@@ -1,0 +1,553 @@
+
+    Private Sub GenerateSingleLineTourNoteFromCode()
+        On Error GoTo errhandler
+
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
+        Dim SelectedRecordsCount As Integer = 0
+        For i = 0 To RowCount - 1
+            If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                SelectedRecordsCount = SelectedRecordsCount + 1
+            End If
+        Next
+
+        If SelectedRecordsCount = 0 Then
+            MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Dim sfilename As String = TAFileName("Tour Note")
+        If My.Computer.FileSystem.FileExists(sfilename) Then
+            Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Dim missing As Object = System.Reflection.Missing.Value
+        Dim fileName As Object = "normal.dotm"
+        Dim newTemplate As Object = False
+        Dim docType As Object = 0
+        Dim isVisible As Object = True
+        Dim WordApp As New Word.ApplicationClass()
+
+        Dim wdDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+
+        WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+        WordApp.Selection.Document.PageSetup.LeftMargin = 10
+        WordApp.Selection.Document.PageSetup.RightMargin = 10
+        WordApp.Selection.Document.PageSetup.TopMargin = 50
+        WordApp.Selection.Document.PageSetup.BottomMargin = 50
+        WordApp.Selection.NoProofing = 1
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+
+        Dim OfficerNameWithDesignation As String = ""
+        OfficerNameWithDesignation = SelectedOfficerName.Replace("FPS", "Fingerprint Searcher")
+        OfficerNameWithDesignation = OfficerNameWithDesignation.Replace("FPE", "Fingerprint Expert")
+        OfficerNameWithDesignation = OfficerNameWithDesignation.Replace("TI", "Tester Inspector")
+
+        WordApp.Selection.TypeText(("TOUR NOTE OF " & OfficerNameWithDesignation & ", " & FullOfficeName & ", " & FullDistrictName & vbNewLine & "FOR THE MONTH OF " & Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text).ToUpper)
+
+        WordApp.Selection.TypeParagraph()
+
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+        WordApp.Selection.Paragraphs.DecreaseSpacing()
+        Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
+        WordApp.Selection.TypeText(vbTab & "PEN No" & vbTab & vbTab & ": " & PENarray(sx) & vbNewLine)
+        WordApp.Selection.TypeText(vbTab & "Basic Pay" & vbTab & ": Rs. " & IIf(BParray(sx) <> "", BParray(sx) & "/-", ""))
+
+
+        WordApp.Selection.Font.Bold = 0
+        WordApp.Selection.ParagraphFormat.Space1()
+        WordApp.Selection.TypeParagraph()
+        WordApp.Selection.Paragraphs.DecreaseSpacing()
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+
+        WordApp.Selection.Tables.Add(WordApp.Selection.Range, (SelectedRecordsCount) + 2, 9)
+
+        WordApp.Selection.Tables.Item(1).Borders.Enable = True
+        WordApp.Selection.Font.Bold = 0
+        WordApp.Selection.Tables.Item(1).AllowAutoFit = False
+        WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(25, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 1))
+        WordApp.Selection.Tables.Item(1).Cell(1, 2).Merge(WordApp.Selection.Tables.Item(1).Cell(1, 3))
+        WordApp.Selection.Tables.Item(1).Cell(1, 3).Merge(WordApp.Selection.Tables.Item(1).Cell(1, 4))
+        WordApp.Selection.Tables.Item(1).Cell(1, 4).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 6))
+        WordApp.Selection.Tables.Item(1).Cell(1, 5).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 7))
+        WordApp.Selection.Tables.Item(1).Cell(1, 6).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 8))
+        WordApp.Selection.Tables.Item(1).Cell(1, 7).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 9))
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Sl.")
+
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Date and Time")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Places Visited")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Mode of conveyance")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Distance in km")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Purpose of journey")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Remarks")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("From")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("To")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("From")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("To")
+
+        WordApp.Selection.Font.Bold = 0
+
+        Dim j = 3
+        Dim n = 0
+        For i = 0 To RowCount - 1
+
+            If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                Dim dt As String = Strings.Format(FingerPrintDataSet.SOCRegister(i).DateOfInspection, "dd/MM/yyyy")
+                Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
+                Dim PS1 As String = PS
+                n = n + 1
+                WordApp.Selection.Tables.Item(1).Cell(j, 1).Select()
+                WordApp.Selection.TypeText(n)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 2).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 3).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 4).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText(TourStartLocation)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 5).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                If Me.chkUsePO.Checked Then
+                    WordApp.Selection.TypeText(FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back")
+                Else
+                    PS1 = PS.Replace("P.S", "")
+                    WordApp.Selection.TypeText(PS1 & " and back")
+                End If
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 6).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText("Dept. Vehicle")
+
+                If chkUsePS.Checked Then
+                    WordApp.Selection.Tables.Item(1).Cell(j, 7).Select()
+                    Dim distance As String = FindDistance(PS)
+                    If Val(distance) <> 0 Then
+                        WordApp.Selection.TypeText(Val(distance) * 2)
+                    End If
+                End If
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 8).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
+                WordApp.Selection.TypeText("SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1)
+                WordApp.Selection.Tables.Item(1).Cell(j, 9).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                j = j + 1
+            End If
+        Next
+        WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+
+        WordApp.Selection.TypeParagraph()
+        WordApp.Selection.TypeText(vbTab & "Certified that the above mentioned journeys and halts were performed in the interest of public service as per orders. Also certified that the amount claimed in the bill has not exceeded the monthly/quarterly ceiling limit.")
+
+        WordApp.Selection.TypeParagraph()
+        WordApp.Selection.TypeText(vbNewLine)
+        WordApp.Selection.TypeText(vbTab & TourStartLocation & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted," & vbNewLine & vbTab & Format(Today, "dd/MM/yyyy") & vbNewLine & vbNewLine & vbNewLine)
+
+        WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+        WordApp.Selection.ParagraphFormat.Space1()
+
+        WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & OfficerNameWithDesignation & vbNewLine)
+        WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+        WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+
+        If SelectedOfficerName.Contains(", TI") = False Then
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & "Counter Signed.")
+
+
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbNewLine & vbNewLine)
+
+            If boolUseTIinLetter Then
+                WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+                WordApp.Selection.ParagraphFormat.Space1()
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & frmMainInterface.txtTI.Text & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
+        End If
+
+
+        If My.Computer.FileSystem.FileExists(sfilename) = False Then
+            wdDoc.SaveAs(sfilename)
+            If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
+                Me.lblSavedTourNote.Text = "Found saved Tour Note for " & Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text
+            End If
+        End If
+
+        WordApp.Visible = True
+        WordApp.Activate()
+        WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+        wdDoc.Activate()
+
+        wdDoc = Nothing
+        WordApp = Nothing
+
+        Me.Cursor = Cursors.Default
+        Exit Sub
+errhandler:
+        Me.Cursor = Cursors.Default
+        DevComponents.DotNetBar.MessageBoxEx.Show(Err.Description & vbNewLine & vbNewLine & "Please make sure that Microsoft Word is installed in your system.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+    End Sub
+    Private Sub GenerateThreeLineTourNoteFromCode()
+        On Error GoTo errhandler
+
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
+        Dim SelectedRecordsCount As Integer = 0
+        For i = 0 To RowCount - 1
+            If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                SelectedRecordsCount = SelectedRecordsCount + 1
+            End If
+        Next
+
+        If SelectedRecordsCount = 0 Then
+            MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Dim sfilename As String = TAFileName("Tour Note - T")
+        If My.Computer.FileSystem.FileExists(sfilename) Then
+            Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Dim missing As Object = System.Reflection.Missing.Value
+        Dim fileName As Object = "normal.dotm"
+        Dim newTemplate As Object = False
+        Dim docType As Object = 0
+        Dim isVisible As Object = True
+        Dim WordApp As New Word.ApplicationClass()
+
+        Dim wdDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+
+        WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+        WordApp.Selection.Document.PageSetup.LeftMargin = 10
+        WordApp.Selection.Document.PageSetup.RightMargin = 10
+        WordApp.Selection.Document.PageSetup.TopMargin = 50
+        WordApp.Selection.Document.PageSetup.BottomMargin = 50
+        WordApp.Selection.NoProofing = 1
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+
+        Dim OfficerNameWithDesignation As String = ""
+        OfficerNameWithDesignation = SelectedOfficerName.Replace("FPS", "Fingerprint Searcher")
+        OfficerNameWithDesignation = OfficerNameWithDesignation.Replace("FPE", "Fingerprint Expert")
+        OfficerNameWithDesignation = OfficerNameWithDesignation.Replace("TI", "Tester Inspector")
+
+        WordApp.Selection.TypeText(("TOUR NOTE OF " & OfficerNameWithDesignation & ", " & FullOfficeName & ", " & FullDistrictName & vbNewLine & "FOR THE MONTH OF " & Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text).ToUpper)
+
+        WordApp.Selection.TypeParagraph()
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+        WordApp.Selection.Paragraphs.DecreaseSpacing()
+        Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
+        WordApp.Selection.TypeText(vbTab & "PEN No" & vbTab & vbTab & ": " & PENarray(sx) & vbNewLine)
+        WordApp.Selection.TypeText(vbTab & "Basic Pay" & vbTab & ": Rs. " & IIf(BParray(sx) <> "", BParray(sx) & "/-", ""))
+
+        WordApp.Selection.Font.Bold = 0
+        WordApp.Selection.ParagraphFormat.Space1()
+        WordApp.Selection.TypeParagraph()
+        WordApp.Selection.Paragraphs.DecreaseSpacing()
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+
+        WordApp.Selection.Tables.Add(WordApp.Selection.Range, (SelectedRecordsCount) * 3 + 2, 9)
+        WordApp.Selection.Tables.Item(1).Borders.Enable = True
+        WordApp.Selection.Font.Bold = 0
+        WordApp.Selection.Tables.Item(1).AllowAutoFit = False
+
+        WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(25, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
+        WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 1))
+        WordApp.Selection.Tables.Item(1).Cell(1, 2).Merge(WordApp.Selection.Tables.Item(1).Cell(1, 3))
+        WordApp.Selection.Tables.Item(1).Cell(1, 3).Merge(WordApp.Selection.Tables.Item(1).Cell(1, 4))
+        WordApp.Selection.Tables.Item(1).Cell(1, 4).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 6))
+        WordApp.Selection.Tables.Item(1).Cell(1, 5).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 7))
+        WordApp.Selection.Tables.Item(1).Cell(1, 6).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 8))
+        WordApp.Selection.Tables.Item(1).Cell(1, 7).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 9))
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Sl.")
+
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Date and Time")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Places Visited")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Mode of conveyance")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Distance in km")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Purpose of journey")
+
+        WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("Remarks")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("From")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("To")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("From")
+
+        WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+        WordApp.Selection.Font.Bold = 1
+        WordApp.Selection.TypeText("To")
+
+        WordApp.Selection.Font.Bold = 0
+
+        Dim n = 0
+
+        Dim j = 3
+        For i = 0 To RowCount - 1
+            If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                Dim dt As String = Strings.Format(FingerPrintDataSet.SOCRegister(i).DateOfInspection, "dd/MM/yyyy")
+                Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
+                Dim PS1 As String = PS
+                n = n + 1
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(j + 2, 1))
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 1).Select()
+                WordApp.Selection.TypeText(n)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 2).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 3).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 4).Select()
+                WordApp.Selection.TypeText(TourStartLocation)
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 5).Select()
+                If Me.chkUsePO.Checked Then
+                    WordApp.Selection.TypeText(FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence)
+                Else
+                    PS1 = PS.Replace("P.S", "")
+                    WordApp.Selection.TypeText(PS1)
+                End If
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 6).Select()
+                WordApp.Selection.TypeText("Dept. Vehicle")
+
+                Dim distance As String = FindDistance(PS)
+                If chkUsePS.Checked Then
+                    WordApp.Selection.Tables.Item(1).Cell(j, 7).Select()
+                    If distance <> "0" Then WordApp.Selection.TypeText(distance)
+                End If
+
+                '   WordApp.Selection.Tables.Item(1).Cell(j, 8).Merge(WordApp.Selection.Tables.Item(1).Cell(j + 2, 8))
+
+                WordApp.Selection.Tables.Item(1).Cell(j, 8).Select()
+                If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
+                WordApp.Selection.TypeText("SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1)
+
+                '  WordApp.Selection.Tables.Item(1).Cell(j, 9).Merge(WordApp.Selection.Tables.Item(1).Cell(j + 2, 9))
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 1, 2).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 1, 3).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 1, 4).Merge(WordApp.Selection.Tables.Item(1).Cell(j + 1, 5))
+                WordApp.Selection.Tables.Item(1).Cell(j + 1, 4).Select()
+                WordApp.Selection.TypeText("Halt & Duty")
+                WordApp.Selection.Tables.Item(1).Cell(j + 1, 7).Select()
+                WordApp.Selection.TypeText("Halt & Duty")
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 2, 2).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 2, 3).Select()
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+                WordApp.Selection.TypeText(dt)
+                WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                WordApp.Selection.TypeText(vbNewLine)
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 2, 4).Select()
+                If Me.chkUsePO.Checked Then
+                    WordApp.Selection.TypeText(FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence)
+                Else
+                    PS1 = PS.Replace("P.S", "")
+                    WordApp.Selection.TypeText(PS1)
+                End If
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 2, 5).Select()
+                WordApp.Selection.TypeText(TourStartLocation)
+
+                WordApp.Selection.Tables.Item(1).Cell(j + 2, 6).Select()
+                WordApp.Selection.TypeText("Dept. Vehicle")
+
+                If chkUsePS.Checked Then
+                    WordApp.Selection.Tables.Item(1).Cell(j + 2, 7).Select()
+                    If distance <> "0" Then WordApp.Selection.TypeText(distance)
+                End If
+                WordApp.Selection.Tables.Item(1).Cell(j + 2, 8).Select()
+                WordApp.Selection.TypeText("Return Journey")
+
+                j = j + 3
+            End If
+        Next
+        WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+        WordApp.Selection.TypeParagraph()
+
+        WordApp.Selection.TypeText(vbTab & "Certified that the above mentioned journeys and halts were performed in the interest of public service as per orders. Also certified that the amount claimed in the bill has not exceeded the monthly/quarterly ceiling limit.")
+        WordApp.Selection.TypeParagraph()
+        WordApp.Selection.TypeText(vbNewLine)
+        WordApp.Selection.TypeText(vbTab & TourStartLocation & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted," & vbNewLine & vbTab & Format(Today, "dd/MM/yyyy") & vbNewLine & vbNewLine & vbNewLine)
+
+        WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+        WordApp.Selection.ParagraphFormat.Space1()
+
+        WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & OfficerNameWithDesignation & vbNewLine)
+        WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+        WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+
+        If SelectedOfficerName.Contains(", TI") = False Then
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & "Counter Signed.")
+
+
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbNewLine & vbNewLine)
+
+            If boolUseTIinLetter Then
+                WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+                WordApp.Selection.ParagraphFormat.Space1()
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & frmMainInterface.txtTI.Text & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
+        End If
+
+
+        If My.Computer.FileSystem.FileExists(sfilename) = False Then
+            wdDoc.SaveAs(sfilename)
+            If My.Computer.FileSystem.FileExists(TAFileName("Tour Note - T")) Then
+                Me.lblSavedTourNote.Text = "Found saved Tour Note for " & Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text
+            End If
+        End If
+
+        WordApp.Visible = True
+        WordApp.Activate()
+        WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+        wdDoc.Activate()
+
+        wdDoc = Nothing
+        WordApp = Nothing
+
+        Me.Cursor = Cursors.Default
+        Exit Sub
+errhandler:
+        DevComponents.DotNetBar.MessageBoxEx.Show(Err.Description & vbNewLine & vbNewLine & "Please make sure that Microsoft Word is installed in your system.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Me.Cursor = Cursors.Default
+
+    End Sub

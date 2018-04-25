@@ -1,0 +1,800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60329ADC-BC87-4F1C-9EF9-889CB89FE0CC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>FingerprintInformationSystem.My.MyApplication</StartupObject>
+    <RootNamespace>FingerprintInformationSystem</RootNamespace>
+    <AssemblyName>Fingerprint Information System</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Fingerprint Information System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Fingerprint Information System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Fingerprint Information System.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Fingerprint Information System.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar.Layout, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar.Schedule, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DotNetBar for Windows Forms\DevComponents.DotNetBar2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevComponents.Instrumentation, Version=14.1.0.0, Culture=neutral, PublicKeyToken=f90dc37c26666a67" />
+    <Reference Include="Google.Apis, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.33.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.33.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.33.0\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.33.0.1194, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Drive.v3.1.33.0.1194\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="iViewCore, Version=1.0.1.2, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\iViewCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FingerPrintDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmOnlineBackup.Designer.vb">
+      <DependentUpon>frmOnlineBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOnlineBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWeeklyDiary.Designer.vb">
+      <DependentUpon>frmWeeklyDiary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWeeklyDiary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAttendanceStatement.Designer.vb">
+      <DependentUpon>frmAttendanceStatement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAttendanceStatement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAC-Register.Designer.vb">
+      <DependentUpon>FrmAC-Register.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAC-Register.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAC-SlipImageDisplayer.designer.vb">
+      <DependentUpon>FrmAC-SlipImageDisplayer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAC-SlipImageDisplayer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdvancedSearch.Designer.vb">
+      <DependentUpon>FrmAdvancedSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdvancedSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnnualStatistics.Designer.vb">
+      <DependentUpon>frmAnnualStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAnnualStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDA-SlipImage.designer.vb">
+      <DependentUpon>FrmDA-SlipImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDA-SlipImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIDRegister.Designer.vb">
+      <DependentUpon>FrmIDRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIDRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIDSlipImageDisplayer.Designer.vb">
+      <DependentUpon>FrmIDSlipImageDisplayer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIDSlipImageDisplayer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmImportTransferRate.Designer.vb">
+      <DependentUpon>FrmImportTransferRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmImportTransferRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIndividualPerformance.Designer.vb">
+      <DependentUpon>FrmIndividualPerformance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIndividualPerformance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInputBox.designer.vb">
+      <DependentUpon>frmInputBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInputBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMiniRegister.Designer.vb">
+      <DependentUpon>frmMiniRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMiniRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-ReportSentStatus.Designer.vb">
+      <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-ReportSentStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPopupMessage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="FingerPrintDataSet.vb">
+      <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAbout.designer.vb">
+      <DependentUpon>FrmAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-FacingSheet-Blank.Designer.vb">
+      <DependentUpon>FrmSOC-FacingSheet-Blank.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-FacingSheet-Blank.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCDRegister.Designer.vb">
+      <DependentUpon>FrmCDRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCDRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDA-PSWiseStatistics.Designer.vb">
+      <DependentUpon>FrmDA-PSWiseStatistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDA-PSWiseStatistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-PrintRemainingCases.Designer.vb">
+      <DependentUpon>FrmSOC-PrintRemainingCases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-PrintRemainingCases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-Statement-Concise.Designer.vb">
+      <DependentUpon>FrmSOC-Statement-Concise.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-Statement-Concise.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDA-Register.Designer.vb">
+      <DependentUpon>FrmDA-Register.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDA-Register.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDA-Statement-AllPS.Designer.vb">
+      <DependentUpon>FrmDA-Statement-AllPS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDA-Statement-AllPS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDA-Statement-SlipOnly.Designer.vb">
+      <DependentUpon>FrmDA-Statement-SlipOnly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDA-Statement-SlipOnly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDA-Statistics-MonthWise.Designer.vb">
+      <DependentUpon>FrmDA-Statistics-MonthWise.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDA-Statistics-MonthWise.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFPA-Statistics-MonthWise.Designer.vb">
+      <DependentUpon>FrmFPA-Statistics-MonthWise.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFPA-Statistics-MonthWise.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPSList.Designer.vb">
+      <DependentUpon>FrmPSList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPSList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-FacingSheet-WithoutGist.Designer.vb">
+      <DependentUpon>FrmSOC-FacingSheet-WithoutGist.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-FacingSheet-WithoutGist.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFPA-Register.Designer.vb">
+      <DependentUpon>FrmFPA-Register.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFPA-Register.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFPA-Statistics.Designer.vb">
+      <DependentUpon>FrmFPA-Statistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFPA-Statistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPerformance-Monthly-Generator.Designer.vb">
+      <DependentUpon>FrmPerformance-Monthly-Generator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPerformance-Monthly-Generator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPerformance-Monthly-Report.designer.vb">
+      <DependentUpon>FrmPerformance-Monthly-Report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPerformance-Monthly-Report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPerformance-Quarterly-Report.Designer.vb">
+      <DependentUpon>FrmPerformance-Quarterly-Report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPerformance-Quarterly-Report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-PhotoNotReceivedCases.Designer.vb">
+      <DependentUpon>FrmSOC-PhotoNotReceivedCases.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-PhotoNotReceivedCases.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPerformance-Quarterly-Generator.Designer.vb">
+      <DependentUpon>FrmPerformance-Quarterly-Generator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPerformance-Quarterly-Generator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-FacingSheet-WithGist.Designer.vb">
+      <DependentUpon>FrmSOC-FacingSheet-WithGist.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-FacingSheet-WithGist.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-Register.Designer.vb">
+      <DependentUpon>FrmSOC-Register.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-Register.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-Statement.Designer.vb">
+      <DependentUpon>FrmSOC-Statement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-Statement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLocalBackup.designer.vb">
+      <DependentUpon>FrmLocalBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLocalBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMainInterface.Designer.vb">
+      <DependentUpon>FrmMainInterface.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMainInterface.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-Statistics.Designer.vb">
+      <DependentUpon>FrmSOC-Statistics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-Statistics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-Statistics-MonthWise.Designer.vb">
+      <DependentUpon>FrmSOC-Statistics-MonthWise.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-Statistics-MonthWise.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-GraveCrimes.Designer.vb">
+      <DependentUpon>FrmSOC-GraveCrimes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-GraveCrimes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSOC-ReportStatement.Designer.vb">
+      <DependentUpon>FrmSOC-ReportStatement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-ReportStatement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSplashScreen.designer.vb">
+      <DependentUpon>FrmSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSettings-Wizard.designer.vb">
+      <DependentUpon>FrmSettings-Wizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSettings-Wizard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTourNote.Designer.vb">
+      <DependentUpon>FrmTourNote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTourNote.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewChancePrints.Designer.vb">
+      <DependentUpon>FrmViewChancePrints.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewChancePrints.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modMain.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Settings.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Active Criminals Register.rdlc" />
+    <EmbeddedResource Include="frmAttendanceStatement.resx">
+      <DependentUpon>frmAttendanceStatement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAC-Register.resx">
+      <DependentUpon>FrmAC-Register.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAC-SlipImageDisplayer.resx">
+      <DependentUpon>FrmAC-SlipImageDisplayer.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdvancedSearch.resx">
+      <DependentUpon>FrmAdvancedSearch.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAnnualStatistics.resx">
+      <DependentUpon>frmAnnualStatistics.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDA-SlipImage.resx">
+      <DependentUpon>FrmDA-SlipImage.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIDRegister.resx">
+      <DependentUpon>FrmIDRegister.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIDSlipImageDisplayer.resx">
+      <DependentUpon>FrmIDSlipImageDisplayer.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmImportTransferRate.resx">
+      <DependentUpon>FrmImportTransferRate.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIndividualPerformance.resx">
+      <DependentUpon>FrmIndividualPerformance.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInputBox.resx">
+      <DependentUpon>frmInputBox.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMiniRegister.resx">
+      <DependentUpon>frmMiniRegister.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOnlineBackup.resx">
+      <DependentUpon>frmOnlineBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-ReportSentStatus.resx">
+      <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPopupMessage.resx">
+      <DependentUpon>FrmPopupMessage.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BlankFacingSheet.rdlc" />
+    <EmbeddedResource Include="CD Register.rdlc" />
+    <EmbeddedResource Include="Concise SOC Report.rdlc" />
+    <EmbeddedResource Include="DA Register.rdlc" />
+    <EmbeddedResource Include="DA Slip Statement.rdlc" />
+    <EmbeddedResource Include="DAStatementAllPS.rdlc" />
+    <EmbeddedResource Include="Facing Sheet No Gist.rdlc" />
+    <EmbeddedResource Include="FPA Register.rdlc" />
+    <EmbeddedResource Include="FrmAbout.resx">
+      <DependentUpon>FrmAbout.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-FacingSheet-Blank.resx">
+      <DependentUpon>FrmSOC-FacingSheet-Blank.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCDRegister.resx">
+      <DependentUpon>FrmCDRegister.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDA-PSWiseStatistics.resx">
+      <DependentUpon>FrmDA-PSWiseStatistics.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-PrintRemainingCases.resx">
+      <DependentUpon>FrmSOC-PrintRemainingCases.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-Statement-Concise.resx">
+      <DependentUpon>FrmSOC-Statement-Concise.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDA-Register.resx">
+      <DependentUpon>FrmDA-Register.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDA-Statement-AllPS.resx">
+      <DependentUpon>FrmDA-Statement-AllPS.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDA-Statement-SlipOnly.resx">
+      <DependentUpon>FrmDA-Statement-SlipOnly.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDA-Statistics-MonthWise.resx">
+      <DependentUpon>FrmDA-Statistics-MonthWise.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFPA-Statistics-MonthWise.resx">
+      <DependentUpon>FrmFPA-Statistics-MonthWise.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPSList.resx">
+      <DependentUpon>FrmPSList.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-FacingSheet-WithoutGist.resx">
+      <DependentUpon>FrmSOC-FacingSheet-WithoutGist.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFPA-Register.resx">
+      <DependentUpon>FrmFPA-Register.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFPA-Statistics.resx">
+      <DependentUpon>FrmFPA-Statistics.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPerformance-Monthly-Generator.resx">
+      <DependentUpon>FrmPerformance-Monthly-Generator.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPerformance-Monthly-Report.resx">
+      <DependentUpon>FrmPerformance-Monthly-Report.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPerformance-Quarterly-Report.resx">
+      <DependentUpon>FrmPerformance-Quarterly-Report.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-PhotoNotReceivedCases.resx">
+      <DependentUpon>FrmSOC-PhotoNotReceivedCases.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPerformance-Quarterly-Generator.resx">
+      <DependentUpon>FrmPerformance-Quarterly-Generator.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-FacingSheet-WithGist.resx">
+      <DependentUpon>FrmSOC-FacingSheet-WithGist.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-Register.resx">
+      <DependentUpon>FrmSOC-Register.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-Statement.resx">
+      <DependentUpon>FrmSOC-Statement.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLocalBackup.resx">
+      <DependentUpon>FrmLocalBackup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMainInterface.resx">
+      <DependentUpon>FrmMainInterface.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-Statistics.resx">
+      <DependentUpon>FrmSOC-Statistics.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-Statistics-MonthWise.resx">
+      <DependentUpon>FrmSOC-Statistics-MonthWise.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-GraveCrimes.resx">
+      <DependentUpon>FrmSOC-GraveCrimes.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-ReportStatement.resx">
+      <DependentUpon>FrmSOC-ReportStatement.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSplashScreen.resx">
+      <DependentUpon>FrmSplashScreen.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSettings-Wizard.resx">
+      <DependentUpon>FrmSettings-Wizard.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTourNote.resx">
+      <DependentUpon>FrmTourNote.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewChancePrints.resx">
+      <DependentUpon>FrmViewChancePrints.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWeeklyDiary.resx">
+      <DependentUpon>frmWeeklyDiary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grave Crime Report.rdlc" />
+    <EmbeddedResource Include="Identified Slips Register.rdlc" />
+    <EmbeddedResource Include="List of Police Stations.rdlc" />
+    <EmbeddedResource Include="List of print remaining cases.rdlc" />
+    <EmbeddedResource Include="Month Wise DA Statistics.rdlc" />
+    <EmbeddedResource Include="Month Wise FPA Statistics.rdlc" />
+    <EmbeddedResource Include="Month Wise SOC Statistics.rdlc" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Performance Statement.rdlc" />
+    <EmbeddedResource Include="Photo Not Received.rdlc" />
+    <EmbeddedResource Include="PS Wise DA Statistics.rdlc" />
+    <EmbeddedResource Include="SOC Register - Mini.rdlc" />
+    <EmbeddedResource Include="SOC Register.rdlc" />
+    <EmbeddedResource Include="SOC Statistics.rdlc" />
+    <EmbeddedResource Include="FPA Statistics.rdlc" />
+    <EmbeddedResource Include="Facing Sheet.rdlc" />
+    <EmbeddedResource Include="Monthly SOC Statement.rdlc" />
+    <EmbeddedResource Include="SOCReportsStatement.rdlc" />
+    <EmbeddedResource Include="SOCStatementNew.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="FingerPrintDataSet.xsc">
+      <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="FingerPrintDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>FingerPrintDataSet.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="FingerPrintDataSet.xss">
+      <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="FIS.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FingerPrint.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,293 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmAnnualStatistics
+    Inherits DevComponents.DotNetBar.Office2007Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAnnualStatistics))
+        Me.txtYear = New DevComponents.Editors.IntegerInput()
+        Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
+        Me.btnGenerateByYear = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateByPeriod = New DevComponents.DotNetBar.ButtonX()
+        Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
+        Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelEx1.SuspendLayout()
+        CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'txtYear
+        '
+        '
+        '
+        '
+        Me.txtYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtYear.ButtonCustom.Image = CType(resources.GetObject("txtYear.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtYear.FocusHighlightEnabled = True
+        Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtYear.Location = New System.Drawing.Point(90, 12)
+        Me.txtYear.MaxValue = 2099
+        Me.txtYear.MinValue = 1900
+        Me.txtYear.Name = "txtYear"
+        Me.txtYear.ShowUpDown = True
+        Me.txtYear.Size = New System.Drawing.Size(115, 29)
+        Me.txtYear.TabIndex = 1
+        Me.txtYear.Value = 1900
+        Me.txtYear.WatermarkText = "Year"
+        '
+        'LabelX2
+        '
+        Me.LabelX2.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX2.Location = New System.Drawing.Point(12, 16)
+        Me.LabelX2.Name = "LabelX2"
+        Me.LabelX2.Size = New System.Drawing.Size(60, 18)
+        Me.LabelX2.TabIndex = 14
+        Me.LabelX2.Text = "Enter Year"
+        '
+        'btnGenerateByYear
+        '
+        Me.btnGenerateByYear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateByYear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateByYear.Location = New System.Drawing.Point(238, 12)
+        Me.btnGenerateByYear.Name = "btnGenerateByYear"
+        Me.btnGenerateByYear.Size = New System.Drawing.Size(110, 30)
+        Me.btnGenerateByYear.TabIndex = 2
+        Me.btnGenerateByYear.Text = "Generate"
+        '
+        'btnGenerateByPeriod
+        '
+        Me.btnGenerateByPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateByPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateByPeriod.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnGenerateByPeriod.Location = New System.Drawing.Point(238, 85)
+        Me.btnGenerateByPeriod.Name = "btnGenerateByPeriod"
+        Me.btnGenerateByPeriod.Size = New System.Drawing.Size(110, 29)
+        Me.btnGenerateByPeriod.TabIndex = 5
+        Me.btnGenerateByPeriod.Text = "Generate"
+        '
+        'PanelEx1
+        '
+        Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx1.Controls.Add(Me.LabelX1)
+        Me.PanelEx1.Controls.Add(Me.LabelX3)
+        Me.PanelEx1.Controls.Add(Me.dtFrom)
+        Me.PanelEx1.Controls.Add(Me.dtTo)
+        Me.PanelEx1.Controls.Add(Me.LabelX2)
+        Me.PanelEx1.Controls.Add(Me.btnGenerateByPeriod)
+        Me.PanelEx1.Controls.Add(Me.txtYear)
+        Me.PanelEx1.Controls.Add(Me.btnGenerateByYear)
+        Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
+        Me.PanelEx1.Name = "PanelEx1"
+        Me.PanelEx1.Size = New System.Drawing.Size(363, 138)
+        Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx1.Style.GradientAngle = 90
+        Me.PanelEx1.TabIndex = 28
+        '
+        'LabelX1
+        '
+        Me.LabelX1.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(12, 109)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(17, 18)
+        Me.LabelX1.TabIndex = 18
+        Me.LabelX1.Text = "To"
+        '
+        'LabelX3
+        '
+        Me.LabelX3.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX3.Location = New System.Drawing.Point(12, 67)
+        Me.LabelX3.Name = "LabelX3"
+        Me.LabelX3.Size = New System.Drawing.Size(72, 18)
+        Me.LabelX3.TabIndex = 17
+        Me.LabelX3.Text = "Period From"
+        '
+        'dtFrom
+        '
+        Me.dtFrom.AllowEmptyState = False
+        Me.dtFrom.AutoAdvance = True
+        Me.dtFrom.AutoSelectDate = True
+        Me.dtFrom.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtFrom.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtFrom.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.ButtonClear.Image = CType(resources.GetObject("dtFrom.ButtonClear.Image"), System.Drawing.Image)
+        Me.dtFrom.ButtonDropDown.Visible = True
+        Me.dtFrom.CustomFormat = "dd/MM/yyyy"
+        Me.dtFrom.FocusHighlightEnabled = True
+        Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.dtFrom.IsPopupCalendarOpen = False
+        Me.dtFrom.Location = New System.Drawing.Point(90, 62)
+        Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtFrom.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtFrom.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.MonthCalendar.TodayButtonVisible = True
+        Me.dtFrom.Name = "dtFrom"
+        Me.dtFrom.Size = New System.Drawing.Size(115, 29)
+        Me.dtFrom.TabIndex = 3
+        Me.dtFrom.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
+        Me.dtFrom.WatermarkText = "From"
+        '
+        'dtTo
+        '
+        Me.dtTo.AllowEmptyState = False
+        Me.dtTo.AutoAdvance = True
+        Me.dtTo.AutoSelectDate = True
+        Me.dtTo.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtTo.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtTo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.ButtonClear.Image = CType(resources.GetObject("dtTo.ButtonClear.Image"), System.Drawing.Image)
+        Me.dtTo.ButtonDropDown.Visible = True
+        Me.dtTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtTo.FocusHighlightEnabled = True
+        Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.dtTo.IsPopupCalendarOpen = False
+        Me.dtTo.Location = New System.Drawing.Point(90, 102)
+        Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtTo.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtTo.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.MonthCalendar.TodayButtonVisible = True
+        Me.dtTo.Name = "dtTo"
+        Me.dtTo.Size = New System.Drawing.Size(115, 29)
+        Me.dtTo.TabIndex = 4
+        Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
+        Me.dtTo.WatermarkText = "To"
+        '
+        'frmAnnualStatistics
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnGenerateByPeriod
+        Me.ClientSize = New System.Drawing.Size(363, 138)
+        Me.Controls.Add(Me.PanelEx1)
+        Me.DoubleBuffered = True
+        Me.EnableGlass = False
+        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "frmAnnualStatistics"
+        Me.Text = "Annual Statistics"
+        Me.TitleText = "<b>Annual Statistics</b>"
+        CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelEx1.ResumeLayout(False)
+        Me.PanelEx1.PerformLayout()
+        CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents txtYear As DevComponents.Editors.IntegerInput
+    Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnGenerateByYear As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateByPeriod As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
+    Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
+End Class
