@@ -25,7 +25,7 @@ Public Class frmOnlineBackup
 
 
     Private Sub CreateService() Handles MyBase.Load
-        Control.CheckForIllegalCrossThreadCalls = False
+
         Me.Cursor = Cursors.WaitCursor
         BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
 
@@ -96,6 +96,7 @@ Public Class frmOnlineBackup
                 item.ImageIndex = 1
 
             Next
+            DisplayInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -206,18 +207,16 @@ Public Class frmOnlineBackup
 
     End Function
 
-    Private Sub btnBackupDatabase_Click(sender As Object, e As EventArgs) Handles btnBackupDatabase.Click
-        Me.BackgroundWorker1.RunWorkerAsync("UploadBackup")
-    End Sub
 
-    Private Sub UploadBackup() ' Handles btnBackupDatabase.Click
+    Private Sub UploadBackup() Handles btnBackupDatabase.Click
         Try
-
+            Me.Cursor = Cursors.WaitCursor
             If InternetAvailable() = False Then
                 MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
                 Exit Sub
             End If
-
+            Application.DoEvents()
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
             Dim sBackupTime = Strings.Format(BackupTime, "dd/MM/yyyy HH:mm:ss")
@@ -253,6 +252,7 @@ Public Class frmOnlineBackup
 
             If file Is Nothing Then
                 MessageBoxEx.Show("Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
                 Exit Sub
             Else
                 MessageBoxEx.Show("Uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -265,8 +265,10 @@ Public Class frmOnlineBackup
             item.SubItems.Add(file.Id)
             item.ImageIndex = 0
             DisplayInformation()
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -521,7 +523,7 @@ Public Class frmOnlineBackup
             Me.Cursor = Cursors.Default
         End Try
     End Sub
-    Private Sub SortByDate(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs)
+    Private Sub SortByDate(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles listViewEx1.ColumnClick
         If Me.listViewEx1.Sorting = SortOrder.Ascending Then
             Me.listViewEx1.Sorting = SortOrder.Descending
         Else
@@ -545,19 +547,5 @@ Public Class frmOnlineBackup
 
     End Sub
 
-    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        If e.Argument = "UploadBackup" Then
-            Me.CircularProgress1.IsRunning = True
-            UploadBackup()
-            Me.CircularProgress1.IsRunning = False
-        End If
-    End Sub
 
-    
-    
-    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
-        If (e.Error IsNot Nothing) Then
-            MessageBox.Show(e.Error.Message)
-        End If
-    End Sub
 End Class
