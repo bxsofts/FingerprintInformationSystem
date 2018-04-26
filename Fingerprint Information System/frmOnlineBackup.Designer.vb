@@ -34,6 +34,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.lblStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -43,8 +44,9 @@ Partial Class frmOnlineBackup
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
-        Me.bgwCreateService = New System.ComponentModel.BackgroundWorker()
-        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
+        Me.bgwService = New System.ComponentModel.BackgroundWorker()
+        Me.bgwUpload = New System.ComponentModel.BackgroundWorker()
+        Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -190,7 +192,7 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel1.Controls.Add(Me.LabelX1)
+        Me.GroupPanel1.Controls.Add(Me.lblStatus)
         Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
@@ -230,16 +232,30 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.TabIndex = 25
         Me.GroupPanel1.Text = "Available Backups"
         '
+        'lblStatus
+        '
+        '
+        '
+        '
+        Me.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblStatus.Location = New System.Drawing.Point(362, 311)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(169, 18)
+        Me.lblStatus.TabIndex = 2
+        Me.lblStatus.Text = "Connecting to Google Drive..."
+        Me.lblStatus.TextAlignment = System.Drawing.StringAlignment.Center
+        '
         'CircularProgress1
         '
         '
         '
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.Location = New System.Drawing.Point(362, 180)
+        Me.CircularProgress1.Location = New System.Drawing.Point(362, 158)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.Size = New System.Drawing.Size(134, 135)
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(169, 153)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 1
         '
@@ -339,23 +355,20 @@ Partial Class frmOnlineBackup
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
         '
-        'bgwCreateService
+        'bgwService
         '
-        Me.bgwCreateService.WorkerReportsProgress = True
-        Me.bgwCreateService.WorkerSupportsCancellation = True
+        Me.bgwService.WorkerReportsProgress = True
+        Me.bgwService.WorkerSupportsCancellation = True
         '
-        'LabelX1
+        'bgwUpload
         '
+        Me.bgwUpload.WorkerReportsProgress = True
+        Me.bgwUpload.WorkerSupportsCancellation = True
         '
+        'bgwDownload
         '
-        '
-        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(362, 312)
-        Me.LabelX1.Name = "LabelX1"
-        Me.LabelX1.Size = New System.Drawing.Size(134, 23)
-        Me.LabelX1.TabIndex = 2
-        Me.LabelX1.Text = "Please Wait..."
-        Me.LabelX1.TextAlignment = System.Drawing.StringAlignment.Center
+        Me.bgwDownload.WorkerReportsProgress = True
+        Me.bgwDownload.WorkerSupportsCancellation = True
         '
         'frmOnlineBackup
         '
@@ -401,7 +414,9 @@ Partial Class frmOnlineBackup
     Friend WithEvents Bar1 As DevComponents.DotNetBar.Bar
     Friend WithEvents lblCount As DevComponents.DotNetBar.LabelItem
     Friend WithEvents lblSelectedFile As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents bgwCreateService As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwService As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
-    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblStatus As DevComponents.DotNetBar.LabelX
+    Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
 End Class
