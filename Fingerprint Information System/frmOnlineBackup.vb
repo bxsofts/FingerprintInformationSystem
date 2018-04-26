@@ -22,7 +22,8 @@ Public Class frmOnlineBackup
     Dim BackupFolder As String
     Dim BackupFolderID As String
     Dim BackupPath As String = ""
-
+    Public CredentialPath As String
+    Public JsonPath As String
 
     Private Sub CreateService() Handles MyBase.Load
 
@@ -38,8 +39,8 @@ Public Class frmOnlineBackup
         Try
 
 
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FIS.json"
+            CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
+            JsonPath = CredentialPath & "\FIS.json"
 
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
                 My.Computer.FileSystem.CreateDirectory(CredentialPath)
@@ -56,22 +57,148 @@ Public Class frmOnlineBackup
             If Not FileIO.FileSystem.FileExists(CredentialPath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user") Then
                 MessageBoxEx.Show("The application will now open your browser. Please enter your gmail id and password to authenticate.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
+            Me.listViewEx1.Items.Clear()
+            Me.CircularProgress1.Show()
+            Me.LabelX1.Text = "Please Wait..."
+            Me.LabelX1.Show()
+            Me.CircularProgress1.IsRunning = True
+
+            bgwCreateService.RunWorkerAsync()
+            ' Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+
+    End Sub
+
+    Private Sub CreateServiceAndLoadData(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCreateService.DoWork
+        Try
+            bgwCreateService.ReportProgress(0)
+            System.Threading.Thread.Sleep(1000)
 
             Dim fStream = New FileStream(JsonPath, FileMode.Open, FileAccess.Read)
 
             Dim Scopes As String() = {DriveService.Scope.Drive}
 
+            bgwCreateService.ReportProgress(20)
+            System.Threading.Thread.Sleep(1000)
+
             FISUserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialPath, True)).Result
 
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISUserCredential, .ApplicationName = strAppName})
 
-            LoadOnlineBackupListWithMessage(False)
-            LoadDownloadedBackupFiles()
-            Me.Cursor = Cursors.Default
+            bgwCreateService.ReportProgress(50)
+            System.Threading.Thread.Sleep(1000)
+
+            Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
+
+                If foundFile Is Nothing Then
+                    Exit Sub
+                End If
+
+                Dim FileName = My.Computer.FileSystem.GetName(foundFile)
+                Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
+
+                Dim Filedate As DateTime = DateTime.ParseExact(FileName.Replace("FingerPrintBackup-", "").Replace(".mdb", ""), BackupDateFormatString, culture)
+
+                Dim item As ListViewItem = New ListViewItem(FileName)
+                item.SubItems.Add(Filedate.ToString("dd/MM/yyyy HH:mm:ss"))
+                item.SubItems.Add("Downloaded File")
+                item.ImageIndex = 1
+                bgwCreateService.ReportProgress(60, item)
+            Next
+
+            bgwCreateService.ReportProgress(80)
+            System.Threading.Thread.Sleep(1000)
+
+
+            BackupFolderID = GetBackupFolderID()
+            Dim List = FISService.Files.List()
+
+            If BackupFolderID = "" Then
+                BackupFolderID = CreateBackupFolder()
+            End If
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(BackupFolderID)
+
+            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
+            List.Fields = "nextPageToken, files(id, name, description)"
+
+            Dim Results = List.Execute
+
+            For Each Result In Results.Files
+                Dim item As ListViewItem = New ListViewItem(Result.Name)
+                item.SubItems.Add(Result.Description)
+                item.SubItems.Add(Result.Id)
+                item.ImageIndex = 0
+                bgwCreateService.ReportProgress(90, item)
+            Next
+
+            bgwCreateService.ReportProgress(99)
+            System.Threading.Thread.Sleep(1000)
+
+            bgwCreateService.ReportProgress(100)
+
         Catch ex As Exception
+
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            bgwCreateService.ReportProgress(100)
+
         End Try
+
+    End Sub
+
+    Private Sub CreateServiceBackgroundWorker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwCreateService.ProgressChanged
+        If e.ProgressPercentage = 0 Then
+            CircularProgress1.Show()
+            CircularProgress1.IsRunning = True
+        End If
+
+        If e.ProgressPercentage = 20 Then
+            LabelX1.Text = "Creating Service..."
+        End If
+
+        If e.ProgressPercentage = 50 Then
+            LabelX1.Text = "Fetching Local Files..."
+        End If
+
+        If e.ProgressPercentage = 60 Then
+            listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
+            listViewEx1.Sort()
+            listViewEx1.Items.Add(e.UserState)
+        End If
+
+        If e.ProgressPercentage = 80 Then
+            LabelX1.Text = "Fetching Online Files..."
+        End If
+
+        If e.ProgressPercentage = 90 Then
+            listViewEx1.Items.Add(e.UserState)
+        End If
+
+        If e.ProgressPercentage = 99 Then
+            LabelX1.Text = "Finishing..."
+        End If
+
+        If e.ProgressPercentage = 100 Then
+            LabelX1.Text = "Finished"
+            CircularProgress1.Hide()
+            LabelX1.Hide()
+            Cursor = Cursors.Default
+
+            DisplayInformation()
+        End If
+
+    End Sub
+
+    Private Sub CreateServiceBackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwCreateService.RunWorkerCompleted
+        LabelX1.Hide()
+        Me.CircularProgress1.Hide()
+        Cursor = Cursors.Default
 
     End Sub
 
@@ -255,16 +382,17 @@ Public Class frmOnlineBackup
                 Me.Cursor = Cursors.Default
                 Exit Sub
             Else
+                Dim item As ListViewItem = Me.listViewEx1.Items.Add(BackupFileName)
+                item.SubItems.Add(sBackupTime)
+                item.SubItems.Add(file.Id)
+                item.ImageIndex = 0
+                DisplayInformation()
                 MessageBoxEx.Show("Uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
 
             Stream.Close()
 
-            Dim item As ListViewItem = Me.listViewEx1.Items.Add(BackupFileName)
-            item.SubItems.Add(sBackupTime)
-            item.SubItems.Add(file.Id)
-            item.ImageIndex = 0
-            DisplayInformation()
+            
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -548,4 +676,5 @@ Public Class frmOnlineBackup
     End Sub
 
 
+   
 End Class
