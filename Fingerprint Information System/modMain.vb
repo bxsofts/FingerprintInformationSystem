@@ -126,7 +126,16 @@ Module modMain
 
     End Function
 
+    Public Function ConvertToDate(strDate As String)
+
+        Dim ConvertedDate As Date = Date.ParseExact(strDate, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)
+        Return ConvertedDate
+    End Function
+
 End Module
+
+
+
 
 Class ListViewItemComparer
     Implements IComparer

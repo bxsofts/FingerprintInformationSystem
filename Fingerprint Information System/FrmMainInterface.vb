@@ -13341,7 +13341,6 @@ errhandler:
         End If
     End Sub
 
-
     Private Sub SetBackupPath(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeBackupFolder.Click
         Try
             Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")

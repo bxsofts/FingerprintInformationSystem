@@ -16,6 +16,7 @@ Imports Google.Apis.Util.Store
 
 
 
+
 Public Class frmOnlineBackup
     Private FISService As DriveService = New DriveService
     Dim FISUserCredential As UserCredential
@@ -408,12 +409,7 @@ Public Class frmOnlineBackup
 #Region "DOWNLOAD FILE"
 
 
-    Public Class DownloadArgs
-        Public ID As String
-        Public SelectedFileName As String
-        Public DownloadFileName As String
-        Public BackupDate As String
-    End Class
+   
 
 
     Private Sub DownloadFileFromDrive()
@@ -855,4 +851,11 @@ Public Class frmOnlineBackup
         End If
     End Sub
 
+End Class
+
+Public Class DownloadArgs
+    Public ID As String
+    Public SelectedFileName As String
+    Public DownloadFileName As String
+    Public BackupDate As String
 End Class

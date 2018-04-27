@@ -3163,7 +3163,7 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnColumnHeaderContextMenu})
         Me.ColumnHeaderContextMenuBar.Location = New System.Drawing.Point(1100, 10)
         Me.ColumnHeaderContextMenuBar.Name = "ColumnHeaderContextMenuBar"
-        Me.ColumnHeaderContextMenuBar.Size = New System.Drawing.Size(245, 25)
+        Me.ColumnHeaderContextMenuBar.Size = New System.Drawing.Size(245, 27)
         Me.ColumnHeaderContextMenuBar.Stretch = true
         Me.ColumnHeaderContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.ColumnHeaderContextMenuBar.TabIndex = 138
@@ -5736,7 +5736,7 @@ Partial Class frmMainInterface
         Me.DataGridContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDatagridContextMenu})
         Me.DataGridContextMenuBar.Location = New System.Drawing.Point(507, 35)
         Me.DataGridContextMenuBar.Name = "DataGridContextMenuBar"
-        Me.DataGridContextMenuBar.Size = New System.Drawing.Size(241, 25)
+        Me.DataGridContextMenuBar.Size = New System.Drawing.Size(241, 27)
         Me.DataGridContextMenuBar.Stretch = true
         Me.DataGridContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.DataGridContextMenuBar.TabIndex = 56
@@ -7314,7 +7314,7 @@ Partial Class frmMainInterface
         Me.DASlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDASlipContextMenu})
         Me.DASlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
         Me.DASlipContextMenuBar.Name = "DASlipContextMenuBar"
-        Me.DASlipContextMenuBar.Size = New System.Drawing.Size(108, 25)
+        Me.DASlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
         Me.DASlipContextMenuBar.Stretch = true
         Me.DASlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.DASlipContextMenuBar.TabIndex = 57
@@ -11494,7 +11494,7 @@ Partial Class frmMainInterface
         Me.ACSlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnACSlipContextMenu})
         Me.ACSlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
         Me.ACSlipContextMenuBar.Name = "ACSlipContextMenuBar"
-        Me.ACSlipContextMenuBar.Size = New System.Drawing.Size(108, 25)
+        Me.ACSlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
         Me.ACSlipContextMenuBar.Stretch = true
         Me.ACSlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.ACSlipContextMenuBar.TabIndex = 57
@@ -12448,7 +12448,7 @@ Partial Class frmMainInterface
         Me.IDSlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDSlipContextMenu})
         Me.IDSlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
         Me.IDSlipContextMenuBar.Name = "IDSlipContextMenuBar"
-        Me.IDSlipContextMenuBar.Size = New System.Drawing.Size(108, 25)
+        Me.IDSlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
         Me.IDSlipContextMenuBar.Stretch = true
         Me.IDSlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.IDSlipContextMenuBar.TabIndex = 57
