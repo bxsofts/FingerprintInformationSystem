@@ -119,7 +119,7 @@ Module modMain
         Dim objPing As New System.Net.NetworkInformation.Ping
 
         Try
-            Return If(objPing.Send("www.google.it").Status = System.Net.NetworkInformation.IPStatus.Success, True, False)
+            Return If(objPing.Send("8.8.8.8").Status = System.Net.NetworkInformation.IPStatus.Success, True, False) 'google-public-dns-a.google.com.
         Catch
             Return False
         End Try
@@ -142,12 +142,9 @@ Class ListViewItemComparer
         Me.order = sortorder
     End Sub
 
-    Public Function Compare(x As Object, y As Object) As Integer _
-                            Implements System.Collections.IComparer.Compare
+    Public Function Compare(x As Object, y As Object) As Integer Implements System.Collections.IComparer.Compare
         Dim returnVal As Integer = -1
-        returnVal = [String].Compare(CType(x,  _
-                        ListViewItem).SubItems(col).Text, _
-                        CType(y, ListViewItem).SubItems(col).Text)
+        returnVal = [String].Compare(CType(x, ListViewItem).SubItems(col).Text, CType(y, ListViewItem).SubItems(col).Text)
 
         If order = SortOrder.Descending Then
             ' Invert the value returned by String.Compare.

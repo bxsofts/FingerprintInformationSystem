@@ -1120,7 +1120,7 @@ Partial Class frmMainInterface
         Me.RibbonPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel2.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel2.Name = "RibbonPanel2"
-        Me.RibbonPanel2.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel2.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
         Me.RibbonPanel2.Size = New System.Drawing.Size(1360, 93)
         '
         '
@@ -1155,7 +1155,7 @@ Partial Class frmMainInterface
         Me.RibbonBar12.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar12.Location = New System.Drawing.Point(220, 0)
         Me.RibbonBar12.Name = "RibbonBar12"
-        Me.RibbonBar12.Size = New System.Drawing.Size(217, 90)
+        Me.RibbonBar12.Size = New System.Drawing.Size(217, 91)
         Me.RibbonBar12.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar12.TabIndex = 25
         Me.RibbonBar12.Text = "CP IMAGE SETTINGS"
@@ -1215,7 +1215,7 @@ Partial Class frmMainInterface
         Me.RibbonBar13.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar13.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar13.Name = "RibbonBar13"
-        Me.RibbonBar13.Size = New System.Drawing.Size(217, 90)
+        Me.RibbonBar13.Size = New System.Drawing.Size(217, 91)
         Me.RibbonBar13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar13.TabIndex = 23
         Me.RibbonBar13.Text = "FP IMAGE SETTINGS"
@@ -1407,7 +1407,6 @@ Partial Class frmMainInterface
         Me.RibbonControl1.KeyTipsFont = New System.Drawing.Font("Tahoma", 7!)
         Me.RibbonControl1.Location = New System.Drawing.Point(5, 1)
         Me.RibbonControl1.Name = "RibbonControl1"
-        Me.RibbonControl1.Padding = New System.Windows.Forms.Padding(0, 0, 0, 3)
         Me.RibbonControl1.QuickToolbarItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1, Me.QatCustomizeItem1})
         Me.RibbonControl1.Size = New System.Drawing.Size(1360, 148)
         Me.RibbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1441,10 +1440,10 @@ Partial Class frmMainInterface
         Me.RibbonPanel1.Controls.Add(Me.RibbonBar1)
         Me.RibbonPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel1.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.RibbonPanel1.Location = New System.Drawing.Point(0, 56)
+        Me.RibbonPanel1.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel1.Name = "RibbonPanel1"
-        Me.RibbonPanel1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
-        Me.RibbonPanel1.Size = New System.Drawing.Size(1360, 89)
+        Me.RibbonPanel1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel1.Size = New System.Drawing.Size(1360, 93)
         '
         '
         '
@@ -1478,7 +1477,7 @@ Partial Class frmMainInterface
         Me.RibbonBar6.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar6.Location = New System.Drawing.Point(1208, 0)
         Me.RibbonBar6.Name = "RibbonBar6"
-        Me.RibbonBar6.Size = New System.Drawing.Size(96, 86)
+        Me.RibbonBar6.Size = New System.Drawing.Size(96, 91)
         Me.RibbonBar6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar6.TabIndex = 12
         Me.RibbonBar6.TabStop = false
@@ -1521,7 +1520,7 @@ Partial Class frmMainInterface
         Me.RibbonBar5.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar5.Location = New System.Drawing.Point(1099, 0)
         Me.RibbonBar5.Name = "RibbonBar5"
-        Me.RibbonBar5.Size = New System.Drawing.Size(109, 86)
+        Me.RibbonBar5.Size = New System.Drawing.Size(109, 91)
         Me.RibbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar5.TabIndex = 11
         Me.RibbonBar5.TabStop = false
@@ -1564,7 +1563,7 @@ Partial Class frmMainInterface
         Me.RibbonBar4.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar4.Location = New System.Drawing.Point(847, 0)
         Me.RibbonBar4.Name = "RibbonBar4"
-        Me.RibbonBar4.Size = New System.Drawing.Size(252, 86)
+        Me.RibbonBar4.Size = New System.Drawing.Size(252, 91)
         Me.RibbonBar4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar4.TabIndex = 10
         Me.RibbonBar4.TabStop = false
@@ -1616,7 +1615,7 @@ Partial Class frmMainInterface
         Me.RibbonBar2.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar2.Location = New System.Drawing.Point(398, 0)
         Me.RibbonBar2.Name = "RibbonBar2"
-        Me.RibbonBar2.Size = New System.Drawing.Size(449, 86)
+        Me.RibbonBar2.Size = New System.Drawing.Size(449, 91)
         Me.RibbonBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar2.TabIndex = 7
         Me.RibbonBar2.TabStop = false
@@ -2147,7 +2146,7 @@ Partial Class frmMainInterface
         Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar1.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar1.Name = "RibbonBar1"
-        Me.RibbonBar1.Size = New System.Drawing.Size(395, 86)
+        Me.RibbonBar1.Size = New System.Drawing.Size(395, 91)
         Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar1.TabIndex = 1
         Me.RibbonBar1.TabStop = false
@@ -2220,7 +2219,7 @@ Partial Class frmMainInterface
         Me.RibbonPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel3.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel3.Name = "RibbonPanel3"
-        Me.RibbonPanel3.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel3.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
         Me.RibbonPanel3.Size = New System.Drawing.Size(1360, 93)
         '
         '
@@ -2255,7 +2254,7 @@ Partial Class frmMainInterface
         Me.RibbonBar10.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar10.Location = New System.Drawing.Point(392, 0)
         Me.RibbonBar10.Name = "RibbonBar10"
-        Me.RibbonBar10.Size = New System.Drawing.Size(210, 90)
+        Me.RibbonBar10.Size = New System.Drawing.Size(210, 91)
         Me.RibbonBar10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar10.TabIndex = 21
         Me.RibbonBar10.Text = "AUTO COMPLETE"
@@ -2370,7 +2369,7 @@ Partial Class frmMainInterface
         Me.RibbonBar8.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar8.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar8.Name = "RibbonBar8"
-        Me.RibbonBar8.Size = New System.Drawing.Size(389, 90)
+        Me.RibbonBar8.Size = New System.Drawing.Size(389, 91)
         Me.RibbonBar8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar8.TabIndex = 20
         Me.RibbonBar8.Text = "DATA ENTRY"
@@ -2495,7 +2494,7 @@ Partial Class frmMainInterface
         Me.RibbonPanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel7.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel7.Name = "RibbonPanel7"
-        Me.RibbonPanel7.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel7.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
         Me.RibbonPanel7.Size = New System.Drawing.Size(1360, 93)
         '
         '
@@ -2530,7 +2529,7 @@ Partial Class frmMainInterface
         Me.RibbonBar15.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar15.Location = New System.Drawing.Point(181, 0)
         Me.RibbonBar15.Name = "RibbonBar15"
-        Me.RibbonBar15.Size = New System.Drawing.Size(646, 90)
+        Me.RibbonBar15.Size = New System.Drawing.Size(646, 91)
         Me.RibbonBar15.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar15.TabIndex = 1
         Me.RibbonBar15.Text = "DATABASE BACKUP"
@@ -2626,7 +2625,7 @@ Partial Class frmMainInterface
         Me.RibbonBar14.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar14.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar14.Name = "RibbonBar14"
-        Me.RibbonBar14.Size = New System.Drawing.Size(178, 90)
+        Me.RibbonBar14.Size = New System.Drawing.Size(178, 91)
         Me.RibbonBar14.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar14.TabIndex = 0
         Me.RibbonBar14.Text = "DATABASE"
@@ -2680,7 +2679,7 @@ Partial Class frmMainInterface
         Me.RibbonPanel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel6.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel6.Name = "RibbonPanel6"
-        Me.RibbonPanel6.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel6.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
         Me.RibbonPanel6.Size = New System.Drawing.Size(1360, 93)
         '
         '
@@ -2715,7 +2714,7 @@ Partial Class frmMainInterface
         Me.RibbonBar11.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar11.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar11.Name = "RibbonBar11"
-        Me.RibbonBar11.Size = New System.Drawing.Size(393, 90)
+        Me.RibbonBar11.Size = New System.Drawing.Size(393, 91)
         Me.RibbonBar11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar11.TabIndex = 20
         Me.RibbonBar11.Text = "TABLE VIEW"
@@ -2831,7 +2830,7 @@ Partial Class frmMainInterface
         Me.RibbonPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel4.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel4.Name = "RibbonPanel4"
-        Me.RibbonPanel4.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel4.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
         Me.RibbonPanel4.Size = New System.Drawing.Size(1360, 93)
         '
         '
@@ -2866,7 +2865,7 @@ Partial Class frmMainInterface
         Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar3.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar3.Name = "RibbonBar3"
-        Me.RibbonBar3.Size = New System.Drawing.Size(225, 90)
+        Me.RibbonBar3.Size = New System.Drawing.Size(225, 91)
         Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar3.TabIndex = 7
         Me.RibbonBar3.Text = "SEARCH SETTINGS"
@@ -2926,7 +2925,7 @@ Partial Class frmMainInterface
         Me.RibbonPanel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RibbonPanel5.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel5.Name = "RibbonPanel5"
-        Me.RibbonPanel5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 3)
+        Me.RibbonPanel5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
         Me.RibbonPanel5.Size = New System.Drawing.Size(1360, 93)
         '
         '
@@ -2961,7 +2960,7 @@ Partial Class frmMainInterface
         Me.RibbonBar7.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar7.Location = New System.Drawing.Point(161, 0)
         Me.RibbonBar7.Name = "RibbonBar7"
-        Me.RibbonBar7.Size = New System.Drawing.Size(176, 90)
+        Me.RibbonBar7.Size = New System.Drawing.Size(176, 91)
         Me.RibbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar7.TabIndex = 27
         Me.RibbonBar7.Text = "SETTINGS WIZARD"
@@ -3012,7 +3011,7 @@ Partial Class frmMainInterface
         Me.RibbonBar9.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar9.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar9.Name = "RibbonBar9"
-        Me.RibbonBar9.Size = New System.Drawing.Size(158, 90)
+        Me.RibbonBar9.Size = New System.Drawing.Size(158, 91)
         Me.RibbonBar9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar9.TabIndex = 26
         Me.RibbonBar9.Text = "MESSAGES"
@@ -3164,7 +3163,7 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnColumnHeaderContextMenu})
         Me.ColumnHeaderContextMenuBar.Location = New System.Drawing.Point(1100, 10)
         Me.ColumnHeaderContextMenuBar.Name = "ColumnHeaderContextMenuBar"
-        Me.ColumnHeaderContextMenuBar.Size = New System.Drawing.Size(245, 27)
+        Me.ColumnHeaderContextMenuBar.Size = New System.Drawing.Size(245, 25)
         Me.ColumnHeaderContextMenuBar.Stretch = true
         Me.ColumnHeaderContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.ColumnHeaderContextMenuBar.TabIndex = 138
@@ -3200,13 +3199,14 @@ Partial Class frmMainInterface
         Me.SOCDatagrid.AllowUserToAddRows = false
         Me.SOCDatagrid.AllowUserToOrderColumns = true
         Me.SOCDatagrid.AutoGenerateColumns = false
+        Me.SOCDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.SOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle74.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle74.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle74.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle74.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle74.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle74.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle74
         Me.SOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -3215,17 +3215,17 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.SOCDatagrid, Me.btnColumnHeaderContextMenu)
         Me.SOCDatagrid.DataSource = Me.SOCRegisterBindingSource
         DataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle97.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle97.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle97.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle97.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle97.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle97.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle97.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle97.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle97.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle97
         Me.SOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.SOCDatagrid.EnableHeadersVisualStyles = false
-        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.SOCDatagrid.Location = New System.Drawing.Point(0, 0)
         Me.SOCDatagrid.MultiSelect = false
         Me.SOCDatagrid.Name = "SOCDatagrid"
@@ -3233,9 +3233,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle98.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle98.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle98.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle98.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle98.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle98.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle98.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle98.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.SOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle98
         Me.SOCDatagrid.RowHeadersWidth = 50
@@ -3576,13 +3576,14 @@ Partial Class frmMainInterface
         Me.PSDataGrid.AllowUserToAddRows = false
         Me.PSDataGrid.AllowUserToOrderColumns = true
         Me.PSDataGrid.AutoGenerateColumns = false
+        Me.PSDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.PSDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.PSDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.PSDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -3591,17 +3592,17 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.PSDataGrid, Me.btnColumnHeaderContextMenu)
         Me.PSDataGrid.DataSource = Me.PSRegisterBindingSource
         DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle25.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.PSDataGrid.DefaultCellStyle = DataGridViewCellStyle25
         Me.PSDataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PSDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.PSDataGrid.EnableHeadersVisualStyles = false
-        Me.PSDataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.PSDataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.PSDataGrid.Location = New System.Drawing.Point(0, 84)
         Me.PSDataGrid.MultiSelect = false
         Me.PSDataGrid.Name = "PSDataGrid"
@@ -3609,9 +3610,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle26.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.PSDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle26
         Me.PSDataGrid.RowHeadersWidth = 40
@@ -3665,13 +3666,14 @@ Partial Class frmMainInterface
         Me.CDDataGrid.AllowUserToAddRows = false
         Me.CDDataGrid.AllowUserToOrderColumns = true
         Me.CDDataGrid.AutoGenerateColumns = false
+        Me.CDDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.CDDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle27.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.CDDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle27
         Me.CDDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -3680,17 +3682,17 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.CDDataGrid, Me.btnColumnHeaderContextMenu)
         Me.CDDataGrid.DataSource = Me.CDRegisterBindingSource
         DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle30.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.CDDataGrid.DefaultCellStyle = DataGridViewCellStyle30
         Me.CDDataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CDDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.CDDataGrid.EnableHeadersVisualStyles = false
-        Me.CDDataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.CDDataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.CDDataGrid.Location = New System.Drawing.Point(1, 245)
         Me.CDDataGrid.MultiSelect = false
         Me.CDDataGrid.Name = "CDDataGrid"
@@ -3698,9 +3700,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle100.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle100.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle100.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle100.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle100.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle100.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle100.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle100.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle100.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.CDDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle100
         Me.CDDataGrid.RowHeadersWidth = 60
@@ -3802,13 +3804,14 @@ Partial Class frmMainInterface
         Me.FPADataGrid.AllowUserToAddRows = false
         Me.FPADataGrid.AllowUserToOrderColumns = true
         Me.FPADataGrid.AutoGenerateColumns = false
+        Me.FPADataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.FPADataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle31.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.FPADataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle31
         Me.FPADataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -3817,16 +3820,16 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.FPADataGrid, Me.btnColumnHeaderContextMenu)
         Me.FPADataGrid.DataSource = Me.FPARegisterBindingSource
         DataGridViewCellStyle104.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle104.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle104.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle104.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle104.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle104.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle104.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle104.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle104.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle104.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.FPADataGrid.DefaultCellStyle = DataGridViewCellStyle104
         Me.FPADataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FPADataGrid.EnableHeadersVisualStyles = false
-        Me.FPADataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.FPADataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.FPADataGrid.Location = New System.Drawing.Point(1, 245)
         Me.FPADataGrid.MultiSelect = false
         Me.FPADataGrid.Name = "FPADataGrid"
@@ -3834,9 +3837,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle105.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle105.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle105.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle105.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle105.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle105.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle105.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle105.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle105.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.FPADataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle105
         Me.FPADataGrid.RowHeadersWidth = 60
@@ -3974,13 +3977,14 @@ Partial Class frmMainInterface
         Me.ACDatagrid.AllowUserToAddRows = false
         Me.ACDatagrid.AllowUserToOrderColumns = true
         Me.ACDatagrid.AutoGenerateColumns = false
+        Me.ACDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.ACDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle36.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle36.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle36.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.ACDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle36
         Me.ACDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -3989,16 +3993,16 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.ACDatagrid, Me.btnColumnHeaderContextMenu)
         Me.ACDatagrid.DataSource = Me.ACRegisterBindingSource
         DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle42.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.ACDatagrid.DefaultCellStyle = DataGridViewCellStyle42
         Me.ACDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ACDatagrid.EnableHeadersVisualStyles = false
-        Me.ACDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.ACDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.ACDatagrid.Location = New System.Drawing.Point(1, 352)
         Me.ACDatagrid.MultiSelect = false
         Me.ACDatagrid.Name = "ACDatagrid"
@@ -4006,9 +4010,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle43.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.ACDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle43
         Me.ACDatagrid.RowHeadersWidth = 60
@@ -4151,13 +4155,14 @@ Partial Class frmMainInterface
         Me.IDDatagrid.AllowUserToAddRows = false
         Me.IDDatagrid.AllowUserToOrderColumns = true
         Me.IDDatagrid.AutoGenerateColumns = false
+        Me.IDDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.IDDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle45.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle45.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle45.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle45.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IDDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle45
         Me.IDDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -4166,16 +4171,16 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.IDDatagrid, Me.btnColumnHeaderContextMenu)
         Me.IDDatagrid.DataSource = Me.IDRegisterBindingSource
         DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle46.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle46.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle46.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle46.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IDDatagrid.DefaultCellStyle = DataGridViewCellStyle46
         Me.IDDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.IDDatagrid.EnableHeadersVisualStyles = false
-        Me.IDDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.IDDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.IDDatagrid.Location = New System.Drawing.Point(1, 352)
         Me.IDDatagrid.MultiSelect = false
         Me.IDDatagrid.Name = "IDDatagrid"
@@ -4183,9 +4188,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle47.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle47.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle47.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IDDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle47
         Me.IDDatagrid.RowHeadersWidth = 60
@@ -4336,13 +4341,14 @@ Partial Class frmMainInterface
         Me.DADatagrid.AllowUserToAddRows = false
         Me.DADatagrid.AllowUserToOrderColumns = true
         Me.DADatagrid.AutoGenerateColumns = false
+        Me.DADatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.DADatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle49.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle49.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle49.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DADatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle49
         Me.DADatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -4351,16 +4357,16 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.DADatagrid, Me.btnColumnHeaderContextMenu)
         Me.DADatagrid.DataSource = Me.DARegisterBindingSource
         DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle52.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle52.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle52.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle52.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DADatagrid.DefaultCellStyle = DataGridViewCellStyle52
         Me.DADatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DADatagrid.EnableHeadersVisualStyles = false
-        Me.DADatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.DADatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.DADatagrid.Location = New System.Drawing.Point(0, 0)
         Me.DADatagrid.MultiSelect = false
         Me.DADatagrid.Name = "DADatagrid"
@@ -4368,9 +4374,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle107.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle107.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle107.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle107.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle107.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle107.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle107.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle107.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DADatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle107
         Me.DADatagrid.RowHeadersWidth = 60
@@ -4525,13 +4531,14 @@ Partial Class frmMainInterface
         Me.RSOCDatagrid.AllowUserToAddRows = false
         Me.RSOCDatagrid.AllowUserToOrderColumns = true
         Me.RSOCDatagrid.AutoGenerateColumns = false
+        Me.RSOCDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.RSOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle53.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle53.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle53.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle53
         Me.RSOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -4540,17 +4547,17 @@ Partial Class frmMainInterface
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.RSOCDatagrid, Me.btnColumnHeaderContextMenu)
         Me.RSOCDatagrid.DataSource = Me.RSOCRegisterBindingSource
         DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle58.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle58.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle58.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle58.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle58.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle58.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.DefaultCellStyle = DataGridViewCellStyle58
         Me.RSOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RSOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.RSOCDatagrid.EnableHeadersVisualStyles = false
-        Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.RSOCDatagrid.Location = New System.Drawing.Point(1, 277)
         Me.RSOCDatagrid.MultiSelect = false
         Me.RSOCDatagrid.Name = "RSOCDatagrid"
@@ -4558,9 +4565,9 @@ Partial Class frmMainInterface
         DataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle109.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle109.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle109.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle109.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle109.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle109.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle109.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle109.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle109
         Me.RSOCDatagrid.RowHeadersWidth = 60
@@ -4714,6 +4721,7 @@ Partial Class frmMainInterface
         'txtSOCIdentificationDetails
         '
         Me.txtSOCIdentificationDetails.AcceptsReturn = true
+        Me.txtSOCIdentificationDetails.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -4723,6 +4731,7 @@ Partial Class frmMainInterface
         Me.txtSOCIdentificationDetails.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCIdentificationDetails.FocusHighlightEnabled = true
         Me.txtSOCIdentificationDetails.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCIdentificationDetails.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCIdentificationDetails, true)
         Me.txtSOCIdentificationDetails.Location = New System.Drawing.Point(956, 279)
         Me.txtSOCIdentificationDetails.MaxLength = 255
@@ -5012,10 +5021,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel1.Name = "TabControlPanel1"
         Me.TabControlPanel1.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel1.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel1.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel1.Style.GradientAngle = 90
@@ -5224,6 +5232,7 @@ Partial Class frmMainInterface
         'txtIdentifiedAs
         '
         Me.txtIdentifiedAs.AcceptsReturn = true
+        Me.txtIdentifiedAs.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -5233,6 +5242,7 @@ Partial Class frmMainInterface
         Me.txtIdentifiedAs.DisabledBackColor = System.Drawing.Color.White
         Me.txtIdentifiedAs.FocusHighlightEnabled = true
         Me.txtIdentifiedAs.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIdentifiedAs.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIdentifiedAs, true)
         Me.txtIdentifiedAs.Location = New System.Drawing.Point(956, 228)
         Me.txtIdentifiedAs.MaxLength = 255
@@ -5333,6 +5343,7 @@ Partial Class frmMainInterface
         '
         Me.txtSOCOfficer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtSOCOfficer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCOfficer.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -5344,6 +5355,7 @@ Partial Class frmMainInterface
         Me.txtSOCOfficer.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCOfficer.FocusHighlightEnabled = true
         Me.txtSOCOfficer.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCOfficer.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCOfficer, true)
         Me.txtSOCOfficer.Location = New System.Drawing.Point(513, 163)
         Me.txtSOCOfficer.MaxLength = 255
@@ -5681,6 +5693,7 @@ Partial Class frmMainInterface
         '
         Me.txtSOCDateOfPhotography.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtSOCDateOfPhotography.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCDateOfPhotography.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -5691,6 +5704,7 @@ Partial Class frmMainInterface
         Me.txtSOCDateOfPhotography.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCDateOfPhotography.FocusHighlightEnabled = true
         Me.txtSOCDateOfPhotography.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCDateOfPhotography.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCDateOfPhotography, true)
         Me.txtSOCDateOfPhotography.Location = New System.Drawing.Point(956, 4)
         Me.txtSOCDateOfPhotography.MaxLength = 50
@@ -5722,7 +5736,7 @@ Partial Class frmMainInterface
         Me.DataGridContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDatagridContextMenu})
         Me.DataGridContextMenuBar.Location = New System.Drawing.Point(507, 35)
         Me.DataGridContextMenuBar.Name = "DataGridContextMenuBar"
-        Me.DataGridContextMenuBar.Size = New System.Drawing.Size(241, 27)
+        Me.DataGridContextMenuBar.Size = New System.Drawing.Size(241, 25)
         Me.DataGridContextMenuBar.Stretch = true
         Me.DataGridContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.DataGridContextMenuBar.TabIndex = 56
@@ -5883,6 +5897,7 @@ Partial Class frmMainInterface
         'txtSOCGist
         '
         Me.txtSOCGist.AcceptsReturn = true
+        Me.txtSOCGist.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -5892,6 +5907,7 @@ Partial Class frmMainInterface
         Me.txtSOCGist.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCGist.FocusHighlightEnabled = true
         Me.txtSOCGist.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCGist.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCGist, true)
         Me.txtSOCGist.Location = New System.Drawing.Point(956, 32)
         Me.txtSOCGist.MaxLength = 1000
@@ -5951,6 +5967,7 @@ Partial Class frmMainInterface
         '
         Me.txtSOCPhotographer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtSOCPhotographer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCPhotographer.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -5961,6 +5978,7 @@ Partial Class frmMainInterface
         Me.txtSOCPhotographer.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCPhotographer.FocusHighlightEnabled = true
         Me.txtSOCPhotographer.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCPhotographer.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCPhotographer, true)
         Me.txtSOCPhotographer.Location = New System.Drawing.Point(513, 309)
         Me.txtSOCPhotographer.MaxLength = 255
@@ -6278,6 +6296,7 @@ Partial Class frmMainInterface
         Me.txtSOCPlace.AcceptsReturn = true
         Me.txtSOCPlace.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtSOCPlace.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCPlace.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6287,6 +6306,7 @@ Partial Class frmMainInterface
         Me.txtSOCPlace.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCPlace.FocusHighlightEnabled = true
         Me.txtSOCPlace.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCPlace.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCPlace, true)
         Me.txtSOCPlace.Location = New System.Drawing.Point(132, 232)
         Me.txtSOCPlace.MaxLength = 255
@@ -6322,6 +6342,7 @@ Partial Class frmMainInterface
         'txtSOCComparisonDetails
         '
         Me.txtSOCComparisonDetails.AcceptsReturn = true
+        Me.txtSOCComparisonDetails.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6331,6 +6352,7 @@ Partial Class frmMainInterface
         Me.txtSOCComparisonDetails.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCComparisonDetails.FocusHighlightEnabled = true
         Me.txtSOCComparisonDetails.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCComparisonDetails.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCComparisonDetails, true)
         Me.txtSOCComparisonDetails.Location = New System.Drawing.Point(956, 92)
         Me.txtSOCComparisonDetails.MaxLength = 255
@@ -6345,6 +6367,7 @@ Partial Class frmMainInterface
         'txtSOCCPDetails
         '
         Me.txtSOCCPDetails.AcceptsReturn = true
+        Me.txtSOCCPDetails.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6354,6 +6377,7 @@ Partial Class frmMainInterface
         Me.txtSOCCPDetails.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCCPDetails.FocusHighlightEnabled = true
         Me.txtSOCCPDetails.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCCPDetails.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCCPDetails, true)
         Me.txtSOCCPDetails.Location = New System.Drawing.Point(513, 244)
         Me.txtSOCCPDetails.MaxLength = 255
@@ -6368,6 +6392,7 @@ Partial Class frmMainInterface
         'txtSOCPropertyLost
         '
         Me.txtSOCPropertyLost.AcceptsReturn = true
+        Me.txtSOCPropertyLost.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6377,6 +6402,7 @@ Partial Class frmMainInterface
         Me.txtSOCPropertyLost.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCPropertyLost.FocusHighlightEnabled = true
         Me.txtSOCPropertyLost.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCPropertyLost.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCPropertyLost, true)
         Me.txtSOCPropertyLost.Location = New System.Drawing.Point(513, 72)
         Me.txtSOCPropertyLost.MaxLength = 255
@@ -6391,6 +6417,7 @@ Partial Class frmMainInterface
         'txtSOCComplainant
         '
         Me.txtSOCComplainant.AcceptsReturn = true
+        Me.txtSOCComplainant.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6400,6 +6427,7 @@ Partial Class frmMainInterface
         Me.txtSOCComplainant.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCComplainant.FocusHighlightEnabled = true
         Me.txtSOCComplainant.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCComplainant.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCComplainant, true)
         Me.txtSOCComplainant.Location = New System.Drawing.Point(513, 4)
         Me.txtSOCComplainant.MaxLength = 255
@@ -6415,6 +6443,7 @@ Partial Class frmMainInterface
         '
         Me.txtSOCModus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtSOCModus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCModus.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6425,6 +6454,7 @@ Partial Class frmMainInterface
         Me.txtSOCModus.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCModus.FocusHighlightEnabled = true
         Me.txtSOCModus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCModus.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCModus, true)
         Me.txtSOCModus.Location = New System.Drawing.Point(132, 309)
         Me.txtSOCModus.MaxLength = 255
@@ -6656,6 +6686,7 @@ Partial Class frmMainInterface
         '
         Me.txtSOCSection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtSOCSection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCSection.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6666,6 +6697,7 @@ Partial Class frmMainInterface
         Me.txtSOCSection.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCSection.FocusHighlightEnabled = true
         Me.txtSOCSection.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCSection.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCSection, true)
         Me.txtSOCSection.Location = New System.Drawing.Point(132, 204)
         Me.txtSOCSection.MaxLength = 255
@@ -6679,6 +6711,7 @@ Partial Class frmMainInterface
         '
         Me.txtSOCCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtSOCCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSOCCrimeNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6689,6 +6722,7 @@ Partial Class frmMainInterface
         Me.txtSOCCrimeNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCCrimeNumber.FocusHighlightEnabled = true
         Me.txtSOCCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCCrimeNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCCrimeNumber, true)
         Me.txtSOCCrimeNumber.Location = New System.Drawing.Point(132, 176)
         Me.txtSOCCrimeNumber.MaxLength = 45
@@ -6702,6 +6736,7 @@ Partial Class frmMainInterface
         '
         Me.dtSOCOccurrence.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.dtSOCOccurrence.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.dtSOCOccurrence.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6712,6 +6747,7 @@ Partial Class frmMainInterface
         Me.dtSOCOccurrence.DisabledBackColor = System.Drawing.Color.White
         Me.dtSOCOccurrence.FocusHighlightEnabled = true
         Me.dtSOCOccurrence.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtSOCOccurrence.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.dtSOCOccurrence, true)
         Me.dtSOCOccurrence.Location = New System.Drawing.Point(132, 120)
         Me.dtSOCOccurrence.MaxLength = 255
@@ -6723,6 +6759,7 @@ Partial Class frmMainInterface
         '
         'txtSOCNumber
         '
+        Me.txtSOCNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6734,6 +6771,7 @@ Partial Class frmMainInterface
         Me.txtSOCNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCNumber.FocusHighlightEnabled = true
         Me.txtSOCNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCNumber, true)
         Me.txtSOCNumber.Location = New System.Drawing.Point(132, 37)
         Me.txtSOCNumber.MaxLength = 10
@@ -6828,6 +6866,7 @@ Partial Class frmMainInterface
         '
         'txtSOCNumberOnly
         '
+        Me.txtSOCNumberOnly.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -6838,6 +6877,7 @@ Partial Class frmMainInterface
         Me.txtSOCNumberOnly.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCNumberOnly.FocusHighlightEnabled = true
         Me.txtSOCNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCNumberOnly.ForeColor = System.Drawing.Color.Black
         Me.txtSOCNumberOnly.Location = New System.Drawing.Point(386, 42)
         Me.txtSOCNumberOnly.MaxLength = 45
         Me.txtSOCNumberOnly.Name = "txtSOCNumberOnly"
@@ -6862,10 +6902,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel2.Name = "TabControlPanel2"
         Me.TabControlPanel2.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel2.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel2.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel2.Style.GradientAngle = 90
@@ -6994,6 +7033,7 @@ Partial Class frmMainInterface
         '
         Me.txtDAModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDAModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAModusOperandi.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7004,6 +7044,7 @@ Partial Class frmMainInterface
         Me.txtDAModusOperandi.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAModusOperandi.FocusHighlightEnabled = true
         Me.txtDAModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAModusOperandi.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAModusOperandi, true)
         Me.txtDAModusOperandi.Location = New System.Drawing.Point(545, 216)
         Me.txtDAModusOperandi.MaxLength = 255
@@ -7102,6 +7143,7 @@ Partial Class frmMainInterface
         '
         'txtDANumberOnly
         '
+        Me.txtDANumberOnly.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7112,6 +7154,7 @@ Partial Class frmMainInterface
         Me.txtDANumberOnly.DisabledBackColor = System.Drawing.Color.White
         Me.txtDANumberOnly.FocusHighlightEnabled = true
         Me.txtDANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDANumberOnly.ForeColor = System.Drawing.Color.Black
         Me.txtDANumberOnly.Location = New System.Drawing.Point(402, 155)
         Me.txtDANumberOnly.MaxLength = 45
         Me.txtDANumberOnly.Name = "txtDANumberOnly"
@@ -7271,7 +7314,7 @@ Partial Class frmMainInterface
         Me.DASlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDASlipContextMenu})
         Me.DASlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
         Me.DASlipContextMenuBar.Name = "DASlipContextMenuBar"
-        Me.DASlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
+        Me.DASlipContextMenuBar.Size = New System.Drawing.Size(108, 25)
         Me.DASlipContextMenuBar.Stretch = true
         Me.DASlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.DASlipContextMenuBar.TabIndex = 57
@@ -7427,6 +7470,7 @@ Partial Class frmMainInterface
         '
         Me.txtDASection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDASection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDASection.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7437,6 +7481,7 @@ Partial Class frmMainInterface
         Me.txtDASection.DisabledBackColor = System.Drawing.Color.White
         Me.txtDASection.FocusHighlightEnabled = true
         Me.txtDASection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDASection.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDASection, true)
         Me.txtDASection.Location = New System.Drawing.Point(122, 206)
         Me.txtDASection.MaxLength = 255
@@ -7450,6 +7495,7 @@ Partial Class frmMainInterface
         '
         Me.txtDACrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtDACrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDACrimeNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7460,6 +7506,7 @@ Partial Class frmMainInterface
         Me.txtDACrimeNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtDACrimeNumber.FocusHighlightEnabled = true
         Me.txtDACrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDACrimeNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDACrimeNumber, true)
         Me.txtDACrimeNumber.Location = New System.Drawing.Point(122, 167)
         Me.txtDACrimeNumber.MaxLength = 45
@@ -7473,6 +7520,7 @@ Partial Class frmMainInterface
         '
         Me.txtDAHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDAHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAHenryDenominator.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7483,6 +7531,7 @@ Partial Class frmMainInterface
         Me.txtDAHenryDenominator.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAHenryDenominator.FocusHighlightEnabled = true
         Me.txtDAHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAHenryDenominator.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAHenryDenominator, true)
         Me.txtDAHenryDenominator.Location = New System.Drawing.Point(545, 49)
         Me.txtDAHenryDenominator.MaxLength = 15
@@ -7495,6 +7544,7 @@ Partial Class frmMainInterface
         'txtDARemarks
         '
         Me.txtDARemarks.AcceptsReturn = true
+        Me.txtDARemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7504,6 +7554,7 @@ Partial Class frmMainInterface
         Me.txtDARemarks.DisabledBackColor = System.Drawing.Color.White
         Me.txtDARemarks.FocusHighlightEnabled = true
         Me.txtDARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDARemarks.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDARemarks, true)
         Me.txtDARemarks.Location = New System.Drawing.Point(545, 254)
         Me.txtDARemarks.MaxLength = 255
@@ -7576,6 +7627,7 @@ Partial Class frmMainInterface
         '
         Me.txtDAFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDAFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAFathersName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7586,6 +7638,7 @@ Partial Class frmMainInterface
         Me.txtDAFathersName.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAFathersName.FocusHighlightEnabled = true
         Me.txtDAFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAFathersName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAFathersName, true)
         Me.txtDAFathersName.Location = New System.Drawing.Point(121, 315)
         Me.txtDAFathersName.MaxLength = 255
@@ -7598,6 +7651,7 @@ Partial Class frmMainInterface
         'txtDAAddress
         '
         Me.txtDAAddress.AcceptsReturn = true
+        Me.txtDAAddress.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7607,6 +7661,7 @@ Partial Class frmMainInterface
         Me.txtDAAddress.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAAddress.FocusHighlightEnabled = true
         Me.txtDAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAAddress.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAAddress, true)
         Me.txtDAAddress.Location = New System.Drawing.Point(545, 124)
         Me.txtDAAddress.MaxLength = 255
@@ -7622,6 +7677,7 @@ Partial Class frmMainInterface
         '
         Me.txtDAHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDAHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAHenryNumerator.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7632,6 +7688,7 @@ Partial Class frmMainInterface
         Me.txtDAHenryNumerator.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAHenryNumerator.FocusHighlightEnabled = true
         Me.txtDAHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAHenryNumerator.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAHenryNumerator, true)
         Me.txtDAHenryNumerator.Location = New System.Drawing.Point(545, 10)
         Me.txtDAHenryNumerator.MaxLength = 15
@@ -7710,6 +7767,7 @@ Partial Class frmMainInterface
         '
         Me.txtDAAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDAAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAAliasName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7720,6 +7778,7 @@ Partial Class frmMainInterface
         Me.txtDAAliasName.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAAliasName.FocusHighlightEnabled = true
         Me.txtDAAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAAliasName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAAliasName, true)
         Me.txtDAAliasName.Location = New System.Drawing.Point(122, 280)
         Me.txtDAAliasName.MaxLength = 255
@@ -7733,6 +7792,7 @@ Partial Class frmMainInterface
         '
         Me.txtDAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtDAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7743,6 +7803,7 @@ Partial Class frmMainInterface
         Me.txtDAName.DisabledBackColor = System.Drawing.Color.White
         Me.txtDAName.FocusHighlightEnabled = true
         Me.txtDAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDAName, true)
         Me.txtDAName.Location = New System.Drawing.Point(122, 243)
         Me.txtDAName.MaxLength = 255
@@ -7895,6 +7956,7 @@ Partial Class frmMainInterface
         '
         'txtDANumber
         '
+        Me.txtDANumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -7906,6 +7968,7 @@ Partial Class frmMainInterface
         Me.txtDANumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtDANumber.FocusHighlightEnabled = true
         Me.txtDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDANumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtDANumber, true)
         Me.txtDANumber.Location = New System.Drawing.Point(122, 51)
         Me.txtDANumber.MaxLength = 10
@@ -7995,10 +8058,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel10.Name = "TabControlPanel10"
         Me.TabControlPanel10.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel10.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel10.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel10.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel10.Style.GradientAngle = 90
@@ -8098,6 +8160,7 @@ Partial Class frmMainInterface
         '
         'txtWeeklyDiary
         '
+        Me.txtWeeklyDiary.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8106,6 +8169,7 @@ Partial Class frmMainInterface
         Me.txtWeeklyDiary.DisabledBackColor = System.Drawing.Color.White
         Me.txtWeeklyDiary.FocusHighlightEnabled = true
         Me.txtWeeklyDiary.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtWeeklyDiary.ForeColor = System.Drawing.Color.Black
         Me.txtWeeklyDiary.Location = New System.Drawing.Point(403, 163)
         Me.txtWeeklyDiary.MaxLength = 2
         Me.txtWeeklyDiary.Name = "txtWeeklyDiary"
@@ -8127,6 +8191,7 @@ Partial Class frmMainInterface
         '
         'txtVigilanceCase
         '
+        Me.txtVigilanceCase.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8135,6 +8200,7 @@ Partial Class frmMainInterface
         Me.txtVigilanceCase.DisabledBackColor = System.Drawing.Color.White
         Me.txtVigilanceCase.FocusHighlightEnabled = true
         Me.txtVigilanceCase.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtVigilanceCase.ForeColor = System.Drawing.Color.Black
         Me.txtVigilanceCase.Location = New System.Drawing.Point(403, 127)
         Me.txtVigilanceCase.MaxLength = 2
         Me.txtVigilanceCase.Name = "txtVigilanceCase"
@@ -8156,6 +8222,7 @@ Partial Class frmMainInterface
         '
         'txtGraveCrime
         '
+        Me.txtGraveCrime.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8164,6 +8231,7 @@ Partial Class frmMainInterface
         Me.txtGraveCrime.DisabledBackColor = System.Drawing.Color.White
         Me.txtGraveCrime.FocusHighlightEnabled = true
         Me.txtGraveCrime.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtGraveCrime.ForeColor = System.Drawing.Color.Black
         Me.txtGraveCrime.Location = New System.Drawing.Point(149, 91)
         Me.txtGraveCrime.MaxLength = 2
         Me.txtGraveCrime.Name = "txtGraveCrime"
@@ -8185,6 +8253,7 @@ Partial Class frmMainInterface
         '
         'txtFPAttestation
         '
+        Me.txtFPAttestation.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8193,6 +8262,7 @@ Partial Class frmMainInterface
         Me.txtFPAttestation.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPAttestation.FocusHighlightEnabled = true
         Me.txtFPAttestation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAttestation.ForeColor = System.Drawing.Color.Black
         Me.txtFPAttestation.Location = New System.Drawing.Point(149, 55)
         Me.txtFPAttestation.MaxLength = 2
         Me.txtFPAttestation.Name = "txtFPAttestation"
@@ -8228,6 +8298,7 @@ Partial Class frmMainInterface
         '
         'txtTABill
         '
+        Me.txtTABill.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8236,6 +8307,7 @@ Partial Class frmMainInterface
         Me.txtTABill.DisabledBackColor = System.Drawing.Color.White
         Me.txtTABill.FocusHighlightEnabled = true
         Me.txtTABill.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtTABill.ForeColor = System.Drawing.Color.Black
         Me.txtTABill.Location = New System.Drawing.Point(403, 91)
         Me.txtTABill.MaxLength = 2
         Me.txtTABill.Name = "txtTABill"
@@ -8244,6 +8316,7 @@ Partial Class frmMainInterface
         '
         'txtRBWarrant
         '
+        Me.txtRBWarrant.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8252,6 +8325,7 @@ Partial Class frmMainInterface
         Me.txtRBWarrant.DisabledBackColor = System.Drawing.Color.White
         Me.txtRBWarrant.FocusHighlightEnabled = true
         Me.txtRBWarrant.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRBWarrant.ForeColor = System.Drawing.Color.Black
         Me.txtRBWarrant.Location = New System.Drawing.Point(149, 163)
         Me.txtRBWarrant.MaxLength = 2
         Me.txtRBWarrant.Name = "txtRBWarrant"
@@ -8260,6 +8334,7 @@ Partial Class frmMainInterface
         '
         'txtSOCDAStatement
         '
+        Me.txtSOCDAStatement.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8268,6 +8343,7 @@ Partial Class frmMainInterface
         Me.txtSOCDAStatement.DisabledBackColor = System.Drawing.Color.White
         Me.txtSOCDAStatement.FocusHighlightEnabled = true
         Me.txtSOCDAStatement.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCDAStatement.ForeColor = System.Drawing.Color.Black
         Me.txtSOCDAStatement.Location = New System.Drawing.Point(403, 55)
         Me.txtSOCDAStatement.MaxLength = 2
         Me.txtSOCDAStatement.Name = "txtSOCDAStatement"
@@ -8276,6 +8352,7 @@ Partial Class frmMainInterface
         '
         'txtIndividualPerformance
         '
+        Me.txtIndividualPerformance.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8284,6 +8361,7 @@ Partial Class frmMainInterface
         Me.txtIndividualPerformance.DisabledBackColor = System.Drawing.Color.White
         Me.txtIndividualPerformance.FocusHighlightEnabled = true
         Me.txtIndividualPerformance.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIndividualPerformance.ForeColor = System.Drawing.Color.Black
         Me.txtIndividualPerformance.Location = New System.Drawing.Point(149, 127)
         Me.txtIndividualPerformance.MaxLength = 2
         Me.txtIndividualPerformance.Name = "txtIndividualPerformance"
@@ -8292,6 +8370,7 @@ Partial Class frmMainInterface
         '
         'txtAttendance
         '
+        Me.txtAttendance.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8300,6 +8379,7 @@ Partial Class frmMainInterface
         Me.txtAttendance.DisabledBackColor = System.Drawing.Color.White
         Me.txtAttendance.FocusHighlightEnabled = true
         Me.txtAttendance.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtAttendance.ForeColor = System.Drawing.Color.Black
         Me.txtAttendance.Location = New System.Drawing.Point(149, 19)
         Me.txtAttendance.MaxLength = 2
         Me.txtAttendance.Name = "txtAttendance"
@@ -8447,6 +8527,7 @@ Partial Class frmMainInterface
         '
         'txtFullDistrict
         '
+        Me.txtFullDistrict.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8455,6 +8536,7 @@ Partial Class frmMainInterface
         Me.txtFullDistrict.DisabledBackColor = System.Drawing.Color.White
         Me.txtFullDistrict.FocusHighlightEnabled = true
         Me.txtFullDistrict.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFullDistrict.ForeColor = System.Drawing.Color.Black
         Me.txtFullDistrict.Location = New System.Drawing.Point(130, 115)
         Me.txtFullDistrict.MaxLength = 255
         Me.txtFullDistrict.Name = "txtFullDistrict"
@@ -8465,6 +8547,7 @@ Partial Class frmMainInterface
         '
         'txtShortOffice
         '
+        Me.txtShortOffice.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8473,6 +8556,7 @@ Partial Class frmMainInterface
         Me.txtShortOffice.DisabledBackColor = System.Drawing.Color.White
         Me.txtShortOffice.FocusHighlightEnabled = true
         Me.txtShortOffice.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtShortOffice.ForeColor = System.Drawing.Color.Black
         Me.txtShortOffice.Location = New System.Drawing.Point(130, 67)
         Me.txtShortOffice.MaxLength = 255
         Me.txtShortOffice.Name = "txtShortOffice"
@@ -8509,6 +8593,7 @@ Partial Class frmMainInterface
         '
         'txtShortDistrict
         '
+        Me.txtShortDistrict.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8517,6 +8602,7 @@ Partial Class frmMainInterface
         Me.txtShortDistrict.DisabledBackColor = System.Drawing.Color.White
         Me.txtShortDistrict.FocusHighlightEnabled = true
         Me.txtShortDistrict.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtShortDistrict.ForeColor = System.Drawing.Color.Black
         Me.txtShortDistrict.Location = New System.Drawing.Point(130, 163)
         Me.txtShortDistrict.MaxLength = 255
         Me.txtShortDistrict.Name = "txtShortDistrict"
@@ -8527,6 +8613,7 @@ Partial Class frmMainInterface
         '
         'txtFullOffice
         '
+        Me.txtFullOffice.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8535,6 +8622,7 @@ Partial Class frmMainInterface
         Me.txtFullOffice.DisabledBackColor = System.Drawing.Color.White
         Me.txtFullOffice.FocusHighlightEnabled = true
         Me.txtFullOffice.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFullOffice.ForeColor = System.Drawing.Color.Black
         Me.txtFullOffice.Location = New System.Drawing.Point(130, 19)
         Me.txtFullOffice.MaxLength = 255
         Me.txtFullOffice.Name = "txtFullOffice"
@@ -8559,10 +8647,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel4.Name = "TabControlPanel4"
         Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel4.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel4.Style.GradientAngle = 90
@@ -8712,6 +8799,7 @@ Partial Class frmMainInterface
         '
         Me.txtHeadOfAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtHeadOfAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtHeadOfAccount.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8722,6 +8810,7 @@ Partial Class frmMainInterface
         Me.txtHeadOfAccount.DisabledBackColor = System.Drawing.Color.White
         Me.txtHeadOfAccount.FocusHighlightEnabled = true
         Me.txtHeadOfAccount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtHeadOfAccount.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtHeadOfAccount, true)
         Me.txtHeadOfAccount.Location = New System.Drawing.Point(524, 144)
         Me.txtHeadOfAccount.MaxLength = 255
@@ -8807,6 +8896,7 @@ Partial Class frmMainInterface
         '
         'txtFPANumberOnly
         '
+        Me.txtFPANumberOnly.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8817,6 +8907,7 @@ Partial Class frmMainInterface
         Me.txtFPANumberOnly.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPANumberOnly.FocusHighlightEnabled = true
         Me.txtFPANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPANumberOnly.ForeColor = System.Drawing.Color.Black
         Me.txtFPANumberOnly.Location = New System.Drawing.Point(421, 74)
         Me.txtFPANumberOnly.MaxLength = 45
         Me.txtFPANumberOnly.Name = "txtFPANumberOnly"
@@ -8933,6 +9024,7 @@ Partial Class frmMainInterface
         '
         Me.txtFPATreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtFPATreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPATreasury.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8943,6 +9035,7 @@ Partial Class frmMainInterface
         Me.txtFPATreasury.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPATreasury.FocusHighlightEnabled = true
         Me.txtFPATreasury.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPATreasury.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPATreasury, true)
         Me.txtFPATreasury.Location = New System.Drawing.Point(524, 178)
         Me.txtFPATreasury.MaxLength = 255
@@ -8981,6 +9074,7 @@ Partial Class frmMainInterface
         '
         'txtFPAChalanNumber
         '
+        Me.txtFPAChalanNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -8990,6 +9084,7 @@ Partial Class frmMainInterface
         Me.txtFPAChalanNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPAChalanNumber.FocusHighlightEnabled = true
         Me.txtFPAChalanNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAChalanNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAChalanNumber, true)
         Me.txtFPAChalanNumber.Location = New System.Drawing.Point(524, 44)
         Me.txtFPAChalanNumber.MaxLength = 50
@@ -9006,6 +9101,7 @@ Partial Class frmMainInterface
         Me.txtFPARemarks.AcceptsReturn = true
         Me.txtFPARemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtFPARemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPARemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9015,6 +9111,7 @@ Partial Class frmMainInterface
         Me.txtFPARemarks.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPARemarks.FocusHighlightEnabled = true
         Me.txtFPARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPARemarks.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPARemarks, true)
         Me.txtFPARemarks.Location = New System.Drawing.Point(875, 7)
         Me.txtFPARemarks.MaxLength = 255
@@ -9055,6 +9152,7 @@ Partial Class frmMainInterface
         'txtFPAAddress
         '
         Me.txtFPAAddress.AcceptsReturn = true
+        Me.txtFPAAddress.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9064,6 +9162,7 @@ Partial Class frmMainInterface
         Me.txtFPAAddress.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPAAddress.FocusHighlightEnabled = true
         Me.txtFPAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAAddress.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAddress, true)
         Me.txtFPAAddress.Location = New System.Drawing.Point(122, 142)
         Me.txtFPAAddress.MaxLength = 255
@@ -9077,6 +9176,7 @@ Partial Class frmMainInterface
         '
         'txtFPAPassportNumber
         '
+        Me.txtFPAPassportNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9087,6 +9187,7 @@ Partial Class frmMainInterface
         Me.txtFPAPassportNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPAPassportNumber.FocusHighlightEnabled = true
         Me.txtFPAPassportNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAPassportNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAPassportNumber, true)
         Me.txtFPAPassportNumber.Location = New System.Drawing.Point(524, 9)
         Me.txtFPAPassportNumber.MaxLength = 50
@@ -9126,6 +9227,7 @@ Partial Class frmMainInterface
         '
         Me.txtFPAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtFPAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPAName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9136,6 +9238,7 @@ Partial Class frmMainInterface
         Me.txtFPAName.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPAName.FocusHighlightEnabled = true
         Me.txtFPAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAName, true)
         Me.txtFPAName.Location = New System.Drawing.Point(122, 108)
         Me.txtFPAName.MaxLength = 255
@@ -9282,6 +9385,7 @@ Partial Class frmMainInterface
         '
         'txtFPANumber
         '
+        Me.txtFPANumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9293,6 +9397,7 @@ Partial Class frmMainInterface
         Me.txtFPANumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtFPANumber.FocusHighlightEnabled = true
         Me.txtFPANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPANumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtFPANumber, true)
         Me.txtFPANumber.Location = New System.Drawing.Point(122, 40)
         Me.txtFPANumber.MaxLength = 10
@@ -9357,10 +9462,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel7.Name = "TabControlPanel7"
         Me.TabControlPanel7.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel7.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel7.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel7.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel7.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel7.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel7.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel7.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel7.Style.GradientAngle = 90
@@ -9478,6 +9582,7 @@ Partial Class frmMainInterface
         '
         Me.txtCCNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtCCNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtCCNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9488,6 +9593,7 @@ Partial Class frmMainInterface
         Me.txtCCNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtCCNumber.FocusHighlightEnabled = true
         Me.txtCCNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCCNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtCCNumber, true)
         Me.txtCCNumber.Location = New System.Drawing.Point(122, 209)
         Me.txtCCNumber.MaxLength = 45
@@ -9514,6 +9620,7 @@ Partial Class frmMainInterface
         '
         Me.txtCourt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtCourt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtCourt.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9524,6 +9631,7 @@ Partial Class frmMainInterface
         Me.txtCourt.DisabledBackColor = System.Drawing.Color.White
         Me.txtCourt.FocusHighlightEnabled = true
         Me.txtCourt.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCourt.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtCourt, true)
         Me.txtCourt.Location = New System.Drawing.Point(122, 168)
         Me.txtCourt.MaxLength = 45
@@ -9721,6 +9829,7 @@ Partial Class frmMainInterface
         'txtCDRemarks
         '
         Me.txtCDRemarks.AcceptsReturn = true
+        Me.txtCDRemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9730,6 +9839,7 @@ Partial Class frmMainInterface
         Me.txtCDRemarks.DisabledBackColor = System.Drawing.Color.White
         Me.txtCDRemarks.FocusHighlightEnabled = true
         Me.txtCDRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDRemarks.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtCDRemarks, true)
         Me.txtCDRemarks.Location = New System.Drawing.Point(650, 157)
         Me.txtCDRemarks.MaxLength = 255
@@ -9744,6 +9854,7 @@ Partial Class frmMainInterface
         'txtCDDetails
         '
         Me.txtCDDetails.AcceptsReturn = true
+        Me.txtCDDetails.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9753,6 +9864,7 @@ Partial Class frmMainInterface
         Me.txtCDDetails.DisabledBackColor = System.Drawing.Color.White
         Me.txtCDDetails.FocusHighlightEnabled = true
         Me.txtCDDetails.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDDetails.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtCDDetails, true)
         Me.txtCDDetails.Location = New System.Drawing.Point(650, 78)
         Me.txtCDDetails.MaxLength = 255
@@ -9896,6 +10008,7 @@ Partial Class frmMainInterface
         '
         Me.txtCDCrNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtCDCrNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtCDCrNo.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9906,6 +10019,7 @@ Partial Class frmMainInterface
         Me.txtCDCrNo.DisabledBackColor = System.Drawing.Color.White
         Me.txtCDCrNo.FocusHighlightEnabled = true
         Me.txtCDCrNo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDCrNo.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtCDCrNo, true)
         Me.txtCDCrNo.Location = New System.Drawing.Point(650, 43)
         Me.txtCDCrNo.MaxLength = 45
@@ -9917,6 +10031,7 @@ Partial Class frmMainInterface
         '
         'txtCDNumber
         '
+        Me.txtCDNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -9928,6 +10043,7 @@ Partial Class frmMainInterface
         Me.txtCDNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtCDNumber.FocusHighlightEnabled = true
         Me.txtCDNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtCDNumber, true)
         Me.txtCDNumber.Location = New System.Drawing.Point(122, 50)
         Me.txtCDNumber.MaxLength = 10
@@ -9991,6 +10107,7 @@ Partial Class frmMainInterface
         '
         'txtCDNumberOnly
         '
+        Me.txtCDNumberOnly.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10001,6 +10118,7 @@ Partial Class frmMainInterface
         Me.txtCDNumberOnly.DisabledBackColor = System.Drawing.Color.White
         Me.txtCDNumberOnly.FocusHighlightEnabled = true
         Me.txtCDNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDNumberOnly.ForeColor = System.Drawing.Color.Black
         Me.txtCDNumberOnly.Location = New System.Drawing.Point(375, 5)
         Me.txtCDNumberOnly.MaxLength = 45
         Me.txtCDNumberOnly.Name = "txtCDNumberOnly"
@@ -10027,10 +10145,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel3.Name = "TabControlPanel3"
         Me.TabControlPanel3.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel3.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel3.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel3.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel3.Style.GradientAngle = 90
@@ -10203,6 +10320,7 @@ Partial Class frmMainInterface
         '
         Me.txtPhoneNumber2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtPhoneNumber2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtPhoneNumber2.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10213,6 +10331,7 @@ Partial Class frmMainInterface
         Me.txtPhoneNumber2.DisabledBackColor = System.Drawing.Color.White
         Me.txtPhoneNumber2.FocusHighlightEnabled = true
         Me.txtPhoneNumber2.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtPhoneNumber2.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtPhoneNumber2, true)
         Me.txtPhoneNumber2.Location = New System.Drawing.Point(543, 4)
         Me.txtPhoneNumber2.MaxLength = 20
@@ -10226,6 +10345,7 @@ Partial Class frmMainInterface
         '
         Me.txtPhoneNumber1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtPhoneNumber1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtPhoneNumber1.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10236,6 +10356,7 @@ Partial Class frmMainInterface
         Me.txtPhoneNumber1.DisabledBackColor = System.Drawing.Color.White
         Me.txtPhoneNumber1.FocusHighlightEnabled = true
         Me.txtPhoneNumber1.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtPhoneNumber1.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtPhoneNumber1, true)
         Me.txtPhoneNumber1.Location = New System.Drawing.Point(116, 48)
         Me.txtPhoneNumber1.MaxLength = 20
@@ -10249,6 +10370,7 @@ Partial Class frmMainInterface
         '
         Me.txtPSName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtPSName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtPSName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10259,6 +10381,7 @@ Partial Class frmMainInterface
         Me.txtPSName.DisabledBackColor = System.Drawing.Color.White
         Me.txtPSName.FocusHighlightEnabled = true
         Me.txtPSName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtPSName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtPSName, true)
         Me.txtPSName.Location = New System.Drawing.Point(116, 4)
         Me.txtPSName.MaxLength = 255
@@ -10296,10 +10419,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel9.Name = "TabControlPanel9"
         Me.TabControlPanel9.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel9.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel9.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel9.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel9.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel9.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel9.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel9.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel9.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel9.Style.GradientAngle = 90
@@ -10468,6 +10590,7 @@ Partial Class frmMainInterface
         '
         Me.txtRSOCDespatchNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtRSOCDespatchNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtRSOCDespatchNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10478,6 +10601,7 @@ Partial Class frmMainInterface
         Me.txtRSOCDespatchNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtRSOCDespatchNumber.FocusHighlightEnabled = true
         Me.txtRSOCDespatchNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCDespatchNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCDespatchNumber, true)
         Me.txtRSOCDespatchNumber.Location = New System.Drawing.Point(678, 140)
         Me.txtRSOCDespatchNumber.MaxLength = 45
@@ -10524,6 +10648,7 @@ Partial Class frmMainInterface
         'txtRSOCReportSentTo
         '
         Me.txtRSOCReportSentTo.AcceptsReturn = true
+        Me.txtRSOCReportSentTo.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10533,6 +10658,7 @@ Partial Class frmMainInterface
         Me.txtRSOCReportSentTo.DisabledBackColor = System.Drawing.Color.White
         Me.txtRSOCReportSentTo.FocusHighlightEnabled = true
         Me.txtRSOCReportSentTo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCReportSentTo.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCReportSentTo, true)
         Me.txtRSOCReportSentTo.Location = New System.Drawing.Point(678, 8)
         Me.txtRSOCReportSentTo.MaxLength = 255
@@ -10770,6 +10896,7 @@ Partial Class frmMainInterface
         'txtRSOCRemarks
         '
         Me.txtRSOCRemarks.AcceptsReturn = true
+        Me.txtRSOCRemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10779,6 +10906,7 @@ Partial Class frmMainInterface
         Me.txtRSOCRemarks.DisabledBackColor = System.Drawing.Color.White
         Me.txtRSOCRemarks.FocusHighlightEnabled = true
         Me.txtRSOCRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCRemarks.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCRemarks, true)
         Me.txtRSOCRemarks.Location = New System.Drawing.Point(678, 181)
         Me.txtRSOCRemarks.MaxLength = 255
@@ -10910,6 +11038,7 @@ Partial Class frmMainInterface
         '
         Me.txtRSOCCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtRSOCCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtRSOCCrimeNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10920,6 +11049,7 @@ Partial Class frmMainInterface
         Me.txtRSOCCrimeNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtRSOCCrimeNumber.FocusHighlightEnabled = true
         Me.txtRSOCCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCCrimeNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCCrimeNumber, true)
         Me.txtRSOCCrimeNumber.Location = New System.Drawing.Point(155, 155)
         Me.txtRSOCCrimeNumber.MaxLength = 45
@@ -10931,6 +11061,7 @@ Partial Class frmMainInterface
         '
         'txtRSOCNumber
         '
+        Me.txtRSOCNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -10941,6 +11072,7 @@ Partial Class frmMainInterface
         Me.txtRSOCNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtRSOCNumber.FocusHighlightEnabled = true
         Me.txtRSOCNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCNumber, true)
         Me.txtRSOCNumber.Location = New System.Drawing.Point(155, 42)
         Me.txtRSOCNumber.MaxLength = 10
@@ -10991,6 +11123,7 @@ Partial Class frmMainInterface
         '
         'txtRSOCNumberOnly
         '
+        Me.txtRSOCNumberOnly.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11001,6 +11134,7 @@ Partial Class frmMainInterface
         Me.txtRSOCNumberOnly.DisabledBackColor = System.Drawing.Color.White
         Me.txtRSOCNumberOnly.FocusHighlightEnabled = true
         Me.txtRSOCNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCNumberOnly.ForeColor = System.Drawing.Color.Black
         Me.txtRSOCNumberOnly.Location = New System.Drawing.Point(993, 43)
         Me.txtRSOCNumberOnly.MaxLength = 45
         Me.txtRSOCNumberOnly.Name = "txtRSOCNumberOnly"
@@ -11026,10 +11160,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel8.Name = "TabControlPanel8"
         Me.TabControlPanel8.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel8.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel8.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel8.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel8.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel8.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel8.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel8.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel8.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel8.Style.GradientAngle = 90
@@ -11099,6 +11232,7 @@ Partial Class frmMainInterface
         '
         Me.txtACModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACModusOperandi.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11109,6 +11243,7 @@ Partial Class frmMainInterface
         Me.txtACModusOperandi.DisabledBackColor = System.Drawing.Color.White
         Me.txtACModusOperandi.FocusHighlightEnabled = true
         Me.txtACModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACModusOperandi.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACModusOperandi, true)
         Me.txtACModusOperandi.Location = New System.Drawing.Point(545, 200)
         Me.txtACModusOperandi.MaxLength = 255
@@ -11157,6 +11292,7 @@ Partial Class frmMainInterface
         'txtACRemarks
         '
         Me.txtACRemarks.AcceptsReturn = true
+        Me.txtACRemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11166,6 +11302,7 @@ Partial Class frmMainInterface
         Me.txtACRemarks.DisabledBackColor = System.Drawing.Color.White
         Me.txtACRemarks.FocusHighlightEnabled = true
         Me.txtACRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACRemarks.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACRemarks, true)
         Me.txtACRemarks.Location = New System.Drawing.Point(545, 240)
         Me.txtACRemarks.MaxLength = 255
@@ -11357,7 +11494,7 @@ Partial Class frmMainInterface
         Me.ACSlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnACSlipContextMenu})
         Me.ACSlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
         Me.ACSlipContextMenuBar.Name = "ACSlipContextMenuBar"
-        Me.ACSlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
+        Me.ACSlipContextMenuBar.Size = New System.Drawing.Size(108, 25)
         Me.ACSlipContextMenuBar.Stretch = true
         Me.ACSlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.ACSlipContextMenuBar.TabIndex = 57
@@ -11506,6 +11643,7 @@ Partial Class frmMainInterface
         '
         Me.txtACSection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACSection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACSection.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11516,6 +11654,7 @@ Partial Class frmMainInterface
         Me.txtACSection.DisabledBackColor = System.Drawing.Color.White
         Me.txtACSection.FocusHighlightEnabled = true
         Me.txtACSection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACSection.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACSection, true)
         Me.txtACSection.Location = New System.Drawing.Point(122, 161)
         Me.txtACSection.MaxLength = 255
@@ -11529,6 +11668,7 @@ Partial Class frmMainInterface
         '
         Me.txtACCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtACCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACCrimeNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11539,6 +11679,7 @@ Partial Class frmMainInterface
         Me.txtACCrimeNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtACCrimeNumber.FocusHighlightEnabled = true
         Me.txtACCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACCrimeNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACCrimeNumber, true)
         Me.txtACCrimeNumber.Location = New System.Drawing.Point(122, 122)
         Me.txtACCrimeNumber.MaxLength = 45
@@ -11552,6 +11693,7 @@ Partial Class frmMainInterface
         '
         Me.txtACHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACHenryDenominator.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11562,6 +11704,7 @@ Partial Class frmMainInterface
         Me.txtACHenryDenominator.DisabledBackColor = System.Drawing.Color.White
         Me.txtACHenryDenominator.FocusHighlightEnabled = true
         Me.txtACHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACHenryDenominator.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACHenryDenominator, true)
         Me.txtACHenryDenominator.Location = New System.Drawing.Point(545, 161)
         Me.txtACHenryDenominator.MaxLength = 15
@@ -11632,6 +11775,7 @@ Partial Class frmMainInterface
         '
         Me.txtACFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACFathersName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11642,6 +11786,7 @@ Partial Class frmMainInterface
         Me.txtACFathersName.DisabledBackColor = System.Drawing.Color.White
         Me.txtACFathersName.FocusHighlightEnabled = true
         Me.txtACFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACFathersName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACFathersName, true)
         Me.txtACFathersName.Location = New System.Drawing.Point(122, 280)
         Me.txtACFathersName.MaxLength = 255
@@ -11654,6 +11799,7 @@ Partial Class frmMainInterface
         'txtACAddress
         '
         Me.txtACAddress.AcceptsReturn = true
+        Me.txtACAddress.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11663,6 +11809,7 @@ Partial Class frmMainInterface
         Me.txtACAddress.DisabledBackColor = System.Drawing.Color.White
         Me.txtACAddress.FocusHighlightEnabled = true
         Me.txtACAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACAddress.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACAddress, true)
         Me.txtACAddress.Location = New System.Drawing.Point(545, 8)
         Me.txtACAddress.MaxLength = 255
@@ -11678,6 +11825,7 @@ Partial Class frmMainInterface
         '
         Me.txtACHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACHenryNumerator.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11688,6 +11836,7 @@ Partial Class frmMainInterface
         Me.txtACHenryNumerator.DisabledBackColor = System.Drawing.Color.White
         Me.txtACHenryNumerator.FocusHighlightEnabled = true
         Me.txtACHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACHenryNumerator.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACHenryNumerator, true)
         Me.txtACHenryNumerator.Location = New System.Drawing.Point(545, 122)
         Me.txtACHenryNumerator.MaxLength = 15
@@ -11766,6 +11915,7 @@ Partial Class frmMainInterface
         '
         Me.txtACAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACAliasName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11776,6 +11926,7 @@ Partial Class frmMainInterface
         Me.txtACAliasName.DisabledBackColor = System.Drawing.Color.White
         Me.txtACAliasName.FocusHighlightEnabled = true
         Me.txtACAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACAliasName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACAliasName, true)
         Me.txtACAliasName.Location = New System.Drawing.Point(122, 240)
         Me.txtACAliasName.MaxLength = 255
@@ -11789,6 +11940,7 @@ Partial Class frmMainInterface
         '
         Me.txtACName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtACName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtACName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11799,6 +11951,7 @@ Partial Class frmMainInterface
         Me.txtACName.DisabledBackColor = System.Drawing.Color.White
         Me.txtACName.FocusHighlightEnabled = true
         Me.txtACName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACName, true)
         Me.txtACName.Location = New System.Drawing.Point(122, 200)
         Me.txtACName.MaxLength = 255
@@ -11857,6 +12010,7 @@ Partial Class frmMainInterface
         '
         'txtACDANumber
         '
+        Me.txtACDANumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -11867,6 +12021,7 @@ Partial Class frmMainInterface
         Me.txtACDANumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtACDANumber.FocusHighlightEnabled = true
         Me.txtACDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtACDANumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtACDANumber, true)
         Me.txtACDANumber.Location = New System.Drawing.Point(122, 45)
         Me.txtACDANumber.MaxLength = 10
@@ -11944,10 +12099,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel6.Name = "TabControlPanel6"
         Me.TabControlPanel6.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel6.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel6.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel6.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel6.Style.GradientAngle = 90
@@ -12032,6 +12186,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDModusOperandi.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12042,6 +12197,7 @@ Partial Class frmMainInterface
         Me.txtIDModusOperandi.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDModusOperandi.FocusHighlightEnabled = true
         Me.txtIDModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDModusOperandi.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDModusOperandi, true)
         Me.txtIDModusOperandi.Location = New System.Drawing.Point(545, 153)
         Me.txtIDModusOperandi.MaxLength = 255
@@ -12090,6 +12246,7 @@ Partial Class frmMainInterface
         'txtIDRemarks
         '
         Me.txtIDRemarks.AcceptsReturn = true
+        Me.txtIDRemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12099,6 +12256,7 @@ Partial Class frmMainInterface
         Me.txtIDRemarks.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDRemarks.FocusHighlightEnabled = true
         Me.txtIDRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDRemarks.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDRemarks, true)
         Me.txtIDRemarks.Location = New System.Drawing.Point(545, 270)
         Me.txtIDRemarks.MaxLength = 255
@@ -12290,7 +12448,7 @@ Partial Class frmMainInterface
         Me.IDSlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDSlipContextMenu})
         Me.IDSlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
         Me.IDSlipContextMenuBar.Name = "IDSlipContextMenuBar"
-        Me.IDSlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
+        Me.IDSlipContextMenuBar.Size = New System.Drawing.Size(108, 25)
         Me.IDSlipContextMenuBar.Stretch = true
         Me.IDSlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.IDSlipContextMenuBar.TabIndex = 57
@@ -12439,6 +12597,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDSection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDSection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDSection.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12449,6 +12608,7 @@ Partial Class frmMainInterface
         Me.txtIDSection.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDSection.FocusHighlightEnabled = true
         Me.txtIDSection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDSection.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDSection, true)
         Me.txtIDSection.Location = New System.Drawing.Point(122, 161)
         Me.txtIDSection.MaxLength = 255
@@ -12462,6 +12622,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtIDCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDCrimeNumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12472,6 +12633,7 @@ Partial Class frmMainInterface
         Me.txtIDCrimeNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDCrimeNumber.FocusHighlightEnabled = true
         Me.txtIDCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDCrimeNumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDCrimeNumber, true)
         Me.txtIDCrimeNumber.Location = New System.Drawing.Point(122, 122)
         Me.txtIDCrimeNumber.MaxLength = 45
@@ -12485,6 +12647,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDHenryDenominator.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12495,6 +12658,7 @@ Partial Class frmMainInterface
         Me.txtIDHenryDenominator.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDHenryDenominator.FocusHighlightEnabled = true
         Me.txtIDHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDHenryDenominator.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDHenryDenominator, true)
         Me.txtIDHenryDenominator.Location = New System.Drawing.Point(545, 119)
         Me.txtIDHenryDenominator.MaxLength = 15
@@ -12507,6 +12671,7 @@ Partial Class frmMainInterface
         'txtIDDetails
         '
         Me.txtIDDetails.AcceptsReturn = true
+        Me.txtIDDetails.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12516,6 +12681,7 @@ Partial Class frmMainInterface
         Me.txtIDDetails.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDDetails.FocusHighlightEnabled = true
         Me.txtIDDetails.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDDetails.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDDetails, true)
         Me.txtIDDetails.Location = New System.Drawing.Point(545, 186)
         Me.txtIDDetails.MaxLength = 1000
@@ -12588,6 +12754,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDFathersName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12598,6 +12765,7 @@ Partial Class frmMainInterface
         Me.txtIDFathersName.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDFathersName.FocusHighlightEnabled = true
         Me.txtIDFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDFathersName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDFathersName, true)
         Me.txtIDFathersName.Location = New System.Drawing.Point(122, 280)
         Me.txtIDFathersName.MaxLength = 255
@@ -12610,6 +12778,7 @@ Partial Class frmMainInterface
         'txtIDAddress
         '
         Me.txtIDAddress.AcceptsReturn = true
+        Me.txtIDAddress.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12619,6 +12788,7 @@ Partial Class frmMainInterface
         Me.txtIDAddress.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDAddress.FocusHighlightEnabled = true
         Me.txtIDAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDAddress.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDAddress, true)
         Me.txtIDAddress.Location = New System.Drawing.Point(545, 8)
         Me.txtIDAddress.MaxLength = 255
@@ -12634,6 +12804,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDHenryNumerator.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12644,6 +12815,7 @@ Partial Class frmMainInterface
         Me.txtIDHenryNumerator.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDHenryNumerator.FocusHighlightEnabled = true
         Me.txtIDHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDHenryNumerator.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDHenryNumerator, true)
         Me.txtIDHenryNumerator.Location = New System.Drawing.Point(545, 84)
         Me.txtIDHenryNumerator.MaxLength = 15
@@ -12722,6 +12894,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDAliasName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12732,6 +12905,7 @@ Partial Class frmMainInterface
         Me.txtIDAliasName.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDAliasName.FocusHighlightEnabled = true
         Me.txtIDAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDAliasName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDAliasName, true)
         Me.txtIDAliasName.Location = New System.Drawing.Point(122, 240)
         Me.txtIDAliasName.MaxLength = 255
@@ -12745,6 +12919,7 @@ Partial Class frmMainInterface
         '
         Me.txtIDName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.txtIDName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12755,6 +12930,7 @@ Partial Class frmMainInterface
         Me.txtIDName.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDName.FocusHighlightEnabled = true
         Me.txtIDName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDName, true)
         Me.txtIDName.Location = New System.Drawing.Point(122, 200)
         Me.txtIDName.MaxLength = 255
@@ -12813,6 +12989,7 @@ Partial Class frmMainInterface
         '
         'txtIDDANumber
         '
+        Me.txtIDDANumber.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12823,6 +13000,7 @@ Partial Class frmMainInterface
         Me.txtIDDANumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtIDDANumber.FocusHighlightEnabled = true
         Me.txtIDDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDDANumber.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIDDANumber, true)
         Me.txtIDDANumber.Location = New System.Drawing.Point(122, 45)
         Me.txtIDDANumber.MaxLength = 10
@@ -12899,10 +13077,9 @@ Partial Class frmMainInterface
         Me.TabControlPanel5.Name = "TabControlPanel5"
         Me.TabControlPanel5.Padding = New System.Windows.Forms.Padding(1)
         Me.TabControlPanel5.Size = New System.Drawing.Size(1360, 532)
-        Me.TabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(253,Byte),Integer), CType(CType(253,Byte),Integer), CType(CType(254,Byte),Integer))
-        Me.TabControlPanel5.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(157,Byte),Integer), CType(CType(188,Byte),Integer), CType(CType(227,Byte),Integer))
+        Me.TabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(146,Byte),Integer), CType(CType(165,Byte),Integer), CType(CType(199,Byte),Integer))
+        Me.TabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
         Me.TabControlPanel5.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
             Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
         Me.TabControlPanel5.Style.GradientAngle = 90
@@ -12986,6 +13163,7 @@ Partial Class frmMainInterface
         '
         Me.txtIODARate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtIODARate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIODARate.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -12996,6 +13174,7 @@ Partial Class frmMainInterface
         Me.txtIODARate.DisabledBackColor = System.Drawing.Color.White
         Me.txtIODARate.FocusHighlightEnabled = true
         Me.txtIODARate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIODARate.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIODARate, true)
         Me.txtIODARate.Location = New System.Drawing.Point(91, 184)
         Me.txtIODARate.MaxLength = 255
@@ -13022,6 +13201,7 @@ Partial Class frmMainInterface
         '
         Me.txtIOScaleOfPay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtIOScaleOfPay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOScaleOfPay.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -13032,6 +13212,7 @@ Partial Class frmMainInterface
         Me.txtIOScaleOfPay.DisabledBackColor = System.Drawing.Color.White
         Me.txtIOScaleOfPay.FocusHighlightEnabled = true
         Me.txtIOScaleOfPay.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOScaleOfPay.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIOScaleOfPay, true)
         Me.txtIOScaleOfPay.Location = New System.Drawing.Point(91, 149)
         Me.txtIOScaleOfPay.MaxLength = 255
@@ -13058,6 +13239,7 @@ Partial Class frmMainInterface
         '
         Me.txtIOBAsicPay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtIOBAsicPay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOBAsicPay.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -13068,6 +13250,7 @@ Partial Class frmMainInterface
         Me.txtIOBAsicPay.DisabledBackColor = System.Drawing.Color.White
         Me.txtIOBAsicPay.FocusHighlightEnabled = true
         Me.txtIOBAsicPay.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOBAsicPay.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIOBAsicPay, true)
         Me.txtIOBAsicPay.Location = New System.Drawing.Point(91, 114)
         Me.txtIOBAsicPay.MaxLength = 255
@@ -13094,6 +13277,7 @@ Partial Class frmMainInterface
         '
         Me.txtIOPENNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtIOPENNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOPENNo.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -13104,6 +13288,7 @@ Partial Class frmMainInterface
         Me.txtIOPENNo.DisabledBackColor = System.Drawing.Color.White
         Me.txtIOPENNo.FocusHighlightEnabled = true
         Me.txtIOPENNo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOPENNo.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIOPENNo, true)
         Me.txtIOPENNo.Location = New System.Drawing.Point(91, 79)
         Me.txtIOPENNo.MaxLength = 255
@@ -13130,6 +13315,7 @@ Partial Class frmMainInterface
         '
         Me.txtIOOfficerName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.txtIOOfficerName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOOfficerName.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -13140,6 +13326,7 @@ Partial Class frmMainInterface
         Me.txtIOOfficerName.DisabledBackColor = System.Drawing.Color.White
         Me.txtIOOfficerName.FocusHighlightEnabled = true
         Me.txtIOOfficerName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOOfficerName.ForeColor = System.Drawing.Color.Black
         Me.Highlighter1.SetHighlightOnFocus(Me.txtIOOfficerName, true)
         Me.txtIOOfficerName.Location = New System.Drawing.Point(91, 44)
         Me.txtIOOfficerName.MaxLength = 255
@@ -13152,36 +13339,37 @@ Partial Class frmMainInterface
         'IODatagrid
         '
         Me.IODatagrid.AllowUserToDeleteRows = false
+        Me.IODatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle59.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle59.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle59.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle59.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle59.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle59.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle59.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IODatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle59
         Me.IODatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.IODatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Designation, Me.OfficerName, Me.PEN, Me.BasicPay, Me.ScaleOfPay, Me.DARate})
         DataGridViewCellStyle114.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle114.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle114.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle114.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle114.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle114.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle114.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle114.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(21,Byte),Integer), CType(CType(110,Byte),Integer))
+        DataGridViewCellStyle114.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle114.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.IODatagrid.DefaultCellStyle = DataGridViewCellStyle114
         Me.IODatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.IODatagrid.EnableHeadersVisualStyles = false
-        Me.IODatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208,Byte),Integer), CType(CType(215,Byte),Integer), CType(CType(229,Byte),Integer))
+        Me.IODatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.IODatagrid.Location = New System.Drawing.Point(15, 225)
         Me.IODatagrid.MultiSelect = false
         Me.IODatagrid.Name = "IODatagrid"
         DataGridViewCellStyle115.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle115.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle115.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle115.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle115.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle115.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle115.SelectionForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle115.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle115.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IODatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle115
         Me.IODatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -13345,7 +13533,7 @@ Partial Class frmMainInterface
         '
         'StyleManager1
         '
-        Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue
+        Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
         Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(1,Byte),Integer), CType(CType(115,Byte),Integer), CType(CType(199,Byte),Integer)))
         '
         'SOCRegisterTableAdapter

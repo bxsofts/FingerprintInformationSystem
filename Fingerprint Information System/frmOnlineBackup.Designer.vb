@@ -40,6 +40,7 @@ Partial Class frmOnlineBackup
         Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
@@ -159,7 +160,6 @@ Partial Class frmOnlineBackup
         Me.PanelEx1.Size = New System.Drawing.Size(964, 482)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
@@ -179,7 +179,6 @@ Partial Class frmOnlineBackup
         Me.PanelEx3.Size = New System.Drawing.Size(801, 482)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx3.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
@@ -268,13 +267,14 @@ Partial Class frmOnlineBackup
         '
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupDate, Me.ID})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupDate, Me.ID, Me.FileStatus})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.listViewEx1.ForeColor = System.Drawing.Color.Black
         Me.listViewEx1.FullRowSelect = True
         Me.listViewEx1.GridLines = True
+        Me.listViewEx1.HideSelection = False
         Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
@@ -299,7 +299,12 @@ Partial Class frmOnlineBackup
         'ID
         '
         Me.ID.Text = "Drive ID"
-        Me.ID.Width = 209
+        Me.ID.Width = 0
+        '
+        'FileStatus
+        '
+        Me.FileStatus.Text = "File Status"
+        Me.FileStatus.Width = 150
         '
         'Bar1
         '
@@ -348,7 +353,6 @@ Partial Class frmOnlineBackup
         Me.PanelEx2.Size = New System.Drawing.Size(163, 482)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
@@ -419,4 +423,5 @@ Partial Class frmOnlineBackup
     Friend WithEvents lblStatus As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
+    Friend WithEvents FileStatus As System.Windows.Forms.ColumnHeader
 End Class
