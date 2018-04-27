@@ -86,18 +86,9 @@ Source: .\Fonts\SEGOEUIZ.TTF; DestDir: {fonts}; Flags: onlyifdoesntexist uninsne
 Source: .\Fonts\Rupee_Foradian.ttf; DestDir: {fonts}; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: Rupee Foradian
 Source: .\Fonts\Keralite.ttf; DestDir: {fonts}; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: Keralite
 
-Source: ..\Fingerprint Information System\bin\Release\DevComponents.DotNetBar2.dll; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\Fingerprint Information System.pdb; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\Fingerprint Information System.xml; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\Fingerprint Information System.exe.config; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\Fingerprint Information System.exe; DestDir: {app}\; Flags: ignoreversion
-;Source: ..\Fingerprint Information System\bin\Release\Fingerprint Information System.exe.manifest; DestDir: {app}\; Flags: ignoreversion
-;Source: ..\Fingerprint Information System\bin\Release\Fingerprint Information System.application; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\Interop.WIA.dll; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\iViewCore.dll; DestDir: {app}\; Flags: ignoreversion
-Source: ..\Fingerprint Information System\bin\Release\Microsoft.Office.Interop.Word.dll; DestDir: {app}\; Flags: ignoreversion
+Source: ..\Fingerprint Information System\bin\Release\*; DestDir: {app}\; Flags: ignoreversion
 
-Source: ..\Fingerprint Information System\bin\Release\FIS.json; DestDir: {userdocs}\BXSofts\Fingerprint Information System\GoogleDriveAuthentication; Flags: ignoreversion
+
 Source: .\WordTemplates\*.docx; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
 Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist uninsneveruninstall
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror

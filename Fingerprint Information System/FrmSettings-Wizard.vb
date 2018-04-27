@@ -40,6 +40,11 @@ Public Class FrmSettingsWizard
 
             Me.chkAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
+            If autobackuptime = "TextBoxItem1" Then
+                autobackuptime = "7"
+            End If
+
+
             Me.txtBackupInterval.Text = IIf(autobackuptime = "", "7", autobackuptime)
 
             strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
@@ -129,7 +134,7 @@ Public Class FrmSettingsWizard
                     Me.txtWeeklyDiary.Text = PdlWeeklyDiary.Trim
                 End If
 
-                End If
+            End If
 
             If frmMainInterface.DoesTableExist("OfficerTable", strConString) = False Then
                 frmMainInterface.CreateOfficerTable()
