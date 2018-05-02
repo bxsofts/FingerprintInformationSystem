@@ -117,9 +117,9 @@ Partial Class frmAttendanceStmt
         '
         Me.btnGenerateCL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateCL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateCL.Location = New System.Drawing.Point(336, 48)
+        Me.btnGenerateCL.Location = New System.Drawing.Point(354, 48)
         Me.btnGenerateCL.Name = "btnGenerateCL"
-        Me.btnGenerateCL.Size = New System.Drawing.Size(142, 36)
+        Me.btnGenerateCL.Size = New System.Drawing.Size(115, 36)
         Me.btnGenerateCL.TabIndex = 8
         Me.btnGenerateCL.Text = "Covering Letter"
         '
@@ -197,11 +197,11 @@ Partial Class frmAttendanceStmt
         '
         Me.btnGenerateAttendance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateAttendance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateAttendance.Location = New System.Drawing.Point(336, 4)
+        Me.btnGenerateAttendance.Location = New System.Drawing.Point(354, 4)
         Me.btnGenerateAttendance.Name = "btnGenerateAttendance"
-        Me.btnGenerateAttendance.Size = New System.Drawing.Size(142, 36)
+        Me.btnGenerateAttendance.Size = New System.Drawing.Size(115, 36)
         Me.btnGenerateAttendance.TabIndex = 7
-        Me.btnGenerateAttendance.Text = "Generate Attendance"
+        Me.btnGenerateAttendance.Text = "Attendance"
         '
         'dtFrom
         '

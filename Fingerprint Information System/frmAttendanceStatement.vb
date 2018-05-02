@@ -11,7 +11,7 @@ Public Class frmAttendanceStmt
     Dim OfficerList(4) As String
     Dim ArrayLength As Integer = 0
     Dim SaveFileName As String
-
+    Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
     Private Sub LoadDate() Handles MyBase.Load
         On Error Resume Next
 
@@ -82,10 +82,9 @@ Public Class frmAttendanceStmt
         On Error Resume Next
         Dim dt = Now
         If ShowDate Then
-            Return dt.ToString("dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+            Return dt.ToString("dd/MM/yyyy", culture)
         Else
-
-            Return dt.ToString("dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture).Substring(3)
+            Return dt.ToString("dd/MM/yyyy", culture).Substring(3)
         End If
 
     End Function

@@ -8,6 +8,8 @@ Public Class frmWeeklyDiary
 
     Dim TemplateFile As String
     Dim sfilename As String
+    Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+
     Private Sub frmWeeklyDiary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             Me.CircularProgress1.Hide()
@@ -21,7 +23,7 @@ Public Class frmWeeklyDiary
             Dim ToDate As Date = lastweekdate.AddDays(6 - dayOfWeek)
 
             Me.MonthCalendarAdv1.SelectedDate = FromDate
-            Me.lblSelectedDate.Text = FromDate.ToString("dd/MM/yyyy")
+            Me.lblSelectedDate.Text = FromDate.ToString("dd/MM/yyyy", culture)
             dtWeeklyDiaryFrom = FromDate
             dtWeeklyDiaryTo = ToDate
 
@@ -85,8 +87,10 @@ Public Class frmWeeklyDiary
         Try
 
             If e.Argument = "WeeklyDiary" Then
-                bgwWeeklyDiary.ReportProgress(1)
-                System.Threading.Thread.Sleep(200)
+                For delay = 1 To 5
+                    bgwWeeklyDiary.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(50)
+                Next
 
                 Dim wdApp As Word.Application
                 Dim wdDocs As Word.Documents
@@ -94,8 +98,10 @@ Public Class frmWeeklyDiary
                 wdDocs = wdApp.Documents
                 Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
 
-                bgwWeeklyDiary.ReportProgress(5)
-                System.Threading.Thread.Sleep(200)
+                For delay = 6 To 10
+                    bgwWeeklyDiary.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(20)
+                Next
 
                 wdDoc.Range.NoProofing = 1
                 Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
@@ -104,11 +110,9 @@ Public Class frmWeeklyDiary
                 wdBooks("name").Range.Text = TI.Replace(", TI", ", Tester Inspector")
                 wdBooks("office").Range.Text = ShortOfficeName
                 wdBooks("district2").Range.Text = FullDistrictName
-                wdBooks("fromdt").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy")
-                wdBooks("todt").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy")
+                wdBooks("fromdt").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+                wdBooks("todt").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
 
-                bgwWeeklyDiary.ReportProgress(8)
-                System.Threading.Thread.Sleep(200)
 
                 If boolUseTIinLetter Then
                     wdBooks("tiname").Range.Text = TI.Replace(", TI", "")
@@ -122,8 +126,10 @@ Public Class frmWeeklyDiary
                     wdBooks("district3").Range.Text = ""
                 End If
 
-                bgwWeeklyDiary.ReportProgress(10)
-                System.Threading.Thread.Sleep(200)
+                For delay = 11 To 19
+                    bgwWeeklyDiary.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(20)
+                Next
 
                 Dim cnt As Integer = Me.FingerPrintDataSet1.SOCRegister.Count
 
@@ -131,7 +137,7 @@ Public Class frmWeeklyDiary
 
                 For i = 2 To 8
                     With wdTbl
-                        .Cell(i, 1).Range.Text = dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dd/MM/yyyy") & vbNewLine & dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dddd")
+                        .Cell(i, 1).Range.Text = dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dd/MM/yyyy", culture) & vbNewLine & dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dddd")
 
                         Me.SocRegisterTableAdapter1.FillByInspectingOfficer(Me.FingerPrintDataSet1.SOCRegister, "%" & TI & "%", dtWeeklyDiaryFrom.AddDays(i - 2))
                         cnt = Me.FingerPrintDataSet1.SOCRegister.Count
@@ -172,14 +178,16 @@ Public Class frmWeeklyDiary
                     End With
 
                     bgwWeeklyDiary.ReportProgress(i * 10)
-                    System.Threading.Thread.Sleep(200)
-
-                Next
-                For i = 90 To 100
-                    bgwWeeklyDiary.ReportProgress(i)
                     System.Threading.Thread.Sleep(100)
+
+                Next
+                For i = 81 To 99
+                    bgwWeeklyDiary.ReportProgress(i)
+                    System.Threading.Thread.Sleep(20)
                 Next
 
+                bgwWeeklyDiary.ReportProgress(100)
+                System.Threading.Thread.Sleep(200)
                
                 wdApp.Visible = True
                 wdApp.Activate()
@@ -199,8 +207,10 @@ Public Class frmWeeklyDiary
             
             If e.Argument = "CL" Then
 
-                bgwWeeklyDiary.ReportProgress(1)
-                System.Threading.Thread.Sleep(200)
+                For i = 1 To 10
+                    bgwWeeklyDiary.ReportProgress(i)
+                    System.Threading.Thread.Sleep(50)
+                Next
 
                 Dim wdApp As Word.Application
                 Dim wdDocs As Word.Documents
@@ -210,26 +220,27 @@ Public Class frmWeeklyDiary
                 wdDoc.Range.NoProofing = 1
                 Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
-                bgwWeeklyDiary.ReportProgress(10)
-                System.Threading.Thread.Sleep(200)
+                For i = 11 To 20
+                    bgwWeeklyDiary.ReportProgress(i)
+                    System.Threading.Thread.Sleep(20)
+                Next
 
                 wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
                 wdBooks("OfficeName1").Range.Text = FullOfficeName
                 wdBooks("District1").Range.Text = FullDistrictName
-                wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy")
-
-                bgwWeeklyDiary.ReportProgress(20)
-                System.Threading.Thread.Sleep(200)
+                wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy", culture)
 
                 wdBooks("Name1").Range.Text = TI.Replace(", TI", "")
                 wdBooks("OfficeName2").Range.Text = FullOfficeName
                 wdBooks("District2").Range.Text = FullDistrictName
 
-                wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy")
-                wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy")
+                wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+                wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
 
-                bgwWeeklyDiary.ReportProgress(30)
-                System.Threading.Thread.Sleep(200)
+                For i = 21 To 30
+                    bgwWeeklyDiary.ReportProgress(i)
+                    System.Threading.Thread.Sleep(20)
+                Next
 
                 If boolUseTIinLetter Then
                     wdBooks("Name2").Range.Text = TI.Replace(", TI", "")
@@ -243,11 +254,13 @@ Public Class frmWeeklyDiary
                     wdBooks("District3").Range.Text = ""
                 End If
 
-                For i = 4 To 10
-                    bgwWeeklyDiary.ReportProgress(i * 10)
-                    System.Threading.Thread.Sleep(200)
+                For i = 31 To 99
+                    bgwWeeklyDiary.ReportProgress(i)
+                    System.Threading.Thread.Sleep(20)
                 Next
 
+                bgwWeeklyDiary.ReportProgress(100)
+                System.Threading.Thread.Sleep(200)
 
                 wdApp.Visible = True
                 wdApp.Activate()
@@ -327,7 +340,7 @@ Public Class frmWeeklyDiary
 
 
     Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
-        Me.lblSelectedDate.Text = Me.MonthCalendarAdv1.SelectedDate.ToString("dd/MM/yyyy")
+        Me.lblSelectedDate.Text = Me.MonthCalendarAdv1.SelectedDate.ToString("dd/MM/yyyy", culture)
     End Sub
 
    

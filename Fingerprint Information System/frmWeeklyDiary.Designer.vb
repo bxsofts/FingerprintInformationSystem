@@ -26,6 +26,7 @@ Partial Class frmWeeklyDiary
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateWeeklyDiary = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.lblSelectedDate = New DevComponents.DotNetBar.LabelX()
         Me.MonthCalendarAdv1 = New DevComponents.Editors.DateTimeAdv.MonthCalendarAdv()
         Me.btnCoveringLetter = New DevComponents.DotNetBar.ButtonX()
@@ -33,7 +34,6 @@ Partial Class frmWeeklyDiary
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwWeeklyDiary = New System.ComponentModel.BackgroundWorker()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx1.SuspendLayout()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -45,7 +45,7 @@ Partial Class frmWeeklyDiary
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(12, 31)
+        Me.LabelX3.Location = New System.Drawing.Point(18, 31)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(99, 18)
         Me.LabelX3.TabIndex = 22
@@ -85,6 +85,22 @@ Partial Class frmWeeklyDiary
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 24
         '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(140, 9)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(170, 131)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 37
+        Me.CircularProgress1.TabStop = False
+        '
         'lblSelectedDate
         '
         Me.lblSelectedDate.AutoSize = True
@@ -94,7 +110,7 @@ Partial Class frmWeeklyDiary
         Me.lblSelectedDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lblSelectedDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSelectedDate.ForeColor = System.Drawing.Color.Red
-        Me.lblSelectedDate.Location = New System.Drawing.Point(12, 67)
+        Me.lblSelectedDate.Location = New System.Drawing.Point(18, 67)
         Me.lblSelectedDate.Name = "lblSelectedDate"
         Me.lblSelectedDate.Size = New System.Drawing.Size(38, 24)
         Me.lblSelectedDate.TabIndex = 36
@@ -115,8 +131,9 @@ Partial Class frmWeeklyDiary
         Me.MonthCalendarAdv1.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.MonthCalendarAdv1.ContainerControlProcessDialogKey = True
         Me.MonthCalendarAdv1.DisplayMonth = New Date(2018, 4, 1, 0, 0, 0, 0)
+        Me.MonthCalendarAdv1.FirstDayOfWeek = System.DayOfWeek.Monday
         Me.MonthCalendarAdv1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MonthCalendarAdv1.Location = New System.Drawing.Point(117, 9)
+        Me.MonthCalendarAdv1.Location = New System.Drawing.Point(140, 9)
         Me.MonthCalendarAdv1.Name = "MonthCalendarAdv1"
         '
         '
@@ -163,22 +180,6 @@ Partial Class frmWeeklyDiary
         '
         Me.bgwWeeklyDiary.WorkerReportsProgress = True
         Me.bgwWeeklyDiary.WorkerSupportsCancellation = True
-        '
-        'CircularProgress1
-        '
-        '
-        '
-        '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(117, 9)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(170, 136)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 37
-        Me.CircularProgress1.TabStop = False
         '
         'frmWeeklyDiary
         '
