@@ -156,7 +156,7 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: HideFields; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: HighLightColor; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoBackup; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoBackupTime; ValueData: 7; Flags: noerror uninsdeletekey  createvalueifdoesntexist
+Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoBackupTime; ValueData: 30; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: RenameOldBackupFiles; ValueData: 1; Flags: noerror uninsdeletekey
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\TabColorSettings; ValueType: string; ValueName: TabStyle; ValueData: 9; Flags: noerror uninsdeletekey createvalueifdoesntexist
 

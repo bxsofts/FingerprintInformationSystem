@@ -39,13 +39,13 @@ Public Class FrmSettingsWizard
             Me.lblBackupLocation.Text = BackupPath
 
             Me.chkAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
-            Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
+            Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 30)
             If autobackuptime = "TextBoxItem1" Then
-                autobackuptime = "7"
+                autobackuptime = "30"
             End If
 
 
-            Me.txtBackupInterval.Text = IIf(autobackuptime = "", "7", autobackuptime)
+            Me.txtBackupInterval.Text = IIf(autobackuptime = "", "30", autobackuptime)
 
             strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
 

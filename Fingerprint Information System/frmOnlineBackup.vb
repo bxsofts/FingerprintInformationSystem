@@ -1,25 +1,25 @@
 ﻿Imports System.Threading
 Imports System.Threading.Tasks
+Imports System.IO
+
+Imports DevComponents.DotNetBar
 
 Imports Google
 Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Drive.v3
 Imports Google.Apis.Drive.v3.Data
 Imports Google.Apis.Services
-
-Imports Google.Apis.Auth
 Imports Google.Apis.Download
-Imports System.IO
 Imports Google.Apis.Upload
-Imports DevComponents.DotNetBar
 Imports Google.Apis.Util.Store
-
+Imports Google.Apis.Requests
 
 
 
 Public Class frmOnlineBackup
     Private FISService As DriveService = New DriveService
     Dim FISUserCredential As UserCredential
+    Dim FISAccountServiceCredential As GoogleCredential
     Dim BackupFolder As String
     Dim BackupFolderID As String
     Dim BackupPath As String = ""
@@ -47,17 +47,17 @@ Public Class frmOnlineBackup
             My.Computer.FileSystem.CreateDirectory(BackupPath)
         End If
 
-        BackupFolder = "FIS_BACKUP_" & ShortOfficeName & "_" & ShortDistrictName
+        BackupFolder = ShortOfficeName & "_" & ShortDistrictName
         BackupFolderID = ""
+
         Try
 
-
             CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
-            JsonPath = CredentialPath & "\FIS.json"
+            JsonPath = CredentialPath & "\FISServiceAccount.json"
 
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
                 My.Computer.FileSystem.CreateDirectory(CredentialPath)
-                FileSystem.FileCopy(strAppPath & "\FIS.json", CredentialPath & "\FIS.json")
+                FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialPath & "\FISServiceAccount.json")
             End If
 
 
@@ -67,15 +67,16 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
-            If Not FileIO.FileSystem.FileExists(CredentialPath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user") Then
-                MessageBoxEx.Show("The application will now open your browser. Please enter your gmail id and password to authenticate.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
+            ' For oauth2 auhentication only
+            '  If Not FileIO.FileSystem.FileExists(CredentialPath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user") Then
+            'MessageBoxEx.Show("The application will now open your browser. Please enter your gmail id and password to authenticate.", strAppName, 'MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '  End If 
 
             Me.listViewEx1.Items.Clear()
             listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
             listViewEx1.Sort()
 
-            
+
             CircularProgress1.ProgressText = ""
             lblStatus.Text = "Please wait..."
             CircularProgress1.IsRunning = True
@@ -105,16 +106,19 @@ Public Class frmOnlineBackup
             bgwService.ReportProgress(10, "Please wait...")
             System.Threading.Thread.Sleep(500)
 
-            Dim fStream = New FileStream(JsonPath, FileMode.Open, FileAccess.Read)
+            '  Dim fStream = New FileStream(JsonPath, FileMode.Open, FileAccess.Read) ' use fro oauth2 authentication
 
             Dim Scopes As String() = {DriveService.Scope.Drive}
 
             bgwService.ReportProgress(20, "Connecting to Google Drive...")
-            System.Threading.Thread.Sleep(500)
+            System.Threading.Thread.Sleep(300)
 
-            FISUserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialPath, True)).Result
+            '    FISUserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialPath, True)).Result
 
-            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISUserCredential, .ApplicationName = strAppName})
+            '  FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISUserCredential, .ApplicationName = strAppName})
+
+            FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
             bgwService.ReportProgress(50, "Fetching Local Files...")
             System.Threading.Thread.Sleep(500)
@@ -144,11 +148,11 @@ Public Class frmOnlineBackup
             System.Threading.Thread.Sleep(500)
 
 
-            BackupFolderID = GetBackupFolderID()
+            BackupFolderID = GetUserBackupFolderID()
             Dim List = FISService.Files.List()
 
             If BackupFolderID = "" Then
-                BackupFolderID = CreateBackupFolder()
+                BackupFolderID = CreateUserBackupFolder()
             End If
 
             Dim parentlist As New List(Of String)
@@ -213,7 +217,7 @@ Public Class frmOnlineBackup
 
 #Region "GOOGLE DRIVE ID AND FOLDER MANIPULATION"
 
-    Private Function GetBackupFolderID()
+    Private Function GetUserBackupFolderID() As String
         Try
             Dim id As String = ""
             Dim List = FISService.Files.List()
@@ -237,13 +241,22 @@ Public Class frmOnlineBackup
         End Try
     End Function
 
-    Private Function CreateBackupFolder()
+    Private Function CreateUserBackupFolder()
         Try
             Dim id As String = ""
             Dim body As New Google.Apis.Drive.v3.Data.File()
-
             Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
 
+            Dim parentlist As New List(Of String)
+            Dim masterfolderid As String = GetMasterBackupFolderID()
+
+            If masterfolderid = "" Then
+                masterfolderid = CreateMasterBackupFolder()
+            End If
+
+            parentlist.Add(masterfolderid)
+
+            body.Parents = parentlist
             body.Name = BackupFolder
             body.Description = "FIS Backup Folder"
             body.MimeType = "application/vnd.google-apps.folder"
@@ -260,6 +273,65 @@ Public Class frmOnlineBackup
 
     End Function
 
+    Private Function CreateMasterBackupFolder() As String
+        Try
+            Dim id As String = ""
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+
+            body.Name = "FIS Backup"
+            body.Description = "FIS Master Backup Folder"
+            body.MimeType = "application/vnd.google-apps.folder"
+
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
+
+            NewDirectory = request.Execute()
+            id = NewDirectory.Id
+            CreateSharing(id, "fingerprintinformationsystem@gmail.com")
+            Return id
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+            Return ""
+        End Try
+
+    End Function
+
+    Private Function GetMasterBackupFolderID() As String
+        Try
+            Dim id As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                id = ""
+            Else
+                id = Results.Files(0).Id
+            End If
+
+            Return id
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+            Return ""
+        End Try
+    End Function
+
+    Private Sub CreateSharing(fileid As String, email As String)
+        Dim batch = New BatchRequest(FISService)
+        Dim userPermission As Permission = New Permission
+        userPermission.Type = "user"
+        userPermission.Role = "writer"
+        userPermission.EmailAddress = email
+        Dim request = FISService.Permissions.Create(userPermission, fileid)
+        request.Fields = "id"
+        request.Execute()
+
+    End Sub
 #End Region
 
 
@@ -300,7 +372,7 @@ Public Class frmOnlineBackup
             Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
 
             If BackupFolderID = "" Then
-                BackupFolderID = CreateBackupFolder()
+                BackupFolderID = CreateUserBackupFolder()
             End If
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
@@ -409,12 +481,12 @@ Public Class frmOnlineBackup
 #Region "DOWNLOAD FILE"
 
 
-   
+
 
 
     Private Sub DownloadFileFromDrive()
         Try
-           Dim args As DownloadArgs = New DownloadArgs
+            Dim args As DownloadArgs = New DownloadArgs
 
             args.ID = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
             args.SelectedFileName = Me.listViewEx1.SelectedItems(0).Text
@@ -690,8 +762,9 @@ Public Class frmOnlineBackup
                 Else
                     MessageBoxEx.Show("Cannot open file. File is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
-                Me.Cursor = Cursors.WaitCursor
+                Me.Cursor = Cursors.Default
             End If
+
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -784,7 +857,7 @@ Public Class frmOnlineBackup
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
-        
+
     End Sub
 
     Private Sub DisplayInformation() Handles listViewEx1.Click, listViewEx1.ItemSelectionChanged

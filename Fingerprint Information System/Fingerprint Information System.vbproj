@@ -726,7 +726,7 @@
     <None Include="FingerPrintDataSet.xss">
       <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
     </None>
-    <None Include="FIS.json">
+    <None Include="FISServiceAccount.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="My Project\app.manifest" />
