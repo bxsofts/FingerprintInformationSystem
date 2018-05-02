@@ -6,9 +6,15 @@ Imports Microsoft.Office.Interop
 
 Public Class frmWeeklyDiary
 
+    Dim TemplateFile As String
+    Dim sfilename As String
     Private Sub frmWeeklyDiary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-           
+            Me.CircularProgress1.Hide()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = False
+            Me.MonthCalendarAdv1.FirstDayOfWeek = System.DayOfWeek.Sunday
+
             Dim lastweekdate As Date = Date.Today.AddDays(-7) 'gets day of last week
             Dim dayOfWeek = CInt(lastweekdate.DayOfWeek)
             Dim FromDate As Date = lastweekdate.AddDays(-1 * dayOfWeek)
@@ -46,13 +52,13 @@ Public Class frmWeeklyDiary
 
             Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
             System.IO.Directory.CreateDirectory(SaveFolder)
-            Dim sfilename As String = SaveFolder & "\" & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
+            sfilename = SaveFolder & "\" & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
                 Exit Sub
             End If
 
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\WeeklyDiary.docx"
+            TemplateFile = strAppUserPath & "\WordTemplates\WeeklyDiary.docx"
             If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
@@ -60,117 +66,12 @@ Public Class frmWeeklyDiary
 
             Me.Cursor = Cursors.WaitCursor
 
-            Dim wdApp As Word.Application
-            Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
-            wdDoc.Range.NoProofing = 1
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+            CircularProgress1.ProgressText = "0"
+            CircularProgress1.IsRunning = True
+            CircularProgress1.Show()
 
-            wdBooks("district1").Range.Text = FullDistrictName.ToUpper
-            wdBooks("name").Range.Text = TI.Replace(", TI", ", Tester Inspector")
-            wdBooks("office").Range.Text = ShortOfficeName
-            wdBooks("district2").Range.Text = FullDistrictName
-            wdBooks("fromdt").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy")
-            wdBooks("todt").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy")
-
-            If boolUseTIinLetter Then
-                wdBooks("tiname").Range.Text = TI.Replace(", TI", "")
-                wdBooks("ti").Range.Text = "Tester Inspector"
-                wdBooks("sdfpb").Range.Text = FullOfficeName
-                wdBooks("district3").Range.Text = FullDistrictName
-            Else
-                wdBooks("tiname").Range.Text = ""
-                wdBooks("ti").Range.Text = ""
-                wdBooks("sdfpb").Range.Text = ""
-                wdBooks("district3").Range.Text = ""
-            End If
-
-
-            Dim cnt As Integer = Me.FingerPrintDataSet1.SOCRegister.Count
-
-            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
-            For i = 2 To 8
-                With wdTbl
-                    .Cell(i, 1).Range.Text = dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dd/MM/yyyy") & vbNewLine & dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dddd")
-
-                    Me.SocRegisterTableAdapter1.FillByInspectingOfficer(Me.FingerPrintDataSet1.SOCRegister, "%" & TI & "%", dtWeeklyDiaryFrom.AddDays(i - 2))
-                    cnt = Me.FingerPrintDataSet1.SOCRegister.Count
-
-                    If cnt = 0 Then
-
-                        Dim dm As String = dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dd/MM/yyyy")
-                        dm = Strings.Left(dm, 5)
-                        Dim msg = ""
-                        Select Case dm
-                            Case "02/01"
-                                msg = "Availed Holiday"
-                            Case "26/01"
-                                msg = "Availed Holiday"
-                            Case "14/04"
-                                msg = "Availed Holiday"
-                            Case "01/05"
-                                msg = "Availed Holiday"
-                            Case "15/08"
-                                msg = "Availed Holiday"
-                            Case "02/10"
-                                msg = "Availed Holiday"
-                            Case "25/12"
-                                msg = "Availed Holiday"
-                        End Select
-
-                        Dim dt = dtWeeklyDiaryFrom.AddDays(i - 2).Day
-                        If dt > 7 And dt < 15 And dtWeeklyDiaryFrom.AddDays(i - 2).DayOfWeek = DayOfWeek.Saturday Then
-                            msg = "Availed Holiday"
-                        End If
-
-                        If dtWeeklyDiaryFrom.AddDays(i - 2).DayOfWeek = DayOfWeek.Sunday Then
-                            msg = "Availed Holiday"
-                        Else
-                            If msg <> "Availed Holiday" Then msg = "Attended office duty"
-                        End If
-
-                        .Cell(i, 2).Range.Text = msg
-                    End If
-
-                    If cnt = 1 Then
-                        .Cell(i, 2).Range.Text = "Inspected SOC in Cr.No. " & Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation & " P.S"
-                    End If
-
-                    If cnt > 1 Then
-                        Dim details As String = ""
-                        For j = 0 To cnt - 1
-                            If j <> cnt - 1 Then
-                                details = details & "Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S; "
-                            Else
-                                details = details.Remove(details.Length - 2)
-                                details = details & " and Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S"
-                            End If
-
-                        Next
-                        .Cell(i, 2).Range.Text = "Inspected SOC in " & details
-                    End If
-
-                End With
-            Next
-
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
-
-            If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                wdDoc.SaveAs(sfilename)
-            End If
-
-            ReleaseObject(wdTbl)
-            ReleaseObject(wdBooks)
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp = Nothing
-
-            Me.Cursor = Cursors.Default
+            Me.bgwWeeklyDiary.RunWorkerAsync("WeeklyDiary")
+           
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
             Me.Cursor = Cursors.Default
@@ -179,58 +80,224 @@ Public Class frmWeeklyDiary
 
     End Sub
 
+    Private Sub bgwWeeklyDiary_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwWeeklyDiary.DoWork
+        Try
+
+            If e.Argument = "WeeklyDiary" Then
+                bgwWeeklyDiary.ReportProgress(1)
+                System.Threading.Thread.Sleep(200)
+
+                Dim wdApp As Word.Application
+                Dim wdDocs As Word.Documents
+                wdApp = New Word.Application
+                wdDocs = wdApp.Documents
+                Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+
+                bgwWeeklyDiary.ReportProgress(5)
+                System.Threading.Thread.Sleep(200)
+
+                wdDoc.Range.NoProofing = 1
+                Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+
+                wdBooks("district1").Range.Text = FullDistrictName.ToUpper
+                wdBooks("name").Range.Text = TI.Replace(", TI", ", Tester Inspector")
+                wdBooks("office").Range.Text = ShortOfficeName
+                wdBooks("district2").Range.Text = FullDistrictName
+                wdBooks("fromdt").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy")
+                wdBooks("todt").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy")
+
+                bgwWeeklyDiary.ReportProgress(8)
+                System.Threading.Thread.Sleep(200)
+
+                If boolUseTIinLetter Then
+                    wdBooks("tiname").Range.Text = TI.Replace(", TI", "")
+                    wdBooks("ti").Range.Text = "Tester Inspector"
+                    wdBooks("sdfpb").Range.Text = FullOfficeName
+                    wdBooks("district3").Range.Text = FullDistrictName
+                Else
+                    wdBooks("tiname").Range.Text = ""
+                    wdBooks("ti").Range.Text = ""
+                    wdBooks("sdfpb").Range.Text = ""
+                    wdBooks("district3").Range.Text = ""
+                End If
+
+                bgwWeeklyDiary.ReportProgress(10)
+                System.Threading.Thread.Sleep(200)
+
+                Dim cnt As Integer = Me.FingerPrintDataSet1.SOCRegister.Count
+
+                Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
+                For i = 2 To 8
+                    With wdTbl
+                        .Cell(i, 1).Range.Text = dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dd/MM/yyyy") & vbNewLine & dtWeeklyDiaryFrom.AddDays(i - 2).ToString("dddd")
+
+                        Me.SocRegisterTableAdapter1.FillByInspectingOfficer(Me.FingerPrintDataSet1.SOCRegister, "%" & TI & "%", dtWeeklyDiaryFrom.AddDays(i - 2))
+                        cnt = Me.FingerPrintDataSet1.SOCRegister.Count
+
+                        If cnt = 0 Then
+
+
+                            Dim dt = dtWeeklyDiaryFrom.AddDays(i - 2)
+                            Dim msg = ""
+
+                            If IsHoliday(dt) Then
+                                msg = "Availed Holiday"
+                            Else
+                                msg = "Attended office duty"
+                            End If
+
+                            .Cell(i, 2).Range.Text = msg
+                        End If
+
+                        If cnt = 1 Then
+                            .Cell(i, 2).Range.Text = "Inspected SOC in Cr.No. " & Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation & " P.S"
+                        End If
+
+                        If cnt > 1 Then
+                            Dim details As String = ""
+                            For j = 0 To cnt - 1
+                                If j <> cnt - 1 Then
+                                    details = details & "Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S; "
+                                Else
+                                    details = details.Remove(details.Length - 2)
+                                    details = details & " and Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S"
+                                End If
+
+                            Next
+                            .Cell(i, 2).Range.Text = "Inspected SOC in " & details
+                        End If
+
+                    End With
+
+                    bgwWeeklyDiary.ReportProgress(i * 10)
+                    System.Threading.Thread.Sleep(200)
+
+                Next
+                bgwWeeklyDiary.ReportProgress(90)
+                System.Threading.Thread.Sleep(200)
+
+                bgwWeeklyDiary.ReportProgress(95)
+                System.Threading.Thread.Sleep(200)
+
+                bgwWeeklyDiary.ReportProgress(100)
+                System.Threading.Thread.Sleep(200)
+
+                wdApp.Visible = True
+                wdApp.Activate()
+                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+                wdDoc.Activate()
+
+                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                    wdDoc.SaveAs(sfilename)
+                End If
+
+                ReleaseObject(wdTbl)
+                ReleaseObject(wdBooks)
+                ReleaseObject(wdDoc)
+                ReleaseObject(wdDocs)
+                wdApp = Nothing
+            End If
+            
+            If e.Argument = "CL" Then
+
+                bgwWeeklyDiary.ReportProgress(1)
+                System.Threading.Thread.Sleep(200)
+
+                Dim wdApp As Word.Application
+                Dim wdDocs As Word.Documents
+                wdApp = New Word.Application
+                wdDocs = wdApp.Documents
+                Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+                wdDoc.Range.NoProofing = 1
+                Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+
+                bgwWeeklyDiary.ReportProgress(10)
+                System.Threading.Thread.Sleep(200)
+
+                wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
+                wdBooks("OfficeName1").Range.Text = FullOfficeName
+                wdBooks("District1").Range.Text = FullDistrictName
+                wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy")
+
+                bgwWeeklyDiary.ReportProgress(20)
+                System.Threading.Thread.Sleep(200)
+
+                wdBooks("Name1").Range.Text = TI.Replace(", TI", "")
+                wdBooks("OfficeName2").Range.Text = FullOfficeName
+                wdBooks("District2").Range.Text = FullDistrictName
+
+                wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy")
+                wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy")
+
+                bgwWeeklyDiary.ReportProgress(30)
+                System.Threading.Thread.Sleep(200)
+
+                If boolUseTIinLetter Then
+                    wdBooks("Name2").Range.Text = TI.Replace(", TI", "")
+                    wdBooks("Designation").Range.Text = "Tester Inspector"
+                    wdBooks("OfficeName3").Range.Text = FullOfficeName
+                    wdBooks("District3").Range.Text = FullDistrictName
+                Else
+                    wdBooks("Name2").Range.Text = ""
+                    wdBooks("Designation").Range.Text = ""
+                    wdBooks("OfficeName3").Range.Text = ""
+                    wdBooks("District3").Range.Text = ""
+                End If
+
+                For i = 4 To 10
+                    bgwWeeklyDiary.ReportProgress(i * 10)
+                    System.Threading.Thread.Sleep(200)
+                Next
+
+
+                wdApp.Visible = True
+                wdApp.Activate()
+                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+                wdDoc.Activate()
+
+                ReleaseObject(wdBooks)
+                ReleaseObject(wdDoc)
+                ReleaseObject(wdDocs)
+                wdApp = Nothing
+            End If
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            MessageBoxEx.Show(ex.Message)
+            Me.Cursor = Cursors.Default
+
+        End Try
+    End Sub
+
+    Private Sub bgwWeeklyDiary_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwWeeklyDiary.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwWeeklyDiary_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwWeeklyDiary.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+
+        If e.Error IsNot Nothing Then
+            DevComponents.DotNetBar.MessageBoxEx.Show(e.Error.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
 
     Private Sub GenerateWeeklyDiaryCL() Handles btnCoveringLetter.Click
         Try
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\WeeklyDiaryCL.docx"
+            TemplateFile = strAppUserPath & "\WordTemplates\WeeklyDiaryCL.docx"
             If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
             Me.Cursor = Cursors.WaitCursor
-            Dim wdApp As Word.Application
-            Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
-            wdDoc.Range.NoProofing = 1
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
-            wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
-            wdBooks("OfficeName1").Range.Text = FullOfficeName
-            wdBooks("District1").Range.Text = FullDistrictName
-            wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy")
+            CircularProgress1.ProgressText = "0"
+            CircularProgress1.IsRunning = True
+            CircularProgress1.Show()
 
-            wdBooks("Name1").Range.Text = TI.Replace(", TI", "")
-            wdBooks("OfficeName2").Range.Text = FullOfficeName
-            wdBooks("District2").Range.Text = FullDistrictName
-
-            wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy")
-            wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy")
-
-
-            If boolUseTIinLetter Then
-                wdBooks("Name2").Range.Text = TI.Replace(", TI", "")
-                wdBooks("Designation").Range.Text = "Tester Inspector"
-                wdBooks("OfficeName3").Range.Text = FullOfficeName
-                wdBooks("District3").Range.Text = FullDistrictName
-            Else
-                wdBooks("Name2").Range.Text = ""
-                wdBooks("Designation").Range.Text = ""
-                wdBooks("OfficeName3").Range.Text = ""
-                wdBooks("District3").Range.Text = ""
-            End If
-
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
-
-            ReleaseObject(wdBooks)
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp = Nothing
-            Me.Cursor = Cursors.Default
+            Me.bgwWeeklyDiary.RunWorkerAsync("CL")
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
             Me.Cursor = Cursors.Default
@@ -264,4 +331,6 @@ Public Class frmWeeklyDiary
     Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
         Me.lblSelectedDate.Text = Me.MonthCalendarAdv1.SelectedDate.ToString("dd/MM/yyyy")
     End Sub
+
+   
 End Class

@@ -32,6 +32,8 @@ Partial Class frmWeeklyDiary
         Me.btnOpenWeeklyDiaryFolder = New DevComponents.DotNetBar.ButtonX()
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
+        Me.bgwWeeklyDiary = New System.ComponentModel.BackgroundWorker()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx1.SuspendLayout()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -63,6 +65,7 @@ Partial Class frmWeeklyDiary
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.lblSelectedDate)
         Me.PanelEx1.Controls.Add(Me.MonthCalendarAdv1)
         Me.PanelEx1.Controls.Add(Me.btnCoveringLetter)
@@ -156,6 +159,25 @@ Partial Class frmWeeklyDiary
         '
         Me.SocRegisterTableAdapter1.ClearBeforeFill = True
         '
+        'bgwWeeklyDiary
+        '
+        Me.bgwWeeklyDiary.WorkerReportsProgress = True
+        Me.bgwWeeklyDiary.WorkerSupportsCancellation = True
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Location = New System.Drawing.Point(117, 9)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(170, 136)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 37
+        '
         'frmWeeklyDiary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -189,4 +211,6 @@ Partial Class frmWeeklyDiary
     Friend WithEvents btnCoveringLetter As DevComponents.DotNetBar.ButtonX
     Friend WithEvents MonthCalendarAdv1 As DevComponents.Editors.DateTimeAdv.MonthCalendarAdv
     Friend WithEvents lblSelectedDate As DevComponents.DotNetBar.LabelX
+    Friend WithEvents bgwWeeklyDiary As System.ComponentModel.BackgroundWorker
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
 End Class

@@ -225,7 +225,7 @@ Public Class frmAttendanceStmt
 
     Private Sub bgwAttendance_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAttendance.DoWork
         Try
-            bgwAttendance.ReportProgress(2)
+            bgwAttendance.ReportProgress(1)
             System.Threading.Thread.Sleep(200)
 
             Dim args As Attendance = e.Argument
@@ -504,15 +504,7 @@ Public Class frmAttendanceStmt
 
     End Sub
 
-    Private Function IsHoliday(dt As Date) As Boolean
-        IsHoliday = False
-        Dim d = dt.Day
-        Dim y = dt.Year
-
-        If (dt.DayOfWeek = DayOfWeek.Sunday) Or (dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday) Or (dt = New Date(y, 1, 26)) Or (dt = New Date(y, 8, 15)) Or (dt = New Date(y, 10, 2)) Or (dt = New Date(y, 12, 25)) Then
-            IsHoliday = True
-        End If
-    End Function
+   
 
     Public Class Attendance
         Public d1 As Date

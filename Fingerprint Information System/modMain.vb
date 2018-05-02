@@ -132,6 +132,17 @@ Module modMain
         Return ConvertedDate
     End Function
 
+
+    Public Function IsHoliday(dt As Date) As Boolean
+        IsHoliday = False
+        Dim d = dt.Day
+        Dim y = dt.Year
+
+        If (dt.DayOfWeek = DayOfWeek.Sunday) Or (dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday) Or (dt = New Date(y, 1, 26)) Or (dt = New Date(y, 5, 1)) Or (dt = New Date(y, 8, 15)) Or (dt = New Date(y, 10, 2)) Or (dt = New Date(y, 12, 25)) Then
+            IsHoliday = True
+        End If
+    End Function
+
 End Module
 
 
