@@ -25,20 +25,20 @@ Partial Class frmAttendanceStmt
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAttendanceStmt))
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel6 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.btnGenerateCL = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.btnGenerateByDate = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateAttendance = New DevComponents.DotNetBar.ButtonX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.chkStatementOnly = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkCoB = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.chkLetter = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.chkStaff = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwAttendance = New System.ComponentModel.BackgroundWorker()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx2.SuspendLayout()
         Me.GroupPanel6.SuspendLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,7 +58,7 @@ Partial Class frmAttendanceStmt
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(514, 306)
+        Me.PanelEx2.Size = New System.Drawing.Size(514, 313)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -69,18 +69,19 @@ Partial Class frmAttendanceStmt
         '
         'GroupPanel6
         '
-        Me.GroupPanel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.GroupPanel6.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel6.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel6.Controls.Add(Me.btnGenerateCL)
         Me.GroupPanel6.Controls.Add(Me.LabelX1)
         Me.GroupPanel6.Controls.Add(Me.dtTo)
-        Me.GroupPanel6.Controls.Add(Me.btnGenerateByDate)
+        Me.GroupPanel6.Controls.Add(Me.btnGenerateAttendance)
         Me.GroupPanel6.Controls.Add(Me.dtFrom)
         Me.GroupPanel6.Controls.Add(Me.LabelX2)
         Me.GroupPanel6.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel6.Location = New System.Drawing.Point(12, 192)
         Me.GroupPanel6.Name = "GroupPanel6"
-        Me.GroupPanel6.Size = New System.Drawing.Size(492, 104)
+        Me.GroupPanel6.Size = New System.Drawing.Size(492, 114)
         '
         '
         '
@@ -112,6 +113,16 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel6.TabIndex = 25
         Me.GroupPanel6.Text = "Period"
         '
+        'btnGenerateCL
+        '
+        Me.btnGenerateCL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateCL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateCL.Location = New System.Drawing.Point(336, 48)
+        Me.btnGenerateCL.Name = "btnGenerateCL"
+        Me.btnGenerateCL.Size = New System.Drawing.Size(142, 36)
+        Me.btnGenerateCL.TabIndex = 8
+        Me.btnGenerateCL.Text = "Covering Letter"
+        '
         'LabelX1
         '
         Me.LabelX1.AutoSize = True
@@ -119,7 +130,7 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(24, 5)
+        Me.LabelX1.Location = New System.Drawing.Point(24, 13)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(32, 18)
         Me.LabelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -144,7 +155,7 @@ Partial Class frmAttendanceStmt
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(194, 29)
+        Me.dtTo.Location = New System.Drawing.Point(194, 37)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -178,19 +189,19 @@ Partial Class frmAttendanceStmt
         Me.dtTo.MonthCalendar.TodayButtonVisible = True
         Me.dtTo.Name = "dtTo"
         Me.dtTo.Size = New System.Drawing.Size(113, 29)
-        Me.dtTo.TabIndex = 5
+        Me.dtTo.TabIndex = 6
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'btnGenerateByDate
+        'btnGenerateAttendance
         '
-        Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(341, 11)
-        Me.btnGenerateByDate.Name = "btnGenerateByDate"
-        Me.btnGenerateByDate.Size = New System.Drawing.Size(128, 61)
-        Me.btnGenerateByDate.TabIndex = 6
-        Me.btnGenerateByDate.Text = "Generate"
+        Me.btnGenerateAttendance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateAttendance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateAttendance.Location = New System.Drawing.Point(336, 4)
+        Me.btnGenerateAttendance.Name = "btnGenerateAttendance"
+        Me.btnGenerateAttendance.Size = New System.Drawing.Size(142, 36)
+        Me.btnGenerateAttendance.TabIndex = 7
+        Me.btnGenerateAttendance.Text = "Generate Attendance"
         '
         'dtFrom
         '
@@ -210,7 +221,7 @@ Partial Class frmAttendanceStmt
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(24, 29)
+        Me.dtFrom.Location = New System.Drawing.Point(24, 37)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -244,7 +255,7 @@ Partial Class frmAttendanceStmt
         Me.dtFrom.MonthCalendar.TodayButtonVisible = True
         Me.dtFrom.Name = "dtFrom"
         Me.dtFrom.Size = New System.Drawing.Size(113, 29)
-        Me.dtFrom.TabIndex = 4
+        Me.dtFrom.TabIndex = 5
         Me.dtFrom.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtFrom.WatermarkText = "From"
         '
@@ -255,7 +266,7 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(194, 5)
+        Me.LabelX2.Location = New System.Drawing.Point(194, 13)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 13
@@ -263,13 +274,12 @@ Partial Class frmAttendanceStmt
         '
         'GroupPanel5
         '
-        Me.GroupPanel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.GroupPanel5.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel5.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.GroupPanel5.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel5.Controls.Add(Me.chkStatementOnly)
         Me.GroupPanel5.Controls.Add(Me.chkCoB)
-        Me.GroupPanel5.Controls.Add(Me.chkLetter)
         Me.GroupPanel5.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel5.Location = New System.Drawing.Point(12, 102)
         Me.GroupPanel5.Name = "GroupPanel5"
@@ -305,6 +315,22 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel5.TabIndex = 24
         Me.GroupPanel5.Text = "Statement Format"
         '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(159, -4)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(169, 62)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 26
+        Me.CircularProgress1.TabStop = False
+        '
         'chkStatementOnly
         '
         Me.chkStatementOnly.AutoSize = True
@@ -313,11 +339,11 @@ Partial Class frmAttendanceStmt
         '
         Me.chkStatementOnly.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkStatementOnly.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkStatementOnly.Location = New System.Drawing.Point(341, 22)
+        Me.chkStatementOnly.Location = New System.Drawing.Point(187, 22)
         Me.chkStatementOnly.Name = "chkStatementOnly"
         Me.chkStatementOnly.Size = New System.Drawing.Size(110, 18)
         Me.chkStatementOnly.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkStatementOnly.TabIndex = 17
+        Me.chkStatementOnly.TabIndex = 4
         Me.chkStatementOnly.Text = "Statement Only"
         '
         'chkCoB
@@ -335,27 +361,12 @@ Partial Class frmAttendanceStmt
         Me.chkCoB.Name = "chkCoB"
         Me.chkCoB.Size = New System.Drawing.Size(97, 18)
         Me.chkCoB.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkCoB.TabIndex = 15
+        Me.chkCoB.TabIndex = 3
         Me.chkCoB.Text = "CoB Message"
-        '
-        'chkLetter
-        '
-        Me.chkLetter.AutoSize = True
-        '
-        '
-        '
-        Me.chkLetter.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkLetter.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkLetter.Location = New System.Drawing.Point(194, 22)
-        Me.chkLetter.Name = "chkLetter"
-        Me.chkLetter.Size = New System.Drawing.Size(56, 18)
-        Me.chkLetter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkLetter.TabIndex = 16
-        Me.chkLetter.Text = "Letter"
         '
         'GroupPanel4
         '
-        Me.GroupPanel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.GroupPanel4.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel4.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.GroupPanel4.Controls.Add(Me.chkStaff)
@@ -410,7 +421,7 @@ Partial Class frmAttendanceStmt
         Me.chkStaff.Name = "chkStaff"
         Me.chkStaff.Size = New System.Drawing.Size(50, 18)
         Me.chkStaff.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkStaff.TabIndex = 17
+        Me.chkStaff.TabIndex = 1
         Me.chkStaff.Text = "Staff"
         '
         'chkTI
@@ -421,11 +432,11 @@ Partial Class frmAttendanceStmt
         '
         Me.chkTI.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkTI.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkTI.Location = New System.Drawing.Point(194, 18)
+        Me.chkTI.Location = New System.Drawing.Point(187, 18)
         Me.chkTI.Name = "chkTI"
         Me.chkTI.Size = New System.Drawing.Size(113, 18)
         Me.chkTI.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkTI.TabIndex = 18
+        Me.chkTI.TabIndex = 2
         Me.chkTI.Text = "Tester Inspector"
         '
         'bgwAttendance
@@ -433,25 +444,11 @@ Partial Class frmAttendanceStmt
         Me.bgwAttendance.WorkerReportsProgress = True
         Me.bgwAttendance.WorkerSupportsCancellation = True
         '
-        'CircularProgress1
-        '
-        '
-        '
-        '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.Location = New System.Drawing.Point(166, -4)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(154, 62)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 26
-        '
         'frmAttendanceStmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(514, 306)
+        Me.ClientSize = New System.Drawing.Size(514, 313)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -479,10 +476,9 @@ Partial Class frmAttendanceStmt
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents btnGenerateByDate As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateAttendance As DevComponents.DotNetBar.ButtonX
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
-    Friend WithEvents chkLetter As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkCoB As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkTI As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkStaff As DevComponents.DotNetBar.Controls.CheckBoxX
@@ -492,4 +488,5 @@ Partial Class frmAttendanceStmt
     Friend WithEvents GroupPanel4 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents bgwAttendance As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents btnGenerateCL As DevComponents.DotNetBar.ButtonX
 End Class

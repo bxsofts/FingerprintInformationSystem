@@ -170,6 +170,7 @@ Partial Class frmWeeklyDiary
         '
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
         Me.CircularProgress1.Location = New System.Drawing.Point(117, 9)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
@@ -177,6 +178,7 @@ Partial Class frmWeeklyDiary
         Me.CircularProgress1.Size = New System.Drawing.Size(170, 136)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 37
+        Me.CircularProgress1.TabStop = False
         '
         'frmWeeklyDiary
         '

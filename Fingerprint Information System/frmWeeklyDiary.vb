@@ -28,7 +28,7 @@ Public Class frmWeeklyDiary
             If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
             Me.SocRegisterTableAdapter1.Connection.ConnectionString = strConString
             Me.SocRegisterTableAdapter1.Connection.Open()
-
+            Control.CheckForIllegalCrossThreadCalls = False
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
         End Try
@@ -69,6 +69,7 @@ Public Class frmWeeklyDiary
             CircularProgress1.ProgressText = "0"
             CircularProgress1.IsRunning = True
             CircularProgress1.Show()
+
 
             Me.bgwWeeklyDiary.RunWorkerAsync("WeeklyDiary")
            
@@ -174,15 +175,12 @@ Public Class frmWeeklyDiary
                     System.Threading.Thread.Sleep(200)
 
                 Next
-                bgwWeeklyDiary.ReportProgress(90)
-                System.Threading.Thread.Sleep(200)
+                For i = 90 To 100
+                    bgwWeeklyDiary.ReportProgress(i)
+                    System.Threading.Thread.Sleep(100)
+                Next
 
-                bgwWeeklyDiary.ReportProgress(95)
-                System.Threading.Thread.Sleep(200)
-
-                bgwWeeklyDiary.ReportProgress(100)
-                System.Threading.Thread.Sleep(200)
-
+               
                 wdApp.Visible = True
                 wdApp.Activate()
                 wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize

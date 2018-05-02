@@ -250,6 +250,7 @@ Partial Class frmOnlineBackup
         '
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
         Me.CircularProgress1.Location = New System.Drawing.Point(362, 158)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
@@ -257,6 +258,7 @@ Partial Class frmOnlineBackup
         Me.CircularProgress1.Size = New System.Drawing.Size(169, 153)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 1
+        Me.CircularProgress1.TabStop = False
         '
         'listViewEx1
         '
