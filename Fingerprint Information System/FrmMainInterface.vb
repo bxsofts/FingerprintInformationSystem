@@ -13190,6 +13190,11 @@ errhandler:
     End Sub
     Private Sub SaveOfficeSettings() Handles btnSaveOfficeSettings.Click
         Try
+            If Me.txtFullDistrict.Enabled = False Then
+                MessageBoxEx.Show("Please press 'Edit' or 'Open' button to edit, then press 'Save'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             FullDistrictName = Me.txtFullDistrict.Text
             FullOfficeName = Me.txtFullOffice.Text
             ShortDistrictName = Me.txtShortDistrict.Text

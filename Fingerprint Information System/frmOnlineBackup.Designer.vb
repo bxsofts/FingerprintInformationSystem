@@ -72,8 +72,8 @@ Partial Class frmOnlineBackup
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "Google-Drive-icon.png")
-        Me.ImageList1.Images.SetKeyName(1, "gdrive_icon-icons.com_62760.png")
-        Me.ImageList1.Images.SetKeyName(2, "Hopstarter-Office-2010-Microsoft-Office-Access.ico")
+        Me.ImageList1.Images.SetKeyName(1, "Hopstarter-Office-2010-Microsoft-Office-Access.ico")
+        Me.ImageList1.Images.SetKeyName(2, "gdrive_icon-icons.com_62760.png")
         '
         'btnRemoveBackupFile
         '
