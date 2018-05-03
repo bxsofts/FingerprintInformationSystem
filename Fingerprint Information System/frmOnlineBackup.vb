@@ -37,6 +37,7 @@ Public Class frmOnlineBackup
 
 #Region "FORM LOAD EVENTS"
 
+   
 
     Private Sub CreateService() Handles MyBase.Load
 
@@ -49,7 +50,7 @@ Public Class frmOnlineBackup
 
         BackupFolder = ShortOfficeName & "_" & ShortDistrictName
         BackupFolderID = ""
-
+        Me.lblDriveStatus.Text = ""
         Try
 
             CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
@@ -103,16 +104,22 @@ Public Class frmOnlineBackup
     Private Sub CreateServiceAndLoadData(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwService.DoWork
         Try
 
-            bgwService.ReportProgress(10, "Please wait...")
-            System.Threading.Thread.Sleep(500)
-
-            '  Dim fStream = New FileStream(JsonPath, FileMode.Open, FileAccess.Read) ' use fro oauth2 authentication
+            Dim delay As Integer = 0
+            For delay = 0 To 10
+                bgwService.ReportProgress(delay, "Please wait...")
+                System.Threading.Thread.Sleep(50)
+            Next
 
             Dim Scopes As String() = {DriveService.Scope.Drive}
 
-            bgwService.ReportProgress(20, "Connecting to Google Drive...")
-            System.Threading.Thread.Sleep(300)
+            For delay = 11 To 20
+                bgwService.ReportProgress(delay, "Connecting to Google Drive...")
+                System.Threading.Thread.Sleep(50)
+            Next
 
+           
+
+            '  Dim fStream = New FileStream(JsonPath, FileMode.Open, FileAccess.Read) ' use fro oauth2 authentication
             '    FISUserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialPath, True)).Result
 
             '  FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISUserCredential, .ApplicationName = strAppName})
@@ -120,16 +127,16 @@ Public Class frmOnlineBackup
             FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-            bgwService.ReportProgress(50, "Fetching Local Files...")
-            System.Threading.Thread.Sleep(500)
+            For delay = 21 To 50
+                bgwService.ReportProgress(delay, "Fetching Local Files...")
+                System.Threading.Thread.Sleep(10)
+            Next
+
 
             Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
 
-                If foundFile Is Nothing Then
-                    Exit Sub
-                End If
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
 
                 Dim FileName = My.Computer.FileSystem.GetName(foundFile)
                 Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
@@ -141,11 +148,14 @@ Public Class frmOnlineBackup
                 item.SubItems.Add("Downloaded File")
                 item.SubItems.Add("Downloaded File")
                 item.ImageIndex = 1
-                bgwService.ReportProgress(60, item)
+                bgwService.ReportProgress(50, item)
             Next
 
-            bgwService.ReportProgress(80, "Fetching Online Files...")
-            System.Threading.Thread.Sleep(500)
+
+            For delay = 51 To 80
+                bgwService.ReportProgress(delay, "Fetching Online Files...")
+                System.Threading.Thread.Sleep(10)
+            Next
 
 
             BackupFolderID = GetUserBackupFolderID()
@@ -159,9 +169,15 @@ Public Class frmOnlineBackup
             parentlist.Add(BackupFolderID)
 
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
+            ' List.Q = "mimeType = 'database/mdb'" ' list all files
             List.Fields = "nextPageToken, files(id, name, description)"
 
             Dim Results = List.Execute
+
+            For delay = 81 To 90
+                bgwService.ReportProgress(delay, "Fetching Online Files...")
+                System.Threading.Thread.Sleep(20)
+            Next
 
             For Each Result In Results.Files
                 Dim item As ListViewItem = New ListViewItem(Result.Name)
@@ -172,6 +188,13 @@ Public Class frmOnlineBackup
                 bgwService.ReportProgress(90, item)
             Next
 
+            For delay = 90 To 99
+                bgwService.ReportProgress(delay, "Fetching Online Files...")
+                System.Threading.Thread.Sleep(20)
+            Next
+
+            bgwService.ReportProgress(100, "Fetching Online Files...")
+            System.Threading.Thread.Sleep(200)
 
         Catch ex As Exception
 
@@ -187,6 +210,8 @@ Public Class frmOnlineBackup
         If TypeOf e.UserState Is String Then
             lblStatus.Text = e.UserState
         End If
+
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
 
         If TypeOf e.UserState Is ListViewItem Then
             listViewEx1.Items.Add(e.UserState)
@@ -362,8 +387,11 @@ Public Class frmOnlineBackup
 
         Try
 
-            bgwUpload.ReportProgress(10, "Connecting to Google Drive...")
-            System.Threading.Thread.Sleep(500)
+            Dim delay As Integer = 0
+            For delay = 0 To 10
+                bgwUpload.ReportProgress(delay, "Connecting to Google Drive...")
+                System.Threading.Thread.Sleep(50)
+            Next
 
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
@@ -388,15 +416,23 @@ Public Class frmOnlineBackup
 
             My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
 
-            bgwUpload.ReportProgress(20, "Copying Database...")
-            System.Threading.Thread.Sleep(500)
+            For delay = 11 To 20
+                bgwUpload.ReportProgress(delay, "Copying Database...")
+                System.Threading.Thread.Sleep(50)
+            Next
 
             Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
             Dim Stream As New System.IO.MemoryStream(ByteArray)
 
             dFileSize = FileLen(tmpFileName)
-            bgwUpload.ReportProgress(50, "Uploading...")
-            System.Threading.Thread.Sleep(500)
+
+            For delay = 21 To 37
+                bgwUpload.ReportProgress(delay, "Initializing upload...")
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            bgwUpload.ReportProgress(38, "Uploading...")
+            System.Threading.Thread.Sleep(50)
 
             Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
             UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
@@ -408,26 +444,26 @@ Public Class frmOnlineBackup
 
             If uUploadStatus = UploadStatus.Completed Then
 
-                bgwUpload.ReportProgress(97, "Uploaded.")
-                System.Threading.Thread.Sleep(500)
+                For delay = 91 To 98
+                    bgwUpload.ReportProgress(delay, "Uploading...")
+                    System.Threading.Thread.Sleep(40)
+                Next
 
                 Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
-
-                If file Is Nothing Then
-                    bgwUpload.ReportProgress(98, "Upload failed.")
-                    System.Threading.Thread.Sleep(500)
-                Else
-                    Dim item As ListViewItem = New ListViewItem(BackupFileName)
+                Dim item As ListViewItem = New ListViewItem(BackupFileName)
                     item.SubItems.Add(sBackupTime)
                     item.SubItems.Add(file.Id)
                     item.SubItems.Add("")
                     item.ImageIndex = 0
-                    bgwUpload.ReportProgress(99, item)
+                bgwUpload.ReportProgress(99, item)
+                System.Threading.Thread.Sleep(40)
+                    bgwUpload.ReportProgress(100, "Uploaded.")
+                    System.Threading.Thread.Sleep(200)
                 End If
-            End If
+
 
             If uUploadStatus = UploadStatus.Failed Then
-                bgwUpload.ReportProgress(98, "Upload interrupted.")
+                bgwUpload.ReportProgress(39, "Upload failed.")
             End If
 
             Stream.Close()
@@ -446,8 +482,7 @@ Public Class frmOnlineBackup
 
         uBytesUploaded = Progress.BytesSent
         uUploadStatus = Progress.Status
-        CircularProgress1.ProgressText = CInt(uBytesUploaded / dFileSize * 100)
-        System.Threading.Thread.Sleep(100)
+        CircularProgress1.ProgressText = 40 + CInt((uBytesUploaded / dFileSize / 2) * 100)
     End Sub
 
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpload.ProgressChanged
@@ -461,12 +496,14 @@ Public Class frmOnlineBackup
             listViewEx1.Items.Add(e.UserState)
         End If
 
-        If e.ProgressPercentage = 98 Then
+        If e.ProgressPercentage <> 39 Then Me.CircularProgress1.ProgressText = e.ProgressPercentage
+
+        If e.ProgressPercentage = 39 Then
             MessageBoxEx.Show("Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Question)
         End If
 
-        If e.ProgressPercentage = 97 Then
-            lblStatus.Text = "Uploaded"
+        If e.ProgressPercentage = 100 Then
+            lblStatus.Text = "Uploaded."
             frmMainInterface.ShowAlertMessage("Database uploaded successfully")
         End If
 
@@ -478,9 +515,6 @@ Public Class frmOnlineBackup
 
 
 #Region "DOWNLOAD FILE"
-
-
-
 
 
     Private Sub DownloadFileFromDrive()
@@ -563,9 +597,15 @@ Public Class frmOnlineBackup
 
     Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownload.DoWork
         Try
+            Dim delay As Integer = 0
+
+            For delay = 0 To 10
+                bgwDownload.ReportProgress(delay, "Connecting to Google Drive...")
+                System.Threading.Thread.Sleep(40)
+            Next
+
             Dim args As DownloadArgs = e.Argument
-            bgwDownload.ReportProgress(10, "Connecting to Google Drive...")
-            System.Threading.Thread.Sleep(500)
+          
 
             Dim request = FISService.Files.Get(args.ID)
             request.Fields = "size"
@@ -576,8 +616,11 @@ Public Class frmOnlineBackup
             Dim fStream = New System.IO.FileStream(args.DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
             Dim mStream = New System.IO.MemoryStream
 
-            bgwDownload.ReportProgress(20, "Downloading...")
-            System.Threading.Thread.Sleep(100)
+            For delay = 11 To 18
+                bgwDownload.ReportProgress(delay, "Downloading...")
+                System.Threading.Thread.Sleep(15)
+            Next
+            
 
             Dim m = request.MediaDownloader
             m.ChunkSize = 256 * 1024
@@ -594,23 +637,33 @@ Public Class frmOnlineBackup
                 item.SubItems.Add("Downloaded File")
                 item.SubItems.Add("Downloaded File")
                 item.ImageIndex = 1
-                bgwDownload.ReportProgress(97, item)
-                System.Threading.Thread.Sleep(100)
+
+                For delay = 71 To 99
+                    bgwDownload.ReportProgress(delay, "Downloading...")
+                    System.Threading.Thread.Sleep(10)
+                Next
+
 
                 If DownloadOpen Then
-                    bgwDownload.ReportProgress(98, "Opening in MS Access...")
+                    bgwDownload.ReportProgress(100, "Opening in MS Access...")
                     System.Threading.Thread.Sleep(1000)
-                End If
-
-                If DownloadRestore Then
-                    bgwDownload.ReportProgress(99, "Restoring...")
+                ElseIf DownloadRestore Then
+                    bgwDownload.ReportProgress(100, "Restoring...")
                     System.Threading.Thread.Sleep(1000)
+                Else
+                    bgwDownload.ReportProgress(100, "Downloaded.")
+                    System.Threading.Thread.Sleep(100)
                 End If
 
             End If
 
-            fStream.Close()
-            mStream.Close()
+                If dDownloadStatus = DownloadStatus.Failed Then
+                bgwDownload.ReportProgress(19, "Failed.")
+                    System.Threading.Thread.Sleep(100)
+                End If
+
+                fStream.Close()
+                mStream.Close()
 
 
         Catch ex As Exception
@@ -625,8 +678,7 @@ Public Class frmOnlineBackup
 
         dBytesDownloaded = Progress.BytesDownloaded
         dDownloadStatus = Progress.Status
-        CircularProgress1.ProgressText = CInt(dBytesDownloaded / dFileSize * 100)
-        System.Threading.Thread.Sleep(100)
+        CircularProgress1.ProgressText = 20 + CInt((dBytesDownloaded / dFileSize / 2) * 100)
     End Sub
 
     Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownload.ProgressChanged
@@ -639,9 +691,15 @@ Public Class frmOnlineBackup
             listViewEx1.Items.Add(e.UserState)
         End If
 
+        If e.ProgressPercentage <> 19 Then Me.CircularProgress1.ProgressText = e.ProgressPercentage
 
-        If e.ProgressPercentage = 97 Then
-            lblStatus.Text = "Downloaded"
+        If e.ProgressPercentage = 19 Then
+            lblStatus.Text = "Failed."
+            frmMainInterface.ShowAlertMessage("File download failed")
+        End If
+
+        If e.ProgressPercentage = 100 Then
+            lblStatus.Text = e.UserState
             frmMainInterface.ShowAlertMessage("File downloaded successfully")
         End If
 
@@ -835,6 +893,7 @@ Public Class frmOnlineBackup
             Me.Cursor = Cursors.Default
 
             DisplayInformation()
+            ' GetDriveStorageDetails()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -844,7 +903,7 @@ Public Class frmOnlineBackup
 
 #End Region
 
-    Private Sub GetDriveDetails()
+    Private Sub GetDriveStorageDetails() Handles lblSelectedFile.Click
         Try
             Me.lblDriveStatus.Text = ""
             Dim request = FISService.About.Get
@@ -853,7 +912,7 @@ Public Class frmOnlineBackup
             Me.lblDriveStatus.Text = "Drive Space used: " & CalculateFileSize(x.StorageQuota.UsageInDrive) & "/" & CalculateFileSize(x.StorageQuota.Limit)
 
         Catch ex As Exception
-            'ShowErrorMessage(ex)
+            ShowErrorMessage(ex)
             Me.lblDriveStatus.Text = ""
         End Try
 
@@ -884,8 +943,6 @@ Public Class frmOnlineBackup
             Me.lblSelectedFile.Text = "No file selected"
         End If
 
-        GetDriveDetails()
-
     End Sub
 
     Private Function CalculateFileSize(FileSize) As String
@@ -915,9 +972,13 @@ Public Class frmOnlineBackup
         End If
         Return CalculatedSize.ToString & " " & SizeType
     End Function
+
+
+
     Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwService.RunWorkerCompleted, bgwUpload.RunWorkerCompleted, bgwDownload.RunWorkerCompleted
 
         DisplayInformation()
+        '  GetDriveStorageDetails()
         CircularProgress1.IsRunning = False
         CircularProgress1.ProgressText = ""
         lblStatus.Text = ""
@@ -965,7 +1026,7 @@ Public Class frmOnlineBackup
         End If
     End Sub
 
-
+   
 
 End Class
 
