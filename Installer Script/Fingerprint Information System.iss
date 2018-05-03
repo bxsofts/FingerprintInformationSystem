@@ -36,10 +36,10 @@ UninstallDisplayIcon={app}\Fingerprint Information System.exe
 UninstallFilesDir={app}
 WizardImageBackColor=clRed
 WindowVisible=false
-WizardImageFile=.\Icons\WizardImage.bmp
-WizardSmallImageFile=.\Icons\WizardImageSmall.bmp
-SetupIconFile=.\Icons\Setup Icon.ico
-
+WizardImageFile=.\Styles\Office2007.bmp
+WizardSmallImageFile=.\Styles\WizardImageSmall.bmp
+SetupIconFile=.\Styles\Setup Icon.ico
+DisableWelcomePage=no
 
 [Icons]
 Name: {commonprograms}\BXSofts\Fingerprint Information System\Fingerprint Information System; Filename: {app}\Fingerprint Information System.exe
@@ -55,11 +55,27 @@ dotnetmissing=Setup has detected that Microsoft .NET Framework v3.5 is not insta
 
 
 [code]
+
+// Importing LoadSkin API from ISSkin.DLL
+procedure LoadSkin(lpszPath: String; lpszIniFileName: String);
+external 'LoadSkin@files:isskin.dll stdcall';
+
+// Importing UnloadSkin API from ISSkin.DLL
+procedure UnloadSkin();
+external 'UnloadSkin@files:isskin.dll stdcall';
+
+// Importing ShowWindow Windows API from User32.DLL
+function ShowWindow(hWnd: Integer; uType: Integer): Integer;
+external 'ShowWindow@user32.dll stdcall';
+
 function InitializeSetup(): Boolean;
 var
     NetFrameWorkInstalled : Boolean;
     Result1 : Boolean;
 begin
+   ExtractTemporaryFile('Office2007.cjstyles');
+  LoadSkin(ExpandConstant('{tmp}\Office2007.cjstyles'), '');
+  Result := True;
 
 	NetFrameWorkInstalled := RegKeyExists(HKLM,'SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5');
 	if NetFrameWorkInstalled =true then
@@ -77,7 +93,18 @@ begin
 	    end;
   end;
 
+procedure DeinitializeSetup();
+begin
+  // Hide Window before unloading skin so user does not get
+  // a glimpse of an unskinned window before it is closed.
+  ShowWindow(StrToInt(ExpandConstant('{wizardhwnd}')), 0);
+  UnloadSkin();
+end;
+
+
 [Files]
+Source: .\Styles\ISSkin.dll; DestDir: {app}; Flags: dontcopy
+Source: .\Styles\Office2007.cjstyles; DestDir: {tmp}; Flags: dontcopy
 
 Source: .\Fonts\segoeui.ttf; DestDir: {fonts}; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: Segoe UI
 Source: .\Fonts\segoeuib.ttf; DestDir: {fonts}; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: Segoe UI Bold
