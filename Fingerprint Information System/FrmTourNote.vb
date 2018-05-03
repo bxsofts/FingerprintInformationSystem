@@ -44,15 +44,20 @@ Public Class FrmTourNote
     Dim PENarray(4) As String
     Dim ScaleArray(4) As String
     Dim DAarray(4) As String
-
+    Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
 
     Private Sub LoadForm() Handles Me.Load
         On Error Resume Next
+
         boolGenerateRecords = False
-        
+
+        CircularProgress1.ProgressText = ""
+        CircularProgress1.IsRunning = False
+        CircularProgress1.Hide()
+
         Me.lblSavedTourNote.Text = ""
         Me.lblSavedTABill.Text = ""
         Me.lblTickedRecords.Text = "Selected Records : 0"
@@ -212,8 +217,6 @@ Public Class FrmTourNote
             If e.Value = True Then e.CellStyle.BackColor = Color.MediumVioletRed
         End If
 
-
-
     End Sub
 
     Private Sub SOCDatagrid_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SOCDatagrid.CellValueChanged, SOCDatagrid.CellValidated
@@ -259,8 +262,9 @@ Public Class FrmTourNote
         Dim m = Me.cmbMonth.SelectedIndex + 1
         Dim y = Me.txtYear.Value
         Dim d As Integer = Date.DaysInMonth(y, m)
-        d1 = CDate(m & "/01/" & y)
-        d2 = CDate(m & "/" & d & "/" & y)
+        d1 = New DateTime(y, m, 1)
+        d2 = New DateTime(y, m, d)
+
         Me.PanelSOC.Text = "SOCs inspected in " & MonthName(m) & " " & y
         TourStartLocation = Me.txtStartingLocation.Text
         Me.SocRegisterTableAdapter1.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
@@ -321,6 +325,86 @@ Public Class FrmTourNote
 #End Region
 
 
+#Region "GENERATE BLANK TOUR NOTE"
+
+    Private Sub GenerateBlankTourNote() Handles btnGenerateBlankTourNote.Click
+        Try
+            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\BlankTourNote.docx"
+
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+            bgwBlankTourNote.RunWorkerAsync(TemplateFile)
+
+        Catch ex As Exception
+            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+
+        End Try
+
+    End Sub
+
+    Private Sub bgwBlankTourNote_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwBlankTourNote.DoWork
+        Try
+            For delay = 0 To 20
+                bgwBlankTourNote.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            For delay = 21 To 50
+                bgwBlankTourNote.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(e.Argument)
+
+            For delay = 51 To 100
+                bgwBlankTourNote.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            wdDoc.Range.NoProofing = 1
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp = Nothing
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwBlankTourNote_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwBlankTourNote.ProgressChanged, bgwThreeTN.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwBlankTourNote_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwBlankTourNote.RunWorkerCompleted, bgwSingleTN.RunWorkerCompleted, bgwThreeTN.RunWorkerCompleted
+        CircularProgress1.IsRunning = False
+        CircularProgress1.ProgressText = ""
+        CircularProgress1.Hide()
+        Me.Cursor = Cursors.Default
+
+        If e.Error IsNot Nothing Then
+            MessageBoxEx.Show(e.Error.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
+#End Region
+
 #Region "GENERATE TOUR NOTE"
 
     Private Sub ShowTourNote() Handles btnShowTourNote.Click
@@ -350,40 +434,6 @@ errhandler:
         DevComponents.DotNetBar.MessageBoxEx.Show(Err.Description, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
     End Sub
 
-    Private Sub GenerateBlankTourNote() Handles btnGenerateBlankTourNote.Click
-        Try
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\BlankTourNote.docx"
-
-            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-
-            Me.Cursor = Cursors.WaitCursor
-            Dim wdApp As Word.Application
-            Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
-
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
-            wdDoc.Range.NoProofing = 1
-
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
-
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp = Nothing
-            Me.Cursor = Cursors.Default
-        Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
-
-        End Try
-
-    End Sub
 
     Private Sub GenerateSingleLineTourNote()
 
@@ -410,13 +460,48 @@ errhandler:
                 Exit Sub
             End If
 
+
             Dim TemplateFile As String
             TemplateFile = strAppUserPath & "\WordTemplates\TourNote.docx"
             If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
+
+            Dim args As TourNoteArgs = New TourNoteArgs
+            args.TemplateFile = TemplateFile
+            args.sFileName = sfilename
+            args.SelectedRecordsCount = SelectedRecordsCount
+            args.RowCount = RowCount
+            args.OfficerIndex = Me.cmbSOCOfficer.SelectedIndex
+            args.Month = Me.cmbMonth.SelectedItem.ToString
+            args.Year = Me.txtYear.Text
+            args.UsePS = chkUsePS.Checked
+
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+
             Me.Cursor = Cursors.WaitCursor
+
+            bgwSingleTN.RunWorkerAsync(args)
+
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+
+    Private Sub bgwSingleTN_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwSingleTN.DoWork
+        Try
+            Dim delay As Integer = 0
+            For delay = 0 To 10
+                bgwSingleTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
             Dim Designation As String = ""
             If SelectedOfficerName.Contains(", TI") Then
@@ -436,23 +521,36 @@ errhandler:
             OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
             OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
 
-            Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
+            Dim args As TourNoteArgs = e.Argument
+
+            Dim sx As Integer = args.OfficerIndex
+
+
+            For delay = 11 To 20
+                bgwSingleTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
             wdApp = New Word.Application
 
             wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+            Dim wdDoc As Word.Document = wdDocs.Add(args.TemplateFile)
             wdDoc.Range.NoProofing = 1
+
+            For delay = 21 To 30
+                bgwSingleTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
             wdBooks("Name1").Range.Text = (OfficerNameOnly & ", " & Designation & ", " & FullOfficeName & ", " & FullDistrictName).ToUpper
-            wdBooks("Month").Range.Text = (Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text).ToUpper
+            wdBooks("Month").Range.Text = (args.Month & " " & args.Year).ToUpper
             wdBooks("PEN").Range.Text = PENarray(sx)
             wdBooks("BasicPay").Range.Text = BParray(sx)
             wdBooks("Place").Range.Text = TourStartLocation
-            wdBooks("Date").Range.Text = Format(Today, "dd/MM/yyyy")
+            wdBooks("Date").Range.Text = Today.ToString("dd/MM/yyyy", culture)
             wdBooks("Name2").Range.Text = OfficerNameOnly
             wdBooks("Designation").Range.Text = Designation
             wdBooks("Office1").Range.Text = FullOfficeName
@@ -461,20 +559,29 @@ errhandler:
             Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
 
             Dim TblRowCount = wdTbl.Rows.Count - 2 ' 3-2 =1
-            Dim RowCountRequired = SelectedRecordsCount - TblRowCount
+            Dim RowCountRequired = args.SelectedRecordsCount - TblRowCount
             Dim rc = 1
-            If SelectedRecordsCount > TblRowCount Then
+            If args.SelectedRecordsCount > TblRowCount Then
                 For rc = 1 To RowCountRequired
                     wdTbl.Rows.Add()
                 Next
             End If
 
+
+            For delay = 31 To 40
+                bgwSingleTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
+
             Dim j = 3
             Dim n = 0
-            For i = 0 To RowCount - 1
+
+            Dim iteration As Integer = CInt(50 / args.RowCount)
+
+            For i = 0 To args.RowCount - 1
 
                 If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                    Dim dt As String = Strings.Format(FingerPrintDataSet.SOCRegister(i).DateOfInspection, "dd/MM/yyyy")
+                    Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
                     Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
                     Dim PS1 As String = PS
                     n = n + 1
@@ -492,7 +599,7 @@ errhandler:
 
                     wdTbl.Cell(j, 4).Range.Text = TourStartLocation
 
-                    If Me.chkUsePO.Checked Then
+                    If Not args.UsePS Then
                         wdTbl.Cell(j, 5).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back"
                     Else
                         PS1 = PS.Replace("P.S", "")
@@ -501,7 +608,7 @@ errhandler:
 
                     wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
 
-                    If chkUsePS.Checked Then
+                    If args.UsePS Then
                         Dim distance As String = FindDistance(PS)
                         If Val(distance) <> 0 Then
                             wdTbl.Cell(j, 7).Range.Text = Val(distance) * 2
@@ -512,13 +619,28 @@ errhandler:
                     wdTbl.Cell(j, 8).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
                     j = j + 1
                 End If
+
+
+                For delay = delay To delay + iteration
+                    If delay < 91 Then
+                        bgwSingleTN.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(20)
+                    End If
+                Next
+
             Next
 
 
 
-            If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                wdDoc.SaveAs(sfilename)
+            If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
+                wdDoc.SaveAs(args.sFileName)
             End If
+
+            For delay = 91 To 100
+                bgwSingleTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
+
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -529,13 +651,17 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+
         End Try
     End Sub
+
+    Private Sub bgwSingleTN_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwSingleTN.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
 
     Private Sub GenerateThreeLineTourNote()
         Try
@@ -568,7 +694,39 @@ errhandler:
                 Exit Sub
             End If
 
+            Dim args As TourNoteArgs = New TourNoteArgs
+            args.TemplateFile = TemplateFile
+            args.sFileName = sfilename
+            args.SelectedRecordsCount = SelectedRecordsCount
+            args.RowCount = RowCount
+            args.OfficerIndex = Me.cmbSOCOfficer.SelectedIndex
+            args.Month = Me.cmbMonth.SelectedItem.ToString
+            args.Year = Me.txtYear.Text
+            args.UsePS = chkUsePS.Checked
+
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+
             Me.Cursor = Cursors.WaitCursor
+
+            bgwThreeTN.RunWorkerAsync(args)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+
+    Private Sub bgwThreeTN_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwThreeTN.DoWork
+        Try
+
+            Dim delay As Integer = 0
+            For delay = 0 To 10
+                bgwThreeTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
             Dim Designation As String = ""
             If SelectedOfficerName.Contains(", TI") Then
@@ -588,7 +746,15 @@ errhandler:
             OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
             OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
 
-            Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
+            Dim args As TourNoteArgs = e.Argument
+
+            Dim sx As Integer = args.OfficerIndex
+
+
+            For delay = 11 To 20
+                bgwThreeTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
 
 
@@ -597,16 +763,21 @@ errhandler:
             wdApp = New Word.Application
 
             wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+            Dim wdDoc As Word.Document = wdDocs.Add(args.TemplateFile)
             wdDoc.Range.NoProofing = 1
+
+            For delay = 21 To 30
+                bgwThreeTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
             wdBooks("Name1").Range.Text = (OfficerNameOnly & ", " & Designation & ", " & FullOfficeName & ", " & FullDistrictName).ToUpper
-            wdBooks("Month").Range.Text = (Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text).ToUpper
+            wdBooks("Month").Range.Text = (args.Month & " " & args.Year).ToUpper
             wdBooks("PEN").Range.Text = PENarray(sx)
             wdBooks("BasicPay").Range.Text = BParray(sx)
             wdBooks("Place").Range.Text = TourStartLocation
-            wdBooks("Date").Range.Text = Format(Today, "dd/MM/yyyy")
+            wdBooks("Date").Range.Text = Today.ToString("dd/MM/yyyy", culture)
             wdBooks("Name2").Range.Text = OfficerNameOnly
             wdBooks("Designation").Range.Text = Designation
             wdBooks("Office1").Range.Text = FullOfficeName
@@ -615,21 +786,27 @@ errhandler:
             Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
 
             Dim TblRowCount = wdTbl.Rows.Count - 2 ' 3-2 =1
-            Dim RowCountRequired = SelectedRecordsCount * 3 - TblRowCount
+            Dim RowCountRequired = args.SelectedRecordsCount * 3 - TblRowCount
             Dim rc = 1
-            If SelectedRecordsCount > TblRowCount Then
+            If args.SelectedRecordsCount > TblRowCount Then
                 For rc = 1 To RowCountRequired
                     wdTbl.Rows.Add()
                 Next
             End If
 
+            For delay = 31 To 40
+                bgwThreeTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(20)
+            Next
 
             Dim j = 3
             Dim n = 0
-            For i = 0 To RowCount - 1
+            Dim iteration As Integer = CInt(50 / args.RowCount)
+
+            For i = 0 To args.RowCount - 1
 
                 If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                    Dim dt As String = Strings.Format(FingerPrintDataSet.SOCRegister(i).DateOfInspection, "dd/MM/yyyy")
+                    Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
                     Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
                     Dim PS1 As String = PS
                     n = n + 1
@@ -657,7 +834,7 @@ errhandler:
 
                     wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
 
-                    If chkUsePS.Checked Then
+                    If args.UsePS Then
                         Dim distance As String = FindDistance(PS)
                         If Val(distance) <> 0 Then
                             wdTbl.Cell(j, 7).Range.Text = Val(distance)
@@ -694,7 +871,7 @@ errhandler:
                     wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
                     wdApp.Selection.TypeText(vbNewLine)
 
-                    If Me.chkUsePO.Checked Then
+                    If Not args.UsePS Then
                         wdTbl.Cell(j, 4).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
                     Else
                         PS1 = PS.Replace("P.S", "")
@@ -704,7 +881,7 @@ errhandler:
                     wdTbl.Cell(j, 5).Range.Text = TourStartLocation
                     wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
 
-                    If chkUsePS.Checked Then
+                    If args.UsePS Then
                         Dim distance As String = FindDistance(PS)
                         If Val(distance) <> 0 Then
                             wdTbl.Cell(j, 7).Range.Text = Val(distance)
@@ -717,11 +894,24 @@ errhandler:
 
                     j = j + 1
                 End If
+
+                For delay = delay To delay + iteration
+                    If delay < 91 Then
+                        bgwThreeTN.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(20)
+                    End If
+                Next
+
             Next
 
-            If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                wdDoc.SaveAs(sfilename)
+            If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
+                wdDoc.SaveAs(args.sFileName)
             End If
+
+            For delay = 91 To 100
+                bgwThreeTN.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -734,7 +924,7 @@ errhandler:
             wdApp = Nothing
             Me.Cursor = Cursors.Default
 
-       Catch ex As Exception
+        Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
@@ -2561,12 +2751,12 @@ errhandler:
         Try
 
             Dim distance As String = Me.PoliceStationListTableAdapter1.FindDistance(PS)
-        If distance Is Nothing Then
-            distance = "0"
-        Else
-            distance = distance.Replace(" km", "")
-        End If
-        Return distance
+            If distance Is Nothing Then
+                distance = "0"
+            Else
+                distance = distance.Replace(" km", "")
+            End If
+            Return distance
         Catch ex As Exception
             Return "0"
         End Try
@@ -2630,5 +2820,20 @@ errhandler:
         End If
     End Sub
 
-    
+
+
+
+  
+End Class
+
+
+Public Class TourNoteArgs
+    Public TemplateFile As String
+    Public SelectedRecordsCount As Integer
+    Public RowCount As Integer
+    Public sFileName As String
+    Public OfficerIndex As Integer
+    Public Month As String
+    Public Year As String
+    Public UsePS As Boolean
 End Class

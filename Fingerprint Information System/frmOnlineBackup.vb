@@ -668,7 +668,6 @@ Public Class frmOnlineBackup
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            bgwDownload.ReportProgress(100)
         End Try
     End Sub
 

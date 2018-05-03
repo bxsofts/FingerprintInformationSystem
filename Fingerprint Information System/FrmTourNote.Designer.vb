@@ -57,6 +57,7 @@ Partial Class FrmTourNote
         Me.btnGenerateBlankTourNote = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateBlankTR47 = New DevComponents.DotNetBar.ButtonX()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
         Me.chkUseSavedTourNote = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
@@ -85,6 +86,9 @@ Partial Class FrmTourNote
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.PoliceStationListTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PoliceStationListTableAdapter()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.bgwBlankTourNote = New System.ComponentModel.BackgroundWorker()
+        Me.bgwSingleTN = New System.ComponentModel.BackgroundWorker()
+        Me.bgwThreeTN = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         CType(Me.SOCDatagrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -443,6 +447,7 @@ Partial Class FrmTourNote
         Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel2.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel2.Controls.Add(Me.PanelEx4)
         Me.GroupPanel2.Controls.Add(Me.btnOpenTABillFolder)
         Me.GroupPanel2.Controls.Add(Me.btnShowTourNote)
@@ -481,6 +486,22 @@ Partial Class FrmTourNote
         Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel2.TabIndex = 47
         Me.GroupPanel2.Text = "Step 3 : Generate Tour Note"
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(3, 101)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(367, 80)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 47
+        Me.CircularProgress1.TabStop = False
         '
         'PanelEx4
         '
@@ -924,6 +945,21 @@ Partial Class FrmTourNote
         '
         Me.Timer1.Enabled = True
         '
+        'bgwBlankTourNote
+        '
+        Me.bgwBlankTourNote.WorkerReportsProgress = True
+        Me.bgwBlankTourNote.WorkerSupportsCancellation = True
+        '
+        'bgwSingleTN
+        '
+        Me.bgwSingleTN.WorkerReportsProgress = True
+        Me.bgwSingleTN.WorkerSupportsCancellation = True
+        '
+        'bgwThreeTN
+        '
+        Me.bgwThreeTN.WorkerReportsProgress = True
+        Me.bgwThreeTN.WorkerSupportsCancellation = True
+        '
         'FrmTourNote
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1016,4 +1052,8 @@ Partial Class FrmTourNote
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel5 As DevComponents.DotNetBar.Controls.GroupPanel
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents bgwBlankTourNote As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwSingleTN As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwThreeTN As System.ComponentModel.BackgroundWorker
 End Class
