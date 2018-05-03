@@ -322,7 +322,6 @@ Public Class frmOnlineBackup
     End Function
 
     Private Sub CreateSharing(fileid As String, email As String)
-        Dim batch = New BatchRequest(FISService)
         Dim userPermission As Permission = New Permission
         userPermission.Type = "user"
         userPermission.Role = "writer"
@@ -330,8 +329,8 @@ Public Class frmOnlineBackup
         Dim request = FISService.Permissions.Create(userPermission, fileid)
         request.Fields = "id"
         request.Execute()
-
     End Sub
+
 #End Region
 
 
@@ -652,6 +651,7 @@ Public Class frmOnlineBackup
 
 #End Region
 
+
 #Region "RESTORE DATABASE"
 
     Private Sub RestoreSelectedFile() Handles btnRestoreDatabase.Click
@@ -844,6 +844,20 @@ Public Class frmOnlineBackup
 
 #End Region
 
+    Private Sub GetDriveDetails()
+        Try
+            Me.lblDriveStatus.Text = ""
+            Dim request = FISService.About.Get
+            request.Fields = "user, storageQuota"
+            Dim x = request.Execute
+            Me.lblDriveStatus.Text = "Drive Space used: " & CalculateFileSize(x.StorageQuota.UsageInDrive) & "/" & CalculateFileSize(x.StorageQuota.Limit)
+
+        Catch ex As Exception
+            'ShowErrorMessage(ex)
+            Me.lblDriveStatus.Text = ""
+        End Try
+
+    End Sub
     Private Sub SortByDate(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles listViewEx1.ColumnClick
         Try
             If Me.listViewEx1.Sorting = SortOrder.Ascending Then
@@ -870,10 +884,37 @@ Public Class frmOnlineBackup
             Me.lblSelectedFile.Text = "No file selected"
         End If
 
+        GetDriveDetails()
 
     End Sub
 
+    Private Function CalculateFileSize(FileSize) As String
+        Dim CalculatedSize As Decimal
 
+        Dim SizeType As String = "B"
+
+        If FileSize < 1024 Then
+            CalculatedSize = FileSize
+
+        ElseIf FileSize > 1024 AndAlso FileSize < (1024 ^ 2) Then 'KB
+            CalculatedSize = Math.Round((FileSize / 1024), 2)
+            SizeType = "KB"
+
+        ElseIf FileSize > (1024 ^ 2) AndAlso FileSize < (1024 ^ 3) Then 'MB
+            CalculatedSize = Math.Round((FileSize / (1024 ^ 2)), 2)
+            SizeType = "MB"
+
+        ElseIf FileSize > (1024 ^ 3) AndAlso FileSize < (1024 ^ 4) Then 'GB
+            CalculatedSize = Math.Round((FileSize / (1024 ^ 3)), 2)
+            SizeType = "GB"
+
+        ElseIf FileSize > (1024 ^ 4) Then 'TB
+            CalculatedSize = Math.Round((FileSize / (1024 ^ 4)), 2)
+            SizeType = "TB"
+
+        End If
+        Return CalculatedSize.ToString & " " & SizeType
+    End Function
     Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwService.RunWorkerCompleted, bgwUpload.RunWorkerCompleted, bgwDownload.RunWorkerCompleted
 
         DisplayInformation()
@@ -923,6 +964,8 @@ Public Class frmOnlineBackup
             Me.Cursor = Cursors.Default
         End If
     End Sub
+
+
 
 End Class
 
