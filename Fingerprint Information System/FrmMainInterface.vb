@@ -15264,33 +15264,33 @@ errhandler:
                     PdlNumber = PdlAttendance
                 Case btnSOCCL.Name
                     m2 = MonthName(m2) & " " & y2
-                    subject = "Monthly SOC and DA Slip Statements - submitting of - reg:- "
-                    bodytext = "I am submitting here with the monthly SOC and DA Slip statements for the month of " & m2 & " for favour of necessary action."
+                    subject = "SOC and DA Slip Statements - " & m2 & " - submitting of - reg:- "
+                    bodytext = "I am submitting here with the SOC and DA Slip statements for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlSOCDAStatement
 
                 Case btnTABill.Name
                     m2 = MonthName(m2) & " " & y2
-                    subject = "TA Bills of staff - submitting of - reg:- "
-                    bodytext = "I am submitting here with the TA Bills of this office staff for the month of " & m2 & " for favour of further necessary action."
+                    subject = "TA Bills of staff - " & m2 & " - submitting of - reg:- "
+                    bodytext = "I am submitting here with the TA Bills of the staff of this unit for the month of " & m2 & " for favour of further necessary action."
                     PdlNumber = PdlTABill
                 Case btnRBWarrant.Name
                     m2 = MonthName(m2) & " " & y2
-                    subject = "Bus and Railway Warrants Statement - submitting of - reg:- "
-                    bodytext = "I am submitting here with the Bus and Railway Warrant statement for the month of " & m2 & " for favour of necessary action."
+                    subject = "Bus and Railway Warrants Statement - " & m2 & " - submitting of - reg:- "
+                    bodytext = "I am submitting here with the Bus and Railway Warrant statements for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlRBWarrant
                 Case btnIndividualPerformanceCL.Name
                     m2 = MonthName(m2) & " " & y2
-                    subject = "Individual performance statement - submitting of - reg:- "
-                    bodytext = "I am submitting here with the Individual performance statement of this unit for the month of " & m2 & " for favour of necessary action."
+                    subject = "Individual performance statement - " & m2 & " - submitting of - reg:- "
+                    bodytext = "I am submitting here with the Individual performance statement of the staff of this unit for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIndividualPerformance
                 Case btnRBNilReport.Name
                     m2 = MonthName(m2) & " " & y2
-                    subject = "Bus and Railway Warrants Statement - submitting of - reg:- "
+                    subject = "Bus and Railway Warrants Statement - " & m2 & " - submitting of - reg:- "
                     bodytext = "No Bus and Railway Warrants were used in the month of " & m2 & ". This is for favour of information and necessary action."
                     PdlNumber = PdlRBWarrant
                 Case btnVigilanceCase.Name
                     m2 = MonthName(m2) & " " & y2
-                    subject = "Vigilance case against staff – report submitting of - reg:- "
+                    subject = "Vigilance case against staff – " & m2 & " - report submitting of - reg:- "
                     bodytext = "No case has been Registered or Investigated or being investigated by Local Police / CBCID / Vigilance Department against any of the staff working in this unit during the month of " & m2 & ". This is for favour of information and necessary action."
                     PdlNumber = PdlVigilanceCase
             End Select
