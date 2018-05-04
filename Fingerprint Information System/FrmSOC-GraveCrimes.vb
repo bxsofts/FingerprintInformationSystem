@@ -34,11 +34,11 @@ Public Class FrmSOCGraveCrimes
 
         Dim d As Integer = Date.DaysInMonth(y, m)
 
-        dtFrom.Value = CDate(m & "/01/" & y)
-        dtTo.Value = CDate(m & "/" & d & "/" & y)
+        dtFrom.Value = New Date(y, m, 1)
+        dtTo.Value = New Date(y, m, d)
 
-        d1 = CDate(m & "/01/" & y)
-        d2 = CDate(m & "/" & d & "/" & y)
+        d1 = New Date(y, m, 1)
+        d2 = New Date(y, m, d)
 
         Me.SOCRegisterTableAdapter.FillByGraveCrimeAndDate(Me.FingerPrintDataSet.SOCRegister, d1, d2, True)
         Me.cmbMonth.Focus()
@@ -67,8 +67,8 @@ Public Class FrmSOCGraveCrimes
                 Dim m = Me.cmbMonth.SelectedIndex + 1
                 Dim y = Me.txtYear.Value
                 Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = CDate(m & "/01/" & y)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d1 = New Date(y, m, 1)
+                d2 = New Date(y, m, d)
                 headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
                 SaveFileName = "Grave Crime Statement - " & Me.cmbMonth.Text & " " & Me.txtYear.Text
         End Select

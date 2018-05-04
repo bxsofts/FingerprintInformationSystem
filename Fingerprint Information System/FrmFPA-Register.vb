@@ -23,8 +23,8 @@ Public Class frmFPARegister
         Dim y As Integer = DateAndTime.Year(Today)
         Me.txtYear.Text = y
 
-        d1 = CDate("#01/01/" & y & "#")
-        d2 = CDate("#12/31/" & y & "#")
+        d1 = New Date(y, 1, 1)
+        d2 = New Date(y, 12, 31)
         headertext = "FP Attestation Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
@@ -39,8 +39,8 @@ Public Class frmFPARegister
         Me.Cursor = Cursors.WaitCursor
         boolCurrentFPA = False
         Dim y = Me.txtYear.Text
-        d1 = CDate("#01/01/" & y & "#")
-        d2 = CDate("#12/31/" & y & "#")
+        d1 = New Date(y, 1, 1)
+        d2 = New Date(y, 12, 31)
         headertext = "DP Attestation Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.RefreshReport()

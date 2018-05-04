@@ -21,12 +21,12 @@ Public Class frmSOCRegister
         Dim y As Integer = DateAndTime.Year(Today)
         Dim d As Integer = Date.DaysInMonth(y, m)
 
-        dtFrom.Value = CDate(m & "/01/" & y)
-        dtTo.Value = CDate(m & "/" & d & "/" & y)
+        dtFrom.Value = New Date(y, m, 1)
+        dtTo.Value = New Date(y, m, d)
         Me.txtYear.Text = y
 
-        d1 = CDate("01/01/" & y)
-        d2 = CDate("12/31/" & y)
+        d1 = New Date(y, 1, 1)
+        d2 = New Date(y, 12, 31)
         headertext = "Scene of Crime Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
@@ -41,8 +41,8 @@ Public Class frmSOCRegister
         Me.Cursor = Cursors.WaitCursor
         boolCurrentSOC = False
         Dim y = Me.txtYear.Text
-        d1 = CDate("01/01/" & y)
-        d2 = CDate("12/31/" & y)
+        d1 = New Date(y, 1, 1)
+        d2 = New Date(y, 12, 31)
         headertext = "Scene of Crime Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.RefreshReport()

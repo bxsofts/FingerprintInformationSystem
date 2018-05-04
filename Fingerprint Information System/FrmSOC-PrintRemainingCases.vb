@@ -25,8 +25,8 @@ Public Class FrmSOCPrintRemainingCases
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
         Dim d As Integer = Date.DaysInMonth(y, m)
-        dtFrom.Value = CDate(m & "/01/" & y)
-        dtTo.Value = CDate(m & "/" & d & "/" & y)
+        dtFrom.Value = New Date(y, m, 1)
+        dtTo.Value = New Date(y, m, d)
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))
         Next
@@ -67,8 +67,8 @@ Public Class FrmSOCPrintRemainingCases
                 Dim m = Me.cmbMonth.SelectedIndex + 1
                 Dim y = Me.txtYear.Value
                 Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = CDate(m & "/01/" & y)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d1 = New Date(y, m, 1)
+                d2 = New Date(y, m, d)
                 headertext = "List of chance print remaining cases for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
         End Select
 

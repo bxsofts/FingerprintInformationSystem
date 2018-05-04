@@ -49,8 +49,8 @@ Public Class frmMonthWiseDAStatistics
         For m As Integer = 0 To 11
             r(m) = Me.FingerPrintDataSet.YearlyDAPerformance.NewYearlyDAPerformanceRow
             month = m + 1
-            d1 = CDate(month & "/01/" & y)
-            d2 = CDate(month & "/" & Date.DaysInMonth(y, month) & "/" & y)
+            d1 = New Date(y, month, 1)
+            d2 = New Date(y, month, Date.DaysInMonth(y, month))
             With r(m)
                 .MonthName = MonthName(m + 1)
                 .DASlipsRecieved = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))

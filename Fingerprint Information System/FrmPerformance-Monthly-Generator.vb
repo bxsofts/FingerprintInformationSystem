@@ -173,8 +173,8 @@ Public Class frmMonthlyPerformance
         Dim y = Me.txtYear.Value
         Dim d As Integer = Date.DaysInMonth(y, m)
 
-        d1 = CDate(m & "/01/" & y)
-        d2 = CDate(m & "/" & d & "/" & y)
+        d1 = New Date(y, m, 1)
+        d2 = New Date(y, m, d)
 
         Me.lblPeriod.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
         SaveFileName = "Monthly Performance Statement - " & Me.cmbMonth.Text & " " & Me.txtYear.Text
@@ -240,8 +240,8 @@ Public Class frmMonthlyPerformance
 
         Dim d = Date.DaysInMonth(y, m)
 
-        d1 = CDate(m & "/01/" & y)
-        d2 = CDate(m & "/" & d & "/" & y)
+        d1 = New Date(y, m, 1)
+        d2 = New Date(y, m, d)
 
         Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
 
@@ -336,19 +336,19 @@ Public Class frmMonthlyPerformance
     End Sub
 
 
-    Private Function CalculateCasesPendingInPreviousMonth(ByVal d As Date)
+    Private Function CalculateCasesPendingInPreviousMonth(ByVal dt As Date)
         On Error Resume Next
-        Dim m = Month(d)
-        Dim y = Year(d)
+        Dim m = Month(dt)
+        Dim y = Year(dt)
         If m = 1 Then
             m = 12
             y = y - 1
         Else
             m = m - 1
         End If
-        Dim c = Date.DaysInMonth(y, m)
-        Dim dt1 As Date = CDate(m & "/01/" & y)
-        Dim dt2 As Date = CDate(m & "/" & c & "/" & y)
+        Dim d = Date.DaysInMonth(y, m)
+        Dim dt1 As Date = New Date(y, m, 1)
+        Dim dt2 As Date = New Date(y, m, d)
         Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(dt1, dt2, "").ToString
     End Function
 

@@ -24,12 +24,12 @@ Public Class frmDARegister
         Dim y As Integer = DateAndTime.Year(Today)
         Dim d As Integer = Date.DaysInMonth(y, m)
 
-        dtFrom.Value = CDate(m & "/01/" & y)
-        dtTo.Value = CDate(m & "/" & d & "/" & y)
+        dtFrom.Value = New Date(y, m, 1)
+        dtTo.Value = New Date(y, m, d)
         Me.txtYear.Text = y
 
-        d1 = CDate("#01/01/" & y & "#")
-        d2 = CDate("#12/31/" & y & "#")
+        d1 = New Date(y, 1, 1)
+        d2 = New Date(y, 12, 31)
         headertext = "Daily Arrest Slip Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
@@ -44,8 +44,8 @@ Public Class frmDARegister
         boolCurrentDA = False
         Me.Cursor = Cursors.WaitCursor
         Dim y = Me.txtYear.Text
-        d1 = CDate("#01/01/" & y & "#")
-        d2 = CDate("#12/31/" & y & "#")
+        d1 = New Date(y, 1, 1)
+        d2 = New Date(y, 12, 31)
         headertext = "Daily Arrest Slip Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.RefreshReport()
@@ -62,8 +62,8 @@ Public Class frmDARegister
     Private Sub GenerateReportByDate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        d1 = CDate(Me.dtFrom.Value)
-        d2 = CDate(Me.dtTo.Value)
+        d1 = Me.dtFrom.Value
+        d2 = Me.dtTo.Value
         If d1 > d2 Then
             DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.dtFrom.Focus()

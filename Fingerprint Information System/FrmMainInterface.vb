@@ -1192,9 +1192,9 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         Dim y As String = Year(Today)
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
-
+        Dim d1 As Date = New Date(y, 1, 1)
+        Dim d2 As Date = New Date(y, 12, 31)
+        
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
         Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
@@ -1216,8 +1216,8 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         Dim y As String = Year(Today)
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
+        Dim d1 As Date = New Date(y, 1, 1)
+        Dim d2 As Date = New Date(y, 12, 31)
 
         Select Case CurrentTab
             Case "SOC"
@@ -1260,9 +1260,9 @@ Public Class frmMainInterface
         Me.Cursor = Cursors.WaitCursor
         Dim m As String = Month(Today)
         Dim y As String = Year(Today)
-        Dim d1 As Date = CDate(m & "/01/" & y)
+        Dim d1 As Date = New Date(y, m, 1)
         Dim d As Integer = Date.DaysInMonth(y, m)
-        Dim d2 As Date = CDate(m & "/" & d & "/" & y)
+        Dim d2 As Date = New Date(y, m, d)
 
         Select Case CurrentTab
             Case "SOC"
@@ -1305,9 +1305,9 @@ Public Class frmMainInterface
 
         Dim m As String = Month(Today)
         Dim y As String = Year(Today)
-        Dim d1 As Date = CDate(m & "/01/" & y)
+        Dim d1 As Date = New Date(y, m, 1)
         Dim d As Integer = Date.DaysInMonth(y, m)
-        Dim d2 As Date = CDate(m & "/" & d & "/" & y)
+        Dim d2 As Date = New Date(y, m, d)
 
         Select Case CurrentTab
             Case "SOC"
@@ -1321,9 +1321,9 @@ Public Class frmMainInterface
 
                 m = Month(Me.dtSOCInspection.Value)
                 y = Year(Me.dtSOCInspection.Value)
-                d1 = CDate(m & "/01/" & y)
+                d1 = New Date(y, m, 1)
                 d = Date.DaysInMonth(y, m)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d2 = New Date(y, m, d)
 
                 Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
                 Me.SOCRegisterBindingSource.MoveLast()
@@ -1338,9 +1338,9 @@ Public Class frmMainInterface
 
                 m = Month(Me.dtRSOCReportSentOn.Value)
                 y = Year(Me.dtRSOCReportSentOn.Value)
-                d1 = CDate(m & "/01/" & y)
+                d1 = New Date(y, m, 1)
                 d = Date.DaysInMonth(y, m)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d2 = New Date(y, m, d)
 
                 Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
                 Me.RSOCRegisterBindingSource.MoveLast()
@@ -1355,9 +1355,9 @@ Public Class frmMainInterface
 
                 m = Month(Me.dtDAEntry.Value)
                 y = Year(Me.dtDAEntry.Value)
-                d1 = CDate(m & "/01/" & y)
+                d1 = New Date(y, m, 1)
                 d = Date.DaysInMonth(y, m)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d2 = New Date(y, m, d)
 
                 Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
                 Me.DARegisterBindingSource.MoveLast()
@@ -1372,9 +1372,9 @@ Public Class frmMainInterface
 
                 m = Month(Me.dtFPADate.Value)
                 y = Year(Me.dtFPADate.Value)
-                d1 = CDate(m & "/01/" & y)
+                d1 = New Date(y, m, 1)
                 d = Date.DaysInMonth(y, m)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d2 = New Date(y, m, d)
 
                 Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
                 Me.FPARegisterBindingSource.MoveLast()
@@ -1388,9 +1388,9 @@ Public Class frmMainInterface
 
                 m = Month(Me.dtCDExamination.Value)
                 y = Year(Me.dtCDExamination.Value)
-                d1 = CDate(m & "/01/" & y)
+                d1 = New Date(y, m, 1)
                 d = Date.DaysInMonth(y, m)
-                d2 = CDate(m & "/" & d & "/" & y)
+                d2 = New Date(y, m, d)
 
                 Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
                 Me.CDRegisterBindingSource.MoveLast()
@@ -1465,9 +1465,10 @@ Public Class frmMainInterface
                 Exit Sub
         End Select
 
+        
 
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
+        Dim d1 As Date = New Date(y, 1, 1)
+        Dim d2 As Date = New Date(y, 12, 31)
 
         Select Case CurrentTab
             Case "SOC"
@@ -2661,12 +2662,13 @@ Public Class frmMainInterface
         Me.lblReportSent.Visible = False
         Dim m As String = Month(Today)
         Dim y As String = Year(Today)
-        Dim d1 As Date = CDate(m & "/01/" & y)
-        Dim d As Integer = Date.DaysInMonth(y, m)
-        Dim d2 As Date = CDate(m & "/" & d & "/" & y)
 
-        Dim y1 As Date = CDate("01/01/" & y)
-        Dim y2 As Date = CDate("12/31/" & y)
+        Dim d1 As Date = New Date(y, m, 1)
+        Dim d As Integer = Date.DaysInMonth(y, m)
+        Dim d2 As Date = New Date(y, m, d)
+
+        Dim y1 As Date = New Date(y, 1, 1)
+        Dim y2 As Date = New Date(y, 12, 31)
 
         Me.lblCurrentMonth.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.lblCurrentYear.Font = New Font("Segoe UI", 10, FontStyle.Bold)
@@ -6545,7 +6547,7 @@ errhandler:
         On Error Resume Next
         Dim y As String = Year(Today)
         If Me.chkSOCTwodigits.Checked Then y = Strings.Right(y, 2)
-        Dim n As String = Val(Me.SOCRegisterTableAdapter.ScalarQueryMaxNumber(CDate("01/01/" & y), CDate("12/31/" & y))) + 1
+        Dim n As String = Val(Me.SOCRegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
         Me.txtSOCNumber.Text = n.ToString & "/" & y
         Me.txtSOCNumberOnly.Text = n.ToString
         Me.txtSOCNumber.Select(Me.txtSOCNumber.Text.Length, 0)
@@ -6577,7 +6579,7 @@ errhandler:
         Dim y As String = Year(Today)
         If Me.chkDATwodigits.Checked Then y = Strings.Right(y, 2)
 
-        Dim n As Integer = Val(Me.DARegisterTableAdapter.ScalarQueryMaxNumber(CDate("01/01/" & y), CDate("12/31/" & y))) + 1
+        Dim n As Integer = Val(Me.DARegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
         Me.txtDANumber.Text = n.ToString & "/" & y
         Me.txtDANumberOnly.Text = n.ToString
 
@@ -6623,7 +6625,7 @@ errhandler:
         Dim y As String = Year(Today)
         If Me.chkCDTwodigits.Checked Then y = Strings.Right(y, 2)
 
-        Dim n As Integer = Val(Me.CDRegisterTableAdapter.ScalarQueryMaxNumber(CDate("01/01/" & y), CDate("12/31/" & y))) + 1
+        Dim n As Integer = Val(Me.CDRegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
         Me.txtCDNumber.Text = n.ToString & "/" & y
         Me.txtCDNumberOnly.Text = n.ToString
 
@@ -6644,7 +6646,7 @@ errhandler:
         Dim y As String = Year(Today)
         If Me.chkFPATwodigits.Checked Then y = Strings.Right(y, 2)
 
-        Dim n As Integer = Val(Me.FPARegisterTableAdapter.ScalarQueryMaxNumber(CDate("01/01/" & y), CDate("12/31/" & y))) + 1
+        Dim n As Integer = Val(Me.FPARegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
         Me.txtFPANumber.Text = n.ToString & "/" & y
         Me.txtFPANumberOnly.Text = n.ToString
 
@@ -8153,8 +8155,8 @@ errhandler:
             Exit Sub
         End If
 
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
+            Dim d1 As Date = New Date(y, 1, 1)
+            Dim d2 As Date = New Date(y, 12, 31)
         Dim sNumber = Me.txtSOCNumber.Text
 
         Dim dti = Me.dtSOCInspection.ValueObject
@@ -9870,8 +9872,8 @@ errhandler:
             Exit Sub
         End If
 
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
+            Dim d1 As Date = New Date(y, 1, 1)
+            Dim d2 As Date = New Date(y, 12, 31)
 
         Dim sNumber = Me.txtDANumber.Text
         Dim ps = Trim(Me.cmbDAPoliceStation.Text)
@@ -12248,8 +12250,8 @@ errhandler:
             Exit Sub
         End If
 
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
+            Dim d1 As Date = New Date(y, 1, 1)
+            Dim d2 As Date = New Date(y, 12, 31)
 
         Dim sNumber = Me.txtCDNumber.Text
         Dim ps = Trim(Me.cmbCDPoliceStation.Text)
@@ -12854,8 +12856,8 @@ errhandler:
             Exit Sub
         End If
 
-        Dim d1 As Date = CDate("01/01/" & y)
-        Dim d2 As Date = CDate("12/31/" & y)
+            Dim d1 As Date = New Date(y, 1, 1)
+            Dim d2 As Date = New Date(y, 12, 31)
 
         Dim sNumber As String = Me.txtFPANumber.Text
         Dim name = Me.txtFPAName.Text
@@ -14200,8 +14202,8 @@ errhandler:
             Dim d2 As Date = Today
 
             If Param = "Y" Then
-                d1 = CDate("01/01/" & strAnnualStatistics)
-                d2 = CDate("12/31/" & strAnnualStatistics)
+                d1 = New Date(strAnnualStatistics, 1, 1)
+                d2 = New Date(strAnnualStatistics, 12, 31)
                 Header = "LIST OF IDENTIFIED CASES" & " FOR THE YEAR " & strAnnualStatistics
             End If
 
@@ -14403,8 +14405,8 @@ errhandler:
             Dim d2 As Date = Today
 
             If Param = "Y" Then
-                d1 = CDate("01/01/" & strAnnualStatistics)
-                d2 = CDate("12/31/" & strAnnualStatistics)
+                d1 = New Date(strAnnualStatistics, 1, 1)
+                d2 = New Date(strAnnualStatistics, 12, 31)
                 Header = "GIST OF IDENTIFIED CASES" & " FOR THE YEAR " & strAnnualStatistics
             End If
 
@@ -15694,8 +15696,8 @@ errhandler:
         Dim d2 As Date = Today
 
         If Param = "Y" Then
-            d1 = CDate("01/01/" & strAnnualStatistics)
-            d2 = CDate("12/31/" & strAnnualStatistics)
+            d1 = New DateTime(strAnnualStatistics, 1, 1)
+            d2 = New DateTime(strAnnualStatistics, 12, 31)
         End If
 
         If Param = "P" Then

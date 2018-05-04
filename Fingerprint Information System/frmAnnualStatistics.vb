@@ -10,11 +10,11 @@
         
         If Me.Text = "Annual Statistics" Then
             Me.txtYear.Value = y - 1
-            dtFrom.Value = CDate("01/01/" & (y - 1))
-            dtTo.Value = CDate("12/31/" & (y - 1))
+            dtFrom.Value = New Date(y - 1, 1, 1)
+            dtTo.Value = New Date(y - 1, 12, 31)
         Else
             Me.txtYear.Value = y
-            dtFrom.Value = CDate("01/01/" & y)
+            dtFrom.Value = New Date(y, 1, 1)
             dtTo.Value = Today
         End If
         

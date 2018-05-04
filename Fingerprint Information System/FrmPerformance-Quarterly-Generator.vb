@@ -156,26 +156,26 @@ Public Class frmQuarterlyPerformance
 
         Select Case q
             Case 1
-                d1 = CDate("01/01/" & y)
-                d2 = CDate("01/31/" & y)
-                d3 = CDate("10/01/" & (y - 1))
-                d4 = CDate("12/31/" & (y - 1))
-                d5 = CDate("02/01/" & y)
-                d6 = CDate("02/" & Date.DaysInMonth(y, 2) & "/" & y)
-                d7 = CDate("03/01/" & y)
-                d8 = CDate("03/31/" & y)
+                d1 = New Date(y, 1, 1)
+                d2 = New Date(y, 1, 31)
+                d3 = New Date(y - 1, 10, 1)
+                d4 = New Date(y - 1, 12, 31)
+                d5 = New Date(y, 2, 1)
+                d6 = New Date(y, 2, Date.DaysInMonth(y, 2))
+                d7 = New Date(y, 3, 1)
+                d8 = New Date(y, 3, 31)
             Case 2
-                d1 = CDate("04/01/" & y)
-                d2 = CDate("04/30/" & y)
-                d3 = CDate("01/01/" & y)
-                d4 = CDate("03/31/" & y)
-                d5 = CDate("05/01/" & y)
-                d6 = CDate("05/31/" & y)
-                d7 = CDate("06/01/" & y)
-                d8 = CDate("06/30/" & y)
+                d1 = New Date(y, 4, 1)
+                d2 = New Date(y, 4, 30)
+                d3 = New Date(y, 1, 1)
+                d4 = New Date(y, 3, 31)
+                d5 = New Date(y, 5, 1)
+                d6 = New Date(y, 5, 31)
+                d7 = New Date(y, 6, 1)
+                d8 = New Date(y, 6, 30)
 
             Case 3
-                d1 = CDate("07/01/" & y)
+                d1 = CDate("07/01/" & y) New Date(y, 7, 1)
                 d2 = CDate("07/31/" & y)
                 d3 = CDate("04/01/" & y)
                 d4 = CDate("06/30/" & y)
@@ -192,7 +192,7 @@ Public Class frmQuarterlyPerformance
                 d5 = CDate("11/01/" & y)
                 d6 = CDate("11/30/" & y)
                 d7 = CDate("12/01/" & y)
-                d8 = CDate("12/31/" & y)
+                d8 = New Date(y, 12, 31)
 
         End Select
         Me.lblPeriod.Text = UCase("statement of performance for the period from " & Format(d1, "dd/MM/yyyy") & " to " & Format(d8, "dd/MM/yyyy"))
@@ -236,7 +236,7 @@ Public Class frmQuarterlyPerformance
                 d3 = CDate("10/01/" & (y - 1))
                 d4 = CDate("12/31/" & (y - 1))
             Case 2
-                d3 = CDate("01/01/" & y)
+                d3 = New Date(y, 1, 1)
                 d4 = CDate("03/31/" & y)
             Case 3
                 d3 = CDate("04/01/" & y)
@@ -360,7 +360,7 @@ Public Class frmQuarterlyPerformance
             m = m - 1
         End If
         Dim c = Date.DaysInMonth(y, m)
-        Dim dt1 As Date = CDate(m & "/01/" & y)
+        Dim dt1 As Date = New Date(y, m, 1)
         Dim dt2 As Date = CDate(m & "/" & c & "/" & y)
         Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(dt1, dt2, "").ToString
     End Function
@@ -383,7 +383,7 @@ Public Class frmQuarterlyPerformance
 
         Select Case q
             Case 1
-                d1 = CDate("01/01/" & y)
+                d1 = New Date(y, 1, 1)
                 d2 = CDate("03/31/" & y)
 
             Case 2
@@ -396,7 +396,7 @@ Public Class frmQuarterlyPerformance
 
             Case 4
                 d1 = CDate("10/01/" & y)
-                d2 = CDate("12/31/" & y)
+                d2 = New Date(y, 12, 31)
 
         End Select
 
