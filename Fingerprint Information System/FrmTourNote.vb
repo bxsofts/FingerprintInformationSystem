@@ -413,6 +413,7 @@ Public Class FrmTourNote
         CircularProgress2.ProgressText = ""
         CircularProgress2.Hide()
 
+        DisplayFileStatus()
         Me.Cursor = Cursors.Default
 
         If e.Error IsNot Nothing Then
@@ -439,13 +440,13 @@ Public Class FrmTourNote
         End If
         TourStartLocation = Me.txtStartingLocation.Text
         SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+        DisplayFileStatus()
 
         If chkSingleRow.Checked Then
             GenerateSingleLineTourNote()
         Else
             GenerateThreeLineTourNote()
         End If
-        DisplayFileStatus()
         Exit Sub
 errhandler:
         DevComponents.DotNetBar.MessageBoxEx.Show(Err.Description, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -495,6 +496,7 @@ errhandler:
             args.Year = Me.txtYear.Text
             args.UsePS = chkUsePS.Checked
 
+            Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generating from selected records..."
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
@@ -658,6 +660,7 @@ errhandler:
                 System.Threading.Thread.Sleep(30)
             Next
 
+            Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generated"
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -723,6 +726,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
+            Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -928,6 +932,7 @@ errhandler:
                 bgwThreeTN.ReportProgress(delay)
                 System.Threading.Thread.Sleep(30)
             Next
+            Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generated"
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -961,6 +966,7 @@ errhandler:
             End If
             TourStartLocation = Me.txtStartingLocation.Text
             SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+            DisplayFileStatus()
 
             Dim sfilename As String = TAFileName("TA Bill")
             If My.Computer.FileSystem.FileExists(sfilename) Then
@@ -1016,7 +1022,6 @@ errhandler:
                 End If
             End If
 
-            DisplayFileStatus()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -1074,6 +1079,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -1105,7 +1111,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
-
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             bgwTR56.RunWorkerAsync(args)
 
         Catch ex As Exception
@@ -1227,7 +1233,7 @@ errhandler:
                         If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
                             If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 7).Range.Text = wdTbl.Cell(j, 7).Range.Text & vbNewLine & (Val(distance) * 2) & " km"
+                                wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance) * 2) & " km"
                             End If
                         End If
 
@@ -1461,6 +1467,8 @@ errhandler:
                     System.Threading.Thread.Sleep(30)
                 Next
 
+                Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
+
                 wdDocTN.Close()
 
                 wdApp.Visible = True
@@ -1514,7 +1522,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
-
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
             Me.Cursor = Cursors.WaitCursor
 
             bgwTR56ThreeLine.RunWorkerAsync(args)
@@ -1544,7 +1552,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
-
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             Me.Cursor = Cursors.WaitCursor
             bgwTR56ThreeLine.RunWorkerAsync(args)
 
@@ -1651,7 +1659,7 @@ errhandler:
 
                         wdTbl.Cell(j, 5).Range.Text = TourStartLocation
 
-                        If Me.chkUsePO.Checked Then
+                        If Not args.UsePS Then
                             wdTbl.Cell(j, 6).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
                         Else
                             PS1 = PS.Replace("P.S", "")
@@ -1660,10 +1668,10 @@ errhandler:
 
                         wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine
 
-                        If chkUsePS.Checked Then
+                        If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
                             If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 7).Range.Text = wdTbl.Cell(j, 7).Range.Text & vbNewLine & (Val(distance) * 2) & " km"
+                                wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
                             End If
                         End If
 
@@ -1721,7 +1729,7 @@ errhandler:
                         If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
                             If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 7).Range.Text = wdTbl.Cell(j, 7).Range.Text & vbNewLine & (Val(distance) * 2) & " km"
+                                wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
                             End If
                         End If
                         wdTbl.Cell(j, 14).Range.Text = 0
@@ -2042,6 +2050,8 @@ errhandler:
                     System.Threading.Thread.Sleep(30)
                 Next
 
+                Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
+
                 wdDocTN.Close()
 
                 wdApp.Visible = True
@@ -2114,6 +2124,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -2142,7 +2153,7 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
-
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             Me.Cursor = Cursors.WaitCursor
             bgwTR47.RunWorkerAsync(args)
 
@@ -2254,7 +2265,7 @@ errhandler:
                         If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
                             If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 5).Range.Text = wdTbl.Cell(j, 5).Range.Text & vbNewLine & (Val(distance) * 2) & " km"
+                                wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance) * 2) & " km"
                             End If
                         End If
 
@@ -2464,6 +2475,8 @@ errhandler:
                     System.Threading.Thread.Sleep(20)
                 Next
 
+                Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
+
                 wdApp.Visible = True
                 wdApp.Activate()
                 wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -2483,7 +2496,6 @@ errhandler:
         End Try
     End Sub
 
-    
 
     Private Sub GenerateThreeLineTR47fromRecords()
         Try
@@ -2519,12 +2531,13 @@ errhandler:
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
 
             bgwTR47ThreeLine.RunWorkerAsync(args)
 
-            
+
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
@@ -2539,7 +2552,18 @@ errhandler:
                 Exit Sub
             End If
 
-            
+            Dim args As TourNoteArgs = New TourNoteArgs
+            args.TATemplateFile = TATemplateFile
+            args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
+            args.TAFromRecord = False
+
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
+            Me.Cursor = Cursors.WaitCursor
+            bgwTR47ThreeLine.RunWorkerAsync(args)
+
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
@@ -2645,7 +2669,7 @@ errhandler:
                         If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
                             If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 5).Range.Text = wdTbl.Cell(j, 5).Range.Text & vbNewLine & (Val(distance) * 2) & " km"
+                                wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
                             End If
                         End If
 
@@ -2701,7 +2725,7 @@ errhandler:
                         If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
                             If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 5).Range.Text = wdTbl.Cell(j, 5).Range.Text & vbNewLine & (Val(distance) * 2) & " km"
+                                wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
                             End If
                         End If
 
@@ -3017,7 +3041,7 @@ errhandler:
                     bgwTR47ThreeLine.ReportProgress(delay)
                     System.Threading.Thread.Sleep(20)
                 Next
-
+                Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
                 wdApp.Visible = True
                 wdApp.Activate()
                 wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
