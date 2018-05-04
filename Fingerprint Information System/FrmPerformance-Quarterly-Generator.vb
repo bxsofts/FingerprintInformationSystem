@@ -998,6 +998,7 @@ Public Class frmQuarterlyPerformance
 #End Region
 
     Private Sub OpenInWord() Handles btnOpenInWord.Click
+        Dim sFileName = FileIO.SpecialDirectories.MyDocuments & "\" & SaveFileName & ".docx"
         Try
             Me.Cursor = Cursors.WaitCursor
 
@@ -1198,10 +1199,8 @@ Public Class frmQuarterlyPerformance
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
             aDoc.Activate()
 
-            SaveFileName = FileIO.SpecialDirectories.MyDocuments & "\" & SaveFileName & ".docx"
-
-            If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
-                aDoc.SaveAs(SaveFileName)
+             If My.Computer.FileSystem.FileExists(sFileName) = False Then
+                aDoc.SaveAs(sFileName)
             End If
 
 
