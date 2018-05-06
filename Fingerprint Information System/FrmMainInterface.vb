@@ -3071,7 +3071,7 @@ Public Class frmMainInterface
 
 
 
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting, IODatagrid.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
@@ -6168,11 +6168,6 @@ errhandler:
     Private Sub OpenRecord() Handles btnOpen.Click, btnOpenContext.Click
         On Error Resume Next
 
-        If CurrentTab = "OS" Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please edit the Data Entry Fields directly", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtFullOffice.Focus()
-            Exit Sub
-        End If
 
         If CurrentTab = "SOC" Then
 
@@ -8939,8 +8934,8 @@ errhandler:
             .CrimeNumber = cr
             .InspectingOfficer = officer
             .ReportSentTo = reportto
-            .DateOfReportSent = CDate(ReportSentDate)
-            .NatureOfReports = nature
+                .DateOfReportSent = ReportSentDate
+                .NatureOfReports = nature
             .DespatchNumber = despatch
             .Remarks = remarks
         End With
@@ -8948,7 +8943,7 @@ errhandler:
         Me.FingerPrintDataSet.SOCReportRegister.Rows.Add(newRow) ' add the row to the table
         Me.RSOCRegisterBindingSource.Position = Me.RSOCRegisterBindingSource.Find("SerialNo", OriginalRSOCSerialNumber)
 
-        Me.RSOCRegisterTableAdapter.Insert(OriginalRSOCSerialNumber, socno, socnumwithoutyear, Me.SOCDatagrid.SelectedCells(2).Value, ps, cr, officer, reportto, CDate(ReportSentDate), nature, despatch, remarks)
+            Me.RSOCRegisterTableAdapter.Insert(OriginalRSOCSerialNumber, socno, socnumwithoutyear, Me.SOCDatagrid.SelectedCells(2).Value, ps, cr, officer, reportto, ReportSentDate, nature, despatch, remarks)
         InitializeRSOCFields()
         IncrementRSOCNumber(OriginalRSOCSerialNumber)
 
@@ -15084,7 +15079,7 @@ errhandler:
 
     Private Function GenerateDate(ByVal ShowDate As Boolean)
         On Error Resume Next
-        Dim dt = CDate(ReportSentDate)
+        Dim dt = ReportSentDate
         If ShowDate Then
             Return Format(dt, "dd/MM/yyyy")
         Else

@@ -47,8 +47,8 @@ Public Class FrmMonthWiseSOCStatistics
         For m As Integer = 0 To 11
             r(m) = Me.FingerPrintDataSet.YearlySOCPerformance.NewYearlySOCPerformanceRow
             month = m + 1
-            d1 = CDate(month & "/01/" & y)
-            d2 = CDate(month & "/" & Date.DaysInMonth(y, month) & "/" & y)
+            d1 = New Date(y, month, 1)
+            d2 = New Date(y, month, Date.DaysInMonth(y, month))
             With r(m)
                 .MonthName = MonthName(m + 1)
                 .NumberOfSOCsInspected = Val(Me.SocRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))

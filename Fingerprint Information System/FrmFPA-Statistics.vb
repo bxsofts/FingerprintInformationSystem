@@ -558,7 +558,7 @@ Public Class frmFPAStatistics
 
     Private Function GenerateDate(ByVal ShowDate As Boolean)
         On Error Resume Next
-        Dim dt = CDate(ReportSentDate)
+        Dim dt = ReportSentDate
         If ShowDate Then
             Return Format(dt, "dd/MM/yyyy")
         Else

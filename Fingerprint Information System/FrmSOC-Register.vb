@@ -56,8 +56,8 @@ Public Class frmSOCRegister
     Private Sub GenerateReportByDate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        d1 = CDate(Me.dtFrom.Value)
-        d2 = CDate(Me.dtTo.Value)
+        d1 = Me.dtFrom.Value
+        d2 = Me.dtTo.Value
         If d1 > d2 Then
             DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.dtFrom.Focus()

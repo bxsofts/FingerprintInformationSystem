@@ -48,7 +48,7 @@ Public Class frmSOCStatistics
         Me.txtYear.Value = Year(Today)
 
         d1 = Me.dtFrom.Value
-        d2 = CDate(Today)
+        d2 = Today
         datevalue = "SOC Statistics for the period from " & Me.dtFrom.Text & " to " & Format(d2, "dd/MM/yyyy")
 
         GenerateOnLoad()

@@ -34,7 +34,7 @@ Public Class FrmSOCPrintRemainingCases
         Me.txtYear.Value = Year(Today)
 
         d1 = Me.dtFrom.Value
-        d2 = CDate(Today)
+        d2 = Today
         headertext = "List of chance print remaining cases for the period from " & Me.dtFrom.Text & " to " & Format(d2, "dd/MM/yyyy")
 
         GenerateOnLoad()

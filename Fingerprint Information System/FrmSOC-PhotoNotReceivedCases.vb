@@ -67,7 +67,7 @@ Public Class frmPhotoNotReceived
         Me.cmbMonth.SelectedIndex = (Month(Today) - 1)
         Me.txtYear.Value = Year(Today)
         d1 = Me.dtFrom.Value
-        d2 = CDate(Today)
+        d2 = Today
         datevalue = "SOC's in which photographs are not received for the period from " & Me.dtFrom.Text & " to " & Format(d2, "dd/MM/yyyy")
 
         GenerateOnLoad()
