@@ -18,7 +18,7 @@ Imports Google.Apis.Requests
 
 Public Class frmOnlineBackup
     Private FISService As DriveService = New DriveService
-    Dim FISUserCredential As UserCredential
+    '  Dim FISUserCredential As UserCredential
     Dim FISAccountServiceCredential As GoogleCredential
     Dim BackupFolder As String
     Dim BackupFolderID As String
@@ -31,7 +31,6 @@ Public Class frmOnlineBackup
     Public dFileSize As Long
     Public uBytesUploaded As Long
     Public uUploadStatus As UploadStatus
-    Public ResumeUpload As Boolean = False
     Public DownloadRestore As Boolean = False
     Public DownloadOpen As Boolean = False
 

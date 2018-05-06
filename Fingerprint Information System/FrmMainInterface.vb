@@ -7,6 +7,20 @@ Imports System.IO
 Imports System.Media
 Imports Microsoft.Win32
 Imports System.Object
+
+Imports System.Threading
+Imports System.Threading.Tasks
+
+Imports Google
+Imports Google.Apis.Auth.OAuth2
+Imports Google.Apis.Drive.v3
+Imports Google.Apis.Drive.v3.Data
+Imports Google.Apis.Services
+Imports Google.Apis.Download
+Imports Google.Apis.Upload
+Imports Google.Apis.Util.Store
+Imports Google.Apis.Requests
+
 Public Class frmMainInterface
 
     
@@ -351,8 +365,11 @@ Public Class frmMainInterface
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
             Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "7", autobackuptime)
-            If Me.chkTakeAutoBackup.Checked Then TakeAutoBackup()
-
+            If Me.chkTakeAutoBackup.Checked Then
+                TakeAutoBackup()
+                bgwOnlineAutoBackup.RunWorkerAsync()
+            End If
+           
         End If
 
 
@@ -13308,6 +13325,97 @@ errhandler:
 
 #Region "BACKUP DATABASE"
 
+    Private Sub TakeOnlineAutoBackup(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwOnlineAutoBackup.DoWork
+        Try
+
+            If InternetAvailable() = False Then
+                Exit Sub
+            End If
+
+            Dim lastbackupdate As Date = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Today()))
+            Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
+
+            If backupperiod = 0 Then Exit Sub
+            Dim dt As Date = lastbackupdate.AddDays(backupperiod)
+
+            If Today >= dt Then
+                Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+                Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+                If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+                    Exit Sub
+                End If
+
+                Dim FISService As DriveService = New DriveService
+                Dim Scopes As String() = {DriveService.Scope.Drive}
+                Dim BackupFolder As String = ShortOfficeName & "_" & ShortDistrictName
+                Dim BackupFolderID As String = ""
+
+
+                Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+                FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+                Dim List = FISService.Files.List()
+
+                List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "'"
+                List.Fields = "files(id)"
+
+                Dim Results = List.Execute
+
+                Dim cnt = Results.Files.Count
+                If cnt = 0 Then
+                    BackupFolderID = ""
+                Else
+                    BackupFolderID = Results.Files(0).Id
+                End If
+
+                If BackupFolderID = "" Then
+                    Exit Sub
+                End If
+
+                Dim BackupTime As Date = Now
+                Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
+                Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+                Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+
+                Dim body As New Google.Apis.Drive.v3.Data.File()
+                body.Name = BackupFileName
+                body.Description = sBackupTime
+                body.MimeType = "database/mdb"
+
+                Dim parentlist As New List(Of String)
+                parentlist.Add(BackupFolderID)
+                body.Parents = parentlist
+
+                Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
+                My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
+                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+                Dim Stream As New System.IO.MemoryStream(ByteArray)
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+                UploadRequest.Fields = "id"
+                UploadRequest.Upload()
+                If uUploadStatus = UploadStatus.Completed Then
+                    My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Today, Microsoft.Win32.RegistryValueKind.String)
+                End If
+            End If
+
+            
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Public uUploadStatus As UploadStatus
+    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
+        uUploadStatus = Progress.Status
+    End Sub
+
+    Private Sub bgwOnlineAutoBackup_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwOnlineAutoBackup.RunWorkerCompleted
+
+    End Sub
+
     Private Sub TakeAutoBackup()
         On Error Resume Next
         Dim lastbackupdate As Date = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastBackupDate", Today()))
@@ -16312,4 +16420,9 @@ errhandler:
         frmAbout.ShowDialog()
     End Sub
 
+    
+    '  Private Sub SOCDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles SOCDatagrid.RowPrePaint
+    'Dim dt As Date = SOCDatagrid.Rows(e.RowIndex).Cells(2).Value
+    ' If dt.Month = Today.Month And dt.Year = Today.Year Then SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Cyan
+    '   End Sub
 End Class
