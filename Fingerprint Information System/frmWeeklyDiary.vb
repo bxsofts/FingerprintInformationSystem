@@ -8,7 +8,7 @@ Public Class frmWeeklyDiary
 
     Dim TemplateFile As String
     Dim sfilename As String
-    Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+
 
     Private Sub frmWeeklyDiary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
@@ -89,7 +89,7 @@ Public Class frmWeeklyDiary
             If e.Argument = "WeeklyDiary" Then
                 For delay = 1 To 5
                     bgwWeeklyDiary.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(50)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Dim wdApp As Word.Application
@@ -100,7 +100,7 @@ Public Class frmWeeklyDiary
 
                 For delay = 6 To 10
                     bgwWeeklyDiary.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 wdDoc.Range.NoProofing = 1
@@ -128,7 +128,7 @@ Public Class frmWeeklyDiary
 
                 For delay = 11 To 19
                     bgwWeeklyDiary.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Dim cnt As Integer = Me.FingerPrintDataSet1.SOCRegister.Count
@@ -183,12 +183,12 @@ Public Class frmWeeklyDiary
                 Next
                 For i = 81 To 99
                     bgwWeeklyDiary.ReportProgress(i)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 bgwWeeklyDiary.ReportProgress(100)
-                System.Threading.Thread.Sleep(200)
-               
+                System.Threading.Thread.Sleep(100)
+
                 wdApp.Visible = True
                 wdApp.Activate()
                 wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -204,12 +204,12 @@ Public Class frmWeeklyDiary
                 ReleaseObject(wdDocs)
                 wdApp = Nothing
             End If
-            
+
             If e.Argument = "CL" Then
 
                 For i = 1 To 10
                     bgwWeeklyDiary.ReportProgress(i)
-                    System.Threading.Thread.Sleep(50)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Dim wdApp As Word.Application
@@ -222,7 +222,7 @@ Public Class frmWeeklyDiary
 
                 For i = 11 To 20
                     bgwWeeklyDiary.ReportProgress(i)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
@@ -239,7 +239,7 @@ Public Class frmWeeklyDiary
 
                 For i = 21 To 30
                     bgwWeeklyDiary.ReportProgress(i)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 If boolUseTIinLetter Then
@@ -256,7 +256,7 @@ Public Class frmWeeklyDiary
 
                 For i = 31 To 99
                     bgwWeeklyDiary.ReportProgress(i)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 bgwWeeklyDiary.ReportProgress(100)

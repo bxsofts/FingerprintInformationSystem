@@ -5,39 +5,22 @@ Imports Microsoft.Office.Interop
 Public Class frmSOCStatement
     Dim d1 As Date
     Dim d2 As Date
-    Dim parms(5) As ReportParameter
     Dim headertext As String = vbNullString
 
 
-    Private Sub frmSOCStatement_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        On Error Resume Next
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "NilPrintText", Me.txtNilPrint.Text, Microsoft.Win32.RegistryValueKind.String)
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "PrintRemainsText", Me.txtPrintRemains.Text, Microsoft.Win32.RegistryValueKind.String)
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "NoPrintRemainsText", Me.txtNoPrintRemains.Text, Microsoft.Win32.RegistryValueKind.String)
-    End Sub
 
     Sub SetDays() Handles MyBase.Load
+        Me.Cursor = Cursors.WaitCursor
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Control.CheckForIllegalCrossThreadCalls = False
-        Me.Cursor = Cursors.WaitCursor
-        Me.ReportViewer1.Cursor = Cursors.WaitCursor
-        bgwReport.RunWorkerAsync()
-    End Sub
-
-    Private Sub bgwReport_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwReport.DoWork
-        On Error Resume Next
-
 
         If Me.SocRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter.Connection.Close()
         Me.SocRegisterTableAdapter.Connection.ConnectionString = strConString
         Me.SocRegisterTableAdapter.Connection.Open()
 
 
-        Me.txtNilPrint.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "NilPrintText", "No action")
-        Me.txtPrintRemains.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "PrintRemainsText", "Search continuing")
-        Me.txtNoPrintRemains.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "NoPrintRemainsText", "Fully eliminated or unfit")
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))
         Next
@@ -64,90 +47,36 @@ Public Class frmSOCStatement
         d1 = New Date(y, m, 1)
         d2 = New Date(y, m, d)
         headertext = "for the month of " & MonthName(m) & " " & y
-        
-        GenerateOnLoad()
-        System.Threading.Thread.Sleep(250)
-        Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
-        Me.ReportViewer1.ZoomMode = ZoomMode.Percent
-        Me.ReportViewer1.ZoomPercent = 25
-        Me.cmbMonth.Focus()
-
+        Me.Cursor = Cursors.Default
     End Sub
+
 
     Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-
-
-        Select Case DirectCast(sender, Control).Name
-            Case btnGenerateByDate.Name
-                d1 = Me.dtFrom.Value
-                d2 = Me.dtTo.Value
-                If d1 > d2 Then
-                    DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtFrom.Focus()
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-
-            Case btnGenerateByMonth.Name
-                Dim m = Me.cmbMonth.SelectedIndex + 1
-                Dim y = Me.txtYear.Value
-                Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = New Date(y, m, 1)
-                d2 = New Date(y, m, d)
-                headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-        End Select
-
-        GenerateOnLoad()
-
-        Me.ReportViewer1.RefreshReport()
-        Application.DoEvents()
-
-        Me.Cursor = Cursors.Default
-
-    End Sub
-
-
-    Sub GenerateOnLoad()
-        On Error Resume Next
-
-
-        parms(0) = New ReportParameter("HeaderText", headertext)
-        parms(1) = New ReportParameter("OfficeName", FullOfficeName)
-        parms(2) = New ReportParameter("Place", FullDistrictName)
-        parms(3) = New ReportParameter("NilPrintText", Me.txtNilPrint.Text)
-        parms(4) = New ReportParameter("PrintRemainsText", Me.txtPrintRemains.Text)
-        parms(5) = New ReportParameter("NoPrintRemainsText", Me.txtNoPrintRemains.Text)
-        ReportViewer1.LocalReport.SetParameters(parms)
-
-        Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-
-    End Sub
-
-    Private Sub PrintReport() Handles btnPrint.Click
-        On Error Resume Next
-        If Me.SOCRegisterTableAdapter.ScalarQueryMaxNumber(d1, d2) - Me.SOCRegisterTableAdapter.ScalarQueryMinNumber(d1, d2) + 1 <> Me.FingerPrintDataSet.SOCRegister.Count Then
-            If Me.FingerPrintDataSet.SOCRegister.Count > 0 Then DevComponents.DotNetBar.MessageBoxEx.Show("WARNING: It seems that some SOC Numbers are missing. Please check before you start printing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        End If
-        Me.Timer1.Enabled = True
-    End Sub
-
-
-    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-        On Error Resume Next
-        Me.timer1.Enabled = False
-        Me.ReportViewer1.PrintDialog()
-    End Sub
-    Private Sub ReportViewer1_Print(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ReportViewer1.Print
-        If Me.SOCRegisterTableAdapter.ScalarQueryMaxNumber(d1, d2) - Me.SOCRegisterTableAdapter.ScalarQueryMinNumber(d1, d2) + 1 <> Me.FingerPrintDataSet.SOCRegister.Count Then
-            If Me.FingerPrintDataSet.SOCRegister.Count > 0 Then DevComponents.DotNetBar.MessageBoxEx.Show("WARNING: It seems that some SOC Numbers are missing. Please check before you start printing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        End If
-    End Sub
-
-    Private Sub OpenReportInWord() Handles btnOpenInWord.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
+
+            Select Case DirectCast(sender, Control).Name
+                Case btnGenerateByDate.Name
+                    d1 = Me.dtFrom.Value
+                    d2 = Me.dtTo.Value
+                    If d1 > d2 Then
+                        DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Me.dtFrom.Focus()
+                        Me.Cursor = Cursors.Default
+                        Exit Sub
+                    End If
+                    headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+
+                Case btnGenerateByMonth.Name
+                    Dim m = Me.cmbMonth.SelectedIndex + 1
+                    Dim y = Me.txtYear.Value
+                    Dim d As Integer = Date.DaysInMonth(y, m)
+                    d1 = New Date(y, m, 1)
+                    d2 = New Date(y, m, d)
+                    headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+            End Select
+
+            Me.SocRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
@@ -158,6 +87,8 @@ Public Class frmSOCStatement
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
+
 
     Private Sub bgwWord_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwWord.DoWork
         Try
@@ -328,7 +259,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PoliceStation & vbNewLine & "Cr.No. " & Me.FingerPrintDataSet.SOCRegister(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.SOCRegister(j).SectionOfLaw)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                WordApp.Selection.TypeText(Strings.Format(Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection, "dd/MM/yyyy"))
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfOccurrence)
@@ -360,11 +291,11 @@ Public Class frmSOCStatement
                 WordApp.Selection.Tables.Item(1).Cell(i, 12).Select()
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails
                 If Trim(Remarks) = "" Then
-                    If cpdeveloped = 0 Then Remarks = Me.txtNilPrint.Text
+                    If cpdeveloped = 0 Then Remarks = "No action pending"
                     If cpdeveloped > 0 Then
                         Dim cpremaining As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsRemaining
-                        If cpremaining > 0 Then Remarks = Me.txtPrintRemains.Text
-                        If cpremaining = 0 Then Remarks = Me.txtNoPrintRemains.Text
+                        If cpremaining > 0 Then Remarks = "Search continuing"
+                        If cpremaining = 0 Then Remarks = "Fully eliminated or unfit"
                     End If
                 End If
                 WordApp.Selection.TypeText(Remarks)
@@ -429,10 +360,5 @@ Public Class frmSOCStatement
         Me.Cursor = Cursors.Default
     End Sub
     
-    Private Sub bgwReport_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwReport.RunWorkerCompleted
-        Me.Cursor = Cursors.Default
-        Me.ReportViewer1.Cursor = Cursors.Default
-    End Sub
 
-   
 End Class

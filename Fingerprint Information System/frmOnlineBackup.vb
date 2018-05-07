@@ -132,9 +132,6 @@ Public Class frmOnlineBackup
             Next
 
 
-            Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
-
-
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
 
                 Dim FileName = My.Computer.FileSystem.GetName(foundFile)

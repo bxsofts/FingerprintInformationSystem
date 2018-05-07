@@ -124,21 +124,6 @@ Partial Class frmMainInterface
         Me.btnWindows7Blue = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCustomBaseColor = New DevComponents.DotNetBar.ColorPickerDropDown()
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
-        Me.RibbonPanel6 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar11 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer7 = New DevComponents.DotNetBar.ItemContainer()
-        Me.chkLoadRecordsAtStartup = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.chkLoadCurrentYearRecordsOnly = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.ItemContainer13 = New DevComponents.DotNetBar.ItemContainer()
-        Me.LabelItem11 = New DevComponents.DotNetBar.LabelItem()
-        Me.ItemContainer8 = New DevComponents.DotNetBar.ItemContainer()
-        Me.btnResetColumWidth = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnResetColumnWidthOfAllTables = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnResetColumnOrder = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnResetColumnOrderOfAllTables = New DevComponents.DotNetBar.ButtonItem()
-        Me.ItemContainer15 = New DevComponents.DotNetBar.ItemContainer()
-        Me.ColorPickerEvenRecords = New DevComponents.DotNetBar.ColorPickerDropDown()
-        Me.ColorPickerOddRecords = New DevComponents.DotNetBar.ColorPickerDropDown()
         Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar6 = New DevComponents.DotNetBar.RibbonBar()
         Me.btnExit = New DevComponents.DotNetBar.ButtonItem()
@@ -169,7 +154,6 @@ Partial Class frmMainInterface
         Me.btnSOCReport = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem3 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDAStatementAllPS = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAStatementSlipPS = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDARegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCurrentDA = New DevComponents.DotNetBar.ButtonItem()
         Me.btnMonthWiseDAStatistics = New DevComponents.DotNetBar.ButtonItem()
@@ -237,6 +221,27 @@ Partial Class frmMainInterface
         Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDeleteAll = New DevComponents.DotNetBar.ButtonItem()
         Me.chkPreventDeletion = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.RibbonPanel6 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.RibbonBar11 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer7 = New DevComponents.DotNetBar.ItemContainer()
+        Me.chkLoadRecordsAtStartup = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.chkLoadCurrentYearRecordsOnly = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.ItemContainer13 = New DevComponents.DotNetBar.ItemContainer()
+        Me.LabelItem11 = New DevComponents.DotNetBar.LabelItem()
+        Me.ItemContainer8 = New DevComponents.DotNetBar.ItemContainer()
+        Me.btnResetColumWidth = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnResetColumnWidthOfAllTables = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnResetColumnOrder = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnResetColumnOrderOfAllTables = New DevComponents.DotNetBar.ButtonItem()
+        Me.ItemContainer15 = New DevComponents.DotNetBar.ItemContainer()
+        Me.ColorPickerEvenRecords = New DevComponents.DotNetBar.ColorPickerDropDown()
+        Me.ColorPickerOddRecords = New DevComponents.DotNetBar.ColorPickerDropDown()
+        Me.RibbonPanel4 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer5 = New DevComponents.DotNetBar.ItemContainer()
+        Me.rdoBeginsWith = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.rdoFullText = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.rdoAnyWhere = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel3 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar10 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer10 = New DevComponents.DotNetBar.ItemContainer()
@@ -276,12 +281,6 @@ Partial Class frmMainInterface
         Me.btnChangeDBFolder = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenDBFolder = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenDBInMSAccess = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonPanel4 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer5 = New DevComponents.DotNetBar.ItemContainer()
-        Me.rdoBeginsWith = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.rdoFullText = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.rdoAnyWhere = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel5 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
         Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
@@ -1015,11 +1014,11 @@ Partial Class frmMainInterface
         Me.bgwOnlineAutoBackup = New System.ComponentModel.BackgroundWorker()
         Me.RibbonPanel2.SuspendLayout()
         Me.RibbonControl1.SuspendLayout()
-        Me.RibbonPanel6.SuspendLayout()
         Me.RibbonPanel1.SuspendLayout()
+        Me.RibbonPanel6.SuspendLayout()
+        Me.RibbonPanel4.SuspendLayout()
         Me.RibbonPanel3.SuspendLayout()
         Me.RibbonPanel7.SuspendLayout()
-        Me.RibbonPanel4.SuspendLayout()
         Me.RibbonPanel5.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.PanelEx9.SuspendLayout()
@@ -1399,9 +1398,9 @@ Partial Class frmMainInterface
         Me.RibbonControl1.CaptionVisible = True
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel6)
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel3)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel7)
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
         Me.RibbonControl1.Dock = System.Windows.Forms.DockStyle.Top
@@ -1433,186 +1432,6 @@ Partial Class frmMainInterface
         Me.RibbonControl1.TabIndex = 1
         Me.RibbonControl1.Text = "FINGERPRINT INFORMATION SYSTEM"
         Me.RibbonControl1.TitleText = "<b>FINGERPRINT INFORMATION SYSTEM</b>"
-        '
-        'RibbonPanel6
-        '
-        Me.RibbonPanel6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel6.Controls.Add(Me.RibbonBar11)
-        Me.RibbonPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel6.Location = New System.Drawing.Point(0, 55)
-        Me.RibbonPanel6.Name = "RibbonPanel6"
-        Me.RibbonPanel6.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel6.Size = New System.Drawing.Size(1360, 93)
-        '
-        '
-        '
-        Me.RibbonPanel6.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel6.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel6.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel6.TabIndex = 7
-        Me.RibbonPanel6.Visible = False
-        '
-        'RibbonBar11
-        '
-        Me.RibbonBar11.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar11.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar11.ContainerControlProcessDialogKey = True
-        Me.RibbonBar11.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar11.DragDropSupport = True
-        Me.RibbonBar11.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer7, Me.ItemContainer13, Me.ItemContainer8, Me.ItemContainer15})
-        Me.RibbonBar11.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar11.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar11.Name = "RibbonBar11"
-        Me.RibbonBar11.Size = New System.Drawing.Size(656, 91)
-        Me.RibbonBar11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar11.TabIndex = 20
-        Me.RibbonBar11.Text = "TABLE VIEW"
-        '
-        '
-        '
-        Me.RibbonBar11.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar11.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer7
-        '
-        '
-        '
-        '
-        Me.ItemContainer7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer7.BeginGroup = True
-        Me.ItemContainer7.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer7.Name = "ItemContainer7"
-        Me.ItemContainer7.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkLoadRecordsAtStartup, Me.chkLoadCurrentYearRecordsOnly})
-        '
-        '
-        '
-        Me.ItemContainer7.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'chkLoadRecordsAtStartup
-        '
-        Me.chkLoadRecordsAtStartup.Checked = True
-        Me.chkLoadRecordsAtStartup.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkLoadRecordsAtStartup.Name = "chkLoadRecordsAtStartup"
-        Me.chkLoadRecordsAtStartup.Text = "Load Records at Startup"
-        '
-        'chkLoadCurrentYearRecordsOnly
-        '
-        Me.chkLoadCurrentYearRecordsOnly.Name = "chkLoadCurrentYearRecordsOnly"
-        Me.chkLoadCurrentYearRecordsOnly.Text = "Load Current Year Records Only"
-        '
-        'ItemContainer13
-        '
-        '
-        '
-        '
-        Me.ItemContainer13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer13.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer13.Name = "ItemContainer13"
-        Me.ItemContainer13.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem11})
-        '
-        '
-        '
-        Me.ItemContainer13.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer13.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'LabelItem11
-        '
-        Me.LabelItem11.Name = "LabelItem11"
-        '
-        'ItemContainer8
-        '
-        '
-        '
-        '
-        Me.ItemContainer8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer8.BeginGroup = True
-        Me.ItemContainer8.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer8.Name = "ItemContainer8"
-        Me.ItemContainer8.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnResetColumWidth, Me.btnResetColumnOrder})
-        '
-        '
-        '
-        Me.ItemContainer8.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer8.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnResetColumWidth
-        '
-        Me.btnResetColumWidth.Name = "btnResetColumWidth"
-        Me.btnResetColumWidth.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnResetColumnWidthOfAllTables})
-        Me.btnResetColumWidth.SubItemsExpandWidth = 14
-        Me.btnResetColumWidth.Text = "Reset column width of table"
-        '
-        'btnResetColumnWidthOfAllTables
-        '
-        Me.btnResetColumnWidthOfAllTables.Name = "btnResetColumnWidthOfAllTables"
-        Me.btnResetColumnWidthOfAllTables.Text = "Reset All Tables"
-        '
-        'btnResetColumnOrder
-        '
-        Me.btnResetColumnOrder.Name = "btnResetColumnOrder"
-        Me.btnResetColumnOrder.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnResetColumnOrderOfAllTables})
-        Me.btnResetColumnOrder.SubItemsExpandWidth = 14
-        Me.btnResetColumnOrder.Text = "Reset column order of table"
-        '
-        'btnResetColumnOrderOfAllTables
-        '
-        Me.btnResetColumnOrderOfAllTables.Name = "btnResetColumnOrderOfAllTables"
-        Me.btnResetColumnOrderOfAllTables.Text = "Reset All Tables"
-        '
-        'ItemContainer15
-        '
-        '
-        '
-        '
-        Me.ItemContainer15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer15.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer15.Name = "ItemContainer15"
-        Me.ItemContainer15.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ColorPickerEvenRecords, Me.ColorPickerOddRecords})
-        '
-        '
-        '
-        Me.ItemContainer15.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer15.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ColorPickerEvenRecords
-        '
-        Me.ColorPickerEvenRecords.Name = "ColorPickerEvenRecords"
-        Me.ColorPickerEvenRecords.Text = "Highlight Color for Even month"
-        '
-        'ColorPickerOddRecords
-        '
-        Me.ColorPickerOddRecords.BeginGroup = True
-        Me.ColorPickerOddRecords.Name = "ColorPickerOddRecords"
-        Me.ColorPickerOddRecords.Text = "Highlight Color for Odd month"
         '
         'RibbonPanel1
         '
@@ -1936,7 +1755,7 @@ Partial Class frmMainInterface
         '
         Me.ButtonItem3.ForeColor = System.Drawing.Color.Red
         Me.ButtonItem3.Name = "ButtonItem3"
-        Me.ButtonItem3.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAStatementAllPS, Me.btnDAStatementSlipPS, Me.btnDARegister, Me.btnCurrentDA, Me.btnMonthWiseDAStatistics, Me.btnPSWiseDAStatistics})
+        Me.ButtonItem3.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAStatementAllPS, Me.btnDARegister, Me.btnCurrentDA, Me.btnMonthWiseDAStatistics, Me.btnPSWiseDAStatistics})
         Me.ButtonItem3.Text = "DA"
         '
         'btnDAStatementAllPS
@@ -1944,12 +1763,7 @@ Partial Class frmMainInterface
         Me.btnDAStatementAllPS.BeginGroup = True
         Me.btnDAStatementAllPS.ForeColor = System.Drawing.Color.Red
         Me.btnDAStatementAllPS.Name = "btnDAStatementAllPS"
-        Me.btnDAStatementAllPS.Text = "Statement - Include All PS"
-        '
-        'btnDAStatementSlipPS
-        '
-        Me.btnDAStatementSlipPS.Name = "btnDAStatementSlipPS"
-        Me.btnDAStatementSlipPS.Text = "Statement - Slip Received PS"
+        Me.btnDAStatementAllPS.Text = "DA Statement"
         '
         'btnDARegister
         '
@@ -1966,7 +1780,7 @@ Partial Class frmMainInterface
         '
         Me.btnMonthWiseDAStatistics.BeginGroup = True
         Me.btnMonthWiseDAStatistics.Name = "btnMonthWiseDAStatistics"
-        Me.btnMonthWiseDAStatistics.Text = "Month Wise DA Slip Count"
+        Me.btnMonthWiseDAStatistics.Text = "Month Wise DA Statistics"
         '
         'btnPSWiseDAStatistics
         '
@@ -2394,6 +2208,282 @@ Partial Class frmMainInterface
         Me.chkPreventDeletion.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkPreventDeletion.Name = "chkPreventDeletion"
         Me.chkPreventDeletion.Text = "Prevent Deletion"
+        '
+        'RibbonPanel6
+        '
+        Me.RibbonPanel6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel6.Controls.Add(Me.RibbonBar11)
+        Me.RibbonPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel6.Location = New System.Drawing.Point(0, 55)
+        Me.RibbonPanel6.Name = "RibbonPanel6"
+        Me.RibbonPanel6.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel6.Size = New System.Drawing.Size(1360, 93)
+        '
+        '
+        '
+        Me.RibbonPanel6.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel6.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel6.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel6.TabIndex = 7
+        Me.RibbonPanel6.Visible = False
+        '
+        'RibbonBar11
+        '
+        Me.RibbonBar11.AutoOverflowEnabled = True
+        '
+        '
+        '
+        Me.RibbonBar11.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar11.ContainerControlProcessDialogKey = True
+        Me.RibbonBar11.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar11.DragDropSupport = True
+        Me.RibbonBar11.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer7, Me.ItemContainer13, Me.ItemContainer8, Me.ItemContainer15})
+        Me.RibbonBar11.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar11.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBar11.Name = "RibbonBar11"
+        Me.RibbonBar11.Size = New System.Drawing.Size(656, 91)
+        Me.RibbonBar11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar11.TabIndex = 20
+        Me.RibbonBar11.Text = "TABLE VIEW"
+        '
+        '
+        '
+        Me.RibbonBar11.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar11.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer7
+        '
+        '
+        '
+        '
+        Me.ItemContainer7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer7.BeginGroup = True
+        Me.ItemContainer7.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer7.Name = "ItemContainer7"
+        Me.ItemContainer7.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkLoadRecordsAtStartup, Me.chkLoadCurrentYearRecordsOnly})
+        '
+        '
+        '
+        Me.ItemContainer7.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'chkLoadRecordsAtStartup
+        '
+        Me.chkLoadRecordsAtStartup.Checked = True
+        Me.chkLoadRecordsAtStartup.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkLoadRecordsAtStartup.Name = "chkLoadRecordsAtStartup"
+        Me.chkLoadRecordsAtStartup.Text = "Load Records at Startup"
+        '
+        'chkLoadCurrentYearRecordsOnly
+        '
+        Me.chkLoadCurrentYearRecordsOnly.Name = "chkLoadCurrentYearRecordsOnly"
+        Me.chkLoadCurrentYearRecordsOnly.Text = "Load Current Year Records Only"
+        '
+        'ItemContainer13
+        '
+        '
+        '
+        '
+        Me.ItemContainer13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer13.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer13.Name = "ItemContainer13"
+        Me.ItemContainer13.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.LabelItem11})
+        '
+        '
+        '
+        Me.ItemContainer13.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer13.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'LabelItem11
+        '
+        Me.LabelItem11.Name = "LabelItem11"
+        '
+        'ItemContainer8
+        '
+        '
+        '
+        '
+        Me.ItemContainer8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer8.BeginGroup = True
+        Me.ItemContainer8.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer8.Name = "ItemContainer8"
+        Me.ItemContainer8.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnResetColumWidth, Me.btnResetColumnOrder})
+        '
+        '
+        '
+        Me.ItemContainer8.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer8.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnResetColumWidth
+        '
+        Me.btnResetColumWidth.Name = "btnResetColumWidth"
+        Me.btnResetColumWidth.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnResetColumnWidthOfAllTables})
+        Me.btnResetColumWidth.SubItemsExpandWidth = 14
+        Me.btnResetColumWidth.Text = "Reset column width of table"
+        '
+        'btnResetColumnWidthOfAllTables
+        '
+        Me.btnResetColumnWidthOfAllTables.Name = "btnResetColumnWidthOfAllTables"
+        Me.btnResetColumnWidthOfAllTables.Text = "Reset All Tables"
+        '
+        'btnResetColumnOrder
+        '
+        Me.btnResetColumnOrder.Name = "btnResetColumnOrder"
+        Me.btnResetColumnOrder.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnResetColumnOrderOfAllTables})
+        Me.btnResetColumnOrder.SubItemsExpandWidth = 14
+        Me.btnResetColumnOrder.Text = "Reset column order of table"
+        '
+        'btnResetColumnOrderOfAllTables
+        '
+        Me.btnResetColumnOrderOfAllTables.Name = "btnResetColumnOrderOfAllTables"
+        Me.btnResetColumnOrderOfAllTables.Text = "Reset All Tables"
+        '
+        'ItemContainer15
+        '
+        '
+        '
+        '
+        Me.ItemContainer15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer15.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer15.Name = "ItemContainer15"
+        Me.ItemContainer15.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ColorPickerEvenRecords, Me.ColorPickerOddRecords})
+        '
+        '
+        '
+        Me.ItemContainer15.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer15.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ColorPickerEvenRecords
+        '
+        Me.ColorPickerEvenRecords.AutoExpandOnClick = True
+        Me.ColorPickerEvenRecords.Name = "ColorPickerEvenRecords"
+        Me.ColorPickerEvenRecords.Text = "Highlight Color for Even month"
+        '
+        'ColorPickerOddRecords
+        '
+        Me.ColorPickerOddRecords.AutoExpandOnClick = True
+        Me.ColorPickerOddRecords.BeginGroup = True
+        Me.ColorPickerOddRecords.Name = "ColorPickerOddRecords"
+        Me.ColorPickerOddRecords.Text = "Highlight Color for Odd month"
+        '
+        'RibbonPanel4
+        '
+        Me.RibbonPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel4.Controls.Add(Me.RibbonBar3)
+        Me.RibbonPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel4.Location = New System.Drawing.Point(0, 55)
+        Me.RibbonPanel4.Name = "RibbonPanel4"
+        Me.RibbonPanel4.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel4.Size = New System.Drawing.Size(1360, 93)
+        '
+        '
+        '
+        Me.RibbonPanel4.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel4.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel4.TabIndex = 5
+        Me.RibbonPanel4.Visible = False
+        '
+        'RibbonBar3
+        '
+        Me.RibbonBar3.AutoOverflowEnabled = True
+        '
+        '
+        '
+        Me.RibbonBar3.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar3.ContainerControlProcessDialogKey = True
+        Me.RibbonBar3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar3.DragDropSupport = True
+        Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer5})
+        Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar3.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBar3.Name = "RibbonBar3"
+        Me.RibbonBar3.Size = New System.Drawing.Size(225, 91)
+        Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar3.TabIndex = 7
+        Me.RibbonBar3.Text = "SEARCH SETTINGS"
+        '
+        '
+        '
+        Me.RibbonBar3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer5
+        '
+        '
+        '
+        '
+        Me.ItemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer5.BeginGroup = True
+        Me.ItemContainer5.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer5.Name = "ItemContainer5"
+        Me.ItemContainer5.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.rdoBeginsWith, Me.rdoFullText, Me.rdoAnyWhere})
+        '
+        '
+        '
+        Me.ItemContainer5.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer5.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'rdoBeginsWith
+        '
+        Me.rdoBeginsWith.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.rdoBeginsWith.Checked = True
+        Me.rdoBeginsWith.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.rdoBeginsWith.Name = "rdoBeginsWith"
+        Me.rdoBeginsWith.Text = "Begins with the characters entered"
+        '
+        'rdoFullText
+        '
+        Me.rdoFullText.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.rdoFullText.Name = "rdoFullText"
+        Me.rdoFullText.Text = "Full text should match"
+        '
+        'rdoAnyWhere
+        '
+        Me.rdoAnyWhere.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.rdoAnyWhere.Name = "rdoAnyWhere"
+        Me.rdoAnyWhere.Text = "Characters can occure anywhere"
         '
         'RibbonPanel3
         '
@@ -2855,100 +2945,6 @@ Partial Class frmMainInterface
         '
         Me.btnOpenDBInMSAccess.Name = "btnOpenDBInMSAccess"
         Me.btnOpenDBInMSAccess.Text = "Open Database in MS Access"
-        '
-        'RibbonPanel4
-        '
-        Me.RibbonPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel4.Controls.Add(Me.RibbonBar3)
-        Me.RibbonPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel4.Location = New System.Drawing.Point(0, 55)
-        Me.RibbonPanel4.Name = "RibbonPanel4"
-        Me.RibbonPanel4.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel4.Size = New System.Drawing.Size(1360, 93)
-        '
-        '
-        '
-        Me.RibbonPanel4.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel4.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel4.TabIndex = 5
-        Me.RibbonPanel4.Visible = False
-        '
-        'RibbonBar3
-        '
-        Me.RibbonBar3.AutoOverflowEnabled = True
-        '
-        '
-        '
-        Me.RibbonBar3.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar3.ContainerControlProcessDialogKey = True
-        Me.RibbonBar3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar3.DragDropSupport = True
-        Me.RibbonBar3.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer5})
-        Me.RibbonBar3.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar3.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar3.Name = "RibbonBar3"
-        Me.RibbonBar3.Size = New System.Drawing.Size(225, 91)
-        Me.RibbonBar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar3.TabIndex = 7
-        Me.RibbonBar3.Text = "SEARCH SETTINGS"
-        '
-        '
-        '
-        Me.RibbonBar3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar3.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer5
-        '
-        '
-        '
-        '
-        Me.ItemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer5.BeginGroup = True
-        Me.ItemContainer5.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer5.Name = "ItemContainer5"
-        Me.ItemContainer5.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.rdoBeginsWith, Me.rdoFullText, Me.rdoAnyWhere})
-        '
-        '
-        '
-        Me.ItemContainer5.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer5.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'rdoBeginsWith
-        '
-        Me.rdoBeginsWith.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.rdoBeginsWith.Checked = True
-        Me.rdoBeginsWith.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.rdoBeginsWith.Name = "rdoBeginsWith"
-        Me.rdoBeginsWith.Text = "Begins with the characters entered"
-        '
-        'rdoFullText
-        '
-        Me.rdoFullText.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.rdoFullText.Name = "rdoFullText"
-        Me.rdoFullText.Text = "Full text should match"
-        '
-        'rdoAnyWhere
-        '
-        Me.rdoAnyWhere.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.rdoAnyWhere.Name = "rdoAnyWhere"
-        Me.rdoAnyWhere.Text = "Characters can occure anywhere"
         '
         'RibbonPanel5
         '
@@ -13670,11 +13666,11 @@ Partial Class frmMainInterface
         Me.RibbonPanel2.ResumeLayout(false)
         Me.RibbonControl1.ResumeLayout(false)
         Me.RibbonControl1.PerformLayout
-        Me.RibbonPanel6.ResumeLayout(false)
         Me.RibbonPanel1.ResumeLayout(false)
+        Me.RibbonPanel6.ResumeLayout(false)
+        Me.RibbonPanel4.ResumeLayout(false)
         Me.RibbonPanel3.ResumeLayout(false)
         Me.RibbonPanel7.ResumeLayout(false)
-        Me.RibbonPanel4.ResumeLayout(false)
         Me.RibbonPanel5.ResumeLayout(false)
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.PanelEx9.ResumeLayout(false)
@@ -14079,7 +14075,6 @@ End Sub
     Friend WithEvents btnFPARegister As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents ButtonItem7 As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnCDRegister As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents btnDAStatementSlipPS As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnPhotoNotRecieved As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnCurrentSOC As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnCurrentDA As DevComponents.DotNetBar.ButtonItem

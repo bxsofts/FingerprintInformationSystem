@@ -24,13 +24,10 @@ Partial Class frmDAStatement
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDAStatement))
-        Dim ReportDataSource1 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
         Me.DAStatementBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnOpenInWord = New DevComponents.DotNetBar.ButtonX()
-        Me.btnPrint = New DevComponents.DotNetBar.ButtonX()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -41,21 +38,17 @@ Partial Class frmDAStatement
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.DARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
         Me.PSRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PoliceStationListTableAdapter()
         Me.DASTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DAStatementTableAdapter()
         Me.PsWiseDACountTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PSWiseDACountTableAdapter()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.bgwWord = New System.ComponentModel.BackgroundWorker()
         CType(Me.DAStatementBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelEx2.SuspendLayout()
         Me.PanelEx1.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DAStatementBindingSource
@@ -68,30 +61,11 @@ Partial Class frmDAStatement
         Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
         Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'PanelEx2
-        '
-        Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx2.Controls.Add(Me.PanelEx1)
-        Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
-        Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(1032, 87)
-        Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx2.Style.GradientAngle = 90
-        Me.PanelEx2.TabIndex = 18
-        '
         'PanelEx1
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx1.Controls.Add(Me.btnOpenInWord)
-        Me.PanelEx1.Controls.Add(Me.btnPrint)
+        Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.LabelX2)
         Me.PanelEx1.Controls.Add(Me.btnGenerateByMonth)
         Me.PanelEx1.Controls.Add(Me.LabelX1)
@@ -107,7 +81,7 @@ Partial Class frmDAStatement
         Me.PanelEx1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1032, 87)
+        Me.PanelEx1.Size = New System.Drawing.Size(520, 99)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -116,29 +90,22 @@ Partial Class frmDAStatement
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
         '
-        'btnOpenInWord
+        'CircularProgress1
         '
-        Me.btnOpenInWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenInWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenInWord.Image = CType(resources.GetObject("btnOpenInWord.Image"), System.Drawing.Image)
-        Me.btnOpenInWord.Location = New System.Drawing.Point(707, 16)
-        Me.btnOpenInWord.Name = "btnOpenInWord"
-        Me.btnOpenInWord.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
-        Me.btnOpenInWord.Size = New System.Drawing.Size(121, 56)
-        Me.btnOpenInWord.TabIndex = 8
-        Me.btnOpenInWord.Text = "MS Word"
         '
-        'btnPrint
         '
-        Me.btnPrint.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnPrint.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
-        Me.btnPrint.Location = New System.Drawing.Point(536, 16)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
-        Me.btnPrint.Size = New System.Drawing.Size(121, 56)
-        Me.btnPrint.TabIndex = 7
-        Me.btnPrint.Text = "Print"
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(399, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(121, 99)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 49
+        Me.CircularProgress1.TabStop = False
         '
         'LabelX2
         '
@@ -147,7 +114,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(241, 13)
+        Me.LabelX2.Location = New System.Drawing.Point(241, 62)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 8
@@ -157,10 +124,10 @@ Partial Class frmDAStatement
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(400, 49)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(400, 11)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
         Me.btnGenerateByMonth.Size = New System.Drawing.Size(98, 29)
-        Me.btnGenerateByMonth.TabIndex = 6
+        Me.btnGenerateByMonth.TabIndex = 3
         Me.btnGenerateByMonth.Text = "Generate"
         '
         'LabelX1
@@ -170,7 +137,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(8, 13)
+        Me.LabelX1.Location = New System.Drawing.Point(8, 62)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(72, 18)
         Me.LabelX1.TabIndex = 7
@@ -183,7 +150,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(239, 58)
+        Me.LabelX4.Location = New System.Drawing.Point(239, 20)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 25
@@ -193,10 +160,10 @@ Partial Class frmDAStatement
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(400, 8)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(400, 57)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 29)
-        Me.btnGenerateByDate.TabIndex = 3
+        Me.btnGenerateByDate.TabIndex = 6
         Me.btnGenerateByDate.Text = "Generate"
         '
         'LabelX3
@@ -206,7 +173,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(8, 58)
+        Me.LabelX3.Location = New System.Drawing.Point(8, 20)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 24
@@ -223,13 +190,13 @@ Partial Class frmDAStatement
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(273, 49)
+        Me.txtYear.Location = New System.Drawing.Point(273, 11)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 0
         Me.txtYear.Name = "txtYear"
         Me.txtYear.ShowUpDown = True
         Me.txtYear.Size = New System.Drawing.Size(120, 29)
-        Me.txtYear.TabIndex = 5
+        Me.txtYear.TabIndex = 2
         Me.txtYear.Value = 1900
         Me.txtYear.WatermarkText = "Year"
         '
@@ -251,7 +218,7 @@ Partial Class frmDAStatement
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(86, 8)
+        Me.dtFrom.Location = New System.Drawing.Point(86, 57)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -285,7 +252,7 @@ Partial Class frmDAStatement
         Me.dtFrom.MonthCalendar.TodayButtonVisible = True
         Me.dtFrom.Name = "dtFrom"
         Me.dtFrom.Size = New System.Drawing.Size(134, 29)
-        Me.dtFrom.TabIndex = 1
+        Me.dtFrom.TabIndex = 4
         Me.dtFrom.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtFrom.WatermarkText = "From"
         '
@@ -299,12 +266,12 @@ Partial Class frmDAStatement
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(86, 49)
+        Me.cmbMonth.Location = New System.Drawing.Point(86, 11)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
         Me.cmbMonth.Size = New System.Drawing.Size(134, 29)
-        Me.cmbMonth.TabIndex = 4
+        Me.cmbMonth.TabIndex = 1
         Me.cmbMonth.WatermarkText = "Month"
         '
         'dtTo
@@ -325,7 +292,7 @@ Partial Class frmDAStatement
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(273, 8)
+        Me.dtTo.Location = New System.Drawing.Point(273, 57)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -359,35 +326,9 @@ Partial Class frmDAStatement
         Me.dtTo.MonthCalendar.TodayButtonVisible = True
         Me.dtTo.Name = "dtTo"
         Me.dtTo.Size = New System.Drawing.Size(120, 29)
-        Me.dtTo.TabIndex = 2
+        Me.dtTo.TabIndex = 5
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.ReportViewer1, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 87)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 313.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1032, 411)
-        Me.TableLayoutPanel1.TabIndex = 19
-        '
-        'ReportViewer1
-        '
-        Me.ReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        ReportDataSource1.Name = "FingerPrintDataSet_DAStatement"
-        ReportDataSource1.Value = Me.DAStatementBindingSource
-        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource1)
-        Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "FingerprintInformationSystem.DAStatementAllPS.rdlc"
-        Me.ReportViewer1.Location = New System.Drawing.Point(3, 3)
-        Me.ReportViewer1.Name = "ReportViewer1"
-        Me.ReportViewer1.Size = New System.Drawing.Size(1026, 405)
-        Me.ReportViewer1.TabIndex = 0
         '
         'DARegisterTableAdapter
         '
@@ -405,33 +346,38 @@ Partial Class frmDAStatement
         '
         Me.PsWiseDACountTableAdapter.ClearBeforeFill = True
         '
+        'bgwWord
+        '
+        Me.bgwWord.WorkerReportsProgress = True
+        Me.bgwWord.WorkerSupportsCancellation = True
+        '
         'frmDAStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1032, 498)
-        Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.PanelEx2)
+        Me.ClientSize = New System.Drawing.Size(520, 99)
+        Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmDAStatement"
-        Me.Text = "DA Statement - All PS"
-        Me.TitleText = "<b>DA Statement - All PS</b>"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.Text = "DA Statement"
+        Me.TitleText = "<b>DA Statement</b>"
         CType(Me.DAStatementBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents btnGenerateByMonth As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
@@ -443,15 +389,12 @@ Partial Class frmDAStatement
     Friend WithEvents btnGenerateByDate As DevComponents.DotNetBar.ButtonX
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
-    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents btnPrint As DevComponents.DotNetBar.ButtonX
     Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents DARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter
     Friend WithEvents PSRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PoliceStationListTableAdapter
     Friend WithEvents DAStatementBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents DASTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DAStatementTableAdapter
     Friend WithEvents PsWiseDACountTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PSWiseDACountTableAdapter
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents btnOpenInWord As DevComponents.DotNetBar.ButtonX
-    Private WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents bgwWord As System.ComponentModel.BackgroundWorker
 End Class

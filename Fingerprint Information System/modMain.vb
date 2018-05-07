@@ -68,6 +68,7 @@ Module modMain
     Public dtWeeklyDiaryTo As Date
     Public boolUseTIinLetter As Boolean = True
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
+    Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!

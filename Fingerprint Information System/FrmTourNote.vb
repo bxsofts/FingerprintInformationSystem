@@ -44,7 +44,7 @@ Public Class FrmTourNote
     Dim PENarray(4) As String
     Dim ScaleArray(4) As String
     Dim DAarray(4) As String
-    Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 

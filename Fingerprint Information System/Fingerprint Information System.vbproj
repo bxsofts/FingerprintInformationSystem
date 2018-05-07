@@ -317,12 +317,6 @@
     <Compile Include="FrmDA-Statement-AllPS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-Statement-SlipOnly.Designer.vb">
-      <DependentUpon>FrmDA-Statement-SlipOnly.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmDA-Statement-SlipOnly.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmDA-Statistics-MonthWise.Designer.vb">
       <DependentUpon>FrmDA-Statistics-MonthWise.vb</DependentUpon>
     </Compile>
@@ -353,10 +347,10 @@
     <Compile Include="FrmFPA-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFPA-Statistics.Designer.vb">
-      <DependentUpon>FrmFPA-Statistics.vb</DependentUpon>
+    <Compile Include="FrmFPA-Statement.Designer.vb">
+      <DependentUpon>FrmFPA-Statement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmFPA-Statistics.vb">
+    <Compile Include="FrmFPA-Statement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmPerformance-Monthly-Generator.Designer.vb">
@@ -549,8 +543,6 @@
     <EmbeddedResource Include="CD Register.rdlc" />
     <EmbeddedResource Include="Concise SOC Report.rdlc" />
     <EmbeddedResource Include="DA Register.rdlc" />
-    <EmbeddedResource Include="DA Slip Statement.rdlc" />
-    <EmbeddedResource Include="DAStatementAllPS.rdlc" />
     <EmbeddedResource Include="Facing Sheet No Gist.rdlc" />
     <EmbeddedResource Include="FPA Register.rdlc" />
     <EmbeddedResource Include="FrmAbout.resx">
@@ -585,10 +577,6 @@
       <DependentUpon>FrmDA-Statement-AllPS.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-Statement-SlipOnly.resx">
-      <DependentUpon>FrmDA-Statement-SlipOnly.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmDA-Statistics-MonthWise.resx">
       <DependentUpon>FrmDA-Statistics-MonthWise.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -609,8 +597,8 @@
       <DependentUpon>FrmFPA-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFPA-Statistics.resx">
-      <DependentUpon>FrmFPA-Statistics.vb</DependentUpon>
+    <EmbeddedResource Include="FrmFPA-Statement.resx">
+      <DependentUpon>FrmFPA-Statement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPerformance-Monthly-Generator.resx">
@@ -688,7 +676,6 @@
     <EmbeddedResource Include="frmWeeklyDiary.resx">
       <DependentUpon>frmWeeklyDiary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Grave Crime Report.rdlc" />
     <EmbeddedResource Include="Identified Slips Register.rdlc" />
     <EmbeddedResource Include="List of Police Stations.rdlc" />
     <EmbeddedResource Include="List of print remaining cases.rdlc" />
@@ -710,7 +697,6 @@
     <EmbeddedResource Include="FPA Statistics.rdlc" />
     <EmbeddedResource Include="Facing Sheet.rdlc" />
     <EmbeddedResource Include="SOCReportsStatement.rdlc" />
-    <EmbeddedResource Include="SOCStatementNew.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

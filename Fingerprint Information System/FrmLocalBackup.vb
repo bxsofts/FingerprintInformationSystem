@@ -16,8 +16,6 @@ Public Class FrmLocalBackup
         Me.listViewEx1.Items.Clear()
 
 
-        Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
-
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
 
             If foundFile Is Nothing Then
@@ -259,7 +257,6 @@ Public Class FrmLocalBackup
         '  Dim NewFormatString As String = BackupDateFormatString
         Dim OldFileName As String
         Dim NewFileName As String
-        Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchTopLevelOnly, "FingerPrintBackup*.fpbbk")
             If foundFile Is Nothing Then

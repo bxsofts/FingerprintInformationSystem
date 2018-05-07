@@ -5,52 +5,21 @@ Public Class frmDAStatement
 
     Dim d1 As Date
     Dim d2 As Date
-    Dim parms(2) As ReportParameter
+
     Dim datevalue As String = vbNullString
     Dim TotalDACount As Integer
-
-    Public Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-
-        Select Case DirectCast(sender, Control).Name
-            Case btnGenerateByDate.Name
-                d1 = Me.dtFrom.Value
-                d2 = Me.dtTo.Value
-                If d1 > d2 Then
-                    DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtFrom.Focus()
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                datevalue = "DA SLIP STATEMENT FOR the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-
-            Case btnGenerateByMonth.Name
-                Dim m = Me.cmbMonth.SelectedIndex + 1
-                Dim y = Me.txtYear.Value
-                Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = New Date(y, m, 1)
-                d2 = New Date(y, m, d)
-                datevalue = "DA SLIP STATEMENT FOR the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-
-        End Select
-
-
-        GenerateOnLoad()
-        Me.ReportViewer1.RefreshReport()
-        ValidateStatement()
-        Me.Cursor = Cursors.Default
-
-    End Sub
-
 
 
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next
-        
+
         Me.Cursor = Cursors.WaitCursor
-        Me.PanelEx1.Width = Me.TableLayoutPanel1.Width / 2
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Control.CheckForIllegalCrossThreadCalls = False
+
         If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
         Me.DARegisterTableAdapter.Connection.ConnectionString = strConString
         Me.DARegisterTableAdapter.Connection.Open()
@@ -66,9 +35,6 @@ Public Class frmDAStatement
         If Me.PSWiseDACountTableAdapter.Connection.State = ConnectionState.Open Then Me.PSWiseDACountTableAdapter.Connection.Close()
         Me.PSWiseDACountTableAdapter.Connection.ConnectionString = strConString
         Me.PSWiseDACountTableAdapter.Connection.Open()
-
-       
-
 
 
         For i = 0 To 11
@@ -97,67 +63,85 @@ Public Class frmDAStatement
 
         datevalue = "DA SLIP STATEMENT FOR the month of " & MonthName(m) & " " & y
 
-
-
-        GenerateOnLoad()
-        Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
-        Me.ReportViewer1.ZoomMode = ZoomMode.Percent
-        Me.ReportViewer1.ZoomPercent = 25
         Me.cmbMonth.Focus()
         Me.Cursor = Cursors.Default
     End Sub
 
-    Sub GenerateOnLoad()
-        On Error Resume Next
-        parms(0) = New ReportParameter("DateValue", datevalue)
-        parms(1) = New ReportParameter("OfficeName", FullOfficeName)
-        parms(2) = New ReportParameter("District", FullDistrictName)
-        ReportViewer1.LocalReport.SetParameters(parms)
 
-        Me.PSRegisterTableAdapter.Fill(FingerPrintDataSet.PoliceStationList)
-        Dim c As Short = Me.FingerPrintDataSet.PoliceStationList.Count - 1
-        Me.FingerPrintDataSet.DAStatement.RejectChanges()
-        Me.DASTableAdapter.DeleteAllQuery()
-        TotalDACount = 0
-        Dim r(c) As FingerPrintDataSet.DAStatementRow
-        Dim ps As String
-        For i = 0 To c
-            r(i) = Me.FingerPrintDataSet.DAStatement.NewDAStatementRow
-            ps = Me.FingerPrintDataSet.PoliceStationList(i).PoliceStation
-            r(i).PoliceStation = ps
-            r(i).SlipCount = Me.DARegisterTableAdapter.PSWiseDACount(d1, d2, ps)
-            TotalDACount = TotalDACount + r(i).SlipCount
-            Me.FingerPrintDataSet.DAStatement.Rows.Add(r(i))
-        Next
-
-    End Sub
-
-    Private Sub ShowPrintDialog() Handles btnPrint.Click
-        On Error Resume Next
-        Me.Timer1.Enabled = True
-    End Sub
-
-    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles timer1.Tick
-        On Error Resume Next
-        Me.timer1.Enabled = False
-        Me.ReportViewer1.PrintDialog()
-    End Sub
-
-    Private Sub ValidateStatement()
-        On Error Resume Next
-        Me.PsWiseDACountTableAdapter.Fill(Me.FingerPrintDataSet.PSWiseDACount, d1, d2)
-        Dim sum As Integer = 0
-        For c = 0 To Me.FingerPrintDataSet.PSWiseDACount.Count
-            sum = sum + Me.FingerPrintDataSet.PSWiseDACount(c).Expr1
-        Next
-        If TotalDACount <> sum Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("WARNING: It seems that some PS Names are missing from the List of Police Stations for which DA Slips have been registered. The DA Statement generated may not be correct.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        End If
-    End Sub
-
-    Private Sub OpenInWord() Handles btnOpenInWord.Click
+    Public Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
         Try
             Me.Cursor = Cursors.WaitCursor
+
+            Select Case DirectCast(sender, Control).Name
+                Case btnGenerateByDate.Name
+                    d1 = Me.dtFrom.Value
+                    d2 = Me.dtTo.Value
+                    If d1 > d2 Then
+                        DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Me.dtFrom.Focus()
+                        Me.Cursor = Cursors.Default
+                        Exit Sub
+                    End If
+                    datevalue = "DA SLIP STATEMENT FOR the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+
+                Case btnGenerateByMonth.Name
+                    Dim m = Me.cmbMonth.SelectedIndex + 1
+                    Dim y = Me.txtYear.Value
+                    Dim d As Integer = Date.DaysInMonth(y, m)
+                    d1 = New Date(y, m, 1)
+                    d2 = New Date(y, m, d)
+                    datevalue = "DA SLIP STATEMENT FOR the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+
+            End Select
+
+            
+
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+            Me.Cursor = Cursors.WaitCursor
+            Me.bgwWord.RunWorkerAsync()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+
+    End Sub
+
+    Private Sub bgwWord_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwWord.DoWork
+        Try
+
+            Dim delay As Integer = 0
+
+            bgwWord.ReportProgress(0)
+            System.Threading.Thread.Sleep(30)
+
+            Me.PSRegisterTableAdapter.Fill(FingerPrintDataSet.PoliceStationList)
+            Dim c As Short = Me.FingerPrintDataSet.PoliceStationList.Count - 1
+            Me.FingerPrintDataSet.DAStatement.RejectChanges()
+            Me.DASTableAdapter.DeleteAllQuery()
+            TotalDACount = 0
+            Dim r(c) As FingerPrintDataSet.DAStatementRow
+            Dim ps As String
+
+            Dim iteration As Integer = CInt(20 / c)
+
+            For i = 0 To c
+                r(i) = Me.FingerPrintDataSet.DAStatement.NewDAStatementRow
+                ps = Me.FingerPrintDataSet.PoliceStationList(i).PoliceStation
+                r(i).PoliceStation = ps
+                r(i).SlipCount = Me.DARegisterTableAdapter.PSWiseDACount(d1, d2, ps)
+                TotalDACount = TotalDACount + r(i).SlipCount
+                Me.FingerPrintDataSet.DAStatement.Rows.Add(r(i))
+
+                For delay = delay To delay + iteration
+                    If delay < 21 Then
+                        bgwWord.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(20)
+                    End If
+                Next
+            Next
+
 
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -167,6 +151,11 @@ Public Class frmDAStatement
             Dim WordApp As New Word.ApplicationClass()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+
+            For delay = 21 To 30
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
 
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
@@ -178,7 +167,9 @@ Public Class frmDAStatement
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine)
             WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
             WordApp.Selection.TypeText(datevalue.ToUpper)
@@ -190,8 +181,13 @@ Public Class frmDAStatement
 
             Dim RowCount = Me.FingerPrintDataSet.DAStatement.Count + 2
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
+
+            For delay = 31 To 40
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Tables.Item(1).AllowAutoFit = True
@@ -227,7 +223,14 @@ Public Class frmDAStatement
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Remarks")
 
+            For delay = 41 To 50
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
+
             Dim totalslip As Integer = 0
+            iteration = CInt(50 / RowCount)
+
             For i = 2 To RowCount - 1
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                 WordApp.Selection.TypeText(i - 1)
@@ -245,6 +248,12 @@ Public Class frmDAStatement
                     WordApp.Selection.TypeText(slipcount)
                 End If
 
+                For delay = delay To delay + iteration
+                    If delay < 99 Then
+                        bgwWord.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(20)
+                    End If
+                Next
             Next
 
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2))
@@ -271,12 +280,14 @@ Public Class frmDAStatement
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.SpaceAfter = 1
                 WordApp.Selection.ParagraphFormat.Space1()
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & frmMainInterface.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TI.Replace(", TI", "") & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
-
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
+            bgwWord.ReportProgress(100)
+            System.Threading.Thread.Sleep(100)
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -286,13 +297,22 @@ Public Class frmDAStatement
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
 
-  
+    Private Sub bgwWord_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwWord.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwWord_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwWord.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+    End Sub
     
+   
 End Class

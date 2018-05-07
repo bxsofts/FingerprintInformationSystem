@@ -134,7 +134,6 @@ Public Class FrmIndividualPerformance
         ShowReport(filename)
         Me.Cursor = Cursors.Default
 
-        Me.Close()
 
     End Sub
 

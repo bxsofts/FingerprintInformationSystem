@@ -3978,8 +3978,6 @@ Public Class frmMainInterface
         End Try
     End Sub
 
-
-
     Private Sub EvenColorPicker_SelectedColorChanged(sender As Object, e As EventArgs) Handles ColorPickerEvenRecords.SelectedColorChanged
         TableEvenColor = ColorPickerEvenRecords.SelectedColor
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableEvenColor", TableEvenColor.ToArgb.ToString, Microsoft.Win32.RegistryValueKind.String)
@@ -13858,22 +13856,13 @@ errhandler:
     End Sub
 
     Private Sub ShowBlankSOCFacingSheet() Handles btnFacingsheetBlank.Click, btnBlankFacingSheet.Click
-        On Error Resume Next
-
         frmBlankFacingSheet.Show()
         frmBlankFacingSheet.WindowState = FormWindowState.Maximized
         frmBlankFacingSheet.BringToFront()
     End Sub
 
     Private Sub ShowSOCStatement() Handles btnSOCStatement.Click, btnMonthlySOC.Click
-
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        frmSOCStatement.Show()
-        frmSOCStatement.WindowState = FormWindowState.Maximized
-        Me.Cursor = Cursors.Default
-        frmSOCStatement.BringToFront()
-
+        frmSOCStatement.ShowDialog()
     End Sub
 
     Private Sub ShowGraveCrimeReport() Handles btnGraveCrimeReport.Click, btnGraveCrimeStatement.Click
@@ -15350,18 +15339,9 @@ errhandler:
     Private Sub ShowDASlipStatementAllPS() Handles btnDAStatementAllPS.Click, btnMonthlyDA.Click
 
         On Error Resume Next
-        frmDAStatement.Show()
-        frmDAStatement.WindowState = FormWindowState.Maximized
-        frmDAStatement.BringToFront()
+        frmDAStatement.ShowDialog()
     End Sub
 
-
-    Private Sub ShowDASlipStatementSlipReceivedPSOnly() Handles btnDAStatementSlipPS.Click
-        On Error Resume Next
-        frmDAStatementSlipOnly.Show()
-        frmDAStatementSlipOnly.WindowState = FormWindowState.Maximized
-        frmDAStatementSlipOnly.BringToFront()
-    End Sub
 
     Private Sub ShowFPAStstistics() Handles btnFPAStatement.Click, btnMonthlyFPA.Click
 

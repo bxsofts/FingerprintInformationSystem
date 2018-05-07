@@ -11,7 +11,6 @@ Public Class frmAttendanceStmt
     Dim OfficerList(4) As String
     Dim ArrayLength As Integer = 0
     Dim SaveFileName As String
-    Dim culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
     Private Sub LoadDate() Handles MyBase.Load
         On Error Resume Next
 
