@@ -160,6 +160,12 @@ Public Class frmMainInterface
 
         ShowAllDataEntryFields(ShowAllFields)
 
+        If Me.PanelSOC.Visible = False Then
+            Me.SOCDatagrid.Focus()
+        Else
+            Me.txtSOCNumber.Focus()
+        End If
+
         Application.DoEvents()
 
         boolUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
@@ -2471,7 +2477,12 @@ Public Class frmMainInterface
             Case Me.SOCTabItem.Name
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
                 CurrentTab = "SOC"
-                Me.txtSOCNumber.Focus()
+                If Me.PanelSOC.Visible = False Then
+                    Me.SOCDatagrid.Focus()
+                Else
+                    Me.txtSOCNumber.Focus()
+                End If
+
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveSOC
                 Me.btnFacingSheetContext.Visible = True
@@ -2487,7 +2498,12 @@ Public Class frmMainInterface
             Case Me.RSOCTabItem.Name
                 Me.pnlRegisterName.Text = "Scene of Crime Reports Register"
                 CurrentTab = "RSOC"
-                Me.txtRSOCSerialNumber.Focus()
+                If Me.PanelRSOC.Visible = False Then
+                    Me.RSOCDatagrid.Focus()
+                Else
+                    Me.txtRSOCSerialNumber.Focus()
+                End If
+
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveRSOC
                 Me.RSOCDatagrid.Cursor = Cursors.Default
@@ -2503,7 +2519,12 @@ Public Class frmMainInterface
                 Me.pnlRegisterName.Text = "Daily Arrest Slips Register"
                 CurrentTab = "DA"
                
-                Me.txtDANumber.Focus()
+                If Me.PanelDA.Visible = False Then
+                    Me.DADatagrid.Focus()
+                Else
+                    Me.txtDANumber.Focus()
+                End If
+
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveDA
                 Me.DADatagrid.Cursor = Cursors.Default
@@ -2518,7 +2539,12 @@ Public Class frmMainInterface
             Case Me.IDTabItem.Name
                 Me.pnlRegisterName.Text = "Identified Slips Register"
                 CurrentTab = "ID"
-                Me.txtIDNumber.Focus()
+                If Me.PanelID.Visible = False Then
+                    Me.IDDatagrid.Focus()
+                Else
+                    Me.txtIDNumber.Focus()
+                End If
+
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveID
                 Me.IDDatagrid.Cursor = Cursors.Default
@@ -2527,7 +2553,12 @@ Public Class frmMainInterface
             Case Me.ACTabItem.Name
                 Me.pnlRegisterName.Text = "Active Criminal Slips Register"
                 CurrentTab = "AC"
-                Me.txtACNumber.Focus()
+                If Me.PanelAC.Visible = False Then
+                    Me.ACDatagrid.Focus()
+                Else
+                    Me.txtACNumber.Focus()
+                End If
+
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveAC
                 Me.ACDatagrid.Cursor = Cursors.Default
@@ -2536,7 +2567,12 @@ Public Class frmMainInterface
             Case Me.FPATabItem.Name
                 Me.pnlRegisterName.Text = "Fingerprint Attestation Register"
                 CurrentTab = "FPA"
-                Me.txtFPANumber.Focus()
+                If Me.PanelFPA.Visible = False Then
+                    Me.FPADataGrid.Focus()
+                Else
+                    Me.txtFPANumber.Focus()
+                End If
+
                 Me.AcceptButton = btnSaveFPA
                 Me.FPADataGrid.Cursor = Cursors.Default
                 Me.btnLoadThisMonthRecords.Visible = True
@@ -2550,7 +2586,12 @@ Public Class frmMainInterface
             Case Me.PSTabItem.Name
                 Me.pnlRegisterName.Text = "List of Police Stations"
                 CurrentTab = "PS"
-                Me.txtPSName.Focus()
+                If Me.PanelPS.Visible = False Then
+                    Me.PSDataGrid.Focus()
+                Else
+                    Me.txtPSName.Focus()
+                End If
+
                 Me.AcceptButton = btnSavePS
                 If PSListChanged Then Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
                 PSListChanged = False
@@ -2560,7 +2601,12 @@ Public Class frmMainInterface
             Case Me.CDTabItem.Name
                 Me.pnlRegisterName.Text = "Court Duty Register"
                 CurrentTab = "CD"
-                Me.txtCDNumber.Focus()
+                If Me.PanelCD.Visible = False Then
+                    Me.CDDataGrid.Focus()
+                Else
+                    Me.txtCDNumber.Focus()
+                End If
+
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveCD
                 Me.CDDataGrid.Cursor = Cursors.Default
@@ -13369,7 +13415,7 @@ errhandler:
                 End If
 
                 If BackupFolderID = "" Then
-                    Exit Sub
+                    BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
                 End If
 
                 Dim BackupTime As Date = Now
@@ -13406,6 +13452,59 @@ errhandler:
             ' ShowErrorMessage(ex)
         End Try
     End Sub
+
+    Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
+        Try
+            Dim id As String = ""
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+
+            Dim parentlist As New List(Of String)
+            Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
+
+            parentlist.Add(masterfolderid)
+
+            body.Parents = parentlist
+            body.Name = BackupFolder
+            body.Description = "FIS Backup Folder"
+            body.MimeType = "application/vnd.google-apps.folder"
+
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
+
+            NewDirectory = request.Execute()
+            id = NewDirectory.Id
+            Return id
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+            Return ""
+        End Try
+
+    End Function
+
+
+    Private Function GetMasterBackupFolderID(FISService As DriveService) As String
+        Try
+            Dim id As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                id = ""
+            Else
+                id = Results.Files(0).Id
+            End If
+
+            Return id
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+            Return ""
+        End Try
+    End Function
 
     Public uUploadStatus As UploadStatus
     Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
@@ -16421,8 +16520,44 @@ errhandler:
     End Sub
 
     
-    '  Private Sub SOCDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles SOCDatagrid.RowPrePaint
-    'Dim dt As Date = SOCDatagrid.Rows(e.RowIndex).Cells(2).Value
-    ' If dt.Month = Today.Month And dt.Year = Today.Year Then SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Cyan
-    '   End Sub
+    Private Sub SOCDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles SOCDatagrid.RowPrePaint
+        Try
+            Dim dt As Date = SOCDatagrid.Rows(e.RowIndex).Cells(2).Value
+            If dt.Month Mod 2 = 0 Then SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub DADatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles DADatagrid.RowPrePaint
+        Try
+            Dim dt As Date = DADatagrid.Rows(e.RowIndex).Cells(2).Value
+            If dt.Month Mod 2 = 0 Then DADatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub FPADatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles FPADataGrid.RowPrePaint
+        Try
+            Dim dt As Date = FPADataGrid.Rows(e.RowIndex).Cells(2).Value
+            If dt.Month Mod 2 = 0 Then FPADataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub CDDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles CDDataGrid.RowPrePaint
+        Try
+            Dim dt As Date = CDDataGrid.Rows(e.RowIndex).Cells(2).Value
+            If dt.Month Mod 2 = 0 Then CDDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub rsocDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles RSOCDatagrid.RowPrePaint
+        Try
+            Dim dt As Date = RSOCDatagrid.Rows(e.RowIndex).Cells(3).Value
+            If dt.Month Mod 2 = 0 Then RSOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
+        Catch ex As Exception
+        End Try
+    End Sub
+
 End Class
