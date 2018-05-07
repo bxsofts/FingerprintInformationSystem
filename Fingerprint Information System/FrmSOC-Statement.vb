@@ -17,14 +17,24 @@ Public Class frmSOCStatement
     End Sub
 
     Sub SetDays() Handles MyBase.Load
-        On Error Resume Next
-        
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.WaitCursor
-        If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
-        Me.SOCRegisterTableAdapter.Connection.Open()
+        Me.ReportViewer1.Cursor = Cursors.WaitCursor
+        bgwReport.RunWorkerAsync()
+    End Sub
 
-       
+    Private Sub bgwReport_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwReport.DoWork
+        On Error Resume Next
+
+
+        If Me.SocRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter.Connection.Close()
+        Me.SocRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SocRegisterTableAdapter.Connection.Open()
+
+
         Me.txtNilPrint.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "NilPrintText", "No action")
         Me.txtPrintRemains.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "PrintRemainsText", "Search continuing")
         Me.txtNoPrintRemains.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "NoPrintRemainsText", "Fully eliminated or unfit")
@@ -54,15 +64,15 @@ Public Class frmSOCStatement
         d1 = New Date(y, m, 1)
         d2 = New Date(y, m, d)
         headertext = "for the month of " & MonthName(m) & " " & y
-
+        
         GenerateOnLoad()
+        System.Threading.Thread.Sleep(250)
         Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
         Me.ReportViewer1.ZoomMode = ZoomMode.Percent
         Me.ReportViewer1.ZoomPercent = 25
         Me.cmbMonth.Focus()
-        Me.Cursor = Cursors.Default
-    End Sub
 
+    End Sub
 
     Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
         On Error Resume Next
@@ -138,15 +148,31 @@ Public Class frmSOCStatement
 
     Private Sub OpenReportInWord() Handles btnOpenInWord.Click
         Try
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
             Me.Cursor = Cursors.WaitCursor
+            Me.bgwWord.RunWorkerAsync()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
 
+    Private Sub bgwWord_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwWord.DoWork
+        Try
+
+            Dim delay As Integer = 0
+            For delay = 0 To 10
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
             Dim WordApp As New Word.ApplicationClass()
-
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
 
@@ -158,18 +184,32 @@ Public Class frmSOCStatement
             WordApp.Selection.Document.PageSetup.BottomMargin = 50
             WordApp.Selection.NoProofing = 1
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.Font.Size = 14
+            WordApp.Selection.Font.Size = 12
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            For delay = 11 To 20
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
+            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
 
-            WordApp.Selection.TypeText(("STATEMENT OF SCENES OF CRIME INSPECTED BY THE " & FullOfficeName & ", " & FullDistrictName & " " & vbNewLine & headertext).ToUpper)
+            WordApp.Selection.TypeText(("STATEMENT OF SCENES OF CRIME INSPECTED BY " & FullOfficeName & ", " & FullDistrictName & " " & vbCrLf & headertext).ToUpper)
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.TypeParagraph()
+            WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.Paragraphs.DecreaseSpacing()
+
             Dim RowCount = Me.SOCRegisterBindingSource.Count
+
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 2, 12)
+
+            For delay = 21 To 30
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Font.Bold = 0
@@ -186,6 +226,11 @@ Public Class frmSOCStatement
             WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
             'WordApp.Selection.Tables.Item(1).Columns(12).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+            For delay = 31 To 40
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
 
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
             WordApp.Selection.Font.Bold = 1
@@ -253,12 +298,22 @@ Public Class frmSOCStatement
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Details of Comparison and Disposal")
 
+            For delay = 41 To 50
+                bgwWord.ReportProgress(delay)
+                System.Threading.Thread.Sleep(30)
+            Next
+
             For i = 1 To 12
                 WordApp.Selection.Tables.Item(1).Cell(2, i).Select()
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText(i)
+                bgwWord.ReportProgress(delay + i)
+                System.Threading.Thread.Sleep(30)
             Next
+            delay = 62
+
+            Dim iteration As Integer = CInt(38 / RowCount)
 
             For i = 3 To RowCount + 2
                 Dim j = i - 3
@@ -287,7 +342,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                 WordApp.Selection.Font.Name = "Rupee Foradian"
                 WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 10
+                WordApp.Selection.Font.Size = 8
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PropertyLost)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
@@ -313,6 +368,14 @@ Public Class frmSOCStatement
                     End If
                 End If
                 WordApp.Selection.TypeText(Remarks)
+
+                For delay = delay To delay + iteration
+                    If delay < 99 Then
+                        bgwWord.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(20)
+                    End If
+                Next
+
             Next
 
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 3, 12).Select()
@@ -328,13 +391,17 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.SpaceAfter = 1
                 WordApp.Selection.ParagraphFormat.Space1()
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & frmMainInterface.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TI.Replace(", TI", "") & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
+
+            bgwWord.ReportProgress(100)
+            System.Threading.Thread.Sleep(100)
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -344,10 +411,28 @@ Public Class frmSOCStatement
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
+
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
+    Private Sub bgwWord_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwWord.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwWord_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwWord.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+    End Sub
+    
+    Private Sub bgwReport_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwReport.RunWorkerCompleted
+        Me.Cursor = Cursors.Default
+        Me.ReportViewer1.Cursor = Cursors.Default
+    End Sub
+
+   
 End Class

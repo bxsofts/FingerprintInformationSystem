@@ -23,7 +23,7 @@ Partial Class frmSOCStatement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ReportDataSource1 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
+        Dim ReportDataSource3 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSOCStatement))
         Me.SOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
@@ -53,6 +53,9 @@ Partial Class frmSOCStatement
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SocRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
+        Me.bgwReport = New System.ComponentModel.BackgroundWorker()
+        Me.bgwWord = New System.ComponentModel.BackgroundWorker()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -78,9 +81,9 @@ Partial Class frmSOCStatement
         'ReportViewer1
         '
         Me.ReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        ReportDataSource1.Name = "FingerPrintDataSet_SOCRegister"
-        ReportDataSource1.Value = Me.SOCRegisterBindingSource
-        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource1)
+        ReportDataSource3.Name = "FingerPrintDataSet_SOCRegister"
+        ReportDataSource3.Value = Me.SOCRegisterBindingSource
+        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource3)
         Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "FingerprintInformationSystem.SOCStatementNew.rdlc"
         Me.ReportViewer1.Location = New System.Drawing.Point(3, 128)
         Me.ReportViewer1.Name = "ReportViewer1"
@@ -127,6 +130,7 @@ Partial Class frmSOCStatement
         '
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx3.Controls.Add(Me.CircularProgress1)
         Me.PanelEx3.Controls.Add(Me.btnOpenInWord)
         Me.PanelEx3.Controls.Add(Me.btnPrint)
         Me.PanelEx3.Controls.Add(Me.txtNoPrintRemains)
@@ -552,6 +556,32 @@ Partial Class frmSOCStatement
         '
         Me.SocRegisterTableAdapter.ClearBeforeFill = True
         '
+        'bgwReport
+        '
+        Me.bgwReport.WorkerReportsProgress = True
+        Me.bgwReport.WorkerSupportsCancellation = True
+        '
+        'bgwWord
+        '
+        Me.bgwWord.WorkerReportsProgress = True
+        Me.bgwWord.WorkerSupportsCancellation = True
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(572, 9)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(275, 101)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 48
+        Me.CircularProgress1.TabStop = False
+        '
         'frmSOCStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -607,4 +637,7 @@ Partial Class frmSOCStatement
     Friend WithEvents btnOpenInWord As DevComponents.DotNetBar.ButtonX
     Friend WithEvents SocRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
     Private WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents bgwReport As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwWord As System.ComponentModel.BackgroundWorker
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
 End Class

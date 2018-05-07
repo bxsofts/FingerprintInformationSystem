@@ -709,7 +709,6 @@
     <EmbeddedResource Include="SOC Statistics.rdlc" />
     <EmbeddedResource Include="FPA Statistics.rdlc" />
     <EmbeddedResource Include="Facing Sheet.rdlc" />
-    <EmbeddedResource Include="Monthly SOC Statement.rdlc" />
     <EmbeddedResource Include="SOCReportsStatement.rdlc" />
     <EmbeddedResource Include="SOCStatementNew.rdlc" />
   </ItemGroup>

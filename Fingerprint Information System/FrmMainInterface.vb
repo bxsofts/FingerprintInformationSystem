@@ -13868,9 +13868,12 @@ errhandler:
     Private Sub ShowSOCStatement() Handles btnSOCStatement.Click, btnMonthlySOC.Click
 
         On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
         frmSOCStatement.Show()
         frmSOCStatement.WindowState = FormWindowState.Maximized
+        Me.Cursor = Cursors.Default
         frmSOCStatement.BringToFront()
+
     End Sub
 
     Private Sub ShowGraveCrimeReport() Handles btnGraveCrimeReport.Click, btnGraveCrimeStatement.Click
