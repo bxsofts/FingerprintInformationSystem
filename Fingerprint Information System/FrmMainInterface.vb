@@ -102,6 +102,8 @@ Public Class frmMainInterface
     Dim IDDetailsFocussed As Boolean = False
     Dim IOSelectedRow As Integer
 
+    Dim TableEvenColor As Color
+    Dim TableOddColor As Color
 
 #End Region
 
@@ -113,9 +115,9 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If FrmSettingsWizard.Visible Then FrmSettingsWizard.Close()
-      
-        SetColorTheme()
 
+        SetColorTheme()
+        SetTableBackColor()
 
         strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
         '  Dim InstalledDBPath = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
@@ -375,7 +377,7 @@ Public Class frmMainInterface
                 TakeAutoBackup()
                 bgwOnlineAutoBackup.RunWorkerAsync()
             End If
-           
+
         End If
 
 
@@ -930,7 +932,7 @@ Public Class frmMainInterface
 
     End Sub
 
-    
+
 #End Region
 
 
@@ -1217,7 +1219,7 @@ Public Class frmMainInterface
         Dim y As String = Year(Today)
         Dim d1 As Date = New Date(y, 1, 1)
         Dim d2 As Date = New Date(y, 12, 31)
-        
+
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
         Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
@@ -1488,7 +1490,7 @@ Public Class frmMainInterface
                 Exit Sub
         End Select
 
-        
+
 
         Dim d1 As Date = New Date(y, 1, 1)
         Dim d2 As Date = New Date(y, 12, 31)
@@ -1782,7 +1784,7 @@ Public Class frmMainInterface
         Me.Cursor = Cursors.WaitCursor
         boolShowWizard = True
         FrmSettingsWizard.ShowDialog()
-       
+
         If boolSettingsWizardCancelled = False Then
             ReloadTablesAfterDBChange()
         End If
@@ -1812,7 +1814,7 @@ Public Class frmMainInterface
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
-        
+
     End Sub
 
     Private Sub SaveLoadDAtoID() Handles chkIDLoadOtherDetails.CheckValueChanged
@@ -2518,7 +2520,7 @@ Public Class frmMainInterface
             Case Me.DATabItem.Name
                 Me.pnlRegisterName.Text = "Daily Arrest Slips Register"
                 CurrentTab = "DA"
-               
+
                 If Me.PanelDA.Visible = False Then
                     Me.DADatagrid.Focus()
                 Else
@@ -3002,7 +3004,7 @@ Public Class frmMainInterface
         Me.IODatagrid.Columns(0).DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
     End Sub
 
-   
+
 
     Private Sub HideDataEntryFields() Handles btnShowHideFields.Click
         On Error Resume Next
@@ -3878,6 +3880,115 @@ Public Class frmMainInterface
         End If
     End Sub
 
+
+#End Region
+
+
+#Region "DATAGRID BACKCOLOR"
+    Private Sub SetTableBackColor()
+        Try
+            Dim strTableEvenColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableEvenColor", Color.Salmon.ToArgb.ToString)
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableEvenColor", strTableEvenColor, Microsoft.Win32.RegistryValueKind.String)
+
+            Dim strTableOddColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableOddColor", SOCDatagrid.DefaultCellStyle.BackColor)
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableOddColor", strTableOddColor, Microsoft.Win32.RegistryValueKind.String)
+
+            TableEvenColor = CType(Color.FromArgb(strTableEvenColor), Color)
+            TableOddColor = CType(Color.FromArgb(strTableOddColor), Color)
+            Me.ColorPickerEvenRecords.SelectedColor = TableEvenColor
+            Me.ColorPickerOddRecords.SelectedColor = TableOddColor
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub SOCDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles SOCDatagrid.RowPrePaint
+        Try
+
+            Dim dt As Date = SOCDatagrid.Rows(e.RowIndex).Cells(2).Value
+
+            If dt.Month Mod 2 = 0 Then
+                SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
+            Else
+                SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
+            End If
+
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub DADatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles DADatagrid.RowPrePaint
+        Try
+
+            Dim dt As Date = DADatagrid.Rows(e.RowIndex).Cells(2).Value
+            If dt.Month Mod 2 = 0 Then
+                DADatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
+            Else
+                DADatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
+            End If
+
+
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub FPADatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles FPADataGrid.RowPrePaint
+        Try
+
+            Dim dt As Date = FPADataGrid.Rows(e.RowIndex).Cells(2).Value
+
+            If dt.Month Mod 2 = 0 Then
+                FPADataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
+            Else
+                FPADataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
+            End If
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub CDDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles CDDataGrid.RowPrePaint
+        Try
+
+            Dim dt As Date = CDDataGrid.Rows(e.RowIndex).Cells(2).Value
+            If dt.Month Mod 2 = 0 Then
+                CDDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
+            Else
+                CDDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
+            End If
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub rsocDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles RSOCDatagrid.RowPrePaint
+        Try
+
+
+            Dim dt As Date = RSOCDatagrid.Rows(e.RowIndex).Cells(3).Value
+            If dt.Month Mod 2 = 0 Then
+                RSOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
+            Else
+                RSOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
+            End If
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+
+
+    Private Sub EvenColorPicker_SelectedColorChanged(sender As Object, e As EventArgs) Handles ColorPickerEvenRecords.SelectedColorChanged
+        TableEvenColor = ColorPickerEvenRecords.SelectedColor
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableEvenColor", TableEvenColor.ToArgb.ToString, Microsoft.Win32.RegistryValueKind.String)
+    End Sub
+
+    Private Sub OddColorPicker_SelectedColorChanged(sender As Object, e As EventArgs) Handles ColorPickerOddRecords.SelectedColorChanged
+        TableOddColor = ColorPickerOddRecords.SelectedColor
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableOddColor", TableOddColor.ToArgb.ToString, Microsoft.Win32.RegistryValueKind.String)
+    End Sub
 
 #End Region
 
@@ -16519,45 +16630,6 @@ errhandler:
         frmAbout.ShowDialog()
     End Sub
 
+
     
-    Private Sub SOCDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles SOCDatagrid.RowPrePaint
-        Try
-            Dim dt As Date = SOCDatagrid.Rows(e.RowIndex).Cells(2).Value
-            If dt.Month Mod 2 = 0 Then SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub DADatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles DADatagrid.RowPrePaint
-        Try
-            Dim dt As Date = DADatagrid.Rows(e.RowIndex).Cells(2).Value
-            If dt.Month Mod 2 = 0 Then DADatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub FPADatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles FPADataGrid.RowPrePaint
-        Try
-            Dim dt As Date = FPADataGrid.Rows(e.RowIndex).Cells(2).Value
-            If dt.Month Mod 2 = 0 Then FPADataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub CDDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles CDDataGrid.RowPrePaint
-        Try
-            Dim dt As Date = CDDataGrid.Rows(e.RowIndex).Cells(2).Value
-            If dt.Month Mod 2 = 0 Then CDDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub rsocDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles RSOCDatagrid.RowPrePaint
-        Try
-            Dim dt As Date = RSOCDatagrid.Rows(e.RowIndex).Cells(3).Value
-            If dt.Month Mod 2 = 0 Then RSOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Salmon
-        Catch ex As Exception
-        End Try
-    End Sub
-
 End Class
