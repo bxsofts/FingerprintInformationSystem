@@ -364,7 +364,7 @@ Public Class FrmTourNote
 
             For delay = 0 To 20
                 bgwBlankForms.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(10)
             Next
 
             Dim wdApp As Word.Application
@@ -372,14 +372,14 @@ Public Class FrmTourNote
             wdApp = New Word.Application
             For delay = 21 To 50
                 bgwBlankForms.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
+                System.Threading.Thread.Sleep(5)
             Next
             wdDocs = wdApp.Documents
             Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
 
             For delay = 51 To 100
                 bgwBlankForms.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
+                System.Threading.Thread.Sleep(5)
             Next
 
             wdDoc.Range.NoProofing = 1
@@ -519,7 +519,7 @@ errhandler:
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwSingleTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim Designation As String = ""
@@ -547,7 +547,7 @@ errhandler:
 
             For delay = 11 To 20
                 bgwSingleTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim wdApp As Word.Application
@@ -560,7 +560,7 @@ errhandler:
 
             For delay = 21 To 30
                 bgwSingleTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
@@ -589,7 +589,7 @@ errhandler:
 
             For delay = 31 To 40
                 bgwSingleTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim j = 3
@@ -643,7 +643,7 @@ errhandler:
                 For delay = delay To delay + iteration
                     If delay < 91 Then
                         bgwSingleTN.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(20)
+                        System.Threading.Thread.Sleep(5)
                     End If
                 Next
 
@@ -657,7 +657,7 @@ errhandler:
 
             For delay = 91 To 100
                 bgwSingleTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
 
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generated"
@@ -745,7 +745,7 @@ errhandler:
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwThreeTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim Designation As String = ""
@@ -773,7 +773,7 @@ errhandler:
 
             For delay = 11 To 20
                 bgwThreeTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
 
@@ -788,7 +788,7 @@ errhandler:
 
             For delay = 21 To 30
                 bgwThreeTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
@@ -816,7 +816,7 @@ errhandler:
 
             For delay = 31 To 40
                 bgwThreeTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim j = 3
@@ -918,7 +918,7 @@ errhandler:
                 For delay = delay To delay + iteration
                     If delay < 91 Then
                         bgwThreeTN.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(20)
+                        System.Threading.Thread.Sleep(5)
                     End If
                 Next
 
@@ -930,7 +930,7 @@ errhandler:
 
             For delay = 91 To 100
                 bgwThreeTN.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generated"
 
@@ -1129,7 +1129,7 @@ errhandler:
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwTR56.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim args As TourNoteArgs = e.Argument
@@ -1156,7 +1156,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdApp As Word.Application
@@ -1168,7 +1168,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 wdDoc.Range.NoProofing = 1
@@ -1195,7 +1195,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim iteration As Integer = CInt(50 / args.RowCount)
@@ -1252,7 +1252,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR56.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next
@@ -1279,7 +1279,7 @@ errhandler:
                 End If
                 For delay = 91 To 100
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(30)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 wdApp.Visible = True
@@ -1331,7 +1331,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 wdDocTA.Range.NoProofing = 1
@@ -1348,7 +1348,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim TATblRowCount = wdTblTA.Rows.Count - 7 'total 23 -3(heading) - 4 (calculation) = 16
@@ -1364,7 +1364,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim j = 4
@@ -1436,7 +1436,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR56.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next
@@ -1464,7 +1464,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(30)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
@@ -1566,7 +1566,7 @@ errhandler:
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwTR56ThreeLine.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim args As TourNoteArgs = e.Argument
@@ -1594,7 +1594,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdApp As Word.Application
@@ -1606,7 +1606,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 wdDoc.Range.NoProofing = 1
@@ -1632,7 +1632,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim DA As Integer = Val(DAarray(sx))
@@ -1741,7 +1741,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR56ThreeLine.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
 
@@ -1768,7 +1768,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(30)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 wdApp.Visible = True
@@ -1795,7 +1795,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdDocTA As Word.Document = wdDocs.Add(args.TATemplateFile)
@@ -1826,7 +1826,7 @@ errhandler:
                 Dim sx As Integer = args.SelectedIndex
                 For delay = 21 To 30
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 wdDocTA.Range.NoProofing = 1
@@ -1855,7 +1855,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim j = 4
@@ -2019,7 +2019,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR56ThreeLine.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next i
@@ -2047,7 +2047,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(30)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
@@ -2068,7 +2068,7 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
     End Sub
-   
+
 
 #End Region
 
@@ -2157,7 +2157,7 @@ errhandler:
             Me.Cursor = Cursors.WaitCursor
             bgwTR47.RunWorkerAsync(args)
 
-           
+
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -2174,7 +2174,7 @@ errhandler:
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwTR47.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim args As TourNoteArgs = e.Argument
@@ -2186,7 +2186,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdApp As Word.Application
@@ -2199,7 +2199,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
@@ -2225,7 +2225,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim DA As Integer = Val(DAarray(sx))
@@ -2280,7 +2280,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR47.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next
@@ -2307,7 +2307,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 wdApp.Visible = True
@@ -2332,7 +2332,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdDocTA As Word.Document = wdDocs.Add(args.TATemplateFile)
@@ -2350,7 +2350,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdBooks As Word.Bookmarks = wdDocTA.Bookmarks
@@ -2376,7 +2376,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim DA As Integer = Val(DAarray(sx))
@@ -2443,7 +2443,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR47.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next
@@ -2472,7 +2472,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
@@ -2579,7 +2579,7 @@ errhandler:
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwTR47ThreeLine.ReportProgress(delay)
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(5)
             Next
 
             Dim args As TourNoteArgs = e.Argument
@@ -2599,7 +2599,7 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
@@ -2616,7 +2616,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim TblRowCount = wdTbl.Rows.Count - 11 'total 25-3-7 = 15
@@ -2630,7 +2630,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim DA As Integer = Val(DAarray(sx))
@@ -2737,7 +2737,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR47ThreeLine.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next
@@ -2764,7 +2764,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 wdApp.Visible = True
@@ -2796,13 +2796,13 @@ errhandler:
 
                 For delay = 11 To 20
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim TNRowCount = wdTblTN.Rows.Count
                 Dim TNRecordCount As Integer = TNRowCount - 2
 
-               
+
                 OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
 
                 Dim sx As Integer = args.SelectedIndex
@@ -2811,7 +2811,7 @@ errhandler:
 
                 For delay = 21 To 30
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim wdBooks As Word.Bookmarks = wdDocTA.Bookmarks
@@ -2826,7 +2826,7 @@ errhandler:
                 wdBooks("Name").Range.Text = OfficerNameOnly.ToUpper
                 wdBooks("Designation").Range.Text = Designation
 
-                
+
 
                 Dim TATblRowCount = wdTblTA.Rows.Count - 11 'total rows = 25 -4(calculation) -7(heading)  = 14
                 Dim RowCountRequired = TNRecordCount - TATblRowCount '18-15 = 3
@@ -2841,7 +2841,7 @@ errhandler:
 
                 For delay = 31 To 40
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
 
                 Dim j = 8
@@ -3010,7 +3010,7 @@ errhandler:
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR47ThreeLine.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(20)
+                            System.Threading.Thread.Sleep(5)
                         End If
                     Next
                 Next
@@ -3039,7 +3039,7 @@ errhandler:
 
                 For delay = 91 To 100
                     bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(5)
                 Next
                 Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
                 wdApp.Visible = True

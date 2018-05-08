@@ -1798,7 +1798,7 @@ Public Class frmMainInterface
             strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
             ConnectToDatabase()
             LoadOfficerList()
-            Me.IODatagrid.Rows(0).Cells(1).Value = TI.Replace(", TI", "")
+            Me.IODatagrid.Rows(0).Cells(1).Value = TIName()
             Me.IODatagrid.Rows(1).Cells(1).Value = FPE1.Replace(", FPE", "")
             Me.IODatagrid.Rows(2).Cells(1).Value = FPE2.Replace(", FPE", "")
             Me.IODatagrid.Rows(3).Cells(1).Value = FPE3.Replace(", FPE", "")

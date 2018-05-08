@@ -29,6 +29,7 @@ Partial Class frmSOCStatement
         Me.SocRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwWord = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
@@ -39,7 +40,6 @@ Partial Class frmSOCStatement
         Me.btnGenerateByDate = New DevComponents.DotNetBar.ButtonX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -87,7 +87,7 @@ Partial Class frmSOCStatement
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(537, 105)
+        Me.PanelEx2.Size = New System.Drawing.Size(537, 97)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -96,13 +96,30 @@ Partial Class frmSOCStatement
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 23
         '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(420, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(117, 97)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 48
+        Me.CircularProgress1.TabStop = False
+        '
         'btnGenerateByMonth
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(420, 11)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(420, 10)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
-        Me.btnGenerateByMonth.Size = New System.Drawing.Size(98, 33)
+        Me.btnGenerateByMonth.Size = New System.Drawing.Size(98, 29)
         Me.btnGenerateByMonth.TabIndex = 3
         Me.btnGenerateByMonth.Text = "Generate"
         '
@@ -201,9 +218,9 @@ Partial Class frmSOCStatement
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(420, 56)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(420, 57)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
-        Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 33)
+        Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 29)
         Me.btnGenerateByDate.TabIndex = 6
         Me.btnGenerateByDate.Text = "Generate"
         '
@@ -319,28 +336,11 @@ Partial Class frmSOCStatement
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'CircularProgress1
-        '
-        '
-        '
-        '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(410, 0)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(127, 105)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 48
-        Me.CircularProgress1.TabStop = False
-        '
         'frmSOCStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 105)
+        Me.ClientSize = New System.Drawing.Size(537, 97)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False

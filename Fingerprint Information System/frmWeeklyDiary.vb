@@ -115,7 +115,7 @@ Public Class frmWeeklyDiary
 
 
                 If boolUseTIinLetter Then
-                    wdBooks("tiname").Range.Text = TI.Replace(", TI", "")
+                    wdBooks("tiname").Range.Text = TIName()
                     wdBooks("ti").Range.Text = "Tester Inspector"
                     wdBooks("sdfpb").Range.Text = FullOfficeName
                     wdBooks("district3").Range.Text = FullDistrictName
@@ -178,7 +178,7 @@ Public Class frmWeeklyDiary
                     End With
 
                     bgwWeeklyDiary.ReportProgress(i * 10)
-                    System.Threading.Thread.Sleep(100)
+                    System.Threading.Thread.Sleep(10)
 
                 Next
                 For i = 81 To 99
@@ -187,7 +187,7 @@ Public Class frmWeeklyDiary
                 Next
 
                 bgwWeeklyDiary.ReportProgress(100)
-                System.Threading.Thread.Sleep(100)
+                System.Threading.Thread.Sleep(10)
 
                 wdApp.Visible = True
                 wdApp.Activate()
@@ -230,7 +230,7 @@ Public Class frmWeeklyDiary
                 wdBooks("District1").Range.Text = FullDistrictName
                 wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy", culture)
 
-                wdBooks("Name1").Range.Text = TI.Replace(", TI", "")
+                wdBooks("Name1").Range.Text = TIName()
                 wdBooks("OfficeName2").Range.Text = FullOfficeName
                 wdBooks("District2").Range.Text = FullDistrictName
 
@@ -243,7 +243,7 @@ Public Class frmWeeklyDiary
                 Next
 
                 If boolUseTIinLetter Then
-                    wdBooks("Name2").Range.Text = TI.Replace(", TI", "")
+                    wdBooks("Name2").Range.Text = TIName()
                     wdBooks("Designation").Range.Text = "Tester Inspector"
                     wdBooks("OfficeName3").Range.Text = FullOfficeName
                     wdBooks("District3").Range.Text = FullDistrictName
@@ -260,7 +260,7 @@ Public Class frmWeeklyDiary
                 Next
 
                 bgwWeeklyDiary.ReportProgress(100)
-                System.Threading.Thread.Sleep(200)
+                System.Threading.Thread.Sleep(10)
 
                 wdApp.Visible = True
                 wdApp.Activate()

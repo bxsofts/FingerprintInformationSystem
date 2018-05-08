@@ -105,7 +105,7 @@ Public Class frmAttendanceStmt
             args.d2 = d2
             args.CoBFormat = Me.chkCoB.Checked
             args.UseTI = Me.chkTI.Checked
-            args.TIName = frmMainInterface.IODatagrid.Rows(0).Cells(1).Value
+            args.TIName = TIName()
             args.CL = True
 
             CircularProgress1.ProgressText = "0"
@@ -150,7 +150,7 @@ Public Class frmAttendanceStmt
         args.d2 = d2
         args.CoBFormat = Me.chkCoB.Checked
         args.UseTI = Me.chkTI.Checked
-        args.TIName = frmMainInterface.IODatagrid.Rows(0).Cells(1).Value
+        args.TIName = TIName()
         args.CL = False
 
         CircularProgress1.ProgressText = "0"
@@ -170,7 +170,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 1 To 5
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Dim missing As Object = System.Reflection.Missing.Value
@@ -184,7 +184,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 7 To 10
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
 
@@ -203,7 +203,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 11 To 20
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 If args.CoBFormat Then
@@ -247,7 +247,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 21 To 30
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
 
@@ -278,7 +278,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 31 To 40
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Dim i = 1
@@ -296,7 +296,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 41 To 50
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 r = rowcount
@@ -317,7 +317,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 51 To 60
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 For i = 2 To rowcount
@@ -437,7 +437,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 1 To 10
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 Dim bodytext As String = vbNullString
@@ -463,7 +463,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 11 To 20
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
@@ -477,7 +477,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 21 To 30
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 WordApp.Selection.Font.Size = 12 ' WordApp.Selection.Paragraphs.DecreaseSpacing()
@@ -492,7 +492,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 31 To 40
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 If WordApp.Version < 12 Then WordApp.Selection.ParagraphFormat.Space15()
@@ -515,7 +515,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 41 To 50
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 WordApp.Selection.TypeText(vbTab & "The Director" & vbNewLine & vbTab & "Fingerprint Bureau" & vbNewLine & vbTab & "Thiruvananthapuram")
@@ -532,7 +532,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 51 To 60
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 WordApp.Selection.TypeText(vbTab & bodytext)
@@ -546,7 +546,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 61 To 70
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 If boolUseTIinLetter Then
@@ -559,7 +559,7 @@ Public Class frmAttendanceStmt
 
                 For delay = 71 To 99
                     bgwAttendance.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(20)
+                    System.Threading.Thread.Sleep(10)
                 Next
 
                 bgwAttendance.ReportProgress(100)

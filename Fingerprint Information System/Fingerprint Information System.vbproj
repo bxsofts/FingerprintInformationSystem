@@ -311,10 +311,10 @@
     <Compile Include="FrmDA-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-Statement-AllPS.Designer.vb">
-      <DependentUpon>FrmDA-Statement-AllPS.vb</DependentUpon>
+    <Compile Include="FrmDA-Statement.Designer.vb">
+      <DependentUpon>FrmDA-Statement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDA-Statement-AllPS.vb">
+    <Compile Include="FrmDA-Statement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmDA-Statistics-MonthWise.Designer.vb">
@@ -573,8 +573,8 @@
       <DependentUpon>FrmDA-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-Statement-AllPS.resx">
-      <DependentUpon>FrmDA-Statement-AllPS.vb</DependentUpon>
+    <EmbeddedResource Include="FrmDA-Statement.resx">
+      <DependentUpon>FrmDA-Statement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDA-Statistics-MonthWise.resx">

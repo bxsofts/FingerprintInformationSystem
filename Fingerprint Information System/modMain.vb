@@ -144,6 +144,10 @@ Module modMain
         End If
     End Function
 
+    Public Function TIName() As String
+        Return TI.Replace(", TI", "")
+    End Function
+
 End Module
 
 

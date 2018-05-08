@@ -106,17 +106,17 @@ Public Class frmOnlineBackup
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwService.ReportProgress(delay, "Please wait...")
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             Dim Scopes As String() = {DriveService.Scope.Drive}
 
             For delay = 11 To 20
                 bgwService.ReportProgress(delay, "Connecting to Google Drive...")
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
-           
+
 
             '  Dim fStream = New FileStream(JsonPath, FileMode.Open, FileAccess.Read) ' use fro oauth2 authentication
             '    FISUserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialPath, True)).Result
@@ -172,7 +172,7 @@ Public Class frmOnlineBackup
 
             For delay = 81 To 90
                 bgwService.ReportProgress(delay, "Fetching Online Files...")
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(10)
             Next
 
             For Each Result In Results.Files
@@ -186,11 +186,11 @@ Public Class frmOnlineBackup
 
             For delay = 90 To 99
                 bgwService.ReportProgress(delay, "Fetching Online Files...")
-                System.Threading.Thread.Sleep(20)
+                System.Threading.Thread.Sleep(10)
             Next
 
             bgwService.ReportProgress(100, "Fetching Online Files...")
-            System.Threading.Thread.Sleep(200)
+            System.Threading.Thread.Sleep(50)
 
         Catch ex As Exception
 
@@ -386,7 +386,7 @@ Public Class frmOnlineBackup
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwUpload.ReportProgress(delay, "Connecting to Google Drive...")
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             Dim BackupTime As Date = Now
@@ -414,7 +414,7 @@ Public Class frmOnlineBackup
 
             For delay = 11 To 20
                 bgwUpload.ReportProgress(delay, "Copying Database...")
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
@@ -424,11 +424,11 @@ Public Class frmOnlineBackup
 
             For delay = 21 To 37
                 bgwUpload.ReportProgress(delay, "Initializing upload...")
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             bgwUpload.ReportProgress(38, "Uploading...")
-            System.Threading.Thread.Sleep(50)
+            System.Threading.Thread.Sleep(10)
 
             Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
             UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
@@ -447,15 +447,15 @@ Public Class frmOnlineBackup
 
                 Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
                 Dim item As ListViewItem = New ListViewItem(BackupFileName)
-                    item.SubItems.Add(sBackupTime)
-                    item.SubItems.Add(file.Id)
-                    item.SubItems.Add("")
-                    item.ImageIndex = 0
+                item.SubItems.Add(sBackupTime)
+                item.SubItems.Add(file.Id)
+                item.SubItems.Add("")
+                item.ImageIndex = 0
                 bgwUpload.ReportProgress(99, item)
                 System.Threading.Thread.Sleep(40)
-                    bgwUpload.ReportProgress(100, "Uploaded.")
-                    System.Threading.Thread.Sleep(200)
-                End If
+                bgwUpload.ReportProgress(100, "Uploaded.")
+                System.Threading.Thread.Sleep(100)
+            End If
 
 
             If uUploadStatus = UploadStatus.Failed Then
@@ -597,7 +597,7 @@ Public Class frmOnlineBackup
 
             For delay = 0 To 10
                 bgwDownload.ReportProgress(delay, "Connecting to Google Drive...")
-                System.Threading.Thread.Sleep(40)
+                System.Threading.Thread.Sleep(10)
             Next
 
             Dim args As DownloadArgs = e.Argument

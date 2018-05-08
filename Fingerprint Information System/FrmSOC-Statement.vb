@@ -96,7 +96,7 @@ Public Class frmSOCStatement
             Dim delay As Integer = 0
             For delay = 0 To 10
                 bgwWord.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -119,7 +119,7 @@ Public Class frmSOCStatement
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             For delay = 11 To 20
                 bgwWord.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.Paragraphs.DecreaseSpacing()
@@ -139,7 +139,7 @@ Public Class frmSOCStatement
 
             For delay = 21 To 30
                 bgwWord.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
@@ -160,7 +160,7 @@ Public Class frmSOCStatement
 
             For delay = 31 To 40
                 bgwWord.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
 
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
@@ -231,7 +231,7 @@ Public Class frmSOCStatement
 
             For delay = 41 To 50
                 bgwWord.ReportProgress(delay)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
 
             For i = 1 To 12
@@ -240,7 +240,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText(i)
                 bgwWord.ReportProgress(delay + i)
-                System.Threading.Thread.Sleep(30)
+                System.Threading.Thread.Sleep(10)
             Next
             delay = 62
 
@@ -303,7 +303,7 @@ Public Class frmSOCStatement
                 For delay = delay To delay + iteration
                     If delay < 99 Then
                         bgwWord.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(20)
+                        System.Threading.Thread.Sleep(10)
                     End If
                 Next
 
@@ -323,7 +323,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.ParagraphFormat.SpaceAfter = 1
                 WordApp.Selection.ParagraphFormat.Space1()
 
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TI.Replace(", TI", "") & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TIName() & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
@@ -332,7 +332,7 @@ Public Class frmSOCStatement
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             bgwWord.ReportProgress(100)
-            System.Threading.Thread.Sleep(100)
+            System.Threading.Thread.Sleep(10)
 
             WordApp.Visible = True
             WordApp.Activate()
