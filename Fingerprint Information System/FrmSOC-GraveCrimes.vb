@@ -9,6 +9,11 @@ Public Class FrmSOCGraveCrimes
         On Error Resume Next
         
         Me.Cursor = Cursors.WaitCursor
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Control.CheckForIllegalCrossThreadCalls = False
+
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
         Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
         Me.SOCRegisterTableAdapter.Connection.Open()
@@ -47,56 +52,64 @@ Public Class FrmSOCGraveCrimes
 
 
     Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
+        Try
+            Me.Cursor = Cursors.WaitCursor
 
-        Select Case DirectCast(sender, Control).Name
-            Case btnGenerateByDate.Name
-                d1 = Me.dtFrom.Value
-                d2 = Me.dtTo.Value
-                If d1 > d2 Then
-                    DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtFrom.Focus()
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-                SaveFileName = "Grave Crime Statement " & headertext.Replace("/", "-")
+            Select Case DirectCast(sender, Control).Name
+                Case btnGenerateByDate.Name
+                    d1 = Me.dtFrom.Value
+                    d2 = Me.dtTo.Value
+                    If d1 > d2 Then
+                        DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Me.dtFrom.Focus()
+                        Me.Cursor = Cursors.Default
+                        Exit Sub
+                    End If
+                    headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+                    SaveFileName = (Me.dtFrom.Text & " to " & Me.dtTo.Text).Replace("/", "-")
 
-            Case btnGenerateByMonth.Name
-                Dim m = Me.cmbMonth.SelectedIndex + 1
-                Dim y = Me.txtYear.Value
-                Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = New Date(y, m, 1)
-                d2 = New Date(y, m, d)
-                headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-                SaveFileName = "Grave Crime Statement - " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-        End Select
+                Case btnGenerateByMonth.Name
+                    Dim m = Me.cmbMonth.SelectedIndex + 1
+                    Dim y = Me.txtYear.Value
+                    Dim d As Integer = Date.DaysInMonth(y, m)
+                    d1 = New Date(y, m, 1)
+                    d2 = New Date(y, m, d)
+                    headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+                    Dim month = Me.cmbMonth.SelectedIndex + 1
+                    SaveFileName = Me.txtYear.Text & " - " & month.ToString("D2")
+            End Select
 
-        SaveFileName = FileIO.SpecialDirectories.MyDocuments & "\" & SaveFileName & ".docx"
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement"
+            System.IO.Directory.CreateDirectory(SaveFolder)
+            SaveFileName = SaveFolder & "\Grave Crime Statement - " & SaveFileName & ".docx"
 
-        If My.Computer.FileSystem.FileExists(SaveFileName) Then
-            Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            Me.SOCRegisterTableAdapter.FillByGraveCrimeAndDate(Me.FingerPrintDataSet.SOCRegister, d1, d2, True)
+
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+            bgwLetter.RunWorkerAsync()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        Me.SOCRegisterTableAdapter.FillByGraveCrimeAndDate(Me.FingerPrintDataSet.SOCRegister, d1, d2, True)
-        OpenInWord()
-        Application.DoEvents()
-
-        Me.Cursor = Cursors.Default
-
+        End Try
     End Sub
 
 
-    Private Sub OpenInWord()
+    Private Sub bgwLetter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwLetter.DoWork
         Try
+            Dim delay As Integer = 0
+            Dim blSaveFile As Boolean = False
+            bgwLetter.ReportProgress(0)
+            System.Threading.Thread.Sleep(10)
 
-            Me.Cursor = Cursors.WaitCursor
             Dim bodytext As String = vbNullString
-
-
 
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -105,6 +118,11 @@ Public Class FrmSOCGraveCrimes
             Dim isVisible As Object = True
             Dim WordApp As New Word.ApplicationClass()
             Dim RowCount = Me.SOCRegisterBindingSource.Count + 3
+
+            For delay = 1 To 10
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
@@ -131,6 +149,10 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Document.PageSetup.RightMargin = 40
             End If
 
+            For delay = 11 To 20
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Size = 11
@@ -139,10 +161,15 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("CoB MESSAGE" & vbNewLine & vbNewLine)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Font.Size = 11
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeText("TO:" & vbTab & "DIRECTOR, FPB, TVPM" & vbNewLine)
+
+            For delay = 21 To 30
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             If ShortDistrictName = "IDK" Then
                 WordApp.Selection.TypeText("INF:" & vbTab & "TESTER INSPECTOR, SDFPB, KOCHI CITY" & vbNewLine)
@@ -170,6 +197,10 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Font.Bold = 0
 
+            For delay = 31 To 40
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
 
             WordApp.Selection.TypeParagraph()
@@ -187,7 +218,14 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeText((vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName).ToUpper)
+
+                For delay = 41 To 90
+                    bgwLetter.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(2)
+                Next
+                blSaveFile = False
             Else
+                blSaveFile = True
 
                 bodytext = "GRAVE CRIME DETAILS " & headertext
 
@@ -220,12 +258,20 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.TypeText("DISTRICT: " & FullDistrictName.ToUpper & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & bodytext.ToUpper)
 
+                For delay = 41 To 50
+                    bgwLetter.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(10)
+                Next
+
                 For i = 1 To 16
                     WordApp.Selection.Tables.Item(1).Cell(2, i).Select()
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                     WordApp.Selection.TypeText(i)
+                    bgwLetter.ReportProgress(delay + i)
+                    System.Threading.Thread.Sleep(10)
                 Next
+
                 WordApp.Selection.Tables.Item(1).Cell(3, 1).Select()
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.Font.Size = 10
@@ -332,6 +378,11 @@ Public Class FrmSOCGraveCrimes
                 ' WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
                 WordApp.Selection.TypeText("Present Position")
 
+                For delay = 56 To 86
+                    bgwLetter.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(5)
+                Next
+
                 For i = 4 To RowCount
                     Dim j = i - 4
                     WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
@@ -424,26 +475,37 @@ Public Class FrmSOCGraveCrimes
                     WordApp.Selection.TypeText(Remarks)
 
                 Next
+
+
+                For delay = 86 To 96
+                    bgwLetter.ReportProgress(delay)
+                    System.Threading.Thread.Sleep(5)
+                Next
+
+                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+
+                If boolUseTIinLetter Then
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+                    WordApp.Selection.ParagraphFormat.Space1()
+                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TIName() & vbNewLine)
+                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+                End If
             End If
 
-            WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
-            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-
-            If boolUseTIinLetter Then
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.ParagraphFormat.SpaceAfter = 1
-                WordApp.Selection.ParagraphFormat.Space1()
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TIName() & vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
-            End If
-
-            If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
+            If My.Computer.FileSystem.FileExists(SaveFileName) = False And blSaveFile Then
                 aDoc.SaveAs(SaveFileName)
             End If
+
+            For delay = 96 To 100
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -454,13 +516,23 @@ Public Class FrmSOCGraveCrimes
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
-
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
 
+
+    Private Sub bgwLetter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwLetter.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwLetter_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwLetter.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+        Me.Close()
+    End Sub
    
 End Class

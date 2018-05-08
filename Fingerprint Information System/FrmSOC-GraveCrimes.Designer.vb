@@ -39,6 +39,8 @@ Partial Class FrmSOCGraveCrimes
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -66,7 +68,7 @@ Partial Class FrmSOCGraveCrimes
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(235, 53)
+        Me.LabelX2.Location = New System.Drawing.Point(222, 53)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 8
@@ -76,7 +78,7 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(408, 10)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(396, 10)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
         Me.btnGenerateByMonth.Size = New System.Drawing.Size(98, 29)
         Me.btnGenerateByMonth.TabIndex = 2
@@ -86,7 +88,7 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(408, 48)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(396, 48)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 29)
         Me.btnGenerateByDate.TabIndex = 5
@@ -112,7 +114,7 @@ Partial Class FrmSOCGraveCrimes
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(233, 18)
+        Me.LabelX4.Location = New System.Drawing.Point(220, 18)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 25
@@ -127,7 +129,7 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(516, 86)
+        Me.PanelEx2.Size = New System.Drawing.Size(507, 86)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -141,6 +143,7 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx1.AutoSize = True
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.LabelX2)
         Me.PanelEx1.Controls.Add(Me.btnGenerateByMonth)
         Me.PanelEx1.Controls.Add(Me.LabelX1)
@@ -156,7 +159,7 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(516, 86)
+        Me.PanelEx1.Size = New System.Drawing.Size(507, 86)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -189,12 +192,12 @@ Partial Class FrmSOCGraveCrimes
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(267, 10)
+        Me.txtYear.Location = New System.Drawing.Point(256, 10)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 0
         Me.txtYear.Name = "txtYear"
         Me.txtYear.ShowUpDown = True
-        Me.txtYear.Size = New System.Drawing.Size(120, 29)
+        Me.txtYear.Size = New System.Drawing.Size(117, 29)
         Me.txtYear.TabIndex = 1
         Me.txtYear.Value = 1900
         Me.txtYear.WatermarkText = "Year"
@@ -251,7 +254,7 @@ Partial Class FrmSOCGraveCrimes
         Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.dtFrom.MonthCalendar.TodayButtonVisible = True
         Me.dtFrom.Name = "dtFrom"
-        Me.dtFrom.Size = New System.Drawing.Size(134, 29)
+        Me.dtFrom.Size = New System.Drawing.Size(117, 29)
         Me.dtFrom.TabIndex = 3
         Me.dtFrom.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtFrom.WatermarkText = "From"
@@ -270,7 +273,7 @@ Partial Class FrmSOCGraveCrimes
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
-        Me.cmbMonth.Size = New System.Drawing.Size(134, 29)
+        Me.cmbMonth.Size = New System.Drawing.Size(117, 29)
         Me.cmbMonth.TabIndex = 0
         Me.cmbMonth.WatermarkText = "Month"
         '
@@ -292,7 +295,7 @@ Partial Class FrmSOCGraveCrimes
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(267, 48)
+        Me.dtTo.Location = New System.Drawing.Point(256, 48)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -326,7 +329,7 @@ Partial Class FrmSOCGraveCrimes
         Me.dtTo.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.dtTo.MonthCalendar.TodayButtonVisible = True
         Me.dtTo.Name = "dtTo"
-        Me.dtTo.Size = New System.Drawing.Size(120, 29)
+        Me.dtTo.Size = New System.Drawing.Size(117, 29)
         Me.dtTo.TabIndex = 4
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
@@ -335,11 +338,33 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.SOCRegisterTableAdapter.ClearBeforeFill = True
         '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(392, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(115, 86)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 52
+        Me.CircularProgress1.TabStop = False
+        '
+        'bgwLetter
+        '
+        Me.bgwLetter.WorkerReportsProgress = True
+        Me.bgwLetter.WorkerSupportsCancellation = True
+        '
         'FrmSOCGraveCrimes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(516, 86)
+        Me.ClientSize = New System.Drawing.Size(507, 86)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -379,4 +404,6 @@ Partial Class FrmSOCGraveCrimes
     Friend WithEvents SOCRegisterBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents SOCRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
 End Class

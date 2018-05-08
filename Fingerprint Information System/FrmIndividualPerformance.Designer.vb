@@ -25,6 +25,7 @@ Partial Class FrmIndividualPerformance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmIndividualPerformance))
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.chkIncludeTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -41,6 +42,7 @@ Partial Class FrmIndividualPerformance
         Me.DARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
         Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         Me.CDRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
+        Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,6 +54,7 @@ Partial Class FrmIndividualPerformance
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx2.Controls.Add(Me.CircularProgress1)
         Me.PanelEx2.Controls.Add(Me.chkIncludeTI)
         Me.PanelEx2.Controls.Add(Me.btnGenerateByMonth)
         Me.PanelEx2.Controls.Add(Me.LabelX4)
@@ -67,7 +70,7 @@ Partial Class FrmIndividualPerformance
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(502, 134)
+        Me.PanelEx2.Size = New System.Drawing.Size(495, 134)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -75,6 +78,23 @@ Partial Class FrmIndividualPerformance
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 26
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(380, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(115, 134)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 51
+        Me.CircularProgress1.TabStop = False
         '
         'chkIncludeTI
         '
@@ -94,7 +114,7 @@ Partial Class FrmIndividualPerformance
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(405, 46)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(396, 46)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
         Me.btnGenerateByMonth.Size = New System.Drawing.Size(84, 29)
         Me.btnGenerateByMonth.TabIndex = 3
@@ -195,7 +215,7 @@ Partial Class FrmIndividualPerformance
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(405, 95)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(396, 95)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(84, 29)
         Me.btnGenerateByDate.TabIndex = 6
@@ -334,11 +354,16 @@ Partial Class FrmIndividualPerformance
         '
         Me.CDRegisterTableAdapter.ClearBeforeFill = True
         '
+        'bgwLetter
+        '
+        Me.bgwLetter.WorkerReportsProgress = True
+        Me.bgwLetter.WorkerSupportsCancellation = True
+        '
         'FrmIndividualPerformance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(502, 134)
+        Me.ClientSize = New System.Drawing.Size(495, 134)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -377,4 +402,6 @@ Partial Class FrmIndividualPerformance
     Friend WithEvents FPARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
     Friend WithEvents CDRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter
     Friend WithEvents chkIncludeTI As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
 End Class

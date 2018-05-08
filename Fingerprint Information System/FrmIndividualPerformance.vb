@@ -16,6 +16,11 @@ Public Class FrmIndividualPerformance
         On Error Resume Next
         
         Me.Cursor = Cursors.WaitCursor
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Control.CheckForIllegalCrossThreadCalls = False
+
         Me.chkIncludeTI.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "IncludeTI", 0)
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
@@ -102,10 +107,10 @@ Public Class FrmIndividualPerformance
     End Function
 
     Public Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
-        On Error Resume Next
+        Try
 
-        Me.Cursor = Cursors.WaitCursor
-        Dim filename As String = "Individual Performance"
+            Me.Cursor = Cursors.WaitCursor
+
         Select Case DirectCast(sender, Control).Name
             Case btnGenerateByDate.Name
                 d1 = Me.dtFrom.Value
@@ -118,40 +123,51 @@ Public Class FrmIndividualPerformance
                 End If
                 Header = FullOfficeName & ", " & FullDistrictName & vbNewLine & "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
                 SubHeader = "Details of additional duties attended by the staff of this unit during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-                filename = Me.dtFrom.Text & " to " & Me.dtTo.Text
-                filename = filename.Replace("/", "-")
-            Case btnGenerateByMonth.Name
-                Dim m = Me.cmbMonth.SelectedIndex + 1
-                Dim y = Me.txtYear.Value
-                Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = New Date(y, m, 1)
-                d2 = New Date(y, m, d)
-                Header = FullOfficeName & ", " & FullDistrictName & vbNewLine & "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-                SubHeader = "Details of additional duties attended by the staff of this unit during the the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-                filename = Me.txtYear.Text & " - " & m.ToString("00") & " " & Me.cmbMonth.Text
-        End Select
-        'Me.Hide()
-        ShowReport(filename)
-        Me.Cursor = Cursors.Default
+                Case btnGenerateByMonth.Name
+                    Dim m = Me.cmbMonth.SelectedIndex + 1
+                    Dim y = Me.txtYear.Value
+                    Dim d As Integer = Date.DaysInMonth(y, m)
+                    d1 = New Date(y, m, 1)
+                    d2 = New Date(y, m, d)
+                    Header = FullOfficeName & ", " & FullDistrictName & vbNewLine & "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+                    SubHeader = "Details of additional duties attended by the staff of this unit during the the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+            End Select
 
+        Me.CircularProgress1.Show()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = True
+            bgwLetter.RunWorkerAsync()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
 
     End Sub
 
-    Private Sub ShowReport(ByVal SaveFileName As String)
+
+   
+    Private Sub bgwLetter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwLetter.DoWork
         Try
+            Dim delay As Integer = 0
+
+            bgwLetter.ReportProgress(0)
+            System.Threading.Thread.Sleep(10)
+
             Dim dacount As Integer = Val(Me.DARegisterTableAdapter.CountDASlip(d1, d2))
             Dim fpacount As Integer = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
             Dim cdcount As Integer = Val(Me.CDRegisterTableAdapter.CountCD(d1, d2))
-            '   If dacount = vbNull Then dacount = "Nil"
-            '  If fpacount = vbNull Then fpacount = "Nil"
-            '  If cdcount = vbNull Then cdcount = "Nil"
+           
             Dim sdacount As String = ""
             Dim sfpacount As String = ""
             Dim scdcount As String = ""
             If dacount = 0 Then sdacount = "Nil" Else sdacount = dacount.ToString
             If fpacount = 0 Then sfpacount = "Nil" Else sfpacount = fpacount.ToString
             If cdcount = 0 Then scdcount = "Nil" Else scdcount = cdcount.ToString
-
+            For delay = 1 To 10
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
             Dim newTemplate As Object = False
@@ -160,7 +176,10 @@ Public Class FrmIndividualPerformance
             Dim WordApp As New Word.ApplicationClass()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
-
+            For delay = 11 To 20
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
             ' WordApp.Selection.Document.PageSetup.LeftMargin = 25
@@ -192,9 +211,12 @@ Public Class FrmIndividualPerformance
             WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-            '  For i = 2 To RowCount + 1
-            'WordApp.Selection.Tables.Item(1).Rows(i).SetHeight(40, Word.WdRowHeightRule.wdRowHeightAuto)
-            ' Next
+
+            For delay = 21 To 30
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Sl.No.")
@@ -231,6 +253,13 @@ Public Class FrmIndividualPerformance
             WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Remarks")
+
+            For delay = 31 To 40
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            Dim iteration As Integer = CInt(50 / RowCount)
 
             For i = 2 To RowCount + 1
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
@@ -278,6 +307,12 @@ Public Class FrmIndividualPerformance
                 If cpi = "" Or cpi = "0" Then cpi = "-"
                 WordApp.Selection.TypeText(cpi)
 
+                For delay = delay To delay + iteration
+                    If delay < 90 Then
+                        bgwLetter.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(10)
+                    End If
+                Next
 
             Next
 
@@ -313,7 +348,12 @@ Public Class FrmIndividualPerformance
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
-           
+
+            For delay = 91 To 100
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -327,5 +367,15 @@ Public Class FrmIndividualPerformance
         End Try
     End Sub
 
-   
+    Private Sub bgwLetter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwLetter.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwLetter_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwLetter.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+        Me.Close()
+    End Sub
 End Class

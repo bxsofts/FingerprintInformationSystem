@@ -312,6 +312,7 @@ Public Class frmDAStatement
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
+        Me.Close()
     End Sub
     
    

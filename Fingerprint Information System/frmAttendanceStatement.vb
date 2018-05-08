@@ -125,19 +125,29 @@ Public Class frmAttendanceStmt
         d1 = Me.dtFrom.Value
         d2 = Me.dtTo.Value
         If d1 > d2 Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            DevComponents.DotNetBar.MessageBoxEx.Show("Error: 'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.dtFrom.Focus()
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
-        If Me.chkTI.Checked Then
-            SaveFileName = "Attendance - TI - from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
-        Else
-            SaveFileName = "Attendance - Staff - from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+        Dim d = DateDiff(DateInterval.Day, d1, d2)
+        If d + 1 > 31 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Error: Difference between 'From' and 'To' exceeds 31 days.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.dtTo.Focus()
+            Me.Cursor = Cursors.Default
+            Exit Sub
         End If
 
-        SaveFileName = FileIO.SpecialDirectories.MyDocuments & "\" & SaveFileName & ".docx"
+        If Me.chkTI.Checked Then
+            SaveFileName = "Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+        Else
+            SaveFileName = "Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+        End If
+
+        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement"
+        System.IO.Directory.CreateDirectory(SaveFolder)
+        SaveFileName = SaveFolder & "\" & SaveFileName & ".docx"
 
         If My.Computer.FileSystem.FileExists(SaveFileName) Then
             Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)

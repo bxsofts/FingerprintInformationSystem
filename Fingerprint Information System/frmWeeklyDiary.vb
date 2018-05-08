@@ -54,7 +54,7 @@ Public Class frmWeeklyDiary
 
             Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
             System.IO.Directory.CreateDirectory(SaveFolder)
-            sfilename = SaveFolder & "\" & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
+            sfilename = SaveFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
                 Exit Sub

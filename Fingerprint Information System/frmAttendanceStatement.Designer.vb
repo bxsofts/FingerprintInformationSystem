@@ -72,6 +72,7 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel6.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel6.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel6.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel6.Controls.Add(Me.btnGenerateCL)
         Me.GroupPanel6.Controls.Add(Me.LabelX1)
         Me.GroupPanel6.Controls.Add(Me.dtTo)
@@ -277,7 +278,6 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel5.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel5.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel5.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel5.Controls.Add(Me.chkStatementOnly)
         Me.GroupPanel5.Controls.Add(Me.chkCoB)
         Me.GroupPanel5.DisabledBackColor = System.Drawing.Color.Empty
@@ -321,12 +321,13 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(159, -4)
+        Me.CircularProgress1.Location = New System.Drawing.Point(345, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(169, 62)
+        Me.CircularProgress1.Size = New System.Drawing.Size(141, 90)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 26
         Me.CircularProgress1.TabStop = False

@@ -387,6 +387,7 @@ Public Class frmFPAStatistics
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
+        Me.Close()
     End Sub
 
     Private Sub bgwCoB_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCoB.DoWork
@@ -637,6 +638,7 @@ Public Class frmFPAStatistics
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
+        Me.Close()
     End Sub
 
 
