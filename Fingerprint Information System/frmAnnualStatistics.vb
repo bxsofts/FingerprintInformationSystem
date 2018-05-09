@@ -574,11 +574,6 @@ Public Class frmAnnualStatistics
                 Dim ino = Me.FingerPrintDataSet.IdentifiedCases(i).InvestigatingOfficer
                 Dim ido = Me.FingerPrintDataSet.IdentifiedCases(i).IdentifiedBy
 
-                For delay = 81 To 90
-                    bgwLetter.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(10)
-                Next
-
                 ino = Replace(Replace(Replace(Replace(ino, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 ido = Replace(Replace(Replace(Replace(ido, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 Dim gist = Me.FingerPrintDataSet.IdentifiedCases(i).Gist.Trim
@@ -603,6 +598,12 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.TypeText(vbNewLine)
                 If iddetails <> "" Then WordApp.Selection.TypeText(vbNewLine)
             Next
+
+            For delay = 81 To 90
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
