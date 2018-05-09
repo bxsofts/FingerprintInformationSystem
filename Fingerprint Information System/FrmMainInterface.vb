@@ -14480,42 +14480,28 @@ errhandler:
 
     Private Sub ListOfIdentifiedCases(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnListOfIdentifiedCases.Click
         On Error Resume Next
-        strAnnualStatistics = ""
-        strAnnualStatisticsFrom = ""
-        strAnnualStatisticsTo = ""
+
         frmAnnualStatistics.StartPosition = FormStartPosition.CenterParent
         frmAnnualStatistics.Text = "List of Identified Cases"
         frmAnnualStatistics.TitleText = "<b>List of Identified Cases</b>"
         frmAnnualStatistics.ShowDialog()
 
-        If strAnnualStatistics = "" Then
-            If strAnnualStatisticsFrom <> "" Then
-                ShowListOfIdentifiedCases("P")
-            End If
-            Exit Sub
-        Else
-            ShowListOfIdentifiedCases("Y")
-
-        End If
     End Sub
 
     Private Sub ShowListOfIdentifiedCases(ByVal Param As String)
         Try
             Me.Cursor = Cursors.WaitCursor
             Dim Header = ""
-            Dim d1 As Date = Today
-            Dim d2 As Date = Today
+            Dim d1 As Date = dtAnnualStatisticsFrom
+            Dim d2 As Date = dtAnnualStatisticsTo
 
             If Param = "Y" Then
-                d1 = New Date(strAnnualStatistics, 1, 1)
-                d2 = New Date(strAnnualStatistics, 12, 31)
-                Header = "LIST OF IDENTIFIED CASES" & " FOR THE YEAR " & strAnnualStatistics
+                
+                Header = "LIST OF IDENTIFIED CASES" & " FOR THE YEAR " & strStatementPeriod
             End If
 
             If Param = "P" Then
-                d1 = "#" & strAnnualStatisticsFrom & "#"
-                d2 = "#" & strAnnualStatisticsTo & "#"
-                Header = "LIST OF IDENTIFIED CASES" & strAnnualStatisticsPeriod
+                Header = "LIST OF IDENTIFIED CASES" & strStatementPeriod
             End If
 
 
@@ -14681,23 +14667,13 @@ errhandler:
 
     Private Sub GistOfIdentifiedCases(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGistOfIdentifiedCases.Click
         On Error Resume Next
-        strAnnualStatistics = ""
-        strAnnualStatisticsFrom = ""
-        strAnnualStatisticsTo = ""
+
         frmAnnualStatistics.StartPosition = FormStartPosition.CenterParent
         frmAnnualStatistics.Text = "Gist of Identified Cases"
         frmAnnualStatistics.TitleText = "<b>Gist of Identified Cases</b>"
         frmAnnualStatistics.ShowDialog()
 
-        If strAnnualStatistics = "" Then
-            If strAnnualStatisticsFrom <> "" Then
-                ShowGistOfIdentifiedCases("P")
-            End If
-            Exit Sub
-        Else
-            ShowGistOfIdentifiedCases("Y")
 
-        End If
     End Sub
 
 
@@ -14706,19 +14682,15 @@ errhandler:
 
             Me.Cursor = Cursors.WaitCursor
             Dim Header = ""
-            Dim d1 As Date = Today
-            Dim d2 As Date = Today
+            Dim d1 As Date = dtAnnualStatisticsFrom
+            Dim d2 As Date = dtAnnualStatisticsTo
 
             If Param = "Y" Then
-                d1 = New Date(strAnnualStatistics, 1, 1)
-                d2 = New Date(strAnnualStatistics, 12, 31)
-                Header = "GIST OF IDENTIFIED CASES" & " FOR THE YEAR " & strAnnualStatistics
+                Header = "GIST OF IDENTIFIED CASES" & strStatementPeriod
             End If
 
             If Param = "P" Then
-                d1 = "#" & strAnnualStatisticsFrom & "#"
-                d2 = "#" & strAnnualStatisticsTo & "#"
-                Header = "GIST OF IDENTIFIED CASES" & strAnnualStatisticsPeriod
+                Header = "GIST OF IDENTIFIED CASES" & strStatementPeriod
             End If
 
 
@@ -15965,41 +15937,20 @@ errhandler:
 #Region "ANNUAL STATISTICS"
     Private Sub AnnualStatistics() Handles btnAnnualStatics.Click
         On Error Resume Next
-
-        strAnnualStatistics = ""
-        strAnnualStatisticsFrom = ""
-        strAnnualStatisticsTo = ""
+        Me.Cursor = Cursors.WaitCursor
         frmAnnualStatistics.StartPosition = FormStartPosition.CenterParent
         frmAnnualStatistics.Text = "Annual Statistics"
         frmAnnualStatistics.TitleText = "<b>Annual Statistics</b>"
         frmAnnualStatistics.ShowDialog()
-        If strAnnualStatistics = "" Then
-            If strAnnualStatisticsFrom <> "" Then
-                ShowAnnualStatistics("P")
-            End If
-            Exit Sub
-        Else
-            ShowAnnualStatistics("Y")
-        End If
-
         Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ShowAnnualStatistics(ByVal Param As String)
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        Dim d1 As Date = Today
-        Dim d2 As Date = Today
+        Dim d1 As Date = dtAnnualStatisticsFrom
+        Dim d2 As Date = dtAnnualStatisticsTo
 
-        If Param = "Y" Then
-            d1 = New DateTime(strAnnualStatistics, 1, 1)
-            d2 = New DateTime(strAnnualStatistics, 12, 31)
-        End If
-
-        If Param = "P" Then
-            d1 = "#" & strAnnualStatisticsFrom & "#"
-            d2 = "#" & strAnnualStatisticsTo & "#"
-        End If
 
         Dim missing As Object = System.Reflection.Missing.Value
         Dim fileName As Object = "normal.dotm"
@@ -16027,9 +15978,9 @@ errhandler:
         WordApp.Selection.TypeText("ANNUAL STATISTICS REPORT")
         WordApp.Selection.TypeText(vbNewLine)
         WordApp.Selection.Font.Size = 12
-        If Param = "Y" Then WordApp.Selection.TypeText("STATEMENT OF PERFORMANCE OF " & FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & " FOR THE YEAR " & strAnnualStatistics)
+        If Param = "Y" Then WordApp.Selection.TypeText("STATEMENT OF PERFORMANCE OF " & FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & " FOR THE YEAR " & strStatementPeriod)
 
-        If Param = "P" Then WordApp.Selection.TypeText("STATEMENT OF PERFORMANCE OF " & FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & strAnnualStatisticsPeriod)
+        If Param = "P" Then WordApp.Selection.TypeText("STATEMENT OF PERFORMANCE OF " & FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & strStatementPeriod)
         WordApp.Selection.TypeText(vbNewLine & vbNewLine)
         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
         WordApp.Selection.Paragraphs.SpaceAfter = 1
@@ -16518,7 +16469,7 @@ errhandler:
 
 
         If Param = "Y" Then
-            Dim SaveFileName = FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics - " & strAnnualStatistics & ".docx"
+            Dim SaveFileName = FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics - " & strStatementPeriod & ".docx"
 
             If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
                 aDoc.SaveAs(SaveFileName)

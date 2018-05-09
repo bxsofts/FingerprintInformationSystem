@@ -140,7 +140,7 @@ Partial Class FrmAdvancedSearch
         '
         Me.btnSearchSQL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnSearchSQL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchSQL.Location = New System.Drawing.Point(871, 549)
+        Me.btnSearchSQL.Location = New System.Drawing.Point(871, 548)
         Me.btnSearchSQL.Name = "btnSearchSQL"
         Me.btnSearchSQL.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlF)
         Me.btnSearchSQL.Size = New System.Drawing.Size(118, 58)
@@ -168,7 +168,7 @@ Partial Class FrmAdvancedSearch
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGrid.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.DataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.DataGrid.Location = New System.Drawing.Point(0, 5)
         Me.DataGrid.Name = "DataGrid"
         Me.DataGrid.RowTemplate.Height = 30
@@ -193,7 +193,7 @@ Partial Class FrmAdvancedSearch
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(872, 170)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(126, 27)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(126, 25)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.ContextMenuBar1.TabIndex = 6
@@ -423,7 +423,7 @@ Partial Class FrmAdvancedSearch
         '
         Me.btnGenerateSQL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateSQL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateSQL.Location = New System.Drawing.Point(871, 465)
+        Me.btnGenerateSQL.Location = New System.Drawing.Point(871, 466)
         Me.btnGenerateSQL.Name = "btnGenerateSQL"
         Me.btnGenerateSQL.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlG)
         Me.btnGenerateSQL.Size = New System.Drawing.Size(118, 58)

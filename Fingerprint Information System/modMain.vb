@@ -59,10 +59,10 @@ Module modMain
     Public ReportSentDate As Date = Today
     Public ReportNature As String = ""
     Public boolRSOCButtonClicked As Boolean = False
-    Public strAnnualStatistics As String = ""
-    Public strAnnualStatisticsFrom As String = ""
-    Public strAnnualStatisticsTo As String = ""
-    Public strAnnualStatisticsPeriod As String = ""
+
+    Public dtAnnualStatisticsFrom As Date
+    Public dtAnnualStatisticsTo As Date
+    Public strStatementPeriod As String = ""
     Public boolShowWizard As Boolean = False
     Public dtWeeklyDiaryFrom As Date
     Public dtWeeklyDiaryTo As Date

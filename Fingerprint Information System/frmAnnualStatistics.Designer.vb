@@ -26,16 +26,25 @@ Partial Class frmAnnualStatistics
         Me.txtYear = New DevComponents.Editors.IntegerInput()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByYear = New DevComponents.DotNetBar.ButtonX()
-        Me.btnGenerateByPeriod = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnGeneratebyPeriod = New DevComponents.DotNetBar.ButtonX()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
+        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
+        Me.CdRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
+        Me.DaRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
+        Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
+        Me.FPARegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
+        Me.IDCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtYear
@@ -76,40 +85,30 @@ Partial Class frmAnnualStatistics
         '
         Me.btnGenerateByYear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByYear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByYear.Location = New System.Drawing.Point(238, 12)
+        Me.btnGenerateByYear.Location = New System.Drawing.Point(225, 12)
         Me.btnGenerateByYear.Name = "btnGenerateByYear"
         Me.btnGenerateByYear.Size = New System.Drawing.Size(110, 30)
         Me.btnGenerateByYear.TabIndex = 2
         Me.btnGenerateByYear.Text = "Generate"
         '
-        'btnGenerateByPeriod
-        '
-        Me.btnGenerateByPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGenerateByPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByPeriod.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnGenerateByPeriod.Location = New System.Drawing.Point(238, 85)
-        Me.btnGenerateByPeriod.Name = "btnGenerateByPeriod"
-        Me.btnGenerateByPeriod.Size = New System.Drawing.Size(110, 29)
-        Me.btnGenerateByPeriod.TabIndex = 5
-        Me.btnGenerateByPeriod.Text = "Generate"
-        '
         'PanelEx1
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx1.Controls.Add(Me.CircularProgress1)
+        Me.PanelEx1.Controls.Add(Me.btnGeneratebyPeriod)
         Me.PanelEx1.Controls.Add(Me.LabelX1)
         Me.PanelEx1.Controls.Add(Me.LabelX3)
         Me.PanelEx1.Controls.Add(Me.dtFrom)
         Me.PanelEx1.Controls.Add(Me.dtTo)
         Me.PanelEx1.Controls.Add(Me.LabelX2)
-        Me.PanelEx1.Controls.Add(Me.btnGenerateByPeriod)
         Me.PanelEx1.Controls.Add(Me.txtYear)
         Me.PanelEx1.Controls.Add(Me.btnGenerateByYear)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(363, 138)
+        Me.PanelEx1.Size = New System.Drawing.Size(348, 138)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -117,6 +116,33 @@ Partial Class frmAnnualStatistics
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 28
+        '
+        'btnGeneratebyPeriod
+        '
+        Me.btnGeneratebyPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGeneratebyPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(225, 82)
+        Me.btnGeneratebyPeriod.Name = "btnGeneratebyPeriod"
+        Me.btnGeneratebyPeriod.Size = New System.Drawing.Size(110, 30)
+        Me.btnGeneratebyPeriod.TabIndex = 55
+        Me.btnGeneratebyPeriod.Text = "Generate"
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(225, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(123, 138)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 54
+        Me.CircularProgress1.TabStop = False
         '
         'LabelX1
         '
@@ -256,12 +282,41 @@ Partial Class frmAnnualStatistics
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
+        'bgwLetter
+        '
+        Me.bgwLetter.WorkerReportsProgress = True
+        Me.bgwLetter.WorkerSupportsCancellation = True
+        '
+        'FingerPrintDataSet
+        '
+        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'CdRegisterTableAdapter1
+        '
+        Me.CdRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'DaRegisterTableAdapter1
+        '
+        Me.DaRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'SocRegisterTableAdapter1
+        '
+        Me.SocRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'FPARegisterTableAdapter1
+        '
+        Me.FPARegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'IDCasesTableAdapter1
+        '
+        Me.IDCasesTableAdapter1.ClearBeforeFill = True
+        '
         'frmAnnualStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.btnGenerateByPeriod
-        Me.ClientSize = New System.Drawing.Size(363, 138)
+        Me.ClientSize = New System.Drawing.Size(348, 138)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -278,16 +333,25 @@ Partial Class frmAnnualStatistics
         Me.PanelEx1.PerformLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents txtYear As DevComponents.Editors.IntegerInput
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnGenerateByYear As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents btnGenerateByPeriod As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
+    Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
+    Friend WithEvents CdRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter
+    Friend WithEvents DaRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter
+    Friend WithEvents SocRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
+    Friend WithEvents FPARegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
+    Friend WithEvents IDCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
+    Friend WithEvents btnGeneratebyPeriod As DevComponents.DotNetBar.ButtonX
 End Class
