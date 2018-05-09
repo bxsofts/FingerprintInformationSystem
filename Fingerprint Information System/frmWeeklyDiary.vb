@@ -62,7 +62,7 @@ Public Class frmWeeklyDiary
 
             TemplateFile = strAppUserPath & "\WordTemplates\WeeklyDiary.docx"
             If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBoxEx.Show("File missing. Please re-install the Application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 

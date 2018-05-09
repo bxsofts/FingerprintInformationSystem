@@ -275,12 +275,6 @@
     <Compile Include="FrmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-FacingSheet-Blank.Designer.vb">
-      <DependentUpon>FrmSOC-FacingSheet-Blank.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmSOC-FacingSheet-Blank.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmCDRegister.Designer.vb">
       <DependentUpon>FrmCDRegister.vb</DependentUpon>
     </Compile>
@@ -335,12 +329,6 @@
     <Compile Include="FrmPSList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-FacingSheet-WithoutGist.Designer.vb">
-      <DependentUpon>FrmSOC-FacingSheet-WithoutGist.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmSOC-FacingSheet-WithoutGist.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmFPA-Register.Designer.vb">
       <DependentUpon>FrmFPA-Register.vb</DependentUpon>
     </Compile>
@@ -381,12 +369,6 @@
       <DependentUpon>FrmPerformance-Quarterly-Generator.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmPerformance-Quarterly-Generator.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSOC-FacingSheet-WithGist.Designer.vb">
-      <DependentUpon>FrmSOC-FacingSheet-WithGist.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmSOC-FacingSheet-WithGist.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmSOC-Register.Designer.vb">
@@ -543,14 +525,9 @@
     <EmbeddedResource Include="CD Register.rdlc" />
     <EmbeddedResource Include="Concise SOC Report.rdlc" />
     <EmbeddedResource Include="DA Register.rdlc" />
-    <EmbeddedResource Include="Facing Sheet No Gist.rdlc" />
     <EmbeddedResource Include="FPA Register.rdlc" />
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-FacingSheet-Blank.resx">
-      <DependentUpon>FrmSOC-FacingSheet-Blank.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCDRegister.resx">
@@ -589,10 +566,6 @@
       <DependentUpon>FrmPSList.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-FacingSheet-WithoutGist.resx">
-      <DependentUpon>FrmSOC-FacingSheet-WithoutGist.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmFPA-Register.resx">
       <DependentUpon>FrmFPA-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -619,10 +592,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPerformance-Quarterly-Generator.resx">
       <DependentUpon>FrmPerformance-Quarterly-Generator.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-FacingSheet-WithGist.resx">
-      <DependentUpon>FrmSOC-FacingSheet-WithGist.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSOC-Register.resx">
@@ -695,7 +664,6 @@
     <EmbeddedResource Include="SOC Register.rdlc" />
     <EmbeddedResource Include="SOC Statistics.rdlc" />
     <EmbeddedResource Include="FPA Statistics.rdlc" />
-    <EmbeddedResource Include="Facing Sheet.rdlc" />
     <EmbeddedResource Include="SOCReportsStatement.rdlc" />
   </ItemGroup>
   <ItemGroup>

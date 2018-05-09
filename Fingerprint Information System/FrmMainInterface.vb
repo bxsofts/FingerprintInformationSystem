@@ -13821,29 +13821,80 @@ errhandler:
     '---------------------------------------------REPORTS-----------------------------------
 #Region "REPORTS"
     Private Sub ShowSOCFacingSheet() Handles btnSOCFacingSheet.Click, btnFacingSheet.Click, btnFacingSheetContext.Click, btnFacingSheetMenu.Click
-        On Error Resume Next
-
+       
         If (Me.SOCDatagrid.RowCount = 0) Or (Me.SOCDatagrid.SelectedRows.Count = 0) Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No record is selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             Exit Sub
         End If
 
-        If SOCDatagrid.SelectedCells(21).Value.ToString = "" Then
-            If boolFacingSheetWithoutGistIsVisible Then
-                frmSOCFacingSheetWithoutGist.Close()
-            End If
-            frmSOCFacingSheetWithoutGist.Show()
-            frmSOCFacingSheetWithoutGist.WindowState = FormWindowState.Maximized
-            frmSOCFacingSheetWithoutGist.BringToFront()
-        Else
-            If boolFacingSheetWithGistIsVisible Then
-                frmSOCFacingSheetWithGist.Close()
-            End If
-            frmSOCFacingSheetWithGist.Show()
-            frmSOCFacingSheetWithGist.WindowState = FormWindowState.Maximized
-            frmSOCFacingSheetWithGist.BringToFront()
+        Dim TemplateFile = strAppUserPath & "\WordTemplates\FacingSheet.docx"
+        If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+            MessageBoxEx.Show("File missing. Please re-install the Application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
         End If
+
+        Try
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+
+            wdDoc.Range.NoProofing = 1
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+
+            Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
+
+            wdBooks("FileNo").Range.Text = "No. " & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
+            wdBooks("Unit").Range.Text = FullDistrictName.ToUpper
+            wdBooks("PS").Range.Text = Me.SOCDatagrid.SelectedCells(5).Value.ToString
+            wdBooks("CrNo").Range.Text = Me.SOCDatagrid.SelectedCells(6).Value.ToString & " u/s " & Me.SOCDatagrid.SelectedCells(7).Value.ToString
+            wdBooks("DI").Range.Text = Me.SOCDatagrid.SelectedCells(2).FormattedValue
+            wdBooks("DR").Range.Text = Me.SOCDatagrid.SelectedCells(3).FormattedValue
+            wdBooks("DO").Range.Text = Me.SOCDatagrid.SelectedCells(4).Value.ToString
+            wdBooks("PO").Range.Text = Me.SOCDatagrid.SelectedCells(8).Value.ToString
+            wdBooks("NC").Range.Text = Me.SOCDatagrid.SelectedCells(15).Value.ToString
+            wdBooks("MO").Range.Text = Me.SOCDatagrid.SelectedCells(16).Value.ToString
+            wdBooks("PL").Range.Text = Me.SOCDatagrid.SelectedCells(17).Value.ToString
+           
+            Dim cpdeveloped As Integer = Me.SOCDatagrid.SelectedCells(10).Value
+            Dim cpd As String = ""
+
+            If cpdeveloped = 0 Then cpd = "Nil Print"
+            If cpdeveloped = 1 Then cpd = "One Print"
+            If cpdeveloped > 1 Then cpd = cpdeveloped & " Prints"
+            Dim cpdetails As String = Me.SOCDatagrid.SelectedCells(14).Value.ToString
+
+            wdBooks("CP").Range.Text = cpd & IIf(cpdetails <> "", vbNewLine & Me.SOCDatagrid.SelectedCells(14).Value.ToString, "")
+            wdBooks("Photographer").Range.Text = Me.SOCDatagrid.SelectedCells(18).Value.ToString
+            wdBooks("Remarks").Range.Text = Me.SOCDatagrid.SelectedCells(22).Value.ToString
+
+            Dim Officer = Me.SOCDatagrid.SelectedCells(9).Value.ToString()
+
+            Officer = Replace(Replace(Replace(Officer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector")
+            Officer = Officer.Replace("; ", vbNewLine)
+            wdBooks("IO").Range.Text = Officer
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            ReleaseObject(wdBooks)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp = Nothing
+
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
 
     End Sub
 
@@ -13855,11 +13906,6 @@ errhandler:
         ShowSOCFacingSheet()
     End Sub
 
-    Private Sub ShowBlankSOCFacingSheet() Handles btnFacingsheetBlank.Click, btnBlankFacingSheet.Click
-        frmBlankFacingSheet.Show()
-        frmBlankFacingSheet.WindowState = FormWindowState.Maximized
-        frmBlankFacingSheet.BringToFront()
-    End Sub
 
     Private Sub ShowSOCStatement() Handles btnSOCStatement.Click, btnMonthlySOC.Click
         frmSOCStatement.ShowDialog()
