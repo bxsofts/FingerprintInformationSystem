@@ -27,19 +27,22 @@ Partial Class frmAnnualStatistics
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByYear = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnGeneratebyPeriod = New DevComponents.DotNetBar.ButtonX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.btnGeneratebyPeriod = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
+        Me.bgwAnnualStatistics = New System.ComponentModel.BackgroundWorker()
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.CdRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
         Me.DaRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.FPARegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         Me.IDCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
+        Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
+        Me.IdentifiedCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
+        Me.bgwIDGist = New System.ComponentModel.BackgroundWorker()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,16 +120,6 @@ Partial Class frmAnnualStatistics
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 28
         '
-        'btnGeneratebyPeriod
-        '
-        Me.btnGeneratebyPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGeneratebyPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(225, 82)
-        Me.btnGeneratebyPeriod.Name = "btnGeneratebyPeriod"
-        Me.btnGeneratebyPeriod.Size = New System.Drawing.Size(110, 30)
-        Me.btnGeneratebyPeriod.TabIndex = 55
-        Me.btnGeneratebyPeriod.Text = "Generate"
-        '
         'CircularProgress1
         '
         '
@@ -143,6 +136,16 @@ Partial Class frmAnnualStatistics
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 54
         Me.CircularProgress1.TabStop = False
+        '
+        'btnGeneratebyPeriod
+        '
+        Me.btnGeneratebyPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGeneratebyPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(225, 82)
+        Me.btnGeneratebyPeriod.Name = "btnGeneratebyPeriod"
+        Me.btnGeneratebyPeriod.Size = New System.Drawing.Size(110, 30)
+        Me.btnGeneratebyPeriod.TabIndex = 55
+        Me.btnGeneratebyPeriod.Text = "Generate"
         '
         'LabelX1
         '
@@ -282,10 +285,10 @@ Partial Class frmAnnualStatistics
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'bgwLetter
+        'bgwAnnualStatistics
         '
-        Me.bgwLetter.WorkerReportsProgress = True
-        Me.bgwLetter.WorkerSupportsCancellation = True
+        Me.bgwAnnualStatistics.WorkerReportsProgress = True
+        Me.bgwAnnualStatistics.WorkerSupportsCancellation = True
         '
         'FingerPrintDataSet
         '
@@ -311,6 +314,20 @@ Partial Class frmAnnualStatistics
         'IDCasesTableAdapter1
         '
         Me.IDCasesTableAdapter1.ClearBeforeFill = True
+        '
+        'bgwIDList
+        '
+        Me.bgwIDList.WorkerReportsProgress = True
+        Me.bgwIDList.WorkerSupportsCancellation = True
+        '
+        'IdentifiedCasesTableAdapter1
+        '
+        Me.IdentifiedCasesTableAdapter1.ClearBeforeFill = True
+        '
+        'bgwIDGist
+        '
+        Me.bgwIDGist.WorkerReportsProgress = True
+        Me.bgwIDGist.WorkerSupportsCancellation = True
         '
         'frmAnnualStatistics
         '
@@ -345,7 +362,7 @@ Partial Class frmAnnualStatistics
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
-    Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwAnnualStatistics As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents CdRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter
@@ -354,4 +371,7 @@ Partial Class frmAnnualStatistics
     Friend WithEvents FPARegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
     Friend WithEvents IDCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
     Friend WithEvents btnGeneratebyPeriod As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents bgwIDList As System.ComponentModel.BackgroundWorker
+    Friend WithEvents IdentifiedCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
+    Friend WithEvents bgwIDGist As System.ComponentModel.BackgroundWorker
 End Class
