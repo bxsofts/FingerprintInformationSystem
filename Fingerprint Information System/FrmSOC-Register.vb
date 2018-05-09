@@ -21,7 +21,7 @@ Public Class frmSOCRegister
         Dim y As Integer = DateAndTime.Year(Today)
         Dim d As Integer = Date.DaysInMonth(y, m)
 
-        dtFrom.Value = New Date(y, m, 1)
+        dtFrom.Value = New Date(y, 1, 1)
         dtTo.Value = New Date(y, m, d)
         Me.txtYear.Text = y
 
