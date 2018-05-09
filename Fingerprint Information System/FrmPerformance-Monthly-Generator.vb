@@ -2,67 +2,68 @@
 
 
 Public Class frmMonthlyPerformance
-    Dim PerformanceSavePath As String
+    Dim SaveFolder As String
     Dim SelectedMonth As Integer
     Dim SelectedYear As Integer
-    Dim SaveStatement As Boolean
-    Dim SaveFileName As String
-
+    Dim PerfFileName As String
+    Dim blSaveFile As Boolean = False
 
 #Region "FORM LOAD EVENTS"
-
-
 
     Private Sub LoadForm() Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        
-        ConnectToDatabse()
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.txtBlankCellValue.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BlankCellValue", "-")
+
         SetDays()
         CreateDatagridRows()
-        Application.DoEvents()
-        PerformanceSavePath = (My.Computer.FileSystem.GetParentPath(strDatabaseFile) & "\Performance Statements\Monthly Statement").Replace("\Database", "")
+        ConnectToDatabase()
+        SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
+        System.IO.Directory.CreateDirectory(SaveFolder)
 
-        '  GenerateSelectedMonthValuesFromDataBase() 'Generate current month from database
-        'GenetratePreviousMonthFromDBorFile()
         GenerateSelectedMonthValuesFromDBOrFile()
 
-
-
-        SaveStatement = True
-        Me.txtBlankCellValue.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BlankCellValue", "-")
         InsertBlankValues()
+        Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
     End Sub
 
-    Private Sub ConnectToDatabse()
-        On Error Resume Next
-        If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
-        Me.SOCRegisterTableAdapter.Connection.Open()
+    Private Sub ConnectToDatabase()
+        Try
+            If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
+            Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.SOCRegisterTableAdapter.Connection.Open()
 
-        If Me.DaRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter.Connection.Close()
-        Me.DaRegisterTableAdapter.Connection.ConnectionString = strConString
-        Me.DaRegisterTableAdapter.Connection.Open()
+            If Me.DaRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter.Connection.Close()
+            Me.DaRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.DaRegisterTableAdapter.Connection.Open()
 
-        If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
-        Me.FPARegisterTableAdapter.Connection.Open()
+            If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
+            Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.FPARegisterTableAdapter.Connection.Open()
 
-        If Me.CdRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CdRegisterTableAdapter.Connection.Close()
-        Me.CdRegisterTableAdapter.Connection.ConnectionString = strConString
-        Me.CdRegisterTableAdapter.Connection.Open()
+            If Me.CdRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CdRegisterTableAdapter.Connection.Close()
+            Me.CdRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.CdRegisterTableAdapter.Connection.Open()
 
-        If Me.PerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.PerformanceTableAdapter.Connection.Close()
-        Me.PerformanceTableAdapter.Connection.ConnectionString = strConString
-        Me.PerformanceTableAdapter.Connection.Open()
+            If Me.PerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.PerformanceTableAdapter.Connection.Close()
+            Me.PerformanceTableAdapter.Connection.ConnectionString = strConString
+            Me.PerformanceTableAdapter.Connection.Open()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+       
     End Sub
 
 
     Sub SetDays()
         On Error Resume Next
         Me.cmbMonth.Items.Clear()
+        Dim i = 0
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))
         Next
@@ -91,69 +92,68 @@ Public Class frmMonthlyPerformance
 
 
     Private Sub CreateDatagridRows()
-        On Error Resume Next
-        Me.FingerPrintDataSet.Performance.RejectChanges()
+        Try
+            Me.FingerPrintDataSet.Performance.RejectChanges()
 
-        Dim r(19) As FingerPrintDataSet.PerformanceRow
+            Dim r(19) As FingerPrintDataSet.PerformanceRow
 
+            Dim i As Integer = 0
+            For i = 0 To 5
+                r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+                r(i).SlNo = i + 1
+                Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
+            Next
+            r(6) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(6).SlNo = "7a"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(6))
 
-        For i As Short = 0 To 5
-            r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
-            r(i).SlNo = i + 1
-            Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
-        Next
-        r(6) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
-        r(6).SlNo = "7a"
-        Me.FingerPrintDataSet.Performance.Rows.Add(r(6))
+            r(7) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(7).SlNo = "7b"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(7))
 
-        r(7) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
-        r(7).SlNo = "7b"
-        Me.FingerPrintDataSet.Performance.Rows.Add(r(7))
+            For i = 8 To 19
+                r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+                r(i).SlNo = i
+                Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
+            Next
 
-        For i As Short = 8 To 19
-            r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
-            r(i).SlNo = i
-            Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
-        Next
+            For i = 0 To 19
+                Me.DataGridViewX1.Rows(i).Cells(1).Value = ""
+                Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
+                Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
+                Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
+                Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
+                Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
+                Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
+            Next
 
-        For i = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(1).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(8).Value = ""
-        Next
+            With Me.DataGridViewX1
 
-        With Me.DataGridViewX1
+                .Rows(0).Cells(1).Value = "No. of Scenes of Crime Inspected"
+                .Rows(1).Cells(1).Value = "No. of cases in which chanceprints were developed"
+                .Rows(2).Cells(1).Value = "Total No. of chanceprints developed"
+                .Rows(3).Cells(1).Value = "No. of chanceprints unfit for comparison"
+                .Rows(4).Cells(1).Value = "No. of chanceprints eliminated"
+                .Rows(5).Cells(1).Value = "No. of chanceprints remain for search"
+                .Rows(6).Cells(1).Value = "No. of chanceprints identified"
+                .Rows(7).Cells(1).Value = "No. of cases identified through chanceprints"
+                .Rows(8).Cells(1).Value = "No. of cases in which search is continuing"
+                .Rows(9).Cells(1).Value = "No. of cases in which photographs were not received"
+                .Rows(10).Cells(1).Value = "No. of DA Slips received"
+                .Rows(11).Cells(1).Value = "No. of conviction reports received"
+                .Rows(12).Cells(1).Value = "No. of single prints recorded"
+                .Rows(13).Cells(1).Value = "No. of Court duties attended by the staff"
+                .Rows(14).Cells(1).Value = "No. of in-service courses conducted"
+                .Rows(15).Cells(1).Value = "No. of cases pending in the previous month/quarter"
+                .Rows(16).Cells(1).Value = "No. of cases in which chanceprints searched in AFIS"
+                .Rows(17).Cells(1).Value = "No. of cases identified in AFIS"
+                .Rows(18).Cells(1).Value = "No. of FP Slips attested for emmigration"
+                .Rows(19).Cells(1).Value = "Amount of Fees remitted"
 
-            .Rows(0).Cells(1).Value = "No. of Scenes of Crime Inspected"
-            .Rows(1).Cells(1).Value = "No. of cases in which chanceprints were developed"
-            .Rows(2).Cells(1).Value = "Total No. of chanceprints developed"
-            .Rows(3).Cells(1).Value = "No. of chanceprints unfit for comparison"
-            .Rows(4).Cells(1).Value = "No. of chanceprints eliminated"
-            .Rows(5).Cells(1).Value = "No. of chanceprints remain for search"
-            .Rows(6).Cells(1).Value = "No. of chanceprints identified"
-            .Rows(7).Cells(1).Value = "No. of cases identified through chanceprints"
-            .Rows(8).Cells(1).Value = "No. of cases in which search is continuing"
-            .Rows(9).Cells(1).Value = "No. of cases in which photographs were not received"
-            .Rows(10).Cells(1).Value = "No. of DA Slips received"
-            .Rows(11).Cells(1).Value = "No. of conviction reports received"
-            .Rows(12).Cells(1).Value = "No. of single prints recorded"
-            .Rows(13).Cells(1).Value = "No. of Court duties attended by the staff"
-            .Rows(14).Cells(1).Value = "No. of in-service courses conducted"
-            .Rows(15).Cells(1).Value = "No. of cases pending in the previous month/quarter"
-            .Rows(16).Cells(1).Value = "No. of cases in which chanceprints searched in AFIS"
-            .Rows(17).Cells(1).Value = "No. of cases identified in AFIS"
-            .Rows(18).Cells(1).Value = "No. of FP Slips attested for emmigration"
-            .Rows(19).Cells(1).Value = "Amount of Fees remitted"
-
-        End With
-
-
-
+            End With
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
 
@@ -177,7 +177,8 @@ Public Class frmMonthlyPerformance
         d2 = New Date(y, m, d)
 
         Me.lblPeriod.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
-        SaveFileName = "Monthly Performance Statement - " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+        Dim month = Me.cmbMonth.SelectedIndex + 1
+        PerfFileName = "Performance Statement - " & Me.txtYear.Text & " - " & month.ToString("D2")
         Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
 
         SelectedMonth = m
@@ -199,16 +200,19 @@ Public Class frmMonthlyPerformance
         Me.DataGridViewX1.Rows(15).Cells(3).Value = CalculateCasesPendingInPreviousMonth(d1)
         Me.DataGridViewX1.Rows(18).Cells(3).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
         Me.DataGridViewX1.Rows(19).Cells(3).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-        SaveStatement = True
         Me.lblSelectedMonth.Text = Me.DataGridViewX1.Columns(3).HeaderText & " - Generated from Database"
+        blSaveFile = True
         Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub GenerateSelectedMonthValuesFromDBOrFile()
         On Error Resume Next
-        Dim FilePath As String = PerformanceSavePath & "\" & Me.txtYear.Text
-        Dim FileName As String = FilePath & "\" & Me.cmbMonth.Text & "-" & Me.txtYear.Text & ".txt"
-        If My.Computer.FileSystem.FileExists(FileName) Then
+
+        Dim month As Integer = Me.cmbMonth.SelectedIndex + 1
+
+        Dim SavedFileName As String = SaveFolder & "\Performance Statement - " & Me.txtYear.Text & " - " & month.ToString("D2") & ".docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
             Me.chkGenerateSelectedMonthValuesFromFile.Checked = True
             Application.DoEvents()
             GenerateSelectedMonthPerformanceFromFile(False)
@@ -219,6 +223,7 @@ Public Class frmMonthlyPerformance
             GenerateSelectedMonthValuesFromDataBase()
             GenetratePreviousMonthFromDBorFile()
         End If
+        blSaveFile = True
     End Sub
 
     Private Sub GeneratePreviousMonthValuesFromDataBase()
@@ -261,7 +266,7 @@ Public Class frmMonthlyPerformance
         Me.DataGridViewX1.Rows(15).Cells(2).Value = CalculateCasesPendingInPreviousMonth(d1)
         Me.DataGridViewX1.Rows(18).Cells(2).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
         Me.DataGridViewX1.Rows(19).Cells(2).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-        SaveStatement = True
+
         Me.lblPreviousMonth.Text = Me.DataGridViewX1.Columns(2).HeaderText & " - Generated from Database"
         Me.Cursor = Cursors.Default
     End Sub
@@ -278,10 +283,10 @@ Public Class frmMonthlyPerformance
             m = m - 1
         End If
 
-        Dim FilePath As String = PerformanceSavePath & "\" & y
-        Dim FileName As String = FilePath & "\" & MonthName(m) & "-" & y & ".txt"
 
-        If My.Computer.FileSystem.FileExists(FileName) Then
+        Dim SavedFileName As String = SaveFolder & "\Performance Statement - " & y & " - " & m.ToString("D2") & ".docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
             Me.chkGeneratePreviousMonthValuesFromFile.Checked = True
             Application.DoEvents()
             GeneratePreviousMonthValuesFromFile(False)
@@ -303,7 +308,6 @@ Public Class frmMonthlyPerformance
 
         If Me.chkGenerateSelectedMonthValuesFromDataBase.Checked Then
             GenerateSelectedMonthValuesFromDataBase()
-            GenetratePreviousMonthFromDBorFile()
             frmMainInterface.ShowAlertMessage("Values generated for " & MonthName(SelectedMonth) & " " & SelectedYear)
         Else
             GenerateSelectedMonthPerformanceFromFile(True)
@@ -375,7 +379,7 @@ Public Class frmMonthlyPerformance
         Me.Cursor = Cursors.WaitCursor
         ClearAllFieldsWithoutMessage()
         Me.lblPeriod.Text = UCase("statement of performance for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text)
-        SaveFileName = "Performance Statement from " & Me.dtFrom.Text.Replace("/", "-") & " to " & Me.dtTo.Text.Replace("/", "-")
+
         Me.DataGridViewX1.Columns(2).HeaderText = ""
         Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
         Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
@@ -393,13 +397,14 @@ Public Class frmMonthlyPerformance
         Me.DataGridViewX1.Rows(15).Cells(3).Value = CalculateCasesPendingInPreviousMonth(d1)
         Me.DataGridViewX1.Rows(18).Cells(3).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
         Me.DataGridViewX1.Rows(19).Cells(3).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-        SaveStatement = False
+
         Me.lblSelectedMonth.Text = ""
         Me.lblPreviousMonth.Text = ""
         For i As Short = 0 To 19
             If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Then Me.DataGridViewX1.Rows(i).Cells(3).Value = Me.txtBlankCellValue.Text
         Next
         frmMainInterface.ShowAlertMessage("Values generated for the selected period")
+        blSaveFile = False
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -410,140 +415,26 @@ Public Class frmMonthlyPerformance
 
 #Region "SAVE AND LOAD STATEMENTS"
 
+  
+    Private Sub GenerateSelectedMonthPerformanceFromFile(ByVal ShowMessage As Boolean)
+        Try
 
-    Private Sub SaveSelectedMonthPerformance() Handles btnSaveReport.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        Dim FilePath As String = PerformanceSavePath & "\" & SelectedYear
-        Dim FileName As String = FilePath & "\" & MonthName(SelectedMonth) & "-" & SelectedYear & ".txt"
+            Me.Cursor = Cursors.WaitCursor
+            Dim m = Me.cmbMonth.SelectedIndex + 1
+            Dim y = Me.txtYear.Value
+            Dim SavedFileName As String = SaveFolder & "\Performance Statement - " & y & " - " & m.ToString("D2") & ".docx"
 
-        If My.Computer.FileSystem.DirectoryExists(FilePath) = False Then
-            My.Computer.FileSystem.CreateDirectory(FilePath)
-        End If
-
-        If My.Computer.FileSystem.FileExists(FileName) Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the month " & MonthName(SelectedMonth) & " " & SelectedYear & " already exists. Do you want to replace it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            If reply = Windows.Forms.DialogResult.No Then
+            If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the month " & Me.cmbMonth.Text & " " & Me.txtYear.Text & " does not exist." & vbNewLine & "Please use the option 'Generate from Database'.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
-            My.Computer.FileSystem.DeleteFile(FileName)
-        End If
-
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(FileName, True)
-
-        For j = 2 To 7
-            For i = 0 To 19
-                file.WriteLine(Me.DataGridViewX1.Rows(i).Cells(j).Value.ToString)
-            Next
-        Next
-        file.Close()
-        file.Dispose()
-        frmMainInterface.ShowAlertMessage("Performance File for " & MonthName(SelectedMonth) & " " & SelectedYear & " saved!")
-        SaveStatement = False
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Public Sub AutoSaveSelectedMonthPerformance()
-        On Error Resume Next
-        Dim FilePath As String = PerformanceSavePath & "\" & SelectedYear
-        Dim FileName As String = FilePath & "\" & MonthName(SelectedMonth) & "-" & SelectedYear & ".txt"
-
-        If My.Computer.FileSystem.DirectoryExists(FilePath) = False Then
-            My.Computer.FileSystem.CreateDirectory(FilePath)
-        End If
-
-        If My.Computer.FileSystem.FileExists(FileName) Then
-            My.Computer.FileSystem.DeleteFile(FileName)
-        End If
-
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(FileName, True)
-
-        For j = 2 To 7
-            For i = 0 To 19
-                file.WriteLine(Me.DataGridViewX1.Rows(i).Cells(j).Value.ToString)
-            Next
-        Next
-        file.Close()
-        file.Dispose()
-        SaveStatement = False
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub SaveValuesOnExit(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-
-        On Error Resume Next
-
-        If SaveStatement Then
-            If StatementFileChanged() Then
-                If SelectedMonth < Month(Today) And SelectedYear <= Year(Today) Then
-                    Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you want to save the Performance Statement for " & MonthName(SelectedMonth) & " " & SelectedYear & "?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                    If r = Windows.Forms.DialogResult.Yes Then
-                        SaveSelectedMonthPerformance()
-                    End If
-                    If r = Windows.Forms.DialogResult.Cancel Then
-                        e.Cancel = True
-                    End If
-                End If
-            End If
-        End If
-
-
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "BlankCellValue", Me.txtBlankCellValue.Text, Microsoft.Win32.RegistryValueKind.String)
-
-    End Sub
-
-    Private Function StatementFileChanged() As Boolean
-        On Error Resume Next
-        StatementFileChanged = True
-        Dim FilePath As String = PerformanceSavePath & "\" & SelectedYear
-        Dim FileName As String = FilePath & "\" & MonthName(SelectedMonth) & "-" & SelectedYear & ".txt"
-
-        If My.Computer.FileSystem.FileExists(FileName) Then
-            Dim fileReader As System.IO.StreamReader
-            fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
-            For j = 2 To 7
-                For i = 0 To 19
-                    Dim Value1 As String = Me.DataGridViewX1.Rows(i).Cells(j).Value.ToString
-                    Dim Value2 As String = fileReader.ReadLine()
-                    If Value1 <> Value2 Then
-                        StatementFileChanged = True
-                        fileReader.Close()
-                        fileReader.Dispose()
-                        Exit Function
-                    End If
-                Next
-            Next
-            StatementFileChanged = False
-            fileReader.Close()
-            fileReader.Dispose()
-        Else
-
-            StatementFileChanged = True
-        End If
-
-    End Function
-
-    Private Sub GenerateSelectedMonthPerformanceFromFile(ByVal ShowMessage As Boolean)
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        Dim FilePath As String = PerformanceSavePath & "\" & Me.txtYear.Text
-        Dim FileName As String = FilePath & "\" & Me.cmbMonth.Text & "-" & Me.txtYear.Text & ".txt"
-        If My.Computer.FileSystem.FileExists(FileName) = False Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the month " & Me.cmbMonth.Text & " " & Me.txtYear.Text & " does not exist." & vbNewLine & "Please use the option 'Generate from Database'.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
         ClearMonth1Field()
         Me.lblPeriod.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
-        SaveFileName = "Monthly Performance Statement - " & Me.cmbMonth.Text & " " & Me.txtYear.Text
 
-        Dim m = Me.cmbMonth.SelectedIndex + 1
-        Dim y = Me.txtYear.Value
+            PerfFileName = "Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2")
 
-        SelectedMonth = m
+            SelectedMonth = m
         SelectedYear = y
 
         Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
@@ -554,26 +445,45 @@ Public Class frmMonthlyPerformance
             m = m - 1
         End If
 
-        Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
+            Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
 
-        Dim fileReader As System.IO.StreamReader
-        fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
-        For j = 2 To 7
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
+            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
             For i = 0 To 19
-                Me.DataGridViewX1.Rows(i).Cells(j).Value = fileReader.ReadLine()
+                Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 3).Range.Text.Trim(ChrW(7)).Trim()
+                Me.DataGridViewX1.Rows(i).Cells(3).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
             Next
-        Next
-        fileReader.Close()
+
+            wdDoc.Close()
+            ReleaseObject(wdTbl)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp.Quit()
+       
+
+
         If ShowMessage Then frmMainInterface.ShowAlertMessage("Performance File for " & Me.cmbMonth.Text & " " & Me.txtYear.Text & " loaded!")
         Me.lblSelectedMonth.Text = "Loaded saved statement of " & Me.DataGridViewX1.Columns(3).HeaderText
         Me.lblPreviousMonth.Text = ""
-        SaveStatement = True
-        Me.Cursor = Cursors.Default
+
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
     End Sub
 
 
     Private Sub GeneratePreviousMonthValuesFromFile(ByVal ShowMessage As Boolean)
-        Me.Cursor = Cursors.WaitCursor
+        Try
+
+            Me.Cursor = Cursors.WaitCursor
 
         Dim m = Me.cmbMonth.SelectedIndex + 1
         Dim y = Me.txtYear.Value
@@ -585,10 +495,9 @@ Public Class frmMonthlyPerformance
             m = m - 1
         End If
 
-        Dim FilePath As String = PerformanceSavePath & "\" & y
-        Dim FileName As String = FilePath & "\" & MonthName(m) & "-" & y & ".txt"
+        Dim SavedFileName As String = SaveFolder & "\Performance Statement - " & y & " - " & m.ToString("D2") & ".docx"
 
-        If My.Computer.FileSystem.FileExists(FileName) = False Then
+        If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
             DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the month " & MonthName(m) & " " & y & " does not exist." & vbNewLine & "Please use the option 'Generate from Database'.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Me.Cursor = Cursors.Default
             Exit Sub
@@ -597,34 +506,39 @@ Public Class frmMonthlyPerformance
         Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
 
         ClearPreviousField()
-        Dim fileReader As System.IO.StreamReader
-        fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
+
+        Dim wdApp As Word.Application
+        Dim wdDocs As Word.Documents
+        wdApp = New Word.Application
+
+        wdDocs = wdApp.Documents
+        Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
+        Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
         For i = 0 To 19
-            fileReader.ReadLine()
-        Next
-        For i = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = fileReader.ReadLine()
-        Next
-        fileReader.Close()
+            Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+            Next
+
+            wdDoc.Close()
+            ReleaseObject(wdTbl)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp.Quit()
+
         If ShowMessage Then frmMainInterface.ShowAlertMessage("Values loaded for previous month (" & Me.DataGridViewX1.Columns(2).HeaderText & ")")
-        SaveStatement = True
+
         Me.lblPreviousMonth.Text = Me.DataGridViewX1.Columns(2).HeaderText & " - Generated from Saved Statement of " & Me.DataGridViewX1.Columns(2).HeaderText
 
-        Me.Cursor = Cursors.Default
+           
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
     End Sub
 
-
-#End Region
-
-
-#Region "PRINT REPORT"
-
-    Private Sub PrintReport() Handles btnPrintPreview.Click
-        On Error Resume Next
-        frmMonthlyPerformanceReport.Show()
-        frmMonthlyPerformanceReport.BringToFront()
-    End Sub
-
+   
 #End Region
 
 
@@ -645,7 +559,7 @@ Public Class frmMonthlyPerformance
         Me.DataGridViewX1.Columns(4).HeaderText = "Month2"
         Me.DataGridViewX1.Columns(5).HeaderText = "Month3"
         Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
-        SaveStatement = False
+
     End Sub
 
     Private Sub ClearPreviousField()
@@ -702,13 +616,26 @@ Public Class frmMonthlyPerformance
 #End Region
 
 
-    Private Sub OpenInWord() Handles btnOpenInWord.Click
+    Private Sub OpenInWord() Handles btnStatement.Click
+        Me.Cursor = Cursors.WaitCursor
+        Me.CircularProgress1.Show()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = True
+        Me.bgwStatement.RunWorkerAsync()
+    End Sub
 
-        Dim sFileName = FileIO.SpecialDirectories.MyDocuments & "\" & SaveFileName & ".docx"
+
+    Private Sub bgwStatement_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwStatement.DoWork
+
+        Dim sFileName = SaveFolder & "\" & PerfFileName & ".docx"
 
         Try
+            Dim delay As Integer = 0
 
-            Me.Cursor = Cursors.WaitCursor
+            For delay = 1 To 10
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -719,6 +646,10 @@ Public Class frmMonthlyPerformance
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
+            For delay = 11 To 20
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientPortrait
@@ -762,6 +693,11 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
 
+            For delay = 21 To 30
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             For i = 1 To 8
                 WordApp.Selection.Tables.Item(1).Cell(3, i).Select()
                 WordApp.Selection.Font.Bold = 1
@@ -803,6 +739,9 @@ Public Class frmMonthlyPerformance
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Remarks)
 
+                bgwStatement.ReportProgress(delay + j)
+                System.Threading.Thread.Sleep(10)
+
             Next
 
 
@@ -819,6 +758,10 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText(Me.DataGridViewX1.Columns(3).HeaderText)
 
+            For delay = 50 To 60
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Selection.Tables.Item(1).Cell(1, 8).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 8))
             WordApp.Selection.Tables.Item(1).Cell(1, 7).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 7))
@@ -851,6 +794,11 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Month")
 
+            For delay = 61 To 70
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
             WordApp.Selection.Font.Name = oldfont
             WordApp.Selection.Font.Size = 11
@@ -873,6 +821,11 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
+            For delay = 71 To 80
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             If boolUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -884,14 +837,17 @@ Public Class frmMonthlyPerformance
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
-
+            For delay = 81 To 100
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
             aDoc.Activate()
 
-            If My.Computer.FileSystem.FileExists(sFileName) = False Then
+            If My.Computer.FileSystem.FileExists(sFileName) = False And blSaveFile Then
                 aDoc.SaveAs(sFileName)
             End If
 
@@ -903,6 +859,17 @@ Public Class frmMonthlyPerformance
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
+    End Sub
+
+    Private Sub bgwStatement_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwStatement.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwStatement_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwStatement.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
     End Sub
 
 End Class

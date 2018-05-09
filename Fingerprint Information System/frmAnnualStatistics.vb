@@ -122,9 +122,11 @@ Public Class frmAnnualStatistics
 
             Dim delay As Integer = 0
             Dim blSaveFile As Boolean = False
-            bgwAnnualStatistics.ReportProgress(0)
-            System.Threading.Thread.Sleep(10)
-
+            
+            For delay = 1 To 10
+                bgwAnnualStatistics.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -135,10 +137,7 @@ Public Class frmAnnualStatistics
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
-            For delay = 1 To 10
-                bgwAnnualStatistics.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
+           
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             If WordApp.Version < 12 Then
