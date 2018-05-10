@@ -224,12 +224,11 @@ Public Class FrmLocalBackup
             Exit Sub
         End If
 
-        If FileIO.FileSystem.DirectoryExists(BackupPath) Then
-            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
-        Else
+        If Not FileIO.FileSystem.DirectoryExists(BackupPath) Then
             FileIO.FileSystem.CreateDirectory(BackupPath)
-            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
         End If
+
+        Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
     End Sub
 
     Private Sub OpenFileInMSAccess(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnOpenFileMSAccess.Click

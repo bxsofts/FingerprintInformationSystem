@@ -16,6 +16,8 @@ Public Class frmMonthlyPerformance
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
+        Me.lblPreviousMonth.Text = ""
+        Me.lblSelectedMonth.Text = ""
         Me.txtBlankCellValue.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BlankCellValue", "-")
 
         SetDays()
@@ -23,7 +25,7 @@ Public Class frmMonthlyPerformance
         ConnectToDatabase()
         SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
         System.IO.Directory.CreateDirectory(SaveFolder)
-
+        Me.cmbMonth.Focus()
         GenerateSelectedMonthValuesFromDBOrFile()
 
         InsertBlankValues()
@@ -166,6 +168,7 @@ Public Class frmMonthlyPerformance
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         ClearMonth1Field()
+        Application.DoEvents()
         Dim d1 As Date
         Dim d2 As Date
 
@@ -230,6 +233,7 @@ Public Class frmMonthlyPerformance
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         ClearPreviousField()
+        Application.DoEvents()
         Dim d1 As Date
         Dim d2 As Date
 
@@ -357,7 +361,7 @@ Public Class frmMonthlyPerformance
     End Function
 
 
-    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) ' Handles DataGridViewX1.CellEndEdit
+    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewX1.CellEndEdit
         On Error Resume Next
         If e.RowIndex < 2 Or e.RowIndex > 5 Then Exit Sub
         Dim i = e.ColumnIndex
@@ -381,6 +385,7 @@ Public Class frmMonthlyPerformance
         Me.lblPeriod.Text = UCase("statement of performance for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text)
 
         Me.DataGridViewX1.Columns(2).HeaderText = ""
+        Me.DataGridViewX1.Columns(3).HeaderText = Me.dtFrom.Text & " to " & Me.dtTo.Text
         Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
         Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
         Me.DataGridViewX1.Rows(2).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
@@ -429,15 +434,19 @@ Public Class frmMonthlyPerformance
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
-        ClearMonth1Field()
-        Me.lblPeriod.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
+
+            ClearPreviousField()
+            ClearMonth1Field()
+
+            Me.lblPeriod.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
 
             PerfFileName = "Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2")
 
             SelectedMonth = m
-        SelectedYear = y
+            SelectedYear = y
 
-        Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
+            Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
+
         If m = 1 Then
             m = 12
             y = y - 1
@@ -872,4 +881,26 @@ Public Class frmMonthlyPerformance
         Me.Cursor = Cursors.Default
     End Sub
 
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+            Dim month = Me.cmbMonth.SelectedIndex + 1
+            Dim sPerfFileName = SaveFolder & "\Performance Statement - " & Me.txtYear.Text & " - " & month.ToString("D2") & ".docx"
+
+            If FileIO.FileSystem.FileExists(sPerfFileName) Then
+                Call Shell("explorer.exe /select," & sPerfFileName, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
+
+
+            If Not FileIO.FileSystem.DirectoryExists(SaveFolder) Then
+                FileIO.FileSystem.CreateDirectory(SaveFolder)
+            End If
+
+            Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
+
+        Catch ex As Exception
+            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+        End Try
+    End Sub
 End Class

@@ -833,9 +833,11 @@ Public Class frmOnlineBackup
             End If
         End If
 
-        If FileIO.FileSystem.DirectoryExists(BackupPath) Then
-            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
+        If Not FileIO.FileSystem.DirectoryExists(BackupPath) Then
+            FileIO.FileSystem.CreateDirectory(BackupPath)
         End If
+
+        Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
     End Sub
 
 #End Region
