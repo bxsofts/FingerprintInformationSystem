@@ -319,11 +319,18 @@ Public Class frmWeeklyDiary
     Private Sub btnOpenWeeklyDiaryFolder_Click(sender As Object, e As EventArgs) Handles btnOpenWeeklyDiaryFolder.Click
         Try
             Dim WeeklyDiaryFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
-            If FileIO.FileSystem.DirectoryExists(WeeklyDiaryFolder) Then
-                Call Shell("explorer.exe " & WeeklyDiaryFolder, AppWinStyle.NormalFocus)
-            Else
-                DevComponents.DotNetBar.MessageBoxEx.Show("The folder does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Dim sfilename = WeeklyDiaryFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
+
+            If FileIO.FileSystem.FileExists(sfilename) Then
+                Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
+                Exit Sub
             End If
+
+            If Not FileIO.FileSystem.DirectoryExists(WeeklyDiaryFolder) Then
+                FileIO.FileSystem.CreateDirectory(WeeklyDiaryFolder)
+            End If
+
+            Call Shell("explorer.exe " & WeeklyDiaryFolder, AppWinStyle.NormalFocus)
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
         End Try
