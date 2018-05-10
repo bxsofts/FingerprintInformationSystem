@@ -347,12 +347,6 @@
     <Compile Include="FrmPerformance-Monthly-Generator.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPerformance-Monthly-Report.designer.vb">
-      <DependentUpon>FrmPerformance-Monthly-Report.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPerformance-Monthly-Report.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmPerformance-Quarterly-Report.Designer.vb">
       <DependentUpon>FrmPerformance-Quarterly-Report.vb</DependentUpon>
     </Compile>
@@ -576,10 +570,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPerformance-Monthly-Generator.resx">
       <DependentUpon>FrmPerformance-Monthly-Generator.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmPerformance-Monthly-Report.resx">
-      <DependentUpon>FrmPerformance-Monthly-Report.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPerformance-Quarterly-Report.resx">
