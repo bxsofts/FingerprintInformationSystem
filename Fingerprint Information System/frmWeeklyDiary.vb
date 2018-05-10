@@ -5,7 +5,8 @@ Imports Microsoft.Office.Interop
 
 
 Public Class frmWeeklyDiary
-
+    Dim dtWeeklyDiaryFrom As Date
+    Dim dtWeeklyDiaryTo As Date
     Dim TemplateFile As String
     Dim sfilename As String
 
@@ -19,13 +20,12 @@ Public Class frmWeeklyDiary
 
             Dim lastweekdate As Date = Date.Today.AddDays(-7) 'gets day of last week
             Dim dayOfWeek = CInt(lastweekdate.DayOfWeek)
-            Dim FromDate As Date = lastweekdate.AddDays(-1 * dayOfWeek)
-            Dim ToDate As Date = lastweekdate.AddDays(6 - dayOfWeek)
+            dtWeeklyDiaryFrom = lastweekdate.AddDays(-1 * dayOfWeek)
+            dtWeeklyDiaryTo = lastweekdate.AddDays(6 - dayOfWeek)
 
-            Me.MonthCalendarAdv1.SelectedDate = FromDate
-            Me.lblSelectedDate.Text = FromDate.ToString("dd/MM/yyyy", culture)
-            dtWeeklyDiaryFrom = FromDate
-            dtWeeklyDiaryTo = ToDate
+            Me.MonthCalendarAdv1.SelectedDate = dtWeeklyDiaryFrom
+            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+            
 
             If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
             Me.SocRegisterTableAdapter1.Connection.ConnectionString = strConString
@@ -319,7 +319,7 @@ Public Class frmWeeklyDiary
     Private Sub btnOpenWeeklyDiaryFolder_Click(sender As Object, e As EventArgs) Handles btnOpenWeeklyDiaryFolder.Click
         Try
             Dim WeeklyDiaryFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
-            Dim sfilename = WeeklyDiaryFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
+            Dim sfilename = WeeklyDiaryFolder & "\Weekly Diary - " & Me.MonthCalendarAdv1.SelectedDate.ToString("yyyy-MM-dd") & ".docx"
 
             If FileIO.FileSystem.FileExists(sfilename) Then
                 Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)

@@ -15231,8 +15231,6 @@ errhandler:
 
     Private Sub GenerateWeeklyDiary() Handles btnWeeklyDiary.Click
         Try
-            dtWeeklyDiaryFrom = Today
-            dtWeeklyDiaryTo = Today
             frmWeeklyDiary.StartPosition = FormStartPosition.CenterParent
             frmWeeklyDiary.ShowDialog()
 

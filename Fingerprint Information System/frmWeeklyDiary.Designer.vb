@@ -55,10 +55,10 @@ Partial Class frmWeeklyDiary
         '
         Me.btnGenerateWeeklyDiary.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateWeeklyDiary.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateWeeklyDiary.Location = New System.Drawing.Point(333, 9)
+        Me.btnGenerateWeeklyDiary.Location = New System.Drawing.Point(328, 9)
         Me.btnGenerateWeeklyDiary.Name = "btnGenerateWeeklyDiary"
         Me.btnGenerateWeeklyDiary.Size = New System.Drawing.Size(106, 40)
-        Me.btnGenerateWeeklyDiary.TabIndex = 21
+        Me.btnGenerateWeeklyDiary.TabIndex = 1
         Me.btnGenerateWeeklyDiary.Text = "Weekly Diary"
         '
         'PanelEx1
@@ -76,7 +76,7 @@ Partial Class frmWeeklyDiary
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(450, 148)
+        Me.PanelEx1.Size = New System.Drawing.Size(444, 148)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -151,20 +151,20 @@ Partial Class frmWeeklyDiary
         '
         Me.btnCoveringLetter.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnCoveringLetter.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCoveringLetter.Location = New System.Drawing.Point(333, 53)
+        Me.btnCoveringLetter.Location = New System.Drawing.Point(328, 53)
         Me.btnCoveringLetter.Name = "btnCoveringLetter"
         Me.btnCoveringLetter.Size = New System.Drawing.Size(106, 40)
-        Me.btnCoveringLetter.TabIndex = 34
+        Me.btnCoveringLetter.TabIndex = 2
         Me.btnCoveringLetter.Text = "Covering Letter"
         '
         'btnOpenWeeklyDiaryFolder
         '
         Me.btnOpenWeeklyDiaryFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenWeeklyDiaryFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenWeeklyDiaryFolder.Location = New System.Drawing.Point(333, 97)
+        Me.btnOpenWeeklyDiaryFolder.Location = New System.Drawing.Point(328, 97)
         Me.btnOpenWeeklyDiaryFolder.Name = "btnOpenWeeklyDiaryFolder"
         Me.btnOpenWeeklyDiaryFolder.Size = New System.Drawing.Size(106, 40)
-        Me.btnOpenWeeklyDiaryFolder.TabIndex = 24
+        Me.btnOpenWeeklyDiaryFolder.TabIndex = 3
         Me.btnOpenWeeklyDiaryFolder.Text = "Open Folder"
         '
         'FingerPrintDataSet1
@@ -185,7 +185,7 @@ Partial Class frmWeeklyDiary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(450, 148)
+        Me.ClientSize = New System.Drawing.Size(444, 148)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
