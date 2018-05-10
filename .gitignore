@@ -12,3 +12,4 @@ bin
 obj
 /Fingerprint Information System/FISoAuth2.json
 /Fingerprint Information System/FISServiceAccount.json
+*.suo
