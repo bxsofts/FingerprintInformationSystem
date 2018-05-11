@@ -150,6 +150,13 @@ Public Class frmMonthlyPerformance
                 .Rows(19).Cells(1).Value = "Amount of Fees remitted"
 
             End With
+
+            For i = 0 To 19
+                For j = 2 To 7
+                    Me.DataGridViewX1.Rows(i).Cells(j).Value = ""
+                Next
+            Next
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -163,6 +170,9 @@ Public Class frmMonthlyPerformance
 
     Private Sub GeneratePerformanceStatement() Handles btnGeneratePerformanceStatement.Click
         On Error Resume Next
+
+        Me.Cursor = Cursors.WaitCursor
+        Me.DataGridViewX1.Cursor = Cursors.WaitCursor
 
         Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
         Dim y = Me.txtYear.Value
@@ -197,6 +207,9 @@ Public Class frmMonthlyPerformance
         End If
 
         blSaveFile = True
+
+        Me.Cursor = Cursors.Default
+        Me.DataGridViewX1.Cursor = Cursors.Default
     End Sub
 
     Private Sub GenerateMonth1ValuesFromDB()
