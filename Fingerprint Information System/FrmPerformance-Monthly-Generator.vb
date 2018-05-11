@@ -668,7 +668,7 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientPortrait
             WordApp.Selection.Document.PageSetup.TopMargin = 40
-            WordApp.Selection.Document.PageSetup.BottomMargin = 50
+            WordApp.Selection.Document.PageSetup.BottomMargin = 20
             WordApp.Selection.Document.PageSetup.LeftMargin = 40
             WordApp.Selection.Document.PageSetup.RightMargin = 30
 
@@ -689,7 +689,7 @@ Public Class frmMonthlyPerformance
 
             Dim RowCount = 23
 
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 8)
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
@@ -716,6 +716,7 @@ Public Class frmMonthlyPerformance
 
             For i = 4 To 23
                 Dim j = i - 4
+                WordApp.Selection.Tables.Item(1).Rows(i).Height = 20
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).SlNo)
@@ -756,19 +757,20 @@ Public Class frmMonthlyPerformance
 
             For f = 3 To 7
                 WordApp.Selection.Tables.Item(1).Cell(23, f).Select()
+                WordApp.Selection.Tables.Item(1).Cell(23, f).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
                 WordApp.Selection.Font.Name = "Rupee Foradian"
                 WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 10
+                WordApp.Selection.Font.Size = 8
             Next
 
 
             WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText(Me.DataGridViewX1.Columns(2).HeaderText)
 
             WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText(Me.DataGridViewX1.Columns(3).HeaderText)
 
@@ -784,23 +786,23 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 1))
 
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Sl. No.")
 
 
             WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Details of Work")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Previous Month")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Month")
 
@@ -810,12 +812,12 @@ Public Class frmMonthlyPerformance
             Next
 
             WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Present Quarter")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Remarks")
 
@@ -825,7 +827,7 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.TypeParagraph()
-            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Size = 10
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
             For delay = 71 To 80
