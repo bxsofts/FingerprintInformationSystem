@@ -23,17 +23,17 @@ Partial Class frmMonthlyPerformance
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMonthlyPerformance))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
-        Me.lblPeriod = New DevComponents.DotNetBar.LabelX()
+        Me.lblHeader = New DevComponents.DotNetBar.LabelX()
         Me.txtBlankCellValue = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.btnInsertBlankValues = New DevComponents.DotNetBar.ButtonX()
         Me.btnClearAllFields = New DevComponents.DotNetBar.ButtonX()
@@ -41,7 +41,7 @@ Partial Class frmMonthlyPerformance
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.txtYear = New DevComponents.Editors.IntegerInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.btnGenerateSelectedMonthValue = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateMonth1Values = New DevComponents.DotNetBar.ButtonX()
         Me.btnGeneratePreviousMonthValues = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel8 = New DevComponents.DotNetBar.Controls.GroupPanel()
@@ -49,17 +49,18 @@ Partial Class frmMonthlyPerformance
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.btnGenerateForPeriod = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateSelectedPeriodValues = New DevComponents.DotNetBar.ButtonX()
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.CheckBoxX2 = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkBlankValue = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.chkGeneratePreviousMonthValuesFromFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.chkGeneratePreviousMonthValuesFromDataBase = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkGeneratePreviousMonthValuesFromDB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.chkGenerateSelectedMonthValuesFromFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.chkGenerateSelectedMonthValuesFromDataBase = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkGenerateMonth1ValuesFromFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkGenerateMonth1ValuesFromDB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.btnGeneratePerformanceStatement = New DevComponents.DotNetBar.ButtonX()
         Me.PerformanceBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
@@ -69,9 +70,10 @@ Partial Class frmMonthlyPerformance
         Me.CdRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.lblPreviousMonth = New DevComponents.DotNetBar.LabelX()
-        Me.btnStatement = New DevComponents.DotNetBar.ButtonX()
-        Me.lblSelectedMonth = New DevComponents.DotNetBar.LabelX()
+        Me.btnOpenInWord = New DevComponents.DotNetBar.ButtonX()
+        Me.lblMonth1 = New DevComponents.DotNetBar.LabelX()
         Me.DataGridViewX1 = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.SlNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DetailsOfWorkDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -82,7 +84,6 @@ Partial Class frmMonthlyPerformance
         Me.PresentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bgwStatement = New System.ComponentModel.BackgroundWorker()
-        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -103,7 +104,7 @@ Partial Class frmMonthlyPerformance
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx1.Controls.Add(Me.lblPeriod)
+        Me.PanelEx1.Controls.Add(Me.lblHeader)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelEx1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -118,20 +119,20 @@ Partial Class frmMonthlyPerformance
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 1
         '
-        'lblPeriod
+        'lblHeader
         '
         '
         '
         '
-        Me.lblPeriod.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPeriod.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lblPeriod.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPeriod.Location = New System.Drawing.Point(0, 0)
-        Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(977, 45)
-        Me.lblPeriod.TabIndex = 34
-        Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
-        Me.lblPeriod.TextAlignment = System.Drawing.StringAlignment.Center
+        Me.lblHeader.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHeader.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(977, 45)
+        Me.lblHeader.TabIndex = 34
+        Me.lblHeader.Text = "STATEMENT OF PERFORMANCE"
+        Me.lblHeader.TextAlignment = System.Drawing.StringAlignment.Center
         '
         'txtBlankCellValue
         '
@@ -148,7 +149,7 @@ Partial Class frmMonthlyPerformance
         Me.txtBlankCellValue.Location = New System.Drawing.Point(129, 7)
         Me.txtBlankCellValue.Name = "txtBlankCellValue"
         Me.txtBlankCellValue.Size = New System.Drawing.Size(82, 27)
-        Me.txtBlankCellValue.TabIndex = 5
+        Me.txtBlankCellValue.TabIndex = 3
         '
         'btnInsertBlankValues
         '
@@ -157,7 +158,7 @@ Partial Class frmMonthlyPerformance
         Me.btnInsertBlankValues.Location = New System.Drawing.Point(249, 6)
         Me.btnInsertBlankValues.Name = "btnInsertBlankValues"
         Me.btnInsertBlankValues.Size = New System.Drawing.Size(99, 58)
-        Me.btnInsertBlankValues.TabIndex = 5
+        Me.btnInsertBlankValues.TabIndex = 4
         Me.btnInsertBlankValues.Text = "INSERT"
         '
         'btnClearAllFields
@@ -168,7 +169,7 @@ Partial Class frmMonthlyPerformance
         Me.btnClearAllFields.Location = New System.Drawing.Point(12, 15)
         Me.btnClearAllFields.Name = "btnClearAllFields"
         Me.btnClearAllFields.Size = New System.Drawing.Size(126, 56)
-        Me.btnClearAllFields.TabIndex = 7
+        Me.btnClearAllFields.TabIndex = 10
         Me.btnClearAllFields.Text = "CLEAR"
         '
         'LabelX4
@@ -178,7 +179,7 @@ Partial Class frmMonthlyPerformance
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(204, 19)
+        Me.LabelX4.Location = New System.Drawing.Point(3, 54)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 30
@@ -208,13 +209,13 @@ Partial Class frmMonthlyPerformance
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(249, 12)
+        Me.txtYear.Location = New System.Drawing.Point(50, 48)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 1900
         Me.txtYear.Name = "txtYear"
         Me.txtYear.ShowUpDown = True
-        Me.txtYear.Size = New System.Drawing.Size(99, 29)
-        Me.txtYear.TabIndex = 2
+        Me.txtYear.Size = New System.Drawing.Size(119, 29)
+        Me.txtYear.TabIndex = 1
         Me.txtYear.Value = 1900
         Me.txtYear.WatermarkText = "Year"
         '
@@ -228,23 +229,23 @@ Partial Class frmMonthlyPerformance
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(55, 13)
+        Me.cmbMonth.Location = New System.Drawing.Point(50, 13)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
-        Me.cmbMonth.Size = New System.Drawing.Size(120, 29)
-        Me.cmbMonth.TabIndex = 1
+        Me.cmbMonth.Size = New System.Drawing.Size(119, 29)
+        Me.cmbMonth.TabIndex = 0
         Me.cmbMonth.WatermarkText = "Month"
         '
-        'btnGenerateSelectedMonthValue
+        'btnGenerateMonth1Values
         '
-        Me.btnGenerateSelectedMonthValue.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGenerateSelectedMonthValue.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateSelectedMonthValue.Location = New System.Drawing.Point(249, 6)
-        Me.btnGenerateSelectedMonthValue.Name = "btnGenerateSelectedMonthValue"
-        Me.btnGenerateSelectedMonthValue.Size = New System.Drawing.Size(99, 58)
-        Me.btnGenerateSelectedMonthValue.TabIndex = 3
-        Me.btnGenerateSelectedMonthValue.Text = "GENERATE"
+        Me.btnGenerateMonth1Values.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateMonth1Values.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateMonth1Values.Location = New System.Drawing.Point(249, 6)
+        Me.btnGenerateMonth1Values.Name = "btnGenerateMonth1Values"
+        Me.btnGenerateMonth1Values.Size = New System.Drawing.Size(99, 58)
+        Me.btnGenerateMonth1Values.TabIndex = 5
+        Me.btnGenerateMonth1Values.Text = "GENERATE"
         '
         'btnGeneratePreviousMonthValues
         '
@@ -253,7 +254,7 @@ Partial Class frmMonthlyPerformance
         Me.btnGeneratePreviousMonthValues.Location = New System.Drawing.Point(249, 6)
         Me.btnGeneratePreviousMonthValues.Name = "btnGeneratePreviousMonthValues"
         Me.btnGeneratePreviousMonthValues.Size = New System.Drawing.Size(99, 58)
-        Me.btnGeneratePreviousMonthValues.TabIndex = 4
+        Me.btnGeneratePreviousMonthValues.TabIndex = 6
         Me.btnGeneratePreviousMonthValues.Text = "GENERATE"
         '
         'PanelEx2
@@ -288,9 +289,9 @@ Partial Class frmMonthlyPerformance
         Me.GroupPanel8.Controls.Add(Me.LabelX1)
         Me.GroupPanel8.Controls.Add(Me.dtFrom)
         Me.GroupPanel8.Controls.Add(Me.dtTo)
-        Me.GroupPanel8.Controls.Add(Me.btnGenerateForPeriod)
+        Me.GroupPanel8.Controls.Add(Me.btnGenerateSelectedPeriodValues)
         Me.GroupPanel8.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel8.Location = New System.Drawing.Point(7, 526)
+        Me.GroupPanel8.Location = New System.Drawing.Point(7, 566)
         Me.GroupPanel8.Name = "GroupPanel8"
         Me.GroupPanel8.Size = New System.Drawing.Size(360, 93)
         '
@@ -321,8 +322,8 @@ Partial Class frmMonthlyPerformance
         '
         '
         Me.GroupPanel8.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel8.TabIndex = 40
-        Me.GroupPanel8.Text = "Generate for selected period"
+        Me.GroupPanel8.TabIndex = 36
+        Me.GroupPanel8.Text = "Generate Selected Period Statement"
         '
         'LabelX2
         '
@@ -402,7 +403,7 @@ Partial Class frmMonthlyPerformance
         Me.dtFrom.MonthCalendar.TodayButtonVisible = True
         Me.dtFrom.Name = "dtFrom"
         Me.dtFrom.Size = New System.Drawing.Size(115, 27)
-        Me.dtFrom.TabIndex = 10
+        Me.dtFrom.TabIndex = 7
         Me.dtFrom.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtFrom.WatermarkText = "From"
         '
@@ -458,19 +459,19 @@ Partial Class frmMonthlyPerformance
         Me.dtTo.MonthCalendar.TodayButtonVisible = True
         Me.dtTo.Name = "dtTo"
         Me.dtTo.Size = New System.Drawing.Size(115, 27)
-        Me.dtTo.TabIndex = 11
+        Me.dtTo.TabIndex = 8
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'btnGenerateForPeriod
+        'btnGenerateSelectedPeriodValues
         '
-        Me.btnGenerateForPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGenerateForPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateForPeriod.Location = New System.Drawing.Point(249, 6)
-        Me.btnGenerateForPeriod.Name = "btnGenerateForPeriod"
-        Me.btnGenerateForPeriod.Size = New System.Drawing.Size(99, 58)
-        Me.btnGenerateForPeriod.TabIndex = 6
-        Me.btnGenerateForPeriod.Text = "GENERATE"
+        Me.btnGenerateSelectedPeriodValues.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateSelectedPeriodValues.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateSelectedPeriodValues.Location = New System.Drawing.Point(249, 6)
+        Me.btnGenerateSelectedPeriodValues.Name = "btnGenerateSelectedPeriodValues"
+        Me.btnGenerateSelectedPeriodValues.Size = New System.Drawing.Size(99, 58)
+        Me.btnGenerateSelectedPeriodValues.TabIndex = 9
+        Me.btnGenerateSelectedPeriodValues.Text = "GENERATE"
         '
         'GroupPanel4
         '
@@ -482,7 +483,7 @@ Partial Class frmMonthlyPerformance
         Me.GroupPanel4.Controls.Add(Me.txtBlankCellValue)
         Me.GroupPanel4.Controls.Add(Me.btnInsertBlankValues)
         Me.GroupPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel4.Location = New System.Drawing.Point(7, 393)
+        Me.GroupPanel4.Location = New System.Drawing.Point(7, 164)
         Me.GroupPanel4.Name = "GroupPanel4"
         Me.GroupPanel4.Size = New System.Drawing.Size(360, 91)
         '
@@ -513,8 +514,8 @@ Partial Class frmMonthlyPerformance
         '
         '
         Me.GroupPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel4.TabIndex = 35
-        Me.GroupPanel4.Text = "STEP 4 : What value should be used in blank cells ?"
+        Me.GroupPanel4.TabIndex = 33
+        Me.GroupPanel4.Text = "Blank Cell Value"
         '
         'CheckBoxX2
         '
@@ -556,9 +557,9 @@ Partial Class frmMonthlyPerformance
         Me.GroupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.GroupPanel3.Controls.Add(Me.btnGeneratePreviousMonthValues)
         Me.GroupPanel3.Controls.Add(Me.chkGeneratePreviousMonthValuesFromFile)
-        Me.GroupPanel3.Controls.Add(Me.chkGeneratePreviousMonthValuesFromDataBase)
+        Me.GroupPanel3.Controls.Add(Me.chkGeneratePreviousMonthValuesFromDB)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel3.Location = New System.Drawing.Point(7, 260)
+        Me.GroupPanel3.Location = New System.Drawing.Point(7, 432)
         Me.GroupPanel3.Name = "GroupPanel3"
         Me.GroupPanel3.Size = New System.Drawing.Size(360, 91)
         '
@@ -589,8 +590,8 @@ Partial Class frmMonthlyPerformance
         '
         '
         Me.GroupPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel3.TabIndex = 34
-        Me.GroupPanel3.Text = "STEP 3 : Generate value for previous month from"
+        Me.GroupPanel3.TabIndex = 35
+        Me.GroupPanel3.Text = "Generate Previous Month Values"
         '
         'chkGeneratePreviousMonthValuesFromFile
         '
@@ -602,39 +603,39 @@ Partial Class frmMonthlyPerformance
         Me.chkGeneratePreviousMonthValuesFromFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
         Me.chkGeneratePreviousMonthValuesFromFile.Location = New System.Drawing.Point(3, 40)
         Me.chkGeneratePreviousMonthValuesFromFile.Name = "chkGeneratePreviousMonthValuesFromFile"
-        Me.chkGeneratePreviousMonthValuesFromFile.Size = New System.Drawing.Size(246, 18)
+        Me.chkGeneratePreviousMonthValuesFromFile.Size = New System.Drawing.Size(225, 18)
         Me.chkGeneratePreviousMonthValuesFromFile.TabIndex = 3
         Me.chkGeneratePreviousMonthValuesFromFile.TabStop = False
-        Me.chkGeneratePreviousMonthValuesFromFile.Text = "Saved statement of the previous month"
+        Me.chkGeneratePreviousMonthValuesFromFile.Text = "Saved statement of Previous Month"
         '
-        'chkGeneratePreviousMonthValuesFromDataBase
+        'chkGeneratePreviousMonthValuesFromDB
         '
-        Me.chkGeneratePreviousMonthValuesFromDataBase.AutoSize = True
+        Me.chkGeneratePreviousMonthValuesFromDB.AutoSize = True
         '
         '
         '
-        Me.chkGeneratePreviousMonthValuesFromDataBase.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGeneratePreviousMonthValuesFromDataBase.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGeneratePreviousMonthValuesFromDataBase.Checked = True
-        Me.chkGeneratePreviousMonthValuesFromDataBase.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkGeneratePreviousMonthValuesFromDataBase.CheckValue = "Y"
-        Me.chkGeneratePreviousMonthValuesFromDataBase.Location = New System.Drawing.Point(3, 13)
-        Me.chkGeneratePreviousMonthValuesFromDataBase.Name = "chkGeneratePreviousMonthValuesFromDataBase"
-        Me.chkGeneratePreviousMonthValuesFromDataBase.Size = New System.Drawing.Size(75, 18)
-        Me.chkGeneratePreviousMonthValuesFromDataBase.TabIndex = 2
-        Me.chkGeneratePreviousMonthValuesFromDataBase.TabStop = False
-        Me.chkGeneratePreviousMonthValuesFromDataBase.Text = "Database"
+        Me.chkGeneratePreviousMonthValuesFromDB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkGeneratePreviousMonthValuesFromDB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkGeneratePreviousMonthValuesFromDB.Checked = True
+        Me.chkGeneratePreviousMonthValuesFromDB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkGeneratePreviousMonthValuesFromDB.CheckValue = "Y"
+        Me.chkGeneratePreviousMonthValuesFromDB.Location = New System.Drawing.Point(3, 13)
+        Me.chkGeneratePreviousMonthValuesFromDB.Name = "chkGeneratePreviousMonthValuesFromDB"
+        Me.chkGeneratePreviousMonthValuesFromDB.Size = New System.Drawing.Size(75, 18)
+        Me.chkGeneratePreviousMonthValuesFromDB.TabIndex = 2
+        Me.chkGeneratePreviousMonthValuesFromDB.TabStop = False
+        Me.chkGeneratePreviousMonthValuesFromDB.Text = "Database"
         '
         'GroupPanel2
         '
         Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel2.Controls.Add(Me.btnGenerateSelectedMonthValue)
-        Me.GroupPanel2.Controls.Add(Me.chkGenerateSelectedMonthValuesFromFile)
-        Me.GroupPanel2.Controls.Add(Me.chkGenerateSelectedMonthValuesFromDataBase)
+        Me.GroupPanel2.Controls.Add(Me.btnGenerateMonth1Values)
+        Me.GroupPanel2.Controls.Add(Me.chkGenerateMonth1ValuesFromFile)
+        Me.GroupPanel2.Controls.Add(Me.chkGenerateMonth1ValuesFromDB)
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel2.Location = New System.Drawing.Point(7, 127)
+        Me.GroupPanel2.Location = New System.Drawing.Point(7, 298)
         Me.GroupPanel2.Name = "GroupPanel2"
         Me.GroupPanel2.Size = New System.Drawing.Size(360, 91)
         '
@@ -665,47 +666,48 @@ Partial Class frmMonthlyPerformance
         '
         '
         Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel2.TabIndex = 33
-        Me.GroupPanel2.Text = "STEP 2 : Generate values for selected month from"
+        Me.GroupPanel2.TabIndex = 34
+        Me.GroupPanel2.Text = "Generate Month 1 Values"
         '
-        'chkGenerateSelectedMonthValuesFromFile
+        'chkGenerateMonth1ValuesFromFile
         '
-        Me.chkGenerateSelectedMonthValuesFromFile.AutoSize = True
-        '
-        '
-        '
-        Me.chkGenerateSelectedMonthValuesFromFile.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGenerateSelectedMonthValuesFromFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGenerateSelectedMonthValuesFromFile.Location = New System.Drawing.Point(3, 39)
-        Me.chkGenerateSelectedMonthValuesFromFile.Name = "chkGenerateSelectedMonthValuesFromFile"
-        Me.chkGenerateSelectedMonthValuesFromFile.Size = New System.Drawing.Size(194, 18)
-        Me.chkGenerateSelectedMonthValuesFromFile.TabIndex = 1
-        Me.chkGenerateSelectedMonthValuesFromFile.TabStop = False
-        Me.chkGenerateSelectedMonthValuesFromFile.Text = "Saved statement of the month"
-        '
-        'chkGenerateSelectedMonthValuesFromDataBase
-        '
-        Me.chkGenerateSelectedMonthValuesFromDataBase.AutoSize = True
+        Me.chkGenerateMonth1ValuesFromFile.AutoSize = True
         '
         '
         '
-        Me.chkGenerateSelectedMonthValuesFromDataBase.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGenerateSelectedMonthValuesFromDataBase.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGenerateSelectedMonthValuesFromDataBase.Checked = True
-        Me.chkGenerateSelectedMonthValuesFromDataBase.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkGenerateSelectedMonthValuesFromDataBase.CheckValue = "Y"
-        Me.chkGenerateSelectedMonthValuesFromDataBase.Location = New System.Drawing.Point(3, 12)
-        Me.chkGenerateSelectedMonthValuesFromDataBase.Name = "chkGenerateSelectedMonthValuesFromDataBase"
-        Me.chkGenerateSelectedMonthValuesFromDataBase.Size = New System.Drawing.Size(75, 18)
-        Me.chkGenerateSelectedMonthValuesFromDataBase.TabIndex = 0
-        Me.chkGenerateSelectedMonthValuesFromDataBase.TabStop = False
-        Me.chkGenerateSelectedMonthValuesFromDataBase.Text = "Database"
+        Me.chkGenerateMonth1ValuesFromFile.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkGenerateMonth1ValuesFromFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkGenerateMonth1ValuesFromFile.Location = New System.Drawing.Point(3, 39)
+        Me.chkGenerateMonth1ValuesFromFile.Name = "chkGenerateMonth1ValuesFromFile"
+        Me.chkGenerateMonth1ValuesFromFile.Size = New System.Drawing.Size(183, 18)
+        Me.chkGenerateMonth1ValuesFromFile.TabIndex = 1
+        Me.chkGenerateMonth1ValuesFromFile.TabStop = False
+        Me.chkGenerateMonth1ValuesFromFile.Text = "Saved statement of Month 1"
+        '
+        'chkGenerateMonth1ValuesFromDB
+        '
+        Me.chkGenerateMonth1ValuesFromDB.AutoSize = True
+        '
+        '
+        '
+        Me.chkGenerateMonth1ValuesFromDB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkGenerateMonth1ValuesFromDB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkGenerateMonth1ValuesFromDB.Checked = True
+        Me.chkGenerateMonth1ValuesFromDB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkGenerateMonth1ValuesFromDB.CheckValue = "Y"
+        Me.chkGenerateMonth1ValuesFromDB.Location = New System.Drawing.Point(3, 12)
+        Me.chkGenerateMonth1ValuesFromDB.Name = "chkGenerateMonth1ValuesFromDB"
+        Me.chkGenerateMonth1ValuesFromDB.Size = New System.Drawing.Size(75, 18)
+        Me.chkGenerateMonth1ValuesFromDB.TabIndex = 0
+        Me.chkGenerateMonth1ValuesFromDB.TabStop = False
+        Me.chkGenerateMonth1ValuesFromDB.Text = "Database"
         '
         'GroupPanel1
         '
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel1.Controls.Add(Me.btnGeneratePerformanceStatement)
         Me.GroupPanel1.Controls.Add(Me.LabelX3)
         Me.GroupPanel1.Controls.Add(Me.LabelX4)
         Me.GroupPanel1.Controls.Add(Me.txtYear)
@@ -713,7 +715,7 @@ Partial Class frmMonthlyPerformance
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Location = New System.Drawing.Point(7, 12)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(360, 76)
+        Me.GroupPanel1.Size = New System.Drawing.Size(360, 109)
         '
         '
         '
@@ -743,7 +745,17 @@ Partial Class frmMonthlyPerformance
         '
         Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel1.TabIndex = 32
-        Me.GroupPanel1.Text = "STEP 1 : Select Month & Year"
+        Me.GroupPanel1.Text = "Generate Statement for Selected Month & Year"
+        '
+        'btnGeneratePerformanceStatement
+        '
+        Me.btnGeneratePerformanceStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGeneratePerformanceStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGeneratePerformanceStatement.Location = New System.Drawing.Point(249, 18)
+        Me.btnGeneratePerformanceStatement.Name = "btnGeneratePerformanceStatement"
+        Me.btnGeneratePerformanceStatement.Size = New System.Drawing.Size(99, 58)
+        Me.btnGeneratePerformanceStatement.TabIndex = 2
+        Me.btnGeneratePerformanceStatement.Text = "GENERATE"
         '
         'PerformanceBindingSource
         '
@@ -782,22 +794,22 @@ Partial Class frmMonthlyPerformance
         Me.PanelEx3.Controls.Add(Me.CircularProgress1)
         Me.PanelEx3.Controls.Add(Me.btnOpenFolder)
         Me.PanelEx3.Controls.Add(Me.lblPreviousMonth)
-        Me.PanelEx3.Controls.Add(Me.btnStatement)
-        Me.PanelEx3.Controls.Add(Me.lblSelectedMonth)
+        Me.PanelEx3.Controls.Add(Me.btnOpenInWord)
+        Me.PanelEx3.Controls.Add(Me.lblMonth1)
         Me.PanelEx3.Controls.Add(Me.btnClearAllFields)
         Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelEx3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PanelEx3.Location = New System.Drawing.Point(377, 650)
+        Me.PanelEx3.Location = New System.Drawing.Point(377, 632)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(977, 83)
+        Me.PanelEx3.Size = New System.Drawing.Size(977, 101)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx3.Style.GradientAngle = 90
-        Me.PanelEx3.TabIndex = 10
+        Me.PanelEx3.TabIndex = 37
         '
         'CircularProgress1
         '
@@ -806,7 +818,7 @@ Partial Class frmMonthlyPerformance
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(297, 7)
+        Me.CircularProgress1.Location = New System.Drawing.Point(295, 7)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -815,6 +827,18 @@ Partial Class frmMonthlyPerformance
         Me.CircularProgress1.TabIndex = 55
         Me.CircularProgress1.TabStop = False
         '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(299, 15)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
+        Me.btnOpenFolder.Size = New System.Drawing.Size(126, 56)
+        Me.btnOpenFolder.TabIndex = 13
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
         'lblPreviousMonth
         '
         Me.lblPreviousMonth.AutoSize = True
@@ -822,36 +846,36 @@ Partial Class frmMonthlyPerformance
         '
         '
         Me.lblPreviousMonth.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPreviousMonth.Location = New System.Drawing.Point(455, 51)
+        Me.lblPreviousMonth.Location = New System.Drawing.Point(437, 15)
         Me.lblPreviousMonth.Name = "lblPreviousMonth"
         Me.lblPreviousMonth.Size = New System.Drawing.Size(100, 20)
         Me.lblPreviousMonth.TabIndex = 31
         Me.lblPreviousMonth.Text = "Previous Month"
         '
-        'btnStatement
+        'btnOpenInWord
         '
-        Me.btnStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnStatement.Image = CType(resources.GetObject("btnStatement.Image"), System.Drawing.Image)
-        Me.btnStatement.Location = New System.Drawing.Point(156, 15)
-        Me.btnStatement.Name = "btnStatement"
-        Me.btnStatement.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
-        Me.btnStatement.Size = New System.Drawing.Size(126, 56)
-        Me.btnStatement.TabIndex = 8
-        Me.btnStatement.Text = "PRINT"
+        Me.btnOpenInWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenInWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenInWord.Image = CType(resources.GetObject("btnOpenInWord.Image"), System.Drawing.Image)
+        Me.btnOpenInWord.Location = New System.Drawing.Point(156, 15)
+        Me.btnOpenInWord.Name = "btnOpenInWord"
+        Me.btnOpenInWord.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
+        Me.btnOpenInWord.Size = New System.Drawing.Size(126, 56)
+        Me.btnOpenInWord.TabIndex = 12
+        Me.btnOpenInWord.Text = "PRINT"
         '
-        'lblSelectedMonth
+        'lblMonth1
         '
-        Me.lblSelectedMonth.AutoSize = True
+        Me.lblMonth1.AutoSize = True
         '
         '
         '
-        Me.lblSelectedMonth.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSelectedMonth.Location = New System.Drawing.Point(455, 15)
-        Me.lblSelectedMonth.Name = "lblSelectedMonth"
-        Me.lblSelectedMonth.Size = New System.Drawing.Size(99, 20)
-        Me.lblSelectedMonth.TabIndex = 30
-        Me.lblSelectedMonth.Text = "Selected Month"
+        Me.lblMonth1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblMonth1.Location = New System.Drawing.Point(437, 51)
+        Me.lblMonth1.Name = "lblMonth1"
+        Me.lblMonth1.Size = New System.Drawing.Size(55, 20)
+        Me.lblMonth1.TabIndex = 30
+        Me.lblMonth1.Text = "Month 1"
         '
         'DataGridViewX1
         '
@@ -859,42 +883,43 @@ Partial Class frmMonthlyPerformance
         Me.DataGridViewX1.AllowUserToDeleteRows = False
         Me.DataGridViewX1.AutoGenerateColumns = False
         Me.DataGridViewX1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewX1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNoDataGridViewTextBoxColumn, Me.DetailsOfWorkDataGridViewTextBoxColumn, Me.PreviousDataGridViewTextBoxColumn, Me.Month1DataGridViewTextBoxColumn, Me.Month2DataGridViewTextBoxColumn, Me.Month3DataGridViewTextBoxColumn, Me.PresentDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn})
         Me.DataGridViewX1.DataSource = Me.PerformanceBindingSource
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.DataGridViewX1.Location = New System.Drawing.Point(377, 45)
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle9
+        Me.DataGridViewX1.RowHeadersVisible = False
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle18
         Me.DataGridViewX1.RowTemplate.Height = 25
-        Me.DataGridViewX1.Size = New System.Drawing.Size(977, 605)
+        Me.DataGridViewX1.Size = New System.Drawing.Size(977, 587)
         Me.DataGridViewX1.TabIndex = 15
         '
         'SlNoDataGridViewTextBoxColumn
         '
         Me.SlNoDataGridViewTextBoxColumn.DataPropertyName = "SlNo"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.SlNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.SlNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle11
         Me.SlNoDataGridViewTextBoxColumn.HeaderText = "Sl.No."
         Me.SlNoDataGridViewTextBoxColumn.Name = "SlNoDataGridViewTextBoxColumn"
         Me.SlNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -911,8 +936,8 @@ Partial Class frmMonthlyPerformance
         'PreviousDataGridViewTextBoxColumn
         '
         Me.PreviousDataGridViewTextBoxColumn.DataPropertyName = "Previous"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PreviousDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PreviousDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle12
         Me.PreviousDataGridViewTextBoxColumn.HeaderText = "Previous Quarter/Month"
         Me.PreviousDataGridViewTextBoxColumn.Name = "PreviousDataGridViewTextBoxColumn"
         Me.PreviousDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -921,8 +946,8 @@ Partial Class frmMonthlyPerformance
         'Month1DataGridViewTextBoxColumn
         '
         Me.Month1DataGridViewTextBoxColumn.DataPropertyName = "Month1"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month1DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month1DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle13
         Me.Month1DataGridViewTextBoxColumn.HeaderText = "Month1"
         Me.Month1DataGridViewTextBoxColumn.Name = "Month1DataGridViewTextBoxColumn"
         Me.Month1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -931,8 +956,8 @@ Partial Class frmMonthlyPerformance
         'Month2DataGridViewTextBoxColumn
         '
         Me.Month2DataGridViewTextBoxColumn.DataPropertyName = "Month2"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month2DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month2DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle14
         Me.Month2DataGridViewTextBoxColumn.HeaderText = "Month2"
         Me.Month2DataGridViewTextBoxColumn.Name = "Month2DataGridViewTextBoxColumn"
         Me.Month2DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -941,8 +966,8 @@ Partial Class frmMonthlyPerformance
         'Month3DataGridViewTextBoxColumn
         '
         Me.Month3DataGridViewTextBoxColumn.DataPropertyName = "Month3"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month3DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month3DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
         Me.Month3DataGridViewTextBoxColumn.HeaderText = "Month3"
         Me.Month3DataGridViewTextBoxColumn.Name = "Month3DataGridViewTextBoxColumn"
         Me.Month3DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -951,8 +976,8 @@ Partial Class frmMonthlyPerformance
         'PresentDataGridViewTextBoxColumn
         '
         Me.PresentDataGridViewTextBoxColumn.DataPropertyName = "Present"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle16
         Me.PresentDataGridViewTextBoxColumn.HeaderText = "Present Quarter"
         Me.PresentDataGridViewTextBoxColumn.Name = "PresentDataGridViewTextBoxColumn"
         Me.PresentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -964,24 +989,12 @@ Partial Class frmMonthlyPerformance
         Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
         Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
         Me.RemarksDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.RemarksDataGridViewTextBoxColumn.Width = 150
+        Me.RemarksDataGridViewTextBoxColumn.Width = 190
         '
         'bgwStatement
         '
         Me.bgwStatement.WorkerReportsProgress = True
         Me.bgwStatement.WorkerSupportsCancellation = True
-        '
-        'btnOpenFolder
-        '
-        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
-        Me.btnOpenFolder.Location = New System.Drawing.Point(299, 15)
-        Me.btnOpenFolder.Name = "btnOpenFolder"
-        Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
-        Me.btnOpenFolder.Size = New System.Drawing.Size(126, 56)
-        Me.btnOpenFolder.TabIndex = 9
-        Me.btnOpenFolder.Text = "Open Folder"
         '
         'frmMonthlyPerformance
         '
@@ -1036,7 +1049,7 @@ Partial Class frmMonthlyPerformance
     Friend WithEvents btnClearAllFields As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PerformanceBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents PerformanceTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PerformanceTableAdapter
-    Friend WithEvents lblPeriod As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblHeader As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnInsertBlankValues As DevComponents.DotNetBar.ButtonX
     Friend WithEvents CdRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter
     Friend WithEvents txtBlankCellValue As DevComponents.DotNetBar.Controls.TextBoxX
@@ -1045,27 +1058,28 @@ Partial Class frmMonthlyPerformance
     Friend WithEvents GroupPanel4 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel3 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
-    Friend WithEvents chkGenerateSelectedMonthValuesFromFile As DevComponents.DotNetBar.Controls.CheckBoxX
-    Friend WithEvents chkGenerateSelectedMonthValuesFromDataBase As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkGenerateMonth1ValuesFromFile As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkGenerateMonth1ValuesFromDB As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkGeneratePreviousMonthValuesFromFile As DevComponents.DotNetBar.Controls.CheckBoxX
-    Friend WithEvents chkGeneratePreviousMonthValuesFromDataBase As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkGeneratePreviousMonthValuesFromDB As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents CheckBoxX2 As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkBlankValue As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents btnGeneratePreviousMonthValues As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents btnGenerateSelectedMonthValue As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateMonth1Values As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lblPreviousMonth As DevComponents.DotNetBar.LabelX
-    Friend WithEvents lblSelectedMonth As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblMonth1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents GroupPanel8 As DevComponents.DotNetBar.Controls.GroupPanel
-    Friend WithEvents btnGenerateForPeriod As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateSelectedPeriodValues As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
-    Friend WithEvents btnStatement As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnOpenInWord As DevComponents.DotNetBar.ButtonX
     Friend WithEvents DataGridViewX1 As DevComponents.DotNetBar.Controls.DataGridViewX
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwStatement As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents SlNoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DetailsOfWorkDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PreviousDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1074,5 +1088,5 @@ Partial Class frmMonthlyPerformance
     Friend WithEvents Month3DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PresentDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RemarksDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGeneratePerformanceStatement As DevComponents.DotNetBar.ButtonX
 End Class

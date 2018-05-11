@@ -63,14 +63,14 @@ Partial Class frmQuarterlyPerformance
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.lblPeriod = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.lblPreviousQuarter = New DevComponents.DotNetBar.LabelX()
-        Me.lblSelectedQuarter = New DevComponents.DotNetBar.LabelX()
-        Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnOpenInWord = New DevComponents.DotNetBar.ButtonX()
         Me.btnClearAllFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveReport = New DevComponents.DotNetBar.ButtonX()
-        Me.btnPrintPreview = New DevComponents.DotNetBar.ButtonX()
+        Me.lblSelectedQuarter = New DevComponents.DotNetBar.LabelX()
+        Me.btnStatement = New DevComponents.DotNetBar.ButtonX()
         Me.DataGridViewX1 = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.bgwStatement = New System.ComponentModel.BackgroundWorker()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.SlNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DetailsOfWorkDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PreviousDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -90,7 +90,6 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel1.SuspendLayout()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
-        Me.PanelEx4.SuspendLayout()
         CType(Me.DataGridViewX1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -108,17 +107,17 @@ Partial Class frmQuarterlyPerformance
         '
         Me.btnInsertBlankValues.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnInsertBlankValues.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnInsertBlankValues.Location = New System.Drawing.Point(276, 6)
+        Me.btnInsertBlankValues.Location = New System.Drawing.Point(267, 6)
         Me.btnInsertBlankValues.Name = "btnInsertBlankValues"
         Me.btnInsertBlankValues.Size = New System.Drawing.Size(99, 58)
-        Me.btnInsertBlankValues.TabIndex = 6
+        Me.btnInsertBlankValues.TabIndex = 5
         Me.btnInsertBlankValues.Text = "INSERT"
         '
         'btnGenerateSelectedQuarterFromDB
         '
         Me.btnGenerateSelectedQuarterFromDB.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateSelectedQuarterFromDB.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateSelectedQuarterFromDB.Location = New System.Drawing.Point(276, 17)
+        Me.btnGenerateSelectedQuarterFromDB.Location = New System.Drawing.Point(267, 17)
         Me.btnGenerateSelectedQuarterFromDB.Name = "btnGenerateSelectedQuarterFromDB"
         Me.btnGenerateSelectedQuarterFromDB.Size = New System.Drawing.Size(99, 58)
         Me.btnGenerateSelectedQuarterFromDB.TabIndex = 3
@@ -233,7 +232,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.btnGeneratePreviousQuarterValues.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGeneratePreviousQuarterValues.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGeneratePreviousQuarterValues.Location = New System.Drawing.Point(276, 5)
+        Me.btnGeneratePreviousQuarterValues.Location = New System.Drawing.Point(267, 5)
         Me.btnGeneratePreviousQuarterValues.Name = "btnGeneratePreviousQuarterValues"
         Me.btnGeneratePreviousQuarterValues.Size = New System.Drawing.Size(99, 58)
         Me.btnGeneratePreviousQuarterValues.TabIndex = 4
@@ -252,7 +251,7 @@ Partial Class frmQuarterlyPerformance
         Me.PanelEx2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(401, 733)
+        Me.PanelEx2.Size = New System.Drawing.Size(395, 733)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -273,7 +272,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel4.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel4.Location = New System.Drawing.Point(7, 483)
         Me.GroupPanel4.Name = "GroupPanel4"
-        Me.GroupPanel4.Size = New System.Drawing.Size(384, 91)
+        Me.GroupPanel4.Size = New System.Drawing.Size(378, 96)
         '
         '
         '
@@ -303,7 +302,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.GroupPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel4.TabIndex = 35
-        Me.GroupPanel4.Text = "Step 4 : What value should be used in blank cells ?"
+        Me.GroupPanel4.Text = "STEP 4 : Blank Cell Value"
         '
         'CheckBoxX2
         '
@@ -349,7 +348,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel3.Location = New System.Drawing.Point(7, 331)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(384, 91)
+        Me.GroupPanel3.Size = New System.Drawing.Size(378, 96)
         '
         '
         '
@@ -379,7 +378,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.GroupPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel3.TabIndex = 34
-        Me.GroupPanel3.Text = "Step 3 : Generate values for previous quarter from"
+        Me.GroupPanel3.Text = "STEP 3 : Generate values for Previous Quarter from"
         '
         'chkGeneratePreviousQuarterValuesFromFile
         '
@@ -426,7 +425,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel2.Location = New System.Drawing.Point(7, 152)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(384, 118)
+        Me.GroupPanel2.Size = New System.Drawing.Size(378, 118)
         '
         '
         '
@@ -456,7 +455,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel2.TabIndex = 33
-        Me.GroupPanel2.Text = "Step 2 : Generate values for selected quarter from"
+        Me.GroupPanel2.Text = "STEP 2 : Generate values for Selected Quarter from"
         '
         'chkGenerateSelectedQuarterValuesFromESelectedQuarterFile
         '
@@ -518,7 +517,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Location = New System.Drawing.Point(7, 12)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(384, 79)
+        Me.GroupPanel1.Size = New System.Drawing.Size(378, 76)
         '
         '
         '
@@ -548,7 +547,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel1.TabIndex = 32
-        Me.GroupPanel1.Text = "Step 1 : Select Quarter and Year"
+        Me.GroupPanel1.Text = "STEP 1 : Select Quarter and Year"
         '
         'PanelEx1
         '
@@ -558,9 +557,9 @@ Partial Class frmQuarterlyPerformance
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelEx1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PanelEx1.Location = New System.Drawing.Point(401, 0)
+        Me.PanelEx1.Location = New System.Drawing.Point(395, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(953, 45)
+        Me.PanelEx1.Size = New System.Drawing.Size(959, 45)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -579,7 +578,7 @@ Partial Class frmQuarterlyPerformance
         Me.lblPeriod.Font = New System.Drawing.Font("Segoe UI", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPeriod.Location = New System.Drawing.Point(0, 0)
         Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(953, 45)
+        Me.lblPeriod.Size = New System.Drawing.Size(959, 45)
         Me.lblPeriod.TabIndex = 34
         Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
         Me.lblPeriod.TextAlignment = System.Drawing.StringAlignment.Center
@@ -588,14 +587,18 @@ Partial Class frmQuarterlyPerformance
         '
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx3.Controls.Add(Me.CircularProgress1)
+        Me.PanelEx3.Controls.Add(Me.btnOpenFolder)
         Me.PanelEx3.Controls.Add(Me.lblPreviousQuarter)
+        Me.PanelEx3.Controls.Add(Me.btnClearAllFields)
         Me.PanelEx3.Controls.Add(Me.lblSelectedQuarter)
+        Me.PanelEx3.Controls.Add(Me.btnStatement)
         Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelEx3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PanelEx3.Location = New System.Drawing.Point(401, 641)
+        Me.PanelEx3.Location = New System.Drawing.Point(395, 637)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(953, 92)
+        Me.PanelEx3.Size = New System.Drawing.Size(959, 96)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -604,6 +607,22 @@ Partial Class frmQuarterlyPerformance
         Me.PanelEx3.Style.GradientAngle = 90
         Me.PanelEx3.TabIndex = 11
         '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(338, 4)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(142, 78)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 56
+        Me.CircularProgress1.TabStop = False
+        '
         'lblPreviousQuarter
         '
         Me.lblPreviousQuarter.AutoSize = True
@@ -611,11 +630,22 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.lblPreviousQuarter.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPreviousQuarter.Location = New System.Drawing.Point(6, 51)
+        Me.lblPreviousQuarter.Location = New System.Drawing.Point(486, 55)
         Me.lblPreviousQuarter.Name = "lblPreviousQuarter"
         Me.lblPreviousQuarter.Size = New System.Drawing.Size(106, 20)
         Me.lblPreviousQuarter.TabIndex = 31
         Me.lblPreviousQuarter.Text = "Previous Quarter"
+        '
+        'btnClearAllFields
+        '
+        Me.btnClearAllFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearAllFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearAllFields.Image = CType(resources.GetObject("btnClearAllFields.Image"), System.Drawing.Image)
+        Me.btnClearAllFields.Location = New System.Drawing.Point(26, 19)
+        Me.btnClearAllFields.Name = "btnClearAllFields"
+        Me.btnClearAllFields.Size = New System.Drawing.Size(126, 56)
+        Me.btnClearAllFields.TabIndex = 6
+        Me.btnClearAllFields.Text = "CLEAR"
         '
         'lblSelectedQuarter
         '
@@ -624,80 +654,23 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.lblSelectedQuarter.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSelectedQuarter.Location = New System.Drawing.Point(6, 14)
+        Me.lblSelectedQuarter.Location = New System.Drawing.Point(487, 19)
         Me.lblSelectedQuarter.Name = "lblSelectedQuarter"
         Me.lblSelectedQuarter.Size = New System.Drawing.Size(105, 20)
         Me.lblSelectedQuarter.TabIndex = 30
         Me.lblSelectedQuarter.Text = "Selected Quarter"
         '
-        'PanelEx4
+        'btnStatement
         '
-        Me.PanelEx4.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx4.Controls.Add(Me.btnOpenInWord)
-        Me.PanelEx4.Controls.Add(Me.btnClearAllFields)
-        Me.PanelEx4.Controls.Add(Me.btnSaveReport)
-        Me.PanelEx4.Controls.Add(Me.btnPrintPreview)
-        Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelEx4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PanelEx4.Location = New System.Drawing.Point(401, 546)
-        Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(953, 95)
-        Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx4.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx4.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx4.Style.GradientAngle = 90
-        Me.PanelEx4.TabIndex = 13
-        '
-        'btnOpenInWord
-        '
-        Me.btnOpenInWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenInWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenInWord.Image = CType(resources.GetObject("btnOpenInWord.Image"), System.Drawing.Image)
-        Me.btnOpenInWord.Location = New System.Drawing.Point(306, 19)
-        Me.btnOpenInWord.Name = "btnOpenInWord"
-        Me.btnOpenInWord.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
-        Me.btnOpenInWord.Size = New System.Drawing.Size(126, 56)
-        Me.btnOpenInWord.TabIndex = 8
-        Me.btnOpenInWord.Text = "MS WORD"
-        '
-        'btnClearAllFields
-        '
-        Me.btnClearAllFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearAllFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearAllFields.Image = CType(resources.GetObject("btnClearAllFields.Image"), System.Drawing.Image)
-        Me.btnClearAllFields.Location = New System.Drawing.Point(752, 19)
-        Me.btnClearAllFields.Name = "btnClearAllFields"
-        Me.btnClearAllFields.Size = New System.Drawing.Size(126, 56)
-        Me.btnClearAllFields.TabIndex = 10
-        Me.btnClearAllFields.Text = "CLEAR"
-        '
-        'btnSaveReport
-        '
-        Me.btnSaveReport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveReport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveReport.Image = CType(resources.GetObject("btnSaveReport.Image"), System.Drawing.Image)
-        Me.btnSaveReport.Location = New System.Drawing.Point(529, 19)
-        Me.btnSaveReport.Name = "btnSaveReport"
-        Me.btnSaveReport.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS)
-        Me.btnSaveReport.Size = New System.Drawing.Size(126, 56)
-        Me.btnSaveReport.TabIndex = 9
-        Me.btnSaveReport.Text = "SAVE"
-        '
-        'btnPrintPreview
-        '
-        Me.btnPrintPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnPrintPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnPrintPreview.Image = CType(resources.GetObject("btnPrintPreview.Image"), System.Drawing.Image)
-        Me.btnPrintPreview.Location = New System.Drawing.Point(83, 19)
-        Me.btnPrintPreview.Name = "btnPrintPreview"
-        Me.btnPrintPreview.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
-        Me.btnPrintPreview.Size = New System.Drawing.Size(126, 56)
-        Me.btnPrintPreview.TabIndex = 7
-        Me.btnPrintPreview.Text = "PRINT"
+        Me.btnStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnStatement.Image = CType(resources.GetObject("btnStatement.Image"), System.Drawing.Image)
+        Me.btnStatement.Location = New System.Drawing.Point(183, 19)
+        Me.btnStatement.Name = "btnStatement"
+        Me.btnStatement.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
+        Me.btnStatement.Size = New System.Drawing.Size(126, 56)
+        Me.btnStatement.TabIndex = 7
+        Me.btnStatement.Text = "PRINT"
         '
         'DataGridViewX1
         '
@@ -726,15 +699,33 @@ Partial Class frmQuarterlyPerformance
         Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
-        Me.DataGridViewX1.Location = New System.Drawing.Point(401, 45)
+        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.DataGridViewX1.Location = New System.Drawing.Point(395, 45)
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
+        Me.DataGridViewX1.RowHeadersVisible = False
         DataGridViewCellStyle9.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewX1.RowTemplate.Height = 25
-        Me.DataGridViewX1.Size = New System.Drawing.Size(953, 501)
+        Me.DataGridViewX1.Size = New System.Drawing.Size(959, 592)
         Me.DataGridViewX1.TabIndex = 14
+        '
+        'bgwStatement
+        '
+        Me.bgwStatement.WorkerReportsProgress = True
+        Me.bgwStatement.WorkerSupportsCancellation = True
+        '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(340, 19)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
+        Me.btnOpenFolder.Size = New System.Drawing.Size(126, 56)
+        Me.btnOpenFolder.TabIndex = 8
+        Me.btnOpenFolder.Text = "Open Folder"
         '
         'SlNoDataGridViewTextBoxColumn
         '
@@ -744,7 +735,7 @@ Partial Class frmQuarterlyPerformance
         Me.SlNoDataGridViewTextBoxColumn.HeaderText = "Sl.No."
         Me.SlNoDataGridViewTextBoxColumn.Name = "SlNoDataGridViewTextBoxColumn"
         Me.SlNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.SlNoDataGridViewTextBoxColumn.Width = 60
+        Me.SlNoDataGridViewTextBoxColumn.Width = 45
         '
         'DetailsOfWorkDataGridViewTextBoxColumn
         '
@@ -810,7 +801,7 @@ Partial Class frmQuarterlyPerformance
         Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
         Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
         Me.RemarksDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.RemarksDataGridViewTextBoxColumn.Width = 150
+        Me.RemarksDataGridViewTextBoxColumn.Width = 169
         '
         'frmQuarterlyPerformance
         '
@@ -818,7 +809,6 @@ Partial Class frmQuarterlyPerformance
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1354, 733)
         Me.Controls.Add(Me.DataGridViewX1)
-        Me.Controls.Add(Me.PanelEx4)
         Me.Controls.Add(Me.PanelEx3)
         Me.Controls.Add(Me.PanelEx1)
         Me.Controls.Add(Me.PanelEx2)
@@ -846,7 +836,6 @@ Partial Class frmQuarterlyPerformance
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.PanelEx3.PerformLayout()
-        Me.PanelEx4.ResumeLayout(False)
         CType(Me.DataGridViewX1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -883,12 +872,12 @@ Partial Class frmQuarterlyPerformance
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lblPreviousQuarter As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblSelectedQuarter As DevComponents.DotNetBar.LabelX
-    Friend WithEvents PanelEx4 As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents btnOpenInWord As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnClearAllFields As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents btnSaveReport As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents btnPrintPreview As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnStatement As DevComponents.DotNetBar.ButtonX
     Friend WithEvents DataGridViewX1 As DevComponents.DotNetBar.Controls.DataGridViewX
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents bgwStatement As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents SlNoDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DetailsOfWorkDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PreviousDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn

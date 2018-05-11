@@ -347,12 +347,6 @@
     <Compile Include="FrmPerformance-Monthly-Generator.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPerformance-Quarterly-Report.Designer.vb">
-      <DependentUpon>FrmPerformance-Quarterly-Report.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPerformance-Quarterly-Report.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmSOC-PhotoNotReceivedCases.Designer.vb">
       <DependentUpon>FrmSOC-PhotoNotReceivedCases.vb</DependentUpon>
     </Compile>
@@ -572,10 +566,6 @@
       <DependentUpon>FrmPerformance-Monthly-Generator.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPerformance-Quarterly-Report.resx">
-      <DependentUpon>FrmPerformance-Quarterly-Report.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmSOC-PhotoNotReceivedCases.resx">
       <DependentUpon>FrmSOC-PhotoNotReceivedCases.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -647,7 +637,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Performance Statement.rdlc" />
     <EmbeddedResource Include="Photo Not Received.rdlc" />
     <EmbeddedResource Include="PS Wise DA Statistics.rdlc" />
     <EmbeddedResource Include="SOC Register - Mini.rdlc" />

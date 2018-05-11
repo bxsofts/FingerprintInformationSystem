@@ -2,29 +2,36 @@
 
 
 Public Class frmQuarterlyPerformance
-    Dim PerformanceSavePath As String = ""
-    Dim SaveStatement As Boolean
+    Dim SaveFolder As String = ""
     Dim SelectedQuarter As Integer
     Dim SelectedYear As Integer
-    Dim SaveFileName As String
+    Dim PerfFileName As String
 #Region "FORM LOAD EVENTS"
 
 
     Private Sub FormLoadEvents() Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        
-        ConnectToDatabse()
-        PerformanceSavePath = (My.Computer.FileSystem.GetParentPath(strDatabaseFile) & "\Performance Statements\Quarterly Statement").Replace("\Database", "")
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+
+        Me.lblPreviousQuarter.Text = ""
+        Me.lblSelectedQuarter.Text = ""
+        Me.txtBlankCellValue.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BlankCellValue", "-")
 
         SetDays()
-        GenerateRows()
+        CreateDatagridRows()
+        ConnectToDatabse()
 
+        SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
+        System.IO.Directory.CreateDirectory(SaveFolder)
+        Me.txtQuarter.Focus()
         Application.DoEvents()
+
         LoadSelectedQuarterAtFormLoad()
-        Me.txtBlankCellValue.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BlankCellValue", "-")
         InsertBlankValues()
-        SaveStatement = True
+        Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
     End Sub
@@ -34,7 +41,7 @@ Public Class frmQuarterlyPerformance
         On Error Resume Next
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
-        Dim d As Integer = Date.DaysInMonth(y, m)
+
         Me.txtQuarterYear.Value = y
         Dim q As Integer = 1
         If m <= 3 Then q = 1
@@ -76,7 +83,7 @@ Public Class frmQuarterlyPerformance
     End Sub
 
 
-    Private Sub GenerateRows()
+    Private Sub CreateDatagridRows()
         On Error Resume Next
 
         Me.FingerPrintDataSet.Performance.RejectChanges()
@@ -97,7 +104,7 @@ Public Class frmQuarterlyPerformance
         r(7).SlNo = "7b"
         Me.FingerPrintDataSet.Performance.Rows.Add(r(7))
 
-        For i As Short = 8 To 19
+        For i = 8 To 19
             r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
             r(i).SlNo = i
             Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
@@ -196,7 +203,7 @@ Public Class frmQuarterlyPerformance
 
         End Select
         Me.lblPeriod.Text = UCase("statement of performance for the period from " & Format(d1, "dd/MM/yyyy") & " to " & Format(d8, "dd/MM/yyyy"))
-        SaveFileName = "Quarterly Performance Statement from " & Format(d1, "dd-MM-yyyy") & " to " & Format(d8, "dd-MM-yyyy")
+
         Dim qtr = 1
         If q = 1 Then
             qtr = 4
@@ -214,7 +221,7 @@ Public Class frmQuarterlyPerformance
         GenerateMonth3Statistics(d7, d8)
         GeneratePreviousQuarterValuesFromDataBase()
         Me.lblSelectedQuarter.Text = "Quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " generated from database"
-        SaveStatement = True
+
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -272,7 +279,7 @@ Public Class frmQuarterlyPerformance
         Me.DataGridViewX1.Rows(18).Cells(2).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d3, d4))
         Me.DataGridViewX1.Rows(19).Cells(2).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d3, d4)) & "/-"
         Me.lblPreviousQuarter.Text = "Quarter " & qtr & "-" & y & " generated from database"
-        SaveStatement = True
+
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -403,7 +410,7 @@ Public Class frmQuarterlyPerformance
         Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, "").ToString
     End Function
 
-    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) ' Handles DataGridViewX1.CellEndEdit
+    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewX1.CellEndEdit
         On Error Resume Next
         If e.RowIndex < 2 Or e.RowIndex > 5 Then Exit Sub
         Dim i = e.ColumnIndex
@@ -496,9 +503,8 @@ Public Class frmQuarterlyPerformance
 
     Private Sub LoadSelectedQuarterAtFormLoad()
         On Error Resume Next
-        Dim FilePath As String = PerformanceSavePath & "\" & Me.txtQuarterYear.Text
-        Dim FileName As String = FilePath & "\" & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & ".txt"
-        If My.Computer.FileSystem.FileExists(FileName) Then
+        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
             GenerateValuesForSelectedQuarterFromSelectedQuarterFile(False)
             Me.lblPreviousQuarter.Text = ""
         Else
@@ -529,12 +535,12 @@ Public Class frmQuarterlyPerformance
             Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
         Next
-        Me.DataGridViewX1.Columns(2).HeaderText = "Previous Quarter/Month"
+        Me.DataGridViewX1.Columns(2).HeaderText = "Previous Quarter"
         Me.DataGridViewX1.Columns(3).HeaderText = "Month1"
         Me.DataGridViewX1.Columns(4).HeaderText = "Month2"
         Me.DataGridViewX1.Columns(5).HeaderText = "Month3"
         Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
-        SaveStatement = False
+
     End Sub
 
     Private Sub ClearPreviousQuarterField()
@@ -554,16 +560,6 @@ Public Class frmQuarterlyPerformance
     End Sub
 #End Region
 
-
-#Region "PRINT REPORT"
-    Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrintPreview.Click
-        On Error Resume Next
-        frmQuarterlyPerformanceReport.Show()
-        frmQuarterlyPerformanceReport.BringToFront()
-
-    End Sub
-
-#End Region
 
 #Region "INSERT BLANK VALES"
 
@@ -600,102 +596,24 @@ Public Class frmQuarterlyPerformance
 
 #Region "SAVE AND LOAD STATEMENTS"
 
-    Private Sub SaveQuarterlyPerformance() Handles btnSaveReport.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-
-        Dim FilePath As String = PerformanceSavePath & "\" & SelectedYear
-        Dim FileName As String = FilePath & "\" & SelectedQuarter & "-" & SelectedYear & ".txt"
-
-        If My.Computer.FileSystem.DirectoryExists(FilePath) = False Then
-            My.Computer.FileSystem.CreateDirectory(FilePath)
-        End If
-
-        If My.Computer.FileSystem.FileExists(FileName) Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & SelectedQuarter & " - " & SelectedYear & " already exists. Do you want to replace it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            If reply = Windows.Forms.DialogResult.No Then
-                Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
-            My.Computer.FileSystem.DeleteFile(FileName)
-        End If
-
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(FileName, True)
-        file.WriteLine(Me.lblPeriod.Text)
-        file.WriteLine(Me.DataGridViewX1.Columns(3).HeaderText.ToString)
-        file.WriteLine(Me.DataGridViewX1.Columns(4).HeaderText.ToString)
-        file.WriteLine(Me.DataGridViewX1.Columns(5).HeaderText.ToString)
-        For j = 2 To 7
-            For i = 0 To 19
-                file.WriteLine(Me.DataGridViewX1.Rows(i).Cells(j).Value.ToString)
-            Next
-        Next
-        file.Close()
-        file.Dispose()
-        frmMainInterface.ShowAlertMessage("Performance file for the Quarter " & SelectedQuarter & "-" & SelectedYear & " saved!")
-        SaveStatement = False
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Public Sub AutoSaveQuarterlyPerformance()
-        On Error Resume Next
-
-        Dim FilePath As String = PerformanceSavePath & "\" & SelectedYear
-        Dim FileName As String = FilePath & "\" & SelectedQuarter & "-" & SelectedYear & ".txt"
-
-        If My.Computer.FileSystem.DirectoryExists(FilePath) = False Then
-            My.Computer.FileSystem.CreateDirectory(FilePath)
-        End If
-
-        If My.Computer.FileSystem.FileExists(FileName) Then
-            My.Computer.FileSystem.DeleteFile(FileName)
-        End If
-
-        Dim file As System.IO.StreamWriter
-        file = My.Computer.FileSystem.OpenTextFileWriter(FileName, True)
-        file.WriteLine(Me.lblPeriod.Text)
-        file.WriteLine(Me.DataGridViewX1.Columns(3).HeaderText.ToString)
-        file.WriteLine(Me.DataGridViewX1.Columns(4).HeaderText.ToString)
-        file.WriteLine(Me.DataGridViewX1.Columns(5).HeaderText.ToString)
-        For j = 2 To 7
-            For i = 0 To 19
-                file.WriteLine(Me.DataGridViewX1.Rows(i).Cells(j).Value.ToString)
-            Next
-        Next
-        file.Close()
-        file.Dispose()
-        SaveStatement = False
-    End Sub
-
     Private Function GenerateValuesForSelectedQuarterFromSelectedQuarterFile(ByVal ShowMessage As Boolean) As Boolean
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         GenerateValuesForSelectedQuarterFromSelectedQuarterFile = False
 
-        Dim FilePath As String = PerformanceSavePath & "\" & Me.txtQuarterYear.Text
-        Dim FileName As String = FilePath & "\" & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & ".txt"
-        If My.Computer.FileSystem.FileExists(FileName) = False Then
+        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
             DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Me.Cursor = Cursors.Default
             Exit Function
         End If
+
         ClearAllFieldsWithoutMessage()
-        Dim fileReader As System.IO.StreamReader
-        fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
-        Me.lblPeriod.Text = fileReader.ReadLine()
-        Me.DataGridViewX1.Columns(3).HeaderText = fileReader.ReadLine()
-        Me.DataGridViewX1.Columns(4).HeaderText = fileReader.ReadLine()
-        Me.DataGridViewX1.Columns(5).HeaderText = fileReader.ReadLine()
-        For j = 2 To 7
-            For i = 0 To 19
-                Me.DataGridViewX1.Rows(i).Cells(j).Value = fileReader.ReadLine()
-            Next
-        Next
-        fileReader.Close()
+       
         Me.lblSelectedQuarter.Text = "Loaded saved statement of " & "Quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text
         Me.lblPreviousQuarter.Text = ""
-        SaveStatement = True
+
 
         SelectedQuarter = Me.txtQuarter.Value
         SelectedYear = Me.txtQuarterYear.Text
@@ -712,6 +630,30 @@ Public Class frmQuarterlyPerformance
         End If
 
         Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
+
+        Dim wdApp As Word.Application
+        Dim wdDocs As Word.Documents
+        wdApp = New Word.Application
+
+        wdDocs = wdApp.Documents
+        Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
+        Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
+        For i = 0 To 19
+            Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 3).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(3).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(4).Value = wdTbl.Cell(i + 4, 5).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(5).Value = wdTbl.Cell(i + 4, 6).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(6).Value = wdTbl.Cell(i + 4, 7).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(7).Value = wdTbl.Cell(i + 4, 8).Range.Text.Trim(ChrW(7)).Trim()
+        Next
+
+        wdDoc.Close()
+        ReleaseObject(wdTbl)
+        ReleaseObject(wdDoc)
+        ReleaseObject(wdDocs)
+        wdApp.Quit()
+
         GenerateValuesForSelectedQuarterFromSelectedQuarterFile = True
         Me.Cursor = Cursors.Default
     End Function
@@ -728,7 +670,7 @@ Public Class frmQuarterlyPerformance
         Else
             q = q - 1
         End If
-        Dim FilePath As String = PerformanceSavePath & "\" & y
+        Dim FilePath As String = SaveFolder & "\" & y
         Dim FileName As String = FilePath & "\" & q & "-" & y & ".txt"
         If My.Computer.FileSystem.FileExists(FileName) = False Then
             DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & q & "-" & y & " does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -761,7 +703,7 @@ Public Class frmQuarterlyPerformance
         End If
 
         Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
-        SaveStatement = True
+
         GeneratePreviousQuarterValuesFromFile = True
         Me.Cursor = Cursors.Default
     End Function
@@ -806,7 +748,7 @@ Public Class frmQuarterlyPerformance
         Dim FilePath As String = strAppUserPath & "\Performance Statements\Monthly Statement\" & Me.txtQuarterYear.Text
         Dim FileName As String = FilePath & "\" & MonthName(m1) & "-" & Me.txtQuarterYear.Text & ".txt"
         Me.lblPeriod.Text = UCase("statement of performance for the period from " & p)
-        SaveFileName = "Performance for the period from " & p.Replace("/", "-")
+        PerfFileName = "Performance for the period from " & p.Replace("/", "-")
 
         Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m1, True) & " " & y
         Dim fileReader As System.IO.StreamReader
@@ -844,7 +786,7 @@ Public Class frmQuarterlyPerformance
 
         fileReader.Close()
         Me.lblSelectedQuarter.Text = "Quarter " & Me.txtQuarter.Value & "-" & Me.txtQuarterYear.Text & " generated from monthly statements of the three months"
-        SaveStatement = True
+
         SelectedQuarter = Me.txtQuarter.Value
         SelectedYear = Me.txtQuarterYear.Text
         q = Me.txtQuarter.Value
@@ -919,7 +861,7 @@ Public Class frmQuarterlyPerformance
         Else
             m = m - 1
         End If
-        Dim FilePath As String = PerformanceSavePath & "\" & y
+        Dim FilePath As String = SaveFolder & "\" & y
         Dim FileName As String = FilePath & "\" & m & "-" & y & ".txt"
         If My.Computer.FileSystem.FileExists(FileName) Then
             Me.chkGeneratePreviousQuarterValuesFromFile.Checked = True
@@ -932,75 +874,31 @@ Public Class frmQuarterlyPerformance
         End If
     End Sub
 
-    Private Sub SaveStatementOnExit(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
-        On Error Resume Next
-
-        If SaveStatement Then
-            If StatementFileChanged() Then
-                Dim m As Integer = DateAndTime.Month(Today)
-
-                Dim q As Integer = 1
-                If m <= 3 Then q = 1
-                If m > 3 And m < 7 Then q = 2
-                If m > 6 And m < 10 Then q = 3
-                If m > 9 Then q = 4
-
-                If SelectedQuarter < q And SelectedYear <= Year(Today) Then
-                    Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you want to save the Performance Statement for the quarter " & SelectedQuarter & " - " & SelectedYear & "?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                    If r = Windows.Forms.DialogResult.Yes Then
-                        SaveQuarterlyPerformance()
-                    End If
-                    If r = Windows.Forms.DialogResult.Cancel Then
-                        e.Cancel = True
-                    End If
-                End If
-            End If
-        End If
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "BlankCellValue", Me.txtBlankCellValue.Text, Microsoft.Win32.RegistryValueKind.String)
-
-    End Sub
-
-    Private Function StatementFileChanged() As Boolean
-        On Error Resume Next
-        StatementFileChanged = True
-        Dim FilePath As String = PerformanceSavePath & "\" & SelectedYear
-        Dim FileName As String = FilePath & "\" & SelectedQuarter & "-" & SelectedYear & ".txt"
-
-        If My.Computer.FileSystem.FileExists(FileName) Then
-            Dim fileReader As System.IO.StreamReader
-            fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
-            fileReader.ReadLine()
-            fileReader.ReadLine()
-            fileReader.ReadLine()
-            fileReader.ReadLine()
-            For j = 2 To 7
-                For i = 0 To 19
-                    Dim Value1 As String = Me.DataGridViewX1.Rows(i).Cells(j).Value.ToString
-                    Dim Value2 As String = fileReader.ReadLine()
-                    If Value1 <> Value2 Then
-                        StatementFileChanged = True
-                        fileReader.Close()
-                        fileReader.Dispose()
-                        Exit Function
-                    End If
-                Next
-            Next
-            StatementFileChanged = False
-            fileReader.Close()
-            fileReader.Dispose()
-        Else
-
-            StatementFileChanged = True
-        End If
-
-    End Function
 #End Region
 
-    Private Sub OpenInWord() Handles btnOpenInWord.Click
-        Dim sFileName = FileIO.SpecialDirectories.MyDocuments & "\" & SaveFileName & ".docx"
+#Region "WORD STATEMENT"
+
+    Private Sub OpenInWord() Handles btnStatement.Click
+        Me.Cursor = Cursors.WaitCursor
+        Me.CircularProgress1.Show()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = True
+        Me.bgwStatement.RunWorkerAsync()
+    End Sub
+
+
+    Private Sub bgwStatement_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwStatement.DoWork
+
+        PerfFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+
         Try
-            Me.Cursor = Cursors.WaitCursor
+            Dim delay As Integer = 0
+
+            For delay = 1 To 10
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -1011,6 +909,10 @@ Public Class frmQuarterlyPerformance
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
+            For delay = 11 To 20
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientPortrait
@@ -1034,7 +936,6 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.TypeParagraph()
             ' WordApp.Selection.Paragraphs.IncreaseSpacing()
-
             Dim oldfont = WordApp.Selection.Font.Name
 
             Dim RowCount = 23
@@ -1042,7 +943,6 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.Font.Name = "Rupee Foradian"
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 10
-
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 8)
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
@@ -1050,11 +950,16 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(20, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(180, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+            For delay = 21 To 30
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             For i = 1 To 8
                 WordApp.Selection.Tables.Item(1).Cell(3, i).Select()
@@ -1075,35 +980,33 @@ Public Class frmQuarterlyPerformance
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
                 WordApp.Selection.Font.Bold = 0
-                If j = 19 Then WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Previous)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                If j = 19 Then WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Month1)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
-                If j = 19 Then WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Month2)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
-                If j = 19 Then WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Month3)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
-                If j = 19 Then WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Present)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
-                If j = 19 Then WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Remarks)
 
+                bgwStatement.ReportProgress(delay + j)
+                System.Threading.Thread.Sleep(10)
+
             Next
+
 
 
             WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
@@ -1118,17 +1021,10 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText(Me.DataGridViewX1.Columns(3).HeaderText)
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
-            WordApp.Selection.Font.Name = oldfont
-            WordApp.Selection.Font.Size = 11
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText(Me.DataGridViewX1.Columns(4).HeaderText)
-
-            WordApp.Selection.Tables.Item(1).Cell(2, 6).Select()
-            WordApp.Selection.Font.Name = oldfont
-            WordApp.Selection.Font.Size = 11
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText(Me.DataGridViewX1.Columns(5).HeaderText)
+            For delay = 50 To 60
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Selection.Tables.Item(1).Cell(1, 8).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 8))
             WordApp.Selection.Tables.Item(1).Cell(1, 7).Merge(WordApp.Selection.Tables.Item(1).Cell(2, 7))
@@ -1161,6 +1057,11 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Month")
 
+            For delay = 61 To 70
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
             WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
             WordApp.Selection.Font.Name = oldfont
             WordApp.Selection.Font.Size = 11
@@ -1173,6 +1074,7 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Remarks")
 
+
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
@@ -1181,6 +1083,11 @@ Public Class frmQuarterlyPerformance
             WordApp.Selection.Font.Name = oldfont
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+
+            For delay = 71 To 80
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             If boolUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
@@ -1193,16 +1100,19 @@ Public Class frmQuarterlyPerformance
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
+            For delay = 81 To 100
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
 
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
             aDoc.Activate()
 
-             If My.Computer.FileSystem.FileExists(sFileName) = False Then
-                aDoc.SaveAs(sFileName)
+            If My.Computer.FileSystem.FileExists(PerfFileName) = False Then
+                aDoc.SaveAs(PerfFileName)
             End If
-
 
             aDoc = Nothing
             WordApp = Nothing
@@ -1211,6 +1121,41 @@ Public Class frmQuarterlyPerformance
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub bgwStatement_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwStatement.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwStatement_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwStatement.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+    End Sub
+
+#End Region
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+
+            Dim sPerfFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+
+            If FileIO.FileSystem.FileExists(sPerfFileName) Then
+                Call Shell("explorer.exe /select," & sPerfFileName, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
+
+
+            If Not FileIO.FileSystem.DirectoryExists(SaveFolder) Then
+                FileIO.FileSystem.CreateDirectory(SaveFolder)
+            End If
+
+            Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
+
+        Catch ex As Exception
+            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
         End Try
     End Sub
 
