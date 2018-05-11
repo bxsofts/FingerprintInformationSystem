@@ -141,10 +141,44 @@ Public Class frmQuarterlyPerformance
 
 #Region "GENERATE REPORTS"
 
-    Private Sub GenerateSelectedQuarterValuesFromDatabase()
+    Private Sub GenerateSelectedQuarterValuesWithMessage() Handles btnGenerateSelectedQuarterValues.Click
+        On Error Resume Next
+        If Me.txtQuarter.Text = vbNullString Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Please select the Quarter", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtQuarter.Focus()
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Me.txtQuarterYear.Text = vbNullString Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtQuarterYear.Focus()
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Me.chkSelectedQuaterFromDB.Checked Then
+            GenerateSelectedQuarterValuesFromDB()
+        End If
+
+        If Me.chkSelectedQuarterFromMonthFiles.Checked Then
+            GenerateSelectedQuarterValuesFromMonthFiles()
+        End If
+
+        If Me.chkSelectedQuarterValuesFromQuarterFile.Checked Then
+            GenerateSelectedQuarterValuesFromQuarterFile()
+        End If
+
+
+        CalculateCurrentQuarterTotalValues()
+        InsertBlankValues()
+    End Sub
+
+    Private Sub GenerateSelectedQuarterValuesFromDB()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        ClearAllFieldsWithoutMessage()
+        ClearSelectedQuarterFileds()
+        Application.DoEvents()
         Dim d1 As Date
         Dim d2 As Date
         Dim d3 As Date
@@ -219,500 +253,16 @@ Public Class frmQuarterlyPerformance
         GenerateMonth1Statistics(d1, d2)
         GenerateMonth2Statistics(d5, d6)
         GenerateMonth3Statistics(d7, d8)
-        GeneratePreviousQuarterValuesFromDataBase()
+
         Me.lblSelectedQuarter.Text = "Quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " generated from database"
 
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub GeneratePreviousQuarterValuesFromDataBase()
-        On Error Resume Next
-
-        Me.Cursor = Cursors.WaitCursor
-        ClearPreviousQuarterField()
-        Dim d3 As Date
-        Dim d4 As Date
-
-
-
-        Dim q = Me.txtQuarter.Value
-        Dim y = Me.txtQuarterYear.Value
-
-        Select Case q
-            Case 1
-                d3 = New Date(y - 1, 10, 1)
-                d4 = New Date(y - 1, 12, 31)
-            Case 2
-                d3 = New Date(y, 1, 1)
-                d4 = New Date(y, 3, 31)
-            Case 3
-                d3 = New Date(y, 4, 1)
-                d4 = New Date(y, 6, 30)
-            Case 4
-                d3 = New Date(y, 7, 1)
-                d4 = New Date(y, 9, 30)
-        End Select
-
-        Dim qtr = 1
-        If q = 1 Then
-            qtr = 4
-            y = y - 1
-        Else
-            qtr = q - 1
-        End If
-        Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
-
-        Me.DataGridViewX1.Rows(0).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d3, d4))
-        Me.DataGridViewX1.Rows(1).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d3, d4))
-        Me.DataGridViewX1.Rows(2).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d3, d4))
-        Me.DataGridViewX1.Rows(3).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d3, d4))
-        Me.DataGridViewX1.Rows(4).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d3, d4))
-        Me.DataGridViewX1.Rows(5).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d3, d4))
-        Me.DataGridViewX1.Rows(6).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d3, d4))
-        Me.DataGridViewX1.Rows(7).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d3, d4))
-
-        Me.DataGridViewX1.Rows(8).Cells(2).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d3, d4, ""))
-        Me.DataGridViewX1.Rows(9).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d3, d4))
-        Me.DataGridViewX1.Rows(10).Cells(2).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d3, d4))
-        Me.DataGridViewX1.Rows(13).Cells(2).Value = Val(Me.CdRegisterTableAdapter.CountCD(d3, d4))
-        Me.DataGridViewX1.Rows(15).Cells(2).Value = CalculateCasesPendingInPreviousQuarter()
-        Me.DataGridViewX1.Rows(18).Cells(2).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d3, d4))
-        Me.DataGridViewX1.Rows(19).Cells(2).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d3, d4)) & "/-"
-        Me.lblPreviousQuarter.Text = "Quarter " & qtr & "-" & y & " generated from database"
-
-        Me.Cursor = Cursors.Default
-    End Sub
-
-
-    Private Sub GenerateSelectedQuarterReportWithMessage() Handles btnGenerateSelectedQuarterFromDB.Click
-        On Error Resume Next
-        If Me.txtQuarter.Text = vbNullString Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please select the Quarter", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtQuarter.Focus()
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.txtQuarterYear.Text = vbNullString Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtQuarterYear.Focus()
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.chkGenerateSelectedQuaterValuesFromDataBase.Checked Then
-            GenerateSelectedQuarterValuesFromDatabase()
-            GeneratePreviousQuarterValuesFromDBorFile()
-            frmMainInterface.ShowAlertMessage("Values generated from database!")
-        End If
-
-        If Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.Checked Then
-            GenerateStatementFromSavedMonthlyStatements()
-            GeneratePreviousQuarterValuesFromDBorFile()
-            frmMainInterface.ShowAlertMessage("Values generated from saved monthly statements!")
-        End If
-
-        If Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.Checked Then
-            If GenerateValuesForSelectedQuarterFromSelectedQuarterFile(True) Then
-                frmMainInterface.ShowAlertMessage("Performance file for the Quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " loaded!")
-            End If
-
-        End If
-        CalculateCurrentQuarterTotalValues()
-        InsertBlankValues()
-    End Sub
-
-
-    Private Sub GeneratePreviousQuarterValuesWithMessage() Handles btnGeneratePreviousQuarterValues.Click
-        On Error Resume Next
-        If Me.txtQuarter.Text = vbNullString Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please select the Quarter", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtQuarter.Focus()
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.txtQuarterYear.Text = vbNullString Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtQuarterYear.Focus()
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.chkGeneratePreviousQuarterValuesfromDataBase.Checked Then
-            GeneratePreviousQuarterValuesFromDataBase()
-            frmMainInterface.ShowAlertMessage("Previous quarter values generated from database!")
-        End If
-
-        If Me.chkGeneratePreviousQuarterValuesFromFile.Checked Then
-            If GeneratePreviousQuarterValuesFromFile() Then
-                frmMainInterface.ShowAlertMessage("Previous quarter values loaded!")
-            Else
-                Exit Sub
-            End If
-        End If
-
-        InsertBlankValues()
-    End Sub
-
-
-    Private Function CalculateCasesPendingInPreviousMonth(ByVal d As Date)
-        On Error Resume Next
-        Dim m = Month(d)
-        Dim y = Year(d)
-        If m = 1 Then
-            m = 12
-            y = y - 1
-        Else
-            m = m - 1
-        End If
-        Dim c = Date.DaysInMonth(y, m)
-        Dim dt1 As Date = New Date(y, m, 1)
-        Dim dt2 As Date = New Date(y, m, c)
-        Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(dt1, dt2, "").ToString
-    End Function
-
-    Private Function CalculateCasesPendingInPreviousQuarter()
-        On Error Resume Next
-        Dim q = Me.txtQuarter.Value
-        Dim y = Me.txtQuarterYear.Value
-        If q = 1 Then
-            q = 3
-            y = y - 1
-        ElseIf q = 2 Then
-            q = 4
-            y = y - 1
-        Else
-            q = q - 2
-        End If
-        Dim d1 As Date
-        Dim d2 As Date
-
-        Select Case q
-            Case 1
-                d1 = New Date(y, 1, 1)
-                d2 = New Date(y, 3, 31)
-
-            Case 2
-                d1 = New Date(y, 4, 1)
-                d2 = New Date(y, 6, 30)
-
-            Case 3
-                d1 = New Date(y, 7, 1)
-                d2 = New Date(y, 9, 30)
-
-            Case 4
-                d1 = New Date(y, 10, 1)
-                d2 = New Date(y, 12, 31)
-
-        End Select
-
-        Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, "").ToString
-    End Function
-
-    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewX1.CellEndEdit
-        On Error Resume Next
-        If e.RowIndex < 2 Or e.RowIndex > 5 Then Exit Sub
-        Dim i = e.ColumnIndex
-        Me.DataGridViewX1.Rows(5).Cells(i).Value = Val(Me.DataGridViewX1.Rows(2).Cells(i).Value) - (Val(Me.DataGridViewX1.Rows(3).Cells(i).Value) + Val(Me.DataGridViewX1.Rows(4).Cells(i).Value))
-
-    End Sub
-
-
-    Private Sub GenerateMonth1Statistics(ByVal d1 As Date, ByVal d2 As Date)
-        On Error Resume Next
-
-        Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
-        Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-        Me.DataGridViewX1.Rows(2).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-        Me.DataGridViewX1.Rows(3).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-        Me.DataGridViewX1.Rows(4).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-        Me.DataGridViewX1.Rows(5).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
-        Me.DataGridViewX1.Rows(7).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
-
-        Me.DataGridViewX1.Rows(8).Cells(3).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
-        Me.DataGridViewX1.Rows(9).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
-        Me.DataGridViewX1.Rows(10).Cells(3).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-        Me.DataGridViewX1.Rows(13).Cells(3).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-        Me.DataGridViewX1.Rows(15).Cells(3).Value = CalculateCasesPendingInPreviousMonth(d1)
-        Me.DataGridViewX1.Rows(18).Cells(3).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
-        Me.DataGridViewX1.Rows(19).Cells(3).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-
-    End Sub
-
-    Private Sub GenerateMonth2Statistics(ByVal d1 As Date, ByVal d2 As Date)
-        On Error Resume Next
-
-        Me.DataGridViewX1.Rows(0).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
-        Me.DataGridViewX1.Rows(1).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-        Me.DataGridViewX1.Rows(2).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-        Me.DataGridViewX1.Rows(3).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-        Me.DataGridViewX1.Rows(4).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-        Me.DataGridViewX1.Rows(5).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
-        Me.DataGridViewX1.Rows(7).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
-
-        Me.DataGridViewX1.Rows(8).Cells(4).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
-        Me.DataGridViewX1.Rows(9).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
-        Me.DataGridViewX1.Rows(10).Cells(4).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-        Me.DataGridViewX1.Rows(13).Cells(4).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-        Me.DataGridViewX1.Rows(15).Cells(4).Value = CalculateCasesPendingInPreviousMonth(d1)
-        Me.DataGridViewX1.Rows(18).Cells(4).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
-        Me.DataGridViewX1.Rows(19).Cells(4).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-
-    End Sub
-
-    Private Sub GenerateMonth3Statistics(ByVal d1 As Date, ByVal d2 As Date)
-        On Error Resume Next
-
-        Me.DataGridViewX1.Rows(0).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
-        Me.DataGridViewX1.Rows(1).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-        Me.DataGridViewX1.Rows(2).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-        Me.DataGridViewX1.Rows(3).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-        Me.DataGridViewX1.Rows(4).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-        Me.DataGridViewX1.Rows(5).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
-        Me.DataGridViewX1.Rows(7).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
-
-        Me.DataGridViewX1.Rows(8).Cells(5).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
-        Me.DataGridViewX1.Rows(9).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
-        Me.DataGridViewX1.Rows(10).Cells(5).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-        Me.DataGridViewX1.Rows(13).Cells(5).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-        Me.DataGridViewX1.Rows(15).Cells(5).Value = CalculateCasesPendingInPreviousMonth(d1)
-        Me.DataGridViewX1.Rows(18).Cells(5).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
-        Me.DataGridViewX1.Rows(19).Cells(5).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-
-    End Sub
-
-
-    Private Sub CalculateCurrentQuarterTotalValues() Handles DataGridViewX1.CellEndEdit
-        On Error Resume Next
-        For i = 0 To 18
-            Me.DataGridViewX1.Rows(i).Cells(6).Value = Val(Me.DataGridViewX1.Rows(i).Cells(3).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(4).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(5).Value.ToString)
-        Next
-
-        Dim v1 = Me.DataGridViewX1.Rows(19).Cells(3).Value.ToString.Replace("` ", "").Replace("/-", "")
-        Dim v2 = Me.DataGridViewX1.Rows(19).Cells(4).Value.ToString.Replace("` ", "").Replace("/-", "")
-        Dim v3 = Me.DataGridViewX1.Rows(19).Cells(5).Value.ToString.Replace("` ", "").Replace("/-", "")
-        Me.DataGridViewX1.Rows(19).Cells(6).Value = "` " & Val(v1) + Val(v2) + Val(v3) & "/-"
-
-        InsertBlankValues()
-    End Sub
-
-
-    Private Sub LoadSelectedQuarterAtFormLoad()
-        On Error Resume Next
-        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
-        If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            GenerateValuesForSelectedQuarterFromSelectedQuarterFile(False)
-            Me.lblPreviousQuarter.Text = ""
-        Else
-            GenerateSelectedQuarterValuesFromDBorFile()
-            GeneratePreviousQuarterValuesFromDBorFile()
-            CalculateCurrentQuarterTotalValues()
-        End If
-    End Sub
-#End Region
-
-
-
-#Region "CLEAR FIELDS"
-
-    Private Sub ClearFieldsWithMessage() Handles btnClearAllFields.Click
-        On Error Resume Next
-        ClearAllFieldsWithoutMessage()
-        frmMainInterface.ShowAlertMessage("All fields cleared!")
-    End Sub
-
-    Private Sub ClearAllFieldsWithoutMessage()
-        On Error Resume Next
-        For i As Short = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
-        Next
-        Me.DataGridViewX1.Columns(2).HeaderText = "Previous Quarter"
-        Me.DataGridViewX1.Columns(3).HeaderText = "Month1"
-        Me.DataGridViewX1.Columns(4).HeaderText = "Month2"
-        Me.DataGridViewX1.Columns(5).HeaderText = "Month3"
-        Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
-
-    End Sub
-
-    Private Sub ClearPreviousQuarterField()
-        On Error Resume Next
-        For i As Short = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
-        Next
-    End Sub
-
-    Private Sub ClearSelectedQuarterFileds()
-        On Error Resume Next
-        For i As Short = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
-            Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
-        Next
-    End Sub
-#End Region
-
-
-#Region "INSERT BLANK VALES"
-
-    Private Sub InsertBlankValuesWithMessage() Handles btnInsertBlankValues.Click
+    Private Sub GenerateSelectedQuarterValuesFromMonthFiles()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        InsertBlankValues()
-        frmMainInterface.ShowAlertMessage("Inserted values in blank cells!")
-        Me.Cursor = Cursors.Default
-    End Sub
-
-
-    Private Sub InsertBlankValues()
-        On Error Resume Next
-        Dim blankvalue As String = Me.txtBlankCellValue.Text
-        Dim Tblankvalue As String = blankvalue
-        If Me.chkBlankValue.Checked = False Then
-            blankvalue = ""
-        End If
-
-        For i As Short = 0 To 19
-            If Me.DataGridViewX1.Rows(i).Cells(2).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
-            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(3).Value = blankvalue
-            If Me.DataGridViewX1.Rows(i).Cells(4).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(4).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(4).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(4).Value = blankvalue
-            If Me.DataGridViewX1.Rows(i).Cells(5).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(5).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(5).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(5).Value = blankvalue
-            If Me.DataGridViewX1.Rows(i).Cells(6).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(6).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(6).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(6).Value = blankvalue
-        Next
-
-    End Sub
-
-
-
-#End Region
-
-#Region "SAVE AND LOAD STATEMENTS"
-
-    Private Function GenerateValuesForSelectedQuarterFromSelectedQuarterFile(ByVal ShowMessage As Boolean) As Boolean
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        GenerateValuesForSelectedQuarterFromSelectedQuarterFile = False
-
-        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
-
-        If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
-            Exit Function
-        End If
-
-        ClearAllFieldsWithoutMessage()
-       
-        Me.lblSelectedQuarter.Text = "Loaded saved statement of " & "Quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text
-        Me.lblPreviousQuarter.Text = ""
-
-
-        SelectedQuarter = Me.txtQuarter.Value
-        SelectedYear = Me.txtQuarterYear.Text
-
-        Dim q = Me.txtQuarter.Value
-        Dim y = Me.txtQuarterYear.Value
-
-        Dim qtr = 1
-        If q = 1 Then
-            qtr = 4
-            y = y - 1
-        Else
-            qtr = q - 1
-        End If
-
-        Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
-
-        Dim wdApp As Word.Application
-        Dim wdDocs As Word.Documents
-        wdApp = New Word.Application
-
-        wdDocs = wdApp.Documents
-        Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
-        Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
-
-        For i = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 3).Range.Text.Trim(ChrW(7)).Trim()
-            Me.DataGridViewX1.Rows(i).Cells(3).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
-            Me.DataGridViewX1.Rows(i).Cells(4).Value = wdTbl.Cell(i + 4, 5).Range.Text.Trim(ChrW(7)).Trim()
-            Me.DataGridViewX1.Rows(i).Cells(5).Value = wdTbl.Cell(i + 4, 6).Range.Text.Trim(ChrW(7)).Trim()
-            Me.DataGridViewX1.Rows(i).Cells(6).Value = wdTbl.Cell(i + 4, 7).Range.Text.Trim(ChrW(7)).Trim()
-            Me.DataGridViewX1.Rows(i).Cells(7).Value = wdTbl.Cell(i + 4, 8).Range.Text.Trim(ChrW(7)).Trim()
-        Next
-
-        wdDoc.Close()
-        ReleaseObject(wdTbl)
-        ReleaseObject(wdDoc)
-        ReleaseObject(wdDocs)
-        wdApp.Quit()
-
-        GenerateValuesForSelectedQuarterFromSelectedQuarterFile = True
-        Me.Cursor = Cursors.Default
-    End Function
-
-
-    Private Function GeneratePreviousQuarterValuesFromFile() As Boolean
-        Me.Cursor = Cursors.WaitCursor
-        GeneratePreviousQuarterValuesFromFile = False
-        Dim q = Me.txtQuarter.Value
-        Dim y = Me.txtQuarterYear.Value
-        If q = 1 Then
-            q = 4
-            y = Me.txtQuarterYear.Value - 1
-        Else
-            q = q - 1
-        End If
-        Dim FilePath As String = SaveFolder & "\" & y
-        Dim FileName As String = FilePath & "\" & q & "-" & y & ".txt"
-        If My.Computer.FileSystem.FileExists(FileName) = False Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & q & "-" & y & " does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
-            Exit Function
-        End If
-
-        Dim fileReader As System.IO.StreamReader
-        fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
-        For i = 0 To 83
-            fileReader.ReadLine()
-        Next
-
-
-        For i = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = fileReader.ReadLine()
-        Next
-
-        fileReader.Close()
-        Me.lblPreviousQuarter.Text = "Quarter " & q & "-" & y & " generated from saved statement"
-        q = Me.txtQuarter.Value
-        y = Me.txtQuarterYear.Value
-
-        Dim qtr = 1
-        If q = 1 Then
-            qtr = 4
-            y = y - 1
-        Else
-            qtr = q - 1
-        End If
-
-        Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
-
-        GeneratePreviousQuarterValuesFromFile = True
-        Me.Cursor = Cursors.Default
-    End Function
-
-
-    Private Sub GenerateStatementFromSavedMonthlyStatements()
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        ClearAllFieldsWithoutMessage()
+        ClearAllFields()
         Dim q = Me.txtQuarter.Value
         Dim y As String = Me.txtQuarterYear.Text
         Dim m1 As String = vbNullString
@@ -841,15 +391,128 @@ Public Class frmQuarterlyPerformance
         Dim FileName2 As String = FilePath & "\" & MonthName(m2) & "-" & Me.txtQuarterYear.Text & ".txt"
         Dim FileName3 As String = FilePath & "\" & MonthName(m3) & "-" & Me.txtQuarterYear.Text & ".txt"
         If FileIO.FileSystem.FileExists(FileName1) And FileIO.FileSystem.FileExists(FileName2) And FileIO.FileSystem.FileExists(FileName3) Then
-            Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.Checked = True
+            Me.chkSelectedQuarterFromMonthFiles.Checked = True
             Application.DoEvents()
-            GenerateStatementFromSavedMonthlyStatements()
+            GenerateSelectedQuarterValuesFromMonthFiles()
         Else
-            Me.chkGenerateSelectedQuaterValuesFromDataBase.Checked = True
+            Me.chkSelectedQuaterFromDB.Checked = True
             Application.DoEvents()
-            GenerateSelectedQuarterValuesFromDatabase()
+            GenerateSelectedQuarterValuesFromDB()
         End If
     End Sub
+
+    Private Sub GenerateSelectedQuarterValuesFromQuarterFile()
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+
+        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        ClearSelectedQuarterFileds()
+
+        Me.lblSelectedQuarter.Text = "Quarter " & (Me.txtQuarter.Value).ToString & "-" & Me.txtQuarterYear.Text & " - Loaded from saved statement"
+
+        Me.lblPreviousQuarter.Text = ""
+
+
+        SelectedQuarter = Me.txtQuarter.Value
+        SelectedYear = Me.txtQuarterYear.Text
+
+        Dim q = Me.txtQuarter.Value
+        Dim y = Me.txtQuarterYear.Value
+
+        Dim qtr = 1
+        If q = 1 Then
+            qtr = 4
+            y = y - 1
+        Else
+            qtr = q - 1
+        End If
+
+        Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
+
+        Dim wdApp As Word.Application
+        Dim wdDocs As Word.Documents
+        wdApp = New Word.Application
+
+        wdDocs = wdApp.Documents
+        Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
+        Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
+        For i = 0 To 19
+            Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 3).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(3).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(4).Value = wdTbl.Cell(i + 4, 5).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(5).Value = wdTbl.Cell(i + 4, 6).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(6).Value = wdTbl.Cell(i + 4, 7).Range.Text.Trim(ChrW(7)).Trim()
+            Me.DataGridViewX1.Rows(i).Cells(7).Value = wdTbl.Cell(i + 4, 8).Range.Text.Trim(ChrW(7)).Trim()
+        Next
+
+        wdDoc.Close()
+        ReleaseObject(wdTbl)
+        ReleaseObject(wdDoc)
+        ReleaseObject(wdDocs)
+        wdApp.Quit()
+
+        GenerateSelectedQuarterValuesFromQuarterFile()
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
+    Private Function GeneratePreviousQuarterValuesFromFile() As Boolean
+        Me.Cursor = Cursors.WaitCursor
+        GeneratePreviousQuarterValuesFromFile = False
+        Dim q = Me.txtQuarter.Value
+        Dim y = Me.txtQuarterYear.Value
+        If q = 1 Then
+            q = 4
+            y = Me.txtQuarterYear.Value - 1
+        Else
+            q = q - 1
+        End If
+        Dim FilePath As String = SaveFolder & "\" & y
+        Dim FileName As String = FilePath & "\" & q & "-" & y & ".txt"
+        If My.Computer.FileSystem.FileExists(FileName) = False Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the quarter " & q & "-" & y & " does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Me.Cursor = Cursors.Default
+            Exit Function
+        End If
+
+        Dim fileReader As System.IO.StreamReader
+        fileReader = My.Computer.FileSystem.OpenTextFileReader(FileName)
+        For i = 0 To 83
+            fileReader.ReadLine()
+        Next
+
+
+        For i = 0 To 19
+            Me.DataGridViewX1.Rows(i).Cells(2).Value = fileReader.ReadLine()
+        Next
+
+        fileReader.Close()
+        Me.lblPreviousQuarter.Text = "Quarter " & q & "-" & y & " generated from saved statement"
+        q = Me.txtQuarter.Value
+        y = Me.txtQuarterYear.Value
+
+        Dim qtr = 1
+        If q = 1 Then
+            qtr = 4
+            y = y - 1
+        Else
+            qtr = q - 1
+        End If
+
+        Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
+
+        GeneratePreviousQuarterValuesFromFile = True
+        Me.Cursor = Cursors.Default
+    End Function
+
 
     Private Sub GeneratePreviousQuarterValuesFromDBorFile()
         On Error Resume Next
@@ -864,18 +527,349 @@ Public Class frmQuarterlyPerformance
         Dim FilePath As String = SaveFolder & "\" & y
         Dim FileName As String = FilePath & "\" & m & "-" & y & ".txt"
         If My.Computer.FileSystem.FileExists(FileName) Then
-            Me.chkGeneratePreviousQuarterValuesFromFile.Checked = True
+            Me.chkPreviousQuarterFromFile.Checked = True
             Application.DoEvents()
             GeneratePreviousQuarterValuesFromFile()
         Else
-            Me.chkGeneratePreviousQuarterValuesfromDataBase.Checked = True
+            Me.chkPreviousQuarterFromDB.Checked = True
             Application.DoEvents()
-            GeneratePreviousQuarterValuesFromDataBase()
+            GeneratePreviousQuarterValuesFromDB()
         End If
     End Sub
 
 
+    Private Sub GeneratePreviousQuarterValuesFromDB()
+        On Error Resume Next
+
+        Me.Cursor = Cursors.WaitCursor
+        ClearPreviousQuarterField()
+        Dim d3 As Date
+        Dim d4 As Date
+
+        Dim q = Me.txtQuarter.Value
+        Dim y = Me.txtQuarterYear.Value
+
+        Select Case q
+            Case 1
+                d3 = New Date(y - 1, 10, 1)
+                d4 = New Date(y - 1, 12, 31)
+            Case 2
+                d3 = New Date(y, 1, 1)
+                d4 = New Date(y, 3, 31)
+            Case 3
+                d3 = New Date(y, 4, 1)
+                d4 = New Date(y, 6, 30)
+            Case 4
+                d3 = New Date(y, 7, 1)
+                d4 = New Date(y, 9, 30)
+        End Select
+
+        Dim qtr = 1
+        If q = 1 Then
+            qtr = 4
+            y = y - 1
+        Else
+            qtr = q - 1
+        End If
+        Me.DataGridViewX1.Columns(2).HeaderText = "Quarter " & qtr & " " & y
+
+        Me.DataGridViewX1.Rows(0).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d3, d4))
+        Me.DataGridViewX1.Rows(1).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d3, d4))
+        Me.DataGridViewX1.Rows(2).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d3, d4))
+        Me.DataGridViewX1.Rows(3).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d3, d4))
+        Me.DataGridViewX1.Rows(4).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d3, d4))
+        Me.DataGridViewX1.Rows(5).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d3, d4))
+        Me.DataGridViewX1.Rows(6).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d3, d4))
+        Me.DataGridViewX1.Rows(7).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d3, d4))
+
+        Me.DataGridViewX1.Rows(8).Cells(2).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d3, d4, ""))
+        Me.DataGridViewX1.Rows(9).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d3, d4))
+        Me.DataGridViewX1.Rows(10).Cells(2).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d3, d4))
+        Me.DataGridViewX1.Rows(13).Cells(2).Value = Val(Me.CdRegisterTableAdapter.CountCD(d3, d4))
+        Me.DataGridViewX1.Rows(15).Cells(2).Value = CalculateCasesPendingInPreviousQuarter()
+        Me.DataGridViewX1.Rows(18).Cells(2).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d3, d4))
+        Me.DataGridViewX1.Rows(19).Cells(2).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d3, d4)) & "/-"
+        Me.lblPreviousQuarter.Text = "Quarter " & qtr & "-" & y & " generated from database"
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
+   
+
+
+    Private Sub GeneratePreviousQuarterValuesWithMessage() Handles btnGeneratePreviousQuarterValues.Click
+        On Error Resume Next
+        If Me.txtQuarter.Text = vbNullString Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Please select the Quarter", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtQuarter.Focus()
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Me.txtQuarterYear.Text = vbNullString Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtQuarterYear.Focus()
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Me.chkPreviousQuarterFromDB.Checked Then
+            GeneratePreviousQuarterValuesFromDB()
+            frmMainInterface.ShowAlertMessage("Previous quarter values generated from database!")
+        End If
+
+        If Me.chkPreviousQuarterFromFile.Checked Then
+            If GeneratePreviousQuarterValuesFromFile() Then
+                frmMainInterface.ShowAlertMessage("Previous quarter values loaded!")
+            Else
+                Exit Sub
+            End If
+        End If
+
+        InsertBlankValues()
+    End Sub
+
+
+    Private Function CalculateCasesPendingInPreviousMonth(ByVal d As Date)
+        On Error Resume Next
+        Dim m = Month(d)
+        Dim y = Year(d)
+        If m = 1 Then
+            m = 12
+            y = y - 1
+        Else
+            m = m - 1
+        End If
+        Dim c = Date.DaysInMonth(y, m)
+        Dim dt1 As Date = New Date(y, m, 1)
+        Dim dt2 As Date = New Date(y, m, c)
+        Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(dt1, dt2, "").ToString
+    End Function
+
+    Private Function CalculateCasesPendingInPreviousQuarter()
+        On Error Resume Next
+        Dim q = Me.txtQuarter.Value
+        Dim y = Me.txtQuarterYear.Value
+        If q = 1 Then
+            q = 3
+            y = y - 1
+        ElseIf q = 2 Then
+            q = 4
+            y = y - 1
+        Else
+            q = q - 2
+        End If
+        Dim d1 As Date
+        Dim d2 As Date
+
+        Select Case q
+            Case 1
+                d1 = New Date(y, 1, 1)
+                d2 = New Date(y, 3, 31)
+
+            Case 2
+                d1 = New Date(y, 4, 1)
+                d2 = New Date(y, 6, 30)
+
+            Case 3
+                d1 = New Date(y, 7, 1)
+                d2 = New Date(y, 9, 30)
+
+            Case 4
+                d1 = New Date(y, 10, 1)
+                d2 = New Date(y, 12, 31)
+
+        End Select
+
+        Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, "").ToString
+    End Function
+
+    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) ' Handles DataGridViewX1.CellEndEdit
+        On Error Resume Next
+        If e.RowIndex < 2 Or e.RowIndex > 5 Then Exit Sub
+        Dim i = e.ColumnIndex
+        Me.DataGridViewX1.Rows(5).Cells(i).Value = Val(Me.DataGridViewX1.Rows(2).Cells(i).Value) - (Val(Me.DataGridViewX1.Rows(3).Cells(i).Value) + Val(Me.DataGridViewX1.Rows(4).Cells(i).Value))
+
+    End Sub
+
+
+    Private Sub GenerateMonth1Statistics(ByVal d1 As Date, ByVal d2 As Date)
+        On Error Resume Next
+
+        Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
+        Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
+        Me.DataGridViewX1.Rows(2).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
+        Me.DataGridViewX1.Rows(3).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
+        Me.DataGridViewX1.Rows(4).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
+        Me.DataGridViewX1.Rows(5).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
+        Me.DataGridViewX1.Rows(6).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
+        Me.DataGridViewX1.Rows(7).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
+
+        Me.DataGridViewX1.Rows(8).Cells(3).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+        Me.DataGridViewX1.Rows(9).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+        Me.DataGridViewX1.Rows(10).Cells(3).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
+        Me.DataGridViewX1.Rows(13).Cells(3).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
+        Me.DataGridViewX1.Rows(15).Cells(3).Value = CalculateCasesPendingInPreviousMonth(d1)
+        Me.DataGridViewX1.Rows(18).Cells(3).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
+        Me.DataGridViewX1.Rows(19).Cells(3).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+
+    End Sub
+
+    Private Sub GenerateMonth2Statistics(ByVal d1 As Date, ByVal d2 As Date)
+        On Error Resume Next
+
+        Me.DataGridViewX1.Rows(0).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
+        Me.DataGridViewX1.Rows(1).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
+        Me.DataGridViewX1.Rows(2).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
+        Me.DataGridViewX1.Rows(3).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
+        Me.DataGridViewX1.Rows(4).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
+        Me.DataGridViewX1.Rows(5).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
+        Me.DataGridViewX1.Rows(6).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
+        Me.DataGridViewX1.Rows(7).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
+
+        Me.DataGridViewX1.Rows(8).Cells(4).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+        Me.DataGridViewX1.Rows(9).Cells(4).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+        Me.DataGridViewX1.Rows(10).Cells(4).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
+        Me.DataGridViewX1.Rows(13).Cells(4).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
+        Me.DataGridViewX1.Rows(15).Cells(4).Value = CalculateCasesPendingInPreviousMonth(d1)
+        Me.DataGridViewX1.Rows(18).Cells(4).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
+        Me.DataGridViewX1.Rows(19).Cells(4).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+
+    End Sub
+
+    Private Sub GenerateMonth3Statistics(ByVal d1 As Date, ByVal d2 As Date)
+        On Error Resume Next
+
+        Me.DataGridViewX1.Rows(0).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
+        Me.DataGridViewX1.Rows(1).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
+        Me.DataGridViewX1.Rows(2).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
+        Me.DataGridViewX1.Rows(3).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
+        Me.DataGridViewX1.Rows(4).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
+        Me.DataGridViewX1.Rows(5).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
+        Me.DataGridViewX1.Rows(6).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
+        Me.DataGridViewX1.Rows(7).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
+
+        Me.DataGridViewX1.Rows(8).Cells(5).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+        Me.DataGridViewX1.Rows(9).Cells(5).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+        Me.DataGridViewX1.Rows(10).Cells(5).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
+        Me.DataGridViewX1.Rows(13).Cells(5).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
+        Me.DataGridViewX1.Rows(15).Cells(5).Value = CalculateCasesPendingInPreviousMonth(d1)
+        Me.DataGridViewX1.Rows(18).Cells(5).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
+        Me.DataGridViewX1.Rows(19).Cells(5).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+
+    End Sub
+
+
+    Private Sub CalculateCurrentQuarterTotalValues() Handles DataGridViewX1.CellEndEdit
+        On Error Resume Next
+        For i = 0 To 18
+            Me.DataGridViewX1.Rows(i).Cells(6).Value = Val(Me.DataGridViewX1.Rows(i).Cells(3).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(4).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(5).Value.ToString)
+        Next
+
+        Dim v1 = Me.DataGridViewX1.Rows(19).Cells(3).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Dim v2 = Me.DataGridViewX1.Rows(19).Cells(4).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Dim v3 = Me.DataGridViewX1.Rows(19).Cells(5).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Me.DataGridViewX1.Rows(19).Cells(6).Value = "` " & Val(v1) + Val(v2) + Val(v3) & "/-"
+
+        InsertBlankValues()
+    End Sub
+
+
+    Private Sub LoadSelectedQuarterAtFormLoad()
+        On Error Resume Next
+        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
+            GenerateSelectedQuarterValuesFromQuarterFile()
+            Me.lblPreviousQuarter.Text = ""
+        Else
+            GenerateSelectedQuarterValuesFromDBorFile()
+            GeneratePreviousQuarterValuesFromDBorFile()
+            CalculateCurrentQuarterTotalValues()
+        End If
+    End Sub
 #End Region
+
+
+
+#Region "CLEAR FIELDS"
+
+    Private Sub ClearAllFields() Handles btnClearAllFields.Click
+        On Error Resume Next
+        For i As Short = 0 To 19
+            Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
+        Next
+        Me.DataGridViewX1.Columns(2).HeaderText = "Previous Quarter"
+        Me.DataGridViewX1.Columns(3).HeaderText = "Month1"
+        Me.DataGridViewX1.Columns(4).HeaderText = "Month2"
+        Me.DataGridViewX1.Columns(5).HeaderText = "Month3"
+        Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
+        Me.lblPreviousQuarter.Text = ""
+        Me.lblSelectedQuarter.Text = ""
+    End Sub
+
+    Private Sub ClearPreviousQuarterField()
+        On Error Resume Next
+        For i As Short = 0 To 19
+            Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
+        Next
+    End Sub
+
+    Private Sub ClearSelectedQuarterFileds()
+        On Error Resume Next
+        For i As Short = 0 To 19
+            Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
+            Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
+        Next
+    End Sub
+#End Region
+
+
+#Region "INSERT BLANK VALES"
+
+
+    Private Sub InsertBlankValues() Handles btnInsertBlankValues.Click
+        On Error Resume Next
+        Dim blankvalue As String = Me.txtBlankCellValue.Text
+        Dim Tblankvalue As String = blankvalue
+        If Me.chkBlankValue.Checked = False Then
+            blankvalue = ""
+        End If
+
+        For i As Short = 0 To 19
+            If Me.DataGridViewX1.Rows(i).Cells(2).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
+            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(3).Value = blankvalue
+            If Me.DataGridViewX1.Rows(i).Cells(4).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(4).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(4).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(4).Value = blankvalue
+            If Me.DataGridViewX1.Rows(i).Cells(5).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(5).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(5).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(5).Value = blankvalue
+            If Me.DataGridViewX1.Rows(i).Cells(6).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(6).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(6).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(6).Value = blankvalue
+        Next
+
+    End Sub
+
+    Private Sub InsertBlankValuesInPreviousQuarter()
+        On Error Resume Next
+        Dim blankvalue As String = Me.txtBlankCellValue.Text
+        Dim Tblankvalue As String = blankvalue
+
+        If Me.chkBlankValue.Checked = False Then
+            blankvalue = ""
+        End If
+
+        For i As Short = 0 To 19
+            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
+        Next
+    End Sub
+
+#End Region
+
+
 
 #Region "WORD STATEMENT"
 
@@ -1159,4 +1153,7 @@ Public Class frmQuarterlyPerformance
         End Try
     End Sub
 
+    Private Sub GenerateSelectedQuarterReportWithMessage(sender As Object, e As EventArgs) Handles btnGenerateSelectedQuarterValues.Click
+
+    End Sub
 End Class

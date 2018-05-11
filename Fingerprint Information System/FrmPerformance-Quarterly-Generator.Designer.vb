@@ -36,7 +36,7 @@ Partial Class frmQuarterlyPerformance
         Me.PerformanceBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.btnInsertBlankValues = New DevComponents.DotNetBar.ButtonX()
-        Me.btnGenerateSelectedQuarterFromDB = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateSelectedQuarterValues = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.txtQuarterYear = New DevComponents.Editors.IntegerInput()
@@ -53,24 +53,24 @@ Partial Class frmQuarterlyPerformance
         Me.CheckBoxX2 = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkBlankValue = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.chkGeneratePreviousQuarterValuesFromFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.chkGeneratePreviousQuarterValuesfromDataBase = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkPreviousQuarterFromFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkPreviousQuarterFromDB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.chkGenerateSelectedQuaterValuesFromDataBase = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkSelectedQuarterValuesFromQuarterFile = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkSelectedQuarterFromMonthFiles = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkSelectedQuaterFromDB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.btnGeneratePerformanceStatement = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.lblPeriod = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.lblPreviousQuarter = New DevComponents.DotNetBar.LabelX()
         Me.btnClearAllFields = New DevComponents.DotNetBar.ButtonX()
         Me.lblSelectedQuarter = New DevComponents.DotNetBar.LabelX()
         Me.btnStatement = New DevComponents.DotNetBar.ButtonX()
         Me.DataGridViewX1 = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.bgwStatement = New System.ComponentModel.BackgroundWorker()
-        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.SlNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DetailsOfWorkDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PreviousDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -79,6 +79,7 @@ Partial Class frmQuarterlyPerformance
         Me.Month3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PresentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bgwStatement = New System.ComponentModel.BackgroundWorker()
         CType(Me.PerformanceBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,15 +114,15 @@ Partial Class frmQuarterlyPerformance
         Me.btnInsertBlankValues.TabIndex = 5
         Me.btnInsertBlankValues.Text = "INSERT"
         '
-        'btnGenerateSelectedQuarterFromDB
+        'btnGenerateSelectedQuarterValues
         '
-        Me.btnGenerateSelectedQuarterFromDB.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGenerateSelectedQuarterFromDB.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateSelectedQuarterFromDB.Location = New System.Drawing.Point(267, 17)
-        Me.btnGenerateSelectedQuarterFromDB.Name = "btnGenerateSelectedQuarterFromDB"
-        Me.btnGenerateSelectedQuarterFromDB.Size = New System.Drawing.Size(99, 58)
-        Me.btnGenerateSelectedQuarterFromDB.TabIndex = 3
-        Me.btnGenerateSelectedQuarterFromDB.Text = "GENERATE"
+        Me.btnGenerateSelectedQuarterValues.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateSelectedQuarterValues.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateSelectedQuarterValues.Location = New System.Drawing.Point(267, 17)
+        Me.btnGenerateSelectedQuarterValues.Name = "btnGenerateSelectedQuarterValues"
+        Me.btnGenerateSelectedQuarterValues.Size = New System.Drawing.Size(99, 58)
+        Me.btnGenerateSelectedQuarterValues.TabIndex = 6
+        Me.btnGenerateSelectedQuarterValues.Text = "GENERATE"
         '
         'LabelX5
         '
@@ -130,7 +131,7 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(193, 19)
+        Me.LabelX5.Location = New System.Drawing.Point(147, 19)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.Size = New System.Drawing.Size(28, 18)
         Me.LabelX5.TabIndex = 38
@@ -143,7 +144,7 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(11, 19)
+        Me.LabelX6.Location = New System.Drawing.Point(6, 19)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.Size = New System.Drawing.Size(46, 18)
         Me.LabelX6.TabIndex = 37
@@ -160,7 +161,7 @@ Partial Class frmQuarterlyPerformance
         Me.txtQuarterYear.FocusHighlightEnabled = True
         Me.txtQuarterYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuarterYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtQuarterYear.Location = New System.Drawing.Point(227, 14)
+        Me.txtQuarterYear.Location = New System.Drawing.Point(181, 14)
         Me.txtQuarterYear.MaxValue = 2099
         Me.txtQuarterYear.MinValue = 1900
         Me.txtQuarterYear.Name = "txtQuarterYear"
@@ -185,7 +186,7 @@ Partial Class frmQuarterlyPerformance
         Me.txtBlankCellValue.Location = New System.Drawing.Point(130, 7)
         Me.txtBlankCellValue.Name = "txtBlankCellValue"
         Me.txtBlankCellValue.Size = New System.Drawing.Size(82, 27)
-        Me.txtBlankCellValue.TabIndex = 5
+        Me.txtBlankCellValue.TabIndex = 4
         '
         'txtQuarter
         '
@@ -198,7 +199,7 @@ Partial Class frmQuarterlyPerformance
         Me.txtQuarter.FocusHighlightEnabled = True
         Me.txtQuarter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuarter.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtQuarter.Location = New System.Drawing.Point(68, 14)
+        Me.txtQuarter.Location = New System.Drawing.Point(59, 14)
         Me.txtQuarter.MaxValue = 4
         Me.txtQuarter.MinValue = 1
         Me.txtQuarter.Name = "txtQuarter"
@@ -235,7 +236,7 @@ Partial Class frmQuarterlyPerformance
         Me.btnGeneratePreviousQuarterValues.Location = New System.Drawing.Point(267, 5)
         Me.btnGeneratePreviousQuarterValues.Name = "btnGeneratePreviousQuarterValues"
         Me.btnGeneratePreviousQuarterValues.Size = New System.Drawing.Size(99, 58)
-        Me.btnGeneratePreviousQuarterValues.TabIndex = 4
+        Me.btnGeneratePreviousQuarterValues.TabIndex = 7
         Me.btnGeneratePreviousQuarterValues.Text = "GENERATE"
         '
         'PanelEx2
@@ -270,7 +271,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel4.Controls.Add(Me.chkBlankValue)
         Me.GroupPanel4.Controls.Add(Me.btnInsertBlankValues)
         Me.GroupPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel4.Location = New System.Drawing.Point(7, 483)
+        Me.GroupPanel4.Location = New System.Drawing.Point(7, 146)
         Me.GroupPanel4.Name = "GroupPanel4"
         Me.GroupPanel4.Size = New System.Drawing.Size(378, 96)
         '
@@ -301,8 +302,8 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.GroupPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel4.TabIndex = 35
-        Me.GroupPanel4.Text = "STEP 4 : Blank Cell Value"
+        Me.GroupPanel4.TabIndex = 33
+        Me.GroupPanel4.Text = "Blank Cell Value"
         '
         'CheckBoxX2
         '
@@ -343,10 +344,10 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel3.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.GroupPanel3.Controls.Add(Me.btnGeneratePreviousQuarterValues)
-        Me.GroupPanel3.Controls.Add(Me.chkGeneratePreviousQuarterValuesFromFile)
-        Me.GroupPanel3.Controls.Add(Me.chkGeneratePreviousQuarterValuesfromDataBase)
+        Me.GroupPanel3.Controls.Add(Me.chkPreviousQuarterFromFile)
+        Me.GroupPanel3.Controls.Add(Me.chkPreviousQuarterFromDB)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel3.Location = New System.Drawing.Point(7, 331)
+        Me.GroupPanel3.Location = New System.Drawing.Point(7, 450)
         Me.GroupPanel3.Name = "GroupPanel3"
         Me.GroupPanel3.Size = New System.Drawing.Size(378, 96)
         '
@@ -377,53 +378,53 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.GroupPanel3.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel3.TabIndex = 34
-        Me.GroupPanel3.Text = "STEP 3 : Generate values for Previous Quarter from"
+        Me.GroupPanel3.TabIndex = 35
+        Me.GroupPanel3.Text = "Generate Previous Quarter Values from"
         '
-        'chkGeneratePreviousQuarterValuesFromFile
+        'chkPreviousQuarterFromFile
         '
-        Me.chkGeneratePreviousQuarterValuesFromFile.AutoSize = True
-        '
-        '
-        '
-        Me.chkGeneratePreviousQuarterValuesFromFile.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGeneratePreviousQuarterValuesFromFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGeneratePreviousQuarterValuesFromFile.Location = New System.Drawing.Point(3, 40)
-        Me.chkGeneratePreviousQuarterValuesFromFile.Name = "chkGeneratePreviousQuarterValuesFromFile"
-        Me.chkGeneratePreviousQuarterValuesFromFile.Size = New System.Drawing.Size(250, 18)
-        Me.chkGeneratePreviousQuarterValuesFromFile.TabIndex = 3
-        Me.chkGeneratePreviousQuarterValuesFromFile.TabStop = False
-        Me.chkGeneratePreviousQuarterValuesFromFile.Text = "Saved statement of the previous quarter"
-        '
-        'chkGeneratePreviousQuarterValuesfromDataBase
-        '
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.AutoSize = True
+        Me.chkPreviousQuarterFromFile.AutoSize = True
         '
         '
         '
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.Checked = True
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.CheckValue = "Y"
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.Location = New System.Drawing.Point(3, 13)
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.Name = "chkGeneratePreviousQuarterValuesfromDataBase"
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.Size = New System.Drawing.Size(75, 18)
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.TabIndex = 2
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.TabStop = False
-        Me.chkGeneratePreviousQuarterValuesfromDataBase.Text = "Database"
+        Me.chkPreviousQuarterFromFile.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkPreviousQuarterFromFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkPreviousQuarterFromFile.Location = New System.Drawing.Point(3, 40)
+        Me.chkPreviousQuarterFromFile.Name = "chkPreviousQuarterFromFile"
+        Me.chkPreviousQuarterFromFile.Size = New System.Drawing.Size(250, 18)
+        Me.chkPreviousQuarterFromFile.TabIndex = 3
+        Me.chkPreviousQuarterFromFile.TabStop = False
+        Me.chkPreviousQuarterFromFile.Text = "Saved statement of the previous quarter"
+        '
+        'chkPreviousQuarterFromDB
+        '
+        Me.chkPreviousQuarterFromDB.AutoSize = True
+        '
+        '
+        '
+        Me.chkPreviousQuarterFromDB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkPreviousQuarterFromDB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkPreviousQuarterFromDB.Checked = True
+        Me.chkPreviousQuarterFromDB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkPreviousQuarterFromDB.CheckValue = "Y"
+        Me.chkPreviousQuarterFromDB.Location = New System.Drawing.Point(3, 13)
+        Me.chkPreviousQuarterFromDB.Name = "chkPreviousQuarterFromDB"
+        Me.chkPreviousQuarterFromDB.Size = New System.Drawing.Size(75, 18)
+        Me.chkPreviousQuarterFromDB.TabIndex = 2
+        Me.chkPreviousQuarterFromDB.TabStop = False
+        Me.chkPreviousQuarterFromDB.Text = "Database"
         '
         'GroupPanel2
         '
         Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel2.Controls.Add(Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile)
-        Me.GroupPanel2.Controls.Add(Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements)
-        Me.GroupPanel2.Controls.Add(Me.chkGenerateSelectedQuaterValuesFromDataBase)
-        Me.GroupPanel2.Controls.Add(Me.btnGenerateSelectedQuarterFromDB)
+        Me.GroupPanel2.Controls.Add(Me.chkSelectedQuarterValuesFromQuarterFile)
+        Me.GroupPanel2.Controls.Add(Me.chkSelectedQuarterFromMonthFiles)
+        Me.GroupPanel2.Controls.Add(Me.chkSelectedQuaterFromDB)
+        Me.GroupPanel2.Controls.Add(Me.btnGenerateSelectedQuarterValues)
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel2.Location = New System.Drawing.Point(7, 152)
+        Me.GroupPanel2.Location = New System.Drawing.Point(7, 287)
         Me.GroupPanel2.Name = "GroupPanel2"
         Me.GroupPanel2.Size = New System.Drawing.Size(378, 118)
         '
@@ -454,62 +455,63 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel2.TabIndex = 33
-        Me.GroupPanel2.Text = "STEP 2 : Generate values for Selected Quarter from"
+        Me.GroupPanel2.TabIndex = 34
+        Me.GroupPanel2.Text = "Generate  Selected Quarter Values from"
         '
-        'chkGenerateSelectedQuarterValuesFromESelectedQuarterFile
+        'chkSelectedQuarterValuesFromQuarterFile
         '
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.AutoSize = True
-        '
-        '
-        '
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.Location = New System.Drawing.Point(3, 63)
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.Name = "chkGenerateSelectedQuarterValuesFromESelectedQuarterFile"
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.Size = New System.Drawing.Size(255, 18)
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.TabIndex = 4
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.TabStop = False
-        Me.chkGenerateSelectedQuarterValuesFromESelectedQuarterFile.Text = "Load saved values of the selected quarter"
-        '
-        'chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements
-        '
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.AutoSize = True
+        Me.chkSelectedQuarterValuesFromQuarterFile.AutoSize = True
         '
         '
         '
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.Location = New System.Drawing.Point(3, 39)
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.Name = "chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements"
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.Size = New System.Drawing.Size(211, 18)
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.TabIndex = 1
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.TabStop = False
-        Me.chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements.Text = "Saved values of the three months"
+        Me.chkSelectedQuarterValuesFromQuarterFile.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkSelectedQuarterValuesFromQuarterFile.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkSelectedQuarterValuesFromQuarterFile.Location = New System.Drawing.Point(3, 63)
+        Me.chkSelectedQuarterValuesFromQuarterFile.Name = "chkSelectedQuarterValuesFromQuarterFile"
+        Me.chkSelectedQuarterValuesFromQuarterFile.Size = New System.Drawing.Size(255, 18)
+        Me.chkSelectedQuarterValuesFromQuarterFile.TabIndex = 4
+        Me.chkSelectedQuarterValuesFromQuarterFile.TabStop = False
+        Me.chkSelectedQuarterValuesFromQuarterFile.Text = "Load saved values of the selected quarter"
         '
-        'chkGenerateSelectedQuaterValuesFromDataBase
+        'chkSelectedQuarterFromMonthFiles
         '
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.AutoSize = True
+        Me.chkSelectedQuarterFromMonthFiles.AutoSize = True
         '
         '
         '
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.Checked = True
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.CheckValue = "Y"
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.Location = New System.Drawing.Point(3, 12)
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.Name = "chkGenerateSelectedQuaterValuesFromDataBase"
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.Size = New System.Drawing.Size(75, 18)
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.TabIndex = 0
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.TabStop = False
-        Me.chkGenerateSelectedQuaterValuesFromDataBase.Text = "Database"
+        Me.chkSelectedQuarterFromMonthFiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkSelectedQuarterFromMonthFiles.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkSelectedQuarterFromMonthFiles.Location = New System.Drawing.Point(3, 39)
+        Me.chkSelectedQuarterFromMonthFiles.Name = "chkSelectedQuarterFromMonthFiles"
+        Me.chkSelectedQuarterFromMonthFiles.Size = New System.Drawing.Size(211, 18)
+        Me.chkSelectedQuarterFromMonthFiles.TabIndex = 1
+        Me.chkSelectedQuarterFromMonthFiles.TabStop = False
+        Me.chkSelectedQuarterFromMonthFiles.Text = "Saved values of the three months"
+        '
+        'chkSelectedQuaterFromDB
+        '
+        Me.chkSelectedQuaterFromDB.AutoSize = True
+        '
+        '
+        '
+        Me.chkSelectedQuaterFromDB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkSelectedQuaterFromDB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkSelectedQuaterFromDB.Checked = True
+        Me.chkSelectedQuaterFromDB.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkSelectedQuaterFromDB.CheckValue = "Y"
+        Me.chkSelectedQuaterFromDB.Location = New System.Drawing.Point(3, 12)
+        Me.chkSelectedQuaterFromDB.Name = "chkSelectedQuaterFromDB"
+        Me.chkSelectedQuaterFromDB.Size = New System.Drawing.Size(75, 18)
+        Me.chkSelectedQuaterFromDB.TabIndex = 0
+        Me.chkSelectedQuaterFromDB.TabStop = False
+        Me.chkSelectedQuaterFromDB.Text = "Database"
         '
         'GroupPanel1
         '
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel1.Controls.Add(Me.btnGeneratePerformanceStatement)
         Me.GroupPanel1.Controls.Add(Me.LabelX6)
         Me.GroupPanel1.Controls.Add(Me.txtQuarter)
         Me.GroupPanel1.Controls.Add(Me.txtQuarterYear)
@@ -517,7 +519,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Location = New System.Drawing.Point(7, 12)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(378, 76)
+        Me.GroupPanel1.Size = New System.Drawing.Size(378, 89)
         '
         '
         '
@@ -547,7 +549,17 @@ Partial Class frmQuarterlyPerformance
         '
         Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel1.TabIndex = 32
-        Me.GroupPanel1.Text = "STEP 1 : Select Quarter and Year"
+        Me.GroupPanel1.Text = "Generate Statement for Selected Quarter"
+        '
+        'btnGeneratePerformanceStatement
+        '
+        Me.btnGeneratePerformanceStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGeneratePerformanceStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGeneratePerformanceStatement.Location = New System.Drawing.Point(267, 3)
+        Me.btnGeneratePerformanceStatement.Name = "btnGeneratePerformanceStatement"
+        Me.btnGeneratePerformanceStatement.Size = New System.Drawing.Size(99, 58)
+        Me.btnGeneratePerformanceStatement.TabIndex = 3
+        Me.btnGeneratePerformanceStatement.Text = "GENERATE"
         '
         'PanelEx1
         '
@@ -614,7 +626,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(338, 4)
+        Me.CircularProgress1.Location = New System.Drawing.Point(336, 4)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -622,6 +634,18 @@ Partial Class frmQuarterlyPerformance
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 56
         Me.CircularProgress1.TabStop = False
+        '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(340, 19)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
+        Me.btnOpenFolder.Size = New System.Drawing.Size(126, 56)
+        Me.btnOpenFolder.TabIndex = 10
+        Me.btnOpenFolder.Text = "Open Folder"
         '
         'lblPreviousQuarter
         '
@@ -644,7 +668,7 @@ Partial Class frmQuarterlyPerformance
         Me.btnClearAllFields.Location = New System.Drawing.Point(26, 19)
         Me.btnClearAllFields.Name = "btnClearAllFields"
         Me.btnClearAllFields.Size = New System.Drawing.Size(126, 56)
-        Me.btnClearAllFields.TabIndex = 6
+        Me.btnClearAllFields.TabIndex = 8
         Me.btnClearAllFields.Text = "CLEAR"
         '
         'lblSelectedQuarter
@@ -669,7 +693,7 @@ Partial Class frmQuarterlyPerformance
         Me.btnStatement.Name = "btnStatement"
         Me.btnStatement.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
         Me.btnStatement.Size = New System.Drawing.Size(126, 56)
-        Me.btnStatement.TabIndex = 7
+        Me.btnStatement.TabIndex = 9
         Me.btnStatement.Text = "PRINT"
         '
         'DataGridViewX1
@@ -709,23 +733,6 @@ Partial Class frmQuarterlyPerformance
         Me.DataGridViewX1.RowTemplate.Height = 25
         Me.DataGridViewX1.Size = New System.Drawing.Size(959, 592)
         Me.DataGridViewX1.TabIndex = 14
-        '
-        'bgwStatement
-        '
-        Me.bgwStatement.WorkerReportsProgress = True
-        Me.bgwStatement.WorkerSupportsCancellation = True
-        '
-        'btnOpenFolder
-        '
-        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
-        Me.btnOpenFolder.Location = New System.Drawing.Point(340, 19)
-        Me.btnOpenFolder.Name = "btnOpenFolder"
-        Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
-        Me.btnOpenFolder.Size = New System.Drawing.Size(126, 56)
-        Me.btnOpenFolder.TabIndex = 8
-        Me.btnOpenFolder.Text = "Open Folder"
         '
         'SlNoDataGridViewTextBoxColumn
         '
@@ -803,6 +810,11 @@ Partial Class frmQuarterlyPerformance
         Me.RemarksDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.RemarksDataGridViewTextBoxColumn.Width = 169
         '
+        'bgwStatement
+        '
+        Me.bgwStatement.WorkerReportsProgress = True
+        Me.bgwStatement.WorkerSupportsCancellation = True
+        '
         'frmQuarterlyPerformance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
@@ -846,7 +858,7 @@ Partial Class frmQuarterlyPerformance
     Friend WithEvents FpARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
     Friend WithEvents SOCRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
     Friend WithEvents btnInsertBlankValues As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents btnGenerateSelectedQuarterFromDB As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateSelectedQuarterValues As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
     Friend WithEvents DaRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
@@ -860,13 +872,13 @@ Partial Class frmQuarterlyPerformance
     Friend WithEvents chkBlankValue As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents GroupPanel3 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents btnGeneratePreviousQuarterValues As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents chkGeneratePreviousQuarterValuesFromFile As DevComponents.DotNetBar.Controls.CheckBoxX
-    Friend WithEvents chkGeneratePreviousQuarterValuesfromDataBase As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkPreviousQuarterFromFile As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkPreviousQuarterFromDB As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
-    Friend WithEvents chkGenerateSelectedQuarterValuesFromSavedMonthlyStatements As DevComponents.DotNetBar.Controls.CheckBoxX
-    Friend WithEvents chkGenerateSelectedQuaterValuesFromDataBase As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkSelectedQuarterFromMonthFiles As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkSelectedQuaterFromDB As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
-    Friend WithEvents chkGenerateSelectedQuarterValuesFromESelectedQuarterFile As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkSelectedQuarterValuesFromQuarterFile As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lblPeriod As DevComponents.DotNetBar.LabelX
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
@@ -886,4 +898,5 @@ Partial Class frmQuarterlyPerformance
     Friend WithEvents Month3DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PresentDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RemarksDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnGeneratePerformanceStatement As DevComponents.DotNetBar.ButtonX
 End Class

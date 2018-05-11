@@ -3,8 +3,6 @@
 
 Public Class frmMonthlyPerformance
     Dim SaveFolder As String
-    Dim SelectedMonth As Integer
-    Dim SelectedYear As Integer
     Dim PerfFileName As String
     Dim blSaveFile As Boolean = False
 
@@ -27,6 +25,8 @@ Public Class frmMonthlyPerformance
         SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
         System.IO.Directory.CreateDirectory(SaveFolder)
         Me.cmbMonth.Focus()
+
+        Application.DoEvents()
 
         GeneratePerformanceStatement()
 
@@ -86,10 +86,6 @@ Public Class frmMonthlyPerformance
 
         Me.cmbMonth.SelectedIndex = m - 1
         Me.txtYear.Value = y
-
-        SelectedMonth = m
-        SelectedYear = y
-
 
     End Sub
 
@@ -223,9 +219,6 @@ Public Class frmMonthlyPerformance
         PerfFileName = "Monthly Performance Statement - " & Me.txtYear.Text & " - " & month.ToString("D2")
         Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
 
-        SelectedMonth = m
-        SelectedYear = y
-
         Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
         Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
         Me.DataGridViewX1.Rows(2).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
@@ -264,9 +257,6 @@ Public Class frmMonthlyPerformance
             End If
 
             ClearMonth1Field()
-
-            SelectedMonth = m
-            SelectedYear = y
 
             Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
 
@@ -845,6 +835,8 @@ Public Class frmMonthlyPerformance
                 bgwStatement.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
+
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             WordApp.Visible = True
             WordApp.Activate()
