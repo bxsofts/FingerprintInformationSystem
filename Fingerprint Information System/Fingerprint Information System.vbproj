@@ -509,7 +509,6 @@
       <DependentUpon>FrmPopupMessage.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="BlankFacingSheet.rdlc" />
     <EmbeddedResource Include="CD Register.rdlc" />
     <EmbeddedResource Include="Concise SOC Report.rdlc" />
     <EmbeddedResource Include="DA Register.rdlc" />
@@ -639,7 +638,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Photo Not Received.rdlc" />
     <EmbeddedResource Include="PS Wise DA Statistics.rdlc" />
-    <EmbeddedResource Include="SOC Register - Mini.rdlc" />
     <EmbeddedResource Include="SOC Register.rdlc" />
     <EmbeddedResource Include="SOC Statistics.rdlc" />
     <EmbeddedResource Include="FPA Statistics.rdlc" />
