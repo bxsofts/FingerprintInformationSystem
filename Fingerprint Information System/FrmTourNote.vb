@@ -51,7 +51,7 @@ Public Class FrmTourNote
 
     Private Sub LoadForm() Handles Me.Load
         On Error Resume Next
-
+        Me.Cursor = Cursors.WaitCursor
         boolGenerateRecords = False
 
         CircularProgress1.ProgressText = ""
@@ -68,6 +68,35 @@ Public Class FrmTourNote
         Me.lblOfficerName.Text = "Officer Name not selected"
         Me.SOCDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 11, FontStyle.Regular)
         Me.SOCDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+
+        TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", "")
+        If TourStartLocation = "" And FullDistrictName = "Idukki" Then
+            TourStartLocation = "Painavu"
+        Else
+            TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", FullDistrictName)
+        End If
+
+        Me.txtStartingLocation.Text = TourStartLocation
+
+
+        For i = 0 To 11
+            Me.cmbMonth.Items.Add(MonthName(i + 1))
+        Next
+
+        Dim m As Integer = Month(Today)
+        Dim y As Integer = Year(Today)
+
+        If m = 1 Then
+            m = 12
+            y = y - 1
+        Else
+            m = m - 1
+        End If
+
+        Me.txtYear.Value = y
+
+
+        Me.cmbMonth.SelectedIndex = m - 1
 
         Me.cmbSOCOfficer.Items.Clear()
         Dim n As Integer = 0
@@ -140,7 +169,8 @@ Public Class FrmTourNote
             PENarray(n) = PENFPS
         End If
 
-
+        Me.cmbSOCOfficer.Focus()
+        Application.DoEvents()
 
         If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
         Me.SocRegisterTableAdapter1.Connection.ConnectionString = strConString
@@ -150,48 +180,15 @@ Public Class FrmTourNote
         Me.PoliceStationListTableAdapter1.Connection.ConnectionString = strConString
         Me.PoliceStationListTableAdapter1.Connection.Open()
 
-
-
-
-
-        TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", "")
-        If TourStartLocation = "" And FullDistrictName = "Idukki" Then
-            TourStartLocation = "Painavu"
-        Else
-            TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", FullDistrictName)
-        End If
-        Me.txtStartingLocation.Text = TourStartLocation
-        Me.cmbSOCOfficer.Focus()
-
-        For i = 0 To 11
-            Me.cmbMonth.Items.Add(MonthName(i + 1))
-        Next
-
-        Dim m As Integer = Month(Today)
-        Dim y As Integer = Year(Today)
-
-        If m = 1 Then
-            m = 12
-            y = y - 1
-        Else
-            m = m - 1
-        End If
-
-        Me.txtYear.Value = y
-
-        Application.DoEvents()
-        Me.cmbMonth.SelectedIndex = m - 1
         boolGenerateRecords = True
         GenerateRecords()
-
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub SaveTourStartLocation() Handles Me.FormClosed, txtStartingLocation.Validated
         On Error Resume Next
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "TourStartingLocation", Me.txtStartingLocation.Text, Microsoft.Win32.RegistryValueKind.String)
     End Sub
-
-
 
 #End Region
 
@@ -3088,6 +3085,8 @@ errhandler:
                 wdBooks("name").Range.Text = name.ToUpper
                 wdBooks("designation").Range.Text = designation.ToUpper
                 wdBooks("office").Range.Text = FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper
+                wdBooks("place").Range.Text = TourStartLocation
+                wdBooks("date").Range.Text = Today.ToString("dd/MM/yyyy", culture)
             End If
 
 
@@ -3120,7 +3119,20 @@ errhandler:
         End If
     End Sub
 
-   
+    Private Sub GenerateBlankTR47Outer() Handles btnBlankTR47Outer.Click
+        Try
+
+            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\TR47OuterBlank.docx"
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+            GenerateBlankForm(TemplateFile)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
     Private Function FindDistance(ByVal PS As String) As String
         Try
 
