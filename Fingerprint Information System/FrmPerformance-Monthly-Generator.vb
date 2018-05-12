@@ -4,7 +4,8 @@
 Public Class frmMonthlyPerformance
     Dim SaveFolder As String
     Dim PerfFileName As String
-    Dim blSaveFile As Boolean = False
+    Dim IsMonthStatement As Boolean = False
+    Dim blAllowSave As Boolean = False
 
 #Region "FORM LOAD EVENTS"
 
@@ -15,13 +16,12 @@ Public Class frmMonthlyPerformance
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
-        Me.lblPreviousMonth.Text = ""
-        Me.lblMonth1.Text = ""
-        Me.txtBlankCellValue.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BlankCellValue", "-")
+
 
         SetDays()
         CreateDatagridRows()
         ConnectToDatabase()
+
         SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
         System.IO.Directory.CreateDirectory(SaveFolder)
         Me.cmbMonth.Focus()
@@ -169,7 +169,6 @@ Public Class frmMonthlyPerformance
 #Region "GENERATE REPORT"
 
     Private Sub GeneratePerformanceStatement() Handles btnGeneratePerformanceStatement.Click
-        On Error Resume Next
 
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
@@ -178,14 +177,9 @@ Public Class frmMonthlyPerformance
         Dim y = Me.txtYear.Value
 
         ClearAllFields()
-
-        Dim SavedFileName As String = SaveFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
-
         Me.lblHeader.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
-
-        PerfFileName = "Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2")
-
         Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y ' current month
+        PerfFileName = SaveFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
         If m = 1 Then
             m = 12
@@ -196,223 +190,70 @@ Public Class frmMonthlyPerformance
 
         Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y 'previous month name
 
-        If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            GenerateValuesFromWordFile(SavedFileName, "All")
-            Me.lblMonth1.Text = "Loaded Values from Saved Statement for " & Me.DataGridViewX1.Columns(3).HeaderText
-            Me.lblPreviousMonth.Text = ""
+        If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            LoadPerformanceFromSavedFile(PerfFileName, 0) 'generate from saved file
         Else
             GeneratePreviousMonthFromDBorFile()
-            GenerateMonth1ValuesFromDB()
 
+            Dim m1 = Me.cmbMonth.SelectedIndex + 1
+            Dim y1 = Me.txtYear.Value
+            Dim d As Integer = Date.DaysInMonth(y1, m1)
+
+            Dim d1 As Date = New Date(y1, m1, 1)
+            Dim d2 As Date = New Date(y1, m1, d)
+
+            If Today > d2 Then
+                blAllowSave = True
+            Else
+                blAllowSave = False
+            End If
+
+            Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m1, True) & " " & y1
+            GenerateMonthValuesFromDB(d1, d2, 3) 'generate month 1 from db
         End If
 
-        blSaveFile = True
+        InsertBlankValues()
+        IsMonthStatement = True
 
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
     End Sub
 
-    Private Sub GenerateMonth1ValuesFromDB()
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        ClearMonth1Field()
-        Application.DoEvents()
-        Dim d1 As Date
-        Dim d2 As Date
-
-        Dim m = Me.cmbMonth.SelectedIndex + 1
-        Dim y = Me.txtYear.Value
-        Dim d As Integer = Date.DaysInMonth(y, m)
-
-        d1 = New Date(y, m, 1)
-        d2 = New Date(y, m, d)
-
-        Me.lblHeader.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
-        Dim month = Me.cmbMonth.SelectedIndex + 1
-        PerfFileName = "Monthly Performance Statement - " & Me.txtYear.Text & " - " & month.ToString("D2")
-        Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
-
-        Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
-        Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-        Me.DataGridViewX1.Rows(2).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-        Me.DataGridViewX1.Rows(3).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-        Me.DataGridViewX1.Rows(4).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-        Me.DataGridViewX1.Rows(5).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
-        Me.DataGridViewX1.Rows(7).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
-
-        Me.DataGridViewX1.Rows(8).Cells(3).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
-        Me.DataGridViewX1.Rows(9).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
-        Me.DataGridViewX1.Rows(10).Cells(3).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-        Me.DataGridViewX1.Rows(13).Cells(3).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-        Me.DataGridViewX1.Rows(15).Cells(3).Value = CalculateCasesPendingInPreviousMonth(d1)
-        Me.DataGridViewX1.Rows(18).Cells(3).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
-        Me.DataGridViewX1.Rows(19).Cells(3).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-        InsertBlankValues()
-        Me.lblMonth1.Text = Me.DataGridViewX1.Columns(3).HeaderText & " - Generated from Database"
-
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub GenerateMonth1ValuesFromFile()
+    Private Sub LoadPerformanceFromSavedFile(SavedFileName As String, Column As Integer)
         Try
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
 
-            Me.Cursor = Cursors.WaitCursor
-            Dim m = Me.cmbMonth.SelectedIndex + 1
-            Dim y = Me.txtYear.Value
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
+            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
 
-            Dim SavedFileName As String = SaveFolder & "\Monthly Performance Statement - " & y & " - " & m.ToString("D2") & ".docx"
-
-            If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the month " & Me.cmbMonth.Text & " " & Me.txtYear.Text & " does not exist." & vbNewLine & "Please use the option 'Generate from Database'.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
-                Exit Sub
+            If Column = 0 Then
+                For i = 0 To 19
+                    For j = 2 To 7
+                        Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+                Next
             End If
 
-            ClearMonth1Field()
-
-            Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y
-
-            If m = 1 Then
-                m = 12
-                y = y - 1
-            Else
-                m = m - 1
+            If Column = 2 Then
+                For i = 0 To 19
+                    Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+                Next
             End If
 
-            Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
-
-            GenerateValuesFromWordFile(SavedFileName, "Month1")
-
-            Me.lblMonth1.Text = Me.DataGridViewX1.Columns(3).HeaderText & " - Generated from Saved Statement"
-            Me.Cursor = Cursors.Default
+            wdDoc.Close()
+            ReleaseObject(wdTbl)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp.Quit()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
 
-    Private Sub GenerateMonth1ValuesWithMessage() Handles btnGenerateMonth1Values.Click
-        On Error Resume Next
-
-        If Me.txtYear.Text = vbNullString Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtYear.Focus()
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.chkGenerateMonth1ValuesFromDB.Checked Then
-            GenerateMonth1ValuesFromDB()
-        Else
-            GenerateMonth1ValuesFromFile()
-        End If
-
-        blSaveFile = True
-    End Sub
-
-    Private Sub GeneratePreviousMonthValuesFromDB()
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        ClearPreviousField()
-        Application.DoEvents()
-        Dim d1 As Date
-        Dim d2 As Date
-
-        Dim m = Me.cmbMonth.SelectedIndex + 1
-        Dim y = Me.txtYear.Value
-
-        If m = 1 Then
-            m = 12
-            y = y - 1
-        Else
-            m = m - 1
-        End If
-
-        Dim d = Date.DaysInMonth(y, m)
-
-        d1 = New Date(y, m, 1)
-        d2 = New Date(y, m, d)
-
-        Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
-
-        Me.DataGridViewX1.Rows(0).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
-        Me.DataGridViewX1.Rows(1).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-        Me.DataGridViewX1.Rows(2).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-        Me.DataGridViewX1.Rows(3).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-        Me.DataGridViewX1.Rows(4).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-        Me.DataGridViewX1.Rows(5).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
-        Me.DataGridViewX1.Rows(7).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
-
-        Me.DataGridViewX1.Rows(8).Cells(2).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
-        Me.DataGridViewX1.Rows(9).Cells(2).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
-        Me.DataGridViewX1.Rows(10).Cells(2).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-        Me.DataGridViewX1.Rows(13).Cells(2).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-        Me.DataGridViewX1.Rows(15).Cells(2).Value = CalculateCasesPendingInPreviousMonth(d1)
-        Me.DataGridViewX1.Rows(18).Cells(2).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
-        Me.DataGridViewX1.Rows(19).Cells(2).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-        InsertBlankValues()
-        Me.lblPreviousMonth.Text = Me.DataGridViewX1.Columns(2).HeaderText & " - Generated from Database"
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub GeneratePreviousMonthValuesFromFile()
-        Try
-
-            Me.Cursor = Cursors.WaitCursor
-
-            Dim m = Me.cmbMonth.SelectedIndex + 1
-            Dim y = Me.txtYear.Value
-
-            If m = 1 Then
-                m = 12
-                y = y - 1
-            Else
-                m = m - 1
-            End If
-
-            Dim SavedFileName As String = SaveFolder & "\Monthly Performance Statement - " & y & " - " & m.ToString("D2") & ".docx"
-
-            If My.Computer.FileSystem.FileExists(SavedFileName) = False Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("Performance File for the month " & MonthName(m) & " " & y & " does not exist." & vbNewLine & "Please use the option 'Generate from Database'.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
-
-            Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
-
-            ClearPreviousField()
-
-            GenerateValuesFromWordFile(SavedFileName, "PreviousMonth")
-
-            Me.lblPreviousMonth.Text = Me.DataGridViewX1.Columns(2).HeaderText & " - Generated from Saved Statement"
-
-            Me.Cursor = Cursors.Default
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-    End Sub
-
-    Private Sub GeneratePreviousMonthValuesWithMessage() Handles btnGeneratePreviousMonthValues.Click
-        On Error Resume Next
-
-        If Me.txtYear.Text = vbNullString Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtYear.Focus()
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.chkGeneratePreviousMonthValuesFromDB.Checked Then
-            GeneratePreviousMonthValuesFromDB()
-        Else
-            GeneratePreviousMonthValuesFromFile() 
-        End If
-
-        blSaveFile = True
-    End Sub
 
     Private Sub GeneratePreviousMonthFromDBorFile()
         On Error Resume Next
@@ -430,59 +271,43 @@ Public Class frmMonthlyPerformance
         Dim SavedFileName As String = SaveFolder & "\Monthly Performance Statement - " & y & " - " & m.ToString("D2") & ".docx"
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            Me.chkGeneratePreviousMonthValuesFromFile.Checked = True
-            Application.DoEvents()
-            GeneratePreviousMonthValuesFromFile()
+            LoadPerformanceFromSavedFile(SavedFileName, 2) 'generate previous month from file
         Else
-            Me.chkGeneratePreviousMonthValuesFromDB.Checked = True
-            GeneratePreviousMonthValuesFromDB()
+            Dim d = Date.DaysInMonth(y, m)
+            Dim d1 As Date = New Date(y, m, 1)
+            Dim d2 As Date = New Date(y, m, d)
+
+            Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
+
+            GenerateMonthValuesFromDB(d1, d2, 2) 'generate previous month from db
         End If
     End Sub
 
-    Private Sub GenerateValuesFromWordFile(SavedFileName As String, Column As String)
+    Private Sub GenerateMonthValuesFromDB(ByVal d1 As Date, ByVal d2 As Date, Column As Integer)
         Try
-            Dim wdApp As Word.Application
-            Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
 
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
-            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+            Me.DataGridViewX1.Rows(0).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
+            Me.DataGridViewX1.Rows(1).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
+            Me.DataGridViewX1.Rows(2).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
+            Me.DataGridViewX1.Rows(3).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
+            Me.DataGridViewX1.Rows(4).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
+            Me.DataGridViewX1.Rows(5).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
+            Me.DataGridViewX1.Rows(6).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
+            Me.DataGridViewX1.Rows(7).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
 
-
-            '   Me.DataGridViewX1.Columns(2).HeaderText = wdTbl.Cell(2, 1).Range.Text.Trim(ChrW(7)).Trim() 'previous month name
-            '   Me.DataGridViewX1.Columns(3).HeaderText = wdTbl.Cell(2, 2).Range.Text.Trim(ChrW(7)).Trim() ' current month
-
-            For i = 0 To 19
-
-                If Column = "PreviousMonth" Or Column = "All" Then
-                    Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 3).Range.Text.Trim(ChrW(7)).Trim()
-                End If
-
-                If Column = "Month1" Or Column = "All" Then
-                    Me.DataGridViewX1.Rows(i).Cells(3).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
-                End If
-
-                If Column = "All" Then
-                    Me.DataGridViewX1.Rows(i).Cells(4).Value = wdTbl.Cell(i + 4, 5).Range.Text.Trim(ChrW(7)).Trim()
-                    Me.DataGridViewX1.Rows(i).Cells(5).Value = wdTbl.Cell(i + 4, 6).Range.Text.Trim(ChrW(7)).Trim()
-                    Me.DataGridViewX1.Rows(i).Cells(6).Value = wdTbl.Cell(i + 4, 7).Range.Text.Trim(ChrW(7)).Trim()
-                    Me.DataGridViewX1.Rows(i).Cells(7).Value = wdTbl.Cell(i + 4, 8).Range.Text.Trim(ChrW(7)).Trim()
-                End If
-
-            Next
-
-            wdDoc.Close()
-            ReleaseObject(wdTbl)
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp.Quit()
+            Me.DataGridViewX1.Rows(8).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+            Me.DataGridViewX1.Rows(9).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+            Me.DataGridViewX1.Rows(10).Cells(Column).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
+            Me.DataGridViewX1.Rows(13).Cells(Column).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
+            Me.DataGridViewX1.Rows(15).Cells(Column).Value = CalculateCasesPendingInPreviousMonth(d1)
+            Me.DataGridViewX1.Rows(18).Cells(Column).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
+            Me.DataGridViewX1.Rows(19).Cells(Column).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
+            Me.DataGridViewX1.Cursor = Cursors.Default
         End Try
     End Sub
-
     Private Function CalculateCasesPendingInPreviousMonth(ByVal dt As Date)
         On Error Resume Next
         Dim m = Month(dt)
@@ -499,13 +324,6 @@ Public Class frmMonthlyPerformance
         Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(dt1, dt2, "").ToString
     End Function
 
-    Private Sub CalculateNumberOfPrintsRemaining(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) ' Handles DataGridViewX1.CellEndEdit
-        On Error Resume Next
-        If e.RowIndex < 2 Or e.RowIndex > 5 Then Exit Sub
-        Dim i = e.ColumnIndex
-        Me.DataGridViewX1.Rows(5).Cells(i).Value = Val(Me.DataGridViewX1.Rows(2).Cells(i).Value) - (Val(Me.DataGridViewX1.Rows(3).Cells(i).Value) + Val(Me.DataGridViewX1.Rows(4).Cells(i).Value))
-
-    End Sub
 
     Private Sub GenerateForPeriod(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateSelectedPeriodValues.Click
         On Error Resume Next
@@ -518,37 +336,15 @@ Public Class frmMonthlyPerformance
             Me.dtFrom.Focus()
             Exit Sub
         End If
+
         Me.Cursor = Cursors.WaitCursor
         ClearAllFields()
         Me.lblHeader.Text = UCase("statement of performance for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text)
 
         Me.DataGridViewX1.Columns(2).HeaderText = ""
         Me.DataGridViewX1.Columns(3).HeaderText = Me.dtFrom.Text & " to " & Me.dtTo.Text
-        Me.DataGridViewX1.Rows(0).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
-        Me.DataGridViewX1.Rows(1).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-        Me.DataGridViewX1.Rows(2).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-        Me.DataGridViewX1.Rows(3).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-        Me.DataGridViewX1.Rows(4).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-        Me.DataGridViewX1.Rows(5).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
-        Me.DataGridViewX1.Rows(7).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
-
-        Me.DataGridViewX1.Rows(8).Cells(3).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
-        Me.DataGridViewX1.Rows(9).Cells(3).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
-        Me.DataGridViewX1.Rows(10).Cells(3).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-        Me.DataGridViewX1.Rows(13).Cells(3).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-        Me.DataGridViewX1.Rows(15).Cells(3).Value = CalculateCasesPendingInPreviousMonth(d1)
-        Me.DataGridViewX1.Rows(18).Cells(3).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
-        Me.DataGridViewX1.Rows(19).Cells(3).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
-
-        Me.lblMonth1.Text = ""
-        Me.lblPreviousMonth.Text = ""
-        For i As Short = 0 To 19
-            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Then Me.DataGridViewX1.Rows(i).Cells(3).Value = Me.txtBlankCellValue.Text
-        Next
-        InsertBlankValuesInPreviousMonth()
-
-        blSaveFile = False
+        GenerateMonthValuesFromDB(d1, d2, 3)
+        IsMonthStatement = False
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -567,27 +363,7 @@ Public Class frmMonthlyPerformance
             Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
         Next
-        Me.DataGridViewX1.Columns(2).HeaderText = "Previous Month"
-        Me.DataGridViewX1.Columns(3).HeaderText = "Month1"
-        Me.DataGridViewX1.Columns(4).HeaderText = "Month2"
-        Me.DataGridViewX1.Columns(5).HeaderText = "Month3"
-        Me.lblHeader.Text = "STATEMENT OF PERFORMANCE"
-        Me.lblMonth1.Text = ""
-        Me.lblPreviousMonth.Text = ""
-    End Sub
 
-    Private Sub ClearPreviousField()
-        On Error Resume Next
-        For i As Short = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
-        Next
-    End Sub
-
-    Private Sub ClearMonth1Field()
-        On Error Resume Next
-        For i As Short = 0 To 19
-            Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
-        Next
     End Sub
 
 
@@ -596,34 +372,18 @@ Public Class frmMonthlyPerformance
 
 #Region "BLANK CELL VALUES"
 
-    Private Sub InsertBlankValues() Handles btnInsertBlankValues.Click
+    Private Sub InsertBlankValues()
         On Error Resume Next
-        Dim blankvalue As String = Me.txtBlankCellValue.Text
-        Dim Tblankvalue As String = blankvalue
+        Dim blankvalue As String = "-"
 
-        If Me.chkBlankValue.Checked = False Then
-            blankvalue = ""
-        End If
 
         For i As Short = 0 To 19
-            If Me.DataGridViewX1.Rows(i).Cells(2).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
-            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(3).Value = blankvalue
+            If Me.DataGridViewX1.Rows(i).Cells(2).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
+            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Then Me.DataGridViewX1.Rows(i).Cells(3).Value = blankvalue
         Next
     End Sub
 
-    Private Sub InsertBlankValuesInPreviousMonth()
-        On Error Resume Next
-        Dim blankvalue As String = Me.txtBlankCellValue.Text
-        Dim Tblankvalue As String = blankvalue
 
-        If Me.chkBlankValue.Checked = False Then
-            blankvalue = ""
-        End If
-
-        For i As Short = 0 To 19
-            If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = Tblankvalue Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
-        Next
-    End Sub
 
 #End Region
 
@@ -640,8 +400,6 @@ Public Class frmMonthlyPerformance
 
 
     Private Sub bgwStatement_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwStatement.DoWork
-
-        Dim sFileName = SaveFolder & "\" & PerfFileName & ".docx"
 
         Try
             Dim delay As Integer = 0
@@ -858,8 +616,8 @@ Public Class frmMonthlyPerformance
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
             aDoc.Activate()
 
-            If My.Computer.FileSystem.FileExists(sFileName) = False And blSaveFile Then
-                aDoc.SaveAs(sFileName)
+            If My.Computer.FileSystem.FileExists(PerfFileName) = False And IsMonthStatement And blAllowSave Then
+                aDoc.SaveAs(PerfFileName)
             End If
 
             aDoc = Nothing
@@ -882,6 +640,7 @@ Public Class frmMonthlyPerformance
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
     End Sub
+
 
 #End Region
 
@@ -913,5 +672,5 @@ Public Class frmMonthlyPerformance
         mwe.Handled = True
     End Sub
 
-   
+  
 End Class

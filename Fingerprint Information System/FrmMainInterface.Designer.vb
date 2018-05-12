@@ -1988,6 +1988,7 @@ Partial Class frmMainInterface
         '
         'btnPerformance
         '
+        Me.btnPerformance.BeginGroup = True
         Me.btnPerformance.ForeColor = System.Drawing.Color.Red
         Me.btnPerformance.Name = "btnPerformance"
         Me.btnPerformance.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlyPerformance, Me.btnQuarterlyPerformance, Me.btnIndividualPerformance, Me.btnAnnualStatics})

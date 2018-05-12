@@ -24,15 +24,15 @@ Partial Class frmQuarterlyPerformance
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmQuarterlyPerformance))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PerformanceBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
@@ -179,7 +179,6 @@ Partial Class frmQuarterlyPerformance
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx2.Controls.Add(Me.CircularProgress1)
         Me.PanelEx2.Controls.Add(Me.GroupPanel2)
         Me.PanelEx2.Controls.Add(Me.GroupPanel1)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
@@ -203,7 +202,7 @@ Partial Class frmQuarterlyPerformance
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(126, 153)
+        Me.CircularProgress1.Location = New System.Drawing.Point(117, 5)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -217,13 +216,14 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel2.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel2.Controls.Add(Me.btnClearAllFields)
         Me.GroupPanel2.Controls.Add(Me.btnOpenFolder)
         Me.GroupPanel2.Controls.Add(Me.btnStatement)
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel2.Location = New System.Drawing.Point(7, 146)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(378, 81)
+        Me.GroupPanel2.Size = New System.Drawing.Size(380, 100)
         '
         '
         '
@@ -253,13 +253,14 @@ Partial Class frmQuarterlyPerformance
         '
         Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel2.TabIndex = 57
+        Me.GroupPanel2.Text = "Print Statement In MS Word"
         '
         'btnClearAllFields
         '
         Me.btnClearAllFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnClearAllFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnClearAllFields.Image = CType(resources.GetObject("btnClearAllFields.Image"), System.Drawing.Image)
-        Me.btnClearAllFields.Location = New System.Drawing.Point(3, 9)
+        Me.btnClearAllFields.Location = New System.Drawing.Point(6, 9)
         Me.btnClearAllFields.Name = "btnClearAllFields"
         Me.btnClearAllFields.Size = New System.Drawing.Size(107, 56)
         Me.btnClearAllFields.TabIndex = 6
@@ -270,7 +271,7 @@ Partial Class frmQuarterlyPerformance
         Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
-        Me.btnOpenFolder.Location = New System.Drawing.Point(259, 9)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(262, 9)
         Me.btnOpenFolder.Name = "btnOpenFolder"
         Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
         Me.btnOpenFolder.Size = New System.Drawing.Size(107, 56)
@@ -282,7 +283,7 @@ Partial Class frmQuarterlyPerformance
         Me.btnStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnStatement.Image = CType(resources.GetObject("btnStatement.Image"), System.Drawing.Image)
-        Me.btnStatement.Location = New System.Drawing.Point(131, 9)
+        Me.btnStatement.Location = New System.Drawing.Point(134, 9)
         Me.btnStatement.Name = "btnStatement"
         Me.btnStatement.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
         Me.btnStatement.Size = New System.Drawing.Size(107, 56)
@@ -302,7 +303,7 @@ Partial Class frmQuarterlyPerformance
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Location = New System.Drawing.Point(7, 12)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(378, 92)
+        Me.GroupPanel1.Size = New System.Drawing.Size(380, 90)
         '
         '
         '
@@ -384,25 +385,25 @@ Partial Class frmQuarterlyPerformance
         Me.DataGridViewX1.AllowUserToDeleteRows = False
         Me.DataGridViewX1.AutoGenerateColumns = False
         Me.DataGridViewX1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle28.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle28
         Me.DataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewX1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNoDataGridViewTextBoxColumn, Me.DetailsOfWorkDataGridViewTextBoxColumn, Me.PreviousDataGridViewTextBoxColumn, Me.Month1DataGridViewTextBoxColumn, Me.Month2DataGridViewTextBoxColumn, Me.Month3DataGridViewTextBoxColumn, Me.PresentDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn})
         Me.DataGridViewX1.DataSource = Me.PerformanceBindingSource
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle35.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle35
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
@@ -410,8 +411,8 @@ Partial Class frmQuarterlyPerformance
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
         Me.DataGridViewX1.RowHeadersVisible = False
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle36.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle36
         Me.DataGridViewX1.RowTemplate.Height = 25
         Me.DataGridViewX1.Size = New System.Drawing.Size(959, 688)
         Me.DataGridViewX1.TabIndex = 14
@@ -419,8 +420,8 @@ Partial Class frmQuarterlyPerformance
         'SlNoDataGridViewTextBoxColumn
         '
         Me.SlNoDataGridViewTextBoxColumn.DataPropertyName = "SlNo"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.SlNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.SlNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle29
         Me.SlNoDataGridViewTextBoxColumn.HeaderText = "Sl.No."
         Me.SlNoDataGridViewTextBoxColumn.Name = "SlNoDataGridViewTextBoxColumn"
         Me.SlNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -437,8 +438,8 @@ Partial Class frmQuarterlyPerformance
         'PreviousDataGridViewTextBoxColumn
         '
         Me.PreviousDataGridViewTextBoxColumn.DataPropertyName = "Previous"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PreviousDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PreviousDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle30
         Me.PreviousDataGridViewTextBoxColumn.HeaderText = "Previous Quarter/Month"
         Me.PreviousDataGridViewTextBoxColumn.Name = "PreviousDataGridViewTextBoxColumn"
         Me.PreviousDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -447,8 +448,8 @@ Partial Class frmQuarterlyPerformance
         'Month1DataGridViewTextBoxColumn
         '
         Me.Month1DataGridViewTextBoxColumn.DataPropertyName = "Month1"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month1DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month1DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle31
         Me.Month1DataGridViewTextBoxColumn.HeaderText = "Month1"
         Me.Month1DataGridViewTextBoxColumn.Name = "Month1DataGridViewTextBoxColumn"
         Me.Month1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -457,8 +458,8 @@ Partial Class frmQuarterlyPerformance
         'Month2DataGridViewTextBoxColumn
         '
         Me.Month2DataGridViewTextBoxColumn.DataPropertyName = "Month2"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month2DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month2DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle32
         Me.Month2DataGridViewTextBoxColumn.HeaderText = "Month2"
         Me.Month2DataGridViewTextBoxColumn.Name = "Month2DataGridViewTextBoxColumn"
         Me.Month2DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -467,8 +468,8 @@ Partial Class frmQuarterlyPerformance
         'Month3DataGridViewTextBoxColumn
         '
         Me.Month3DataGridViewTextBoxColumn.DataPropertyName = "Month3"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month3DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month3DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle33
         Me.Month3DataGridViewTextBoxColumn.HeaderText = "Month3"
         Me.Month3DataGridViewTextBoxColumn.Name = "Month3DataGridViewTextBoxColumn"
         Me.Month3DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -477,8 +478,8 @@ Partial Class frmQuarterlyPerformance
         'PresentDataGridViewTextBoxColumn
         '
         Me.PresentDataGridViewTextBoxColumn.DataPropertyName = "Present"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle34
         Me.PresentDataGridViewTextBoxColumn.HeaderText = "Present Quarter"
         Me.PresentDataGridViewTextBoxColumn.Name = "PresentDataGridViewTextBoxColumn"
         Me.PresentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable

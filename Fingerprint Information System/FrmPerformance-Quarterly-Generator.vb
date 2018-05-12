@@ -151,15 +151,14 @@ Public Class frmQuarterlyPerformance
     Private Sub GeneratePerformanceStatement() Handles btnGeneratePerformanceStatement.Click
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
+
         PerfFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
         ClearAllFields()
         GenerateHeaderTexts()
         Application.DoEvents()
 
-        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
-
-        If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            LoadPerformanceFromSavedFile(SavedFileName)
+        If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            LoadPerformanceFromSavedFile(PerfFileName)
         Else
             GeneratePreviousQuarterValuesFromDBorFile()
             GenerateSelectedQuarterValuesFromDBorFile()
@@ -248,9 +247,9 @@ Public Class frmQuarterlyPerformance
 
         GenerateMonthValuesFromDB(dp1, dp2, 2)
 
-       
+
     End Sub
-   
+
 
     Private Sub GenerateSelectedQuarterValuesFromDBorFile()
         On Error Resume Next
@@ -465,7 +464,7 @@ Public Class frmQuarterlyPerformance
         Me.DataGridViewX1.Columns(5).HeaderText = MonthName(Month(d5), True) & " " & y
     End Sub
 
-   
+
 
 
 
@@ -499,7 +498,7 @@ Public Class frmQuarterlyPerformance
             Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
         Next
-       
+
     End Sub
 
 #End Region
