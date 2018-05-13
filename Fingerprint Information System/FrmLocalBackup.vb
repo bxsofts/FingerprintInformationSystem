@@ -30,11 +30,11 @@ Public Class FrmLocalBackup
             Dim item As ListViewItem = Me.listViewEx1.Items.Add(FileName)
             item.SubItems.Add(Filedate.ToString("dd/MM/yyyy HH:mm:ss"))
             item.SubItems.Add(FullFilePath)
-            If FullFilePath.Contains("Online") Then
-                item.ImageIndex = 1
-            Else
-                item.ImageIndex = 0
-            End If
+            ' If FullFilePath.Contains("Online") Then
+            'item.ImageIndex = 1
+            ' Else
+            item.ImageIndex = 0
+            ' End If
 
         Next
         DisplayInformation()

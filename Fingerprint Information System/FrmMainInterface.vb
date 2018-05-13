@@ -104,7 +104,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If FrmSettingsWizard.Visible Then FrmSettingsWizard.Close()
-
+        My.Application.SplashScreen.BringToFront()
         SetColorTheme()
         SetTableBackColor()
 
@@ -390,15 +390,20 @@ Public Class frmMainInterface
         ApplicationIsLoading = False
         DisplayDatabaseInformation()
         Me.lblAutoCapsStatus.Visible = True
-
-        If DBExists = False Then
-            Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
-            DisableControls()
-        End If
-
         My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\Desktop", "ForegroundLockTimeout", 0, Microsoft.Win32.RegistryValueKind.DWord)
         Me.txtPosition.TextBox.ContextMenuStrip = Me.ContextMenuStrip1
         ChangeCursor()
+
+        If DBExists = False Then
+            My.Application.SplashScreen.Close()
+            Me.BringToFront()
+            Me.Activate()
+            Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
+            DisableControls()
+            MessageBoxEx.Show("FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+        Me.BringToFront()
+        Me.Activate()
     End Sub
 
 #End Region
@@ -4704,9 +4709,18 @@ Public Class frmMainInterface
         Me.btnDelete.Enabled = False
         Me.btnViewReports.Enabled = False
         Me.btnReload.Enabled = False
-        Me.btnOnlineBackup.Enabled = False
         Me.btnSearchMain.Enabled = False
         Me.btnShowHideFields.Enabled = False
+
+        Me.RibbonTabItem1.Enabled = False
+        Me.RibbonTabItem2.Enabled = False
+        Me.RibbonTabItem3.Enabled = False
+        Me.RibbonTabItem4.Enabled = False
+        Me.RibbonTabItem5.Enabled = False
+        Me.RibbonTabItem6.Enabled = False
+
+        Me.btnLocalBackup.Enabled = True
+        Me.btnOnlineBackup.Enabled = True
 
     End Sub
 
@@ -4726,6 +4740,14 @@ Public Class frmMainInterface
         Me.btnOnlineBackup.Enabled = True
         Me.btnSearchMain.Enabled = True
         Me.btnShowHideFields.Enabled = True
+
+        Me.RibbonTabItem1.Enabled = True
+        Me.RibbonTabItem2.Enabled = True
+        Me.RibbonTabItem3.Enabled = True
+        Me.RibbonTabItem4.Enabled = True
+        Me.RibbonTabItem5.Enabled = True
+        Me.RibbonTabItem6.Enabled = True
+
     End Sub
 #End Region
 
@@ -6816,6 +6838,10 @@ errhandler:
 #Region "OFFICER SETTINGS"
 
     Private Sub InitializeOfficerTable()
+        If Me.IODatagrid.Rows.Count = 6 Then
+            Exit Sub
+        End If
+
         Me.IODatagrid.Rows.Add(5)
         Me.IODatagrid.Rows(0).Cells(0).Value = "Tester Inspector"
         Me.IODatagrid.Rows(1).Cells(0).Value = "FP Expert 1"
@@ -13753,6 +13779,7 @@ errhandler:
         RemoveNullFromOfficerTable()
         LoadRecordsToAllTablesDependingOnCurrentYearSettings()
         LoadPSList()
+        InitializeOfficerTable()
         LoadOfficer()
         LoadOfficerListToTable()
 
@@ -15738,7 +15765,7 @@ errhandler:
         Me.RibbonControl1.Cursor = Cursors.Default
         Me.RibbonPanel1.Cursor = Cursors.Default
         Me.RibbonPanel2.Cursor = Cursors.Default
-        Me.tabSettings.Cursor = Cursors.Default
+        Me.RibbonTabItem6.Cursor = Cursors.Default
         Me.tabHome.Cursor = Cursors.Default
         Me.Cursor = Cursors.Default
 
