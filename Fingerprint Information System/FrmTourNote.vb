@@ -3152,20 +3152,34 @@ errhandler:
 
     Private Sub btnOpenTABillFolder_Click(sender As Object, e As EventArgs) Handles btnOpenTABillFolder.Click
         Try
-            Dim TABillFolder As String = FileIO.SpecialDirectories.MyDocuments
 
-            If Me.cmbSOCOfficer.SelectedIndex < 0 Then
-                TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills"
-            Else
-                SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
-                TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & SelectedOfficerName.Replace(",", "")
+            Dim sFileName As String = TAFileName("TA Bill")
+
+            If Not FileIO.FileSystem.FileExists(sFileName) Then
+                sFileName = TAFileName("Tour Note")
             End If
 
-            If FileIO.FileSystem.DirectoryExists(TABillFolder) Then
-                Call Shell("explorer.exe " & TABillFolder, AppWinStyle.NormalFocus)
-            Else
-                MessageBoxEx.Show("The folder does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            If Not FileIO.FileSystem.FileExists(sFileName) Then
+                sFileName = TAFileName("Tour Note - T")
             End If
+
+            If FileIO.FileSystem.FileExists(sFileName) Then
+                Call Shell("explorer.exe /select," & sFileName, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
+
+
+            Dim TABillFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills"
+
+            If Me.cmbSOCOfficer.SelectedIndex >= 0 Then
+                Dim officer = Me.cmbSOCOfficer.SelectedItem.ToString
+                TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & officer.Replace(",", "")
+                FileIO.FileSystem.CreateDirectory(TABillFolder)
+            End If
+
+            FileIO.FileSystem.CreateDirectory(TABillFolder)
+
+            Call Shell("explorer.exe " & TABillFolder, AppWinStyle.NormalFocus)
 
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
