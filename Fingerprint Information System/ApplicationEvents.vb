@@ -21,6 +21,12 @@ Namespace My
             e.BringToForeground = True
             frmMainInterface.WindowState = FormWindowState.Maximized
             frmMainInterface.BringToFront()
+            frmMainInterface.Activate()
+        End Sub
+
+
+        Private Sub MyApplication_UnhandledException(sender As Object, e As ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
+            ShowErrorMessage(e.Exception)
         End Sub
     End Class
 

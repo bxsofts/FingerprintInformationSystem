@@ -386,7 +386,6 @@ Public Class frmMainInterface
                 msg = "Have a nice day!"
         End Select
         Me.btnSOCReport2.Icon = Me.btnSOCReport.Icon
-        ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
         ApplicationIsLoading = False
         DisplayDatabaseInformation()
         Me.lblAutoCapsStatus.Visible = True
@@ -404,6 +403,7 @@ Public Class frmMainInterface
         End If
         Me.BringToFront()
         Me.Activate()
+        ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
     End Sub
 
 #End Region
