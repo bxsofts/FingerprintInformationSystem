@@ -27,6 +27,7 @@ Partial Class FrmSOCReportSentStatus
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnSave = New DevComponents.DotNetBar.ButtonX()
         Me.btnDontSave = New DevComponents.DotNetBar.ButtonX()
@@ -40,19 +41,20 @@ Partial Class FrmSOCReportSentStatus
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.RSOCDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
+        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
+        Me.SocReportRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCReportRegisterTableAdapter()
         Me.SOCNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReportSentToDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateOfReportSentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NatureOfReportsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SOCReportRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
-        Me.SocReportRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCReportRegisterTableAdapter()
+        Me.PoliceStationListTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PoliceStationListTableAdapter()
         CType(Me.dtReportSentOn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.RSOCDatagrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.SOCReportRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SOCReportRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnSave
@@ -274,42 +276,72 @@ Partial Class FrmSOCReportSentStatus
         Me.RSOCDatagrid.AllowUserToAddRows = False
         Me.RSOCDatagrid.AllowUserToOrderColumns = True
         Me.RSOCDatagrid.AutoGenerateColumns = False
+        Me.RSOCDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.RSOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.RSOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.RSOCDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SOCNumberDataGridViewTextBoxColumn, Me.ReportSentToDataGridViewTextBoxColumn, Me.DateOfReportSentDataGridViewTextBoxColumn, Me.NatureOfReportsDataGridViewTextBoxColumn})
         Me.RSOCDatagrid.DataSource = Me.SOCReportRegisterBindingSource
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.DefaultCellStyle = DataGridViewCellStyle3
         Me.RSOCDatagrid.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.RSOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.RSOCDatagrid.EnableHeadersVisualStyles = False
         Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.RSOCDatagrid.Location = New System.Drawing.Point(0, 229)
         Me.RSOCDatagrid.MultiSelect = False
         Me.RSOCDatagrid.Name = "RSOCDatagrid"
         Me.RSOCDatagrid.ReadOnly = True
-        Me.RSOCDatagrid.RowHeadersWidth = 40
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RSOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.RSOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
+        Me.RSOCDatagrid.RowHeadersWidth = 40
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RSOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.RSOCDatagrid.RowTemplate.Height = 40
         Me.RSOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.RSOCDatagrid.Size = New System.Drawing.Size(678, 177)
         Me.RSOCDatagrid.TabIndex = 43
         Me.RSOCDatagrid.TabStop = False
+        '
+        'FingerPrintDataSet1
+        '
+        Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'btnCancel
+        '
+        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Location = New System.Drawing.Point(501, 141)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(96, 38)
+        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Text = "Cancel"
+        '
+        'SocReportRegisterTableAdapter
+        '
+        Me.SocReportRegisterTableAdapter.ClearBeforeFill = True
         '
         'SOCNumberDataGridViewTextBoxColumn
         '
@@ -350,25 +382,9 @@ Partial Class FrmSOCReportSentStatus
         Me.SOCReportRegisterBindingSource.DataMember = "SOCReportRegister"
         Me.SOCReportRegisterBindingSource.DataSource = Me.FingerPrintDataSet1
         '
-        'FingerPrintDataSet1
+        'PoliceStationListTableAdapter1
         '
-        Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'btnCancel
-        '
-        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(501, 141)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(96, 38)
-        Me.btnCancel.TabIndex = 5
-        Me.btnCancel.Text = "Cancel"
-        '
-        'SocReportRegisterTableAdapter
-        '
-        Me.SocReportRegisterTableAdapter.ClearBeforeFill = True
+        Me.PoliceStationListTableAdapter1.ClearBeforeFill = True
         '
         'FrmSOCReportSentStatus
         '
@@ -394,8 +410,8 @@ Partial Class FrmSOCReportSentStatus
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
         CType(Me.RSOCDatagrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SOCReportRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SOCReportRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -419,4 +435,5 @@ Partial Class FrmSOCReportSentStatus
     Friend WithEvents DateOfReportSentDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents NatureOfReportsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents PoliceStationListTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PoliceStationListTableAdapter
 End Class

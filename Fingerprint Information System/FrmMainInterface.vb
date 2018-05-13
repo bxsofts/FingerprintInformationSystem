@@ -917,6 +917,7 @@ Public Class frmMainInterface
             Me.SOCRegisterTableAdapter.RemoveNullFromIdentifiedBy("")
             Me.SOCRegisterTableAdapter.RemoveNullFromIdentifiedAs("")
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
+            Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
         End If
     End Sub
@@ -2017,7 +2018,7 @@ Public Class frmMainInterface
         Me.txtFPAName.AutoCompleteMode = mode
         Me.txtFPATreasury.AutoCompleteMode = mode
 
-
+        Me.cmbSHO.AutoCompleteMode = mode
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoCompleteMode", mode, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
@@ -2079,9 +2080,7 @@ Public Class frmMainInterface
         Me.txtSOCSection.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtSOCSection.AutoCompleteCustomSource = soclaw
 
-
-
-
+        
 
         '-----------------------------------DA------------------------------------
 
@@ -2588,12 +2587,7 @@ Public Class frmMainInterface
             Case Me.PSTabItem.Name
                 Me.pnlRegisterName.Text = "List of Police Stations"
                 CurrentTab = "PS"
-                If Me.PanelPS.Visible = False Then
-                    Me.PSDataGrid.Focus()
-                Else
-                    Me.txtPSName.Focus()
-                End If
-
+                Me.txtPSName.Focus()
                 Me.AcceptButton = btnSavePS
                 If PSListChanged Then Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
                 PSListChanged = False
@@ -3066,13 +3060,6 @@ Public Class frmMainInterface
                     Me.txtCDNumber.Focus()
                 End If
 
-            Case "PS"
-                Me.PanelPS.Visible = Not Me.PanelPS.Visible
-                If Me.PanelPS.Visible = False Then
-                    Me.PSDataGrid.Focus()
-                Else
-                    Me.txtPSName.Focus()
-                End If
 
         End Select
 
@@ -3120,7 +3107,7 @@ Public Class frmMainInterface
         Me.PanelAC.Visible = Show
         Me.PanelFPA.Visible = Show
         Me.PanelCD.Visible = Show
-        Me.PanelPS.Visible = Show
+
         ShowAllFields = Not Show
 
 
@@ -5278,7 +5265,6 @@ errhandler:
             Call FPASaveButtonAction()
         End If
         If CurrentTab = "PS" Then
-            If Me.PanelPS.Visible = False Then Exit Sub
             btnSavePS.Focus()
             Call PSSaveButtonAction()
         End If
@@ -5358,9 +5344,6 @@ errhandler:
 #End Region
 
 
-
-
-
 #Region "NEW BUTTON ACTION"
     Private Sub NewDataMode() Handles btnNewEntry.Click
         On Error Resume Next
@@ -5429,7 +5412,6 @@ errhandler:
         End If
 
         If CurrentTab = "PS" Then
-            Me.PanelPS.Visible = True
             PSEditMode = False
             ClearPSFields()
             Me.btnSavePS.Text = "Save"
@@ -6297,14 +6279,15 @@ errhandler:
                 DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
-            Me.PanelPS.Visible = True
+
             PSEditMode = True
             Me.btnSavePS.Text = "Update"
             With Me.PSDataGrid
                 Me.txtPSName.Text = .SelectedCells(0).Value.ToString
-                Me.txtPhoneNumber1.Text = .SelectedCells(1).Value.ToString
-                Me.txtPhoneNumber2.Text = .SelectedCells(2).Value.ToString
-                Dim d As String = .SelectedCells(3).Value.ToString
+                Me.cmbSHO.Text = .SelectedCells(1).Value.ToString
+                Me.txtPhoneNumber1.Text = .SelectedCells(2).Value.ToString
+                Me.txtPhoneNumber2.Text = .SelectedCells(3).Value.ToString
+                Dim d As String = .SelectedCells(4).Value.ToString
                 Me.txtDistance.Text = vbNullString
                 Me.txtDistance.Text = Strings.Left(d, Len(d) - 3)
             End With
@@ -6659,12 +6642,14 @@ errhandler:
                 DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
-            Me.PanelPS.Visible = True
+
+
             With Me.PSDataGrid
                 Me.txtPSName.Text = .SelectedCells(0).Value.ToString
-                Me.txtPhoneNumber1.Text = .SelectedCells(1).Value.ToString
-                Me.txtPhoneNumber2.Text = .SelectedCells(2).Value.ToString
-                Dim d As String = .SelectedCells(3).Value.ToString
+                Me.cmbSHO.Text = .SelectedCells(1).Value.ToString
+                Me.txtPhoneNumber1.Text = .SelectedCells(2).Value.ToString
+                Me.txtPhoneNumber2.Text = .SelectedCells(3).Value.ToString
+                Dim d As String = .SelectedCells(4).Value.ToString
                 Me.txtDistance.Text = vbNullString
                 Me.txtDistance.Text = Strings.Left(d, Len(d) - 3)
             End With
@@ -13108,6 +13093,7 @@ errhandler:
         Me.txtPhoneNumber1.Clear()
         Me.txtPhoneNumber2.Clear()
         Me.txtDistance.Text = vbNullString
+        Me.cmbSHO.Text = ""
     End Sub
 
     Private Sub ClearSelectedPSFields(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPSName.ButtonCustomClick, txtPhoneNumber1.ButtonCustomClick, txtPhoneNumber2.ButtonCustomClick
@@ -13141,15 +13127,15 @@ errhandler:
         OriginalPSName = Trim(Me.txtPSName.Text)
         Dim Ph1 As String = Trim(Me.txtPhoneNumber1.Text)
         Dim Ph2 As String = Trim(Me.txtPhoneNumber2.Text)
-        Dim Distance As String = Trim(Me.txtDistance.Text)
+            Dim Distance As String = Trim(Me.txtDistance.Text)
+            Dim SHO As String = Trim(cmbSHO.Text).ToUpper
+
         If Distance <> "" Then Distance = Distance & " km"
         If OriginalPSName = vbNullString Then
             MessageBoxEx.Show("Please enter the Police Station Name!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtPSName.Focus()
             Exit Sub
         End If
-
-
 
 
         If PSNameExists(OriginalPSName) Then
@@ -13164,20 +13150,23 @@ errhandler:
         End If
 
 
-        Dim newRow As FingerPrintDataSet.PoliceStationListRow 'add a new row to insert values
-        newRow = Me.FingerPrintDataSet.PoliceStationList.NewPoliceStationListRow()
-        With newRow
-            .PoliceStation = OriginalPSName
-            .PhoneNumber1 = Ph1
-            .PhoneNumber2 = Ph2
-            .DistanceKM = Distance
-        End With
+            Dim newRow As FingerPrintDataSet.PoliceStationListRow 'add a new row to insert values
+
+            newRow = Me.FingerPrintDataSet.PoliceStationList.NewPoliceStationListRow()
+
+            With newRow
+                .PoliceStation = OriginalPSName
+                .PhoneNumber1 = Ph1
+                .PhoneNumber2 = Ph2
+                .DistanceKM = Distance
+                .SHO = SHO
+            End With
 
         Me.FingerPrintDataSet.PoliceStationList.Rows.Add(newRow) ' add the row to the table
         Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", OriginalPSName)
 
 
-        Me.PSRegisterTableAdapter.Insert(OriginalPSName, Ph1, Ph2, Distance) 'update the database
+            Me.PSRegisterTableAdapter.Insert(OriginalPSName, Ph1, Ph2, Distance, SHO) 'update the database
         ShowAlertMessage("New Police Station Name entered successfully!")
 
 
@@ -13219,7 +13208,9 @@ errhandler:
         Dim NewPSName As String = Trim(Me.txtPSName.Text)
         Dim Ph1 As String = Trim(Me.txtPhoneNumber1.Text)
         Dim Ph2 As String = Trim(Me.txtPhoneNumber2.Text)
-        Dim Distance As String = Trim(Me.txtDistance.Text)
+            Dim Distance As String = Trim(Me.txtDistance.Text)
+            Dim SHO As String = Trim(cmbSHO.Text)
+
         If Distance <> "" Then Distance = Distance & " km"
         If LCase(NewPSName) <> LCase(OriginalPSName) Then
             If PSNameExists(NewPSName) Then
@@ -13238,14 +13229,15 @@ errhandler:
                 .PoliceStation = NewPSName
                 .PhoneNumber1 = Ph1
                 .PhoneNumber2 = Ph2
-                .DistanceKM = Distance
+                    .DistanceKM = Distance
+                    .SHO = SHO
             End With
         End If
         Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", NewPSName)
 
 
 
-        Me.PSRegisterTableAdapter.UpdateQuery(NewPSName, Distance, Ph1, Ph2, OriginalPSName) 'update the database
+            Me.PSRegisterTableAdapter.UpdateQuery(NewPSName, Distance, Ph1, Ph2, SHO, OriginalPSName) 'update the database
 
         If LCase(NewPSName) <> LCase(OriginalPSName) Then
 
@@ -13303,7 +13295,8 @@ errhandler:
         Dim NewPSName As String = Trim(Me.txtPSName.Text)
         Dim Ph1 As String = Trim(Me.txtPhoneNumber1.Text)
         Dim Ph2 As String = Trim(Me.txtPhoneNumber2.Text)
-        Dim Distance As String = Trim(Me.txtDistance.Text)
+            Dim Distance As String = Trim(Me.txtDistance.Text)
+            Dim SHO As String = Trim(cmbSHO.Text)
         If Distance <> "" Then Distance = Distance & " km"
 
 
@@ -13314,14 +13307,15 @@ errhandler:
                 .PoliceStation = NewPSName
                 .PhoneNumber1 = Ph1
                 .PhoneNumber2 = Ph2
-                .DistanceKM = Distance
+                    .DistanceKM = Distance
+                    .SHO = SHO
             End With
         End If
         Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", NewPSName)
 
 
 
-        Me.PSRegisterTableAdapter.UpdateQuery(NewPSName, Distance, Ph1, Ph2, OriginalPSName) 'update the database
+            Me.PSRegisterTableAdapter.UpdateQuery(NewPSName, Distance, Ph1, Ph2, SHO, OriginalPSName) 'update the database
 
         ShowAlertMessage("Police Station Name overwrited successfully!")
         NewDataMode()
@@ -13752,12 +13746,13 @@ errhandler:
         CreateSOCReportRegisterTable()
         CreateSettingsTable()
         ModifyTables()
+        UpdateNullFields()
+        RemoveNullFromOfficerTable()
         LoadRecordsToAllTablesDependingOnCurrentYearSettings()
         LoadPSList()
-        RemoveNullFromOfficerTable()
         LoadOfficer()
         LoadOfficerListToTable()
-        UpdateNullFields()
+
         OfficeSettingsEditMode(True)
         LoadOfficeSettings()
         LoadOfficeSettingsToTextBoxes()
@@ -13771,7 +13766,6 @@ errhandler:
         IsValidBackupFile = False
 
         Try
-
             DBPath = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & DBPath
             If DoesTableExist("SOCRegister", DBPath) Then
                 IsValidBackupFile = True
@@ -15556,6 +15550,11 @@ errhandler:
 
         If DoesFieldExist("FPAttestationRegister", "HeadOfAccount", strConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE FPAttestationRegister ADD COLUMN HeadOfAccount VARCHAR(255) WITH COMPRESSION", con)
+            cmd.ExecuteNonQuery()
+        End If
+
+        If DoesFieldExist("PoliceStationList", "SHO", strConString) = False Then
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE PoliceStationList ADD COLUMN SHO VARCHAR(5) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 

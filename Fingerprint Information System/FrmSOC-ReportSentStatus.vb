@@ -192,6 +192,7 @@
         End If
 
         Me.txtReportSentTo.Focus()
+        Me.txtReportSentTo.SelectionStart = Me.txtReportSentTo.TextLength + 1
     End Sub
 
     Function MandatoryFieldsNotFilled() As Boolean
@@ -241,8 +242,14 @@
     End Sub
 
     Private Function FindAddressFromRSOCRegister(ByVal SOCNo As String) As String
+        If Me.PoliceStationListTableAdapter1.Connection.State = ConnectionState.Open Then Me.PoliceStationListTableAdapter1.Connection.Close()
+        Me.PoliceStationListTableAdapter1.Connection.ConnectionString = strConString
+        Me.PoliceStationListTableAdapter1.Connection.Open()
 
         Dim ps As String = frmMainInterface.SOCDatagrid.SelectedCells(5).Value.ToString
+
+        Dim sho As String = Me.PoliceStationListTableAdapter1.FindSHO(ps)
+
         If Strings.Right(ps, 3) <> "P.S" Then
             ps = ps & " P.S"
         End If
@@ -257,13 +264,13 @@
             If Me.FingerPrintDataSet1.SOCReportRegister.Count > 0 Then
                 address = Me.FingerPrintDataSet1.SOCReportRegister(Me.FingerPrintDataSet1.SOCReportRegister.Count - 1).ReportSentTo.ToString
             Else
-                If frmMainInterface.SOCDatagrid.SelectedCells(23).Value = True Then
+                If sho.ToUpper = "IP" Then
                     address = "Inspector of Police" & vbNewLine & ps
                 Else
                     address = "Sub Inspector of Police" & vbNewLine & ps
                 End If
-
             End If
+
         Catch ex As Exception
             address = "Sub Inspector of Police" & vbNewLine & ps
         End Try
