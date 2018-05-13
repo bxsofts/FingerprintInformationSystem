@@ -30,22 +30,22 @@ Public Class frmAnnualStatistics
         End If
 
         If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
-        Me.SocRegisterTableAdapter1.Connection.ConnectionString = strConString
-        Me.SocRegisterTableAdapter1.Connection.Open()
+            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.SocRegisterTableAdapter1.Connection.Open()
 
-        If Me.DaRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter1.Connection.Close()
-        Me.DaRegisterTableAdapter1.Connection.ConnectionString = strConString
-        Me.DaRegisterTableAdapter1.Connection.Open()
+            If Me.DaRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter1.Connection.Close()
+            Me.DaRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.DaRegisterTableAdapter1.Connection.Open()
 
-        If Me.CdRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CdRegisterTableAdapter1.Connection.Close()
-        Me.CdRegisterTableAdapter1.Connection.ConnectionString = strConString
-        Me.CdRegisterTableAdapter1.Connection.Open()
+            If Me.CdRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CdRegisterTableAdapter1.Connection.Close()
+            Me.CdRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.CdRegisterTableAdapter1.Connection.Open()
 
-        If Me.FPARegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter1.Connection.Close()
-        Me.FPARegisterTableAdapter1.Connection.ConnectionString = strConString
-        Me.FPARegisterTableAdapter1.Connection.Open()
+            If Me.FPARegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter1.Connection.Close()
+            Me.FPARegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.FPARegisterTableAdapter1.Connection.Open()
             If Me.IDCasesTableAdapter1.Connection.State = ConnectionState.Open Then Me.IDCasesTableAdapter1.Connection.Close()
-            Me.IDCasesTableAdapter1.Connection.ConnectionString = strConString
+            Me.IDCasesTableAdapter1.Connection.ConnectionString = sConString
             Me.IDCasesTableAdapter1.Connection.Open()
 
             Me.Cursor = Cursors.Default

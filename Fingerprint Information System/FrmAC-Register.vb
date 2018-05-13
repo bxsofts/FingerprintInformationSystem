@@ -9,7 +9,7 @@ Public Class FrmACRegister
         Me.Cursor = Cursors.WaitCursor
         
         If Me.ACRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.ACRegisterTableAdapter.Connection.Close()
-        Me.ACRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.ACRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterTableAdapter.Connection.Open()
 
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)

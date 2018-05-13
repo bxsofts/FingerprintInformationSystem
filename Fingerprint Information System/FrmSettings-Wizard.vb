@@ -18,17 +18,17 @@ Public Class FrmSettingsWizard
                 Exit Sub
             End If
 
-            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+            sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-            If ValidPath(strDatabaseFile) Then
-                Me.lblDatabaseLocation.Text = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
+            If ValidPath(sDatabaseFile) Then
+                Me.lblDatabaseLocation.Text = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
             Else
                 Me.lblDatabaseLocation.Text = SuggestedLocation & "\Database"
             End If
 
             OldDBFile = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
-            If FileIO.FileSystem.FileExists(strDatabaseFile) = False Then
-                strDatabaseFile = OldDBFile
+            If FileIO.FileSystem.FileExists(sDatabaseFile) = False Then
+                sDatabaseFile = OldDBFile
             End If
 
             BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
@@ -47,21 +47,21 @@ Public Class FrmSettingsWizard
 
             Me.txtBackupInterval.Text = IIf(autobackuptime = "", "30", autobackuptime)
 
-            strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
+            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
 
             If Me.OfficerTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficerTableTableAdapter1.Connection.Close()
-            Me.OfficerTableTableAdapter1.Connection.ConnectionString = strConString
+            Me.OfficerTableTableAdapter1.Connection.ConnectionString = sConString
             Me.OfficerTableTableAdapter1.Connection.Open()
 
             If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
-            Me.SettingsTableAdapter1.Connection.ConnectionString = strConString
+            Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
             Me.SettingsTableAdapter1.Connection.Open()
 
             PdlGraveCrime = Trim(My.Computer.Registry.GetValue(strGeneralSettingsPath, "PdlGraveCrime", "12"))
             PdlVigilanceCase = Trim(My.Computer.Registry.GetValue(strGeneralSettingsPath, "PdlVigilanceCase", "6"))
             PdlWeeklyDiary = Trim(My.Computer.Registry.GetValue(strGeneralSettingsPath, "PdlWeeklyDiary", ""))
 
-            If frmMainInterface.DoesTableExist("Settings", strConString) = False Then 'older version of database
+            If frmMainInterface.DoesTableExist("Settings", sConString) = False Then 'older version of database
                 frmMainInterface.CreateSettingsTable()
                 Application.DoEvents()
                 Me.txtFullDistrict.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "FullDistrictName", "Idukki")
@@ -82,7 +82,7 @@ Public Class FrmSettingsWizard
                 Me.txtWeeklyDiary.Text = PdlWeeklyDiary
             Else
 
-                If frmMainInterface.DoesFieldExist("Settings", "PdlGraveCrime", strConString) = False Then 'create new fields
+                If frmMainInterface.DoesFieldExist("Settings", "PdlGraveCrime", sConString) = False Then 'create new fields
                     frmMainInterface.ModifyTables()
                     Me.txtGraveCrime.Text = PdlGraveCrime
                     Me.txtVigilanceCase.Text = PdlVigilanceCase
@@ -136,7 +136,7 @@ Public Class FrmSettingsWizard
 
             End If
 
-            If frmMainInterface.DoesTableExist("OfficerTable", strConString) = False Then
+            If frmMainInterface.DoesTableExist("OfficerTable", sConString) = False Then
                 frmMainInterface.CreateOfficerTable()
                 Application.DoEvents()
             End If
@@ -183,23 +183,23 @@ Public Class FrmSettingsWizard
 
 
         Dim newdbfolder = Me.lblDatabaseLocation.Text
-        Dim olddbfolder = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
+        Dim olddbfolder = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
         If olddbfolder <> newdbfolder Then
             My.Computer.FileSystem.CreateDirectory(newdbfolder)
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, newdbfolder & "\Fingerprint.mdb", False)
-            strDatabaseFile = newdbfolder & "\Fingerprint.mdb"
+            My.Computer.FileSystem.CopyFile(sDatabaseFile, newdbfolder & "\Fingerprint.mdb", False)
+            sDatabaseFile = newdbfolder & "\Fingerprint.mdb"
             Application.DoEvents()
         End If
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", strDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
 
-        Dim PerformancePath = (My.Computer.FileSystem.GetParentPath(strDatabaseFile) & "\Performance Statements").Replace("\Database", "")
+        Dim PerformancePath = (My.Computer.FileSystem.GetParentPath(sDatabaseFile) & "\Performance Statements").Replace("\Database", "")
 
         If FileIO.FileSystem.DirectoryExists(PerformancePath) = False Then
             PerformancePath = strAppUserPath & "\Performance Statements"
         End If
 
 
-        Dim NewPerformancePath = (My.Computer.FileSystem.GetParentPath(strDatabaseFile) & "\Performance Statements").Replace("\Database", "")
+        Dim NewPerformancePath = (My.Computer.FileSystem.GetParentPath(sDatabaseFile) & "\Performance Statements").Replace("\Database", "")
 
 
         My.Computer.FileSystem.CreateDirectory(NewPerformancePath)
@@ -237,14 +237,14 @@ Public Class FrmSettingsWizard
 
         Application.DoEvents()
 
-        strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
+        sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
 
         If Me.OfficerTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficerTableTableAdapter1.Connection.Close()
-        Me.OfficerTableTableAdapter1.Connection.ConnectionString = strConString
+        Me.OfficerTableTableAdapter1.Connection.ConnectionString = sConString
         Me.OfficerTableTableAdapter1.Connection.Open()
 
         If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
-        Me.SettingsTableAdapter1.Connection.ConnectionString = strConString
+        Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
 

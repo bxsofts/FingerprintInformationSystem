@@ -59,17 +59,6 @@ Public Class frmMainInterface
     Dim OriginalPSName As String = vbNullString
 
 
-    '------------ Recent Records List---------------
-
-
-    Public RecentSOCRecordsList As Collection
-    Public RecentRSOCRecordsList As Collection
-    Public RecentDARecordsList As Collection
-    Public RecentIDRecordsList As Collection
-    Public RecentACRecordsList As Collection
-    Public RecentFPARecordsList As Collection
-    Public RecentCDRecordsList As Collection
-
     '------------ Slip Image ---------------
 
     Dim DASlipImageFile As String = vbNullString
@@ -119,16 +108,11 @@ Public Class frmMainInterface
         SetColorTheme()
         SetTableBackColor()
 
-        strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
-        '  Dim InstalledDBPath = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
-        ' If FileIO.FileSystem.FileExists(strDatabaseFile) = False Then
-        'strDatabaseFile = InstalledDBPath
-        '  End If
+        sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-
-        strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
+        sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
         If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
-        Me.SettingsTableAdapter1.Connection.ConnectionString = strConString
+        Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
         LoadOfficeSettings()
@@ -142,7 +126,8 @@ Public Class frmMainInterface
         ApplicationIsLoading = True
 
         Me.prgBar.Text = "Loading Application ..."
-        Me.prgBar.Maximum = 62
+        Me.prgBar.Maximum = 100
+        Me.prgBar.Value = 0
         Me.prgBar.Increment(1)
 
         '---------------------------------------'
@@ -194,8 +179,6 @@ Public Class frmMainInterface
 
         Dim savewidth As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "SaveDefaultWidth", "1")
         If savewidth = 1 Then
-            Me.prgBar.Text = "Saving Default Column Widths ..."
-            Application.DoEvents()
             SaveSOCDatagridColumnDefaultWidth()
             SaveRSOCDatagridColumnDefaultWidth()
             SaveDADatagridColumnDefaultWidth()
@@ -209,9 +192,6 @@ Public Class frmMainInterface
         Me.prgBar.Increment(1)
 
         '------------ Load Column Width ---------------
-        Me.prgBar.Text = "Loading Column Widths ..."
-        Application.DoEvents()
-        Me.prgBar.Increment(1)
         If savewidth = 1 Then
             LoadSOCDatagridColumnDefaultWidth()
         Else
@@ -238,9 +218,7 @@ Public Class frmMainInterface
         Me.prgBar.Increment(1)
 
         '------------ Load Column Order ---------------
-        Me.prgBar.Text = "Loading Column Orders ..."
-        Application.DoEvents()
-        Me.prgBar.Increment(1)
+        
         If savewidth = 1 Then
             LoadSOCDatagridColumnDefaultOrder()
         Else
@@ -294,15 +272,7 @@ Public Class frmMainInterface
         Me.prgBar.Increment(1)
 
 
-        '------------ load recent records ---------------
-        RecentSOCRecordsList = New Collection
-        RecentRSOCRecordsList = New Collection
-        RecentFPARecordsList = New Collection
-        RecentDARecordsList = New Collection
-        RecentCDRecordsList = New Collection
-        RecentIDRecordsList = New Collection
-        RecentACRecordsList = New Collection
-
+      
 
         '------------ device manager ---------------
 
@@ -317,7 +287,7 @@ Public Class frmMainInterface
         Me.prgBar.Text = "Connecting To Database ..."
         Application.DoEvents()
 
-        Dim DBExists As Boolean = FileIO.FileSystem.FileExists(strDatabaseFile)
+        Dim DBExists As Boolean = FileIO.FileSystem.FileExists(sDatabaseFile)
 
         If DBExists Then
             ConnectToDatabase()
@@ -355,18 +325,21 @@ Public Class frmMainInterface
                 Me.prgBar.Increment(1)
             End If
 
-            Me.prgBar.Text = "Loading PS List ..."
+            Me.prgBar.Text = "Loading Police Station List ..."
             Application.DoEvents()
+
             LoadPSListOnLoad()
             Me.prgBar.Increment(1)
 
-            Me.prgBar.Text = "Loading Officer List ..."
-            Application.DoEvents()
             lblDesignation.Visible = False
             RemoveNullFromOfficerTable()
+            Me.prgBar.Text = "Loading Office Settings ..."
+            Application.DoEvents()
             InitializeOfficerTable()
             LoadOfficer()
             LoadOfficerListToTable()
+            Me.prgBar.Text = "Loading Office Settings ..."
+            Application.DoEvents()
 
             LoadNatureOfReport()
             Me.prgBar.Increment(1)
@@ -380,6 +353,10 @@ Public Class frmMainInterface
 
         End If
 
+        Dim pgbarvalue = prgBar.Value
+        For i = pgbarvalue To 100
+            prgBar.Increment(1)
+        Next
 
         Me.prgBar.Visible = False
 
@@ -832,73 +809,73 @@ Public Class frmMainInterface
         On Error Resume Next
 
         If Me.OfficerTableAdapter.Connection.State = ConnectionState.Open Then Me.OfficerTableAdapter.Connection.Close()
-        Me.OfficerTableAdapter.Connection.ConnectionString = strConString
+        Me.OfficerTableAdapter.Connection.ConnectionString = sConString
         Me.OfficerTableAdapter.Connection.Open()
 
         If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
-        Me.SettingsTableAdapter1.Connection.ConnectionString = strConString
+        Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
         If Me.SOCRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterAutoTextTableAdapter.Connection.Close()
-        Me.SOCRegisterAutoTextTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterAutoTextTableAdapter.Connection.Open()
 
 
         If Me.IdentifiedCasesTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentifiedCasesTableAdapter1.Connection.Close()
-        Me.IdentifiedCasesTableAdapter1.Connection.ConnectionString = strConString
+        Me.IdentifiedCasesTableAdapter1.Connection.ConnectionString = sConString
         Me.IdentifiedCasesTableAdapter1.Connection.Open()
 
 
         If Me.RSOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.RSOCRegisterTableAdapter.Connection.Close()
-        Me.RSOCRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.RSOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.RSOCRegisterTableAdapter.Connection.Open()
 
         If Me.SocReportRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocReportRegisterTableAdapter1.Connection.Close()
-        Me.SocReportRegisterTableAdapter1.Connection.ConnectionString = strConString
+        Me.SocReportRegisterTableAdapter1.Connection.ConnectionString = sConString
         Me.SocReportRegisterTableAdapter1.Connection.Open()
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterTableAdapter.Connection.Open()
 
         If Me.DARegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterAutoTextTableAdapter.Connection.Close()
-        Me.DARegisterAutoTextTableAdapter.Connection.ConnectionString = strConString
+        Me.DARegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterAutoTextTableAdapter.Connection.Open()
 
         If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
-        Me.DARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterTableAdapter.Connection.Open()
 
         If Me.FPARegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterAutoTextTableAdapter.Connection.Close()
-        Me.FPARegisterAutoTextTableAdapter.Connection.ConnectionString = strConString
+        Me.FPARegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterAutoTextTableAdapter.Connection.Open()
 
         If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
         If Me.CDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CDRegisterTableAdapter.Connection.Close()
-        Me.CDRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.CDRegisterTableAdapter.Connection.Open()
 
         If Me.PSRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.PSRegisterTableAdapter.Connection.Close()
-        Me.PSRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.PSRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.PSRegisterTableAdapter.Connection.Open()
 
         If Me.IDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRegisterTableAdapter.Connection.Close()
-        Me.IDRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.IDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.IDRegisterTableAdapter.Connection.Open()
 
         If Me.IDRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRegisterAutoTextTableAdapter.Connection.Close()
-        Me.IDRegisterAutoTextTableAdapter.Connection.ConnectionString = strConString
+        Me.IDRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.IDRegisterAutoTextTableAdapter.Connection.Open()
 
         If Me.ACRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.ACRegisterTableAdapter.Connection.Close()
-        Me.ACRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.ACRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterTableAdapter.Connection.Open()
 
         If Me.ACRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.ACRegisterAutoTextTableAdapter.Connection.Close()
-        Me.ACRegisterAutoTextTableAdapter.Connection.ConnectionString = strConString
+        Me.ACRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterAutoTextTableAdapter.Connection.Open()
     End Sub
 #End Region
@@ -960,7 +937,7 @@ Public Class frmMainInterface
         Me.SOCRegisterBindingSource.MoveLast()
 
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
             Application.DoEvents()
         Else
             Dim p = Me.SOCRegisterBindingSource.Find("SOCNumber", oldrow)
@@ -988,7 +965,7 @@ Public Class frmMainInterface
         Me.RSOCRegisterBindingSource.MoveLast()
 
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
         Else
             Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
             If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
@@ -1013,7 +990,7 @@ Public Class frmMainInterface
         Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
         Me.DARegisterBindingSource.MoveLast()
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
         Else
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
             If p >= 0 Then Me.DARegisterBindingSource.Position = p
@@ -1037,7 +1014,7 @@ Public Class frmMainInterface
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
         Me.IDRegisterBindingSource.MoveLast()
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
         Else
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
             If p >= 0 Then Me.IDRegisterBindingSource.Position = p
@@ -1062,7 +1039,7 @@ Public Class frmMainInterface
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
         Me.ACRegisterBindingSource.MoveLast()
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
         Else
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
             If p >= 0 Then Me.ACRegisterBindingSource.Position = p
@@ -1087,7 +1064,7 @@ Public Class frmMainInterface
         Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
         Me.FPARegisterBindingSource.MoveLast()
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
         Else
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
             If p >= 0 Then Me.FPARegisterBindingSource.Position = p
@@ -1112,7 +1089,7 @@ Public Class frmMainInterface
         Me.CDRegisterBindingSource.MoveLast()
 
         If Me.prgBar.Visible Then
-            Me.prgBar.Increment(1)
+            Me.prgBar.Increment(5)
         Else
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
             If p >= 0 Then Me.CDRegisterBindingSource.Position = p
@@ -1129,9 +1106,6 @@ Public Class frmMainInterface
         Me.PSRegisterBindingSource.MoveFirst()
         Me.Cursor = Cursors.Default
     End Sub
-
-
-
 
 
     Sub LoadRecordsToAllTablesDependingOnCurrentYearSettings() 'loads data to the datagrid
@@ -1178,11 +1152,8 @@ Public Class frmMainInterface
 
         Select Case CurrentTab
             Case "SOC"
-
                 LoadSOCRecords()
                 ShowAlertMessage("Records reloaded in SOC Register!")
-
-
             Case "RSOC"
                 LoadRSOCRecords()
                 ShowAlertMessage("Records reloaded in SOC Reports Register!")
@@ -1221,11 +1192,41 @@ Public Class frmMainInterface
         Dim d1 As Date = New Date(y, 1, 1)
         Dim d2 As Date = New Date(y, 12, 31)
 
+        If Me.prgBar.Visible Then
+            Me.prgBar.Text = "Loading SOC Register ..."
+            Application.DoEvents()
+        End If
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-        Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
+        Me.prgBar.Increment(5)
+
+        If Me.prgBar.Visible Then
+            Me.prgBar.Text = "Loading DA Register ..."
+            Application.DoEvents()
+        End If
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-        Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
+        Me.prgBar.Increment(5)
+
+        If Me.prgBar.Visible Then
+            Me.prgBar.Text = "Loading FPA Register ..."
+            Application.DoEvents()
+        End If
         Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
+        Me.prgBar.Increment(5)
+
+        If Me.prgBar.Visible Then
+            Me.prgBar.Text = "Loading SOC Reports Register ..."
+            Application.DoEvents()
+        End If
+        Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
+        Me.prgBar.Increment(5)
+
+        If Me.prgBar.Visible Then
+            Me.prgBar.Text = "Loading Court Duty Register ..."
+            Application.DoEvents()
+        End If
+        Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
+        Me.prgBar.Increment(5)
+        
 
         Me.SOCRegisterBindingSource.MoveLast()
         Me.RSOCRegisterBindingSource.MoveLast()
@@ -1795,8 +1796,8 @@ Public Class frmMainInterface
 
     Private Sub ReloadTablesAfterDBChange()
         Try
-            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
-            strConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
+            sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
             ConnectToDatabase()
             LoadOfficerList()
             Me.IODatagrid.Rows(0).Cells(1).Value = TIName()
@@ -1949,7 +1950,7 @@ Public Class frmMainInterface
             BalloonMessage.AutoCloseTimeOut = 5
             BalloonMessage.Text = msg
             BalloonMessage.AlertAnimation = eAlertAnimation.BottomToTop
-            'BalloonMessage.AlertAnimationDuration = 5000
+
             BalloonMessage.Style = eBallonStyle.Alert
             BalloonMessage.BackColor = Me.BackColor
             BalloonMessage.BackColor2 = Me.BackColor
@@ -9993,7 +9994,7 @@ errhandler:
         End If
         SQLText = SQLText.Replace("%%", "%")
         SQLText = SQLText.Replace("##", "##")
-        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
         con.Open()
         Dim cmd As OleDb.OleDbCommand = New OleDb.OleDbCommand(SQLText, con)
         Dim da As New OleDb.OleDbDataAdapter(cmd)
@@ -10121,7 +10122,7 @@ errhandler:
         SQLText = SQLText.Replace("##", "##")
 
 
-        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
         con.Open()
         Dim cmd As OleDb.OleDbCommand = New OleDb.OleDbCommand(SQLText, con)
         Dim da As New OleDb.OleDbDataAdapter(cmd)
@@ -10950,7 +10951,7 @@ errhandler:
 
         SQLText = SQLText.Replace("%%", "%")
 
-        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
         con.Open()
         Dim cmd As OleDb.OleDbCommand = New OleDb.OleDbCommand(SQLText, con)
         Dim da As New OleDb.OleDbDataAdapter(cmd)
@@ -11753,7 +11754,7 @@ errhandler:
 
         SQLText = SQLText.Replace("%%", "%")
 
-        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
         con.Open()
         Dim cmd As OleDb.OleDbCommand = New OleDb.OleDbCommand(SQLText, con)
         Dim da As New OleDb.OleDbDataAdapter(cmd)
@@ -13396,18 +13397,18 @@ errhandler:
     Private Sub ChangeDatabseLocation(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeDBFolder.Click
         Try
             Dim StartFolder As String
-            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+            sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-            If ValidPath(strDatabaseFile) Then
-                StartFolder = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
+            If ValidPath(sDatabaseFile) Then
+                StartFolder = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
             Else
                 StartFolder = SuggestedLocation & "\Database"
             End If
 
             Dim OldDBFile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
 
-            If FileIO.FileSystem.FileExists(strDatabaseFile) = False Then
-                strDatabaseFile = OldDBFile
+            If FileIO.FileSystem.FileExists(sDatabaseFile) = False Then
+                sDatabaseFile = OldDBFile
             End If
 
             Me.FolderBrowserDialog1.ShowNewFolderButton = True
@@ -13428,7 +13429,7 @@ errhandler:
                 SelectedPath = SelectedPath.Replace("\\", "\")
 
 
-                Dim olddbfolder = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
+                Dim olddbfolder = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
                 If olddbfolder <> SelectedPath Then
                     If FileIO.FileSystem.FileExists(SelectedPath & "\Fingerprint.mdb") Then
                         Dim reply As DialogResult = MessageBoxEx.Show("Database already exists in selected folder. Click 'Yes' to overwrite or 'No' to exit without change.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
@@ -13439,11 +13440,11 @@ errhandler:
                     End If
 
                     My.Computer.FileSystem.CreateDirectory(SelectedPath)
-                    My.Computer.FileSystem.CopyFile(strDatabaseFile, SelectedPath & "\Fingerprint.mdb", True)
-                    strDatabaseFile = SelectedPath & "\Fingerprint.mdb"
+                    My.Computer.FileSystem.CopyFile(sDatabaseFile, SelectedPath & "\Fingerprint.mdb", True)
+                    sDatabaseFile = SelectedPath & "\Fingerprint.mdb"
                     Application.DoEvents()
                     ShowAlertMessage("Database Folder changed")
-                    My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", strDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
                     ReloadTablesAfterDBChange()
                
                 End If
@@ -13536,7 +13537,7 @@ errhandler:
                 body.Parents = parentlist
 
                 Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-                My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
+                My.Computer.FileSystem.CopyFile(sDatabaseFile, tmpFileName, True)
                 Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
                 Dim Stream As New System.IO.MemoryStream(ByteArray)
                 Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
@@ -13629,7 +13630,7 @@ errhandler:
         If Today >= dt Then
             Me.prgBar.Text = "Taking backup of database..."
 
-            Dim Source As String = strDatabaseFile
+            Dim Source As String = sDatabaseFile
 
             Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
 
@@ -13703,6 +13704,7 @@ errhandler:
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
         On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
         boolRestored = False
         FrmLocalBackup.ShowDialog()
         If boolRestored Then
@@ -13715,6 +13717,7 @@ errhandler:
             ShowAlertMessage("Database restored successfully!")
         End If
         boolRestored = False
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
@@ -13736,8 +13739,8 @@ errhandler:
 
             ShowAlertMessage("Database restored successfully!")
         End If
-        Cursor = Cursors.Default
         boolRestored = False
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub LoadRecordsAfterRestore()
@@ -13785,8 +13788,8 @@ errhandler:
     Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
         On Error Resume Next
 
-        If FileIO.FileSystem.FileExists(strDatabaseFile) Then
-            Call Shell("explorer.exe /select," & strDatabaseFile, AppWinStyle.NormalFocus)
+        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
+            Call Shell("explorer.exe /select," & sDatabaseFile, AppWinStyle.NormalFocus)
         Else
             MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
@@ -13798,8 +13801,8 @@ errhandler:
     Private Sub OpenDBInAccess() Handles btnOpenDBInMSAccess.Click
         On Error Resume Next
 
-        If FileIO.FileSystem.FileExists(strDatabaseFile) Then
-            Shell("explorer.exe " & strDatabaseFile, AppWinStyle.MaximizedFocus)
+        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
+            Shell("explorer.exe " & sDatabaseFile, AppWinStyle.MaximizedFocus)
 
         Else
             MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -15450,11 +15453,11 @@ errhandler:
 
     Public Sub CreateSOCReportRegisterTable()
         Try
-            If DoesTableExist("SOCReportRegister", strConString) Then
+            If DoesTableExist("SOCReportRegister", sConString) Then
                 Exit Sub
             End If
 
-            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
             Dim cmd = New OleDb.OleDbCommand("Create TABLE SOCReportRegister (SerialNo integer primary key, SOCNumber VARCHAR(50)WITH COMPRESSION ,  SOCNumberWithoutYear integer, DateOfInspection Date, PoliceStation VARCHAR(255) WITH COMPRESSION , CrimeNumber VARCHAR(50) WITH COMPRESSION , InspectingOfficer VARCHAR(255) WITH COMPRESSION , ReportSentTo VARCHAR(255) WITH COMPRESSION , DateOfReportSent Date, NatureOfReports VARCHAR(255) WITH COMPRESSION , DespatchNumber VARCHAR(255) WITH COMPRESSION , Remarks VARCHAR(255) WITH COMPRESSION )", con)
 
@@ -15468,11 +15471,11 @@ errhandler:
 
     Public Sub CreateOfficerTable()
         Try
-            If DoesTableExist("OfficerTable", strConString) Then
+            If DoesTableExist("OfficerTable", sConString) Then
                 Exit Sub
             End If
 
-            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
             Dim cmd = New OleDb.OleDbCommand("Create TABLE OfficerTable (OfficerID integer primary key, TI VARCHAR(255)WITH COMPRESSION , FPE1 VARCHAR(255)WITH COMPRESSION , FPE2 VARCHAR(255)WITH COMPRESSION , FPE3 VARCHAR(255)WITH COMPRESSION , FPS VARCHAR(255)WITH COMPRESSION , Photographer VARCHAR(255)WITH COMPRESSION )", con)
 
@@ -15486,11 +15489,11 @@ errhandler:
 
     Public Sub CreateSettingsTable()
         Try
-            If DoesTableExist("Settings", strConString) Then
+            If DoesTableExist("Settings", sConString) Then
                 Exit Sub
             End If
 
-            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
             Dim cmd = New OleDb.OleDbCommand("Create TABLE Settings (SettingsID integer primary key, FullDistrictName VARCHAR(255)WITH COMPRESSION , ShortDistrictName VARCHAR(255)WITH COMPRESSION , FullOfficeName VARCHAR(255)WITH COMPRESSION , ShortOfficeName VARCHAR(255)WITH COMPRESSION , FPImageImportLocation VARCHAR(255)WITH COMPRESSION , CPImageImportLocation VARCHAR(255)WITH COMPRESSION , PdlAttendance VARCHAR(2)WITH COMPRESSION , PdlIndividualPerformance VARCHAR(2)WITH COMPRESSION , PdlRBWarrant VARCHAR(2)WITH COMPRESSION , PdlSOCDAStatement VARCHAR(2)WITH COMPRESSION , PdlTABill VARCHAR(2)WITH COMPRESSION , PdlFPAttestation VARCHAR(2)WITH COMPRESSION )", con)
 
@@ -15504,73 +15507,73 @@ errhandler:
 
     Public Sub ModifyTables()
         On Error Resume Next
-        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+        Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
         con.Open()
 
 
-        If DoesFieldExist("SOCRegister", "GraveCrime", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "GraveCrime", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN GraveCrime YesNo", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("SOCRegister", "FileStatus", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "FileStatus", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN FileStatus VARCHAR(25) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("SOCRegister", "IdentifiedBy", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "IdentifiedBy", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN IdentifiedBy VARCHAR(255) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("SOCRegister", "IdentificationDate", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "IdentificationDate", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN IdentificationDate DATE", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("SOCRegister", "CPsIdentified", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "CPsIdentified", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN CPsIdentified VARCHAR(3) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("SOCRegister", "IdentifiedAs", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "IdentifiedAs", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN IdentifiedAs VARCHAR(255) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("SOCRegister", "GraveCrime", strConString) = False Then
+        If DoesFieldExist("SOCRegister", "GraveCrime", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN GraveCrime YesNo", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("FPAttestationRegister", "ChalanDate", strConString) = False Then
+        If DoesFieldExist("FPAttestationRegister", "ChalanDate", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE FPAttestationRegister ADD COLUMN ChalanDate DATE", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("FPAttestationRegister", "HeadOfAccount", strConString) = False Then
+        If DoesFieldExist("FPAttestationRegister", "HeadOfAccount", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE FPAttestationRegister ADD COLUMN HeadOfAccount VARCHAR(255) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("PoliceStationList", "SHO", strConString) = False Then
+        If DoesFieldExist("PoliceStationList", "SHO", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE PoliceStationList ADD COLUMN SHO VARCHAR(5) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
         Dim UpdateSettingsTable As Boolean = False
-        If DoesFieldExist("Settings", "PdlGraveCrime", strConString) = False Then
+        If DoesFieldExist("Settings", "PdlGraveCrime", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE Settings ADD COLUMN PdlGraveCrime VARCHAR(2) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
             UpdateSettingsTable = True
         End If
 
-        If DoesFieldExist("Settings", "PdlVigilanceCase", strConString) = False Then
+        If DoesFieldExist("Settings", "PdlVigilanceCase", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE Settings ADD COLUMN PdlVigilanceCase VARCHAR(2) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("Settings", "PdlWeeklyDiary", strConString) = False Then
+        If DoesFieldExist("Settings", "PdlWeeklyDiary", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE Settings ADD COLUMN PdlWeeklyDiary VARCHAR(2) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
@@ -15655,25 +15658,35 @@ errhandler:
 
     Private Sub ShowAdvancedSearch(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSOCAdvancedSearch.Click, btnRSOCAdvancedSearch.Click, btnDAAdvancedSearch.Click, btnIDAdvancedSearch.Click, btnACAdvancedSearch.Click, btnFPAAdvancedSearch.Click, btnCDAdvancedSearch.Click, btnSearchMain.Click
         On Error Resume Next
-        FrmAdvancedSearch.Close()
-        FrmAdvancedSearch.WindowState = FormWindowState.Normal
-        FrmAdvancedSearch.StartPosition = FormStartPosition.CenterScreen
-        If CurrentTab <> "IO" And CurrentTab <> "PS" Then
-            FrmAdvancedSearch.Text = "Advanced Search - " & Me.pnlRegisterName.Text
-            FrmAdvancedSearch.TitleText = "<b>Advanced Search - " & Me.pnlRegisterName.Text & "</b> "
-            FrmAdvancedSearch.Show()
-            FrmAdvancedSearch.BringToFront()
-        End If
         If CurrentTab = "IO" Then
             MessageBoxEx.Show("Search is not available for 'Officer List'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
 
         If CurrentTab = "PS" Then
             MessageBoxEx.Show("Search is not available for 'Police Station List'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
 
+        If CurrentTab = "OS" Then
+            MessageBoxEx.Show("Search is not available for 'Office Settings'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        FrmAdvancedSearch.Close()
+        FrmAdvancedSearch.WindowState = FormWindowState.Normal
+        FrmAdvancedSearch.StartPosition = FormStartPosition.CenterScreen
+        FrmAdvancedSearch.Text = "Advanced Search - " & Me.pnlRegisterName.Text
+        FrmAdvancedSearch.TitleText = "<b>Advanced Search - " & Me.pnlRegisterName.Text & "</b> "
+        FrmAdvancedSearch.Show()
+        FrmAdvancedSearch.BringToFront()
+
+
+        Me.Cursor = Cursors.Default
     End Sub
 #End Region
+
 
 
 
@@ -15768,7 +15781,9 @@ errhandler:
 
 
     Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
+        Cursor = Cursors.WaitCursor
         frmAbout.ShowDialog()
+        Cursor = Cursors.Default
     End Sub
 
 

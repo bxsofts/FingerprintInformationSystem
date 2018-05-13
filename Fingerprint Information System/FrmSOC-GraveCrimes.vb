@@ -15,7 +15,7 @@ Public Class FrmSOCGraveCrimes
         Control.CheckForIllegalCrossThreadCalls = False
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterTableAdapter.Connection.Open()
 
         Me.cmbMonth.Items.Clear()

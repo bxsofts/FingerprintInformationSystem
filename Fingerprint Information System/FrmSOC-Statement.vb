@@ -17,7 +17,7 @@ Public Class frmSOCStatement
         Control.CheckForIllegalCrossThreadCalls = False
 
         If Me.SocRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter.Connection.Close()
-        Me.SocRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SocRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SocRegisterTableAdapter.Connection.Open()
 
 

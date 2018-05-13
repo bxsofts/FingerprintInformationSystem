@@ -24,19 +24,19 @@ Public Class FrmIndividualPerformance
         Me.chkIncludeTI.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "IncludeTI", 0)
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterTableAdapter.Connection.Open()
 
         If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
-        Me.DARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterTableAdapter.Connection.Open()
 
         If Me.CDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CDRegisterTableAdapter.Connection.Close()
-        Me.CDRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.CDRegisterTableAdapter.Connection.Open()
 
         If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
         Me.cmbMonth.Items.Clear()

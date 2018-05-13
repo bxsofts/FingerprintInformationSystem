@@ -38,23 +38,23 @@ Public Class frmMonthlyPerformance
     Private Sub ConnectToDatabase()
         Try
             If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-            Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
             Me.SOCRegisterTableAdapter.Connection.Open()
 
             If Me.DaRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter.Connection.Close()
-            Me.DaRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.DaRegisterTableAdapter.Connection.ConnectionString = sConString
             Me.DaRegisterTableAdapter.Connection.Open()
 
             If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-            Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
             Me.FPARegisterTableAdapter.Connection.Open()
 
             If Me.CdRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CdRegisterTableAdapter.Connection.Close()
-            Me.CdRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.CdRegisterTableAdapter.Connection.ConnectionString = sConString
             Me.CdRegisterTableAdapter.Connection.Open()
 
             If Me.PerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.PerformanceTableAdapter.Connection.Close()
-            Me.PerformanceTableAdapter.Connection.ConnectionString = strConString
+            Me.PerformanceTableAdapter.Connection.ConnectionString = sConString
             Me.PerformanceTableAdapter.Connection.Open()
         Catch ex As Exception
             ShowErrorMessage(ex)

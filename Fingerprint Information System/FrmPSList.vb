@@ -10,7 +10,7 @@ Public Class frmPSList
         Me.Cursor = Cursors.WaitCursor
         
         If Me.PSRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.PSRegisterTableAdapter.Connection.Close()
-        Me.PSRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.PSRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.PSRegisterTableAdapter.Connection.Open()
 
         Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)

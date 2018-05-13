@@ -19,7 +19,7 @@ Public Class frmFPAStatistics
         Me.chkCoB.Checked = Not Me.chkLetter.Checked
 
         If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
        

@@ -15,23 +15,23 @@ Public Class frmSOCStatistics
         
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterTableAdapter.Connection.Open()
 
         If Me.OfficerWiseSOCCountTableAdapter.Connection.State = ConnectionState.Open Then Me.OfficerWiseSOCCountTableAdapter.Connection.Close()
-        Me.OfficerWiseSOCCountTableAdapter.Connection.ConnectionString = strConString
+        Me.OfficerWiseSOCCountTableAdapter.Connection.ConnectionString = sConString
         Me.OfficerWiseSOCCountTableAdapter.Connection.Open()
 
         If Me.CrNoWiseSOCCountTableAdapter.Connection.State = ConnectionState.Open Then Me.CrNoWiseSOCCountTableAdapter.Connection.Close()
-        Me.CrNoWiseSOCCountTableAdapter.Connection.ConnectionString = strConString
+        Me.CrNoWiseSOCCountTableAdapter.Connection.ConnectionString = sConString
         Me.CrNoWiseSOCCountTableAdapter.Connection.Open()
 
         If Me.PSWiseSOCCountTableAdapter.Connection.State = ConnectionState.Open Then Me.PSWiseSOCCountTableAdapter.Connection.Close()
-        Me.PSWiseSOCCountTableAdapter.Connection.ConnectionString = strConString
+        Me.PSWiseSOCCountTableAdapter.Connection.ConnectionString = sConString
         Me.PSWiseSOCCountTableAdapter.Connection.Open()
 
         If Me.MOWiseSOCCountTableAdapter.Connection.State = ConnectionState.Open Then Me.MOWiseSOCCountTableAdapter.Connection.Close()
-        Me.MOWiseSOCCountTableAdapter.Connection.ConnectionString = strConString
+        Me.MOWiseSOCCountTableAdapter.Connection.ConnectionString = sConString
         Me.MOWiseSOCCountTableAdapter.Connection.Open()
 
        

@@ -11,11 +11,11 @@ Public Class FrmMonthWiseSOCStatistics
         
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
-        Me.SOCRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SocRegisterTableAdapter.Connection.Open()
 
         If Me.YearlySOCPerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.YearlySOCPerformanceTableAdapter.Connection.Close()
-        Me.YearlySOCPerformanceTableAdapter.Connection.ConnectionString = strConString
+        Me.YearlySOCPerformanceTableAdapter.Connection.ConnectionString = sConString
         Me.YearlySOCPerformanceTableAdapter.Connection.Open()
 
         Me.txtYear.Text = Year(Today)

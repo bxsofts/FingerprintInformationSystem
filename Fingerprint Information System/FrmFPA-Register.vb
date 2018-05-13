@@ -16,7 +16,7 @@ Public Class frmFPARegister
         Me.Cursor = Cursors.WaitCursor
         
         If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
        

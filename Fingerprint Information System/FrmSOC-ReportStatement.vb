@@ -51,7 +51,7 @@ Public Class FrmSOCReportStatement
         
         Me.PanelEx1.Width = Me.TableLayoutPanel1.Width / 2
         If Me.SOCReportRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCReportRegisterTableAdapter.Connection.Close()
-        Me.SOCReportRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.SOCReportRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SOCReportRegisterTableAdapter.Connection.Open()
 
         For i = 0 To 11

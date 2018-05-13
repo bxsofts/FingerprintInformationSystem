@@ -16,7 +16,7 @@ Public Class frmDARegister
         Me.Cursor = Cursors.WaitCursor
         
         If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
-        Me.DARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterTableAdapter.Connection.Open()
 
 

@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="NoDAImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAK
-        7wAACu8BfXaKSAAAACt0RVh0Q3JlYXRpb24gVGltZQBGciAxNCBPa3QgMjAwNSAxMzowMjozOSArMDEw
+        7gAACu4BrzForAAAACt0RVh0Q3JlYXRpb24gVGltZQBGciAxNCBPa3QgMjAwNSAxMzowMjozOSArMDEw
         MOiEjo0AAAAHdElNRQfVCg4LEAxrafk1AAA51UlEQVR4Xu19B5iU1dl21MRUv8T0mG6+VBNTsMaCJUYT
         W4w1NkAFAUV6F1SkI0VQOohIk97LLrC0haXDFpalLrC79N7r8933mTmz5z1z3jLLKub/ea/rsLsz78wu
         89znKfdTzuc+d/G6+Alc/AQufgIXP4GLn8DFT+DiJxDwCXyYJz/suehU3e6ZJ6XbgpPSZd6J2Jp7XK3O

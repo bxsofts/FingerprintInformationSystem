@@ -10,7 +10,6 @@ Public Class FrmAdvancedSearch
 
     Private Sub FormLoadEvents(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
-        
         Me.listViewEx1.Items.Clear()
         CurrentTab = frmMainInterface.CurrentTab
         SetDatagridFont()
@@ -65,7 +64,8 @@ Public Class FrmAdvancedSearch
                 RowCount = frmMainInterface.RSOCDatagrid.ColumnCount - 1
                 
                 For i = 0 To RowCount
-                    Me.listViewEx1.Items.Add(frmMainInterface.RSOCDatagrid.Columns(i).DataPropertyName)
+                    Dim t As String = frmMainInterface.RSOCDatagrid.Columns(i).DataPropertyName
+                    If t <> "SerialNo" And t <> "SOCNumberWithoutYear" Then Me.listViewEx1.Items.Add(t)
                 Next
                 Register = "SOCReportRegister"
 
@@ -93,14 +93,17 @@ Public Class FrmAdvancedSearch
             Case "FPA"
                 RowCount = frmMainInterface.FPADataGrid.ColumnCount - 1
                 For i = 0 To RowCount
-                    Me.listViewEx1.Items.Add(frmMainInterface.FPADataGrid.Columns(i).DataPropertyName)
+                    Dim t As String = frmMainInterface.FPADataGrid.Columns(i).DataPropertyName
+                    If t <> "AttestedFPNumber" Then Me.listViewEx1.Items.Add(t)
                 Next
                 Register = "FPAttestationRegister"
 
             Case "CD"
                 RowCount = frmMainInterface.CDDataGrid.ColumnCount - 1
                 For i = 0 To RowCount
-                    Me.listViewEx1.Items.Add(frmMainInterface.CDDataGrid.Columns(i).DataPropertyName)
+                    Dim t As String = frmMainInterface.CDDataGrid.Columns(i).DataPropertyName
+                    If t = "CDNumberWithYear" Then t = "CDNumber"
+                    Me.listViewEx1.Items.Add(t)
                 Next
                 Register = "CDRegister"
 
@@ -134,7 +137,7 @@ Public Class FrmAdvancedSearch
             dgoperator.Items.Add(">")
             dgoperator.Items.Add("<=")
             dgoperator.Items.Add(">=")
-            dgoperator.Items.Add("LIKE")
+            dgoperator.Items.Add("STARTS WITH")
             dgoperator.Items.Add("CONTAINS")
 
             dgoperator.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
@@ -469,8 +472,8 @@ Public Class FrmAdvancedSearch
 
                                 If field <> "HenryNumerator" And field <> "HenryDenominator" Then
 
-                                    If condition = "LIKE" Then
-                                        value = "'" & value & "%'"
+                                    If condition = "STARTS WITH" Then
+                                        value = " Like '" & value & "%'"
                                     ElseIf condition = "CONTAINS" Then
                                         value = " Like '%" & value & "%'"
                                     Else
@@ -527,7 +530,9 @@ Public Class FrmAdvancedSearch
             sql = sql.Replace("%%", "%")
             sql = sql.Replace("##", "#")
             sql = sql.Replace("CONTAINS", "")
+            sql = sql.Replace("STARTS WITH", "")
             Me.txtSQL.Text = sql
+
             If DirectCast(sender, Control).Name = btnSearch.Name Then
                 PerformSearch()
             End If
@@ -587,9 +592,10 @@ Public Class FrmAdvancedSearch
             If SQLText = "" Then
                 SQLText = "Select * from " & Register
             End If
-            If CurrentTab = "SOC" Then
-                SQLText = Strings.Replace(SQLText, "InspectingOfficer", "InvestigatingOfficer", , , CompareMethod.Text)
-            End If
+
+            SQLText = Strings.Replace(SQLText, "InspectingOfficer", "InvestigatingOfficer", , , CompareMethod.Text)
+            SQLText = Strings.Replace(SQLText, "CDNumber", "CDNumberWithYear", , , CompareMethod.Text)
+
             If Trim(SQLText.ToUpper).StartsWith("DELETE") Then
                 Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("You are about to DELETE records from " & Register & ". Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
                 If r = Windows.Forms.DialogResult.No Then Exit Sub
@@ -609,7 +615,7 @@ Public Class FrmAdvancedSearch
 
             Me.Cursor = Cursors.WaitCursor
 
-            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(strConString)
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
             Dim cmd As OleDb.OleDbCommand = New OleDb.OleDbCommand(SQLText, con)
             Dim da As New OleDb.OleDbDataAdapter(cmd)

@@ -13,11 +13,11 @@ Public Class frmMonthWiseDAStatistics
         Me.Cursor = Cursors.WaitCursor
         
         If Me.DaRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter.Connection.Close()
-        Me.DaRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.DaRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DaRegisterTableAdapter.Connection.Open()
 
         If Me.YearlyDAPerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.YearlyDAPerformanceTableAdapter.Connection.Close()
-        Me.YearlyDAPerformanceTableAdapter.Connection.ConnectionString = strConString
+        Me.YearlyDAPerformanceTableAdapter.Connection.ConnectionString = sConString
         Me.YearlyDAPerformanceTableAdapter.Connection.Open()
 
         Me.txtYear.Text = Year(Today)

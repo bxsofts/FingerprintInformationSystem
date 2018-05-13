@@ -17,7 +17,7 @@ Public Class FrmSOCPrintRemainingCases
         Me.Cursor = Cursors.WaitCursor
         
         If Me.PrintRemainingCasesTableAdapter.Connection.State = ConnectionState.Open Then Me.PrintRemainingCasesTableAdapter.Connection.Close()
-        Me.PrintRemainingCasesTableAdapter.Connection.ConnectionString = strConString
+        Me.PrintRemainingCasesTableAdapter.Connection.ConnectionString = sConString
         Me.PrintRemainingCasesTableAdapter.Connection.Open()
 
        

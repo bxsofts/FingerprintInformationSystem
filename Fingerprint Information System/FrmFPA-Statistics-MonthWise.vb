@@ -12,11 +12,11 @@ Public Class FrmMonthWiseFPAStatistics
         Me.Cursor = Cursors.WaitCursor
         
         If Me.FPARegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter1.Connection.Close()
-        Me.FPARegisterTableAdapter1.Connection.ConnectionString = strConString
+        Me.FPARegisterTableAdapter1.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter1.Connection.Open()
 
         If Me.YearlyFPAPerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.YearlyFPAPerformanceTableAdapter.Connection.Close()
-        Me.YearlyFPAPerformanceTableAdapter.Connection.ConnectionString = strConString
+        Me.YearlyFPAPerformanceTableAdapter.Connection.ConnectionString = sConString
         Me.YearlyFPAPerformanceTableAdapter.Connection.Open()
 
         Me.txtYear.Text = Year(Today)

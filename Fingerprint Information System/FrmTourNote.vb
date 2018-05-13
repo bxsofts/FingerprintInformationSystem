@@ -173,11 +173,11 @@ Public Class FrmTourNote
         Application.DoEvents()
 
         If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
-        Me.SocRegisterTableAdapter1.Connection.ConnectionString = strConString
+        Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
         Me.SocRegisterTableAdapter1.Connection.Open()
 
         If Me.PoliceStationListTableAdapter1.Connection.State = ConnectionState.Open Then Me.PoliceStationListTableAdapter1.Connection.Close()
-        Me.PoliceStationListTableAdapter1.Connection.ConnectionString = strConString
+        Me.PoliceStationListTableAdapter1.Connection.ConnectionString = sConString
         Me.PoliceStationListTableAdapter1.Connection.Open()
 
         boolGenerateRecords = True

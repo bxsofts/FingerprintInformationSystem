@@ -16,15 +16,15 @@ Public Class FrmDAPSWiseStatistics
         Me.Cursor = Cursors.WaitCursor
 
         If Me.DaRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DaRegisterTableAdapter.Connection.Close()
-        Me.DaRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.DaRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DaRegisterTableAdapter.Connection.Open()
 
         If Me.PSWiseDAStatisticsTableAdapter.Connection.State = ConnectionState.Open Then Me.PSWiseDAStatisticsTableAdapter.Connection.Close()
-        Me.PSWiseDAStatisticsTableAdapter.Connection.ConnectionString = strConString
+        Me.PSWiseDAStatisticsTableAdapter.Connection.ConnectionString = sConString
         Me.PSWiseDAStatisticsTableAdapter.Connection.Open()
 
         If Me.PSRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.PSRegisterTableAdapter.Connection.Close()
-        Me.PSRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.PSRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.PSRegisterTableAdapter.Connection.Open()
 
         Me.txtYear.Text = Year(Today)

@@ -632,7 +632,6 @@
     <EmbeddedResource Include="Month Wise SOC Statistics.rdlc" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -676,6 +675,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="icon.ico" />
+    <None Include="PNG 48x48\Arrioch-Senary-Office-access-mdb.ico" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">

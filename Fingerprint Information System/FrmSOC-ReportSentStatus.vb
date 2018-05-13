@@ -243,7 +243,7 @@
 
     Private Function FindAddressFromRSOCRegister(ByVal SOCNo As String) As String
         If Me.PoliceStationListTableAdapter1.Connection.State = ConnectionState.Open Then Me.PoliceStationListTableAdapter1.Connection.Close()
-        Me.PoliceStationListTableAdapter1.Connection.ConnectionString = strConString
+        Me.PoliceStationListTableAdapter1.Connection.ConnectionString = sConString
         Me.PoliceStationListTableAdapter1.Connection.Open()
 
         Dim ps As String = frmMainInterface.SOCDatagrid.SelectedCells(5).Value.ToString
@@ -257,7 +257,7 @@
 
         Try
             If Me.SocReportRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SocReportRegisterTableAdapter.Connection.Close()
-            Me.SocReportRegisterTableAdapter.Connection.ConnectionString = strConString
+            Me.SocReportRegisterTableAdapter.Connection.ConnectionString = sConString
             Me.SocReportRegisterTableAdapter.Connection.Open()
 
             Me.SocReportRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet1.SOCReportRegister, SOCNo)

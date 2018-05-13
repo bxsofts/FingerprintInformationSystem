@@ -57,7 +57,7 @@ Public Class FrmLocalBackup
             Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
 
 
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, BackupPath & "\" & BackupFileName, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
+            My.Computer.FileSystem.CopyFile(sDatabaseFile, BackupPath & "\" & BackupFileName, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
 
             Application.DoEvents()
             Dim item As ListViewItem = Me.listViewEx1.Items.Add(BackupFileName)
@@ -75,7 +75,7 @@ Public Class FrmLocalBackup
 
     Private Sub CopyDatabase() Handles btnCopyDatabase.Click
         Try
-            If My.Computer.FileSystem.FileExists(strDatabaseFile) = False Then
+            If My.Computer.FileSystem.FileExists(sDatabaseFile) = False Then
                 MessageBoxEx.Show("The source database file does not exist. Cannot copy database", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
@@ -86,14 +86,14 @@ Public Class FrmLocalBackup
             Dim result As DialogResult = FolderBrowserDialog1.ShowDialog()
             If (result = DialogResult.OK) Then
                 Dim destination As String = Me.FolderBrowserDialog1.SelectedPath & "\Fingerprint.mdb"
-                If UCase(destination) = UCase(strDatabaseFile) Then
+                If UCase(destination) = UCase(sDatabaseFile) Then
 
                     MessageBoxEx.Show("The source and destination are same. Cannot copy database", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                     Exit Sub
                 End If
 
-                My.Computer.FileSystem.CopyFile(strDatabaseFile, destination, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
+                My.Computer.FileSystem.CopyFile(sDatabaseFile, destination, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
                 ' CopyFileWithProgressBar(strDatabaseFile, destination)
 
             End If
@@ -118,7 +118,7 @@ Public Class FrmLocalBackup
 
             If result = Windows.Forms.DialogResult.Yes Then
                 strBackupFile = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
-                My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
+                My.Computer.FileSystem.CopyFile(strBackupFile, sDatabaseFile, True)
                 Application.DoEvents()
                 boolRestored = True
                 Me.Close()
@@ -149,7 +149,7 @@ Public Class FrmLocalBackup
             OpenFileDialog1.InitialDirectory = BackupPath
             If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                 strBackupFile = OpenFileDialog1.FileName
-                If UCase(strBackupFile) = UCase(strDatabaseFile) Then
+                If UCase(strBackupFile) = UCase(sDatabaseFile) Then
 
                     MessageBoxEx.Show("The source and destination are same. Cannot restore database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -159,7 +159,7 @@ Public Class FrmLocalBackup
                     MessageBoxEx.Show("The file you selected is not a valid Database. Cannot restore database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Exit Sub
                 End If
-                My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
+                My.Computer.FileSystem.CopyFile(strBackupFile, sDatabaseFile, True)
                 Application.DoEvents()
                 boolRestored = True
                 Me.Close()

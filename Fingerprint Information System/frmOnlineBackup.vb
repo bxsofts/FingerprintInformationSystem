@@ -410,7 +410,7 @@ Public Class frmOnlineBackup
 
             Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
 
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
+            My.Computer.FileSystem.CopyFile(sDatabaseFile, tmpFileName, True)
 
             For delay = 11 To 20
                 bgwUpload.ReportProgress(delay, "Connecting to Google Drive...")
@@ -600,7 +600,7 @@ Public Class frmOnlineBackup
             Next
 
             Dim args As DownloadArgs = e.Argument
-          
+
 
             Dim request = FISService.Files.Get(args.ID)
             request.Fields = "size"
@@ -615,7 +615,7 @@ Public Class frmOnlineBackup
                 bgwDownload.ReportProgress(delay, "Downloading...")
                 System.Threading.Thread.Sleep(10)
             Next
-            
+
 
             Dim m = request.MediaDownloader
             m.ChunkSize = 256 * 1024
@@ -652,13 +652,13 @@ Public Class frmOnlineBackup
 
             End If
 
-                If dDownloadStatus = DownloadStatus.Failed Then
+            If dDownloadStatus = DownloadStatus.Failed Then
                 bgwDownload.ReportProgress(19, "Failed.")
-                    System.Threading.Thread.Sleep(100)
-                End If
+                System.Threading.Thread.Sleep(100)
+            End If
 
-                fStream.Close()
-                mStream.Close()
+            fStream.Close()
+            mStream.Close()
 
 
         Catch ex As Exception
@@ -748,7 +748,7 @@ Public Class frmOnlineBackup
                     DownloadRestore = False
                     Me.Cursor = Cursors.WaitCursor
                     If My.Computer.FileSystem.FileExists(strBackupFile) Then
-                        My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
+                        My.Computer.FileSystem.CopyFile(strBackupFile, sDatabaseFile, True)
                         boolRestored = True
                         Me.Close()
                         Exit Sub
@@ -1010,7 +1010,7 @@ Public Class frmOnlineBackup
             DownloadRestore = False
 
             If My.Computer.FileSystem.FileExists(strBackupFile) Then
-                My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
+                My.Computer.FileSystem.CopyFile(strBackupFile, sDatabaseFile, True)
                 lblStatus.Text = "Restoring..."
                 boolRestored = True
                 Me.Close()

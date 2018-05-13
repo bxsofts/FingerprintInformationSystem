@@ -8,8 +8,8 @@ Module modMain
     Public strGeneralSettingsPath As String = strRegistrySettingsPath & "\General Settings"
     Public strAppUserPath As String = FileIO.SpecialDirectories.MyDocuments & "\BXSofts\Fingerprint Information System"
     Public strAppPath As String = My.Application.Info.DirectoryPath
-    Public strDatabaseFile As String = vbNullString
-    Public strConString As String = vbNullString
+    Public sDatabaseFile As String = vbNullString
+    Public sConString As String = vbNullString
     Public strBackupFile As String = ""
     Public boolRestored As Boolean = False
     Public m_BaseColorSelected As Boolean = False 'style color

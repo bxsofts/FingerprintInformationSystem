@@ -11,7 +11,7 @@ Public Class FrmIDRegister
         Me.Cursor = Cursors.WaitCursor
         
         If Me.IDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRegisterTableAdapter.Connection.Close()
-        Me.IDRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.IDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.IDRegisterTableAdapter.Connection.Open()
 
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)

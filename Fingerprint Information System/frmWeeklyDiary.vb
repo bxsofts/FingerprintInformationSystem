@@ -28,7 +28,7 @@ Public Class frmWeeklyDiary
             
 
             If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
-            Me.SocRegisterTableAdapter1.Connection.ConnectionString = strConString
+            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.SocRegisterTableAdapter1.Connection.Open()
             Control.CheckForIllegalCrossThreadCalls = False
         Catch ex As Exception

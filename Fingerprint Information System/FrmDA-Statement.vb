@@ -21,19 +21,19 @@ Public Class frmDAStatement
         Control.CheckForIllegalCrossThreadCalls = False
 
         If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
-        Me.DARegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterTableAdapter.Connection.Open()
 
         If Me.DASTableAdapter.Connection.State = ConnectionState.Open Then Me.DASTableAdapter.Connection.Close()
-        Me.DASTableAdapter.Connection.ConnectionString = strConString
+        Me.DASTableAdapter.Connection.ConnectionString = sConString
         Me.DASTableAdapter.Connection.Open()
 
         If Me.PSRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.PSRegisterTableAdapter.Connection.Close()
-        Me.PSRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.PSRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.PSRegisterTableAdapter.Connection.Open()
 
         If Me.PSWiseDACountTableAdapter.Connection.State = ConnectionState.Open Then Me.PSWiseDACountTableAdapter.Connection.Close()
-        Me.PSWiseDACountTableAdapter.Connection.ConnectionString = strConString
+        Me.PSWiseDACountTableAdapter.Connection.ConnectionString = sConString
         Me.PSWiseDACountTableAdapter.Connection.Open()
 
 

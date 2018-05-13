@@ -17,7 +17,7 @@ Public Class frmCDRegister
         Me.Cursor = Cursors.WaitCursor
 
         If Me.CDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CDRegisterTableAdapter.Connection.Close()
-        Me.CDRegisterTableAdapter.Connection.ConnectionString = strConString
+        Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.CDRegisterTableAdapter.Connection.Open()
         Dim y As Integer = DateAndTime.Year(Today)
         Me.txtYear.Text = y
