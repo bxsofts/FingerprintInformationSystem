@@ -8,6 +8,8 @@ Imports System.Media
 Imports Microsoft.Win32
 Imports System.Object
 
+Imports System.Runtime.InteropServices
+
 Imports System.Threading
 Imports System.Threading.Tasks
 
@@ -23,7 +25,10 @@ Imports Google.Apis.Requests
 
 Public Class frmMainInterface
 
-    
+    <DllImport("user32.dll", EntryPoint:="SetForegroundWindow")> _
+    Private Shared Function SetForegroundWindow(ByVal hWnd As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
+    End Function
+
 
 #Region "VARIABLES DECLARATION "
 
@@ -84,7 +89,7 @@ Public Class frmMainInterface
     Dim TemporarilyStopCapitalize As Boolean
     Dim ShowAllFields As Boolean = True
     Dim ShowStatusTexts As Boolean = False
-    Dim ApplicationIsLoading As Boolean
+    Dim blApplicationIsLoading As Boolean = True
     Dim ClipBoardText As String = ""
     Dim PhotographerFieldFocussed As Boolean = False
     Dim PhotographedDateFocussed As Boolean = False
@@ -102,11 +107,21 @@ Public Class frmMainInterface
     Private Sub LoadForm() Handles MyBase.Load
 
         On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
+
+        ChangeCursor(Cursors.WaitCursor)
+
+        frmSplashScreen.ShowCircularProgress()
+        Me.prgBar.Text = "Loading Application ..."
+        Me.prgBar.Maximum = 100
+        Me.prgBar.Value = 0
+        Me.prgBar.Increment(1)
+
         If FrmSettingsWizard.Visible Then FrmSettingsWizard.Close()
         My.Application.SplashScreen.BringToFront()
         SetColorTheme()
         SetTableBackColor()
+
+        Me.prgBar.Increment(1)
 
         sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
@@ -117,17 +132,15 @@ Public Class frmMainInterface
 
         LoadOfficeSettings()
 
+        Me.prgBar.Increment(1)
+
         SetWindowTitle()
         LoadOfficeSettingsToTextBoxes()
         DisplayTime()
         Me.txtSOCOfficer.ButtonCustom2.Image = Me.txtSOCPhotographer.ButtonCustom.Image
         AddHandler TabControl.TabStrip.MouseDown, AddressOf TabControl_MouseDown
         Me.txtPosition.TextBox.TextAlign = HorizontalAlignment.Center
-        ApplicationIsLoading = True
 
-        Me.prgBar.Text = "Loading Application ..."
-        Me.prgBar.Maximum = 100
-        Me.prgBar.Value = 0
         Me.prgBar.Increment(1)
 
         '---------------------------------------'
@@ -153,12 +166,14 @@ Public Class frmMainInterface
             Me.txtSOCNumber.Focus()
         End If
 
-        Application.DoEvents()
+
+
+        Me.prgBar.Increment(1)
 
         boolUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
         Me.chkUseTIAtBottomOfLetter.Checked = boolUseTIinLetter
 
-        Me.prgBar.Increment(1)
+
 
         LoadQuickToolBarSettings()
 
@@ -166,12 +181,11 @@ Public Class frmMainInterface
         SetDatagridFont()
         SetDatagridSortMode()
         SetAscendingSortMode()
-        Me.prgBar.Increment(1)
 
         TemporarilyStopCapitalize = False
 
         SetTabColor()
-        Application.DoEvents()
+
         Me.prgBar.Increment(1)
 
 
@@ -197,28 +211,29 @@ Public Class frmMainInterface
         Else
             LoadSOCDatagridColumnWidth()
         End If
-        Me.prgBar.Increment(1)
+
         LoadRSOCDatagridColumnWidth()
 
-        Application.DoEvents()
-        Me.prgBar.Increment(1)
-        LoadDADatagridColumnWidth()
-        Me.prgBar.Increment(1)
-        LoadIDDatagridColumnWidth()
-        Me.prgBar.Increment(1)
-        LoadACDatagridColumnWidth()
-        Me.prgBar.Increment(1)
-        LoadFPADatagridColumnWidth()
-        Me.prgBar.Increment(1)
-        LoadCDDatagridColumnWidth()
-        Me.prgBar.Increment(1)
-        LoadPSDatagridColumnWidth()
-        Me.prgBar.Increment(1)
-        Invalidate()
+
         Me.prgBar.Increment(1)
 
+        LoadDADatagridColumnWidth()
+
+        LoadIDDatagridColumnWidth()
+
+        LoadACDatagridColumnWidth()
+
+        LoadFPADatagridColumnWidth()
+
+        LoadCDDatagridColumnWidth()
+
+        LoadPSDatagridColumnWidth()
+
+        Invalidate()
+
+
         '------------ Load Column Order ---------------
-        
+
         If savewidth = 1 Then
             LoadSOCDatagridColumnDefaultOrder()
         Else
@@ -226,7 +241,7 @@ Public Class frmMainInterface
         End If
 
 
-        Application.DoEvents()
+
         Me.prgBar.Increment(1)
         LoadRSOCDatagridColumnOrder()
         Me.prgBar.Increment(1)
@@ -247,7 +262,7 @@ Public Class frmMainInterface
 
         '------------ initialize fields ---------------
         Me.prgBar.Text = "Initializing Fields ..."
-        Application.DoEvents()
+
 
         Dim d As Date = Today
         Me.txtSOCYear.Value = Year(d)
@@ -272,7 +287,7 @@ Public Class frmMainInterface
         Me.prgBar.Increment(1)
 
 
-      
+
 
         '------------ device manager ---------------
 
@@ -285,7 +300,7 @@ Public Class frmMainInterface
         '------------ Connecting To Database ---------------
 
         Me.prgBar.Text = "Connecting To Database ..."
-        Application.DoEvents()
+
 
         Dim DBExists As Boolean = FileIO.FileSystem.FileExists(sDatabaseFile)
 
@@ -294,22 +309,21 @@ Public Class frmMainInterface
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
             If CreateTable = 1 Then
                 Me.prgBar.Text = "Creating Tables ..."
-                Application.DoEvents()
+
                 CreateSOCReportRegisterTable()
-                'CreateOfficerTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
 
             '------------ load last soc number ---------------
 
-            LoadLastSOCNumber()
-            LoadLastRSOCSerialNumber()
-            LoadLastDANumber()
-            LoadLastFPANumber()
-            LoadLastCDNumber()
-            LoadLastIDNumber()
-            LoadLastACNumber()
+            GenerateNewSOCNumber()
+            GenerateNewRSOCSerialNumber()
+            GenerateNewDANumber()
+            GenerateNewFPANumber()
+            GenerateNewCDNumber()
+            GenerateNewIDNumber()
+            GenerateNewACNumber()
 
             Me.prgBar.Increment(1)
             UpdateNullFields()
@@ -319,14 +333,14 @@ Public Class frmMainInterface
 
             '------------ load records, ps list, officer list ---------------
             Me.prgBar.Text = "Loading Data To Tables ..."
-            Application.DoEvents()
+
             If Me.chkLoadRecordsAtStartup.Checked Then
                 LoadRecordsToAllTablesDependingOnCurrentYearSettings()
                 Me.prgBar.Increment(1)
             End If
 
             Me.prgBar.Text = "Loading Police Station List ..."
-            Application.DoEvents()
+
 
             LoadPSListOnLoad()
             Me.prgBar.Increment(1)
@@ -334,18 +348,20 @@ Public Class frmMainInterface
             lblDesignation.Visible = False
             RemoveNullFromOfficerTable()
             Me.prgBar.Text = "Loading Office Settings ..."
-            Application.DoEvents()
+
             InitializeOfficerTable()
             LoadOfficer()
+            Me.prgBar.Increment(3)
             LoadOfficerListToTable()
             Me.prgBar.Text = "Loading Office Settings ..."
-            Application.DoEvents()
+
 
             LoadNatureOfReport()
             Me.prgBar.Increment(1)
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
             Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "7", autobackuptime)
+
             If Me.chkTakeAutoBackup.Checked Then
                 TakeAutoBackup()
                 bgwOnlineAutoBackup.RunWorkerAsync()
@@ -353,22 +369,16 @@ Public Class frmMainInterface
 
         End If
 
+
+        '------------load auto text ---------------
+
+        If chkLoadAutoTextAtStartup.Checked And DBExists Then LoadAutoTextFromDB()
+
         Dim pgbarvalue = prgBar.Value
         For i = pgbarvalue To 100
             prgBar.Increment(1)
         Next
-
         Me.prgBar.Visible = False
-
-        Me.Cursor = Cursors.Default
-        Me.SOCDatagrid.Cursor = Cursors.Default
-
-
-        '------------load auto text ---------------
-
-        If chkLoadAutoTextAtStartup.Checked And DBExists Then LoadAutoTextFromDBWithoutAlertMessage()
-
-        Me.BringToFront()
 
         Dim dm As String = Format(Today, "dd/MM/yyyy")
         dm = Strings.Left(dm, 5)
@@ -386,24 +396,36 @@ Public Class frmMainInterface
                 msg = "Have a nice day!"
         End Select
         Me.btnSOCReport2.Icon = Me.btnSOCReport.Icon
-        ApplicationIsLoading = False
+        blApplicationIsLoading = False
         DisplayDatabaseInformation()
         Me.lblAutoCapsStatus.Visible = True
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\Desktop", "ForegroundLockTimeout", 0, Microsoft.Win32.RegistryValueKind.DWord)
         Me.txtPosition.TextBox.ContextMenuStrip = Me.ContextMenuStrip1
-        ChangeCursor()
+
+        '  My.Application.SplashScreen.Close()
+        '   My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\Desktop", "ForegroundLockTimeout", 0, Microsoft.Win32.RegistryValueKind.DWord)
+
+        ' Me.BringToFront()
+        ' Me.Activate()
+
+
+        SetForegroundWindow(MyBase.Handle)
+
+        ChangeCursor(Cursors.Default)
+
+        My.Application.SplashScreen.Close()
+
+        ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
+
+        btnViewReports.AutoExpandOnClick = True
+        blApplicationIsLoading = False
 
         If DBExists = False Then
-            My.Application.SplashScreen.Close()
-            Me.BringToFront()
-            Me.Activate()
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
             MessageBoxEx.Show("FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-        Me.BringToFront()
-        Me.Activate()
-        ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
+
+
     End Sub
 
 #End Region
@@ -928,7 +950,7 @@ Public Class frmMainInterface
 
         If Me.prgBar.Visible Then
             Me.prgBar.Text = "Loading SOC Register ..."
-            Application.DoEvents()
+
         End If
         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(2).DataPropertyName.ToString() & " ASC, " & SOCDatagrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
@@ -949,7 +971,7 @@ Public Class frmMainInterface
             If p >= 0 Then Me.SOCRegisterBindingSource.Position = p
         End If
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -976,7 +998,7 @@ Public Class frmMainInterface
             If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
         End If
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub LoadDARecords()
@@ -1000,7 +1022,7 @@ Public Class frmMainInterface
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
             If p >= 0 Then Me.DARegisterBindingSource.Position = p
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1024,7 +1046,7 @@ Public Class frmMainInterface
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
             If p >= 0 Then Me.IDRegisterBindingSource.Position = p
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1049,7 +1071,7 @@ Public Class frmMainInterface
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
             If p >= 0 Then Me.ACRegisterBindingSource.Position = p
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1074,7 +1096,7 @@ Public Class frmMainInterface
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
             If p >= 0 Then Me.FPARegisterBindingSource.Position = p
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1099,7 +1121,7 @@ Public Class frmMainInterface
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
             If p >= 0 Then Me.CDRegisterBindingSource.Position = p
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1109,7 +1131,7 @@ Public Class frmMainInterface
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
         Me.PSRegisterBindingSource.MoveFirst()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1131,7 +1153,7 @@ Public Class frmMainInterface
         LoadACRecords()
         LoadPSRecords()
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1148,11 +1170,14 @@ Public Class frmMainInterface
         LoadPSRecords()
         LoadOfficerListToTable()
         ShowAlertMessage("Records reloaded in all tables!")
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
     Sub LoadRecordsToTableWithAlertMessage() Handles btnReload.Click 'loads data in the datagrid
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
 
         Select Case CurrentTab
@@ -1186,7 +1211,7 @@ Public Class frmMainInterface
                 ShowAlertMessage("Records reloaded in Officer List!")
         End Select
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1199,48 +1224,49 @@ Public Class frmMainInterface
 
         If Me.prgBar.Visible Then
             Me.prgBar.Text = "Loading SOC Register ..."
-            Application.DoEvents()
+
         End If
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+        Me.SOCRegisterBindingSource.MoveLast()
+        Application.DoEvents()
         Me.prgBar.Increment(5)
 
         If Me.prgBar.Visible Then
             Me.prgBar.Text = "Loading DA Register ..."
-            Application.DoEvents()
+
         End If
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
         Me.prgBar.Increment(5)
 
         If Me.prgBar.Visible Then
             Me.prgBar.Text = "Loading FPA Register ..."
-            Application.DoEvents()
+
         End If
         Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
         Me.prgBar.Increment(5)
 
         If Me.prgBar.Visible Then
             Me.prgBar.Text = "Loading SOC Reports Register ..."
-            Application.DoEvents()
+
         End If
         Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
         Me.prgBar.Increment(5)
 
         If Me.prgBar.Visible Then
             Me.prgBar.Text = "Loading Court Duty Register ..."
-            Application.DoEvents()
+
         End If
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
         Me.prgBar.Increment(5)
-        
 
-        Me.SOCRegisterBindingSource.MoveLast()
+
+        '  Me.SOCRegisterBindingSource.MoveLast()
         Me.RSOCRegisterBindingSource.MoveLast()
         Me.DARegisterBindingSource.MoveLast()
         Me.FPARegisterBindingSource.MoveLast()
         Me.CDRegisterBindingSource.MoveLast()
 
-
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1272,7 +1298,7 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1282,7 +1308,7 @@ Public Class frmMainInterface
             ShowAlertMessage("This Year's SOC Reports Register loaded!")
         End If
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1317,7 +1343,7 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1326,7 +1352,7 @@ Public Class frmMainInterface
         Else
             ShowAlertMessage("This Month's SOC Reports Register loaded!")
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1347,7 +1373,7 @@ Public Class frmMainInterface
                 If Me.dtSOCInspection.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Inspection' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtSOCInspection.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1364,7 +1390,7 @@ Public Class frmMainInterface
                 If Me.dtRSOCReportSentOn.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtRSOCReportSentOn.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1381,7 +1407,7 @@ Public Class frmMainInterface
                 If Me.dtDAEntry.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Entry' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtDAEntry.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1398,7 +1424,7 @@ Public Class frmMainInterface
                 If Me.dtFPADate.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtFPADate.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1414,7 +1440,7 @@ Public Class frmMainInterface
                 If Me.dtCDExamination.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtCDExamination.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1428,7 +1454,7 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1437,7 +1463,7 @@ Public Class frmMainInterface
         Else
             ShowAlertMessage("Specified Month's SOC Reports Register loaded!")
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1451,7 +1477,7 @@ Public Class frmMainInterface
                 If Me.txtSOCYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtSOCYear.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtSOCYear.Text
@@ -1460,7 +1486,7 @@ Public Class frmMainInterface
                 If Me.dtRSOCReportSentOn.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtRSOCReportSentOn.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Year(Me.dtRSOCReportSentOn.Value)
@@ -1469,7 +1495,7 @@ Public Class frmMainInterface
                 If Me.txtDAYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtDAYear.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtDAYear.Text
@@ -1478,7 +1504,7 @@ Public Class frmMainInterface
                 If Me.txtFPAYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtFPAYear.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtFPAYear.Text
@@ -1487,13 +1513,13 @@ Public Class frmMainInterface
                 If Me.txtCDYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtCDYear.Focus()
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtCDYear.Text
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1530,7 +1556,7 @@ Public Class frmMainInterface
         Else
             ShowAlertMessage("Specified Year's SOC Reports Register loaded!")
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -1796,7 +1822,7 @@ Public Class frmMainInterface
             ReloadTablesAfterDBChange()
         End If
         boolSettingsWizardCancelled = False
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ReloadTablesAfterDBChange()
@@ -2045,62 +2071,48 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub LoadAutoTextFromDBWithoutAlertMessage()
+    Private Sub LoadAutoTextFromDB()
         On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        Me.prgBar.Value = 0
-        Me.prgBar.Visible = True
-        Me.prgBar.Text = vbNullString
-        Me.StatusBar.RecalcLayout()
+
         ClearAutoCompletionTexts()
 
+        prgBar.Increment(1)
 
         '------------------------------------SOC------------------------------------
 
 
         Me.SOCRegisterAutoTextTableAdapter.FillByMO(FingerPrintDataSet.SOCRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.SOCRegisterAutoText.Count - 1
-        Me.prgBar.Text = "SOC - Auto Completion - Modus Operandi"
+
         Dim socmodus As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.SOCRegisterAutoText.Count - 1
             socmodus.Add(FingerPrintDataSet.SOCRegisterAutoText(i).ModusOperandi)
             '  If modus <> Nothing Then Me.txtSOCModus.AutoCompleteCustomSource.Add(modus)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
         Me.txtSOCModus.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtSOCModus.AutoCompleteCustomSource = socmodus
 
-
-
-        Me.prgBar.Value = 0
         Me.SOCRegisterAutoTextTableAdapter.FillBySection(FingerPrintDataSet.SOCRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.SOCRegisterAutoText.Count - 1
-        Me.prgBar.Text = "SOC - Auto Completion - Section Of Law"
+
         Dim soclaw As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.SOCRegisterAutoText.Count - 1
             soclaw.Add(FingerPrintDataSet.SOCRegisterAutoText(i).SectionOfLaw)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
         Me.txtSOCSection.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtSOCSection.AutoCompleteCustomSource = soclaw
 
-        
+        prgBar.Increment(1)
 
         '-----------------------------------DA------------------------------------
 
 
-        Me.prgBar.Value = 0
+
         Me.DARegisterAutoTextTableAdapter.FillBySection(FingerPrintDataSet.DARegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.DARegisterAutoText.Count - 1
-        Me.prgBar.Text = "DA - Auto Completion - Section Of Law"
+
         Dim dalaw As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.DARegisterAutoText.Count - 1
             dalaw.Add(FingerPrintDataSet.DARegisterAutoText(i).SectionOfLaw)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
+
         Me.txtDASection.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtDASection.AutoCompleteCustomSource = dalaw
 
@@ -2110,16 +2122,13 @@ Public Class frmMainInterface
         Me.txtIDSection.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDSection.AutoCompleteCustomSource = dalaw
 
+        prgBar.Increment(1)
 
-        Me.prgBar.Value = 0
         Me.DARegisterAutoTextTableAdapter.FillByName(FingerPrintDataSet.DARegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.DARegisterAutoText.Count - 1
-        Me.prgBar.Text = "DA - Auto Completion - Name"
+
         Dim daname As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.DARegisterAutoText.Count - 1
             daname.Add(FingerPrintDataSet.DARegisterAutoText(i).Name)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
         Me.txtDAName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtDAName.AutoCompleteCustomSource = daname
@@ -2130,16 +2139,16 @@ Public Class frmMainInterface
         Me.txtIDName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDName.AutoCompleteCustomSource = daname
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.DARegisterAutoTextTableAdapter.FillByAlias(FingerPrintDataSet.DARegisterAutoText)
-        Me.prgBar.Text = "DA - Auto Completion - Alias Name"
+
         Dim daalias As New AutoCompleteStringCollection
-        Me.prgBar.Maximum = FingerPrintDataSet.DARegisterAutoText.Count - 1
         For i As Long = 0 To FingerPrintDataSet.DARegisterAutoText.Count - 1
             daalias.Add(FingerPrintDataSet.DARegisterAutoText(i).AliasName)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
+
+        prgBar.Increment(1)
 
         Me.txtDAAliasName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtDAAliasName.AutoCompleteCustomSource = daalias
@@ -2150,15 +2159,12 @@ Public Class frmMainInterface
         Me.txtIDAliasName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDAliasName.AutoCompleteCustomSource = daalias
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.DARegisterAutoTextTableAdapter.FillByFather(FingerPrintDataSet.DARegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.DARegisterAutoText.Count - 1
-        Me.prgBar.Text = "DA - Auto Completion - Fathers Name"
         Dim dafather As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.DARegisterAutoText.Count - 1
             dafather.Add(FingerPrintDataSet.DARegisterAutoText(i).FathersName)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
         Me.txtDAFathersName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtDAFathersName.AutoCompleteCustomSource = dafather
@@ -2169,17 +2175,13 @@ Public Class frmMainInterface
         Me.txtIDFathersName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDFathersName.AutoCompleteCustomSource = dafather
 
+        prgBar.Increment(1)
 
-        Me.prgBar.Value = 0
         Me.DARegisterAutoTextTableAdapter.FillByModus(FingerPrintDataSet.DARegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.DARegisterAutoText.Count - 1
-        Me.prgBar.Text = "DA - Auto Completion - Modus Operandi"
         Dim damo As New AutoCompleteStringCollection
 
         For i As Long = 0 To FingerPrintDataSet.DARegisterAutoText.Count - 1
             damo.Add(FingerPrintDataSet.DARegisterAutoText(i).ModusOperandi)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
         Me.txtDAModusOperandi.AutoCompleteSource = AutoCompleteSource.CustomSource
@@ -2191,164 +2193,123 @@ Public Class frmMainInterface
         Me.txtIDModusOperandi.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDModusOperandi.AutoCompleteCustomSource = damo
 
+        prgBar.Increment(1)
 
 
         '------------------------------------ID------------------------------------
 
-        Me.prgBar.Value = 0
+
         Me.IDRegisterAutoTextTableAdapter.FillBySection(FingerPrintDataSet.IDRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.IDRegisterAutoText.Count - 1
-        Me.prgBar.Text = "ID - Auto Completion - Section Of Law"
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             dalaw.Add(FingerPrintDataSet.IDRegisterAutoText(i).SectionOfLaw)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.IDRegisterAutoTextTableAdapter.FillByName(FingerPrintDataSet.IDRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.IDRegisterAutoText.Count - 1
-        Me.prgBar.Text = "ID - Auto Completion - Name"
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             daname.Add(FingerPrintDataSet.IDRegisterAutoText(i).Name)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.IDRegisterAutoTextTableAdapter.FillByAlias(FingerPrintDataSet.IDRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.IDRegisterAutoText.Count - 1
-        Me.prgBar.Text = "ID - Auto Completion - Alias Name"
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             daalias.Add(FingerPrintDataSet.IDRegisterAutoText(i).AliasName)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.IDRegisterAutoTextTableAdapter.FillByFather(FingerPrintDataSet.IDRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.IDRegisterAutoText.Count - 1
-        Me.prgBar.Text = "ID - Auto Completion - Fathers Name"
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             dafather.Add(FingerPrintDataSet.IDRegisterAutoText(i).FathersName)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.IDRegisterAutoTextTableAdapter.FillByModus(FingerPrintDataSet.IDRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.IDRegisterAutoText.Count - 1
-        Me.prgBar.Text = "ID - Auto Completion - Modus Operandi"
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             damo.Add(FingerPrintDataSet.IDRegisterAutoText(i).ModusOperandi)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
+        prgBar.Increment(1)
 
         '------------------------------------AC------------------------------------
 
 
-        Me.prgBar.Value = 0
+
         Me.ACRegisterAutoTextTableAdapter.FillBySection(FingerPrintDataSet.ACRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.ACRegisterAutoText.Count - 1
-        Me.prgBar.Text = "AC - Auto Completion - Section Of Law"
         For i As Long = 0 To FingerPrintDataSet.ACRegisterAutoText.Count - 1
             dalaw.Add(FingerPrintDataSet.ACRegisterAutoText(i).SectionOfLaw)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+
         Me.ACRegisterAutoTextTableAdapter.FillByName(FingerPrintDataSet.ACRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.ACRegisterAutoText.Count - 1
-        Me.prgBar.Text = "AC - Auto Completion - Name"
         For i As Long = 0 To FingerPrintDataSet.ACRegisterAutoText.Count - 1
             daname.Add(FingerPrintDataSet.ACRegisterAutoText(i).Name)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.ACRegisterAutoTextTableAdapter.FillByAlias(FingerPrintDataSet.ACRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.ACRegisterAutoText.Count - 1
-        Me.prgBar.Text = "AC - Auto Completion - Alias Name"
         For i As Long = 0 To FingerPrintDataSet.ACRegisterAutoText.Count - 1
             daalias.Add(FingerPrintDataSet.ACRegisterAutoText(i).AliasName)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+
         Me.ACRegisterAutoTextTableAdapter.FillByFather(FingerPrintDataSet.ACRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.ACRegisterAutoText.Count - 1
-        Me.prgBar.Text = "AC - Auto Completion - Fathers Name"
+
         For i As Long = 0 To FingerPrintDataSet.ACRegisterAutoText.Count - 1
             dafather.Add(FingerPrintDataSet.ACRegisterAutoText(i).FathersName)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-        Me.prgBar.Value = 0
+        prgBar.Increment(1)
+
         Me.ACRegisterAutoTextTableAdapter.FillByModus(FingerPrintDataSet.ACRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.ACRegisterAutoText.Count - 1
-        Me.prgBar.Text = "AC - Auto Completion - Modus Operandi"
+
         For i As Long = 0 To FingerPrintDataSet.ACRegisterAutoText.Count - 1
             damo.Add(FingerPrintDataSet.ACRegisterAutoText(i).ModusOperandi)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
 
-
+        prgBar.Increment(1)
 
         '------------------------------------FPA------------------------------------
 
 
-        Me.prgBar.Value = 0
+
         Me.FPARegisterAutoTextTableAdapter.FillByName(FingerPrintDataSet.FPRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.FPRegisterAutoText.Count - 1
-        Me.prgBar.Text = "FPA - Auto Completion - Name"
         Dim fpaname As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.FPRegisterAutoText.Count - 1
             fpaname.Add(FingerPrintDataSet.FPRegisterAutoText(i).Name.ToString)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
+
+        prgBar.Increment(1)
 
         Me.txtFPAName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtFPAName.AutoCompleteCustomSource = fpaname
 
-
-        Me.prgBar.Value = 0
         Me.FPARegisterAutoTextTableAdapter.FillByTreausury(FingerPrintDataSet.FPRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.FPRegisterAutoText.Count - 1
-        Me.prgBar.Text = "FPA - Auto Completion - Treasury"
         Dim fpatreasury As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.FPRegisterAutoText.Count - 1
             fpatreasury.Add(FingerPrintDataSet.FPRegisterAutoText(i).Treasury)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
         Me.txtFPATreasury.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtFPATreasury.AutoCompleteCustomSource = fpatreasury
 
+        prgBar.Increment(1)
 
-        Me.prgBar.Value = 0
+
         Me.FPARegisterAutoTextTableAdapter.FillByHeadOfAccount(FingerPrintDataSet.FPRegisterAutoText)
-        Me.prgBar.Maximum = FingerPrintDataSet.FPRegisterAutoText.Count - 1
-        Me.prgBar.Text = "FPA - Auto Completion - Head Of Account"
+
         Dim fpaha As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.FPRegisterAutoText.Count - 1
             fpaha.Add(FingerPrintDataSet.FPRegisterAutoText(i).HeadOfAccount)
-            Me.prgBar.Increment(1)
-            Application.DoEvents()
         Next (i)
         Me.txtHeadOfAccount.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtHeadOfAccount.AutoCompleteCustomSource = fpaha
-        Me.prgBar.Value = 0
-        Me.prgBar.Visible = False
+        prgBar.Increment(1)
 
-        Me.Cursor = Cursors.Default
+
     End Sub
 
 
@@ -2641,7 +2602,7 @@ Public Class frmMainInterface
         End Select
 
         DisplayDatabaseInformation()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -2745,7 +2706,7 @@ Public Class frmMainInterface
             Me.lblNumberOfRecords.Visible = True
             Me.txtPosition.Visible = True
 
-            If ApplicationIsLoading = False And SOCDatagrid.RowCount <> 0 Then
+            If blApplicationIsLoading = False And SOCDatagrid.RowCount <> 0 Then
                 If Me.SocReportRegisterTableAdapter1.ScalarQueryReportSent(Me.SOCDatagrid.SelectedCells(0).Value.ToString) > 0 Then
                     Me.lblReportSent.Visible = True
                 Else
@@ -3007,6 +2968,9 @@ Public Class frmMainInterface
 
 
     Private Sub HideDataEntryFields() Handles btnShowHideFields.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
 
         Select Case CurrentTab
@@ -3069,7 +3033,7 @@ Public Class frmMainInterface
 
         End Select
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -3097,7 +3061,7 @@ Public Class frmMainInterface
                 Me.PSDataGrid.Focus()
 
         End Select
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -3343,7 +3307,7 @@ Public Class frmMainInterface
         LoadCDDatagridColumnDefaultWidth()
         LoadPSDatagridColumnDefaultWidth()
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column widths of all tables set to default widths!")
     End Sub
 
@@ -3377,7 +3341,7 @@ Public Class frmMainInterface
 
         End Select
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column widths of the current table set to default widths!")
     End Sub
 
@@ -3797,7 +3761,7 @@ Public Class frmMainInterface
         LoadFPADatagridColumnDefaultOrder()
         LoadCDDatagridColumnDefaultOrder()
         LoadPSDatagridColumnDefaultOrder()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column order of all tables set to default order!")
     End Sub
 
@@ -3806,7 +3770,7 @@ Public Class frmMainInterface
         On Error Resume Next
         If CurrentTab = "IO" Then
             MessageBoxEx.Show("This option is not available for the current table", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("This action will reset the column order of the current table. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -3835,11 +3799,11 @@ Public Class frmMainInterface
                 LoadPSDatagridColumnDefaultOrder()
             Case "IO"
                 MessageBoxEx.Show("This option is not available for the current table", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column order of the current table set to default order!")
     End Sub
 
@@ -4305,7 +4269,7 @@ Public Class frmMainInterface
                         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4317,7 +4281,7 @@ Public Class frmMainInterface
                     Else
                         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4332,7 +4296,7 @@ Public Class frmMainInterface
                         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4344,7 +4308,7 @@ Public Class frmMainInterface
                     Else
                         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4361,7 +4325,7 @@ Public Class frmMainInterface
                         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4373,7 +4337,7 @@ Public Class frmMainInterface
                     Else
                         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4386,7 +4350,7 @@ Public Class frmMainInterface
                 If IDDatagrid.SortOrder = SortOrder.None Or IDDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4394,7 +4358,7 @@ Public Class frmMainInterface
                 If IDDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4407,7 +4371,7 @@ Public Class frmMainInterface
                 If ACDatagrid.SortOrder = SortOrder.None Or ACDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4415,7 +4379,7 @@ Public Class frmMainInterface
                 If ACDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4433,7 +4397,7 @@ Public Class frmMainInterface
                         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4445,7 +4409,7 @@ Public Class frmMainInterface
                     Else
                         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4462,7 +4426,7 @@ Public Class frmMainInterface
                         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4474,7 +4438,7 @@ Public Class frmMainInterface
                     Else
                         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4487,7 +4451,7 @@ Public Class frmMainInterface
                 If PSDataGrid.SortOrder = SortOrder.None Or PSDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4495,7 +4459,7 @@ Public Class frmMainInterface
                 If PSDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
-                    Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4781,7 +4745,7 @@ Public Class frmMainInterface
 
     Private Function ImportImageFromScannerOrCamera(ByVal SaveLocation As String, Optional ByVal FileName As String = vbNullString) As String
         On Error GoTo errhandler
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         If Me.devmanager.DeviceInfos.Count = 0 Then
             MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return vbNullString
@@ -4909,7 +4873,7 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(FPImageImportLocation)
             Call Shell("explorer.exe " & FPImageImportLocation, AppWinStyle.NormalFocus)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -4925,7 +4889,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        Me.Cursor = Cursors.Default
+                        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -4939,7 +4903,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        Me.Cursor = Cursors.Default
+                        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -4953,7 +4917,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        Me.Cursor = Cursors.Default
+                        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -4962,7 +4926,7 @@ errhandler:
 
         End Select
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -5097,164 +5061,164 @@ errhandler:
             End If
         End If
         DisplayDatabaseInformation()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
     End Sub
 
     Private Sub SelectFPSlipFromContext() Handles btnSelectFPSlipContext.Click
-       Try
+        Try
 
-        Dim currentfile As String = ""
-        If CurrentTab = "DA" Then
-            currentfile = Me.DADatagrid.SelectedCells(15).Value.ToString
-        End If
-        If CurrentTab = "ID" Then
-            currentfile = Me.IDDatagrid.SelectedCells(15).Value.ToString
-        End If
-        If CurrentTab = "AC" Then
-            currentfile = Me.ACDatagrid.SelectedCells(14).Value.ToString
-        End If
-
-
-
-
-        If FileIO.FileSystem.FileExists(currentfile) Then
-            Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("There is already an image file associated with the selected record. Do you want to replace it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If r = Windows.Forms.DialogResult.No Then
-                Exit Sub
+            Dim currentfile As String = ""
+            If CurrentTab = "DA" Then
+                currentfile = Me.DADatagrid.SelectedCells(15).Value.ToString
             End If
-        End If
+            If CurrentTab = "ID" Then
+                currentfile = Me.IDDatagrid.SelectedCells(15).Value.ToString
+            End If
+            If CurrentTab = "AC" Then
+                currentfile = Me.ACDatagrid.SelectedCells(14).Value.ToString
+            End If
 
 
 
-        If CurrentTab = "DA" Then
-            OpenFileDialog1.InitialDirectory = DASlipImageImportLocation
-        End If
-        If CurrentTab = "ID" Then
-            OpenFileDialog1.InitialDirectory = IDSlipImageImportLocation
-        End If
-        If CurrentTab = "AC" Then
-            OpenFileDialog1.InitialDirectory = ACSlipImageImportLocation
-        End If
 
-        OpenFileDialog1.Filter = "Picture Files(JPG, JPEG, BMP, TIF, GIF, PNG)|*.jpg;*.jpeg;*.bmp;*.tif;*.gif;*.png;*.tiff"
-        OpenFileDialog1.FileName = ""
-        OpenFileDialog1.Title = "Select FP Slip Image File"
-        OpenFileDialog1.AutoUpgradeEnabled = True
-        OpenFileDialog1.RestoreDirectory = True 'remember last directory
-        Dim SelectedFile As String
-        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
-            Application.DoEvents() 'first close the selection window
-            SelectedFile = OpenFileDialog1.FileName
-            Dim getInfo As System.IO.DriveInfo = My.Computer.FileSystem.GetDriveInfo(SelectedFile)
+            If FileIO.FileSystem.FileExists(currentfile) Then
+                Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("There is already an image file associated with the selected record. Do you want to replace it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If r = Windows.Forms.DialogResult.No Then
+                    Exit Sub
+                End If
+            End If
 
-            '------------------------------------- DA -------------------------------------------
+
 
             If CurrentTab = "DA" Then
-                Dim DANo As String = Me.DADatagrid.SelectedCells(0).Value.ToString()
-                If getInfo.DriveType <> IO.DriveType.Fixed Then
-                    Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The FP Slip Image File you selected is on a removable media. Do you want to copy it to the DA Slip Image Files Location?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                    If r = Windows.Forms.DialogResult.Yes Then
-                        Dim yr As String = Year(Me.DADatagrid.SelectedCells(2).Value)
-                        If Strings.Right(DASlipImageImportLocation, 1) <> "\" Then DASlipImageImportLocation = DASlipImageImportLocation & "\"
-                        Dim DestinationFile As String = DASlipImageImportLocation & yr & "\" & OpenFileDialog1.SafeFileName
-                        My.Computer.FileSystem.CopyFile(SelectedFile, DestinationFile, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException) 'shows replace option
-                        SelectedFile = DestinationFile
-                    End If
-
-                    If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
-                End If
-
-                DASlipImageFile = SelectedFile
-
-                Dim oldRow As FingerPrintDataSet.DARegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.DARegister.FindByDANumber(DANo)
-                If oldRow IsNot Nothing Then
-                    With oldRow
-                        .SlipFile = DASlipImageFile
-                    End With
-                End If
-
-                Me.DARegisterTableAdapter.UpdateSlipFile(DASlipImageFile, DANo)
-                DASlipImageFile = ""
-                ShowAlertMessage("DA Slip Image file updated")
+                OpenFileDialog1.InitialDirectory = DASlipImageImportLocation
             End If
-
-
-            '------------------------------------- ID -------------------------------------------
-
-
             If CurrentTab = "ID" Then
-                Dim IDNo As String = Me.IDDatagrid.SelectedCells(0).Value.ToString()
-                If getInfo.DriveType <> IO.DriveType.Fixed Then
-
-                    Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The Identified Slip Image File you selected is on a removable media. Do you want to copy it to the Identified Slips Image Files Location?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                    If r = Windows.Forms.DialogResult.Yes Then
-                        If Strings.Right(IDSlipImageImportLocation, 1) <> "\" Then IDSlipImageImportLocation = IDSlipImageImportLocation & "\"
-                        Dim DestinationFile As String = IDSlipImageImportLocation & OpenFileDialog1.SafeFileName
-                        My.Computer.FileSystem.CopyFile(SelectedFile, DestinationFile, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException) 'shows replace option
-                        SelectedFile = DestinationFile
-                    End If
-
-                    ' If reply=vbNo then do nothing just use the selected file
-
-                    If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
-                End If
-
-                IDSlipImageFile = SelectedFile
-                Dim oldRow As FingerPrintDataSet.IdentifiedSlipsRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.IdentifiedSlipsRegister.FindByIDNumber(IDNo)
-                If oldRow IsNot Nothing Then
-                    With oldRow
-                        .SlipFile = IDSlipImageFile
-                    End With
-                End If
-
-                Me.IDRegisterTableAdapter.UpdateSlipFile(IDSlipImageFile, IDNo)
-                IDSlipImageFile = ""
-                ShowAlertMessage("Identified Slip Image file updated")
+                OpenFileDialog1.InitialDirectory = IDSlipImageImportLocation
             End If
-
-
-            '------------------------------------- AC -------------------------------------------
-
-
             If CurrentTab = "AC" Then
-                Dim ACNo As String = Me.ACDatagrid.SelectedCells(0).Value.ToString()
-                If getInfo.DriveType <> IO.DriveType.Fixed Then
-
-                    Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The Active Criminal Slip Image File you selected is on a removable media. Do you want to copy it to the Active Criminal Slips Image Files Location?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
-                    If r = Windows.Forms.DialogResult.Yes Then
-                        If Strings.Right(ACSlipImageImportLocation, 1) <> "\" Then ACSlipImageImportLocation = ACSlipImageImportLocation & "\"
-                        Dim DestinationFile As String = ACSlipImageImportLocation & OpenFileDialog1.SafeFileName
-                        My.Computer.FileSystem.CopyFile(SelectedFile, DestinationFile, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException) 'shows replace option
-                        SelectedFile = DestinationFile
-                    End If
-
-                    ' If reply=vbNo then do nothing just use the selected file
-
-                    If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
-                End If
-
-                ACSlipImageFile = SelectedFile
-                Dim oldRow As FingerPrintDataSet.ActiveCriminalsRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.ActiveCriminalsRegister.FindByACNumber(ACNo)
-                If oldRow IsNot Nothing Then
-                    With oldRow
-                        .SlipFile = ACSlipImageFile
-                    End With
-                End If
-
-                Me.ACRegisterTableAdapter.UpdateSlipFile(ACSlipImageFile, ACNo)
-                ACSlipImageFile = ""
-                ShowAlertMessage("Active Criminal Slip Image file updated")
+                OpenFileDialog1.InitialDirectory = ACSlipImageImportLocation
             End If
 
-        End If
-        DisplayDatabaseInformation()
+            OpenFileDialog1.Filter = "Picture Files(JPG, JPEG, BMP, TIF, GIF, PNG)|*.jpg;*.jpeg;*.bmp;*.tif;*.gif;*.png;*.tiff"
+            OpenFileDialog1.FileName = ""
+            OpenFileDialog1.Title = "Select FP Slip Image File"
+            OpenFileDialog1.AutoUpgradeEnabled = True
+            OpenFileDialog1.RestoreDirectory = True 'remember last directory
+            Dim SelectedFile As String
+            If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
+                Application.DoEvents() 'first close the selection window
+                SelectedFile = OpenFileDialog1.FileName
+                Dim getInfo As System.IO.DriveInfo = My.Computer.FileSystem.GetDriveInfo(SelectedFile)
+
+                '------------------------------------- DA -------------------------------------------
+
+                If CurrentTab = "DA" Then
+                    Dim DANo As String = Me.DADatagrid.SelectedCells(0).Value.ToString()
+                    If getInfo.DriveType <> IO.DriveType.Fixed Then
+                        Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The FP Slip Image File you selected is on a removable media. Do you want to copy it to the DA Slip Image Files Location?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+                        If r = Windows.Forms.DialogResult.Yes Then
+                            Dim yr As String = Year(Me.DADatagrid.SelectedCells(2).Value)
+                            If Strings.Right(DASlipImageImportLocation, 1) <> "\" Then DASlipImageImportLocation = DASlipImageImportLocation & "\"
+                            Dim DestinationFile As String = DASlipImageImportLocation & yr & "\" & OpenFileDialog1.SafeFileName
+                            My.Computer.FileSystem.CopyFile(SelectedFile, DestinationFile, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException) 'shows replace option
+                            SelectedFile = DestinationFile
+                        End If
+
+                        If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                    End If
+
+                    DASlipImageFile = SelectedFile
+
+                    Dim oldRow As FingerPrintDataSet.DARegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.DARegister.FindByDANumber(DANo)
+                    If oldRow IsNot Nothing Then
+                        With oldRow
+                            .SlipFile = DASlipImageFile
+                        End With
+                    End If
+
+                    Me.DARegisterTableAdapter.UpdateSlipFile(DASlipImageFile, DANo)
+                    DASlipImageFile = ""
+                    ShowAlertMessage("DA Slip Image file updated")
+                End If
+
+
+                '------------------------------------- ID -------------------------------------------
+
+
+                If CurrentTab = "ID" Then
+                    Dim IDNo As String = Me.IDDatagrid.SelectedCells(0).Value.ToString()
+                    If getInfo.DriveType <> IO.DriveType.Fixed Then
+
+                        Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The Identified Slip Image File you selected is on a removable media. Do you want to copy it to the Identified Slips Image Files Location?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+                        If r = Windows.Forms.DialogResult.Yes Then
+                            If Strings.Right(IDSlipImageImportLocation, 1) <> "\" Then IDSlipImageImportLocation = IDSlipImageImportLocation & "\"
+                            Dim DestinationFile As String = IDSlipImageImportLocation & OpenFileDialog1.SafeFileName
+                            My.Computer.FileSystem.CopyFile(SelectedFile, DestinationFile, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException) 'shows replace option
+                            SelectedFile = DestinationFile
+                        End If
+
+                        ' If reply=vbNo then do nothing just use the selected file
+
+                        If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                    End If
+
+                    IDSlipImageFile = SelectedFile
+                    Dim oldRow As FingerPrintDataSet.IdentifiedSlipsRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.IdentifiedSlipsRegister.FindByIDNumber(IDNo)
+                    If oldRow IsNot Nothing Then
+                        With oldRow
+                            .SlipFile = IDSlipImageFile
+                        End With
+                    End If
+
+                    Me.IDRegisterTableAdapter.UpdateSlipFile(IDSlipImageFile, IDNo)
+                    IDSlipImageFile = ""
+                    ShowAlertMessage("Identified Slip Image file updated")
+                End If
+
+
+                '------------------------------------- AC -------------------------------------------
+
+
+                If CurrentTab = "AC" Then
+                    Dim ACNo As String = Me.ACDatagrid.SelectedCells(0).Value.ToString()
+                    If getInfo.DriveType <> IO.DriveType.Fixed Then
+
+                        Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The Active Criminal Slip Image File you selected is on a removable media. Do you want to copy it to the Active Criminal Slips Image Files Location?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+                        If r = Windows.Forms.DialogResult.Yes Then
+                            If Strings.Right(ACSlipImageImportLocation, 1) <> "\" Then ACSlipImageImportLocation = ACSlipImageImportLocation & "\"
+                            Dim DestinationFile As String = ACSlipImageImportLocation & OpenFileDialog1.SafeFileName
+                            My.Computer.FileSystem.CopyFile(SelectedFile, DestinationFile, FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException) 'shows replace option
+                            SelectedFile = DestinationFile
+                        End If
+
+                        ' If reply=vbNo then do nothing just use the selected file
+
+                        If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                    End If
+
+                    ACSlipImageFile = SelectedFile
+                    Dim oldRow As FingerPrintDataSet.ActiveCriminalsRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.ActiveCriminalsRegister.FindByACNumber(ACNo)
+                    If oldRow IsNot Nothing Then
+                        With oldRow
+                            .SlipFile = ACSlipImageFile
+                        End With
+                    End If
+
+                    Me.ACRegisterTableAdapter.UpdateSlipFile(ACSlipImageFile, ACNo)
+                    ACSlipImageFile = ""
+                    ShowAlertMessage("Active Criminal Slip Image file updated")
+                End If
+
+            End If
+            DisplayDatabaseInformation()
 
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -5369,13 +5333,14 @@ errhandler:
 
 #Region "NEW BUTTON ACTION"
     Private Sub NewDataMode() Handles btnNewEntry.Click
+        If blApplicationIsLoading Then Exit Sub
         On Error Resume Next
 
         If CurrentTab = "SOC" Then
             Me.PanelSOC.Visible = True
             SOCEditMode = False
             ClearSOCFields()
-            LoadLastSOCNumber()
+            GenerateNewSOCNumber()
             Me.txtSOCYear.Text = Year(Today)
             Me.dtSOCInspection.Value = Today
             Me.dtSOCReport.Value = Today
@@ -5387,7 +5352,7 @@ errhandler:
             Me.PanelRSOC.Visible = True
             RSOCEditMode = False
             ClearRSOCFields()
-            LoadLastRSOCSerialNumber()
+            GenerateNewRSOCSerialNumber()
             Me.dtRSOCInspection.Text = ""
             Me.dtRSOCReportSentOn.Value = Today
             Me.btnSaveRSOC.Text = "Save"
@@ -5398,7 +5363,7 @@ errhandler:
             Me.PanelDA.Visible = True
             DAEditMode = False
             ClearDAFields()
-            LoadLastDANumber()
+            GenerateNewDANumber()
             Me.txtDAYear.Text = Year(Today)
             Me.dtDAEntry.Value = Today
             Me.btnSaveDA.Text = "Save"
@@ -5409,7 +5374,7 @@ errhandler:
             Me.PanelID.Visible = True
             IDEditMode = False
             ClearIDFields()
-            LoadLastIDNumber()
+            GenerateNewIDNumber()
             Me.btnSaveID.Text = "Save"
             cmbIDSex.SelectedIndex = 1
         End If
@@ -5418,7 +5383,7 @@ errhandler:
             Me.PanelAC.Visible = True
             ACEditMode = False
             ClearACFields()
-            LoadLastACNumber()
+            GenerateNewACNumber()
             Me.btnSaveAC.Text = "Save"
             cmbACSex.SelectedIndex = 1
         End If
@@ -5428,7 +5393,7 @@ errhandler:
             Me.PanelFPA.Visible = True
             FPAEditMode = False
             ClearFPAFields()
-            LoadLastFPANumber()
+            GenerateNewFPANumber()
             Me.txtFPAYear.Text = Year(Today)
             Me.dtFPADate.Value = Today
             Me.btnSaveFPA.Text = "Save"
@@ -5445,7 +5410,7 @@ errhandler:
             Me.PanelCD.Visible = True
             CDEditMode = False
             ClearCDFields()
-            LoadLastCDNumber()
+            GenerateNewCDNumber()
             Me.txtCDYear.Text = Year(Today)
             Me.dtCDExamination.Value = Today
             Me.btnSaveCD.Text = "Save"
@@ -5469,333 +5434,336 @@ errhandler:
 
 
     Private Sub DeleteSelectedItem() Handles btnDelete.Click, btnDeleteContext.Click
-       Try
 
-        If CurrentTab = "IO" Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not available for Officer List", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
+        If blApplicationIsLoading Then Exit Sub
+
+        Try
+
+            If CurrentTab = "IO" Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not available for Officer List", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
 
             If CurrentTab = "OS" Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not available for Office Settings", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
-        If Me.chkPreventDeletion.Checked Then
-            MessageBoxEx.Show("Please click the down arrow to the right of the delete button and uncheck the box 'Prevent Deletion' to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        '###################   SOC ##############
-        If CurrentTab = "SOC" Then
-            If Me.SOCDatagrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            If Me.chkPreventDeletion.Checked Then
+                MessageBoxEx.Show("Please click the down arrow to the right of the delete button and uncheck the box 'Prevent Deletion' to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
-            If Me.SOCDatagrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '###################   SOC ##############
+            If CurrentTab = "SOC" Then
+                If Me.SOCDatagrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If SOCEditMode Then
-                    SOCEditMode = False
-                    Me.btnSaveSOC.Text = "Save"
+                    Exit Sub
                 End If
 
+                If Me.SOCDatagrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                OriginalSOCNumber = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
-                oldRow.Delete()
-
-                Me.SOCRegisterTableAdapter.DeleteSelectedRecord(OriginalSOCNumber)
-                ShowAlertMessage("Selected SOC record deleted!")
-                If Me.SOCDatagrid.SelectedRows.Count = 0 And Me.SOCDatagrid.RowCount <> 0 Then
-                    Me.SOCDatagrid.Rows(Me.SOCDatagrid.RowCount - 1).Selected = True
-                End If
-            End If
-        End If
-
-
-        If CurrentTab = "RSOC" Then
-            If Me.RSOCDatagrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            If Me.RSOCDatagrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If RSOCEditMode Then
-                    RSOCEditMode = False
-                    Me.btnSaveRSOC.Text = "Save"
+                    Exit Sub
                 End If
 
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-                OriginalRSOCSerialNumber = Me.RSOCDatagrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.SOCReportRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.SOCReportRegister.FindBySerialNo(OriginalRSOCSerialNumber)
-                oldRow.Delete()
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-                Me.RSOCRegisterTableAdapter.DeleteSelectedRecord(OriginalRSOCSerialNumber)
-                ShowAlertMessage("Selected SOC Report record deleted!")
-                If Me.RSOCDatagrid.SelectedRows.Count = 0 And Me.RSOCDatagrid.RowCount <> 0 Then
-                    Me.RSOCDatagrid.Rows(Me.RSOCDatagrid.RowCount - 1).Selected = True
+                    If SOCEditMode Then
+                        SOCEditMode = False
+                        Me.btnSaveSOC.Text = "Save"
+                    End If
+
+
+                    OriginalSOCNumber = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
+                    oldRow.Delete()
+
+                    Me.SOCRegisterTableAdapter.DeleteSelectedRecord(OriginalSOCNumber)
+                    ShowAlertMessage("Selected SOC record deleted!")
+                    If Me.SOCDatagrid.SelectedRows.Count = 0 And Me.SOCDatagrid.RowCount <> 0 Then
+                        Me.SOCDatagrid.Rows(Me.SOCDatagrid.RowCount - 1).Selected = True
+                    End If
                 End If
             End If
-        End If
 
 
+            If CurrentTab = "RSOC" Then
+                If Me.RSOCDatagrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-        If CurrentTab = "DA" Then
-            If Me.DADatagrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            If Me.DADatagrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If DAEditMode Then
-                    DAEditMode = False
-                    Me.btnSaveDA.Text = "Save"
+                    Exit Sub
                 End If
 
+                If Me.RSOCDatagrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                OriginalDANumber = Me.DADatagrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.DARegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.DARegister.FindByDANumber(OriginalDANumber)
-                oldRow.Delete()
-
-                Me.DARegisterTableAdapter.DeleteSelectedRecord(OriginalDANumber)
-                ShowAlertMessage("Selected DA record deleted!")
-                If Me.DADatagrid.SelectedRows.Count = 0 And Me.DADatagrid.RowCount <> 0 Then
-                    Me.DADatagrid.Rows(Me.DADatagrid.RowCount - 1).Selected = True
-                End If
-            End If
-        End If
-
-
-
-
-        If CurrentTab = "ID" Then
-            If Me.IDDatagrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            If Me.IDDatagrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If IDEditMode Then
-                    IDEditMode = False
-                    Me.btnSaveID.Text = "Save"
+                    Exit Sub
                 End If
 
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-                OriginalIDNumber = Me.IDDatagrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.IdentifiedSlipsRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.IdentifiedSlipsRegister.FindByIDNumber(OriginalIDNumber)
-                oldRow.Delete()
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-                Me.IDRegisterTableAdapter.DeleteSelectedRecord(OriginalIDNumber)
-                ShowAlertMessage("Selected Identified Slip record deleted!")
-                If Me.IDDatagrid.SelectedRows.Count = 0 And Me.IDDatagrid.RowCount <> 0 Then
-                    Me.IDDatagrid.Rows(Me.IDDatagrid.RowCount - 1).Selected = True
+                    If RSOCEditMode Then
+                        RSOCEditMode = False
+                        Me.btnSaveRSOC.Text = "Save"
+                    End If
+
+
+                    OriginalRSOCSerialNumber = Me.RSOCDatagrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.SOCReportRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.SOCReportRegister.FindBySerialNo(OriginalRSOCSerialNumber)
+                    oldRow.Delete()
+
+                    Me.RSOCRegisterTableAdapter.DeleteSelectedRecord(OriginalRSOCSerialNumber)
+                    ShowAlertMessage("Selected SOC Report record deleted!")
+                    If Me.RSOCDatagrid.SelectedRows.Count = 0 And Me.RSOCDatagrid.RowCount <> 0 Then
+                        Me.RSOCDatagrid.Rows(Me.RSOCDatagrid.RowCount - 1).Selected = True
+                    End If
                 End If
             End If
-        End If
 
 
 
+            If CurrentTab = "DA" Then
+                If Me.DADatagrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-        If CurrentTab = "AC" Then
-            If Me.ACDatagrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            If Me.ACDatagrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If ACEditMode Then
-                    ACEditMode = False
-                    Me.btnSaveAC.Text = "Save"
+                    Exit Sub
                 End If
 
+                If Me.DADatagrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                OriginalACNumber = Me.ACDatagrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.ActiveCriminalsRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.ActiveCriminalsRegister.FindByACNumber(OriginalACNumber)
-                oldRow.Delete()
-
-                Me.ACRegisterTableAdapter.DeleteSelectedRecord(OriginalACNumber)
-                ShowAlertMessage("Selected Identified Slip record deleted!")
-                If Me.ACDatagrid.SelectedRows.Count = 0 And Me.ACDatagrid.RowCount <> 0 Then
-                    Me.ACDatagrid.Rows(Me.ACDatagrid.RowCount - 1).Selected = True
-                End If
-            End If
-        End If
-
-
-
-        If CurrentTab = "CD" Then
-            If Me.CDDataGrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            If Me.CDDataGrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If CDEditMode Then
-                    CDEditMode = False
-                    Me.btnSaveCD.Text = "Save"
+                    Exit Sub
                 End If
 
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-                OriginalCDNumber = Me.CDDataGrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.CDRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.CDRegister.FindByCDNumberWithYear(OriginalCDNumber)
-                oldRow.Delete()
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-                Me.CDRegisterTableAdapter.DeleteSelectedRecord(OriginalCDNumber)
-                ShowAlertMessage("Selected CD record deleted!")
-                If Me.CDDataGrid.SelectedRows.Count = 0 And Me.CDDataGrid.RowCount <> 0 Then
-                    Me.CDDataGrid.Rows(Me.CDDataGrid.RowCount - 1).Selected = True
+                    If DAEditMode Then
+                        DAEditMode = False
+                        Me.btnSaveDA.Text = "Save"
+                    End If
+
+
+                    OriginalDANumber = Me.DADatagrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.DARegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.DARegister.FindByDANumber(OriginalDANumber)
+                    oldRow.Delete()
+
+                    Me.DARegisterTableAdapter.DeleteSelectedRecord(OriginalDANumber)
+                    ShowAlertMessage("Selected DA record deleted!")
+                    If Me.DADatagrid.SelectedRows.Count = 0 And Me.DADatagrid.RowCount <> 0 Then
+                        Me.DADatagrid.Rows(Me.DADatagrid.RowCount - 1).Selected = True
+                    End If
                 End If
             End If
-        End If
 
 
-        If CurrentTab = "FPA" Then
-            If Me.FPADataGrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                Exit Sub
-            End If
 
-            If Me.FPADataGrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If CurrentTab = "ID" Then
+                If Me.IDDatagrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If FPAEditMode Then
-                    FPAEditMode = False
-                    Me.btnSaveFPA.Text = "Save"
+                    Exit Sub
                 End If
 
+                If Me.IDDatagrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                OriginalFPANumber = Me.FPADataGrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.FPAttestationRegisterRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.FPAttestationRegister.FindByFPNumber(OriginalFPANumber)
-                oldRow.Delete()
-
-                Me.FPARegisterTableAdapter.DeleteSelectedRecord(OriginalFPANumber)
-                ShowAlertMessage("Selected record deleted!")
-                If Me.FPADataGrid.SelectedRows.Count = 0 And Me.FPADataGrid.RowCount <> 0 Then
-                    Me.FPADataGrid.Rows(Me.FPADataGrid.RowCount - 1).Selected = True
-                End If
-            End If
-        End If
-
-        '###################   PS ##############
-
-        If CurrentTab = "PS" Then
-            If Me.PSDataGrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            If Me.PSDataGrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                Exit Sub
-            End If
-
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Police Station Name?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If PSEditMode Then
-                    PSEditMode = False
-                    Me.btnSavePS.Text = "Save"
+                    Exit Sub
                 End If
 
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-                OriginalPSName = Me.PSDataGrid.SelectedCells(0).Value.ToString()
-                Dim oldRow As FingerPrintDataSet.PoliceStationListRow 'add a new row to insert values
-                oldRow = Me.FingerPrintDataSet.PoliceStationList.FindByPoliceStation(OriginalPSName)
-                oldRow.Delete()
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-                Me.PSRegisterTableAdapter.DeleteSelectedRecord(OriginalPSName)
-                ShowAlertMessage("Selected Police Station Name deleted!")
-                If Me.PSDataGrid.SelectedRows.Count = 0 And Me.PSDataGrid.RowCount <> 0 Then
-                    Me.PSDataGrid.Rows(Me.PSDataGrid.RowCount - 1).Selected = True
+                    If IDEditMode Then
+                        IDEditMode = False
+                        Me.btnSaveID.Text = "Save"
+                    End If
+
+
+                    OriginalIDNumber = Me.IDDatagrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.IdentifiedSlipsRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.IdentifiedSlipsRegister.FindByIDNumber(OriginalIDNumber)
+                    oldRow.Delete()
+
+                    Me.IDRegisterTableAdapter.DeleteSelectedRecord(OriginalIDNumber)
+                    ShowAlertMessage("Selected Identified Slip record deleted!")
+                    If Me.IDDatagrid.SelectedRows.Count = 0 And Me.IDDatagrid.RowCount <> 0 Then
+                        Me.IDDatagrid.Rows(Me.IDDatagrid.RowCount - 1).Selected = True
+                    End If
                 End If
-                PSListChanged = True
             End If
-        End If
 
-        
 
-        DisplayDatabaseInformation()
+
+
+            If CurrentTab = "AC" Then
+                If Me.ACDatagrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                If Me.ACDatagrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    If ACEditMode Then
+                        ACEditMode = False
+                        Me.btnSaveAC.Text = "Save"
+                    End If
+
+
+                    OriginalACNumber = Me.ACDatagrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.ActiveCriminalsRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.ActiveCriminalsRegister.FindByACNumber(OriginalACNumber)
+                    oldRow.Delete()
+
+                    Me.ACRegisterTableAdapter.DeleteSelectedRecord(OriginalACNumber)
+                    ShowAlertMessage("Selected Identified Slip record deleted!")
+                    If Me.ACDatagrid.SelectedRows.Count = 0 And Me.ACDatagrid.RowCount <> 0 Then
+                        Me.ACDatagrid.Rows(Me.ACDatagrid.RowCount - 1).Selected = True
+                    End If
+                End If
+            End If
+
+
+
+            If CurrentTab = "CD" Then
+                If Me.CDDataGrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                If Me.CDDataGrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    If CDEditMode Then
+                        CDEditMode = False
+                        Me.btnSaveCD.Text = "Save"
+                    End If
+
+
+                    OriginalCDNumber = Me.CDDataGrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.CDRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.CDRegister.FindByCDNumberWithYear(OriginalCDNumber)
+                    oldRow.Delete()
+
+                    Me.CDRegisterTableAdapter.DeleteSelectedRecord(OriginalCDNumber)
+                    ShowAlertMessage("Selected CD record deleted!")
+                    If Me.CDDataGrid.SelectedRows.Count = 0 And Me.CDDataGrid.RowCount <> 0 Then
+                        Me.CDDataGrid.Rows(Me.CDDataGrid.RowCount - 1).Selected = True
+                    End If
+                End If
+            End If
+
+
+            If CurrentTab = "FPA" Then
+                If Me.FPADataGrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                If Me.FPADataGrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    If FPAEditMode Then
+                        FPAEditMode = False
+                        Me.btnSaveFPA.Text = "Save"
+                    End If
+
+
+                    OriginalFPANumber = Me.FPADataGrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.FPAttestationRegisterRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.FPAttestationRegister.FindByFPNumber(OriginalFPANumber)
+                    oldRow.Delete()
+
+                    Me.FPARegisterTableAdapter.DeleteSelectedRecord(OriginalFPANumber)
+                    ShowAlertMessage("Selected record deleted!")
+                    If Me.FPADataGrid.SelectedRows.Count = 0 And Me.FPADataGrid.RowCount <> 0 Then
+                        Me.FPADataGrid.Rows(Me.FPADataGrid.RowCount - 1).Selected = True
+                    End If
+                End If
+            End If
+
+            '###################   PS ##############
+
+            If CurrentTab = "PS" Then
+                If Me.PSDataGrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                If Me.PSDataGrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Police Station Name?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    If PSEditMode Then
+                        PSEditMode = False
+                        Me.btnSavePS.Text = "Save"
+                    End If
+
+
+                    OriginalPSName = Me.PSDataGrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.PoliceStationListRow 'add a new row to insert values
+                    oldRow = Me.FingerPrintDataSet.PoliceStationList.FindByPoliceStation(OriginalPSName)
+                    oldRow.Delete()
+
+                    Me.PSRegisterTableAdapter.DeleteSelectedRecord(OriginalPSName)
+                    ShowAlertMessage("Selected Police Station Name deleted!")
+                    If Me.PSDataGrid.SelectedRows.Count = 0 And Me.PSDataGrid.RowCount <> 0 Then
+                        Me.PSDataGrid.Rows(Me.PSDataGrid.RowCount - 1).Selected = True
+                    End If
+                    PSListChanged = True
+                End If
+            End If
+
+
+
+            DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -5808,170 +5776,170 @@ errhandler:
     End Sub
 
     Private Sub DeleteAllRecords() Handles btnDeleteAll.Click
-       Try
+        Try
 
-        If Me.chkPreventDeletion.Checked Then
-            MessageBoxEx.Show("Please uncheck the box 'Prevent Deletion' next to the Delete button to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-
-        frmInputBox.SetTitleandMessage("Confirm Delete All Records", "Please enter the words 'I want to delete all records' to confirm deletion. This is a security measure.")
-        frmInputBox.AcceptButton = frmInputBox.btnCancel
-        frmInputBox.ShowDialog()
-        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
-        If frmInputBox.txtInputBox.Text <> "I want to delete all records" Then
-            MessageBoxEx.Show("The words you entered do not match the test words!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-
-        End If
-
-
-
-        '###################   SOC  ##############
-        If CurrentTab = "SOC" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
-
-                If SOCEditMode Then
-                    SOCEditMode = False
-                    Me.btnSaveSOC.Text = "Save"
-                End If
-
-                Me.SOCRegisterTableAdapter.DeleteAllRecords()
-                Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
-                ShowAlertMessage("All records deleted from SOC Register!")
+            If Me.chkPreventDeletion.Checked Then
+                MessageBoxEx.Show("Please uncheck the box 'Prevent Deletion' next to the Delete button to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
             End If
-        End If
 
-        If CurrentTab = "RSOC" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-            If reply = Windows.Forms.DialogResult.Yes Then
+            frmInputBox.SetTitleandMessage("Confirm Delete All Records", "Please enter the words 'I want to delete all records' to confirm deletion. This is a security measure.")
+            frmInputBox.AcceptButton = frmInputBox.btnCancel
+            frmInputBox.ShowDialog()
+            If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+            If frmInputBox.txtInputBox.Text <> "I want to delete all records" Then
+                MessageBoxEx.Show("The words you entered do not match the test words!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
 
-                If RSOCEditMode Then
-                    RSOCEditMode = False
-                    Me.btnSaveRSOC.Text = "Save"
-                End If
-
-                Me.RSOCRegisterTableAdapter.DeleteAllRecords()
-                Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
-                LoadLastRSOCSerialNumber()
-                ShowAlertMessage("All records deleted from SOC Reports Register!")
             End If
-        End If
 
 
-        If CurrentTab = "FPA" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-            If reply = Windows.Forms.DialogResult.Yes Then
+            '###################   SOC  ##############
+            If CurrentTab = "SOC" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-                If FPAEditMode Then
-                    FPAEditMode = False
-                    Me.btnSaveFPA.Text = "Save"
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    If SOCEditMode Then
+                        SOCEditMode = False
+                        Me.btnSaveSOC.Text = "Save"
+                    End If
+
+                    Me.SOCRegisterTableAdapter.DeleteAllRecords()
+                    Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
+                    ShowAlertMessage("All records deleted from SOC Register!")
                 End If
-
-                Me.FPARegisterTableAdapter.DeleteAllRecords()
-                Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
-                ShowAlertMessage("All records deleted from FP Attestation Register!")
             End If
-        End If
 
-        If CurrentTab = "DA" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+            If CurrentTab = "RSOC" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-            If reply = Windows.Forms.DialogResult.Yes Then
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-                If DAEditMode Then
-                    DAEditMode = False
-                    Me.btnSaveDA.Text = "Save"
+                    If RSOCEditMode Then
+                        RSOCEditMode = False
+                        Me.btnSaveRSOC.Text = "Save"
+                    End If
+
+                    Me.RSOCRegisterTableAdapter.DeleteAllRecords()
+                    Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
+                    GenerateNewRSOCSerialNumber()
+                    ShowAlertMessage("All records deleted from SOC Reports Register!")
                 End If
-
-                Me.DARegisterTableAdapter.DeleteAllRecords()
-                Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
-                ShowAlertMessage("All records deleted from DA Register!")
             End If
-        End If
 
 
-        If CurrentTab = "ID" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+            If CurrentTab = "FPA" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-            If reply = Windows.Forms.DialogResult.Yes Then
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-                If IDEditMode Then
-                    IDEditMode = False
-                    Me.btnSaveID.Text = "Save"
+                    If FPAEditMode Then
+                        FPAEditMode = False
+                        Me.btnSaveFPA.Text = "Save"
+                    End If
+
+                    Me.FPARegisterTableAdapter.DeleteAllRecords()
+                    Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
+                    ShowAlertMessage("All records deleted from FP Attestation Register!")
                 End If
-
-                Me.IDRegisterTableAdapter.DeleteAllRecords()
-                Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
-                ShowAlertMessage("All records deleted from Identified Slips Register!")
             End If
-        End If
 
-        If CurrentTab = "AC" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+            If CurrentTab = "DA" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-            If reply = Windows.Forms.DialogResult.Yes Then
+                If reply = Windows.Forms.DialogResult.Yes Then
 
+                    If DAEditMode Then
+                        DAEditMode = False
+                        Me.btnSaveDA.Text = "Save"
+                    End If
 
-                If ACEditMode Then
-                    ACEditMode = False
-                    Me.btnSaveAC.Text = "Save"
+                    Me.DARegisterTableAdapter.DeleteAllRecords()
+                    Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
+                    ShowAlertMessage("All records deleted from DA Register!")
                 End If
-
-                Me.ACRegisterTableAdapter.DeleteAllRecords()
-                Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
-                ShowAlertMessage("All records deleted from Active Criminal Slips Register!")
             End If
-        End If
 
 
+            If CurrentTab = "ID" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-        If CurrentTab = "CD" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                If reply = Windows.Forms.DialogResult.Yes Then
 
-            If reply = Windows.Forms.DialogResult.Yes Then
+                    If IDEditMode Then
+                        IDEditMode = False
+                        Me.btnSaveID.Text = "Save"
+                    End If
 
-
-                If CDEditMode Then
-                    CDEditMode = False
-                    Me.btnSaveCD.Text = "Save"
+                    Me.IDRegisterTableAdapter.DeleteAllRecords()
+                    Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
+                    ShowAlertMessage("All records deleted from Identified Slips Register!")
                 End If
-
-                Me.CDRegisterTableAdapter.DeleteAllRecords()
-                Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
-                ShowAlertMessage("All records deleted from Court Duty Register!")
             End If
-        End If
 
-        '###################   PS ##############
+            If CurrentTab = "AC" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
-        If CurrentTab = "PS" Then
-            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Police Station List?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-            If reply = Windows.Forms.DialogResult.Yes Then
+                If reply = Windows.Forms.DialogResult.Yes Then
 
 
-                If PSEditMode Then
-                    PSEditMode = False
-                    Me.btnSavePS.Text = "Save"
+                    If ACEditMode Then
+                        ACEditMode = False
+                        Me.btnSaveAC.Text = "Save"
+                    End If
+
+                    Me.ACRegisterTableAdapter.DeleteAllRecords()
+                    Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
+                    ShowAlertMessage("All records deleted from Active Criminal Slips Register!")
                 End If
-
-                Me.PSRegisterTableAdapter.DeleteAllRecords()
-                Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
-                ShowAlertMessage("All records deleted from Police Station List!")
-                Me.cmbSOCPoliceStation.Items.Clear()
             End If
-        End If
 
-        DisplayDatabaseInformation()
+
+
+            If CurrentTab = "CD" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+
+                    If CDEditMode Then
+                        CDEditMode = False
+                        Me.btnSaveCD.Text = "Save"
+                    End If
+
+                    Me.CDRegisterTableAdapter.DeleteAllRecords()
+                    Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
+                    ShowAlertMessage("All records deleted from Court Duty Register!")
+                End If
+            End If
+
+            '###################   PS ##############
+
+            If CurrentTab = "PS" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Police Station List?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+
+                    If PSEditMode Then
+                        PSEditMode = False
+                        Me.btnSavePS.Text = "Save"
+                    End If
+
+                    Me.PSRegisterTableAdapter.DeleteAllRecords()
+                    Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
+                    ShowAlertMessage("All records deleted from Police Station List!")
+                    Me.cmbSOCPoliceStation.Items.Clear()
+                End If
+            End If
+
+            DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
@@ -5979,6 +5947,9 @@ errhandler:
 
 #Region "EDIT BUTTON ACTION"
     Private Sub OpenRecordForEditing() Handles btnEdit.Click, btnEditContext.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
 
         If CurrentTab = "SOC" Then
@@ -6155,7 +6126,7 @@ errhandler:
             OriginalDANumber = Me.txtDANumber.Text
             Me.txtDANumber.Focus()
             Me.txtDAYear.Text = Year(Me.dtDAEntry.Value)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6202,7 +6173,7 @@ errhandler:
             End If
             OriginalIDNumber = Me.txtIDNumber.Text
             Me.txtIDNumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6250,7 +6221,7 @@ errhandler:
             End If
             OriginalACNumber = Me.txtACNumber.Text
             Me.txtACNumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6344,9 +6315,10 @@ errhandler:
 
 #Region "OPEN  BUTTON ACTION"
     Private Sub OpenRecord() Handles btnOpen.Click, btnOpenContext.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
-
-
         If CurrentTab = "SOC" Then
 
             SOCEditMode = False
@@ -6523,7 +6495,7 @@ errhandler:
             OriginalDANumber = Me.txtDANumber.Text
             Me.txtDANumber.Focus()
             Me.txtDAYear.Text = Year(Me.dtDAEntry.Value)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6569,7 +6541,7 @@ errhandler:
             End If
             OriginalIDNumber = Me.txtIDNumber.Text
             Me.txtIDNumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6614,7 +6586,7 @@ errhandler:
             End If
             OriginalACNumber = Me.txtACNumber.Text
             Me.txtACNumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6718,11 +6690,11 @@ errhandler:
         Me.txtSOCNumberOnly.Text = n.ToString
     End Sub
 
-    Private Sub LoadLastSOCNumber()
+    Private Sub GenerateNewSOCNumber()
         On Error Resume Next
         Dim y As String = Year(Today)
-        If Me.chkSOCTwodigits.Checked Then y = Strings.Right(y, 2)
         Dim n As String = Val(Me.SOCRegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
+        If Me.chkSOCTwodigits.Checked Then y = Strings.Right(y, 2)
         Me.txtSOCNumber.Text = n.ToString & "/" & y
         Me.txtSOCNumberOnly.Text = n.ToString
         Me.txtSOCNumber.Select(Me.txtSOCNumber.Text.Length, 0)
@@ -6733,7 +6705,7 @@ errhandler:
         Me.txtRSOCSerialNumber.Text = LastRSOCNumber + 1
     End Sub
 
-    Private Sub LoadLastRSOCSerialNumber()
+    Private Sub GenerateNewRSOCSerialNumber()
         On Error Resume Next
         Me.txtRSOCSerialNumber.Text = Val(Me.RSOCRegisterTableAdapter.ScalarQueryMaxNumber()) + 1
 
@@ -6749,12 +6721,11 @@ errhandler:
         Me.txtDANumberOnly.Text = n.ToString
     End Sub
 
-    Private Sub LoadLastDANumber()
+    Private Sub GenerateNewDANumber()
         On Error Resume Next
         Dim y As String = Year(Today)
-        If Me.chkDATwodigits.Checked Then y = Strings.Right(y, 2)
-
         Dim n As Integer = Val(Me.DARegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
+        If Me.chkDATwodigits.Checked Then y = Strings.Right(y, 2)
         Me.txtDANumber.Text = n.ToString & "/" & y
         Me.txtDANumberOnly.Text = n.ToString
 
@@ -6766,7 +6737,7 @@ errhandler:
         Me.txtIDNumber.Text = LastIDNumber + 1
     End Sub
 
-    Private Sub LoadLastIDNumber()
+    Private Sub GenerateNewIDNumber()
         On Error Resume Next
         Me.txtIDNumber.Text = Val(Me.IDRegisterTableAdapter.ScalarQueryMaxNumber()) + 1
 
@@ -6778,7 +6749,7 @@ errhandler:
         Me.txtACNumber.Text = LastACNumber + 1
     End Sub
 
-    Private Sub LoadLastACNumber()
+    Private Sub GenerateNewACNumber()
         On Error Resume Next
         Me.txtACNumber.Text = Val(Me.ACRegisterTableAdapter.ScalarQueryMaxNumber()) + 1
 
@@ -6795,12 +6766,11 @@ errhandler:
         Me.txtCDNumberOnly.Text = n.ToString
     End Sub
 
-    Private Sub LoadLastCDNumber()
+    Private Sub GenerateNewCDNumber()
         On Error Resume Next
         Dim y As String = Year(Today)
-        If Me.chkCDTwodigits.Checked Then y = Strings.Right(y, 2)
-
         Dim n As Integer = Val(Me.CDRegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
+        If Me.chkCDTwodigits.Checked Then y = Strings.Right(y, 2)
         Me.txtCDNumber.Text = n.ToString & "/" & y
         Me.txtCDNumberOnly.Text = n.ToString
 
@@ -6816,12 +6786,11 @@ errhandler:
         Me.txtFPANumberOnly.Text = n.ToString
     End Sub
 
-    Private Sub LoadLastFPANumber()
+    Private Sub GenerateNewFPANumber()
         On Error Resume Next
         Dim y As String = Year(Today)
-        If Me.chkFPATwodigits.Checked Then y = Strings.Right(y, 2)
-
         Dim n As Integer = Val(Me.FPARegisterTableAdapter.ScalarQueryMaxNumber(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
+        If Me.chkFPATwodigits.Checked Then y = Strings.Right(y, 2)
         Me.txtFPANumber.Text = n.ToString & "/" & y
         Me.txtFPANumberOnly.Text = n.ToString
 
@@ -6875,7 +6844,7 @@ errhandler:
 
     Public Sub LoadOfficerListToTable()
         Me.OfficerTableAdapter.Fill(Me.FingerPrintDataSet.OfficerTable)
-            Dim cnt = Me.FingerPrintDataSet.OfficerTable.Count
+        Dim cnt = Me.FingerPrintDataSet.OfficerTable.Count
 
         If cnt > 0 Then
 
@@ -6887,42 +6856,42 @@ errhandler:
             Me.IODatagrid.Rows(5).Cells(1).Value = Me.FingerPrintDataSet.OfficerTable(0).Photographer.ToString
         End If
 
-            If cnt > 1 Then
+        If cnt > 1 Then
             Me.IODatagrid.Rows(0).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).TI
-                Me.IODatagrid.Rows(1).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPE1
-                Me.IODatagrid.Rows(2).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPE2
-                Me.IODatagrid.Rows(3).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPE3
-                Me.IODatagrid.Rows(4).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPS
-                Me.IODatagrid.Rows(5).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).Photographer
+            Me.IODatagrid.Rows(1).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPE1
+            Me.IODatagrid.Rows(2).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPE2
+            Me.IODatagrid.Rows(3).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPE3
+            Me.IODatagrid.Rows(4).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).FPS
+            Me.IODatagrid.Rows(5).Cells(2).Value = Me.FingerPrintDataSet.OfficerTable(1).Photographer
 
-            End If
-
-            If cnt > 2 Then
-                Me.IODatagrid.Rows(0).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).TI
-                Me.IODatagrid.Rows(1).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPE1
-                Me.IODatagrid.Rows(2).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPE2
-                Me.IODatagrid.Rows(3).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPE3
-                Me.IODatagrid.Rows(4).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPS
-                Me.IODatagrid.Rows(5).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).Photographer
-
-            End If
-
-            If cnt > 3 Then
-            Me.IODatagrid.Rows(0).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).TI
-                Me.IODatagrid.Rows(1).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPE1
-                Me.IODatagrid.Rows(2).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPE2
-                Me.IODatagrid.Rows(3).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPE3
-                Me.IODatagrid.Rows(4).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPS
-                Me.IODatagrid.Rows(5).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).Photographer
         End If
 
-            If cnt > 4 Then
-                Me.IODatagrid.Rows(0).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).TI
-                Me.IODatagrid.Rows(1).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPE1
-                Me.IODatagrid.Rows(2).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPE2
-                Me.IODatagrid.Rows(3).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPE3
-                Me.IODatagrid.Rows(4).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPS
-                Me.IODatagrid.Rows(5).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).Photographer
+        If cnt > 2 Then
+            Me.IODatagrid.Rows(0).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).TI
+            Me.IODatagrid.Rows(1).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPE1
+            Me.IODatagrid.Rows(2).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPE2
+            Me.IODatagrid.Rows(3).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPE3
+            Me.IODatagrid.Rows(4).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).FPS
+            Me.IODatagrid.Rows(5).Cells(3).Value = Me.FingerPrintDataSet.OfficerTable(2).Photographer
+
+        End If
+
+        If cnt > 3 Then
+            Me.IODatagrid.Rows(0).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).TI
+            Me.IODatagrid.Rows(1).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPE1
+            Me.IODatagrid.Rows(2).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPE2
+            Me.IODatagrid.Rows(3).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPE3
+            Me.IODatagrid.Rows(4).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).FPS
+            Me.IODatagrid.Rows(5).Cells(4).Value = Me.FingerPrintDataSet.OfficerTable(3).Photographer
+        End If
+
+        If cnt > 4 Then
+            Me.IODatagrid.Rows(0).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).TI
+            Me.IODatagrid.Rows(1).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPE1
+            Me.IODatagrid.Rows(2).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPE2
+            Me.IODatagrid.Rows(3).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPE3
+            Me.IODatagrid.Rows(4).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).FPS
+            Me.IODatagrid.Rows(5).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).Photographer
         End If
 
     End Sub
@@ -7228,7 +7197,7 @@ errhandler:
     End Sub
 
 
-   
+
 #End Region
 
 
@@ -7289,7 +7258,7 @@ errhandler:
 
     End Sub
 
-  
+
 
 
     Private Sub AppendSOCYear() Handles txtSOCNumber.Leave, txtSOCCrimeNumber.Leave
@@ -7697,124 +7666,124 @@ errhandler:
 
 
     Private Sub SaveNewSOCEntry()
-       Try
+        Try
 
-        OriginalSOCNumber = Trim(Me.txtSOCNumber.Text)
-        GenerateSOCNumberWithoutYear(OriginalSOCNumber)
-        Dim sYear = Me.txtSOCNumberOnly.Text
-        Dim dto = Trim(Me.dtSOCOccurrence.Text)
-        Dim ps = Trim(Me.cmbSOCPoliceStation.Text)
-        Dim cr = Trim(Me.txtSOCCrimeNumber.Text)
-        Dim sec = Trim(Me.txtSOCSection.Text)
-        Dim po = Trim(Me.txtSOCPlace.Text)
-        Dim complainant = Trim(Me.txtSOCComplainant.Text)
-        Dim mo = Trim(Me.txtSOCModus.Text)
-        Dim pl = Trim(Me.txtSOCPropertyLost.Text)
-        Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
-        Dim cpunfit = Me.txtSOCCPsUnfit.Value
-        Dim cpeliminated = Me.txtSOCCPsEliminated.Value
-        Dim cpremaining = Me.txtSOCCPsRemaining.Value
-        Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
-        Dim photographer = Trim(Me.txtSOCPhotographer.Text)
-        Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
-        Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
-        Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
-        Dim gist = Trim(Me.txtSOCGist.Text)
-        Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-        Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
-        Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
-        Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-        Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
-        Dim cpsidentified = ""
-        If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
-        Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
+            OriginalSOCNumber = Trim(Me.txtSOCNumber.Text)
+            GenerateSOCNumberWithoutYear(OriginalSOCNumber)
+            Dim sYear = Me.txtSOCNumberOnly.Text
+            Dim dto = Trim(Me.dtSOCOccurrence.Text)
+            Dim ps = Trim(Me.cmbSOCPoliceStation.Text)
+            Dim cr = Trim(Me.txtSOCCrimeNumber.Text)
+            Dim sec = Trim(Me.txtSOCSection.Text)
+            Dim po = Trim(Me.txtSOCPlace.Text)
+            Dim complainant = Trim(Me.txtSOCComplainant.Text)
+            Dim mo = Trim(Me.txtSOCModus.Text)
+            Dim pl = Trim(Me.txtSOCPropertyLost.Text)
+            Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
+            Dim cpunfit = Me.txtSOCCPsUnfit.Value
+            Dim cpeliminated = Me.txtSOCCPsEliminated.Value
+            Dim cpremaining = Me.txtSOCCPsRemaining.Value
+            Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
+            Dim photographer = Trim(Me.txtSOCPhotographer.Text)
+            Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
+            Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
+            Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
+            Dim gist = Trim(Me.txtSOCGist.Text)
+            Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
+            Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
+            Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
+            Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
+            Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
+            Dim cpsidentified = ""
+            If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
+            Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
 
-        If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
-            If comparison.ToLower.StartsWith("identified as") = False Then
-                comparison = "Identified as " & identifiedas
-            End If
-        End If
-
-        If filestatus.ToLower = "otherwise detected" Then
-            If comparison.ToLower.StartsWith("otherwise detected") = False Then
-                comparison = "Otherwise detected"
-            End If
-        End If
-
-
-        If filestatus.ToLower <> "identified" Then
-            identifiedby = ""
-            identifiedas = ""
-            identificationdetails = ""
-            cpsidentified = ""
-            Me.dtIdentificationDate.Text = ""
-        End If
-
-
-        If SOCNumberExists(OriginalSOCNumber) Then
-            Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("A record for the SOC Number " & OriginalSOCNumber & " already exists. Do you want to over write it with the new data?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-            If r = Windows.Forms.DialogResult.Yes Then
-                OverWriteSOCData()
-            Else
-                Me.txtSOCNumber.Focus()
-                Me.txtSOCNumber.SelectAll()
+            If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
+                If comparison.ToLower.StartsWith("identified as") = False Then
+                    comparison = "Identified as " & identifiedas
+                End If
             End If
 
-            Exit Sub
-        End If
+            If filestatus.ToLower = "otherwise detected" Then
+                If comparison.ToLower.StartsWith("otherwise detected") = False Then
+                    comparison = "Otherwise detected"
+                End If
+            End If
+
+
+            If filestatus.ToLower <> "identified" Then
+                identifiedby = ""
+                identifiedas = ""
+                identificationdetails = ""
+                cpsidentified = ""
+                Me.dtIdentificationDate.Text = ""
+            End If
+
+
+            If SOCNumberExists(OriginalSOCNumber) Then
+                Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("A record for the SOC Number " & OriginalSOCNumber & " already exists. Do you want to over write it with the new data?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                If r = Windows.Forms.DialogResult.Yes Then
+                    OverWriteSOCData()
+                Else
+                    Me.txtSOCNumber.Focus()
+                    Me.txtSOCNumber.SelectAll()
+                End If
+
+                Exit Sub
+            End If
 
 
 
-        Dim newRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
-        newRow = Me.FingerPrintDataSet.SOCRegister.NewSOCRegisterRow()
-        With newRow
-            .SOCNumber = OriginalSOCNumber
-            .SOCYear = sYear
-            .DateOfInspection = Me.dtSOCInspection.ValueObject
+            Dim newRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
+            newRow = Me.FingerPrintDataSet.SOCRegister.NewSOCRegisterRow()
+            With newRow
+                .SOCNumber = OriginalSOCNumber
+                .SOCYear = sYear
+                .DateOfInspection = Me.dtSOCInspection.ValueObject
 
-            If Me.dtSOCReport.IsEmpty = False Then .DateOfReport = dtSOCReport.Value
+                If Me.dtSOCReport.IsEmpty = False Then .DateOfReport = dtSOCReport.Value
 
-            .DateOfOccurrence = dto
-            .PoliceStation = ps
-            .CrimeNumber = cr
-            .SectionOfLaw = sec
-            .PlaceOfOccurrence = po
-            .Complainant = complainant
-            .ModusOperandi = mo
-            .PropertyLost = pl
-            .ChancePrintsDeveloped = cpdeveloped
-            .ChancePrintsUnfit = cpunfit
-            .ChancePrintsEliminated = cpeliminated
-            .ChancePrintsRemaining = cpremaining
-            .ChancePrintDetails = cpdetails
-            .Photographer = photographer
-            .PhotoReceived = photoreceived
-            .DateOfReceptionOfPhoto = dateofreceptionofphoto
-            .InvestigatingOfficer = officer
-            .Gist = gist
-            .ComparisonDetails = comparison
-            .Remarks = identificationdetails
-            .GraveCrime = gravecrime
-            .FileStatus = filestatus
-            .IdentifiedBy = identifiedby
-            .CPsIdentified = cpsidentified
-            .IdentificationDate = Me.dtIdentificationDate.ValueObject
-            .IdentifiedAs = identifiedas
-        End With
+                .DateOfOccurrence = dto
+                .PoliceStation = ps
+                .CrimeNumber = cr
+                .SectionOfLaw = sec
+                .PlaceOfOccurrence = po
+                .Complainant = complainant
+                .ModusOperandi = mo
+                .PropertyLost = pl
+                .ChancePrintsDeveloped = cpdeveloped
+                .ChancePrintsUnfit = cpunfit
+                .ChancePrintsEliminated = cpeliminated
+                .ChancePrintsRemaining = cpremaining
+                .ChancePrintDetails = cpdetails
+                .Photographer = photographer
+                .PhotoReceived = photoreceived
+                .DateOfReceptionOfPhoto = dateofreceptionofphoto
+                .InvestigatingOfficer = officer
+                .Gist = gist
+                .ComparisonDetails = comparison
+                .Remarks = identificationdetails
+                .GraveCrime = gravecrime
+                .FileStatus = filestatus
+                .IdentifiedBy = identifiedby
+                .CPsIdentified = cpsidentified
+                .IdentificationDate = Me.dtIdentificationDate.ValueObject
+                .IdentifiedAs = identifiedas
+            End With
 
-        Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
-        Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
+            Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
+            Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-        Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, cpsidentified, Me.dtIdentificationDate.ValueObject, identifiedby, identifiedas) 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, cpsidentified, Me.dtIdentificationDate.ValueObject, identifiedby, identifiedas) 'update the database
 
-        InitializeSOCFields()
-        IncrementSOCNumber(OriginalSOCNumber)
+            InitializeSOCFields()
+            IncrementSOCNumber(OriginalSOCNumber)
 
 
-        DisplayDatabaseInformation()
-         Catch ex As Exception
+            DisplayDatabaseInformation()
+        Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -7834,138 +7803,138 @@ errhandler:
 
     Private Sub UpdateSOCData()
 
-       Try
+        Try
 
-        Dim NewSOCNumber As String = Trim(Me.txtSOCNumber.Text)
-        GenerateSOCNumberWithoutYear(NewSOCNumber)
-        Dim sYear = Me.txtSOCNumberOnly.Text
-        Dim dti = Me.dtSOCInspection.ValueObject
-        Dim dtr = Me.dtSOCReport.ValueObject
-        Dim dto = Trim(Me.dtSOCOccurrence.Text)
-        Dim ps = Trim(Me.cmbSOCPoliceStation.Text)
-        Dim cr = Trim(Me.txtSOCCrimeNumber.Text)
-        Dim sec = Trim(Me.txtSOCSection.Text)
-        Dim po = Trim(Me.txtSOCPlace.Text)
-        Dim complainant = Trim(Me.txtSOCComplainant.Text)
-        Dim mo = Trim(Me.txtSOCModus.Text)
-        Dim pl = Trim(Me.txtSOCPropertyLost.Text)
-        Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
-        Dim cpunfit = Me.txtSOCCPsUnfit.Value
-        Dim cpeliminated = Me.txtSOCCPsEliminated.Value
-        Dim cpremaining = Me.txtSOCCPsRemaining.Value
-        Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
-        Dim photographer = Trim(Me.txtSOCPhotographer.Text)
-        Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
-        Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
-        Dim gist = Trim(Me.txtSOCGist.Text)
-        Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
-        Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-        Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
-        Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
-        Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-        Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
-        Dim cpsidentified = ""
-        If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
-        Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
-
-
-        If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
-            If comparison.ToLower.StartsWith("identified as") = False Then
-                comparison = "Identified as " & identifiedas
-            End If
-        End If
-
-        If filestatus.ToLower = "otherwise detected" Then
-            If comparison.ToLower.StartsWith("otherwise detected") = False Then
-                comparison = "Otherwise detected"
-            End If
-        End If
-
-        If filestatus.ToLower <> "identified" Then
-            identifiedby = ""
-            identifiedas = ""
-            identificationdetails = ""
-            cpsidentified = ""
-            Me.dtIdentificationDate.Text = ""
-        End If
-
-        If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
-            If SOCNumberExists(NewSOCNumber) Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("A record for the SOC Number " & NewSOCNumber & " already exists. Please enter a different SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.txtSOCNumber.Focus()
-                Me.txtSOCNumber.SelectAll()
-                Exit Sub
-            End If
-        End If
+            Dim NewSOCNumber As String = Trim(Me.txtSOCNumber.Text)
+            GenerateSOCNumberWithoutYear(NewSOCNumber)
+            Dim sYear = Me.txtSOCNumberOnly.Text
+            Dim dti = Me.dtSOCInspection.ValueObject
+            Dim dtr = Me.dtSOCReport.ValueObject
+            Dim dto = Trim(Me.dtSOCOccurrence.Text)
+            Dim ps = Trim(Me.cmbSOCPoliceStation.Text)
+            Dim cr = Trim(Me.txtSOCCrimeNumber.Text)
+            Dim sec = Trim(Me.txtSOCSection.Text)
+            Dim po = Trim(Me.txtSOCPlace.Text)
+            Dim complainant = Trim(Me.txtSOCComplainant.Text)
+            Dim mo = Trim(Me.txtSOCModus.Text)
+            Dim pl = Trim(Me.txtSOCPropertyLost.Text)
+            Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
+            Dim cpunfit = Me.txtSOCCPsUnfit.Value
+            Dim cpeliminated = Me.txtSOCCPsEliminated.Value
+            Dim cpremaining = Me.txtSOCCPsRemaining.Value
+            Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
+            Dim photographer = Trim(Me.txtSOCPhotographer.Text)
+            Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
+            Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
+            Dim gist = Trim(Me.txtSOCGist.Text)
+            Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
+            Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
+            Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
+            Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
+            Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
+            Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
+            Dim cpsidentified = ""
+            If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
+            Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
 
 
-        Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
-        oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
-        If oldRow IsNot Nothing Then
-
-            With oldRow
-                .SOCNumber = NewSOCNumber
-                .SOCYear = sYear
-                .DateOfInspection = dtSOCInspection.Value
-
-                If Me.dtSOCReport.IsEmpty = False Then
-                    .DateOfReport = dtSOCReport.Value
-                Else
-                    .DateOfReport = Nothing
+            If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
+                If comparison.ToLower.StartsWith("identified as") = False Then
+                    comparison = "Identified as " & identifiedas
                 End If
+            End If
 
-                .DateOfOccurrence = dto
-                .PoliceStation = ps
-                .CrimeNumber = cr
-                .SectionOfLaw = sec
-                .PlaceOfOccurrence = po
-                .Complainant = complainant
-                .ModusOperandi = mo
-                .PropertyLost = pl
-                .ChancePrintsDeveloped = cpdeveloped
-                .ChancePrintsUnfit = cpunfit
-                .ChancePrintsEliminated = cpeliminated
-                .ChancePrintsRemaining = cpremaining
-                .ChancePrintDetails = cpdetails
-                .Photographer = photographer
-                .PhotoReceived = photoreceived
-                .DateOfReceptionOfPhoto = dateofreceptionofphoto
-                .InvestigatingOfficer = officer
-                .Gist = gist
-                .ComparisonDetails = comparison
-                .Remarks = identificationdetails
-                .GraveCrime = gravecrime
-                .FileStatus = filestatus
-                .IdentifiedBy = identifiedby
-                .CPsIdentified = cpsidentified
-                .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                .IdentifiedAs = identifiedas
-            End With
-        End If
-        Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
+            If filestatus.ToLower = "otherwise detected" Then
+                If comparison.ToLower.StartsWith("otherwise detected") = False Then
+                    comparison = "Otherwise detected"
+                End If
+            End If
 
-        Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, OriginalSOCNumber)
+            If filestatus.ToLower <> "identified" Then
+                identifiedby = ""
+                identifiedas = ""
+                identificationdetails = ""
+                cpsidentified = ""
+                Me.dtIdentificationDate.Text = ""
+            End If
 
-        If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
-            Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
-            LoadRSOCRecords()
-        End If
+            If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
+                If SOCNumberExists(NewSOCNumber) Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("A record for the SOC Number " & NewSOCNumber & " already exists. Please enter a different SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Me.txtSOCNumber.Focus()
+                    Me.txtSOCNumber.SelectAll()
+                    Exit Sub
+                End If
+            End If
 
-        ShowAlertMessage("Selected Record updated successfully!")
-        InitializeSOCFields()
-        ' IncrementSOCNumber(NewSOCNumber)
-        LoadLastSOCNumber()
-        Me.dtSOCInspection.Value = Today
-        Me.dtSOCReport.Value = Today
 
-        Me.btnSaveSOC.Text = "Save"
-        SOCEditMode = False
+            Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
+            oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
+            If oldRow IsNot Nothing Then
 
-        DisplayDatabaseInformation()
-       
+                With oldRow
+                    .SOCNumber = NewSOCNumber
+                    .SOCYear = sYear
+                    .DateOfInspection = dtSOCInspection.Value
+
+                    If Me.dtSOCReport.IsEmpty = False Then
+                        .DateOfReport = dtSOCReport.Value
+                    Else
+                        .DateOfReport = Nothing
+                    End If
+
+                    .DateOfOccurrence = dto
+                    .PoliceStation = ps
+                    .CrimeNumber = cr
+                    .SectionOfLaw = sec
+                    .PlaceOfOccurrence = po
+                    .Complainant = complainant
+                    .ModusOperandi = mo
+                    .PropertyLost = pl
+                    .ChancePrintsDeveloped = cpdeveloped
+                    .ChancePrintsUnfit = cpunfit
+                    .ChancePrintsEliminated = cpeliminated
+                    .ChancePrintsRemaining = cpremaining
+                    .ChancePrintDetails = cpdetails
+                    .Photographer = photographer
+                    .PhotoReceived = photoreceived
+                    .DateOfReceptionOfPhoto = dateofreceptionofphoto
+                    .InvestigatingOfficer = officer
+                    .Gist = gist
+                    .ComparisonDetails = comparison
+                    .Remarks = identificationdetails
+                    .GraveCrime = gravecrime
+                    .FileStatus = filestatus
+                    .IdentifiedBy = identifiedby
+                    .CPsIdentified = cpsidentified
+                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
+                    .IdentifiedAs = identifiedas
+                End With
+            End If
+            Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
+
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, OriginalSOCNumber)
+
+            If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
+                Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
+                LoadRSOCRecords()
+            End If
+
+            ShowAlertMessage("Selected Record updated successfully!")
+            InitializeSOCFields()
+            ' IncrementSOCNumber(NewSOCNumber)
+            GenerateNewSOCNumber()
+            Me.dtSOCInspection.Value = Today
+            Me.dtSOCReport.Value = Today
+
+            Me.btnSaveSOC.Text = "Save"
+            SOCEditMode = False
+
+            DisplayDatabaseInformation()
+
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
         End Try
 
@@ -7977,121 +7946,121 @@ errhandler:
 #Region "OVERWRITE SOC DATA"
 
     Public Sub OverWriteSOCData()
-       Try
+        Try
 
-        Dim NewSOCNumber As String = Trim(Me.txtSOCNumber.Text)
-        GenerateSOCNumberWithoutYear(NewSOCNumber)
-        Dim sYear = Me.txtSOCNumberOnly.Text
-        Dim dti = Me.dtSOCInspection.ValueObject
-        Dim dtr = Me.dtSOCReport.ValueObject
-        Dim dto = Trim(Me.dtSOCOccurrence.Text)
-        Dim ps = Trim(Me.cmbSOCPoliceStation.Text)
-        Dim cr = Trim(Me.txtSOCCrimeNumber.Text)
-        Dim sec = Trim(Me.txtSOCSection.Text)
-        Dim po = Trim(Me.txtSOCPlace.Text)
-        Dim complainant = Trim(Me.txtSOCComplainant.Text)
-        Dim mo = Trim(Me.txtSOCModus.Text)
-        Dim pl = Trim(Me.txtSOCPropertyLost.Text)
-        Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
-        Dim cpunfit = Me.txtSOCCPsUnfit.Value
-        Dim cpeliminated = Me.txtSOCCPsEliminated.Value
-        Dim cpremaining = Me.txtSOCCPsRemaining.Value
-        Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
-        Dim photographer = Trim(Me.txtSOCPhotographer.Text)
-        Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
-        Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
-        Dim gist = Trim(Me.txtSOCGist.Text)
-        Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
-        Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-        Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
-        Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
-        Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-        Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
-        Dim cpsidentified = ""
-        If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
+            Dim NewSOCNumber As String = Trim(Me.txtSOCNumber.Text)
+            GenerateSOCNumberWithoutYear(NewSOCNumber)
+            Dim sYear = Me.txtSOCNumberOnly.Text
+            Dim dti = Me.dtSOCInspection.ValueObject
+            Dim dtr = Me.dtSOCReport.ValueObject
+            Dim dto = Trim(Me.dtSOCOccurrence.Text)
+            Dim ps = Trim(Me.cmbSOCPoliceStation.Text)
+            Dim cr = Trim(Me.txtSOCCrimeNumber.Text)
+            Dim sec = Trim(Me.txtSOCSection.Text)
+            Dim po = Trim(Me.txtSOCPlace.Text)
+            Dim complainant = Trim(Me.txtSOCComplainant.Text)
+            Dim mo = Trim(Me.txtSOCModus.Text)
+            Dim pl = Trim(Me.txtSOCPropertyLost.Text)
+            Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
+            Dim cpunfit = Me.txtSOCCPsUnfit.Value
+            Dim cpeliminated = Me.txtSOCCPsEliminated.Value
+            Dim cpremaining = Me.txtSOCCPsRemaining.Value
+            Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
+            Dim photographer = Trim(Me.txtSOCPhotographer.Text)
+            Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
+            Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
+            Dim gist = Trim(Me.txtSOCGist.Text)
+            Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
+            Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
+            Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
+            Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
+            Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
+            Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
+            Dim cpsidentified = ""
+            If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
 
-        Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
+            Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
 
-        If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
-            If comparison.ToLower.StartsWith("identified as") = False Then
-                comparison = "Identified as " & identifiedas
-            End If
-        End If
-
-        If filestatus.ToLower = "otherwise detected" Then
-            If comparison.ToLower.StartsWith("otherwise detected") = False Then
-                comparison = "Otherwise detected"
-            End If
-        End If
-
-        If filestatus.ToLower <> "identified" Then
-            identifiedby = ""
-            identifiedas = ""
-            identificationdetails = ""
-            cpsidentified = ""
-            Me.dtIdentificationDate.Text = ""
-        End If
-
-        Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
-        oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
-        If oldRow IsNot Nothing Then
-            With oldRow
-                .SOCNumber = NewSOCNumber
-                .SOCYear = sYear
-                .DateOfInspection = dtSOCInspection.Value
-
-                If Me.dtSOCReport.IsEmpty = False Then
-                    .DateOfReport = dtSOCReport.Value
-                Else
-                    .DateOfReport = Nothing
+            If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
+                If comparison.ToLower.StartsWith("identified as") = False Then
+                    comparison = "Identified as " & identifiedas
                 End If
+            End If
 
-                .DateOfOccurrence = dto
-                .PoliceStation = ps
-                .CrimeNumber = cr
-                .SectionOfLaw = sec
-                .PlaceOfOccurrence = po
-                .Complainant = complainant
-                .ModusOperandi = mo
-                .PropertyLost = pl
-                .ChancePrintsDeveloped = cpdeveloped
-                .ChancePrintsUnfit = cpunfit
-                .ChancePrintsEliminated = cpeliminated
-                .ChancePrintsRemaining = cpremaining
-                .ChancePrintDetails = cpdetails
-                .Photographer = photographer
-                .PhotoReceived = photoreceived
-                .DateOfReceptionOfPhoto = dateofreceptionofphoto
-                .InvestigatingOfficer = officer
-                .Gist = gist
-                .ComparisonDetails = comparison
-                .Remarks = identificationdetails
-                .GraveCrime = gravecrime
-                .FileStatus = filestatus
-                .IdentifiedBy = identifiedby
-                .CPsIdentified = cpsidentified
-                .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                .IdentifiedAs = identifiedas
-            End With
-        End If
-        Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
+            If filestatus.ToLower = "otherwise detected" Then
+                If comparison.ToLower.StartsWith("otherwise detected") = False Then
+                    comparison = "Otherwise detected"
+                End If
+            End If
 
-        Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, OriginalSOCNumber)
+            If filestatus.ToLower <> "identified" Then
+                identifiedby = ""
+                identifiedas = ""
+                identificationdetails = ""
+                cpsidentified = ""
+                Me.dtIdentificationDate.Text = ""
+            End If
 
-        ShowAlertMessage("SOC Record over writed!")
-        InitializeSOCFields()
-        ' IncrementSOCNumber(NewSOCNumber)
-        LoadLastSOCNumber()
-        Me.dtSOCInspection.Value = Today
-        Me.dtSOCReport.Value = Today
+            Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
+            oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
+            If oldRow IsNot Nothing Then
+                With oldRow
+                    .SOCNumber = NewSOCNumber
+                    .SOCYear = sYear
+                    .DateOfInspection = dtSOCInspection.Value
 
-        Me.btnSaveSOC.Text = "Save"
-        SOCEditMode = False
-        DisplayDatabaseInformation()
-        
+                    If Me.dtSOCReport.IsEmpty = False Then
+                        .DateOfReport = dtSOCReport.Value
+                    Else
+                        .DateOfReport = Nothing
+                    End If
+
+                    .DateOfOccurrence = dto
+                    .PoliceStation = ps
+                    .CrimeNumber = cr
+                    .SectionOfLaw = sec
+                    .PlaceOfOccurrence = po
+                    .Complainant = complainant
+                    .ModusOperandi = mo
+                    .PropertyLost = pl
+                    .ChancePrintsDeveloped = cpdeveloped
+                    .ChancePrintsUnfit = cpunfit
+                    .ChancePrintsEliminated = cpeliminated
+                    .ChancePrintsRemaining = cpremaining
+                    .ChancePrintDetails = cpdetails
+                    .Photographer = photographer
+                    .PhotoReceived = photoreceived
+                    .DateOfReceptionOfPhoto = dateofreceptionofphoto
+                    .InvestigatingOfficer = officer
+                    .Gist = gist
+                    .ComparisonDetails = comparison
+                    .Remarks = identificationdetails
+                    .GraveCrime = gravecrime
+                    .FileStatus = filestatus
+                    .IdentifiedBy = identifiedby
+                    .CPsIdentified = cpsidentified
+                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
+                    .IdentifiedAs = identifiedas
+                End With
+            End If
+            Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
+
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, OriginalSOCNumber)
+
+            ShowAlertMessage("SOC Record over writed!")
+            InitializeSOCFields()
+            ' IncrementSOCNumber(NewSOCNumber)
+            GenerateNewSOCNumber()
+            Me.dtSOCInspection.Value = Today
+            Me.dtSOCReport.Value = Today
+
+            Me.btnSaveSOC.Text = "Save"
+            SOCEditMode = False
+            DisplayDatabaseInformation()
+
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
         End Try
 
@@ -8152,10 +8121,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -8166,11 +8135,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -8315,11 +8284,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -8330,7 +8299,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtSOCYear.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -8468,11 +8437,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -8536,7 +8505,7 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(CPImageImportLocation)
             Call Shell("explorer.exe " & CPImageImportLocation, AppWinStyle.NormalFocus)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -8552,7 +8521,7 @@ errhandler:
         Else
             MessageBoxEx.Show("No chance prints have been imported for the selected SOC Number", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ImportChancePrints() Handles btnImportCP.Click
@@ -8623,7 +8592,7 @@ errhandler:
             ShowAlertMessage(i - 1 & " images imported sucessfully!")
         End If
         DisplayDatabaseInformation()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Exit Sub
 errhandler:
@@ -8635,7 +8604,7 @@ errhandler:
             ' ShowAlertMessage(Err.Description)
         End If
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -8829,7 +8798,7 @@ errhandler:
 
         If oldRow IsNot Nothing Then
             If RSOCEditMode Then
-                Me.Cursor = Cursors.Default '
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default '
                 Exit Sub
             End If
 
@@ -8895,7 +8864,7 @@ errhandler:
 
             End With
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub FindRSOCNumber(ByVal socno As String) ' Handles dtSOCInspection.GotFocus
@@ -9084,13 +9053,13 @@ errhandler:
         DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
     Private Sub SaveSOCReportOnGeneratingReport()
        Try
-        LoadLastRSOCSerialNumber()
+        GenerateNewRSOCSerialNumber()
         OriginalRSOCSerialNumber = Me.txtRSOCSerialNumber.Value
         GenerateRSOCNumberWithoutYear(Me.txtRSOCNumber.Text)
 
@@ -9136,7 +9105,7 @@ errhandler:
         Me.StatusBar.RecalcLayout()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9219,7 +9188,7 @@ errhandler:
 
         ShowAlertMessage("Selected Record updated successfully!")
         InitializeRSOCFields()
-        LoadLastRSOCSerialNumber()
+        GenerateNewRSOCSerialNumber()
         Me.dtRSOCInspection.Text = vbNullString
         Me.dtRSOCReportSentOn.Value = Today
 
@@ -9231,7 +9200,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.RSOCRegisterBindingSource.Position = Me.RSOCRegisterBindingSource.Find("SerialNo", OriginalRSOCSerialNumber)
         End Try
 
@@ -9296,7 +9265,7 @@ errhandler:
 
         ShowAlertMessage("Selected Record over writed!")
         InitializeRSOCFields()
-        LoadLastRSOCSerialNumber()
+        GenerateNewRSOCSerialNumber()
         Me.dtRSOCInspection.Text = vbNullString
         Me.dtRSOCReportSentOn.Value = Today
 
@@ -9308,7 +9277,7 @@ errhandler:
 
          Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.RSOCRegisterBindingSource.Position = Me.RSOCRegisterBindingSource.Find("SerialNo", OriginalRSOCSerialNumber)
         End Try
 
@@ -9332,10 +9301,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9407,11 +9376,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
@@ -9725,7 +9694,7 @@ errhandler:
         DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9793,7 +9762,7 @@ errhandler:
 
         InitializeDAFields()
         ' IncrementDANumber(NewDANumber)
-        LoadLastDANumber()
+        GenerateNewDANumber()
         Me.dtDAEntry.Value = Today
         Me.btnSaveDA.Text = "Save"
         DAEditMode = False
@@ -9803,7 +9772,7 @@ errhandler:
         
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.DARegisterBindingSource.Position = Me.DARegisterBindingSource.Find("DANumber", OriginalDANumber)
         End Try
 
@@ -9880,7 +9849,7 @@ errhandler:
 
         InitializeDAFields()
         ' IncrementDANumber(NewDANumber)
-        LoadLastDANumber()
+        GenerateNewDANumber()
         Me.dtDAEntry.Value = Today
 
         Me.btnSaveDA.Text = "Save"
@@ -9890,7 +9859,7 @@ errhandler:
        
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.DARegisterBindingSource.Position = Me.DARegisterBindingSource.Find("DANumber", OriginalDANumber)
         End Try
 
@@ -9914,10 +9883,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -10031,10 +10000,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -10047,7 +10016,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtDAYear.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -10160,10 +10129,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -10219,7 +10188,7 @@ errhandler:
 
             DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the DA Number which is used as the scanned image's File Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtDANumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -10236,7 +10205,7 @@ errhandler:
             Me.picDASlip.Image = New Bitmap(ScannedImage)
         End If
         DisplayDatabaseInformation()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -10251,13 +10220,13 @@ errhandler:
                 Call Shell("explorer.exe /select," & DASlipImageFile, AppWinStyle.NormalFocus)
             Else
                 MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -10289,7 +10258,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If Me.DADatagrid.RowCount = 0 Then
             ShowAlertMessage("No data in the list to show image!")
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim imagefile = Me.DADatagrid.SelectedCells(15).Value.ToString
@@ -10304,7 +10273,7 @@ errhandler:
 
             If FileIO.FileSystem.FileExists(imagefile) = False Then
                 MessageBoxEx.Show("No image file is associated with the selected DA Number!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         End If
@@ -10323,10 +10292,10 @@ errhandler:
 
         Else
             MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -10342,13 +10311,13 @@ errhandler:
                 frmDASlipImageDisplayer.LoadPictureFromViewer(DASlipImageFile, Me.txtDANumber.Text)
             Else
                 MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Sub ViewDAImage() Handles btnDAViewDisplayContext.Click
@@ -10362,13 +10331,13 @@ errhandler:
                 frmDASlipImageDisplayer.LoadPictureFromViewer(DASlipImageFile, Me.txtDANumber.Text)
             Else
                 MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub DASlipContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles DASlipContextMenuBar.PopupOpen
@@ -10458,7 +10427,7 @@ errhandler:
 
         If oldRow IsNot Nothing Then
             If IDEditMode Then
-                Me.Cursor = Cursors.Default '
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default '
                 Exit Sub
             End If
 
@@ -10484,7 +10453,7 @@ errhandler:
                 End If
             End With
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub FindIDNumber() Handles txtIDDANumber.GotFocus
@@ -10749,7 +10718,7 @@ errhandler:
 
         InitializeIDFields()
         ' IncrementIDNumber(NewIDNumber)
-        LoadLastIDNumber()
+        GenerateNewIDNumber()
         Me.btnSaveID.Text = "Save"
         IDEditMode = False
         DisplayDatabaseInformation()
@@ -10831,14 +10800,14 @@ errhandler:
 
         InitializeIDFields()
         ' IncrementIDNumber(NewIDNumber)
-        LoadLastIDNumber()
+        GenerateNewIDNumber()
         Me.btnSaveID.Text = "Save"
         IDEditMode = False
             DisplayDatabaseInformation()
 
          Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.IDRegisterBindingSource.Position = Me.IDRegisterBindingSource.Find("IDNumber", OriginalIDNumber)
         End Try
         
@@ -10863,11 +10832,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -10988,10 +10957,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11049,7 +11018,7 @@ errhandler:
 
             DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Number which is used as the scanned image's File Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtIDNumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim FileName As String = "IDNo." & Format(Me.txtIDNumber.Value, "0000")
@@ -11062,7 +11031,7 @@ errhandler:
             Me.picIDSlip.Image = New Bitmap(ScannedImage)
         End If
         DisplayDatabaseInformation()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11074,13 +11043,13 @@ errhandler:
                 Call Shell("explorer.exe /select," & IDSlipImageFile, AppWinStyle.NormalFocus)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11111,7 +11080,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If Me.IDDatagrid.RowCount = 0 Then
             ShowAlertMessage("No data in the list to show image!")
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim imagefile = Me.IDDatagrid.SelectedCells(15).Value.ToString
@@ -11122,7 +11091,7 @@ errhandler:
             imagefile = IDSlipImageImportLocation & FileName
             If FileIO.FileSystem.FileExists(imagefile) = False Then
                 MessageBoxEx.Show("No image file is associated with the selected Identified Slip record!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
 
@@ -11141,10 +11110,10 @@ errhandler:
             frmIDSlipImageDisplayer.LoadDASlipPicture(imagefile, idno & "  -   " & name & IIf(aliasname <> vbNullString, " @ " & aliasname, ""))
         Else
             MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11160,13 +11129,13 @@ errhandler:
                 frmIDSlipImageDisplayer.LoadPictureFromViewer(IDSlipImageFile, Me.txtIDNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Sub ViewIDImage() Handles btnIDViewDisplayContext.Click
@@ -11180,13 +11149,13 @@ errhandler:
                 frmIDSlipImageDisplayer.LoadPictureFromViewer(IDSlipImageFile, Me.txtIDNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub IDSlipContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles IDSlipContextMenuBar.PopupOpen
@@ -11275,7 +11244,7 @@ errhandler:
 
             If ACEditMode Then
                 Me.cmbACPoliceStation.Focus()
-                Me.Cursor = Cursors.Default '
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default '
                 Exit Sub
             End If
 
@@ -11301,7 +11270,7 @@ errhandler:
                 End If
             End With
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11494,7 +11463,7 @@ errhandler:
             DisplayDatabaseInformation()
          Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11562,7 +11531,7 @@ errhandler:
         
         InitializeACFields()
         ' IncrementACNumber(NewACNumber)
-        LoadLastACNumber()
+        GenerateNewACNumber()
         Me.btnSaveAC.Text = "Save"
         ACEditMode = False
 
@@ -11570,7 +11539,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.ACRegisterBindingSource.Position = Me.ACRegisterBindingSource.Find("ACNumber", OriginalACNumber)
         End Try
 
@@ -11643,14 +11612,14 @@ errhandler:
         ShowAlertMessage("Selected Active Criminal Record updated successfully!")
         InitializeACFields()
         ' IncrementACNumber(NewACNumber)
-        LoadLastACNumber()
+        GenerateNewACNumber()
         Me.btnSaveAC.Text = "Save"
         ACEditMode = False
         DisplayDatabaseInformation()
         
          Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.ACRegisterBindingSource.Position = Me.ACRegisterBindingSource.Find("ACNumber", OriginalACNumber)
         End Try
 
@@ -11676,10 +11645,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11795,11 +11764,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11858,7 +11827,7 @@ errhandler:
 
             DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Number which is used as the scanned image's File Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtACNumber.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim FileName As String = "ACNo." & Format(Me.txtACNumber.Value, "0000")
@@ -11872,7 +11841,7 @@ errhandler:
         End If
         DisplayDatabaseInformation()
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11885,13 +11854,13 @@ errhandler:
 
             Else
                 MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11923,7 +11892,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If Me.ACDatagrid.RowCount = 0 Then
             ShowAlertMessage("No data in the list to show image!")
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim imagefile = Me.ACDatagrid.SelectedCells(14).Value.ToString
@@ -11934,7 +11903,7 @@ errhandler:
             imagefile = ACSlipImageImportLocation & FileName
             If FileIO.FileSystem.FileExists(imagefile) = False Then
                 MessageBoxEx.Show("No image file is associated with the selected Active Criminal Slip record!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         End If
@@ -11951,10 +11920,10 @@ errhandler:
 
         Else
             MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11970,13 +11939,13 @@ errhandler:
                 FrmACSlipImageDisplayer.LoadPictureFromViewer(ACSlipImageFile, Me.txtACNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Sub ViewACImage() Handles btnACViewDisplayContext.Click
@@ -11990,13 +11959,13 @@ errhandler:
                 FrmACSlipImageDisplayer.LoadPictureFromViewer(ACSlipImageFile, Me.txtACNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Me.Cursor = Cursors.Default
+                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ACSlipContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles ACSlipContextMenuBar.PopupOpen
@@ -12241,7 +12210,7 @@ errhandler:
         DisplayDatabaseInformation()
          Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12312,7 +12281,7 @@ errhandler:
             ShowAlertMessage("Selected CD Record updated successfully!")
             InitializeCDFields()
             ' IncrementCDNumber(NewCDNumber)
-            LoadLastCDNumber()
+            GenerateNewCDNumber()
             Me.dtCDExamination.Value = Today
             Me.btnSaveCD.Text = "Save"
             CDEditMode = False
@@ -12321,7 +12290,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.CDRegisterBindingSource.Position = Me.CDRegisterBindingSource.Find("CDNumberWithYear", OriginalDANumber)
         End Try
 
@@ -12348,10 +12317,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12409,10 +12378,10 @@ errhandler:
             DisplayDatabaseInformation()
             ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
             Application.DoEvents()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12425,7 +12394,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtCDYear.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -12480,11 +12449,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12530,7 +12499,7 @@ errhandler:
 
         InitializeCDFields()
         ' IncrementCDNumber(NewCDNumber)
-        LoadLastCDNumber()
+        GenerateNewCDNumber()
         Me.dtCDExamination.Value = Today
         Me.btnSaveCD.Text = "Save"
         CDEditMode = False
@@ -12538,7 +12507,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.CDRegisterBindingSource.Position = Me.CDRegisterBindingSource.Find("CDNumberWithYear", OriginalDANumber)
         End Try
 
@@ -12768,7 +12737,7 @@ errhandler:
         DisplayDatabaseInformation()
        Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12845,7 +12814,7 @@ errhandler:
 
         InitializeFPAFields()
         ' IncrementFPANumber(NewFPANumber)
-        LoadLastFPANumber()
+        GenerateNewFPANumber()
         Me.dtFPADate.Value = Today
         Me.btnSaveFPA.Text = "Save"
         FPAEditMode = False
@@ -12853,7 +12822,7 @@ errhandler:
        
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.FPARegisterBindingSource.Position = Me.FPARegisterBindingSource.Find("FPNumber", OriginalFPANumber)
         End Try
 
@@ -12904,7 +12873,7 @@ errhandler:
         InitializeFPAFields()
         ' IncrementFPANumber(NewFPANumber)
 
-        LoadLastFPANumber()
+        GenerateNewFPANumber()
         Me.dtFPADate.Value = Today
 
         Me.btnSaveFPA.Text = "Save"
@@ -12914,7 +12883,7 @@ errhandler:
         
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.FPARegisterBindingSource.Position = Me.FPARegisterBindingSource.Find("FPNumber", OriginalFPANumber)
         End Try
 
@@ -12939,10 +12908,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -13014,11 +12983,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -13031,7 +13000,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtFPAYear.Focus()
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -13099,11 +13068,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -13204,7 +13173,7 @@ errhandler:
         DisplayDatabaseInformation()
        Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -13307,7 +13276,7 @@ errhandler:
       
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", OriginalPSName)
         End Try
 
@@ -13352,7 +13321,7 @@ errhandler:
        
          Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", OriginalPSName)
         End Try
 
@@ -13414,7 +13383,7 @@ errhandler:
             OfficeSettingsEditMode(False)
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
@@ -13704,7 +13673,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -13729,6 +13698,9 @@ errhandler:
 
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         boolRestored = False
@@ -13743,15 +13715,18 @@ errhandler:
             ShowAlertMessage("Database restored successfully!")
         End If
         boolRestored = False
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         boolRestored = False
@@ -13914,10 +13889,10 @@ errhandler:
             ReleaseObject(wdDocs)
             wdApp = Nothing
 
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -14390,10 +14365,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14529,10 +14504,10 @@ errhandler:
             ReleaseObject(wdDocs)
             wdApp.Visible = True
             wdApp = Nothing
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -14688,10 +14663,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14812,10 +14787,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14946,10 +14921,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14980,10 +14955,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
     Private Sub GenerateFPASlipForm(sender As Object, e As EventArgs) Handles btnFPAGenerateSlipFormContext.Click, btnFPAGenerateSlipForm.Click, btnFPABlankSlipForm.Click
@@ -15055,10 +15030,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
     End Sub
     Private Sub CDRegister() Handles btnCDRegister.Click
@@ -15209,7 +15184,7 @@ errhandler:
             Return t
         Catch ex As Exception
             Return Number.ToString
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -15260,7 +15235,7 @@ errhandler:
 
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -15415,12 +15390,12 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
             Exit Sub
 
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message & vbNewLine & vbNewLine & "Please make sure that Microsoft Word is installed in your system.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
         End Try
 
 
@@ -15444,6 +15419,10 @@ errhandler:
     '---------------------------------------------END APPLICATION-----------------------------------
 #Region "END APPLICATION"
     Private Sub EndApplication() Handles btnExit.Click, MyBase.FormClosed
+
+
+        If blApplicationIsLoading Then Exit Sub
+
         On Error Resume Next
         SaveSOCDatagridColumnWidth()
         SaveRSOCDatagridColumnWidth()
@@ -15684,6 +15663,10 @@ errhandler:
 #Region "ADVANCED SEARCH"
 
     Private Sub ShowAdvancedSearch(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSOCAdvancedSearch.Click, btnRSOCAdvancedSearch.Click, btnDAAdvancedSearch.Click, btnIDAdvancedSearch.Click, btnACAdvancedSearch.Click, btnFPAAdvancedSearch.Click, btnCDAdvancedSearch.Click, btnSearchMain.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
+
         On Error Resume Next
         If CurrentTab = "IO" Then
             MessageBoxEx.Show("Search is not available for 'Officer List'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -15710,7 +15693,7 @@ errhandler:
         FrmAdvancedSearch.BringToFront()
 
 
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -15725,7 +15708,7 @@ errhandler:
         frmAnnualStatistics.Text = "Annual Statistics"
         frmAnnualStatistics.TitleText = "<b>Annual Statistics</b>"
         frmAnnualStatistics.ShowDialog()
-        Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
     End Sub
 
 #End Region
@@ -15735,40 +15718,49 @@ errhandler:
 
     Private Sub frmMainInterface_StyleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.StyleChanged
         On Error Resume Next
-        ChangeCursor()
+        ChangeCursor(Cursors.Default)
     End Sub
 
-    Private Sub ChangeCursor()
+    Private Sub ChangeCursor(cr As Cursor)
         On Error Resume Next
-        Me.btnNewEntry.Cursor = Cursors.Default
-        Me.btnOpen.Cursor = Cursors.Default
-        Me.btnEdit.Cursor = Cursors.Default
-        Me.btnDelete.Cursor = Cursors.Default
-        Me.btnViewReports.Cursor = Cursors.Default
-        Me.btnReload.Cursor = Cursors.Default
-        Me.btnShowHideFields.Cursor = Cursors.Default
-        Me.btnOnlineBackup.Cursor = Cursors.Default
-        Me.btnLocalBackup.Cursor = Cursors.Default
-        Me.btnAbout.Cursor = Cursors.Default
-        Me.btnExit.Cursor = Cursors.Default
-        Me.RibbonBar1.Cursor = Cursors.Default
-        Me.RibbonBar2.Cursor = Cursors.Default
-        Me.RibbonBar3.Cursor = Cursors.Default
-        Me.RibbonBar4.Cursor = Cursors.Default
-        Me.RibbonBar5.Cursor = Cursors.Default
-        Me.RibbonBar6.Cursor = Cursors.Default
-        Me.RibbonBar7.Cursor = Cursors.Default
-        Me.RibbonBar9.Cursor = Cursors.Default
-        Me.RibbonBar10.Cursor = Cursors.Default
-        Me.RibbonBar11.Cursor = Cursors.Default
-        Me.RibbonBar13.Cursor = Cursors.Default
-        Me.RibbonControl1.Cursor = Cursors.Default
-        Me.RibbonPanel1.Cursor = Cursors.Default
-        Me.RibbonPanel2.Cursor = Cursors.Default
-        Me.RibbonTabItem6.Cursor = Cursors.Default
-        Me.tabHome.Cursor = Cursors.Default
-        Me.Cursor = Cursors.Default
 
+        Me.Cursor = cr
+        Me.btnNewEntry.Cursor = cr
+        Me.btnOpen.Cursor = cr
+        Me.btnEdit.Cursor = cr
+        Me.btnDelete.Cursor = cr
+        Me.btnViewReports.Cursor = cr
+        Me.btnReload.Cursor = cr
+        Me.btnShowHideFields.Cursor = cr
+        Me.btnOnlineBackup.Cursor = cr
+        Me.btnLocalBackup.Cursor = cr
+        Me.btnAbout.Cursor = cr
+        Me.btnExit.Cursor = cr
+        Me.RibbonBar1.Cursor = cr
+        Me.RibbonBar2.Cursor = cr
+        Me.RibbonBar3.Cursor = cr
+        Me.RibbonBar4.Cursor = cr
+        Me.RibbonBar5.Cursor = cr
+        Me.RibbonBar6.Cursor = cr
+        Me.RibbonBar7.Cursor = cr
+        Me.RibbonBar9.Cursor = cr
+        Me.RibbonBar10.Cursor = cr
+        Me.RibbonBar11.Cursor = cr
+        Me.RibbonBar13.Cursor = cr
+        Me.RibbonControl1.Cursor = cr
+        Me.RibbonPanel1.Cursor = cr
+        Me.RibbonPanel2.Cursor = cr
+        Me.RibbonTabItem6.Cursor = cr
+        Me.tabHome.Cursor = cr
+        Me.SOCDatagrid.Cursor = cr
+        Me.DADatagrid.Cursor = cr
+        Me.RSOCDatagrid.Cursor = cr
+        Me.FPADataGrid.Cursor = cr
+        Me.CDDataGrid.Cursor = cr
+        Me.IDDatagrid.Cursor = cr
+        Me.ACDatagrid.Cursor = cr
+        Me.PSDataGrid.Cursor = cr
+        Me.IODatagrid.Cursor = cr
     End Sub
 
 
@@ -15808,6 +15800,9 @@ errhandler:
 
 
     Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
+
+        If blApplicationIsLoading Then Exit Sub
+
         Cursor = Cursors.WaitCursor
         frmAbout.ShowDialog()
         Cursor = Cursors.Default
@@ -15815,4 +15810,7 @@ errhandler:
 
 
     
+    Private Sub prgBar_ValueChanged(sender As Object, e As EventArgs) Handles prgBar.ValueChanged
+        frmSplashScreen.SetCircularProgressText(Me.prgBar.Value)
+    End Sub
 End Class

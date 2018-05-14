@@ -56,6 +56,7 @@ Partial Class frmSplashScreen
         Me.CircularProgress1.Location = New System.Drawing.Point(416, 1)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.CircularProgress1.ProgressTextVisible = True
         Me.CircularProgress1.Size = New System.Drawing.Size(54, 261)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 15
