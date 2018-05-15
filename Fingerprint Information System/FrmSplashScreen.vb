@@ -5,40 +5,49 @@ Imports DevComponents.DotNetBar.Rendering
 
 Public NotInheritable Class frmSplashScreen
 
-
     
     Private Sub frmSplashScreen_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Me.Width = 475
+        Me.Height = 244
         Control.CheckForIllegalCrossThreadCalls = False
-        Me.CircularProgress1.Hide()
+        Me.ProgressBarX1.Hide()
     End Sub
 
     Public Delegate Sub SetProgressBarDelegate(ByVal max As Integer)
     Public Delegate Sub UpdateProgressBarDelegate(ByVal value As Integer)
-    Public Delegate Sub SetCircularProgressVisible()
+    Public Delegate Sub IncrementProgressBarDelegate(ByVal value As Integer)
+    Public Delegate Sub SetProgressBarVisible()
 
-    Public Sub ShowCircularProgress()
+    Public Sub ShowProgressBar()
         If Me.InvokeRequired Then
-            Me.Invoke(New SetCircularProgressVisible(AddressOf ShowCircularProgress))
+            Me.Invoke(New SetProgressBarVisible(AddressOf ShowProgressBar))
         Else
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.IsRunning = True
+            Me.ProgressBarX1.Show()
         End If
     End Sub
 
-    Public Sub SetCircularProgressMaxValue(ByVal MaxLength As Integer)
+    Public Sub SetProgressBarMaxValue(ByVal MaxLength As Integer)
         If Me.InvokeRequired Then
-            Me.Invoke(New SetProgressBarDelegate(AddressOf SetCircularProgressMaxValue), MaxLength)
+            Me.Invoke(New SetProgressBarDelegate(AddressOf SetProgressBarMaxValue), MaxLength)
         Else
-            Me.CircularProgress1.Maximum = MaxLength
+            Me.ProgressBarX1.Maximum = MaxLength
         End If
     End Sub
 
 
-    Public Sub SetCircularProgressText(ByVal ProgressValue As Integer)
+    Public Sub SetProgressBarValue(ByVal ProgressValue As Integer)
         If Me.InvokeRequired Then
-            Me.Invoke(New UpdateProgressBarDelegate(AddressOf SetCircularProgressText), ProgressValue)
+            Me.Invoke(New UpdateProgressBarDelegate(AddressOf SetProgressBarValue), ProgressValue)
         Else
-            Me.CircularProgress1.ProgressText = ProgressValue
+            Me.ProgressBarX1.Value = ProgressValue
+        End If
+    End Sub
+
+    Public Sub IncrementProgressBarValue(ByVal increment As Integer)
+        If Me.InvokeRequired Then
+            Me.Invoke(New IncrementProgressBarDelegate(AddressOf IncrementProgressBarValue), increment)
+        Else
+            Me.ProgressBarX1.Increment(increment)
         End If
     End Sub
 End Class

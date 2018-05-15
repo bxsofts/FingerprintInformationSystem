@@ -110,18 +110,16 @@ Public Class frmMainInterface
 
         ChangeCursor(Cursors.WaitCursor)
 
-        frmSplashScreen.ShowCircularProgress()
-        Me.prgBar.Text = "Loading Application ..."
-        Me.prgBar.Maximum = 100
-        Me.prgBar.Value = 0
-        Me.prgBar.Increment(1)
+        frmSplashScreen.ShowProgressBar()
+
+        IncrementCircularProgress(1)
 
         If FrmSettingsWizard.Visible Then FrmSettingsWizard.Close()
         My.Application.SplashScreen.BringToFront()
         SetColorTheme()
         SetTableBackColor()
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
@@ -132,7 +130,7 @@ Public Class frmMainInterface
 
         LoadOfficeSettings()
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         SetWindowTitle()
         LoadOfficeSettingsToTextBoxes()
@@ -141,7 +139,7 @@ Public Class frmMainInterface
         AddHandler TabControl.TabStrip.MouseDown, AddressOf TabControl_MouseDown
         Me.txtPosition.TextBox.TextAlign = HorizontalAlignment.Center
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '---------------------------------------'
 
@@ -168,7 +166,7 @@ Public Class frmMainInterface
 
 
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         boolUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
         Me.chkUseTIAtBottomOfLetter.Checked = boolUseTIinLetter
@@ -177,7 +175,7 @@ Public Class frmMainInterface
 
         LoadQuickToolBarSettings()
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         SetDatagridFont()
         SetDatagridSortMode()
         SetAscendingSortMode()
@@ -186,7 +184,7 @@ Public Class frmMainInterface
 
         SetTabColor()
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
 
         '------------ Save Defualt Column Width in first run ---------------
@@ -203,7 +201,7 @@ Public Class frmMainInterface
             SavePSDatagridColumnDefaultWidth()
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "SaveDefaultWidth", "0", Microsoft.Win32.RegistryValueKind.String)
         End If
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------ Load Column Width ---------------
         If savewidth = 1 Then
@@ -215,7 +213,7 @@ Public Class frmMainInterface
         LoadRSOCDatagridColumnWidth()
 
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         LoadDADatagridColumnWidth()
 
@@ -242,26 +240,26 @@ Public Class frmMainInterface
 
 
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadRSOCDatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadDADatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadIDDatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadACDatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadFPADatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadCDDatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadPSDatagridColumnOrder()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         Invalidate()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------ initialize fields ---------------
-        Me.prgBar.Text = "Initializing Fields ..."
+
 
 
         Dim d As Date = Today
@@ -272,7 +270,7 @@ Public Class frmMainInterface
         cmbDASex.SelectedIndex = 1
         cmbIDSex.SelectedIndex = 1
         cmbACSex.SelectedIndex = 1
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------ date values ---------------
 
@@ -282,24 +280,24 @@ Public Class frmMainInterface
         Me.dtFPADate.Value = d
         Me.dtCDExamination.Value = d
         Me.dtRSOCReportSentOn.Value = d
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         LoadGeneralSettings()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
 
 
 
         '------------ device manager ---------------
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         devmanager = New WIA.DeviceManager
         devmanager.RegisterEvent(WIA.EventID.wiaEventDeviceConnected)
         devmanager.RegisterEvent(WIA.EventID.wiaEventDeviceDisconnected)
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------ Connecting To Database ---------------
 
-        Me.prgBar.Text = "Connecting To Database ..."
+        
 
 
         Dim DBExists As Boolean = FileIO.FileSystem.FileExists(sDatabaseFile)
@@ -308,8 +306,7 @@ Public Class frmMainInterface
             ConnectToDatabase()
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
             If CreateTable = 1 Then
-                Me.prgBar.Text = "Creating Tables ..."
-
+              
                 CreateSOCReportRegisterTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
@@ -325,39 +322,33 @@ Public Class frmMainInterface
             GenerateNewIDNumber()
             GenerateNewACNumber()
 
-            Me.prgBar.Increment(1)
+            IncrementCircularProgress(1)
             UpdateNullFields()
-            Me.prgBar.Increment(1)
+            IncrementCircularProgress(1)
             ShowStatusTexts = True
 
 
             '------------ load records, ps list, officer list ---------------
-            Me.prgBar.Text = "Loading Data To Tables ..."
+
 
             If Me.chkLoadRecordsAtStartup.Checked Then
                 LoadRecordsToAllTablesDependingOnCurrentYearSettings()
-                Me.prgBar.Increment(1)
+                IncrementCircularProgress(1)
             End If
-
-            Me.prgBar.Text = "Loading Police Station List ..."
 
 
             LoadPSListOnLoad()
-            Me.prgBar.Increment(1)
+            IncrementCircularProgress(1)
 
             lblDesignation.Visible = False
             RemoveNullFromOfficerTable()
-            Me.prgBar.Text = "Loading Office Settings ..."
-
             InitializeOfficerTable()
             LoadOfficer()
-            Me.prgBar.Increment(3)
+            IncrementCircularProgress(3)
             LoadOfficerListToTable()
-            Me.prgBar.Text = "Loading Office Settings ..."
-
 
             LoadNatureOfReport()
-            Me.prgBar.Increment(1)
+            IncrementCircularProgress(1)
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
             Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "7", autobackuptime)
@@ -374,11 +365,11 @@ Public Class frmMainInterface
 
         If chkLoadAutoTextAtStartup.Checked And DBExists Then LoadAutoTextFromDB()
 
-        Dim pgbarvalue = prgBar.Value
+        Dim pgbarvalue = 100
         For i = pgbarvalue To 100
-            prgBar.Increment(1)
+            IncrementCircularProgress(1)
         Next
-        Me.prgBar.Visible = False
+
 
         Dim dm As String = Format(Today, "dd/MM/yyyy")
         dm = Strings.Left(dm, 5)
@@ -407,12 +398,9 @@ Public Class frmMainInterface
         ' Me.BringToFront()
         ' Me.Activate()
 
-
         SetForegroundWindow(MyBase.Handle)
 
         ChangeCursor(Cursors.Default)
-
-        My.Application.SplashScreen.Close()
 
         ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
 
@@ -420,6 +408,7 @@ Public Class frmMainInterface
         blApplicationIsLoading = False
 
         If DBExists = False Then
+            My.Application.SplashScreen.Close()
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
             MessageBoxEx.Show("FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -701,21 +690,21 @@ Public Class frmMainInterface
 
         Dim d As Date = Today
         Me.dtSOCInspection.MonthCalendar.DisplayMonth = d
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         Me.dtSOCReport.MonthCalendar.DisplayMonth = d
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         Me.dtDAEntry.MonthCalendar.DisplayMonth = d
         Me.dtFPADate.MonthCalendar.DisplayMonth = d
         Me.dtCDExamination.MonthCalendar.DisplayMonth = d
         Me.dtRSOCInspection.MonthCalendar.DisplayMonth = d
         Me.dtRSOCReportSentOn.MonthCalendar.DisplayMonth = d
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         CurrentTab = "SOC"
         Me.TabControl.SelectedTab = SOCTabItem
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         Me.txtSOCNumber.Focus()
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
 
 
@@ -725,13 +714,13 @@ Public Class frmMainInterface
         DisplayAllCapsStatus(Me.chkAutoCapitalize.Checked)
 
         Me.chkIgnoreAllCaps.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "IgnoreAllCaps", 1)
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.chkShowPopups.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "ShowPopups", 1)
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.chkPlaySound.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "PlaySound", 1)
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.cmbAutoCompletionMode.SelectedIndex = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoCompleteMode", 1)
 
@@ -744,20 +733,20 @@ Public Class frmMainInterface
 
         Dim hcolor As Integer = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HighLightColor", 5) 'none
         Me.cmbHighlightColor.SelectedIndex = hcolor - 1
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.chkLoadAutoTextAtStartup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "LoadAutoTextFromDB", 1)
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         GetFPSlipImageImportLocation()
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         GetCPImageImportLocation()
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         Me.chkLoadRecordsAtStartup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "LoadRecordsAtStartup", 1)
-        Me.prgBar.Increment(1)
+        IncrementCircularProgress(1)
         Me.chkLoadCurrentYearRecordsOnly.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "LoadCurrentYearRecordsOnly", 0)
         Me.chkAppendSOCYear.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AppendSOCYear", 1)
         Me.chkAppendDAYear.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AppendDAYear", 1)
@@ -948,10 +937,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading SOC Register ..."
-
-        End If
+       
         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(2).DataPropertyName.ToString() & " ASC, " & SOCDatagrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -963,8 +949,8 @@ Public Class frmMainInterface
         Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
         Me.SOCRegisterBindingSource.MoveLast()
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
             Application.DoEvents()
         Else
             Dim p = Me.SOCRegisterBindingSource.Find("SOCNumber", oldrow)
@@ -979,10 +965,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading SOC Reports Register ..."
-            Application.DoEvents()
-        End If
+       
         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(3).DataPropertyName.ToString() & " ASC, " & RSOCDatagrid.Columns(2).DataPropertyName.ToString() ' & " ASC, " & RSOCDatagrid.Columns(7).DataPropertyName.ToString() & " ASC"
         Dim oldrow As String = ""
         If Me.RSOCDatagrid.SelectedRows.Count <> 0 Then
@@ -991,8 +974,8 @@ Public Class frmMainInterface
         Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
         Me.RSOCRegisterBindingSource.MoveLast()
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
         Else
             Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
             If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
@@ -1004,10 +987,7 @@ Public Class frmMainInterface
     Private Sub LoadDARecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading DA Register ..."
-            Application.DoEvents()
-        End If
+     
         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(2).DataPropertyName.ToString() & " ASC, " & DADatagrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1016,8 +996,8 @@ Public Class frmMainInterface
         End If
         Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
         Me.DARegisterBindingSource.MoveLast()
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
         Else
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
             If p >= 0 Then Me.DARegisterBindingSource.Position = p
@@ -1029,10 +1009,7 @@ Public Class frmMainInterface
     Private Sub LoadIDRecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading Identified Slips Register ..."
-            Application.DoEvents()
-        End If
+       
         Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(0).DataPropertyName.ToString() & " ASC"
         Dim oldrow As String = ""
         If Me.IDDatagrid.SelectedRows.Count <> 0 Then
@@ -1040,8 +1017,8 @@ Public Class frmMainInterface
         End If
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
         Me.IDRegisterBindingSource.MoveLast()
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
         Else
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
             If p >= 0 Then Me.IDRegisterBindingSource.Position = p
@@ -1053,10 +1030,7 @@ Public Class frmMainInterface
     Private Sub LoadACRecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading Active Criminals Register ..."
-            Application.DoEvents()
-        End If
+       
         Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(0).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1065,8 +1039,8 @@ Public Class frmMainInterface
         End If
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
         Me.ACRegisterBindingSource.MoveLast()
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
         Else
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
             If p >= 0 Then Me.ACRegisterBindingSource.Position = p
@@ -1078,10 +1052,7 @@ Public Class frmMainInterface
     Private Sub LoadFPARecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading FPA Register ..."
-            Application.DoEvents()
-        End If
+       
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1090,8 +1061,8 @@ Public Class frmMainInterface
         End If
         Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
         Me.FPARegisterBindingSource.MoveLast()
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
         Else
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
             If p >= 0 Then Me.FPARegisterBindingSource.Position = p
@@ -1103,10 +1074,7 @@ Public Class frmMainInterface
     Private Sub LoadCDRecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading CD Register ..."
-            Application.DoEvents()
-        End If
+       
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Dim oldrow As String = ""
         If Me.CDDataGrid.SelectedRows.Count <> 0 Then
@@ -1115,8 +1083,8 @@ Public Class frmMainInterface
         Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
         Me.CDRegisterBindingSource.MoveLast()
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Increment(5)
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
         Else
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
             If p >= 0 Then Me.CDRegisterBindingSource.Position = p
@@ -1222,42 +1190,25 @@ Public Class frmMainInterface
         Dim d1 As Date = New Date(y, 1, 1)
         Dim d2 As Date = New Date(y, 12, 31)
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading SOC Register ..."
-
-        End If
+        
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
         Me.SOCRegisterBindingSource.MoveLast()
         Application.DoEvents()
-        Me.prgBar.Increment(5)
+        IncrementCircularProgress(5)
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading DA Register ..."
-
-        End If
+       
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-        Me.prgBar.Increment(5)
+        IncrementCircularProgress(5)
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading FPA Register ..."
-
-        End If
         Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-        Me.prgBar.Increment(5)
+        IncrementCircularProgress(5)
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading SOC Reports Register ..."
-
-        End If
         Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
-        Me.prgBar.Increment(5)
+        IncrementCircularProgress(5)
 
-        If Me.prgBar.Visible Then
-            Me.prgBar.Text = "Loading Court Duty Register ..."
-
-        End If
+       
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
-        Me.prgBar.Increment(5)
+        IncrementCircularProgress(5)
 
 
         '  Me.SOCRegisterBindingSource.MoveLast()
@@ -2076,7 +2027,7 @@ Public Class frmMainInterface
 
         ClearAutoCompletionTexts()
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------------------------------SOC------------------------------------
 
@@ -2100,7 +2051,7 @@ Public Class frmMainInterface
         Me.txtSOCSection.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtSOCSection.AutoCompleteCustomSource = soclaw
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '-----------------------------------DA------------------------------------
 
@@ -2122,7 +2073,7 @@ Public Class frmMainInterface
         Me.txtIDSection.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDSection.AutoCompleteCustomSource = dalaw
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.DARegisterAutoTextTableAdapter.FillByName(FingerPrintDataSet.DARegisterAutoText)
 
@@ -2139,7 +2090,7 @@ Public Class frmMainInterface
         Me.txtIDName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDName.AutoCompleteCustomSource = daname
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.DARegisterAutoTextTableAdapter.FillByAlias(FingerPrintDataSet.DARegisterAutoText)
 
@@ -2148,7 +2099,7 @@ Public Class frmMainInterface
             daalias.Add(FingerPrintDataSet.DARegisterAutoText(i).AliasName)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.txtDAAliasName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtDAAliasName.AutoCompleteCustomSource = daalias
@@ -2159,7 +2110,7 @@ Public Class frmMainInterface
         Me.txtIDAliasName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDAliasName.AutoCompleteCustomSource = daalias
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.DARegisterAutoTextTableAdapter.FillByFather(FingerPrintDataSet.DARegisterAutoText)
         Dim dafather As New AutoCompleteStringCollection
@@ -2175,7 +2126,7 @@ Public Class frmMainInterface
         Me.txtIDFathersName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDFathersName.AutoCompleteCustomSource = dafather
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.DARegisterAutoTextTableAdapter.FillByModus(FingerPrintDataSet.DARegisterAutoText)
         Dim damo As New AutoCompleteStringCollection
@@ -2193,7 +2144,7 @@ Public Class frmMainInterface
         Me.txtIDModusOperandi.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtIDModusOperandi.AutoCompleteCustomSource = damo
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
 
         '------------------------------------ID------------------------------------
@@ -2204,35 +2155,35 @@ Public Class frmMainInterface
             dalaw.Add(FingerPrintDataSet.IDRegisterAutoText(i).SectionOfLaw)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.IDRegisterAutoTextTableAdapter.FillByName(FingerPrintDataSet.IDRegisterAutoText)
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             daname.Add(FingerPrintDataSet.IDRegisterAutoText(i).Name)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.IDRegisterAutoTextTableAdapter.FillByAlias(FingerPrintDataSet.IDRegisterAutoText)
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             daalias.Add(FingerPrintDataSet.IDRegisterAutoText(i).AliasName)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.IDRegisterAutoTextTableAdapter.FillByFather(FingerPrintDataSet.IDRegisterAutoText)
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             dafather.Add(FingerPrintDataSet.IDRegisterAutoText(i).FathersName)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.IDRegisterAutoTextTableAdapter.FillByModus(FingerPrintDataSet.IDRegisterAutoText)
         For i As Long = 0 To FingerPrintDataSet.IDRegisterAutoText.Count - 1
             damo.Add(FingerPrintDataSet.IDRegisterAutoText(i).ModusOperandi)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------------------------------AC------------------------------------
 
@@ -2249,7 +2200,7 @@ Public Class frmMainInterface
             daname.Add(FingerPrintDataSet.ACRegisterAutoText(i).Name)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.ACRegisterAutoTextTableAdapter.FillByAlias(FingerPrintDataSet.ACRegisterAutoText)
         For i As Long = 0 To FingerPrintDataSet.ACRegisterAutoText.Count - 1
@@ -2263,7 +2214,7 @@ Public Class frmMainInterface
             dafather.Add(FingerPrintDataSet.ACRegisterAutoText(i).FathersName)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.ACRegisterAutoTextTableAdapter.FillByModus(FingerPrintDataSet.ACRegisterAutoText)
 
@@ -2271,7 +2222,7 @@ Public Class frmMainInterface
             damo.Add(FingerPrintDataSet.ACRegisterAutoText(i).ModusOperandi)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         '------------------------------------FPA------------------------------------
 
@@ -2283,7 +2234,7 @@ Public Class frmMainInterface
             fpaname.Add(FingerPrintDataSet.FPRegisterAutoText(i).Name.ToString)
         Next (i)
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
         Me.txtFPAName.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtFPAName.AutoCompleteCustomSource = fpaname
@@ -2296,7 +2247,7 @@ Public Class frmMainInterface
         Me.txtFPATreasury.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtFPATreasury.AutoCompleteCustomSource = fpatreasury
 
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
 
         Me.FPARegisterAutoTextTableAdapter.FillByHeadOfAccount(FingerPrintDataSet.FPRegisterAutoText)
@@ -2307,7 +2258,7 @@ Public Class frmMainInterface
         Next (i)
         Me.txtHeadOfAccount.AutoCompleteSource = AutoCompleteSource.CustomSource
         Me.txtHeadOfAccount.AutoCompleteCustomSource = fpaha
-        prgBar.Increment(1)
+        IncrementCircularProgress(1)
 
 
     End Sub
@@ -13623,8 +13574,7 @@ errhandler:
         Dim dt As Date = lastbackupdate.AddDays(backuptime)
 
         If Today >= dt Then
-            Me.prgBar.Text = "Taking backup of database..."
-
+          
             Dim Source As String = sDatabaseFile
 
             Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
@@ -15808,9 +15758,8 @@ errhandler:
         Cursor = Cursors.Default
     End Sub
 
-
-    
-    Private Sub prgBar_ValueChanged(sender As Object, e As EventArgs) Handles prgBar.ValueChanged
-        frmSplashScreen.SetCircularProgressText(Me.prgBar.Value)
+    Private Sub IncrementCircularProgress(increment As Integer)
+        frmSplashScreen.IncrementProgressBarValue(increment)
     End Sub
+    
 End Class
