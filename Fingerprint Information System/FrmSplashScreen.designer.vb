@@ -27,6 +27,7 @@ Partial Class frmSplashScreen
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ProgressBarX1 = New DevComponents.DotNetBar.Controls.ProgressBarX()
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
+        Me.lblVersion = New DevComponents.DotNetBar.LabelX()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -36,7 +37,7 @@ Partial Class frmSplashScreen
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(82, 1)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(310, 240)
+        Me.PictureBox1.Size = New System.Drawing.Size(310, 178)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 14
         Me.PictureBox1.TabStop = False
@@ -47,7 +48,7 @@ Partial Class frmSplashScreen
         '
         '
         Me.ProgressBarX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ProgressBarX1.Location = New System.Drawing.Point(82, 220)
+        Me.ProgressBarX1.Location = New System.Drawing.Point(82, 181)
         Me.ProgressBarX1.Name = "ProgressBarX1"
         Me.ProgressBarX1.Size = New System.Drawing.Size(310, 10)
         Me.ProgressBarX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -58,11 +59,27 @@ Partial Class frmSplashScreen
         Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
         Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
         '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        '
+        '
+        '
+        Me.lblVersion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(337, 193)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(132, 32)
+        Me.lblVersion.TabIndex = 17
+        Me.lblVersion.Text = "V 12.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Copyright © Baiju Xavior"
+        Me.lblVersion.TextAlignment = System.Drawing.StringAlignment.Far
+        '
         'frmSplashScreen
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(475, 244)
+        Me.ClientSize = New System.Drawing.Size(475, 228)
         Me.ControlBox = False
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.ProgressBarX1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -84,5 +101,6 @@ Partial Class frmSplashScreen
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ProgressBarX1 As DevComponents.DotNetBar.Controls.ProgressBarX
     Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
+    Friend WithEvents lblVersion As DevComponents.DotNetBar.LabelX
 
 End Class

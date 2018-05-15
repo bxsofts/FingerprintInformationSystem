@@ -8,8 +8,10 @@ Public NotInheritable Class frmSplashScreen
     
     Private Sub frmSplashScreen_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.Width = 475
-        Me.Height = 244
+        Me.Height = 228
         Control.CheckForIllegalCrossThreadCalls = False
+
+        Me.lblVersion.Text = "V " & My.Application.Info.Version.ToString.Substring(0, 4) & vbCrLf & "Copyright © Baiju Xavior"
         Me.ProgressBarX1.Hide()
     End Sub
 
