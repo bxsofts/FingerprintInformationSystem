@@ -26,8 +26,8 @@ Partial Class frmSplashScreen
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSplashScreen))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ProgressBarX1 = New DevComponents.DotNetBar.Controls.ProgressBarX()
-        Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         Me.lblVersion = New DevComponents.DotNetBar.LabelX()
+        Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -54,11 +54,6 @@ Partial Class frmSplashScreen
         Me.ProgressBarX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ProgressBarX1.TabIndex = 16
         '
-        'StyleManager1
-        '
-        Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
-        Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
-        '
         'lblVersion
         '
         Me.lblVersion.AutoSize = True
@@ -69,10 +64,15 @@ Partial Class frmSplashScreen
         Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVersion.Location = New System.Drawing.Point(337, 193)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(132, 32)
+        Me.lblVersion.Size = New System.Drawing.Size(123, 32)
         Me.lblVersion.TabIndex = 17
         Me.lblVersion.Text = "V 12.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Copyright © Baiju Xavior"
         Me.lblVersion.TextAlignment = System.Drawing.StringAlignment.Far
+        '
+        'StyleManager1
+        '
+        Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
+        Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
         '
         'frmSplashScreen
         '
@@ -100,7 +100,7 @@ Partial Class frmSplashScreen
     End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ProgressBarX1 As DevComponents.DotNetBar.Controls.ProgressBarX
-    Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
     Friend WithEvents lblVersion As DevComponents.DotNetBar.LabelX
+    Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
 
 End Class

@@ -116,7 +116,7 @@ Public Class frmMainInterface
 
         If FrmSettingsWizard.Visible Then FrmSettingsWizard.Close()
         My.Application.SplashScreen.BringToFront()
-        SetColorTheme()
+        ' SetColorTheme()
         SetTableBackColor()
 
         IncrementCircularProgress(1)
@@ -129,6 +129,8 @@ Public Class frmMainInterface
         Me.SettingsTableAdapter1.Connection.Open()
 
         LoadOfficeSettings()
+
+        LoadQuickToolBarSettings()
 
         IncrementCircularProgress(1)
 
@@ -170,10 +172,6 @@ Public Class frmMainInterface
 
         boolUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
         Me.chkUseTIAtBottomOfLetter.Checked = boolUseTIinLetter
-
-
-
-        LoadQuickToolBarSettings()
 
         IncrementCircularProgress(1)
         SetDatagridFont()
@@ -297,7 +295,7 @@ Public Class frmMainInterface
 
         '------------ Connecting To Database ---------------
 
-        
+
 
 
         Dim DBExists As Boolean = FileIO.FileSystem.FileExists(sDatabaseFile)
@@ -306,7 +304,7 @@ Public Class frmMainInterface
             ConnectToDatabase()
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
             If CreateTable = 1 Then
-              
+
                 CreateSOCReportRegisterTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
@@ -371,7 +369,7 @@ Public Class frmMainInterface
         Next
 
 
-        Dim dm As String = Format(Today, "dd/MM/yyyy")
+        Dim dm As String = Today.ToString("dd/MM/yyyy", culture)
         dm = Strings.Left(dm, 5)
         Dim msg = ""
         Select Case dm
@@ -423,7 +421,7 @@ Public Class frmMainInterface
 #Region "COLOR STYLES" 'sets Color themes for the form
 
 
-    Sub SetColorTheme() 'set the color scheme
+    Public Sub SetColorTheme() 'set the color scheme
         On Error Resume Next
 
         Dim VisualStyle As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "VisualStyle", "Office2016")
@@ -432,16 +430,16 @@ Public Class frmMainInterface
         Dim BaseColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", "")
 
         If StyleManager.IsMetro(Style) Then ' if Office2016, metro, vs2012
-            If BaseColor = 0 Then
+            If BaseColor = "" Or BaseColor = "0" Then
                 m_BaseColor = StyleManager.MetroColorGeneratorParameters.BaseColor
             Else
                 m_BaseColor = CType(Color.FromArgb(BaseColor), Color)
             End If
-            BaseColor = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", StyleManager.MetroColorGeneratorParameters.BaseColor)
+            ' BaseColor = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", StyleManager.MetroColorGeneratorParameters.BaseColor)
             StyleManager.Style = Style
             StyleManager.MetroColorGeneratorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(StyleManager.MetroColorGeneratorParameters.CanvasColor, m_BaseColor)
         Else
-            If BaseColor = 0 Then
+            If BaseColor = "" Or BaseColor = "0" Then
                 m_BaseColor = Color.Empty
             Else
                 m_BaseColor = CType(Color.FromArgb(BaseColor), Color)
@@ -513,6 +511,7 @@ Public Class frmMainInterface
                 Else
                     StyleManager.ColorTint = m_BaseColor
                 End If
+
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "BaseColor", btnCustomBaseColor.SelectedColor.ToArgb.ToString, Microsoft.Win32.RegistryValueKind.String)
             End If
 
@@ -535,7 +534,6 @@ Public Class frmMainInterface
     Private Sub CustomBaseColorSelected(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCustomBaseColor.SelectedColorChanged
         m_BaseColorSelected = True ' Indicate that color was selected for buttonStyleCustom_ExpandChange method
         btnCustomBaseColor.CommandParameter = btnCustomBaseColor.SelectedColor
-
     End Sub
 
 
@@ -545,7 +543,7 @@ Public Class frmMainInterface
             m_BaseColorSelected = False
         Else
             If m_BaseColorSelected = False Then
-                SetColorTheme()
+              SetColorTheme()
             End If
         End If
 
@@ -605,28 +603,33 @@ Public Class frmMainInterface
 
         Dim s As String
         For Each s In names
-            Dim menuItem As ButtonItem = New ButtonItem(s, s)
-            ' Construct the image for the menu item by creating dummy tab item to get right colors from it
-            Dim tabTemp As TabItem = New TabItem()
-            tabTemp.PredefinedColor = CType(System.Enum.Parse(GetType(eTabItemColor), s), eTabItemColor)
-            Dim bmp As Bitmap = New Bitmap(16, 16, System.Drawing.Imaging.PixelFormat.Format24bppRgb)
-            Dim g As Graphics = Graphics.FromImage(bmp)
-            Try
-                g.Clear(SystemColors.Control)
-                Dim r As Rectangle = New Rectangle(1, 1, 14, 14)
-                Dim brush As System.Drawing.Drawing2D.LinearGradientBrush = New System.Drawing.Drawing2D.LinearGradientBrush(r, tabTemp.BackColor, tabTemp.BackColor2, tabTemp.BackColorGradientAngle)
-                g.FillRectangle(brush, r)
-                brush.Dispose()
-                Dim pen As Pen = New Pen(Color.DarkGray, 1)
-                g.DrawRectangle(pen, r)
-                pen.Dispose()
-            Finally
-                g.Dispose()
-            End Try
-            bmp.MakeTransparent(SystemColors.Control)
-            menuItem.Image = bmp
-            AddHandler menuItem.Click, AddressOf ChangeTabColor
-            item.SubItems.Add(menuItem)
+
+            If Not s.StartsWith("Office") Then
+
+
+                Dim menuItem As ButtonItem = New ButtonItem(s, s)
+                ' Construct the image for the menu item by creating dummy tab item to get right colors from it
+                Dim tabTemp As TabItem = New TabItem()
+                tabTemp.PredefinedColor = CType(System.Enum.Parse(GetType(eTabItemColor), s), eTabItemColor)
+                Dim bmp As Bitmap = New Bitmap(16, 16, System.Drawing.Imaging.PixelFormat.Format24bppRgb)
+                Dim g As Graphics = Graphics.FromImage(bmp)
+                Try
+                    g.Clear(SystemColors.Control)
+                    Dim r As Rectangle = New Rectangle(1, 1, 14, 14)
+                    Dim brush As System.Drawing.Drawing2D.LinearGradientBrush = New System.Drawing.Drawing2D.LinearGradientBrush(r, tabTemp.BackColor, tabTemp.BackColor2, tabTemp.BackColorGradientAngle)
+                    g.FillRectangle(brush, r)
+                    brush.Dispose()
+                    Dim pen As Pen = New Pen(Color.DarkGray, 1)
+                    g.DrawRectangle(pen, r)
+                    pen.Dispose()
+                Finally
+                    g.Dispose()
+                End Try
+                bmp.MakeTransparent(SystemColors.Control)
+                menuItem.Image = bmp
+                AddHandler menuItem.Click, AddressOf ChangeTabColor
+                item.SubItems.Add(menuItem)
+            End If
         Next
     End Sub
 
@@ -643,9 +646,11 @@ Public Class frmMainInterface
         Dim names As String() = System.Enum.GetNames(GetType(eTabStripStyle))
         Dim s As String
         For Each s In names
+
             Dim menuItem As ButtonItem = New ButtonItem(s, s)
             AddHandler menuItem.Click, AddressOf ChangeTabStyle
             item.SubItems.Add(menuItem)
+
         Next
     End Sub
 
@@ -811,8 +816,8 @@ Public Class frmMainInterface
         OfficeSettingsEditMode(False)
     End Sub
     Public Sub SetWindowTitle()
-        Dim version As String = String.Format(" v {0}", My.Application.Info.Version.ToString)
-        version = version.Replace(".0.0", "")
+        Dim version As String = " V" & My.Application.Info.Version.ToString.Substring(0, 4)
+
         Me.Text = (strAppName & version & " - " & FullOfficeName & ", " & FullDistrictName).ToUpper
         Me.RibbonControl1.Text = Me.Text
         Me.RibbonControl1.TitleText = "<b>" & Me.Text & "</b>"

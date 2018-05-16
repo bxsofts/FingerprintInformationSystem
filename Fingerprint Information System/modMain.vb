@@ -156,6 +156,23 @@ Module modMain
         End Try
     End Sub
 
+    Public Function GetRandomColor() As String
+        Dim colorList(10) As String
+        colorList(0) = "-4194304"
+        colorList(1) = "-65536"
+        colorList(2) = "-16384"
+        colorList(3) = "-256"
+        colorList(4) = "-7155632"
+        colorList(5) = "-16732080"
+        colorList(6) = "-16731920"
+        colorList(7) = "-16748352"
+        colorList(8) = "-16768928"
+        colorList(9) = "-9424736"
+
+        Dim rnd = New Random()
+        Dim randomColour = colorList(rnd.Next(0, 9))
+        Return randomColour
+    End Function
 
 End Module
 

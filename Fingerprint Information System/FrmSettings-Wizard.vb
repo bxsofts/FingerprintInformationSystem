@@ -1,4 +1,4 @@
-﻿Imports System.Threading
+﻿Imports DevComponents.DotNetBar
 Public Class FrmSettingsWizard
     Dim OldDBFile = ""
     Dim BackupPath = ""
@@ -6,11 +6,13 @@ Public Class FrmSettingsWizard
 
     Private Sub FormLoad() Handles MyBase.Load
         Try
+            SetColorTheme()
+            frmMainInterface.SetColorTheme()
             ShowDotNetWarning()
             boolSettingsWizardCancelled = False
 
             firstrun = My.Computer.Registry.GetValue(strGeneralSettingsPath, "FirstRun", 1)
-           
+
 
             If (firstrun = "0" And boolShowWizard = False) Then
                 frmMainInterface.Show()
@@ -40,7 +42,7 @@ Public Class FrmSettingsWizard
 
             Me.chkAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 30)
-            If autobackuptime = "TextBoxItem1" Then
+            If autobackuptime = "TextBoxItem1" Or firstrun Then
                 autobackuptime = "30"
             End If
 
@@ -161,6 +163,36 @@ Public Class FrmSettingsWizard
         End Try
     End Sub
 
+
+
+    Public Sub SetColorTheme() 'set the color scheme
+        On Error Resume Next
+
+
+        Dim VisualStyle As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "VisualStyle", "Office2016")
+        Dim Style As eStyle = CType(System.Enum.Parse(GetType(eStyle), VisualStyle), eStyle)
+
+        Dim BaseColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", "")
+
+        If StyleManager.IsMetro(Style) Then ' if Office2016, metro, vs2012
+            If BaseColor = "" Or BaseColor = "0" Then
+                m_BaseColor = StyleManager.MetroColorGeneratorParameters.BaseColor
+            Else
+                m_BaseColor = CType(Color.FromArgb(BaseColor), Color)
+            End If
+            ' BaseColor = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", StyleManager.MetroColorGeneratorParameters.BaseColor)
+            StyleManager.Style = Style
+            StyleManager.MetroColorGeneratorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(StyleManager.MetroColorGeneratorParameters.CanvasColor, m_BaseColor)
+        Else
+            If BaseColor = "" Or BaseColor = "0" Then
+                m_BaseColor = Color.Empty
+            Else
+                m_BaseColor = CType(Color.FromArgb(BaseColor), Color)
+            End If
+            StyleManager.ChangeStyle(Style, m_BaseColor)
+            StyleManager.ColorTint = m_BaseColor
+        End If
+    End Sub
     Private Sub Wizard1_CancelButtonClick(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SettingsWizard.CancelButtonClick
         On Error Resume Next
         boolSettingsWizardCancelled = True

@@ -23,6 +23,7 @@ Partial Class FrmSettingsWizard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSettingsWizard))
         Me.SettingsWizard = New DevComponents.DotNetBar.Wizard()
         Me.StartPage = New DevComponents.DotNetBar.WizardPage()
@@ -93,6 +94,7 @@ Partial Class FrmSettingsWizard
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.OfficerTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.OfficerTableTableAdapter()
         Me.SettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SettingsTableAdapter()
+        Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         Me.SettingsWizard.SuspendLayout()
         Me.StartPage.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1295,6 +1297,11 @@ Partial Class FrmSettingsWizard
         '
         Me.SettingsTableAdapter1.ClearBeforeFill = True
         '
+        'StyleManager1
+        '
+        Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
+        Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
+        '
         'FrmSettingsWizard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1404,4 +1411,5 @@ Partial Class FrmSettingsWizard
     Friend WithEvents txtWeeklyDiary As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX21 As DevComponents.DotNetBar.LabelX
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
 End Class

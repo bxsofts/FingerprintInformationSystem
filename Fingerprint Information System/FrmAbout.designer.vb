@@ -25,7 +25,6 @@ Partial Class frmAbout
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAbout))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Licence = New DevComponents.DotNetBar.LabelX()
         Me.LabelVersion = New DevComponents.DotNetBar.LabelX()
         Me.TableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -39,26 +38,10 @@ Partial Class frmAbout
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(462, 189)
+        Me.PictureBox1.Size = New System.Drawing.Size(462, 197)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
-        '
-        'Licence
-        '
-        '
-        '
-        '
-        Me.Licence.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Licence.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Licence.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Licence.Location = New System.Drawing.Point(3, 222)
-        Me.Licence.Name = "Licence"
-        Me.Licence.Size = New System.Drawing.Size(462, 21)
-        Me.Licence.TabIndex = 9
-        Me.Licence.Text = "Licence"
-        Me.Licence.TextAlignment = System.Drawing.StringAlignment.Far
-        Me.Licence.WordWrap = True
         '
         'LabelVersion
         '
@@ -67,12 +50,12 @@ Partial Class frmAbout
         '
         Me.LabelVersion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelVersion.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelVersion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelVersion.Location = New System.Drawing.Point(3, 198)
+        Me.LabelVersion.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelVersion.Location = New System.Drawing.Point(3, 206)
         Me.LabelVersion.Name = "LabelVersion"
-        Me.LabelVersion.Size = New System.Drawing.Size(462, 18)
+        Me.LabelVersion.Size = New System.Drawing.Size(462, 37)
         Me.LabelVersion.TabIndex = 2
-        Me.LabelVersion.Text = "Version"
+        Me.LabelVersion.Text = "Version" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Licenced To:"
         Me.LabelVersion.TextAlignment = System.Drawing.StringAlignment.Far
         '
         'TableLayoutPanel
@@ -80,16 +63,14 @@ Partial Class frmAbout
         Me.TableLayoutPanel.ColumnCount = 1
         Me.TableLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel.Controls.Add(Me.LabelVersion, 0, 1)
-        Me.TableLayoutPanel.Controls.Add(Me.Licence, 0, 2)
         Me.TableLayoutPanel.Controls.Add(Me.PictureBox1, 0, 0)
         Me.TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TableLayoutPanel.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel.Name = "TableLayoutPanel"
-        Me.TableLayoutPanel.RowCount = 3
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.84791!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.885932!))
-        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.64639!))
+        Me.TableLayoutPanel.RowCount = 2
+        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.92683!))
+        Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.07317!))
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel.Size = New System.Drawing.Size(468, 246)
         Me.TableLayoutPanel.TabIndex = 0
@@ -119,7 +100,6 @@ Partial Class frmAbout
 
     End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents Licence As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelVersion As DevComponents.DotNetBar.LabelX
     Friend WithEvents TableLayoutPanel As System.Windows.Forms.TableLayoutPanel
 
