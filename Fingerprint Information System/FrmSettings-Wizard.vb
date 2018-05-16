@@ -445,12 +445,12 @@ Public Class FrmSettingsWizard
 
 
     Private Sub ShowDotNetWarning()
-        Dim dotnetversion As String = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5", "version", 0)
-        If dotnetversion.StartsWith("3.5") = False Then
+        Dim dotnetversion As String = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4.0\Client", "version", 0)
+        If dotnetversion.StartsWith("4.0") = False Then
             Dim ShowDotNetVersion As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "ShowDotNetVersion", 1)
 
             If ShowDotNetVersion = 1 Then
-                Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Microsoft .NET 3.5 is not installed. The application will not work correctly until it is installed." & vbNewLine & "Do you want to hide this message in the future?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+                Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Microsoft .NET V4.0 or above is not installed. The application will not work correctly until it is installed." & vbNewLine & "Do you want to hide this message in the future?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
                 If r = Windows.Forms.DialogResult.Yes Then My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowDotNetVersion", 0, Microsoft.Win32.RegistryValueKind.String)
                 If r = Windows.Forms.DialogResult.No Then My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowDotNetVersion", 1, Microsoft.Win32.RegistryValueKind.String)
             End If
