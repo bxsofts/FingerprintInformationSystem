@@ -50,7 +50,7 @@ Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Fingerprint Informa
 
 
 [CustomMessages]
-dotnetmissing=Setup has detected that Microsoft .NET Framework v3.5 is not installed in your system. The application will not work correctly until you install it. Do you want to install the application any way?
+dotnetmissing=Setup has detected that Microsoft .NET Framework v4.5 or higher is not installed in your system. Do you want to install the application any way?
 
 
 
@@ -70,6 +70,7 @@ external 'ShowWindow@user32.dll stdcall';
 
 function InitializeSetup(): Boolean;
 var
+    NetFrameworkVersion: Cardinal;
     NetFrameWorkInstalled : Boolean;
     Result1 : Boolean;
 begin
@@ -77,7 +78,9 @@ begin
   LoadSkin(ExpandConstant('{tmp}\Office2007.cjstyles'), '');
   Result := True;
 
-	NetFrameWorkInstalled := RegKeyExists(HKLM,'SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5');
+	//NetFrameWorkInstalled := RegKeyExists(HKLM,'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full');
+  NetFrameWorkInstalled := RegQueryDWordValue(HKLM,'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full', 'Release', NetFrameworkVersion);
+
 	if NetFrameWorkInstalled =true then
 	  begin
 		Result := true;
@@ -85,12 +88,8 @@ begin
 
 	if NetFrameWorkInstalled =false then
 		begin
-			Result1 := MsgBox(ExpandConstant('{cm:dotnetmissing}'),mbConfirmation, MB_YESNO) = idYes;
-			if Result1 =true then
-				begin
-					Result:=true;
-			    end
-	    end;
+			Result:= MsgBox(ExpandConstant('{cm:dotnetmissing}'),mbConfirmation, MB_YESNO)= idyes
+		end;
   end;
 
 procedure DeinitializeSetup();
