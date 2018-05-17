@@ -303,6 +303,7 @@ Public Class frmMainInterface
         If DBExists Then
             ConnectToDatabase()
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
+
             If CreateTable = 1 Then
 
                 CreateSOCReportRegisterTable()
@@ -430,15 +431,16 @@ Public Class frmMainInterface
         Dim BaseColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", "")
 
         If StyleManager.IsMetro(Style) Then ' if Office2016, metro, vs2012
+            Me.btnRandomColor.Visible = True
             If BaseColor = "" Or BaseColor = "0" Then
                 m_BaseColor = StyleManager.MetroColorGeneratorParameters.BaseColor
             Else
                 m_BaseColor = CType(Color.FromArgb(BaseColor), Color)
             End If
-            ' BaseColor = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", StyleManager.MetroColorGeneratorParameters.BaseColor)
             StyleManager.Style = Style
             StyleManager.MetroColorGeneratorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(StyleManager.MetroColorGeneratorParameters.CanvasColor, m_BaseColor)
         Else
+            Me.btnRandomColor.Visible = False
             If BaseColor = "" Or BaseColor = "0" Then
                 m_BaseColor = Color.Empty
             Else
@@ -491,12 +493,15 @@ Public Class frmMainInterface
                 Dim Style As eStyle = CType(System.Enum.Parse(GetType(eStyle), Source.CommandParameter.ToString()), eStyle)
 
                 If StyleManager.IsMetro(Style) Then 'Office2016, Metro, VS2012
+                    Me.btnRandomColor.Visible = True
+
                     If Style = eStyle.Metro Then
                         StyleManager.MetroColorGeneratorParameters = DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters.Default
                     End If
                     StyleManager.Style = Style
                     My.Computer.Registry.SetValue(strGeneralSettingsPath, "BaseColor", StyleManager.MetroColorGeneratorParameters.BaseColor.ToArgb.ToString, Microsoft.Win32.RegistryValueKind.String)
                 Else
+                    Me.btnRandomColor.Visible = False
                     StyleManager.ChangeStyle(Style, Color.Empty)
                     StyleManager.ColorTint = Color.Empty
                     My.Computer.Registry.SetValue(strGeneralSettingsPath, "BaseColor", StyleManager.ColorTint.ToArgb.ToString, Microsoft.Win32.RegistryValueKind.String)
@@ -534,6 +539,8 @@ Public Class frmMainInterface
     Private Sub CustomBaseColorSelected(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCustomBaseColor.SelectedColorChanged
         m_BaseColorSelected = True ' Indicate that color was selected for buttonStyleCustom_ExpandChange method
         btnCustomBaseColor.CommandParameter = btnCustomBaseColor.SelectedColor
+        Me.btnRandomColor.Checked = False
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "UseRandomColor", 0, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 
@@ -549,6 +556,16 @@ Public Class frmMainInterface
 
     End Sub
 
+    Private Sub SetRandomColorButton() Handles btnRandomColor.Click
+        On Error Resume Next
+        btnRandomColor.Checked = Not btnRandomColor.Checked
+        Dim s As Boolean = btnRandomColor.Checked
+        Dim v As Integer
+        If s Then v = 1 Else v = 0
+
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "UseRandomColor", v, Microsoft.Win32.RegistryValueKind.String)
+
+    End Sub
 
     '-------------------- TAB COLORS  --------------------------
 
@@ -766,6 +783,7 @@ Public Class frmMainInterface
 
         Me.chkIDLoadOtherDetails.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "LoadDAtoID", 1)
         Me.chkACLoadOtherDetails.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "LoadDAtoAC", 1)
+        Me.btnRandomColor.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseRandomColor", 1)
 
     End Sub
 

@@ -2,19 +2,23 @@
 Public Class FrmSettingsWizard
     Dim OldDBFile = ""
     Dim BackupPath = ""
-
+    Dim firstrun As Boolean
 
     Private Sub FormLoad() Handles MyBase.Load
         Try
-            SetColorTheme()
+            firstrun = CBool(My.Computer.Registry.GetValue(strGeneralSettingsPath, "FirstRun", 1))
+            If frmMainInterface.Visible = False Then
+                SetColorTheme()
+            End If
+
             frmMainInterface.SetColorTheme()
             ShowDotNetWarning()
             boolSettingsWizardCancelled = False
 
-            firstrun = My.Computer.Registry.GetValue(strGeneralSettingsPath, "FirstRun", 1)
 
 
-            If (firstrun = "0" And boolShowWizard = False) Then
+
+            If (firstrun = False And boolShowWizard = False) Then
                 frmMainInterface.Show()
                 Me.Close()
                 Exit Sub
@@ -175,6 +179,13 @@ Public Class FrmSettingsWizard
         Dim BaseColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", "")
 
         If StyleManager.IsMetro(Style) Then ' if Office2016, metro, vs2012
+            Dim UseRandomColor As String = CBool(My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseRandomColor", 1))
+
+            If UseRandomColor And firstrun = False Then
+                BaseColor = GetRandomColor()
+                My.Computer.Registry.SetValue(strGeneralSettingsPath, "BaseColor", BaseColor, Microsoft.Win32.RegistryValueKind.String)
+            End If
+
             If BaseColor = "" Or BaseColor = "0" Then
                 m_BaseColor = StyleManager.MetroColorGeneratorParameters.BaseColor
             Else

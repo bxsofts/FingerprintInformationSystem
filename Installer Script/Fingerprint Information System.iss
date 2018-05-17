@@ -168,14 +168,12 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: QTBarLayout; ValueData: 0,btnNewEntry,btnOpen,btnEdit,btnDelete; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: FirstRun; ValueData: 1;  Flags: noerror uninsdeletekey 
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: PdlFPAttestation; ValueData: ;  Flags: noerror uninsdeletekey   createvalueifdoesntexist
+
 
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: RibbonVisible; ValueData: 1; Flags: noerror uninsdeletekey   createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoCapitalize; ValueData: 1; Flags: noerror uninsdeletekey   createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: IgnoreAllCaps; ValueData: 1; Flags: noerror uninsdeletekey   createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: NilPrintText; ValueData: No action pending; Flags: noerror uninsdeletekey   createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: PrintRemainsText; ValueData: Search continuing; Flags: noerror uninsdeletekey   createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: NoPrintRemainsText; ValueData: Fully eliminated or unfit; Flags: noerror uninsdeletekey   createvalueifdoesntexist
+
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: SaveDefaultWidth; ValueData: 1; Flags: noerror uninsdeletekey
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: CreateTable; ValueData: 1; Flags: noerror uninsdeletekey
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: UpdateNullFields; ValueData: 1; Flags: noerror uninsdeletekey
