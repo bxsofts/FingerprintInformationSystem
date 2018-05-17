@@ -389,6 +389,7 @@ Partial Class frmOnlineBackup
         Me.ClientSize = New System.Drawing.Size(964, 482)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
+        Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

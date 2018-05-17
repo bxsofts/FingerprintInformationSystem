@@ -355,7 +355,7 @@ Public Class frmOnlineBackup
 #End Region
 
 
-#Region "BACKUP DATABSE"
+#Region "BACKUP DATABASE"
 
 
     Private Sub UploadBackup() Handles btnBackupDatabase.Click
@@ -633,11 +633,12 @@ Public Class frmOnlineBackup
                 item.SubItems.Add("Downloaded File")
                 item.ImageIndex = 1
 
-                For delay = 71 To 99
+                For delay = 71 To 98
                     bgwDownload.ReportProgress(delay, "Downloading...")
                     System.Threading.Thread.Sleep(10)
                 Next
 
+                bgwDownload.ReportProgress(99, item)
 
                 If DownloadOpen Then
                     bgwDownload.ReportProgress(100, "Opening in MS Access...")

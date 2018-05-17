@@ -90,6 +90,7 @@ Public Class frmMainInterface
     Dim ShowAllFields As Boolean = True
     Dim ShowStatusTexts As Boolean = False
     Dim blApplicationIsLoading As Boolean = True
+    Dim blApplicationIsRestoring As Boolean = False
     Dim ClipBoardText As String = ""
     Dim PhotographerFieldFocussed As Boolean = False
     Dim PhotographedDateFocussed As Boolean = False
@@ -980,7 +981,7 @@ Public Class frmMainInterface
             If p >= 0 Then Me.SOCRegisterBindingSource.Position = p
         End If
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1004,7 +1005,7 @@ Public Class frmMainInterface
             If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
         End If
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub LoadDARecords()
@@ -1025,7 +1026,7 @@ Public Class frmMainInterface
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
             If p >= 0 Then Me.DARegisterBindingSource.Position = p
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1046,7 +1047,7 @@ Public Class frmMainInterface
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
             If p >= 0 Then Me.IDRegisterBindingSource.Position = p
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1068,7 +1069,7 @@ Public Class frmMainInterface
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
             If p >= 0 Then Me.ACRegisterBindingSource.Position = p
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1090,7 +1091,7 @@ Public Class frmMainInterface
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
             If p >= 0 Then Me.FPARegisterBindingSource.Position = p
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1112,7 +1113,7 @@ Public Class frmMainInterface
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
             If p >= 0 Then Me.CDRegisterBindingSource.Position = p
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1122,29 +1123,28 @@ Public Class frmMainInterface
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
         Me.PSRegisterBindingSource.MoveFirst()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
     Sub LoadRecordsToAllTablesDependingOnCurrentYearSettings() 'loads data to the datagrid
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If chkLoadCurrentYearRecordsOnly.Checked Then
-            LoadCurrentYearRecords()
-        Else
-            LoadSOCRecords()
-            LoadRSOCRecords()
-            LoadDARecords()
-            LoadFPARecords()
-            LoadCDRecords()
-
-        End If
-
         LoadIDRecords()
         LoadACRecords()
         LoadPSRecords()
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+        If chkLoadCurrentYearRecordsOnly.Checked Then
+            LoadCurrentYearRecords()
+        Else
+            LoadRSOCRecords()
+            LoadDARecords()
+            LoadFPARecords()
+            LoadCDRecords()
+            LoadSOCRecords()
+        End If
+
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1161,7 +1161,7 @@ Public Class frmMainInterface
         LoadPSRecords()
         LoadOfficerListToTable()
         ShowAlertMessage("Records reloaded in all tables!")
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1202,7 +1202,7 @@ Public Class frmMainInterface
                 ShowAlertMessage("Records reloaded in Officer List!")
         End Select
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1213,13 +1213,6 @@ Public Class frmMainInterface
         Dim d1 As Date = New Date(y, 1, 1)
         Dim d2 As Date = New Date(y, 12, 31)
 
-        
-        Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-        Me.SOCRegisterBindingSource.MoveLast()
-        Application.DoEvents()
-        IncrementCircularProgress(5)
-
-       
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
         IncrementCircularProgress(5)
 
@@ -1233,6 +1226,10 @@ Public Class frmMainInterface
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
         IncrementCircularProgress(5)
 
+        Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+        Me.SOCRegisterBindingSource.MoveLast()
+        Application.DoEvents()
+        IncrementCircularProgress(5)
 
         '  Me.SOCRegisterBindingSource.MoveLast()
         Me.RSOCRegisterBindingSource.MoveLast()
@@ -1240,7 +1237,7 @@ Public Class frmMainInterface
         Me.FPARegisterBindingSource.MoveLast()
         Me.CDRegisterBindingSource.MoveLast()
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1272,7 +1269,7 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1282,7 +1279,7 @@ Public Class frmMainInterface
             ShowAlertMessage("This Year's SOC Reports Register loaded!")
         End If
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1317,7 +1314,7 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1326,7 +1323,7 @@ Public Class frmMainInterface
         Else
             ShowAlertMessage("This Month's SOC Reports Register loaded!")
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1347,7 +1344,7 @@ Public Class frmMainInterface
                 If Me.dtSOCInspection.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Inspection' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtSOCInspection.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1364,7 +1361,7 @@ Public Class frmMainInterface
                 If Me.dtRSOCReportSentOn.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtRSOCReportSentOn.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1381,7 +1378,7 @@ Public Class frmMainInterface
                 If Me.dtDAEntry.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Entry' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtDAEntry.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1398,7 +1395,7 @@ Public Class frmMainInterface
                 If Me.dtFPADate.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtFPADate.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1414,7 +1411,7 @@ Public Class frmMainInterface
                 If Me.dtCDExamination.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtCDExamination.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1428,7 +1425,7 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1437,7 +1434,7 @@ Public Class frmMainInterface
         Else
             ShowAlertMessage("Specified Month's SOC Reports Register loaded!")
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1451,7 +1448,7 @@ Public Class frmMainInterface
                 If Me.txtSOCYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtSOCYear.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtSOCYear.Text
@@ -1460,7 +1457,7 @@ Public Class frmMainInterface
                 If Me.dtRSOCReportSentOn.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtRSOCReportSentOn.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Year(Me.dtRSOCReportSentOn.Value)
@@ -1469,7 +1466,7 @@ Public Class frmMainInterface
                 If Me.txtDAYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtDAYear.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtDAYear.Text
@@ -1478,7 +1475,7 @@ Public Class frmMainInterface
                 If Me.txtFPAYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtFPAYear.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtFPAYear.Text
@@ -1487,13 +1484,13 @@ Public Class frmMainInterface
                 If Me.txtCDYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtCDYear.Focus()
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtCDYear.Text
             Case Else
                 ShowAlertMessage("This option is not available for the selected register!")
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1530,7 +1527,7 @@ Public Class frmMainInterface
         Else
             ShowAlertMessage("Specified Year's SOC Reports Register loaded!")
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -1796,7 +1793,7 @@ Public Class frmMainInterface
             ReloadTablesAfterDBChange()
         End If
         boolSettingsWizardCancelled = False
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ReloadTablesAfterDBChange()
@@ -2576,7 +2573,7 @@ Public Class frmMainInterface
         End Select
 
         DisplayDatabaseInformation()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -3007,7 +3004,7 @@ Public Class frmMainInterface
 
         End Select
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -3035,7 +3032,7 @@ Public Class frmMainInterface
                 Me.PSDataGrid.Focus()
 
         End Select
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -3281,7 +3278,7 @@ Public Class frmMainInterface
         LoadCDDatagridColumnDefaultWidth()
         LoadPSDatagridColumnDefaultWidth()
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column widths of all tables set to default widths!")
     End Sub
 
@@ -3315,7 +3312,7 @@ Public Class frmMainInterface
 
         End Select
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column widths of the current table set to default widths!")
     End Sub
 
@@ -3735,7 +3732,7 @@ Public Class frmMainInterface
         LoadFPADatagridColumnDefaultOrder()
         LoadCDDatagridColumnDefaultOrder()
         LoadPSDatagridColumnDefaultOrder()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column order of all tables set to default order!")
     End Sub
 
@@ -3744,7 +3741,7 @@ Public Class frmMainInterface
         On Error Resume Next
         If CurrentTab = "IO" Then
             MessageBoxEx.Show("This option is not available for the current table", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("This action will reset the column order of the current table. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -3773,11 +3770,11 @@ Public Class frmMainInterface
                 LoadPSDatagridColumnDefaultOrder()
             Case "IO"
                 MessageBoxEx.Show("This option is not available for the current table", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowAlertMessage("Column order of the current table set to default order!")
     End Sub
 
@@ -4243,7 +4240,7 @@ Public Class frmMainInterface
                         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4255,7 +4252,7 @@ Public Class frmMainInterface
                     Else
                         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4270,7 +4267,7 @@ Public Class frmMainInterface
                         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4282,7 +4279,7 @@ Public Class frmMainInterface
                     Else
                         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4299,7 +4296,7 @@ Public Class frmMainInterface
                         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4311,7 +4308,7 @@ Public Class frmMainInterface
                     Else
                         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4324,7 +4321,7 @@ Public Class frmMainInterface
                 If IDDatagrid.SortOrder = SortOrder.None Or IDDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4332,7 +4329,7 @@ Public Class frmMainInterface
                 If IDDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4345,7 +4342,7 @@ Public Class frmMainInterface
                 If ACDatagrid.SortOrder = SortOrder.None Or ACDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4353,7 +4350,7 @@ Public Class frmMainInterface
                 If ACDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4371,7 +4368,7 @@ Public Class frmMainInterface
                         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4383,7 +4380,7 @@ Public Class frmMainInterface
                     Else
                         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4400,7 +4397,7 @@ Public Class frmMainInterface
                         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4412,7 +4409,7 @@ Public Class frmMainInterface
                     Else
                         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4425,7 +4422,7 @@ Public Class frmMainInterface
                 If PSDataGrid.SortOrder = SortOrder.None Or PSDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
@@ -4433,7 +4430,7 @@ Public Class frmMainInterface
                 If PSDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
-                    If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowAlertMessage("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
@@ -4719,7 +4716,7 @@ Public Class frmMainInterface
 
     Private Function ImportImageFromScannerOrCamera(ByVal SaveLocation As String, Optional ByVal FileName As String = vbNullString) As String
         On Error GoTo errhandler
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         If Me.devmanager.DeviceInfos.Count = 0 Then
             MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return vbNullString
@@ -4847,7 +4844,7 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(FPImageImportLocation)
             Call Shell("explorer.exe " & FPImageImportLocation, AppWinStyle.NormalFocus)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -4863,7 +4860,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -4877,7 +4874,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -4891,7 +4888,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -4900,7 +4897,7 @@ errhandler:
 
         End Select
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -5035,7 +5032,7 @@ errhandler:
             End If
         End If
         DisplayDatabaseInformation()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -5192,7 +5189,7 @@ errhandler:
             DisplayDatabaseInformation()
 
         Catch ex As Exception
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -5737,7 +5734,7 @@ errhandler:
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -5913,7 +5910,7 @@ errhandler:
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
@@ -6100,7 +6097,7 @@ errhandler:
             OriginalDANumber = Me.txtDANumber.Text
             Me.txtDANumber.Focus()
             Me.txtDAYear.Text = Year(Me.dtDAEntry.Value)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6147,7 +6144,7 @@ errhandler:
             End If
             OriginalIDNumber = Me.txtIDNumber.Text
             Me.txtIDNumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6195,7 +6192,7 @@ errhandler:
             End If
             OriginalACNumber = Me.txtACNumber.Text
             Me.txtACNumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6469,7 +6466,7 @@ errhandler:
             OriginalDANumber = Me.txtDANumber.Text
             Me.txtDANumber.Focus()
             Me.txtDAYear.Text = Year(Me.dtDAEntry.Value)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6515,7 +6512,7 @@ errhandler:
             End If
             OriginalIDNumber = Me.txtIDNumber.Text
             Me.txtIDNumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6560,7 +6557,7 @@ errhandler:
             End If
             OriginalACNumber = Me.txtACNumber.Text
             Me.txtACNumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6781,17 +6778,18 @@ errhandler:
 #Region "OFFICER SETTINGS"
 
     Private Sub InitializeOfficerTable()
-        If Me.IODatagrid.Rows.Count = 6 Then
-            Exit Sub
-        End If
+        Dim rowcount As Integer = Me.IODatagrid.Rows.Count
 
-        Me.IODatagrid.Rows.Add(5)
-        Me.IODatagrid.Rows(0).Cells(0).Value = "Tester Inspector"
-        Me.IODatagrid.Rows(1).Cells(0).Value = "FP Expert 1"
-        Me.IODatagrid.Rows(2).Cells(0).Value = "FP Expert 2"
-        Me.IODatagrid.Rows(3).Cells(0).Value = "FP Expert 3"
-        Me.IODatagrid.Rows(4).Cells(0).Value = "FP Searcher"
-        Me.IODatagrid.Rows(5).Cells(0).Value = "Photographer"
+        If rowcount < 6 Then
+            Dim rowneeded As Integer = 6 - rowcount
+            Me.IODatagrid.Rows.Add(rowneeded)
+            Me.IODatagrid.Rows(0).Cells(0).Value = "Tester Inspector"
+            Me.IODatagrid.Rows(1).Cells(0).Value = "FP Expert 1"
+            Me.IODatagrid.Rows(2).Cells(0).Value = "FP Expert 2"
+            Me.IODatagrid.Rows(3).Cells(0).Value = "FP Expert 3"
+            Me.IODatagrid.Rows(4).Cells(0).Value = "FP Searcher"
+            Me.IODatagrid.Rows(5).Cells(0).Value = "Photographer"
+        End If
 
         For iocnt = 0 To 5
             For i = 1 To 5
@@ -7757,7 +7755,7 @@ errhandler:
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -7908,7 +7906,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
         End Try
 
@@ -8034,7 +8032,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
         End Try
 
@@ -8095,10 +8093,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -8109,11 +8107,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -8258,11 +8256,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -8273,7 +8271,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtSOCYear.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -8411,11 +8409,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -8479,7 +8477,7 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(CPImageImportLocation)
             Call Shell("explorer.exe " & CPImageImportLocation, AppWinStyle.NormalFocus)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -8495,7 +8493,7 @@ errhandler:
         Else
             MessageBoxEx.Show("No chance prints have been imported for the selected SOC Number", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ImportChancePrints() Handles btnImportCP.Click
@@ -8566,7 +8564,7 @@ errhandler:
             ShowAlertMessage(i - 1 & " images imported sucessfully!")
         End If
         DisplayDatabaseInformation()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Exit Sub
 errhandler:
@@ -8578,7 +8576,7 @@ errhandler:
             ' ShowAlertMessage(Err.Description)
         End If
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -8772,7 +8770,7 @@ errhandler:
 
         If oldRow IsNot Nothing Then
             If RSOCEditMode Then
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default '
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default '
                 Exit Sub
             End If
 
@@ -8838,7 +8836,7 @@ errhandler:
 
             End With
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub FindRSOCNumber(ByVal socno As String) ' Handles dtSOCInspection.GotFocus
@@ -9027,7 +9025,7 @@ errhandler:
         DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9079,7 +9077,7 @@ errhandler:
         Me.StatusBar.RecalcLayout()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9174,7 +9172,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.RSOCRegisterBindingSource.Position = Me.RSOCRegisterBindingSource.Find("SerialNo", OriginalRSOCSerialNumber)
         End Try
 
@@ -9251,7 +9249,7 @@ errhandler:
 
          Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.RSOCRegisterBindingSource.Position = Me.RSOCRegisterBindingSource.Find("SerialNo", OriginalRSOCSerialNumber)
         End Try
 
@@ -9275,10 +9273,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9350,11 +9348,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
@@ -9668,7 +9666,7 @@ errhandler:
         DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9746,7 +9744,7 @@ errhandler:
         
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.DARegisterBindingSource.Position = Me.DARegisterBindingSource.Find("DANumber", OriginalDANumber)
         End Try
 
@@ -9833,7 +9831,7 @@ errhandler:
        
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.DARegisterBindingSource.Position = Me.DARegisterBindingSource.Find("DANumber", OriginalDANumber)
         End Try
 
@@ -9857,10 +9855,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9974,10 +9972,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -9990,7 +9988,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtDAYear.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -10103,10 +10101,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -10162,7 +10160,7 @@ errhandler:
 
             DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the DA Number which is used as the scanned image's File Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtDANumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -10179,7 +10177,7 @@ errhandler:
             Me.picDASlip.Image = New Bitmap(ScannedImage)
         End If
         DisplayDatabaseInformation()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -10194,13 +10192,13 @@ errhandler:
                 Call Shell("explorer.exe /select," & DASlipImageFile, AppWinStyle.NormalFocus)
             Else
                 MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -10232,7 +10230,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If Me.DADatagrid.RowCount = 0 Then
             ShowAlertMessage("No data in the list to show image!")
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim imagefile = Me.DADatagrid.SelectedCells(15).Value.ToString
@@ -10247,7 +10245,7 @@ errhandler:
 
             If FileIO.FileSystem.FileExists(imagefile) = False Then
                 MessageBoxEx.Show("No image file is associated with the selected DA Number!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         End If
@@ -10266,10 +10264,10 @@ errhandler:
 
         Else
             MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -10285,13 +10283,13 @@ errhandler:
                 frmDASlipImageDisplayer.LoadPictureFromViewer(DASlipImageFile, Me.txtDANumber.Text)
             Else
                 MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Sub ViewDAImage() Handles btnDAViewDisplayContext.Click
@@ -10305,13 +10303,13 @@ errhandler:
                 frmDASlipImageDisplayer.LoadPictureFromViewer(DASlipImageFile, Me.txtDANumber.Text)
             Else
                 MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub DASlipContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles DASlipContextMenuBar.PopupOpen
@@ -10401,7 +10399,7 @@ errhandler:
 
         If oldRow IsNot Nothing Then
             If IDEditMode Then
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default '
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default '
                 Exit Sub
             End If
 
@@ -10427,7 +10425,7 @@ errhandler:
                 End If
             End With
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub FindIDNumber() Handles txtIDDANumber.GotFocus
@@ -10781,7 +10779,7 @@ errhandler:
 
          Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.IDRegisterBindingSource.Position = Me.IDRegisterBindingSource.Find("IDNumber", OriginalIDNumber)
         End Try
         
@@ -10806,11 +10804,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -10931,10 +10929,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -10992,7 +10990,7 @@ errhandler:
 
             DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Number which is used as the scanned image's File Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtIDNumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim FileName As String = "IDNo." & Format(Me.txtIDNumber.Value, "0000")
@@ -11005,7 +11003,7 @@ errhandler:
             Me.picIDSlip.Image = New Bitmap(ScannedImage)
         End If
         DisplayDatabaseInformation()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11017,13 +11015,13 @@ errhandler:
                 Call Shell("explorer.exe /select," & IDSlipImageFile, AppWinStyle.NormalFocus)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11054,7 +11052,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If Me.IDDatagrid.RowCount = 0 Then
             ShowAlertMessage("No data in the list to show image!")
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim imagefile = Me.IDDatagrid.SelectedCells(15).Value.ToString
@@ -11065,7 +11063,7 @@ errhandler:
             imagefile = IDSlipImageImportLocation & FileName
             If FileIO.FileSystem.FileExists(imagefile) = False Then
                 MessageBoxEx.Show("No image file is associated with the selected Identified Slip record!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
 
@@ -11084,10 +11082,10 @@ errhandler:
             frmIDSlipImageDisplayer.LoadDASlipPicture(imagefile, idno & "  -   " & name & IIf(aliasname <> vbNullString, " @ " & aliasname, ""))
         Else
             MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11103,13 +11101,13 @@ errhandler:
                 frmIDSlipImageDisplayer.LoadPictureFromViewer(IDSlipImageFile, Me.txtIDNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Sub ViewIDImage() Handles btnIDViewDisplayContext.Click
@@ -11123,13 +11121,13 @@ errhandler:
                 frmIDSlipImageDisplayer.LoadPictureFromViewer(IDSlipImageFile, Me.txtIDNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub IDSlipContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles IDSlipContextMenuBar.PopupOpen
@@ -11218,7 +11216,7 @@ errhandler:
 
             If ACEditMode Then
                 Me.cmbACPoliceStation.Focus()
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default '
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default '
                 Exit Sub
             End If
 
@@ -11244,7 +11242,7 @@ errhandler:
                 End If
             End With
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11437,7 +11435,7 @@ errhandler:
             DisplayDatabaseInformation()
          Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11513,7 +11511,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.ACRegisterBindingSource.Position = Me.ACRegisterBindingSource.Find("ACNumber", OriginalACNumber)
         End Try
 
@@ -11593,7 +11591,7 @@ errhandler:
         
          Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.ACRegisterBindingSource.Position = Me.ACRegisterBindingSource.Find("ACNumber", OriginalACNumber)
         End Try
 
@@ -11619,10 +11617,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11738,11 +11736,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -11801,7 +11799,7 @@ errhandler:
 
             DevComponents.DotNetBar.MessageBoxEx.Show("Please enter the Number which is used as the scanned image's File Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtACNumber.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim FileName As String = "ACNo." & Format(Me.txtACNumber.Value, "0000")
@@ -11815,7 +11813,7 @@ errhandler:
         End If
         DisplayDatabaseInformation()
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11828,13 +11826,13 @@ errhandler:
 
             Else
                 MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11866,7 +11864,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If Me.ACDatagrid.RowCount = 0 Then
             ShowAlertMessage("No data in the list to show image!")
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim imagefile = Me.ACDatagrid.SelectedCells(14).Value.ToString
@@ -11877,7 +11875,7 @@ errhandler:
             imagefile = ACSlipImageImportLocation & FileName
             If FileIO.FileSystem.FileExists(imagefile) = False Then
                 MessageBoxEx.Show("No image file is associated with the selected Active Criminal Slip record!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         End If
@@ -11894,10 +11892,10 @@ errhandler:
 
         Else
             MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -11913,13 +11911,13 @@ errhandler:
                 FrmACSlipImageDisplayer.LoadPictureFromViewer(ACSlipImageFile, Me.txtACNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Sub ViewACImage() Handles btnACViewDisplayContext.Click
@@ -11933,13 +11931,13 @@ errhandler:
                 FrmACSlipImageDisplayer.LoadPictureFromViewer(ACSlipImageFile, Me.txtACNumber.Text)
             Else
                 MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
             End If
         Else
             MessageBoxEx.Show("No image to show!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ACSlipContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles ACSlipContextMenuBar.PopupOpen
@@ -12184,7 +12182,7 @@ errhandler:
         DisplayDatabaseInformation()
          Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12264,7 +12262,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.CDRegisterBindingSource.Position = Me.CDRegisterBindingSource.Find("CDNumberWithYear", OriginalDANumber)
         End Try
 
@@ -12291,10 +12289,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12352,10 +12350,10 @@ errhandler:
             DisplayDatabaseInformation()
             ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
             Application.DoEvents()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12368,7 +12366,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtCDYear.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -12423,11 +12421,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12481,7 +12479,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.CDRegisterBindingSource.Position = Me.CDRegisterBindingSource.Find("CDNumberWithYear", OriginalDANumber)
         End Try
 
@@ -12711,7 +12709,7 @@ errhandler:
         DisplayDatabaseInformation()
        Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12796,7 +12794,7 @@ errhandler:
        
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.FPARegisterBindingSource.Position = Me.FPARegisterBindingSource.Find("FPNumber", OriginalFPANumber)
         End Try
 
@@ -12857,7 +12855,7 @@ errhandler:
         
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.FPARegisterBindingSource.Position = Me.FPARegisterBindingSource.Find("FPNumber", OriginalFPANumber)
         End Try
 
@@ -12882,10 +12880,10 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12957,11 +12955,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -12974,7 +12972,7 @@ errhandler:
         If y = vbNullString Then
             MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtFPAYear.Focus()
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -13042,11 +13040,11 @@ errhandler:
         DisplayDatabaseInformation()
         ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -13147,7 +13145,7 @@ errhandler:
         DisplayDatabaseInformation()
        Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -13250,7 +13248,7 @@ errhandler:
       
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", OriginalPSName)
         End Try
 
@@ -13295,7 +13293,7 @@ errhandler:
        
          Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.PSRegisterBindingSource.Position = Me.PSRegisterBindingSource.Find("PoliceStation", OriginalPSName)
         End Try
 
@@ -13357,7 +13355,7 @@ errhandler:
             OfficeSettingsEditMode(False)
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
@@ -13646,7 +13644,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -13674,6 +13672,7 @@ errhandler:
 
         If blApplicationIsLoading Then Exit Sub
 
+
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         boolRestored = False
@@ -13688,7 +13687,7 @@ errhandler:
             ShowAlertMessage("Database restored successfully!")
         End If
         boolRestored = False
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
@@ -13699,7 +13698,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         boolRestored = False
@@ -13718,6 +13717,8 @@ errhandler:
     End Sub
 
     Private Sub LoadRecordsAfterRestore()
+        Me.Cursor = Cursors.WaitCursor
+        blApplicationIsRestoring = True
         ConnectToDatabase()
         CreateOfficerTable()
         CreateSOCReportRegisterTable()
@@ -13725,7 +13726,6 @@ errhandler:
         ModifyTables()
         UpdateNullFields()
         RemoveNullFromOfficerTable()
-        LoadRecordsToAllTablesDependingOnCurrentYearSettings()
         LoadPSList()
         InitializeOfficerTable()
         LoadOfficer()
@@ -13734,11 +13734,13 @@ errhandler:
         OfficeSettingsEditMode(True)
         LoadOfficeSettings()
         LoadOfficeSettingsToTextBoxes()
+        LoadRecordsToAllTablesDependingOnCurrentYearSettings()
         If Me.btnOpen.Enabled = False Then
             EnableControls()
             Me.pnlRegisterName.Text = "Scene of Crime Register"
         End If
         OfficeSettingsEditMode(False)
+        blApplicationIsRestoring = False
     End Sub
     Public Function IsValidBackupFile(ByVal DBPath As String) As Boolean
         IsValidBackupFile = False
@@ -13862,10 +13864,10 @@ errhandler:
             ReleaseObject(wdDocs)
             wdApp = Nothing
 
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -14338,10 +14340,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14477,10 +14479,10 @@ errhandler:
             ReleaseObject(wdDocs)
             wdApp.Visible = True
             wdApp = Nothing
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -14636,10 +14638,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14760,10 +14762,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14894,10 +14896,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14928,10 +14930,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
     Private Sub GenerateFPASlipForm(sender As Object, e As EventArgs) Handles btnFPAGenerateSlipFormContext.Click, btnFPAGenerateSlipForm.Click, btnFPABlankSlipForm.Click
@@ -15003,10 +15005,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
     Private Sub CDRegister() Handles btnCDRegister.Click
@@ -15157,7 +15159,7 @@ errhandler:
             Return t
         Catch ex As Exception
             Return Number.ToString
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -15208,7 +15210,7 @@ errhandler:
 
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -15363,12 +15365,12 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
 
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message & vbNewLine & vbNewLine & "Please make sure that Microsoft Word is installed in your system.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
 
@@ -15666,7 +15668,7 @@ errhandler:
         FrmAdvancedSearch.BringToFront()
 
 
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -15681,7 +15683,7 @@ errhandler:
         frmAnnualStatistics.Text = "Annual Statistics"
         frmAnnualStatistics.TitleText = "<b>Annual Statistics</b>"
         frmAnnualStatistics.ShowDialog()
-        If Not blApplicationIsLoading Then Me.Cursor = Cursors.Default
+         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 #End Region
