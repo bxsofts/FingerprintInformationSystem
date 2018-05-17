@@ -973,7 +973,7 @@ Public Class frmMainInterface
         Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
         Me.SOCRegisterBindingSource.MoveLast()
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
             Application.DoEvents()
         Else
@@ -998,7 +998,7 @@ Public Class frmMainInterface
         Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
         Me.RSOCRegisterBindingSource.MoveLast()
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
@@ -1020,7 +1020,7 @@ Public Class frmMainInterface
         End If
         Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
         Me.DARegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
@@ -1041,7 +1041,7 @@ Public Class frmMainInterface
         End If
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
         Me.IDRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
@@ -1063,7 +1063,7 @@ Public Class frmMainInterface
         End If
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
         Me.ACRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
@@ -1085,7 +1085,7 @@ Public Class frmMainInterface
         End If
         Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
         Me.FPARegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
@@ -1107,7 +1107,7 @@ Public Class frmMainInterface
         Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
         Me.CDRegisterBindingSource.MoveLast()
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blApplicationIsRestoring Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
@@ -1130,19 +1130,19 @@ Public Class frmMainInterface
     Sub LoadRecordsToAllTablesDependingOnCurrentYearSettings() 'loads data to the datagrid
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        LoadIDRecords()
-        LoadACRecords()
-        LoadPSRecords()
-
         If chkLoadCurrentYearRecordsOnly.Checked Then
             LoadCurrentYearRecords()
         Else
+            LoadSOCRecords()
             LoadRSOCRecords()
             LoadDARecords()
             LoadFPARecords()
             LoadCDRecords()
-            LoadSOCRecords()
         End If
+
+        LoadIDRecords()
+        LoadACRecords()
+        LoadPSRecords()
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
@@ -1167,7 +1167,7 @@ Public Class frmMainInterface
 
     Sub LoadRecordsToTableWithAlertMessage() Handles btnReload.Click 'loads data in the datagrid
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
 
@@ -1213,6 +1213,11 @@ Public Class frmMainInterface
         Dim d1 As Date = New Date(y, 1, 1)
         Dim d2 As Date = New Date(y, 12, 31)
 
+        Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+        Me.SOCRegisterBindingSource.MoveLast()
+        IncrementCircularProgress(5)
+        Application.DoEvents()
+       
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
         IncrementCircularProgress(5)
 
@@ -1226,10 +1231,7 @@ Public Class frmMainInterface
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
         IncrementCircularProgress(5)
 
-        Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-        Me.SOCRegisterBindingSource.MoveLast()
-        Application.DoEvents()
-        IncrementCircularProgress(5)
+        
 
         '  Me.SOCRegisterBindingSource.MoveLast()
         Me.RSOCRegisterBindingSource.MoveLast()
@@ -2677,7 +2679,7 @@ Public Class frmMainInterface
             Me.lblNumberOfRecords.Visible = True
             Me.txtPosition.Visible = True
 
-            If blApplicationIsLoading = False And SOCDatagrid.RowCount <> 0 Then
+            If blApplicationIsLoading Or blApplicationIsRestoring = False And SOCDatagrid.RowCount <> 0 Then
                 If Me.SocReportRegisterTableAdapter1.ScalarQueryReportSent(Me.SOCDatagrid.SelectedCells(0).Value.ToString) > 0 Then
                     Me.lblReportSent.Visible = True
                 Else
@@ -2940,7 +2942,7 @@ Public Class frmMainInterface
 
     Private Sub HideDataEntryFields() Handles btnShowHideFields.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
 
@@ -5304,7 +5306,7 @@ errhandler:
 
 #Region "NEW BUTTON ACTION"
     Private Sub NewDataMode() Handles btnNewEntry.Click
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
         On Error Resume Next
 
         If CurrentTab = "SOC" Then
@@ -5406,7 +5408,7 @@ errhandler:
 
     Private Sub DeleteSelectedItem() Handles btnDelete.Click, btnDeleteContext.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         Try
 
@@ -5919,7 +5921,7 @@ errhandler:
 #Region "EDIT BUTTON ACTION"
     Private Sub OpenRecordForEditing() Handles btnEdit.Click, btnEditContext.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
 
@@ -6287,7 +6289,7 @@ errhandler:
 #Region "OPEN  BUTTON ACTION"
     Private Sub OpenRecord() Handles btnOpen.Click, btnOpenContext.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
         If CurrentTab = "SOC" Then
@@ -13670,7 +13672,7 @@ errhandler:
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
 
         On Error Resume Next
@@ -13692,7 +13694,7 @@ errhandler:
 
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
@@ -15396,7 +15398,7 @@ errhandler:
     Private Sub EndApplication() Handles btnExit.Click, MyBase.FormClosed
 
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
         SaveSOCDatagridColumnWidth()
@@ -15639,7 +15641,7 @@ errhandler:
 
     Private Sub ShowAdvancedSearch(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSOCAdvancedSearch.Click, btnRSOCAdvancedSearch.Click, btnDAAdvancedSearch.Click, btnIDAdvancedSearch.Click, btnACAdvancedSearch.Click, btnFPAAdvancedSearch.Click, btnCDAdvancedSearch.Click, btnSearchMain.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
 
         On Error Resume Next
@@ -15776,7 +15778,7 @@ errhandler:
 
     Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
 
-        If blApplicationIsLoading Then Exit Sub
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         Cursor = Cursors.WaitCursor
         frmAbout.ShowDialog()
