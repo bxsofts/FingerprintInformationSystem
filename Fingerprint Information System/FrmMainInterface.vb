@@ -399,14 +399,14 @@ Public Class frmMainInterface
         SetForegroundWindow(MyBase.Handle)
 
         ChangeCursor(Cursors.Default)
-
+        System.Threading.Thread.Sleep(1000)
+        frmSplashScreen.CloseForm()
         ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
 
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
 
         If DBExists = False Then
-            My.Application.SplashScreen.Close()
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
             MessageBoxEx.Show("FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)

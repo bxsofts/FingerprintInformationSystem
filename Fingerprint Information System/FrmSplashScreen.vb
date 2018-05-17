@@ -19,7 +19,15 @@ Public NotInheritable Class frmSplashScreen
     Public Delegate Sub UpdateProgressBarDelegate(ByVal value As Integer)
     Public Delegate Sub IncrementProgressBarDelegate(ByVal value As Integer)
     Public Delegate Sub SetProgressBarVisible()
+    Public Delegate Sub CloseSplashScreen()
 
+    Public Sub CloseForm()
+        If Me.InvokeRequired Then
+            Me.Invoke(New CloseSplashScreen(AddressOf CloseForm))
+        Else
+            Me.Close()
+        End If
+    End Sub
     Public Sub ShowProgressBar()
         If Me.InvokeRequired Then
             Me.Invoke(New SetProgressBarVisible(AddressOf ShowProgressBar))

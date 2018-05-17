@@ -16,3 +16,4 @@ obj
 *.suo
 /*.suo
 Fingerprint Information System.v12.suo
+*.db
