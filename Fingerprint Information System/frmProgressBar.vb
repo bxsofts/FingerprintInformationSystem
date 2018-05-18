@@ -27,8 +27,14 @@ Public Class frmProgressBar
         Me.Height = 152
         Me.CenterToScreen()
         Me.TopMost = True
+        
+
+        Me.CircularProgress1.ProgressColor = GetProgressTextColor
+
         Me.CircularProgress1.Show()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = True
     End Sub
+
+   
 End Class

@@ -175,6 +175,17 @@ Module modMain
         Return randomColour
     End Function
 
+    Public Function GetProgressTextColor() As System.Drawing.Color
+        Dim BaseColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", "")
+        Dim cBaseColor As System.Drawing.Color
+
+        If BaseColor = "" Or BaseColor = "0" Then
+            cBaseColor = StyleManager.MetroColorGeneratorParameters.BaseColor
+        Else
+            cBaseColor = CType(Color.FromArgb(BaseColor), Color)
+        End If
+        Return cBaseColor
+    End Function
 End Module
 
 
@@ -204,4 +215,6 @@ Class ListViewItemComparer
         End If
         Return returnVal
     End Function
+
+  
 End Class
