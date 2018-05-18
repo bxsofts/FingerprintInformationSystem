@@ -1893,28 +1893,35 @@ Public Class frmMainInterface
         FrmSettingsWizard.ShowDialog()
 
         If boolSettingsWizardCancelled = False Then
-            ReloadTablesAfterDBChange()
+            ReloadDataAfterWizardClose()
         End If
         boolSettingsWizardCancelled = False
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub ReloadTablesAfterDBChange()
+    Private Sub ReloadDataAfterWizardClose()
         Try
             sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
             sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
             ConnectToDatabase()
-            LoadOfficerList()
-            Me.IODatagrid.Rows(0).Cells(1).Value = TIName()
-            Me.IODatagrid.Rows(1).Cells(1).Value = FPE1.Replace(", FPE", "")
-            Me.IODatagrid.Rows(2).Cells(1).Value = FPE2.Replace(", FPE", "")
-            Me.IODatagrid.Rows(3).Cells(1).Value = FPE3.Replace(", FPE", "")
-            Me.IODatagrid.Rows(4).Cells(1).Value = FPS.Replace(", FPS", "")
-            Me.IODatagrid.Rows(5).Cells(1).Value = strPhotographer
+           
+            LoadPSList()
+            InitializeOfficerTable()
+            LoadOfficer()
+            LoadOfficerListToTable()
+
+            OfficeSettingsEditMode(True)
+            LoadOfficeSettings()
             SetWindowTitle()
+
+            LoadOfficeSettingsToTextBoxes()
             LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+
+            OfficeSettingsEditMode(False)
+
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
-            Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
+            Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 30)
+
             Me.txtAutoBackupPeriod.TextBox.Text = autobackuptime
             GetFPSlipImageImportLocation()
             GetCPImageImportLocation()
@@ -13464,6 +13471,7 @@ errhandler:
 #End Region
 
 
+#Region "DATABASE LOCATION"
     Private Sub ChangeDatabseLocation(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeDBFolder.Click
         Try
             Dim StartFolder As String
@@ -13515,8 +13523,8 @@ errhandler:
                     Application.DoEvents()
                     ShowAlertMessage("Database Folder changed")
                     My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
-                    ReloadTablesAfterDBChange()
-               
+                    ReloadDataAfterWizardClose()
+
                 End If
 
             End If
@@ -13526,7 +13534,7 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
 
-        
+
     End Sub
 
 
@@ -13541,6 +13549,7 @@ errhandler:
 
     End Function
 
+#End Region
     '---------------------------------------------BACKUP DATABASE MANIPULATION-----------------------------------
 
 #Region "BACKUP DATABASE"
@@ -13621,7 +13630,7 @@ errhandler:
                 End If
             End If
 
-            
+
         Catch ex As Exception
             ' ShowErrorMessage(ex)
         End Try
@@ -13698,7 +13707,7 @@ errhandler:
         Dim dt As Date = lastbackupdate.AddDays(backuptime)
 
         If Today >= dt Then
-          
+
             Dim Source As String = sDatabaseFile
 
             Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
@@ -13747,7 +13756,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -13790,7 +13799,7 @@ errhandler:
             ShowAlertMessage("Database restored successfully!")
         End If
         boolRestored = False
-        If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
@@ -13801,7 +13810,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         boolRestored = False
@@ -13819,97 +13828,97 @@ errhandler:
         Cursor = Cursors.Default
     End Sub
 
-   
+
 
     Private Sub LoadRecordsAfterRestore()
         Try
 
-        
-        Me.Cursor = Cursors.WaitCursor
 
-        frmProgressBar.Show()
-        frmProgressBar.SetStatusText("Restoring...")
-        blApplicationIsRestoring = True
+            Me.Cursor = Cursors.WaitCursor
 
-        ConnectToDatabase()
+            frmProgressBar.Show()
+            frmProgressBar.SetStatusText("Restoring...")
+            blApplicationIsRestoring = True
 
-        For i = 1 To 5
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            ConnectToDatabase()
+
+            For i = 1 To 5
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
 
-        CreateOfficerTable()
+            CreateOfficerTable()
 
-        For i = 6 To 10
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 6 To 10
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        CreateSOCReportRegisterTable()
+            CreateSOCReportRegisterTable()
 
-        For i = 11 To 15
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 11 To 15
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        CreateSettingsTable()
+            CreateSettingsTable()
 
-        For i = 16 To 20
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 16 To 20
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        ModifyTables()
+            ModifyTables()
 
-        For i = 21 To 25
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 21 To 25
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        UpdateNullFields()
+            UpdateNullFields()
 
-        For i = 26 To 30
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 26 To 30
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        RemoveNullFromOfficerTable()
-        For i = 31 To 35
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            RemoveNullFromOfficerTable()
+            For i = 31 To 35
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        LoadPSList()
-        InitializeOfficerTable()
-        LoadOfficer()
-        LoadOfficerListToTable()
+            LoadPSList()
+            InitializeOfficerTable()
+            LoadOfficer()
+            LoadOfficerListToTable()
 
-        For i = 36 To 40
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 36 To 40
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        OfficeSettingsEditMode(True)
+            OfficeSettingsEditMode(True)
             LoadOfficeSettings()
             SetWindowTitle()
-        LoadOfficeSettingsToTextBoxes()
+            LoadOfficeSettingsToTextBoxes()
 
-        For i = 41 To 50
-            frmProgressBar.SetProgressText(i)
-            System.Threading.Thread.Sleep(50)
-        Next
+            For i = 41 To 50
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
 
-        LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+            LoadRecordsToAllTablesDependingOnCurrentYearSettings()
 
-        If Me.btnOpen.Enabled = False Then
-            EnableControls()
-            Me.pnlRegisterName.Text = "Scene of Crime Register"
-        End If
-        OfficeSettingsEditMode(False)
-        blApplicationIsRestoring = False
+            If Me.btnOpen.Enabled = False Then
+                EnableControls()
+                Me.pnlRegisterName.Text = "Scene of Crime Register"
+            End If
+            OfficeSettingsEditMode(False)
+            blApplicationIsRestoring = False
 
-        frmProgressBar.Close()
+            frmProgressBar.Close()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -13968,7 +13977,7 @@ errhandler:
     '---------------------------------------------REPORTS-----------------------------------
 #Region "REPORTS"
     Private Sub ShowSOCFacingSheet() Handles btnSOCFacingSheet.Click, btnFacingSheet.Click, btnFacingSheetContext.Click, btnFacingSheetMenu.Click
-       
+
         If (Me.SOCDatagrid.RowCount = 0) Or (Me.SOCDatagrid.SelectedRows.Count = 0) Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No record is selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -14008,7 +14017,7 @@ errhandler:
             wdBooks("NC").Range.Text = Me.SOCDatagrid.SelectedCells(15).Value.ToString
             wdBooks("MO").Range.Text = Me.SOCDatagrid.SelectedCells(16).Value.ToString
             wdBooks("PL").Range.Text = Me.SOCDatagrid.SelectedCells(17).Value.ToString
-           
+
             Dim cpdeveloped As Integer = Me.SOCDatagrid.SelectedCells(10).Value
             Dim cpd As String = ""
 
@@ -14037,10 +14046,10 @@ errhandler:
             ReleaseObject(wdDocs)
             wdApp = Nothing
 
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -14513,10 +14522,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14652,10 +14661,10 @@ errhandler:
             ReleaseObject(wdDocs)
             wdApp.Visible = True
             wdApp = Nothing
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -14811,10 +14820,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -14935,10 +14944,10 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -15069,10 +15078,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -15103,10 +15112,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
     Private Sub GenerateFPASlipForm(sender As Object, e As EventArgs) Handles btnFPAGenerateSlipFormContext.Click, btnFPAGenerateSlipForm.Click, btnFPABlankSlipForm.Click
@@ -15178,10 +15187,10 @@ errhandler:
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
     Private Sub CDRegister() Handles btnCDRegister.Click
@@ -15332,7 +15341,7 @@ errhandler:
             Return t
         Catch ex As Exception
             Return Number.ToString
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Function
@@ -15383,7 +15392,7 @@ errhandler:
 
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         End Try
     End Sub
@@ -15538,12 +15547,12 @@ errhandler:
             aDoc = Nothing
             WordApp = Nothing
 
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
 
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message & vbNewLine & vbNewLine & "Please make sure that Microsoft Word is installed in your system.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
 
@@ -15841,7 +15850,7 @@ errhandler:
         FrmAdvancedSearch.BringToFront()
 
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -15856,7 +15865,7 @@ errhandler:
         frmAnnualStatistics.Text = "Annual Statistics"
         frmAnnualStatistics.TitleText = "<b>Annual Statistics</b>"
         frmAnnualStatistics.ShowDialog()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 #End Region
@@ -15959,7 +15968,7 @@ errhandler:
     Private Sub IncrementCircularProgress(increment As Integer)
         frmSplashScreen.IncrementProgressBarValue(increment)
     End Sub
-    
-    
-  
+
+
+
 End Class
