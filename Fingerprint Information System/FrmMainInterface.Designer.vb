@@ -124,6 +124,7 @@ Partial Class frmMainInterface
         Me.btnOffice2007VistaGlass = New DevComponents.DotNetBar.ButtonItem()
         Me.btnWindows7Blue = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCustomBaseColor = New DevComponents.DotNetBar.ColorPickerDropDown()
+        Me.btnRandomColor = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
         Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar6 = New DevComponents.DotNetBar.RibbonBar()
@@ -1014,7 +1015,6 @@ Partial Class frmMainInterface
         Me.SettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SettingsTableAdapter()
         Me.OfficerTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
-        Me.btnRandomColor = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1387,6 +1387,12 @@ Partial Class frmMainInterface
         Me.btnCustomBaseColor.Command = Me.AppCommandTheme
         Me.btnCustomBaseColor.Name = "btnCustomBaseColor"
         Me.btnCustomBaseColor.Text = "Custom Color Style"
+        '
+        'btnRandomColor
+        '
+        Me.btnRandomColor.Checked = true
+        Me.btnRandomColor.Name = "btnRandomColor"
+        Me.btnRandomColor.Text = "Use Random Color"
         '
         'RibbonControl1
         '
@@ -13658,12 +13664,6 @@ Partial Class frmMainInterface
         '
         Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
         Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(1,Byte),Integer), CType(CType(115,Byte),Integer), CType(CType(199,Byte),Integer)))
-        '
-        'btnRandomColor
-        '
-        Me.btnRandomColor.Checked = true
-        Me.btnRandomColor.Name = "btnRandomColor"
-        Me.btnRandomColor.Text = "Use Random Color"
         '
         'frmMainInterface
         '

@@ -973,7 +973,14 @@ Public Class frmMainInterface
         Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
         Me.SOCRegisterBindingSource.MoveLast()
 
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+        If blApplicationIsRestoring Then
+            For i = 51 To 60
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
             Application.DoEvents()
         Else
@@ -998,7 +1005,14 @@ Public Class frmMainInterface
         Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
         Me.RSOCRegisterBindingSource.MoveLast()
 
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+        If blApplicationIsRestoring Then
+            For i = 61 To 70
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
@@ -1020,7 +1034,16 @@ Public Class frmMainInterface
         End If
         Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
         Me.DARegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+
+
+        If blApplicationIsRestoring Then
+            For i = 71 To 80
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
@@ -1041,7 +1064,7 @@ Public Class frmMainInterface
         End If
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
         Me.IDRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
@@ -1063,7 +1086,7 @@ Public Class frmMainInterface
         End If
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
         Me.ACRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
@@ -1085,7 +1108,15 @@ Public Class frmMainInterface
         End If
         Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
         Me.FPARegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+
+        If blApplicationIsRestoring Then
+            For i = 81 To 85
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
@@ -1107,7 +1138,14 @@ Public Class frmMainInterface
         Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
         Me.CDRegisterBindingSource.MoveLast()
 
-        If blApplicationIsLoading Or blApplicationIsRestoring Then
+        If blApplicationIsRestoring Then
+            For i = 86 To 90
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
@@ -1141,8 +1179,23 @@ Public Class frmMainInterface
         End If
 
         LoadIDRecords()
+
+        If blApplicationIsRestoring Then
+            For i = 91 To 95
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
         LoadACRecords()
         LoadPSRecords()
+
+        If blApplicationIsRestoring Then
+            For i = 96 To 100
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
@@ -1215,23 +1268,71 @@ Public Class frmMainInterface
 
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
         Me.SOCRegisterBindingSource.MoveLast()
-        IncrementCircularProgress(5)
-        Application.DoEvents()
-       
+
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
+            Application.DoEvents()
+        End If
+      
+
+        If blApplicationIsRestoring Then
+            For i = 51 To 60
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-        IncrementCircularProgress(5)
+
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
+        End If
+
+        If blApplicationIsRestoring Then
+            For i = 61 To 70
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
 
         Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-        IncrementCircularProgress(5)
+
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
+        End If
+
+        If blApplicationIsRestoring Then
+            For i = 71 To 80
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
 
         Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
-        IncrementCircularProgress(5)
 
-       
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
+        End If
+
+        If blApplicationIsRestoring Then
+            For i = 81 To 85
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
+
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
-        IncrementCircularProgress(5)
 
-        
+        If blApplicationIsLoading Then
+            IncrementCircularProgress(5)
+        End If
+
+        If blApplicationIsRestoring Then
+            For i = 86 To 90
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+        End If
 
         '  Me.SOCRegisterBindingSource.MoveLast()
         Me.RSOCRegisterBindingSource.MoveLast()
@@ -13718,31 +13819,100 @@ errhandler:
         Cursor = Cursors.Default
     End Sub
 
+   
+
     Private Sub LoadRecordsAfterRestore()
+        Try
+
+        
         Me.Cursor = Cursors.WaitCursor
+
+        frmProgressBar.Show()
+        frmProgressBar.SetStatusText("Restoring...")
         blApplicationIsRestoring = True
+
         ConnectToDatabase()
+
+        For i = 1 To 5
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
+
         CreateOfficerTable()
+
+        For i = 6 To 10
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         CreateSOCReportRegisterTable()
+
+        For i = 11 To 15
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         CreateSettingsTable()
+
+        For i = 16 To 20
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         ModifyTables()
+
+        For i = 21 To 25
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         UpdateNullFields()
+
+        For i = 26 To 30
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         RemoveNullFromOfficerTable()
+        For i = 31 To 35
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         LoadPSList()
         InitializeOfficerTable()
         LoadOfficer()
         LoadOfficerListToTable()
 
+        For i = 36 To 40
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         OfficeSettingsEditMode(True)
         LoadOfficeSettings()
         LoadOfficeSettingsToTextBoxes()
+
+        For i = 41 To 50
+            frmProgressBar.SetProgressText(i)
+            System.Threading.Thread.Sleep(50)
+        Next
+
         LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+
         If Me.btnOpen.Enabled = False Then
             EnableControls()
             Me.pnlRegisterName.Text = "Scene of Crime Register"
         End If
         OfficeSettingsEditMode(False)
         blApplicationIsRestoring = False
+
+        frmProgressBar.Close()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
     End Sub
     Public Function IsValidBackupFile(ByVal DBPath As String) As Boolean
         IsValidBackupFile = False
@@ -15789,4 +15959,6 @@ errhandler:
         frmSplashScreen.IncrementProgressBarValue(increment)
     End Sub
     
+    
+  
 End Class
