@@ -13891,7 +13891,8 @@ errhandler:
         Next
 
         OfficeSettingsEditMode(True)
-        LoadOfficeSettings()
+            LoadOfficeSettings()
+            SetWindowTitle()
         LoadOfficeSettingsToTextBoxes()
 
         For i = 41 To 50
