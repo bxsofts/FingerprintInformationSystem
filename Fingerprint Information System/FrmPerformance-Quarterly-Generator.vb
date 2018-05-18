@@ -18,7 +18,7 @@ Public Class frmQuarterlyPerformance
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
-
+        Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False

@@ -175,7 +175,7 @@ Module modMain
         Return randomColour
     End Function
 
-    Public Function GetProgressTextColor() As System.Drawing.Color
+    Public Function GetProgressColor() As System.Drawing.Color
         Dim BaseColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BaseColor", "")
         Dim cBaseColor As System.Drawing.Color
 

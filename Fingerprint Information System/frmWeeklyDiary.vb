@@ -13,11 +13,12 @@ Public Class frmWeeklyDiary
 
     Private Sub frmWeeklyDiary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            Me.CircularProgress1.ProgressColor = GetProgressColor()
             Me.CircularProgress1.Hide()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = False
             Me.MonthCalendarAdv1.FirstDayOfWeek = System.DayOfWeek.Sunday
-
+            Me.MonthCalendarAdv1.DisplayMonth = Today
             Dim lastweekdate As Date = Date.Today.AddDays(-7) 'gets day of last week
             Dim dayOfWeek = CInt(lastweekdate.DayOfWeek)
             dtWeeklyDiaryFrom = lastweekdate.AddDays(-1 * dayOfWeek)
@@ -25,7 +26,7 @@ Public Class frmWeeklyDiary
 
             Me.MonthCalendarAdv1.SelectedDate = dtWeeklyDiaryFrom
             Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
-            
+
 
             If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
             Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString

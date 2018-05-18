@@ -55,10 +55,12 @@ Public Class FrmTourNote
         boolGenerateRecords = False
 
         CircularProgress1.ProgressText = ""
+        CircularProgress1.ProgressColor = GetProgressColor()
         CircularProgress1.IsRunning = False
         CircularProgress1.Hide()
 
         CircularProgress2.ProgressText = ""
+        CircularProgress1.ProgressColor = GetProgressColor()
         CircularProgress2.IsRunning = False
         CircularProgress2.Hide()
 

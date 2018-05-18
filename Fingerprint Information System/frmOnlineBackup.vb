@@ -41,6 +41,7 @@ Public Class frmOnlineBackup
     Private Sub CreateService() Handles MyBase.Load
 
         Me.Cursor = Cursors.WaitCursor
+
         BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
 
         If My.Computer.FileSystem.DirectoryExists(BackupPath) = False Then
@@ -80,6 +81,7 @@ Public Class frmOnlineBackup
             CircularProgress1.ProgressText = ""
             lblStatus.Text = "Please wait..."
             CircularProgress1.IsRunning = True
+            Me.CircularProgress1.ProgressColor = GetProgressColor()
             CircularProgress1.Show()
             lblStatus.Show()
 

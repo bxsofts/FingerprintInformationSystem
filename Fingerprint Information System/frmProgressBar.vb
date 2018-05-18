@@ -29,7 +29,7 @@ Public Class frmProgressBar
         Me.TopMost = True
         
 
-        Me.CircularProgress1.ProgressColor = GetProgressTextColor
+        Me.CircularProgress1.ProgressColor = GetProgressColor
 
         Me.CircularProgress1.Show()
         Me.CircularProgress1.ProgressText = ""
