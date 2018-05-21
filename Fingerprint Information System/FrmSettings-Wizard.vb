@@ -33,6 +33,7 @@ Public Class FrmSettingsWizard
             End If
 
             OldDBFile = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
+
             If FileIO.FileSystem.FileExists(sDatabaseFile) = False Then
                 sDatabaseFile = OldDBFile
             End If
@@ -235,28 +236,10 @@ Public Class FrmSettingsWizard
         End If
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
 
-        Dim PerformancePath = (My.Computer.FileSystem.GetParentPath(sDatabaseFile) & "\Performance Statements").Replace("\Database", "")
-
-        If FileIO.FileSystem.DirectoryExists(PerformancePath) = False Then
-            PerformancePath = strAppUserPath & "\Performance Statements"
-        End If
-
-
-        Dim NewPerformancePath = (My.Computer.FileSystem.GetParentPath(sDatabaseFile) & "\Performance Statements").Replace("\Database", "")
-
-
-        My.Computer.FileSystem.CreateDirectory(NewPerformancePath)
-        My.Computer.FileSystem.CreateDirectory(NewPerformancePath & "\Monthly Statement")
-        My.Computer.FileSystem.CreateDirectory(NewPerformancePath & "\Quarterly Statement")
-
-        If (FileIO.FileSystem.DirectoryExists(PerformancePath)) Then
-            If PerformancePath <> NewPerformancePath Then
-                My.Computer.FileSystem.CopyDirectory(PerformancePath, NewPerformancePath)
-            End If
-        End If
-
+       
         Dim newbackupfolder = Me.lblBackupLocation.Text
         My.Computer.FileSystem.CreateDirectory(newbackupfolder)
+
         If (BackupPath <> newbackupfolder) Then
             My.Computer.FileSystem.CopyDirectory(BackupPath, newbackupfolder)
             BackupPath = newbackupfolder
@@ -300,6 +283,7 @@ Public Class FrmSettingsWizard
 
             Me.OfficerTableTableAdapter1.UpdateQuery(Me.txtTI.Text, Me.txtFPE1.Text, Me.txtFPE2.Text, Me.txtFPE3.Text, Me.txtFPS.Text, Me.txtPhotographer.Text, oid)
         End If
+
         Application.DoEvents()
         TI = Me.txtTI.Text & ", TI"
         FPE1 = Me.txtFPE1.Text & ", FPE"
@@ -307,6 +291,7 @@ Public Class FrmSettingsWizard
         FPE3 = Me.txtFPE3.Text & ", FPE"
         FPS = Me.txtFPS.Text & ", FPS"
         strPhotographer = Me.txtPhotographer.Text
+
         frmMainInterface.txtSOCPhotographer.AutoCompleteCustomSource.Clear()
         frmMainInterface.txtSOCPhotographer.AutoCompleteCustomSource.Add(strPhotographer)
         frmMainInterface.txtSOCPhotographer.AutoCompleteCustomSource.Add("No Photographer")
@@ -315,6 +300,7 @@ Public Class FrmSettingsWizard
         FullOfficeName = Me.txtFullOffice.Text
         ShortDistrictName = Me.txtShortDistrict.Text
         ShortOfficeName = Me.txtShortOffice.Text
+
         PdlAttendance = IIf(Me.txtAttendance.Text = "", "   ", Me.txtAttendance.Text)
         PdlIndividualPerformance = IIf(Me.txtIndividualPerformance.Text = "", "   ", Me.txtIndividualPerformance.Text)
         PdlRBWarrant = IIf(Me.txtRBWarrant.Text = "", "   ", Me.txtRBWarrant.Text)
@@ -324,6 +310,7 @@ Public Class FrmSettingsWizard
         PdlGraveCrime = IIf(Me.txtGraveCrime.Text = "", "   ", Me.txtGraveCrime.Text)
         PdlVigilanceCase = IIf(Me.txtVigilanceCase.Text = "", "   ", Me.txtVigilanceCase.Text)
         PdlWeeklyDiary = IIf(Me.txtWeeklyDiary.Text = "", "   ", Me.txtWeeklyDiary.Text)
+
         CPImageImportLocation = Me.lblCPLocation.Text
         FPImageImportLocation = Me.lblFPLocation.Text
 
@@ -339,9 +326,6 @@ Public Class FrmSettingsWizard
 
         boolSettingsWizardCancelled = False
 
-        Application.DoEvents()
-        frmMainInterface.LoadOfficeSettingsToTextBoxes()
-        frmMainInterface.SetWindowTitle()
         frmMainInterface.Show()
         Me.Hide()
 

@@ -125,18 +125,21 @@ Public Class frmMainInterface
         sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
         sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
+
         If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
-        LoadOfficeSettings()
+        LoadOfficeSettingsToMemory()
 
+        ChangeCursor(Cursors.Default)
         LoadQuickToolBarSettings()
+        ChangeCursor(Cursors.WaitCursor)
 
         IncrementCircularProgress(1)
 
         SetWindowTitle()
-        LoadOfficeSettingsToTextBoxes()
+
         DisplayTime()
         Me.txtSOCOfficer.ButtonCustom2.Image = Me.txtSOCPhotographer.ButtonCustom.Image
         AddHandler TabControl.TabStrip.MouseDown, AddressOf TabControl_MouseDown
@@ -343,9 +346,13 @@ Public Class frmMainInterface
             lblDesignation.Visible = False
             RemoveNullFromOfficerTable()
             InitializeOfficerTable()
-            LoadOfficer()
+            LoadOfficerToMemory()
             IncrementCircularProgress(3)
             LoadOfficerListToTable()
+
+            LoadOfficeSettingsToMemory()
+
+            LoadOfficeSettingsToTextBoxes()
 
             LoadNatureOfReport()
             IncrementCircularProgress(1)
@@ -789,7 +796,7 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub LoadOfficeSettings()
+    Private Sub LoadOfficeSettingsToMemory()
         On Error Resume Next
 
         Me.SettingsTableAdapter1.Fill(Me.FingerPrintDataSet.Settings)
@@ -848,6 +855,7 @@ Public Class frmMainInterface
     Sub ConnectToDatabase()
         On Error Resume Next
 
+
         If Me.OfficerTableAdapter.Connection.State = ConnectionState.Open Then Me.OfficerTableAdapter.Connection.Close()
         Me.OfficerTableAdapter.Connection.ConnectionString = sConString
         Me.OfficerTableAdapter.Connection.Open()
@@ -856,6 +864,7 @@ Public Class frmMainInterface
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
+       
         If Me.SOCRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterAutoTextTableAdapter.Connection.Close()
         Me.SOCRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterAutoTextTableAdapter.Connection.Open()
@@ -864,7 +873,6 @@ Public Class frmMainInterface
         If Me.IdentifiedCasesTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentifiedCasesTableAdapter1.Connection.Close()
         Me.IdentifiedCasesTableAdapter1.Connection.ConnectionString = sConString
         Me.IdentifiedCasesTableAdapter1.Connection.Open()
-
 
         If Me.RSOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.RSOCRegisterTableAdapter.Connection.Close()
         Me.RSOCRegisterTableAdapter.Connection.ConnectionString = sConString
@@ -882,29 +890,36 @@ Public Class frmMainInterface
         Me.DARegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterAutoTextTableAdapter.Connection.Open()
 
+
         If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
         Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterTableAdapter.Connection.Open()
 
+     
         If Me.FPARegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterAutoTextTableAdapter.Connection.Close()
         Me.FPARegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterAutoTextTableAdapter.Connection.Open()
 
+      
         If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
         Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
+
 
         If Me.CDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CDRegisterTableAdapter.Connection.Close()
         Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.CDRegisterTableAdapter.Connection.Open()
 
+    
         If Me.PSRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.PSRegisterTableAdapter.Connection.Close()
         Me.PSRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.PSRegisterTableAdapter.Connection.Open()
 
+
         If Me.IDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRegisterTableAdapter.Connection.Close()
         Me.IDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.IDRegisterTableAdapter.Connection.Open()
+
 
         If Me.IDRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRegisterAutoTextTableAdapter.Connection.Close()
         Me.IDRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
@@ -914,9 +929,11 @@ Public Class frmMainInterface
         Me.ACRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterTableAdapter.Connection.Open()
 
+      
         If Me.ACRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.ACRegisterAutoTextTableAdapter.Connection.Close()
         Me.ACRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterAutoTextTableAdapter.Connection.Open()
+
     End Sub
 #End Region
 
@@ -1213,6 +1230,9 @@ Public Class frmMainInterface
         LoadACRecords()
         LoadPSRecords()
         LoadOfficerListToTable()
+        LoadOfficerListToDropDownMenu()
+        LoadOfficeSettingsToMemory()
+        LoadOfficeSettingsToTextBoxes()
         ShowAlertMessage("Records reloaded in all tables!")
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
@@ -1253,6 +1273,11 @@ Public Class frmMainInterface
             Case "IO"
                 LoadOfficerListToTable()
                 ShowAlertMessage("Records reloaded in Officer List!")
+
+            Case "OS"
+                LoadOfficeSettingsToMemory()
+                LoadOfficeSettingsToTextBoxes()
+                ShowAlertMessage("Records reloaded in Office Settings!")
         End Select
 
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -1640,7 +1665,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.PSRegisterTableAdapter.Fill(FingerPrintDataSet.PoliceStationList)
         Me.PSRegisterBindingSource.MoveFirst()
-        Dim drpdwnlenght As Integer
+        Dim drpdwnlength As Integer
         For i As Short = 0 To Me.FingerPrintDataSet.PoliceStationList.Count - 1
             Dim ps As String = Me.FingerPrintDataSet.PoliceStationList(i).PoliceStation
             Me.cmbSOCPoliceStation.Items.Add(ps)
@@ -1652,12 +1677,12 @@ Public Class frmMainInterface
             ChangeDropdownWidth(ps, cmbSOCPoliceStation)
         Next
 
-        drpdwnlenght = Me.cmbSOCPoliceStation.DropDownWidth
-        Me.cmbRSOCPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbDAPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbCDPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbIDPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbACPoliceStation.DropDownWidth = drpdwnlenght
+        drpdwnlength = Me.cmbSOCPoliceStation.DropDownWidth
+        Me.cmbRSOCPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbDAPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbCDPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbIDPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbACPoliceStation.DropDownWidth = drpdwnlength
 
         PSListChanged = False
 
@@ -1893,31 +1918,38 @@ Public Class frmMainInterface
         FrmSettingsWizard.ShowDialog()
 
         If boolSettingsWizardCancelled = False Then
-            ReloadDataAfterWizardClose()
+            ReloadDataAfterSettingsWizardClose()
         End If
+
         boolSettingsWizardCancelled = False
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub ReloadDataAfterWizardClose()
+    Private Sub ReloadDataAfterSettingsWizardClose()
         Try
+
+            System.Threading.Thread.Sleep(1000)
+
             sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
             sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
             ConnectToDatabase()
-           
+
+
             LoadPSList()
+
             InitializeOfficerTable()
-            LoadOfficer()
+            '   LoadOfficerToMemory()
             LoadOfficerListToTable()
+            LoadOfficerListToDropDownMenu()
 
-            OfficeSettingsEditMode(True)
-            LoadOfficeSettings()
-            SetWindowTitle()
-
+          
+            '   LoadOfficeSettingsToMemory()
             LoadOfficeSettingsToTextBoxes()
+
+            SetWindowTitle()
             LoadRecordsToAllTablesDependingOnCurrentYearSettings()
 
-            OfficeSettingsEditMode(False)
+
 
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 30)
@@ -1927,6 +1959,7 @@ Public Class frmMainInterface
             GetCPImageImportLocation()
         Catch ex As Exception
             ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -2001,6 +2034,8 @@ Public Class frmMainInterface
             .Add(btnAbout)
             .Add(btnExit)
         End With
+
+
     End Sub
 
     Sub SaveQuicktoolbarSettings()
@@ -6907,7 +6942,7 @@ errhandler:
             Next
         Next
     End Sub
-    Public Sub LoadOfficer()
+    Public Sub LoadOfficerToMemory()
         On Error Resume Next
         Me.OfficerTableAdapter.Fill(Me.FingerPrintDataSet.OfficerTable)
         Dim cnt = Me.FingerPrintDataSet.OfficerTable.Count
@@ -6920,11 +6955,12 @@ errhandler:
             strPhotographer = Me.FingerPrintDataSet.OfficerTable(0).Photographer
             Me.txtSOCPhotographer.AutoCompleteCustomSource.Add(strPhotographer)
             Me.txtSOCPhotographer.AutoCompleteCustomSource.Add("No Photographer")
-            LoadOfficerList()
+            LoadOfficerListToDropDownMenu()
         End If
     End Sub
 
     Public Sub LoadOfficerListToTable()
+
         Me.OfficerTableAdapter.Fill(Me.FingerPrintDataSet.OfficerTable)
         Dim cnt = Me.FingerPrintDataSet.OfficerTable.Count
 
@@ -6978,7 +7014,7 @@ errhandler:
 
     End Sub
 
-    Public Sub LoadOfficerList()
+    Public Sub LoadOfficerListToDropDownMenu()
         On Error Resume Next
         Dim x As System.Drawing.Point
         x.X = Me.txtSOCOfficer.Location.X
@@ -7074,7 +7110,7 @@ errhandler:
 
     End Sub
 
-    Private Sub ClearOfficerList()
+    Private Sub ClearDropDownOfficerList()
         On Error Resume Next
         Me.chkTI.Checked = False
         Me.chkFPE1.Checked = False
@@ -7271,7 +7307,7 @@ errhandler:
 
             ShowAlertMessage("Officer List Updated")
             ConnectToDatabase()
-            LoadOfficer()
+            LoadOfficerToMemory()
 
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -7310,7 +7346,7 @@ errhandler:
         IDDetailsFocussed = False
 
         Me.dtIdentificationDate.Text = vbNullString
-        ClearOfficerList()
+        ClearDropDownOfficerList()
     End Sub
 
     Private Sub ClearSOCFields() Handles btnClearSOC.Click 'Clear all textboxes, comboboxes etc
@@ -7321,7 +7357,7 @@ errhandler:
         Me.dtSOCReport.Text = vbNullString
         Me.dtIdentificationDate.Text = vbNullString
         Me.chkGraveCrime.Checked = False
-        ClearOfficerList()
+        ClearDropDownOfficerList()
         Dim ctrl As Control
         For Each ctrl In Me.PanelSOC.Controls 'clear all textboxes
             If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.DotNetBar.Controls.ComboBoxEx Or TypeOf (ctrl) Is DevComponents.Editors.IntegerInput Then
@@ -13523,7 +13559,7 @@ errhandler:
                     Application.DoEvents()
                     ShowAlertMessage("Database Folder changed")
                     My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
-                    ReloadDataAfterWizardClose()
+                    ReloadDataAfterSettingsWizardClose()
 
                 End If
 
@@ -13833,7 +13869,6 @@ errhandler:
     Private Sub LoadRecordsAfterRestore()
         Try
 
-
             Me.Cursor = Cursors.WaitCursor
 
             frmProgressBar.Show()
@@ -13891,7 +13926,7 @@ errhandler:
 
             LoadPSList()
             InitializeOfficerTable()
-            LoadOfficer()
+            LoadOfficerToMemory()
             LoadOfficerListToTable()
 
             For i = 36 To 40
@@ -13900,7 +13935,7 @@ errhandler:
             Next
 
             OfficeSettingsEditMode(True)
-            LoadOfficeSettings()
+            LoadOfficeSettingsToMemory()
             SetWindowTitle()
             LoadOfficeSettingsToTextBoxes()
 
@@ -15880,6 +15915,8 @@ errhandler:
 
     Private Sub ChangeCursor(cr As Cursor)
         On Error Resume Next
+
+        RibbonControl1.Cursor = cr
 
         Me.Cursor = cr
         Me.btnNewEntry.Cursor = cr
