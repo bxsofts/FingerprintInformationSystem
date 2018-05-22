@@ -472,6 +472,52 @@ Partial Class frmMainInterface
         Me.lblReportSent = New DevComponents.DotNetBar.LabelItem()
         Me.lblTime = New DevComponents.DotNetBar.LabelItem()
         Me.TabControl = New DevComponents.DotNetBar.TabControl()
+        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelFPA = New DevComponents.DotNetBar.PanelEx()
+        Me.btnGenerateFPSlipMain = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX162 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX161 = New DevComponents.DotNetBar.LabelX()
+        Me.dtChalanDate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.txtHeadOfAccount = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX94 = New DevComponents.DotNetBar.LabelX()
+        Me.chkFPATwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.lblFPAPassport = New DevComponents.DotNetBar.LabelX()
+        Me.lblFPAAddress = New DevComponents.DotNetBar.LabelX()
+        Me.lblFPAName = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFPAAmount = New DevComponents.Editors.IntegerInput()
+        Me.LabelX69 = New DevComponents.DotNetBar.LabelX()
+        Me.btnSearchFPA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnFPAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchInFPAYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearFPAFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX67 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPATreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX66 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX60 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAChalanNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFPARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX61 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX62 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFPAPassportNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX63 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX64 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX65 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX54 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX55 = New DevComponents.DotNetBar.LabelX()
+        Me.chkAppendFPAYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.txtFPAYear = New DevComponents.Editors.IntegerInput()
+        Me.dtFPADate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.txtFPANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.LabelX57 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX58 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX59 = New DevComponents.DotNetBar.LabelX()
+        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel1 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -581,7 +627,6 @@ Partial Class frmMainInterface
         Me.txtSOCCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.dtSOCOccurrence = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.LabelX10 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -775,50 +820,6 @@ Partial Class frmMainInterface
         Me.txtShortDistrict = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtFullOffice = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.OSTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelFPA = New DevComponents.DotNetBar.PanelEx()
-        Me.LabelX162 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX161 = New DevComponents.DotNetBar.LabelX()
-        Me.dtChalanDate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.txtHeadOfAccount = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX94 = New DevComponents.DotNetBar.LabelX()
-        Me.chkFPATwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.lblFPAPassport = New DevComponents.DotNetBar.LabelX()
-        Me.lblFPAAddress = New DevComponents.DotNetBar.LabelX()
-        Me.lblFPAName = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPAAmount = New DevComponents.Editors.IntegerInput()
-        Me.LabelX69 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSearchFPA = New DevComponents.DotNetBar.ButtonX()
-        Me.btnFPAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchInFPAYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearFPAFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX67 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPATreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX66 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX60 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAChalanNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX61 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX62 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPAPassportNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX63 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX64 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX65 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX54 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX55 = New DevComponents.DotNetBar.LabelX()
-        Me.chkAppendFPAYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.txtFPAYear = New DevComponents.Editors.IntegerInput()
-        Me.dtFPADate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.txtFPANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX57 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX58 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX59 = New DevComponents.DotNetBar.LabelX()
-        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel7 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelCD = New DevComponents.DotNetBar.PanelEx()
         Me.chkCDTwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
@@ -1047,6 +1048,12 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControl.SuspendLayout
+        Me.TabControlPanel4.SuspendLayout
+        Me.PanelFPA.SuspendLayout
+        CType(Me.dtChalanDate,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtFPAAmount,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtFPAYear,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dtFPADate,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel1.SuspendLayout
         Me.PanelEx1.SuspendLayout
         Me.PanelEx4.SuspendLayout
@@ -1087,12 +1094,6 @@ Partial Class frmMainInterface
         Me.PanelEx7.SuspendLayout
         Me.GroupPanel5.SuspendLayout
         Me.GroupPanel4.SuspendLayout
-        Me.TabControlPanel4.SuspendLayout
-        Me.PanelFPA.SuspendLayout
-        CType(Me.dtChalanDate,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtFPAAmount,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtFPAYear,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dtFPADate,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel7.SuspendLayout
         Me.PanelCD.SuspendLayout
         CType(Me.txtCDYear,System.ComponentModel.ISupportInitialize).BeginInit
@@ -5008,12 +5009,12 @@ Partial Class frmMainInterface
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
         Me.TabControl.Controls.Add(Me.TabControlPanel1)
-        Me.TabControl.Controls.Add(Me.TabControlPanel5)
         Me.TabControl.Controls.Add(Me.TabControlPanel3)
+        Me.TabControl.Controls.Add(Me.TabControlPanel5)
+        Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel9)
         Me.TabControl.Controls.Add(Me.TabControlPanel2)
         Me.TabControl.Controls.Add(Me.TabControlPanel10)
-        Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel7)
         Me.TabControl.Controls.Add(Me.TabControlPanel8)
         Me.TabControl.Controls.Add(Me.TabControlPanel6)
@@ -5039,6 +5040,834 @@ Partial Class frmMainInterface
         Me.TabControl.Tabs.Add(Me.IOTabItem)
         Me.TabControl.Tabs.Add(Me.OSTabItem)
         Me.TabControl.TabStop = false
+        '
+        'TabControlPanel4
+        '
+        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
+        Me.TabControlPanel4.Controls.Add(Me.PanelFPA)
+        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel4.Name = "TabControlPanel4"
+        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel4.Style.GradientAngle = 90
+        Me.TabControlPanel4.TabIndex = 4
+        Me.TabControlPanel4.TabItem = Me.FPATabItem
+        '
+        'PanelFPA
+        '
+        Me.PanelFPA.AutoScroll = true
+        Me.PanelFPA.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelFPA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelFPA.Controls.Add(Me.btnGenerateFPSlipMain)
+        Me.PanelFPA.Controls.Add(Me.LabelX162)
+        Me.PanelFPA.Controls.Add(Me.LabelX161)
+        Me.PanelFPA.Controls.Add(Me.dtChalanDate)
+        Me.PanelFPA.Controls.Add(Me.txtHeadOfAccount)
+        Me.PanelFPA.Controls.Add(Me.LabelX94)
+        Me.PanelFPA.Controls.Add(Me.chkFPATwodigits)
+        Me.PanelFPA.Controls.Add(Me.lblFPAPassport)
+        Me.PanelFPA.Controls.Add(Me.lblFPAAddress)
+        Me.PanelFPA.Controls.Add(Me.lblFPAName)
+        Me.PanelFPA.Controls.Add(Me.txtFPANumberOnly)
+        Me.PanelFPA.Controls.Add(Me.txtFPAAmount)
+        Me.PanelFPA.Controls.Add(Me.LabelX69)
+        Me.PanelFPA.Controls.Add(Me.btnSearchFPA)
+        Me.PanelFPA.Controls.Add(Me.btnClearFPAFields)
+        Me.PanelFPA.Controls.Add(Me.btnSaveFPA)
+        Me.PanelFPA.Controls.Add(Me.LabelX67)
+        Me.PanelFPA.Controls.Add(Me.txtFPATreasury)
+        Me.PanelFPA.Controls.Add(Me.LabelX66)
+        Me.PanelFPA.Controls.Add(Me.LabelX60)
+        Me.PanelFPA.Controls.Add(Me.txtFPAChalanNumber)
+        Me.PanelFPA.Controls.Add(Me.txtFPARemarks)
+        Me.PanelFPA.Controls.Add(Me.LabelX61)
+        Me.PanelFPA.Controls.Add(Me.LabelX62)
+        Me.PanelFPA.Controls.Add(Me.txtFPAAddress)
+        Me.PanelFPA.Controls.Add(Me.txtFPAPassportNumber)
+        Me.PanelFPA.Controls.Add(Me.LabelX63)
+        Me.PanelFPA.Controls.Add(Me.LabelX64)
+        Me.PanelFPA.Controls.Add(Me.txtFPAName)
+        Me.PanelFPA.Controls.Add(Me.LabelX65)
+        Me.PanelFPA.Controls.Add(Me.LabelX54)
+        Me.PanelFPA.Controls.Add(Me.LabelX55)
+        Me.PanelFPA.Controls.Add(Me.chkAppendFPAYear)
+        Me.PanelFPA.Controls.Add(Me.txtFPAYear)
+        Me.PanelFPA.Controls.Add(Me.dtFPADate)
+        Me.PanelFPA.Controls.Add(Me.txtFPANumber)
+        Me.PanelFPA.Controls.Add(Me.LabelX57)
+        Me.PanelFPA.Controls.Add(Me.LabelX58)
+        Me.PanelFPA.Controls.Add(Me.LabelX59)
+        Me.PanelFPA.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelFPA.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelFPA.Location = New System.Drawing.Point(1, 1)
+        Me.PanelFPA.Name = "PanelFPA"
+        Me.PanelFPA.Size = New System.Drawing.Size(1358, 244)
+        Me.PanelFPA.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelFPA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelFPA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelFPA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelFPA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelFPA.Style.GradientAngle = 90
+        Me.PanelFPA.TabIndex = 4
+        '
+        'btnGenerateFPSlipMain
+        '
+        Me.btnGenerateFPSlipMain.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateFPSlipMain.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateFPSlipMain.Location = New System.Drawing.Point(1177, 189)
+        Me.btnGenerateFPSlipMain.Name = "btnGenerateFPSlipMain"
+        Me.btnGenerateFPSlipMain.Size = New System.Drawing.Size(141, 50)
+        Me.btnGenerateFPSlipMain.TabIndex = 143
+        Me.btnGenerateFPSlipMain.Text = "Generate FP Slip"
+        '
+        'LabelX162
+        '
+        Me.LabelX162.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX162.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX162.Location = New System.Drawing.Point(421, 153)
+        Me.LabelX162.Name = "LabelX162"
+        Me.LabelX162.Size = New System.Drawing.Size(97, 18)
+        Me.LabelX162.TabIndex = 142
+        Me.LabelX162.Text = "Head of Account"
+        '
+        'LabelX161
+        '
+        Me.LabelX161.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX161.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX161.Location = New System.Drawing.Point(421, 111)
+        Me.LabelX161.Name = "LabelX161"
+        Me.LabelX161.Size = New System.Drawing.Size(71, 18)
+        Me.LabelX161.TabIndex = 141
+        Me.LabelX161.Text = "Chalan Date"
+        '
+        'dtChalanDate
+        '
+        Me.dtChalanDate.AutoAdvance = true
+        Me.dtChalanDate.AutoSelectDate = true
+        Me.dtChalanDate.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtChalanDate.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtChalanDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.ButtonClear.Image = CType(resources.GetObject("dtChalanDate.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtChalanDate.ButtonClear.Visible = true
+        Me.dtChalanDate.ButtonDropDown.Visible = true
+        Me.dtChalanDate.CustomFormat = "dd/MM/yyyy"
+        Me.dtChalanDate.FocusHighlightEnabled = true
+        Me.dtChalanDate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtChalanDate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtChalanDate, true)
+        Me.dtChalanDate.IsPopupCalendarOpen = false
+        Me.dtChalanDate.Location = New System.Drawing.Point(524, 109)
+        Me.dtChalanDate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtChalanDate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtChalanDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtChalanDate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtChalanDate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtChalanDate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.MonthCalendar.TodayButtonVisible = true
+        Me.dtChalanDate.Name = "dtChalanDate"
+        Me.dtChalanDate.Size = New System.Drawing.Size(227, 29)
+        Me.dtChalanDate.TabIndex = 68
+        Me.dtChalanDate.WatermarkText = "Chalan Date"
+        '
+        'txtHeadOfAccount
+        '
+        Me.txtHeadOfAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtHeadOfAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtHeadOfAccount.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtHeadOfAccount.Border.Class = "TextBoxBorder"
+        Me.txtHeadOfAccount.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtHeadOfAccount.ButtonCustom.Image = CType(resources.GetObject("txtHeadOfAccount.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtHeadOfAccount.ButtonCustom.Visible = true
+        Me.txtHeadOfAccount.DisabledBackColor = System.Drawing.Color.White
+        Me.txtHeadOfAccount.FocusHighlightEnabled = true
+        Me.txtHeadOfAccount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtHeadOfAccount.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtHeadOfAccount, true)
+        Me.txtHeadOfAccount.Location = New System.Drawing.Point(524, 144)
+        Me.txtHeadOfAccount.MaxLength = 255
+        Me.txtHeadOfAccount.Name = "txtHeadOfAccount"
+        Me.txtHeadOfAccount.Size = New System.Drawing.Size(227, 29)
+        Me.txtHeadOfAccount.TabIndex = 69
+        Me.txtHeadOfAccount.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtHeadOfAccount.WatermarkText = "Head of Account"
+        '
+        'LabelX94
+        '
+        Me.LabelX94.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX94.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX94.Font = New System.Drawing.Font("Rupee Foradian", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX94.Location = New System.Drawing.Point(473, 222)
+        Me.LabelX94.Name = "LabelX94"
+        Me.LabelX94.Size = New System.Drawing.Size(9, 16)
+        Me.LabelX94.TabIndex = 140
+        Me.LabelX94.Text = "`"
+        '
+        'chkFPATwodigits
+        '
+        Me.chkFPATwodigits.AutoSize = true
+        '
+        '
+        '
+        Me.chkFPATwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkFPATwodigits, true)
+        Me.chkFPATwodigits.Location = New System.Drawing.Point(200, 22)
+        Me.chkFPATwodigits.Name = "chkFPATwodigits"
+        Me.chkFPATwodigits.Size = New System.Drawing.Size(126, 18)
+        Me.chkFPATwodigits.TabIndex = 139
+        Me.chkFPATwodigits.TabStop = false
+        Me.chkFPATwodigits.Text = "Use last two digits"
+        '
+        'lblFPAPassport
+        '
+        Me.lblFPAPassport.AutoSize = true
+        '
+        '
+        '
+        Me.lblFPAPassport.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAPassport.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblFPAPassport.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAPassport.Location = New System.Drawing.Point(752, 13)
+        Me.lblFPAPassport.Name = "lblFPAPassport"
+        Me.lblFPAPassport.Size = New System.Drawing.Size(11, 22)
+        Me.lblFPAPassport.TabIndex = 137
+        Me.lblFPAPassport.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblFPAAddress
+        '
+        Me.lblFPAAddress.AutoSize = true
+        '
+        '
+        '
+        Me.lblFPAAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAAddress.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblFPAAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAAddress.Location = New System.Drawing.Point(349, 147)
+        Me.lblFPAAddress.Name = "lblFPAAddress"
+        Me.lblFPAAddress.Size = New System.Drawing.Size(11, 22)
+        Me.lblFPAAddress.TabIndex = 136
+        Me.lblFPAAddress.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblFPAName
+        '
+        Me.lblFPAName.AutoSize = true
+        '
+        '
+        '
+        Me.lblFPAName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAName.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblFPAName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAName.Location = New System.Drawing.Point(356, 114)
+        Me.lblFPAName.Name = "lblFPAName"
+        Me.lblFPAName.Size = New System.Drawing.Size(11, 22)
+        Me.lblFPAName.TabIndex = 135
+        Me.lblFPAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'txtFPANumberOnly
+        '
+        Me.txtFPANumberOnly.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPANumberOnly.Border.Class = "TextBoxBorder"
+        Me.txtFPANumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPANumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtFPANumberOnly.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPANumberOnly.ButtonCustom.Visible = true
+        Me.txtFPANumberOnly.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPANumberOnly.FocusHighlightEnabled = true
+        Me.txtFPANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPANumberOnly.ForeColor = System.Drawing.Color.Black
+        Me.txtFPANumberOnly.Location = New System.Drawing.Point(421, 74)
+        Me.txtFPANumberOnly.MaxLength = 45
+        Me.txtFPANumberOnly.Name = "txtFPANumberOnly"
+        Me.txtFPANumberOnly.Size = New System.Drawing.Size(116, 23)
+        Me.txtFPANumberOnly.TabIndex = 134
+        Me.txtFPANumberOnly.TabStop = false
+        Me.txtFPANumberOnly.Visible = false
+        '
+        'txtFPAAmount
+        '
+        '
+        '
+        '
+        Me.txtFPAAmount.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtFPAAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAAmount.FocusHighlightEnabled = true
+        Me.txtFPAAmount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAmount, true)
+        Me.txtFPAAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtFPAAmount.Location = New System.Drawing.Point(524, 210)
+        Me.txtFPAAmount.MaxValue = 9999
+        Me.txtFPAAmount.MinValue = 0
+        Me.txtFPAAmount.Name = "txtFPAAmount"
+        Me.txtFPAAmount.ShowUpDown = true
+        Me.txtFPAAmount.Size = New System.Drawing.Size(91, 29)
+        Me.txtFPAAmount.TabIndex = 71
+        Me.txtFPAAmount.WatermarkText = "Amount"
+        '
+        'LabelX69
+        '
+        Me.LabelX69.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX69.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX69.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX69.Location = New System.Drawing.Point(617, 214)
+        Me.LabelX69.Name = "LabelX69"
+        Me.LabelX69.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX69.TabIndex = 129
+        Me.LabelX69.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'btnSearchFPA
+        '
+        Me.btnSearchFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchFPA.Image = CType(resources.GetObject("btnSearchFPA.Image"),System.Drawing.Image)
+        Me.btnSearchFPA.Location = New System.Drawing.Point(1177, 67)
+        Me.btnSearchFPA.Name = "btnSearchFPA"
+        Me.btnSearchFPA.Size = New System.Drawing.Size(141, 50)
+        Me.btnSearchFPA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAFindByNumber, Me.btnSearchInFPAYear, Me.btnFPAAdvancedSearch})
+        Me.btnSearchFPA.TabIndex = 74
+        Me.btnSearchFPA.Text = "Search"
+        '
+        'btnFPAFindByNumber
+        '
+        Me.btnFPAFindByNumber.GlobalItem = false
+        Me.btnFPAFindByNumber.Name = "btnFPAFindByNumber"
+        Me.btnFPAFindByNumber.Text = "Find by FPA Number"
+        '
+        'btnSearchInFPAYear
+        '
+        Me.btnSearchInFPAYear.BeginGroup = true
+        Me.btnSearchInFPAYear.GlobalItem = false
+        Me.btnSearchInFPAYear.Name = "btnSearchInFPAYear"
+        Me.btnSearchInFPAYear.Text = "Search in selected Year"
+        '
+        'btnFPAAdvancedSearch
+        '
+        Me.btnFPAAdvancedSearch.BeginGroup = true
+        Me.btnFPAAdvancedSearch.GlobalItem = false
+        Me.btnFPAAdvancedSearch.Name = "btnFPAAdvancedSearch"
+        Me.btnFPAAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearFPAFields
+        '
+        Me.btnClearFPAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearFPAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearFPAFields.Image = CType(resources.GetObject("btnClearFPAFields.Image"),System.Drawing.Image)
+        Me.btnClearFPAFields.Location = New System.Drawing.Point(1177, 128)
+        Me.btnClearFPAFields.Name = "btnClearFPAFields"
+        Me.btnClearFPAFields.Size = New System.Drawing.Size(141, 50)
+        Me.btnClearFPAFields.TabIndex = 75
+        Me.btnClearFPAFields.Text = "Clear All Fields"
+        '
+        'btnSaveFPA
+        '
+        Me.btnSaveFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveFPA.Image = CType(resources.GetObject("btnSaveFPA.Image"),System.Drawing.Image)
+        Me.btnSaveFPA.Location = New System.Drawing.Point(1177, 6)
+        Me.btnSaveFPA.Name = "btnSaveFPA"
+        Me.btnSaveFPA.Size = New System.Drawing.Size(141, 50)
+        Me.btnSaveFPA.TabIndex = 73
+        Me.btnSaveFPA.Text = "Save"
+        '
+        'LabelX67
+        '
+        Me.LabelX67.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX67.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX67.Location = New System.Drawing.Point(421, 219)
+        Me.LabelX67.Name = "LabelX67"
+        Me.LabelX67.Size = New System.Drawing.Size(48, 18)
+        Me.LabelX67.TabIndex = 123
+        Me.LabelX67.Text = "Amount"
+        '
+        'txtFPATreasury
+        '
+        Me.txtFPATreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtFPATreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPATreasury.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPATreasury.Border.Class = "TextBoxBorder"
+        Me.txtFPATreasury.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPATreasury.ButtonCustom.Image = CType(resources.GetObject("txtFPATreasury.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPATreasury.ButtonCustom.Visible = true
+        Me.txtFPATreasury.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPATreasury.FocusHighlightEnabled = true
+        Me.txtFPATreasury.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPATreasury.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPATreasury, true)
+        Me.txtFPATreasury.Location = New System.Drawing.Point(524, 178)
+        Me.txtFPATreasury.MaxLength = 255
+        Me.txtFPATreasury.Name = "txtFPATreasury"
+        Me.txtFPATreasury.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPATreasury.TabIndex = 70
+        Me.txtFPATreasury.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPATreasury.WatermarkText = "Treasury"
+        '
+        'LabelX66
+        '
+        Me.LabelX66.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX66.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX66.Location = New System.Drawing.Point(421, 184)
+        Me.LabelX66.Name = "LabelX66"
+        Me.LabelX66.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX66.TabIndex = 121
+        Me.LabelX66.Text = "Treasury"
+        '
+        'LabelX60
+        '
+        Me.LabelX60.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX60.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX60.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX60.Location = New System.Drawing.Point(349, 115)
+        Me.LabelX60.Name = "LabelX60"
+        Me.LabelX60.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX60.TabIndex = 119
+        Me.LabelX60.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'txtFPAChalanNumber
+        '
+        Me.txtFPAChalanNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAChalanNumber.Border.Class = "TextBoxBorder"
+        Me.txtFPAChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAChalanNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAChalanNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAChalanNumber.FocusHighlightEnabled = true
+        Me.txtFPAChalanNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAChalanNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAChalanNumber, true)
+        Me.txtFPAChalanNumber.Location = New System.Drawing.Point(524, 44)
+        Me.txtFPAChalanNumber.MaxLength = 50
+        Me.txtFPAChalanNumber.Multiline = true
+        Me.txtFPAChalanNumber.Name = "txtFPAChalanNumber"
+        Me.txtFPAChalanNumber.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtFPAChalanNumber.Size = New System.Drawing.Size(227, 61)
+        Me.txtFPAChalanNumber.TabIndex = 67
+        Me.txtFPAChalanNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAChalanNumber.WatermarkText = "Chalan Number"
+        '
+        'txtFPARemarks
+        '
+        Me.txtFPARemarks.AcceptsReturn = true
+        Me.txtFPARemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtFPARemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPARemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPARemarks.Border.Class = "TextBoxBorder"
+        Me.txtFPARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPARemarks.ButtonCustom.Image = CType(resources.GetObject("txtFPARemarks.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPARemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPARemarks.FocusHighlightEnabled = true
+        Me.txtFPARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPARemarks.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPARemarks, true)
+        Me.txtFPARemarks.Location = New System.Drawing.Point(875, 7)
+        Me.txtFPARemarks.MaxLength = 255
+        Me.txtFPARemarks.Multiline = true
+        Me.txtFPARemarks.Name = "txtFPARemarks"
+        Me.txtFPARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtFPARemarks.Size = New System.Drawing.Size(227, 92)
+        Me.txtFPARemarks.TabIndex = 72
+        Me.txtFPARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPARemarks.WatermarkText = "Remarks"
+        '
+        'LabelX61
+        '
+        Me.LabelX61.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX61.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX61.Location = New System.Drawing.Point(808, 12)
+        Me.LabelX61.Name = "LabelX61"
+        Me.LabelX61.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX61.TabIndex = 118
+        Me.LabelX61.Text = "Remarks"
+        '
+        'LabelX62
+        '
+        Me.LabelX62.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX62.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX62.Location = New System.Drawing.Point(421, 42)
+        Me.LabelX62.Name = "LabelX62"
+        Me.LabelX62.Size = New System.Drawing.Size(91, 18)
+        Me.LabelX62.TabIndex = 117
+        Me.LabelX62.Text = "Chalan Number"
+        '
+        'txtFPAAddress
+        '
+        Me.txtFPAAddress.AcceptsReturn = true
+        Me.txtFPAAddress.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAAddress.Border.Class = "TextBoxBorder"
+        Me.txtFPAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAAddress.ButtonCustom.Image = CType(resources.GetObject("txtFPAAddress.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAAddress.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAAddress.FocusHighlightEnabled = true
+        Me.txtFPAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAAddress.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAddress, true)
+        Me.txtFPAAddress.Location = New System.Drawing.Point(122, 142)
+        Me.txtFPAAddress.MaxLength = 255
+        Me.txtFPAAddress.Multiline = true
+        Me.txtFPAAddress.Name = "txtFPAAddress"
+        Me.txtFPAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtFPAAddress.Size = New System.Drawing.Size(227, 96)
+        Me.txtFPAAddress.TabIndex = 65
+        Me.txtFPAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAAddress.WatermarkText = "Address"
+        '
+        'txtFPAPassportNumber
+        '
+        Me.txtFPAPassportNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAPassportNumber.Border.Class = "TextBoxBorder"
+        Me.txtFPAPassportNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAPassportNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAPassportNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAPassportNumber.ButtonCustom.Visible = true
+        Me.txtFPAPassportNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAPassportNumber.FocusHighlightEnabled = true
+        Me.txtFPAPassportNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAPassportNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAPassportNumber, true)
+        Me.txtFPAPassportNumber.Location = New System.Drawing.Point(524, 9)
+        Me.txtFPAPassportNumber.MaxLength = 50
+        Me.txtFPAPassportNumber.Name = "txtFPAPassportNumber"
+        Me.txtFPAPassportNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPAPassportNumber.TabIndex = 66
+        Me.txtFPAPassportNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAPassportNumber.WatermarkText = "Passport Number"
+        '
+        'LabelX63
+        '
+        Me.LabelX63.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX63.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX63.Location = New System.Drawing.Point(421, 9)
+        Me.LabelX63.Name = "LabelX63"
+        Me.LabelX63.Size = New System.Drawing.Size(101, 18)
+        Me.LabelX63.TabIndex = 114
+        Me.LabelX63.Text = "Passport Number"
+        '
+        'LabelX64
+        '
+        Me.LabelX64.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX64.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX64.Location = New System.Drawing.Point(12, 147)
+        Me.LabelX64.Name = "LabelX64"
+        Me.LabelX64.Size = New System.Drawing.Size(48, 18)
+        Me.LabelX64.TabIndex = 112
+        Me.LabelX64.Text = "Address"
+        '
+        'txtFPAName
+        '
+        Me.txtFPAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtFPAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPAName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAName.Border.Class = "TextBoxBorder"
+        Me.txtFPAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAName.ButtonCustom.Image = CType(resources.GetObject("txtFPAName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAName.ButtonCustom.Visible = true
+        Me.txtFPAName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAName.FocusHighlightEnabled = true
+        Me.txtFPAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAName, true)
+        Me.txtFPAName.Location = New System.Drawing.Point(122, 108)
+        Me.txtFPAName.MaxLength = 255
+        Me.txtFPAName.Name = "txtFPAName"
+        Me.txtFPAName.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPAName.TabIndex = 64
+        Me.txtFPAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAName.WatermarkText = "Name"
+        '
+        'LabelX65
+        '
+        Me.LabelX65.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX65.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX65.Location = New System.Drawing.Point(11, 113)
+        Me.LabelX65.Name = "LabelX65"
+        Me.LabelX65.Size = New System.Drawing.Size(36, 18)
+        Me.LabelX65.TabIndex = 109
+        Me.LabelX65.Text = "Name"
+        '
+        'LabelX54
+        '
+        Me.LabelX54.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX54.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX54.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX54.Location = New System.Drawing.Point(349, 81)
+        Me.LabelX54.Name = "LabelX54"
+        Me.LabelX54.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX54.TabIndex = 70
+        Me.LabelX54.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX55
+        '
+        Me.LabelX55.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX55.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX55.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX55.Location = New System.Drawing.Point(349, 45)
+        Me.LabelX55.Name = "LabelX55"
+        Me.LabelX55.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX55.TabIndex = 69
+        Me.LabelX55.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'chkAppendFPAYear
+        '
+        Me.chkAppendFPAYear.AutoSize = true
+        '
+        '
+        '
+        Me.chkAppendFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkAppendFPAYear, true)
+        Me.chkAppendFPAYear.Location = New System.Drawing.Point(200, 2)
+        Me.chkAppendFPAYear.Name = "chkAppendFPAYear"
+        Me.chkAppendFPAYear.Size = New System.Drawing.Size(124, 18)
+        Me.chkAppendFPAYear.TabIndex = 67
+        Me.chkAppendFPAYear.TabStop = false
+        Me.chkAppendFPAYear.Text = "Auto append year"
+        '
+        'txtFPAYear
+        '
+        '
+        '
+        '
+        Me.txtFPAYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAYear.ButtonCustom.Image = CType(resources.GetObject("txtFPAYear.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAYear.FocusHighlightEnabled = true
+        Me.txtFPAYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAYear, true)
+        Me.txtFPAYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtFPAYear.Location = New System.Drawing.Point(122, 5)
+        Me.txtFPAYear.MaxValue = 2099
+        Me.txtFPAYear.MinValue = 1900
+        Me.txtFPAYear.Name = "txtFPAYear"
+        Me.txtFPAYear.ShowUpDown = true
+        Me.txtFPAYear.Size = New System.Drawing.Size(58, 29)
+        Me.txtFPAYear.TabIndex = 61
+        Me.txtFPAYear.Value = 1900
+        Me.txtFPAYear.WatermarkText = "Year"
+        '
+        'dtFPADate
+        '
+        Me.dtFPADate.AutoAdvance = true
+        Me.dtFPADate.AutoSelectDate = true
+        Me.dtFPADate.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtFPADate.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtFPADate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.ButtonClear.Image = CType(resources.GetObject("dtFPADate.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtFPADate.ButtonClear.Visible = true
+        Me.dtFPADate.ButtonDropDown.Visible = true
+        Me.dtFPADate.CustomFormat = "dd/MM/yyyy"
+        Me.dtFPADate.FocusHighlightEnabled = true
+        Me.dtFPADate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtFPADate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtFPADate, true)
+        Me.dtFPADate.IsPopupCalendarOpen = false
+        Me.dtFPADate.Location = New System.Drawing.Point(122, 75)
+        Me.dtFPADate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtFPADate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtFPADate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtFPADate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtFPADate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtFPADate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.MonthCalendar.TodayButtonVisible = true
+        Me.dtFPADate.Name = "dtFPADate"
+        Me.dtFPADate.Size = New System.Drawing.Size(227, 29)
+        Me.dtFPADate.TabIndex = 63
+        Me.dtFPADate.WatermarkText = "Date of Attestation"
+        '
+        'txtFPANumber
+        '
+        Me.txtFPANumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPANumber.Border.Class = "TextBoxBorder"
+        Me.txtFPANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPANumber.ButtonCustom.Image = CType(resources.GetObject("txtFPANumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPANumber.ButtonCustom.Visible = true
+        Me.txtFPANumber.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.txtFPANumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPANumber.FocusHighlightEnabled = true
+        Me.txtFPANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPANumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPANumber, true)
+        Me.txtFPANumber.Location = New System.Drawing.Point(122, 40)
+        Me.txtFPANumber.MaxLength = 10
+        Me.txtFPANumber.Name = "txtFPANumber"
+        Me.txtFPANumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPANumber.TabIndex = 62
+        Me.txtFPANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPANumber.WatermarkText = "FPA Number"
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
+        'LabelX57
+        '
+        Me.LabelX57.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX57.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX57.Location = New System.Drawing.Point(11, 79)
+        Me.LabelX57.Name = "LabelX57"
+        Me.LabelX57.Size = New System.Drawing.Size(29, 18)
+        Me.LabelX57.TabIndex = 66
+        Me.LabelX57.Text = "Date"
+        '
+        'LabelX58
+        '
+        Me.LabelX58.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX58.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX58.Location = New System.Drawing.Point(11, 9)
+        Me.LabelX58.Name = "LabelX58"
+        Me.LabelX58.Size = New System.Drawing.Size(28, 18)
+        Me.LabelX58.TabIndex = 65
+        Me.LabelX58.Text = "Year"
+        '
+        'LabelX59
+        '
+        Me.LabelX59.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX59.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX59.Location = New System.Drawing.Point(11, 42)
+        Me.LabelX59.Name = "LabelX59"
+        Me.LabelX59.Size = New System.Drawing.Size(74, 18)
+        Me.LabelX59.TabIndex = 64
+        Me.LabelX59.Text = "FPA Number"
+        '
+        'FPATabItem
+        '
+        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
+        Me.FPATabItem.Name = "FPATabItem"
+        Me.FPATabItem.Text = "FP Attestation Register"
         '
         'TabControlPanel1
         '
@@ -6801,11 +7630,6 @@ Partial Class frmMainInterface
         Me.txtSOCNumber.TabIndex = 2
         Me.txtSOCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
         Me.txtSOCNumber.WatermarkText = "SOC Number"
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
         'LabelX10
         '
@@ -10073,821 +10897,6 @@ Partial Class frmMainInterface
         Me.OSTabItem.Name = "OSTabItem"
         Me.OSTabItem.Text = "Office Settings"
         '
-        'TabControlPanel4
-        '
-        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
-        Me.TabControlPanel4.Controls.Add(Me.PanelFPA)
-        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel4.Name = "TabControlPanel4"
-        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 530)
-        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel4.Style.GradientAngle = 90
-        Me.TabControlPanel4.TabIndex = 4
-        Me.TabControlPanel4.TabItem = Me.FPATabItem
-        '
-        'PanelFPA
-        '
-        Me.PanelFPA.AutoScroll = true
-        Me.PanelFPA.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelFPA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelFPA.Controls.Add(Me.LabelX162)
-        Me.PanelFPA.Controls.Add(Me.LabelX161)
-        Me.PanelFPA.Controls.Add(Me.dtChalanDate)
-        Me.PanelFPA.Controls.Add(Me.txtHeadOfAccount)
-        Me.PanelFPA.Controls.Add(Me.LabelX94)
-        Me.PanelFPA.Controls.Add(Me.chkFPATwodigits)
-        Me.PanelFPA.Controls.Add(Me.lblFPAPassport)
-        Me.PanelFPA.Controls.Add(Me.lblFPAAddress)
-        Me.PanelFPA.Controls.Add(Me.lblFPAName)
-        Me.PanelFPA.Controls.Add(Me.txtFPANumberOnly)
-        Me.PanelFPA.Controls.Add(Me.txtFPAAmount)
-        Me.PanelFPA.Controls.Add(Me.LabelX69)
-        Me.PanelFPA.Controls.Add(Me.btnSearchFPA)
-        Me.PanelFPA.Controls.Add(Me.btnClearFPAFields)
-        Me.PanelFPA.Controls.Add(Me.btnSaveFPA)
-        Me.PanelFPA.Controls.Add(Me.LabelX67)
-        Me.PanelFPA.Controls.Add(Me.txtFPATreasury)
-        Me.PanelFPA.Controls.Add(Me.LabelX66)
-        Me.PanelFPA.Controls.Add(Me.LabelX60)
-        Me.PanelFPA.Controls.Add(Me.txtFPAChalanNumber)
-        Me.PanelFPA.Controls.Add(Me.txtFPARemarks)
-        Me.PanelFPA.Controls.Add(Me.LabelX61)
-        Me.PanelFPA.Controls.Add(Me.LabelX62)
-        Me.PanelFPA.Controls.Add(Me.txtFPAAddress)
-        Me.PanelFPA.Controls.Add(Me.txtFPAPassportNumber)
-        Me.PanelFPA.Controls.Add(Me.LabelX63)
-        Me.PanelFPA.Controls.Add(Me.LabelX64)
-        Me.PanelFPA.Controls.Add(Me.txtFPAName)
-        Me.PanelFPA.Controls.Add(Me.LabelX65)
-        Me.PanelFPA.Controls.Add(Me.LabelX54)
-        Me.PanelFPA.Controls.Add(Me.LabelX55)
-        Me.PanelFPA.Controls.Add(Me.chkAppendFPAYear)
-        Me.PanelFPA.Controls.Add(Me.txtFPAYear)
-        Me.PanelFPA.Controls.Add(Me.dtFPADate)
-        Me.PanelFPA.Controls.Add(Me.txtFPANumber)
-        Me.PanelFPA.Controls.Add(Me.LabelX57)
-        Me.PanelFPA.Controls.Add(Me.LabelX58)
-        Me.PanelFPA.Controls.Add(Me.LabelX59)
-        Me.PanelFPA.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelFPA.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelFPA.Location = New System.Drawing.Point(1, 1)
-        Me.PanelFPA.Name = "PanelFPA"
-        Me.PanelFPA.Size = New System.Drawing.Size(1358, 244)
-        Me.PanelFPA.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelFPA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelFPA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelFPA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelFPA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelFPA.Style.GradientAngle = 90
-        Me.PanelFPA.TabIndex = 4
-        '
-        'LabelX162
-        '
-        Me.LabelX162.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX162.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX162.Location = New System.Drawing.Point(421, 153)
-        Me.LabelX162.Name = "LabelX162"
-        Me.LabelX162.Size = New System.Drawing.Size(97, 18)
-        Me.LabelX162.TabIndex = 142
-        Me.LabelX162.Text = "Head of Account"
-        '
-        'LabelX161
-        '
-        Me.LabelX161.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX161.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX161.Location = New System.Drawing.Point(421, 111)
-        Me.LabelX161.Name = "LabelX161"
-        Me.LabelX161.Size = New System.Drawing.Size(71, 18)
-        Me.LabelX161.TabIndex = 141
-        Me.LabelX161.Text = "Chalan Date"
-        '
-        'dtChalanDate
-        '
-        Me.dtChalanDate.AutoAdvance = true
-        Me.dtChalanDate.AutoSelectDate = true
-        Me.dtChalanDate.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtChalanDate.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtChalanDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.ButtonClear.Image = CType(resources.GetObject("dtChalanDate.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtChalanDate.ButtonClear.Visible = true
-        Me.dtChalanDate.ButtonDropDown.Visible = true
-        Me.dtChalanDate.CustomFormat = "dd/MM/yyyy"
-        Me.dtChalanDate.FocusHighlightEnabled = true
-        Me.dtChalanDate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtChalanDate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtChalanDate, true)
-        Me.dtChalanDate.IsPopupCalendarOpen = false
-        Me.dtChalanDate.Location = New System.Drawing.Point(524, 109)
-        Me.dtChalanDate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtChalanDate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtChalanDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtChalanDate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtChalanDate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtChalanDate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.MonthCalendar.TodayButtonVisible = true
-        Me.dtChalanDate.Name = "dtChalanDate"
-        Me.dtChalanDate.Size = New System.Drawing.Size(227, 29)
-        Me.dtChalanDate.TabIndex = 68
-        Me.dtChalanDate.WatermarkText = "Chalan Date"
-        '
-        'txtHeadOfAccount
-        '
-        Me.txtHeadOfAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtHeadOfAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtHeadOfAccount.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtHeadOfAccount.Border.Class = "TextBoxBorder"
-        Me.txtHeadOfAccount.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtHeadOfAccount.ButtonCustom.Image = CType(resources.GetObject("txtHeadOfAccount.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtHeadOfAccount.ButtonCustom.Visible = true
-        Me.txtHeadOfAccount.DisabledBackColor = System.Drawing.Color.White
-        Me.txtHeadOfAccount.FocusHighlightEnabled = true
-        Me.txtHeadOfAccount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtHeadOfAccount.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtHeadOfAccount, true)
-        Me.txtHeadOfAccount.Location = New System.Drawing.Point(524, 144)
-        Me.txtHeadOfAccount.MaxLength = 255
-        Me.txtHeadOfAccount.Name = "txtHeadOfAccount"
-        Me.txtHeadOfAccount.Size = New System.Drawing.Size(227, 29)
-        Me.txtHeadOfAccount.TabIndex = 69
-        Me.txtHeadOfAccount.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtHeadOfAccount.WatermarkText = "Head of Account"
-        '
-        'LabelX94
-        '
-        Me.LabelX94.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX94.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX94.Font = New System.Drawing.Font("Rupee Foradian", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX94.Location = New System.Drawing.Point(473, 222)
-        Me.LabelX94.Name = "LabelX94"
-        Me.LabelX94.Size = New System.Drawing.Size(9, 16)
-        Me.LabelX94.TabIndex = 140
-        Me.LabelX94.Text = "`"
-        '
-        'chkFPATwodigits
-        '
-        Me.chkFPATwodigits.AutoSize = true
-        '
-        '
-        '
-        Me.chkFPATwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkFPATwodigits, true)
-        Me.chkFPATwodigits.Location = New System.Drawing.Point(200, 22)
-        Me.chkFPATwodigits.Name = "chkFPATwodigits"
-        Me.chkFPATwodigits.Size = New System.Drawing.Size(126, 18)
-        Me.chkFPATwodigits.TabIndex = 139
-        Me.chkFPATwodigits.TabStop = false
-        Me.chkFPATwodigits.Text = "Use last two digits"
-        '
-        'lblFPAPassport
-        '
-        Me.lblFPAPassport.AutoSize = true
-        '
-        '
-        '
-        Me.lblFPAPassport.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAPassport.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblFPAPassport.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAPassport.Location = New System.Drawing.Point(752, 13)
-        Me.lblFPAPassport.Name = "lblFPAPassport"
-        Me.lblFPAPassport.Size = New System.Drawing.Size(11, 22)
-        Me.lblFPAPassport.TabIndex = 137
-        Me.lblFPAPassport.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblFPAAddress
-        '
-        Me.lblFPAAddress.AutoSize = true
-        '
-        '
-        '
-        Me.lblFPAAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAAddress.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblFPAAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAAddress.Location = New System.Drawing.Point(349, 147)
-        Me.lblFPAAddress.Name = "lblFPAAddress"
-        Me.lblFPAAddress.Size = New System.Drawing.Size(11, 22)
-        Me.lblFPAAddress.TabIndex = 136
-        Me.lblFPAAddress.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblFPAName
-        '
-        Me.lblFPAName.AutoSize = true
-        '
-        '
-        '
-        Me.lblFPAName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAName.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblFPAName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAName.Location = New System.Drawing.Point(356, 114)
-        Me.lblFPAName.Name = "lblFPAName"
-        Me.lblFPAName.Size = New System.Drawing.Size(11, 22)
-        Me.lblFPAName.TabIndex = 135
-        Me.lblFPAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'txtFPANumberOnly
-        '
-        Me.txtFPANumberOnly.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPANumberOnly.Border.Class = "TextBoxBorder"
-        Me.txtFPANumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPANumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtFPANumberOnly.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPANumberOnly.ButtonCustom.Visible = true
-        Me.txtFPANumberOnly.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPANumberOnly.FocusHighlightEnabled = true
-        Me.txtFPANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPANumberOnly.ForeColor = System.Drawing.Color.Black
-        Me.txtFPANumberOnly.Location = New System.Drawing.Point(421, 74)
-        Me.txtFPANumberOnly.MaxLength = 45
-        Me.txtFPANumberOnly.Name = "txtFPANumberOnly"
-        Me.txtFPANumberOnly.Size = New System.Drawing.Size(116, 23)
-        Me.txtFPANumberOnly.TabIndex = 134
-        Me.txtFPANumberOnly.TabStop = false
-        Me.txtFPANumberOnly.Visible = false
-        '
-        'txtFPAAmount
-        '
-        '
-        '
-        '
-        Me.txtFPAAmount.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtFPAAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAAmount.FocusHighlightEnabled = true
-        Me.txtFPAAmount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAmount, true)
-        Me.txtFPAAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtFPAAmount.Location = New System.Drawing.Point(524, 210)
-        Me.txtFPAAmount.MaxValue = 9999
-        Me.txtFPAAmount.MinValue = 0
-        Me.txtFPAAmount.Name = "txtFPAAmount"
-        Me.txtFPAAmount.ShowUpDown = true
-        Me.txtFPAAmount.Size = New System.Drawing.Size(91, 29)
-        Me.txtFPAAmount.TabIndex = 71
-        Me.txtFPAAmount.WatermarkText = "Amount"
-        '
-        'LabelX69
-        '
-        Me.LabelX69.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX69.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX69.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX69.Location = New System.Drawing.Point(617, 214)
-        Me.LabelX69.Name = "LabelX69"
-        Me.LabelX69.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX69.TabIndex = 129
-        Me.LabelX69.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'btnSearchFPA
-        '
-        Me.btnSearchFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchFPA.Image = CType(resources.GetObject("btnSearchFPA.Image"),System.Drawing.Image)
-        Me.btnSearchFPA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchFPA.Location = New System.Drawing.Point(1178, 87)
-        Me.btnSearchFPA.Name = "btnSearchFPA"
-        Me.btnSearchFPA.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchFPA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAFindByNumber, Me.btnSearchInFPAYear, Me.btnFPAAdvancedSearch})
-        Me.btnSearchFPA.TabIndex = 74
-        Me.btnSearchFPA.Text = "Search"
-        '
-        'btnFPAFindByNumber
-        '
-        Me.btnFPAFindByNumber.GlobalItem = false
-        Me.btnFPAFindByNumber.Name = "btnFPAFindByNumber"
-        Me.btnFPAFindByNumber.Text = "Find by FPA Number"
-        '
-        'btnSearchInFPAYear
-        '
-        Me.btnSearchInFPAYear.BeginGroup = true
-        Me.btnSearchInFPAYear.GlobalItem = false
-        Me.btnSearchInFPAYear.Name = "btnSearchInFPAYear"
-        Me.btnSearchInFPAYear.Text = "Search in selected Year"
-        '
-        'btnFPAAdvancedSearch
-        '
-        Me.btnFPAAdvancedSearch.BeginGroup = true
-        Me.btnFPAAdvancedSearch.GlobalItem = false
-        Me.btnFPAAdvancedSearch.Name = "btnFPAAdvancedSearch"
-        Me.btnFPAAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearFPAFields
-        '
-        Me.btnClearFPAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearFPAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearFPAFields.Image = CType(resources.GetObject("btnClearFPAFields.Image"),System.Drawing.Image)
-        Me.btnClearFPAFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearFPAFields.Location = New System.Drawing.Point(1178, 166)
-        Me.btnClearFPAFields.Name = "btnClearFPAFields"
-        Me.btnClearFPAFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearFPAFields.TabIndex = 75
-        Me.btnClearFPAFields.Text = "Clear All Fields"
-        '
-        'btnSaveFPA
-        '
-        Me.btnSaveFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveFPA.Image = CType(resources.GetObject("btnSaveFPA.Image"),System.Drawing.Image)
-        Me.btnSaveFPA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveFPA.Location = New System.Drawing.Point(1178, 7)
-        Me.btnSaveFPA.Name = "btnSaveFPA"
-        Me.btnSaveFPA.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveFPA.TabIndex = 73
-        Me.btnSaveFPA.Text = "Save"
-        '
-        'LabelX67
-        '
-        Me.LabelX67.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX67.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX67.Location = New System.Drawing.Point(421, 219)
-        Me.LabelX67.Name = "LabelX67"
-        Me.LabelX67.Size = New System.Drawing.Size(48, 18)
-        Me.LabelX67.TabIndex = 123
-        Me.LabelX67.Text = "Amount"
-        '
-        'txtFPATreasury
-        '
-        Me.txtFPATreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtFPATreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPATreasury.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPATreasury.Border.Class = "TextBoxBorder"
-        Me.txtFPATreasury.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPATreasury.ButtonCustom.Image = CType(resources.GetObject("txtFPATreasury.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPATreasury.ButtonCustom.Visible = true
-        Me.txtFPATreasury.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPATreasury.FocusHighlightEnabled = true
-        Me.txtFPATreasury.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPATreasury.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPATreasury, true)
-        Me.txtFPATreasury.Location = New System.Drawing.Point(524, 178)
-        Me.txtFPATreasury.MaxLength = 255
-        Me.txtFPATreasury.Name = "txtFPATreasury"
-        Me.txtFPATreasury.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPATreasury.TabIndex = 70
-        Me.txtFPATreasury.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPATreasury.WatermarkText = "Treasury"
-        '
-        'LabelX66
-        '
-        Me.LabelX66.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX66.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX66.Location = New System.Drawing.Point(421, 184)
-        Me.LabelX66.Name = "LabelX66"
-        Me.LabelX66.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX66.TabIndex = 121
-        Me.LabelX66.Text = "Treasury"
-        '
-        'LabelX60
-        '
-        Me.LabelX60.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX60.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX60.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX60.Location = New System.Drawing.Point(349, 115)
-        Me.LabelX60.Name = "LabelX60"
-        Me.LabelX60.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX60.TabIndex = 119
-        Me.LabelX60.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'txtFPAChalanNumber
-        '
-        Me.txtFPAChalanNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAChalanNumber.Border.Class = "TextBoxBorder"
-        Me.txtFPAChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAChalanNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAChalanNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAChalanNumber.FocusHighlightEnabled = true
-        Me.txtFPAChalanNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAChalanNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAChalanNumber, true)
-        Me.txtFPAChalanNumber.Location = New System.Drawing.Point(524, 44)
-        Me.txtFPAChalanNumber.MaxLength = 50
-        Me.txtFPAChalanNumber.Multiline = true
-        Me.txtFPAChalanNumber.Name = "txtFPAChalanNumber"
-        Me.txtFPAChalanNumber.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPAChalanNumber.Size = New System.Drawing.Size(227, 61)
-        Me.txtFPAChalanNumber.TabIndex = 67
-        Me.txtFPAChalanNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAChalanNumber.WatermarkText = "Chalan Number"
-        '
-        'txtFPARemarks
-        '
-        Me.txtFPARemarks.AcceptsReturn = true
-        Me.txtFPARemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtFPARemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPARemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPARemarks.Border.Class = "TextBoxBorder"
-        Me.txtFPARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPARemarks.ButtonCustom.Image = CType(resources.GetObject("txtFPARemarks.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPARemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPARemarks.FocusHighlightEnabled = true
-        Me.txtFPARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPARemarks.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPARemarks, true)
-        Me.txtFPARemarks.Location = New System.Drawing.Point(875, 7)
-        Me.txtFPARemarks.MaxLength = 255
-        Me.txtFPARemarks.Multiline = true
-        Me.txtFPARemarks.Name = "txtFPARemarks"
-        Me.txtFPARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPARemarks.Size = New System.Drawing.Size(227, 92)
-        Me.txtFPARemarks.TabIndex = 72
-        Me.txtFPARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPARemarks.WatermarkText = "Remarks"
-        '
-        'LabelX61
-        '
-        Me.LabelX61.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX61.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX61.Location = New System.Drawing.Point(808, 12)
-        Me.LabelX61.Name = "LabelX61"
-        Me.LabelX61.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX61.TabIndex = 118
-        Me.LabelX61.Text = "Remarks"
-        '
-        'LabelX62
-        '
-        Me.LabelX62.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX62.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX62.Location = New System.Drawing.Point(421, 42)
-        Me.LabelX62.Name = "LabelX62"
-        Me.LabelX62.Size = New System.Drawing.Size(91, 18)
-        Me.LabelX62.TabIndex = 117
-        Me.LabelX62.Text = "Chalan Number"
-        '
-        'txtFPAAddress
-        '
-        Me.txtFPAAddress.AcceptsReturn = true
-        Me.txtFPAAddress.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAAddress.Border.Class = "TextBoxBorder"
-        Me.txtFPAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAAddress.ButtonCustom.Image = CType(resources.GetObject("txtFPAAddress.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAAddress.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAAddress.FocusHighlightEnabled = true
-        Me.txtFPAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAAddress.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAddress, true)
-        Me.txtFPAAddress.Location = New System.Drawing.Point(122, 142)
-        Me.txtFPAAddress.MaxLength = 255
-        Me.txtFPAAddress.Multiline = true
-        Me.txtFPAAddress.Name = "txtFPAAddress"
-        Me.txtFPAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPAAddress.Size = New System.Drawing.Size(227, 96)
-        Me.txtFPAAddress.TabIndex = 65
-        Me.txtFPAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAAddress.WatermarkText = "Address"
-        '
-        'txtFPAPassportNumber
-        '
-        Me.txtFPAPassportNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAPassportNumber.Border.Class = "TextBoxBorder"
-        Me.txtFPAPassportNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAPassportNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAPassportNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAPassportNumber.ButtonCustom.Visible = true
-        Me.txtFPAPassportNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAPassportNumber.FocusHighlightEnabled = true
-        Me.txtFPAPassportNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAPassportNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAPassportNumber, true)
-        Me.txtFPAPassportNumber.Location = New System.Drawing.Point(524, 9)
-        Me.txtFPAPassportNumber.MaxLength = 50
-        Me.txtFPAPassportNumber.Name = "txtFPAPassportNumber"
-        Me.txtFPAPassportNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPAPassportNumber.TabIndex = 66
-        Me.txtFPAPassportNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAPassportNumber.WatermarkText = "Passport Number"
-        '
-        'LabelX63
-        '
-        Me.LabelX63.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX63.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX63.Location = New System.Drawing.Point(421, 9)
-        Me.LabelX63.Name = "LabelX63"
-        Me.LabelX63.Size = New System.Drawing.Size(101, 18)
-        Me.LabelX63.TabIndex = 114
-        Me.LabelX63.Text = "Passport Number"
-        '
-        'LabelX64
-        '
-        Me.LabelX64.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX64.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX64.Location = New System.Drawing.Point(12, 147)
-        Me.LabelX64.Name = "LabelX64"
-        Me.LabelX64.Size = New System.Drawing.Size(48, 18)
-        Me.LabelX64.TabIndex = 112
-        Me.LabelX64.Text = "Address"
-        '
-        'txtFPAName
-        '
-        Me.txtFPAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtFPAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPAName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAName.Border.Class = "TextBoxBorder"
-        Me.txtFPAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAName.ButtonCustom.Image = CType(resources.GetObject("txtFPAName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAName.ButtonCustom.Visible = true
-        Me.txtFPAName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAName.FocusHighlightEnabled = true
-        Me.txtFPAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAName, true)
-        Me.txtFPAName.Location = New System.Drawing.Point(122, 108)
-        Me.txtFPAName.MaxLength = 255
-        Me.txtFPAName.Name = "txtFPAName"
-        Me.txtFPAName.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPAName.TabIndex = 64
-        Me.txtFPAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAName.WatermarkText = "Name"
-        '
-        'LabelX65
-        '
-        Me.LabelX65.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX65.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX65.Location = New System.Drawing.Point(11, 113)
-        Me.LabelX65.Name = "LabelX65"
-        Me.LabelX65.Size = New System.Drawing.Size(36, 18)
-        Me.LabelX65.TabIndex = 109
-        Me.LabelX65.Text = "Name"
-        '
-        'LabelX54
-        '
-        Me.LabelX54.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX54.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX54.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX54.Location = New System.Drawing.Point(349, 81)
-        Me.LabelX54.Name = "LabelX54"
-        Me.LabelX54.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX54.TabIndex = 70
-        Me.LabelX54.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX55
-        '
-        Me.LabelX55.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX55.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX55.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX55.Location = New System.Drawing.Point(349, 45)
-        Me.LabelX55.Name = "LabelX55"
-        Me.LabelX55.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX55.TabIndex = 69
-        Me.LabelX55.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'chkAppendFPAYear
-        '
-        Me.chkAppendFPAYear.AutoSize = true
-        '
-        '
-        '
-        Me.chkAppendFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkAppendFPAYear, true)
-        Me.chkAppendFPAYear.Location = New System.Drawing.Point(200, 2)
-        Me.chkAppendFPAYear.Name = "chkAppendFPAYear"
-        Me.chkAppendFPAYear.Size = New System.Drawing.Size(124, 18)
-        Me.chkAppendFPAYear.TabIndex = 67
-        Me.chkAppendFPAYear.TabStop = false
-        Me.chkAppendFPAYear.Text = "Auto append year"
-        '
-        'txtFPAYear
-        '
-        '
-        '
-        '
-        Me.txtFPAYear.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAYear.ButtonCustom.Image = CType(resources.GetObject("txtFPAYear.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAYear.FocusHighlightEnabled = true
-        Me.txtFPAYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAYear, true)
-        Me.txtFPAYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtFPAYear.Location = New System.Drawing.Point(122, 5)
-        Me.txtFPAYear.MaxValue = 2099
-        Me.txtFPAYear.MinValue = 1900
-        Me.txtFPAYear.Name = "txtFPAYear"
-        Me.txtFPAYear.ShowUpDown = true
-        Me.txtFPAYear.Size = New System.Drawing.Size(58, 29)
-        Me.txtFPAYear.TabIndex = 61
-        Me.txtFPAYear.Value = 1900
-        Me.txtFPAYear.WatermarkText = "Year"
-        '
-        'dtFPADate
-        '
-        Me.dtFPADate.AutoAdvance = true
-        Me.dtFPADate.AutoSelectDate = true
-        Me.dtFPADate.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtFPADate.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtFPADate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.ButtonClear.Image = CType(resources.GetObject("dtFPADate.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtFPADate.ButtonClear.Visible = true
-        Me.dtFPADate.ButtonDropDown.Visible = true
-        Me.dtFPADate.CustomFormat = "dd/MM/yyyy"
-        Me.dtFPADate.FocusHighlightEnabled = true
-        Me.dtFPADate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtFPADate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtFPADate, true)
-        Me.dtFPADate.IsPopupCalendarOpen = false
-        Me.dtFPADate.Location = New System.Drawing.Point(122, 75)
-        Me.dtFPADate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtFPADate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtFPADate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtFPADate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtFPADate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtFPADate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.MonthCalendar.TodayButtonVisible = true
-        Me.dtFPADate.Name = "dtFPADate"
-        Me.dtFPADate.Size = New System.Drawing.Size(227, 29)
-        Me.dtFPADate.TabIndex = 63
-        Me.dtFPADate.WatermarkText = "Date of Attestation"
-        '
-        'txtFPANumber
-        '
-        Me.txtFPANumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPANumber.Border.Class = "TextBoxBorder"
-        Me.txtFPANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPANumber.ButtonCustom.Image = CType(resources.GetObject("txtFPANumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPANumber.ButtonCustom.Visible = true
-        Me.txtFPANumber.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.txtFPANumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPANumber.FocusHighlightEnabled = true
-        Me.txtFPANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPANumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPANumber, true)
-        Me.txtFPANumber.Location = New System.Drawing.Point(122, 40)
-        Me.txtFPANumber.MaxLength = 10
-        Me.txtFPANumber.Name = "txtFPANumber"
-        Me.txtFPANumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPANumber.TabIndex = 62
-        Me.txtFPANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPANumber.WatermarkText = "FPA Number"
-        '
-        'LabelX57
-        '
-        Me.LabelX57.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX57.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX57.Location = New System.Drawing.Point(11, 79)
-        Me.LabelX57.Name = "LabelX57"
-        Me.LabelX57.Size = New System.Drawing.Size(29, 18)
-        Me.LabelX57.TabIndex = 66
-        Me.LabelX57.Text = "Date"
-        '
-        'LabelX58
-        '
-        Me.LabelX58.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX58.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX58.Location = New System.Drawing.Point(11, 9)
-        Me.LabelX58.Name = "LabelX58"
-        Me.LabelX58.Size = New System.Drawing.Size(28, 18)
-        Me.LabelX58.TabIndex = 65
-        Me.LabelX58.Text = "Year"
-        '
-        'LabelX59
-        '
-        Me.LabelX59.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX59.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX59.Location = New System.Drawing.Point(11, 42)
-        Me.LabelX59.Name = "LabelX59"
-        Me.LabelX59.Size = New System.Drawing.Size(74, 18)
-        Me.LabelX59.TabIndex = 64
-        Me.LabelX59.Text = "FPA Number"
-        '
-        'FPATabItem
-        '
-        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
-        Me.FPATabItem.Name = "FPATabItem"
-        Me.FPATabItem.Text = "FP Attestation Register"
-        '
         'TabControlPanel7
         '
         Me.TabControlPanel7.Controls.Add(Me.CDDataGrid)
@@ -13713,6 +13722,13 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControl.ResumeLayout(false)
+        Me.TabControlPanel4.ResumeLayout(false)
+        Me.PanelFPA.ResumeLayout(false)
+        Me.PanelFPA.PerformLayout
+        CType(Me.dtChalanDate,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtFPAAmount,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtFPAYear,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dtFPADate,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControlPanel1.ResumeLayout(false)
         Me.PanelEx1.ResumeLayout(false)
         Me.PanelEx4.ResumeLayout(false)
@@ -13760,13 +13776,6 @@ Partial Class frmMainInterface
         Me.GroupPanel5.PerformLayout
         Me.GroupPanel4.ResumeLayout(false)
         Me.GroupPanel4.PerformLayout
-        Me.TabControlPanel4.ResumeLayout(false)
-        Me.PanelFPA.ResumeLayout(false)
-        Me.PanelFPA.PerformLayout
-        CType(Me.dtChalanDate,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtFPAAmount,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtFPAYear,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dtFPADate,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControlPanel7.ResumeLayout(false)
         Me.PanelCD.ResumeLayout(false)
         Me.PanelCD.PerformLayout
@@ -14711,5 +14720,6 @@ End Sub
     Friend WithEvents DistanceKM As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
     Friend WithEvents btnRandomColor As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnGenerateFPSlipMain As DevComponents.DotNetBar.ButtonX
 
 End Class

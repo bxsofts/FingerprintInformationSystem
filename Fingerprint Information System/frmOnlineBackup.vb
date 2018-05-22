@@ -163,8 +163,8 @@ Public Class frmOnlineBackup
                 BackupFolderID = CreateUserBackupFolder()
             End If
 
-            Dim parentlist As New List(Of String)
-            parentlist.Add(BackupFolderID)
+            '  Dim parentlist As New List(Of String)
+            '  parentlist.Add(BackupFolderID)
 
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
             ' List.Q = "mimeType = 'database/mdb'" ' list all files

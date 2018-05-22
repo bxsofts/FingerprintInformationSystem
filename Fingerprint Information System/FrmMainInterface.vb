@@ -2676,7 +2676,6 @@ Public Class frmMainInterface
                 PSListChanged = False
                 Me.PSDataGrid.Cursor = Cursors.Default
 
-
             Case Me.CDTabItem.Name
                 Me.pnlRegisterName.Text = "Court Duty Register"
                 CurrentTab = "CD"
@@ -4288,6 +4287,7 @@ Public Class frmMainInterface
 
 
         If CurrentTab = "PS" Then
+           
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.PSDataGrid.Rows.Count - 1 Then
                 e.Cancel = True
                 Exit Sub
@@ -15153,23 +15153,22 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
-    Private Sub GenerateFPASlipForm(sender As Object, e As EventArgs) Handles btnFPAGenerateSlipFormContext.Click, btnFPAGenerateSlipForm.Click, btnFPABlankSlipForm.Click
+
+    Private Sub GenerateFPASlip() Handles btnFPAGenerateSlipFormContext.Click, btnFPAGenerateSlipForm.Click, btnGenerateFPSlipMain.Click
+        GenerateFPASlipForm(False)
+    End Sub
+
+    Private Sub GenerateBlankFPAForm() Handles btnFPABlankSlipForm.Click
+        GenerateFPASlipForm(True)
+    End Sub
+    Private Sub GenerateFPASlipForm(BlankForm As Boolean)
 
         Try
 
-            Dim BlankForm As Boolean
-
-            Select Case DirectCast(sender, DevComponents.DotNetBar.ButtonItem).Name
-                Case btnFPABlankSlipForm.Name
-                    BlankForm = True
-                Case Else
-                    BlankForm = False
-                    If (Me.FPADataGrid.RowCount = 0) Or (Me.FPADataGrid.SelectedRows.Count = 0) Then
-                        DevComponents.DotNetBar.MessageBoxEx.Show("No record is selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Exit Sub
-                    End If
-            End Select
-
+            If (Me.FPADataGrid.RowCount = 0) Or (Me.FPADataGrid.SelectedRows.Count = 0) Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No record is selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
 
 
             Dim TemplateFile As String = strAppUserPath & "\WordTemplates\FPASlipForm.docx"
@@ -15890,8 +15889,6 @@ errhandler:
 #End Region
 
 
-
-
 #Region "ANNUAL STATISTICS"
     Private Sub AnnualStatistics() Handles btnAnnualStatics.Click
         On Error Resume Next
@@ -15967,6 +15964,8 @@ errhandler:
 #End Region
 
 
+#Region "GENERAL SETTINGS"
+
     Private Sub OpenRegedit() Handles btnOpenRegedit.Click
         Try
             My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Applets\Regedit", "LastKey", strGeneralSettingsPath)
@@ -16006,6 +16005,7 @@ errhandler:
         frmSplashScreen.IncrementProgressBarValue(increment)
     End Sub
 
+#End Region
 
 
 End Class
