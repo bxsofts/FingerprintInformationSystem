@@ -117,7 +117,7 @@ Module modMain
         Dim objPing As New System.Net.NetworkInformation.Ping
 
         Try
-            Return If(objPing.Send("8.8.8.8").Status = System.Net.NetworkInformation.IPStatus.Success, True, False) 'google-public-dns-a.google.com.
+            Return If(objPing.Send("google.co.in").Status = System.Net.NetworkInformation.IPStatus.Success, True, False) 'google-public-dns-a.google.com.
         Catch
             Return False
         End Try
