@@ -5556,14 +5556,23 @@ errhandler:
         Try
 
             If CurrentTab = "IO" Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not available for Officer List", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
+                    ClearIOFields()
+                    UpdateOfficerList()
+                    ShowAlertMessage("Selected officer deleted")
+                End If
                 Exit Sub
             End If
+
 
             If CurrentTab = "OS" Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not available for Office Settings", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
+
 
             If Me.chkPreventDeletion.Checked Then
                 MessageBoxEx.Show("Please click the down arrow to the right of the delete button and uncheck the box 'Prevent Deletion' to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -5879,7 +5888,7 @@ errhandler:
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -7182,13 +7191,17 @@ errhandler:
 
     End Sub
     Private Sub SaveOfficerList(sender As Object, e As EventArgs) Handles btnSaveIO.Click
+        If Me.lblDesignation.Visible = False Then
+            MessageBoxEx.Show("Please press 'Edit' or 'Open' button to edit, then press 'Save'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        UpdateOfficerList()
+        ShowAlertMessage("Officer List Updated")
+
+    End Sub
+
+    Private Sub UpdateOfficerList()
         Try
-            If Me.lblDesignation.Visible = False Then
-                MessageBoxEx.Show("Please press 'Edit' or 'Open' button to edit, then press 'Save'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-
             With Me.IODatagrid.Rows(IOSelectedRow)
                 .Cells(1).Value = Me.txtIOOfficerName.Text
                 .Cells(2).Value = Me.txtIOPENNo.Text
@@ -7305,7 +7318,6 @@ errhandler:
                 Next
             Next
 
-            ShowAlertMessage("Officer List Updated")
             ConnectToDatabase()
             LoadOfficerToMemory()
 
@@ -7313,8 +7325,6 @@ errhandler:
             MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
 
 #End Region
 
