@@ -14747,8 +14747,8 @@ errhandler:
             End If
             If (Me.SOCDatagrid.SelectedCells(13).Value.ToString = "0") Then
                 If DevComponents.DotNetBar.MessageBoxEx.Show("No. of prints remaining for search is zero.Do you want to generate the report?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
-
             End If
+
             Me.Cursor = Cursors.WaitCursor
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -14806,7 +14806,7 @@ errhandler:
             WordApp.Selection.TypeText("Sir,")
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Sub: Comparison of chance prints – requesting of - reg:-")
+            WordApp.Selection.TypeText(vbTab & "Sub: Comparison of chance prints with your Bureau records - reg:-")
 
             WordApp.Selection.TypeText(vbNewLine)
             Dim ps As String = Me.SOCDatagrid.SelectedCells(5).Value.ToString
@@ -14940,7 +14940,7 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine)
 
 
-            WordApp.Selection.TypeText(vbTab & "Sub: Comparison of chance print with FP slips of suspect - report forwarding of - reg.")
+            WordApp.Selection.TypeText(vbTab & "Sub: Comparison of chance print with FP slip of suspect - report - reg.")
 
             WordApp.Selection.TypeText(vbNewLine)
             Dim ps As String = Me.SOCDatagrid.SelectedCells(5).Value.ToString
