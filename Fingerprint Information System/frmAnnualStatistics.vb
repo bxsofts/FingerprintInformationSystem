@@ -693,7 +693,7 @@ Public Class frmAnnualStatistics
                 System.Threading.Thread.Sleep(10)
             Next
 
-            Me.IdentifiedCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
+            Me.IDCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
             Dim idcount = Me.FingerPrintDataSet.IdentifiedCases.Count
             Dim rows = idcount + 1
             If rows = 1 Then rows = 2
@@ -906,7 +906,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.TypeText(vbCrLf & Header & vbCrLf)
-            Me.IdentifiedCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
+            Me.IDCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
             Dim idcount = Me.FingerPrintDataSet.IdentifiedCases.Count
 
             For delay = 30 To 40

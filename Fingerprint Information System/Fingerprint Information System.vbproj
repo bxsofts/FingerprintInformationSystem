@@ -680,9 +680,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FingerPrint.mdb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="FingerPrint.mdb" />
     <Content Include="icon.ico" />
     <None Include="PNG 48x48\Arrioch-Senary-Office-access-mdb.ico" />
   </ItemGroup>

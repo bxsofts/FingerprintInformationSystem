@@ -41,7 +41,6 @@ Partial Class frmAnnualStatistics
         Me.FPARegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         Me.IDCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
         Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
-        Me.IdentifiedCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
         Me.bgwIDGist = New System.ComponentModel.BackgroundWorker()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -320,10 +319,6 @@ Partial Class frmAnnualStatistics
         Me.bgwIDList.WorkerReportsProgress = True
         Me.bgwIDList.WorkerSupportsCancellation = True
         '
-        'IdentifiedCasesTableAdapter1
-        '
-        Me.IdentifiedCasesTableAdapter1.ClearBeforeFill = True
-        '
         'bgwIDGist
         '
         Me.bgwIDGist.WorkerReportsProgress = True
@@ -372,6 +367,5 @@ Partial Class frmAnnualStatistics
     Friend WithEvents IDCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
     Friend WithEvents btnGeneratebyPeriod As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwIDList As System.ComponentModel.BackgroundWorker
-    Friend WithEvents IdentifiedCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
     Friend WithEvents bgwIDGist As System.ComponentModel.BackgroundWorker
 End Class
