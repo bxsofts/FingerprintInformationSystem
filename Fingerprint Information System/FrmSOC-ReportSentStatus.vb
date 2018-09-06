@@ -265,7 +265,7 @@
                 address = Me.FingerPrintDataSet1.SOCReportRegister(Me.FingerPrintDataSet1.SOCReportRegister.Count - 1).ReportSentTo.ToString
             Else
                 If sho.ToUpper = "IP" Then
-                    address = "Inspector of Police" & vbNewLine & ps
+                    address = "Inspector SHO" & vbNewLine & ps
                 Else
                     address = "Sub Inspector of Police" & vbNewLine & ps
                 End If
