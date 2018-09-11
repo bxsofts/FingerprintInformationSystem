@@ -14272,7 +14272,7 @@ errhandler:
             '--------------------------NIL PRINT---------------------
 
             If CPD = 0 Then 'nil print
-                BodyText = BodyText & "." & vbNewLine & vbTab & "It is intimated that no useful chance prints were obtained from the scene of crime. Hence no further action is pending with this office in this regard. This is for your information."
+                BodyText = BodyText & "." & vbNewLine & vbTab & "It is intimated that no useful chance prints were obtained from the scene of crime. Hence no further action is pending with this office in this regard. This is for information."
             End If
 
             '--------------------------ONE PRINT---------------------
@@ -14283,11 +14283,11 @@ errhandler:
 
 
                 If CPU = 1 Then
-                    BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is unfit for comparison. Hence no further action is pending with this office in this regard. This is for your information."
+                    BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is unfit for comparison. Hence no further action is pending with this office in this regard. This is for information."
                 End If
 
                 If CPE = 1 Then
-                    BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is eliminated as the finger impression of the inmate. Hence no further action is pending with this office in this regard. This is for your information."
+                    BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is eliminated as the finger impression of the inmate. Hence no further action is pending with this office in this regard. This is for information."
                 End If
 
                 If CPR = 1 Then
@@ -14302,17 +14302,17 @@ errhandler:
 
 
             If CPD > 1 And CPU = CPD And CPR = 0 Then 'all unfit
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "It is intimated that all the chance prints are unfit for comparison. Hence no further action is pending with this office in this regard. This is for your information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "It is intimated that all the chance prints are unfit for comparison. Hence no further action is pending with this office in this regard. This is for information."
             End If
 
             If CPD > 1 And CPE = CPD And CPR = 0 Then 'all eliminated
 
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "It is intimated that all the chance prints are eliminated as the finger impressions of inmates. Hence no further action is pending with this office in this regard. This is for your information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "It is intimated that all the chance prints are eliminated as the finger impressions of inmates. Hence no further action is pending with this office in this regard. This is for information."
             End If
 
             If CPD > 1 And CPU <> CPD And CPE <> CPD And CPR = 0 Then 'all eliminated or unfit
 
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. Hence no further action is pending with this office in this regard. This is for your information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. Hence no further action is pending with this office in this regard. This is for information."
 
             End If
 
@@ -14328,7 +14328,7 @@ errhandler:
 
             If CPD > 0 And CPR <> CPD And CPR <> 0 And CPE <> 0 And CPU = 0 Then 'some remains
                 IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for your information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
                 IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print was ", " chance prints were ") & "compared with the records of this bureau. On comparison, " & ConvertNumberToWord(CPID) & IIf(CPID = 1, " of the chance prints is ", " chance prints are ") & "found IDENTICAL with the ---------- finger impression of one " & idas & " since they possess identical ridge characteristics in their nature and relative position. He is previously involved in Cr.No.------ u/s --------- of -------- P.S. His fingerprint slip is recorded in this bureau as daily arrest slip number ---------. The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "." & vbNewLine & vbTab & "Detailed Expert Opinion shall be furnished shortly."
             End If
@@ -14337,7 +14337,7 @@ errhandler:
 
                 IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer
 
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for your information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
                 IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print was ", " chance prints were ") & "compared with the records of this bureau. On comparison, " & ConvertNumberToWord(CPID) & IIf(CPID = 1, " of the chance prints is ", " chance prints are ") & "found IDENTICAL with the ---------- finger impression of one " & idas & " since they possess identical ridge characteristics in their nature and relative position. He is previously involved in Cr.No.------ u/s --------- of -------- P.S. His fingerprint slip is recorded in this bureau as daily arrest slip number ---------. The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "." & vbNewLine & vbTab & "Detailed Expert Opinion shall be furnished shortly."
             End If
@@ -14347,7 +14347,7 @@ errhandler:
 
                 IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer
 
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for your information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
                 IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print was ", " chance prints were ") & "compared with the records of this bureau. On comparison, " & ConvertNumberToWord(CPID) & IIf(CPID = 1, " of the chance prints is ", " chance prints are ") & "found IDENTICAL with the ---------- finger impression of one " & idas & " since they possess identical ridge characteristics in their nature and relative position. He is previously involved in Cr.No.------ u/s --------- of -------- P.S. His fingerprint slip is recorded in this bureau as daily arrest slip number ---------. The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "." & vbNewLine & vbTab & "Detailed Expert Opinion shall be furnished shortly."
             End If
@@ -14360,12 +14360,12 @@ errhandler:
                 Select Case ReportNature.ToLower
                     Case "awaiting photographs"
                         BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti & " and developed one chance print which was photographed by " & Photographer
-                        BodyText = BodyText & vbNewLine & vbTab & "The comparison work of the chance print will be initiated on receipt of photographs of chance print from the Police Photographer and result of comparison will be intimated to you. This is for your information."
+                        BodyText = BodyText & vbNewLine & vbTab & "The comparison work of the chance print will be initiated on receipt of photographs of chance print from the Police Photographer and result of comparison will be intimated to you. This is for information."
 
                     Case "interim"
-                        BodyText = "The chance print in the above case was compared with the fingerprint slips of Active Criminals / MO Criminals recorded in this bureau and remains untraced. Further comparison is being continued in the DA Slips collection and the result will be intimated as and when search is completed. This is for your information."
+                        BodyText = "The chance print in the above case was compared with the fingerprint slips of Active Criminals / MO Criminals recorded in this bureau and remains untraced. Further comparison is being continued in the DA Slips collection and the result will be intimated as and when search is completed. This is for information."
                     Case "untraced"
-                        BodyText = "The chance print developed from the scene of crime concerned in the above case remains untraced in the available records of this bureau. This is for your information."
+                        BodyText = "The chance print developed from the scene of crime concerned in the above case remains untraced in the available records of this bureau. This is for information."
                     Case "identification report - cob"
                         Dim receiver As String = ReportSentTo.Replace(vbCrLf, ",").ToUpper
 
@@ -14380,12 +14380,12 @@ errhandler:
                 Select Case ReportNature.ToLower
                     Case "awaiting photographs"
                         BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti & " and developed " & ConvertNumberToWord(CPD) & " chance prints which were photographed by " & Photographer
-                        BodyText = BodyText & vbNewLine & vbTab & "The comparison work of chance prints will be initiated on receipt of photographs of chance prints from the Police Photographer and result of comparison will be intimated to you. This is for your information."
+                        BodyText = BodyText & vbNewLine & vbTab & "The comparison work of chance prints will be initiated on receipt of photographs of chance prints from the Police Photographer and result of comparison will be intimated to you. This is for information."
 
                     Case "interim"
-                        BodyText = "The chance prints in the above case were compared with the fingerprint slips of Active Criminals / MO Criminals recorded in this bureau and remain untraced. Further comparison is being continued in the DA Slips collection and the result will be intimated as and when search is completed. This is for your information."
+                        BodyText = "The chance prints in the above case were compared with the fingerprint slips of Active Criminals / MO Criminals recorded in this bureau and remain untraced. Further comparison is being continued in the DA Slips collection and the result will be intimated as and when search is completed. This is for information."
                     Case "untraced"
-                        BodyText = "The chance prints developed from the scene of crime concerned in the above case remain untraced in the available records of this bureau. This is for your information."
+                        BodyText = "The chance prints developed from the scene of crime concerned in the above case remain untraced in the available records of this bureau. This is for information."
                     Case "identification report - cob"
 
                         If CPID = 1 Then BodyText = "ONE OF THE CHANCEPRINTS DEVELOPED FROM THE SCENE OF CRIME IN CR.NO. " & cr & " U/S " & us & " of " & ps & " IS FOUND IDENTICAL WITH THE ------------ FINGER IMPRESSION OF ONE " & idas & "(.) HE IS PREVIOUSLY INVOLVED IN CR.NO. ----------- OF ---------------- P.S(.) DETAILED REPORT FOLLOWS(.)"
@@ -14968,7 +14968,7 @@ errhandler:
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.ParagraphFormat.LeftIndent = 0
 
-            WordApp.Selection.TypeText(vbTab & "It is intimated that the " & IIf(CPD = 1, "chance print is", "chance prints are") & " NOT IDENTICAL with his/their finger impressions. This is for your information.")
+            WordApp.Selection.TypeText(vbTab & "It is intimated that the " & IIf(CPD = 1, "chance print is", "chance prints are") & " NOT IDENTICAL with his/their finger impressions. This is for information.")
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
