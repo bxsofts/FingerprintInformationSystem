@@ -14021,11 +14021,22 @@ errhandler:
 
     '---------------------------------------------REPORTS-----------------------------------
 #Region "REPORTS"
+
+    Private Sub ShowFacingSheetOnDatagridCellDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SOCDatagrid.CellDoubleClick
+        On Error Resume Next
+        If e.RowIndex < 0 Or e.RowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
+            Exit Sub
+        End If
+        If MessageBoxEx.Show("Generate Facing Sheet for SoC No. " & Me.SOCDatagrid.SelectedCells(0).Value & " ?", strAppName, MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+            ShowSOCFacingSheet()
+        End If
+
+    End Sub
+
     Private Sub ShowSOCFacingSheet() Handles btnSOCFacingSheet.Click, btnFacingSheet.Click, btnFacingSheetContext.Click, btnFacingSheetMenu.Click
 
         If (Me.SOCDatagrid.RowCount = 0) Or (Me.SOCDatagrid.SelectedRows.Count = 0) Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No record is selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
             Exit Sub
         End If
 
@@ -14097,14 +14108,6 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
-    End Sub
-
-    Private Sub ShowFacingSheetOnDatagridCellDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SOCDatagrid.CellDoubleClick
-        On Error Resume Next
-        If e.RowIndex < 0 Or e.RowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
-            Exit Sub
-        End If
-        ShowSOCFacingSheet()
     End Sub
 
 
