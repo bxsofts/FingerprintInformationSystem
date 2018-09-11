@@ -3959,10 +3959,10 @@ Public Class frmMainInterface
 #Region "DATAGRID BACKCOLOR"
     Private Sub SetTableBackColor()
         Try
-            Dim strTableEvenColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableEvenColor", Color.Salmon.ToArgb.ToString)
+            Dim strTableEvenColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableEvenColor", Color.LightSalmon.ToArgb.ToString)
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableEvenColor", strTableEvenColor, Microsoft.Win32.RegistryValueKind.String)
 
-            Dim strTableOddColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableOddColor", SOCDatagrid.DefaultCellStyle.BackColor)
+            Dim strTableOddColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableOddColor", SOCDatagrid.DefaultCellStyle.BackColor.ToArgb.ToString)
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableOddColor", strTableOddColor, Microsoft.Win32.RegistryValueKind.String)
 
             TableEvenColor = CType(Color.FromArgb(strTableEvenColor), Color)
