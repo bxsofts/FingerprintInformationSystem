@@ -15219,7 +15219,7 @@ errhandler:
                 wdBooks("Address").Range.Text = Me.FPADataGrid.SelectedCells(4).Value
                 wdBooks("Passport").Range.Text = Me.FPADataGrid.SelectedCells(5).Value
                 wdBooks("FileNo").Range.Text = FileNo
-                wdBooks("Date").Range.Text = Me.FPADataGrid.SelectedCells(2).FormattedValue
+                wdBooks("Date").Range.Text = Format(Me.FPADataGrid.SelectedCells(2).Value, "dd-MMM-yyyy")
                 wdBooks("NameAddress").Range.Text = Me.FPADataGrid.SelectedCells(3).Value & ", " & Me.FPADataGrid.SelectedCells(4).Value.ToString.Replace(vbNewLine, ", ")
                 wdBooks("PassportNo").Range.Text = Me.FPADataGrid.SelectedCells(5).Value
                 wdBooks("Reason").Range.Text = Me.FPADataGrid.SelectedCells(12).Value
