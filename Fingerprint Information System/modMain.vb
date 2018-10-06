@@ -114,11 +114,19 @@ Module modMain
 
     Public Function InternetAvailable() As Boolean
 
-        Dim objPing As New System.Net.NetworkInformation.Ping
-
+        Dim objUrl As New System.Uri("http://www.google.com/")
+        Dim objWebReq As System.Net.WebRequest
+        objWebReq = System.Net.WebRequest.Create(objUrl)
+        objWebReq.Proxy = Nothing
+        Dim objResp As System.Net.WebResponse
         Try
-            Return If(objPing.Send("google.co.in").Status = System.Net.NetworkInformation.IPStatus.Success, True, False) 'google-public-dns-a.google.com.
-        Catch
+            objResp = objWebReq.GetResponse
+            objResp.Close()
+            objWebReq = Nothing
+            Return True
+        Catch ex As Exception
+            objResp.Close()
+            objWebReq = Nothing
             Return False
         End Try
 
