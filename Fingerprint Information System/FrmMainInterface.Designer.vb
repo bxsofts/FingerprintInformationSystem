@@ -131,6 +131,7 @@ Partial Class frmMainInterface
         Me.btnExit = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
         Me.btnAbout = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadInstaller = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar4 = New DevComponents.DotNetBar.RibbonBar()
         Me.btnLocalBackup = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOnlineBackup = New DevComponents.DotNetBar.ButtonItem()
@@ -222,6 +223,17 @@ Partial Class frmMainInterface
         Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDeleteAll = New DevComponents.DotNetBar.ButtonItem()
         Me.chkPreventDeletion = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.RibbonPanel5 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.RibbonBar16 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnDownloadInstaller1 = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenRegedit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenTemplatesFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBar9 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer9 = New DevComponents.DotNetBar.ItemContainer()
+        Me.chkShowPopups = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.chkPlaySound = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel6 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar11 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer7 = New DevComponents.DotNetBar.ItemContainer()
@@ -276,15 +288,6 @@ Partial Class frmMainInterface
         Me.ComboItem15 = New DevComponents.Editors.ComboItem()
         Me.ComboItem16 = New DevComponents.Editors.ComboItem()
         Me.ComboItem13 = New DevComponents.Editors.ComboItem()
-        Me.RibbonPanel5 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpenRegedit = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpenTemplatesFolder = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonBar9 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer9 = New DevComponents.DotNetBar.ItemContainer()
-        Me.chkShowPopups = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.chkPlaySound = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel4 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer5 = New DevComponents.DotNetBar.ItemContainer()
@@ -1016,14 +1019,13 @@ Partial Class frmMainInterface
         Me.SettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SettingsTableAdapter()
         Me.OfficerTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
-        Me.btnDownloadInstaller = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
+        Me.RibbonPanel5.SuspendLayout
         Me.RibbonPanel6.SuspendLayout
         Me.RibbonPanel7.SuspendLayout
         Me.RibbonPanel3.SuspendLayout
-        Me.RibbonPanel5.SuspendLayout
         Me.RibbonPanel4.SuspendLayout
         Me.TableLayoutPanel1.SuspendLayout
         Me.PanelEx9.SuspendLayout
@@ -1407,11 +1409,11 @@ Partial Class frmMainInterface
         Me.RibbonControl1.CaptionFont = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RibbonControl1.CaptionVisible = true
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel6)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel7)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel3)
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonControl1.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -1557,6 +1559,11 @@ Partial Class frmMainInterface
         Me.btnAbout.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDownloadInstaller})
         Me.btnAbout.SubItemsExpandWidth = 14
         Me.btnAbout.Text = "About"
+        '
+        'btnDownloadInstaller
+        '
+        Me.btnDownloadInstaller.Name = "btnDownloadInstaller"
+        Me.btnDownloadInstaller.Text = "Download Installer File"
         '
         'RibbonBar4
         '
@@ -2215,6 +2222,182 @@ Partial Class frmMainInterface
         Me.chkPreventDeletion.Name = "chkPreventDeletion"
         Me.chkPreventDeletion.Text = "Prevent Deletion"
         '
+        'RibbonPanel5
+        '
+        Me.RibbonPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel5.Controls.Add(Me.RibbonBar16)
+        Me.RibbonPanel5.Controls.Add(Me.RibbonBar7)
+        Me.RibbonPanel5.Controls.Add(Me.RibbonBar9)
+        Me.RibbonPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel5.Location = New System.Drawing.Point(0, 55)
+        Me.RibbonPanel5.Name = "RibbonPanel5"
+        Me.RibbonPanel5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel5.Size = New System.Drawing.Size(1360, 95)
+        '
+        '
+        '
+        Me.RibbonPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel5.TabIndex = 6
+        Me.RibbonPanel5.Visible = false
+        '
+        'RibbonBar16
+        '
+        Me.RibbonBar16.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar16.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar16.ContainerControlProcessDialogKey = true
+        Me.RibbonBar16.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar16.DragDropSupport = true
+        Me.RibbonBar16.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDownloadInstaller1})
+        Me.RibbonBar16.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar16.Location = New System.Drawing.Point(337, 0)
+        Me.RibbonBar16.Name = "RibbonBar16"
+        Me.RibbonBar16.Size = New System.Drawing.Size(187, 93)
+        Me.RibbonBar16.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar16.TabIndex = 28
+        Me.RibbonBar16.Text = "UPDATE"
+        '
+        '
+        '
+        Me.RibbonBar16.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar16.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnDownloadInstaller1
+        '
+        Me.btnDownloadInstaller1.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDownloadInstaller1.Image = CType(resources.GetObject("btnDownloadInstaller1.Image"),System.Drawing.Image)
+        Me.btnDownloadInstaller1.Name = "btnDownloadInstaller1"
+        Me.btnDownloadInstaller1.SubItemsExpandWidth = 14
+        Me.btnDownloadInstaller1.Text = "Download Installer"
+        '
+        'RibbonBar7
+        '
+        Me.RibbonBar7.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar7.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar7.ContainerControlProcessDialogKey = true
+        Me.RibbonBar7.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar7.DragDropSupport = true
+        Me.RibbonBar7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSettingsWizard})
+        Me.RibbonBar7.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar7.Location = New System.Drawing.Point(161, 0)
+        Me.RibbonBar7.Name = "RibbonBar7"
+        Me.RibbonBar7.Size = New System.Drawing.Size(176, 93)
+        Me.RibbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar7.TabIndex = 27
+        Me.RibbonBar7.Text = "SETTINGS WIZARD"
+        '
+        '
+        '
+        Me.RibbonBar7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnSettingsWizard
+        '
+        Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
+        Me.btnSettingsWizard.Name = "btnSettingsWizard"
+        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
+        Me.btnSettingsWizard.SubItemsExpandWidth = 14
+        Me.btnSettingsWizard.Text = "Settings Wizard"
+        '
+        'btnOpenRegedit
+        '
+        Me.btnOpenRegedit.Name = "btnOpenRegedit"
+        Me.btnOpenRegedit.Text = "Open Regedit"
+        '
+        'btnOpenTemplatesFolder
+        '
+        Me.btnOpenTemplatesFolder.BeginGroup = true
+        Me.btnOpenTemplatesFolder.Name = "btnOpenTemplatesFolder"
+        Me.btnOpenTemplatesFolder.Text = "Open Templates Folder"
+        '
+        'RibbonBar9
+        '
+        Me.RibbonBar9.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar9.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar9.ContainerControlProcessDialogKey = true
+        Me.RibbonBar9.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar9.DragDropSupport = true
+        Me.RibbonBar9.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer9})
+        Me.RibbonBar9.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar9.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBar9.Name = "RibbonBar9"
+        Me.RibbonBar9.Size = New System.Drawing.Size(158, 93)
+        Me.RibbonBar9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar9.TabIndex = 26
+        Me.RibbonBar9.Text = "MESSAGES"
+        '
+        '
+        '
+        Me.RibbonBar9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar9.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer9
+        '
+        '
+        '
+        '
+        Me.ItemContainer9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer9.BeginGroup = true
+        Me.ItemContainer9.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer9.Name = "ItemContainer9"
+        Me.ItemContainer9.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkShowPopups, Me.chkPlaySound})
+        '
+        '
+        '
+        Me.ItemContainer9.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'chkShowPopups
+        '
+        Me.chkShowPopups.Name = "chkShowPopups"
+        Me.chkShowPopups.Text = "Show Popup Messages"
+        '
+        'chkPlaySound
+        '
+        Me.chkPlaySound.Name = "chkPlaySound"
+        Me.chkPlaySound.Text = "Play Sound for Popups"
+        '
         'RibbonPanel6
         '
         Me.RibbonPanel6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -2857,142 +3040,6 @@ Partial Class frmMainInterface
         Me.ComboItem13.FontSize = 9!
         Me.ComboItem13.FontStyle = System.Drawing.FontStyle.Bold
         Me.ComboItem13.Text = "None"
-        '
-        'RibbonPanel5
-        '
-        Me.RibbonPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel5.Controls.Add(Me.RibbonBar7)
-        Me.RibbonPanel5.Controls.Add(Me.RibbonBar9)
-        Me.RibbonPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel5.Location = New System.Drawing.Point(0, 55)
-        Me.RibbonPanel5.Name = "RibbonPanel5"
-        Me.RibbonPanel5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel5.Size = New System.Drawing.Size(1360, 95)
-        '
-        '
-        '
-        Me.RibbonPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel5.TabIndex = 6
-        Me.RibbonPanel5.Visible = false
-        '
-        'RibbonBar7
-        '
-        Me.RibbonBar7.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar7.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar7.ContainerControlProcessDialogKey = true
-        Me.RibbonBar7.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar7.DragDropSupport = true
-        Me.RibbonBar7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSettingsWizard})
-        Me.RibbonBar7.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar7.Location = New System.Drawing.Point(161, 0)
-        Me.RibbonBar7.Name = "RibbonBar7"
-        Me.RibbonBar7.Size = New System.Drawing.Size(176, 93)
-        Me.RibbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar7.TabIndex = 27
-        Me.RibbonBar7.Text = "SETTINGS WIZARD"
-        '
-        '
-        '
-        Me.RibbonBar7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnSettingsWizard
-        '
-        Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
-        Me.btnSettingsWizard.Name = "btnSettingsWizard"
-        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
-        Me.btnSettingsWizard.SubItemsExpandWidth = 14
-        Me.btnSettingsWizard.Text = "Settings Wizard"
-        '
-        'btnOpenRegedit
-        '
-        Me.btnOpenRegedit.Name = "btnOpenRegedit"
-        Me.btnOpenRegedit.Text = "Open Regedit"
-        '
-        'btnOpenTemplatesFolder
-        '
-        Me.btnOpenTemplatesFolder.BeginGroup = true
-        Me.btnOpenTemplatesFolder.Name = "btnOpenTemplatesFolder"
-        Me.btnOpenTemplatesFolder.Text = "Open Templates Folder"
-        '
-        'RibbonBar9
-        '
-        Me.RibbonBar9.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar9.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar9.ContainerControlProcessDialogKey = true
-        Me.RibbonBar9.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar9.DragDropSupport = true
-        Me.RibbonBar9.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer9})
-        Me.RibbonBar9.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar9.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar9.Name = "RibbonBar9"
-        Me.RibbonBar9.Size = New System.Drawing.Size(158, 93)
-        Me.RibbonBar9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar9.TabIndex = 26
-        Me.RibbonBar9.Text = "MESSAGES"
-        '
-        '
-        '
-        Me.RibbonBar9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar9.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer9
-        '
-        '
-        '
-        '
-        Me.ItemContainer9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer9.BeginGroup = true
-        Me.ItemContainer9.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer9.Name = "ItemContainer9"
-        Me.ItemContainer9.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkShowPopups, Me.chkPlaySound})
-        '
-        '
-        '
-        Me.ItemContainer9.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'chkShowPopups
-        '
-        Me.chkShowPopups.Name = "chkShowPopups"
-        Me.chkShowPopups.Text = "Show Popup Messages"
-        '
-        'chkPlaySound
-        '
-        Me.chkPlaySound.Name = "chkPlaySound"
-        Me.chkPlaySound.Text = "Play Sound for Popups"
         '
         'RibbonPanel4
         '
@@ -13676,11 +13723,6 @@ Partial Class frmMainInterface
         Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
         Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer)), System.Drawing.Color.FromArgb(CType(CType(1,Byte),Integer), CType(CType(115,Byte),Integer), CType(CType(199,Byte),Integer)))
         '
-        'btnDownloadInstaller
-        '
-        Me.btnDownloadInstaller.Name = "btnDownloadInstaller"
-        Me.btnDownloadInstaller.Text = "Download Installer File"
-        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -13700,10 +13742,10 @@ Partial Class frmMainInterface
         Me.RibbonControl1.ResumeLayout(false)
         Me.RibbonControl1.PerformLayout
         Me.RibbonPanel1.ResumeLayout(false)
+        Me.RibbonPanel5.ResumeLayout(false)
         Me.RibbonPanel6.ResumeLayout(false)
         Me.RibbonPanel7.ResumeLayout(false)
         Me.RibbonPanel3.ResumeLayout(false)
-        Me.RibbonPanel5.ResumeLayout(false)
         Me.RibbonPanel4.ResumeLayout(false)
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.PanelEx9.ResumeLayout(false)
@@ -14729,5 +14771,7 @@ End Sub
     Friend WithEvents btnRandomColor As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnGenerateFPSlipMain As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnDownloadInstaller As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents RibbonBar16 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents btnDownloadInstaller1 As DevComponents.DotNetBar.ButtonItem
 
 End Class

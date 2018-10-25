@@ -16023,7 +16023,7 @@ errhandler:
 
 #Region "DOWNLOAD INSTALLER"
 
-    Private Sub DownloadInstaller() Handles btnDownloadInstaller.Click
+    Private Sub DownloadInstaller() Handles btnDownloadInstaller.Click, btnDownloadInstaller1.Click
         Try
             ' Process.Start("https://app.box.com/s/cisqnor3yow7c6lopq3s9mscd7kx62as") ' File
             Process.Start("https://app.box.com/s/kjkkp4cyp17mnkr7t1oz2qclodylz73i") 'Folder
