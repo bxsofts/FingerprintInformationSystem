@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmFPAStatistics
+Partial Class frmFPAStatement
     Inherits DevComponents.DotNetBar.Office2007Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmFPAStatistics
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFPAStatistics))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFPAStatement))
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -317,7 +317,7 @@ Partial Class frmFPAStatistics
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(552, 138)
+        Me.PanelEx3.Size = New System.Drawing.Size(552, 134)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -338,7 +338,7 @@ Partial Class frmFPAStatistics
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(128, 138)
+        Me.CircularProgress1.Size = New System.Drawing.Size(128, 134)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 50
         Me.CircularProgress1.TabStop = False
@@ -398,11 +398,11 @@ Partial Class frmFPAStatistics
         Me.bgwCoB.WorkerReportsProgress = True
         Me.bgwCoB.WorkerSupportsCancellation = True
         '
-        'frmFPAStatistics
+        'frmFPAStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(552, 138)
+        Me.ClientSize = New System.Drawing.Size(552, 134)
         Me.Controls.Add(Me.PanelEx3)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -411,10 +411,10 @@ Partial Class frmFPAStatistics
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmFPAStatistics"
+        Me.Name = "frmFPAStatement"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Revenue Income Statement"
-        Me.TitleText = "<b>Revenue Income Statement</b>"
+        Me.TitleText = "<b>FP Attestation Statement</b>"
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()

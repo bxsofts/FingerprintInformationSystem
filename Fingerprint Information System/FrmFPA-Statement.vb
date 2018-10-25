@@ -1,14 +1,14 @@
 ﻿Imports Microsoft.Office.Interop
-Public Class frmFPAStatistics
+Public Class frmFPAStatement
 
     Dim d1 As Date
     Dim d2 As Date
     Dim datevalue As String = vbNullString
     Dim RowCount As Integer = 0
     Sub SetDays() Handles MyBase.Load
-        
+
         On Error Resume Next
-        
+
         Me.Cursor = Cursors.WaitCursor
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressColor = GetProgressColor()
@@ -23,7 +23,7 @@ Public Class frmFPAStatistics
         Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
-       
+
 
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
@@ -65,26 +65,26 @@ Public Class frmFPAStatistics
             Me.Cursor = Cursors.WaitCursor
 
 
-        Select Case DirectCast(sender, Control).Name
-            Case btnGenerateByDate.Name
-                d1 = Me.dtFrom.Value
-                d2 = Me.dtTo.Value
-                If d1 > d2 Then
-                    DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtFrom.Focus()
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                datevalue = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+            Select Case DirectCast(sender, Control).Name
+                Case btnGenerateByDate.Name
+                    d1 = Me.dtFrom.Value
+                    d2 = Me.dtTo.Value
+                    If d1 > d2 Then
+                        DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Me.dtFrom.Focus()
+                        Me.Cursor = Cursors.Default
+                        Exit Sub
+                    End If
+                    datevalue = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
 
-            Case btnGenerateByMonth.Name
-                Dim m = Me.cmbMonth.SelectedIndex + 1
-                Dim y = Me.txtYear.Value
-                Dim d As Integer = Date.DaysInMonth(y, m)
-                d1 = New Date(y, m, 1)
-                d2 = New Date(y, m, d)
-                datevalue = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-        End Select
+                Case btnGenerateByMonth.Name
+                    Dim m = Me.cmbMonth.SelectedIndex + 1
+                    Dim y = Me.txtYear.Value
+                    Dim d As Integer = Date.DaysInMonth(y, m)
+                    d1 = New Date(y, m, 1)
+                    d2 = New Date(y, m, d)
+                    datevalue = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+            End Select
 
 
             Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
@@ -94,11 +94,11 @@ Public Class frmFPAStatistics
             Me.CircularProgress1.IsRunning = True
             Me.Cursor = Cursors.WaitCursor
 
-        If Me.chkLetter.Checked Then
+            If Me.chkLetter.Checked Then
                 bgwLetter.RunWorkerAsync()
-        Else
+            Else
                 bgwCoB.RunWorkerAsync()
-        End If
+            End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -180,7 +180,7 @@ Public Class frmFPAStatistics
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
 
             WordApp.Selection.TypeText(vbNewLine)
-            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Date:       /" & GenerateDate(False))
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Date:       /" & GenerateDateWithoutDay())
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText("From")
             WordApp.Selection.TypeText(vbNewLine)
@@ -461,7 +461,7 @@ Public Class frmFPAStatistics
             WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. " & PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & "DATED: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
+            WordApp.Selection.TypeText("No. " & PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE:    /" & GenerateDateWithoutDay() & vbNewLine)
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
@@ -627,7 +627,7 @@ Public Class frmFPAStatistics
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
-        
+
     End Sub
 
     Private Sub bgwCoB_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwCoB.ProgressChanged
@@ -668,21 +668,6 @@ Public Class frmFPAStatistics
         End Try
     End Function
 
-    Private Function GenerateDate(ByVal ShowDate As Boolean)
-        On Error Resume Next
-        Dim dt = ReportSentDate
-        If ShowDate Then
-            Return Format(dt, "dd/MM/yyyy")
-        Else
-            dt = Today
-            Dim m As String = Month(dt)
-            If m < 10 Then m = "0" & m
-            Dim y As String = Year(dt)
-            Dim d As String = m & "/" & y
-            Return d
-        End If
-
-    End Function
 
     Private Sub LetterFormat() Handles chkCoB.Click, chkLetter.Click
         On Error Resume Next
@@ -694,5 +679,5 @@ Public Class frmFPAStatistics
 
     End Sub
 
- 
+
 End Class

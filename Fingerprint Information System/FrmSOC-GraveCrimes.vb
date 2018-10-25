@@ -184,13 +184,13 @@ Public Class FrmSOCGraveCrimes
             If RowCount = 3 Then
                 WordApp.Selection.TypeText("-----------------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
                 WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.TypeText(FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATED: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
+                WordApp.Selection.TypeText(FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText("-----------------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             Else
                 WordApp.Selection.TypeText("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
                 WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.TypeText(FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATED: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
+                WordApp.Selection.TypeText(FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.TypeText("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             End If

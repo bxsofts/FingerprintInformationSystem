@@ -14618,7 +14618,7 @@ errhandler:
         Dim line() = Strings.Split(FileNo, "/")
         FileNo = line(0) & "/SOC/" & line(1)
 
-        WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATED: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
+        WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
         WordApp.Selection.Font.Bold = 0
         WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
         WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
@@ -15094,7 +15094,7 @@ errhandler:
         frmFPARegister.BringToFront()
     End Sub
 
-
+  
 
     Private Sub ShowFPAApplicationForm() Handles btnFPAApplicationForm.Click
         Try
@@ -15267,7 +15267,12 @@ errhandler:
     Private Sub ShowFPAStstistics() Handles btnFPAStatement.Click, btnMonthlyFPA.Click
 
         On Error Resume Next
-        frmFPAStatistics.ShowDialog()
+        frmFPAStatement.ShowDialog()
+    End Sub
+
+
+    Private Sub GenerateRevenueIncomeStatement() Handles btnRevenueCollectionStatement.Click
+        frmRevenueCollection.ShowDialog()
     End Sub
 
     Private Sub ShowMonthlyPerformance() Handles btnMonthlyPerformance.Click

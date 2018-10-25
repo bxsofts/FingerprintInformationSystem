@@ -194,6 +194,18 @@ Module modMain
         End If
         Return cBaseColor
     End Function
+
+    Public Function GenerateDateWithoutDay()
+        On Error Resume Next
+
+        Dim dt = Today
+        Dim m As String = Month(dt)
+        If m < 10 Then m = "0" & m
+        Dim y As String = Year(dt)
+        Dim d As String = m & "/" & y
+        Return d
+    End Function
+
 End Module
 
 

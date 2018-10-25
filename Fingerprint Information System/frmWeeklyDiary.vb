@@ -40,8 +40,6 @@ Public Class frmWeeklyDiary
     End Sub
 
 
-   
-
     Private Sub GenerateWeeklyDiary(sender As Object, e As EventArgs) Handles btnGenerateWeeklyDiary.Click
         Try
             If Me.MonthCalendarAdv1.SelectedDate.DayOfWeek <> DayOfWeek.Sunday Then
