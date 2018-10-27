@@ -125,7 +125,7 @@ Module modMain
             objWebReq = Nothing
             Return True
         Catch ex As Exception
-            objResp.Close()
+            ' objResp.Close()
             objWebReq = Nothing
             Return False
         End Try

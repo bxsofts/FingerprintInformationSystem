@@ -415,6 +415,8 @@ Public Class frmMainInterface
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
 
+        CheckForUpdatesAtStartup()
+
         If DBExists = False Then
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
@@ -16029,13 +16031,85 @@ errhandler:
 
 #Region "DOWNLOAD INSTALLER"
 
-    Private Sub DownloadInstaller() Handles btnDownloadInstaller.Click, btnDownloadInstaller1.Click
+    Private Sub DownloadInstaller() Handles btnDownloadInstaller.Click
         Try
-            ' Process.Start("https://app.box.com/s/cisqnor3yow7c6lopq3s9mscd7kx62as") ' File
-            Process.Start("https://app.box.com/s/kjkkp4cyp17mnkr7t1oz2qclodylz73i") 'Folder
+            Process.Start("https://drive.google.com/file/d/1vyGdhxjXUWjkcgTE_rTT7juiMSBA-UKc/view") ' google drive File
+            ' Process.Start("https://app.box.com/s/kjkkp4cyp17mnkr7t1oz2qclodylz73i") 'box Folder
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
     End Sub
+
+    Private Sub CheckForUpdatesAtStartup()
+        If InternetAvailable() = False Then
+            Exit Sub
+        End If
+
+        If CheckForUpdates() Then
+            If MessageBoxEx.Show("A new version of '" & strAppName & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                DownloadInstaller()
+            End If
+        End If
+    End Sub
+
+    Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If CheckForUpdates() Then
+            If MessageBoxEx.Show("A new version is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                DownloadInstaller()
+            End If
+        Else
+            MessageBoxEx.Show("You are using the latest version.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Function CheckForUpdates() As Boolean
+
+        Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+        Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+        If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+            Return False
+        End If
+
+        Try
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim VersionFolder As String = "Version"
+            Dim VersionFolderID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+            List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false"
+            List.Fields = "files(name, webViewLink)"
+
+            Dim Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                Dim RemoteVersion As String = Results.Files(0).Name
+                RemoteVersion = RemoteVersion.Substring(RemoteVersion.Length - 8).Remove(4)
+                Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
+                If RemoteVersion > LocalVersion Then
+                    Return True
+                End If
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Return False
+        End Try
+    End Function
+
+
 #End Region
 End Class
