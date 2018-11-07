@@ -15117,6 +15117,7 @@ errhandler:
             wdDoc.Range.NoProofing = 1
 
             wdBooks("Year1").Range.Text = Year(Today) ' get year 
+            wdBooks("District").Range.Text = ShortDistrictName
             wdBooks("Year2").Range.Text = Year(Today)
             wdBooks("Office").Range.Text = UCase(FullOfficeName & ", " & FullDistrictName)
 
@@ -15496,7 +15497,7 @@ errhandler:
                 Case btnTABill.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "TA Bills of staff - " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am submitting here with the TA Bills of the staff of this unit for the month of " & m2 & " for favour of further necessary action."
+                    bodytext = "I am forwarding here with the TA Bills of the staff of this unit for the month of " & m2 & " for favour of further necessary action."
                     PdlNumber = PdlTABill
                 Case btnRBWarrant.Name
                     m2 = MonthName(m2) & " " & y2
