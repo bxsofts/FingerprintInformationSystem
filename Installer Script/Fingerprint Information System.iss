@@ -1,13 +1,13 @@
 
 [Setup]
 AppName=Fingerprint Information System
-AppVerName=Fingerprint Information System V 12.1.0.0
-VersionInfoVersion=12.1.0.0
+AppVerName=Fingerprint Information System V 12.2.0.0
+VersionInfoVersion=12.2.0.0
 VersionInfoCompany=BXSofts
 VersionInfoProductName= Fingerprint Information System
-VersionInfoProductVersion=12.1.0.0
+VersionInfoProductVersion=12.2.0.0
 VersionInfoDescription=Manage SDFPB Registers. C@P Baiju Xavior, Fingerprint Expert.
-VersionInfoTextVersion=12.1.0.0
+VersionInfoTextVersion=12.2.0.0
 VersionInfoCopyright=C@P BXSofts
 MinVersion=0,5
 AppComments=Manage SDFPB Registers. C@P Baiju Xavior, Fingerprint Expert.
@@ -21,7 +21,7 @@ OutputDir=.
 UsePreviousAppDir=yes
 UsePreviousGroup=yes
 UsePreviousSetupType=yes
-OutputBaseFilename=Fingerprint Information System V12.1
+OutputBaseFilename=Fingerprint Information System V12.2
 SolidCompression=true
 PrivilegesRequired=admin
 ChangesAssociations=true
