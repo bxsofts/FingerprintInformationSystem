@@ -460,6 +460,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="frmPleaseWait.Designer.vb">
+      <DependentUpon>frmPleaseWait.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPleaseWait.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
@@ -659,6 +665,9 @@
     <EmbeddedResource Include="SOC Statistics.rdlc" />
     <EmbeddedResource Include="FPA Statistics.rdlc" />
     <EmbeddedResource Include="SOCReportsStatement.rdlc" />
+    <EmbeddedResource Include="frmPleaseWait.resx">
+      <DependentUpon>frmPleaseWait.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

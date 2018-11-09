@@ -14050,6 +14050,8 @@ errhandler:
             Exit Sub
         End If
 
+        frmPleaseWait.Show()
+
         Try
             Me.Cursor = Cursors.WaitCursor
 
@@ -14096,15 +14098,22 @@ errhandler:
             Officer = Officer.Replace("; ", vbNewLine)
             wdBooks("IO").Range.Text = Officer
 
+            frmPleaseWait.Hide()
+
+            Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\FacingSheet.docx"
+            If Not FileInUse(sFileName) Then wdDoc.SaveAs(sFileName)
+
             wdApp.Visible = True
             wdApp.Activate()
             wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
             wdDoc.Activate()
 
+
             ReleaseObject(wdBooks)
             ReleaseObject(wdDoc)
             ReleaseObject(wdDocs)
             wdApp = Nothing
+
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -14162,6 +14171,7 @@ errhandler:
 
             Exit Sub
         End If
+
         ReportNature = ""
         ReportSentDate = Today
         ReportSentTo = ""
@@ -14196,6 +14206,7 @@ errhandler:
                 Exit Sub
             End If
 
+            frmPleaseWait.Show()
 
             Me.Cursor = Cursors.WaitCursor
             Dim BodyText As String = vbNullString
@@ -14567,6 +14578,8 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & "Dy. Superintendent of Police, DCRB, " & FullDistrictName & " with C/L")
             End If
 
+            frmPleaseWait.Hide()
+
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -14583,6 +14596,8 @@ errhandler:
     End Sub
 
     Private Sub GenerateIdentificationCoB(ByVal message As String, ByVal Receiver As String)
+
+        frmPleaseWait.Show()
 
         Dim missing As Object = System.Reflection.Missing.Value
         Dim fileName As Object = "normal.dotm"
@@ -14633,6 +14648,8 @@ errhandler:
 
         WordApp.Selection.TypeText(vbNewLine)
 
+        frmPleaseWait.Hide()
+
         WordApp.Visible = True
         WordApp.Activate()
         WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -14653,6 +14670,8 @@ errhandler:
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
+
+            frmPleaseWait.Show()
             Me.Cursor = Cursors.WaitCursor
 
             Dim wdApp As Word.Application
@@ -14703,6 +14722,8 @@ errhandler:
                 wdBooks("FPEIns").Range.Text = "Inspected by: " & InspectingOfficer
                 wdBooks("FPEId").Range.Text = "Identified by: " & IdentifyingOfficer
             End If
+
+            frmPleaseWait.Hide()
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -14756,6 +14777,8 @@ errhandler:
             If (Me.SOCDatagrid.SelectedCells(13).Value.ToString = "0") Then
                 If DevComponents.DotNetBar.MessageBoxEx.Show("No. of prints remaining for search is zero.Do you want to generate the report?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
             End If
+
+            frmPleaseWait.Show()
 
             Me.Cursor = Cursors.WaitCursor
             Dim missing As Object = System.Reflection.Missing.Value
@@ -14865,6 +14888,8 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
+            frmPleaseWait.Hide()
+
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -14888,6 +14913,9 @@ errhandler:
 
                 Exit Sub
             End If
+
+
+            frmPleaseWait.Show()
 
             Dim CPD As Integer = CInt(Me.SOCDatagrid.SelectedCells(10).Value.ToString)
             Dim CPR As Integer = CInt(Me.SOCDatagrid.SelectedCells(13).Value.ToString)
@@ -14988,7 +15016,7 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-
+            frmPleaseWait.Hide()
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -15109,6 +15137,9 @@ errhandler:
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
+
+            frmPleaseWait.Show()
+
             Me.Cursor = Cursors.WaitCursor
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -15123,6 +15154,7 @@ errhandler:
             wdBooks("Year2").Range.Text = Year(Today)
             wdBooks("Office").Range.Text = UCase(FullOfficeName & ", " & FullDistrictName)
 
+            frmPleaseWait.Hide()
             wdApp.Visible = True
             wdApp.Activate()
             wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -15146,6 +15178,8 @@ errhandler:
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
+
+            frmPleaseWait.Show()
             Me.Cursor = Cursors.WaitCursor
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -15156,6 +15190,8 @@ errhandler:
             wdDoc.Range.NoProofing = 1
 
             wdBooks("Office").Range.Text = UCase(FullOfficeName & ", " & FullDistrictName)
+
+            frmPleaseWait.Hide()
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -15195,6 +15231,8 @@ errhandler:
                 MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
+
+            frmPleaseWait.Show()
             Me.Cursor = Cursors.WaitCursor
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -15230,6 +15268,8 @@ errhandler:
                 wdBooks("PassportNo").Range.Text = Me.FPADataGrid.SelectedCells(5).Value
                 wdBooks("Reason").Range.Text = Me.FPADataGrid.SelectedCells(12).Value
             End If
+
+            frmPleaseWait.Hide()
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -15465,6 +15505,8 @@ errhandler:
 
         Try
 
+            frmPleaseWait.Show()
+
             Me.Cursor = Cursors.WaitCursor
             Dim bodytext As String = vbNullString
             Dim subject As String = vbNullString
@@ -15596,6 +15638,7 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
+            frmPleaseWait.Hide()
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -16115,4 +16158,6 @@ errhandler:
 
 
 #End Region
+
+   
 End Class

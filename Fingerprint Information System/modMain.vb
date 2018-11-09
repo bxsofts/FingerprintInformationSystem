@@ -206,6 +206,20 @@ Module modMain
         Return d
     End Function
 
+    Public Function FileInUse(ByVal sFile As String) As Boolean
+        Dim thisFileInUse As Boolean = False
+        If System.IO.File.Exists(sFile) Then
+            Try
+                Using f As New IO.FileStream(sFile, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite, System.IO.FileShare.None)
+                    ' thisFileInUse = False
+                End Using
+            Catch
+                thisFileInUse = True
+            End Try
+        End If
+        Return thisFileInUse
+    End Function
+
 End Module
 
 
