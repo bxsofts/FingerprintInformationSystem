@@ -377,6 +377,7 @@ Public Class frmMainInterface
             IncrementCircularProgress(1)
         Next
 
+        Me.txtHeadOfAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
 
         Dim dm As String = Today.ToString("dd/MM/yyyy", culture)
         dm = Strings.Left(dm, 5)
@@ -5514,6 +5515,7 @@ errhandler:
             GenerateNewFPANumber()
             Me.txtFPAYear.Text = Year(Today)
             Me.dtFPADate.Value = Today
+            Me.txtHeadOfAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
             Me.btnSaveFPA.Text = "Save"
         End If
 
