@@ -484,7 +484,7 @@ Partial Class frmMainInterface
         Me.lblcrt2 = New DevComponents.DotNetBar.LabelX()
         Me.lblcrt1 = New DevComponents.DotNetBar.LabelX()
         Me.lblIdentifiedAs = New DevComponents.DotNetBar.LabelX()
-        Me.txtIdentifiedAs = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtSOCIdentifiedCulpritName = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.lblRupee = New System.Windows.Forms.LinkLabel()
         Me.lblIdentificationDetails = New DevComponents.DotNetBar.LabelX()
         Me.ItemPanel1 = New DevComponents.DotNetBar.ItemPanel()
@@ -5160,7 +5160,7 @@ Partial Class frmMainInterface
         Me.PanelSOC.Controls.Add(Me.lblcrt2)
         Me.PanelSOC.Controls.Add(Me.lblcrt1)
         Me.PanelSOC.Controls.Add(Me.lblIdentifiedAs)
-        Me.PanelSOC.Controls.Add(Me.txtIdentifiedAs)
+        Me.PanelSOC.Controls.Add(Me.txtSOCIdentifiedCulpritName)
         Me.PanelSOC.Controls.Add(Me.lblRupee)
         Me.PanelSOC.Controls.Add(Me.lblIdentificationDetails)
         Me.PanelSOC.Controls.Add(Me.txtSOCIdentificationDetails)
@@ -5312,31 +5312,31 @@ Partial Class frmMainInterface
         Me.lblIdentifiedAs.Text = "Name of Culprit(s)"
         Me.lblIdentifiedAs.Visible = false
         '
-        'txtIdentifiedAs
+        'txtSOCIdentifiedCulpritName
         '
-        Me.txtIdentifiedAs.AcceptsReturn = true
-        Me.txtIdentifiedAs.BackColor = System.Drawing.Color.White
+        Me.txtSOCIdentifiedCulpritName.AcceptsReturn = True
+        Me.txtSOCIdentifiedCulpritName.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.txtIdentifiedAs.Border.Class = "TextBoxBorder"
-        Me.txtIdentifiedAs.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIdentifiedAs.ButtonCustom.Image = CType(resources.GetObject("txtIdentifiedAs.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIdentifiedAs.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIdentifiedAs.FocusHighlightEnabled = true
-        Me.txtIdentifiedAs.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIdentifiedAs.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIdentifiedAs, true)
-        Me.txtIdentifiedAs.Location = New System.Drawing.Point(956, 228)
-        Me.txtIdentifiedAs.MaxLength = 255
-        Me.txtIdentifiedAs.Multiline = true
-        Me.txtIdentifiedAs.Name = "txtIdentifiedAs"
-        Me.txtIdentifiedAs.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtIdentifiedAs.Size = New System.Drawing.Size(227, 50)
-        Me.txtIdentifiedAs.TabIndex = 28
-        Me.txtIdentifiedAs.Visible = false
-        Me.txtIdentifiedAs.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIdentifiedAs.WatermarkText = "Name of the identified criminal(s)"
+        Me.txtSOCIdentifiedCulpritName.Border.Class = "TextBoxBorder"
+        Me.txtSOCIdentifiedCulpritName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtSOCIdentifiedCulpritName.ButtonCustom.Image = CType(resources.GetObject("txtIdentifiedAs.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtSOCIdentifiedCulpritName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtSOCIdentifiedCulpritName.FocusHighlightEnabled = True
+        Me.txtSOCIdentifiedCulpritName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSOCIdentifiedCulpritName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtSOCIdentifiedCulpritName, True)
+        Me.txtSOCIdentifiedCulpritName.Location = New System.Drawing.Point(956, 228)
+        Me.txtSOCIdentifiedCulpritName.MaxLength = 255
+        Me.txtSOCIdentifiedCulpritName.Multiline = True
+        Me.txtSOCIdentifiedCulpritName.Name = "txtSOCIdentifiedCulpritName"
+        Me.txtSOCIdentifiedCulpritName.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtSOCIdentifiedCulpritName.Size = New System.Drawing.Size(227, 50)
+        Me.txtSOCIdentifiedCulpritName.TabIndex = 28
+        Me.txtSOCIdentifiedCulpritName.Visible = false
+        Me.txtSOCIdentifiedCulpritName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtSOCIdentifiedCulpritName.WatermarkText = "Name of the identified criminal(s)"
         '
         'lblRupee
         '
@@ -14538,7 +14538,7 @@ End Sub
     Friend WithEvents lblRupee As System.Windows.Forms.LinkLabel
     Friend WithEvents IdentifiedCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
     Friend WithEvents lblIdentifiedAs As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtIdentifiedAs As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtSOCIdentifiedCulpritName As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents lblcrt3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblcrt2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblcrt1 As DevComponents.DotNetBar.LabelX

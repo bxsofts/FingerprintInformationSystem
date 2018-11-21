@@ -4642,6 +4642,21 @@ Public Class frmMainInterface
         Return t
     End Function
 
+    Private Sub HandleCtrlAinMultilineTextBox(sender As Object, e As KeyEventArgs) Handles txtSOCPlace.KeyDown, txtSOCComplainant.KeyDown, txtSOCPropertyLost.KeyDown, txtSOCCPDetails.KeyDown, txtSOCGist.KeyDown, txtSOCComparisonDetails.KeyDown, txtSOCIdentificationDetails.KeyDown, txtSOCIdentifiedCulpritName.KeyDown, txtDAAddress.KeyDown, txtDARemarks.KeyDown, txtFPAAddress.KeyDown, txtFPAChalanNumber.KeyDown, txtFPARemarks.KeyDown, txtCDDetails.KeyDown, txtCDRemarks.KeyDown, txtIDAddress.KeyDown, txtIDDetails.KeyDown, txtIDRemarks.KeyDown, txtACRemarks.KeyDown, txtACAddress.KeyDown, txtRSOCRemarks.KeyDown, txtRSOCReportSentTo.KeyDown
+        Try
+        Dim x As TextBox = DirectCast(sender, Control)
+        If e.Control And e.KeyCode = Keys.A Then
+            x.SelectAll()
+            e.Handled = True
+                e.SuppressKeyPress = True
+        End If
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
 
     Private Sub ConvertToProperCase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSOCPlace.Validated, txtSOCComplainant.Validated, cmbDASex.Validated, txtDAAddress.Validated, txtDAName.Validated, txtDAAliasName.Validated, txtDAFathersName.Validated, cmbIDSex.Validated, txtIDAddress.Validated, txtIDName.Validated, txtIDAliasName.Validated, txtIDFathersName.Validated, txtFPAName.Validated, txtFPAAddress.Validated, txtFPATreasury.Validated, txtFPAPassportNumber.Validated, txtSOCPhotographer.Validated, cmbACSex.Validated, txtACAddress.Validated, txtACName.Validated, txtACAliasName.Validated, txtACFathersName.Validated, txtSOCOfficer.Validated
         On Error Resume Next
@@ -6126,7 +6141,7 @@ errhandler:
                 Me.cmbIdentifiedByOfficer.Text = .SelectedCells(25).Value.ToString
                 Me.dtIdentificationDate.ValueObject = .SelectedCells(26).Value
                 Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
-                Me.txtIdentifiedAs.Text = .SelectedCells(28).Value.ToString
+                Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
                 Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
@@ -6255,7 +6270,7 @@ errhandler:
             OriginalDANumber = Me.txtDANumber.Text
             Me.txtDANumber.Focus()
             Me.txtDAYear.Text = Year(Me.dtDAEntry.Value)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6302,7 +6317,7 @@ errhandler:
             End If
             OriginalIDNumber = Me.txtIDNumber.Text
             Me.txtIDNumber.Focus()
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6350,7 +6365,7 @@ errhandler:
             End If
             OriginalACNumber = Me.txtACNumber.Text
             Me.txtACNumber.Focus()
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6493,7 +6508,7 @@ errhandler:
                 Me.cmbIdentifiedByOfficer.Text = .SelectedCells(25).Value.ToString
                 Me.dtIdentificationDate.ValueObject = .SelectedCells(26).Value
                 Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
-                Me.txtIdentifiedAs.Text = .SelectedCells(28).Value.ToString
+                Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
                 Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
@@ -6624,7 +6639,7 @@ errhandler:
             OriginalDANumber = Me.txtDANumber.Text
             Me.txtDANumber.Focus()
             Me.txtDAYear.Text = Year(Me.dtDAEntry.Value)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6670,7 +6685,7 @@ errhandler:
             End If
             OriginalIDNumber = Me.txtIDNumber.Text
             Me.txtIDNumber.Focus()
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -6715,7 +6730,7 @@ errhandler:
             End If
             OriginalACNumber = Me.txtACNumber.Text
             Me.txtACNumber.Focus()
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End If
 
 
@@ -7467,7 +7482,7 @@ errhandler:
         Me.txtSOCIdentificationDetails.Visible = visible
         Me.lblIdentificationDetails.Visible = visible
         Me.lblIdentifiedAs.Visible = visible
-        Me.txtIdentifiedAs.Visible = visible
+        Me.txtSOCIdentifiedCulpritName.Visible = visible
         Me.lblcrt1.Visible = visible
         Me.lblcrt2.Visible = visible
         Me.lblcrt3.Visible = visible
@@ -7613,7 +7628,7 @@ errhandler:
         If Me.txtSOCIdentificationDetails.Text <> vbNullString Or Me.txtCPsIdentified.Value = 0 Then Exit Sub
         If IDDetailsFocussed = False Then
             Dim cpid = Me.txtCPsIdentified.Value
-            Dim iddetails As String = ConvertToProperCase(ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtIdentifiedAs.Text
+            Dim iddetails As String = ConvertToProperCase(ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtSOCIdentifiedCulpritName.Text
 
             Me.txtSOCIdentificationDetails.Text = iddetails
             IDDetailsFocussed = True
@@ -7640,7 +7655,7 @@ errhandler:
     Function MandatoryIdentificationFieldsNotFilled() As Boolean
         On Error Resume Next
 
-        If Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Or Me.dtIdentificationDate.IsEmpty Or Me.txtCPsIdentified.Value = 0 Or Me.txtIdentifiedAs.Text = vbNullString Then
+        If Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Or Me.dtIdentificationDate.IsEmpty Or Me.txtCPsIdentified.Value = 0 Or Me.txtSOCIdentifiedCulpritName.Text = vbNullString Then
             Return True
         Else
             Return False
@@ -7669,7 +7684,7 @@ errhandler:
             If x <> 1 And x <> 2 And x <> 3 Then x = 4
         End If
 
-        If Trim(Me.txtIdentifiedAs.Text) = vbNullString Then
+        If Trim(Me.txtSOCIdentifiedCulpritName.Text) = vbNullString Then
             msg = msg & " Name of culprit" & vbNewLine
             If x <> 1 And x <> 2 And x <> 3 And x <> 4 Then x = 5
         End If
@@ -7685,7 +7700,7 @@ errhandler:
             Case 4
                 txtCPsIdentified.Focus()
             Case 5
-                txtIdentifiedAs.Focus()
+                txtSOCIdentifiedCulpritName.Focus()
         End Select
 
     End Sub
@@ -7828,7 +7843,7 @@ errhandler:
             Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
             Dim cpsidentified = ""
             If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
-            Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
+            Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
                 If comparison.ToLower.StartsWith("identified as") = False Then
@@ -7915,7 +7930,7 @@ errhandler:
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -7967,7 +7982,7 @@ errhandler:
             Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
             Dim cpsidentified = ""
             If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
-            Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
+            Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
 
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
@@ -8066,7 +8081,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
         End Try
 
@@ -8111,7 +8126,7 @@ errhandler:
             Dim cpsidentified = ""
             If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
 
-            Dim identifiedas = Me.txtIdentifiedAs.Text.Trim
+            Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
                 If comparison.ToLower.StartsWith("identified as") = False Then
@@ -8192,7 +8207,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
         End Try
 
