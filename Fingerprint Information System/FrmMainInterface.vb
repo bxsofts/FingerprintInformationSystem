@@ -4612,14 +4612,12 @@ Public Class frmMainInterface
             aChar = Strings.Mid(InputWord, i, 1)
             If (Not IsNumeric(aChar)) Then 'And (aChar <> Space(1)) Then
                 If (Asc(aChar) >= 65 And Asc(aChar) <= 90) Then
-                    AllCaps = True
+                    Return True
                 Else
-                    AllCaps = False
-                    Exit For
+                    Return False
                 End If
             Else
-                AllCaps = True
-                Exit For
+                Return True
             End If
         Next
 
