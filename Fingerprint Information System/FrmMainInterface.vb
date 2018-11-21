@@ -143,7 +143,7 @@ Public Class frmMainInterface
         DisplayTime()
         Me.txtSOCOfficer.ButtonCustom2.Image = Me.txtSOCPhotographer.ButtonCustom.Image
         AddHandler TabControl.TabStrip.MouseDown, AddressOf TabControl_MouseDown
-        Me.txtPosition.TextBox.TextAlign = HorizontalAlignment.Center
+
 
         IncrementCircularProgress(1)
 
@@ -398,7 +398,7 @@ Public Class frmMainInterface
         blApplicationIsLoading = False
         DisplayDatabaseInformation()
         Me.lblAutoCapsStatus.Visible = True
-        Me.txtPosition.TextBox.ContextMenuStrip = Me.ContextMenuStrip1
+
 
         '  My.Application.SplashScreen.Close()
         '   My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Control Panel\Desktop", "ForegroundLockTimeout", 0, Microsoft.Win32.RegistryValueKind.DWord)
@@ -2702,7 +2702,6 @@ Public Class frmMainInterface
                 Me.pnlRegisterName.Text = "List of Officers"
                 CurrentTab = "IO"
                 Me.lblNumberOfRecords.Visible = False
-                Me.txtPosition.Visible = False
                 Me.lblCurrentYear.Visible = False
                 Me.lblCurrentMonth.Visible = False
                 Me.txtIOOfficerName.Focus()
@@ -2713,7 +2712,6 @@ Public Class frmMainInterface
                 Me.pnlRegisterName.Text = "Office Settings"
                 CurrentTab = "OS"
                 Me.lblNumberOfRecords.Visible = False
-                Me.txtPosition.Visible = False
                 Me.lblCurrentYear.Visible = False
                 Me.lblCurrentMonth.Visible = False
                 Me.txtFullOffice.Focus()
@@ -2730,74 +2728,10 @@ Public Class frmMainInterface
 
 #Region "STATUSBAR TEXTS"
 
-    Private Sub ChangeAcceptButtonOnFocusToPositionTextBox() Handles txtPosition.GotFocus
-        On Error Resume Next
-        Dim s As Button = New Button
-        Me.AcceptButton = s
-    End Sub
-
-    Private Sub SetAcceptButton() Handles txtPosition.LostFocus
-        On Error Resume Next
-        Select Case CurrentTab
-            Case "SOC"
-                Me.AcceptButton = btnSaveSOC
-            Case "RSOC"
-                Me.AcceptButton = btnSaveRSOC
-            Case "DA"
-                Me.AcceptButton = btnSaveDA
-            Case "ID"
-                Me.AcceptButton = btnSaveID
-            Case "AC"
-                Me.AcceptButton = btnSaveAC
-            Case "FPA"
-                Me.AcceptButton = btnSaveFPA
-            Case "CD"
-                Me.AcceptButton = btnSaveCD
-            Case "PS"
-                Me.AcceptButton = btnSavePS
-
-        End Select
-    End Sub
+   
 
 
-    Private Sub FindPositionOnEnterKeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPosition.KeyUp
-        On Error Resume Next
-        If e.KeyCode = Keys.Enter Then FindRecordByPosition()
-    End Sub
-
-    Private Sub FindRecordByPosition() Handles txtPosition.ButtonCustomClick
-        On Error Resume Next
-        Dim position As Long = Me.txtPosition.TextBox.Text
-        position = position - 1
-        If position < 0 Then Me.txtPosition.TextBox.Text = "0"
-        Select Case CurrentTab
-            Case "SOC"
-                If SOCRegisterBindingSource.Count <> 0 Then Me.SOCRegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-            Case "RSOC"
-                If RSOCRegisterBindingSource.Count <> 0 Then Me.RSOCRegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-            Case "DA"
-                If DARegisterBindingSource.Count <> 0 Then Me.DARegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-            Case "ID"
-                If IDRegisterBindingSource.Count <> 0 Then Me.IDRegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-            Case "AC"
-                If ACRegisterBindingSource.Count <> 0 Then Me.ACRegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-            Case "FPA"
-                If FPARegisterBindingSource.Count <> 0 Then Me.FPARegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-            Case "CD"
-                If CDRegisterBindingSource.Count <> 0 Then Me.CDRegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-
-            Case "PS"
-                If PSRegisterBindingSource.Count <> 0 Then Me.PSRegisterBindingSource.Position = position Else Me.txtPosition.TextBox.Text = "0"
-
-        End Select
-    End Sub
+   
 
     Sub DisplayDatabaseInformation() Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged
         On Error Resume Next
@@ -2822,7 +2756,6 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = True
             lblCurrentYear.Visible = True
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
 
             If blApplicationIsLoading Or blApplicationIsRestoring = False And SOCDatagrid.RowCount <> 0 Then
                 If Me.SocReportRegisterTableAdapter1.ScalarQueryReportSent(Me.SOCDatagrid.SelectedCells(0).Value.ToString) > 0 Then
@@ -2836,11 +2769,7 @@ Public Class frmMainInterface
             Me.lblRegisterNameStatusBar.Text = "SOC Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.SOCRegisterBindingSource.Count
 
-            If SOCDatagrid.RowCount <> 0 Then
-                Me.txtPosition.TextBox.Text = SOCRegisterBindingSource.Position + 1
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
+            
             Dim yearsoccount = Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(y1, y2)
             Dim yearcpcount = Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(y1, y2)
             Dim yearcpunfit = Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(y1, y2)
@@ -2877,17 +2806,8 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = True
             lblCurrentYear.Visible = True
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
-
             Me.lblRegisterNameStatusBar.Text = "SOC Reports Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.RSOCRegisterBindingSource.Count
-
-            If RSOCDatagrid.RowCount <> 0 Then
-                Me.txtPosition.TextBox.Text = RSOCRegisterBindingSource.Position + 1
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
-
             Me.lblCurrentYear.Text = "This Year : " & Me.RSOCRegisterTableAdapter.ScalarQueryReportsSent(y1, y2)
             Me.lblCurrentMonth.Text = "This Month: " & Me.RSOCRegisterTableAdapter.ScalarQueryReportsSent(d1, d2)
         End If
@@ -2897,17 +2817,8 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = True
             lblCurrentYear.Visible = True
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
             Me.lblRegisterNameStatusBar.Text = "DA Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.DARegisterBindingSource.Count
-
-            If DADatagrid.RowCount <> 0 Then
-                Me.txtPosition.TextBox.Text = DARegisterBindingSource.Position + 1
-                Me.lblHasFPSlip.Visible = FileIO.FileSystem.FileExists(Me.DADatagrid.SelectedCells(15).Value.ToString)
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
-
             Me.lblCurrentYear.Text = "This Year : " & Me.DARegisterTableAdapter.CountDASlip(y1, y2)
             Me.lblCurrentMonth.Text = "This Month: " & Me.DARegisterTableAdapter.CountDASlip(d1, d2)
         End If
@@ -2916,16 +2827,8 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = False
             lblCurrentYear.Visible = False
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
             Me.lblRegisterNameStatusBar.Text = "Identified Slips Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.IDRegisterBindingSource.Count
-
-            If IDDatagrid.RowCount <> 0 Then
-                Me.txtPosition.TextBox.Text = IDRegisterBindingSource.Position + 1
-                Me.lblHasFPSlip.Visible = FileIO.FileSystem.FileExists(Me.IDDatagrid.SelectedCells(15).Value.ToString)
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
         End If
 
 
@@ -2933,15 +2836,8 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = False
             lblCurrentYear.Visible = False
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
             Me.lblRegisterNameStatusBar.Text = "Active Criminals Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.ACRegisterBindingSource.Count
-            If ACDatagrid.RowCount <> 0 Then
-                Me.txtPosition.TextBox.Text = ACRegisterBindingSource.Position + 1
-                Me.lblHasFPSlip.Visible = FileIO.FileSystem.FileExists(Me.ACDatagrid.SelectedCells(14).Value.ToString)
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
         End If
 
 
@@ -2949,7 +2845,6 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = True
             lblCurrentYear.Visible = True
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
             Me.lblCurrentMonth.Font = New Font("Rupee Foradian", 9, FontStyle.Bold)
             Me.lblCurrentYear.Font = New Font("Rupee Foradian", 9, FontStyle.Bold)
 
@@ -2962,28 +2857,14 @@ Public Class frmMainInterface
 
             Me.lblCurrentYear.Text = "This Year : " & yearattested & ";   ` " & yearamount
             Me.lblCurrentMonth.Text = "This Month: " & monthattested & ";   ` " & monthamount
-
-
-            If FPADataGrid.RowCount <> 0 Then
-                Me.txtPosition.TextBox.Text = FPARegisterBindingSource.Position + 1
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
         End If
 
         If CurrentTab = "PS" Then
             lblCurrentMonth.Visible = False
             lblCurrentYear.Visible = False
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
             Me.lblRegisterNameStatusBar.Text = "List of Police Stations"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.PSRegisterBindingSource.Count
-            If PSDataGrid.RowCount <> 0 Then
-
-                Me.txtPosition.TextBox.Text = PSRegisterBindingSource.Position + 1
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
         End If
 
 
@@ -2991,24 +2872,16 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = True
             lblCurrentYear.Visible = True
             Me.lblNumberOfRecords.Visible = True
-            Me.txtPosition.Visible = True
             Me.lblRegisterNameStatusBar.Text = "Court Duty Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.CDRegisterBindingSource.Count
             Me.lblCurrentYear.Text = "This Year : " & Me.CDRegisterTableAdapter.CountCD(y1, y2)
             Me.lblCurrentMonth.Text = "This Month: " & Me.CDRegisterTableAdapter.CountCD(d1, d2)
-            If CDDataGrid.RowCount <> 0 Then
-
-                Me.txtPosition.TextBox.Text = CDRegisterBindingSource.Position + 1
-            Else
-                Me.txtPosition.TextBox.Text = "0"
-            End If
         End If
 
         If CurrentTab = "IO" Then
             lblCurrentMonth.Visible = False
             lblCurrentYear.Visible = False
             Me.lblNumberOfRecords.Visible = False
-            Me.txtPosition.Visible = False
             Me.lblRegisterNameStatusBar.Text = "List of Officers"
         End If
 
@@ -3016,7 +2889,6 @@ Public Class frmMainInterface
             lblCurrentMonth.Visible = False
             lblCurrentYear.Visible = False
             Me.lblNumberOfRecords.Visible = False
-            Me.txtPosition.Visible = False
             Me.lblRegisterNameStatusBar.Text = "Office Settings"
         End If
 
@@ -4766,7 +4638,7 @@ Public Class frmMainInterface
 
 
 #Region "ALLOW NUMBER ONLY"
-    Private Sub AllowOnlyNumberKeys(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPosition.KeyDown, txtAutoBackupPeriod.KeyDown
+    Private Sub AllowOnlyNumberKeys(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAutoBackupPeriod.KeyDown
         On Error Resume Next
         If e.KeyCode <> Keys.NumPad0 And e.KeyCode <> Keys.NumPad1 And e.KeyCode <> Keys.NumPad2 And e.KeyCode <> Keys.NumPad3 And e.KeyCode <> Keys.NumPad4 And e.KeyCode <> Keys.NumPad5 And e.KeyCode <> Keys.NumPad6 And e.KeyCode <> Keys.NumPad7 And e.KeyCode <> Keys.NumPad8 And e.KeyCode <> Keys.NumPad9 And e.KeyCode <> Keys.D0 And e.KeyCode <> Keys.D1 And e.KeyCode <> Keys.D2 And e.KeyCode <> Keys.D3 And e.KeyCode <> Keys.D4 And e.KeyCode <> Keys.D5 And e.KeyCode <> Keys.D6 And e.KeyCode <> Keys.D7 And e.KeyCode <> Keys.D8 And e.KeyCode <> Keys.D9 And e.KeyCode <> Keys.Back And e.KeyCode <> Keys.Enter And e.KeyCode <> Keys.Delete And e.KeyCode <> Keys.Left And e.KeyCode <> Keys.Right And e.KeyCode <> Keys.End And e.KeyCode <> Keys.Home Then e.SuppressKeyPress = True
     End Sub
@@ -4778,7 +4650,7 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub PreventPasting(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.GotFocus, txtDANumber.GotFocus, txtFPANumber.GotFocus, txtCDNumber.GotFocus, txtPosition.GotFocus, txtAutoBackupPeriod.GotFocus
+    Private Sub PreventPasting(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.GotFocus, txtDANumber.GotFocus, txtFPANumber.GotFocus, txtCDNumber.GotFocus, txtAutoBackupPeriod.GotFocus
         On Error Resume Next
         If My.Computer.Clipboard.ContainsText Then
             ClipBoardText = My.Computer.Clipboard.GetText
@@ -4786,7 +4658,7 @@ Public Class frmMainInterface
         End If
     End Sub
 
-    Private Sub RestoreClipBoardText(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.LostFocus, txtDANumber.LostFocus, txtFPANumber.LostFocus, txtCDNumber.LostFocus, txtPosition.LostFocus, txtAutoBackupPeriod.LostFocus
+    Private Sub RestoreClipBoardText(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.LostFocus, txtDANumber.LostFocus, txtFPANumber.LostFocus, txtCDNumber.LostFocus, txtAutoBackupPeriod.LostFocus
         On Error Resume Next
         If ClipBoardText <> "" Then My.Computer.Clipboard.SetText(ClipBoardText)
     End Sub
