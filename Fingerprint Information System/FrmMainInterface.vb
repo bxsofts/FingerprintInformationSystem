@@ -974,7 +974,6 @@ Public Class frmMainInterface
 #End Region
 
 
-
 #Region "LOAD RECORDS TO TABLE"
 
     Private Sub LoadSOCRecords()
@@ -2061,7 +2060,6 @@ Public Class frmMainInterface
 #End Region
 
 
-
 #Region "POPUP MESSAGES SETTINGS"
 
 
@@ -2547,7 +2545,6 @@ Public Class frmMainInterface
 #End Region
 
 
-
 #Region "TAB SETTINGS"
 
     Private Sub SelectedTabChanged(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.TabStripTabChangedEventArgs) Handles TabControl.SelectedTabChanged
@@ -2718,7 +2715,7 @@ Public Class frmMainInterface
         End Select
 
         DisplayDatabaseInformation()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -4467,7 +4464,6 @@ Public Class frmMainInterface
 #End Region
 
 
-
 #Region "AUTO CAPITALIZE"
 
 
@@ -4516,12 +4512,12 @@ Public Class frmMainInterface
 
     Private Sub HandleCtrlAinMultilineTextBox(sender As Object, e As KeyEventArgs) Handles txtSOCPlace.KeyDown, txtSOCComplainant.KeyDown, txtSOCPropertyLost.KeyDown, txtSOCCPDetails.KeyDown, txtSOCGist.KeyDown, txtSOCComparisonDetails.KeyDown, txtSOCIdentificationDetails.KeyDown, txtSOCIdentifiedCulpritName.KeyDown, txtDAAddress.KeyDown, txtDARemarks.KeyDown, txtFPAAddress.KeyDown, txtFPAChalanNumber.KeyDown, txtFPARemarks.KeyDown, txtCDDetails.KeyDown, txtCDRemarks.KeyDown, txtIDAddress.KeyDown, txtIDDetails.KeyDown, txtIDRemarks.KeyDown, txtACRemarks.KeyDown, txtACAddress.KeyDown, txtRSOCRemarks.KeyDown, txtRSOCReportSentTo.KeyDown
         Try
-        Dim x As TextBox = DirectCast(sender, Control)
-        If e.Control And e.KeyCode = Keys.A Then
-            x.SelectAll()
-            e.Handled = True
+            Dim x As TextBox = DirectCast(sender, Control)
+            If e.Control And e.KeyCode = Keys.A Then
+                x.SelectAll()
+                e.Handled = True
                 e.SuppressKeyPress = True
-        End If
+            End If
 
         Catch ex As Exception
 
@@ -6690,7 +6686,6 @@ errhandler:
 #End Region
 
 
-
     '-------------------------------------------LOAD LAST SERIAL NUMBERS-----------------------------------------
 #Region "LOAD LAST SERIAL NUMBERS"
 
@@ -6812,8 +6807,6 @@ errhandler:
 
 
 #End Region
-
-
 
 
     '-------------------------------------------OFFICER SETTINGS-----------------------------------------
@@ -10371,9 +10364,6 @@ errhandler:
 #End Region
 
 
-
-
-
     '---------------------------------------------ID DATA MANIPULATION-----------------------------------------
 #Region "ID DATA ENTRY FIELDS SETTINGS"
 
@@ -10983,7 +10973,6 @@ errhandler:
 
 
 #End Region
-
 
 
 #Region "ID SLIP IMAGE FILE SETTINGS"
@@ -11999,8 +11988,6 @@ errhandler:
 #End Region
 
 
-
-
     '---------------------------------------------CD DATA MANIPULATION-----------------------------------------
 #Region "CD REGISTER DATAENTRY SETTINGS"
     Private Sub InitializeCDFields()
@@ -12530,8 +12517,6 @@ errhandler:
 
     End Sub
 #End Region
-
-
 
 
     '---------------------------------------------FPA DATA MANIPULATION-----------------------------------------
@@ -13873,7 +13858,6 @@ errhandler:
         End Try
     End Function
 #End Region
-
 
 
 #Region "OPEN DATABASE"
@@ -15565,7 +15549,6 @@ errhandler:
         FrmTourNote.BringToFront()
     End Sub
 #End Region
-    '---------------------------------------------HELP-----------------------------------
 
 
     '---------------------------------------------END APPLICATION-----------------------------------
