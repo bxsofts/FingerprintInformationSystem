@@ -185,8 +185,9 @@ Public Class FrmIndividualPerformance
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
             ' WordApp.Selection.Document.PageSetup.LeftMargin = 25
             ' WordApp.Selection.Document.PageSetup.RightMargin = 25
-            WordApp.Selection.Document.PageSetup.TopMargin = 10
-            WordApp.Selection.Document.PageSetup.BottomMargin = 10
+            ' WordApp.Selection.Document.PageSetup.TopMargin = 30
+            '  WordApp.Selection.Document.PageSetup.BottomMargin = 10
+
             WordApp.Selection.NoProofing = 1
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter

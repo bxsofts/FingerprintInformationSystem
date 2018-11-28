@@ -165,6 +165,9 @@ Public Class frmFPAStatement
 
             WordApp.Selection.Font.Size = 11 ' WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Paragraphs.Space1()
 
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab)
             WordApp.Selection.Font.Underline = 1
@@ -204,10 +207,12 @@ Public Class frmFPAStatement
             Next
 
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.ParagraphFormat.Space1()
+
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
 
+            WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
+            WordApp.Selection.ParagraphFormat.LineSpacing = 14
 
             If RowCount = 2 Then ' No records
                 datevalue = datevalue.Replace("for the month of ", "in the month of ")

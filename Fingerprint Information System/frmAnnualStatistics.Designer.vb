@@ -27,6 +27,7 @@ Partial Class frmAnnualStatistics
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByYear = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGeneratebyPeriod = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -89,7 +90,7 @@ Partial Class frmAnnualStatistics
         Me.btnGenerateByYear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnGenerateByYear.Location = New System.Drawing.Point(225, 12)
         Me.btnGenerateByYear.Name = "btnGenerateByYear"
-        Me.btnGenerateByYear.Size = New System.Drawing.Size(110, 30)
+        Me.btnGenerateByYear.Size = New System.Drawing.Size(110, 29)
         Me.btnGenerateByYear.TabIndex = 2
         Me.btnGenerateByYear.Text = "Generate"
         '
@@ -106,6 +107,7 @@ Partial Class frmAnnualStatistics
         Me.PanelEx1.Controls.Add(Me.LabelX2)
         Me.PanelEx1.Controls.Add(Me.txtYear)
         Me.PanelEx1.Controls.Add(Me.btnGenerateByYear)
+        Me.PanelEx1.Controls.Add(Me.btnOpenFolder)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
@@ -118,6 +120,16 @@ Partial Class frmAnnualStatistics
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 28
+        '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(225, 102)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(110, 29)
+        Me.btnOpenFolder.TabIndex = 6
+        Me.btnOpenFolder.Text = "Open Folder"
         '
         'CircularProgress1
         '
@@ -140,10 +152,10 @@ Partial Class frmAnnualStatistics
         '
         Me.btnGeneratebyPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGeneratebyPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(225, 82)
+        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(225, 62)
         Me.btnGeneratebyPeriod.Name = "btnGeneratebyPeriod"
-        Me.btnGeneratebyPeriod.Size = New System.Drawing.Size(110, 30)
-        Me.btnGeneratebyPeriod.TabIndex = 55
+        Me.btnGeneratebyPeriod.Size = New System.Drawing.Size(110, 29)
+        Me.btnGeneratebyPeriod.TabIndex = 5
         Me.btnGeneratebyPeriod.Text = "Generate"
         '
         'LabelX1
@@ -368,4 +380,5 @@ Partial Class frmAnnualStatistics
     Friend WithEvents btnGeneratebyPeriod As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwIDList As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwIDGist As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
 End Class

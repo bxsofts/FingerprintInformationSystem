@@ -286,8 +286,13 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(cpdeveloped)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).Photographer & vbNewLine & Me.FingerPrintDataSet.SOCRegister(j).DateOfReceptionOfPhoto)
+                Dim photographer As String = Me.FingerPrintDataSet.SOCRegister(j).Photographer.ToLower
 
+                If photographer <> "" And photographer <> "no photographer" Then
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).Photographer & vbNewLine & Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
+                Else
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).Photographer)
+                End If
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 12).Select()
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails

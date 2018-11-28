@@ -11,7 +11,7 @@ Public Class frmAnnualStatistics
     Private Sub frmAnnualStatistics_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Me.Cursor = Cursors.WaitCursor
-       
+            Me.btnOpenFolder.Hide()
             Me.CircularProgress1.Hide()
             Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.ProgressText = ""
@@ -20,15 +20,18 @@ Public Class frmAnnualStatistics
 
         Dim y As Integer = DateAndTime.Year(Today)
 
-        If Me.Text = "Annual Statistics" Then
-            Me.txtYear.Value = y - 1
-            dtFrom.Value = New Date(y - 1, 1, 1)
-            dtTo.Value = New Date(y - 1, 12, 31)
-        Else
-            Me.txtYear.Value = y
-            dtFrom.Value = New Date(y, 1, 1)
-            dtTo.Value = Today
-        End If
+            If Me.Text = "Annual Statistics" Then
+                Me.btnGeneratebyPeriod.Top = Me.dtFrom.Top
+                Me.btnOpenFolder.Show()
+                Me.txtYear.Value = y - 1
+                dtFrom.Value = New Date(y - 1, 1, 1)
+                dtTo.Value = New Date(y - 1, 12, 31)
+            Else
+                Me.btnGeneratebyPeriod.Top = Me.dtFrom.Top + Me.dtFrom.Height / 2
+                Me.txtYear.Value = y
+                dtFrom.Value = New Date(y, 1, 1)
+                dtTo.Value = Today
+            End If
 
         If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
             Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
@@ -979,6 +982,26 @@ Public Class frmAnnualStatistics
             WordApp = Nothing
         Catch ex As Exception
             ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+            Dim sFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics\"
+            Dim sfilename = sFolder & "Annual Statistics - " & Me.txtYear.Text & ".docx"
+
+            If FileIO.FileSystem.FileExists(sfilename) Then
+                Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
+
+            If Not FileIO.FileSystem.DirectoryExists(sFolder) Then
+                FileIO.FileSystem.CreateDirectory(sFolder)
+            End If
+
+            Call Shell("explorer.exe " & sFolder, AppWinStyle.NormalFocus)
+        Catch ex As Exception
+            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
         End Try
     End Sub
 End Class
