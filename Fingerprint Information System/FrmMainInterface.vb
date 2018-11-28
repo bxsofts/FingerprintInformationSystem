@@ -2724,12 +2724,6 @@ Public Class frmMainInterface
 
 
 #Region "STATUSBAR TEXTS"
-
-   
-
-
-   
-
     Sub DisplayDatabaseInformation() Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged
         On Error Resume Next
         If ShowStatusTexts = False Then Exit Sub
@@ -2766,7 +2760,7 @@ Public Class frmMainInterface
             Me.lblRegisterNameStatusBar.Text = "SOC Register"
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.SOCRegisterBindingSource.Count
 
-            
+
             Dim yearsoccount = Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(y1, y2)
             Dim yearcpcount = Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(y1, y2)
             Dim yearcpunfit = Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(y1, y2)
@@ -8464,7 +8458,6 @@ errhandler:
     End Sub
 
 #End Region
-
 
 
 #Region "CHANCE PRINT IMAGE SETTINGS"
@@ -14531,7 +14524,29 @@ errhandler:
     End Sub
 
 
+    Private Function FindIDentificationSerialNumber(strSOCNumber As String, IDDate As Date)
+        Dim FPDS As New FingerPrintDataSet
+        Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
+        SOCTblAdptr.Connection.ConnectionString = sConString
+        SOCTblAdptr.Connection.Open()
+
+        Dim y As Integer = DateAndTime.Year(IDDate)
+        Dim dt1 As Date = New Date(y, 1, 1)
+        Dim dt2 As Date = New Date(y, 12, 31)
+
+        SOCTblAdptr.FillByIdentificationYear(FPDS.SOCRegister, dt1, dt2)
+        Dim cnt As Integer = FPDS.SOCRegister.Count
+        Dim SerialNumber As String = ""
+        For i = 0 To cnt - 1
+            If FPDS.SOCRegister(i).SOCNumber = strSOCNumber Then
+                SerialNumber = i + 1
+                Exit For
+            End If
+        Next
+        Return SerialNumber & "/" & y
+    End Function
     Private Sub GenerateIdentificationTemplates() Handles btnIdentifiedTemplateContextMenu.Click
+
         Try
 
             Dim TemplateFile As String = strAppUserPath & "\WordTemplates\IdentifiedTemplate.docx"
@@ -14544,6 +14559,8 @@ errhandler:
             frmPleaseWait.Show()
             Me.Cursor = Cursors.WaitCursor
 
+
+
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
             wdApp = New Word.Application
@@ -14551,7 +14568,8 @@ errhandler:
             Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
             wdDoc.Range.NoProofing = 1
-            Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+            Dim SoCNumber = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+            Dim FileNo As String = SoCNumber
             Dim line() = Strings.Split(FileNo, "/")
             FileNo = line(0) & "/SOC/" & line(1)
 
@@ -14578,7 +14596,7 @@ errhandler:
             Next
 
             Dim dtid = Me.SOCDatagrid.SelectedCells(26).FormattedValue.ToString
-            wdBooks("IDN").Range.Text = "    /" & dtid.Substring(6) ' get year 
+            wdBooks("IDN").Range.Text = FindIDentificationSerialNumber(SoCNumber, Me.SOCDatagrid.SelectedCells(26).Value)
             wdBooks("SOC").Range.Text = "No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
             wdBooks("PS").Range.Text = Me.SOCDatagrid.SelectedCells(5).Value.ToString
             wdBooks("Cr").Range.Text = Me.SOCDatagrid.SelectedCells(6).Value.ToString & " u/s " & Me.SOCDatagrid.SelectedCells(7).Value.ToString
@@ -15002,7 +15020,7 @@ errhandler:
         frmFPARegister.BringToFront()
     End Sub
 
-  
+
 
     Private Sub ShowFPAApplicationForm() Handles btnFPAApplicationForm.Click
         Try
@@ -16036,5 +16054,5 @@ errhandler:
 
 #End Region
 
-   
+
 End Class
