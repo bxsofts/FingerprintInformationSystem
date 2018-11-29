@@ -14525,25 +14525,30 @@ errhandler:
 
 
     Private Function FindIDentificationSerialNumber(strSOCNumber As String, IDDate As Date)
-        Dim FPDS As New FingerPrintDataSet
-        Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
-        SOCTblAdptr.Connection.ConnectionString = sConString
-        SOCTblAdptr.Connection.Open()
+        Try
+            Dim FPDS As New FingerPrintDataSet
+            Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
+            SOCTblAdptr.Connection.ConnectionString = sConString
+            SOCTblAdptr.Connection.Open()
 
-        Dim y As Integer = DateAndTime.Year(IDDate)
-        Dim dt1 As Date = New Date(y, 1, 1)
-        Dim dt2 As Date = New Date(y, 12, 31)
+            Dim y As Integer = DateAndTime.Year(IDDate)
+            Dim dt1 As Date = New Date(y, 1, 1)
+            Dim dt2 As Date = New Date(y, 12, 31)
 
-        SOCTblAdptr.FillByIdentificationYear(FPDS.SOCRegister, dt1, dt2)
-        Dim cnt As Integer = FPDS.SOCRegister.Count
-        Dim SerialNumber As String = ""
-        For i = 0 To cnt - 1
-            If FPDS.SOCRegister(i).SOCNumber = strSOCNumber Then
-                SerialNumber = i + 1
-                Exit For
-            End If
-        Next
-        Return SerialNumber & "/" & y
+            SOCTblAdptr.FillByIdentificationYear(FPDS.SOCRegister, dt1, dt2)
+            Dim cnt As Integer = FPDS.SOCRegister.Count
+            Dim SerialNumber As String = ""
+            For i = 0 To cnt - 1
+                If FPDS.SOCRegister(i).SOCNumber = strSOCNumber Then
+                    SerialNumber = i + 1
+                    Exit For
+                End If
+            Next
+            Return SerialNumber & "/" & y
+        Catch ex As Exception
+            Return "   /" & DateAndTime.Year(IDDate)
+        End Try
+       
     End Function
     Private Sub GenerateIdentificationTemplates() Handles btnIdentifiedTemplateContextMenu.Click
 
