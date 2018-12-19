@@ -16,8 +16,10 @@ Public Class frmQuarterlyPerformance
 
     Private Sub FormLoadEvents() Handles MyBase.Load
         On Error Resume Next
+        frmPleaseWait.Show()
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
+        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
@@ -34,7 +36,7 @@ Public Class frmQuarterlyPerformance
         Control.CheckForIllegalCrossThreadCalls = False
 
         GeneratePerformanceStatement()
-
+        frmPleaseWait.Close()
     End Sub
 
     Sub SetDays()

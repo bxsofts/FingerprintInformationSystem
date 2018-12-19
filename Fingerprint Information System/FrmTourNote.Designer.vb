@@ -186,6 +186,7 @@ Partial Class FrmTourNote
         Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.SOCDatagrid.RowTemplate.Height = 40
         Me.SOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.SelectAllSignVisible = False
         Me.SOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.SOCDatagrid.ShowCellErrors = False
         Me.SOCDatagrid.Size = New System.Drawing.Size(888, 659)

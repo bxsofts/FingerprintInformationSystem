@@ -15,6 +15,7 @@ Public Class FrmAdvancedSearch
         SetDatagridFont()
         CreateDatagridTable()
         Me.txtSQL.Text = "Select * from " & Register
+        If CurrentTab = "IDR" Then Me.txtSQL.Text = "Select * from " & Register & " where FileStatus = 'identified'"
         SQLTextChanged = False
     End Sub
 
@@ -107,6 +108,18 @@ Public Class FrmAdvancedSearch
                 Next
                 Register = "CDRegister"
 
+            Case "IDR"
+                RowCount = frmMainInterface.IDRDataGrid.ColumnCount - 1
+                For i = 1 To RowCount
+                    Dim t As String = frmMainInterface.IDRDataGrid.Columns(i).DataPropertyName
+                    If t = "InvestigatingOfficer" Then t = "InspectingOfficer"
+                    If t = "IdentifiedAs" Then t = "CulpritName"
+                    If t = "ChancePrintsDeveloped" Then t = "CPsDeveloped"
+                    If t = "Remarks" Then t = "IdentificationDetails"
+                    Me.listViewEx1.Items.Add(t)
+                Next
+                Register = "SOCRegister"
+
         End Select
 
         
@@ -169,6 +182,8 @@ Public Class FrmAdvancedSearch
                     dgtype.Value = frmMainInterface.FPADataGrid.Columns(i).ValueType.Name
                 Case "CD"
                     dgtype.Value = frmMainInterface.CDDataGrid.Columns(i).ValueType.Name
+                Case "IDR"
+                    dgtype.Value = frmMainInterface.IDRDataGrid.Columns(i + 1).ValueType.Name
             End Select
 
 
@@ -422,6 +437,7 @@ Public Class FrmAdvancedSearch
     Private Sub GenerateSQL(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateSQL.Click, btnSearch.Click
         Try
             Dim sql As String = "Select * from " & Register & " where "
+            If CurrentTab = "IDR" Then sql = "Select * from " & Register & " where FileStatus = 'identified' AND "
             Dim SelectedCount As Integer = 0
 
             For i = 0 To RowCount
@@ -531,6 +547,8 @@ Public Class FrmAdvancedSearch
             sql = sql.Replace("##", "#")
             sql = sql.Replace("CONTAINS", "")
             sql = sql.Replace("STARTS WITH", "")
+
+            If CurrentTab = "IDR" Then sql = sql & " ORDER BY IdentificationDate"
             Me.txtSQL.Text = sql
 
             If DirectCast(sender, Control).Name = btnSearch.Name Then
@@ -595,6 +613,9 @@ Public Class FrmAdvancedSearch
 
             SQLText = Strings.Replace(SQLText, "InspectingOfficer", "InvestigatingOfficer", , , CompareMethod.Text)
             SQLText = Strings.Replace(SQLText, "CDNumber", "CDNumberWithYear", , , CompareMethod.Text)
+            SQLText = Strings.Replace(SQLText, "CPsDeveloped", "ChancePrintsDeveloped", , , CompareMethod.Text)
+            SQLText = Strings.Replace(SQLText, "CulpritName", "IdentifiedAs", , , CompareMethod.Text)
+            SQLText = Strings.Replace(SQLText, "IdentificationDetails", "Remarks", , , CompareMethod.Text)
 
             If Trim(SQLText.ToUpper).StartsWith("DELETE") Then
                 Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("You are about to DELETE records from " & Register & ". Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
@@ -659,6 +680,10 @@ Public Class FrmAdvancedSearch
                     da.Fill(frmMainInterface.FingerPrintDataSet.CDRegister)
                     frmMainInterface.ShowAlertMessage("Search finished. Found " & IIf(frmMainInterface.CDDataGrid.RowCount = 1, "1 Record", frmMainInterface.CDDataGrid.RowCount & " Records"))
 
+                Case "IDR"
+                    frmMainInterface.FingerPrintDataSet.IdentifiedCases.Clear()
+                    da.Fill(frmMainInterface.FingerPrintDataSet.IdentifiedCases)
+                    frmMainInterface.ShowAlertMessage("Search finished. Found " & IIf(frmMainInterface.IDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.IDRDataGrid.RowCount & " Records"))
             End Select
 
 

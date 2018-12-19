@@ -41,20 +41,20 @@ Partial Class FrmSOCReportSentStatus
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.RSOCDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
-        Me.SocReportRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCReportRegisterTableAdapter()
         Me.SOCNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReportSentToDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateOfReportSentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NatureOfReportsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SOCReportRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
+        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
+        Me.SocReportRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCReportRegisterTableAdapter()
         Me.PoliceStationListTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PoliceStationListTableAdapter()
         CType(Me.dtReportSentOn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.RSOCDatagrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SOCReportRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnSave
@@ -318,30 +318,11 @@ Partial Class FrmSOCReportSentStatus
         Me.RSOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.RSOCDatagrid.RowTemplate.Height = 40
         Me.RSOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RSOCDatagrid.SelectAllSignVisible = False
         Me.RSOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.RSOCDatagrid.Size = New System.Drawing.Size(678, 177)
         Me.RSOCDatagrid.TabIndex = 43
         Me.RSOCDatagrid.TabStop = False
-        '
-        'FingerPrintDataSet1
-        '
-        Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'btnCancel
-        '
-        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(501, 141)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(96, 38)
-        Me.btnCancel.TabIndex = 5
-        Me.btnCancel.Text = "Cancel"
-        '
-        'SocReportRegisterTableAdapter
-        '
-        Me.SocReportRegisterTableAdapter.ClearBeforeFill = True
         '
         'SOCNumberDataGridViewTextBoxColumn
         '
@@ -382,6 +363,26 @@ Partial Class FrmSOCReportSentStatus
         Me.SOCReportRegisterBindingSource.DataMember = "SOCReportRegister"
         Me.SOCReportRegisterBindingSource.DataSource = Me.FingerPrintDataSet1
         '
+        'FingerPrintDataSet1
+        '
+        Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'btnCancel
+        '
+        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Location = New System.Drawing.Point(501, 141)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(96, 38)
+        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Text = "Cancel"
+        '
+        'SocReportRegisterTableAdapter
+        '
+        Me.SocReportRegisterTableAdapter.ClearBeforeFill = True
+        '
         'PoliceStationListTableAdapter1
         '
         Me.PoliceStationListTableAdapter1.ClearBeforeFill = True
@@ -410,8 +411,8 @@ Partial Class FrmSOCReportSentStatus
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
         CType(Me.RSOCDatagrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SOCReportRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

@@ -12,7 +12,8 @@ Public Class frmMonthlyPerformance
     Private Sub LoadForm() Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-
+        frmPleaseWait.Show()
+        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
@@ -30,10 +31,10 @@ Public Class frmMonthlyPerformance
         Application.DoEvents()
 
         GeneratePerformanceStatement()
-
         Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
+        frmPleaseWait.Close()
     End Sub
 
     Private Sub ConnectToDatabase()
