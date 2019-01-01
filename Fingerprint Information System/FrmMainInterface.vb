@@ -967,6 +967,7 @@ Public Class frmMainInterface
             Me.SOCRegisterTableAdapter.RemoveNullFromIdentifiedAs("")
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
+            Me.SOCRegisterTableAdapter.RemoveNullFromIdentificationNumber("")
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
         End If
     End Sub
@@ -3882,7 +3883,7 @@ Public Class frmMainInterface
     Private Sub IDRDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles IDRDataGrid.RowPrePaint
         Try
 
-            Dim dt As Date = IDRDataGrid.Rows(e.RowIndex).Cells(0).Value
+            Dim dt As Date = IDRDataGrid.Rows(e.RowIndex).Cells(2).Value
 
             If dt.Year Mod 2 = 0 Then
                 IDRDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
@@ -5566,6 +5567,7 @@ errhandler:
                 Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
                 Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
                 Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
+                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
             Me.txtSOCNumber.Focus()
@@ -5915,6 +5917,7 @@ errhandler:
                 Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
                 Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
                 Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
+                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
             Me.txtSOCNumber.Focus()
@@ -5982,6 +5985,7 @@ errhandler:
                 Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
                 Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
                 Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
+                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
             Me.txtSOCNumber.Focus()
@@ -6323,6 +6327,7 @@ errhandler:
                 Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
                 Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
                 Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
+                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
             Me.txtSOCNumber.Focus()
@@ -7669,6 +7674,8 @@ errhandler:
         Me.lblcrt1.Visible = visible
         Me.lblcrt2.Visible = visible
         Me.lblcrt3.Visible = visible
+        Me.lblIDRNumber.Visible = visible
+        Me.txtSOCIDRNumber.Visible = visible
     End Sub
 
     Private Sub dtIdentificationDate_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtIdentificationDate.GotFocus
@@ -7677,6 +7684,12 @@ errhandler:
     End Sub
 
 
+    Private Sub txtSOCIDRNumber_GotFocus(sender As Object, e As EventArgs) Handles txtSOCIDRNumber.GotFocus
+        If Me.txtSOCIDRNumber.Text <> "" Or Me.dtIdentificationDate.Text = "" Then
+            Exit Sub
+        End If
+        Me.txtSOCIDRNumber.Text = FindIDentificationSerialNumber(Me.txtSOCNumber.Text, Me.dtIdentificationDate.Value)
+    End Sub
     Private Sub cmbIdentifiedByOfficer_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbIdentifiedByOfficer.GotFocus
         Dim IDOfficer As String = Me.txtSOCOfficer.Text
         If Not IDOfficer.Contains(";") And Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Then
@@ -8030,6 +8043,7 @@ errhandler:
             Dim cpsidentified = ""
             If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
             Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
+            Dim idrnumber As String = Me.txtSOCIDRNumber.Text.Trim
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
                 If comparison.ToLower.StartsWith("identified as") = False Then
@@ -8050,6 +8064,7 @@ errhandler:
                 identificationdetails = ""
                 cpsidentified = ""
                 Me.dtIdentificationDate.Text = ""
+                idrnumber = ""
             End If
 
 
@@ -8102,12 +8117,13 @@ errhandler:
                 .CPsIdentified = cpsidentified
                 .IdentificationDate = Me.dtIdentificationDate.ValueObject
                 .IdentifiedAs = identifiedas
+                .IdentificationNumber = idrnumber
             End With
 
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, cpsidentified, Me.dtIdentificationDate.ValueObject, identifiedby, identifiedas) 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, cpsidentified, Me.dtIdentificationDate.ValueObject, identifiedby, identifiedas, idrnumber) 'update the database
 
             If filestatus.ToLower = "identified" Then
                 Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
@@ -8145,6 +8161,7 @@ errhandler:
                     .CPsIdentified = cpsidentified
                     .IdentificationDate = Me.dtIdentificationDate.ValueObject
                     .IdentifiedAs = identifiedas
+                    .IdentificationNumber = idrnumber
                 End With
 
                 Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
@@ -8211,7 +8228,7 @@ errhandler:
             Dim cpsidentified = ""
             If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
             Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
-
+            Dim idrnumber As String = Me.txtSOCIDRNumber.Text.Trim
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
                 If comparison.ToLower.StartsWith("identified as") = False Then
@@ -8231,6 +8248,7 @@ errhandler:
                 identificationdetails = ""
                 cpsidentified = ""
                 Me.dtIdentificationDate.Text = ""
+                idrnumber = ""
             End If
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
@@ -8284,11 +8302,12 @@ errhandler:
                     .CPsIdentified = cpsidentified
                     .IdentificationDate = Me.dtIdentificationDate.ValueObject
                     .IdentifiedAs = identifiedas
+                    .IdentificationNumber = idrnumber
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
                 Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
@@ -8350,6 +8369,7 @@ errhandler:
                     .CPsIdentified = cpsidentified
                     .IdentificationDate = Me.dtIdentificationDate.ValueObject
                     .IdentifiedAs = identifiedas
+                    .IdentificationNumber = idrnumber
                 End With
                 If blAddRow Then
                     Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
@@ -8418,6 +8438,7 @@ errhandler:
             If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
 
             Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
+            Dim idrnumber As String = Me.txtSOCIDRNumber.Text.Trim
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
                 If comparison.ToLower.StartsWith("identified as") = False Then
@@ -8437,6 +8458,7 @@ errhandler:
                 identificationdetails = ""
                 cpsidentified = ""
                 Me.dtIdentificationDate.Text = ""
+                idrnumber = ""
             End If
 
             Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
@@ -8479,11 +8501,12 @@ errhandler:
                     .CPsIdentified = cpsidentified
                     .IdentificationDate = Me.dtIdentificationDate.ValueObject
                     .IdentifiedAs = identifiedas
+                    .IdentificationNumber = idrnumber
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
 
             If filestatus.ToLower <> "identified" Then
                 Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
@@ -8540,6 +8563,7 @@ errhandler:
                     .CPsIdentified = cpsidentified
                     .IdentificationDate = Me.dtIdentificationDate.ValueObject
                     .IdentifiedAs = identifiedas
+                    .IdentificationNumber = idrnumber
                 End With
 
                 If blAddRow Then
@@ -15049,6 +15073,8 @@ errhandler:
                     Exit For
                 End If
             Next
+            If SerialNumber = "" Then SerialNumber = "1"
+
             Return SerialNumber & "/" & y
         Catch ex As Exception
             Return "   /" & DateAndTime.Year(IDDate)
@@ -15071,6 +15097,7 @@ errhandler:
             frmPleaseWait.Show()
             Me.Cursor = Cursors.WaitCursor
 
+            Dim idno As String = ""
             Dim SoCNumber As String = ""
             Dim InspectingOfficer As String = ""
             Dim IdentifyingOfficer As String = ""
@@ -15082,6 +15109,7 @@ errhandler:
             Dim accused As String = ""
 
             If CurrentTab = "SOC" Then
+                idno = Me.SOCDatagrid.SelectedCells(30).Value.ToString()
                 SoCNumber = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
                 InspectingOfficer = Me.SOCDatagrid.SelectedCells(9).Value.ToString().Replace(vbNewLine, "; ")
                 IdentifyingOfficer = Me.SOCDatagrid.SelectedCells(25).Value.ToString().Replace(vbNewLine, "; ")
@@ -15095,6 +15123,7 @@ errhandler:
 
 
             If CurrentTab = "IDR" Then
+                idno = Me.IDRDataGrid.SelectedCells(0).Value.ToString()
                 SoCNumber = Me.IDRDataGrid.SelectedCells(1).Value.ToString()
                 InspectingOfficer = Me.IDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
                 IdentifyingOfficer = Me.IDRDataGrid.SelectedCells(10).Value.ToString().Replace(vbNewLine, "; ")
@@ -15106,7 +15135,9 @@ errhandler:
                 accused = Me.IDRDataGrid.SelectedCells(11).Value.ToString
             End If
 
-
+            If idno = "" Then
+                idno = FindIDentificationSerialNumber(SoCNumber, dtid)
+            End If
 
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -15140,7 +15171,7 @@ errhandler:
             Next
 
 
-            wdBooks("IDN").Range.Text = FindIDentificationSerialNumber(SoCNumber, dtid)
+            wdBooks("IDN").Range.Text = idno
             wdBooks("SOC").Range.Text = "No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
             wdBooks("PS").Range.Text = PS
             wdBooks("Cr").Range.Text = Cr
@@ -16270,6 +16301,12 @@ errhandler:
             cmd.ExecuteNonQuery()
         End If
 
+        If DoesFieldExist("IdentificationNumber", "IdentificationNumber", sConString) = False Then
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN IdentificationNumber VARCHAR(10) WITH COMPRESSION", con)
+            cmd.ExecuteNonQuery()
+        End If
+
+
         If DoesFieldExist("FPAttestationRegister", "ChalanDate", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE FPAttestationRegister ADD COLUMN ChalanDate DATE", con)
             cmd.ExecuteNonQuery()
@@ -16305,6 +16342,13 @@ errhandler:
             Dim id = 1
             Me.SettingsTableAdapter1.UpdateNullFields(PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
         End If
+
+        Dim cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN Remarks MEMO", con)
+        cmd1.ExecuteNonQuery()
+
+        cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN ComparisonDetails MEMO", con)
+        cmd1.ExecuteNonQuery()
+
         con.Close()
         ' MsgBox(Err.Description)
     End Sub
@@ -16582,5 +16626,5 @@ errhandler:
 #End Region
 
 
-  
+   
 End Class
