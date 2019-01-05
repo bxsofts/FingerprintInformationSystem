@@ -94,7 +94,7 @@ Public Class frmMainInterface
     Dim ClipBoardText As String = ""
     Dim PhotographerFieldFocussed As Boolean = False
     Dim PhotographedDateFocussed As Boolean = False
-    Dim IDDetailsFocussed As Boolean = False
+    Public IDDetailsFocussed As Boolean = False
     Dim IOSelectedRow As Integer
 
     Dim TableEvenColor As Color
@@ -312,7 +312,6 @@ Public Class frmMainInterface
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
 
             If CreateTable = 1 Then
-
                 CreateSOCReportRegisterTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
@@ -363,6 +362,11 @@ Public Class frmMainInterface
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
             Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "7", autobackuptime)
 
+
+            If Me.IdentifiedCasesTableAdapter1.CountBlankIDNumber("") > 0 Then
+                bgwUpdateIDRNumber.RunWorkerAsync()
+            End If
+
             If Me.chkTakeAutoBackup.Checked Then
                 TakeAutoBackup()
                 bgwOnlineAutoBackup.RunWorkerAsync()
@@ -382,6 +386,8 @@ Public Class frmMainInterface
         Next
 
         Me.txtHeadOfAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+
+      
 
         Dim dm As String = Today.ToString("dd/MM/yyyy", culture)
         dm = Strings.Left(dm, 5)
@@ -427,6 +433,7 @@ Public Class frmMainInterface
             DisableControls()
             MessageBoxEx.Show("FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+
 
 
     End Sub
@@ -1016,8 +1023,12 @@ Public Class frmMainInterface
             IncrementCircularProgress(5)
             Application.DoEvents()
         Else
-            Dim p = Me.SOCRegisterBindingSource.Find("SOCNumber", oldrow)
-            If p >= 0 Then Me.SOCRegisterBindingSource.Position = p
+            If blApplicationIsRestoring Then
+                Me.SOCRegisterBindingSource.MoveLast()
+            Else
+                Dim p = Me.SOCRegisterBindingSource.Find("SOCNumber", oldrow)
+                If p >= 0 Then Me.SOCRegisterBindingSource.Position = p
+            End If
         End If
 
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -1238,6 +1249,11 @@ Public Class frmMainInterface
                 frmProgressBar.SetProgressText(i)
                 System.Threading.Thread.Sleep(50)
             Next
+
+            blApplicationIsRestoring = False
+            frmProgressBar.Close()
+            boolRestored = False
+            ShowAlertMessage("Database restored successfully!")
         End If
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -4545,7 +4561,7 @@ Public Class frmMainInterface
 #Region "AUTO CAPITALIZE"
 
 
-    Private Function ConvertToProperCase(ByVal InputText) As String
+    Public Function ConvertToProperCase(ByVal InputText) As String
         On Error Resume Next
         If Me.chkIgnoreAllCaps.Checked = False Then
             Return Strings.StrConv(InputText, VbStrConv.ProperCase)
@@ -6348,18 +6364,6 @@ errhandler:
 
         Try
 
-            If CurrentTab = "IO" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
-
-                If reply = Windows.Forms.DialogResult.Yes Then
-                    IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
-                    ClearIOFields()
-                    UpdateOfficerList()
-                    ShowAlertMessage("Selected officer deleted")
-                End If
-                Exit Sub
-            End If
-
 
             If CurrentTab = "OS" Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not available for Office Settings", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -6373,6 +6377,18 @@ errhandler:
 
             If Me.chkPreventDeletion.Checked Then
                 MessageBoxEx.Show("Please click the down arrow to the right of the delete button and uncheck the box 'Prevent Deletion' to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If CurrentTab = "IO" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " : " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
+                    ClearIOFields()
+                    UpdateOfficerList()
+                    ShowAlertMessage("Selected officer deleted")
+                End If
                 Exit Sub
             End If
 
@@ -6390,7 +6406,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete SoC No. " & Me.SOCDatagrid.SelectedCells(0).Value.ToString() & " from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6432,7 +6448,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.RSOCDatagrid.SelectedCells(0).Value.ToString() & " from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6470,7 +6486,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete DA No." & Me.DADatagrid.SelectedCells(0).Value.ToString() & " from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6509,7 +6525,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.IDDatagrid.SelectedCells(0).Value.ToString() & " from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6548,7 +6564,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.ACDatagrid.SelectedCells(0).Value.ToString() & " from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6586,7 +6602,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.CDDataGrid.SelectedCells(0).Value.ToString() & " from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6623,7 +6639,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete FPA No. " & Me.FPADataGrid.SelectedCells(0).Value.ToString() & " from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6659,7 +6675,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Police Station Name?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Police Station " & Me.PSDataGrid.SelectedCells(0).Value.ToString() & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -7032,6 +7048,16 @@ errhandler:
         Me.txtSOCNumber.Text = n.ToString & "/" & y
         Me.txtSOCNumberOnly.Text = n.ToString
         Me.txtSOCNumber.Select(Me.txtSOCNumber.Text.Length, 0)
+    End Sub
+
+
+    Private Sub GenerateNewIDRNumber()
+        On Error Resume Next
+        Dim y As String = Year(Me.dtIdentificationDate.Value)
+        Dim n As String = Val(Me.IdentifiedCasesTableAdapter1.ScalarQuerySOCsIdentified(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
+
+        Me.txtSOCIDRNumber.Text = n.ToString & "/" & y
+        Me.txtSOCIDRNumber.Select(Me.txtSOCIDRNumber.Text.Length, 0)
     End Sub
 
     Private Sub IncrementRSOCNumber(ByVal LastRSOCNumber As Long)
@@ -7593,9 +7619,6 @@ errhandler:
 
     End Sub
 
-
-
-
     Private Sub AppendSOCYear() Handles txtSOCNumber.Leave, txtSOCCrimeNumber.Leave
         On Error Resume Next
         If Me.chkAppendSOCYear.Checked = False Then Exit Sub
@@ -7643,6 +7666,11 @@ errhandler:
 
     Private Sub SetFileStatus() Handles cmbFileStatus.GotFocus
 
+        If Me.cmbFileStatus.Text.ToLower <> "identified" And Me.txtSOCComparisonDetails.Text.ToLower.StartsWith("identified as") Then
+            Me.txtSOCComparisonDetails.Text = ""
+            SetComparisonDetails()
+        End If
+
         If Me.txtSOCCPsRemaining.Text = "" Then Exit Sub
         If Me.txtSOCCPsRemaining.Value = 0 Then
             Me.cmbFileStatus.SelectedItem = Me.cmbFileStatus.Items.Item(0)
@@ -7656,6 +7684,11 @@ errhandler:
 
     Private Sub cmbFileStatus_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFileStatus.Validated, cmbFileStatus.TextChanged
         On Error Resume Next
+        If Me.cmbFileStatus.Text.ToLower <> "identified" And Me.txtSOCComparisonDetails.Text.ToLower.StartsWith("identified as") Then
+            Me.txtSOCComparisonDetails.Text = ""
+            SetComparisonDetails()
+        End If
+
         Dim visible As Boolean = False
 
         If Me.cmbFileStatus.Text.ToLower = "identified" Then
@@ -7667,15 +7700,17 @@ errhandler:
         Me.txtCPsIdentified.Visible = visible
         Me.cmbIdentifiedByOfficer.Visible = visible
         Me.dtIdentificationDate.Visible = visible
-        Me.txtSOCIdentificationDetails.Visible = visible
-        Me.lblIdentificationDetails.Visible = visible
-        Me.lblIdentifiedAs.Visible = visible
-        Me.txtSOCIdentifiedCulpritName.Visible = visible
+        ' Me.txtSOCIdentificationDetails.Visible = visible
+        Me.lblIdentificationNumber.Visible = visible
+        Me.lblIdentificationDate.Visible = visible
+        '  Me.txtSOCIdentifiedCulpritName.Visible = visible
         Me.lblcrt1.Visible = visible
         Me.lblcrt2.Visible = visible
         Me.lblcrt3.Visible = visible
-        Me.lblIDRNumber.Visible = visible
+        Me.lblcrt4.Visible = visible
+        Me.lblIdentificationNumber.Visible = visible
         Me.txtSOCIDRNumber.Visible = visible
+        Me.btnEnterIdentificationDetails.Visible = visible
     End Sub
 
     Private Sub dtIdentificationDate_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtIdentificationDate.GotFocus
@@ -7688,7 +7723,7 @@ errhandler:
         If Me.txtSOCIDRNumber.Text <> "" Or Me.dtIdentificationDate.Text = "" Then
             Exit Sub
         End If
-        Me.txtSOCIDRNumber.Text = FindIDentificationSerialNumber(Me.txtSOCNumber.Text, Me.dtIdentificationDate.Value)
+        GenerateNewIDRNumber()
     End Sub
     Private Sub cmbIdentifiedByOfficer_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbIdentifiedByOfficer.GotFocus
         Dim IDOfficer As String = Me.txtSOCOfficer.Text
@@ -7763,18 +7798,18 @@ errhandler:
         End If
     End Sub
 
-
-
-    Private Sub ComparisonDetails() Handles txtSOCComparisonDetails.GotFocus
+    Private Sub SetComparisonDetails() Handles txtSOCComparisonDetails.GotFocus
         On Error Resume Next
 
+        If Me.txtSOCComparisonDetails.Text <> vbNullString Then Exit Sub
 
         If Me.txtSOCCPsDeveloped.Value = 0 Then
+            Me.txtSOCComparisonDetails.Text = "No action pending."
             Exit Sub
         End If
 
-        If Me.txtSOCComparisonDetails.Text <> vbNullString Then Exit Sub
         Me.txtSOCComparisonDetails.Clear()
+
         If Me.txtSOCCPsDeveloped.Value = Me.txtSOCCPsUnfit.Value Then
             If Me.txtSOCCPsDeveloped.Value = 1 Then
                 Me.txtSOCComparisonDetails.Text = "Unfit"
@@ -7823,19 +7858,12 @@ errhandler:
         Me.SOCRegisterBindingSource.Position = p
     End Sub
 
-    Private Sub IdentificationDetails() Handles txtSOCIdentificationDetails.GotFocus
-        On Error Resume Next
-        If Me.txtSOCIdentificationDetails.Text <> vbNullString Or Me.txtCPsIdentified.Value = 0 Then Exit Sub
-        If IDDetailsFocussed = False Then
-            Dim cpid = Me.txtCPsIdentified.Value
-            Dim iddetails As String = ConvertToProperCase(ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtSOCIdentifiedCulpritName.Text & ". He has been previously involved in Cr. No......... of P.S. His fingerprint slip is registered in the Bureau records as DA No......."
-
-            Me.txtSOCIdentificationDetails.Text = iddetails
-            IDDetailsFocussed = True
-        End If
-        Me.txtSOCIdentificationDetails.Select(Me.txtSOCIdentificationDetails.Text.Length, 0)
+    Private Sub EnterIdentificationDetails(sender As Object, e As EventArgs) Handles btnEnterIdentificationDetails.Click
+        FrmSOC_IdentificationDetails.Show()
+        FrmSOC_IdentificationDetails.lblSOCNumber.Text = Me.txtSOCNumber.Text
+        FrmSOC_IdentificationDetails.txtSOCIdentifiedCulpritName.Text = Me.txtSOCIdentifiedCulpritName.Text
+        FrmSOC_IdentificationDetails.txtSOCIdentificationDetails.Text = Me.txtSOCIdentificationDetails.Text
     End Sub
-
 #End Region
 
 
@@ -7854,7 +7882,7 @@ errhandler:
     Function MandatoryIdentificationFieldsNotFilled() As Boolean
         On Error Resume Next
 
-        If Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Or Me.dtIdentificationDate.IsEmpty Or Me.txtCPsIdentified.Value = 0 Or Me.txtSOCIdentifiedCulpritName.Text = vbNullString Then
+        If Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Or Me.dtIdentificationDate.IsEmpty Or Me.txtCPsIdentified.Value = 0 Or Me.txtSOCIdentifiedCulpritName.Text = vbNullString Or Me.txtSOCIDRNumber.Text = vbNullString Or Me.txtSOCIdentificationDetails.Text = vbNullString Then
             Return True
         Else
             Return False
@@ -7878,14 +7906,25 @@ errhandler:
             msg = msg & " Date of Identification" & vbNewLine
             If x <> 1 And x <> 2 Then x = 3
         End If
-        If Me.txtCPsIdentified.Value = 0 Then
-            msg = msg & " No. of CPs Identified" & vbNewLine
+
+        If Trim(Me.txtSOCIDRNumber.Text) = vbNullString Then
+            msg = msg & " Identification Number" & vbNewLine
             If x <> 1 And x <> 2 And x <> 3 Then x = 4
         End If
 
-        If Trim(Me.txtSOCIdentifiedCulpritName.Text) = vbNullString Then
-            msg = msg & " Name of culprit" & vbNewLine
+        If Me.txtCPsIdentified.Value = 0 Then
+            msg = msg & " No. of CPs Identified" & vbNewLine
             If x <> 1 And x <> 2 And x <> 3 And x <> 4 Then x = 5
+        End If
+
+        If Trim(Me.txtSOCIdentifiedCulpritName.Text) = vbNullString Then
+            msg = msg & " Name of Culprit" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 Then x = 6
+        End If
+
+        If Trim(Me.txtSOCIdentificationDetails.Text) = vbNullString Then
+            msg = msg & " Identification Details" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 Then x = 7
         End If
 
         msg1 = msg1 & msg
@@ -7897,9 +7936,13 @@ errhandler:
             Case 3
                 dtIdentificationDate.Focus()
             Case 4
-                txtCPsIdentified.Focus()
+                txtSOCIDRNumber.Focus()
             Case 5
+                txtCPsIdentified.Focus()
+            Case 6
                 txtSOCIdentifiedCulpritName.Focus()
+            Case 7
+                txtSOCIdentificationDetails.Focus()
         End Select
 
     End Sub
@@ -7993,7 +8036,7 @@ errhandler:
         End If
         ValidateChanceprintCount()
         If CPValidated = False Then Exit Sub
-        ComparisonDetails()
+        SetComparisonDetails()
         SetFileStatus()
         AddTextsToAutoCompletionList()
 
@@ -8236,6 +8279,10 @@ errhandler:
                 End If
             End If
 
+            If filestatus.ToLower <> "identified" And comparison.ToLower.StartsWith("identified as") Then
+                comparison = ""
+            End If
+
             If filestatus.ToLower = "otherwise detected" Then
                 If comparison.ToLower.StartsWith("otherwise detected") = False Then
                     comparison = "Otherwise detected"
@@ -8444,6 +8491,10 @@ errhandler:
                 If comparison.ToLower.StartsWith("identified as") = False Then
                     comparison = "Identified as " & identifiedas
                 End If
+            End If
+
+            If filestatus.ToLower <> "identified" And comparison.ToLower.StartsWith("identified as") Then
+                comparison = ""
             End If
 
             If filestatus.ToLower = "otherwise detected" Then
@@ -9232,6 +9283,50 @@ errhandler:
     End Sub
 #End Region
 
+
+#Region "IDENTIFICATION NUMBER FIX"
+
+    Private Sub bgwUpdateIDRNumber_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateIDRNumber.DoWork
+        Try
+
+            Dim FPDS As New FingerPrintDataSet
+            Dim IDRTblAdptr As New FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
+            IDRTblAdptr.Connection.ConnectionString = sConString
+            IDRTblAdptr.Connection.Open()
+
+            IDRTblAdptr.Fill(FPDS.IdentifiedCases)
+            Dim idrnum As String = ""
+            Dim idrnum1 As String = ""
+            Dim y As String = ""
+            Dim y1 As String = ""
+            Dim j As Integer = 0
+
+            For i = 0 To FPDS.IdentifiedCases.Rows.Count - 1
+
+                idrnum = FPDS.IdentifiedCases(i).IdentificationNumber
+                idrnum1 = idrnum
+                y = FPDS.IdentifiedCases(i).IdentificationDate.Year
+                If y <> y1 Then
+                    y1 = y
+                    j = 0
+                End If
+                j = j + 1
+                idrnum = j & "/" & y1
+                If idrnum1 = "" Then
+                    IDRTblAdptr.UpdateIDRNumber(idrnum, FPDS.IdentifiedCases(i).SOCNumber)
+                End If
+            Next
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwUpdateIDRNumber_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpdateIDRNumber.RunWorkerCompleted
+        System.Threading.Thread.Sleep(3000)
+        LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+    End Sub
+
+#End Region
     '-------------------------------------------RSOC DATA MANIPULATION-----------------------------------------
 
 #Region "RSOC DATA ENTRY FIELDS SETTINGS"
@@ -14233,10 +14328,7 @@ errhandler:
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
-
-            ShowAlertMessage("Database restored successfully!")
         End If
-        boolRestored = False
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -14259,10 +14351,7 @@ errhandler:
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
-
-            ShowAlertMessage("Database restored successfully!")
         End If
-        boolRestored = False
         Cursor = Cursors.Default
     End Sub
 
@@ -14272,9 +14361,9 @@ errhandler:
         Try
 
             Me.Cursor = Cursors.WaitCursor
-
+            ' Me.TabControl.SelectedTab = SOCTabItem
             frmProgressBar.Show()
-            frmProgressBar.SetStatusText("Restoring...")
+            frmProgressBar.SetStatusText("Restoring Database...")
             blApplicationIsRestoring = True
 
             ConnectToDatabase()
@@ -14283,7 +14372,6 @@ errhandler:
                 frmProgressBar.SetProgressText(i)
                 System.Threading.Thread.Sleep(50)
             Next
-
 
             CreateOfficerTable()
 
@@ -14305,9 +14393,8 @@ errhandler:
                 frmProgressBar.SetProgressText(i)
                 System.Threading.Thread.Sleep(50)
             Next
-
             ModifyTables()
-
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
             For i = 21 To 25
                 frmProgressBar.SetProgressText(i)
                 System.Threading.Thread.Sleep(50)
@@ -14336,6 +14423,7 @@ errhandler:
                 System.Threading.Thread.Sleep(50)
             Next
 
+
             OfficeSettingsEditMode(True)
             LoadOfficeSettingsToMemory()
             SetWindowTitle()
@@ -14346,16 +14434,18 @@ errhandler:
                 System.Threading.Thread.Sleep(50)
             Next
 
-            LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+            If Me.IdentifiedCasesTableAdapter1.CountBlankIDNumber("") > 0 Then
+                bgwUpdateIDRNumber.RunWorkerAsync()
+            Else
+                LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+            End If
 
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
             OfficeSettingsEditMode(False)
-            blApplicationIsRestoring = False
 
-            frmProgressBar.Close()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -14476,7 +14566,7 @@ errhandler:
 
             wdBooks("CP").Range.Text = cpd & IIf(cpdetails <> "", vbNewLine & Me.SOCDatagrid.SelectedCells(14).Value.ToString, "")
             wdBooks("Photographer").Range.Text = Me.SOCDatagrid.SelectedCells(18).Value.ToString
-            wdBooks("Remarks").Range.Text = Me.SOCDatagrid.SelectedCells(22).Value.ToString
+            '  wdBooks("Remarks").Range.Text = Me.SOCDatagrid.SelectedCells(22).Value.ToString
 
             Dim Officer = Me.SOCDatagrid.SelectedCells(9).Value.ToString()
 
@@ -15053,7 +15143,7 @@ errhandler:
     End Sub
 
 
-    Private Function FindIDentificationSerialNumber(strSOCNumber As String, IDDate As Date)
+    Private Function FindIdentificationSerialNumber(strSOCNumber As String, IDDate As Date)
         Try
             Dim FPDS As New FingerPrintDataSet
             Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
@@ -15073,13 +15163,12 @@ errhandler:
                     Exit For
                 End If
             Next
-            If SerialNumber = "" Then SerialNumber = "1"
 
             Return SerialNumber & "/" & y
         Catch ex As Exception
             Return "   /" & DateAndTime.Year(IDDate)
         End Try
-       
+
     End Function
 
 
@@ -15136,7 +15225,7 @@ errhandler:
             End If
 
             If idno = "" Then
-                idno = FindIDentificationSerialNumber(SoCNumber, dtid)
+                idno = FindIdentificationSerialNumber(SoCNumber, dtid)
             End If
 
             Dim wdApp As Word.Application
@@ -15839,7 +15928,7 @@ errhandler:
 
     End Function
 
-    Private Function ConvertNumberToWord(ByVal Number As Integer)
+    Public Function ConvertNumberToWord(ByVal Number As Integer)
         Try
             Dim t As String = Number.ToString
             Select Case Number
@@ -15998,6 +16087,7 @@ errhandler:
                 y2 = y1 - 1
             End If
 
+            Dim sFileName As String = "Statement.docx"
 
             Select Case DirectCast(sender, DevComponents.DotNetBar.ButtonItem).Name
 
@@ -16005,37 +16095,43 @@ errhandler:
                     subject = "Abstract of Attendance Register - submitting of - reg:- "
                     bodytext = "I am submitting here with the abstract of the Attendance Register of this office for the period from 11/" & IIf(m2.Length = 1, "0" & m2, m2) & "/" & y2 & " to 10/" & IIf(m1.Length = 1, "0" & m1, m1) & "/" & y1 & " for favour of further necessary action."
                     PdlNumber = PdlAttendance
+                    sFileName = "CL - Attendance Statement.docx"
                 Case btnSOCCL.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "SOC and DA Slip Statements - " & m2 & " - submitting of - reg:- "
                     bodytext = "I am submitting here with the SOC and DA Slip statements for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlSOCDAStatement
-
+                    sFileName = "CL - SoC Statement.docx"
                 Case btnTABill.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "TA Bills of staff - " & m2 & " - submitting of - reg:- "
                     bodytext = "I am forwarding here with the TA Bills of the staff of this unit for the month of " & m2 & " for favour of further necessary action."
                     PdlNumber = PdlTABill
+                    sFileName = "CL - TA Bill.docx"
                 Case btnRBWarrant.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Bus and Railway Warrants Statement - " & m2 & " - submitting of - reg:- "
                     bodytext = "I am submitting here with the Bus and Railway Warrant statements for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlRBWarrant
+                    sFileName = "CL - Rail Bus Warrant Statement.docx"
                 Case btnIndividualPerformanceCL.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Individual performance statement - " & m2 & " - submitting of - reg:- "
                     bodytext = "I am submitting here with the Individual performance statement of the staff of this unit for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIndividualPerformance
+                    sFileName = "CL - Individual Performance Statement.docx"
                 Case btnRBNilReport.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Bus and Railway Warrants Statement - " & m2 & " - submitting of - reg:- "
                     bodytext = "No Bus and Railway Warrants were used in the month of " & m2 & ". This is for favour of information and necessary action."
                     PdlNumber = PdlRBWarrant
+                    sFileName = "CL - Rail Bus Warrant Nil Statement.docx"
                 Case btnVigilanceCase.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Vigilance case against staff – " & m2 & " - report submitting of - reg:- "
                     bodytext = "No case has been Registered or Investigated or being investigated by Local Police / CBCID / Vigilance Department against any of the staff working in this unit during the month of " & m2 & ". This is for favour of information and necessary action."
                     PdlNumber = PdlVigilanceCase
+                    sFileName = "CL - Vigilance Case Statement.docx"
             End Select
 
 
@@ -16115,6 +16211,9 @@ errhandler:
             End If
 
             frmPleaseWait.Hide()
+
+            Dim sFullFileName As String = FileIO.SpecialDirectories.MyDocuments & "\" & sFileName
+            If Not FileInUse(sFullFileName) Then aDoc.SaveAs(sFullFileName)
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -16626,5 +16725,5 @@ errhandler:
 #End Region
 
 
-   
+
 End Class

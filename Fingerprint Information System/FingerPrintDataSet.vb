@@ -3,6 +3,10 @@ End Class
 
 Namespace FingerPrintDataSetTableAdapters
     
+    Partial Class IdentifiedCasesTableAdapter
+
+    End Class
+
     Partial Class DARegisterAutoTextTableAdapter
 
     End Class

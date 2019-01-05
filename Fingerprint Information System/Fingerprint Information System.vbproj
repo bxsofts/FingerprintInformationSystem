@@ -190,6 +190,12 @@
     <Compile Include="frmRevenueCollection.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmSOC-IdentificationDetails.Designer.vb">
+      <DependentUpon>FrmSOC-IdentificationDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSOC-IdentificationDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmWeeklyDiary.Designer.vb">
       <DependentUpon>frmWeeklyDiary.vb</DependentUpon>
     </Compile>
@@ -524,6 +530,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRevenueCollection.resx">
       <DependentUpon>frmRevenueCollection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSOC-IdentificationDetails.resx">
+      <DependentUpon>FrmSOC-IdentificationDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSOC-ReportSentStatus.resx">
       <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>

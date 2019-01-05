@@ -336,11 +336,17 @@ Public Class frmSOCStatement
             End If
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
-
             bgwWord.ReportProgress(100)
             System.Threading.Thread.Sleep(10)
 
             WordApp.Visible = True
+
+            ' For Each section As Word.Section In aDoc.Sections
+            'section.Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Paragraphs.Alignment = 'Word.WdParagraphAlignment.wdAlignParagraphRight
+            ' section.Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Text = "Page "
+            ' section.Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).PageNumbers.Add(Word.WdPageNumberAlignment.wdAlignPageNumberRight, True)
+            '  Next
+
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
             aDoc.Activate()
