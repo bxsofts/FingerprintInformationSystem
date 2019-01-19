@@ -501,7 +501,7 @@ Public Class frmOnlineBackup
 
         If e.ProgressPercentage = 100 Then
             lblStatus.Text = "Uploaded."
-            frmMainInterface.ShowAlertMessage("Database uploaded successfully")
+            frmMainInterface.ShowDesktopAlert("Database uploaded successfully")
         End If
 
     End Sub
@@ -692,12 +692,12 @@ Public Class frmOnlineBackup
 
         If e.ProgressPercentage = 19 Then
             lblStatus.Text = "Failed."
-            frmMainInterface.ShowAlertMessage("File download failed")
+            frmMainInterface.ShowDesktopAlert("File download failed")
         End If
 
         If e.ProgressPercentage = 100 Then
             lblStatus.Text = e.UserState
-            frmMainInterface.ShowAlertMessage("File downloaded successfully")
+            frmMainInterface.ShowDesktopAlert("File downloaded successfully")
         End If
 
     End Sub
@@ -873,7 +873,7 @@ Public Class frmOnlineBackup
                 My.Computer.FileSystem.DeleteFile(SelectedFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
                 Me.listViewEx1.SelectedItems(0).Remove()
                 Application.DoEvents()
-                frmMainInterface.ShowAlertMessage("Selected backup file deleted to the Recycle Bin.")
+                frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
             Else 'remove online file
 
                 If InternetAvailable() = False Then
@@ -886,7 +886,7 @@ Public Class frmOnlineBackup
                 DeleteRequest.Execute()
                 Me.listViewEx1.SelectedItems(0).Remove()
                 Application.DoEvents()
-                frmMainInterface.ShowAlertMessage("Selected backup file deleted from Google Drive.")
+                frmMainInterface.ShowDesktopAlert("Selected backup file deleted from Google Drive.")
             End If
 
             Me.Cursor = Cursors.Default
@@ -986,7 +986,7 @@ Public Class frmOnlineBackup
         Me.Cursor = Cursors.Default
 
         If NoFileFoundMessage And listViewEx1.Items.Count = 0 Then
-            frmMainInterface.ShowAlertMessage("No online Backup Files were found.")
+            frmMainInterface.ShowDesktopAlert("No online Backup Files were found.")
             NoFileFoundMessage = False
         End If
 

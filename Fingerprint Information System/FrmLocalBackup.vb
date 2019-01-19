@@ -65,7 +65,7 @@ Public Class FrmLocalBackup
             item.SubItems.Add(BackupPath & "\" & BackupFileName)
             item.ImageIndex = 0
 
-            frmMainInterface.ShowAlertMessage("Database backed up successfully.")
+            frmMainInterface.ShowDesktopAlert("Database backed up successfully.")
             Application.DoEvents()
             DisplayInformation()
         Catch ex As Exception
@@ -198,7 +198,7 @@ Public Class FrmLocalBackup
             My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
             Me.listViewEx1.SelectedItems(0).Remove()
             Application.DoEvents()
-            frmMainInterface.ShowAlertMessage("Selected backup file deleted to the Recycle Bin.")
+            frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
         End If
 
         DisplayInformation()

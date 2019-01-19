@@ -107,9 +107,7 @@ Public Class frmMainInterface
 
     Private Sub LoadForm() Handles MyBase.Load
        
-
         On Error Resume Next
-
         ChangeCursor(Cursors.WaitCursor)
 
         frmSplashScreen.ShowProgressBar()
@@ -421,7 +419,9 @@ Public Class frmMainInterface
         ChangeCursor(Cursors.Default)
         System.Threading.Thread.Sleep(1000)
         frmSplashScreen.CloseForm()
-        ShowAlertMessage("Welcome to " & strAppName & "!" & vbCrLf & msg)
+        SetRandomDesktopAlertColor()
+        ShowDesktopAlert("Welcome to " & strAppName & "!<br/>" & msg)
+
 
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
@@ -572,7 +572,7 @@ Public Class frmMainInterface
             m_BaseColorSelected = False
         Else
             If m_BaseColorSelected = False Then
-              SetColorTheme()
+                SetColorTheme()
             End If
         End If
 
@@ -878,7 +878,7 @@ Public Class frmMainInterface
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
-       
+
         If Me.SOCRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterAutoTextTableAdapter.Connection.Close()
         Me.SOCRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterAutoTextTableAdapter.Connection.Open()
@@ -909,12 +909,12 @@ Public Class frmMainInterface
         Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.DARegisterTableAdapter.Connection.Open()
 
-     
+
         If Me.FPARegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterAutoTextTableAdapter.Connection.Close()
         Me.FPARegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterAutoTextTableAdapter.Connection.Open()
 
-      
+
         If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
         Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
@@ -924,7 +924,7 @@ Public Class frmMainInterface
         Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.CDRegisterTableAdapter.Connection.Open()
 
-    
+
         If Me.PSRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.PSRegisterTableAdapter.Connection.Close()
         Me.PSRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.PSRegisterTableAdapter.Connection.Open()
@@ -943,7 +943,7 @@ Public Class frmMainInterface
         Me.ACRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterTableAdapter.Connection.Open()
 
-      
+
         If Me.ACRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.ACRegisterAutoTextTableAdapter.Connection.Close()
         Me.ACRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterAutoTextTableAdapter.Connection.Open()
@@ -1000,7 +1000,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
-       
+
         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(2).DataPropertyName.ToString() & " ASC, " & SOCDatagrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1031,7 +1031,7 @@ Public Class frmMainInterface
             End If
         End If
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1039,7 +1039,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
-       
+
         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(3).DataPropertyName.ToString() & " ASC, " & RSOCDatagrid.Columns(2).DataPropertyName.ToString() ' & " ASC, " & RSOCDatagrid.Columns(7).DataPropertyName.ToString() & " ASC"
         Dim oldrow As String = ""
         If Me.RSOCDatagrid.SelectedRows.Count <> 0 Then
@@ -1062,13 +1062,13 @@ Public Class frmMainInterface
             If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
         End If
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub LoadDARecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-     
+
         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(2).DataPropertyName.ToString() & " ASC, " & DADatagrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1092,14 +1092,14 @@ Public Class frmMainInterface
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
             If p >= 0 Then Me.DARegisterBindingSource.Position = p
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
     Private Sub LoadIDRecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-       
+
         Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(0).DataPropertyName.ToString() & " ASC"
         Dim oldrow As String = ""
         If Me.IDDatagrid.SelectedRows.Count <> 0 Then
@@ -1113,14 +1113,14 @@ Public Class frmMainInterface
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
             If p >= 0 Then Me.IDRegisterBindingSource.Position = p
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
     Private Sub LoadACRecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-       
+
         Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(0).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1135,14 +1135,14 @@ Public Class frmMainInterface
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
             If p >= 0 Then Me.ACRegisterBindingSource.Position = p
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
     Private Sub LoadFPARecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-       
+
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
         Dim oldrow As String = ""
@@ -1165,14 +1165,14 @@ Public Class frmMainInterface
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
             If p >= 0 Then Me.FPARegisterBindingSource.Position = p
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
     Private Sub LoadCDRecords()
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-       
+
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Dim oldrow As String = ""
         If Me.CDDataGrid.SelectedRows.Count <> 0 Then
@@ -1194,7 +1194,7 @@ Public Class frmMainInterface
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
             If p >= 0 Then Me.CDRegisterBindingSource.Position = p
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1204,7 +1204,7 @@ Public Class frmMainInterface
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
         Me.PSRegisterBindingSource.MoveFirst()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1253,7 +1253,7 @@ Public Class frmMainInterface
             blApplicationIsRestoring = False
             frmProgressBar.Close()
             boolRestored = False
-            ShowAlertMessage("Database restored successfully!")
+            ShowDesktopAlert("Database restored successfully!")
         End If
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -1276,8 +1276,8 @@ Public Class frmMainInterface
         LoadOfficerListToDropDownMenu()
         LoadOfficeSettingsToMemory()
         LoadOfficeSettingsToTextBoxes()
-        ShowAlertMessage("Records reloaded in all tables!")
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        ShowDesktopAlert("Records reloaded in all tables!")
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1290,46 +1290,46 @@ Public Class frmMainInterface
         Select Case CurrentTab
             Case "SOC"
                 LoadSOCRecords()
-                ShowAlertMessage("Records reloaded in SOC Register!")
+                ShowDesktopAlert("Records reloaded in SOC Register!")
             Case "RSOC"
                 LoadRSOCRecords()
-                ShowAlertMessage("Records reloaded in SOC Reports Register!")
+                ShowDesktopAlert("Records reloaded in SOC Reports Register!")
             Case "DA"
                 LoadDARecords()
-                ShowAlertMessage("Records reloaded in DA Register!")
+                ShowDesktopAlert("Records reloaded in DA Register!")
             Case "FPA"
                 LoadFPARecords()
-                ShowAlertMessage("Records reloaded in FP Attestation Register!")
+                ShowDesktopAlert("Records reloaded in FP Attestation Register!")
             Case "CD"
                 LoadCDRecords()
-                ShowAlertMessage("Records reloaded in Court Duty Register!")
+                ShowDesktopAlert("Records reloaded in Court Duty Register!")
             Case "ID"
                 LoadIDRecords()
-                ShowAlertMessage("Records reloaded in Identified Slips Register!")
+                ShowDesktopAlert("Records reloaded in Identified Slips Register!")
             Case "AC"
                 LoadACRecords()
-                ShowAlertMessage("Records reloaded in Active Criminal Slips Register!")
+                ShowDesktopAlert("Records reloaded in Active Criminal Slips Register!")
             Case "PS"
                 LoadPSRecords()
-                ShowAlertMessage("Records reloaded in List of Police Stations!")
+                ShowDesktopAlert("Records reloaded in List of Police Stations!")
 
             Case "IO"
                 LoadOfficerListToTable()
-                ShowAlertMessage("Records reloaded in Officer List!")
+                ShowDesktopAlert("Records reloaded in Officer List!")
 
             Case "OS"
                 LoadOfficeSettingsToMemory()
                 LoadOfficeSettingsToTextBoxes()
-                ShowAlertMessage("Records reloaded in Office Settings!")
+                ShowDesktopAlert("Records reloaded in Office Settings!")
 
             Case "IDR"
                 Me.Cursor = Cursors.WaitCursor
                 LoadIDRRecords()
-                ShowAlertMessage("Records reloaded in Identification Register!")
+                ShowDesktopAlert("Records reloaded in Identification Register!")
                 Me.Cursor = Cursors.Default
         End Select
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1347,7 +1347,7 @@ Public Class frmMainInterface
             IncrementCircularProgress(5)
             Application.DoEvents()
         End If
-      
+
 
         If blApplicationIsRestoring Then
             For i = 51 To 60
@@ -1416,7 +1416,7 @@ Public Class frmMainInterface
         Me.CDRegisterBindingSource.MoveLast()
         Me.IDRRegisterBindingSource.MoveLast()
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1450,18 +1450,18 @@ Public Class frmMainInterface
                 Me.IDRRegisterTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.IdentifiedCases, d1, d2)
                 Me.IDRRegisterBindingSource.MoveLast()
             Case Else
-                ShowAlertMessage("This option is not available for the selected register!")
-                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                ShowDesktopAlert("This option is not available for the selected register!")
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
         If CurrentTab <> "RSOC" Then
-            ShowAlertMessage("This Year's " & CurrentTab & " records loaded!")
+            ShowDesktopAlert("This Year's " & CurrentTab & " records loaded!")
         Else
-            ShowAlertMessage("This Year's SOC Reports Register loaded!")
+            ShowDesktopAlert("This Year's SOC Reports Register loaded!")
         End If
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1501,17 +1501,17 @@ Public Class frmMainInterface
                 Me.IDRRegisterBindingSource.MoveLast()
 
             Case Else
-                ShowAlertMessage("This option is not available for the selected register!")
-                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                ShowDesktopAlert("This option is not available for the selected register!")
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
         If CurrentTab <> "RSOC" Then
-            ShowAlertMessage("This Month's " & CurrentTab & " records loaded!")
+            ShowDesktopAlert("This Month's " & CurrentTab & " records loaded!")
         Else
-            ShowAlertMessage("This Month's SOC Reports Register loaded!")
+            ShowDesktopAlert("This Month's SOC Reports Register loaded!")
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1532,7 +1532,7 @@ Public Class frmMainInterface
                 If Me.dtSOCInspection.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Inspection' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtSOCInspection.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1549,7 +1549,7 @@ Public Class frmMainInterface
                 If Me.dtRSOCReportSentOn.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtRSOCReportSentOn.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1566,7 +1566,7 @@ Public Class frmMainInterface
                 If Me.dtDAEntry.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Entry' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtDAEntry.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1583,7 +1583,7 @@ Public Class frmMainInterface
                 If Me.dtFPADate.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtFPADate.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1599,7 +1599,7 @@ Public Class frmMainInterface
                 If Me.dtCDExamination.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtCDExamination.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
 
@@ -1612,17 +1612,17 @@ Public Class frmMainInterface
                 Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
                 Me.CDRegisterBindingSource.MoveLast()
             Case Else
-                ShowAlertMessage("This option is not available for the selected register!")
-                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                ShowDesktopAlert("This option is not available for the selected register!")
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
         If CurrentTab <> "RSOC" Then
-            ShowAlertMessage("Specified Month's " & CurrentTab & " records loaded!")
+            ShowDesktopAlert("Specified Month's " & CurrentTab & " records loaded!")
         Else
-            ShowAlertMessage("Specified Month's SOC Reports Register loaded!")
+            ShowDesktopAlert("Specified Month's SOC Reports Register loaded!")
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -1636,7 +1636,7 @@ Public Class frmMainInterface
                 If Me.txtSOCYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtSOCYear.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtSOCYear.Text
@@ -1645,7 +1645,7 @@ Public Class frmMainInterface
                 If Me.dtRSOCReportSentOn.IsEmpty Then
                     MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.dtRSOCReportSentOn.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Year(Me.dtRSOCReportSentOn.Value)
@@ -1654,7 +1654,7 @@ Public Class frmMainInterface
                 If Me.txtDAYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtDAYear.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtDAYear.Text
@@ -1663,7 +1663,7 @@ Public Class frmMainInterface
                 If Me.txtFPAYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtFPAYear.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtFPAYear.Text
@@ -1672,13 +1672,13 @@ Public Class frmMainInterface
                 If Me.txtCDYear.Text = "" Then
                     MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtCDYear.Focus()
-                     If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
                 y = Me.txtCDYear.Text
             Case Else
-                ShowAlertMessage("This option is not available for the selected register!")
-                 If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                ShowDesktopAlert("This option is not available for the selected register!")
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                 Exit Sub
         End Select
 
@@ -1711,11 +1711,11 @@ Public Class frmMainInterface
         End Select
 
         If CurrentTab <> "RSOC" Then
-            ShowAlertMessage("Specified Year's " & CurrentTab & " records loaded!")
+            ShowDesktopAlert("Specified Year's " & CurrentTab & " records loaded!")
         Else
-            ShowAlertMessage("Specified Year's SOC Reports Register loaded!")
+            ShowDesktopAlert("Specified Year's SOC Reports Register loaded!")
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -1982,7 +1982,7 @@ Public Class frmMainInterface
         End If
 
         boolSettingsWizardCancelled = False
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ReloadDataAfterSettingsWizardClose()
@@ -2002,7 +2002,7 @@ Public Class frmMainInterface
             LoadOfficerListToTable()
             LoadOfficerListToDropDownMenu()
 
-          
+
             '   LoadOfficeSettingsToMemory()
             LoadOfficeSettingsToTextBoxes()
 
@@ -2118,9 +2118,7 @@ Public Class frmMainInterface
 #End Region
 
 
-#Region "POPUP MESSAGES SETTINGS"
-
-
+#Region "ALERT MESSAGES SETTINGS"
 
     Private Sub ShowAlertMessage() Handles chkShowPopups.Click
         On Error Resume Next
@@ -2131,8 +2129,6 @@ Public Class frmMainInterface
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowPopups", v, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
-
-
     Private Sub PlaySoundOnAlertMessage() Handles chkPlaySound.Click
         On Error Resume Next
         Dim s As Boolean = chkPlaySound.Checked
@@ -2142,33 +2138,26 @@ Public Class frmMainInterface
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "PlaySound", v, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
-
-    Public Sub ShowAlertMessage(ByVal msg As String)
+    Public Sub ShowDesktopAlert(ByVal msg As String)
         On Error Resume Next
         If Me.chkShowPopups.Checked Then
             If msg.EndsWith("!") = False And msg.EndsWith(".") = False Then
                 msg = msg & "."
             End If
-            BalloonMessage = New FrmPopupMessage()
-            Dim r As System.Drawing.Rectangle = Screen.GetWorkingArea(Me)
-            BalloonMessage.Location = New System.Drawing.Point(r.Right - BalloonMessage.Width, r.Bottom - BalloonMessage.Height)
-            BalloonMessage.AutoClose = True
-            BalloonMessage.AutoCloseTimeOut = 5
-            BalloonMessage.Text = msg
-            BalloonMessage.AlertAnimation = eAlertAnimation.BottomToTop
 
-            BalloonMessage.Style = eBallonStyle.Alert
-            BalloonMessage.BackColor = Me.BackColor
-            BalloonMessage.BackColor2 = Me.BackColor
-            BalloonMessage.ForeColor = Me.ForeColor
-            BalloonMessage.Show(False)
-            BalloonMessage.Invalidate()
-            If Me.chkPlaySound.Checked Then System.Media.SystemSounds.Asterisk.Play()
+            DesktopAlert.PlaySound = Me.chkPlaySound.Checked
+            DesktopAlert.AutoCloseTimeOut = 3
 
+            DesktopAlert.Show("<u><h5>" & strAppName & "</h5></u>" & msg, eAlertPosition.BottomRight)
         End If
 
     End Sub
 
+    Public Sub SetRandomDesktopAlertColor()
+        Dim rnd = New Random()
+        DesktopAlert.AlertColor = rnd.Next(0, 10)
+
+    End Sub
 
 #End Region
 
@@ -3053,6 +3042,103 @@ Public Class frmMainInterface
             btnHideAllDataEntryFields.Text = "Show All Data Entry Fields"
         End If
     End Sub
+
+    Private Sub Datagrid_CellMouseLeave(sender As Object, e As DataGridViewCellEventArgs) Handles SOCDatagrid.CellMouseLeave, DADatagrid.CellMouseLeave, IDRDataGrid.CellMouseLeave, FPADataGrid.CellMouseLeave, CDDataGrid.CellMouseLeave, RSOCDatagrid.CellMouseLeave
+
+        On Error Resume Next
+        Select Case DirectCast(sender, Control).Name
+            Case SOCDatagrid.Name
+                Me.lblSOCGridInfo.Visible = False
+            Case DADatagrid.Name
+                Me.lblDAGridInfo.Visible = False
+            Case IDRDataGrid.Name
+                Me.lblIDRGridInfo.Visible = False
+            Case FPADataGrid.Name
+                Me.lblFPAGridInfo.Visible = False
+            Case CDDataGrid.Name
+                Me.lblCDGridInfo.Visible = False
+            Case RSOCDatagrid.Name
+                Me.lblRSOCGridInfo.Visible = False
+        End Select
+
+    End Sub
+
+
+    Private Sub Datagrid_MouseMove(sender As Object, e As MouseEventArgs) Handles SOCDatagrid.MouseMove, DADatagrid.MouseMove, IDRDataGrid.MouseMove, FPADataGrid.MouseMove, CDDataGrid.MouseMove, RSOCDatagrid.MouseMove
+
+        On Error Resume Next
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+        Select Case DirectCast(sender, Control).Name
+            Case SOCDatagrid.Name
+                Me.lblSOCGridInfo.Location = New Point(Me.lblSOCGridInfo.Location.X, e.Y)
+            Case DADatagrid.Name
+                Me.lblDAGridInfo.Location = New Point(Me.lblDAGridInfo.Location.X, e.Y)
+            Case IDRDataGrid.Name
+                Me.lblIDRGridInfo.Location = New Point(Me.lblIDRGridInfo.Location.X, e.Y)
+            Case FPADataGrid.Name
+                Me.lblFPAGridInfo.Location = New Point(Me.lblFPAGridInfo.Location.X, e.Y)
+            Case CDDataGrid.Name
+                Me.lblCDGridInfo.Location = New Point(Me.lblCDGridInfo.Location.X, e.Y)
+            Case RSOCDatagrid.Name
+                Me.lblRSOCGridInfo.Location = New Point(Me.lblRSOCGridInfo.Location.X, e.Y)
+        End Select
+
+    End Sub
+
+    Private Sub Datagrid_CellMouseEnter(sender As Object, e As DataGridViewCellEventArgs) Handles SOCDatagrid.CellMouseEnter, DADatagrid.CellMouseEnter, IDRDataGrid.CellMouseEnter, FPADataGrid.CellMouseEnter, CDDataGrid.CellMouseEnter, RSOCDatagrid.CellMouseEnter
+
+        On Error Resume Next
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+        Select Case DirectCast(sender, Control).Name
+            Case SOCDatagrid.Name
+                If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblSOCGridInfo.Visible = False
+
+                If e.RowIndex > -1 And e.ColumnIndex > -1 Then
+                    Me.lblSOCGridInfo.Visible = True
+                    Dim dt As Date = Me.SOCDatagrid.Rows(e.RowIndex).Cells(2).Value
+                    Me.lblSOCGridInfo.Text = Strings.Format(dt, "MMM yyyy")
+                End If
+            Case DADatagrid.Name
+                If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblDAGridInfo.Visible = False
+                If e.RowIndex > -1 And e.ColumnIndex > -1 Then
+                    Me.lblDAGridInfo.Visible = True
+                    Dim dt As Date = Me.DADatagrid.Rows(e.RowIndex).Cells(2).Value
+                    Me.lblDAGridInfo.Text = Strings.Format(dt, "MMM yyyy")
+                End If
+            Case IDRDataGrid.Name
+                If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblIDRGridInfo.Visible = False
+                If e.RowIndex > -1 And e.ColumnIndex > -1 Then
+                    Me.lblIDRGridInfo.Visible = True
+                    Dim dt As Date = Me.IDRDataGrid.Rows(e.RowIndex).Cells(2).Value
+                    Me.lblIDRGridInfo.Text = Strings.Format(dt, "MMM yyyy")
+                End If
+            Case FPADataGrid.Name
+                If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblFPAGridInfo.Visible = False
+                If e.RowIndex > -1 And e.ColumnIndex > -1 Then
+                    Me.lblFPAGridInfo.Visible = True
+                    Dim dt As Date = Me.FPADataGrid.Rows(e.RowIndex).Cells(2).Value
+                    Me.lblFPAGridInfo.Text = Strings.Format(dt, "MMM yyyy")
+                End If
+            Case CDDataGrid.Name
+                If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblCDGridInfo.Visible = False
+                If e.RowIndex > -1 And e.ColumnIndex > -1 Then
+                    Me.lblCDGridInfo.Visible = True
+                    Dim dt As Date = Me.CDDataGrid.Rows(e.RowIndex).Cells(2).Value
+                    Me.lblCDGridInfo.Text = Strings.Format(dt, "MMM yyyy")
+                End If
+            Case RSOCDatagrid.Name
+                If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblRSOCGridInfo.Visible = False
+                If e.RowIndex > -1 And e.ColumnIndex > -1 Then
+                    Me.lblRSOCGridInfo.Visible = True
+                    Dim dt As Date = Me.RSOCDatagrid.Rows(e.RowIndex).Cells(8).Value
+                    Me.lblRSOCGridInfo.Text = Strings.Format(dt, "MMM yyyy")
+                End If
+        End Select
+
+
+    End Sub
     Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting, IODatagrid.CellPainting, IDRDataGrid.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
@@ -3283,7 +3369,7 @@ Public Class frmMainInterface
         LoadIDRDatagridColumnDefaultWidth()
 
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        ShowAlertMessage("Column widths of all tables set to default widths!")
+        ShowDesktopAlert("Column widths of all tables set to default widths!")
     End Sub
 
 
@@ -3318,7 +3404,7 @@ Public Class frmMainInterface
         End Select
 
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        ShowAlertMessage("Column widths of the current table set to default widths!")
+        ShowDesktopAlert("Column widths of the current table set to default widths!")
     End Sub
 
     '-----------------------------------------Save Changed Column Width-------------
@@ -3773,7 +3859,7 @@ Public Class frmMainInterface
         LoadPSDatagridColumnDefaultOrder()
         LoadIDRDatagridColumnDefaultOrder()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        ShowAlertMessage("Column order of all tables set to default order!")
+        ShowDesktopAlert("Column order of all tables set to default order!")
     End Sub
 
 
@@ -3817,7 +3903,7 @@ Public Class frmMainInterface
         End Select
 
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        ShowAlertMessage("Column order of the current table set to default order!")
+        ShowDesktopAlert("Column order of the current table set to default order!")
     End Sub
 
     Private Sub FreezeColumns() Handles btnFreezeColumn.Click
@@ -3861,7 +3947,7 @@ Public Class frmMainInterface
 #Region "DATAGRID BACKCOLOR"
     Private Sub SetTableBackColor()
         Try
-            Dim strTableEvenColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableEvenColor", Color.LightSalmon.ToArgb.ToString)
+            Dim strTableEvenColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableEvenColor", Color.LightBlue.ToArgb.ToString)
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "TableEvenColor", strTableEvenColor, Microsoft.Win32.RegistryValueKind.String)
 
             Dim strTableOddColor As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TableOddColor", SOCDatagrid.DefaultCellStyle.BackColor.ToArgb.ToString)
@@ -4328,7 +4414,7 @@ Public Class frmMainInterface
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4340,7 +4426,7 @@ Public Class frmMainInterface
                         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4355,7 +4441,7 @@ Public Class frmMainInterface
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4367,7 +4453,7 @@ Public Class frmMainInterface
                         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4384,7 +4470,7 @@ Public Class frmMainInterface
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4396,7 +4482,7 @@ Public Class frmMainInterface
                         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4409,7 +4495,7 @@ Public Class frmMainInterface
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4417,7 +4503,7 @@ Public Class frmMainInterface
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4430,7 +4516,7 @@ Public Class frmMainInterface
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4438,7 +4524,7 @@ Public Class frmMainInterface
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4456,7 +4542,7 @@ Public Class frmMainInterface
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4468,7 +4554,7 @@ Public Class frmMainInterface
                         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4485,7 +4571,7 @@ Public Class frmMainInterface
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4497,7 +4583,7 @@ Public Class frmMainInterface
                         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4510,7 +4596,7 @@ Public Class frmMainInterface
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4518,7 +4604,7 @@ Public Class frmMainInterface
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4532,7 +4618,7 @@ Public Class frmMainInterface
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & IDRDataGrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & IDRDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
@@ -4544,7 +4630,7 @@ Public Class frmMainInterface
                         Me.IDRRegisterBindingSource.Sort = IDRDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowAlertMessage("Table sorted with " & IDRDataGrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & IDRDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -4819,16 +4905,16 @@ Public Class frmMainInterface
         If EventID = WIA.EventID.wiaEventDeviceConnected Then
             If Me.devmanager.DeviceInfos.Count = 1 Then
                 If Me.devmanager.DeviceInfos.Item(1).Type = WIA.WiaDeviceType.CameraDeviceType Then
-                    ShowAlertMessage("Compatible Camera Connected!")
+                    ShowDesktopAlert("Compatible Camera Connected!")
                 End If
 
                 If Me.devmanager.DeviceInfos.Item(1).Type = WIA.WiaDeviceType.ScannerDeviceType Then
-                    ShowAlertMessage("Compatible Scanner Connected!")
+                    ShowDesktopAlert("Compatible Scanner Connected!")
                 End If
 
             ElseIf Me.devmanager.DeviceInfos.Count > 1 Then
                 For i = 1 To Me.devmanager.DeviceInfos.Count
-                    If Me.devmanager.DeviceInfos.Item(i).Type = WIA.WiaDeviceType.CameraDeviceType Or WIA.WiaDeviceType.ScannerDeviceType Then ShowAlertMessage("Compatible Device Connected!")
+                    If Me.devmanager.DeviceInfos.Item(i).Type = WIA.WiaDeviceType.CameraDeviceType Or WIA.WiaDeviceType.ScannerDeviceType Then ShowDesktopAlert("Compatible Device Connected!")
                     Exit For
                 Next
             End If
@@ -4944,7 +5030,7 @@ errhandler:
             My.Computer.FileSystem.CreateDirectory(DASlipImageImportLocation)
             My.Computer.FileSystem.CreateDirectory(IDSlipImageImportLocation)
             My.Computer.FileSystem.CreateDirectory(ACSlipImageImportLocation)
-            ShowAlertMessage("Scanned FP Slips location changed!")
+            ShowDesktopAlert("Scanned FP Slips location changed!")
         End If
     End Sub
 
@@ -5098,7 +5184,7 @@ errhandler:
 
                 Me.DARegisterTableAdapter.UpdateSlipFile(DASlipImageFile, DANo)
 
-                ShowAlertMessage("Imported one Image")
+                ShowDesktopAlert("Imported one Image")
                 DASlipImageFile = ""
             End If
         End If
@@ -5124,7 +5210,7 @@ errhandler:
 
                 Me.IDRegisterTableAdapter.UpdateSlipFile(IDSlipImageFile, IDNo)
 
-                ShowAlertMessage("Imported one Image")
+                ShowDesktopAlert("Imported one Image")
                 IDSlipImageFile = ""
             End If
         End If
@@ -5150,7 +5236,7 @@ errhandler:
 
                 Me.ACRegisterTableAdapter.UpdateSlipFile(ACSlipImageFile, ACNo)
 
-                ShowAlertMessage("Imported one Image")
+                ShowDesktopAlert("Imported one Image")
                 ACSlipImageFile = ""
             End If
         End If
@@ -5235,7 +5321,7 @@ errhandler:
 
                     Me.DARegisterTableAdapter.UpdateSlipFile(DASlipImageFile, DANo)
                     DASlipImageFile = ""
-                    ShowAlertMessage("DA Slip Image file updated")
+                    ShowDesktopAlert("DA Slip Image file updated")
                 End If
 
 
@@ -5270,7 +5356,7 @@ errhandler:
 
                     Me.IDRegisterTableAdapter.UpdateSlipFile(IDSlipImageFile, IDNo)
                     IDSlipImageFile = ""
-                    ShowAlertMessage("Identified Slip Image file updated")
+                    ShowDesktopAlert("Identified Slip Image file updated")
                 End If
 
 
@@ -5305,7 +5391,7 @@ errhandler:
 
                     Me.ACRegisterTableAdapter.UpdateSlipFile(ACSlipImageFile, ACNo)
                     ACSlipImageFile = ""
-                    ShowAlertMessage("Active Criminal Slip Image file updated")
+                    ShowDesktopAlert("Active Criminal Slip Image file updated")
                 End If
 
             End If
@@ -6387,7 +6473,7 @@ errhandler:
                     IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
                     ClearIOFields()
                     UpdateOfficerList()
-                    ShowAlertMessage("Selected officer deleted")
+                    ShowDesktopAlert("Selected officer deleted")
                 End If
                 Exit Sub
             End If
@@ -6427,7 +6513,7 @@ errhandler:
                         IDRRow.Delete()
                     End If
                     Me.SOCRegisterTableAdapter.DeleteSelectedRecord(OriginalSOCNumber)
-                    ShowAlertMessage("Selected SOC record deleted!")
+                    ShowDesktopAlert("Selected SOC record deleted!")
                     If Me.SOCDatagrid.SelectedRows.Count = 0 And Me.SOCDatagrid.RowCount <> 0 Then
                         Me.SOCDatagrid.Rows(Me.SOCDatagrid.RowCount - 1).Selected = True
                     End If
@@ -6464,7 +6550,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.RSOCRegisterTableAdapter.DeleteSelectedRecord(OriginalRSOCSerialNumber)
-                    ShowAlertMessage("Selected SOC Report record deleted!")
+                    ShowDesktopAlert("Selected SOC Report record deleted!")
                     If Me.RSOCDatagrid.SelectedRows.Count = 0 And Me.RSOCDatagrid.RowCount <> 0 Then
                         Me.RSOCDatagrid.Rows(Me.RSOCDatagrid.RowCount - 1).Selected = True
                     End If
@@ -6502,7 +6588,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.DARegisterTableAdapter.DeleteSelectedRecord(OriginalDANumber)
-                    ShowAlertMessage("Selected DA record deleted!")
+                    ShowDesktopAlert("Selected DA record deleted!")
                     If Me.DADatagrid.SelectedRows.Count = 0 And Me.DADatagrid.RowCount <> 0 Then
                         Me.DADatagrid.Rows(Me.DADatagrid.RowCount - 1).Selected = True
                     End If
@@ -6541,7 +6627,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.IDRegisterTableAdapter.DeleteSelectedRecord(OriginalIDNumber)
-                    ShowAlertMessage("Selected Identified Slip record deleted!")
+                    ShowDesktopAlert("Selected Identified Slip record deleted!")
                     If Me.IDDatagrid.SelectedRows.Count = 0 And Me.IDDatagrid.RowCount <> 0 Then
                         Me.IDDatagrid.Rows(Me.IDDatagrid.RowCount - 1).Selected = True
                     End If
@@ -6580,7 +6666,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.ACRegisterTableAdapter.DeleteSelectedRecord(OriginalACNumber)
-                    ShowAlertMessage("Selected Identified Slip record deleted!")
+                    ShowDesktopAlert("Selected Identified Slip record deleted!")
                     If Me.ACDatagrid.SelectedRows.Count = 0 And Me.ACDatagrid.RowCount <> 0 Then
                         Me.ACDatagrid.Rows(Me.ACDatagrid.RowCount - 1).Selected = True
                     End If
@@ -6618,7 +6704,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.CDRegisterTableAdapter.DeleteSelectedRecord(OriginalCDNumber)
-                    ShowAlertMessage("Selected CD record deleted!")
+                    ShowDesktopAlert("Selected CD record deleted!")
                     If Me.CDDataGrid.SelectedRows.Count = 0 And Me.CDDataGrid.RowCount <> 0 Then
                         Me.CDDataGrid.Rows(Me.CDDataGrid.RowCount - 1).Selected = True
                     End If
@@ -6655,7 +6741,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.FPARegisterTableAdapter.DeleteSelectedRecord(OriginalFPANumber)
-                    ShowAlertMessage("Selected record deleted!")
+                    ShowDesktopAlert("Selected record deleted!")
                     If Me.FPADataGrid.SelectedRows.Count = 0 And Me.FPADataGrid.RowCount <> 0 Then
                         Me.FPADataGrid.Rows(Me.FPADataGrid.RowCount - 1).Selected = True
                     End If
@@ -6691,7 +6777,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.PSRegisterTableAdapter.DeleteSelectedRecord(OriginalPSName)
-                    ShowAlertMessage("Selected Police Station Name deleted!")
+                    ShowDesktopAlert("Selected Police Station Name deleted!")
                     If Me.PSDataGrid.SelectedRows.Count = 0 And Me.PSDataGrid.RowCount <> 0 Then
                         Me.PSDataGrid.Rows(Me.PSDataGrid.RowCount - 1).Selected = True
                     End If
@@ -6748,7 +6834,7 @@ errhandler:
 
                     Me.SOCRegisterTableAdapter.DeleteAllRecords()
                     Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
-                    ShowAlertMessage("All records deleted from SOC Register!")
+                    ShowDesktopAlert("All records deleted from SOC Register!")
                 End If
             End If
 
@@ -6765,7 +6851,7 @@ errhandler:
                     Me.RSOCRegisterTableAdapter.DeleteAllRecords()
                     Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
                     GenerateNewRSOCSerialNumber()
-                    ShowAlertMessage("All records deleted from SOC Reports Register!")
+                    ShowDesktopAlert("All records deleted from SOC Reports Register!")
                 End If
             End If
 
@@ -6782,7 +6868,7 @@ errhandler:
 
                     Me.FPARegisterTableAdapter.DeleteAllRecords()
                     Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
-                    ShowAlertMessage("All records deleted from FP Attestation Register!")
+                    ShowDesktopAlert("All records deleted from FP Attestation Register!")
                 End If
             End If
 
@@ -6798,7 +6884,7 @@ errhandler:
 
                     Me.DARegisterTableAdapter.DeleteAllRecords()
                     Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
-                    ShowAlertMessage("All records deleted from DA Register!")
+                    ShowDesktopAlert("All records deleted from DA Register!")
                 End If
             End If
 
@@ -6815,7 +6901,7 @@ errhandler:
 
                     Me.IDRegisterTableAdapter.DeleteAllRecords()
                     Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
-                    ShowAlertMessage("All records deleted from Identified Slips Register!")
+                    ShowDesktopAlert("All records deleted from Identified Slips Register!")
                 End If
             End If
 
@@ -6832,7 +6918,7 @@ errhandler:
 
                     Me.ACRegisterTableAdapter.DeleteAllRecords()
                     Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
-                    ShowAlertMessage("All records deleted from Active Criminal Slips Register!")
+                    ShowDesktopAlert("All records deleted from Active Criminal Slips Register!")
                 End If
             End If
 
@@ -6851,7 +6937,7 @@ errhandler:
 
                     Me.CDRegisterTableAdapter.DeleteAllRecords()
                     Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
-                    ShowAlertMessage("All records deleted from Court Duty Register!")
+                    ShowDesktopAlert("All records deleted from Court Duty Register!")
                 End If
             End If
 
@@ -6870,7 +6956,7 @@ errhandler:
 
                     Me.PSRegisterTableAdapter.DeleteAllRecords()
                     Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
-                    ShowAlertMessage("All records deleted from Police Station List!")
+                    ShowDesktopAlert("All records deleted from Police Station List!")
                     Me.cmbSOCPoliceStation.Items.Clear()
                 End If
             End If
@@ -7429,7 +7515,7 @@ errhandler:
             Exit Sub
         End If
         UpdateOfficerList()
-        ShowAlertMessage("Officer List Updated")
+        ShowDesktopAlert("Officer List Updated")
 
     End Sub
 
@@ -8424,7 +8510,7 @@ errhandler:
                 Me.IDRRegisterBindingSource.Position = Me.IDRRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
             End If
 
-            ShowAlertMessage("Selected Record updated successfully!")
+            ShowDesktopAlert("Selected Record updated successfully!")
 
             InitializeSOCFields()
             ' IncrementSOCNumber(NewSOCNumber)
@@ -8624,7 +8710,7 @@ errhandler:
                 Me.IDRRegisterBindingSource.Position = Me.IDRRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
             End If
 
-            ShowAlertMessage("SOC Record overwritten!")
+            ShowDesktopAlert("SOC Record overwritten!")
 
             InitializeSOCFields()
             ' IncrementSOCNumber(NewSOCNumber)
@@ -8669,7 +8755,7 @@ errhandler:
 
         Me.SOCRegisterTableAdapter.UpdatePhotoReceived(y, soc)
 
-        ShowAlertMessage("Photo received status set to '" & y & "'")
+        ShowDesktopAlert("Photo received status set to '" & y & "'")
     End Sub
 #End Region
 
@@ -8697,7 +8783,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         Me.SOCRegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.SOCRegister, Me.txtSOCNumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -8711,7 +8797,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         Me.SOCRegisterTableAdapter.FillByGraveCrime(Me.FingerPrintDataSet.SOCRegister, Me.chkGraveCrime.Checked)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -8860,7 +8946,7 @@ errhandler:
         End If
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -9013,7 +9099,7 @@ errhandler:
         End If
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -9027,7 +9113,7 @@ errhandler:
         On Error Resume Next
         Me.SOCRegisterTableAdapter.FillByIdentififiedCases(FingerPrintDataSet.SOCRegister)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Identified Records Loaded. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Identified Records Loaded. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
     End Sub
 
@@ -9059,7 +9145,7 @@ errhandler:
             Me.SettingsTableAdapter1.SetCPImageLocation(CPImageImportLocation, id)
             GetCPImageImportLocation()
             My.Computer.FileSystem.CreateDirectory(CPImageImportLocation)
-            ShowAlertMessage("Chance Print location changed!")
+            ShowDesktopAlert("Chance Print location changed!")
         End If
     End Sub
 
@@ -9145,7 +9231,7 @@ errhandler:
             img = dg.ShowTransfer(itm, , True) 'show default transfer progress dialog
             FileName = itm.Properties("Item Name").Value 'use the original name
             saved = SaveImage(img, Location, FileName)
-            ShowAlertMessage(count & "1 image imported sucessfully!")
+            ShowDesktopAlert(count & "1 image imported sucessfully!")
         End If
 
         If count > 1 Then
@@ -9166,7 +9252,7 @@ errhandler:
 
             Next
             FrmImportTransferRate.Close()
-            ShowAlertMessage(i - 1 & " images imported sucessfully!")
+            ShowDesktopAlert(i - 1 & " images imported sucessfully!")
         End If
         DisplayDatabaseInformation()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -9215,7 +9301,7 @@ errhandler:
 
             If count = 1 Then
                 My.Computer.FileSystem.CopyFile(OpenFileDialog1.FileNames(0), Location & "/" & OpenFileDialog1.SafeFileNames(0), True)
-                ShowAlertMessage("1 image imported sucessfully!")
+                ShowDesktopAlert("1 image imported sucessfully!")
             End If
 
             If count > 1 Then
@@ -9232,7 +9318,7 @@ errhandler:
                     Application.DoEvents()
                 Next
                 FrmImportTransferRate.Close()
-                ShowAlertMessage(i & " images imported sucessfully!")
+                ShowDesktopAlert(i & " images imported sucessfully!")
             End If
         End If
         DisplayDatabaseInformation()
@@ -9666,7 +9752,7 @@ errhandler:
         Me.RSOCRegisterBindingSource.Position = Me.RSOCRegisterBindingSource.Find("SerialNo", OriginalRSOCSerialNumber)
 
         Me.RSOCRegisterTableAdapter.Insert(OriginalRSOCSerialNumber, socno, socnumwithoutyear, Me.dtRSOCInspection.ValueObject, ps, cr, officer, reportto, Me.dtRSOCReportSentOn.ValueObject, nature, despatch, remarks)
-        ShowAlertMessage("New Record entered successfully!")
+        ShowDesktopAlert("New Record entered successfully!")
         InitializeRSOCFields()
         IncrementRSOCNumber(OriginalRSOCSerialNumber)
 
@@ -9807,7 +9893,7 @@ errhandler:
 
         Me.RSOCRegisterTableAdapter.UpdateQuery(NewRSOCSerialNumber, socno, socnumwithoutyear, Me.dtRSOCInspection.ValueObject, ps, cr, officer, reportto, Me.dtRSOCReportSentOn.ValueObject, nature, despatch, remarks, OriginalRSOCSerialNumber)
 
-        ShowAlertMessage("Selected Record updated successfully!")
+        ShowDesktopAlert("Selected Record updated successfully!")
         InitializeRSOCFields()
         GenerateNewRSOCSerialNumber()
         Me.dtRSOCInspection.Text = vbNullString
@@ -9884,7 +9970,7 @@ errhandler:
 
         Me.RSOCRegisterTableAdapter.UpdateQuery(OriginalRSOCSerialNumber, socno, socnumwithoutyear, Me.dtRSOCInspection.ValueObject, ps, cr, officer, reportto, Me.dtRSOCReportSentOn.ValueObject, nature, despatch, remarks, OriginalRSOCSerialNumber)
 
-        ShowAlertMessage("Selected Record over writed!")
+        ShowDesktopAlert("Selected Record over writed!")
         InitializeRSOCFields()
         GenerateNewRSOCSerialNumber()
         Me.dtRSOCInspection.Text = vbNullString
@@ -9920,7 +10006,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         Me.RSOCRegisterTableAdapter.FillBySerialNumber(Me.FingerPrintDataSet.SOCReportRegister, Me.txtRSOCSerialNumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -9995,7 +10081,7 @@ errhandler:
         End If
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.RSOCDatagrid.RowCount < 2, Me.RSOCDatagrid.RowCount & " Record", Me.RSOCDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -10306,7 +10392,7 @@ errhandler:
         Me.DARegisterBindingSource.Position = Me.DARegisterBindingSource.Find("DANumber", OriginalDANumber)
 
         Me.DARegisterTableAdapter.Insert(OriginalDANumber, sYear, Me.dtDAEntry.ValueObject, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, DASlipImageFile, remarks, modus)
-        ShowAlertMessage("New DA Record entered successfully!")
+        ShowDesktopAlert("New DA Record entered successfully!")
 
         InitializeDAFields()
         IncrementDANumber(OriginalDANumber)
@@ -10378,7 +10464,7 @@ errhandler:
 
         Me.DARegisterTableAdapter.UpdateQuery(NewDANumber, sYear, Me.dtDAEntry.ValueObject, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, DASlipImageFile, remarks, modus, OriginalDANumber)
 
-        ShowAlertMessage("DA Record over writed!")
+        ShowDesktopAlert("DA Record over writed!")
         
 
         InitializeDAFields()
@@ -10465,7 +10551,7 @@ errhandler:
 
         Me.DARegisterTableAdapter.UpdateQuery(NewDANumber, sYear, Me.dtDAEntry.ValueObject, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, DASlipImageFile, remarks, modus, OriginalDANumber)
 
-        ShowAlertMessage("Selected DA Record updated successfully!")
+        ShowDesktopAlert("Selected DA Record updated successfully!")
 
 
         InitializeDAFields()
@@ -10502,7 +10588,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         Me.DARegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.DARegister, Me.txtDANumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -10619,7 +10705,7 @@ errhandler:
         con.Close()
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -10748,7 +10834,7 @@ errhandler:
 
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.DADatagrid.RowCount < 2, Me.DADatagrid.RowCount & " Record", Me.DADatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -10860,7 +10946,7 @@ errhandler:
     Private Sub ClearDAImageWithMessage() Handles btnDAClearFPSlip.Click, btnDAClearDisplayContext.Click
         On Error Resume Next
         ClearDAImage()
-        ShowAlertMessage("Image cleared!")
+        ShowDesktopAlert("Image cleared!")
     End Sub
 
 
@@ -10878,7 +10964,7 @@ errhandler:
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If Me.DADatagrid.RowCount = 0 Then
-            ShowAlertMessage("No data in the list to show image!")
+            ShowDesktopAlert("No data in the list to show image!")
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
@@ -11256,7 +11342,7 @@ errhandler:
 
 
             Me.IDRegisterTableAdapter.Insert(OriginalIDNumber, da, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, iddetails, IDSlipImageFile, remarks, modus)
-            ShowAlertMessage("New Identified Slips Record entered successfully!")
+            ShowDesktopAlert("New Identified Slips Record entered successfully!")
 
             InitializeIDFields()
             IncrementIDNumber(OriginalIDNumber)
@@ -11332,7 +11418,7 @@ errhandler:
         Me.IDRegisterTableAdapter.UpdateQuery(NewIDNumber, da, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, iddetails, IDSlipImageFile, remarks, modus, OriginalIDNumber)
 
 
-        ShowAlertMessage("Identified Slips Record over writed!")
+        ShowDesktopAlert("Identified Slips Record over writed!")
 
         InitializeIDFields()
         ' IncrementIDNumber(NewIDNumber)
@@ -11414,7 +11500,7 @@ errhandler:
 
         Me.IDRegisterTableAdapter.UpdateQuery(NewIDNumber, da, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, iddetails, IDSlipImageFile, remarks, modus, OriginalIDNumber)
 
-        ShowAlertMessage("Selected Identified Slips Record updated successfully!")
+        ShowDesktopAlert("Selected Identified Slips Record updated successfully!")
 
         InitializeIDFields()
         ' IncrementIDNumber(NewIDNumber)
@@ -11448,7 +11534,7 @@ errhandler:
         Me.Cursor = Cursors.WaitCursor
         Me.IDRegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.IdentifiedSlipsRegister, Me.txtIDNumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -11573,7 +11659,7 @@ errhandler:
         con.Close()
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.IDDatagrid.RowCount < 2, Me.IDDatagrid.RowCount & " Record", Me.IDDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -11680,7 +11766,7 @@ errhandler:
         On Error Resume Next
         Me.picIDSlip.ClearImage()
         IDSlipImageFile = vbNullString
-        ShowAlertMessage("Image cleared!")
+        ShowDesktopAlert("Image cleared!")
     End Sub
 
     Private Sub ViewImageOnIDDatagridCellDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles IDDatagrid.CellDoubleClick
@@ -11696,7 +11782,7 @@ errhandler:
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If Me.IDDatagrid.RowCount = 0 Then
-            ShowAlertMessage("No data in the list to show image!")
+            ShowDesktopAlert("No data in the list to show image!")
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
@@ -12073,7 +12159,7 @@ errhandler:
 
 
         Me.ACRegisterTableAdapter.Insert(OriginalACNumber, da, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, modus, ACSlipImageFile, remarks)
-        ShowAlertMessage("New Active Criminal Slips Record entered successfully!")
+        ShowDesktopAlert("New Active Criminal Slips Record entered successfully!")
 
         InitializeACFields()
         IncrementACNumber(OriginalACNumber)
@@ -12144,7 +12230,7 @@ errhandler:
         Me.ACRegisterTableAdapter.UpdateQuery(NewACNumber, da, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, modus, ACSlipImageFile, remarks, OriginalACNumber)
 
 
-        ShowAlertMessage("Active Criminal Slips Record over writed!")
+        ShowDesktopAlert("Active Criminal Slips Record over writed!")
         
         InitializeACFields()
         ' IncrementACNumber(NewACNumber)
@@ -12226,7 +12312,7 @@ errhandler:
 
         Me.ACRegisterTableAdapter.UpdateQuery(NewACNumber, da, ps, cr, section, name, aliasname, father, sex, address, hnum, hden, modus, ACSlipImageFile, remarks, OriginalACNumber)
 
-        ShowAlertMessage("Selected Active Criminal Record updated successfully!")
+        ShowDesktopAlert("Selected Active Criminal Record updated successfully!")
         InitializeACFields()
         ' IncrementACNumber(NewACNumber)
         GenerateNewACNumber()
@@ -12260,7 +12346,7 @@ errhandler:
 
         Me.ACRegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.ActiveCriminalsRegister, Me.txtACNumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -12379,7 +12465,7 @@ errhandler:
 
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.ACDatagrid.RowCount < 2, Me.ACDatagrid.RowCount & " Record", Me.ACDatagrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -12491,7 +12577,7 @@ errhandler:
         On Error Resume Next
         Me.picACSlip.ClearImage()
         ACSlipImageFile = vbNullString
-        ShowAlertMessage("Image cleared!")
+        ShowDesktopAlert("Image cleared!")
     End Sub
 
 
@@ -12508,7 +12594,7 @@ errhandler:
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If Me.ACDatagrid.RowCount = 0 Then
-            ShowAlertMessage("No data in the list to show image!")
+            ShowDesktopAlert("No data in the list to show image!")
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
@@ -12817,7 +12903,7 @@ errhandler:
         Me.CDRegisterBindingSource.Position = Me.CDRegisterBindingSource.Find("CDNumberWithYear", OriginalCDNumber)
 
         Me.CDRegisterTableAdapter.Insert(OriginalCDNumber, CDN, Me.dtCDExamination.ValueObject, officer, court, ccno, ps, crno, details, remarks)
-        ShowAlertMessage("New CD Record entered successfully!")
+        ShowDesktopAlert("New CD Record entered successfully!")
 
         InitializeCDFields()
         IncrementCDNumber(OriginalCDNumber)
@@ -12893,7 +12979,7 @@ errhandler:
 
             Me.CDRegisterTableAdapter.UpdateQuery(NewCDNumber, CDN, Me.dtCDExamination.ValueObject, officer, court, ccno, ps, crno, details, remarks, OriginalCDNumber)
 
-            ShowAlertMessage("Selected CD Record updated successfully!")
+            ShowDesktopAlert("Selected CD Record updated successfully!")
             InitializeCDFields()
             ' IncrementCDNumber(NewCDNumber)
             GenerateNewCDNumber()
@@ -12930,7 +13016,7 @@ errhandler:
 
         Me.CDRegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.CDRegister, Me.txtCDNumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -12991,7 +13077,7 @@ errhandler:
 
 
             DisplayDatabaseInformation()
-            ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
+            ShowDesktopAlert("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
             Application.DoEvents()
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -13062,7 +13148,7 @@ errhandler:
 
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.CDDataGrid.RowCount < 2, Me.CDDataGrid.RowCount & " Record", Me.CDDataGrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -13110,7 +13196,7 @@ errhandler:
 
         Me.CDRegisterTableAdapter.UpdateQuery(NewCDNumber, CDN, Me.dtCDExamination.ValueObject, officer, court, ccno, ps, crno, details, remarks, OriginalCDNumber)
 
-        ShowAlertMessage("CD Record over writed!")
+        ShowDesktopAlert("CD Record over writed!")
 
         InitializeCDFields()
         ' IncrementCDNumber(NewCDNumber)
@@ -13341,7 +13427,7 @@ errhandler:
 
 
         Me.FPARegisterTableAdapter.Insert(OriginalFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalan, treaury, "", remarks, HeadofAccount, amount, dtChalanDate.ValueObject)
-        ShowAlertMessage("New Record entered successfully!")
+        ShowDesktopAlert("New Record entered successfully!")
 
         InitializeFPAFields()
         IncrementFPANumber(OriginalFPANumber)
@@ -13423,7 +13509,7 @@ errhandler:
 
 
         Me.FPARegisterTableAdapter.UpdateQuery(NewFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalan, treaury, amount, "", remarks, Me.dtChalanDate.ValueObject, HeadofAccount, OriginalFPANumber)
-        ShowAlertMessage("Selected Record updated successfully!")
+        ShowDesktopAlert("Selected Record updated successfully!")
 
         InitializeFPAFields()
         ' IncrementFPANumber(NewFPANumber)
@@ -13481,7 +13567,7 @@ errhandler:
         Me.FPARegisterBindingSource.Position = Me.FPARegisterBindingSource.Find("FPNumber", NewFPANumber)
 
         Me.FPARegisterTableAdapter.UpdateQuery(NewFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalan, treaury, amount, "", remarks, Me.dtChalanDate.ValueObject, HeadofAccount, OriginalFPANumber)
-        ShowAlertMessage("FPA Record over writed!")
+        ShowDesktopAlert("FPA Record over writed!")
 
         InitializeFPAFields()
         ' IncrementFPANumber(NewFPANumber)
@@ -13519,7 +13605,7 @@ errhandler:
 
         Me.FPARegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.FPAttestationRegister, Me.txtFPANumber.Text)
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -13594,7 +13680,7 @@ errhandler:
 
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -13679,7 +13765,7 @@ errhandler:
 
 
         DisplayDatabaseInformation()
-        ShowAlertMessage("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
+        ShowDesktopAlert("Search finished. Found " & IIf(Me.FPADataGrid.RowCount < 2, Me.FPADataGrid.RowCount & " Record", Me.FPADataGrid.RowCount & " Records"))
         Application.DoEvents()
          If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
@@ -13776,7 +13862,7 @@ errhandler:
 
 
             Me.PSRegisterTableAdapter.Insert(OriginalPSName, Ph1, Ph2, Distance, SHO) 'update the database
-        ShowAlertMessage("New Police Station Name entered successfully!")
+        ShowDesktopAlert("New Police Station Name entered successfully!")
 
 
         ClearPSFields()
@@ -13876,10 +13962,10 @@ errhandler:
 
                 DevComponents.DotNetBar.MessageBoxEx.Show("Police Station Name updated successfully!" & vbNewLine & vbNewLine & c1 & IIf(c1 <= 1, " record ", " records ") & "updated in SOC Register." & vbNewLine & c2 & IIf(c2 <= 1, " record ", " records ") & "updated in DA Register." & vbNewLine & c3 & IIf(c3 <= 1, " record ", " records ") & "updated in Identified Slips Register." & vbNewLine & c4 & IIf(c4 <= 1, " record ", " records ") & "updated in Active Criminals Register." & vbNewLine & c5 & IIf(c5 <= 1, " record ", " records ") & "updated in CD Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
-                ShowAlertMessage("Police Station Name updated successfully!")
+                ShowDesktopAlert("Police Station Name updated successfully!")
             End If
         Else
-            ShowAlertMessage("Police Station details updated successfully!")
+            ShowDesktopAlert("Police Station details updated successfully!")
         End If
 
 
@@ -13926,7 +14012,7 @@ errhandler:
 
             Me.PSRegisterTableAdapter.UpdateQuery(NewPSName, Distance, Ph1, Ph2, SHO, OriginalPSName) 'update the database
 
-        ShowAlertMessage("Police Station Name overwrited successfully!")
+        ShowDesktopAlert("Police Station Name overwrited successfully!")
         NewDataMode()
         PSListChanged = True
         DisplayDatabaseInformation()
@@ -13994,7 +14080,7 @@ errhandler:
             End If
             SetWindowTitle()
 
-            ShowAlertMessage("Office Settings updated!")
+            ShowDesktopAlert("Office Settings updated!")
             OfficeSettingsEditMode(False)
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -14045,7 +14131,7 @@ errhandler:
                     If FileIO.FileSystem.FileExists(SelectedPath & "\Fingerprint.mdb") Then
                         Dim reply As DialogResult = MessageBoxEx.Show("Database already exists in selected folder. Click 'Yes' to overwrite or 'No' to exit without change.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
                         If reply = Windows.Forms.DialogResult.No Then
-                            ShowAlertMessage("Database Folder not changed")
+                            ShowDesktopAlert("Database Folder not changed")
                             Exit Sub
                         End If
                     End If
@@ -14054,7 +14140,7 @@ errhandler:
                     My.Computer.FileSystem.CopyFile(sDatabaseFile, SelectedPath & "\Fingerprint.mdb", True)
                     sDatabaseFile = SelectedPath & "\Fingerprint.mdb"
                     Application.DoEvents()
-                    ShowAlertMessage("Database Folder changed")
+                    ShowDesktopAlert("Database Folder changed")
                     My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
                     ReloadDataAfterSettingsWizardClose()
 
@@ -14284,7 +14370,7 @@ errhandler:
                 End If
                 SelectedPath = SelectedPath.Replace("\\", "\")
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", SelectedPath, Microsoft.Win32.RegistryValueKind.String)
-                ShowAlertMessage("Backup Folder changed!")
+                ShowDesktopAlert("Backup Folder changed!")
             End If
 
         Catch ex As Exception
@@ -16723,7 +16809,6 @@ errhandler:
 
 
 #End Region
-
 
 
 End Class
