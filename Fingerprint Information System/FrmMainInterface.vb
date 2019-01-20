@@ -100,6 +100,14 @@ Public Class frmMainInterface
     Dim TableEvenColor As Color
     Dim TableOddColor As Color
 
+    Dim InstallerFileName As String = ""
+    Dim InstallerFileID As String = ""
+    Dim InstallerFileURL As String = "" '"https://drive.google.com/file/d/1vyGdhxjXUWjkcgTE_rTT7juiMSBA-UKc/view"
+    Dim InstallerFileVersion As String = ""
+    Public dBytesDownloaded As Long
+    Public dDownloadStatus As DownloadStatus
+    Public dFileSize As Long
+
 #End Region
 
 
@@ -15352,7 +15360,7 @@ errhandler:
             wdBooks("Cr").Range.Text = Cr
             wdBooks("DIns").Range.Text = dtins
             wdBooks("Did").Range.Text = sdtid
-            wdBooks("Accused").Range.Text = accused
+            wdBooks("Accused").Range.Text = accused & vbNewLine
             If InspectingOfficer = IdentifyingOfficer Then
                 wdBooks("FPEIns").Range.Text = "Inspected and Identified by: " & InspectingOfficer
                 wdBooks("FPEId").Range.Text = ""
@@ -16728,22 +16736,136 @@ errhandler:
 
 #Region "DOWNLOAD INSTALLER"
 
-    Private Sub DownloadInstaller() Handles btnDownloadInstaller.Click
+    Private Sub btnDownloadInstallerInBrowser_Click(sender As Object, e As EventArgs) Handles btnDownloadInstallerInBrowser.Click
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        CheckForUpdates()
+        Me.Cursor = Cursors.Default
+        Process.Start(InstallerFileURL) ' google drive File
+    End Sub
+
+
+    Private Sub btnDownloadInstaller_Click(sender As Object, e As EventArgs) Handles btnDownloadInstaller.Click
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        DownloadInstaller()
+    End Sub
+
+    Private Sub DownloadInstaller()
+
+        pgrDownloadInstaller.Visible = True
+        pgrDownloadInstaller.Value = 0
+        pgrDownloadInstaller.Text = "Downloading Installer 0%"
+        Me.StatusBar.RecalcLayout()
+
+        cpgrDownloadInstaller.ProgressColor = GetProgressColor()
+        cpgrDownloadInstaller.ProgressText = "0"
+        rbrDownloadInstaller.Visible = True
+        cpgrDownloadInstaller.IsRunning = True
+        bgwDownload.RunWorkerAsync()
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownload.DoWork
         Try
-            Process.Start("https://drive.google.com/file/d/1vyGdhxjXUWjkcgTE_rTT7juiMSBA-UKc/view") ' google drive File
-            ' Process.Start("https://app.box.com/s/kjkkp4cyp17mnkr7t1oz2qclodylz73i") 'box Folder
+
+            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim VersionFolder As String = "Version"
+            Dim VersionFolderID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+            List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false"
+            List.Fields = "files(name, id, webViewLink)"
+
+            Dim Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                InstallerFileName = Results.Files(0).Name
+                InstallerFileID = Results.Files(0).Id
+            End If
+
+            Dim request = FISService.Files.Get(InstallerFileID)
+            request.Fields = "size"
+            Dim file = request.Execute
+
+            dFileSize = file.Size
+
+            Dim fStream = New System.IO.FileStream(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+            Dim mStream = New System.IO.MemoryStream
+
+            Dim m = request.MediaDownloader
+            m.ChunkSize = 256 * 1024
+
+            AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+            request.DownloadWithStatus(mStream)
+
+            If dDownloadStatus = DownloadStatus.Completed Then
+                mStream.WriteTo(fStream)
+            End If
+
+            fStream.Close()
+            mStream.Close()
+
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
     End Sub
 
+
+    Private Sub Download_ProgressChanged(Progress As IDownloadProgress)
+
+        Control.CheckForIllegalCrossThreadCalls = False
+        dBytesDownloaded = Progress.BytesDownloaded
+        dDownloadStatus = Progress.Status
+        Dim percent = CInt((dBytesDownloaded / dFileSize) * 100)
+        cpgrDownloadInstaller.ProgressText = percent
+        pgrDownloadInstaller.Value = percent
+        pgrDownloadInstaller.Text = "Downloading Installer " & percent & "%"
+    End Sub
+
+
+    Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
+
+        rbrDownloadInstaller.Visible = False
+        pgrDownloadInstaller.Visible = False
+
+        If dDownloadStatus = DownloadStatus.Completed Then
+            MessageBoxEx.Show(InstallerFileName.Replace(".exe", "") & " Installer File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Call Shell("explorer.exe /select," & My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, AppWinStyle.NormalFocus)
+        End If
+
+        If dDownloadStatus = DownloadStatus.Failed Then
+            MessageBoxEx.Show("Installer File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+    End Sub
     Private Sub CheckForUpdatesAtStartup()
         If InternetAvailable() = False Then
             Exit Sub
         End If
 
         If CheckForUpdates() Then
-            If MessageBoxEx.Show("A new version of '" & strAppName & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+            If MessageBoxEx.Show("A new version '" & strAppName & " V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
                 DownloadInstaller()
             End If
         End If
@@ -16758,7 +16880,8 @@ errhandler:
         End If
 
         If CheckForUpdates() Then
-            If MessageBoxEx.Show("A new version is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+            If MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
                 DownloadInstaller()
             End If
         Else
@@ -16788,15 +16911,17 @@ errhandler:
 
             Dim List = FISService.Files.List()
             List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false"
-            List.Fields = "files(name, webViewLink)"
+            List.Fields = "files(name, id, webViewLink)"
 
             Dim Results = List.Execute
 
             If Results.Files.Count > 0 Then
-                Dim RemoteVersion As String = Results.Files(0).Name
-                RemoteVersion = RemoteVersion.Substring(RemoteVersion.Length - 8).Remove(4)
+                InstallerFileVersion = Results.Files(0).Name
+                InstallerFileID = Results.Files(0).Id
+                InstallerFileURL = Results.Files(0).WebViewLink
+                InstallerFileVersion = InstallerFileVersion.Substring(InstallerFileVersion.Length - 8).Remove(4)
                 Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
-                If RemoteVersion > LocalVersion Then
+                If InstallerFileVersion > LocalVersion Then
                     Return True
                 End If
             End If
@@ -16810,5 +16935,6 @@ errhandler:
 
 #End Region
 
-
+   
+   
 End Class

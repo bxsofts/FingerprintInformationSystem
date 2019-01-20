@@ -24,94 +24,94 @@ Partial Class frmMainInterface
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainInterface))
-        Dim DataGridViewCellStyle195 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle205 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle206 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle207 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle196 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle197 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle198 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle199 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle200 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle201 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle202 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle203 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle204 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle142 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle154 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle208 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle152 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle153 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle89 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle155 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle209 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle210 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle101 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle213 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle214 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle215 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle102 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle156 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle157 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle211 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle212 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle160 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle161 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle162 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle107 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle108 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle109 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle216 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle217 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle164 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle218 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle219 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle163 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle222 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle223 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle224 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle111 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle165 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle166 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle220 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle221 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle228 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle229 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle169 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle170 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle171 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle225 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle226 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle227 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle230 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle231 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle232 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle233 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle234 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle235 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle236 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle237 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle238 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle239 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle240 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle241 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle242 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle243 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle244 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle245 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle246 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle247 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle74 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle75 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle76 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle77 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle78 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle79 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle80 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle81 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle82 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle83 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle84 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle85 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle86 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle87 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle88 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.RibbonTabItem6 = New DevComponents.DotNetBar.RibbonTabItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar12 = New DevComponents.DotNetBar.RibbonBar()
@@ -140,6 +140,21 @@ Partial Class frmMainInterface
         Me.btnCustomBaseColor = New DevComponents.DotNetBar.ColorPickerDropDown()
         Me.btnRandomColor = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
+        Me.RibbonPanel5 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.rbrDownloadInstaller = New DevComponents.DotNetBar.RibbonBar()
+        Me.cpgrDownloadInstaller = New DevComponents.DotNetBar.CircularProgressItem()
+        Me.RibbonBar16 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnCheckUpdate = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadInstaller = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadInstallerInBrowser = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenRegedit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenTemplatesFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBar9 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer9 = New DevComponents.DotNetBar.ItemContainer()
+        Me.chkShowPopups = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.chkPlaySound = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar6 = New DevComponents.DotNetBar.RibbonBar()
         Me.btnExit = New DevComponents.DotNetBar.ButtonItem()
@@ -237,18 +252,6 @@ Partial Class frmMainInterface
         Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDeleteAll = New DevComponents.DotNetBar.ButtonItem()
         Me.chkPreventDeletion = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.RibbonPanel5 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar16 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnCheckUpdate = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDownloadInstaller = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpenRegedit = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpenTemplatesFolder = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonBar9 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer9 = New DevComponents.DotNetBar.ItemContainer()
-        Me.chkShowPopups = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.chkPlaySound = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel4 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer5 = New DevComponents.DotNetBar.ItemContainer()
@@ -500,214 +503,12 @@ Partial Class frmMainInterface
         Me.LabelItem2 = New DevComponents.DotNetBar.LabelItem()
         Me.lblCurrentYear = New DevComponents.DotNetBar.LabelItem()
         Me.lblCurrentMonth = New DevComponents.DotNetBar.LabelItem()
+        Me.pgrDownloadInstaller = New DevComponents.DotNetBar.ProgressBarItem()
         Me.lblHasFPSlip = New DevComponents.DotNetBar.LabelItem()
         Me.lblReportSent = New DevComponents.DotNetBar.LabelItem()
         Me.lblAutoCapsStatus = New DevComponents.DotNetBar.LabelItem()
         Me.lblTime = New DevComponents.DotNetBar.LabelItem()
         Me.TabControl = New DevComponents.DotNetBar.TabControl()
-        Me.TabControlPanel9 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.lblRSOCGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.PanelRSOC = New DevComponents.DotNetBar.PanelEx()
-        Me.LabelX93 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX89 = New DevComponents.DotNetBar.LabelX()
-        Me.txtRSOCSerialNumber = New DevComponents.Editors.IntegerInput()
-        Me.LabelX84 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX82 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX81 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX80 = New DevComponents.DotNetBar.LabelX()
-        Me.txtRSOCDespatchNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.cmbRSOCNatureOfReport = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
-        Me.txtRSOCReportSentTo = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.dtRSOCReportSentOn = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.LabelX20 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX43 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX56 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX97 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX98 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX102 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX103 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSearchRSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnRSOCFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRSOCAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearRSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveRSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.cmbRSOCPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.txtRSOCRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.cmbRSOCOfficer = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.dtRSOCInspection = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.LabelX111 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX122 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX151 = New DevComponents.DotNetBar.LabelX()
-        Me.txtRSOCCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtRSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX152 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX153 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX157 = New DevComponents.DotNetBar.LabelX()
-        Me.txtRSOCNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.RSOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel7 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.lblCDGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.PanelCD = New DevComponents.DotNetBar.PanelEx()
-        Me.chkCDTwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.LabelX78 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX77 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX76 = New DevComponents.DotNetBar.LabelX()
-        Me.txtCCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX75 = New DevComponents.DotNetBar.LabelX()
-        Me.txtCourt = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX83 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX85 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX86 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX87 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX88 = New DevComponents.DotNetBar.LabelX()
-        Me.chkAppendCDYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.txtCDYear = New DevComponents.Editors.IntegerInput()
-        Me.btnSearchCD = New DevComponents.DotNetBar.ButtonX()
-        Me.btnCDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchCDInYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearCDFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveCD = New DevComponents.DotNetBar.ButtonX()
-        Me.cmbCDPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.txtCDRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtCDDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.cmbCDOfficer = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.dtCDExamination = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.LabelX90 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX91 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX92 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX99 = New DevComponents.DotNetBar.LabelX()
-        Me.txtCDCrNo = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtCDNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.LabelX100 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX101 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX104 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX105 = New DevComponents.DotNetBar.LabelX()
-        Me.txtCDNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.CDTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel11 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
-        Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.IDRTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.lblFPAGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.PanelFPA = New DevComponents.DotNetBar.PanelEx()
-        Me.btnGenerateFPSlipMain = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX162 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX161 = New DevComponents.DotNetBar.LabelX()
-        Me.dtChalanDate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.txtHeadOfAccount = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX94 = New DevComponents.DotNetBar.LabelX()
-        Me.chkFPATwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.lblFPAPassport = New DevComponents.DotNetBar.LabelX()
-        Me.lblFPAAddress = New DevComponents.DotNetBar.LabelX()
-        Me.lblFPAName = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPAAmount = New DevComponents.Editors.IntegerInput()
-        Me.LabelX69 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSearchFPA = New DevComponents.DotNetBar.ButtonX()
-        Me.btnFPAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchInFPAYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearFPAFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX67 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPATreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX66 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX60 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAChalanNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX61 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX62 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPAPassportNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX63 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX64 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX65 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX54 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX55 = New DevComponents.DotNetBar.LabelX()
-        Me.chkAppendFPAYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.txtFPAYear = New DevComponents.Editors.IntegerInput()
-        Me.dtFPADate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.txtFPANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX57 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX58 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX59 = New DevComponents.DotNetBar.LabelX()
-        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel2 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
-        Me.PanelEx5 = New DevComponents.DotNetBar.PanelEx()
-        Me.lblDAGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.PanelDA = New DevComponents.DotNetBar.PanelEx()
-        Me.LabelX145 = New DevComponents.DotNetBar.LabelX()
-        Me.txtDAModusOperandi = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.chkDATwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.lblDAAdress = New DevComponents.DotNetBar.LabelX()
-        Me.lblDAFather = New DevComponents.DotNetBar.LabelX()
-        Me.lblDAAlias = New DevComponents.DotNetBar.LabelX()
-        Me.lblDAName = New DevComponents.DotNetBar.LabelX()
-        Me.btnViewDASlip = New DevComponents.DotNetBar.ButtonX()
-        Me.txtDANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX50 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX49 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX48 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX47 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX46 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX45 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX44 = New DevComponents.DotNetBar.LabelX()
-        Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.DASlipContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
-        Me.btnDASlipContextMenu = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAViewDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDASelectDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAScanDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAClearDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAExploreDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.picDASlip = New iViewCore.PictureBox()
-        Me.btnDAClearFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnDAScanFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnDASelectFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSearchDA = New DevComponents.DotNetBar.ButtonX()
-        Me.btnDAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchDAInYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearDAFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveDA = New DevComponents.DotNetBar.ButtonX()
-        Me.txtDASection = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDACrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDAHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.cmbDASex = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.ComboItem6 = New DevComponents.Editors.ComboItem()
-        Me.ComboItem5 = New DevComponents.Editors.ComboItem()
-        Me.LabelX34 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX35 = New DevComponents.DotNetBar.LabelX()
-        Me.txtDAFathersName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDAHenryNumerator = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX28 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX29 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX30 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX31 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX32 = New DevComponents.DotNetBar.LabelX()
-        Me.txtDAAliasName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDAName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX25 = New DevComponents.DotNetBar.LabelX()
-        Me.chkAppendDAYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.txtDAYear = New DevComponents.Editors.IntegerInput()
-        Me.cmbDAPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.dtDAEntry = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.LabelX21 = New DevComponents.DotNetBar.LabelX()
-        Me.txtDANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX22 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX23 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX24 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX26 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX27 = New DevComponents.DotNetBar.LabelX()
-        Me.DATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel1 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -821,6 +622,7 @@ Partial Class frmMainInterface
         Me.txtSOCCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.dtSOCOccurrence = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.LabelX10 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -829,6 +631,208 @@ Partial Class frmMainInterface
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.txtSOCNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.SOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel2 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.PanelEx5 = New DevComponents.DotNetBar.PanelEx()
+        Me.lblDAGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.PanelDA = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX145 = New DevComponents.DotNetBar.LabelX()
+        Me.txtDAModusOperandi = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.chkDATwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.lblDAAdress = New DevComponents.DotNetBar.LabelX()
+        Me.lblDAFather = New DevComponents.DotNetBar.LabelX()
+        Me.lblDAAlias = New DevComponents.DotNetBar.LabelX()
+        Me.lblDAName = New DevComponents.DotNetBar.LabelX()
+        Me.btnViewDASlip = New DevComponents.DotNetBar.ButtonX()
+        Me.txtDANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX50 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX49 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX48 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX47 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX46 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX45 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX44 = New DevComponents.DotNetBar.LabelX()
+        Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.DASlipContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
+        Me.btnDASlipContextMenu = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAViewDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDASelectDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAScanDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAClearDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAExploreDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.picDASlip = New iViewCore.PictureBox()
+        Me.btnDAClearFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnDAScanFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnDASelectFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchDA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnDAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchDAInYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearDAFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveDA = New DevComponents.DotNetBar.ButtonX()
+        Me.txtDASection = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtDACrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtDAHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtDARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.cmbDASex = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.ComboItem6 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem5 = New DevComponents.Editors.ComboItem()
+        Me.LabelX34 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX35 = New DevComponents.DotNetBar.LabelX()
+        Me.txtDAFathersName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtDAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtDAHenryNumerator = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX28 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX29 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX30 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX31 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX32 = New DevComponents.DotNetBar.LabelX()
+        Me.txtDAAliasName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtDAName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX25 = New DevComponents.DotNetBar.LabelX()
+        Me.chkAppendDAYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.txtDAYear = New DevComponents.Editors.IntegerInput()
+        Me.cmbDAPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.dtDAEntry = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.LabelX21 = New DevComponents.DotNetBar.LabelX()
+        Me.txtDANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX22 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX23 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX24 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX26 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX27 = New DevComponents.DotNetBar.LabelX()
+        Me.DATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel9 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.lblRSOCGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.PanelRSOC = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX93 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX89 = New DevComponents.DotNetBar.LabelX()
+        Me.txtRSOCSerialNumber = New DevComponents.Editors.IntegerInput()
+        Me.LabelX84 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX82 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX81 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX80 = New DevComponents.DotNetBar.LabelX()
+        Me.txtRSOCDespatchNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.cmbRSOCNatureOfReport = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
+        Me.txtRSOCReportSentTo = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.dtRSOCReportSentOn = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.LabelX20 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX43 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX56 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX97 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX98 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX102 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX103 = New DevComponents.DotNetBar.LabelX()
+        Me.btnSearchRSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnRSOCFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRSOCAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearRSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveRSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.cmbRSOCPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.txtRSOCRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.cmbRSOCOfficer = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.dtRSOCInspection = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.LabelX111 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX122 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX151 = New DevComponents.DotNetBar.LabelX()
+        Me.txtRSOCCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtRSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX152 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX153 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX157 = New DevComponents.DotNetBar.LabelX()
+        Me.txtRSOCNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.RSOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel7 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.lblCDGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.PanelCD = New DevComponents.DotNetBar.PanelEx()
+        Me.chkCDTwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX78 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX77 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX76 = New DevComponents.DotNetBar.LabelX()
+        Me.txtCCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX75 = New DevComponents.DotNetBar.LabelX()
+        Me.txtCourt = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX83 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX85 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX86 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX87 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX88 = New DevComponents.DotNetBar.LabelX()
+        Me.chkAppendCDYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.txtCDYear = New DevComponents.Editors.IntegerInput()
+        Me.btnSearchCD = New DevComponents.DotNetBar.ButtonX()
+        Me.btnCDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchCDInYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearCDFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveCD = New DevComponents.DotNetBar.ButtonX()
+        Me.cmbCDPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.txtCDRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtCDDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.cmbCDOfficer = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.dtCDExamination = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.LabelX90 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX91 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX92 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX99 = New DevComponents.DotNetBar.LabelX()
+        Me.txtCDCrNo = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtCDNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX100 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX101 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX104 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX105 = New DevComponents.DotNetBar.LabelX()
+        Me.txtCDNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.CDTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel11 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
+        Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.IDRTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.lblFPAGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.PanelFPA = New DevComponents.DotNetBar.PanelEx()
+        Me.btnGenerateFPSlipMain = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX162 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX161 = New DevComponents.DotNetBar.LabelX()
+        Me.dtChalanDate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.txtHeadOfAccount = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX94 = New DevComponents.DotNetBar.LabelX()
+        Me.chkFPATwodigits = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.lblFPAPassport = New DevComponents.DotNetBar.LabelX()
+        Me.lblFPAAddress = New DevComponents.DotNetBar.LabelX()
+        Me.lblFPAName = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFPAAmount = New DevComponents.Editors.IntegerInput()
+        Me.LabelX69 = New DevComponents.DotNetBar.LabelX()
+        Me.btnSearchFPA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnFPAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchInFPAYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearFPAFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX67 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPATreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX66 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX60 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAChalanNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFPARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX61 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX62 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFPAPassportNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX63 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX64 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX65 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX54 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX55 = New DevComponents.DotNetBar.LabelX()
+        Me.chkAppendFPAYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.txtFPAYear = New DevComponents.Editors.IntegerInput()
+        Me.dtFPADate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.txtFPANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX57 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX58 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX59 = New DevComponents.DotNetBar.LabelX()
+        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel8 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelAC = New DevComponents.DotNetBar.PanelEx()
         Me.txtACModusOperandi = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -1107,10 +1111,11 @@ Partial Class frmMainInterface
         Me.PhotoReceivedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GistDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
-        Me.RibbonPanel1.SuspendLayout
         Me.RibbonPanel5.SuspendLayout
+        Me.RibbonPanel1.SuspendLayout
         Me.RibbonPanel4.SuspendLayout
         Me.RibbonPanel6.SuspendLayout
         Me.RibbonPanel7.SuspendLayout
@@ -1141,6 +1146,30 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControl.SuspendLayout
+        Me.TabControlPanel1.SuspendLayout
+        Me.PanelEx1.SuspendLayout
+        Me.PanelEx4.SuspendLayout
+        Me.PanelSOC.SuspendLayout
+        CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dtIdentificationDate,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtCPsIdentified,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.TabColorContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.DataGridContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtSOCCPsRemaining,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtSOCCPsEliminated,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtSOCCPsUnfit,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtSOCCPsDeveloped,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtSOCYear,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControlPanel2.SuspendLayout
+        Me.PanelEx2.SuspendLayout
+        Me.PanelEx5.SuspendLayout
+        Me.PanelDA.SuspendLayout
+        Me.GroupPanel1.SuspendLayout
+        CType(Me.DASlipContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.txtDAYear,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel9.SuspendLayout
         Me.PanelRSOC.SuspendLayout
         CType(Me.txtRSOCSerialNumber,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1158,30 +1187,6 @@ Partial Class frmMainInterface
         CType(Me.txtFPAAmount,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.txtFPAYear,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dtFPADate,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabControlPanel2.SuspendLayout
-        Me.PanelEx2.SuspendLayout
-        Me.PanelEx5.SuspendLayout
-        Me.PanelDA.SuspendLayout
-        Me.GroupPanel1.SuspendLayout
-        CType(Me.DASlipContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtDAYear,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabControlPanel1.SuspendLayout
-        Me.PanelEx1.SuspendLayout
-        Me.PanelEx4.SuspendLayout
-        Me.PanelSOC.SuspendLayout
-        CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dtIdentificationDate,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtCPsIdentified,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.TabColorContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtSOCCPsRemaining,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtSOCCPsEliminated,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtSOCCPsUnfit,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtSOCCPsDeveloped,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.txtSOCYear,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel8.SuspendLayout
         Me.PanelAC.SuspendLayout
         CType(Me.txtACNumber,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1500,8 +1505,8 @@ Partial Class frmMainInterface
         Me.RibbonControl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonControl1.CaptionFont = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RibbonControl1.CaptionVisible = true
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel6)
@@ -1537,6 +1542,234 @@ Partial Class frmMainInterface
         Me.RibbonControl1.Text = "FINGERPRINT INFORMATION SYSTEM"
         Me.RibbonControl1.TitleText = "<b>FINGERPRINT INFORMATION SYSTEM</b>"
         '
+        'RibbonPanel5
+        '
+        Me.RibbonPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel5.Controls.Add(Me.rbrDownloadInstaller)
+        Me.RibbonPanel5.Controls.Add(Me.RibbonBar16)
+        Me.RibbonPanel5.Controls.Add(Me.RibbonBar7)
+        Me.RibbonPanel5.Controls.Add(Me.RibbonBar9)
+        Me.RibbonPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel5.Location = New System.Drawing.Point(0, 55)
+        Me.RibbonPanel5.Name = "RibbonPanel5"
+        Me.RibbonPanel5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel5.Size = New System.Drawing.Size(1360, 95)
+        '
+        '
+        '
+        Me.RibbonPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel5.TabIndex = 6
+        '
+        'rbrDownloadInstaller
+        '
+        Me.rbrDownloadInstaller.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.rbrDownloadInstaller.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.rbrDownloadInstaller.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.rbrDownloadInstaller.ContainerControlProcessDialogKey = true
+        Me.rbrDownloadInstaller.Dock = System.Windows.Forms.DockStyle.Left
+        Me.rbrDownloadInstaller.DragDropSupport = true
+        Me.rbrDownloadInstaller.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.cpgrDownloadInstaller})
+        Me.rbrDownloadInstaller.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.rbrDownloadInstaller.Location = New System.Drawing.Point(696, 0)
+        Me.rbrDownloadInstaller.Name = "rbrDownloadInstaller"
+        Me.rbrDownloadInstaller.Size = New System.Drawing.Size(98, 93)
+        Me.rbrDownloadInstaller.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.rbrDownloadInstaller.TabIndex = 29
+        Me.rbrDownloadInstaller.Text = "Downloading"
+        '
+        '
+        '
+        Me.rbrDownloadInstaller.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.rbrDownloadInstaller.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.rbrDownloadInstaller.Visible = false
+        '
+        'cpgrDownloadInstaller
+        '
+        Me.cpgrDownloadInstaller.Diameter = 78
+        Me.cpgrDownloadInstaller.Name = "cpgrDownloadInstaller"
+        Me.cpgrDownloadInstaller.ProgressTextVisible = true
+        '
+        'RibbonBar16
+        '
+        Me.RibbonBar16.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar16.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar16.ContainerControlProcessDialogKey = true
+        Me.RibbonBar16.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar16.DragDropSupport = true
+        Me.RibbonBar16.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCheckUpdate, Me.btnDownloadInstaller})
+        Me.RibbonBar16.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar16.Location = New System.Drawing.Point(337, 0)
+        Me.RibbonBar16.Name = "RibbonBar16"
+        Me.RibbonBar16.Size = New System.Drawing.Size(359, 93)
+        Me.RibbonBar16.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar16.TabIndex = 28
+        Me.RibbonBar16.Text = "UPDATE"
+        '
+        '
+        '
+        Me.RibbonBar16.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar16.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnCheckUpdate
+        '
+        Me.btnCheckUpdate.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnCheckUpdate.Image = CType(resources.GetObject("btnCheckUpdate.Image"),System.Drawing.Image)
+        Me.btnCheckUpdate.Name = "btnCheckUpdate"
+        Me.btnCheckUpdate.SubItemsExpandWidth = 14
+        Me.btnCheckUpdate.Text = "Check for Updates"
+        '
+        'btnDownloadInstaller
+        '
+        Me.btnDownloadInstaller.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDownloadInstaller.Image = CType(resources.GetObject("btnDownloadInstaller.Image"),System.Drawing.Image)
+        Me.btnDownloadInstaller.Name = "btnDownloadInstaller"
+        Me.btnDownloadInstaller.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDownloadInstallerInBrowser})
+        Me.btnDownloadInstaller.SubItemsExpandWidth = 14
+        Me.btnDownloadInstaller.Text = "Download Installer"
+        '
+        'btnDownloadInstallerInBrowser
+        '
+        Me.btnDownloadInstallerInBrowser.Name = "btnDownloadInstallerInBrowser"
+        Me.btnDownloadInstallerInBrowser.Text = "Download Installer in Browser"
+        '
+        'RibbonBar7
+        '
+        Me.RibbonBar7.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar7.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar7.ContainerControlProcessDialogKey = true
+        Me.RibbonBar7.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar7.DragDropSupport = true
+        Me.RibbonBar7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSettingsWizard})
+        Me.RibbonBar7.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar7.Location = New System.Drawing.Point(161, 0)
+        Me.RibbonBar7.Name = "RibbonBar7"
+        Me.RibbonBar7.Size = New System.Drawing.Size(176, 93)
+        Me.RibbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar7.TabIndex = 27
+        Me.RibbonBar7.Text = "SETTINGS WIZARD"
+        '
+        '
+        '
+        Me.RibbonBar7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnSettingsWizard
+        '
+        Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
+        Me.btnSettingsWizard.Name = "btnSettingsWizard"
+        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
+        Me.btnSettingsWizard.SubItemsExpandWidth = 14
+        Me.btnSettingsWizard.Text = "Settings Wizard"
+        '
+        'btnOpenRegedit
+        '
+        Me.btnOpenRegedit.Name = "btnOpenRegedit"
+        Me.btnOpenRegedit.Text = "Open Regedit"
+        '
+        'btnOpenTemplatesFolder
+        '
+        Me.btnOpenTemplatesFolder.BeginGroup = true
+        Me.btnOpenTemplatesFolder.Name = "btnOpenTemplatesFolder"
+        Me.btnOpenTemplatesFolder.Text = "Open Templates Folder"
+        '
+        'RibbonBar9
+        '
+        Me.RibbonBar9.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar9.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar9.ContainerControlProcessDialogKey = true
+        Me.RibbonBar9.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar9.DragDropSupport = true
+        Me.RibbonBar9.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer9})
+        Me.RibbonBar9.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar9.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBar9.Name = "RibbonBar9"
+        Me.RibbonBar9.Size = New System.Drawing.Size(158, 93)
+        Me.RibbonBar9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar9.TabIndex = 26
+        Me.RibbonBar9.Text = "MESSAGES"
+        '
+        '
+        '
+        Me.RibbonBar9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar9.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer9
+        '
+        '
+        '
+        '
+        Me.ItemContainer9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer9.BeginGroup = true
+        Me.ItemContainer9.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer9.Name = "ItemContainer9"
+        Me.ItemContainer9.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkShowPopups, Me.chkPlaySound})
+        '
+        '
+        '
+        Me.ItemContainer9.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'chkShowPopups
+        '
+        Me.chkShowPopups.Name = "chkShowPopups"
+        Me.chkShowPopups.Text = "Show Popup Messages"
+        '
+        'chkPlaySound
+        '
+        Me.chkPlaySound.Name = "chkPlaySound"
+        Me.chkPlaySound.Text = "Play Sound for Popups"
+        '
         'RibbonPanel1
         '
         Me.RibbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1564,6 +1797,7 @@ Partial Class frmMainInterface
         '
         Me.RibbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel1.TabIndex = 3
+        Me.RibbonPanel1.Visible = false
         '
         'RibbonBar6
         '
@@ -2310,190 +2544,6 @@ Partial Class frmMainInterface
         Me.chkPreventDeletion.Name = "chkPreventDeletion"
         Me.chkPreventDeletion.Text = "Prevent Deletion"
         '
-        'RibbonPanel5
-        '
-        Me.RibbonPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel5.Controls.Add(Me.RibbonBar16)
-        Me.RibbonPanel5.Controls.Add(Me.RibbonBar7)
-        Me.RibbonPanel5.Controls.Add(Me.RibbonBar9)
-        Me.RibbonPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel5.Location = New System.Drawing.Point(0, 0)
-        Me.RibbonPanel5.Name = "RibbonPanel5"
-        Me.RibbonPanel5.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel5.Size = New System.Drawing.Size(1360, 150)
-        '
-        '
-        '
-        Me.RibbonPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel5.TabIndex = 6
-        Me.RibbonPanel5.Visible = false
-        '
-        'RibbonBar16
-        '
-        Me.RibbonBar16.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar16.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar16.ContainerControlProcessDialogKey = true
-        Me.RibbonBar16.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar16.DragDropSupport = true
-        Me.RibbonBar16.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCheckUpdate, Me.btnDownloadInstaller})
-        Me.RibbonBar16.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar16.Location = New System.Drawing.Point(337, 0)
-        Me.RibbonBar16.Name = "RibbonBar16"
-        Me.RibbonBar16.Size = New System.Drawing.Size(331, 148)
-        Me.RibbonBar16.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar16.TabIndex = 28
-        Me.RibbonBar16.Text = "UPDATE"
-        '
-        '
-        '
-        Me.RibbonBar16.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar16.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnCheckUpdate
-        '
-        Me.btnCheckUpdate.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnCheckUpdate.Image = CType(resources.GetObject("btnCheckUpdate.Image"),System.Drawing.Image)
-        Me.btnCheckUpdate.Name = "btnCheckUpdate"
-        Me.btnCheckUpdate.SubItemsExpandWidth = 14
-        Me.btnCheckUpdate.Text = "Check for Updates"
-        '
-        'btnDownloadInstaller
-        '
-        Me.btnDownloadInstaller.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDownloadInstaller.Image = CType(resources.GetObject("btnDownloadInstaller.Image"),System.Drawing.Image)
-        Me.btnDownloadInstaller.Name = "btnDownloadInstaller"
-        Me.btnDownloadInstaller.SubItemsExpandWidth = 14
-        Me.btnDownloadInstaller.Text = "Download Installer"
-        '
-        'RibbonBar7
-        '
-        Me.RibbonBar7.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar7.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar7.ContainerControlProcessDialogKey = true
-        Me.RibbonBar7.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar7.DragDropSupport = true
-        Me.RibbonBar7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSettingsWizard})
-        Me.RibbonBar7.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar7.Location = New System.Drawing.Point(161, 0)
-        Me.RibbonBar7.Name = "RibbonBar7"
-        Me.RibbonBar7.Size = New System.Drawing.Size(176, 148)
-        Me.RibbonBar7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar7.TabIndex = 27
-        Me.RibbonBar7.Text = "SETTINGS WIZARD"
-        '
-        '
-        '
-        Me.RibbonBar7.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnSettingsWizard
-        '
-        Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
-        Me.btnSettingsWizard.Name = "btnSettingsWizard"
-        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
-        Me.btnSettingsWizard.SubItemsExpandWidth = 14
-        Me.btnSettingsWizard.Text = "Settings Wizard"
-        '
-        'btnOpenRegedit
-        '
-        Me.btnOpenRegedit.Name = "btnOpenRegedit"
-        Me.btnOpenRegedit.Text = "Open Regedit"
-        '
-        'btnOpenTemplatesFolder
-        '
-        Me.btnOpenTemplatesFolder.BeginGroup = true
-        Me.btnOpenTemplatesFolder.Name = "btnOpenTemplatesFolder"
-        Me.btnOpenTemplatesFolder.Text = "Open Templates Folder"
-        '
-        'RibbonBar9
-        '
-        Me.RibbonBar9.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar9.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar9.ContainerControlProcessDialogKey = true
-        Me.RibbonBar9.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar9.DragDropSupport = true
-        Me.RibbonBar9.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer9})
-        Me.RibbonBar9.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar9.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar9.Name = "RibbonBar9"
-        Me.RibbonBar9.Size = New System.Drawing.Size(158, 148)
-        Me.RibbonBar9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar9.TabIndex = 26
-        Me.RibbonBar9.Text = "MESSAGES"
-        '
-        '
-        '
-        Me.RibbonBar9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar9.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer9
-        '
-        '
-        '
-        '
-        Me.ItemContainer9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer9.BeginGroup = true
-        Me.ItemContainer9.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer9.Name = "ItemContainer9"
-        Me.ItemContainer9.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkShowPopups, Me.chkPlaySound})
-        '
-        '
-        '
-        Me.ItemContainer9.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer9.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'chkShowPopups
-        '
-        Me.chkShowPopups.Name = "chkShowPopups"
-        Me.chkShowPopups.Text = "Show Popup Messages"
-        '
-        'chkPlaySound
-        '
-        Me.chkPlaySound.Name = "chkPlaySound"
-        Me.chkPlaySound.Text = "Play Sound for Popups"
-        '
         'RibbonPanel4
         '
         Me.RibbonPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -3233,7 +3283,6 @@ Partial Class frmMainInterface
         '
         'tabHome
         '
-        Me.tabHome.Checked = true
         Me.tabHome.Name = "tabHome"
         Me.tabHome.Panel = Me.RibbonPanel1
         Me.tabHome.Text = "Home"
@@ -3264,6 +3313,7 @@ Partial Class frmMainInterface
         '
         'RibbonTabItem3
         '
+        Me.RibbonTabItem3.Checked = true
         Me.RibbonTabItem3.Name = "RibbonTabItem3"
         Me.RibbonTabItem3.Panel = Me.RibbonPanel5
         Me.RibbonTabItem3.Text = "General Settings"
@@ -3379,27 +3429,27 @@ Partial Class frmMainInterface
         Me.SOCDatagrid.AutoGenerateColumns = false
         Me.SOCDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.SOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle195.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle195.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle195.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle195.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle195.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle195.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle195.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle195
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.SOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.SOCDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SOCNumberDataGridViewTextBoxColumn4, Me.SOCYearDataGridViewTextBoxColumn2, Me.DateOfInspectionDataGridViewTextBoxColumn4, Me.DateOfReportDataGridViewTextBoxColumn2, Me.DateOfOccurrenceDataGridViewTextBoxColumn2, Me.PoliceStationDataGridViewTextBoxColumn9, Me.CrimeNumberDataGridViewTextBoxColumn7, Me.SectionOfLawDataGridViewTextBoxColumn6, Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2, Me.InvestigatingOfficerDataGridViewTextBoxColumn3, Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2, Me.ChancePrintsUnfitDataGridViewTextBoxColumn1, Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1, Me.ChancePrintsRemainingDataGridViewTextBoxColumn1, Me.ChancePrintDetailsDataGridViewTextBoxColumn2, Me.ComplainantDataGridViewTextBoxColumn2, Me.ModusOperandiDataGridViewTextBoxColumn3, Me.PropertyLostDataGridViewTextBoxColumn2, Me.PhotographerDataGridViewTextBoxColumn1, Me.PhotoReceivedDataGridViewTextBoxColumn1, Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1, Me.GistDataGridViewTextBoxColumn1, Me.ComparisonDetailsDataGridViewTextBoxColumn, Me.GraveCrimeDataGridViewCheckBoxColumn, Me.FileStatusDataGridViewTextBoxColumn, Me.IdentifiedByDataGridViewTextBoxColumn1, Me.IdentificationDateDataGridViewTextBoxColumn1, Me.CPsIdentifiedDataGridViewTextBoxColumn1, Me.IdentifiedAsDataGridViewTextBoxColumn1, Me.RemarksDataGridViewTextBoxColumn, Me.IdentificationNumberDataGridViewTextBoxColumn})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.SOCDatagrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.SOCDatagrid, Me.btnColumnHeaderContextMenu)
         Me.SOCDatagrid.DataSource = Me.SOCRegisterBindingSource
-        DataGridViewCellStyle205.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle205.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle205.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle205.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle205.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle205.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle205.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle205
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle11
         Me.SOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.SOCDatagrid.EnableHeadersVisualStyles = false
@@ -3408,22 +3458,22 @@ Partial Class frmMainInterface
         Me.SOCDatagrid.MultiSelect = false
         Me.SOCDatagrid.Name = "SOCDatagrid"
         Me.SOCDatagrid.ReadOnly = true
-        DataGridViewCellStyle206.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle206.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle206.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle206.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle206.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle206.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle206.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle206
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.SOCDatagrid.RowHeadersWidth = 50
-        DataGridViewCellStyle207.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle207
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle13
         Me.SOCDatagrid.RowTemplate.Height = 70
         Me.SOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.SOCDatagrid.SelectAllSignVisible = false
         Me.SOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.SOCDatagrid.Size = New System.Drawing.Size(1358, 191)
+        Me.SOCDatagrid.Size = New System.Drawing.Size(1358, 189)
         Me.SOCDatagrid.TabIndex = 2
         Me.SOCDatagrid.TabStop = false
         '
@@ -3447,8 +3497,8 @@ Partial Class frmMainInterface
         'DateOfInspectionDataGridViewTextBoxColumn4
         '
         Me.DateOfInspectionDataGridViewTextBoxColumn4.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle196.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle196
+        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
         Me.DateOfInspectionDataGridViewTextBoxColumn4.HeaderText = "Date of Inspection"
         Me.DateOfInspectionDataGridViewTextBoxColumn4.Name = "DateOfInspectionDataGridViewTextBoxColumn4"
         Me.DateOfInspectionDataGridViewTextBoxColumn4.ReadOnly = true
@@ -3457,8 +3507,8 @@ Partial Class frmMainInterface
         'DateOfReportDataGridViewTextBoxColumn2
         '
         Me.DateOfReportDataGridViewTextBoxColumn2.DataPropertyName = "DateOfReport"
-        DataGridViewCellStyle197.Format = "dd/MM/yyyy"
-        Me.DateOfReportDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle197
+        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
+        Me.DateOfReportDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle3
         Me.DateOfReportDataGridViewTextBoxColumn2.HeaderText = "Date of Report"
         Me.DateOfReportDataGridViewTextBoxColumn2.Name = "DateOfReportDataGridViewTextBoxColumn2"
         Me.DateOfReportDataGridViewTextBoxColumn2.ReadOnly = true
@@ -3514,8 +3564,8 @@ Partial Class frmMainInterface
         'ChancePrintsDevelopedDataGridViewTextBoxColumn2
         '
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DataPropertyName = "ChancePrintsDeveloped"
-        DataGridViewCellStyle198.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle198
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.HeaderText = "No. of CPs Developed"
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn2"
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.ReadOnly = true
@@ -3524,8 +3574,8 @@ Partial Class frmMainInterface
         'ChancePrintsUnfitDataGridViewTextBoxColumn1
         '
         Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsUnfit"
-        DataGridViewCellStyle199.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle199
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
         Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Unfit"
         Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.Name = "ChancePrintsUnfitDataGridViewTextBoxColumn1"
         Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.ReadOnly = true
@@ -3534,8 +3584,8 @@ Partial Class frmMainInterface
         'ChancePrintsEliminatedDataGridViewTextBoxColumn1
         '
         Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsEliminated"
-        DataGridViewCellStyle200.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle200
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle6
         Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Eliminated"
         Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.Name = "ChancePrintsEliminatedDataGridViewTextBoxColumn1"
         Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.ReadOnly = true
@@ -3544,8 +3594,8 @@ Partial Class frmMainInterface
         'ChancePrintsRemainingDataGridViewTextBoxColumn1
         '
         Me.ChancePrintsRemainingDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsRemaining"
-        DataGridViewCellStyle201.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsRemainingDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle201
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsRemainingDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle7
         Me.ChancePrintsRemainingDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Remaining"
         Me.ChancePrintsRemainingDataGridViewTextBoxColumn1.Name = "ChancePrintsRemainingDataGridViewTextBoxColumn1"
         Me.ChancePrintsRemainingDataGridViewTextBoxColumn1.ReadOnly = true
@@ -3593,8 +3643,8 @@ Partial Class frmMainInterface
         'PhotoReceivedDataGridViewTextBoxColumn1
         '
         Me.PhotoReceivedDataGridViewTextBoxColumn1.DataPropertyName = "PhotoReceived"
-        DataGridViewCellStyle202.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle202
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
         Me.PhotoReceivedDataGridViewTextBoxColumn1.HeaderText = "Photo Received"
         Me.PhotoReceivedDataGridViewTextBoxColumn1.Name = "PhotoReceivedDataGridViewTextBoxColumn1"
         Me.PhotoReceivedDataGridViewTextBoxColumn1.ReadOnly = true
@@ -3650,8 +3700,8 @@ Partial Class frmMainInterface
         'IdentificationDateDataGridViewTextBoxColumn1
         '
         Me.IdentificationDateDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationDate"
-        DataGridViewCellStyle203.Format = "dd/MM/yyyy"
-        Me.IdentificationDateDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle203
+        DataGridViewCellStyle9.Format = "dd/MM/yyyy"
+        Me.IdentificationDateDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle9
         Me.IdentificationDateDataGridViewTextBoxColumn1.HeaderText = "Identification Date"
         Me.IdentificationDateDataGridViewTextBoxColumn1.Name = "IdentificationDateDataGridViewTextBoxColumn1"
         Me.IdentificationDateDataGridViewTextBoxColumn1.ReadOnly = true
@@ -3660,8 +3710,8 @@ Partial Class frmMainInterface
         'CPsIdentifiedDataGridViewTextBoxColumn1
         '
         Me.CPsIdentifiedDataGridViewTextBoxColumn1.DataPropertyName = "CPsIdentified"
-        DataGridViewCellStyle204.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.CPsIdentifiedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle204
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.CPsIdentifiedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle10
         Me.CPsIdentifiedDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Identified"
         Me.CPsIdentifiedDataGridViewTextBoxColumn1.Name = "CPsIdentifiedDataGridViewTextBoxColumn1"
         Me.CPsIdentifiedDataGridViewTextBoxColumn1.ReadOnly = true
@@ -3708,27 +3758,27 @@ Partial Class frmMainInterface
         Me.PSDataGrid.AutoGenerateColumns = false
         Me.PSDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.PSDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle142.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle142.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle142.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle142.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle142.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle142.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle142.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PSDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle142
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PSDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.PSDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.PSDataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PoliceStationDataGridViewTextBoxColumn2, Me.SHO, Me.PhoneNumber1, Me.PhoneNumber2, Me.DistanceKM})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.PSDataGrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.PSDataGrid, Me.btnColumnHeaderContextMenu)
         Me.PSDataGrid.DataSource = Me.PSRegisterBindingSource
-        DataGridViewCellStyle154.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle154.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle154.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle154.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle154.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle154.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle154.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PSDataGrid.DefaultCellStyle = DataGridViewCellStyle154
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PSDataGrid.DefaultCellStyle = DataGridViewCellStyle17
         Me.PSDataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PSDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.PSDataGrid.EnableHeadersVisualStyles = false
@@ -3737,28 +3787,28 @@ Partial Class frmMainInterface
         Me.PSDataGrid.MultiSelect = false
         Me.PSDataGrid.Name = "PSDataGrid"
         Me.PSDataGrid.ReadOnly = true
-        DataGridViewCellStyle208.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle208.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle208.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle208.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle208.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle208.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle208.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PSDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle208
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PSDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
         Me.PSDataGrid.RowHeadersWidth = 40
         Me.PSDataGrid.SelectAllSignVisible = false
         Me.PSDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.PSDataGrid.Size = New System.Drawing.Size(743, 528)
+        Me.PSDataGrid.Size = New System.Drawing.Size(743, 526)
         Me.PSDataGrid.TabIndex = 605
         Me.PSDataGrid.TabStop = false
         '
         'PoliceStationDataGridViewTextBoxColumn2
         '
         Me.PoliceStationDataGridViewTextBoxColumn2.DataPropertyName = "PoliceStation"
-        DataGridViewCellStyle152.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle152.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle152.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PoliceStationDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle152
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PoliceStationDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle15
         Me.PoliceStationDataGridViewTextBoxColumn2.HeaderText = "Police Station"
         Me.PoliceStationDataGridViewTextBoxColumn2.Name = "PoliceStationDataGridViewTextBoxColumn2"
         Me.PoliceStationDataGridViewTextBoxColumn2.ReadOnly = true
@@ -3767,8 +3817,8 @@ Partial Class frmMainInterface
         'SHO
         '
         Me.SHO.DataPropertyName = "SHO"
-        DataGridViewCellStyle153.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.SHO.DefaultCellStyle = DataGridViewCellStyle153
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.SHO.DefaultCellStyle = DataGridViewCellStyle16
         Me.SHO.HeaderText = "SHO"
         Me.SHO.Name = "SHO"
         Me.SHO.ReadOnly = true
@@ -3809,27 +3859,27 @@ Partial Class frmMainInterface
         Me.CDDataGrid.AutoGenerateColumns = false
         Me.CDDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.CDDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle89.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle89.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle89.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle89.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle89.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle89.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.CDDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle89
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.CDDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.CDDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.CDDataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CDNumberWithYearDataGridViewTextBoxColumn, Me.CDNumberWithoutYearDataGridViewTextBoxColumn, Me.DateOfExaminationDataGridViewTextBoxColumn, Me.NameOfOfficerDataGridViewTextBoxColumn, Me.CourtDataGridViewTextBoxColumn, Me.CCNumberDataGridViewTextBoxColumn, Me.PoliceStationDataGridViewTextBoxColumn3, Me.CrNumberDataGridViewTextBoxColumn, Me.DetailsDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn3})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.CDDataGrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.CDDataGrid, Me.btnColumnHeaderContextMenu)
         Me.CDDataGrid.DataSource = Me.CDRegisterBindingSource
-        DataGridViewCellStyle155.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle155.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle155.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle155.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle155.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle155.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle155.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CDDataGrid.DefaultCellStyle = DataGridViewCellStyle155
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CDDataGrid.DefaultCellStyle = DataGridViewCellStyle21
         Me.CDDataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CDDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.CDDataGrid.EnableHeadersVisualStyles = false
@@ -3838,22 +3888,22 @@ Partial Class frmMainInterface
         Me.CDDataGrid.MultiSelect = false
         Me.CDDataGrid.Name = "CDDataGrid"
         Me.CDDataGrid.ReadOnly = true
-        DataGridViewCellStyle209.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle209.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle209.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle209.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle209.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle209.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle209.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.CDDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle209
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.CDDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
         Me.CDDataGrid.RowHeadersWidth = 60
-        DataGridViewCellStyle210.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.CDDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle210
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.CDDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle23
         Me.CDDataGrid.RowTemplate.Height = 50
         Me.CDDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.CDDataGrid.SelectAllSignVisible = false
         Me.CDDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.CDDataGrid.Size = New System.Drawing.Size(1358, 284)
+        Me.CDDataGrid.Size = New System.Drawing.Size(1358, 282)
         Me.CDDataGrid.TabIndex = 3
         Me.CDDataGrid.TabStop = false
         '
@@ -3876,8 +3926,8 @@ Partial Class frmMainInterface
         'DateOfExaminationDataGridViewTextBoxColumn
         '
         Me.DateOfExaminationDataGridViewTextBoxColumn.DataPropertyName = "DateOfExamination"
-        DataGridViewCellStyle101.Format = "dd/MM/yyyy"
-        Me.DateOfExaminationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle101
+        DataGridViewCellStyle20.Format = "dd/MM/yyyy"
+        Me.DateOfExaminationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle20
         Me.DateOfExaminationDataGridViewTextBoxColumn.HeaderText = "Date Examined"
         Me.DateOfExaminationDataGridViewTextBoxColumn.Name = "DateOfExaminationDataGridViewTextBoxColumn"
         Me.DateOfExaminationDataGridViewTextBoxColumn.ReadOnly = true
@@ -3948,27 +3998,27 @@ Partial Class frmMainInterface
         Me.FPADataGrid.AutoGenerateColumns = false
         Me.FPADataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.FPADataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FPADataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FPADataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
         Me.FPADataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.FPADataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FPNumberDataGridViewTextBoxColumn, Me.FPYearDataGridViewTextBoxColumn, Me.FPDateDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn1, Me.AddressDataGridViewTextBoxColumn1, Me.PassportNumberDataGridViewTextBoxColumn, Me.ChalanNumberDataGridViewTextBoxColumn, Me.ChalanDate, Me.HeadOfAccount, Me.TreasuryDataGridViewTextBoxColumn, Me.AmountRemittedDataGridViewTextBoxColumn, Me.AttestedFPNumberDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn2})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.FPADataGrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.FPADataGrid, Me.btnColumnHeaderContextMenu)
         Me.FPADataGrid.DataSource = Me.FPARegisterBindingSource
-        DataGridViewCellStyle213.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle213.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle213.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle213.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle213.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle213.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle213.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FPADataGrid.DefaultCellStyle = DataGridViewCellStyle213
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle30.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FPADataGrid.DefaultCellStyle = DataGridViewCellStyle30
         Me.FPADataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FPADataGrid.EnableHeadersVisualStyles = false
         Me.FPADataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
@@ -3976,22 +4026,22 @@ Partial Class frmMainInterface
         Me.FPADataGrid.MultiSelect = false
         Me.FPADataGrid.Name = "FPADataGrid"
         Me.FPADataGrid.ReadOnly = true
-        DataGridViewCellStyle214.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle214.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle214.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle214.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle214.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle214.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle214.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FPADataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle214
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle31.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FPADataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle31
         Me.FPADataGrid.RowHeadersWidth = 60
-        DataGridViewCellStyle215.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.FPADataGrid.RowsDefaultCellStyle = DataGridViewCellStyle215
+        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.FPADataGrid.RowsDefaultCellStyle = DataGridViewCellStyle32
         Me.FPADataGrid.RowTemplate.Height = 70
         Me.FPADataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.FPADataGrid.SelectAllSignVisible = false
         Me.FPADataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.FPADataGrid.Size = New System.Drawing.Size(1358, 284)
+        Me.FPADataGrid.Size = New System.Drawing.Size(1358, 282)
         Me.FPADataGrid.TabIndex = 5
         Me.FPADataGrid.TabStop = false
         '
@@ -4006,8 +4056,8 @@ Partial Class frmMainInterface
         'FPYearDataGridViewTextBoxColumn
         '
         Me.FPYearDataGridViewTextBoxColumn.DataPropertyName = "FPYear"
-        DataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.FPYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle102
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.FPYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle25
         Me.FPYearDataGridViewTextBoxColumn.HeaderText = "Year"
         Me.FPYearDataGridViewTextBoxColumn.Name = "FPYearDataGridViewTextBoxColumn"
         Me.FPYearDataGridViewTextBoxColumn.ReadOnly = true
@@ -4017,8 +4067,8 @@ Partial Class frmMainInterface
         'FPDateDataGridViewTextBoxColumn
         '
         Me.FPDateDataGridViewTextBoxColumn.DataPropertyName = "FPDate"
-        DataGridViewCellStyle156.Format = "dd/MM/yyyy"
-        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle156
+        DataGridViewCellStyle26.Format = "dd/MM/yyyy"
+        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle26
         Me.FPDateDataGridViewTextBoxColumn.HeaderText = "Date of Attestation"
         Me.FPDateDataGridViewTextBoxColumn.Name = "FPDateDataGridViewTextBoxColumn"
         Me.FPDateDataGridViewTextBoxColumn.ReadOnly = true
@@ -4058,8 +4108,8 @@ Partial Class frmMainInterface
         'ChalanDate
         '
         Me.ChalanDate.DataPropertyName = "ChalanDate"
-        DataGridViewCellStyle157.Format = "dd/MM/yyyy"
-        Me.ChalanDate.DefaultCellStyle = DataGridViewCellStyle157
+        DataGridViewCellStyle27.Format = "dd/MM/yyyy"
+        Me.ChalanDate.DefaultCellStyle = DataGridViewCellStyle27
         Me.ChalanDate.HeaderText = "Chalan Date"
         Me.ChalanDate.Name = "ChalanDate"
         Me.ChalanDate.ReadOnly = true
@@ -4083,10 +4133,10 @@ Partial Class frmMainInterface
         'AmountRemittedDataGridViewTextBoxColumn
         '
         Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
-        DataGridViewCellStyle211.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle211.Format = "` #/-"
-        DataGridViewCellStyle211.NullValue = Nothing
-        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle211
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle28.Format = "` #/-"
+        DataGridViewCellStyle28.NullValue = Nothing
+        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle28
         Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount Remitted"
         Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
         Me.AmountRemittedDataGridViewTextBoxColumn.ReadOnly = true
@@ -4095,8 +4145,8 @@ Partial Class frmMainInterface
         'AttestedFPNumberDataGridViewTextBoxColumn
         '
         Me.AttestedFPNumberDataGridViewTextBoxColumn.DataPropertyName = "AttestedFPNumber"
-        DataGridViewCellStyle212.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle212
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle29
         Me.AttestedFPNumberDataGridViewTextBoxColumn.HeaderText = "No. of Slips Attested"
         Me.AttestedFPNumberDataGridViewTextBoxColumn.Name = "AttestedFPNumberDataGridViewTextBoxColumn"
         Me.AttestedFPNumberDataGridViewTextBoxColumn.ReadOnly = true
@@ -4122,27 +4172,27 @@ Partial Class frmMainInterface
         Me.ACDatagrid.AutoGenerateColumns = false
         Me.ACDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.ACDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ACDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle33.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ACDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle33
         Me.ACDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ACDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ACNumberDataGridViewTextBoxColumn, Me.DANumberDataGridViewTextBoxColumn2, Me.PoliceStationDataGridViewTextBoxColumn5, Me.CrimeNumberDataGridViewTextBoxColumn3, Me.SectionOfLawDataGridViewTextBoxColumn3, Me.NameDataGridViewTextBoxColumn3, Me.AliasNameDataGridViewTextBoxColumn2, Me.FathersNameDataGridViewTextBoxColumn2, Me.SexDataGridViewTextBoxColumn2, Me.AddressDataGridViewTextBoxColumn3, Me.HenryNumeratorDataGridViewTextBoxColumn2, Me.HenryDenominatorDataGridViewTextBoxColumn2, Me.ModusOperandiDataGridViewTextBoxColumn1, Me.RemarksDataGridViewTextBoxColumn5, Me.SlipFileDataGridViewTextBoxColumn2})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.ACDatagrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.ACDatagrid, Me.btnColumnHeaderContextMenu)
         Me.ACDatagrid.DataSource = Me.ACRegisterBindingSource
-        DataGridViewCellStyle160.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle160.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle160.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle160.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle160.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle160.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle160.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ACDatagrid.DefaultCellStyle = DataGridViewCellStyle160
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle34.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle34.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle34.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ACDatagrid.DefaultCellStyle = DataGridViewCellStyle34
         Me.ACDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ACDatagrid.EnableHeadersVisualStyles = false
         Me.ACDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
@@ -4150,22 +4200,22 @@ Partial Class frmMainInterface
         Me.ACDatagrid.MultiSelect = false
         Me.ACDatagrid.Name = "ACDatagrid"
         Me.ACDatagrid.ReadOnly = true
-        DataGridViewCellStyle161.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle161.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle161.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle161.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle161.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle161.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle161.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ACDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle161
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle35.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle35.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ACDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle35
         Me.ACDatagrid.RowHeadersWidth = 60
-        DataGridViewCellStyle162.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ACDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle162
+        DataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ACDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle36
         Me.ACDatagrid.RowTemplate.Height = 50
         Me.ACDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.ACDatagrid.SelectAllSignVisible = false
         Me.ACDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.ACDatagrid.Size = New System.Drawing.Size(1358, 177)
+        Me.ACDatagrid.Size = New System.Drawing.Size(1358, 175)
         Me.ACDatagrid.TabIndex = 7
         Me.ACDatagrid.TabStop = false
         '
@@ -4301,27 +4351,27 @@ Partial Class frmMainInterface
         Me.IDDatagrid.AutoGenerateColumns = false
         Me.IDDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.IDDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle37.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle37.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle37
         Me.IDDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.IDDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDNumberDataGridViewTextBoxColumn, Me.DANumberDataGridViewTextBoxColumn1, Me.PoliceStationDataGridViewTextBoxColumn4, Me.CrimeNumberDataGridViewTextBoxColumn2, Me.SectionOfLawDataGridViewTextBoxColumn2, Me.NameDataGridViewTextBoxColumn2, Me.AliasNameDataGridViewTextBoxColumn1, Me.FathersNameDataGridViewTextBoxColumn1, Me.SexDataGridViewTextBoxColumn1, Me.AddressDataGridViewTextBoxColumn2, Me.HenryNumeratorDataGridViewTextBoxColumn1, Me.HenryDenominatorDataGridViewTextBoxColumn1, Me.ModusOperandi, Me.IdentificationDetailsDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn4, Me.SlipFileDataGridViewTextBoxColumn1})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.IDDatagrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.IDDatagrid, Me.btnColumnHeaderContextMenu)
         Me.IDDatagrid.DataSource = Me.IDRegisterBindingSource
-        DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle107.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle107.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle107.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle107.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle107.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle107.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDDatagrid.DefaultCellStyle = DataGridViewCellStyle107
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle38.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle38.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDDatagrid.DefaultCellStyle = DataGridViewCellStyle38
         Me.IDDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.IDDatagrid.EnableHeadersVisualStyles = false
         Me.IDDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
@@ -4329,22 +4379,22 @@ Partial Class frmMainInterface
         Me.IDDatagrid.MultiSelect = false
         Me.IDDatagrid.Name = "IDDatagrid"
         Me.IDDatagrid.ReadOnly = true
-        DataGridViewCellStyle108.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle108.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle108.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle108.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle108.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle108.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle108.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle108
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle39.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle39
         Me.IDDatagrid.RowHeadersWidth = 60
-        DataGridViewCellStyle109.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle109
+        DataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle40
         Me.IDDatagrid.RowTemplate.Height = 50
         Me.IDDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IDDatagrid.SelectAllSignVisible = false
         Me.IDDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.IDDatagrid.Size = New System.Drawing.Size(1358, 177)
+        Me.IDDatagrid.Size = New System.Drawing.Size(1358, 175)
         Me.IDDatagrid.TabIndex = 6
         Me.IDDatagrid.TabStop = false
         '
@@ -4488,27 +4538,27 @@ Partial Class frmMainInterface
         Me.DADatagrid.AutoGenerateColumns = false
         Me.DADatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.DADatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DADatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle41.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle41.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DADatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle41
         Me.DADatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DADatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DANumberDataGridViewTextBoxColumn, Me.DAYearDataGridViewTextBoxColumn, Me.DateOfEntryDataGridViewTextBoxColumn, Me.PoliceStationDataGridViewTextBoxColumn1, Me.CrimeNumberDataGridViewTextBoxColumn1, Me.SectionOfLawDataGridViewTextBoxColumn1, Me.NameDataGridViewTextBoxColumn, Me.AliasNameDataGridViewTextBoxColumn, Me.FathersNameDataGridViewTextBoxColumn, Me.SexDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.HenryNumeratorDataGridViewTextBoxColumn, Me.HenryDenominatorDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn1, Me.RemarksDataGridViewTextBoxColumn1, Me.SlipFileDataGridViewTextBoxColumn})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.DADatagrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.DADatagrid, Me.btnColumnHeaderContextMenu)
         Me.DADatagrid.DataSource = Me.DARegisterBindingSource
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DADatagrid.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle44.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle44.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle44.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle44.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle44.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DADatagrid.DefaultCellStyle = DataGridViewCellStyle44
         Me.DADatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DADatagrid.EnableHeadersVisualStyles = false
         Me.DADatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
@@ -4516,22 +4566,22 @@ Partial Class frmMainInterface
         Me.DADatagrid.MultiSelect = false
         Me.DADatagrid.Name = "DADatagrid"
         Me.DADatagrid.ReadOnly = true
-        DataGridViewCellStyle216.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle216.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle216.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle216.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle216.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle216.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle216.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DADatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle216
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle45.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle45.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle45.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DADatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle45
         Me.DADatagrid.RowHeadersWidth = 60
-        DataGridViewCellStyle217.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DADatagrid.RowsDefaultCellStyle = DataGridViewCellStyle217
+        DataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DADatagrid.RowsDefaultCellStyle = DataGridViewCellStyle46
         Me.DADatagrid.RowTemplate.Height = 50
         Me.DADatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DADatagrid.SelectAllSignVisible = false
         Me.DADatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DADatagrid.Size = New System.Drawing.Size(1358, 177)
+        Me.DADatagrid.Size = New System.Drawing.Size(1358, 175)
         Me.DADatagrid.TabIndex = 3
         Me.DADatagrid.TabStop = false
         '
@@ -4546,8 +4596,8 @@ Partial Class frmMainInterface
         'DAYearDataGridViewTextBoxColumn
         '
         Me.DAYearDataGridViewTextBoxColumn.DataPropertyName = "DAYear"
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.DAYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.DAYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle42
         Me.DAYearDataGridViewTextBoxColumn.HeaderText = "Year"
         Me.DAYearDataGridViewTextBoxColumn.Name = "DAYearDataGridViewTextBoxColumn"
         Me.DAYearDataGridViewTextBoxColumn.ReadOnly = true
@@ -4557,8 +4607,8 @@ Partial Class frmMainInterface
         'DateOfEntryDataGridViewTextBoxColumn
         '
         Me.DateOfEntryDataGridViewTextBoxColumn.DataPropertyName = "DateOfEntry"
-        DataGridViewCellStyle31.Format = "dd/MM/yyyy"
-        Me.DateOfEntryDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle43.Format = "dd/MM/yyyy"
+        Me.DateOfEntryDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle43
         Me.DateOfEntryDataGridViewTextBoxColumn.HeaderText = "Date of Entry"
         Me.DateOfEntryDataGridViewTextBoxColumn.Name = "DateOfEntryDataGridViewTextBoxColumn"
         Me.DateOfEntryDataGridViewTextBoxColumn.ReadOnly = true
@@ -4679,27 +4729,27 @@ Partial Class frmMainInterface
         Me.RSOCDatagrid.AutoGenerateColumns = false
         Me.RSOCDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.RSOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RSOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle47.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle47.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle47.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RSOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle47
         Me.RSOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.RSOCDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SerialNoDataGridViewTextBoxColumn, Me.SOCNumberDataGridViewTextBoxColumn1, Me.SOCNumberWithoutYearDataGridViewTextBoxColumn, Me.DateOfInspectionDataGridViewTextBoxColumn1, Me.PoliceStationDataGridViewTextBoxColumn6, Me.CrimeNumberDataGridViewTextBoxColumn4, Me.InspectingOfficerDataGridViewTextBoxColumn1, Me.ReportSentToDataGridViewTextBoxColumn, Me.DateOfReportSentDataGridViewTextBoxColumn, Me.NatureOfReportsDataGridViewTextBoxColumn, Me.DespatchNumberDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn6})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.RSOCDatagrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.RSOCDatagrid, Me.btnColumnHeaderContextMenu)
         Me.RSOCDatagrid.DataSource = Me.RSOCRegisterBindingSource
-        DataGridViewCellStyle164.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle164.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle164.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle164.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle164.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle164.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle164.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RSOCDatagrid.DefaultCellStyle = DataGridViewCellStyle164
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle50.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle50.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RSOCDatagrid.DefaultCellStyle = DataGridViewCellStyle50
         Me.RSOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RSOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.RSOCDatagrid.EnableHeadersVisualStyles = false
@@ -4708,22 +4758,22 @@ Partial Class frmMainInterface
         Me.RSOCDatagrid.MultiSelect = false
         Me.RSOCDatagrid.Name = "RSOCDatagrid"
         Me.RSOCDatagrid.ReadOnly = true
-        DataGridViewCellStyle218.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle218.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle218.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle218.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle218.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle218.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle218.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RSOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle218
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle51.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle51.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle51.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle51.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle51.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RSOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle51
         Me.RSOCDatagrid.RowHeadersWidth = 60
-        DataGridViewCellStyle219.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RSOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle219
+        DataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RSOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle52
         Me.RSOCDatagrid.RowTemplate.Height = 50
         Me.RSOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.RSOCDatagrid.SelectAllSignVisible = false
         Me.RSOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.RSOCDatagrid.Size = New System.Drawing.Size(1358, 252)
+        Me.RSOCDatagrid.Size = New System.Drawing.Size(1358, 250)
         Me.RSOCDatagrid.TabIndex = 3
         Me.RSOCDatagrid.TabStop = false
         '
@@ -4753,8 +4803,8 @@ Partial Class frmMainInterface
         'DateOfInspectionDataGridViewTextBoxColumn1
         '
         Me.DateOfInspectionDataGridViewTextBoxColumn1.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle36.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle36
+        DataGridViewCellStyle48.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle48
         Me.DateOfInspectionDataGridViewTextBoxColumn1.HeaderText = "Date Of Inspection"
         Me.DateOfInspectionDataGridViewTextBoxColumn1.Name = "DateOfInspectionDataGridViewTextBoxColumn1"
         Me.DateOfInspectionDataGridViewTextBoxColumn1.ReadOnly = true
@@ -4793,9 +4843,9 @@ Partial Class frmMainInterface
         'DateOfReportSentDataGridViewTextBoxColumn
         '
         Me.DateOfReportSentDataGridViewTextBoxColumn.DataPropertyName = "DateOfReportSent"
-        DataGridViewCellStyle163.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle163.Format = "dd/MM/yyyy"
-        Me.DateOfReportSentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle163
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle49.Format = "dd/MM/yyyy"
+        Me.DateOfReportSentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle49
         Me.DateOfReportSentDataGridViewTextBoxColumn.HeaderText = "Date Of Sending Report"
         Me.DateOfReportSentDataGridViewTextBoxColumn.Name = "DateOfReportSentDataGridViewTextBoxColumn"
         Me.DateOfReportSentDataGridViewTextBoxColumn.ReadOnly = true
@@ -4836,27 +4886,27 @@ Partial Class frmMainInterface
         Me.IDRDataGrid.AutoGenerateColumns = false
         Me.IDRDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.IDRDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle37.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle37.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDRDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle53.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle53.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle53.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDRDataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle53
         Me.IDRDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.IDRDataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.SOCNumberDataGridViewTextBoxColumn2, Me.IdentificationDateDataGridViewTextBoxColumn, Me.DateOfInspectionDataGridViewTextBoxColumn2, Me.PoliceStationDataGridViewTextBoxColumn7, Me.CrimeNumberDataGridViewTextBoxColumn5, Me.SectionOfLawDataGridViewTextBoxColumn4, Me.InvestigatingOfficerDataGridViewTextBoxColumn1, Me.ChancePrintsDevelopedDataGridViewTextBoxColumn, Me.CPsIdentifiedDataGridViewTextBoxColumn, Me.IdentifiedByDataGridViewTextBoxColumn, Me.IdentifiedAsDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn7})
         Me.DataGridContextMenuBar.SetContextMenuEx(Me.IDRDataGrid, Me.btnDatagridContextMenu)
         Me.ColumnHeaderContextMenuBar.SetContextMenuEx(Me.IDRDataGrid, Me.btnColumnHeaderContextMenu)
         Me.IDRDataGrid.DataSource = Me.IDRRegisterBindingSource
-        DataGridViewCellStyle222.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle222.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle222.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle222.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle222.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle222.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle222.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDRDataGrid.DefaultCellStyle = DataGridViewCellStyle222
+        DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle59.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle59.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle59.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle59.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDRDataGrid.DefaultCellStyle = DataGridViewCellStyle59
         Me.IDRDataGrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.IDRDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.IDRDataGrid.EnableHeadersVisualStyles = false
@@ -4865,31 +4915,31 @@ Partial Class frmMainInterface
         Me.IDRDataGrid.MultiSelect = false
         Me.IDRDataGrid.Name = "IDRDataGrid"
         Me.IDRDataGrid.ReadOnly = true
-        DataGridViewCellStyle223.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle223.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle223.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle223.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle223.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle223.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle223.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDRDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle223
+        DataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle60.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle60.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle60.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle60.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle60.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDRDataGrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle60
         Me.IDRDataGrid.RowHeadersWidth = 50
-        DataGridViewCellStyle224.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IDRDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle224
+        DataGridViewCellStyle61.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IDRDataGrid.RowsDefaultCellStyle = DataGridViewCellStyle61
         Me.IDRDataGrid.RowTemplate.Height = 70
         Me.IDRDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IDRDataGrid.SelectAllSignVisible = false
         Me.IDRDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.IDRDataGrid.Size = New System.Drawing.Size(1358, 528)
+        Me.IDRDataGrid.Size = New System.Drawing.Size(1358, 526)
         Me.IDRDataGrid.TabIndex = 3
         Me.IDRDataGrid.TabStop = false
         '
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.DataPropertyName = "IdentificationNumber"
-        DataGridViewCellStyle111.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle111.Format = "yyyy"
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle111
+        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle54.Format = "yyyy"
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle54
         Me.DataGridViewTextBoxColumn2.HeaderText = "ID Number"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         Me.DataGridViewTextBoxColumn2.ReadOnly = true
@@ -4908,8 +4958,8 @@ Partial Class frmMainInterface
         'IdentificationDateDataGridViewTextBoxColumn
         '
         Me.IdentificationDateDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDate"
-        DataGridViewCellStyle165.Format = "dd/MM/yyyy"
-        Me.IdentificationDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle165
+        DataGridViewCellStyle55.Format = "dd/MM/yyyy"
+        Me.IdentificationDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle55
         Me.IdentificationDateDataGridViewTextBoxColumn.HeaderText = "Date of Identification"
         Me.IdentificationDateDataGridViewTextBoxColumn.Name = "IdentificationDateDataGridViewTextBoxColumn"
         Me.IdentificationDateDataGridViewTextBoxColumn.ReadOnly = true
@@ -4919,8 +4969,8 @@ Partial Class frmMainInterface
         'DateOfInspectionDataGridViewTextBoxColumn2
         '
         Me.DateOfInspectionDataGridViewTextBoxColumn2.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle166.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle166
+        DataGridViewCellStyle56.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle56
         Me.DateOfInspectionDataGridViewTextBoxColumn2.HeaderText = "Date of Inspection"
         Me.DateOfInspectionDataGridViewTextBoxColumn2.Name = "DateOfInspectionDataGridViewTextBoxColumn2"
         Me.DateOfInspectionDataGridViewTextBoxColumn2.ReadOnly = true
@@ -4965,8 +5015,8 @@ Partial Class frmMainInterface
         'ChancePrintsDevelopedDataGridViewTextBoxColumn
         '
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DataPropertyName = "ChancePrintsDeveloped"
-        DataGridViewCellStyle220.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle220
+        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle57
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Developed"
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn"
         Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.ReadOnly = true
@@ -4976,8 +5026,8 @@ Partial Class frmMainInterface
         'CPsIdentifiedDataGridViewTextBoxColumn
         '
         Me.CPsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "CPsIdentified"
-        DataGridViewCellStyle221.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle221
+        DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle58
         Me.CPsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Identified"
         Me.CPsIdentifiedDataGridViewTextBoxColumn.Name = "CPsIdentifiedDataGridViewTextBoxColumn"
         Me.CPsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
@@ -5207,12 +5257,12 @@ Partial Class frmMainInterface
         Me.StatusBar.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.StatusBar.GrabHandleStyle = DevComponents.DotNetBar.eGrabHandleStyle.ResizeHandle
         Me.StatusBar.IsMaximized = false
-        Me.StatusBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblRegisterNameStatusBar, Me.lblNumberOfRecords, Me.LabelItem2, Me.lblCurrentYear, Me.lblCurrentMonth, Me.lblHasFPSlip, Me.lblReportSent, Me.lblAutoCapsStatus, Me.lblTime})
+        Me.StatusBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblRegisterNameStatusBar, Me.lblNumberOfRecords, Me.LabelItem2, Me.lblCurrentYear, Me.lblCurrentMonth, Me.pgrDownloadInstaller, Me.lblHasFPSlip, Me.lblReportSent, Me.lblAutoCapsStatus, Me.lblTime})
         Me.StatusBar.ItemSpacing = 5
-        Me.StatusBar.Location = New System.Drawing.Point(5, 744)
+        Me.StatusBar.Location = New System.Drawing.Point(5, 742)
         Me.StatusBar.MaximumSize = New System.Drawing.Size(0, 30)
         Me.StatusBar.Name = "StatusBar"
-        Me.StatusBar.Size = New System.Drawing.Size(1360, 26)
+        Me.StatusBar.Size = New System.Drawing.Size(1360, 28)
         Me.StatusBar.Stretch = true
         Me.StatusBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.StatusBar.TabIndex = 4
@@ -5252,6 +5302,22 @@ Partial Class frmMainInterface
         Me.lblCurrentMonth.Text = "This Month :"
         Me.lblCurrentMonth.Width = 190
         '
+        'pgrDownloadInstaller
+        '
+        '
+        '
+        '
+        Me.pgrDownloadInstaller.BackStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.pgrDownloadInstaller.ChunkGradientAngle = 0!
+        Me.pgrDownloadInstaller.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Far
+        Me.pgrDownloadInstaller.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways
+        Me.pgrDownloadInstaller.Name = "pgrDownloadInstaller"
+        Me.pgrDownloadInstaller.RecentlyUsed = false
+        Me.pgrDownloadInstaller.Text = "Downloading Installer 0%"
+        Me.pgrDownloadInstaller.TextVisible = true
+        Me.pgrDownloadInstaller.Visible = false
+        Me.pgrDownloadInstaller.Width = 200
+        '
         'lblHasFPSlip
         '
         Me.lblHasFPSlip.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
@@ -5289,8 +5355,8 @@ Partial Class frmMainInterface
         '
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
-        Me.TabControl.Controls.Add(Me.TabControlPanel2)
         Me.TabControl.Controls.Add(Me.TabControlPanel1)
+        Me.TabControl.Controls.Add(Me.TabControlPanel2)
         Me.TabControl.Controls.Add(Me.TabControlPanel9)
         Me.TabControl.Controls.Add(Me.TabControlPanel7)
         Me.TabControl.Controls.Add(Me.TabControlPanel11)
@@ -5307,7 +5373,7 @@ Partial Class frmMainInterface
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedTabFont = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold)
         Me.TabControl.SelectedTabIndex = 0
-        Me.TabControl.Size = New System.Drawing.Size(1360, 555)
+        Me.TabControl.Size = New System.Drawing.Size(1360, 553)
         Me.TabControl.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document
         Me.TabControl.TabIndex = 5
         Me.TabControl.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox
@@ -5324,3545 +5390,6 @@ Partial Class frmMainInterface
         Me.TabControl.Tabs.Add(Me.OSTabItem)
         Me.TabControl.TabStop = false
         '
-        'TabControlPanel9
-        '
-        Me.TabControlPanel9.Controls.Add(Me.lblRSOCGridInfo)
-        Me.TabControlPanel9.Controls.Add(Me.RSOCDatagrid)
-        Me.TabControlPanel9.Controls.Add(Me.PanelRSOC)
-        Me.TabControlPanel9.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel9.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel9.Name = "TabControlPanel9"
-        Me.TabControlPanel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel9.Size = New System.Drawing.Size(1360, 530)
-        Me.TabControlPanel9.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel9.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel9.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel9.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel9.Style.GradientAngle = 90
-        Me.TabControlPanel9.TabIndex = 9
-        Me.TabControlPanel9.TabItem = Me.RSOCTabItem
-        '
-        'lblRSOCGridInfo
-        '
-        Me.lblRSOCGridInfo.AutoSize = true
-        Me.lblRSOCGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblRSOCGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblRSOCGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblRSOCGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblRSOCGridInfo.Location = New System.Drawing.Point(5, 90)
-        Me.lblRSOCGridInfo.Name = "lblRSOCGridInfo"
-        Me.lblRSOCGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblRSOCGridInfo.TabIndex = 165
-        Me.lblRSOCGridInfo.Text = "Grid"
-        Me.lblRSOCGridInfo.Visible = false
-        '
-        'PanelRSOC
-        '
-        Me.PanelRSOC.AutoScroll = true
-        Me.PanelRSOC.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelRSOC.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelRSOC.Controls.Add(Me.LabelX93)
-        Me.PanelRSOC.Controls.Add(Me.LabelX89)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCSerialNumber)
-        Me.PanelRSOC.Controls.Add(Me.LabelX84)
-        Me.PanelRSOC.Controls.Add(Me.LabelX82)
-        Me.PanelRSOC.Controls.Add(Me.LabelX81)
-        Me.PanelRSOC.Controls.Add(Me.LabelX80)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCDespatchNumber)
-        Me.PanelRSOC.Controls.Add(Me.cmbRSOCNatureOfReport)
-        Me.PanelRSOC.Controls.Add(Me.LabelX15)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCReportSentTo)
-        Me.PanelRSOC.Controls.Add(Me.dtRSOCReportSentOn)
-        Me.PanelRSOC.Controls.Add(Me.LabelX20)
-        Me.PanelRSOC.Controls.Add(Me.LabelX43)
-        Me.PanelRSOC.Controls.Add(Me.LabelX56)
-        Me.PanelRSOC.Controls.Add(Me.LabelX97)
-        Me.PanelRSOC.Controls.Add(Me.LabelX98)
-        Me.PanelRSOC.Controls.Add(Me.LabelX102)
-        Me.PanelRSOC.Controls.Add(Me.LabelX103)
-        Me.PanelRSOC.Controls.Add(Me.btnSearchRSOC)
-        Me.PanelRSOC.Controls.Add(Me.btnClearRSOC)
-        Me.PanelRSOC.Controls.Add(Me.btnSaveRSOC)
-        Me.PanelRSOC.Controls.Add(Me.cmbRSOCPoliceStation)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCRemarks)
-        Me.PanelRSOC.Controls.Add(Me.cmbRSOCOfficer)
-        Me.PanelRSOC.Controls.Add(Me.dtRSOCInspection)
-        Me.PanelRSOC.Controls.Add(Me.LabelX111)
-        Me.PanelRSOC.Controls.Add(Me.LabelX122)
-        Me.PanelRSOC.Controls.Add(Me.LabelX151)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCCrimeNumber)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCNumber)
-        Me.PanelRSOC.Controls.Add(Me.LabelX152)
-        Me.PanelRSOC.Controls.Add(Me.LabelX153)
-        Me.PanelRSOC.Controls.Add(Me.LabelX157)
-        Me.PanelRSOC.Controls.Add(Me.txtRSOCNumberOnly)
-        Me.PanelRSOC.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelRSOC.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelRSOC.Location = New System.Drawing.Point(1, 1)
-        Me.PanelRSOC.Name = "PanelRSOC"
-        Me.PanelRSOC.Size = New System.Drawing.Size(1358, 276)
-        Me.PanelRSOC.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelRSOC.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelRSOC.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelRSOC.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelRSOC.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelRSOC.Style.GradientAngle = 90
-        Me.PanelRSOC.TabIndex = 0
-        '
-        'LabelX93
-        '
-        Me.LabelX93.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX93.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX93.Location = New System.Drawing.Point(12, 7)
-        Me.LabelX93.Name = "LabelX93"
-        Me.LabelX93.Size = New System.Drawing.Size(49, 18)
-        Me.LabelX93.TabIndex = 147
-        Me.LabelX93.Text = "Number"
-        '
-        'LabelX89
-        '
-        Me.LabelX89.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX89.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX89.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX89.Location = New System.Drawing.Point(387, 9)
-        Me.LabelX89.Name = "LabelX89"
-        Me.LabelX89.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX89.TabIndex = 146
-        Me.LabelX89.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'txtRSOCSerialNumber
-        '
-        '
-        '
-        '
-        Me.txtRSOCSerialNumber.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtRSOCSerialNumber.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCSerialNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCSerialNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCSerialNumber.FocusHighlightEnabled = true
-        Me.txtRSOCSerialNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCSerialNumber, true)
-        Me.txtRSOCSerialNumber.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtRSOCSerialNumber.Location = New System.Drawing.Point(155, 5)
-        Me.txtRSOCSerialNumber.MaxValue = 1000000
-        Me.txtRSOCSerialNumber.MinValue = 1
-        Me.txtRSOCSerialNumber.Name = "txtRSOCSerialNumber"
-        Me.txtRSOCSerialNumber.ShowUpDown = true
-        Me.txtRSOCSerialNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtRSOCSerialNumber.TabIndex = 0
-        Me.txtRSOCSerialNumber.Value = 1
-        Me.txtRSOCSerialNumber.WatermarkText = "Number"
-        '
-        'LabelX84
-        '
-        Me.LabelX84.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX84.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX84.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX84.Location = New System.Drawing.Point(909, 105)
-        Me.LabelX84.Name = "LabelX84"
-        Me.LabelX84.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX84.TabIndex = 143
-        Me.LabelX84.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX82
-        '
-        Me.LabelX82.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX82.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX82.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX82.Location = New System.Drawing.Point(909, 10)
-        Me.LabelX82.Name = "LabelX82"
-        Me.LabelX82.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX82.TabIndex = 142
-        Me.LabelX82.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX81
-        '
-        Me.LabelX81.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX81.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX81.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX81.Location = New System.Drawing.Point(387, 240)
-        Me.LabelX81.Name = "LabelX81"
-        Me.LabelX81.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX81.TabIndex = 141
-        Me.LabelX81.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX80
-        '
-        Me.LabelX80.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX80.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX80.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX80.Location = New System.Drawing.Point(387, 202)
-        Me.LabelX80.Name = "LabelX80"
-        Me.LabelX80.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX80.TabIndex = 140
-        Me.LabelX80.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'txtRSOCDespatchNumber
-        '
-        Me.txtRSOCDespatchNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtRSOCDespatchNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtRSOCDespatchNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRSOCDespatchNumber.Border.Class = "TextBoxBorder"
-        Me.txtRSOCDespatchNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCDespatchNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCDespatchNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCDespatchNumber.ButtonCustom.Visible = true
-        Me.txtRSOCDespatchNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRSOCDespatchNumber.FocusHighlightEnabled = true
-        Me.txtRSOCDespatchNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRSOCDespatchNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCDespatchNumber, true)
-        Me.txtRSOCDespatchNumber.Location = New System.Drawing.Point(678, 140)
-        Me.txtRSOCDespatchNumber.MaxLength = 45
-        Me.txtRSOCDespatchNumber.Name = "txtRSOCDespatchNumber"
-        Me.txtRSOCDespatchNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtRSOCDespatchNumber.TabIndex = 9
-        Me.txtRSOCDespatchNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRSOCDespatchNumber.WatermarkText = "Despatch Number"
-        '
-        'cmbRSOCNatureOfReport
-        '
-        Me.cmbRSOCNatureOfReport.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbRSOCNatureOfReport.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbRSOCNatureOfReport.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbRSOCNatureOfReport.FocusHighlightEnabled = true
-        Me.cmbRSOCNatureOfReport.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbRSOCNatureOfReport.ForeColor = System.Drawing.Color.Black
-        Me.cmbRSOCNatureOfReport.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbRSOCNatureOfReport, true)
-        Me.cmbRSOCNatureOfReport.ItemHeight = 23
-        Me.cmbRSOCNatureOfReport.Location = New System.Drawing.Point(678, 100)
-        Me.cmbRSOCNatureOfReport.MaxDropDownItems = 35
-        Me.cmbRSOCNatureOfReport.MaxLength = 255
-        Me.cmbRSOCNatureOfReport.Name = "cmbRSOCNatureOfReport"
-        Me.cmbRSOCNatureOfReport.Size = New System.Drawing.Size(227, 29)
-        Me.cmbRSOCNatureOfReport.Sorted = true
-        Me.cmbRSOCNatureOfReport.TabIndex = 8
-        Me.cmbRSOCNatureOfReport.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbRSOCNatureOfReport.WatermarkText = "Nature of Report"
-        '
-        'LabelX15
-        '
-        Me.LabelX15.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX15.Location = New System.Drawing.Point(559, 107)
-        Me.LabelX15.Name = "LabelX15"
-        Me.LabelX15.Size = New System.Drawing.Size(99, 18)
-        Me.LabelX15.TabIndex = 138
-        Me.LabelX15.Text = "Nature of Report"
-        '
-        'txtRSOCReportSentTo
-        '
-        Me.txtRSOCReportSentTo.AcceptsReturn = true
-        Me.txtRSOCReportSentTo.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRSOCReportSentTo.Border.Class = "TextBoxBorder"
-        Me.txtRSOCReportSentTo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCReportSentTo.ButtonCustom.Image = CType(resources.GetObject("txtRSOCReportSentTo.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCReportSentTo.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRSOCReportSentTo.FocusHighlightEnabled = true
-        Me.txtRSOCReportSentTo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRSOCReportSentTo.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCReportSentTo, true)
-        Me.txtRSOCReportSentTo.Location = New System.Drawing.Point(678, 8)
-        Me.txtRSOCReportSentTo.MaxLength = 255
-        Me.txtRSOCReportSentTo.Multiline = true
-        Me.txtRSOCReportSentTo.Name = "txtRSOCReportSentTo"
-        Me.txtRSOCReportSentTo.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtRSOCReportSentTo.Size = New System.Drawing.Size(227, 82)
-        Me.txtRSOCReportSentTo.TabIndex = 7
-        Me.txtRSOCReportSentTo.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRSOCReportSentTo.WatermarkText = "Report Sent To"
-        '
-        'dtRSOCReportSentOn
-        '
-        Me.dtRSOCReportSentOn.AutoAdvance = true
-        Me.dtRSOCReportSentOn.AutoSelectDate = true
-        Me.dtRSOCReportSentOn.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtRSOCReportSentOn.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtRSOCReportSentOn.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCReportSentOn.ButtonClear.Image = CType(resources.GetObject("dtRSOCReportSentOn.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtRSOCReportSentOn.ButtonClear.Visible = true
-        Me.dtRSOCReportSentOn.ButtonDropDown.Visible = true
-        Me.dtRSOCReportSentOn.CustomFormat = "dd/MM/yyyy"
-        Me.dtRSOCReportSentOn.FocusHighlightEnabled = true
-        Me.dtRSOCReportSentOn.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtRSOCReportSentOn.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtRSOCReportSentOn, true)
-        Me.dtRSOCReportSentOn.IsPopupCalendarOpen = false
-        Me.dtRSOCReportSentOn.Location = New System.Drawing.Point(155, 233)
-        Me.dtRSOCReportSentOn.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtRSOCReportSentOn.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtRSOCReportSentOn.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtRSOCReportSentOn.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCReportSentOn.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCReportSentOn.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtRSOCReportSentOn.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtRSOCReportSentOn.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCReportSentOn.MonthCalendar.TodayButtonVisible = true
-        Me.dtRSOCReportSentOn.Name = "dtRSOCReportSentOn"
-        Me.dtRSOCReportSentOn.Size = New System.Drawing.Size(227, 29)
-        Me.dtRSOCReportSentOn.TabIndex = 6
-        Me.dtRSOCReportSentOn.WatermarkText = "Date of Sending Report"
-        '
-        'LabelX20
-        '
-        Me.LabelX20.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX20.Location = New System.Drawing.Point(557, 9)
-        Me.LabelX20.Name = "LabelX20"
-        Me.LabelX20.Size = New System.Drawing.Size(87, 18)
-        Me.LabelX20.TabIndex = 136
-        Me.LabelX20.Text = "Report Sent To"
-        '
-        'LabelX43
-        '
-        Me.LabelX43.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX43.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX43.Location = New System.Drawing.Point(12, 240)
-        Me.LabelX43.Name = "LabelX43"
-        Me.LabelX43.Size = New System.Drawing.Size(135, 18)
-        Me.LabelX43.TabIndex = 137
-        Me.LabelX43.Text = "Date of Sending Report"
-        '
-        'LabelX56
-        '
-        Me.LabelX56.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX56.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX56.Location = New System.Drawing.Point(559, 145)
-        Me.LabelX56.Name = "LabelX56"
-        Me.LabelX56.Size = New System.Drawing.Size(104, 18)
-        Me.LabelX56.TabIndex = 131
-        Me.LabelX56.Text = "Despatch Number"
-        '
-        'LabelX97
-        '
-        Me.LabelX97.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX97.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX97.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX97.Location = New System.Drawing.Point(387, 160)
-        Me.LabelX97.Name = "LabelX97"
-        Me.LabelX97.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX97.TabIndex = 62
-        Me.LabelX97.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX98
-        '
-        Me.LabelX98.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX98.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX98.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX98.Location = New System.Drawing.Point(387, 121)
-        Me.LabelX98.Name = "LabelX98"
-        Me.LabelX98.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX98.TabIndex = 61
-        Me.LabelX98.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX102
-        '
-        Me.LabelX102.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX102.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX102.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX102.Location = New System.Drawing.Point(387, 84)
-        Me.LabelX102.Name = "LabelX102"
-        Me.LabelX102.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX102.TabIndex = 60
-        Me.LabelX102.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX103
-        '
-        Me.LabelX103.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX103.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX103.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX103.Location = New System.Drawing.Point(387, 45)
-        Me.LabelX103.Name = "LabelX103"
-        Me.LabelX103.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX103.TabIndex = 59
-        Me.LabelX103.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'btnSearchRSOC
-        '
-        Me.btnSearchRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchRSOC.Image = CType(resources.GetObject("btnSearchRSOC.Image"),System.Drawing.Image)
-        Me.btnSearchRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchRSOC.Location = New System.Drawing.Point(1189, 102)
-        Me.btnSearchRSOC.Name = "btnSearchRSOC"
-        Me.btnSearchRSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchRSOC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRSOCFindByNumber, Me.btnRSOCAdvancedSearch})
-        Me.btnSearchRSOC.TabIndex = 12
-        Me.btnSearchRSOC.Text = "Search"
-        '
-        'btnRSOCFindByNumber
-        '
-        Me.btnRSOCFindByNumber.GlobalItem = false
-        Me.btnRSOCFindByNumber.Name = "btnRSOCFindByNumber"
-        Me.btnRSOCFindByNumber.Text = "Find By Number"
-        '
-        'btnRSOCAdvancedSearch
-        '
-        Me.btnRSOCAdvancedSearch.BeginGroup = true
-        Me.btnRSOCAdvancedSearch.GlobalItem = false
-        Me.btnRSOCAdvancedSearch.Name = "btnRSOCAdvancedSearch"
-        Me.btnRSOCAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearRSOC
-        '
-        Me.btnClearRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearRSOC.Image = CType(resources.GetObject("btnClearRSOC.Image"),System.Drawing.Image)
-        Me.btnClearRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearRSOC.Location = New System.Drawing.Point(1189, 193)
-        Me.btnClearRSOC.Name = "btnClearRSOC"
-        Me.btnClearRSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearRSOC.TabIndex = 13
-        Me.btnClearRSOC.Text = "Clear All Fields"
-        '
-        'btnSaveRSOC
-        '
-        Me.btnSaveRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveRSOC.Image = CType(resources.GetObject("btnSaveRSOC.Image"),System.Drawing.Image)
-        Me.btnSaveRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveRSOC.Location = New System.Drawing.Point(1189, 11)
-        Me.btnSaveRSOC.Name = "btnSaveRSOC"
-        Me.btnSaveRSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveRSOC.TabIndex = 11
-        Me.btnSaveRSOC.Text = "Save"
-        '
-        'cmbRSOCPoliceStation
-        '
-        Me.cmbRSOCPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbRSOCPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbRSOCPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbRSOCPoliceStation.FocusHighlightEnabled = true
-        Me.cmbRSOCPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbRSOCPoliceStation.ForeColor = System.Drawing.Color.Black
-        Me.cmbRSOCPoliceStation.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbRSOCPoliceStation, true)
-        Me.cmbRSOCPoliceStation.ItemHeight = 23
-        Me.cmbRSOCPoliceStation.Location = New System.Drawing.Point(155, 116)
-        Me.cmbRSOCPoliceStation.MaxDropDownItems = 35
-        Me.cmbRSOCPoliceStation.MaxLength = 255
-        Me.cmbRSOCPoliceStation.Name = "cmbRSOCPoliceStation"
-        Me.cmbRSOCPoliceStation.Size = New System.Drawing.Size(227, 29)
-        Me.cmbRSOCPoliceStation.Sorted = true
-        Me.cmbRSOCPoliceStation.TabIndex = 3
-        Me.cmbRSOCPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbRSOCPoliceStation.WatermarkText = "Police Station"
-        '
-        'txtRSOCRemarks
-        '
-        Me.txtRSOCRemarks.AcceptsReturn = true
-        Me.txtRSOCRemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRSOCRemarks.Border.Class = "TextBoxBorder"
-        Me.txtRSOCRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCRemarks.ButtonCustom.Image = CType(resources.GetObject("txtRSOCRemarks.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCRemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRSOCRemarks.FocusHighlightEnabled = true
-        Me.txtRSOCRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRSOCRemarks.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCRemarks, true)
-        Me.txtRSOCRemarks.Location = New System.Drawing.Point(678, 181)
-        Me.txtRSOCRemarks.MaxLength = 255
-        Me.txtRSOCRemarks.Multiline = true
-        Me.txtRSOCRemarks.Name = "txtRSOCRemarks"
-        Me.txtRSOCRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtRSOCRemarks.Size = New System.Drawing.Size(227, 84)
-        Me.txtRSOCRemarks.TabIndex = 10
-        Me.txtRSOCRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRSOCRemarks.WatermarkText = "Remarks"
-        '
-        'cmbRSOCOfficer
-        '
-        Me.cmbRSOCOfficer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbRSOCOfficer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.cmbRSOCOfficer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbRSOCOfficer.FocusHighlightEnabled = true
-        Me.cmbRSOCOfficer.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbRSOCOfficer.ForeColor = System.Drawing.Color.Black
-        Me.cmbRSOCOfficer.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbRSOCOfficer, true)
-        Me.cmbRSOCOfficer.ItemHeight = 23
-        Me.cmbRSOCOfficer.Location = New System.Drawing.Point(155, 195)
-        Me.cmbRSOCOfficer.MaxDropDownItems = 15
-        Me.cmbRSOCOfficer.MaxLength = 255
-        Me.cmbRSOCOfficer.Name = "cmbRSOCOfficer"
-        Me.cmbRSOCOfficer.Size = New System.Drawing.Size(227, 29)
-        Me.cmbRSOCOfficer.TabIndex = 5
-        Me.cmbRSOCOfficer.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbRSOCOfficer.WatermarkText = "Inspecting Officer"
-        '
-        'dtRSOCInspection
-        '
-        Me.dtRSOCInspection.AutoAdvance = true
-        Me.dtRSOCInspection.AutoSelectDate = true
-        Me.dtRSOCInspection.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtRSOCInspection.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtRSOCInspection.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCInspection.ButtonClear.Image = CType(resources.GetObject("dtRSOCInspection.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtRSOCInspection.ButtonClear.Visible = true
-        Me.dtRSOCInspection.ButtonDropDown.Visible = true
-        Me.dtRSOCInspection.CustomFormat = "dd/MM/yyyy"
-        Me.dtRSOCInspection.FocusHighlightEnabled = true
-        Me.dtRSOCInspection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtRSOCInspection.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtRSOCInspection, true)
-        Me.dtRSOCInspection.IsPopupCalendarOpen = false
-        Me.dtRSOCInspection.Location = New System.Drawing.Point(155, 80)
-        Me.dtRSOCInspection.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtRSOCInspection.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtRSOCInspection.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtRSOCInspection.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCInspection.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCInspection.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtRSOCInspection.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtRSOCInspection.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtRSOCInspection.MonthCalendar.TodayButtonVisible = true
-        Me.dtRSOCInspection.Name = "dtRSOCInspection"
-        Me.dtRSOCInspection.Size = New System.Drawing.Size(227, 29)
-        Me.dtRSOCInspection.TabIndex = 2
-        Me.dtRSOCInspection.WatermarkText = "Date of Inspection"
-        '
-        'LabelX111
-        '
-        Me.LabelX111.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX111.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX111.Location = New System.Drawing.Point(559, 193)
-        Me.LabelX111.Name = "LabelX111"
-        Me.LabelX111.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX111.TabIndex = 30
-        Me.LabelX111.Text = "Remarks"
-        '
-        'LabelX122
-        '
-        Me.LabelX122.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX122.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX122.Location = New System.Drawing.Point(12, 201)
-        Me.LabelX122.Name = "LabelX122"
-        Me.LabelX122.Size = New System.Drawing.Size(103, 18)
-        Me.LabelX122.TabIndex = 29
-        Me.LabelX122.Text = "Inspecting Officer"
-        '
-        'LabelX151
-        '
-        Me.LabelX151.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX151.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX151.Location = New System.Drawing.Point(12, 160)
-        Me.LabelX151.Name = "LabelX151"
-        Me.LabelX151.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX151.TabIndex = 22
-        Me.LabelX151.Text = "Crime Number"
-        '
-        'txtRSOCCrimeNumber
-        '
-        Me.txtRSOCCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtRSOCCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtRSOCCrimeNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRSOCCrimeNumber.Border.Class = "TextBoxBorder"
-        Me.txtRSOCCrimeNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCCrimeNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCCrimeNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCCrimeNumber.ButtonCustom.Visible = true
-        Me.txtRSOCCrimeNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRSOCCrimeNumber.FocusHighlightEnabled = true
-        Me.txtRSOCCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRSOCCrimeNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCCrimeNumber, true)
-        Me.txtRSOCCrimeNumber.Location = New System.Drawing.Point(155, 155)
-        Me.txtRSOCCrimeNumber.MaxLength = 45
-        Me.txtRSOCCrimeNumber.Name = "txtRSOCCrimeNumber"
-        Me.txtRSOCCrimeNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtRSOCCrimeNumber.TabIndex = 4
-        Me.txtRSOCCrimeNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRSOCCrimeNumber.WatermarkText = "Crime Number"
-        '
-        'txtRSOCNumber
-        '
-        Me.txtRSOCNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRSOCNumber.Border.Class = "TextBoxBorder"
-        Me.txtRSOCNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCNumber.ButtonCustom.Visible = true
-        Me.txtRSOCNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRSOCNumber.FocusHighlightEnabled = true
-        Me.txtRSOCNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRSOCNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCNumber, true)
-        Me.txtRSOCNumber.Location = New System.Drawing.Point(155, 42)
-        Me.txtRSOCNumber.MaxLength = 10
-        Me.txtRSOCNumber.Name = "txtRSOCNumber"
-        Me.txtRSOCNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtRSOCNumber.TabIndex = 1
-        Me.txtRSOCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRSOCNumber.WatermarkText = "SOC Number"
-        '
-        'LabelX152
-        '
-        Me.LabelX152.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX152.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX152.Location = New System.Drawing.Point(12, 84)
-        Me.LabelX152.Name = "LabelX152"
-        Me.LabelX152.Size = New System.Drawing.Size(106, 18)
-        Me.LabelX152.TabIndex = 21
-        Me.LabelX152.Text = "Date of Inspection"
-        '
-        'LabelX153
-        '
-        Me.LabelX153.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX153.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX153.Location = New System.Drawing.Point(12, 122)
-        Me.LabelX153.Name = "LabelX153"
-        Me.LabelX153.Size = New System.Drawing.Size(80, 18)
-        Me.LabelX153.TabIndex = 17
-        Me.LabelX153.Text = "Police Station"
-        '
-        'LabelX157
-        '
-        Me.LabelX157.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX157.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX157.Location = New System.Drawing.Point(12, 46)
-        Me.LabelX157.Name = "LabelX157"
-        Me.LabelX157.Size = New System.Drawing.Size(76, 18)
-        Me.LabelX157.TabIndex = 10
-        Me.LabelX157.Text = "SOC Number"
-        '
-        'txtRSOCNumberOnly
-        '
-        Me.txtRSOCNumberOnly.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRSOCNumberOnly.Border.Class = "TextBoxBorder"
-        Me.txtRSOCNumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRSOCNumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtRSOCNumberOnly.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtRSOCNumberOnly.ButtonCustom.Visible = true
-        Me.txtRSOCNumberOnly.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRSOCNumberOnly.FocusHighlightEnabled = true
-        Me.txtRSOCNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRSOCNumberOnly.ForeColor = System.Drawing.Color.Black
-        Me.txtRSOCNumberOnly.Location = New System.Drawing.Point(993, 43)
-        Me.txtRSOCNumberOnly.MaxLength = 45
-        Me.txtRSOCNumberOnly.Name = "txtRSOCNumberOnly"
-        Me.txtRSOCNumberOnly.Size = New System.Drawing.Size(116, 23)
-        Me.txtRSOCNumberOnly.TabIndex = 132
-        Me.txtRSOCNumberOnly.TabStop = false
-        Me.txtRSOCNumberOnly.Visible = false
-        Me.txtRSOCNumberOnly.WatermarkText = "SOC Number"
-        '
-        'RSOCTabItem
-        '
-        Me.RSOCTabItem.AttachedControl = Me.TabControlPanel9
-        Me.RSOCTabItem.Name = "RSOCTabItem"
-        Me.RSOCTabItem.Text = "SOC Reports Register"
-        '
-        'TabControlPanel7
-        '
-        Me.TabControlPanel7.Controls.Add(Me.lblCDGridInfo)
-        Me.TabControlPanel7.Controls.Add(Me.CDDataGrid)
-        Me.TabControlPanel7.Controls.Add(Me.PanelCD)
-        Me.TabControlPanel7.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel7.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel7.Name = "TabControlPanel7"
-        Me.TabControlPanel7.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel7.Size = New System.Drawing.Size(1360, 530)
-        Me.TabControlPanel7.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel7.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel7.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel7.Style.GradientAngle = 90
-        Me.TabControlPanel7.TabIndex = 7
-        Me.TabControlPanel7.TabItem = Me.CDTabItem
-        '
-        'lblCDGridInfo
-        '
-        Me.lblCDGridInfo.AutoSize = true
-        Me.lblCDGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblCDGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblCDGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblCDGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblCDGridInfo.Location = New System.Drawing.Point(5, 90)
-        Me.lblCDGridInfo.Name = "lblCDGridInfo"
-        Me.lblCDGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblCDGridInfo.TabIndex = 165
-        Me.lblCDGridInfo.Text = "Grid"
-        Me.lblCDGridInfo.Visible = false
-        '
-        'PanelCD
-        '
-        Me.PanelCD.AutoScroll = true
-        Me.PanelCD.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelCD.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelCD.Controls.Add(Me.chkCDTwodigits)
-        Me.PanelCD.Controls.Add(Me.LabelX78)
-        Me.PanelCD.Controls.Add(Me.LabelX77)
-        Me.PanelCD.Controls.Add(Me.LabelX76)
-        Me.PanelCD.Controls.Add(Me.txtCCNumber)
-        Me.PanelCD.Controls.Add(Me.LabelX75)
-        Me.PanelCD.Controls.Add(Me.txtCourt)
-        Me.PanelCD.Controls.Add(Me.LabelX83)
-        Me.PanelCD.Controls.Add(Me.LabelX85)
-        Me.PanelCD.Controls.Add(Me.LabelX86)
-        Me.PanelCD.Controls.Add(Me.LabelX87)
-        Me.PanelCD.Controls.Add(Me.LabelX88)
-        Me.PanelCD.Controls.Add(Me.chkAppendCDYear)
-        Me.PanelCD.Controls.Add(Me.txtCDYear)
-        Me.PanelCD.Controls.Add(Me.btnSearchCD)
-        Me.PanelCD.Controls.Add(Me.btnClearCDFields)
-        Me.PanelCD.Controls.Add(Me.btnSaveCD)
-        Me.PanelCD.Controls.Add(Me.cmbCDPoliceStation)
-        Me.PanelCD.Controls.Add(Me.txtCDRemarks)
-        Me.PanelCD.Controls.Add(Me.txtCDDetails)
-        Me.PanelCD.Controls.Add(Me.cmbCDOfficer)
-        Me.PanelCD.Controls.Add(Me.dtCDExamination)
-        Me.PanelCD.Controls.Add(Me.LabelX90)
-        Me.PanelCD.Controls.Add(Me.LabelX91)
-        Me.PanelCD.Controls.Add(Me.LabelX92)
-        Me.PanelCD.Controls.Add(Me.LabelX99)
-        Me.PanelCD.Controls.Add(Me.txtCDCrNo)
-        Me.PanelCD.Controls.Add(Me.txtCDNumber)
-        Me.PanelCD.Controls.Add(Me.LabelX100)
-        Me.PanelCD.Controls.Add(Me.LabelX101)
-        Me.PanelCD.Controls.Add(Me.LabelX104)
-        Me.PanelCD.Controls.Add(Me.LabelX105)
-        Me.PanelCD.Controls.Add(Me.txtCDNumberOnly)
-        Me.PanelCD.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelCD.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelCD.Location = New System.Drawing.Point(1, 1)
-        Me.PanelCD.Name = "PanelCD"
-        Me.PanelCD.Size = New System.Drawing.Size(1358, 244)
-        Me.PanelCD.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelCD.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelCD.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelCD.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelCD.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelCD.Style.GradientAngle = 90
-        Me.PanelCD.TabIndex = 1
-        '
-        'chkCDTwodigits
-        '
-        Me.chkCDTwodigits.AutoSize = true
-        '
-        '
-        '
-        Me.chkCDTwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkCDTwodigits, true)
-        Me.chkCDTwodigits.Location = New System.Drawing.Point(200, 23)
-        Me.chkCDTwodigits.Name = "chkCDTwodigits"
-        Me.chkCDTwodigits.Size = New System.Drawing.Size(126, 18)
-        Me.chkCDTwodigits.TabIndex = 139
-        Me.chkCDTwodigits.TabStop = false
-        Me.chkCDTwodigits.Text = "Use last two digits"
-        '
-        'LabelX78
-        '
-        Me.LabelX78.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX78.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX78.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX78.Location = New System.Drawing.Point(878, 48)
-        Me.LabelX78.Name = "LabelX78"
-        Me.LabelX78.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX78.TabIndex = 138
-        Me.LabelX78.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX77
-        '
-        Me.LabelX77.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX77.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX77.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX77.Location = New System.Drawing.Point(350, 216)
-        Me.LabelX77.Name = "LabelX77"
-        Me.LabelX77.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX77.TabIndex = 137
-        Me.LabelX77.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX76
-        '
-        Me.LabelX76.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX76.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX76.Location = New System.Drawing.Point(10, 214)
-        Me.LabelX76.Name = "LabelX76"
-        Me.LabelX76.Size = New System.Drawing.Size(67, 18)
-        Me.LabelX76.TabIndex = 136
-        Me.LabelX76.Text = "CC Number"
-        '
-        'txtCCNumber
-        '
-        Me.txtCCNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtCCNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtCCNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCCNumber.Border.Class = "TextBoxBorder"
-        Me.txtCCNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCCNumber.ButtonCustom.Image = CType(resources.GetObject("txtCCNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCCNumber.ButtonCustom.Visible = true
-        Me.txtCCNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCCNumber.FocusHighlightEnabled = true
-        Me.txtCCNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCCNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCCNumber, true)
-        Me.txtCCNumber.Location = New System.Drawing.Point(122, 209)
-        Me.txtCCNumber.MaxLength = 45
-        Me.txtCCNumber.Name = "txtCCNumber"
-        Me.txtCCNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtCCNumber.TabIndex = 6
-        Me.txtCCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCCNumber.WatermarkText = "CC Number"
-        '
-        'LabelX75
-        '
-        Me.LabelX75.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX75.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX75.Location = New System.Drawing.Point(10, 175)
-        Me.LabelX75.Name = "LabelX75"
-        Me.LabelX75.Size = New System.Drawing.Size(34, 18)
-        Me.LabelX75.TabIndex = 134
-        Me.LabelX75.Text = "Court"
-        '
-        'txtCourt
-        '
-        Me.txtCourt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtCourt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtCourt.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCourt.Border.Class = "TextBoxBorder"
-        Me.txtCourt.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCourt.ButtonCustom.Image = CType(resources.GetObject("txtCourt.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCourt.ButtonCustom.Visible = true
-        Me.txtCourt.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCourt.FocusHighlightEnabled = true
-        Me.txtCourt.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCourt.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCourt, true)
-        Me.txtCourt.Location = New System.Drawing.Point(122, 168)
-        Me.txtCourt.MaxLength = 45
-        Me.txtCourt.Name = "txtCourt"
-        Me.txtCourt.Size = New System.Drawing.Size(227, 29)
-        Me.txtCourt.TabIndex = 5
-        Me.txtCourt.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCourt.WatermarkText = "Court"
-        '
-        'LabelX83
-        '
-        Me.LabelX83.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX83.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX83.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX83.Location = New System.Drawing.Point(878, 10)
-        Me.LabelX83.Name = "LabelX83"
-        Me.LabelX83.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX83.TabIndex = 64
-        Me.LabelX83.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX85
-        '
-        Me.LabelX85.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX85.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX85.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX85.Location = New System.Drawing.Point(350, 173)
-        Me.LabelX85.Name = "LabelX85"
-        Me.LabelX85.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX85.TabIndex = 62
-        Me.LabelX85.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX86
-        '
-        Me.LabelX86.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX86.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX86.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX86.Location = New System.Drawing.Point(350, 135)
-        Me.LabelX86.Name = "LabelX86"
-        Me.LabelX86.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX86.TabIndex = 61
-        Me.LabelX86.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX87
-        '
-        Me.LabelX87.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX87.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX87.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX87.Location = New System.Drawing.Point(350, 96)
-        Me.LabelX87.Name = "LabelX87"
-        Me.LabelX87.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX87.TabIndex = 60
-        Me.LabelX87.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX88
-        '
-        Me.LabelX88.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX88.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX88.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX88.Location = New System.Drawing.Point(350, 55)
-        Me.LabelX88.Name = "LabelX88"
-        Me.LabelX88.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX88.TabIndex = 59
-        Me.LabelX88.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'chkAppendCDYear
-        '
-        Me.chkAppendCDYear.AutoSize = true
-        '
-        '
-        '
-        Me.chkAppendCDYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkAppendCDYear.Location = New System.Drawing.Point(200, 2)
-        Me.chkAppendCDYear.Name = "chkAppendCDYear"
-        Me.chkAppendCDYear.Size = New System.Drawing.Size(124, 18)
-        Me.chkAppendCDYear.TabIndex = 2
-        Me.chkAppendCDYear.TabStop = false
-        Me.chkAppendCDYear.Text = "Auto append year"
-        '
-        'txtCDYear
-        '
-        '
-        '
-        '
-        Me.txtCDYear.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtCDYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCDYear.ButtonCustom.Image = CType(resources.GetObject("txtCDYear.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCDYear.FocusHighlightEnabled = true
-        Me.txtCDYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDYear, true)
-        Me.txtCDYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtCDYear.Location = New System.Drawing.Point(122, 5)
-        Me.txtCDYear.MaxValue = 2099
-        Me.txtCDYear.MinValue = 1900
-        Me.txtCDYear.Name = "txtCDYear"
-        Me.txtCDYear.ShowUpDown = true
-        Me.txtCDYear.Size = New System.Drawing.Size(58, 29)
-        Me.txtCDYear.TabIndex = 1
-        Me.txtCDYear.Value = 1900
-        Me.txtCDYear.WatermarkText = "Year"
-        '
-        'btnSearchCD
-        '
-        Me.btnSearchCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchCD.Image = CType(resources.GetObject("btnSearchCD.Image"),System.Drawing.Image)
-        Me.btnSearchCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchCD.Location = New System.Drawing.Point(990, 86)
-        Me.btnSearchCD.Name = "btnSearchCD"
-        Me.btnSearchCD.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchCD.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCDFindByNumber, Me.btnSearchCDInYear, Me.btnCDAdvancedSearch})
-        Me.btnSearchCD.TabIndex = 12
-        Me.btnSearchCD.Text = "Search"
-        '
-        'btnCDFindByNumber
-        '
-        Me.btnCDFindByNumber.GlobalItem = false
-        Me.btnCDFindByNumber.Name = "btnCDFindByNumber"
-        Me.btnCDFindByNumber.Text = "Find by CD Number"
-        '
-        'btnSearchCDInYear
-        '
-        Me.btnSearchCDInYear.BeginGroup = true
-        Me.btnSearchCDInYear.GlobalItem = false
-        Me.btnSearchCDInYear.Name = "btnSearchCDInYear"
-        Me.btnSearchCDInYear.Text = "Search in selected Year"
-        '
-        'btnCDAdvancedSearch
-        '
-        Me.btnCDAdvancedSearch.BeginGroup = true
-        Me.btnCDAdvancedSearch.GlobalItem = false
-        Me.btnCDAdvancedSearch.Name = "btnCDAdvancedSearch"
-        Me.btnCDAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearCDFields
-        '
-        Me.btnClearCDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearCDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearCDFields.Image = CType(resources.GetObject("btnClearCDFields.Image"),System.Drawing.Image)
-        Me.btnClearCDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearCDFields.Location = New System.Drawing.Point(990, 165)
-        Me.btnClearCDFields.Name = "btnClearCDFields"
-        Me.btnClearCDFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearCDFields.TabIndex = 13
-        Me.btnClearCDFields.Text = "Clear All Fields"
-        '
-        'btnSaveCD
-        '
-        Me.btnSaveCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveCD.Image = CType(resources.GetObject("btnSaveCD.Image"),System.Drawing.Image)
-        Me.btnSaveCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveCD.Location = New System.Drawing.Point(990, 7)
-        Me.btnSaveCD.Name = "btnSaveCD"
-        Me.btnSaveCD.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveCD.TabIndex = 11
-        Me.btnSaveCD.Text = "Save"
-        '
-        'cmbCDPoliceStation
-        '
-        Me.cmbCDPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbCDPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbCDPoliceStation.DisplayMember = "Text"
-        Me.cmbCDPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCDPoliceStation.FocusHighlightEnabled = true
-        Me.cmbCDPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbCDPoliceStation.ForeColor = System.Drawing.Color.Black
-        Me.cmbCDPoliceStation.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbCDPoliceStation, true)
-        Me.cmbCDPoliceStation.ItemHeight = 23
-        Me.cmbCDPoliceStation.Location = New System.Drawing.Point(650, 5)
-        Me.cmbCDPoliceStation.MaxDropDownItems = 35
-        Me.cmbCDPoliceStation.MaxLength = 255
-        Me.cmbCDPoliceStation.Name = "cmbCDPoliceStation"
-        Me.cmbCDPoliceStation.Size = New System.Drawing.Size(227, 29)
-        Me.cmbCDPoliceStation.Sorted = true
-        Me.cmbCDPoliceStation.TabIndex = 7
-        Me.cmbCDPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbCDPoliceStation.WatermarkText = "Police Station"
-        '
-        'txtCDRemarks
-        '
-        Me.txtCDRemarks.AcceptsReturn = true
-        Me.txtCDRemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCDRemarks.Border.Class = "TextBoxBorder"
-        Me.txtCDRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCDRemarks.ButtonCustom.Image = CType(resources.GetObject("txtCDRemarks.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCDRemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCDRemarks.FocusHighlightEnabled = true
-        Me.txtCDRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCDRemarks.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDRemarks, true)
-        Me.txtCDRemarks.Location = New System.Drawing.Point(650, 157)
-        Me.txtCDRemarks.MaxLength = 255
-        Me.txtCDRemarks.Multiline = true
-        Me.txtCDRemarks.Name = "txtCDRemarks"
-        Me.txtCDRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCDRemarks.Size = New System.Drawing.Size(227, 81)
-        Me.txtCDRemarks.TabIndex = 10
-        Me.txtCDRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCDRemarks.WatermarkText = "Remarks"
-        '
-        'txtCDDetails
-        '
-        Me.txtCDDetails.AcceptsReturn = true
-        Me.txtCDDetails.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCDDetails.Border.Class = "TextBoxBorder"
-        Me.txtCDDetails.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCDDetails.ButtonCustom.Image = CType(resources.GetObject("txtCDDetails.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCDDetails.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCDDetails.FocusHighlightEnabled = true
-        Me.txtCDDetails.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCDDetails.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDDetails, true)
-        Me.txtCDDetails.Location = New System.Drawing.Point(650, 78)
-        Me.txtCDDetails.MaxLength = 255
-        Me.txtCDDetails.Multiline = true
-        Me.txtCDDetails.Name = "txtCDDetails"
-        Me.txtCDDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCDDetails.Size = New System.Drawing.Size(227, 73)
-        Me.txtCDDetails.TabIndex = 9
-        Me.txtCDDetails.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCDDetails.WatermarkText = "Details of Examination"
-        '
-        'cmbCDOfficer
-        '
-        Me.cmbCDOfficer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbCDOfficer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.cmbCDOfficer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCDOfficer.FocusHighlightEnabled = true
-        Me.cmbCDOfficer.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbCDOfficer.ForeColor = System.Drawing.Color.Black
-        Me.cmbCDOfficer.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbCDOfficer, true)
-        Me.cmbCDOfficer.ItemHeight = 23
-        Me.cmbCDOfficer.Location = New System.Drawing.Point(122, 128)
-        Me.cmbCDOfficer.MaxLength = 255
-        Me.cmbCDOfficer.Name = "cmbCDOfficer"
-        Me.cmbCDOfficer.Size = New System.Drawing.Size(227, 29)
-        Me.cmbCDOfficer.TabIndex = 4
-        Me.cmbCDOfficer.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbCDOfficer.WatermarkText = "Officer"
-        '
-        'dtCDExamination
-        '
-        Me.dtCDExamination.AutoAdvance = true
-        Me.dtCDExamination.AutoSelectDate = true
-        Me.dtCDExamination.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtCDExamination.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtCDExamination.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtCDExamination.ButtonClear.Image = CType(resources.GetObject("dtCDExamination.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtCDExamination.ButtonClear.Visible = true
-        Me.dtCDExamination.ButtonDropDown.Visible = true
-        Me.dtCDExamination.CustomFormat = "dd/MM/yyyy"
-        Me.dtCDExamination.FocusHighlightEnabled = true
-        Me.dtCDExamination.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtCDExamination.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtCDExamination, true)
-        Me.dtCDExamination.IsPopupCalendarOpen = false
-        Me.dtCDExamination.Location = New System.Drawing.Point(122, 90)
-        Me.dtCDExamination.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtCDExamination.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtCDExamination.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtCDExamination.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtCDExamination.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtCDExamination.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtCDExamination.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtCDExamination.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtCDExamination.MonthCalendar.TodayButtonVisible = true
-        Me.dtCDExamination.Name = "dtCDExamination"
-        Me.dtCDExamination.Size = New System.Drawing.Size(227, 29)
-        Me.dtCDExamination.TabIndex = 3
-        Me.dtCDExamination.WatermarkText = "Date of Examination"
-        '
-        'LabelX90
-        '
-        Me.LabelX90.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX90.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX90.Location = New System.Drawing.Point(500, 83)
-        Me.LabelX90.Name = "LabelX90"
-        Me.LabelX90.Size = New System.Drawing.Size(130, 18)
-        Me.LabelX90.TabIndex = 33
-        Me.LabelX90.Text = "Details of Examination"
-        '
-        'LabelX91
-        '
-        Me.LabelX91.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX91.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX91.Location = New System.Drawing.Point(500, 164)
-        Me.LabelX91.Name = "LabelX91"
-        Me.LabelX91.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX91.TabIndex = 30
-        Me.LabelX91.Text = "Remarks"
-        '
-        'LabelX92
-        '
-        Me.LabelX92.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX92.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX92.Location = New System.Drawing.Point(10, 137)
-        Me.LabelX92.Name = "LabelX92"
-        Me.LabelX92.Size = New System.Drawing.Size(41, 18)
-        Me.LabelX92.TabIndex = 29
-        Me.LabelX92.Text = "Officer"
-        '
-        'LabelX99
-        '
-        Me.LabelX99.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX99.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX99.Location = New System.Drawing.Point(500, 50)
-        Me.LabelX99.Name = "LabelX99"
-        Me.LabelX99.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX99.TabIndex = 22
-        Me.LabelX99.Text = "Crime Number"
-        '
-        'txtCDCrNo
-        '
-        Me.txtCDCrNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtCDCrNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtCDCrNo.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCDCrNo.Border.Class = "TextBoxBorder"
-        Me.txtCDCrNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCDCrNo.ButtonCustom.Image = CType(resources.GetObject("txtCDCrNo.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCDCrNo.ButtonCustom.Visible = true
-        Me.txtCDCrNo.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCDCrNo.FocusHighlightEnabled = true
-        Me.txtCDCrNo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCDCrNo.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDCrNo, true)
-        Me.txtCDCrNo.Location = New System.Drawing.Point(650, 43)
-        Me.txtCDCrNo.MaxLength = 45
-        Me.txtCDCrNo.Name = "txtCDCrNo"
-        Me.txtCDCrNo.Size = New System.Drawing.Size(227, 29)
-        Me.txtCDCrNo.TabIndex = 8
-        Me.txtCDCrNo.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCDCrNo.WatermarkText = "Crime Number"
-        '
-        'txtCDNumber
-        '
-        Me.txtCDNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCDNumber.Border.Class = "TextBoxBorder"
-        Me.txtCDNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCDNumber.ButtonCustom.Image = CType(resources.GetObject("txtCDNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCDNumber.ButtonCustom.Visible = true
-        Me.txtCDNumber.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.txtCDNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCDNumber.FocusHighlightEnabled = true
-        Me.txtCDNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCDNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDNumber, true)
-        Me.txtCDNumber.Location = New System.Drawing.Point(122, 50)
-        Me.txtCDNumber.MaxLength = 10
-        Me.txtCDNumber.Name = "txtCDNumber"
-        Me.txtCDNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtCDNumber.TabIndex = 2
-        Me.txtCDNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCDNumber.WatermarkText = "CD Number"
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
-        'LabelX100
-        '
-        Me.LabelX100.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX100.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX100.Location = New System.Drawing.Point(10, 98)
-        Me.LabelX100.Name = "LabelX100"
-        Me.LabelX100.Size = New System.Drawing.Size(29, 18)
-        Me.LabelX100.TabIndex = 21
-        Me.LabelX100.Text = "Date"
-        '
-        'LabelX101
-        '
-        Me.LabelX101.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX101.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX101.Location = New System.Drawing.Point(500, 9)
-        Me.LabelX101.Name = "LabelX101"
-        Me.LabelX101.Size = New System.Drawing.Size(80, 18)
-        Me.LabelX101.TabIndex = 17
-        Me.LabelX101.Text = "Police Station"
-        '
-        'LabelX104
-        '
-        Me.LabelX104.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX104.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX104.Location = New System.Drawing.Point(10, 9)
-        Me.LabelX104.Name = "LabelX104"
-        Me.LabelX104.Size = New System.Drawing.Size(28, 18)
-        Me.LabelX104.TabIndex = 12
-        Me.LabelX104.Text = "Year"
-        '
-        'LabelX105
-        '
-        Me.LabelX105.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX105.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX105.Location = New System.Drawing.Point(10, 58)
-        Me.LabelX105.Name = "LabelX105"
-        Me.LabelX105.Size = New System.Drawing.Size(69, 18)
-        Me.LabelX105.TabIndex = 10
-        Me.LabelX105.Text = "CD Number"
-        '
-        'txtCDNumberOnly
-        '
-        Me.txtCDNumberOnly.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCDNumberOnly.Border.Class = "TextBoxBorder"
-        Me.txtCDNumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCDNumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtCDNumberOnly.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtCDNumberOnly.ButtonCustom.Visible = true
-        Me.txtCDNumberOnly.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCDNumberOnly.FocusHighlightEnabled = true
-        Me.txtCDNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtCDNumberOnly.ForeColor = System.Drawing.Color.Black
-        Me.txtCDNumberOnly.Location = New System.Drawing.Point(375, 5)
-        Me.txtCDNumberOnly.MaxLength = 45
-        Me.txtCDNumberOnly.Name = "txtCDNumberOnly"
-        Me.txtCDNumberOnly.Size = New System.Drawing.Size(116, 23)
-        Me.txtCDNumberOnly.TabIndex = 132
-        Me.txtCDNumberOnly.TabStop = false
-        Me.txtCDNumberOnly.Visible = false
-        Me.txtCDNumberOnly.WatermarkText = "Cd Number"
-        '
-        'CDTabItem
-        '
-        Me.CDTabItem.AttachedControl = Me.TabControlPanel7
-        Me.CDTabItem.Name = "CDTabItem"
-        Me.CDTabItem.Text = "Court Duty Register"
-        '
-        'TabControlPanel11
-        '
-        Me.TabControlPanel11.Controls.Add(Me.PanelIDR)
-        Me.TabControlPanel11.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel11.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel11.Name = "TabControlPanel11"
-        Me.TabControlPanel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel11.Size = New System.Drawing.Size(1360, 530)
-        Me.TabControlPanel11.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel11.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel11.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel11.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel11.Style.GradientAngle = 90
-        Me.TabControlPanel11.TabIndex = 56
-        Me.TabControlPanel11.TabItem = Me.IDRTabItem
-        '
-        'PanelIDR
-        '
-        Me.PanelIDR.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelIDR.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelIDR.Controls.Add(Me.lblIDRGridInfo)
-        Me.PanelIDR.Controls.Add(Me.IDRDataGrid)
-        Me.PanelIDR.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelIDR.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelIDR.Location = New System.Drawing.Point(1, 1)
-        Me.PanelIDR.Name = "PanelIDR"
-        Me.PanelIDR.Size = New System.Drawing.Size(1358, 528)
-        Me.PanelIDR.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelIDR.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelIDR.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelIDR.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelIDR.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelIDR.Style.GradientAngle = 90
-        Me.PanelIDR.TabIndex = 0
-        '
-        'lblIDRGridInfo
-        '
-        Me.lblIDRGridInfo.AutoSize = true
-        Me.lblIDRGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblIDRGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIDRGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblIDRGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblIDRGridInfo.Location = New System.Drawing.Point(5, 90)
-        Me.lblIDRGridInfo.Name = "lblIDRGridInfo"
-        Me.lblIDRGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblIDRGridInfo.TabIndex = 165
-        Me.lblIDRGridInfo.Text = "Grid"
-        Me.lblIDRGridInfo.Visible = false
-        '
-        'IDRTabItem
-        '
-        Me.IDRTabItem.AttachedControl = Me.TabControlPanel11
-        Me.IDRTabItem.Name = "IDRTabItem"
-        Me.IDRTabItem.Text = "Identification Register"
-        '
-        'TabControlPanel4
-        '
-        Me.TabControlPanel4.Controls.Add(Me.lblFPAGridInfo)
-        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
-        Me.TabControlPanel4.Controls.Add(Me.PanelFPA)
-        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel4.Name = "TabControlPanel4"
-        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 530)
-        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel4.Style.GradientAngle = 90
-        Me.TabControlPanel4.TabIndex = 4
-        Me.TabControlPanel4.TabItem = Me.FPATabItem
-        '
-        'lblFPAGridInfo
-        '
-        Me.lblFPAGridInfo.AutoSize = true
-        Me.lblFPAGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblFPAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblFPAGridInfo.Location = New System.Drawing.Point(5, 90)
-        Me.lblFPAGridInfo.Name = "lblFPAGridInfo"
-        Me.lblFPAGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblFPAGridInfo.TabIndex = 165
-        Me.lblFPAGridInfo.Text = "Grid"
-        Me.lblFPAGridInfo.Visible = false
-        '
-        'PanelFPA
-        '
-        Me.PanelFPA.AutoScroll = true
-        Me.PanelFPA.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelFPA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelFPA.Controls.Add(Me.btnGenerateFPSlipMain)
-        Me.PanelFPA.Controls.Add(Me.LabelX162)
-        Me.PanelFPA.Controls.Add(Me.LabelX161)
-        Me.PanelFPA.Controls.Add(Me.dtChalanDate)
-        Me.PanelFPA.Controls.Add(Me.txtHeadOfAccount)
-        Me.PanelFPA.Controls.Add(Me.LabelX94)
-        Me.PanelFPA.Controls.Add(Me.chkFPATwodigits)
-        Me.PanelFPA.Controls.Add(Me.lblFPAPassport)
-        Me.PanelFPA.Controls.Add(Me.lblFPAAddress)
-        Me.PanelFPA.Controls.Add(Me.lblFPAName)
-        Me.PanelFPA.Controls.Add(Me.txtFPANumberOnly)
-        Me.PanelFPA.Controls.Add(Me.txtFPAAmount)
-        Me.PanelFPA.Controls.Add(Me.LabelX69)
-        Me.PanelFPA.Controls.Add(Me.btnSearchFPA)
-        Me.PanelFPA.Controls.Add(Me.btnClearFPAFields)
-        Me.PanelFPA.Controls.Add(Me.btnSaveFPA)
-        Me.PanelFPA.Controls.Add(Me.LabelX67)
-        Me.PanelFPA.Controls.Add(Me.txtFPATreasury)
-        Me.PanelFPA.Controls.Add(Me.LabelX66)
-        Me.PanelFPA.Controls.Add(Me.LabelX60)
-        Me.PanelFPA.Controls.Add(Me.txtFPAChalanNumber)
-        Me.PanelFPA.Controls.Add(Me.txtFPARemarks)
-        Me.PanelFPA.Controls.Add(Me.LabelX61)
-        Me.PanelFPA.Controls.Add(Me.LabelX62)
-        Me.PanelFPA.Controls.Add(Me.txtFPAAddress)
-        Me.PanelFPA.Controls.Add(Me.txtFPAPassportNumber)
-        Me.PanelFPA.Controls.Add(Me.LabelX63)
-        Me.PanelFPA.Controls.Add(Me.LabelX64)
-        Me.PanelFPA.Controls.Add(Me.txtFPAName)
-        Me.PanelFPA.Controls.Add(Me.LabelX65)
-        Me.PanelFPA.Controls.Add(Me.LabelX54)
-        Me.PanelFPA.Controls.Add(Me.LabelX55)
-        Me.PanelFPA.Controls.Add(Me.chkAppendFPAYear)
-        Me.PanelFPA.Controls.Add(Me.txtFPAYear)
-        Me.PanelFPA.Controls.Add(Me.dtFPADate)
-        Me.PanelFPA.Controls.Add(Me.txtFPANumber)
-        Me.PanelFPA.Controls.Add(Me.LabelX57)
-        Me.PanelFPA.Controls.Add(Me.LabelX58)
-        Me.PanelFPA.Controls.Add(Me.LabelX59)
-        Me.PanelFPA.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelFPA.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelFPA.Location = New System.Drawing.Point(1, 1)
-        Me.PanelFPA.Name = "PanelFPA"
-        Me.PanelFPA.Size = New System.Drawing.Size(1358, 244)
-        Me.PanelFPA.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelFPA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelFPA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelFPA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelFPA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelFPA.Style.GradientAngle = 90
-        Me.PanelFPA.TabIndex = 4
-        '
-        'btnGenerateFPSlipMain
-        '
-        Me.btnGenerateFPSlipMain.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGenerateFPSlipMain.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateFPSlipMain.Location = New System.Drawing.Point(1177, 183)
-        Me.btnGenerateFPSlipMain.Name = "btnGenerateFPSlipMain"
-        Me.btnGenerateFPSlipMain.Size = New System.Drawing.Size(141, 50)
-        Me.btnGenerateFPSlipMain.TabIndex = 143
-        Me.btnGenerateFPSlipMain.Text = "Generate FP Slip"
-        '
-        'LabelX162
-        '
-        Me.LabelX162.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX162.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX162.Location = New System.Drawing.Point(421, 153)
-        Me.LabelX162.Name = "LabelX162"
-        Me.LabelX162.Size = New System.Drawing.Size(97, 18)
-        Me.LabelX162.TabIndex = 142
-        Me.LabelX162.Text = "Head of Account"
-        '
-        'LabelX161
-        '
-        Me.LabelX161.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX161.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX161.Location = New System.Drawing.Point(421, 111)
-        Me.LabelX161.Name = "LabelX161"
-        Me.LabelX161.Size = New System.Drawing.Size(71, 18)
-        Me.LabelX161.TabIndex = 141
-        Me.LabelX161.Text = "Chalan Date"
-        '
-        'dtChalanDate
-        '
-        Me.dtChalanDate.AutoAdvance = true
-        Me.dtChalanDate.AutoSelectDate = true
-        Me.dtChalanDate.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtChalanDate.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtChalanDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.ButtonClear.Image = CType(resources.GetObject("dtChalanDate.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtChalanDate.ButtonClear.Visible = true
-        Me.dtChalanDate.ButtonDropDown.Visible = true
-        Me.dtChalanDate.CustomFormat = "dd/MM/yyyy"
-        Me.dtChalanDate.FocusHighlightEnabled = true
-        Me.dtChalanDate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtChalanDate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtChalanDate, true)
-        Me.dtChalanDate.IsPopupCalendarOpen = false
-        Me.dtChalanDate.Location = New System.Drawing.Point(524, 109)
-        Me.dtChalanDate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtChalanDate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtChalanDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtChalanDate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtChalanDate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtChalanDate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtChalanDate.MonthCalendar.TodayButtonVisible = true
-        Me.dtChalanDate.Name = "dtChalanDate"
-        Me.dtChalanDate.Size = New System.Drawing.Size(227, 29)
-        Me.dtChalanDate.TabIndex = 68
-        Me.dtChalanDate.WatermarkText = "Chalan Date"
-        '
-        'txtHeadOfAccount
-        '
-        Me.txtHeadOfAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtHeadOfAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtHeadOfAccount.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtHeadOfAccount.Border.Class = "TextBoxBorder"
-        Me.txtHeadOfAccount.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtHeadOfAccount.ButtonCustom.Image = CType(resources.GetObject("txtHeadOfAccount.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtHeadOfAccount.ButtonCustom.Visible = true
-        Me.txtHeadOfAccount.DisabledBackColor = System.Drawing.Color.White
-        Me.txtHeadOfAccount.FocusHighlightEnabled = true
-        Me.txtHeadOfAccount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtHeadOfAccount.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtHeadOfAccount, true)
-        Me.txtHeadOfAccount.Location = New System.Drawing.Point(524, 144)
-        Me.txtHeadOfAccount.MaxLength = 255
-        Me.txtHeadOfAccount.Name = "txtHeadOfAccount"
-        Me.txtHeadOfAccount.Size = New System.Drawing.Size(227, 29)
-        Me.txtHeadOfAccount.TabIndex = 69
-        Me.txtHeadOfAccount.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtHeadOfAccount.WatermarkText = "Head of Account"
-        '
-        'LabelX94
-        '
-        Me.LabelX94.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX94.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX94.Font = New System.Drawing.Font("Rupee Foradian", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX94.Location = New System.Drawing.Point(473, 222)
-        Me.LabelX94.Name = "LabelX94"
-        Me.LabelX94.Size = New System.Drawing.Size(9, 16)
-        Me.LabelX94.TabIndex = 140
-        Me.LabelX94.Text = "`"
-        '
-        'chkFPATwodigits
-        '
-        Me.chkFPATwodigits.AutoSize = true
-        '
-        '
-        '
-        Me.chkFPATwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkFPATwodigits, true)
-        Me.chkFPATwodigits.Location = New System.Drawing.Point(200, 22)
-        Me.chkFPATwodigits.Name = "chkFPATwodigits"
-        Me.chkFPATwodigits.Size = New System.Drawing.Size(126, 18)
-        Me.chkFPATwodigits.TabIndex = 139
-        Me.chkFPATwodigits.TabStop = false
-        Me.chkFPATwodigits.Text = "Use last two digits"
-        '
-        'lblFPAPassport
-        '
-        Me.lblFPAPassport.AutoSize = true
-        '
-        '
-        '
-        Me.lblFPAPassport.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAPassport.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblFPAPassport.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAPassport.Location = New System.Drawing.Point(752, 13)
-        Me.lblFPAPassport.Name = "lblFPAPassport"
-        Me.lblFPAPassport.Size = New System.Drawing.Size(11, 22)
-        Me.lblFPAPassport.TabIndex = 137
-        Me.lblFPAPassport.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblFPAAddress
-        '
-        Me.lblFPAAddress.AutoSize = true
-        '
-        '
-        '
-        Me.lblFPAAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAAddress.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblFPAAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAAddress.Location = New System.Drawing.Point(349, 147)
-        Me.lblFPAAddress.Name = "lblFPAAddress"
-        Me.lblFPAAddress.Size = New System.Drawing.Size(11, 22)
-        Me.lblFPAAddress.TabIndex = 136
-        Me.lblFPAAddress.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblFPAName
-        '
-        Me.lblFPAName.AutoSize = true
-        '
-        '
-        '
-        Me.lblFPAName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAName.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblFPAName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAName.Location = New System.Drawing.Point(356, 114)
-        Me.lblFPAName.Name = "lblFPAName"
-        Me.lblFPAName.Size = New System.Drawing.Size(11, 22)
-        Me.lblFPAName.TabIndex = 135
-        Me.lblFPAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'txtFPANumberOnly
-        '
-        Me.txtFPANumberOnly.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPANumberOnly.Border.Class = "TextBoxBorder"
-        Me.txtFPANumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPANumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtFPANumberOnly.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPANumberOnly.ButtonCustom.Visible = true
-        Me.txtFPANumberOnly.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPANumberOnly.FocusHighlightEnabled = true
-        Me.txtFPANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPANumberOnly.ForeColor = System.Drawing.Color.Black
-        Me.txtFPANumberOnly.Location = New System.Drawing.Point(421, 74)
-        Me.txtFPANumberOnly.MaxLength = 45
-        Me.txtFPANumberOnly.Name = "txtFPANumberOnly"
-        Me.txtFPANumberOnly.Size = New System.Drawing.Size(116, 23)
-        Me.txtFPANumberOnly.TabIndex = 134
-        Me.txtFPANumberOnly.TabStop = false
-        Me.txtFPANumberOnly.Visible = false
-        '
-        'txtFPAAmount
-        '
-        '
-        '
-        '
-        Me.txtFPAAmount.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtFPAAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAAmount.FocusHighlightEnabled = true
-        Me.txtFPAAmount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAmount, true)
-        Me.txtFPAAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtFPAAmount.Location = New System.Drawing.Point(524, 210)
-        Me.txtFPAAmount.MaxValue = 9999
-        Me.txtFPAAmount.MinValue = 0
-        Me.txtFPAAmount.Name = "txtFPAAmount"
-        Me.txtFPAAmount.ShowUpDown = true
-        Me.txtFPAAmount.Size = New System.Drawing.Size(91, 29)
-        Me.txtFPAAmount.TabIndex = 71
-        Me.txtFPAAmount.WatermarkText = "Amount"
-        '
-        'LabelX69
-        '
-        Me.LabelX69.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX69.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX69.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX69.Location = New System.Drawing.Point(617, 214)
-        Me.LabelX69.Name = "LabelX69"
-        Me.LabelX69.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX69.TabIndex = 129
-        Me.LabelX69.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'btnSearchFPA
-        '
-        Me.btnSearchFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchFPA.Image = CType(resources.GetObject("btnSearchFPA.Image"),System.Drawing.Image)
-        Me.btnSearchFPA.Location = New System.Drawing.Point(1177, 69)
-        Me.btnSearchFPA.Name = "btnSearchFPA"
-        Me.btnSearchFPA.Size = New System.Drawing.Size(141, 50)
-        Me.btnSearchFPA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAFindByNumber, Me.btnSearchInFPAYear, Me.btnFPAAdvancedSearch})
-        Me.btnSearchFPA.TabIndex = 74
-        Me.btnSearchFPA.Text = "Search"
-        '
-        'btnFPAFindByNumber
-        '
-        Me.btnFPAFindByNumber.GlobalItem = false
-        Me.btnFPAFindByNumber.Name = "btnFPAFindByNumber"
-        Me.btnFPAFindByNumber.Text = "Find by FPA Number"
-        '
-        'btnSearchInFPAYear
-        '
-        Me.btnSearchInFPAYear.BeginGroup = true
-        Me.btnSearchInFPAYear.GlobalItem = false
-        Me.btnSearchInFPAYear.Name = "btnSearchInFPAYear"
-        Me.btnSearchInFPAYear.Text = "Search in selected Year"
-        '
-        'btnFPAAdvancedSearch
-        '
-        Me.btnFPAAdvancedSearch.BeginGroup = true
-        Me.btnFPAAdvancedSearch.GlobalItem = false
-        Me.btnFPAAdvancedSearch.Name = "btnFPAAdvancedSearch"
-        Me.btnFPAAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearFPAFields
-        '
-        Me.btnClearFPAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearFPAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearFPAFields.Image = CType(resources.GetObject("btnClearFPAFields.Image"),System.Drawing.Image)
-        Me.btnClearFPAFields.Location = New System.Drawing.Point(1177, 126)
-        Me.btnClearFPAFields.Name = "btnClearFPAFields"
-        Me.btnClearFPAFields.Size = New System.Drawing.Size(141, 50)
-        Me.btnClearFPAFields.TabIndex = 75
-        Me.btnClearFPAFields.Text = "Clear All Fields"
-        '
-        'btnSaveFPA
-        '
-        Me.btnSaveFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveFPA.Image = CType(resources.GetObject("btnSaveFPA.Image"),System.Drawing.Image)
-        Me.btnSaveFPA.Location = New System.Drawing.Point(1177, 12)
-        Me.btnSaveFPA.Name = "btnSaveFPA"
-        Me.btnSaveFPA.Size = New System.Drawing.Size(141, 50)
-        Me.btnSaveFPA.TabIndex = 73
-        Me.btnSaveFPA.Text = "Save"
-        '
-        'LabelX67
-        '
-        Me.LabelX67.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX67.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX67.Location = New System.Drawing.Point(421, 219)
-        Me.LabelX67.Name = "LabelX67"
-        Me.LabelX67.Size = New System.Drawing.Size(48, 18)
-        Me.LabelX67.TabIndex = 123
-        Me.LabelX67.Text = "Amount"
-        '
-        'txtFPATreasury
-        '
-        Me.txtFPATreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtFPATreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPATreasury.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPATreasury.Border.Class = "TextBoxBorder"
-        Me.txtFPATreasury.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPATreasury.ButtonCustom.Image = CType(resources.GetObject("txtFPATreasury.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPATreasury.ButtonCustom.Visible = true
-        Me.txtFPATreasury.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPATreasury.FocusHighlightEnabled = true
-        Me.txtFPATreasury.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPATreasury.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPATreasury, true)
-        Me.txtFPATreasury.Location = New System.Drawing.Point(524, 178)
-        Me.txtFPATreasury.MaxLength = 255
-        Me.txtFPATreasury.Name = "txtFPATreasury"
-        Me.txtFPATreasury.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPATreasury.TabIndex = 70
-        Me.txtFPATreasury.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPATreasury.WatermarkText = "Treasury"
-        '
-        'LabelX66
-        '
-        Me.LabelX66.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX66.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX66.Location = New System.Drawing.Point(421, 184)
-        Me.LabelX66.Name = "LabelX66"
-        Me.LabelX66.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX66.TabIndex = 121
-        Me.LabelX66.Text = "Treasury"
-        '
-        'LabelX60
-        '
-        Me.LabelX60.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX60.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX60.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX60.Location = New System.Drawing.Point(349, 115)
-        Me.LabelX60.Name = "LabelX60"
-        Me.LabelX60.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX60.TabIndex = 119
-        Me.LabelX60.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'txtFPAChalanNumber
-        '
-        Me.txtFPAChalanNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAChalanNumber.Border.Class = "TextBoxBorder"
-        Me.txtFPAChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAChalanNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAChalanNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAChalanNumber.FocusHighlightEnabled = true
-        Me.txtFPAChalanNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAChalanNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAChalanNumber, true)
-        Me.txtFPAChalanNumber.Location = New System.Drawing.Point(524, 44)
-        Me.txtFPAChalanNumber.MaxLength = 50
-        Me.txtFPAChalanNumber.Multiline = true
-        Me.txtFPAChalanNumber.Name = "txtFPAChalanNumber"
-        Me.txtFPAChalanNumber.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPAChalanNumber.Size = New System.Drawing.Size(227, 61)
-        Me.txtFPAChalanNumber.TabIndex = 67
-        Me.txtFPAChalanNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAChalanNumber.WatermarkText = "Chalan Number"
-        '
-        'txtFPARemarks
-        '
-        Me.txtFPARemarks.AcceptsReturn = true
-        Me.txtFPARemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtFPARemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPARemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPARemarks.Border.Class = "TextBoxBorder"
-        Me.txtFPARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPARemarks.ButtonCustom.Image = CType(resources.GetObject("txtFPARemarks.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPARemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPARemarks.FocusHighlightEnabled = true
-        Me.txtFPARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPARemarks.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPARemarks, true)
-        Me.txtFPARemarks.Location = New System.Drawing.Point(875, 7)
-        Me.txtFPARemarks.MaxLength = 255
-        Me.txtFPARemarks.Multiline = true
-        Me.txtFPARemarks.Name = "txtFPARemarks"
-        Me.txtFPARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPARemarks.Size = New System.Drawing.Size(227, 92)
-        Me.txtFPARemarks.TabIndex = 72
-        Me.txtFPARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPARemarks.WatermarkText = "Remarks"
-        '
-        'LabelX61
-        '
-        Me.LabelX61.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX61.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX61.Location = New System.Drawing.Point(808, 12)
-        Me.LabelX61.Name = "LabelX61"
-        Me.LabelX61.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX61.TabIndex = 118
-        Me.LabelX61.Text = "Remarks"
-        '
-        'LabelX62
-        '
-        Me.LabelX62.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX62.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX62.Location = New System.Drawing.Point(421, 42)
-        Me.LabelX62.Name = "LabelX62"
-        Me.LabelX62.Size = New System.Drawing.Size(91, 18)
-        Me.LabelX62.TabIndex = 117
-        Me.LabelX62.Text = "Chalan Number"
-        '
-        'txtFPAAddress
-        '
-        Me.txtFPAAddress.AcceptsReturn = true
-        Me.txtFPAAddress.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAAddress.Border.Class = "TextBoxBorder"
-        Me.txtFPAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAAddress.ButtonCustom.Image = CType(resources.GetObject("txtFPAAddress.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAAddress.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAAddress.FocusHighlightEnabled = true
-        Me.txtFPAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAAddress.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAddress, true)
-        Me.txtFPAAddress.Location = New System.Drawing.Point(122, 142)
-        Me.txtFPAAddress.MaxLength = 255
-        Me.txtFPAAddress.Multiline = true
-        Me.txtFPAAddress.Name = "txtFPAAddress"
-        Me.txtFPAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPAAddress.Size = New System.Drawing.Size(227, 96)
-        Me.txtFPAAddress.TabIndex = 65
-        Me.txtFPAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAAddress.WatermarkText = "Address"
-        '
-        'txtFPAPassportNumber
-        '
-        Me.txtFPAPassportNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAPassportNumber.Border.Class = "TextBoxBorder"
-        Me.txtFPAPassportNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAPassportNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAPassportNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAPassportNumber.ButtonCustom.Visible = true
-        Me.txtFPAPassportNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAPassportNumber.FocusHighlightEnabled = true
-        Me.txtFPAPassportNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAPassportNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAPassportNumber, true)
-        Me.txtFPAPassportNumber.Location = New System.Drawing.Point(524, 9)
-        Me.txtFPAPassportNumber.MaxLength = 50
-        Me.txtFPAPassportNumber.Name = "txtFPAPassportNumber"
-        Me.txtFPAPassportNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPAPassportNumber.TabIndex = 66
-        Me.txtFPAPassportNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAPassportNumber.WatermarkText = "Passport Number"
-        '
-        'LabelX63
-        '
-        Me.LabelX63.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX63.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX63.Location = New System.Drawing.Point(421, 9)
-        Me.LabelX63.Name = "LabelX63"
-        Me.LabelX63.Size = New System.Drawing.Size(101, 18)
-        Me.LabelX63.TabIndex = 114
-        Me.LabelX63.Text = "Passport Number"
-        '
-        'LabelX64
-        '
-        Me.LabelX64.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX64.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX64.Location = New System.Drawing.Point(12, 147)
-        Me.LabelX64.Name = "LabelX64"
-        Me.LabelX64.Size = New System.Drawing.Size(48, 18)
-        Me.LabelX64.TabIndex = 112
-        Me.LabelX64.Text = "Address"
-        '
-        'txtFPAName
-        '
-        Me.txtFPAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtFPAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPAName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAName.Border.Class = "TextBoxBorder"
-        Me.txtFPAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAName.ButtonCustom.Image = CType(resources.GetObject("txtFPAName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAName.ButtonCustom.Visible = true
-        Me.txtFPAName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAName.FocusHighlightEnabled = true
-        Me.txtFPAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAName, true)
-        Me.txtFPAName.Location = New System.Drawing.Point(122, 108)
-        Me.txtFPAName.MaxLength = 255
-        Me.txtFPAName.Name = "txtFPAName"
-        Me.txtFPAName.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPAName.TabIndex = 64
-        Me.txtFPAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAName.WatermarkText = "Name"
-        '
-        'LabelX65
-        '
-        Me.LabelX65.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX65.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX65.Location = New System.Drawing.Point(11, 113)
-        Me.LabelX65.Name = "LabelX65"
-        Me.LabelX65.Size = New System.Drawing.Size(36, 18)
-        Me.LabelX65.TabIndex = 109
-        Me.LabelX65.Text = "Name"
-        '
-        'LabelX54
-        '
-        Me.LabelX54.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX54.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX54.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX54.Location = New System.Drawing.Point(349, 81)
-        Me.LabelX54.Name = "LabelX54"
-        Me.LabelX54.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX54.TabIndex = 70
-        Me.LabelX54.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX55
-        '
-        Me.LabelX55.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX55.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX55.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX55.Location = New System.Drawing.Point(349, 45)
-        Me.LabelX55.Name = "LabelX55"
-        Me.LabelX55.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX55.TabIndex = 69
-        Me.LabelX55.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'chkAppendFPAYear
-        '
-        Me.chkAppendFPAYear.AutoSize = true
-        '
-        '
-        '
-        Me.chkAppendFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkAppendFPAYear, true)
-        Me.chkAppendFPAYear.Location = New System.Drawing.Point(200, 2)
-        Me.chkAppendFPAYear.Name = "chkAppendFPAYear"
-        Me.chkAppendFPAYear.Size = New System.Drawing.Size(124, 18)
-        Me.chkAppendFPAYear.TabIndex = 67
-        Me.chkAppendFPAYear.TabStop = false
-        Me.chkAppendFPAYear.Text = "Auto append year"
-        '
-        'txtFPAYear
-        '
-        '
-        '
-        '
-        Me.txtFPAYear.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAYear.ButtonCustom.Image = CType(resources.GetObject("txtFPAYear.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPAYear.FocusHighlightEnabled = true
-        Me.txtFPAYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAYear, true)
-        Me.txtFPAYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtFPAYear.Location = New System.Drawing.Point(122, 5)
-        Me.txtFPAYear.MaxValue = 2099
-        Me.txtFPAYear.MinValue = 1900
-        Me.txtFPAYear.Name = "txtFPAYear"
-        Me.txtFPAYear.ShowUpDown = true
-        Me.txtFPAYear.Size = New System.Drawing.Size(58, 29)
-        Me.txtFPAYear.TabIndex = 61
-        Me.txtFPAYear.Value = 1900
-        Me.txtFPAYear.WatermarkText = "Year"
-        '
-        'dtFPADate
-        '
-        Me.dtFPADate.AutoAdvance = true
-        Me.dtFPADate.AutoSelectDate = true
-        Me.dtFPADate.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtFPADate.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtFPADate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.ButtonClear.Image = CType(resources.GetObject("dtFPADate.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtFPADate.ButtonClear.Visible = true
-        Me.dtFPADate.ButtonDropDown.Visible = true
-        Me.dtFPADate.CustomFormat = "dd/MM/yyyy"
-        Me.dtFPADate.FocusHighlightEnabled = true
-        Me.dtFPADate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtFPADate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtFPADate, true)
-        Me.dtFPADate.IsPopupCalendarOpen = false
-        Me.dtFPADate.Location = New System.Drawing.Point(122, 75)
-        Me.dtFPADate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtFPADate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtFPADate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtFPADate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtFPADate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtFPADate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFPADate.MonthCalendar.TodayButtonVisible = true
-        Me.dtFPADate.Name = "dtFPADate"
-        Me.dtFPADate.Size = New System.Drawing.Size(227, 29)
-        Me.dtFPADate.TabIndex = 63
-        Me.dtFPADate.WatermarkText = "Date of Attestation"
-        '
-        'txtFPANumber
-        '
-        Me.txtFPANumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPANumber.Border.Class = "TextBoxBorder"
-        Me.txtFPANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPANumber.ButtonCustom.Image = CType(resources.GetObject("txtFPANumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtFPANumber.ButtonCustom.Visible = true
-        Me.txtFPANumber.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.txtFPANumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPANumber.FocusHighlightEnabled = true
-        Me.txtFPANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPANumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPANumber, true)
-        Me.txtFPANumber.Location = New System.Drawing.Point(122, 40)
-        Me.txtFPANumber.MaxLength = 10
-        Me.txtFPANumber.Name = "txtFPANumber"
-        Me.txtFPANumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtFPANumber.TabIndex = 62
-        Me.txtFPANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPANumber.WatermarkText = "FPA Number"
-        '
-        'LabelX57
-        '
-        Me.LabelX57.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX57.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX57.Location = New System.Drawing.Point(11, 79)
-        Me.LabelX57.Name = "LabelX57"
-        Me.LabelX57.Size = New System.Drawing.Size(29, 18)
-        Me.LabelX57.TabIndex = 66
-        Me.LabelX57.Text = "Date"
-        '
-        'LabelX58
-        '
-        Me.LabelX58.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX58.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX58.Location = New System.Drawing.Point(11, 9)
-        Me.LabelX58.Name = "LabelX58"
-        Me.LabelX58.Size = New System.Drawing.Size(28, 18)
-        Me.LabelX58.TabIndex = 65
-        Me.LabelX58.Text = "Year"
-        '
-        'LabelX59
-        '
-        Me.LabelX59.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX59.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX59.Location = New System.Drawing.Point(11, 42)
-        Me.LabelX59.Name = "LabelX59"
-        Me.LabelX59.Size = New System.Drawing.Size(74, 18)
-        Me.LabelX59.TabIndex = 64
-        Me.LabelX59.Text = "FPA Number"
-        '
-        'FPATabItem
-        '
-        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
-        Me.FPATabItem.Name = "FPATabItem"
-        Me.FPATabItem.Text = "FP Attestation Register"
-        '
-        'TabControlPanel2
-        '
-        Me.TabControlPanel2.Controls.Add(Me.PanelEx2)
-        Me.TabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel2.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel2.Name = "TabControlPanel2"
-        Me.TabControlPanel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel2.Size = New System.Drawing.Size(1360, 530)
-        Me.TabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel2.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel2.Style.GradientAngle = 90
-        Me.TabControlPanel2.TabIndex = 2
-        Me.TabControlPanel2.TabItem = Me.DATabItem
-        '
-        'PanelEx2
-        '
-        Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx2.Controls.Add(Me.PanelEx5)
-        Me.PanelEx2.Controls.Add(Me.PanelDA)
-        Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx2.Location = New System.Drawing.Point(1, 1)
-        Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(1358, 528)
-        Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx2.Style.GradientAngle = 90
-        Me.PanelEx2.TabIndex = 0
-        Me.PanelEx2.Text = "PanelEx2"
-        '
-        'PanelEx5
-        '
-        Me.PanelEx5.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx5.Controls.Add(Me.lblDAGridInfo)
-        Me.PanelEx5.Controls.Add(Me.DADatagrid)
-        Me.PanelEx5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx5.Location = New System.Drawing.Point(0, 351)
-        Me.PanelEx5.Name = "PanelEx5"
-        Me.PanelEx5.Size = New System.Drawing.Size(1358, 177)
-        Me.PanelEx5.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx5.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx5.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx5.Style.GradientAngle = 90
-        Me.PanelEx5.TabIndex = 3
-        '
-        'lblDAGridInfo
-        '
-        Me.lblDAGridInfo.AutoSize = true
-        Me.lblDAGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblDAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDAGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblDAGridInfo.Location = New System.Drawing.Point(5, 90)
-        Me.lblDAGridInfo.Name = "lblDAGridInfo"
-        Me.lblDAGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblDAGridInfo.TabIndex = 165
-        Me.lblDAGridInfo.Text = "Grid"
-        Me.lblDAGridInfo.Visible = false
-        '
-        'PanelDA
-        '
-        Me.PanelDA.AutoScroll = true
-        Me.PanelDA.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelDA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelDA.Controls.Add(Me.LabelX145)
-        Me.PanelDA.Controls.Add(Me.txtDAModusOperandi)
-        Me.PanelDA.Controls.Add(Me.chkDATwodigits)
-        Me.PanelDA.Controls.Add(Me.lblDAAdress)
-        Me.PanelDA.Controls.Add(Me.lblDAFather)
-        Me.PanelDA.Controls.Add(Me.lblDAAlias)
-        Me.PanelDA.Controls.Add(Me.lblDAName)
-        Me.PanelDA.Controls.Add(Me.btnViewDASlip)
-        Me.PanelDA.Controls.Add(Me.txtDANumberOnly)
-        Me.PanelDA.Controls.Add(Me.LabelX50)
-        Me.PanelDA.Controls.Add(Me.LabelX49)
-        Me.PanelDA.Controls.Add(Me.LabelX48)
-        Me.PanelDA.Controls.Add(Me.LabelX47)
-        Me.PanelDA.Controls.Add(Me.LabelX46)
-        Me.PanelDA.Controls.Add(Me.LabelX45)
-        Me.PanelDA.Controls.Add(Me.LabelX44)
-        Me.PanelDA.Controls.Add(Me.GroupPanel1)
-        Me.PanelDA.Controls.Add(Me.btnSearchDA)
-        Me.PanelDA.Controls.Add(Me.btnClearDAFields)
-        Me.PanelDA.Controls.Add(Me.btnSaveDA)
-        Me.PanelDA.Controls.Add(Me.txtDASection)
-        Me.PanelDA.Controls.Add(Me.txtDACrimeNumber)
-        Me.PanelDA.Controls.Add(Me.txtDAHenryDenominator)
-        Me.PanelDA.Controls.Add(Me.txtDARemarks)
-        Me.PanelDA.Controls.Add(Me.cmbDASex)
-        Me.PanelDA.Controls.Add(Me.LabelX34)
-        Me.PanelDA.Controls.Add(Me.LabelX35)
-        Me.PanelDA.Controls.Add(Me.txtDAFathersName)
-        Me.PanelDA.Controls.Add(Me.txtDAAddress)
-        Me.PanelDA.Controls.Add(Me.txtDAHenryNumerator)
-        Me.PanelDA.Controls.Add(Me.LabelX28)
-        Me.PanelDA.Controls.Add(Me.LabelX29)
-        Me.PanelDA.Controls.Add(Me.LabelX30)
-        Me.PanelDA.Controls.Add(Me.LabelX31)
-        Me.PanelDA.Controls.Add(Me.LabelX32)
-        Me.PanelDA.Controls.Add(Me.txtDAAliasName)
-        Me.PanelDA.Controls.Add(Me.txtDAName)
-        Me.PanelDA.Controls.Add(Me.LabelX25)
-        Me.PanelDA.Controls.Add(Me.chkAppendDAYear)
-        Me.PanelDA.Controls.Add(Me.txtDAYear)
-        Me.PanelDA.Controls.Add(Me.cmbDAPoliceStation)
-        Me.PanelDA.Controls.Add(Me.dtDAEntry)
-        Me.PanelDA.Controls.Add(Me.LabelX21)
-        Me.PanelDA.Controls.Add(Me.txtDANumber)
-        Me.PanelDA.Controls.Add(Me.LabelX22)
-        Me.PanelDA.Controls.Add(Me.LabelX23)
-        Me.PanelDA.Controls.Add(Me.LabelX24)
-        Me.PanelDA.Controls.Add(Me.LabelX26)
-        Me.PanelDA.Controls.Add(Me.LabelX27)
-        Me.PanelDA.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelDA.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelDA.Location = New System.Drawing.Point(0, 0)
-        Me.PanelDA.Name = "PanelDA"
-        Me.PanelDA.Size = New System.Drawing.Size(1358, 351)
-        Me.PanelDA.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelDA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelDA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelDA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelDA.Style.GradientAngle = 90
-        Me.PanelDA.TabIndex = 2
-        '
-        'LabelX145
-        '
-        Me.LabelX145.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX145.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX145.Location = New System.Drawing.Point(421, 223)
-        Me.LabelX145.Name = "LabelX145"
-        Me.LabelX145.Size = New System.Drawing.Size(97, 18)
-        Me.LabelX145.TabIndex = 147
-        Me.LabelX145.Text = "Modus Operandi"
-        '
-        'txtDAModusOperandi
-        '
-        Me.txtDAModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDAModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDAModusOperandi.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAModusOperandi.Border.Class = "TextBoxBorder"
-        Me.txtDAModusOperandi.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAModusOperandi.ButtonCustom.Image = CType(resources.GetObject("txtDAModusOperandi.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAModusOperandi.ButtonCustom.Visible = true
-        Me.txtDAModusOperandi.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAModusOperandi.FocusHighlightEnabled = true
-        Me.txtDAModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAModusOperandi.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAModusOperandi, true)
-        Me.txtDAModusOperandi.Location = New System.Drawing.Point(545, 216)
-        Me.txtDAModusOperandi.MaxLength = 255
-        Me.txtDAModusOperandi.Name = "txtDAModusOperandi"
-        Me.txtDAModusOperandi.Size = New System.Drawing.Size(227, 29)
-        Me.txtDAModusOperandi.TabIndex = 14
-        Me.txtDAModusOperandi.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAModusOperandi.WatermarkText = "Modus Operandi"
-        '
-        'chkDATwodigits
-        '
-        Me.chkDATwodigits.AutoSize = true
-        '
-        '
-        '
-        Me.chkDATwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkDATwodigits, true)
-        Me.chkDATwodigits.Location = New System.Drawing.Point(200, 28)
-        Me.chkDATwodigits.Name = "chkDATwodigits"
-        Me.chkDATwodigits.Size = New System.Drawing.Size(126, 18)
-        Me.chkDATwodigits.TabIndex = 140
-        Me.chkDATwodigits.TabStop = false
-        Me.chkDATwodigits.Text = "Use last two digits"
-        '
-        'lblDAAdress
-        '
-        Me.lblDAAdress.AutoSize = true
-        '
-        '
-        '
-        Me.lblDAAdress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDAAdress.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblDAAdress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDAAdress.Location = New System.Drawing.Point(775, 131)
-        Me.lblDAAdress.Name = "lblDAAdress"
-        Me.lblDAAdress.Size = New System.Drawing.Size(11, 22)
-        Me.lblDAAdress.TabIndex = 139
-        Me.lblDAAdress.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblDAFather
-        '
-        Me.lblDAFather.AutoSize = true
-        '
-        '
-        '
-        Me.lblDAFather.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDAFather.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblDAFather.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDAFather.Location = New System.Drawing.Point(349, 321)
-        Me.lblDAFather.Name = "lblDAFather"
-        Me.lblDAFather.Size = New System.Drawing.Size(11, 22)
-        Me.lblDAFather.TabIndex = 138
-        Me.lblDAFather.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblDAAlias
-        '
-        Me.lblDAAlias.AutoSize = true
-        '
-        '
-        '
-        Me.lblDAAlias.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDAAlias.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblDAAlias.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDAAlias.Location = New System.Drawing.Point(348, 287)
-        Me.lblDAAlias.Name = "lblDAAlias"
-        Me.lblDAAlias.Size = New System.Drawing.Size(11, 22)
-        Me.lblDAAlias.TabIndex = 137
-        Me.lblDAAlias.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblDAName
-        '
-        Me.lblDAName.AutoSize = true
-        '
-        '
-        '
-        Me.lblDAName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDAName.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblDAName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDAName.Location = New System.Drawing.Point(360, 251)
-        Me.lblDAName.Name = "lblDAName"
-        Me.lblDAName.Size = New System.Drawing.Size(11, 22)
-        Me.lblDAName.TabIndex = 136
-        Me.lblDAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'btnViewDASlip
-        '
-        Me.btnViewDASlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnViewDASlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnViewDASlip.Image = CType(resources.GetObject("btnViewDASlip.Image"),System.Drawing.Image)
-        Me.btnViewDASlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnViewDASlip.Location = New System.Drawing.Point(1163, 266)
-        Me.btnViewDASlip.Name = "btnViewDASlip"
-        Me.btnViewDASlip.Size = New System.Drawing.Size(110, 73)
-        Me.btnViewDASlip.TabIndex = 19
-        Me.btnViewDASlip.Text = "View DA Slip"
-        '
-        'txtDANumberOnly
-        '
-        Me.txtDANumberOnly.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDANumberOnly.Border.Class = "TextBoxBorder"
-        Me.txtDANumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDANumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtDANumberOnly.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDANumberOnly.ButtonCustom.Visible = true
-        Me.txtDANumberOnly.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDANumberOnly.FocusHighlightEnabled = true
-        Me.txtDANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDANumberOnly.ForeColor = System.Drawing.Color.Black
-        Me.txtDANumberOnly.Location = New System.Drawing.Point(402, 155)
-        Me.txtDANumberOnly.MaxLength = 45
-        Me.txtDANumberOnly.Name = "txtDANumberOnly"
-        Me.txtDANumberOnly.Size = New System.Drawing.Size(116, 23)
-        Me.txtDANumberOnly.TabIndex = 133
-        Me.txtDANumberOnly.TabStop = false
-        Me.txtDANumberOnly.Visible = false
-        '
-        'LabelX50
-        '
-        Me.LabelX50.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX50.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX50.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX50.Location = New System.Drawing.Point(776, 15)
-        Me.LabelX50.Name = "LabelX50"
-        Me.LabelX50.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX50.TabIndex = 109
-        Me.LabelX50.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX49
-        '
-        Me.LabelX49.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX49.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX49.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX49.Location = New System.Drawing.Point(352, 252)
-        Me.LabelX49.Name = "LabelX49"
-        Me.LabelX49.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX49.TabIndex = 108
-        Me.LabelX49.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX48
-        '
-        Me.LabelX48.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX48.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX48.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX48.Location = New System.Drawing.Point(353, 210)
-        Me.LabelX48.Name = "LabelX48"
-        Me.LabelX48.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX48.TabIndex = 107
-        Me.LabelX48.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX47
-        '
-        Me.LabelX47.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX47.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX47.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX47.Location = New System.Drawing.Point(353, 173)
-        Me.LabelX47.Name = "LabelX47"
-        Me.LabelX47.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX47.TabIndex = 106
-        Me.LabelX47.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX46
-        '
-        Me.LabelX46.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX46.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX46.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX46.Location = New System.Drawing.Point(353, 135)
-        Me.LabelX46.Name = "LabelX46"
-        Me.LabelX46.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX46.TabIndex = 105
-        Me.LabelX46.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX45
-        '
-        Me.LabelX45.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX45.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX45.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX45.Location = New System.Drawing.Point(353, 94)
-        Me.LabelX45.Name = "LabelX45"
-        Me.LabelX45.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX45.TabIndex = 104
-        Me.LabelX45.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX44
-        '
-        Me.LabelX44.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX44.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX44.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX44.Location = New System.Drawing.Point(352, 59)
-        Me.LabelX44.Name = "LabelX44"
-        Me.LabelX44.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX44.TabIndex = 103
-        Me.LabelX44.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'GroupPanel1
-        '
-        Me.GroupPanel1.BackColor = System.Drawing.Color.White
-        Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
-        Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.GroupPanel1.Controls.Add(Me.DASlipContextMenuBar)
-        Me.GroupPanel1.Controls.Add(Me.btnDAClearFPSlip)
-        Me.GroupPanel1.Controls.Add(Me.picDASlip)
-        Me.GroupPanel1.Controls.Add(Me.btnDAScanFPSlip)
-        Me.GroupPanel1.Controls.Add(Me.btnDASelectFPSlip)
-        Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel1.Location = New System.Drawing.Point(846, 9)
-        Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(267, 328)
-        '
-        '
-        '
-        Me.GroupPanel1.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.GroupPanel1.Style.BackColorGradientAngle = 90
-        Me.GroupPanel1.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.GroupPanel1.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel1.Style.BorderBottomWidth = 1
-        Me.GroupPanel1.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.GroupPanel1.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel1.Style.BorderLeftWidth = 1
-        Me.GroupPanel1.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel1.Style.BorderRightWidth = 1
-        Me.GroupPanel1.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel1.Style.BorderTopWidth = 1
-        Me.GroupPanel1.Style.CornerDiameter = 4
-        Me.GroupPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
-        Me.GroupPanel1.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
-        Me.GroupPanel1.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.GroupPanel1.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
-        '
-        '
-        '
-        Me.GroupPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel1.TabIndex = 101
-        Me.GroupPanel1.Text = "DA Slip"
-        '
-        'DASlipContextMenuBar
-        '
-        Me.DASlipContextMenuBar.SetContextMenuEx(Me.DASlipContextMenuBar, Me.btnDASlipContextMenu)
-        Me.DASlipContextMenuBar.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.DASlipContextMenuBar.IsMaximized = false
-        Me.DASlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDASlipContextMenu})
-        Me.DASlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
-        Me.DASlipContextMenuBar.Name = "DASlipContextMenuBar"
-        Me.DASlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
-        Me.DASlipContextMenuBar.Stretch = true
-        Me.DASlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.DASlipContextMenuBar.TabIndex = 57
-        Me.DASlipContextMenuBar.TabStop = false
-        Me.DASlipContextMenuBar.Text = "ContextMenuBar2"
-        '
-        'btnDASlipContextMenu
-        '
-        Me.btnDASlipContextMenu.AutoExpandOnClick = true
-        Me.btnDASlipContextMenu.Name = "btnDASlipContextMenu"
-        Me.btnDASlipContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAViewDisplayContext, Me.btnDASelectDisplayContext, Me.btnDAScanDisplayContext, Me.btnDAClearDisplayContext, Me.btnDAExploreDisplayContext})
-        Me.btnDASlipContextMenu.Text = "Context Menu"
-        '
-        'btnDAViewDisplayContext
-        '
-        Me.btnDAViewDisplayContext.Icon = CType(resources.GetObject("btnDAViewDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnDAViewDisplayContext.Name = "btnDAViewDisplayContext"
-        Me.btnDAViewDisplayContext.Text = "View"
-        '
-        'btnDASelectDisplayContext
-        '
-        Me.btnDASelectDisplayContext.BeginGroup = true
-        Me.btnDASelectDisplayContext.Icon = CType(resources.GetObject("btnDASelectDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnDASelectDisplayContext.Name = "btnDASelectDisplayContext"
-        Me.btnDASelectDisplayContext.Text = "Select"
-        '
-        'btnDAScanDisplayContext
-        '
-        Me.btnDAScanDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDAScanDisplayContext.Icon = CType(resources.GetObject("btnDAScanDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnDAScanDisplayContext.Name = "btnDAScanDisplayContext"
-        Me.btnDAScanDisplayContext.Text = "Scan"
-        '
-        'btnDAClearDisplayContext
-        '
-        Me.btnDAClearDisplayContext.BeginGroup = true
-        Me.btnDAClearDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDAClearDisplayContext.Icon = CType(resources.GetObject("btnDAClearDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnDAClearDisplayContext.Name = "btnDAClearDisplayContext"
-        Me.btnDAClearDisplayContext.Text = "Clear"
-        '
-        'btnDAExploreDisplayContext
-        '
-        Me.btnDAExploreDisplayContext.BeginGroup = true
-        Me.btnDAExploreDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDAExploreDisplayContext.Icon = CType(resources.GetObject("btnDAExploreDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnDAExploreDisplayContext.Name = "btnDAExploreDisplayContext"
-        Me.btnDAExploreDisplayContext.Text = "Locate"
-        '
-        'picDASlip
-        '
-        Me.picDASlip.BackColor = System.Drawing.Color.Gray
-        Me.DASlipContextMenuBar.SetContextMenuEx(Me.picDASlip, Me.btnDASlipContextMenu)
-        Me.picDASlip.Image = Nothing
-        Me.picDASlip.Location = New System.Drawing.Point(8, 3)
-        Me.picDASlip.Name = "picDASlip"
-        Me.picDASlip.Size = New System.Drawing.Size(245, 253)
-        Me.picDASlip.TabIndex = 20
-        Me.picDASlip.TabStop = false
-        Me.picDASlip.ViewMode = iViewCore.PictureBox.EViewMode.FitImage
-        '
-        'btnDAClearFPSlip
-        '
-        Me.btnDAClearFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnDAClearFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnDAClearFPSlip.Location = New System.Drawing.Point(98, 268)
-        Me.btnDAClearFPSlip.Name = "btnDAClearFPSlip"
-        Me.btnDAClearFPSlip.Size = New System.Drawing.Size(65, 33)
-        Me.btnDAClearFPSlip.TabIndex = 21
-        Me.btnDAClearFPSlip.TabStop = false
-        Me.btnDAClearFPSlip.Text = "Clear"
-        '
-        'btnDAScanFPSlip
-        '
-        Me.btnDAScanFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnDAScanFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnDAScanFPSlip.Location = New System.Drawing.Point(186, 268)
-        Me.btnDAScanFPSlip.Name = "btnDAScanFPSlip"
-        Me.btnDAScanFPSlip.Size = New System.Drawing.Size(65, 33)
-        Me.btnDAScanFPSlip.TabIndex = 16
-        Me.btnDAScanFPSlip.TabStop = false
-        Me.btnDAScanFPSlip.Text = "Scan"
-        '
-        'btnDASelectFPSlip
-        '
-        Me.btnDASelectFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnDASelectFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnDASelectFPSlip.Location = New System.Drawing.Point(10, 268)
-        Me.btnDASelectFPSlip.Name = "btnDASelectFPSlip"
-        Me.btnDASelectFPSlip.Size = New System.Drawing.Size(65, 33)
-        Me.btnDASelectFPSlip.TabIndex = 15
-        Me.btnDASelectFPSlip.TabStop = false
-        Me.btnDASelectFPSlip.Text = "Select"
-        '
-        'btnSearchDA
-        '
-        Me.btnSearchDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchDA.Image = CType(resources.GetObject("btnSearchDA.Image"),System.Drawing.Image)
-        Me.btnSearchDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchDA.Location = New System.Drawing.Point(1163, 96)
-        Me.btnSearchDA.Name = "btnSearchDA"
-        Me.btnSearchDA.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchDA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAFindByNumber, Me.btnSearchDAInYear, Me.btnDAAdvancedSearch})
-        Me.btnSearchDA.TabIndex = 17
-        Me.btnSearchDA.Text = "Search"
-        '
-        'btnDAFindByNumber
-        '
-        Me.btnDAFindByNumber.GlobalItem = false
-        Me.btnDAFindByNumber.Name = "btnDAFindByNumber"
-        Me.btnDAFindByNumber.Text = "Find by DA Number"
-        '
-        'btnSearchDAInYear
-        '
-        Me.btnSearchDAInYear.BeginGroup = true
-        Me.btnSearchDAInYear.GlobalItem = false
-        Me.btnSearchDAInYear.Name = "btnSearchDAInYear"
-        Me.btnSearchDAInYear.Text = "Search in selected Year"
-        '
-        'btnDAAdvancedSearch
-        '
-        Me.btnDAAdvancedSearch.BeginGroup = true
-        Me.btnDAAdvancedSearch.GlobalItem = false
-        Me.btnDAAdvancedSearch.Name = "btnDAAdvancedSearch"
-        Me.btnDAAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearDAFields
-        '
-        Me.btnClearDAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearDAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearDAFields.Image = CType(resources.GetObject("btnClearDAFields.Image"),System.Drawing.Image)
-        Me.btnClearDAFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearDAFields.Location = New System.Drawing.Point(1163, 181)
-        Me.btnClearDAFields.Name = "btnClearDAFields"
-        Me.btnClearDAFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearDAFields.TabIndex = 18
-        Me.btnClearDAFields.Text = "Clear All Fields"
-        '
-        'btnSaveDA
-        '
-        Me.btnSaveDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveDA.Image = CType(resources.GetObject("btnSaveDA.Image"),System.Drawing.Image)
-        Me.btnSaveDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveDA.Location = New System.Drawing.Point(1163, 11)
-        Me.btnSaveDA.Name = "btnSaveDA"
-        Me.btnSaveDA.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveDA.TabIndex = 16
-        Me.btnSaveDA.Text = "Save"
-        '
-        'txtDASection
-        '
-        Me.txtDASection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDASection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDASection.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDASection.Border.Class = "TextBoxBorder"
-        Me.txtDASection.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDASection.ButtonCustom.Image = CType(resources.GetObject("txtDASection.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDASection.ButtonCustom.Visible = true
-        Me.txtDASection.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDASection.FocusHighlightEnabled = true
-        Me.txtDASection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDASection.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDASection, true)
-        Me.txtDASection.Location = New System.Drawing.Point(122, 206)
-        Me.txtDASection.MaxLength = 255
-        Me.txtDASection.Name = "txtDASection"
-        Me.txtDASection.Size = New System.Drawing.Size(227, 29)
-        Me.txtDASection.TabIndex = 6
-        Me.txtDASection.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDASection.WatermarkText = "Section of Law"
-        '
-        'txtDACrimeNumber
-        '
-        Me.txtDACrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtDACrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDACrimeNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDACrimeNumber.Border.Class = "TextBoxBorder"
-        Me.txtDACrimeNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDACrimeNumber.ButtonCustom.Image = CType(resources.GetObject("txtDACrimeNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDACrimeNumber.ButtonCustom.Visible = true
-        Me.txtDACrimeNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDACrimeNumber.FocusHighlightEnabled = true
-        Me.txtDACrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDACrimeNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDACrimeNumber, true)
-        Me.txtDACrimeNumber.Location = New System.Drawing.Point(122, 167)
-        Me.txtDACrimeNumber.MaxLength = 45
-        Me.txtDACrimeNumber.Name = "txtDACrimeNumber"
-        Me.txtDACrimeNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtDACrimeNumber.TabIndex = 5
-        Me.txtDACrimeNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDACrimeNumber.WatermarkText = "Crime Number"
-        '
-        'txtDAHenryDenominator
-        '
-        Me.txtDAHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDAHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDAHenryDenominator.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAHenryDenominator.Border.Class = "TextBoxBorder"
-        Me.txtDAHenryDenominator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAHenryDenominator.ButtonCustom.Image = CType(resources.GetObject("txtDAHenryDenominator.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAHenryDenominator.ButtonCustom.Visible = true
-        Me.txtDAHenryDenominator.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAHenryDenominator.FocusHighlightEnabled = true
-        Me.txtDAHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAHenryDenominator.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAHenryDenominator, true)
-        Me.txtDAHenryDenominator.Location = New System.Drawing.Point(545, 49)
-        Me.txtDAHenryDenominator.MaxLength = 15
-        Me.txtDAHenryDenominator.Name = "txtDAHenryDenominator"
-        Me.txtDAHenryDenominator.Size = New System.Drawing.Size(227, 29)
-        Me.txtDAHenryDenominator.TabIndex = 11
-        Me.txtDAHenryDenominator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAHenryDenominator.WatermarkText = "Classification Denominator"
-        '
-        'txtDARemarks
-        '
-        Me.txtDARemarks.AcceptsReturn = true
-        Me.txtDARemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDARemarks.Border.Class = "TextBoxBorder"
-        Me.txtDARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDARemarks.ButtonCustom.Image = CType(resources.GetObject("txtDARemarks.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDARemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDARemarks.FocusHighlightEnabled = true
-        Me.txtDARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDARemarks.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDARemarks, true)
-        Me.txtDARemarks.Location = New System.Drawing.Point(545, 254)
-        Me.txtDARemarks.MaxLength = 255
-        Me.txtDARemarks.Multiline = true
-        Me.txtDARemarks.Name = "txtDARemarks"
-        Me.txtDARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtDARemarks.Size = New System.Drawing.Size(227, 89)
-        Me.txtDARemarks.TabIndex = 15
-        Me.txtDARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDARemarks.WatermarkText = "Remarks"
-        '
-        'cmbDASex
-        '
-        Me.cmbDASex.AutoCompleteCustomSource.AddRange(New String() {"Male", "Female"})
-        Me.cmbDASex.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbDASex.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbDASex.DisplayMember = "Text"
-        Me.cmbDASex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbDASex.FocusHighlightEnabled = true
-        Me.cmbDASex.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbDASex.ForeColor = System.Drawing.Color.Black
-        Me.cmbDASex.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbDASex, true)
-        Me.cmbDASex.ItemHeight = 23
-        Me.cmbDASex.Items.AddRange(New Object() {Me.ComboItem6, Me.ComboItem5})
-        Me.cmbDASex.Location = New System.Drawing.Point(545, 86)
-        Me.cmbDASex.MaxLength = 6
-        Me.cmbDASex.Name = "cmbDASex"
-        Me.cmbDASex.Size = New System.Drawing.Size(122, 29)
-        Me.cmbDASex.Sorted = true
-        Me.cmbDASex.TabIndex = 12
-        Me.cmbDASex.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbDASex.WatermarkText = "Sex"
-        '
-        'ComboItem6
-        '
-        Me.ComboItem6.Text = "Female"
-        '
-        'ComboItem5
-        '
-        Me.ComboItem5.Text = "Male"
-        '
-        'LabelX34
-        '
-        Me.LabelX34.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX34.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX34.Location = New System.Drawing.Point(421, 270)
-        Me.LabelX34.Name = "LabelX34"
-        Me.LabelX34.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX34.TabIndex = 92
-        Me.LabelX34.Text = "Remarks"
-        '
-        'LabelX35
-        '
-        Me.LabelX35.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX35.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX35.Location = New System.Drawing.Point(421, 53)
-        Me.LabelX35.Name = "LabelX35"
-        Me.LabelX35.Size = New System.Drawing.Size(115, 18)
-        Me.LabelX35.TabIndex = 91
-        Me.LabelX35.Text = "Henry Denominator"
-        '
-        'txtDAFathersName
-        '
-        Me.txtDAFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDAFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDAFathersName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAFathersName.Border.Class = "TextBoxBorder"
-        Me.txtDAFathersName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAFathersName.ButtonCustom.Image = CType(resources.GetObject("txtDAFathersName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAFathersName.ButtonCustom.Visible = true
-        Me.txtDAFathersName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAFathersName.FocusHighlightEnabled = true
-        Me.txtDAFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAFathersName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAFathersName, true)
-        Me.txtDAFathersName.Location = New System.Drawing.Point(121, 315)
-        Me.txtDAFathersName.MaxLength = 255
-        Me.txtDAFathersName.Name = "txtDAFathersName"
-        Me.txtDAFathersName.Size = New System.Drawing.Size(227, 29)
-        Me.txtDAFathersName.TabIndex = 9
-        Me.txtDAFathersName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAFathersName.WatermarkText = "Father's Name"
-        '
-        'txtDAAddress
-        '
-        Me.txtDAAddress.AcceptsReturn = true
-        Me.txtDAAddress.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAAddress.Border.Class = "TextBoxBorder"
-        Me.txtDAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAAddress.ButtonCustom.Image = CType(resources.GetObject("txtDAAddress.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAAddress.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAAddress.FocusHighlightEnabled = true
-        Me.txtDAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAAddress.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAAddress, true)
-        Me.txtDAAddress.Location = New System.Drawing.Point(545, 124)
-        Me.txtDAAddress.MaxLength = 255
-        Me.txtDAAddress.Multiline = true
-        Me.txtDAAddress.Name = "txtDAAddress"
-        Me.txtDAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtDAAddress.Size = New System.Drawing.Size(227, 86)
-        Me.txtDAAddress.TabIndex = 13
-        Me.txtDAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAAddress.WatermarkText = "Address"
-        '
-        'txtDAHenryNumerator
-        '
-        Me.txtDAHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDAHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDAHenryNumerator.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAHenryNumerator.Border.Class = "TextBoxBorder"
-        Me.txtDAHenryNumerator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAHenryNumerator.ButtonCustom.Image = CType(resources.GetObject("txtDAHenryNumerator.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAHenryNumerator.ButtonCustom.Visible = true
-        Me.txtDAHenryNumerator.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAHenryNumerator.FocusHighlightEnabled = true
-        Me.txtDAHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAHenryNumerator.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAHenryNumerator, true)
-        Me.txtDAHenryNumerator.Location = New System.Drawing.Point(545, 10)
-        Me.txtDAHenryNumerator.MaxLength = 15
-        Me.txtDAHenryNumerator.Name = "txtDAHenryNumerator"
-        Me.txtDAHenryNumerator.Size = New System.Drawing.Size(227, 29)
-        Me.txtDAHenryNumerator.TabIndex = 10
-        Me.txtDAHenryNumerator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAHenryNumerator.WatermarkText = "Classification Numerator"
-        '
-        'LabelX28
-        '
-        Me.LabelX28.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX28.Location = New System.Drawing.Point(11, 319)
-        Me.LabelX28.Name = "LabelX28"
-        Me.LabelX28.Size = New System.Drawing.Size(84, 18)
-        Me.LabelX28.TabIndex = 85
-        Me.LabelX28.Text = "Father's Name"
-        '
-        'LabelX29
-        '
-        Me.LabelX29.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX29.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX29.Location = New System.Drawing.Point(421, 15)
-        Me.LabelX29.Name = "LabelX29"
-        Me.LabelX29.Size = New System.Drawing.Size(102, 18)
-        Me.LabelX29.TabIndex = 84
-        Me.LabelX29.Text = "Henry Numerator"
-        '
-        'LabelX30
-        '
-        Me.LabelX30.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX30.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX30.Location = New System.Drawing.Point(421, 131)
-        Me.LabelX30.Name = "LabelX30"
-        Me.LabelX30.Size = New System.Drawing.Size(48, 18)
-        Me.LabelX30.TabIndex = 83
-        Me.LabelX30.Text = "Address"
-        '
-        'LabelX31
-        '
-        Me.LabelX31.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX31.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX31.Location = New System.Drawing.Point(421, 92)
-        Me.LabelX31.Name = "LabelX31"
-        Me.LabelX31.Size = New System.Drawing.Size(22, 18)
-        Me.LabelX31.TabIndex = 82
-        Me.LabelX31.Text = "Sex"
-        '
-        'LabelX32
-        '
-        Me.LabelX32.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX32.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX32.Location = New System.Drawing.Point(11, 284)
-        Me.LabelX32.Name = "LabelX32"
-        Me.LabelX32.Size = New System.Drawing.Size(66, 18)
-        Me.LabelX32.TabIndex = 81
-        Me.LabelX32.Text = "Alias Name"
-        '
-        'txtDAAliasName
-        '
-        Me.txtDAAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDAAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDAAliasName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAAliasName.Border.Class = "TextBoxBorder"
-        Me.txtDAAliasName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAAliasName.ButtonCustom.Image = CType(resources.GetObject("txtDAAliasName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAAliasName.ButtonCustom.Visible = true
-        Me.txtDAAliasName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAAliasName.FocusHighlightEnabled = true
-        Me.txtDAAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAAliasName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAAliasName, true)
-        Me.txtDAAliasName.Location = New System.Drawing.Point(122, 280)
-        Me.txtDAAliasName.MaxLength = 255
-        Me.txtDAAliasName.Name = "txtDAAliasName"
-        Me.txtDAAliasName.Size = New System.Drawing.Size(227, 29)
-        Me.txtDAAliasName.TabIndex = 8
-        Me.txtDAAliasName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAAliasName.WatermarkText = "Alias Name"
-        '
-        'txtDAName
-        '
-        Me.txtDAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtDAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtDAName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDAName.Border.Class = "TextBoxBorder"
-        Me.txtDAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAName.ButtonCustom.Image = CType(resources.GetObject("txtDAName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAName.ButtonCustom.Visible = true
-        Me.txtDAName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDAName.FocusHighlightEnabled = true
-        Me.txtDAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDAName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAName, true)
-        Me.txtDAName.Location = New System.Drawing.Point(122, 243)
-        Me.txtDAName.MaxLength = 255
-        Me.txtDAName.Name = "txtDAName"
-        Me.txtDAName.Size = New System.Drawing.Size(227, 29)
-        Me.txtDAName.TabIndex = 7
-        Me.txtDAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDAName.WatermarkText = "Name"
-        '
-        'LabelX25
-        '
-        Me.LabelX25.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX25.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX25.Location = New System.Drawing.Point(11, 214)
-        Me.LabelX25.Name = "LabelX25"
-        Me.LabelX25.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX25.TabIndex = 74
-        Me.LabelX25.Text = "Section of Law"
-        '
-        'chkAppendDAYear
-        '
-        Me.chkAppendDAYear.AutoSize = true
-        '
-        '
-        '
-        Me.chkAppendDAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Highlighter1.SetHighlightOnFocus(Me.chkAppendDAYear, true)
-        Me.chkAppendDAYear.Location = New System.Drawing.Point(200, 7)
-        Me.chkAppendDAYear.Name = "chkAppendDAYear"
-        Me.chkAppendDAYear.Size = New System.Drawing.Size(124, 18)
-        Me.chkAppendDAYear.TabIndex = 72
-        Me.chkAppendDAYear.TabStop = false
-        Me.chkAppendDAYear.Text = "Auto append year"
-        '
-        'txtDAYear
-        '
-        '
-        '
-        '
-        Me.txtDAYear.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtDAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDAYear.ButtonCustom.Image = CType(resources.GetObject("txtDAYear.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDAYear.FocusHighlightEnabled = true
-        Me.txtDAYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAYear, true)
-        Me.txtDAYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtDAYear.Location = New System.Drawing.Point(122, 9)
-        Me.txtDAYear.MaxValue = 2099
-        Me.txtDAYear.MinValue = 1900
-        Me.txtDAYear.Name = "txtDAYear"
-        Me.txtDAYear.ShowUpDown = true
-        Me.txtDAYear.Size = New System.Drawing.Size(58, 29)
-        Me.txtDAYear.TabIndex = 1
-        Me.txtDAYear.Value = 1900
-        Me.txtDAYear.WatermarkText = "Year"
-        '
-        'cmbDAPoliceStation
-        '
-        Me.cmbDAPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbDAPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbDAPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbDAPoliceStation.FocusHighlightEnabled = true
-        Me.cmbDAPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbDAPoliceStation.ForeColor = System.Drawing.Color.Black
-        Me.cmbDAPoliceStation.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbDAPoliceStation, true)
-        Me.cmbDAPoliceStation.ItemHeight = 23
-        Me.cmbDAPoliceStation.Location = New System.Drawing.Point(122, 129)
-        Me.cmbDAPoliceStation.MaxDropDownItems = 35
-        Me.cmbDAPoliceStation.MaxLength = 255
-        Me.cmbDAPoliceStation.Name = "cmbDAPoliceStation"
-        Me.cmbDAPoliceStation.Size = New System.Drawing.Size(227, 29)
-        Me.cmbDAPoliceStation.Sorted = true
-        Me.cmbDAPoliceStation.TabIndex = 4
-        Me.cmbDAPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbDAPoliceStation.WatermarkText = "Police Station"
-        '
-        'dtDAEntry
-        '
-        Me.dtDAEntry.AutoAdvance = true
-        Me.dtDAEntry.AutoSelectDate = true
-        Me.dtDAEntry.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtDAEntry.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtDAEntry.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtDAEntry.ButtonClear.Image = CType(resources.GetObject("dtDAEntry.ButtonClear.Image"),System.Drawing.Image)
-        Me.dtDAEntry.ButtonClear.Visible = true
-        Me.dtDAEntry.ButtonDropDown.Visible = true
-        Me.dtDAEntry.CustomFormat = "dd/MM/yyyy"
-        Me.dtDAEntry.FocusHighlightEnabled = true
-        Me.dtDAEntry.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dtDAEntry.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.Highlighter1.SetHighlightOnFocus(Me.dtDAEntry, true)
-        Me.dtDAEntry.IsPopupCalendarOpen = false
-        Me.dtDAEntry.Location = New System.Drawing.Point(122, 89)
-        Me.dtDAEntry.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtDAEntry.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtDAEntry.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtDAEntry.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtDAEntry.MonthCalendar.ClearButtonVisible = true
-        '
-        '
-        '
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtDAEntry.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtDAEntry.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtDAEntry.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtDAEntry.MonthCalendar.TodayButtonVisible = true
-        Me.dtDAEntry.Name = "dtDAEntry"
-        Me.dtDAEntry.Size = New System.Drawing.Size(227, 29)
-        Me.dtDAEntry.TabIndex = 3
-        Me.dtDAEntry.WatermarkText = "Date of Entry"
-        '
-        'LabelX21
-        '
-        Me.LabelX21.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX21.Location = New System.Drawing.Point(11, 176)
-        Me.LabelX21.Name = "LabelX21"
-        Me.LabelX21.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX21.TabIndex = 70
-        Me.LabelX21.Text = "Crime Number"
-        '
-        'txtDANumber
-        '
-        Me.txtDANumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDANumber.Border.Class = "TextBoxBorder"
-        Me.txtDANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDANumber.ButtonCustom.Image = CType(resources.GetObject("txtDANumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtDANumber.ButtonCustom.Visible = true
-        Me.txtDANumber.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.txtDANumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDANumber.FocusHighlightEnabled = true
-        Me.txtDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtDANumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtDANumber, true)
-        Me.txtDANumber.Location = New System.Drawing.Point(122, 51)
-        Me.txtDANumber.MaxLength = 10
-        Me.txtDANumber.Name = "txtDANumber"
-        Me.txtDANumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtDANumber.TabIndex = 2
-        Me.txtDANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtDANumber.WatermarkText = "DA Number"
-        '
-        'LabelX22
-        '
-        Me.LabelX22.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX22.Location = New System.Drawing.Point(11, 94)
-        Me.LabelX22.Name = "LabelX22"
-        Me.LabelX22.Size = New System.Drawing.Size(77, 18)
-        Me.LabelX22.TabIndex = 69
-        Me.LabelX22.Text = "Date of Entry"
-        '
-        'LabelX23
-        '
-        Me.LabelX23.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX23.Location = New System.Drawing.Point(11, 136)
-        Me.LabelX23.Name = "LabelX23"
-        Me.LabelX23.Size = New System.Drawing.Size(80, 18)
-        Me.LabelX23.TabIndex = 68
-        Me.LabelX23.Text = "Police Station"
-        '
-        'LabelX24
-        '
-        Me.LabelX24.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX24.Location = New System.Drawing.Point(11, 248)
-        Me.LabelX24.Name = "LabelX24"
-        Me.LabelX24.Size = New System.Drawing.Size(36, 18)
-        Me.LabelX24.TabIndex = 67
-        Me.LabelX24.Text = "Name"
-        '
-        'LabelX26
-        '
-        Me.LabelX26.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX26.Location = New System.Drawing.Point(11, 13)
-        Me.LabelX26.Name = "LabelX26"
-        Me.LabelX26.Size = New System.Drawing.Size(28, 18)
-        Me.LabelX26.TabIndex = 65
-        Me.LabelX26.Text = "Year"
-        '
-        'LabelX27
-        '
-        Me.LabelX27.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX27.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX27.Location = New System.Drawing.Point(11, 55)
-        Me.LabelX27.Name = "LabelX27"
-        Me.LabelX27.Size = New System.Drawing.Size(70, 18)
-        Me.LabelX27.TabIndex = 64
-        Me.LabelX27.Text = "DA Number"
-        '
-        'DATabItem
-        '
-        Me.DATabItem.AttachedControl = Me.TabControlPanel2
-        Me.DATabItem.Name = "DATabItem"
-        Me.DATabItem.Text = "DA Register"
-        '
         'TabControlPanel1
         '
         Me.TabControlPanel1.Controls.Add(Me.PanelEx1)
@@ -8871,7 +5398,7 @@ Partial Class frmMainInterface
         Me.TabControlPanel1.Location = New System.Drawing.Point(0, 25)
         Me.TabControlPanel1.Name = "TabControlPanel1"
         Me.TabControlPanel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel1.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel1.Size = New System.Drawing.Size(1360, 528)
         Me.TabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.TabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
@@ -8890,7 +5417,7 @@ Partial Class frmMainInterface
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(1, 1)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1358, 528)
+        Me.PanelEx1.Size = New System.Drawing.Size(1358, 526)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
@@ -8911,7 +5438,7 @@ Partial Class frmMainInterface
         Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx4.Location = New System.Drawing.Point(0, 337)
         Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(1358, 191)
+        Me.PanelEx4.Size = New System.Drawing.Size(1358, 189)
         Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -10684,6 +7211,11 @@ Partial Class frmMainInterface
         Me.txtSOCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
         Me.txtSOCNumber.WatermarkText = "SOC Number"
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
         'LabelX10
         '
         Me.LabelX10.AutoSize = true
@@ -10791,6 +7323,3540 @@ Partial Class frmMainInterface
         Me.SOCTabItem.Name = "SOCTabItem"
         Me.SOCTabItem.Text = "SOC Register"
         '
+        'TabControlPanel2
+        '
+        Me.TabControlPanel2.Controls.Add(Me.PanelEx2)
+        Me.TabControlPanel2.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel2.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel2.Name = "TabControlPanel2"
+        Me.TabControlPanel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel2.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel2.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel2.Style.GradientAngle = 90
+        Me.TabControlPanel2.TabIndex = 2
+        Me.TabControlPanel2.TabItem = Me.DATabItem
+        '
+        'PanelEx2
+        '
+        Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx2.Controls.Add(Me.PanelEx5)
+        Me.PanelEx2.Controls.Add(Me.PanelDA)
+        Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx2.Location = New System.Drawing.Point(1, 1)
+        Me.PanelEx2.Name = "PanelEx2"
+        Me.PanelEx2.Size = New System.Drawing.Size(1358, 526)
+        Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx2.Style.GradientAngle = 90
+        Me.PanelEx2.TabIndex = 0
+        Me.PanelEx2.Text = "PanelEx2"
+        '
+        'PanelEx5
+        '
+        Me.PanelEx5.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx5.Controls.Add(Me.lblDAGridInfo)
+        Me.PanelEx5.Controls.Add(Me.DADatagrid)
+        Me.PanelEx5.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx5.Location = New System.Drawing.Point(0, 351)
+        Me.PanelEx5.Name = "PanelEx5"
+        Me.PanelEx5.Size = New System.Drawing.Size(1358, 175)
+        Me.PanelEx5.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx5.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx5.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx5.Style.GradientAngle = 90
+        Me.PanelEx5.TabIndex = 3
+        '
+        'lblDAGridInfo
+        '
+        Me.lblDAGridInfo.AutoSize = true
+        Me.lblDAGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblDAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblDAGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblDAGridInfo.Location = New System.Drawing.Point(5, 90)
+        Me.lblDAGridInfo.Name = "lblDAGridInfo"
+        Me.lblDAGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblDAGridInfo.TabIndex = 165
+        Me.lblDAGridInfo.Text = "Grid"
+        Me.lblDAGridInfo.Visible = false
+        '
+        'PanelDA
+        '
+        Me.PanelDA.AutoScroll = true
+        Me.PanelDA.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelDA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelDA.Controls.Add(Me.LabelX145)
+        Me.PanelDA.Controls.Add(Me.txtDAModusOperandi)
+        Me.PanelDA.Controls.Add(Me.chkDATwodigits)
+        Me.PanelDA.Controls.Add(Me.lblDAAdress)
+        Me.PanelDA.Controls.Add(Me.lblDAFather)
+        Me.PanelDA.Controls.Add(Me.lblDAAlias)
+        Me.PanelDA.Controls.Add(Me.lblDAName)
+        Me.PanelDA.Controls.Add(Me.btnViewDASlip)
+        Me.PanelDA.Controls.Add(Me.txtDANumberOnly)
+        Me.PanelDA.Controls.Add(Me.LabelX50)
+        Me.PanelDA.Controls.Add(Me.LabelX49)
+        Me.PanelDA.Controls.Add(Me.LabelX48)
+        Me.PanelDA.Controls.Add(Me.LabelX47)
+        Me.PanelDA.Controls.Add(Me.LabelX46)
+        Me.PanelDA.Controls.Add(Me.LabelX45)
+        Me.PanelDA.Controls.Add(Me.LabelX44)
+        Me.PanelDA.Controls.Add(Me.GroupPanel1)
+        Me.PanelDA.Controls.Add(Me.btnSearchDA)
+        Me.PanelDA.Controls.Add(Me.btnClearDAFields)
+        Me.PanelDA.Controls.Add(Me.btnSaveDA)
+        Me.PanelDA.Controls.Add(Me.txtDASection)
+        Me.PanelDA.Controls.Add(Me.txtDACrimeNumber)
+        Me.PanelDA.Controls.Add(Me.txtDAHenryDenominator)
+        Me.PanelDA.Controls.Add(Me.txtDARemarks)
+        Me.PanelDA.Controls.Add(Me.cmbDASex)
+        Me.PanelDA.Controls.Add(Me.LabelX34)
+        Me.PanelDA.Controls.Add(Me.LabelX35)
+        Me.PanelDA.Controls.Add(Me.txtDAFathersName)
+        Me.PanelDA.Controls.Add(Me.txtDAAddress)
+        Me.PanelDA.Controls.Add(Me.txtDAHenryNumerator)
+        Me.PanelDA.Controls.Add(Me.LabelX28)
+        Me.PanelDA.Controls.Add(Me.LabelX29)
+        Me.PanelDA.Controls.Add(Me.LabelX30)
+        Me.PanelDA.Controls.Add(Me.LabelX31)
+        Me.PanelDA.Controls.Add(Me.LabelX32)
+        Me.PanelDA.Controls.Add(Me.txtDAAliasName)
+        Me.PanelDA.Controls.Add(Me.txtDAName)
+        Me.PanelDA.Controls.Add(Me.LabelX25)
+        Me.PanelDA.Controls.Add(Me.chkAppendDAYear)
+        Me.PanelDA.Controls.Add(Me.txtDAYear)
+        Me.PanelDA.Controls.Add(Me.cmbDAPoliceStation)
+        Me.PanelDA.Controls.Add(Me.dtDAEntry)
+        Me.PanelDA.Controls.Add(Me.LabelX21)
+        Me.PanelDA.Controls.Add(Me.txtDANumber)
+        Me.PanelDA.Controls.Add(Me.LabelX22)
+        Me.PanelDA.Controls.Add(Me.LabelX23)
+        Me.PanelDA.Controls.Add(Me.LabelX24)
+        Me.PanelDA.Controls.Add(Me.LabelX26)
+        Me.PanelDA.Controls.Add(Me.LabelX27)
+        Me.PanelDA.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelDA.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelDA.Location = New System.Drawing.Point(0, 0)
+        Me.PanelDA.Name = "PanelDA"
+        Me.PanelDA.Size = New System.Drawing.Size(1358, 351)
+        Me.PanelDA.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelDA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelDA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelDA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelDA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelDA.Style.GradientAngle = 90
+        Me.PanelDA.TabIndex = 2
+        '
+        'LabelX145
+        '
+        Me.LabelX145.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX145.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX145.Location = New System.Drawing.Point(421, 223)
+        Me.LabelX145.Name = "LabelX145"
+        Me.LabelX145.Size = New System.Drawing.Size(97, 18)
+        Me.LabelX145.TabIndex = 147
+        Me.LabelX145.Text = "Modus Operandi"
+        '
+        'txtDAModusOperandi
+        '
+        Me.txtDAModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDAModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAModusOperandi.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAModusOperandi.Border.Class = "TextBoxBorder"
+        Me.txtDAModusOperandi.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAModusOperandi.ButtonCustom.Image = CType(resources.GetObject("txtDAModusOperandi.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAModusOperandi.ButtonCustom.Visible = true
+        Me.txtDAModusOperandi.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAModusOperandi.FocusHighlightEnabled = true
+        Me.txtDAModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAModusOperandi.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAModusOperandi, true)
+        Me.txtDAModusOperandi.Location = New System.Drawing.Point(545, 216)
+        Me.txtDAModusOperandi.MaxLength = 255
+        Me.txtDAModusOperandi.Name = "txtDAModusOperandi"
+        Me.txtDAModusOperandi.Size = New System.Drawing.Size(227, 29)
+        Me.txtDAModusOperandi.TabIndex = 14
+        Me.txtDAModusOperandi.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAModusOperandi.WatermarkText = "Modus Operandi"
+        '
+        'chkDATwodigits
+        '
+        Me.chkDATwodigits.AutoSize = true
+        '
+        '
+        '
+        Me.chkDATwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkDATwodigits, true)
+        Me.chkDATwodigits.Location = New System.Drawing.Point(200, 28)
+        Me.chkDATwodigits.Name = "chkDATwodigits"
+        Me.chkDATwodigits.Size = New System.Drawing.Size(126, 18)
+        Me.chkDATwodigits.TabIndex = 140
+        Me.chkDATwodigits.TabStop = false
+        Me.chkDATwodigits.Text = "Use last two digits"
+        '
+        'lblDAAdress
+        '
+        Me.lblDAAdress.AutoSize = true
+        '
+        '
+        '
+        Me.lblDAAdress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDAAdress.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDAAdress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblDAAdress.Location = New System.Drawing.Point(775, 131)
+        Me.lblDAAdress.Name = "lblDAAdress"
+        Me.lblDAAdress.Size = New System.Drawing.Size(11, 22)
+        Me.lblDAAdress.TabIndex = 139
+        Me.lblDAAdress.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblDAFather
+        '
+        Me.lblDAFather.AutoSize = true
+        '
+        '
+        '
+        Me.lblDAFather.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDAFather.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDAFather.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblDAFather.Location = New System.Drawing.Point(349, 321)
+        Me.lblDAFather.Name = "lblDAFather"
+        Me.lblDAFather.Size = New System.Drawing.Size(11, 22)
+        Me.lblDAFather.TabIndex = 138
+        Me.lblDAFather.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblDAAlias
+        '
+        Me.lblDAAlias.AutoSize = true
+        '
+        '
+        '
+        Me.lblDAAlias.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDAAlias.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDAAlias.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblDAAlias.Location = New System.Drawing.Point(348, 287)
+        Me.lblDAAlias.Name = "lblDAAlias"
+        Me.lblDAAlias.Size = New System.Drawing.Size(11, 22)
+        Me.lblDAAlias.TabIndex = 137
+        Me.lblDAAlias.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblDAName
+        '
+        Me.lblDAName.AutoSize = true
+        '
+        '
+        '
+        Me.lblDAName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDAName.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblDAName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblDAName.Location = New System.Drawing.Point(360, 251)
+        Me.lblDAName.Name = "lblDAName"
+        Me.lblDAName.Size = New System.Drawing.Size(11, 22)
+        Me.lblDAName.TabIndex = 136
+        Me.lblDAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'btnViewDASlip
+        '
+        Me.btnViewDASlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnViewDASlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnViewDASlip.Image = CType(resources.GetObject("btnViewDASlip.Image"),System.Drawing.Image)
+        Me.btnViewDASlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnViewDASlip.Location = New System.Drawing.Point(1163, 266)
+        Me.btnViewDASlip.Name = "btnViewDASlip"
+        Me.btnViewDASlip.Size = New System.Drawing.Size(110, 73)
+        Me.btnViewDASlip.TabIndex = 19
+        Me.btnViewDASlip.Text = "View DA Slip"
+        '
+        'txtDANumberOnly
+        '
+        Me.txtDANumberOnly.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDANumberOnly.Border.Class = "TextBoxBorder"
+        Me.txtDANumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDANumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtDANumberOnly.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDANumberOnly.ButtonCustom.Visible = true
+        Me.txtDANumberOnly.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDANumberOnly.FocusHighlightEnabled = true
+        Me.txtDANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDANumberOnly.ForeColor = System.Drawing.Color.Black
+        Me.txtDANumberOnly.Location = New System.Drawing.Point(402, 155)
+        Me.txtDANumberOnly.MaxLength = 45
+        Me.txtDANumberOnly.Name = "txtDANumberOnly"
+        Me.txtDANumberOnly.Size = New System.Drawing.Size(116, 23)
+        Me.txtDANumberOnly.TabIndex = 133
+        Me.txtDANumberOnly.TabStop = false
+        Me.txtDANumberOnly.Visible = false
+        '
+        'LabelX50
+        '
+        Me.LabelX50.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX50.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX50.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX50.Location = New System.Drawing.Point(776, 15)
+        Me.LabelX50.Name = "LabelX50"
+        Me.LabelX50.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX50.TabIndex = 109
+        Me.LabelX50.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX49
+        '
+        Me.LabelX49.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX49.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX49.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX49.Location = New System.Drawing.Point(352, 252)
+        Me.LabelX49.Name = "LabelX49"
+        Me.LabelX49.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX49.TabIndex = 108
+        Me.LabelX49.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX48
+        '
+        Me.LabelX48.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX48.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX48.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX48.Location = New System.Drawing.Point(353, 210)
+        Me.LabelX48.Name = "LabelX48"
+        Me.LabelX48.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX48.TabIndex = 107
+        Me.LabelX48.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX47
+        '
+        Me.LabelX47.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX47.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX47.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX47.Location = New System.Drawing.Point(353, 173)
+        Me.LabelX47.Name = "LabelX47"
+        Me.LabelX47.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX47.TabIndex = 106
+        Me.LabelX47.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX46
+        '
+        Me.LabelX46.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX46.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX46.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX46.Location = New System.Drawing.Point(353, 135)
+        Me.LabelX46.Name = "LabelX46"
+        Me.LabelX46.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX46.TabIndex = 105
+        Me.LabelX46.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX45
+        '
+        Me.LabelX45.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX45.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX45.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX45.Location = New System.Drawing.Point(353, 94)
+        Me.LabelX45.Name = "LabelX45"
+        Me.LabelX45.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX45.TabIndex = 104
+        Me.LabelX45.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX44
+        '
+        Me.LabelX44.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX44.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX44.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX44.Location = New System.Drawing.Point(352, 59)
+        Me.LabelX44.Name = "LabelX44"
+        Me.LabelX44.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX44.TabIndex = 103
+        Me.LabelX44.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'GroupPanel1
+        '
+        Me.GroupPanel1.BackColor = System.Drawing.Color.White
+        Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.GroupPanel1.Controls.Add(Me.DASlipContextMenuBar)
+        Me.GroupPanel1.Controls.Add(Me.btnDAClearFPSlip)
+        Me.GroupPanel1.Controls.Add(Me.picDASlip)
+        Me.GroupPanel1.Controls.Add(Me.btnDAScanFPSlip)
+        Me.GroupPanel1.Controls.Add(Me.btnDASelectFPSlip)
+        Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GroupPanel1.Location = New System.Drawing.Point(846, 9)
+        Me.GroupPanel1.Name = "GroupPanel1"
+        Me.GroupPanel1.Size = New System.Drawing.Size(267, 328)
+        '
+        '
+        '
+        Me.GroupPanel1.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GroupPanel1.Style.BackColorGradientAngle = 90
+        Me.GroupPanel1.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GroupPanel1.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel1.Style.BorderBottomWidth = 1
+        Me.GroupPanel1.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GroupPanel1.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel1.Style.BorderLeftWidth = 1
+        Me.GroupPanel1.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel1.Style.BorderRightWidth = 1
+        Me.GroupPanel1.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel1.Style.BorderTopWidth = 1
+        Me.GroupPanel1.Style.CornerDiameter = 4
+        Me.GroupPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GroupPanel1.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
+        Me.GroupPanel1.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GroupPanel1.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GroupPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanel1.TabIndex = 101
+        Me.GroupPanel1.Text = "DA Slip"
+        '
+        'DASlipContextMenuBar
+        '
+        Me.DASlipContextMenuBar.SetContextMenuEx(Me.DASlipContextMenuBar, Me.btnDASlipContextMenu)
+        Me.DASlipContextMenuBar.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.DASlipContextMenuBar.IsMaximized = false
+        Me.DASlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDASlipContextMenu})
+        Me.DASlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
+        Me.DASlipContextMenuBar.Name = "DASlipContextMenuBar"
+        Me.DASlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
+        Me.DASlipContextMenuBar.Stretch = true
+        Me.DASlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.DASlipContextMenuBar.TabIndex = 57
+        Me.DASlipContextMenuBar.TabStop = false
+        Me.DASlipContextMenuBar.Text = "ContextMenuBar2"
+        '
+        'btnDASlipContextMenu
+        '
+        Me.btnDASlipContextMenu.AutoExpandOnClick = true
+        Me.btnDASlipContextMenu.Name = "btnDASlipContextMenu"
+        Me.btnDASlipContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAViewDisplayContext, Me.btnDASelectDisplayContext, Me.btnDAScanDisplayContext, Me.btnDAClearDisplayContext, Me.btnDAExploreDisplayContext})
+        Me.btnDASlipContextMenu.Text = "Context Menu"
+        '
+        'btnDAViewDisplayContext
+        '
+        Me.btnDAViewDisplayContext.Icon = CType(resources.GetObject("btnDAViewDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnDAViewDisplayContext.Name = "btnDAViewDisplayContext"
+        Me.btnDAViewDisplayContext.Text = "View"
+        '
+        'btnDASelectDisplayContext
+        '
+        Me.btnDASelectDisplayContext.BeginGroup = true
+        Me.btnDASelectDisplayContext.Icon = CType(resources.GetObject("btnDASelectDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnDASelectDisplayContext.Name = "btnDASelectDisplayContext"
+        Me.btnDASelectDisplayContext.Text = "Select"
+        '
+        'btnDAScanDisplayContext
+        '
+        Me.btnDAScanDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDAScanDisplayContext.Icon = CType(resources.GetObject("btnDAScanDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnDAScanDisplayContext.Name = "btnDAScanDisplayContext"
+        Me.btnDAScanDisplayContext.Text = "Scan"
+        '
+        'btnDAClearDisplayContext
+        '
+        Me.btnDAClearDisplayContext.BeginGroup = true
+        Me.btnDAClearDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDAClearDisplayContext.Icon = CType(resources.GetObject("btnDAClearDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnDAClearDisplayContext.Name = "btnDAClearDisplayContext"
+        Me.btnDAClearDisplayContext.Text = "Clear"
+        '
+        'btnDAExploreDisplayContext
+        '
+        Me.btnDAExploreDisplayContext.BeginGroup = true
+        Me.btnDAExploreDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDAExploreDisplayContext.Icon = CType(resources.GetObject("btnDAExploreDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnDAExploreDisplayContext.Name = "btnDAExploreDisplayContext"
+        Me.btnDAExploreDisplayContext.Text = "Locate"
+        '
+        'picDASlip
+        '
+        Me.picDASlip.BackColor = System.Drawing.Color.Gray
+        Me.DASlipContextMenuBar.SetContextMenuEx(Me.picDASlip, Me.btnDASlipContextMenu)
+        Me.picDASlip.Image = Nothing
+        Me.picDASlip.Location = New System.Drawing.Point(8, 3)
+        Me.picDASlip.Name = "picDASlip"
+        Me.picDASlip.Size = New System.Drawing.Size(245, 253)
+        Me.picDASlip.TabIndex = 20
+        Me.picDASlip.TabStop = false
+        Me.picDASlip.ViewMode = iViewCore.PictureBox.EViewMode.FitImage
+        '
+        'btnDAClearFPSlip
+        '
+        Me.btnDAClearFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDAClearFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDAClearFPSlip.Location = New System.Drawing.Point(98, 268)
+        Me.btnDAClearFPSlip.Name = "btnDAClearFPSlip"
+        Me.btnDAClearFPSlip.Size = New System.Drawing.Size(65, 33)
+        Me.btnDAClearFPSlip.TabIndex = 21
+        Me.btnDAClearFPSlip.TabStop = false
+        Me.btnDAClearFPSlip.Text = "Clear"
+        '
+        'btnDAScanFPSlip
+        '
+        Me.btnDAScanFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDAScanFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDAScanFPSlip.Location = New System.Drawing.Point(186, 268)
+        Me.btnDAScanFPSlip.Name = "btnDAScanFPSlip"
+        Me.btnDAScanFPSlip.Size = New System.Drawing.Size(65, 33)
+        Me.btnDAScanFPSlip.TabIndex = 16
+        Me.btnDAScanFPSlip.TabStop = false
+        Me.btnDAScanFPSlip.Text = "Scan"
+        '
+        'btnDASelectFPSlip
+        '
+        Me.btnDASelectFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDASelectFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDASelectFPSlip.Location = New System.Drawing.Point(10, 268)
+        Me.btnDASelectFPSlip.Name = "btnDASelectFPSlip"
+        Me.btnDASelectFPSlip.Size = New System.Drawing.Size(65, 33)
+        Me.btnDASelectFPSlip.TabIndex = 15
+        Me.btnDASelectFPSlip.TabStop = false
+        Me.btnDASelectFPSlip.Text = "Select"
+        '
+        'btnSearchDA
+        '
+        Me.btnSearchDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchDA.Image = CType(resources.GetObject("btnSearchDA.Image"),System.Drawing.Image)
+        Me.btnSearchDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchDA.Location = New System.Drawing.Point(1163, 96)
+        Me.btnSearchDA.Name = "btnSearchDA"
+        Me.btnSearchDA.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchDA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAFindByNumber, Me.btnSearchDAInYear, Me.btnDAAdvancedSearch})
+        Me.btnSearchDA.TabIndex = 17
+        Me.btnSearchDA.Text = "Search"
+        '
+        'btnDAFindByNumber
+        '
+        Me.btnDAFindByNumber.GlobalItem = false
+        Me.btnDAFindByNumber.Name = "btnDAFindByNumber"
+        Me.btnDAFindByNumber.Text = "Find by DA Number"
+        '
+        'btnSearchDAInYear
+        '
+        Me.btnSearchDAInYear.BeginGroup = true
+        Me.btnSearchDAInYear.GlobalItem = false
+        Me.btnSearchDAInYear.Name = "btnSearchDAInYear"
+        Me.btnSearchDAInYear.Text = "Search in selected Year"
+        '
+        'btnDAAdvancedSearch
+        '
+        Me.btnDAAdvancedSearch.BeginGroup = true
+        Me.btnDAAdvancedSearch.GlobalItem = false
+        Me.btnDAAdvancedSearch.Name = "btnDAAdvancedSearch"
+        Me.btnDAAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearDAFields
+        '
+        Me.btnClearDAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearDAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearDAFields.Image = CType(resources.GetObject("btnClearDAFields.Image"),System.Drawing.Image)
+        Me.btnClearDAFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearDAFields.Location = New System.Drawing.Point(1163, 181)
+        Me.btnClearDAFields.Name = "btnClearDAFields"
+        Me.btnClearDAFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearDAFields.TabIndex = 18
+        Me.btnClearDAFields.Text = "Clear All Fields"
+        '
+        'btnSaveDA
+        '
+        Me.btnSaveDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveDA.Image = CType(resources.GetObject("btnSaveDA.Image"),System.Drawing.Image)
+        Me.btnSaveDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveDA.Location = New System.Drawing.Point(1163, 11)
+        Me.btnSaveDA.Name = "btnSaveDA"
+        Me.btnSaveDA.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveDA.TabIndex = 16
+        Me.btnSaveDA.Text = "Save"
+        '
+        'txtDASection
+        '
+        Me.txtDASection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDASection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDASection.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDASection.Border.Class = "TextBoxBorder"
+        Me.txtDASection.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDASection.ButtonCustom.Image = CType(resources.GetObject("txtDASection.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDASection.ButtonCustom.Visible = true
+        Me.txtDASection.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDASection.FocusHighlightEnabled = true
+        Me.txtDASection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDASection.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDASection, true)
+        Me.txtDASection.Location = New System.Drawing.Point(122, 206)
+        Me.txtDASection.MaxLength = 255
+        Me.txtDASection.Name = "txtDASection"
+        Me.txtDASection.Size = New System.Drawing.Size(227, 29)
+        Me.txtDASection.TabIndex = 6
+        Me.txtDASection.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDASection.WatermarkText = "Section of Law"
+        '
+        'txtDACrimeNumber
+        '
+        Me.txtDACrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtDACrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDACrimeNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDACrimeNumber.Border.Class = "TextBoxBorder"
+        Me.txtDACrimeNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDACrimeNumber.ButtonCustom.Image = CType(resources.GetObject("txtDACrimeNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDACrimeNumber.ButtonCustom.Visible = true
+        Me.txtDACrimeNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDACrimeNumber.FocusHighlightEnabled = true
+        Me.txtDACrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDACrimeNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDACrimeNumber, true)
+        Me.txtDACrimeNumber.Location = New System.Drawing.Point(122, 167)
+        Me.txtDACrimeNumber.MaxLength = 45
+        Me.txtDACrimeNumber.Name = "txtDACrimeNumber"
+        Me.txtDACrimeNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtDACrimeNumber.TabIndex = 5
+        Me.txtDACrimeNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDACrimeNumber.WatermarkText = "Crime Number"
+        '
+        'txtDAHenryDenominator
+        '
+        Me.txtDAHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDAHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAHenryDenominator.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAHenryDenominator.Border.Class = "TextBoxBorder"
+        Me.txtDAHenryDenominator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAHenryDenominator.ButtonCustom.Image = CType(resources.GetObject("txtDAHenryDenominator.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAHenryDenominator.ButtonCustom.Visible = true
+        Me.txtDAHenryDenominator.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAHenryDenominator.FocusHighlightEnabled = true
+        Me.txtDAHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAHenryDenominator.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAHenryDenominator, true)
+        Me.txtDAHenryDenominator.Location = New System.Drawing.Point(545, 49)
+        Me.txtDAHenryDenominator.MaxLength = 15
+        Me.txtDAHenryDenominator.Name = "txtDAHenryDenominator"
+        Me.txtDAHenryDenominator.Size = New System.Drawing.Size(227, 29)
+        Me.txtDAHenryDenominator.TabIndex = 11
+        Me.txtDAHenryDenominator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAHenryDenominator.WatermarkText = "Classification Denominator"
+        '
+        'txtDARemarks
+        '
+        Me.txtDARemarks.AcceptsReturn = true
+        Me.txtDARemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDARemarks.Border.Class = "TextBoxBorder"
+        Me.txtDARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDARemarks.ButtonCustom.Image = CType(resources.GetObject("txtDARemarks.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDARemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDARemarks.FocusHighlightEnabled = true
+        Me.txtDARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDARemarks.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDARemarks, true)
+        Me.txtDARemarks.Location = New System.Drawing.Point(545, 254)
+        Me.txtDARemarks.MaxLength = 255
+        Me.txtDARemarks.Multiline = true
+        Me.txtDARemarks.Name = "txtDARemarks"
+        Me.txtDARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtDARemarks.Size = New System.Drawing.Size(227, 89)
+        Me.txtDARemarks.TabIndex = 15
+        Me.txtDARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDARemarks.WatermarkText = "Remarks"
+        '
+        'cmbDASex
+        '
+        Me.cmbDASex.AutoCompleteCustomSource.AddRange(New String() {"Male", "Female"})
+        Me.cmbDASex.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbDASex.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbDASex.DisplayMember = "Text"
+        Me.cmbDASex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbDASex.FocusHighlightEnabled = true
+        Me.cmbDASex.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbDASex.ForeColor = System.Drawing.Color.Black
+        Me.cmbDASex.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbDASex, true)
+        Me.cmbDASex.ItemHeight = 23
+        Me.cmbDASex.Items.AddRange(New Object() {Me.ComboItem6, Me.ComboItem5})
+        Me.cmbDASex.Location = New System.Drawing.Point(545, 86)
+        Me.cmbDASex.MaxLength = 6
+        Me.cmbDASex.Name = "cmbDASex"
+        Me.cmbDASex.Size = New System.Drawing.Size(122, 29)
+        Me.cmbDASex.Sorted = true
+        Me.cmbDASex.TabIndex = 12
+        Me.cmbDASex.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbDASex.WatermarkText = "Sex"
+        '
+        'ComboItem6
+        '
+        Me.ComboItem6.Text = "Female"
+        '
+        'ComboItem5
+        '
+        Me.ComboItem5.Text = "Male"
+        '
+        'LabelX34
+        '
+        Me.LabelX34.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX34.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX34.Location = New System.Drawing.Point(421, 270)
+        Me.LabelX34.Name = "LabelX34"
+        Me.LabelX34.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX34.TabIndex = 92
+        Me.LabelX34.Text = "Remarks"
+        '
+        'LabelX35
+        '
+        Me.LabelX35.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX35.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX35.Location = New System.Drawing.Point(421, 53)
+        Me.LabelX35.Name = "LabelX35"
+        Me.LabelX35.Size = New System.Drawing.Size(115, 18)
+        Me.LabelX35.TabIndex = 91
+        Me.LabelX35.Text = "Henry Denominator"
+        '
+        'txtDAFathersName
+        '
+        Me.txtDAFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDAFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAFathersName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAFathersName.Border.Class = "TextBoxBorder"
+        Me.txtDAFathersName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAFathersName.ButtonCustom.Image = CType(resources.GetObject("txtDAFathersName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAFathersName.ButtonCustom.Visible = true
+        Me.txtDAFathersName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAFathersName.FocusHighlightEnabled = true
+        Me.txtDAFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAFathersName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAFathersName, true)
+        Me.txtDAFathersName.Location = New System.Drawing.Point(121, 315)
+        Me.txtDAFathersName.MaxLength = 255
+        Me.txtDAFathersName.Name = "txtDAFathersName"
+        Me.txtDAFathersName.Size = New System.Drawing.Size(227, 29)
+        Me.txtDAFathersName.TabIndex = 9
+        Me.txtDAFathersName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAFathersName.WatermarkText = "Father's Name"
+        '
+        'txtDAAddress
+        '
+        Me.txtDAAddress.AcceptsReturn = true
+        Me.txtDAAddress.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAAddress.Border.Class = "TextBoxBorder"
+        Me.txtDAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAAddress.ButtonCustom.Image = CType(resources.GetObject("txtDAAddress.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAAddress.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAAddress.FocusHighlightEnabled = true
+        Me.txtDAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAAddress.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAAddress, true)
+        Me.txtDAAddress.Location = New System.Drawing.Point(545, 124)
+        Me.txtDAAddress.MaxLength = 255
+        Me.txtDAAddress.Multiline = true
+        Me.txtDAAddress.Name = "txtDAAddress"
+        Me.txtDAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtDAAddress.Size = New System.Drawing.Size(227, 86)
+        Me.txtDAAddress.TabIndex = 13
+        Me.txtDAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAAddress.WatermarkText = "Address"
+        '
+        'txtDAHenryNumerator
+        '
+        Me.txtDAHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDAHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAHenryNumerator.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAHenryNumerator.Border.Class = "TextBoxBorder"
+        Me.txtDAHenryNumerator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAHenryNumerator.ButtonCustom.Image = CType(resources.GetObject("txtDAHenryNumerator.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAHenryNumerator.ButtonCustom.Visible = true
+        Me.txtDAHenryNumerator.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAHenryNumerator.FocusHighlightEnabled = true
+        Me.txtDAHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAHenryNumerator.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAHenryNumerator, true)
+        Me.txtDAHenryNumerator.Location = New System.Drawing.Point(545, 10)
+        Me.txtDAHenryNumerator.MaxLength = 15
+        Me.txtDAHenryNumerator.Name = "txtDAHenryNumerator"
+        Me.txtDAHenryNumerator.Size = New System.Drawing.Size(227, 29)
+        Me.txtDAHenryNumerator.TabIndex = 10
+        Me.txtDAHenryNumerator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAHenryNumerator.WatermarkText = "Classification Numerator"
+        '
+        'LabelX28
+        '
+        Me.LabelX28.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX28.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX28.Location = New System.Drawing.Point(11, 319)
+        Me.LabelX28.Name = "LabelX28"
+        Me.LabelX28.Size = New System.Drawing.Size(84, 18)
+        Me.LabelX28.TabIndex = 85
+        Me.LabelX28.Text = "Father's Name"
+        '
+        'LabelX29
+        '
+        Me.LabelX29.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX29.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX29.Location = New System.Drawing.Point(421, 15)
+        Me.LabelX29.Name = "LabelX29"
+        Me.LabelX29.Size = New System.Drawing.Size(102, 18)
+        Me.LabelX29.TabIndex = 84
+        Me.LabelX29.Text = "Henry Numerator"
+        '
+        'LabelX30
+        '
+        Me.LabelX30.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX30.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX30.Location = New System.Drawing.Point(421, 131)
+        Me.LabelX30.Name = "LabelX30"
+        Me.LabelX30.Size = New System.Drawing.Size(48, 18)
+        Me.LabelX30.TabIndex = 83
+        Me.LabelX30.Text = "Address"
+        '
+        'LabelX31
+        '
+        Me.LabelX31.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX31.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX31.Location = New System.Drawing.Point(421, 92)
+        Me.LabelX31.Name = "LabelX31"
+        Me.LabelX31.Size = New System.Drawing.Size(22, 18)
+        Me.LabelX31.TabIndex = 82
+        Me.LabelX31.Text = "Sex"
+        '
+        'LabelX32
+        '
+        Me.LabelX32.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX32.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX32.Location = New System.Drawing.Point(11, 284)
+        Me.LabelX32.Name = "LabelX32"
+        Me.LabelX32.Size = New System.Drawing.Size(66, 18)
+        Me.LabelX32.TabIndex = 81
+        Me.LabelX32.Text = "Alias Name"
+        '
+        'txtDAAliasName
+        '
+        Me.txtDAAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDAAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAAliasName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAAliasName.Border.Class = "TextBoxBorder"
+        Me.txtDAAliasName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAAliasName.ButtonCustom.Image = CType(resources.GetObject("txtDAAliasName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAAliasName.ButtonCustom.Visible = true
+        Me.txtDAAliasName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAAliasName.FocusHighlightEnabled = true
+        Me.txtDAAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAAliasName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAAliasName, true)
+        Me.txtDAAliasName.Location = New System.Drawing.Point(122, 280)
+        Me.txtDAAliasName.MaxLength = 255
+        Me.txtDAAliasName.Name = "txtDAAliasName"
+        Me.txtDAAliasName.Size = New System.Drawing.Size(227, 29)
+        Me.txtDAAliasName.TabIndex = 8
+        Me.txtDAAliasName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAAliasName.WatermarkText = "Alias Name"
+        '
+        'txtDAName
+        '
+        Me.txtDAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtDAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtDAName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDAName.Border.Class = "TextBoxBorder"
+        Me.txtDAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAName.ButtonCustom.Image = CType(resources.GetObject("txtDAName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAName.ButtonCustom.Visible = true
+        Me.txtDAName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDAName.FocusHighlightEnabled = true
+        Me.txtDAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDAName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAName, true)
+        Me.txtDAName.Location = New System.Drawing.Point(122, 243)
+        Me.txtDAName.MaxLength = 255
+        Me.txtDAName.Name = "txtDAName"
+        Me.txtDAName.Size = New System.Drawing.Size(227, 29)
+        Me.txtDAName.TabIndex = 7
+        Me.txtDAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDAName.WatermarkText = "Name"
+        '
+        'LabelX25
+        '
+        Me.LabelX25.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX25.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX25.Location = New System.Drawing.Point(11, 214)
+        Me.LabelX25.Name = "LabelX25"
+        Me.LabelX25.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX25.TabIndex = 74
+        Me.LabelX25.Text = "Section of Law"
+        '
+        'chkAppendDAYear
+        '
+        Me.chkAppendDAYear.AutoSize = true
+        '
+        '
+        '
+        Me.chkAppendDAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkAppendDAYear, true)
+        Me.chkAppendDAYear.Location = New System.Drawing.Point(200, 7)
+        Me.chkAppendDAYear.Name = "chkAppendDAYear"
+        Me.chkAppendDAYear.Size = New System.Drawing.Size(124, 18)
+        Me.chkAppendDAYear.TabIndex = 72
+        Me.chkAppendDAYear.TabStop = false
+        Me.chkAppendDAYear.Text = "Auto append year"
+        '
+        'txtDAYear
+        '
+        '
+        '
+        '
+        Me.txtDAYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtDAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDAYear.ButtonCustom.Image = CType(resources.GetObject("txtDAYear.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDAYear.FocusHighlightEnabled = true
+        Me.txtDAYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDAYear, true)
+        Me.txtDAYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtDAYear.Location = New System.Drawing.Point(122, 9)
+        Me.txtDAYear.MaxValue = 2099
+        Me.txtDAYear.MinValue = 1900
+        Me.txtDAYear.Name = "txtDAYear"
+        Me.txtDAYear.ShowUpDown = true
+        Me.txtDAYear.Size = New System.Drawing.Size(58, 29)
+        Me.txtDAYear.TabIndex = 1
+        Me.txtDAYear.Value = 1900
+        Me.txtDAYear.WatermarkText = "Year"
+        '
+        'cmbDAPoliceStation
+        '
+        Me.cmbDAPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbDAPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbDAPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbDAPoliceStation.FocusHighlightEnabled = true
+        Me.cmbDAPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbDAPoliceStation.ForeColor = System.Drawing.Color.Black
+        Me.cmbDAPoliceStation.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbDAPoliceStation, true)
+        Me.cmbDAPoliceStation.ItemHeight = 23
+        Me.cmbDAPoliceStation.Location = New System.Drawing.Point(122, 129)
+        Me.cmbDAPoliceStation.MaxDropDownItems = 35
+        Me.cmbDAPoliceStation.MaxLength = 255
+        Me.cmbDAPoliceStation.Name = "cmbDAPoliceStation"
+        Me.cmbDAPoliceStation.Size = New System.Drawing.Size(227, 29)
+        Me.cmbDAPoliceStation.Sorted = true
+        Me.cmbDAPoliceStation.TabIndex = 4
+        Me.cmbDAPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbDAPoliceStation.WatermarkText = "Police Station"
+        '
+        'dtDAEntry
+        '
+        Me.dtDAEntry.AutoAdvance = true
+        Me.dtDAEntry.AutoSelectDate = true
+        Me.dtDAEntry.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtDAEntry.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtDAEntry.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtDAEntry.ButtonClear.Image = CType(resources.GetObject("dtDAEntry.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtDAEntry.ButtonClear.Visible = true
+        Me.dtDAEntry.ButtonDropDown.Visible = true
+        Me.dtDAEntry.CustomFormat = "dd/MM/yyyy"
+        Me.dtDAEntry.FocusHighlightEnabled = true
+        Me.dtDAEntry.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtDAEntry.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtDAEntry, true)
+        Me.dtDAEntry.IsPopupCalendarOpen = false
+        Me.dtDAEntry.Location = New System.Drawing.Point(122, 89)
+        Me.dtDAEntry.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtDAEntry.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtDAEntry.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtDAEntry.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtDAEntry.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtDAEntry.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtDAEntry.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtDAEntry.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtDAEntry.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtDAEntry.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtDAEntry.MonthCalendar.TodayButtonVisible = true
+        Me.dtDAEntry.Name = "dtDAEntry"
+        Me.dtDAEntry.Size = New System.Drawing.Size(227, 29)
+        Me.dtDAEntry.TabIndex = 3
+        Me.dtDAEntry.WatermarkText = "Date of Entry"
+        '
+        'LabelX21
+        '
+        Me.LabelX21.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX21.Location = New System.Drawing.Point(11, 176)
+        Me.LabelX21.Name = "LabelX21"
+        Me.LabelX21.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX21.TabIndex = 70
+        Me.LabelX21.Text = "Crime Number"
+        '
+        'txtDANumber
+        '
+        Me.txtDANumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDANumber.Border.Class = "TextBoxBorder"
+        Me.txtDANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDANumber.ButtonCustom.Image = CType(resources.GetObject("txtDANumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtDANumber.ButtonCustom.Visible = true
+        Me.txtDANumber.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.txtDANumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDANumber.FocusHighlightEnabled = true
+        Me.txtDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtDANumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtDANumber, true)
+        Me.txtDANumber.Location = New System.Drawing.Point(122, 51)
+        Me.txtDANumber.MaxLength = 10
+        Me.txtDANumber.Name = "txtDANumber"
+        Me.txtDANumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtDANumber.TabIndex = 2
+        Me.txtDANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtDANumber.WatermarkText = "DA Number"
+        '
+        'LabelX22
+        '
+        Me.LabelX22.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX22.Location = New System.Drawing.Point(11, 94)
+        Me.LabelX22.Name = "LabelX22"
+        Me.LabelX22.Size = New System.Drawing.Size(77, 18)
+        Me.LabelX22.TabIndex = 69
+        Me.LabelX22.Text = "Date of Entry"
+        '
+        'LabelX23
+        '
+        Me.LabelX23.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX23.Location = New System.Drawing.Point(11, 136)
+        Me.LabelX23.Name = "LabelX23"
+        Me.LabelX23.Size = New System.Drawing.Size(80, 18)
+        Me.LabelX23.TabIndex = 68
+        Me.LabelX23.Text = "Police Station"
+        '
+        'LabelX24
+        '
+        Me.LabelX24.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX24.Location = New System.Drawing.Point(11, 248)
+        Me.LabelX24.Name = "LabelX24"
+        Me.LabelX24.Size = New System.Drawing.Size(36, 18)
+        Me.LabelX24.TabIndex = 67
+        Me.LabelX24.Text = "Name"
+        '
+        'LabelX26
+        '
+        Me.LabelX26.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX26.Location = New System.Drawing.Point(11, 13)
+        Me.LabelX26.Name = "LabelX26"
+        Me.LabelX26.Size = New System.Drawing.Size(28, 18)
+        Me.LabelX26.TabIndex = 65
+        Me.LabelX26.Text = "Year"
+        '
+        'LabelX27
+        '
+        Me.LabelX27.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX27.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX27.Location = New System.Drawing.Point(11, 55)
+        Me.LabelX27.Name = "LabelX27"
+        Me.LabelX27.Size = New System.Drawing.Size(70, 18)
+        Me.LabelX27.TabIndex = 64
+        Me.LabelX27.Text = "DA Number"
+        '
+        'DATabItem
+        '
+        Me.DATabItem.AttachedControl = Me.TabControlPanel2
+        Me.DATabItem.Name = "DATabItem"
+        Me.DATabItem.Text = "DA Register"
+        '
+        'TabControlPanel9
+        '
+        Me.TabControlPanel9.Controls.Add(Me.lblRSOCGridInfo)
+        Me.TabControlPanel9.Controls.Add(Me.RSOCDatagrid)
+        Me.TabControlPanel9.Controls.Add(Me.PanelRSOC)
+        Me.TabControlPanel9.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel9.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel9.Name = "TabControlPanel9"
+        Me.TabControlPanel9.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel9.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel9.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel9.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel9.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel9.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel9.Style.GradientAngle = 90
+        Me.TabControlPanel9.TabIndex = 9
+        Me.TabControlPanel9.TabItem = Me.RSOCTabItem
+        '
+        'lblRSOCGridInfo
+        '
+        Me.lblRSOCGridInfo.AutoSize = true
+        Me.lblRSOCGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblRSOCGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblRSOCGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblRSOCGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblRSOCGridInfo.Location = New System.Drawing.Point(5, 90)
+        Me.lblRSOCGridInfo.Name = "lblRSOCGridInfo"
+        Me.lblRSOCGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblRSOCGridInfo.TabIndex = 165
+        Me.lblRSOCGridInfo.Text = "Grid"
+        Me.lblRSOCGridInfo.Visible = false
+        '
+        'PanelRSOC
+        '
+        Me.PanelRSOC.AutoScroll = true
+        Me.PanelRSOC.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelRSOC.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelRSOC.Controls.Add(Me.LabelX93)
+        Me.PanelRSOC.Controls.Add(Me.LabelX89)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCSerialNumber)
+        Me.PanelRSOC.Controls.Add(Me.LabelX84)
+        Me.PanelRSOC.Controls.Add(Me.LabelX82)
+        Me.PanelRSOC.Controls.Add(Me.LabelX81)
+        Me.PanelRSOC.Controls.Add(Me.LabelX80)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCDespatchNumber)
+        Me.PanelRSOC.Controls.Add(Me.cmbRSOCNatureOfReport)
+        Me.PanelRSOC.Controls.Add(Me.LabelX15)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCReportSentTo)
+        Me.PanelRSOC.Controls.Add(Me.dtRSOCReportSentOn)
+        Me.PanelRSOC.Controls.Add(Me.LabelX20)
+        Me.PanelRSOC.Controls.Add(Me.LabelX43)
+        Me.PanelRSOC.Controls.Add(Me.LabelX56)
+        Me.PanelRSOC.Controls.Add(Me.LabelX97)
+        Me.PanelRSOC.Controls.Add(Me.LabelX98)
+        Me.PanelRSOC.Controls.Add(Me.LabelX102)
+        Me.PanelRSOC.Controls.Add(Me.LabelX103)
+        Me.PanelRSOC.Controls.Add(Me.btnSearchRSOC)
+        Me.PanelRSOC.Controls.Add(Me.btnClearRSOC)
+        Me.PanelRSOC.Controls.Add(Me.btnSaveRSOC)
+        Me.PanelRSOC.Controls.Add(Me.cmbRSOCPoliceStation)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCRemarks)
+        Me.PanelRSOC.Controls.Add(Me.cmbRSOCOfficer)
+        Me.PanelRSOC.Controls.Add(Me.dtRSOCInspection)
+        Me.PanelRSOC.Controls.Add(Me.LabelX111)
+        Me.PanelRSOC.Controls.Add(Me.LabelX122)
+        Me.PanelRSOC.Controls.Add(Me.LabelX151)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCCrimeNumber)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCNumber)
+        Me.PanelRSOC.Controls.Add(Me.LabelX152)
+        Me.PanelRSOC.Controls.Add(Me.LabelX153)
+        Me.PanelRSOC.Controls.Add(Me.LabelX157)
+        Me.PanelRSOC.Controls.Add(Me.txtRSOCNumberOnly)
+        Me.PanelRSOC.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelRSOC.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelRSOC.Location = New System.Drawing.Point(1, 1)
+        Me.PanelRSOC.Name = "PanelRSOC"
+        Me.PanelRSOC.Size = New System.Drawing.Size(1358, 276)
+        Me.PanelRSOC.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelRSOC.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelRSOC.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelRSOC.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelRSOC.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelRSOC.Style.GradientAngle = 90
+        Me.PanelRSOC.TabIndex = 0
+        '
+        'LabelX93
+        '
+        Me.LabelX93.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX93.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX93.Location = New System.Drawing.Point(12, 7)
+        Me.LabelX93.Name = "LabelX93"
+        Me.LabelX93.Size = New System.Drawing.Size(49, 18)
+        Me.LabelX93.TabIndex = 147
+        Me.LabelX93.Text = "Number"
+        '
+        'LabelX89
+        '
+        Me.LabelX89.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX89.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX89.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX89.Location = New System.Drawing.Point(387, 9)
+        Me.LabelX89.Name = "LabelX89"
+        Me.LabelX89.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX89.TabIndex = 146
+        Me.LabelX89.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'txtRSOCSerialNumber
+        '
+        '
+        '
+        '
+        Me.txtRSOCSerialNumber.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtRSOCSerialNumber.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCSerialNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCSerialNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCSerialNumber.FocusHighlightEnabled = true
+        Me.txtRSOCSerialNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCSerialNumber, true)
+        Me.txtRSOCSerialNumber.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtRSOCSerialNumber.Location = New System.Drawing.Point(155, 5)
+        Me.txtRSOCSerialNumber.MaxValue = 1000000
+        Me.txtRSOCSerialNumber.MinValue = 1
+        Me.txtRSOCSerialNumber.Name = "txtRSOCSerialNumber"
+        Me.txtRSOCSerialNumber.ShowUpDown = true
+        Me.txtRSOCSerialNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtRSOCSerialNumber.TabIndex = 0
+        Me.txtRSOCSerialNumber.Value = 1
+        Me.txtRSOCSerialNumber.WatermarkText = "Number"
+        '
+        'LabelX84
+        '
+        Me.LabelX84.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX84.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX84.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX84.Location = New System.Drawing.Point(909, 105)
+        Me.LabelX84.Name = "LabelX84"
+        Me.LabelX84.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX84.TabIndex = 143
+        Me.LabelX84.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX82
+        '
+        Me.LabelX82.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX82.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX82.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX82.Location = New System.Drawing.Point(909, 10)
+        Me.LabelX82.Name = "LabelX82"
+        Me.LabelX82.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX82.TabIndex = 142
+        Me.LabelX82.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX81
+        '
+        Me.LabelX81.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX81.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX81.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX81.Location = New System.Drawing.Point(387, 240)
+        Me.LabelX81.Name = "LabelX81"
+        Me.LabelX81.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX81.TabIndex = 141
+        Me.LabelX81.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX80
+        '
+        Me.LabelX80.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX80.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX80.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX80.Location = New System.Drawing.Point(387, 202)
+        Me.LabelX80.Name = "LabelX80"
+        Me.LabelX80.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX80.TabIndex = 140
+        Me.LabelX80.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'txtRSOCDespatchNumber
+        '
+        Me.txtRSOCDespatchNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtRSOCDespatchNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtRSOCDespatchNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRSOCDespatchNumber.Border.Class = "TextBoxBorder"
+        Me.txtRSOCDespatchNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCDespatchNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCDespatchNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCDespatchNumber.ButtonCustom.Visible = true
+        Me.txtRSOCDespatchNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRSOCDespatchNumber.FocusHighlightEnabled = true
+        Me.txtRSOCDespatchNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCDespatchNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCDespatchNumber, true)
+        Me.txtRSOCDespatchNumber.Location = New System.Drawing.Point(678, 140)
+        Me.txtRSOCDespatchNumber.MaxLength = 45
+        Me.txtRSOCDespatchNumber.Name = "txtRSOCDespatchNumber"
+        Me.txtRSOCDespatchNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtRSOCDespatchNumber.TabIndex = 9
+        Me.txtRSOCDespatchNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtRSOCDespatchNumber.WatermarkText = "Despatch Number"
+        '
+        'cmbRSOCNatureOfReport
+        '
+        Me.cmbRSOCNatureOfReport.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbRSOCNatureOfReport.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbRSOCNatureOfReport.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbRSOCNatureOfReport.FocusHighlightEnabled = true
+        Me.cmbRSOCNatureOfReport.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbRSOCNatureOfReport.ForeColor = System.Drawing.Color.Black
+        Me.cmbRSOCNatureOfReport.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbRSOCNatureOfReport, true)
+        Me.cmbRSOCNatureOfReport.ItemHeight = 23
+        Me.cmbRSOCNatureOfReport.Location = New System.Drawing.Point(678, 100)
+        Me.cmbRSOCNatureOfReport.MaxDropDownItems = 35
+        Me.cmbRSOCNatureOfReport.MaxLength = 255
+        Me.cmbRSOCNatureOfReport.Name = "cmbRSOCNatureOfReport"
+        Me.cmbRSOCNatureOfReport.Size = New System.Drawing.Size(227, 29)
+        Me.cmbRSOCNatureOfReport.Sorted = true
+        Me.cmbRSOCNatureOfReport.TabIndex = 8
+        Me.cmbRSOCNatureOfReport.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbRSOCNatureOfReport.WatermarkText = "Nature of Report"
+        '
+        'LabelX15
+        '
+        Me.LabelX15.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX15.Location = New System.Drawing.Point(559, 107)
+        Me.LabelX15.Name = "LabelX15"
+        Me.LabelX15.Size = New System.Drawing.Size(99, 18)
+        Me.LabelX15.TabIndex = 138
+        Me.LabelX15.Text = "Nature of Report"
+        '
+        'txtRSOCReportSentTo
+        '
+        Me.txtRSOCReportSentTo.AcceptsReturn = true
+        Me.txtRSOCReportSentTo.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRSOCReportSentTo.Border.Class = "TextBoxBorder"
+        Me.txtRSOCReportSentTo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCReportSentTo.ButtonCustom.Image = CType(resources.GetObject("txtRSOCReportSentTo.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCReportSentTo.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRSOCReportSentTo.FocusHighlightEnabled = true
+        Me.txtRSOCReportSentTo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCReportSentTo.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCReportSentTo, true)
+        Me.txtRSOCReportSentTo.Location = New System.Drawing.Point(678, 8)
+        Me.txtRSOCReportSentTo.MaxLength = 255
+        Me.txtRSOCReportSentTo.Multiline = true
+        Me.txtRSOCReportSentTo.Name = "txtRSOCReportSentTo"
+        Me.txtRSOCReportSentTo.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtRSOCReportSentTo.Size = New System.Drawing.Size(227, 82)
+        Me.txtRSOCReportSentTo.TabIndex = 7
+        Me.txtRSOCReportSentTo.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtRSOCReportSentTo.WatermarkText = "Report Sent To"
+        '
+        'dtRSOCReportSentOn
+        '
+        Me.dtRSOCReportSentOn.AutoAdvance = true
+        Me.dtRSOCReportSentOn.AutoSelectDate = true
+        Me.dtRSOCReportSentOn.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtRSOCReportSentOn.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtRSOCReportSentOn.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCReportSentOn.ButtonClear.Image = CType(resources.GetObject("dtRSOCReportSentOn.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtRSOCReportSentOn.ButtonClear.Visible = true
+        Me.dtRSOCReportSentOn.ButtonDropDown.Visible = true
+        Me.dtRSOCReportSentOn.CustomFormat = "dd/MM/yyyy"
+        Me.dtRSOCReportSentOn.FocusHighlightEnabled = true
+        Me.dtRSOCReportSentOn.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtRSOCReportSentOn.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtRSOCReportSentOn, true)
+        Me.dtRSOCReportSentOn.IsPopupCalendarOpen = false
+        Me.dtRSOCReportSentOn.Location = New System.Drawing.Point(155, 233)
+        Me.dtRSOCReportSentOn.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtRSOCReportSentOn.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtRSOCReportSentOn.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtRSOCReportSentOn.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCReportSentOn.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtRSOCReportSentOn.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCReportSentOn.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtRSOCReportSentOn.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtRSOCReportSentOn.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtRSOCReportSentOn.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCReportSentOn.MonthCalendar.TodayButtonVisible = true
+        Me.dtRSOCReportSentOn.Name = "dtRSOCReportSentOn"
+        Me.dtRSOCReportSentOn.Size = New System.Drawing.Size(227, 29)
+        Me.dtRSOCReportSentOn.TabIndex = 6
+        Me.dtRSOCReportSentOn.WatermarkText = "Date of Sending Report"
+        '
+        'LabelX20
+        '
+        Me.LabelX20.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX20.Location = New System.Drawing.Point(557, 9)
+        Me.LabelX20.Name = "LabelX20"
+        Me.LabelX20.Size = New System.Drawing.Size(87, 18)
+        Me.LabelX20.TabIndex = 136
+        Me.LabelX20.Text = "Report Sent To"
+        '
+        'LabelX43
+        '
+        Me.LabelX43.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX43.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX43.Location = New System.Drawing.Point(12, 240)
+        Me.LabelX43.Name = "LabelX43"
+        Me.LabelX43.Size = New System.Drawing.Size(135, 18)
+        Me.LabelX43.TabIndex = 137
+        Me.LabelX43.Text = "Date of Sending Report"
+        '
+        'LabelX56
+        '
+        Me.LabelX56.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX56.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX56.Location = New System.Drawing.Point(559, 145)
+        Me.LabelX56.Name = "LabelX56"
+        Me.LabelX56.Size = New System.Drawing.Size(104, 18)
+        Me.LabelX56.TabIndex = 131
+        Me.LabelX56.Text = "Despatch Number"
+        '
+        'LabelX97
+        '
+        Me.LabelX97.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX97.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX97.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX97.Location = New System.Drawing.Point(387, 160)
+        Me.LabelX97.Name = "LabelX97"
+        Me.LabelX97.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX97.TabIndex = 62
+        Me.LabelX97.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX98
+        '
+        Me.LabelX98.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX98.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX98.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX98.Location = New System.Drawing.Point(387, 121)
+        Me.LabelX98.Name = "LabelX98"
+        Me.LabelX98.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX98.TabIndex = 61
+        Me.LabelX98.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX102
+        '
+        Me.LabelX102.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX102.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX102.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX102.Location = New System.Drawing.Point(387, 84)
+        Me.LabelX102.Name = "LabelX102"
+        Me.LabelX102.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX102.TabIndex = 60
+        Me.LabelX102.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX103
+        '
+        Me.LabelX103.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX103.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX103.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX103.Location = New System.Drawing.Point(387, 45)
+        Me.LabelX103.Name = "LabelX103"
+        Me.LabelX103.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX103.TabIndex = 59
+        Me.LabelX103.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'btnSearchRSOC
+        '
+        Me.btnSearchRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchRSOC.Image = CType(resources.GetObject("btnSearchRSOC.Image"),System.Drawing.Image)
+        Me.btnSearchRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchRSOC.Location = New System.Drawing.Point(1189, 102)
+        Me.btnSearchRSOC.Name = "btnSearchRSOC"
+        Me.btnSearchRSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchRSOC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRSOCFindByNumber, Me.btnRSOCAdvancedSearch})
+        Me.btnSearchRSOC.TabIndex = 12
+        Me.btnSearchRSOC.Text = "Search"
+        '
+        'btnRSOCFindByNumber
+        '
+        Me.btnRSOCFindByNumber.GlobalItem = false
+        Me.btnRSOCFindByNumber.Name = "btnRSOCFindByNumber"
+        Me.btnRSOCFindByNumber.Text = "Find By Number"
+        '
+        'btnRSOCAdvancedSearch
+        '
+        Me.btnRSOCAdvancedSearch.BeginGroup = true
+        Me.btnRSOCAdvancedSearch.GlobalItem = false
+        Me.btnRSOCAdvancedSearch.Name = "btnRSOCAdvancedSearch"
+        Me.btnRSOCAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearRSOC
+        '
+        Me.btnClearRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearRSOC.Image = CType(resources.GetObject("btnClearRSOC.Image"),System.Drawing.Image)
+        Me.btnClearRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearRSOC.Location = New System.Drawing.Point(1189, 193)
+        Me.btnClearRSOC.Name = "btnClearRSOC"
+        Me.btnClearRSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearRSOC.TabIndex = 13
+        Me.btnClearRSOC.Text = "Clear All Fields"
+        '
+        'btnSaveRSOC
+        '
+        Me.btnSaveRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveRSOC.Image = CType(resources.GetObject("btnSaveRSOC.Image"),System.Drawing.Image)
+        Me.btnSaveRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveRSOC.Location = New System.Drawing.Point(1189, 11)
+        Me.btnSaveRSOC.Name = "btnSaveRSOC"
+        Me.btnSaveRSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveRSOC.TabIndex = 11
+        Me.btnSaveRSOC.Text = "Save"
+        '
+        'cmbRSOCPoliceStation
+        '
+        Me.cmbRSOCPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbRSOCPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbRSOCPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbRSOCPoliceStation.FocusHighlightEnabled = true
+        Me.cmbRSOCPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbRSOCPoliceStation.ForeColor = System.Drawing.Color.Black
+        Me.cmbRSOCPoliceStation.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbRSOCPoliceStation, true)
+        Me.cmbRSOCPoliceStation.ItemHeight = 23
+        Me.cmbRSOCPoliceStation.Location = New System.Drawing.Point(155, 116)
+        Me.cmbRSOCPoliceStation.MaxDropDownItems = 35
+        Me.cmbRSOCPoliceStation.MaxLength = 255
+        Me.cmbRSOCPoliceStation.Name = "cmbRSOCPoliceStation"
+        Me.cmbRSOCPoliceStation.Size = New System.Drawing.Size(227, 29)
+        Me.cmbRSOCPoliceStation.Sorted = true
+        Me.cmbRSOCPoliceStation.TabIndex = 3
+        Me.cmbRSOCPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbRSOCPoliceStation.WatermarkText = "Police Station"
+        '
+        'txtRSOCRemarks
+        '
+        Me.txtRSOCRemarks.AcceptsReturn = true
+        Me.txtRSOCRemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRSOCRemarks.Border.Class = "TextBoxBorder"
+        Me.txtRSOCRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCRemarks.ButtonCustom.Image = CType(resources.GetObject("txtRSOCRemarks.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCRemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRSOCRemarks.FocusHighlightEnabled = true
+        Me.txtRSOCRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCRemarks.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCRemarks, true)
+        Me.txtRSOCRemarks.Location = New System.Drawing.Point(678, 181)
+        Me.txtRSOCRemarks.MaxLength = 255
+        Me.txtRSOCRemarks.Multiline = true
+        Me.txtRSOCRemarks.Name = "txtRSOCRemarks"
+        Me.txtRSOCRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtRSOCRemarks.Size = New System.Drawing.Size(227, 84)
+        Me.txtRSOCRemarks.TabIndex = 10
+        Me.txtRSOCRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtRSOCRemarks.WatermarkText = "Remarks"
+        '
+        'cmbRSOCOfficer
+        '
+        Me.cmbRSOCOfficer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbRSOCOfficer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.cmbRSOCOfficer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbRSOCOfficer.FocusHighlightEnabled = true
+        Me.cmbRSOCOfficer.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbRSOCOfficer.ForeColor = System.Drawing.Color.Black
+        Me.cmbRSOCOfficer.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbRSOCOfficer, true)
+        Me.cmbRSOCOfficer.ItemHeight = 23
+        Me.cmbRSOCOfficer.Location = New System.Drawing.Point(155, 195)
+        Me.cmbRSOCOfficer.MaxDropDownItems = 15
+        Me.cmbRSOCOfficer.MaxLength = 255
+        Me.cmbRSOCOfficer.Name = "cmbRSOCOfficer"
+        Me.cmbRSOCOfficer.Size = New System.Drawing.Size(227, 29)
+        Me.cmbRSOCOfficer.TabIndex = 5
+        Me.cmbRSOCOfficer.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbRSOCOfficer.WatermarkText = "Inspecting Officer"
+        '
+        'dtRSOCInspection
+        '
+        Me.dtRSOCInspection.AutoAdvance = true
+        Me.dtRSOCInspection.AutoSelectDate = true
+        Me.dtRSOCInspection.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtRSOCInspection.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtRSOCInspection.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCInspection.ButtonClear.Image = CType(resources.GetObject("dtRSOCInspection.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtRSOCInspection.ButtonClear.Visible = true
+        Me.dtRSOCInspection.ButtonDropDown.Visible = true
+        Me.dtRSOCInspection.CustomFormat = "dd/MM/yyyy"
+        Me.dtRSOCInspection.FocusHighlightEnabled = true
+        Me.dtRSOCInspection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtRSOCInspection.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtRSOCInspection, true)
+        Me.dtRSOCInspection.IsPopupCalendarOpen = false
+        Me.dtRSOCInspection.Location = New System.Drawing.Point(155, 80)
+        Me.dtRSOCInspection.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtRSOCInspection.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtRSOCInspection.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtRSOCInspection.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCInspection.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtRSOCInspection.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCInspection.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtRSOCInspection.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtRSOCInspection.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtRSOCInspection.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtRSOCInspection.MonthCalendar.TodayButtonVisible = true
+        Me.dtRSOCInspection.Name = "dtRSOCInspection"
+        Me.dtRSOCInspection.Size = New System.Drawing.Size(227, 29)
+        Me.dtRSOCInspection.TabIndex = 2
+        Me.dtRSOCInspection.WatermarkText = "Date of Inspection"
+        '
+        'LabelX111
+        '
+        Me.LabelX111.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX111.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX111.Location = New System.Drawing.Point(559, 193)
+        Me.LabelX111.Name = "LabelX111"
+        Me.LabelX111.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX111.TabIndex = 30
+        Me.LabelX111.Text = "Remarks"
+        '
+        'LabelX122
+        '
+        Me.LabelX122.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX122.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX122.Location = New System.Drawing.Point(12, 201)
+        Me.LabelX122.Name = "LabelX122"
+        Me.LabelX122.Size = New System.Drawing.Size(103, 18)
+        Me.LabelX122.TabIndex = 29
+        Me.LabelX122.Text = "Inspecting Officer"
+        '
+        'LabelX151
+        '
+        Me.LabelX151.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX151.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX151.Location = New System.Drawing.Point(12, 160)
+        Me.LabelX151.Name = "LabelX151"
+        Me.LabelX151.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX151.TabIndex = 22
+        Me.LabelX151.Text = "Crime Number"
+        '
+        'txtRSOCCrimeNumber
+        '
+        Me.txtRSOCCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtRSOCCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtRSOCCrimeNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRSOCCrimeNumber.Border.Class = "TextBoxBorder"
+        Me.txtRSOCCrimeNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCCrimeNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCCrimeNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCCrimeNumber.ButtonCustom.Visible = true
+        Me.txtRSOCCrimeNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRSOCCrimeNumber.FocusHighlightEnabled = true
+        Me.txtRSOCCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCCrimeNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCCrimeNumber, true)
+        Me.txtRSOCCrimeNumber.Location = New System.Drawing.Point(155, 155)
+        Me.txtRSOCCrimeNumber.MaxLength = 45
+        Me.txtRSOCCrimeNumber.Name = "txtRSOCCrimeNumber"
+        Me.txtRSOCCrimeNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtRSOCCrimeNumber.TabIndex = 4
+        Me.txtRSOCCrimeNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtRSOCCrimeNumber.WatermarkText = "Crime Number"
+        '
+        'txtRSOCNumber
+        '
+        Me.txtRSOCNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRSOCNumber.Border.Class = "TextBoxBorder"
+        Me.txtRSOCNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCNumber.ButtonCustom.Image = CType(resources.GetObject("txtRSOCNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCNumber.ButtonCustom.Visible = true
+        Me.txtRSOCNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRSOCNumber.FocusHighlightEnabled = true
+        Me.txtRSOCNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtRSOCNumber, true)
+        Me.txtRSOCNumber.Location = New System.Drawing.Point(155, 42)
+        Me.txtRSOCNumber.MaxLength = 10
+        Me.txtRSOCNumber.Name = "txtRSOCNumber"
+        Me.txtRSOCNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtRSOCNumber.TabIndex = 1
+        Me.txtRSOCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtRSOCNumber.WatermarkText = "SOC Number"
+        '
+        'LabelX152
+        '
+        Me.LabelX152.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX152.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX152.Location = New System.Drawing.Point(12, 84)
+        Me.LabelX152.Name = "LabelX152"
+        Me.LabelX152.Size = New System.Drawing.Size(106, 18)
+        Me.LabelX152.TabIndex = 21
+        Me.LabelX152.Text = "Date of Inspection"
+        '
+        'LabelX153
+        '
+        Me.LabelX153.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX153.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX153.Location = New System.Drawing.Point(12, 122)
+        Me.LabelX153.Name = "LabelX153"
+        Me.LabelX153.Size = New System.Drawing.Size(80, 18)
+        Me.LabelX153.TabIndex = 17
+        Me.LabelX153.Text = "Police Station"
+        '
+        'LabelX157
+        '
+        Me.LabelX157.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX157.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX157.Location = New System.Drawing.Point(12, 46)
+        Me.LabelX157.Name = "LabelX157"
+        Me.LabelX157.Size = New System.Drawing.Size(76, 18)
+        Me.LabelX157.TabIndex = 10
+        Me.LabelX157.Text = "SOC Number"
+        '
+        'txtRSOCNumberOnly
+        '
+        Me.txtRSOCNumberOnly.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRSOCNumberOnly.Border.Class = "TextBoxBorder"
+        Me.txtRSOCNumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRSOCNumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtRSOCNumberOnly.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtRSOCNumberOnly.ButtonCustom.Visible = true
+        Me.txtRSOCNumberOnly.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRSOCNumberOnly.FocusHighlightEnabled = true
+        Me.txtRSOCNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRSOCNumberOnly.ForeColor = System.Drawing.Color.Black
+        Me.txtRSOCNumberOnly.Location = New System.Drawing.Point(993, 43)
+        Me.txtRSOCNumberOnly.MaxLength = 45
+        Me.txtRSOCNumberOnly.Name = "txtRSOCNumberOnly"
+        Me.txtRSOCNumberOnly.Size = New System.Drawing.Size(116, 23)
+        Me.txtRSOCNumberOnly.TabIndex = 132
+        Me.txtRSOCNumberOnly.TabStop = false
+        Me.txtRSOCNumberOnly.Visible = false
+        Me.txtRSOCNumberOnly.WatermarkText = "SOC Number"
+        '
+        'RSOCTabItem
+        '
+        Me.RSOCTabItem.AttachedControl = Me.TabControlPanel9
+        Me.RSOCTabItem.Name = "RSOCTabItem"
+        Me.RSOCTabItem.Text = "SOC Reports Register"
+        '
+        'TabControlPanel7
+        '
+        Me.TabControlPanel7.Controls.Add(Me.lblCDGridInfo)
+        Me.TabControlPanel7.Controls.Add(Me.CDDataGrid)
+        Me.TabControlPanel7.Controls.Add(Me.PanelCD)
+        Me.TabControlPanel7.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel7.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel7.Name = "TabControlPanel7"
+        Me.TabControlPanel7.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel7.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel7.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel7.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel7.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel7.Style.GradientAngle = 90
+        Me.TabControlPanel7.TabIndex = 7
+        Me.TabControlPanel7.TabItem = Me.CDTabItem
+        '
+        'lblCDGridInfo
+        '
+        Me.lblCDGridInfo.AutoSize = true
+        Me.lblCDGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblCDGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblCDGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblCDGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblCDGridInfo.Location = New System.Drawing.Point(5, 90)
+        Me.lblCDGridInfo.Name = "lblCDGridInfo"
+        Me.lblCDGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblCDGridInfo.TabIndex = 165
+        Me.lblCDGridInfo.Text = "Grid"
+        Me.lblCDGridInfo.Visible = false
+        '
+        'PanelCD
+        '
+        Me.PanelCD.AutoScroll = true
+        Me.PanelCD.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelCD.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelCD.Controls.Add(Me.chkCDTwodigits)
+        Me.PanelCD.Controls.Add(Me.LabelX78)
+        Me.PanelCD.Controls.Add(Me.LabelX77)
+        Me.PanelCD.Controls.Add(Me.LabelX76)
+        Me.PanelCD.Controls.Add(Me.txtCCNumber)
+        Me.PanelCD.Controls.Add(Me.LabelX75)
+        Me.PanelCD.Controls.Add(Me.txtCourt)
+        Me.PanelCD.Controls.Add(Me.LabelX83)
+        Me.PanelCD.Controls.Add(Me.LabelX85)
+        Me.PanelCD.Controls.Add(Me.LabelX86)
+        Me.PanelCD.Controls.Add(Me.LabelX87)
+        Me.PanelCD.Controls.Add(Me.LabelX88)
+        Me.PanelCD.Controls.Add(Me.chkAppendCDYear)
+        Me.PanelCD.Controls.Add(Me.txtCDYear)
+        Me.PanelCD.Controls.Add(Me.btnSearchCD)
+        Me.PanelCD.Controls.Add(Me.btnClearCDFields)
+        Me.PanelCD.Controls.Add(Me.btnSaveCD)
+        Me.PanelCD.Controls.Add(Me.cmbCDPoliceStation)
+        Me.PanelCD.Controls.Add(Me.txtCDRemarks)
+        Me.PanelCD.Controls.Add(Me.txtCDDetails)
+        Me.PanelCD.Controls.Add(Me.cmbCDOfficer)
+        Me.PanelCD.Controls.Add(Me.dtCDExamination)
+        Me.PanelCD.Controls.Add(Me.LabelX90)
+        Me.PanelCD.Controls.Add(Me.LabelX91)
+        Me.PanelCD.Controls.Add(Me.LabelX92)
+        Me.PanelCD.Controls.Add(Me.LabelX99)
+        Me.PanelCD.Controls.Add(Me.txtCDCrNo)
+        Me.PanelCD.Controls.Add(Me.txtCDNumber)
+        Me.PanelCD.Controls.Add(Me.LabelX100)
+        Me.PanelCD.Controls.Add(Me.LabelX101)
+        Me.PanelCD.Controls.Add(Me.LabelX104)
+        Me.PanelCD.Controls.Add(Me.LabelX105)
+        Me.PanelCD.Controls.Add(Me.txtCDNumberOnly)
+        Me.PanelCD.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelCD.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelCD.Location = New System.Drawing.Point(1, 1)
+        Me.PanelCD.Name = "PanelCD"
+        Me.PanelCD.Size = New System.Drawing.Size(1358, 244)
+        Me.PanelCD.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelCD.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelCD.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelCD.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelCD.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelCD.Style.GradientAngle = 90
+        Me.PanelCD.TabIndex = 1
+        '
+        'chkCDTwodigits
+        '
+        Me.chkCDTwodigits.AutoSize = true
+        '
+        '
+        '
+        Me.chkCDTwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkCDTwodigits, true)
+        Me.chkCDTwodigits.Location = New System.Drawing.Point(200, 23)
+        Me.chkCDTwodigits.Name = "chkCDTwodigits"
+        Me.chkCDTwodigits.Size = New System.Drawing.Size(126, 18)
+        Me.chkCDTwodigits.TabIndex = 139
+        Me.chkCDTwodigits.TabStop = false
+        Me.chkCDTwodigits.Text = "Use last two digits"
+        '
+        'LabelX78
+        '
+        Me.LabelX78.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX78.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX78.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX78.Location = New System.Drawing.Point(878, 48)
+        Me.LabelX78.Name = "LabelX78"
+        Me.LabelX78.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX78.TabIndex = 138
+        Me.LabelX78.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX77
+        '
+        Me.LabelX77.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX77.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX77.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX77.Location = New System.Drawing.Point(350, 216)
+        Me.LabelX77.Name = "LabelX77"
+        Me.LabelX77.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX77.TabIndex = 137
+        Me.LabelX77.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX76
+        '
+        Me.LabelX76.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX76.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX76.Location = New System.Drawing.Point(10, 214)
+        Me.LabelX76.Name = "LabelX76"
+        Me.LabelX76.Size = New System.Drawing.Size(67, 18)
+        Me.LabelX76.TabIndex = 136
+        Me.LabelX76.Text = "CC Number"
+        '
+        'txtCCNumber
+        '
+        Me.txtCCNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtCCNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtCCNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCCNumber.Border.Class = "TextBoxBorder"
+        Me.txtCCNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCCNumber.ButtonCustom.Image = CType(resources.GetObject("txtCCNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCCNumber.ButtonCustom.Visible = true
+        Me.txtCCNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCCNumber.FocusHighlightEnabled = true
+        Me.txtCCNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCCNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCCNumber, true)
+        Me.txtCCNumber.Location = New System.Drawing.Point(122, 209)
+        Me.txtCCNumber.MaxLength = 45
+        Me.txtCCNumber.Name = "txtCCNumber"
+        Me.txtCCNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtCCNumber.TabIndex = 6
+        Me.txtCCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtCCNumber.WatermarkText = "CC Number"
+        '
+        'LabelX75
+        '
+        Me.LabelX75.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX75.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX75.Location = New System.Drawing.Point(10, 175)
+        Me.LabelX75.Name = "LabelX75"
+        Me.LabelX75.Size = New System.Drawing.Size(34, 18)
+        Me.LabelX75.TabIndex = 134
+        Me.LabelX75.Text = "Court"
+        '
+        'txtCourt
+        '
+        Me.txtCourt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtCourt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtCourt.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCourt.Border.Class = "TextBoxBorder"
+        Me.txtCourt.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCourt.ButtonCustom.Image = CType(resources.GetObject("txtCourt.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCourt.ButtonCustom.Visible = true
+        Me.txtCourt.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCourt.FocusHighlightEnabled = true
+        Me.txtCourt.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCourt.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCourt, true)
+        Me.txtCourt.Location = New System.Drawing.Point(122, 168)
+        Me.txtCourt.MaxLength = 45
+        Me.txtCourt.Name = "txtCourt"
+        Me.txtCourt.Size = New System.Drawing.Size(227, 29)
+        Me.txtCourt.TabIndex = 5
+        Me.txtCourt.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtCourt.WatermarkText = "Court"
+        '
+        'LabelX83
+        '
+        Me.LabelX83.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX83.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX83.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX83.Location = New System.Drawing.Point(878, 10)
+        Me.LabelX83.Name = "LabelX83"
+        Me.LabelX83.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX83.TabIndex = 64
+        Me.LabelX83.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX85
+        '
+        Me.LabelX85.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX85.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX85.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX85.Location = New System.Drawing.Point(350, 173)
+        Me.LabelX85.Name = "LabelX85"
+        Me.LabelX85.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX85.TabIndex = 62
+        Me.LabelX85.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX86
+        '
+        Me.LabelX86.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX86.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX86.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX86.Location = New System.Drawing.Point(350, 135)
+        Me.LabelX86.Name = "LabelX86"
+        Me.LabelX86.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX86.TabIndex = 61
+        Me.LabelX86.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX87
+        '
+        Me.LabelX87.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX87.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX87.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX87.Location = New System.Drawing.Point(350, 96)
+        Me.LabelX87.Name = "LabelX87"
+        Me.LabelX87.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX87.TabIndex = 60
+        Me.LabelX87.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX88
+        '
+        Me.LabelX88.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX88.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX88.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX88.Location = New System.Drawing.Point(350, 55)
+        Me.LabelX88.Name = "LabelX88"
+        Me.LabelX88.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX88.TabIndex = 59
+        Me.LabelX88.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'chkAppendCDYear
+        '
+        Me.chkAppendCDYear.AutoSize = true
+        '
+        '
+        '
+        Me.chkAppendCDYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkAppendCDYear.Location = New System.Drawing.Point(200, 2)
+        Me.chkAppendCDYear.Name = "chkAppendCDYear"
+        Me.chkAppendCDYear.Size = New System.Drawing.Size(124, 18)
+        Me.chkAppendCDYear.TabIndex = 2
+        Me.chkAppendCDYear.TabStop = false
+        Me.chkAppendCDYear.Text = "Auto append year"
+        '
+        'txtCDYear
+        '
+        '
+        '
+        '
+        Me.txtCDYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtCDYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCDYear.ButtonCustom.Image = CType(resources.GetObject("txtCDYear.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCDYear.FocusHighlightEnabled = true
+        Me.txtCDYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDYear, true)
+        Me.txtCDYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtCDYear.Location = New System.Drawing.Point(122, 5)
+        Me.txtCDYear.MaxValue = 2099
+        Me.txtCDYear.MinValue = 1900
+        Me.txtCDYear.Name = "txtCDYear"
+        Me.txtCDYear.ShowUpDown = true
+        Me.txtCDYear.Size = New System.Drawing.Size(58, 29)
+        Me.txtCDYear.TabIndex = 1
+        Me.txtCDYear.Value = 1900
+        Me.txtCDYear.WatermarkText = "Year"
+        '
+        'btnSearchCD
+        '
+        Me.btnSearchCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchCD.Image = CType(resources.GetObject("btnSearchCD.Image"),System.Drawing.Image)
+        Me.btnSearchCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchCD.Location = New System.Drawing.Point(990, 86)
+        Me.btnSearchCD.Name = "btnSearchCD"
+        Me.btnSearchCD.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchCD.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCDFindByNumber, Me.btnSearchCDInYear, Me.btnCDAdvancedSearch})
+        Me.btnSearchCD.TabIndex = 12
+        Me.btnSearchCD.Text = "Search"
+        '
+        'btnCDFindByNumber
+        '
+        Me.btnCDFindByNumber.GlobalItem = false
+        Me.btnCDFindByNumber.Name = "btnCDFindByNumber"
+        Me.btnCDFindByNumber.Text = "Find by CD Number"
+        '
+        'btnSearchCDInYear
+        '
+        Me.btnSearchCDInYear.BeginGroup = true
+        Me.btnSearchCDInYear.GlobalItem = false
+        Me.btnSearchCDInYear.Name = "btnSearchCDInYear"
+        Me.btnSearchCDInYear.Text = "Search in selected Year"
+        '
+        'btnCDAdvancedSearch
+        '
+        Me.btnCDAdvancedSearch.BeginGroup = true
+        Me.btnCDAdvancedSearch.GlobalItem = false
+        Me.btnCDAdvancedSearch.Name = "btnCDAdvancedSearch"
+        Me.btnCDAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearCDFields
+        '
+        Me.btnClearCDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearCDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearCDFields.Image = CType(resources.GetObject("btnClearCDFields.Image"),System.Drawing.Image)
+        Me.btnClearCDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearCDFields.Location = New System.Drawing.Point(990, 165)
+        Me.btnClearCDFields.Name = "btnClearCDFields"
+        Me.btnClearCDFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearCDFields.TabIndex = 13
+        Me.btnClearCDFields.Text = "Clear All Fields"
+        '
+        'btnSaveCD
+        '
+        Me.btnSaveCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveCD.Image = CType(resources.GetObject("btnSaveCD.Image"),System.Drawing.Image)
+        Me.btnSaveCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveCD.Location = New System.Drawing.Point(990, 7)
+        Me.btnSaveCD.Name = "btnSaveCD"
+        Me.btnSaveCD.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveCD.TabIndex = 11
+        Me.btnSaveCD.Text = "Save"
+        '
+        'cmbCDPoliceStation
+        '
+        Me.cmbCDPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCDPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbCDPoliceStation.DisplayMember = "Text"
+        Me.cmbCDPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCDPoliceStation.FocusHighlightEnabled = true
+        Me.cmbCDPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbCDPoliceStation.ForeColor = System.Drawing.Color.Black
+        Me.cmbCDPoliceStation.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbCDPoliceStation, true)
+        Me.cmbCDPoliceStation.ItemHeight = 23
+        Me.cmbCDPoliceStation.Location = New System.Drawing.Point(650, 5)
+        Me.cmbCDPoliceStation.MaxDropDownItems = 35
+        Me.cmbCDPoliceStation.MaxLength = 255
+        Me.cmbCDPoliceStation.Name = "cmbCDPoliceStation"
+        Me.cmbCDPoliceStation.Size = New System.Drawing.Size(227, 29)
+        Me.cmbCDPoliceStation.Sorted = true
+        Me.cmbCDPoliceStation.TabIndex = 7
+        Me.cmbCDPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbCDPoliceStation.WatermarkText = "Police Station"
+        '
+        'txtCDRemarks
+        '
+        Me.txtCDRemarks.AcceptsReturn = true
+        Me.txtCDRemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCDRemarks.Border.Class = "TextBoxBorder"
+        Me.txtCDRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCDRemarks.ButtonCustom.Image = CType(resources.GetObject("txtCDRemarks.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCDRemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCDRemarks.FocusHighlightEnabled = true
+        Me.txtCDRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDRemarks.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDRemarks, true)
+        Me.txtCDRemarks.Location = New System.Drawing.Point(650, 157)
+        Me.txtCDRemarks.MaxLength = 255
+        Me.txtCDRemarks.Multiline = true
+        Me.txtCDRemarks.Name = "txtCDRemarks"
+        Me.txtCDRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtCDRemarks.Size = New System.Drawing.Size(227, 81)
+        Me.txtCDRemarks.TabIndex = 10
+        Me.txtCDRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtCDRemarks.WatermarkText = "Remarks"
+        '
+        'txtCDDetails
+        '
+        Me.txtCDDetails.AcceptsReturn = true
+        Me.txtCDDetails.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCDDetails.Border.Class = "TextBoxBorder"
+        Me.txtCDDetails.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCDDetails.ButtonCustom.Image = CType(resources.GetObject("txtCDDetails.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCDDetails.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCDDetails.FocusHighlightEnabled = true
+        Me.txtCDDetails.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDDetails.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDDetails, true)
+        Me.txtCDDetails.Location = New System.Drawing.Point(650, 78)
+        Me.txtCDDetails.MaxLength = 255
+        Me.txtCDDetails.Multiline = true
+        Me.txtCDDetails.Name = "txtCDDetails"
+        Me.txtCDDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtCDDetails.Size = New System.Drawing.Size(227, 73)
+        Me.txtCDDetails.TabIndex = 9
+        Me.txtCDDetails.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtCDDetails.WatermarkText = "Details of Examination"
+        '
+        'cmbCDOfficer
+        '
+        Me.cmbCDOfficer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbCDOfficer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.cmbCDOfficer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCDOfficer.FocusHighlightEnabled = true
+        Me.cmbCDOfficer.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbCDOfficer.ForeColor = System.Drawing.Color.Black
+        Me.cmbCDOfficer.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbCDOfficer, true)
+        Me.cmbCDOfficer.ItemHeight = 23
+        Me.cmbCDOfficer.Location = New System.Drawing.Point(122, 128)
+        Me.cmbCDOfficer.MaxLength = 255
+        Me.cmbCDOfficer.Name = "cmbCDOfficer"
+        Me.cmbCDOfficer.Size = New System.Drawing.Size(227, 29)
+        Me.cmbCDOfficer.TabIndex = 4
+        Me.cmbCDOfficer.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbCDOfficer.WatermarkText = "Officer"
+        '
+        'dtCDExamination
+        '
+        Me.dtCDExamination.AutoAdvance = true
+        Me.dtCDExamination.AutoSelectDate = true
+        Me.dtCDExamination.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtCDExamination.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtCDExamination.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtCDExamination.ButtonClear.Image = CType(resources.GetObject("dtCDExamination.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtCDExamination.ButtonClear.Visible = true
+        Me.dtCDExamination.ButtonDropDown.Visible = true
+        Me.dtCDExamination.CustomFormat = "dd/MM/yyyy"
+        Me.dtCDExamination.FocusHighlightEnabled = true
+        Me.dtCDExamination.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtCDExamination.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtCDExamination, true)
+        Me.dtCDExamination.IsPopupCalendarOpen = false
+        Me.dtCDExamination.Location = New System.Drawing.Point(122, 90)
+        Me.dtCDExamination.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtCDExamination.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtCDExamination.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtCDExamination.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtCDExamination.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtCDExamination.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtCDExamination.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtCDExamination.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtCDExamination.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtCDExamination.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtCDExamination.MonthCalendar.TodayButtonVisible = true
+        Me.dtCDExamination.Name = "dtCDExamination"
+        Me.dtCDExamination.Size = New System.Drawing.Size(227, 29)
+        Me.dtCDExamination.TabIndex = 3
+        Me.dtCDExamination.WatermarkText = "Date of Examination"
+        '
+        'LabelX90
+        '
+        Me.LabelX90.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX90.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX90.Location = New System.Drawing.Point(500, 83)
+        Me.LabelX90.Name = "LabelX90"
+        Me.LabelX90.Size = New System.Drawing.Size(130, 18)
+        Me.LabelX90.TabIndex = 33
+        Me.LabelX90.Text = "Details of Examination"
+        '
+        'LabelX91
+        '
+        Me.LabelX91.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX91.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX91.Location = New System.Drawing.Point(500, 164)
+        Me.LabelX91.Name = "LabelX91"
+        Me.LabelX91.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX91.TabIndex = 30
+        Me.LabelX91.Text = "Remarks"
+        '
+        'LabelX92
+        '
+        Me.LabelX92.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX92.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX92.Location = New System.Drawing.Point(10, 137)
+        Me.LabelX92.Name = "LabelX92"
+        Me.LabelX92.Size = New System.Drawing.Size(41, 18)
+        Me.LabelX92.TabIndex = 29
+        Me.LabelX92.Text = "Officer"
+        '
+        'LabelX99
+        '
+        Me.LabelX99.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX99.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX99.Location = New System.Drawing.Point(500, 50)
+        Me.LabelX99.Name = "LabelX99"
+        Me.LabelX99.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX99.TabIndex = 22
+        Me.LabelX99.Text = "Crime Number"
+        '
+        'txtCDCrNo
+        '
+        Me.txtCDCrNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtCDCrNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtCDCrNo.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCDCrNo.Border.Class = "TextBoxBorder"
+        Me.txtCDCrNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCDCrNo.ButtonCustom.Image = CType(resources.GetObject("txtCDCrNo.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCDCrNo.ButtonCustom.Visible = true
+        Me.txtCDCrNo.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCDCrNo.FocusHighlightEnabled = true
+        Me.txtCDCrNo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDCrNo.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDCrNo, true)
+        Me.txtCDCrNo.Location = New System.Drawing.Point(650, 43)
+        Me.txtCDCrNo.MaxLength = 45
+        Me.txtCDCrNo.Name = "txtCDCrNo"
+        Me.txtCDCrNo.Size = New System.Drawing.Size(227, 29)
+        Me.txtCDCrNo.TabIndex = 8
+        Me.txtCDCrNo.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtCDCrNo.WatermarkText = "Crime Number"
+        '
+        'txtCDNumber
+        '
+        Me.txtCDNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCDNumber.Border.Class = "TextBoxBorder"
+        Me.txtCDNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCDNumber.ButtonCustom.Image = CType(resources.GetObject("txtCDNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCDNumber.ButtonCustom.Visible = true
+        Me.txtCDNumber.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.txtCDNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCDNumber.FocusHighlightEnabled = true
+        Me.txtCDNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtCDNumber, true)
+        Me.txtCDNumber.Location = New System.Drawing.Point(122, 50)
+        Me.txtCDNumber.MaxLength = 10
+        Me.txtCDNumber.Name = "txtCDNumber"
+        Me.txtCDNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtCDNumber.TabIndex = 2
+        Me.txtCDNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtCDNumber.WatermarkText = "CD Number"
+        '
+        'LabelX100
+        '
+        Me.LabelX100.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX100.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX100.Location = New System.Drawing.Point(10, 98)
+        Me.LabelX100.Name = "LabelX100"
+        Me.LabelX100.Size = New System.Drawing.Size(29, 18)
+        Me.LabelX100.TabIndex = 21
+        Me.LabelX100.Text = "Date"
+        '
+        'LabelX101
+        '
+        Me.LabelX101.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX101.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX101.Location = New System.Drawing.Point(500, 9)
+        Me.LabelX101.Name = "LabelX101"
+        Me.LabelX101.Size = New System.Drawing.Size(80, 18)
+        Me.LabelX101.TabIndex = 17
+        Me.LabelX101.Text = "Police Station"
+        '
+        'LabelX104
+        '
+        Me.LabelX104.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX104.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX104.Location = New System.Drawing.Point(10, 9)
+        Me.LabelX104.Name = "LabelX104"
+        Me.LabelX104.Size = New System.Drawing.Size(28, 18)
+        Me.LabelX104.TabIndex = 12
+        Me.LabelX104.Text = "Year"
+        '
+        'LabelX105
+        '
+        Me.LabelX105.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX105.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX105.Location = New System.Drawing.Point(10, 58)
+        Me.LabelX105.Name = "LabelX105"
+        Me.LabelX105.Size = New System.Drawing.Size(69, 18)
+        Me.LabelX105.TabIndex = 10
+        Me.LabelX105.Text = "CD Number"
+        '
+        'txtCDNumberOnly
+        '
+        Me.txtCDNumberOnly.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtCDNumberOnly.Border.Class = "TextBoxBorder"
+        Me.txtCDNumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtCDNumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtCDNumberOnly.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtCDNumberOnly.ButtonCustom.Visible = true
+        Me.txtCDNumberOnly.DisabledBackColor = System.Drawing.Color.White
+        Me.txtCDNumberOnly.FocusHighlightEnabled = true
+        Me.txtCDNumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtCDNumberOnly.ForeColor = System.Drawing.Color.Black
+        Me.txtCDNumberOnly.Location = New System.Drawing.Point(375, 5)
+        Me.txtCDNumberOnly.MaxLength = 45
+        Me.txtCDNumberOnly.Name = "txtCDNumberOnly"
+        Me.txtCDNumberOnly.Size = New System.Drawing.Size(116, 23)
+        Me.txtCDNumberOnly.TabIndex = 132
+        Me.txtCDNumberOnly.TabStop = false
+        Me.txtCDNumberOnly.Visible = false
+        Me.txtCDNumberOnly.WatermarkText = "Cd Number"
+        '
+        'CDTabItem
+        '
+        Me.CDTabItem.AttachedControl = Me.TabControlPanel7
+        Me.CDTabItem.Name = "CDTabItem"
+        Me.CDTabItem.Text = "Court Duty Register"
+        '
+        'TabControlPanel11
+        '
+        Me.TabControlPanel11.Controls.Add(Me.PanelIDR)
+        Me.TabControlPanel11.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel11.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel11.Name = "TabControlPanel11"
+        Me.TabControlPanel11.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel11.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel11.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel11.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel11.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel11.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel11.Style.GradientAngle = 90
+        Me.TabControlPanel11.TabIndex = 56
+        Me.TabControlPanel11.TabItem = Me.IDRTabItem
+        '
+        'PanelIDR
+        '
+        Me.PanelIDR.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelIDR.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelIDR.Controls.Add(Me.lblIDRGridInfo)
+        Me.PanelIDR.Controls.Add(Me.IDRDataGrid)
+        Me.PanelIDR.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelIDR.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelIDR.Location = New System.Drawing.Point(1, 1)
+        Me.PanelIDR.Name = "PanelIDR"
+        Me.PanelIDR.Size = New System.Drawing.Size(1358, 526)
+        Me.PanelIDR.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelIDR.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelIDR.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelIDR.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelIDR.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelIDR.Style.GradientAngle = 90
+        Me.PanelIDR.TabIndex = 0
+        '
+        'lblIDRGridInfo
+        '
+        Me.lblIDRGridInfo.AutoSize = true
+        Me.lblIDRGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblIDRGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblIDRGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblIDRGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblIDRGridInfo.Location = New System.Drawing.Point(5, 90)
+        Me.lblIDRGridInfo.Name = "lblIDRGridInfo"
+        Me.lblIDRGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblIDRGridInfo.TabIndex = 165
+        Me.lblIDRGridInfo.Text = "Grid"
+        Me.lblIDRGridInfo.Visible = false
+        '
+        'IDRTabItem
+        '
+        Me.IDRTabItem.AttachedControl = Me.TabControlPanel11
+        Me.IDRTabItem.Name = "IDRTabItem"
+        Me.IDRTabItem.Text = "Identification Register"
+        '
+        'TabControlPanel4
+        '
+        Me.TabControlPanel4.Controls.Add(Me.lblFPAGridInfo)
+        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
+        Me.TabControlPanel4.Controls.Add(Me.PanelFPA)
+        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel4.Name = "TabControlPanel4"
+        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel4.Style.GradientAngle = 90
+        Me.TabControlPanel4.TabIndex = 4
+        Me.TabControlPanel4.TabItem = Me.FPATabItem
+        '
+        'lblFPAGridInfo
+        '
+        Me.lblFPAGridInfo.AutoSize = true
+        Me.lblFPAGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblFPAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblFPAGridInfo.Location = New System.Drawing.Point(5, 90)
+        Me.lblFPAGridInfo.Name = "lblFPAGridInfo"
+        Me.lblFPAGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblFPAGridInfo.TabIndex = 165
+        Me.lblFPAGridInfo.Text = "Grid"
+        Me.lblFPAGridInfo.Visible = false
+        '
+        'PanelFPA
+        '
+        Me.PanelFPA.AutoScroll = true
+        Me.PanelFPA.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelFPA.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelFPA.Controls.Add(Me.btnGenerateFPSlipMain)
+        Me.PanelFPA.Controls.Add(Me.LabelX162)
+        Me.PanelFPA.Controls.Add(Me.LabelX161)
+        Me.PanelFPA.Controls.Add(Me.dtChalanDate)
+        Me.PanelFPA.Controls.Add(Me.txtHeadOfAccount)
+        Me.PanelFPA.Controls.Add(Me.LabelX94)
+        Me.PanelFPA.Controls.Add(Me.chkFPATwodigits)
+        Me.PanelFPA.Controls.Add(Me.lblFPAPassport)
+        Me.PanelFPA.Controls.Add(Me.lblFPAAddress)
+        Me.PanelFPA.Controls.Add(Me.lblFPAName)
+        Me.PanelFPA.Controls.Add(Me.txtFPANumberOnly)
+        Me.PanelFPA.Controls.Add(Me.txtFPAAmount)
+        Me.PanelFPA.Controls.Add(Me.LabelX69)
+        Me.PanelFPA.Controls.Add(Me.btnSearchFPA)
+        Me.PanelFPA.Controls.Add(Me.btnClearFPAFields)
+        Me.PanelFPA.Controls.Add(Me.btnSaveFPA)
+        Me.PanelFPA.Controls.Add(Me.LabelX67)
+        Me.PanelFPA.Controls.Add(Me.txtFPATreasury)
+        Me.PanelFPA.Controls.Add(Me.LabelX66)
+        Me.PanelFPA.Controls.Add(Me.LabelX60)
+        Me.PanelFPA.Controls.Add(Me.txtFPAChalanNumber)
+        Me.PanelFPA.Controls.Add(Me.txtFPARemarks)
+        Me.PanelFPA.Controls.Add(Me.LabelX61)
+        Me.PanelFPA.Controls.Add(Me.LabelX62)
+        Me.PanelFPA.Controls.Add(Me.txtFPAAddress)
+        Me.PanelFPA.Controls.Add(Me.txtFPAPassportNumber)
+        Me.PanelFPA.Controls.Add(Me.LabelX63)
+        Me.PanelFPA.Controls.Add(Me.LabelX64)
+        Me.PanelFPA.Controls.Add(Me.txtFPAName)
+        Me.PanelFPA.Controls.Add(Me.LabelX65)
+        Me.PanelFPA.Controls.Add(Me.LabelX54)
+        Me.PanelFPA.Controls.Add(Me.LabelX55)
+        Me.PanelFPA.Controls.Add(Me.chkAppendFPAYear)
+        Me.PanelFPA.Controls.Add(Me.txtFPAYear)
+        Me.PanelFPA.Controls.Add(Me.dtFPADate)
+        Me.PanelFPA.Controls.Add(Me.txtFPANumber)
+        Me.PanelFPA.Controls.Add(Me.LabelX57)
+        Me.PanelFPA.Controls.Add(Me.LabelX58)
+        Me.PanelFPA.Controls.Add(Me.LabelX59)
+        Me.PanelFPA.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelFPA.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelFPA.Location = New System.Drawing.Point(1, 1)
+        Me.PanelFPA.Name = "PanelFPA"
+        Me.PanelFPA.Size = New System.Drawing.Size(1358, 244)
+        Me.PanelFPA.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelFPA.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelFPA.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelFPA.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelFPA.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelFPA.Style.GradientAngle = 90
+        Me.PanelFPA.TabIndex = 4
+        '
+        'btnGenerateFPSlipMain
+        '
+        Me.btnGenerateFPSlipMain.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateFPSlipMain.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateFPSlipMain.Location = New System.Drawing.Point(1177, 183)
+        Me.btnGenerateFPSlipMain.Name = "btnGenerateFPSlipMain"
+        Me.btnGenerateFPSlipMain.Size = New System.Drawing.Size(141, 50)
+        Me.btnGenerateFPSlipMain.TabIndex = 143
+        Me.btnGenerateFPSlipMain.Text = "Generate FP Slip"
+        '
+        'LabelX162
+        '
+        Me.LabelX162.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX162.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX162.Location = New System.Drawing.Point(421, 153)
+        Me.LabelX162.Name = "LabelX162"
+        Me.LabelX162.Size = New System.Drawing.Size(97, 18)
+        Me.LabelX162.TabIndex = 142
+        Me.LabelX162.Text = "Head of Account"
+        '
+        'LabelX161
+        '
+        Me.LabelX161.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX161.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX161.Location = New System.Drawing.Point(421, 111)
+        Me.LabelX161.Name = "LabelX161"
+        Me.LabelX161.Size = New System.Drawing.Size(71, 18)
+        Me.LabelX161.TabIndex = 141
+        Me.LabelX161.Text = "Chalan Date"
+        '
+        'dtChalanDate
+        '
+        Me.dtChalanDate.AutoAdvance = true
+        Me.dtChalanDate.AutoSelectDate = true
+        Me.dtChalanDate.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtChalanDate.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtChalanDate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.ButtonClear.Image = CType(resources.GetObject("dtChalanDate.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtChalanDate.ButtonClear.Visible = true
+        Me.dtChalanDate.ButtonDropDown.Visible = true
+        Me.dtChalanDate.CustomFormat = "dd/MM/yyyy"
+        Me.dtChalanDate.FocusHighlightEnabled = true
+        Me.dtChalanDate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtChalanDate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtChalanDate, true)
+        Me.dtChalanDate.IsPopupCalendarOpen = false
+        Me.dtChalanDate.Location = New System.Drawing.Point(524, 109)
+        Me.dtChalanDate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtChalanDate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtChalanDate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtChalanDate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtChalanDate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtChalanDate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtChalanDate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtChalanDate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtChalanDate.MonthCalendar.TodayButtonVisible = true
+        Me.dtChalanDate.Name = "dtChalanDate"
+        Me.dtChalanDate.Size = New System.Drawing.Size(227, 29)
+        Me.dtChalanDate.TabIndex = 68
+        Me.dtChalanDate.WatermarkText = "Chalan Date"
+        '
+        'txtHeadOfAccount
+        '
+        Me.txtHeadOfAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtHeadOfAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtHeadOfAccount.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtHeadOfAccount.Border.Class = "TextBoxBorder"
+        Me.txtHeadOfAccount.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtHeadOfAccount.ButtonCustom.Image = CType(resources.GetObject("txtHeadOfAccount.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtHeadOfAccount.ButtonCustom.Visible = true
+        Me.txtHeadOfAccount.DisabledBackColor = System.Drawing.Color.White
+        Me.txtHeadOfAccount.FocusHighlightEnabled = true
+        Me.txtHeadOfAccount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtHeadOfAccount.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtHeadOfAccount, true)
+        Me.txtHeadOfAccount.Location = New System.Drawing.Point(524, 144)
+        Me.txtHeadOfAccount.MaxLength = 255
+        Me.txtHeadOfAccount.Name = "txtHeadOfAccount"
+        Me.txtHeadOfAccount.Size = New System.Drawing.Size(227, 29)
+        Me.txtHeadOfAccount.TabIndex = 69
+        Me.txtHeadOfAccount.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtHeadOfAccount.WatermarkText = "Head of Account"
+        '
+        'LabelX94
+        '
+        Me.LabelX94.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX94.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX94.Font = New System.Drawing.Font("Rupee Foradian", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX94.Location = New System.Drawing.Point(473, 222)
+        Me.LabelX94.Name = "LabelX94"
+        Me.LabelX94.Size = New System.Drawing.Size(9, 16)
+        Me.LabelX94.TabIndex = 140
+        Me.LabelX94.Text = "`"
+        '
+        'chkFPATwodigits
+        '
+        Me.chkFPATwodigits.AutoSize = true
+        '
+        '
+        '
+        Me.chkFPATwodigits.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkFPATwodigits, true)
+        Me.chkFPATwodigits.Location = New System.Drawing.Point(200, 22)
+        Me.chkFPATwodigits.Name = "chkFPATwodigits"
+        Me.chkFPATwodigits.Size = New System.Drawing.Size(126, 18)
+        Me.chkFPATwodigits.TabIndex = 139
+        Me.chkFPATwodigits.TabStop = false
+        Me.chkFPATwodigits.Text = "Use last two digits"
+        '
+        'lblFPAPassport
+        '
+        Me.lblFPAPassport.AutoSize = true
+        '
+        '
+        '
+        Me.lblFPAPassport.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAPassport.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblFPAPassport.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAPassport.Location = New System.Drawing.Point(752, 13)
+        Me.lblFPAPassport.Name = "lblFPAPassport"
+        Me.lblFPAPassport.Size = New System.Drawing.Size(11, 22)
+        Me.lblFPAPassport.TabIndex = 137
+        Me.lblFPAPassport.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblFPAAddress
+        '
+        Me.lblFPAAddress.AutoSize = true
+        '
+        '
+        '
+        Me.lblFPAAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAAddress.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblFPAAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAAddress.Location = New System.Drawing.Point(349, 147)
+        Me.lblFPAAddress.Name = "lblFPAAddress"
+        Me.lblFPAAddress.Size = New System.Drawing.Size(11, 22)
+        Me.lblFPAAddress.TabIndex = 136
+        Me.lblFPAAddress.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblFPAName
+        '
+        Me.lblFPAName.AutoSize = true
+        '
+        '
+        '
+        Me.lblFPAName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAName.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblFPAName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAName.Location = New System.Drawing.Point(356, 114)
+        Me.lblFPAName.Name = "lblFPAName"
+        Me.lblFPAName.Size = New System.Drawing.Size(11, 22)
+        Me.lblFPAName.TabIndex = 135
+        Me.lblFPAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'txtFPANumberOnly
+        '
+        Me.txtFPANumberOnly.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPANumberOnly.Border.Class = "TextBoxBorder"
+        Me.txtFPANumberOnly.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPANumberOnly.ButtonCustom.Image = CType(resources.GetObject("txtFPANumberOnly.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPANumberOnly.ButtonCustom.Visible = true
+        Me.txtFPANumberOnly.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPANumberOnly.FocusHighlightEnabled = true
+        Me.txtFPANumberOnly.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPANumberOnly.ForeColor = System.Drawing.Color.Black
+        Me.txtFPANumberOnly.Location = New System.Drawing.Point(421, 74)
+        Me.txtFPANumberOnly.MaxLength = 45
+        Me.txtFPANumberOnly.Name = "txtFPANumberOnly"
+        Me.txtFPANumberOnly.Size = New System.Drawing.Size(116, 23)
+        Me.txtFPANumberOnly.TabIndex = 134
+        Me.txtFPANumberOnly.TabStop = false
+        Me.txtFPANumberOnly.Visible = false
+        '
+        'txtFPAAmount
+        '
+        '
+        '
+        '
+        Me.txtFPAAmount.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtFPAAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAAmount.FocusHighlightEnabled = true
+        Me.txtFPAAmount.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAmount, true)
+        Me.txtFPAAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtFPAAmount.Location = New System.Drawing.Point(524, 210)
+        Me.txtFPAAmount.MaxValue = 9999
+        Me.txtFPAAmount.MinValue = 0
+        Me.txtFPAAmount.Name = "txtFPAAmount"
+        Me.txtFPAAmount.ShowUpDown = true
+        Me.txtFPAAmount.Size = New System.Drawing.Size(91, 29)
+        Me.txtFPAAmount.TabIndex = 71
+        Me.txtFPAAmount.WatermarkText = "Amount"
+        '
+        'LabelX69
+        '
+        Me.LabelX69.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX69.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX69.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX69.Location = New System.Drawing.Point(617, 214)
+        Me.LabelX69.Name = "LabelX69"
+        Me.LabelX69.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX69.TabIndex = 129
+        Me.LabelX69.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'btnSearchFPA
+        '
+        Me.btnSearchFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchFPA.Image = CType(resources.GetObject("btnSearchFPA.Image"),System.Drawing.Image)
+        Me.btnSearchFPA.Location = New System.Drawing.Point(1177, 69)
+        Me.btnSearchFPA.Name = "btnSearchFPA"
+        Me.btnSearchFPA.Size = New System.Drawing.Size(141, 50)
+        Me.btnSearchFPA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAFindByNumber, Me.btnSearchInFPAYear, Me.btnFPAAdvancedSearch})
+        Me.btnSearchFPA.TabIndex = 74
+        Me.btnSearchFPA.Text = "Search"
+        '
+        'btnFPAFindByNumber
+        '
+        Me.btnFPAFindByNumber.GlobalItem = false
+        Me.btnFPAFindByNumber.Name = "btnFPAFindByNumber"
+        Me.btnFPAFindByNumber.Text = "Find by FPA Number"
+        '
+        'btnSearchInFPAYear
+        '
+        Me.btnSearchInFPAYear.BeginGroup = true
+        Me.btnSearchInFPAYear.GlobalItem = false
+        Me.btnSearchInFPAYear.Name = "btnSearchInFPAYear"
+        Me.btnSearchInFPAYear.Text = "Search in selected Year"
+        '
+        'btnFPAAdvancedSearch
+        '
+        Me.btnFPAAdvancedSearch.BeginGroup = true
+        Me.btnFPAAdvancedSearch.GlobalItem = false
+        Me.btnFPAAdvancedSearch.Name = "btnFPAAdvancedSearch"
+        Me.btnFPAAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearFPAFields
+        '
+        Me.btnClearFPAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearFPAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearFPAFields.Image = CType(resources.GetObject("btnClearFPAFields.Image"),System.Drawing.Image)
+        Me.btnClearFPAFields.Location = New System.Drawing.Point(1177, 126)
+        Me.btnClearFPAFields.Name = "btnClearFPAFields"
+        Me.btnClearFPAFields.Size = New System.Drawing.Size(141, 50)
+        Me.btnClearFPAFields.TabIndex = 75
+        Me.btnClearFPAFields.Text = "Clear All Fields"
+        '
+        'btnSaveFPA
+        '
+        Me.btnSaveFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveFPA.Image = CType(resources.GetObject("btnSaveFPA.Image"),System.Drawing.Image)
+        Me.btnSaveFPA.Location = New System.Drawing.Point(1177, 12)
+        Me.btnSaveFPA.Name = "btnSaveFPA"
+        Me.btnSaveFPA.Size = New System.Drawing.Size(141, 50)
+        Me.btnSaveFPA.TabIndex = 73
+        Me.btnSaveFPA.Text = "Save"
+        '
+        'LabelX67
+        '
+        Me.LabelX67.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX67.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX67.Location = New System.Drawing.Point(421, 219)
+        Me.LabelX67.Name = "LabelX67"
+        Me.LabelX67.Size = New System.Drawing.Size(48, 18)
+        Me.LabelX67.TabIndex = 123
+        Me.LabelX67.Text = "Amount"
+        '
+        'txtFPATreasury
+        '
+        Me.txtFPATreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtFPATreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPATreasury.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPATreasury.Border.Class = "TextBoxBorder"
+        Me.txtFPATreasury.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPATreasury.ButtonCustom.Image = CType(resources.GetObject("txtFPATreasury.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPATreasury.ButtonCustom.Visible = true
+        Me.txtFPATreasury.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPATreasury.FocusHighlightEnabled = true
+        Me.txtFPATreasury.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPATreasury.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPATreasury, true)
+        Me.txtFPATreasury.Location = New System.Drawing.Point(524, 178)
+        Me.txtFPATreasury.MaxLength = 255
+        Me.txtFPATreasury.Name = "txtFPATreasury"
+        Me.txtFPATreasury.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPATreasury.TabIndex = 70
+        Me.txtFPATreasury.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPATreasury.WatermarkText = "Treasury"
+        '
+        'LabelX66
+        '
+        Me.LabelX66.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX66.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX66.Location = New System.Drawing.Point(421, 184)
+        Me.LabelX66.Name = "LabelX66"
+        Me.LabelX66.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX66.TabIndex = 121
+        Me.LabelX66.Text = "Treasury"
+        '
+        'LabelX60
+        '
+        Me.LabelX60.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX60.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX60.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX60.Location = New System.Drawing.Point(349, 115)
+        Me.LabelX60.Name = "LabelX60"
+        Me.LabelX60.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX60.TabIndex = 119
+        Me.LabelX60.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'txtFPAChalanNumber
+        '
+        Me.txtFPAChalanNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAChalanNumber.Border.Class = "TextBoxBorder"
+        Me.txtFPAChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAChalanNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAChalanNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAChalanNumber.FocusHighlightEnabled = true
+        Me.txtFPAChalanNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAChalanNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAChalanNumber, true)
+        Me.txtFPAChalanNumber.Location = New System.Drawing.Point(524, 44)
+        Me.txtFPAChalanNumber.MaxLength = 50
+        Me.txtFPAChalanNumber.Multiline = true
+        Me.txtFPAChalanNumber.Name = "txtFPAChalanNumber"
+        Me.txtFPAChalanNumber.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtFPAChalanNumber.Size = New System.Drawing.Size(227, 61)
+        Me.txtFPAChalanNumber.TabIndex = 67
+        Me.txtFPAChalanNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAChalanNumber.WatermarkText = "Chalan Number"
+        '
+        'txtFPARemarks
+        '
+        Me.txtFPARemarks.AcceptsReturn = true
+        Me.txtFPARemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtFPARemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPARemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPARemarks.Border.Class = "TextBoxBorder"
+        Me.txtFPARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPARemarks.ButtonCustom.Image = CType(resources.GetObject("txtFPARemarks.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPARemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPARemarks.FocusHighlightEnabled = true
+        Me.txtFPARemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPARemarks.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPARemarks, true)
+        Me.txtFPARemarks.Location = New System.Drawing.Point(875, 7)
+        Me.txtFPARemarks.MaxLength = 255
+        Me.txtFPARemarks.Multiline = true
+        Me.txtFPARemarks.Name = "txtFPARemarks"
+        Me.txtFPARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtFPARemarks.Size = New System.Drawing.Size(227, 92)
+        Me.txtFPARemarks.TabIndex = 72
+        Me.txtFPARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPARemarks.WatermarkText = "Remarks"
+        '
+        'LabelX61
+        '
+        Me.LabelX61.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX61.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX61.Location = New System.Drawing.Point(808, 12)
+        Me.LabelX61.Name = "LabelX61"
+        Me.LabelX61.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX61.TabIndex = 118
+        Me.LabelX61.Text = "Remarks"
+        '
+        'LabelX62
+        '
+        Me.LabelX62.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX62.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX62.Location = New System.Drawing.Point(421, 42)
+        Me.LabelX62.Name = "LabelX62"
+        Me.LabelX62.Size = New System.Drawing.Size(91, 18)
+        Me.LabelX62.TabIndex = 117
+        Me.LabelX62.Text = "Chalan Number"
+        '
+        'txtFPAAddress
+        '
+        Me.txtFPAAddress.AcceptsReturn = true
+        Me.txtFPAAddress.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAAddress.Border.Class = "TextBoxBorder"
+        Me.txtFPAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAAddress.ButtonCustom.Image = CType(resources.GetObject("txtFPAAddress.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAAddress.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAAddress.FocusHighlightEnabled = true
+        Me.txtFPAAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAAddress.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAAddress, true)
+        Me.txtFPAAddress.Location = New System.Drawing.Point(122, 142)
+        Me.txtFPAAddress.MaxLength = 255
+        Me.txtFPAAddress.Multiline = true
+        Me.txtFPAAddress.Name = "txtFPAAddress"
+        Me.txtFPAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtFPAAddress.Size = New System.Drawing.Size(227, 96)
+        Me.txtFPAAddress.TabIndex = 65
+        Me.txtFPAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAAddress.WatermarkText = "Address"
+        '
+        'txtFPAPassportNumber
+        '
+        Me.txtFPAPassportNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAPassportNumber.Border.Class = "TextBoxBorder"
+        Me.txtFPAPassportNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAPassportNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAPassportNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAPassportNumber.ButtonCustom.Visible = true
+        Me.txtFPAPassportNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAPassportNumber.FocusHighlightEnabled = true
+        Me.txtFPAPassportNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAPassportNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAPassportNumber, true)
+        Me.txtFPAPassportNumber.Location = New System.Drawing.Point(524, 9)
+        Me.txtFPAPassportNumber.MaxLength = 50
+        Me.txtFPAPassportNumber.Name = "txtFPAPassportNumber"
+        Me.txtFPAPassportNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPAPassportNumber.TabIndex = 66
+        Me.txtFPAPassportNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAPassportNumber.WatermarkText = "Passport Number"
+        '
+        'LabelX63
+        '
+        Me.LabelX63.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX63.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX63.Location = New System.Drawing.Point(421, 9)
+        Me.LabelX63.Name = "LabelX63"
+        Me.LabelX63.Size = New System.Drawing.Size(101, 18)
+        Me.LabelX63.TabIndex = 114
+        Me.LabelX63.Text = "Passport Number"
+        '
+        'LabelX64
+        '
+        Me.LabelX64.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX64.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX64.Location = New System.Drawing.Point(12, 147)
+        Me.LabelX64.Name = "LabelX64"
+        Me.LabelX64.Size = New System.Drawing.Size(48, 18)
+        Me.LabelX64.TabIndex = 112
+        Me.LabelX64.Text = "Address"
+        '
+        'txtFPAName
+        '
+        Me.txtFPAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtFPAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtFPAName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAName.Border.Class = "TextBoxBorder"
+        Me.txtFPAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAName.ButtonCustom.Image = CType(resources.GetObject("txtFPAName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAName.ButtonCustom.Visible = true
+        Me.txtFPAName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAName.FocusHighlightEnabled = true
+        Me.txtFPAName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAName, true)
+        Me.txtFPAName.Location = New System.Drawing.Point(122, 108)
+        Me.txtFPAName.MaxLength = 255
+        Me.txtFPAName.Name = "txtFPAName"
+        Me.txtFPAName.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPAName.TabIndex = 64
+        Me.txtFPAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPAName.WatermarkText = "Name"
+        '
+        'LabelX65
+        '
+        Me.LabelX65.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX65.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX65.Location = New System.Drawing.Point(11, 113)
+        Me.LabelX65.Name = "LabelX65"
+        Me.LabelX65.Size = New System.Drawing.Size(36, 18)
+        Me.LabelX65.TabIndex = 109
+        Me.LabelX65.Text = "Name"
+        '
+        'LabelX54
+        '
+        Me.LabelX54.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX54.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX54.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX54.Location = New System.Drawing.Point(349, 81)
+        Me.LabelX54.Name = "LabelX54"
+        Me.LabelX54.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX54.TabIndex = 70
+        Me.LabelX54.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX55
+        '
+        Me.LabelX55.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX55.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX55.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX55.Location = New System.Drawing.Point(349, 45)
+        Me.LabelX55.Name = "LabelX55"
+        Me.LabelX55.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX55.TabIndex = 69
+        Me.LabelX55.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'chkAppendFPAYear
+        '
+        Me.chkAppendFPAYear.AutoSize = true
+        '
+        '
+        '
+        Me.chkAppendFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.Highlighter1.SetHighlightOnFocus(Me.chkAppendFPAYear, true)
+        Me.chkAppendFPAYear.Location = New System.Drawing.Point(200, 2)
+        Me.chkAppendFPAYear.Name = "chkAppendFPAYear"
+        Me.chkAppendFPAYear.Size = New System.Drawing.Size(124, 18)
+        Me.chkAppendFPAYear.TabIndex = 67
+        Me.chkAppendFPAYear.TabStop = false
+        Me.chkAppendFPAYear.Text = "Auto append year"
+        '
+        'txtFPAYear
+        '
+        '
+        '
+        '
+        Me.txtFPAYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtFPAYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAYear.ButtonCustom.Image = CType(resources.GetObject("txtFPAYear.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPAYear.FocusHighlightEnabled = true
+        Me.txtFPAYear.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPAYear, true)
+        Me.txtFPAYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtFPAYear.Location = New System.Drawing.Point(122, 5)
+        Me.txtFPAYear.MaxValue = 2099
+        Me.txtFPAYear.MinValue = 1900
+        Me.txtFPAYear.Name = "txtFPAYear"
+        Me.txtFPAYear.ShowUpDown = true
+        Me.txtFPAYear.Size = New System.Drawing.Size(58, 29)
+        Me.txtFPAYear.TabIndex = 61
+        Me.txtFPAYear.Value = 1900
+        Me.txtFPAYear.WatermarkText = "Year"
+        '
+        'dtFPADate
+        '
+        Me.dtFPADate.AutoAdvance = true
+        Me.dtFPADate.AutoSelectDate = true
+        Me.dtFPADate.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtFPADate.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtFPADate.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.ButtonClear.Image = CType(resources.GetObject("dtFPADate.ButtonClear.Image"),System.Drawing.Image)
+        Me.dtFPADate.ButtonClear.Visible = true
+        Me.dtFPADate.ButtonDropDown.Visible = true
+        Me.dtFPADate.CustomFormat = "dd/MM/yyyy"
+        Me.dtFPADate.FocusHighlightEnabled = true
+        Me.dtFPADate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.dtFPADate.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.Highlighter1.SetHighlightOnFocus(Me.dtFPADate, true)
+        Me.dtFPADate.IsPopupCalendarOpen = false
+        Me.dtFPADate.Location = New System.Drawing.Point(122, 75)
+        Me.dtFPADate.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtFPADate.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtFPADate.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtFPADate.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.MonthCalendar.ClearButtonVisible = true
+        '
+        '
+        '
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtFPADate.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtFPADate.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtFPADate.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtFPADate.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFPADate.MonthCalendar.TodayButtonVisible = true
+        Me.dtFPADate.Name = "dtFPADate"
+        Me.dtFPADate.Size = New System.Drawing.Size(227, 29)
+        Me.dtFPADate.TabIndex = 63
+        Me.dtFPADate.WatermarkText = "Date of Attestation"
+        '
+        'txtFPANumber
+        '
+        Me.txtFPANumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPANumber.Border.Class = "TextBoxBorder"
+        Me.txtFPANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPANumber.ButtonCustom.Image = CType(resources.GetObject("txtFPANumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtFPANumber.ButtonCustom.Visible = true
+        Me.txtFPANumber.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.txtFPANumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPANumber.FocusHighlightEnabled = true
+        Me.txtFPANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPANumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtFPANumber, true)
+        Me.txtFPANumber.Location = New System.Drawing.Point(122, 40)
+        Me.txtFPANumber.MaxLength = 10
+        Me.txtFPANumber.Name = "txtFPANumber"
+        Me.txtFPANumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtFPANumber.TabIndex = 62
+        Me.txtFPANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFPANumber.WatermarkText = "FPA Number"
+        '
+        'LabelX57
+        '
+        Me.LabelX57.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX57.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX57.Location = New System.Drawing.Point(11, 79)
+        Me.LabelX57.Name = "LabelX57"
+        Me.LabelX57.Size = New System.Drawing.Size(29, 18)
+        Me.LabelX57.TabIndex = 66
+        Me.LabelX57.Text = "Date"
+        '
+        'LabelX58
+        '
+        Me.LabelX58.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX58.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX58.Location = New System.Drawing.Point(11, 9)
+        Me.LabelX58.Name = "LabelX58"
+        Me.LabelX58.Size = New System.Drawing.Size(28, 18)
+        Me.LabelX58.TabIndex = 65
+        Me.LabelX58.Text = "Year"
+        '
+        'LabelX59
+        '
+        Me.LabelX59.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX59.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX59.Location = New System.Drawing.Point(11, 42)
+        Me.LabelX59.Name = "LabelX59"
+        Me.LabelX59.Size = New System.Drawing.Size(74, 18)
+        Me.LabelX59.TabIndex = 64
+        Me.LabelX59.Text = "FPA Number"
+        '
+        'FPATabItem
+        '
+        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
+        Me.FPATabItem.Name = "FPATabItem"
+        Me.FPATabItem.Text = "FP Attestation Register"
+        '
         'TabControlPanel8
         '
         Me.TabControlPanel8.Controls.Add(Me.ACDatagrid)
@@ -10800,7 +10866,7 @@ Partial Class frmMainInterface
         Me.TabControlPanel8.Location = New System.Drawing.Point(0, 25)
         Me.TabControlPanel8.Name = "TabControlPanel8"
         Me.TabControlPanel8.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel8.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel8.Size = New System.Drawing.Size(1360, 528)
         Me.TabControlPanel8.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel8.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.TabControlPanel8.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
@@ -11739,7 +11805,7 @@ Partial Class frmMainInterface
         Me.TabControlPanel6.Location = New System.Drawing.Point(0, 25)
         Me.TabControlPanel6.Name = "TabControlPanel6"
         Me.TabControlPanel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel6.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel6.Size = New System.Drawing.Size(1360, 528)
         Me.TabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.TabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
@@ -12717,7 +12783,7 @@ Partial Class frmMainInterface
         Me.TabControlPanel5.Location = New System.Drawing.Point(0, 25)
         Me.TabControlPanel5.Name = "TabControlPanel5"
         Me.TabControlPanel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel5.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel5.Size = New System.Drawing.Size(1360, 528)
         Me.TabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.TabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
@@ -12750,7 +12816,7 @@ Partial Class frmMainInterface
         Me.Highlighter1.SetHighlightOnFocus(Me.PanelEx6, true)
         Me.PanelEx6.Location = New System.Drawing.Point(1, 1)
         Me.PanelEx6.Name = "PanelEx6"
-        Me.PanelEx6.Size = New System.Drawing.Size(1358, 528)
+        Me.PanelEx6.Size = New System.Drawing.Size(1358, 526)
         Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -12981,38 +13047,38 @@ Partial Class frmMainInterface
         '
         Me.IODatagrid.AllowUserToDeleteRows = false
         Me.IODatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle41.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle41.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IODatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle62.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle62.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle62.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle62.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle62.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle62.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IODatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle62
         Me.IODatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.IODatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Designation, Me.OfficerName, Me.PEN, Me.BasicPay, Me.ScaleOfPay, Me.DARate})
-        DataGridViewCellStyle228.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle228.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle228.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle228.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle228.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle228.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle228.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.IODatagrid.DefaultCellStyle = DataGridViewCellStyle228
+        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle69.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle69.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle69.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle69.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle69.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.IODatagrid.DefaultCellStyle = DataGridViewCellStyle69
         Me.IODatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.IODatagrid.EnableHeadersVisualStyles = false
         Me.IODatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
         Me.IODatagrid.Location = New System.Drawing.Point(0, 1)
         Me.IODatagrid.MultiSelect = false
         Me.IODatagrid.Name = "IODatagrid"
-        DataGridViewCellStyle229.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle229.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle229.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle229.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle229.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle229.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle229.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IODatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle229
+        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle70.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle70.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle70.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle70.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IODatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle70
         Me.IODatagrid.SelectAllSignVisible = false
         Me.IODatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.IODatagrid.Size = New System.Drawing.Size(844, 178)
@@ -13021,8 +13087,8 @@ Partial Class frmMainInterface
         '
         'Designation
         '
-        DataGridViewCellStyle169.NullValue = "''"
-        Me.Designation.DefaultCellStyle = DataGridViewCellStyle169
+        DataGridViewCellStyle63.NullValue = "''"
+        Me.Designation.DefaultCellStyle = DataGridViewCellStyle63
         Me.Designation.HeaderText = "Designation"
         Me.Designation.Name = "Designation"
         Me.Designation.ReadOnly = true
@@ -13031,38 +13097,38 @@ Partial Class frmMainInterface
         '
         'OfficerName
         '
-        DataGridViewCellStyle170.NullValue = "''"
-        Me.OfficerName.DefaultCellStyle = DataGridViewCellStyle170
+        DataGridViewCellStyle64.NullValue = "''"
+        Me.OfficerName.DefaultCellStyle = DataGridViewCellStyle64
         Me.OfficerName.HeaderText = "Officer Name"
         Me.OfficerName.Name = "OfficerName"
         Me.OfficerName.Width = 190
         '
         'PEN
         '
-        DataGridViewCellStyle171.NullValue = "''"
-        Me.PEN.DefaultCellStyle = DataGridViewCellStyle171
+        DataGridViewCellStyle65.NullValue = "''"
+        Me.PEN.DefaultCellStyle = DataGridViewCellStyle65
         Me.PEN.HeaderText = "PEN No."
         Me.PEN.Name = "PEN"
         '
         'BasicPay
         '
-        DataGridViewCellStyle225.NullValue = "''"
-        Me.BasicPay.DefaultCellStyle = DataGridViewCellStyle225
+        DataGridViewCellStyle66.NullValue = "''"
+        Me.BasicPay.DefaultCellStyle = DataGridViewCellStyle66
         Me.BasicPay.HeaderText = "Basic Pay"
         Me.BasicPay.Name = "BasicPay"
         '
         'ScaleOfPay
         '
-        DataGridViewCellStyle226.NullValue = "''"
-        Me.ScaleOfPay.DefaultCellStyle = DataGridViewCellStyle226
+        DataGridViewCellStyle67.NullValue = "''"
+        Me.ScaleOfPay.DefaultCellStyle = DataGridViewCellStyle67
         Me.ScaleOfPay.HeaderText = "Scale of Pay"
         Me.ScaleOfPay.Name = "ScaleOfPay"
         Me.ScaleOfPay.Width = 150
         '
         'DARate
         '
-        DataGridViewCellStyle227.NullValue = "''"
-        Me.DARate.DefaultCellStyle = DataGridViewCellStyle227
+        DataGridViewCellStyle68.NullValue = "''"
+        Me.DARate.DefaultCellStyle = DataGridViewCellStyle68
         Me.DARate.HeaderText = "DA Rate"
         Me.DARate.Name = "DARate"
         '
@@ -13094,7 +13160,7 @@ Partial Class frmMainInterface
         Me.TabControlPanel3.Location = New System.Drawing.Point(0, 25)
         Me.TabControlPanel3.Name = "TabControlPanel3"
         Me.TabControlPanel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel3.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel3.Size = New System.Drawing.Size(1360, 528)
         Me.TabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.TabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
@@ -13125,7 +13191,7 @@ Partial Class frmMainInterface
         Me.PanelDummy.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelDummy.Location = New System.Drawing.Point(744, 1)
         Me.PanelDummy.Name = "PanelDummy"
-        Me.PanelDummy.Size = New System.Drawing.Size(615, 528)
+        Me.PanelDummy.Size = New System.Drawing.Size(615, 526)
         Me.PanelDummy.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelDummy.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelDummy.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -13369,7 +13435,7 @@ Partial Class frmMainInterface
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelEx3.Location = New System.Drawing.Point(1, 1)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(743, 528)
+        Me.PanelEx3.Size = New System.Drawing.Size(743, 526)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -13392,7 +13458,7 @@ Partial Class frmMainInterface
         Me.TabControlPanel10.Location = New System.Drawing.Point(0, 25)
         Me.TabControlPanel10.Name = "TabControlPanel10"
         Me.TabControlPanel10.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel10.Size = New System.Drawing.Size(1360, 530)
+        Me.TabControlPanel10.Size = New System.Drawing.Size(1360, 528)
         Me.TabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControlPanel10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.TabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
@@ -13413,7 +13479,7 @@ Partial Class frmMainInterface
         Me.PanelEx7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx7.Location = New System.Drawing.Point(1, 1)
         Me.PanelEx7.Name = "PanelEx7"
-        Me.PanelEx7.Size = New System.Drawing.Size(1358, 528)
+        Me.PanelEx7.Size = New System.Drawing.Size(1358, 526)
         Me.PanelEx7.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx7.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -14082,8 +14148,8 @@ Partial Class frmMainInterface
         'SOCYearDataGridViewTextBoxColumn
         '
         Me.SOCYearDataGridViewTextBoxColumn.DataPropertyName = "SOCYear"
-        DataGridViewCellStyle230.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.SOCYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle230
+        DataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.SOCYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle71
         Me.SOCYearDataGridViewTextBoxColumn.HeaderText = "Year"
         Me.SOCYearDataGridViewTextBoxColumn.Name = "SOCYearDataGridViewTextBoxColumn"
         Me.SOCYearDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14093,8 +14159,8 @@ Partial Class frmMainInterface
         'DateOfInspectionDataGridViewTextBoxColumn
         '
         Me.DateOfInspectionDataGridViewTextBoxColumn.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle231.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle231
+        DataGridViewCellStyle72.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle72
         Me.DateOfInspectionDataGridViewTextBoxColumn.HeaderText = "Date of Inspection"
         Me.DateOfInspectionDataGridViewTextBoxColumn.Name = "DateOfInspectionDataGridViewTextBoxColumn"
         Me.DateOfInspectionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14103,8 +14169,8 @@ Partial Class frmMainInterface
         'DateOfReportDataGridViewTextBoxColumn
         '
         Me.DateOfReportDataGridViewTextBoxColumn.DataPropertyName = "DateOfReport"
-        DataGridViewCellStyle232.Format = "dd/MM/yyyy"
-        Me.DateOfReportDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle232
+        DataGridViewCellStyle73.Format = "dd/MM/yyyy"
+        Me.DateOfReportDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle73
         Me.DateOfReportDataGridViewTextBoxColumn.HeaderText = "Date of Report"
         Me.DateOfReportDataGridViewTextBoxColumn.Name = "DateOfReportDataGridViewTextBoxColumn"
         Me.DateOfReportDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14113,8 +14179,8 @@ Partial Class frmMainInterface
         'DateOfOccurrenceDataGridViewTextBoxColumn
         '
         Me.DateOfOccurrenceDataGridViewTextBoxColumn.DataPropertyName = "DateOfOccurrence"
-        DataGridViewCellStyle233.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle233
+        DataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle74
         Me.DateOfOccurrenceDataGridViewTextBoxColumn.HeaderText = "Date of Occurrence"
         Me.DateOfOccurrenceDataGridViewTextBoxColumn.Name = "DateOfOccurrenceDataGridViewTextBoxColumn"
         Me.DateOfOccurrenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14123,8 +14189,8 @@ Partial Class frmMainInterface
         'PoliceStationDataGridViewTextBoxColumn
         '
         Me.PoliceStationDataGridViewTextBoxColumn.DataPropertyName = "PoliceStation"
-        DataGridViewCellStyle234.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PoliceStationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle234
+        DataGridViewCellStyle75.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PoliceStationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle75
         Me.PoliceStationDataGridViewTextBoxColumn.HeaderText = "Police Station"
         Me.PoliceStationDataGridViewTextBoxColumn.Name = "PoliceStationDataGridViewTextBoxColumn"
         Me.PoliceStationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14141,8 +14207,8 @@ Partial Class frmMainInterface
         'SectionOfLawDataGridViewTextBoxColumn
         '
         Me.SectionOfLawDataGridViewTextBoxColumn.DataPropertyName = "SectionOfLaw"
-        DataGridViewCellStyle235.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SectionOfLawDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle235
+        DataGridViewCellStyle76.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SectionOfLawDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle76
         Me.SectionOfLawDataGridViewTextBoxColumn.HeaderText = "Section of Law"
         Me.SectionOfLawDataGridViewTextBoxColumn.Name = "SectionOfLawDataGridViewTextBoxColumn"
         Me.SectionOfLawDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14150,8 +14216,8 @@ Partial Class frmMainInterface
         'PlaceOfOccurrenceDataGridViewTextBoxColumn
         '
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DataPropertyName = "PlaceOfOccurrence"
-        DataGridViewCellStyle236.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle236
+        DataGridViewCellStyle77.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle77
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.HeaderText = "Place of Occurrence"
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.Name = "PlaceOfOccurrenceDataGridViewTextBoxColumn"
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14160,9 +14226,9 @@ Partial Class frmMainInterface
         'InvestigatingOfficerDataGridViewTextBoxColumn
         '
         Me.InvestigatingOfficerDataGridViewTextBoxColumn.DataPropertyName = "InvestigatingOfficer"
-        DataGridViewCellStyle237.NullValue = Nothing
-        DataGridViewCellStyle237.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle237
+        DataGridViewCellStyle78.NullValue = Nothing
+        DataGridViewCellStyle78.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle78
         Me.InvestigatingOfficerDataGridViewTextBoxColumn.HeaderText = "Inspecting Officer"
         Me.InvestigatingOfficerDataGridViewTextBoxColumn.Name = "InvestigatingOfficerDataGridViewTextBoxColumn"
         Me.InvestigatingOfficerDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14171,8 +14237,8 @@ Partial Class frmMainInterface
         'ChancePrintsDeveloped
         '
         Me.ChancePrintsDeveloped.DataPropertyName = "ChancePrintsDeveloped"
-        DataGridViewCellStyle238.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsDeveloped.DefaultCellStyle = DataGridViewCellStyle238
+        DataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsDeveloped.DefaultCellStyle = DataGridViewCellStyle79
         Me.ChancePrintsDeveloped.HeaderText = "No. of CPs Developed"
         Me.ChancePrintsDeveloped.Name = "ChancePrintsDeveloped"
         Me.ChancePrintsDeveloped.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14181,8 +14247,8 @@ Partial Class frmMainInterface
         'ChancePrintsUnfit
         '
         Me.ChancePrintsUnfit.DataPropertyName = "ChancePrintsUnfit"
-        DataGridViewCellStyle239.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsUnfit.DefaultCellStyle = DataGridViewCellStyle239
+        DataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsUnfit.DefaultCellStyle = DataGridViewCellStyle80
         Me.ChancePrintsUnfit.HeaderText = "No. of CPs Unfit"
         Me.ChancePrintsUnfit.Name = "ChancePrintsUnfit"
         Me.ChancePrintsUnfit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14191,8 +14257,8 @@ Partial Class frmMainInterface
         'ChancePrintsEliminated
         '
         Me.ChancePrintsEliminated.DataPropertyName = "ChancePrintsEliminated"
-        DataGridViewCellStyle240.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsEliminated.DefaultCellStyle = DataGridViewCellStyle240
+        DataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsEliminated.DefaultCellStyle = DataGridViewCellStyle81
         Me.ChancePrintsEliminated.HeaderText = "No. of CPs Eliminated"
         Me.ChancePrintsEliminated.Name = "ChancePrintsEliminated"
         Me.ChancePrintsEliminated.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14201,8 +14267,8 @@ Partial Class frmMainInterface
         'ChancePrintsRemaining
         '
         Me.ChancePrintsRemaining.DataPropertyName = "ChancePrintsRemaining"
-        DataGridViewCellStyle241.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsRemaining.DefaultCellStyle = DataGridViewCellStyle241
+        DataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsRemaining.DefaultCellStyle = DataGridViewCellStyle82
         Me.ChancePrintsRemaining.HeaderText = "No. of CPs Remaining"
         Me.ChancePrintsRemaining.Name = "ChancePrintsRemaining"
         Me.ChancePrintsRemaining.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14211,8 +14277,8 @@ Partial Class frmMainInterface
         'ChancePrintDetailsDataGridViewTextBoxColumn
         '
         Me.ChancePrintDetailsDataGridViewTextBoxColumn.DataPropertyName = "ChancePrintDetails"
-        DataGridViewCellStyle242.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ChancePrintDetailsDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle242
+        DataGridViewCellStyle83.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ChancePrintDetailsDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle83
         Me.ChancePrintDetailsDataGridViewTextBoxColumn.HeaderText = "Chance Print Details"
         Me.ChancePrintDetailsDataGridViewTextBoxColumn.Name = "ChancePrintDetailsDataGridViewTextBoxColumn"
         Me.ChancePrintDetailsDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14220,8 +14286,8 @@ Partial Class frmMainInterface
         'ComplainantDataGridViewTextBoxColumn
         '
         Me.ComplainantDataGridViewTextBoxColumn.DataPropertyName = "Complainant"
-        DataGridViewCellStyle243.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ComplainantDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle243
+        DataGridViewCellStyle84.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ComplainantDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle84
         Me.ComplainantDataGridViewTextBoxColumn.HeaderText = "Complainant"
         Me.ComplainantDataGridViewTextBoxColumn.Name = "ComplainantDataGridViewTextBoxColumn"
         Me.ComplainantDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14230,8 +14296,8 @@ Partial Class frmMainInterface
         'ModusOperandiDataGridViewTextBoxColumn
         '
         Me.ModusOperandiDataGridViewTextBoxColumn.DataPropertyName = "ModusOperandi"
-        DataGridViewCellStyle244.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ModusOperandiDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle244
+        DataGridViewCellStyle85.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ModusOperandiDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle85
         Me.ModusOperandiDataGridViewTextBoxColumn.HeaderText = "Modus Operandi"
         Me.ModusOperandiDataGridViewTextBoxColumn.Name = "ModusOperandiDataGridViewTextBoxColumn"
         Me.ModusOperandiDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14240,8 +14306,8 @@ Partial Class frmMainInterface
         'PropertyLostDataGridViewTextBoxColumn
         '
         Me.PropertyLostDataGridViewTextBoxColumn.DataPropertyName = "PropertyLost"
-        DataGridViewCellStyle245.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PropertyLostDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle245
+        DataGridViewCellStyle86.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PropertyLostDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle86
         Me.PropertyLostDataGridViewTextBoxColumn.HeaderText = "Property Lost"
         Me.PropertyLostDataGridViewTextBoxColumn.Name = "PropertyLostDataGridViewTextBoxColumn"
         Me.PropertyLostDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14258,8 +14324,8 @@ Partial Class frmMainInterface
         'PhotoReceived
         '
         Me.PhotoReceived.DataPropertyName = "PhotoReceived"
-        DataGridViewCellStyle246.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PhotoReceived.DefaultCellStyle = DataGridViewCellStyle246
+        DataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PhotoReceived.DefaultCellStyle = DataGridViewCellStyle87
         Me.PhotoReceived.HeaderText = "Photo Received"
         Me.PhotoReceived.Name = "PhotoReceived"
         Me.PhotoReceived.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14268,9 +14334,9 @@ Partial Class frmMainInterface
         'DateOfReceptionOfPhoto
         '
         Me.DateOfReceptionOfPhoto.DataPropertyName = "DateOfReceptionOfPhoto"
-        DataGridViewCellStyle247.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle247.NullValue = Nothing
-        Me.DateOfReceptionOfPhoto.DefaultCellStyle = DataGridViewCellStyle247
+        DataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle88.NullValue = Nothing
+        Me.DateOfReceptionOfPhoto.DefaultCellStyle = DataGridViewCellStyle88
         Me.DateOfReceptionOfPhoto.HeaderText = "Photographed On"
         Me.DateOfReceptionOfPhoto.Name = "DateOfReceptionOfPhoto"
         Me.DateOfReceptionOfPhoto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -14522,6 +14588,11 @@ Partial Class frmMainInterface
         Me.GistDataGridViewTextBoxColumn.Name = "GistDataGridViewTextBoxColumn"
         Me.GistDataGridViewTextBoxColumn.Width = 200
         '
+        'bgwDownload
+        '
+        Me.bgwDownload.WorkerReportsProgress = true
+        Me.bgwDownload.WorkerSupportsCancellation = true
+        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -14540,8 +14611,8 @@ Partial Class frmMainInterface
         Me.RibbonPanel2.ResumeLayout(false)
         Me.RibbonControl1.ResumeLayout(false)
         Me.RibbonControl1.PerformLayout
-        Me.RibbonPanel1.ResumeLayout(false)
         Me.RibbonPanel5.ResumeLayout(false)
+        Me.RibbonPanel1.ResumeLayout(false)
         Me.RibbonPanel4.ResumeLayout(false)
         Me.RibbonPanel6.ResumeLayout(false)
         Me.RibbonPanel7.ResumeLayout(false)
@@ -14572,6 +14643,34 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControl.ResumeLayout(false)
+        Me.TabControlPanel1.ResumeLayout(false)
+        Me.PanelEx1.ResumeLayout(false)
+        Me.PanelEx4.ResumeLayout(false)
+        Me.PanelEx4.PerformLayout
+        Me.PanelSOC.ResumeLayout(false)
+        Me.PanelSOC.PerformLayout
+        CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dtIdentificationDate,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtCPsIdentified,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.TabColorContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.DataGridContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtSOCCPsRemaining,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtSOCCPsEliminated,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtSOCCPsUnfit,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtSOCCPsDeveloped,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtSOCYear,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControlPanel2.ResumeLayout(false)
+        Me.PanelEx2.ResumeLayout(false)
+        Me.PanelEx5.ResumeLayout(false)
+        Me.PanelEx5.PerformLayout
+        Me.PanelDA.ResumeLayout(false)
+        Me.PanelDA.PerformLayout
+        Me.GroupPanel1.ResumeLayout(false)
+        CType(Me.DASlipContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.txtDAYear,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControlPanel9.ResumeLayout(false)
         Me.TabControlPanel9.PerformLayout
         Me.PanelRSOC.ResumeLayout(false)
@@ -14596,34 +14695,6 @@ Partial Class frmMainInterface
         CType(Me.txtFPAAmount,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.txtFPAYear,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dtFPADate,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabControlPanel2.ResumeLayout(false)
-        Me.PanelEx2.ResumeLayout(false)
-        Me.PanelEx5.ResumeLayout(false)
-        Me.PanelEx5.PerformLayout
-        Me.PanelDA.ResumeLayout(false)
-        Me.PanelDA.PerformLayout
-        Me.GroupPanel1.ResumeLayout(false)
-        CType(Me.DASlipContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtDAYear,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabControlPanel1.ResumeLayout(false)
-        Me.PanelEx1.ResumeLayout(false)
-        Me.PanelEx4.ResumeLayout(false)
-        Me.PanelEx4.PerformLayout
-        Me.PanelSOC.ResumeLayout(false)
-        Me.PanelSOC.PerformLayout
-        CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dtIdentificationDate,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtCPsIdentified,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.TabColorContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DataGridContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtSOCCPsRemaining,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtSOCCPsEliminated,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtSOCCPsUnfit,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtSOCCPsDeveloped,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.txtSOCYear,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControlPanel8.ResumeLayout(false)
         Me.PanelAC.ResumeLayout(false)
         Me.PanelAC.PerformLayout
@@ -15656,5 +15727,10 @@ End Sub
     Friend WithEvents lblIDRGridInfo As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblFPAGridInfo As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblDAGridInfo As DevComponents.DotNetBar.LabelX
+    Friend WithEvents rbrDownloadInstaller As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents cpgrDownloadInstaller As DevComponents.DotNetBar.CircularProgressItem
+    Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
+    Friend WithEvents pgrDownloadInstaller As DevComponents.DotNetBar.ProgressBarItem
+    Friend WithEvents btnDownloadInstallerInBrowser As DevComponents.DotNetBar.ButtonItem
 
 End Class
