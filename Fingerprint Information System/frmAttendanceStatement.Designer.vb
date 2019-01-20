@@ -25,6 +25,7 @@ Partial Class frmAttendanceStmt
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAttendanceStmt))
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel6 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGenerateCL = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
@@ -32,7 +33,6 @@ Partial Class frmAttendanceStmt
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.chkStatementOnly = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkCoB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
@@ -113,6 +113,23 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel6.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel6.TabIndex = 25
         Me.GroupPanel6.Text = "Period"
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(345, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(141, 90)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 26
+        Me.CircularProgress1.TabStop = False
         '
         'btnGenerateCL
         '
@@ -315,23 +332,6 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel5.TabIndex = 24
         Me.GroupPanel5.Text = "Statement Format"
         '
-        'CircularProgress1
-        '
-        '
-        '
-        '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(345, 0)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(141, 90)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 26
-        Me.CircularProgress1.TabStop = False
-        '
         'chkStatementOnly
         '
         Me.chkStatementOnly.AutoSize = True
@@ -459,6 +459,7 @@ Partial Class frmAttendanceStmt
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmAttendanceStmt"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Attendance Statement"
         Me.TitleText = "<b>Attendance Statement</b>"

@@ -404,6 +404,7 @@ Partial Class FrmSOCReportSentStatus
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmSOCReportSentStatus"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Set Report Sent Status"
         Me.TitleText = "<b>Set Report Sent Status</b>"

@@ -33,13 +33,13 @@ Partial Class FrmSOCGraveCrimes
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.txtYear = New DevComponents.Editors.IntegerInput()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -167,6 +167,23 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
+        '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(392, 0)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(115, 86)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 52
+        Me.CircularProgress1.TabStop = False
         '
         'LabelX3
         '
@@ -338,23 +355,6 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.SOCRegisterTableAdapter.ClearBeforeFill = True
         '
-        'CircularProgress1
-        '
-        '
-        '
-        '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(392, 0)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(115, 86)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 52
-        Me.CircularProgress1.TabStop = False
-        '
         'bgwLetter
         '
         Me.bgwLetter.WorkerReportsProgress = True
@@ -374,6 +374,7 @@ Partial Class FrmSOCGraveCrimes
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmSOCGraveCrimes"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Statement of Grave Crimes"
         Me.TitleText = "<b>Statement of Grave Crimes</b>"

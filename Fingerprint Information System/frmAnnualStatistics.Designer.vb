@@ -27,13 +27,13 @@ Partial Class frmAnnualStatistics
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByYear = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGeneratebyPeriod = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.bgwAnnualStatistics = New System.ComponentModel.BackgroundWorker()
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.CdRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
@@ -120,16 +120,6 @@ Partial Class frmAnnualStatistics
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 28
-        '
-        'btnOpenFolder
-        '
-        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenFolder.Location = New System.Drawing.Point(225, 102)
-        Me.btnOpenFolder.Name = "btnOpenFolder"
-        Me.btnOpenFolder.Size = New System.Drawing.Size(110, 29)
-        Me.btnOpenFolder.TabIndex = 6
-        Me.btnOpenFolder.Text = "Open Folder"
         '
         'CircularProgress1
         '
@@ -296,6 +286,16 @@ Partial Class frmAnnualStatistics
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(225, 102)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(110, 29)
+        Me.btnOpenFolder.TabIndex = 6
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
         'bgwAnnualStatistics
         '
         Me.bgwAnnualStatistics.WorkerReportsProgress = True
@@ -350,6 +350,7 @@ Partial Class frmAnnualStatistics
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmAnnualStatistics"
+        Me.ShowInTaskbar = False
         Me.Text = "Annual Statistics"
         Me.TitleText = "<b>Annual Statistics</b>"
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()

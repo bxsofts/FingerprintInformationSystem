@@ -412,6 +412,7 @@ Partial Class frmFPAStatement
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmFPAStatement"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Revenue Income Statement"
         Me.TitleText = "<b>FP Attestation Statement</b>"

@@ -172,6 +172,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmFISBackupList.Designer.vb">
+      <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFISBackupList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmProgressBar.Designer.vb">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </Compile>
@@ -284,9 +290,6 @@
       <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmSOC-ReportSentStatus.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmPopupMessage.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
@@ -481,6 +484,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
+    <EmbeddedResource Include="frmFISBackupList.resx">
+      <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProgressBar.resx">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </EmbeddedResource>
@@ -545,10 +551,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSOC-ReportSentStatus.resx">
       <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmPopupMessage.resx">
-      <DependentUpon>FrmPopupMessage.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CD Register.rdlc" />

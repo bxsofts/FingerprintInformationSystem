@@ -373,6 +373,7 @@ Partial Class FrmIndividualPerformance
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmIndividualPerformance"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Individual Performance"
         Me.TitleText = "<b>Individual Performance</b>"

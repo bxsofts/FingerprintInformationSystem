@@ -342,6 +342,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmSOC_ListOfIdentifiedCases"
+        Me.ShowInTaskbar = False
         Me.Text = "List of Identified Cases"
         Me.TitleText = "<b>List of Identified Cases</b>"
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()

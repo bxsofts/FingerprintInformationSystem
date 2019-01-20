@@ -182,6 +182,7 @@ Partial Class frmRevenueCollection
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmRevenueCollection"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Revenue Collection Statement"
         Me.TitleText = "<b>Revenue Collection Statement</b>"
