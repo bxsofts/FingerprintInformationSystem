@@ -64,9 +64,9 @@ Partial Class frmSplashScreen
         Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVersion.Location = New System.Drawing.Point(337, 193)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(123, 32)
+        Me.lblVersion.Size = New System.Drawing.Size(122, 32)
         Me.lblVersion.TabIndex = 17
-        Me.lblVersion.Text = "V 12.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Copyright © Baiju Xavior"
+        Me.lblVersion.Text = "<b>V 12.0</b> <br/>" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Copyright © Baiju Xavior"
         Me.lblVersion.TextAlignment = System.Drawing.StringAlignment.Far
         '
         'StyleManager1

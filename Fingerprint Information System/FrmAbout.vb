@@ -18,7 +18,9 @@
         End If
         Me.Text = String.Format("About {0}", ApplicationTitle)
 
-        Me.LabelVersion.Text = "V " & My.Application.Info.Version.ToString.Substring(0, 4) & vbCrLf & "Licenced To: " & ShortOfficeName & ", " & FullDistrictName
+       
+
+        Me.LabelVersion.Text = "<b>V " & My.Application.Info.Version.ToString.Substring(0, 4) & "</b><br/>Licenced To: " & ShortOfficeName & ", " & FullDistrictName
 
     End Sub
 

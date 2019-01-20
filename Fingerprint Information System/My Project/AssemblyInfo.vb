@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Fingerprint Information System")> 
 <Assembly: AssemblyDescription("A program to automate Single Digit Fingerprint Bureau Registers. This product is designed and programmed by Baiju Xavior, Fingerprint Expert. All rights reserved.")> 
-<Assembly: AssemblyCompany("email - baijuxavior@gmail.com; Ph: - 9497975974, 7907517582")> 
+<Assembly: AssemblyCompany("email - baijuxavior@gmail.com; Ph: - 7907517582")> 
 <Assembly: AssemblyProduct("Fingerprint Information System")> 
 <Assembly: AssemblyCopyright("Copyright © Baiju Xavior 2007-2018")> 
 <Assembly: AssemblyTrademark("")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("12.2.0.0")> 
-<Assembly: AssemblyFileVersion("12.2.0.0")> 
+<Assembly: AssemblyVersion("12.5.0.0")> 
+<Assembly: AssemblyFileVersion("12.5.0.0")> 
