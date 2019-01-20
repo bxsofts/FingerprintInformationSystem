@@ -435,7 +435,7 @@ Public Class frmMainInterface
         blApplicationIsLoading = False
 
         CheckForUpdatesAtStartup()
-
+        UploadVersionInfoToDrive()
         If DBExists = False Then
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
@@ -2760,7 +2760,7 @@ Public Class frmMainInterface
                 Me.lblCurrentMonth.Visible = False
                 Me.txtIOOfficerName.Focus()
                 Me.IODatagrid.Cursor = Cursors.Default
-
+                Me.AcceptButton = btnSaveIO
 
             Case Me.OSTabItem.Name
                 Me.pnlRegisterName.Text = "Office Settings"
@@ -2769,6 +2769,7 @@ Public Class frmMainInterface
                 Me.lblCurrentYear.Visible = False
                 Me.lblCurrentMonth.Visible = False
                 Me.txtFullOffice.Focus()
+                Me.AcceptButton = btnSaveOfficeSettings
 
             Case Me.IDRTabItem.Name
                 Me.pnlRegisterName.Text = "Identification Register"
@@ -5464,6 +5465,16 @@ errhandler:
             btnSaveAC.Focus()
             Call ACSaveButtonAction()
         End If
+
+        If CurrentTab = "OS" Then
+            btnSaveOfficeSettings.Focus()
+            Call SaveOfficeSettings()
+        End If
+
+        If CurrentTab = "IO" Then
+            btnSaveIO.Focus()
+            Call SaveOfficerList()
+        End If
     End Sub
 
     Private Sub SearchHotKey() Handles btnDummySearch.Click
@@ -7520,7 +7531,7 @@ errhandler:
         DirectCast(sender, Control).Text = vbNullString
 
     End Sub
-    Private Sub SaveOfficerList(sender As Object, e As EventArgs) Handles btnSaveIO.Click
+    Private Sub SaveOfficerList() Handles btnSaveIO.Click
         If Me.lblDesignation.Visible = False Then
             MessageBoxEx.Show("Please press 'Edit' or 'Open' button to edit, then press 'Save'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -16868,17 +16879,28 @@ errhandler:
         End If
 
     End Sub
-    Private Sub CheckForUpdatesAtStartup()
-        If InternetAvailable() = False Then
-            Exit Sub
-        End If
+    Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
+        Dim updateavailable As Boolean = CheckForUpdates()
+        bgwUpdateChecker.ReportProgress(100, updateavailable)
+    End Sub
 
-        If CheckForUpdates() Then
+    Private Sub bgwUpdateChecker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateChecker.ProgressChanged
+        If e.ProgressPercentage = 100 And e.UserState = True Then
             If MessageBoxEx.Show("A new version '" & strAppName & " V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
                 ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
                 DownloadInstaller()
             End If
         End If
+    End Sub
+
+
+
+    Private Sub CheckForUpdatesAtStartup()
+        If InternetAvailable() = False Then
+            Exit Sub
+        End If
+        bgwUpdateChecker.RunWorkerAsync()
+
     End Sub
 
     Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
@@ -16947,6 +16969,83 @@ errhandler:
 
    
    
+#Region " VERSION FILE"
+
+    Private Sub UploadVersionInfoToDrive()
+
+        If InternetAvailable() = False Then
+            Exit Sub
+        End If
+
+        bgwVersionUploader.RunWorkerAsync()
+
+    End Sub
+
+    Private Sub bgwVersionUploader_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwVersionUploader.DoWork
+        Try
+
+            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'VersionFolder'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+            Dim VersionFolderID As String = ""
+            Dim cnt = Results.Files.Count
+
+            If cnt > 0 Then
+                VersionFolderID = Results.Files(0).Id
+            Else
+                Exit Sub
+            End If
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and name contains '" & ShortDistrictName & "' and trashed = false and '" & VersionFolderID & "' in parents"
+            List.Fields = "files(id, name)"
+
+            Results = List.Execute
+
+            Dim VersionFileID As String = ""
+            Dim VersionFileName As String = ""
+            Dim VersionFile = New Google.Apis.Drive.v3.Data.File
+
+            cnt = Results.Files.Count
+
+            If cnt > 0 Then 'update version
+                VersionFileID = Results.Files(0).Id
+                VersionFileName = Results.Files(0).Name
+                Dim LocalVersion As String = ShortDistrictName & " - V" & My.Application.Info.Version.ToString.Substring(0, 4)
+                If VersionFileName <> LocalVersion Then
+                    VersionFile.Name = LocalVersion
+                    VersionFile = FISService.Files.Update(VersionFile, VersionFileID).Execute
+                End If
+
+            Else ' create version
+                Dim parentlist As New List(Of String)
+                parentlist.Add(VersionFolderID) 'parent forlder
+
+                VersionFile.Parents = parentlist
+                VersionFile.Name = ShortDistrictName & " - V" & My.Application.Info.Version.ToString.Substring(0, 4)
+
+                VersionFile.MimeType = "application/vnd.google-apps.folder"
+
+                VersionFile = FISService.Files.Create(VersionFile).Execute
+                Exit Sub
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+#End Region
+
+    
   
-   
 End Class

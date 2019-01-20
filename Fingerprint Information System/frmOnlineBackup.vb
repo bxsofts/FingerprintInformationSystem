@@ -902,6 +902,8 @@ Public Class frmOnlineBackup
 
 #End Region
 
+
+#Region "DRIVE STORAGE DETAILS"
     Private Sub GetDriveStorageDetails() Handles lblSelectedFile.Click
         Try
             Me.lblDriveStatus.Text = ""
@@ -972,8 +974,6 @@ Public Class frmOnlineBackup
         Return CalculatedSize.ToString & " " & SizeType
     End Function
 
-
-
     Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwService.RunWorkerCompleted, bgwUpload.RunWorkerCompleted, bgwDownload.RunWorkerCompleted
 
         DisplayInformation()
@@ -1024,8 +1024,9 @@ Public Class frmOnlineBackup
             Me.Cursor = Cursors.Default
         End If
     End Sub
+#End Region
 
-   
+
 
 End Class
 
