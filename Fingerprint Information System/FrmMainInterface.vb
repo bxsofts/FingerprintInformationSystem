@@ -2162,9 +2162,12 @@ Public Class frmMainInterface
     End Sub
 
     Public Sub SetRandomDesktopAlertColor()
-        Dim rnd = New Random()
-        DesktopAlert.AlertColor = rnd.Next(0, 10)
-
+        If Me.btnRandomColor.Checked Then
+            Dim rnd = New Random()
+            DesktopAlert.AlertColor = rnd.Next(0, 10)
+        Else
+            DesktopAlert.AlertColor = eDesktopAlertColor.Default
+        End If
     End Sub
 
 #End Region
@@ -15399,6 +15402,13 @@ errhandler:
         frmAnnualStatistics.ShowDialog()
 
     End Sub
+
+
+    Private Sub ListOfMonthlyIDCases(sender As Object, e As EventArgs) Handles btnListOfMonthlyIDCases.Click
+        On Error Resume Next
+        FrmSOC_ListOfIdentifiedCases.StartPosition = FormStartPosition.CenterParent
+        FrmSOC_ListOfIdentifiedCases.ShowDialog()
+    End Sub
     Private Sub GistOfIdentifiedCases(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGistOfIdentifiedCases.Click
         On Error Resume Next
 
@@ -16936,5 +16946,7 @@ errhandler:
 #End Region
 
    
+   
+  
    
 End Class
