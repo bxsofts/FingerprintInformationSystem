@@ -66,6 +66,8 @@ Module modMain
     Public boolUseTIinLetter As Boolean = True
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+
+    Public AdminPrevilege As Boolean = False
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
@@ -220,6 +222,34 @@ Module modMain
         Return thisFileInUse
     End Function
 
+
+    Public Function CalculateFileSize(FileSize As Long) As String
+        Dim CalculatedSize As Decimal
+
+        Dim SizeType As String = "B"
+
+        If FileSize < 1024 Then
+            CalculatedSize = FileSize
+
+        ElseIf FileSize >= 1024 AndAlso FileSize < (1024 ^ 2) Then 'KB
+            CalculatedSize = Math.Round((FileSize / 1024), 2)
+            SizeType = "KB"
+
+        ElseIf FileSize >= (1024 ^ 2) AndAlso FileSize < (1024 ^ 3) Then 'MB
+            CalculatedSize = Math.Round((FileSize / (1024 ^ 2)), 2)
+            SizeType = "MB"
+
+        ElseIf FileSize >= (1024 ^ 3) AndAlso FileSize < (1024 ^ 4) Then 'GB
+            CalculatedSize = Math.Round((FileSize / (1024 ^ 3)), 2)
+            SizeType = "GB"
+
+        ElseIf FileSize >= (1024 ^ 4) Then 'TB
+            CalculatedSize = Math.Round((FileSize / (1024 ^ 4)), 2)
+            SizeType = "TB"
+
+        End If
+        Return CalculatedSize.ToString & SizeType
+    End Function
 End Module
 
 

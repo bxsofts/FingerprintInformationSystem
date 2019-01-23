@@ -10,12 +10,13 @@
         Me.txtInputBox.Focus()
         ButtonClicked = "Cancel"
     End Sub
-    Sub SetTitleandMessage(ByVal Title As String, ByVal Message As String, Optional ByVal DefaultValue As String = "")
+    Public Sub SetTitleandMessage(ByVal Title As String, ByVal Message As String, ByVal PasswordChar As Boolean, Optional ByVal DefaultValue As String = "")
         On Error Resume Next
         Me.Text = Title
         Me.TitleText = "<b>" & Title & "</b>"
         Me.lblMessage.Text = Message
         Me.txtInputBox.Text = DefaultValue
+        Me.txtInputBox.UseSystemPasswordChar = PasswordChar
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click

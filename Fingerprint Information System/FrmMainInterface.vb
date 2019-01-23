@@ -6831,7 +6831,7 @@ errhandler:
             End If
 
 
-            frmInputBox.SetTitleandMessage("Confirm Delete All Records", "Please enter the words 'I want to delete all records' to confirm deletion. This is a security measure.")
+            frmInputBox.SetTitleandMessage("Confirm Delete All Records", "Please enter the words 'I want to delete all records' to confirm deletion. This is a security measure.", False)
             frmInputBox.AcceptButton = frmInputBox.btnCancel
             frmInputBox.ShowDialog()
             If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
@@ -14249,7 +14249,7 @@ errhandler:
 
                 Dim body As New Google.Apis.Drive.v3.Data.File()
                 body.Name = BackupFileName
-                body.Description = sBackupTime
+                body.Description = ShortOfficeName & "_" & ShortDistrictName
                 body.MimeType = "database/mdb"
 
                 Dim parentlist As New List(Of String)
@@ -14290,7 +14290,7 @@ errhandler:
 
             body.Parents = parentlist
             body.Name = BackupFolder
-            body.Description = "FIS Backup Folder"
+            body.Description = ShortOfficeName & "_" & ShortDistrictName
             body.MimeType = "application/vnd.google-apps.folder"
 
             Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
@@ -14413,6 +14413,40 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(BackupPath)
             Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
         End If
+    End Sub
+    Private Sub btnFISOnlineFileListBasic_Click(sender As Object, e As EventArgs) Handles btnFISOnlineFileListBasic.Click
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        AdminPrevilege = False
+        Me.Cursor = Cursors.Default
+        frmFISBackupList.ShowDialog()
+    End Sub
+
+    Private Sub btnFISFileList_Click(sender As Object, e As EventArgs) Handles btnFISOnlineFileList.Click
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        Me.Cursor = Cursors.Default
+        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+        If frmInputBox.txtInputBox.Text <> "minutiae8" Then
+            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        AdminPrevilege = True
+        frmFISBackupList.ShowDialog()
     End Sub
 
 #End Region
@@ -16777,10 +16811,17 @@ errhandler:
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
+
         DownloadInstaller()
     End Sub
 
     Private Sub DownloadInstaller()
+
+        If Me.rbrDownloadInstaller.Visible Then
+            MessageBoxEx.Show("Another download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
         pgrDownloadInstaller.Visible = True
         pgrDownloadInstaller.Value = 0
@@ -17046,6 +17087,6 @@ errhandler:
     End Sub
 #End Region
 
-    
-  
+
+   
 End Class

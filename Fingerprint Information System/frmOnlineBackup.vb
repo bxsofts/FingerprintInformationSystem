@@ -63,6 +63,7 @@ Public Class frmOnlineBackup
 
 
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
+                Me.Cursor = Cursors.Default
                 MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
                 Exit Sub
@@ -168,7 +169,7 @@ Public Class frmOnlineBackup
 
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
             ' List.Q = "mimeType = 'database/mdb'" ' list all files
-            List.Fields = "nextPageToken, files(id, name, description)"
+            List.Fields = "nextPageToken, files(id, name, modifiedTime)"
 
             Dim Results = List.Execute
 
@@ -179,7 +180,8 @@ Public Class frmOnlineBackup
 
             For Each Result In Results.Files
                 Dim item As ListViewItem = New ListViewItem(Result.Name)
-                item.SubItems.Add(Result.Description)
+                Dim modifiedtime As DateTime = Result.ModifiedTime
+                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                 item.SubItems.Add(Result.Id)
                 item.SubItems.Add("")
                 item.ImageIndex = 0
@@ -281,7 +283,7 @@ Public Class frmOnlineBackup
 
             body.Parents = parentlist
             body.Name = BackupFolder
-            body.Description = "FIS Backup Folder"
+            body.Description = ShortOfficeName & "-" & ShortDistrictName
             body.MimeType = "application/vnd.google-apps.folder"
 
             Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
@@ -304,7 +306,7 @@ Public Class frmOnlineBackup
             Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
 
             body.Name = "FIS Backup"
-            body.Description = "FIS Master Backup Folder"
+            body.Description = "Admin"
             body.MimeType = "application/vnd.google-apps.folder"
 
             Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
@@ -402,7 +404,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = sBackupTime
+            body.Description = ShortOfficeName & "_" & ShortDistrictName
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -946,34 +948,6 @@ Public Class frmOnlineBackup
 
     End Sub
 
-    Private Function CalculateFileSize(FileSize) As String
-        Dim CalculatedSize As Decimal
-
-        Dim SizeType As String = "B"
-
-        If FileSize < 1024 Then
-            CalculatedSize = FileSize
-
-        ElseIf FileSize > 1024 AndAlso FileSize < (1024 ^ 2) Then 'KB
-            CalculatedSize = Math.Round((FileSize / 1024), 2)
-            SizeType = "KB"
-
-        ElseIf FileSize > (1024 ^ 2) AndAlso FileSize < (1024 ^ 3) Then 'MB
-            CalculatedSize = Math.Round((FileSize / (1024 ^ 2)), 2)
-            SizeType = "MB"
-
-        ElseIf FileSize > (1024 ^ 3) AndAlso FileSize < (1024 ^ 4) Then 'GB
-            CalculatedSize = Math.Round((FileSize / (1024 ^ 3)), 2)
-            SizeType = "GB"
-
-        ElseIf FileSize > (1024 ^ 4) Then 'TB
-            CalculatedSize = Math.Round((FileSize / (1024 ^ 4)), 2)
-            SizeType = "TB"
-
-        End If
-        Return CalculatedSize.ToString & " " & SizeType
-    End Function
-
     Private Sub BackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwService.RunWorkerCompleted, bgwUpload.RunWorkerCompleted, bgwDownload.RunWorkerCompleted
 
         DisplayInformation()
@@ -1027,12 +1001,10 @@ Public Class frmOnlineBackup
 #End Region
 
 
-
-End Class
-
-Public Class DownloadArgs
-    Public ID As String
-    Public SelectedFileName As String
-    Public DownloadFileName As String
-    Public BackupDate As String
+    Public Class DownloadArgs
+        Public ID As String
+        Public SelectedFileName As String
+        Public DownloadFileName As String
+        Public BackupDate As String
+    End Class
 End Class

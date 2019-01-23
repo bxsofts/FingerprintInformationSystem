@@ -621,7 +621,7 @@ Public Class FrmAdvancedSearch
                 Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("You are about to DELETE records from " & Register & ". Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
                 If r = Windows.Forms.DialogResult.No Then Exit Sub
                 If r = Windows.Forms.DialogResult.Yes Then
-                    frmInputBox.SetTitleandMessage("Delete Records", "Please enter the word 'DELETE' to confirm deletion. This is a security measure.")
+                    frmInputBox.SetTitleandMessage("Delete Records", "Please enter the word 'DELETE' to confirm deletion. This is a security measure.", False)
                     frmInputBox.AcceptButton = frmInputBox.btnCancel
                     frmInputBox.ShowDialog()
                     If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
