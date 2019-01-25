@@ -1,6 +1,5 @@
 ﻿
 Imports System.IO
-
 Imports DevComponents.DotNetBar
 
 Imports Google
@@ -32,6 +31,10 @@ Public Class frmFISBackupList
     Dim ServiceCreated As Boolean = False
     Dim CurrentFolderName As String = ""
 
+    Dim FileOwner As String = ""
+
+   
+
 #Region "LOAD DATA"
 
     Private Sub frmFISBckupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,11 +43,17 @@ Public Class frmFISBackupList
             Me.Text = "FIS Online File List - Admin"
             Me.TitleText = "<b>FIS Online File List - Admin</b>"
             Me.listViewEx1.Columns(3).Width = 290
+            Me.Width = 1150
         Else
             Me.Text = "FIS Online File List"
             Me.TitleText = "<b>FIS Online File List</b>"
             Me.listViewEx1.Columns(3).Width = 0
+            Me.Width = 990
         End If
+        Me.CenterToScreen()
+
+        FileOwner = ShortOfficeName & "_" & ShortDistrictName
+
         Me.lblDriveSpaceUsed.Text = ""
         Me.lblItemCount.Text = ""
 
@@ -66,13 +75,26 @@ Public Class frmFISBackupList
         Me.listViewEx1.Items.Clear()
         ServiceCreated = False
         CurrentFolderName = ""
+
+        CircularProgress1.ProgressText = ""
+        lblProgressStatus.Text = "Fetching Files from Google Drive..."
+        CircularProgress1.IsRunning = True
+        CircularProgress1.ProgressColor = GetProgressColor()
+        CircularProgress1.ProgressBarType = eCircularProgressType.Donut
+        CircularProgress1.Show()
+        lblProgressStatus.Show()
+
+        blUploadIsProgressing = False
+        blDownloadIsProgressing = False
+        blListIsLoading = False
+
         bgwListFiles.RunWorkerAsync("root")
 
     End Sub
 
 
     Private Sub CreateServiceAndLoadData(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwListFiles.DoWork
-
+        blListIsLoading = True
         Me.Cursor = Cursors.WaitCursor
         Try
             If ServiceCreated = False Then
@@ -86,6 +108,7 @@ Public Class frmFISBackupList
             GetDriveUsageDetails()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
+            blListIsLoading = False
             ServiceCreated = False
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -95,26 +118,34 @@ Public Class frmFISBackupList
     Private Sub bgwListFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwListFiles.ProgressChanged
         Try
 
-       
-        If TypeOf e.UserState Is ListViewItem Then
-            listViewEx1.Items.Add(e.UserState)
-        End If
 
-        If TypeOf e.UserState Is String Then
-            lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
-            Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
-                If uSelectedFile <> "" Then Me.listViewEx1.FindItemWithText(ShortOfficeName & "_" & ShortDistrictName & "_" & uSelectedFile)
-            uSelectedFile = ""
-        End If
+            If TypeOf e.UserState Is ListViewItem Then
+                listViewEx1.Items.Add(e.UserState)
+            End If
 
-            Me.Cursor = Cursors.Default
+            If TypeOf e.UserState Is String Then
+                lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
+                Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
+                If uSelectedFile <> "" Then Me.listViewEx1.FindItemWithText(FileOwner & "_" & uSelectedFile)
+                uSelectedFile = ""
+            End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+    Private Sub bgwListFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwListFiles.RunWorkerCompleted
+        Me.Cursor = Cursors.Default
+        CircularProgress1.IsRunning = False
+        CircularProgress1.ProgressText = ""
+        CircularProgress1.ProgressBarType = eCircularProgressType.Line
+        lblProgressStatus.Text = ""
+        CircularProgress1.Hide()
+        lblProgressStatus.Hide()
+        blListIsLoading = False
 
+    End Sub
 
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
         Try
@@ -165,7 +196,7 @@ Public Class frmFISBackupList
                 ElseIf Result.MimeType = "application/x-msdownload" Then ' 
                     item.ImageIndex = 1 'exe
                     item.SubItems.Add(CalculateFileSize(Result.Size))
-                ElseIf Result.MimeType = "database/mdb" Then
+                ElseIf Result.MimeType = "database/mdb" Or Result.MimeType = "files/mdb" Then
                     item.ImageIndex = 2 'mdb
                     item.SubItems.Add(CalculateFileSize(Result.Size))
                 Else
@@ -175,7 +206,7 @@ Public Class frmFISBackupList
 
                 item.SubItems.Add(Result.Id)
 
-                If Result.Name = "InstallerFile" Or Result.Name = "FIS Backup" Then
+                If Result.Name = "InstallerFile" Or Result.Name = "FIS Backup" Or Result.Name.StartsWith(strAppName & " V") Then
                     item.SubItems.Add("Admin")
                 ElseIf Result.Description = "FIS Backup Folder" Then
                     item.SubItems.Add(Result.Name)
@@ -199,12 +230,19 @@ Public Class frmFISBackupList
 
     End Sub
 
+
     Private Sub ListViewEx1_DoubleClick(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick
 
 
         If Me.listViewEx1.SelectedItems.Count = 0 Then
             Exit Sub
         End If
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
+            Exit Sub
+        End If
+       
 
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
@@ -257,10 +295,12 @@ Public Class frmFISBackupList
 
 
     Private Sub RefreshFileList(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        If Me.CircularProgress1.Visible Then
-            MessageBoxEx.Show("Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
             Exit Sub
         End If
+
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -269,7 +309,78 @@ Public Class frmFISBackupList
         End If
         CurrentFolderID = "root"
         Me.listViewEx1.Items.Clear()
+        CircularProgress1.ProgressText = ""
+        lblProgressStatus.Text = "Fetching Files from Google Drive..."
+        CircularProgress1.IsRunning = True
+        CircularProgress1.ProgressColor = GetProgressColor()
+        CircularProgress1.ProgressBarType = eCircularProgressType.Donut
+        CircularProgress1.Show()
+        lblProgressStatus.Show()
         bgwListFiles.RunWorkerAsync("root")
+    End Sub
+
+#End Region
+
+
+#Region "NEW FOLDER"
+
+    Private Sub btnNewFolder_Click(sender As Object, e As EventArgs) Handles btnNewFolder.Click
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
+            Exit Sub
+        End If
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Or Trim(frmInputBox.txtInputBox.Text) = "" Then Exit Sub
+
+        Try
+
+            Me.Cursor = Cursors.WaitCursor
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(CurrentFolderID) 'parent forlder
+
+            NewDirectory.Parents = parentlist
+            NewDirectory.Name = frmInputBox.txtInputBox.Text
+            NewDirectory.MimeType = "application/vnd.google-apps.folder"
+            If AdminPrevilege Then
+                NewDirectory.Description = "Admin_" & FileOwner
+            Else
+                NewDirectory.Description = FileOwner
+            End If
+
+            NewDirectory = FISService.Files.Create(NewDirectory).Execute
+
+            Dim List As FilesResource.GetRequest = FISService.Files.Get(NewDirectory.Id)
+            List.Fields = "id, modifiedTime, description"
+            Dim Result = List.Execute
+
+            Dim item As ListViewItem
+
+            item = New ListViewItem(NewDirectory.Name)
+            Dim modifiedtime As DateTime = Result.ModifiedTime
+            item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+            item.SubItems.Add("")
+            item.SubItems.Add(Result.Id)
+            item.SubItems.Add(Result.Description)
+
+            item.ImageIndex = 0
+            Me.listViewEx1.Items.Add(item)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+
     End Sub
 
 #End Region
@@ -278,6 +389,11 @@ Public Class frmFISBackupList
 #Region "UPLOAD FILE"
 
     Private Sub btnUploadFile_Click(sender As Object, e As EventArgs) Handles btnUploadFile.Click
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
+            Exit Sub
+        End If
+
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
@@ -307,11 +423,12 @@ Public Class frmFISBackupList
         End If
 
         Me.Cursor = Cursors.WaitCursor
+        CircularProgress1.ProgressBarType = eCircularProgressType.Line
         CircularProgress1.Visible = True
-        CircularProgress1.ProgressText = 0
+        CircularProgress1.ProgressText = "0"
         CircularProgress1.IsRunning = True
-        lblStatus.Text = "Uploading File..."
-        lblStatus.Visible = True
+        lblProgressStatus.Text = "Uploading File..."
+        lblProgressStatus.Visible = True
 
         bgwUploadFile.RunWorkerAsync(uSelectedFile)
 
@@ -319,10 +436,17 @@ Public Class frmFISBackupList
 
     Private Sub bgwUploadFile_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadFile.DoWork
         Try
+            blUploadIsProgressing = True
+
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
             body.MimeType = "files/" & My.Computer.FileSystem.GetFileInfo(e.Argument).Extension.Replace(".", "")
-            body.Description = ShortOfficeName & "_" & ShortDistrictName
+
+            If AdminPrevilege Then
+                body.Description = "Admin_" & FileOwner
+            Else
+                body.Description = FileOwner
+            End If
 
             Dim parentlist As New List(Of String)
             parentlist.Add(CurrentFolderID)
@@ -357,6 +481,7 @@ Public Class frmFISBackupList
 
             Stream.Close()
         Catch ex As Exception
+            blUploadIsProgressing = False
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
@@ -370,21 +495,23 @@ Public Class frmFISBackupList
         Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
         bgwUploadFile.ReportProgress(percent, uBytesUploaded)
     End Sub
+
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
         CircularProgress1.ProgressText = e.ProgressPercentage
-        lblStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+        lblProgressStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
         If TypeOf e.UserState Is ListViewItem Then
             listViewEx1.Items.Add(e.UserState)
         End If
     End Sub
-  Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadFile.RunWorkerCompleted
+    Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadFile.RunWorkerCompleted
 
         CircularProgress1.Visible = False
-        lblStatus.Visible = False
-
+        lblProgressStatus.Visible = False
+        blUploadIsProgressing = False
 
         If uUploadStatus = UploadStatus.Completed Then
             MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            GetDriveUsageDetails()
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -400,14 +527,15 @@ Public Class frmFISBackupList
 
     Private Sub DownloadSelectedFile() Handles btnDownloadFile.Click
 
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
             Exit Sub
         End If
 
-        If Me.CircularProgress1.Visible Then
-            MessageBoxEx.Show("Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -432,14 +560,15 @@ Public Class frmFISBackupList
         End If
 
         Me.Cursor = Cursors.WaitCursor
+        CircularProgress1.ProgressBarType = eCircularProgressType.Line
         CircularProgress1.Visible = True
         CircularProgress1.ProgressText = 0
         CircularProgress1.IsRunning = True
-        lblStatus.Text = "Downloading File..."
-        lblStatus.Visible = True
+        lblProgressStatus.Text = "Downloading File..."
+        lblProgressStatus.Visible = True
 
         Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
-        If fname.StartsWith("FingerPrintBackup-") Then
+        If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> "" Then
             fname = CurrentFolderName & "_" & fname
         End If
 
@@ -451,6 +580,8 @@ Public Class frmFISBackupList
 
 
         Try
+            blDownloadIsProgressing = True
+
             Dim request = FISService.Files.Get(e.Argument)
             request.Fields = "size"
             Dim file = request.Execute
@@ -475,6 +606,7 @@ Public Class frmFISBackupList
             mStream.Close()
 
         Catch ex As Exception
+            blDownloadIsProgressing = False
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
@@ -494,15 +626,13 @@ Public Class frmFISBackupList
     Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadFile.ProgressChanged
 
         CircularProgress1.ProgressText = e.ProgressPercentage
-        lblStatus.Text = CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
+        lblProgressStatus.Text = CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
     End Sub
-
-
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadFile.RunWorkerCompleted
 
         CircularProgress1.Visible = False
-        lblStatus.Visible = False
-
+        lblProgressStatus.Visible = False
+        blDownloadIsProgressing = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
             MessageBoxEx.Show("File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -521,8 +651,13 @@ Public Class frmFISBackupList
 
     Private Sub DeleteSelectedFile(sender As Object, e As EventArgs) Handles btnRemoveFile.Click
 
-        If Me.CircularProgress1.Visible Then
-            MessageBoxEx.Show("Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
+            Exit Sub
+        End If
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
@@ -546,17 +681,16 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = 0 And AdminPrevilege = False Then
-            MessageBoxEx.Show("Deletion is not allowed for folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = 0 And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And CurrentFolderName <> FileOwner Then
+            MessageBoxEx.Show("You are not authorized to delete the selected folder. You can delete folders inside '" & FileOwner & "' Folder or folders created by you only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> ShortOfficeName & "_" & ShortDistrictName And AdminPrevilege = False Then
-            MessageBoxEx.Show("You are not authorized to delete the selected file. You can delete files in your folder or files created by you only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And AdminPrevilege = False And CurrentFolderName <> FileOwner Then
+            MessageBoxEx.Show("You are not authorized to delete the selected file. You can delete files inside '" & FileOwner & "' Folder or files created by you only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
-
-
 
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -575,6 +709,7 @@ Public Class frmFISBackupList
             Me.Cursor = Cursors.WaitCursor
             RemoveFile(listViewEx1.SelectedItems(0).SubItems(3).Text, False)
             Me.listViewEx1.SelectedItems(0).Remove()
+            GetDriveUsageDetails()
             frmMainInterface.ShowDesktopAlert("Selected file deleted from Google Drive.")
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -618,5 +753,6 @@ Public Class frmFISBackupList
 #End Region
 
 
+   
 End Class
 

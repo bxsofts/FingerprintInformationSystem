@@ -68,6 +68,11 @@ Module modMain
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
     Public AdminPrevilege As Boolean = False
+
+    Public blDownloadIsProgressing As Boolean
+    Public blUploadIsProgressing As Boolean
+    Public blListIsLoading As Boolean
+
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
@@ -250,6 +255,23 @@ Module modMain
         End If
         Return CalculatedSize.ToString & SizeType
     End Function
+
+    Public Sub ShowActionInProgressMessage()
+        If blDownloadIsProgressing Then
+            MessageBoxEx.Show("File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If blUploadIsProgressing Then
+            MessageBoxEx.Show("File Upload is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If blListIsLoading Then
+            MessageBoxEx.Show("File List is loading. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+    End Sub
 End Module
 
 

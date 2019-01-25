@@ -30,6 +30,7 @@ Partial Class frmFISBackupList
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnNewFolder = New DevComponents.DotNetBar.ButtonX()
         Me.btnUploadFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
@@ -39,16 +40,16 @@ Partial Class frmFISBackupList
         Me.CreationDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.lblStatus = New DevComponents.DotNetBar.LabelX()
+        Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -62,10 +63,10 @@ Partial Class frmFISBackupList
         Me.btnDownloadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnDownloadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownloadFile.Image = CType(resources.GetObject("btnDownloadFile.Image"), System.Drawing.Image)
-        Me.btnDownloadFile.Location = New System.Drawing.Point(23, 253)
+        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 293)
         Me.btnDownloadFile.Name = "btnDownloadFile"
-        Me.btnDownloadFile.Size = New System.Drawing.Size(117, 59)
-        Me.btnDownloadFile.TabIndex = 3
+        Me.btnDownloadFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnDownloadFile.TabIndex = 4
         Me.btnDownloadFile.Text = "Download"
         '
         'btnRemoveFile
@@ -74,10 +75,10 @@ Partial Class frmFISBackupList
         Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
-        Me.btnRemoveFile.Location = New System.Drawing.Point(23, 336)
+        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 374)
         Me.btnRemoveFile.Name = "btnRemoveFile"
-        Me.btnRemoveFile.Size = New System.Drawing.Size(117, 59)
-        Me.btnRemoveFile.TabIndex = 4
+        Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnRemoveFile.TabIndex = 5
         Me.btnRemoveFile.Text = "Remove"
         '
         'bgwDownloadFile
@@ -94,13 +95,14 @@ Partial Class frmFISBackupList
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx2.Controls.Add(Me.btnNewFolder)
         Me.PanelEx2.Controls.Add(Me.btnUploadFile)
         Me.PanelEx2.Controls.Add(Me.btnDownloadFile)
         Me.PanelEx2.Controls.Add(Me.btnRemoveFile)
         Me.PanelEx2.Controls.Add(Me.btnRefresh)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelEx2.Location = New System.Drawing.Point(801, 0)
+        Me.PanelEx2.Location = New System.Drawing.Point(803, 0)
         Me.PanelEx2.Name = "PanelEx2"
         Me.PanelEx2.Size = New System.Drawing.Size(163, 482)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -111,16 +113,28 @@ Partial Class frmFISBackupList
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
         '
+        'btnNewFolder
+        '
+        Me.btnNewFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnNewFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnNewFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewFolder.Image = CType(resources.GetObject("btnNewFolder.Image"), System.Drawing.Image)
+        Me.btnNewFolder.Location = New System.Drawing.Point(16, 131)
+        Me.btnNewFolder.Name = "btnNewFolder"
+        Me.btnNewFolder.Size = New System.Drawing.Size(131, 59)
+        Me.btnNewFolder.TabIndex = 2
+        Me.btnNewFolder.Text = "New Folder"
+        '
         'btnUploadFile
         '
         Me.btnUploadFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnUploadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnUploadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadFile.Image = CType(resources.GetObject("btnUploadFile.Image"), System.Drawing.Image)
-        Me.btnUploadFile.Location = New System.Drawing.Point(23, 170)
+        Me.btnUploadFile.Location = New System.Drawing.Point(16, 212)
         Me.btnUploadFile.Name = "btnUploadFile"
-        Me.btnUploadFile.Size = New System.Drawing.Size(117, 59)
-        Me.btnUploadFile.TabIndex = 2
+        Me.btnUploadFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnUploadFile.TabIndex = 3
         Me.btnUploadFile.Text = "Upload"
         '
         'btnRefresh
@@ -129,11 +143,11 @@ Partial Class frmFISBackupList
         Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(23, 87)
+        Me.btnRefresh.Location = New System.Drawing.Point(16, 50)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(117, 59)
+        Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
         Me.btnRefresh.TabIndex = 1
-        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.Text = "Refresh List"
         '
         'lblDriveSpaceUsed
         '
@@ -152,7 +166,7 @@ Partial Class frmFISBackupList
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblItemCount, Me.lblDriveSpaceUsed})
         Me.Bar1.Location = New System.Drawing.Point(0, 459)
         Me.Bar1.Name = "Bar1"
-        Me.Bar1.Size = New System.Drawing.Size(801, 23)
+        Me.Bar1.Size = New System.Drawing.Size(803, 23)
         Me.Bar1.Stretch = True
         Me.Bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Bar1.TabIndex = 24
@@ -172,7 +186,7 @@ Partial Class frmFISBackupList
         '
         'CreationDate
         '
-        Me.CreationDate.Text = "Modified Date"
+        Me.CreationDate.Text = "Uploaded Date"
         Me.CreationDate.Width = 140
         '
         'FileName
@@ -185,7 +199,7 @@ Partial Class frmFISBackupList
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel1.Controls.Add(Me.lblStatus)
+        Me.GroupPanel1.Controls.Add(Me.lblProgressStatus)
         Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
@@ -193,7 +207,7 @@ Partial Class frmFISBackupList
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(801, 459)
+        Me.GroupPanel1.Size = New System.Drawing.Size(803, 459)
         '
         '
         '
@@ -225,19 +239,19 @@ Partial Class frmFISBackupList
         Me.GroupPanel1.TabIndex = 25
         Me.GroupPanel1.Text = "Available Backups"
         '
-        'lblStatus
+        'lblProgressStatus
         '
         '
         '
         '
-        Me.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblStatus.Location = New System.Drawing.Point(313, 284)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(169, 18)
-        Me.lblStatus.TabIndex = 4
-        Me.lblStatus.Text = "Downloading File..."
-        Me.lblStatus.TextAlignment = System.Drawing.StringAlignment.Center
-        Me.lblStatus.Visible = False
+        Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblProgressStatus.Location = New System.Drawing.Point(295, 271)
+        Me.lblProgressStatus.Name = "lblProgressStatus"
+        Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
+        Me.lblProgressStatus.TabIndex = 4
+        Me.lblProgressStatus.Text = "Fetching Files from Google Drive..."
+        Me.lblProgressStatus.TextAlignment = System.Drawing.StringAlignment.Center
+        Me.lblProgressStatus.Visible = False
         '
         'CircularProgress1
         '
@@ -246,11 +260,11 @@ Partial Class frmFISBackupList
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(313, 131)
+        Me.CircularProgress1.Location = New System.Drawing.Point(338, 146)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(169, 153)
+        Me.CircularProgress1.Size = New System.Drawing.Size(120, 120)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 3
         Me.CircularProgress1.TabStop = False
@@ -277,7 +291,7 @@ Partial Class frmFISBackupList
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(795, 435)
+        Me.listViewEx1.Size = New System.Drawing.Size(797, 435)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -287,6 +301,11 @@ Partial Class frmFISBackupList
         '
         Me.ID.Text = "File ID"
         Me.ID.Width = 290
+        '
+        'Description
+        '
+        Me.Description.Text = "Uploaded By"
+        Me.Description.Width = 120
         '
         'ImageList1
         '
@@ -309,7 +328,7 @@ Partial Class frmFISBackupList
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(801, 482)
+        Me.PanelEx3.Size = New System.Drawing.Size(803, 482)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -329,7 +348,7 @@ Partial Class frmFISBackupList
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(964, 482)
+        Me.PanelEx1.Size = New System.Drawing.Size(966, 482)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -347,27 +366,19 @@ Partial Class frmFISBackupList
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Description
-        '
-        Me.Description.Text = "Created By"
-        Me.Description.Width = 290
-        '
         'frmFISBackupList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(964, 482)
+        Me.ClientSize = New System.Drawing.Size(966, 482)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "frmFISBackupList"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "FIS Online File List"
         Me.TitleText = "<b>FIS Online File List</b>"
         Me.PanelEx2.ResumeLayout(False)
@@ -395,11 +406,12 @@ Partial Class frmFISBackupList
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents ID As System.Windows.Forms.ColumnHeader
-    Friend WithEvents lblStatus As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblProgressStatus As DevComponents.DotNetBar.LabelX
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents lblItemCount As DevComponents.DotNetBar.LabelItem
     Friend WithEvents btnUploadFile As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Description As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnNewFolder As DevComponents.DotNetBar.ButtonX
 End Class

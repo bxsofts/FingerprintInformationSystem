@@ -34,13 +34,14 @@ Partial Class frmOnlineBackup
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.lblStatus = New DevComponents.DotNetBar.LabelX()
+        Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.FileStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileLocation = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
@@ -192,7 +193,7 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel1.Controls.Add(Me.lblStatus)
+        Me.GroupPanel1.Controls.Add(Me.lblProgressStatus)
         Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
@@ -232,18 +233,18 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.TabIndex = 25
         Me.GroupPanel1.Text = "Available Backups"
         '
-        'lblStatus
+        'lblProgressStatus
         '
         '
         '
         '
-        Me.lblStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblStatus.Location = New System.Drawing.Point(362, 311)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(169, 18)
-        Me.lblStatus.TabIndex = 2
-        Me.lblStatus.Text = "Connecting to Google Drive..."
-        Me.lblStatus.TextAlignment = System.Drawing.StringAlignment.Center
+        Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblProgressStatus.Location = New System.Drawing.Point(298, 271)
+        Me.lblProgressStatus.Name = "lblProgressStatus"
+        Me.lblProgressStatus.Size = New System.Drawing.Size(199, 18)
+        Me.lblProgressStatus.TabIndex = 2
+        Me.lblProgressStatus.Text = "Fetching Files from Google Drive..."
+        Me.lblProgressStatus.TextAlignment = System.Drawing.StringAlignment.Center
         '
         'CircularProgress1
         '
@@ -252,11 +253,11 @@ Partial Class frmOnlineBackup
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(362, 158)
+        Me.CircularProgress1.Location = New System.Drawing.Point(337, 146)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(169, 153)
+        Me.CircularProgress1.Size = New System.Drawing.Size(120, 120)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 1
         Me.CircularProgress1.TabStop = False
@@ -270,7 +271,7 @@ Partial Class frmOnlineBackup
         '
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupDate, Me.ID, Me.FileStatus})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupDate, Me.ID, Me.FileLocation, Me.FileSize})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -296,7 +297,7 @@ Partial Class frmOnlineBackup
         '
         'BackupDate
         '
-        Me.BackupDate.Text = "Backup Date"
+        Me.BackupDate.Text = "Backup Time"
         Me.BackupDate.Width = 223
         '
         'ID
@@ -304,10 +305,15 @@ Partial Class frmOnlineBackup
         Me.ID.Text = "Drive ID"
         Me.ID.Width = 0
         '
-        'FileStatus
+        'FileLocation
         '
-        Me.FileStatus.Text = "File Status"
-        Me.FileStatus.Width = 150
+        Me.FileLocation.Text = "File Location"
+        Me.FileLocation.Width = 150
+        '
+        'FileSize
+        '
+        Me.FileSize.Text = "File Size"
+        Me.FileSize.Width = 90
         '
         'Bar1
         '
@@ -429,9 +435,10 @@ Partial Class frmOnlineBackup
     Friend WithEvents lblSelectedFile As DevComponents.DotNetBar.LabelItem
     Friend WithEvents bgwService As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
-    Friend WithEvents lblStatus As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblProgressStatus As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
-    Friend WithEvents FileStatus As System.Windows.Forms.ColumnHeader
+    Friend WithEvents FileLocation As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblDriveStatus As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
 End Class
