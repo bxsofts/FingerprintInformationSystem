@@ -14189,472 +14189,8 @@ errhandler:
     End Function
 
 #End Region
-    '---------------------------------------------BACKUP DATABASE MANIPULATION-----------------------------------
 
-#Region "LOCAL AUTO BACKUP"
-    Private Sub TakeAutoLocalBackup()
-        On Error Resume Next
-
-        Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
-        If backupperiod = 0 Then Exit Sub
-
-
-        Dim blTakeBackup As Boolean = False
-
-        Dim lastbackupdate As Date = Now
-
-        If My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastLocalBackupDate", Nothing) Is Nothing Then
-            blTakeBackup = True
-        Else
-            lastbackupdate = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastLocalBackupDate", Now))
-        End If
-
-        Dim dt As Date = lastbackupdate.AddDays(backupperiod)
-
-        If Now >= dt Or blTakeBackup Then
-
-            Dim Source As String = sDatabaseFile
-
-            Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
-
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", Destination, Microsoft.Win32.RegistryValueKind.String)
-
-            If My.Computer.FileSystem.DirectoryExists(Destination) = False Then
-                My.Computer.FileSystem.CreateDirectory(Destination)
-            End If
-
-            If Strings.Right(Destination, 1) <> "\" Then Destination = Destination & "\"
-            Dim d As String = Strings.Format(Now, BackupDateFormatString)
-            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
-
-            Destination = Destination & BackupFileName
-            My.Computer.FileSystem.CopyFile(Source, Destination, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastLocalBackupDate", Now, Microsoft.Win32.RegistryValueKind.String)
-
-        End If
-       
-    End Sub
-
-    Private Sub SetBackupPath(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeBackupFolder.Click
-        Try
-            Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
-            Me.FolderBrowserDialog1.ShowNewFolderButton = True
-            Me.FolderBrowserDialog1.Description = "Select Folder for Database Backup"
-            Me.FolderBrowserDialog1.SelectedPath = Destination
-            Dim result As DialogResult = FolderBrowserDialog1.ShowDialog()
-            If (result = DialogResult.OK) Then
-
-                Dim SelectedPath = Me.FolderBrowserDialog1.SelectedPath
-                If SelectedPath.EndsWith("\" & strAppName & "\Backups") = False Then
-                    If SelectedPath.EndsWith("\" & strAppName) Then
-                        SelectedPath = SelectedPath & "\Backups"
-                    Else
-                        SelectedPath = SelectedPath & "\" & strAppName & "\Backups"
-                    End If
-                End If
-                SelectedPath = SelectedPath.Replace("\\", "\")
-                My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", SelectedPath, Microsoft.Win32.RegistryValueKind.String)
-                ShowDesktopAlert("Backup Folder changed!")
-            End If
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        End Try
-
-    End Sub
-    Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click
-        On Error Resume Next
-        Dim BackupPath As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
-
-        If FileIO.FileSystem.DirectoryExists(BackupPath) Then
-            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
-        Else
-            FileIO.FileSystem.CreateDirectory(BackupPath)
-            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
-        End If
-    End Sub
-
-#End Region
-
-
-#Region "AUTO ONLINE BACKUP"
-
-    Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
-        Try
-            Dim id As String = ""
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
-
-            Dim parentlist As New List(Of String)
-            Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
-
-            parentlist.Add(masterfolderid)
-
-            body.Parents = parentlist
-            body.Name = BackupFolder
-            body.Description = ShortOfficeName & "_" & ShortDistrictName
-            body.MimeType = "application/vnd.google-apps.folder"
-
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
-
-            NewDirectory = request.Execute()
-            id = NewDirectory.Id
-            Return id
-        Catch ex As Exception
-            ' ShowErrorMessage(ex)
-            Return ""
-        End Try
-
-    End Function
-
-    Private Function GetMasterBackupFolderID(FISService As DriveService) As String
-        Try
-            Dim id As String = ""
-            Dim List = FISService.Files.List()
-
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup'"
-            List.Fields = "files(id)"
-
-            Dim Results = List.Execute
-
-            Dim cnt = Results.Files.Count
-            If cnt = 0 Then
-                id = ""
-            Else
-                id = Results.Files(0).Id
-            End If
-
-            Return id
-        Catch ex As Exception
-            ' ShowErrorMessage(ex)
-            Return ""
-        End Try
-    End Function
-
-    Private Sub TakeAutoOnlineBackup()
-
-        Try
-
-        
-        Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
-        If backupperiod = 0 Then Exit Sub
-
-        If InternetAvailable() = False Then
-            Exit Sub
-        End If
-
-        Dim blTakeBackup As Boolean = False
-
-        Dim lastbackupdate As Date = Now
-
-        If My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Nothing) Is Nothing Then
-            blTakeBackup = True
-        Else
-            lastbackupdate = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Now))
-        End If
-
-        Dim dt As Date = lastbackupdate.AddDays(backupperiod)
-
-        If Now >= dt Or blTakeBackup Then
-            pgrDownloadInstaller.Visible = True
-                pgrDownloadInstaller.Value = 0
-                pgrDownloadInstaller.Text = "Uploading Backup 0%"
-            Me.StatusBar.RecalcLayout()
-            bgwOnlineAutoBackup.RunWorkerAsync()
-        End If
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-        End Try
-    End Sub
-    Private Sub bgwOnlineAutoBackup_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwOnlineAutoBackup.DoWork
-
-        Try
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
-            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
-                Exit Sub
-            End If
-
-            Dim FISService As DriveService = New DriveService
-            Dim Scopes As String() = {DriveService.Scope.Drive}
-            Dim BackupFolder As String = ShortOfficeName & "_" & ShortDistrictName
-            Dim BackupFolderID As String = ""
-
-
-            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
-
-            Dim List = FISService.Files.List()
-
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "'"
-            List.Fields = "files(id)"
-
-            Dim Results = List.Execute
-
-            Dim cnt = Results.Files.Count
-            If cnt = 0 Then
-                BackupFolderID = ""
-            Else
-                BackupFolderID = Results.Files(0).Id
-            End If
-
-            If BackupFolderID = "" Then
-                BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
-            End If
-
-            Dim BackupTime As Date = Now
-            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
-            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
-            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
-
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            body.Name = BackupFileName
-            body.Description = "AutoBackup"
-            body.MimeType = "database/mdb"
-
-            Dim parentlist As New List(Of String)
-            parentlist.Add(BackupFolderID)
-            body.Parents = parentlist
-
-            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-            My.Computer.FileSystem.CopyFile(sDatabaseFile, tmpFileName, True)
-
-            dFileSize = FileLen(tmpFileName)
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
-            Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-            UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-            AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
-
-            UploadRequest.Fields = "id"
-            UploadRequest.Upload()
-
-        Catch ex As Exception
-            ' ShowErrorMessage(ex)
-        End Try
-    End Sub
-
-    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
-        Control.CheckForIllegalCrossThreadCalls = False
-        uBytesUploaded = Progress.BytesSent
-        uUploadStatus = Progress.Status
-        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-        bgwOnlineAutoBackup.ReportProgress(percent, uBytesUploaded)
-    End Sub
-
-
-    Private Sub bgwOnlineAutoBackup_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwOnlineAutoBackup.ProgressChanged
-
-        Me.pgrDownloadInstaller.Value = e.ProgressPercentage
-        Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "%"
-        '  Me.pgrDownloadInstaller.Text = "Uploading Backup: " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
-    End Sub
-
-    Private Sub bgwOnlineAutoBackup_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwOnlineAutoBackup.RunWorkerCompleted
-        pgrDownloadInstaller.Visible = False
-        pgrDownloadInstaller.Value = 0
-        pgrDownloadInstaller.Text = ""
-
-        If uUploadStatus = UploadStatus.Completed Then
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Now, Microsoft.Win32.RegistryValueKind.String)
-        End If
-
-        ShowDesktopAlert("Database backed up to Google Drive.")
-    End Sub
-#End Region
-
-
-#Region "RESTORE DATABASE"
-
-
-    Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
-
-        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
-
-
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        boolRestored = False
-        FrmLocalBackup.ShowDialog()
-        If boolRestored Then
-            LoadRecordsAfterRestore()
-            If Me.btnOpen.Enabled = False Then
-                EnableControls()
-                Me.pnlRegisterName.Text = "Scene of Crime Register"
-            End If
-        End If
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
-
-        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
-
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-        boolRestored = False
-        frmOnlineBackup.ShowDialog()
-        If boolRestored Then
-            LoadRecordsAfterRestore()
-            If Me.btnOpen.Enabled = False Then
-                EnableControls()
-                Me.pnlRegisterName.Text = "Scene of Crime Register"
-            End If
-        End If
-        Cursor = Cursors.Default
-    End Sub
-
-    Private Sub LoadRecordsAfterRestore()
-        Try
-
-            Me.Cursor = Cursors.WaitCursor
-            ' Me.TabControl.SelectedTab = SOCTabItem
-            frmProgressBar.Show()
-            frmProgressBar.SetStatusText("Restoring Database...")
-            blApplicationIsRestoring = True
-
-            ConnectToDatabase()
-
-            For i = 1 To 5
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            CreateOfficerTable()
-
-            For i = 6 To 10
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            CreateSOCReportRegisterTable()
-
-            For i = 11 To 15
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            CreateSettingsTable()
-
-            For i = 16 To 20
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-            ModifyTables()
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
-            For i = 21 To 25
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            UpdateNullFields()
-
-            For i = 26 To 30
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            RemoveNullFromOfficerTable()
-            For i = 31 To 35
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            LoadPSList()
-            InitializeOfficerTable()
-            LoadOfficerToMemory()
-            LoadOfficerListToTable()
-
-            For i = 36 To 40
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-
-            OfficeSettingsEditMode(True)
-            LoadOfficeSettingsToMemory()
-            SetWindowTitle()
-            LoadOfficeSettingsToTextBoxes()
-
-            For i = 41 To 50
-                frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
-            Next
-
-            If Me.IdentifiedCasesTableAdapter1.CountBlankIDNumber("") > 0 Then
-                bgwUpdateIDRNumber.RunWorkerAsync()
-            Else
-                LoadRecordsToAllTablesDependingOnCurrentYearSettings()
-            End If
-
-            If Me.btnOpen.Enabled = False Then
-                EnableControls()
-                Me.pnlRegisterName.Text = "Scene of Crime Register"
-            End If
-            OfficeSettingsEditMode(False)
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-    End Sub
-
-    Public Function IsValidBackupFile(ByVal DBPath As String) As Boolean
-        IsValidBackupFile = False
-
-        Try
-            DBPath = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & DBPath
-            If DoesTableExist("SOCRegister", DBPath) Then
-                IsValidBackupFile = True
-            Else
-                IsValidBackupFile = False
-            End If
-        Catch ex As Exception
-            IsValidBackupFile = False
-        End Try
-    End Function
-#End Region
-
-
-#Region "OPEN DATABASE"
-
-    Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
-        On Error Resume Next
-
-        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
-            Call Shell("explorer.exe /select," & sDatabaseFile, AppWinStyle.NormalFocus)
-        Else
-            MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
-    End Sub
-
-
-    Private Sub OpenDBInAccess() Handles btnOpenDBInMSAccess.Click
-        On Error Resume Next
-
-        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
-            Shell("explorer.exe " & sDatabaseFile, AppWinStyle.MaximizedFocus)
-
-        Else
-            MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
-    End Sub
-
-
-#End Region
+   
 
 
     '---------------------------------------------REPORTS-----------------------------------
@@ -16426,45 +15962,6 @@ errhandler:
     End Sub
 #End Region
 
-    '---------------------------------------------END APPLICATION-----------------------------------
-#Region "END APPLICATION"
-    Private Sub EndApplication() Handles btnExit.Click, MyBase.FormClosed
-
-
-        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
-
-        On Error Resume Next
-        SaveSOCDatagridColumnWidth()
-        SaveRSOCDatagridColumnWidth()
-        SaveDADatagridColumnWidth()
-        SaveIDDatagridColumnWidth()
-        SaveFPADatagridColumnWidth()
-        SaveCDDatagridColumnWidth()
-        SaveACDatagridColumnWidth()
-        SavePSDatagridColumnWidth()
-        SaveIDRDatagridColumnWidth()
-
-        SaveSOCDatagridColumnOrder()
-        SaveRSOCDatagridColumnOrder()
-        SaveDADatagridColumnOrder()
-        SaveIDDatagridColumnOrder()
-        SaveFPADatagridColumnOrder()
-        SaveCDDatagridColumnOrder()
-        SaveACDatagridColumnOrder()
-        SavePSDatagridColumnOrder()
-        SaveIDRDatagridColumnOrder()
-
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoBackupTime", Me.txtAutoBackupPeriod.TextBox.Text, Microsoft.Win32.RegistryValueKind.String)
-
-        SaveQuicktoolbarSettings()
-        objMutex.Close()
-        objMutex = Nothing
-        Me.Dispose()
-        End
-    End Sub
-#End Region
-
-
 
 #Region "CREATE TABLE"
 
@@ -16804,6 +16301,613 @@ errhandler:
 #End Region
 
 
+    '---------------------------------------------BACKUP DATABASE MANIPULATION-----------------------------------
+
+#Region "LOCAL AUTO BACKUP"
+    Private Sub TakeAutoLocalBackup()
+        On Error Resume Next
+
+        Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
+        If backupperiod = 0 Then Exit Sub
+
+
+        Dim blTakeBackup As Boolean = False
+
+        Dim lastbackupdate As Date = Now
+
+        If My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastLocalBackupDate", Nothing) Is Nothing Then
+            blTakeBackup = True
+        Else
+            lastbackupdate = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastLocalBackupDate", Now))
+        End If
+
+        Dim dt As Date = lastbackupdate.AddDays(backupperiod)
+
+        If Now >= dt Or blTakeBackup Then
+
+            Dim Source As String = sDatabaseFile
+
+            Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", Destination, Microsoft.Win32.RegistryValueKind.String)
+
+            If My.Computer.FileSystem.DirectoryExists(Destination) = False Then
+                My.Computer.FileSystem.CreateDirectory(Destination)
+            End If
+
+            If Strings.Right(Destination, 1) <> "\" Then Destination = Destination & "\"
+            Dim d As String = Strings.Format(Now, BackupDateFormatString)
+            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+
+            Destination = Destination & BackupFileName
+            My.Computer.FileSystem.CopyFile(Source, Destination, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastLocalBackupDate", Now, Microsoft.Win32.RegistryValueKind.String)
+
+        End If
+
+    End Sub
+
+    Private Sub SetBackupPath(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeBackupFolder.Click
+        Try
+            Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
+            Me.FolderBrowserDialog1.ShowNewFolderButton = True
+            Me.FolderBrowserDialog1.Description = "Select Folder for Database Backup"
+            Me.FolderBrowserDialog1.SelectedPath = Destination
+            Dim result As DialogResult = FolderBrowserDialog1.ShowDialog()
+            If (result = DialogResult.OK) Then
+
+                Dim SelectedPath = Me.FolderBrowserDialog1.SelectedPath
+                If SelectedPath.EndsWith("\" & strAppName & "\Backups") = False Then
+                    If SelectedPath.EndsWith("\" & strAppName) Then
+                        SelectedPath = SelectedPath & "\Backups"
+                    Else
+                        SelectedPath = SelectedPath & "\" & strAppName & "\Backups"
+                    End If
+                End If
+                SelectedPath = SelectedPath.Replace("\\", "\")
+                My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", SelectedPath, Microsoft.Win32.RegistryValueKind.String)
+                ShowDesktopAlert("Backup Folder changed!")
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        End Try
+
+    End Sub
+    Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click
+        On Error Resume Next
+        Dim BackupPath As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
+
+        If FileIO.FileSystem.DirectoryExists(BackupPath) Then
+            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
+        Else
+            FileIO.FileSystem.CreateDirectory(BackupPath)
+            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
+        End If
+    End Sub
+
+#End Region
+
+
+#Region "AUTO ONLINE BACKUP"
+
+    Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
+        Try
+            Dim id As String = ""
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+
+            Dim parentlist As New List(Of String)
+            Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
+
+            parentlist.Add(masterfolderid)
+
+            body.Parents = parentlist
+            body.Name = BackupFolder
+            body.Description = ShortOfficeName & "_" & ShortDistrictName
+            body.MimeType = "application/vnd.google-apps.folder"
+
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
+
+            NewDirectory = request.Execute()
+            id = NewDirectory.Id
+            Return id
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+            Return ""
+        End Try
+
+    End Function
+
+    Private Function GetMasterBackupFolderID(FISService As DriveService) As String
+        Try
+            Dim id As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                id = ""
+            Else
+                id = Results.Files(0).Id
+            End If
+
+            Return id
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+            Return ""
+        End Try
+    End Function
+
+    Private Sub TakeAutoOnlineBackup()
+
+        Try
+
+
+            Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
+            If backupperiod = 0 Then Exit Sub
+
+            If InternetAvailable() = False Then
+                Exit Sub
+            End If
+
+            Dim blTakeBackup As Boolean = False
+
+            Dim lastbackupdate As Date = Now
+
+            If My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Nothing) Is Nothing Then
+                blTakeBackup = True
+            Else
+                lastbackupdate = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Now))
+            End If
+
+            Dim dt As Date = lastbackupdate.AddDays(backupperiod)
+
+            If Now >= dt Or blTakeBackup Then
+                pgrDownloadInstaller.Visible = True
+                pgrDownloadInstaller.Value = 0
+                pgrDownloadInstaller.Text = "Uploading Backup 0%"
+                Me.StatusBar.RecalcLayout()
+                bgwOnlineAutoBackup.RunWorkerAsync()
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+    Private Sub bgwOnlineAutoBackup_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwOnlineAutoBackup.DoWork
+
+        Try
+            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+                Exit Sub
+            End If
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim BackupFolder As String = ShortOfficeName & "_" & ShortDistrictName
+            Dim BackupFolderID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                BackupFolderID = ""
+            Else
+                BackupFolderID = Results.Files(0).Id
+            End If
+
+            If BackupFolderID = "" Then
+                BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
+            End If
+
+            Dim BackupTime As Date = Now
+            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
+            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+            body.Name = BackupFileName
+            body.Description = ShortOfficeName & "_ " & ShortDistrictName & "_AutoBackup"
+            body.MimeType = "database/mdb"
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(BackupFolderID)
+            body.Parents = parentlist
+
+            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
+            My.Computer.FileSystem.CopyFile(sDatabaseFile, tmpFileName, True)
+
+            dFileSize = FileLen(tmpFileName)
+            dFormatedFileSize = CalculateFileSize(dFileSize)
+
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+            Dim Stream As New System.IO.MemoryStream(ByteArray)
+            Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+            UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+            AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+            UploadRequest.Fields = "id"
+            UploadRequest.Upload()
+
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwOnlineAutoBackup.ReportProgress(percent, uBytesUploaded)
+    End Sub
+
+
+    Private Sub bgwOnlineAutoBackup_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwOnlineAutoBackup.ProgressChanged
+
+        Me.pgrDownloadInstaller.Value = e.ProgressPercentage
+        Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
+        '  Me.pgrDownloadInstaller.Text = "Uploading Backup: " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
+    End Sub
+
+    Private Sub bgwOnlineAutoBackup_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwOnlineAutoBackup.RunWorkerCompleted
+        pgrDownloadInstaller.Visible = False
+        pgrDownloadInstaller.Value = 0
+        pgrDownloadInstaller.Text = ""
+
+        If uUploadStatus = UploadStatus.Completed Then
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Now, Microsoft.Win32.RegistryValueKind.String)
+            ShowDesktopAlert("Database backed up to Google Drive.")
+        End If
+
+    End Sub
+#End Region
+
+
+#Region "RESTORE DATABASE"
+
+
+    Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
+
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        boolRestored = False
+        FrmLocalBackup.ShowDialog()
+        If boolRestored Then
+            LoadRecordsAfterRestore()
+            If Me.btnOpen.Enabled = False Then
+                EnableControls()
+                Me.pnlRegisterName.Text = "Scene of Crime Register"
+            End If
+        End If
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
+
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        boolRestored = False
+        frmOnlineBackup.ShowDialog()
+        If boolRestored Then
+            LoadRecordsAfterRestore()
+            If Me.btnOpen.Enabled = False Then
+                EnableControls()
+                Me.pnlRegisterName.Text = "Scene of Crime Register"
+            End If
+        End If
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LoadRecordsAfterRestore()
+        Try
+
+            Me.Cursor = Cursors.WaitCursor
+            ' Me.TabControl.SelectedTab = SOCTabItem
+            frmProgressBar.Show()
+            frmProgressBar.SetStatusText("Restoring Database...")
+            blApplicationIsRestoring = True
+
+            ConnectToDatabase()
+
+            For i = 1 To 5
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            CreateOfficerTable()
+
+            For i = 6 To 10
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            CreateSOCReportRegisterTable()
+
+            For i = 11 To 15
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            CreateSettingsTable()
+
+            For i = 16 To 20
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+            ModifyTables()
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
+            For i = 21 To 25
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            UpdateNullFields()
+
+            For i = 26 To 30
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            RemoveNullFromOfficerTable()
+            For i = 31 To 35
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            LoadPSList()
+            InitializeOfficerTable()
+            LoadOfficerToMemory()
+            LoadOfficerListToTable()
+
+            For i = 36 To 40
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+
+            OfficeSettingsEditMode(True)
+            LoadOfficeSettingsToMemory()
+            SetWindowTitle()
+            LoadOfficeSettingsToTextBoxes()
+
+            For i = 41 To 50
+                frmProgressBar.SetProgressText(i)
+                System.Threading.Thread.Sleep(50)
+            Next
+
+            If Me.IdentifiedCasesTableAdapter1.CountBlankIDNumber("") > 0 Then
+                bgwUpdateIDRNumber.RunWorkerAsync()
+            Else
+                LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+            End If
+
+            If Me.btnOpen.Enabled = False Then
+                EnableControls()
+                Me.pnlRegisterName.Text = "Scene of Crime Register"
+            End If
+            OfficeSettingsEditMode(False)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Public Function IsValidBackupFile(ByVal DBPath As String) As Boolean
+        IsValidBackupFile = False
+
+        Try
+            DBPath = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & DBPath
+            If DoesTableExist("SOCRegister", DBPath) Then
+                IsValidBackupFile = True
+            Else
+                IsValidBackupFile = False
+            End If
+        Catch ex As Exception
+            IsValidBackupFile = False
+        End Try
+    End Function
+#End Region
+
+
+#Region "OPEN DATABASE"
+
+    Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
+        On Error Resume Next
+
+        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
+            Call Shell("explorer.exe /select," & sDatabaseFile, AppWinStyle.NormalFocus)
+        Else
+            MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+    End Sub
+
+
+    Private Sub OpenDBInAccess() Handles btnOpenDBInMSAccess.Click
+        On Error Resume Next
+
+        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
+            Shell("explorer.exe " & sDatabaseFile, AppWinStyle.MaximizedFocus)
+
+        Else
+            MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+    End Sub
+
+
+#End Region
+
+
+#Region "UPLOAD INSTALLER"
+
+    Private Sub btnUploadInstallerFile_Click(sender As Object, e As EventArgs) Handles btnUploadInstallerFile.Click
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Uploading Backup") Then
+            MessageBoxEx.Show("Another File Upload is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Downloading Installer") Then
+            MessageBoxEx.Show("Another File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.Default
+        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+        If frmInputBox.txtInputBox.Text <> "minutiae8" Then
+            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        OpenFileDialog1.Filter = "Exe File|*.exe"
+        OpenFileDialog1.FileName = ""
+        OpenFileDialog1.Title = "Select " & strAppName & "Installer File"
+        OpenFileDialog1.AutoUpgradeEnabled = True
+        OpenFileDialog1.RestoreDirectory = True 'remember last directory
+        Dim uSelectedFile As String = ""
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
+            Application.DoEvents() 'first close the selection window
+            uSelectedFile = OpenFileDialog1.FileName
+        Else
+            Exit Sub
+        End If
+
+        dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
+        dFormatedFileSize = CalculateFileSize(dFileSize)
+
+        pgrDownloadInstaller.Visible = True
+        pgrDownloadInstaller.Value = 0
+        pgrDownloadInstaller.Text = "Uploading Installer 0%"
+        Me.StatusBar.RecalcLayout()
+
+        cpgrDownloadInstaller.ProgressColor = GetProgressColor()
+        cpgrDownloadInstaller.ProgressText = "0"
+        rbrDownloadInstaller.Visible = True
+        cpgrDownloadInstaller.IsRunning = True
+        rbrDownloadInstaller.Text = "Uploading"
+
+        bgwUploadInstaller.RunWorkerAsync(uSelectedFile)
+
+    End Sub
+
+
+    Private Sub bgwUploadInstaller_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadInstaller.DoWork
+
+        Try
+            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+            List.Q = "name contains 'Fingerprint Information System V' and name contains '.exe' and trashed = false"
+            List.Fields = "files(name, id)"
+
+            Dim Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                InstallerFileID = Results.Files(0).Id
+            End If
+
+            If InstallerFileID = "" Then Exit Sub
+
+            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            request.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
+            request.Description = "Admin"
+            request.MimeType = "application/x-msdownload"
+
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(e.Argument)
+            Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+            Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(request, InstallerFileID, Stream, "application/x-msdownload")
+            UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+
+            AddHandler UpdateRequest.ProgressChanged, AddressOf Update_ProgressChanged
+
+            UpdateRequest.Upload()
+            Stream.Close()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+
+    End Sub
+
+    Private Sub Update_ProgressChanged(Progress As IUploadProgress)
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwUploadInstaller.ReportProgress(percent, uBytesUploaded)
+    End Sub
+    Private Sub bgwUploadInstaller_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadInstaller.ProgressChanged
+        Me.pgrDownloadInstaller.Value = e.ProgressPercentage
+        Me.cpgrDownloadInstaller.ProgressText = e.ProgressPercentage
+        Me.pgrDownloadInstaller.Text = "Uploading Installer " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+    End Sub
+
+    Private Sub bgwUploadInstaller_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadInstaller.RunWorkerCompleted
+
+        rbrDownloadInstaller.Visible = False
+        pgrDownloadInstaller.Visible = False
+        pgrDownloadInstaller.Value = 0
+        pgrDownloadInstaller.Text = ""
+
+        If uUploadStatus = UploadStatus.Completed Then
+            ShowDesktopAlert("Installer File uploaded to Google Drive.")
+        End If
+
+        If uUploadStatus = UploadStatus.Failed Then
+            ShowDesktopAlert("Installer File upload failed.")
+        End If
+
+    End Sub
+
+#End Region
+
+
 #Region "DOWNLOAD INSTALLER"
 
     Private Sub btnDownloadInstallerInBrowser_Click(sender As Object, e As EventArgs) Handles btnDownloadInstallerInBrowser.Click
@@ -16813,17 +16917,28 @@ errhandler:
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        CheckForUpdates()
+        ' CheckForUpdates()
         Me.Cursor = Cursors.Default
-        Process.Start(InstallerFileURL) ' google drive File
+        ' Process.Start(InstallerFileURL) ' google drive File
+        Process.Start("https://drive.google.com/file/d/1vyGdhxjXUWjkcgTE_rTT7juiMSBA-UKc/view")
     End Sub
 
 
-    Private Sub btnDownloadInstaller_Click(sender As Object, e As EventArgs) Handles btnDownloadInstaller.Click
+    Private Sub btnDownloadInstaller_Click(sender As Object, e As EventArgs) Handles btnDownloadInstallerFile.Click
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Uploading Backup") Then
+            MessageBoxEx.Show("Another File Upload is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Downloading Installer") Then
+            MessageBoxEx.Show("Another File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -16847,12 +16962,14 @@ errhandler:
         cpgrDownloadInstaller.ProgressText = "0"
         rbrDownloadInstaller.Visible = True
         cpgrDownloadInstaller.IsRunning = True
-        bgwDownload.RunWorkerAsync()
+        rbrDownloadInstaller.Text = "Downloading"
+
+        bgwDownloadInstaller.RunWorkerAsync()
 
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownload.DoWork
+    Private Sub bgwDownloadInstaller_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadInstaller.DoWork
         Try
 
             Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
@@ -16908,25 +17025,22 @@ errhandler:
         End Try
     End Sub
 
-
     Private Sub Download_ProgressChanged(Progress As IDownloadProgress)
 
         Control.CheckForIllegalCrossThreadCalls = False
         dBytesDownloaded = Progress.BytesDownloaded
         dDownloadStatus = Progress.Status
         Dim percent = CInt((dBytesDownloaded / dFileSize) * 100)
-        bgwDownload.ReportProgress(percent, dBytesDownloaded)
+        bgwDownloadInstaller.ReportProgress(percent, dBytesDownloaded)
     End Sub
 
-    Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownload.ProgressChanged
+    Private Sub bgwDownloadInstaller_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadInstaller.ProgressChanged
         cpgrDownloadInstaller.ProgressText = e.ProgressPercentage
         pgrDownloadInstaller.Value = e.ProgressPercentage
-        pgrDownloadInstaller.Text = "Downloading Installer " & e.ProgressPercentage & "%"
+        pgrDownloadInstaller.Text = "Downloading Installer " & e.ProgressPercentage & "% " & CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
         ' pgrDownloadInstaller.Text = "Downloading Installer: " & CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
     End Sub
-
-
-    Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
+    Private Sub bgwDownloadInstaller_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadInstaller.RunWorkerCompleted
 
         rbrDownloadInstaller.Visible = False
         pgrDownloadInstaller.Visible = False
@@ -17030,7 +17144,7 @@ errhandler:
 #End Region
 
 
-#Region " VERSION FILE"
+#Region "VERSION FILE"
 
     Private Sub UploadVersionInfoToDrive()
 
@@ -17076,6 +17190,7 @@ errhandler:
             Dim VersionFileID As String = ""
             Dim VersionFileName As String = ""
             Dim VersionFile = New Google.Apis.Drive.v3.Data.File
+            VersionFile.Description = ShortOfficeName & "_" & ShortDistrictName
 
             cnt = Results.Files.Count
 
@@ -17094,9 +17209,7 @@ errhandler:
 
                 VersionFile.Parents = parentlist
                 VersionFile.Name = ShortDistrictName & " - V" & My.Application.Info.Version.ToString.Substring(0, 4)
-
                 VersionFile.MimeType = "application/vnd.google-apps.folder"
-
                 VersionFile = FISService.Files.Create(VersionFile).Execute
                 Exit Sub
             End If
@@ -17109,7 +17222,7 @@ errhandler:
 
 
 #Region "FIS ONLINE FILE LIST"
-    Private Sub btnFISOnlineFileListBasic_Click(sender As Object, e As EventArgs) Handles btnFISOnlineFileListBasic.Click
+    Private Sub btnFISOnlineFileListBasic_Click(sender As Object, e As EventArgs) Handles btnOnlineFileTransfer.Click
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
@@ -17118,6 +17231,7 @@ errhandler:
             Exit Sub
         End If
         AdminPrevilege = False
+        frmFISBackupList.SetTitleAndSize()
         Me.Cursor = Cursors.Default
         frmFISBackupList.Show()
     End Sub
@@ -17141,9 +17255,51 @@ errhandler:
             Exit Sub
         End If
         AdminPrevilege = True
+        frmFISBackupList.SetTitleAndSize()
         frmFISBackupList.Show()
     End Sub
 
 #End Region
    
+
+    '---------------------------------------------END APPLICATION-----------------------------------
+
+#Region "END APPLICATION"
+    Private Sub EndApplication() Handles btnExit.Click, MyBase.FormClosed
+
+
+        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+        On Error Resume Next
+        SaveSOCDatagridColumnWidth()
+        SaveRSOCDatagridColumnWidth()
+        SaveDADatagridColumnWidth()
+        SaveIDDatagridColumnWidth()
+        SaveFPADatagridColumnWidth()
+        SaveCDDatagridColumnWidth()
+        SaveACDatagridColumnWidth()
+        SavePSDatagridColumnWidth()
+        SaveIDRDatagridColumnWidth()
+
+        SaveSOCDatagridColumnOrder()
+        SaveRSOCDatagridColumnOrder()
+        SaveDADatagridColumnOrder()
+        SaveIDDatagridColumnOrder()
+        SaveFPADatagridColumnOrder()
+        SaveCDDatagridColumnOrder()
+        SaveACDatagridColumnOrder()
+        SavePSDatagridColumnOrder()
+        SaveIDRDatagridColumnOrder()
+
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoBackupTime", Me.txtAutoBackupPeriod.TextBox.Text, Microsoft.Win32.RegistryValueKind.String)
+
+        SaveQuicktoolbarSettings()
+        objMutex.Close()
+        objMutex = Nothing
+        Me.Dispose()
+        End
+    End Sub
+#End Region
+
+
 End Class

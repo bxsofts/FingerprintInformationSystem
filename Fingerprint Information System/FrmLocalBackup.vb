@@ -28,8 +28,9 @@ Public Class FrmLocalBackup
             Dim Filedate As DateTime = DateTime.ParseExact(FileName.Replace("FingerPrintBackup-", "").Replace(".mdb", ""), BackupDateFormatString, culture)
 
             Dim item As ListViewItem = Me.listViewEx1.Items.Add(FileName)
-            item.SubItems.Add(Filedate.ToString("dd/MM/yyyy HH:mm:ss"))
+            item.SubItems.Add(Filedate.ToString("dd-MM-yyyy HH:mm:ss"))
             item.SubItems.Add(FullFilePath)
+            item.SubItems.Add(CalculateFileSize(My.Computer.FileSystem.GetFileInfo(FullFilePath).Length))
             ' If FullFilePath.Contains("Online") Then
             'item.ImageIndex = 1
             ' Else

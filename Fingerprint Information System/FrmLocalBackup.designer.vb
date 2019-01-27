@@ -44,6 +44,7 @@ Partial Class FrmLocalBackup
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupPanel1.SuspendLayout()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
@@ -105,7 +106,7 @@ Partial Class FrmLocalBackup
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(634, 491)
+        Me.GroupPanel1.Size = New System.Drawing.Size(757, 491)
         '
         '
         '
@@ -146,7 +147,7 @@ Partial Class FrmLocalBackup
         '
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFile, Me.BackupDate, Me.BackupFolder})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFile, Me.BackupDate, Me.BackupFolder, Me.FileSize})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -157,7 +158,7 @@ Partial Class FrmLocalBackup
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(628, 467)
+        Me.listViewEx1.Size = New System.Drawing.Size(751, 467)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.listViewEx1.TabIndex = 0
@@ -242,7 +243,7 @@ Partial Class FrmLocalBackup
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(781, 514)
+        Me.PanelEx1.Size = New System.Drawing.Size(904, 514)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -260,7 +261,7 @@ Partial Class FrmLocalBackup
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(634, 491)
+        Me.PanelEx3.Size = New System.Drawing.Size(757, 491)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -280,7 +281,7 @@ Partial Class FrmLocalBackup
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblSelectedFile})
         Me.Bar1.Location = New System.Drawing.Point(0, 491)
         Me.Bar1.Name = "Bar1"
-        Me.Bar1.Size = New System.Drawing.Size(634, 23)
+        Me.Bar1.Size = New System.Drawing.Size(757, 23)
         Me.Bar1.Stretch = True
         Me.Bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Bar1.TabIndex = 36
@@ -312,7 +313,7 @@ Partial Class FrmLocalBackup
         Me.PanelEx2.Controls.Add(Me.btnCopyDatabase)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelEx2.Location = New System.Drawing.Point(634, 0)
+        Me.PanelEx2.Location = New System.Drawing.Point(757, 0)
         Me.PanelEx2.Name = "PanelEx2"
         Me.PanelEx2.Size = New System.Drawing.Size(147, 514)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -323,12 +324,17 @@ Partial Class FrmLocalBackup
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 29
         '
+        'FileSize
+        '
+        Me.FileSize.Text = "File Size"
+        Me.FileSize.Width = 100
+        '
         'FrmLocalBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CaptionFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ClientSize = New System.Drawing.Size(781, 514)
+        Me.ClientSize = New System.Drawing.Size(904, 514)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -372,4 +378,5 @@ Partial Class FrmLocalBackup
     Friend WithEvents lblCount As DevComponents.DotNetBar.LabelItem
     Friend WithEvents lblSelectedFile As DevComponents.DotNetBar.LabelItem
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
 End Class

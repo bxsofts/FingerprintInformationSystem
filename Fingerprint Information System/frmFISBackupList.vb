@@ -39,17 +39,7 @@ Public Class frmFISBackupList
 
     Private Sub frmFISBckupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
-        If AdminPrevilege Then
-            Me.Text = "FIS Online File List - Admin"
-            Me.TitleText = "<b>FIS Online File List - Admin</b>"
-            Me.listViewEx1.Columns(3).Width = 290
-            Me.Width = 1150
-        Else
-            Me.Text = "FIS Online File List"
-            Me.TitleText = "<b>FIS Online File List</b>"
-            Me.listViewEx1.Columns(3).Width = 0
-            Me.Width = 990
-        End If
+        SetTitleAndSize()
         Me.CenterToScreen()
 
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
@@ -151,6 +141,8 @@ Public Class frmFISBackupList
         Try
             Dim List As FilesResource.ListRequest = FISService.Files.List()
 
+            Dim showuserfileonly As String = ""
+
             If ShowTrashedFiles Then
                 List.Q = "trashed = true"
             Else
@@ -206,9 +198,7 @@ Public Class frmFISBackupList
 
                 item.SubItems.Add(Result.Id)
 
-                If Result.Name = "InstallerFile" Or Result.Name = "FIS Backup" Or Result.Name.StartsWith(strAppName & " V") Then
-                    item.SubItems.Add("Admin")
-                ElseIf Result.Description = "FIS Backup Folder" Then
+                If Result.Description = "FIS Backup Folder" Then
                     item.SubItems.Add(Result.Name)
                 ElseIf IsDate(Result.Description) Or Result.Description = "" Then
                     item.SubItems.Add(CurrentFolderName)
@@ -216,9 +206,13 @@ Public Class frmFISBackupList
                     item.SubItems.Add(Result.Description)
                 End If
 
-                If Result.Name <> "VersionFolder" Or AdminPrevilege = True Then
-                    bgwListFiles.ReportProgress(2, item)
+
+                If AdminPrevilege Or CurrentFolderName = FileOwner Or CurrentFolderName = "InstallerFile" Or item.ImageIndex = 0 And Result.Name <> "VersionFolder" Then
+                    bgwListFiles.ReportProgress(2, item) 'report all files
+                ElseIf item.SubItems(4).Text = FileOwner Then
+                    bgwListFiles.ReportProgress(2, item) 'list all folders except version folder
                 End If
+
             Next
 
             bgwListFiles.ReportProgress(3, FolderID)
@@ -262,7 +256,6 @@ Public Class frmFISBackupList
         End If
 
         Try
-
             ' CurrentFolderName = ""
             Dim id As String = ""
             If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
@@ -283,9 +276,22 @@ Public Class frmFISBackupList
                 id = CurrentFolderID
             End If
 
+            CircularProgress1.ProgressText = ""
+            ' lblProgressStatus.Text = "Please wait..."
+            CircularProgress1.IsRunning = True
+            CircularProgress1.ProgressBarType = eCircularProgressType.Donut
+            CircularProgress1.Show()
+            ' lblProgressStatus.Show()
+
             Me.listViewEx1.Items.Clear()
             bgwListFiles.RunWorkerAsync(id)
         Catch ex As Exception
+            CircularProgress1.IsRunning = False
+            CircularProgress1.ProgressText = ""
+            CircularProgress1.ProgressBarType = eCircularProgressType.Line
+            lblProgressStatus.Text = ""
+            CircularProgress1.Hide()
+            lblProgressStatus.Hide()
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
@@ -333,6 +339,11 @@ Public Class frmFISBackupList
 
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If CurrentFolderName = "InstallerFile" And Not AdminPrevilege Then
+            MessageBoxEx.Show("Creation of new Folder is not allowed in 'InstallerFile' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -397,6 +408,11 @@ Public Class frmFISBackupList
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If CurrentFolderName = "InstallerFile" And Not AdminPrevilege Then
+            MessageBoxEx.Show("Uploading of files is not allowed in 'InstallerFile' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -753,6 +769,22 @@ Public Class frmFISBackupList
 #End Region
 
 
+    Public Sub SetTitleAndSize()
+        If AdminPrevilege Then
+            Me.Text = "FIS Online File List - Admin"
+            Me.TitleText = "<b>FIS Online File List - Admin</b>"
+            Me.listViewEx1.Columns(3).Width = 290
+            Me.Width = 1150
+        Else
+            Me.Text = "FIS Online File List"
+            Me.TitleText = "<b>FIS Online File List</b>"
+            Me.listViewEx1.Columns(3).Width = 0
+            Me.Width = 990
+        End If
+
+        Me.CenterToScreen()
+        Me.BringToFront()
+    End Sub
    
 End Class
 

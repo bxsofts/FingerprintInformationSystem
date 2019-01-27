@@ -37,14 +37,14 @@ Partial Class frmFISBackupList
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.CreationDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UploadedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
-        Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
@@ -184,10 +184,10 @@ Partial Class frmFISBackupList
         Me.FileSize.Text = "File Size"
         Me.FileSize.Width = 70
         '
-        'CreationDate
+        'UploadedDate
         '
-        Me.CreationDate.Text = "Uploaded Date"
-        Me.CreationDate.Width = 140
+        Me.UploadedDate.Text = "Uploaded Date"
+        Me.UploadedDate.Width = 140
         '
         'FileName
         '
@@ -279,7 +279,8 @@ Partial Class frmFISBackupList
         '
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.CreationDate, Me.FileSize, Me.ID, Me.Description})
+        Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID, Me.UploadedBy})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -297,15 +298,15 @@ Partial Class frmFISBackupList
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
         Me.listViewEx1.View = System.Windows.Forms.View.Details
         '
-        'ID
+        'FileID
         '
-        Me.ID.Text = "File ID"
-        Me.ID.Width = 290
+        Me.FileID.Text = "File ID"
+        Me.FileID.Width = 290
         '
-        'Description
+        'UploadedBy
         '
-        Me.Description.Text = "Uploaded By"
-        Me.Description.Width = 120
+        Me.UploadedBy.Text = "Uploaded By"
+        Me.UploadedBy.Width = 160
         '
         'ImageList1
         '
@@ -398,20 +399,20 @@ Partial Class frmFISBackupList
     Friend WithEvents lblDriveSpaceUsed As DevComponents.DotNetBar.LabelItem
     Friend WithEvents Bar1 As DevComponents.DotNetBar.Bar
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
-    Friend WithEvents CreationDate As System.Windows.Forms.ColumnHeader
+    Friend WithEvents UploadedDate As System.Windows.Forms.ColumnHeader
     Private WithEvents FileName As System.Windows.Forms.ColumnHeader
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Private WithEvents listViewEx1 As DevComponents.DotNetBar.Controls.ListViewEx
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents ID As System.Windows.Forms.ColumnHeader
+    Friend WithEvents FileID As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblProgressStatus As DevComponents.DotNetBar.LabelX
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents lblItemCount As DevComponents.DotNetBar.LabelItem
     Friend WithEvents btnUploadFile As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents Description As System.Windows.Forms.ColumnHeader
+    Friend WithEvents UploadedBy As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnNewFolder As DevComponents.DotNetBar.ButtonX
 End Class

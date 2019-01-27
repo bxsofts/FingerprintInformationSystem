@@ -38,10 +38,10 @@ Partial Class frmOnlineBackup
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.FileLocation = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BackupTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
@@ -271,7 +271,8 @@ Partial Class frmOnlineBackup
         '
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupDate, Me.ID, Me.FileLocation, Me.FileSize})
+        Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupTime, Me.FileID, Me.FileSize, Me.UploadedBy})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -295,25 +296,25 @@ Partial Class frmOnlineBackup
         Me.BackupFileName.Text = "Backup File"
         Me.BackupFileName.Width = 315
         '
-        'BackupDate
+        'BackupTime
         '
-        Me.BackupDate.Text = "Backup Time"
-        Me.BackupDate.Width = 223
+        Me.BackupTime.Text = "Backup Time"
+        Me.BackupTime.Width = 223
         '
-        'ID
+        'FileID
         '
-        Me.ID.Text = "Drive ID"
-        Me.ID.Width = 0
-        '
-        'FileLocation
-        '
-        Me.FileLocation.Text = "File Location"
-        Me.FileLocation.Width = 150
+        Me.FileID.Text = "File ID"
+        Me.FileID.Width = 0
         '
         'FileSize
         '
         Me.FileSize.Text = "File Size"
         Me.FileSize.Width = 90
+        '
+        'UploadedBy
+        '
+        Me.UploadedBy.Text = "Uploaded By"
+        Me.UploadedBy.Width = 150
         '
         'Bar1
         '
@@ -428,8 +429,8 @@ Partial Class frmOnlineBackup
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Private WithEvents listViewEx1 As DevComponents.DotNetBar.Controls.ListViewEx
     Private WithEvents BackupFileName As System.Windows.Forms.ColumnHeader
-    Friend WithEvents BackupDate As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ID As System.Windows.Forms.ColumnHeader
+    Friend WithEvents BackupTime As System.Windows.Forms.ColumnHeader
+    Friend WithEvents FileID As System.Windows.Forms.ColumnHeader
     Friend WithEvents Bar1 As DevComponents.DotNetBar.Bar
     Friend WithEvents lblCount As DevComponents.DotNetBar.LabelItem
     Friend WithEvents lblSelectedFile As DevComponents.DotNetBar.LabelItem
@@ -438,7 +439,7 @@ Partial Class frmOnlineBackup
     Friend WithEvents lblProgressStatus As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
-    Friend WithEvents FileLocation As System.Windows.Forms.ColumnHeader
-    Friend WithEvents lblDriveStatus As DevComponents.DotNetBar.LabelItem
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lblDriveStatus As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents UploadedBy As System.Windows.Forms.ColumnHeader
 End Class

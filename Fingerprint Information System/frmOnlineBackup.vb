@@ -37,6 +37,8 @@ Public Class frmOnlineBackup
     Public DownloadOnly As Boolean = False
 
     Dim FileOwner As String = ""
+
+
 #Region "FORM LOAD EVENTS"
 
    
@@ -140,11 +142,11 @@ Public Class frmOnlineBackup
                 Dim filesize = CalculateFileSize(My.Computer.FileSystem.GetFileInfo(FullFilePath).Length)
                 Dim Filedate As DateTime = DateTime.ParseExact(FileName.Replace("FingerPrintBackup-", "").Replace(".mdb", ""), BackupDateFormatString, culture)
 
-                Dim item As ListViewItem = New ListViewItem(FileName)
-                item.SubItems.Add(Filedate.ToString("dd-MM-yyyy HH:mm:ss"))
-                item.SubItems.Add("Downloaded File")
-                item.SubItems.Add("Downloaded File")
-                item.SubItems.Add(filesize)
+                Dim item As ListViewItem = New ListViewItem(FileName) 'name
+                item.SubItems.Add(Filedate.ToString("dd-MM-yyyy HH:mm:ss")) 'backuptime
+                item.SubItems.Add("Downloaded File") 'fileid
+                item.SubItems.Add(filesize) 'size
+                item.SubItems.Add("Downloaded File") 'remarks
                 item.ImageIndex = 1
                 bgwService.ReportProgress(50, item)
             Next
@@ -161,17 +163,18 @@ Public Class frmOnlineBackup
 
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
             ' List.Q = "mimeType = 'database/mdb'" ' list all files
-            List.Fields = "nextPageToken, files(id, name, modifiedTime, size)"
+            List.Fields = "nextPageToken, files(id, name, modifiedTime, size, description)"
 
             Dim Results = List.Execute
 
             For Each Result In Results.Files
-                Dim item As ListViewItem = New ListViewItem(Result.Name)
+                Dim item As ListViewItem = New ListViewItem(Result.Name) 'name
                 Dim modifiedtime As DateTime = Result.ModifiedTime
-                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
-                item.SubItems.Add(Result.Id)
-                item.SubItems.Add("")
-                item.SubItems.Add(CalculateFileSize(Result.Size))
+                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")) 'backup time
+                item.SubItems.Add(Result.Id) 'id
+                item.SubItems.Add(CalculateFileSize(Result.Size)) 'size
+                item.SubItems.Add(Result.Description)
+               
                 item.ImageIndex = 0
                 bgwService.ReportProgress(90, item)
             Next
@@ -590,8 +593,8 @@ Public Class frmOnlineBackup
                 Dim item As ListViewItem = New ListViewItem(args.SelectedFileName)
                 item.SubItems.Add(args.BackupDate)
                 item.SubItems.Add("Downloaded File")
-                item.SubItems.Add("Downloaded File")
                 item.SubItems.Add(dFormatedFileSize)
+                item.SubItems.Add("Downloaded File")
                 item.ImageIndex = 1
 
                 bgwDownload.ReportProgress(100, item)
