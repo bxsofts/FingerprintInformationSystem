@@ -31,18 +31,13 @@ Public Class frmFISBackupList
     Dim ServiceCreated As Boolean = False
     Dim CurrentFolderName As String = ""
 
-    Dim FileOwner As String = ""
-
-   
 
 #Region "LOAD DATA"
 
-    Private Sub frmFISBckupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
         SetTitleAndSize()
         Me.CenterToScreen()
-
-        FileOwner = ShortOfficeName & "_" & ShortDistrictName
 
         Me.lblDriveSpaceUsed.Text = ""
         Me.lblItemCount.Text = ""
@@ -116,8 +111,8 @@ Public Class frmFISBackupList
             If TypeOf e.UserState Is String Then
                 lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
                 Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
-                If uSelectedFile <> "" Then Me.listViewEx1.FindItemWithText(FileOwner & "_" & uSelectedFile)
-                uSelectedFile = ""
+                '  If uSelectedFile <> "" Then Me.listViewEx1.FindItemWithText(FileOwner & "_" & uSelectedFile)
+                '  uSelectedFile = ""
             End If
 
         Catch ex As Exception
@@ -207,7 +202,7 @@ Public Class frmFISBackupList
                 End If
 
 
-                If AdminPrevilege Or CurrentFolderName = FileOwner Or CurrentFolderName = "InstallerFile" Or item.ImageIndex = 0 And Result.Name <> "VersionFolder" Then
+                If AdminPrevilege Or CurrentFolderName = FileOwner Or CurrentFolderName = "InstallerFile" Or CurrentFolderName = "General Files" Or item.ImageIndex = 0 And Result.Name <> "VersionFolder" Then
                     bgwListFiles.ReportProgress(2, item) 'report all files
                 ElseIf item.SubItems(4).Text = FileOwner Then
                     bgwListFiles.ReportProgress(2, item) 'list all folders except version folder
@@ -349,7 +344,15 @@ Public Class frmFISBackupList
 
         frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False)
         frmInputBox.ShowDialog()
-        If frmInputBox.ButtonClicked <> "OK" Or Trim(frmInputBox.txtInputBox.Text) = "" Then Exit Sub
+        Dim FolderName As String = frmInputBox.txtInputBox.Text
+        If frmInputBox.ButtonClicked <> "OK" Or Trim(FolderName) = "" Then Exit Sub
+
+        For i = 0 To Me.listViewEx1.Items.Count - 1
+            If Me.listViewEx1.Items(i).Text.ToLower = FolderName.ToLower Then
+                MessageBoxEx.Show("Folder '" & FolderName & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+        Next
 
         Try
 
@@ -361,13 +364,9 @@ Public Class frmFISBackupList
             parentlist.Add(CurrentFolderID) 'parent forlder
 
             NewDirectory.Parents = parentlist
-            NewDirectory.Name = frmInputBox.txtInputBox.Text
+            NewDirectory.Name = FolderName
             NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            If AdminPrevilege Then
-                NewDirectory.Description = "Admin_" & FileOwner
-            Else
-                NewDirectory.Description = FileOwner
-            End If
+            NewDirectory.Description = FileOwner
 
             NewDirectory = FISService.Files.Create(NewDirectory).Execute
 
@@ -386,6 +385,11 @@ Public Class frmFISBackupList
 
             item.ImageIndex = 0
             Me.listViewEx1.Items.Add(item)
+
+            If listViewEx1.Items.Count > 0 Then
+                Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
+            End If
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -457,12 +461,7 @@ Public Class frmFISBackupList
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
             body.MimeType = "files/" & My.Computer.FileSystem.GetFileInfo(e.Argument).Extension.Replace(".", "")
-
-            If AdminPrevilege Then
-                body.Description = "Admin_" & FileOwner
-            Else
-                body.Description = FileOwner
-            End If
+            body.Description = FileOwner
 
             Dim parentlist As New List(Of String)
             parentlist.Add(CurrentFolderID)
@@ -527,7 +526,13 @@ Public Class frmFISBackupList
 
         If uUploadStatus = UploadStatus.Completed Then
             MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            If listViewEx1.Items.Count > 0 Then
+                Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
+            End If
+
             GetDriveUsageDetails()
+
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -770,18 +775,18 @@ Public Class frmFISBackupList
 
 
     Public Sub SetTitleAndSize()
+        Me.Text = "FIS Online File List - " & FileOwner
+        Me.TitleText = "<b>FIS Online File List - " & FileOwner & "</b>"
         If AdminPrevilege Then
-            Me.Text = "FIS Online File List - Admin"
-            Me.TitleText = "<b>FIS Online File List - Admin</b>"
             Me.listViewEx1.Columns(3).Width = 290
             Me.Width = 1150
         Else
-            Me.Text = "FIS Online File List"
-            Me.TitleText = "<b>FIS Online File List</b>"
             Me.listViewEx1.Columns(3).Width = 0
             Me.Width = 990
         End If
 
+        Me.CircularProgress1.Location = New Point((Me.listViewEx1.Width - Me.CircularProgress1.Width) / 2, Me.CircularProgress1.Location.Y)
+        Me.lblProgressStatus.Location = New Point((Me.listViewEx1.Width - Me.lblProgressStatus.Width) / 2, Me.lblProgressStatus.Location.Y)
         Me.CenterToScreen()
         Me.BringToFront()
     End Sub

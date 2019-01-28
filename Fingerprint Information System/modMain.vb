@@ -68,11 +68,13 @@ Module modMain
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
     Public AdminPrevilege As Boolean = False
+    Public FileOwner As String = ""
 
     Public blDownloadIsProgressing As Boolean
     Public blUploadIsProgressing As Boolean
     Public blListIsLoading As Boolean
 
+    Public frmNewPleaseWaitForm As New frmPleaseWait
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
@@ -271,6 +273,23 @@ Module modMain
             MessageBoxEx.Show("File List is loading. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
+    End Sub
+
+
+
+    Public Sub ShowPleaseWaitForm()
+        Dim th As System.Threading.Thread = New Threading.Thread(AddressOf Task_A)
+        th.SetApartmentState(ApartmentState.STA)
+        th.Start()
+    End Sub
+    Public Sub Task_A()
+        frmNewPleaseWaitForm = New frmPleaseWait ' Must be created on this thread!
+        Application.Run(frmNewPleaseWaitForm)
+    End Sub
+
+    Public Sub ClosePleaseWaitForm()
+        On Error Resume Next
+        frmNewPleaseWaitForm.BeginInvoke(New Action(Sub() frmNewPleaseWaitForm.Close()))
     End Sub
 End Module
 

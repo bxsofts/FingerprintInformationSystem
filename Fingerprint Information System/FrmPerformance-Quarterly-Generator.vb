@@ -16,7 +16,7 @@ Public Class frmQuarterlyPerformance
 
     Private Sub FormLoadEvents() Handles MyBase.Load
         On Error Resume Next
-        frmPleaseWait.Show()
+        ShowPleaseWaitForm()
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
@@ -36,7 +36,7 @@ Public Class frmQuarterlyPerformance
         Control.CheckForIllegalCrossThreadCalls = False
 
         GeneratePerformanceStatement()
-        frmPleaseWait.Close()
+       ClosePleaseWaitForm()
     End Sub
 
     Sub SetDays()

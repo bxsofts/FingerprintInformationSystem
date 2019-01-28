@@ -37,11 +37,9 @@ Public Class frmOnlineBackup
     Public DownloadOnly As Boolean = False
 
     Dim FileOwner As String = ""
-
+    Dim TotalFileSize As Long = 0
 
 #Region "FORM LOAD EVENTS"
-
-   
 
     Private Sub CreateService() Handles MyBase.Load
 
@@ -56,7 +54,7 @@ Public Class frmOnlineBackup
         BackupFolder = FileOwner
 
         BackupFolderID = ""
-        Me.lblDriveStatus.Text = ""
+        Me.lblTotalFileSize.Text = ""
         Try
 
             CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
@@ -166,15 +164,17 @@ Public Class frmOnlineBackup
             List.Fields = "nextPageToken, files(id, name, modifiedTime, size, description)"
 
             Dim Results = List.Execute
+            TotalFileSize = 0
 
             For Each Result In Results.Files
                 Dim item As ListViewItem = New ListViewItem(Result.Name) 'name
                 Dim modifiedtime As DateTime = Result.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")) 'backup time
                 item.SubItems.Add(Result.Id) 'id
+                TotalFileSize = TotalFileSize + Result.Size
                 item.SubItems.Add(CalculateFileSize(Result.Size)) 'size
                 item.SubItems.Add(Result.Description)
-               
+
                 item.ImageIndex = 0
                 bgwService.ReportProgress(90, item)
             Next
@@ -210,7 +210,9 @@ Public Class frmOnlineBackup
         blListIsLoading = False
 
         Me.Cursor = Cursors.Default
-
+        If listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(0).Selected = True
+        End If
         If NoFileFoundMessage And listViewEx1.Items.Count = 0 Then
             frmMainInterface.ShowDesktopAlert("No online Backup Files were found.")
             NoFileFoundMessage = False
@@ -220,7 +222,7 @@ Public Class frmOnlineBackup
             MessageBoxEx.Show(e.Error.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
-
+        Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
     End Sub
 
     Private Sub RefreshBackupList() Handles btnRefresh.Click
@@ -439,10 +441,11 @@ Public Class frmOnlineBackup
                 Dim modifiedtime As DateTime = file.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                 item.SubItems.Add(file.Id)
-                item.SubItems.Add("")
                 item.SubItems.Add(CalculateFileSize(file.Size))
+                item.SubItems.Add(FileOwner)
                 item.ImageIndex = 0
                 bgwUpload.ReportProgress(100, item)
+                TotalFileSize += file.Size
             End If
 
             Stream.Close()
@@ -483,7 +486,11 @@ Public Class frmOnlineBackup
         DisplayInformation()
 
         If uUploadStatus = UploadStatus.Completed Then
+            Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
             MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If listViewEx1.Items.Count > 0 Then
+                Me.listViewEx1.Items(0).Selected = True
+            End If
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -865,6 +872,7 @@ Public Class frmOnlineBackup
             Dim SelectedFileName As String = Me.listViewEx1.SelectedItems(0).Text
             Dim SelectedFile = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
             Dim id As String = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
+            Dim SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
 
             If id = "Downloaded File" Then 'delete local file
                 My.Computer.FileSystem.DeleteFile(SelectedFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
@@ -879,14 +887,22 @@ Public Class frmOnlineBackup
                     Exit Sub
                 End If
 
+                Dim request = FISService.Files.Get(id)
+                request.Fields = "size"
+                Dim file = request.Execute
+
                 Dim DeleteRequest = FISService.Files.Delete(id)
                 DeleteRequest.Execute()
+                TotalFileSize -= file.Size
+                Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
                 Me.listViewEx1.SelectedItems(0).Remove()
                 Application.DoEvents()
                 frmMainInterface.ShowDesktopAlert("Selected backup file deleted from Google Drive.")
             End If
 
             Me.Cursor = Cursors.Default
+
+            SelectNextItem(SelectedFileIndex)
 
             DisplayInformation()
             ' GetDriveStorageDetails()
@@ -897,24 +913,22 @@ Public Class frmOnlineBackup
 
     End Sub
 
+    Private Sub SelectNextItem(SelectedFileIndex)
+        On Error Resume Next
+        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+        End If
+
+        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        End If
+    End Sub
+
 #End Region
 
 
-#Region "DRIVE STORAGE DETAILS"
-    Private Sub GetDriveStorageDetails() Handles lblSelectedFile.Click
-        Try
-            Me.lblDriveStatus.Text = ""
-            Dim request = FISService.About.Get
-            request.Fields = "user, storageQuota"
-            Dim x = request.Execute
-            Me.lblDriveStatus.Text = "Drive Space used: " & CalculateFileSize(x.StorageQuota.UsageInDrive) & "/" & CalculateFileSize(x.StorageQuota.Limit)
+#Region "SORT LIST"
 
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.lblDriveStatus.Text = ""
-        End Try
-
-    End Sub
     Private Sub SortByDate(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles listViewEx1.ColumnClick
         Try
             If Me.listViewEx1.Sorting = SortOrder.Ascending Then
@@ -943,7 +957,7 @@ Public Class frmOnlineBackup
 
     End Sub
 
-   
+
 #End Region
 
 
@@ -954,5 +968,5 @@ Public Class frmOnlineBackup
         Public BackupDate As String
     End Class
 
-    
+
 End Class

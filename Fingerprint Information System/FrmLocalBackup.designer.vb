@@ -32,6 +32,7 @@ Partial Class FrmLocalBackup
         Me.BackupFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BackupFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnBackupDatabase = New DevComponents.DotNetBar.ButtonX()
         Me.btnCopyDatabase = New DevComponents.DotNetBar.ButtonX()
         Me.btnImportDatabase = New DevComponents.DotNetBar.ButtonX()
@@ -44,7 +45,7 @@ Partial Class FrmLocalBackup
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
-        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
         Me.GroupPanel1.SuspendLayout()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
@@ -180,6 +181,11 @@ Partial Class FrmLocalBackup
         Me.BackupFolder.Text = "Backup Folder"
         Me.BackupFolder.Width = 0
         '
+        'FileSize
+        '
+        Me.FileSize.Text = "File Size"
+        Me.FileSize.Width = 100
+        '
         'btnBackupDatabase
         '
         Me.btnBackupDatabase.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
@@ -278,7 +284,7 @@ Partial Class FrmLocalBackup
         Me.Bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
-        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblSelectedFile})
+        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblSelectedFile, Me.lblTotalFileSize})
         Me.Bar1.Location = New System.Drawing.Point(0, 491)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(757, 23)
@@ -298,7 +304,7 @@ Partial Class FrmLocalBackup
         Me.lblSelectedFile.BeginGroup = True
         Me.lblSelectedFile.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
         Me.lblSelectedFile.Name = "lblSelectedFile"
-        Me.lblSelectedFile.Width = 270
+        Me.lblSelectedFile.Width = 300
         '
         'PanelEx2
         '
@@ -324,10 +330,12 @@ Partial Class FrmLocalBackup
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 29
         '
-        'FileSize
+        'lblTotalFileSize
         '
-        Me.FileSize.Text = "File Size"
-        Me.FileSize.Width = 100
+        Me.lblTotalFileSize.BeginGroup = True
+        Me.lblTotalFileSize.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
+        Me.lblTotalFileSize.Name = "lblTotalFileSize"
+        Me.lblTotalFileSize.Width = 200
         '
         'FrmLocalBackup
         '
@@ -379,4 +387,5 @@ Partial Class FrmLocalBackup
     Friend WithEvents lblSelectedFile As DevComponents.DotNetBar.LabelItem
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lblTotalFileSize As DevComponents.DotNetBar.LabelItem
 End Class

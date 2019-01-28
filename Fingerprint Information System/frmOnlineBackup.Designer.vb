@@ -45,7 +45,7 @@ Partial Class frmOnlineBackup
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
-        Me.lblDriveStatus = New DevComponents.DotNetBar.LabelItem()
+        Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.bgwService = New System.ComponentModel.BackgroundWorker()
         Me.bgwUpload = New System.ComponentModel.BackgroundWorker()
@@ -323,7 +323,7 @@ Partial Class frmOnlineBackup
         Me.Bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
-        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblSelectedFile, Me.lblDriveStatus})
+        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblSelectedFile, Me.lblTotalFileSize})
         Me.Bar1.Location = New System.Drawing.Point(0, 459)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(801, 23)
@@ -345,10 +345,12 @@ Partial Class frmOnlineBackup
         Me.lblSelectedFile.Name = "lblSelectedFile"
         Me.lblSelectedFile.Width = 270
         '
-        'lblDriveStatus
+        'lblTotalFileSize
         '
-        Me.lblDriveStatus.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
-        Me.lblDriveStatus.Name = "lblDriveStatus"
+        Me.lblTotalFileSize.BeginGroup = True
+        Me.lblTotalFileSize.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
+        Me.lblTotalFileSize.Name = "lblTotalFileSize"
+        Me.lblTotalFileSize.Width = 200
         '
         'PanelEx2
         '
@@ -440,6 +442,6 @@ Partial Class frmOnlineBackup
     Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
-    Friend WithEvents lblDriveStatus As DevComponents.DotNetBar.LabelItem
     Friend WithEvents UploadedBy As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lblTotalFileSize As DevComponents.DotNetBar.LabelItem
 End Class

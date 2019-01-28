@@ -5,7 +5,7 @@ Imports DevComponents.DotNetBar
 Public Class FrmLocalBackup
 
     Dim BackupPath As String = ""
-
+    Dim TotalFileSize As Long = 0
 
     Private Sub frmBackupList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
@@ -14,14 +14,13 @@ Public Class FrmLocalBackup
         RenameOldFormatFiles()
 
         Me.listViewEx1.Items.Clear()
-
+        TotalFileSize = 0
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
 
             If foundFile Is Nothing Then
                 Exit Sub
             End If
-
             Dim FileName = My.Computer.FileSystem.GetName(foundFile)
             Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
 
@@ -30,7 +29,9 @@ Public Class FrmLocalBackup
             Dim item As ListViewItem = Me.listViewEx1.Items.Add(FileName)
             item.SubItems.Add(Filedate.ToString("dd-MM-yyyy HH:mm:ss"))
             item.SubItems.Add(FullFilePath)
-            item.SubItems.Add(CalculateFileSize(My.Computer.FileSystem.GetFileInfo(FullFilePath).Length))
+            Dim fsize = My.Computer.FileSystem.GetFileInfo(FullFilePath).Length
+            TotalFileSize += fsize
+            item.SubItems.Add(CalculateFileSize(fsize))
             ' If FullFilePath.Contains("Online") Then
             'item.ImageIndex = 1
             ' Else
@@ -38,6 +39,7 @@ Public Class FrmLocalBackup
             ' End If
 
         Next
+        Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
         DisplayInformation()
 
         Me.listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
@@ -54,21 +56,29 @@ Public Class FrmLocalBackup
 
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
-            Dim sBackupTime = Strings.Format(BackupTime, "dd/MM/yyyy HH:mm:ss")
+            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
             Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+            Dim FullFilePath As String = BackupPath & "\" & BackupFileName
 
-
-            My.Computer.FileSystem.CopyFile(sDatabaseFile, BackupPath & "\" & BackupFileName, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
+            My.Computer.FileSystem.CopyFile(sDatabaseFile, FullFilePath, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
 
             Application.DoEvents()
+            
             Dim item As ListViewItem = Me.listViewEx1.Items.Add(BackupFileName)
             item.SubItems.Add(sBackupTime)
-            item.SubItems.Add(BackupPath & "\" & BackupFileName)
+            item.SubItems.Add(FullFilePath)
+            Dim fsize As Long = My.Computer.FileSystem.GetFileInfo(FullFilePath).Length
+            TotalFileSize += fsize
+            item.SubItems.Add(CalculateFileSize(fsize))
             item.ImageIndex = 0
 
+            Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
             frmMainInterface.ShowDesktopAlert("Database backed up successfully.")
             Application.DoEvents()
             DisplayInformation()
+            If listViewEx1.Items.Count > 0 Then
+                Me.listViewEx1.Items(0).Selected = True
+            End If
         Catch ex As Exception
 
         End Try
@@ -195,16 +205,37 @@ Public Class FrmLocalBackup
 
         Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to remove the selected backup file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
-        If result = Windows.Forms.DialogResult.Yes Then
-            My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
-            Me.listViewEx1.SelectedItems(0).Remove()
-            Application.DoEvents()
-            frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
+        If result = Windows.Forms.DialogResult.No Then
+            Exit Sub
         End If
 
-        DisplayInformation()
+        If result = Windows.Forms.DialogResult.Yes Then
+            Dim selectedfileindex = Me.listViewEx1.SelectedItems(0).Index
+            Dim fsize As Long = My.Computer.FileSystem.GetFileInfo(Me.listViewEx1.SelectedItems(0).SubItems(2).Text).Length
+            TotalFileSize -= fsize
+            My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
+            Me.listViewEx1.SelectedItems(0).Remove()
+            Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
+
+            Application.DoEvents()
+            frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
+            SelectNextItem(SelectedFileIndex)
+            DisplayInformation()
+        End If
+
     End Sub
 
+
+    Private Sub SelectNextItem(SelectedFileIndex)
+        On Error Resume Next
+        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+        End If
+
+        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        End If
+    End Sub
 
     Private Sub SortByDate(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles listViewEx1.ColumnClick
         If Me.listViewEx1.Sorting = SortOrder.Ascending Then

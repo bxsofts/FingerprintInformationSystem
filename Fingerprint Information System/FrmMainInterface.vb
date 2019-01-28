@@ -14191,8 +14191,6 @@ errhandler:
 #End Region
 
    
-
-
     '---------------------------------------------REPORTS-----------------------------------
 #Region "REPORTS"
 
@@ -14219,7 +14217,7 @@ errhandler:
             Exit Sub
         End If
 
-        frmPleaseWait.Show()
+        ShowPleaseWaitForm()
 
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -14267,7 +14265,7 @@ errhandler:
             Officer = Officer.Replace("; ", vbNewLine)
             wdBooks("IO").Range.Text = Officer
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
             Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\FacingSheet.docx"
             If Not FileInUse(sFileName) Then wdDoc.SaveAs(sFileName)
@@ -14286,7 +14284,7 @@ errhandler:
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Close()
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -14375,7 +14373,7 @@ errhandler:
                 Exit Sub
             End If
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
 
             Me.Cursor = Cursors.WaitCursor
             Dim BodyText As String = vbNullString
@@ -14748,7 +14746,7 @@ errhandler:
             End If
 
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -14760,7 +14758,7 @@ errhandler:
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Close()
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -14768,69 +14766,69 @@ errhandler:
 
     Private Sub GenerateIdentificationCoB(ByVal message As String, ByVal Receiver As String)
         Try
-            frmPleaseWait.Show()
-        message = message.Replace("..", ".")
-        Dim missing As Object = System.Reflection.Missing.Value
-        Dim fileName As Object = "normal.dotm"
-        Dim newTemplate As Object = False
-        Dim docType As Object = 0
-        Dim isVisible As Object = True
-        Dim WordApp As New Word.ApplicationClass()
+            ShowPleaseWaitForm()
+            message = message.Replace("..", ".")
+            Dim missing As Object = System.Reflection.Missing.Value
+            Dim fileName As Object = "normal.dotm"
+            Dim newTemplate As Object = False
+            Dim docType As Object = 0
+            Dim isVisible As Object = True
+            Dim WordApp As New Word.ApplicationClass()
 
-        Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+            Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
-        WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
-        If WordApp.Version < 12 Then
-            WordApp.Selection.Document.PageSetup.LeftMargin = 72
-            WordApp.Selection.Document.PageSetup.RightMargin = 72
-            WordApp.Selection.Document.PageSetup.TopMargin = 72
-            WordApp.Selection.Document.PageSetup.BottomMargin = 72
-            WordApp.Selection.ParagraphFormat.Space15()
-        End If
-        WordApp.Selection.NoProofing = 1
+            WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+            If WordApp.Version < 12 Then
+                WordApp.Selection.Document.PageSetup.LeftMargin = 72
+                WordApp.Selection.Document.PageSetup.RightMargin = 72
+                WordApp.Selection.Document.PageSetup.TopMargin = 72
+                WordApp.Selection.Document.PageSetup.BottomMargin = 72
+                WordApp.Selection.ParagraphFormat.Space15()
+            End If
+            WordApp.Selection.NoProofing = 1
 
-        WordApp.Selection.Paragraphs.DecreaseSpacing()
-        WordApp.Selection.Font.Size = 11
-        WordApp.Selection.Font.Bold = 1
-        WordApp.Selection.Font.Underline = 1
-        WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-        WordApp.Selection.TypeText("CoB/WIRELESS MESSAGE" & vbNewLine & vbNewLine)
-        WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-        WordApp.Selection.Font.Size = 12
-        WordApp.Selection.Font.Bold = 0
-        WordApp.Selection.Font.Underline = 0
-        WordApp.Selection.TypeText(("TO:" & vbTab & Receiver) & vbNewLine)
-        WordApp.Selection.TypeText("INF:" & vbTab & "DIRECTOR, FPB, TVPM" & vbNewLine)
-        WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
-        WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
-        WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = 1
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("CoB/WIRELESS MESSAGE" & vbNewLine & vbNewLine)
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeText(("TO:" & vbTab & Receiver) & vbNewLine)
+            WordApp.Selection.TypeText("INF:" & vbTab & "DIRECTOR, FPB, TVPM" & vbNewLine)
+            WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
+            WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
+            WordApp.Selection.Font.Bold = 1
 
-        Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
-        Dim line() = Strings.Split(FileNo, "/")
-        FileNo = line(0) & "/SOC/" & line(1)
+            Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
 
-        WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
-        WordApp.Selection.Font.Bold = 0
-        WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
-        WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-        WordApp.Selection.Font.Bold = 0
-        WordApp.Selection.TypeText(vbTab & message.ToUpper & vbNewLine)
-        WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
+            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(vbTab & message.ToUpper & vbNewLine)
+            WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
 
-        WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
 
-        frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
-        WordApp.Visible = True
-        WordApp.Activate()
-        WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-        aDoc.Activate()
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            aDoc.Activate()
 
-        aDoc = Nothing
+            aDoc = Nothing
             WordApp = Nothing
 
         Catch ex As Exception
-            frmPleaseWait.Close()
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
         End Try
     End Sub
@@ -14876,7 +14874,7 @@ errhandler:
                 Exit Sub
             End If
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
             Me.Cursor = Cursors.WaitCursor
 
             Dim idno As String = ""
@@ -14968,7 +14966,7 @@ errhandler:
                 wdBooks("FPEId").Range.Text = "Identified by: " & IdentifyingOfficer
             End If
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -14982,7 +14980,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Close()
+            ClosePleaseWaitForm()
             MessageBoxEx.Show(ex.Message)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -15027,7 +15025,7 @@ errhandler:
                 If DevComponents.DotNetBar.MessageBoxEx.Show("No. of prints remaining for search is zero.Do you want to generate the report?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
             End If
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
 
             Me.Cursor = Cursors.WaitCursor
             Dim missing As Object = System.Reflection.Missing.Value
@@ -15140,7 +15138,7 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -15152,7 +15150,7 @@ errhandler:
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -15168,7 +15166,7 @@ errhandler:
             End If
 
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
 
             Dim CPD As Integer = CInt(Me.SOCDatagrid.SelectedCells(10).Value.ToString)
             Dim CPR As Integer = CInt(Me.SOCDatagrid.SelectedCells(13).Value.ToString)
@@ -15272,7 +15270,7 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -15283,7 +15281,7 @@ errhandler:
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -15395,7 +15393,7 @@ errhandler:
                 Exit Sub
             End If
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
 
             Me.Cursor = Cursors.WaitCursor
             Dim wdApp As Word.Application
@@ -15411,7 +15409,7 @@ errhandler:
             wdBooks("Year2").Range.Text = Year(Today)
             wdBooks("Office").Range.Text = UCase(FullOfficeName & ", " & FullDistrictName)
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             wdApp.Visible = True
             wdApp.Activate()
             wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -15423,7 +15421,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             MessageBoxEx.Show(ex.Message)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -15437,7 +15435,7 @@ errhandler:
                 Exit Sub
             End If
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
             Me.Cursor = Cursors.WaitCursor
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -15449,7 +15447,7 @@ errhandler:
 
             wdBooks("Office").Range.Text = UCase(FullOfficeName & ", " & FullDistrictName)
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -15462,7 +15460,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             MessageBoxEx.Show(ex.Message)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -15492,7 +15490,7 @@ errhandler:
                 Exit Sub
             End If
 
-            frmPleaseWait.Show()
+            ShowPleaseWaitForm()
             Me.Cursor = Cursors.WaitCursor
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -15529,7 +15527,7 @@ errhandler:
                 wdBooks("Reason").Range.Text = Me.FPADataGrid.SelectedCells(12).Value
             End If
 
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -15542,7 +15540,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             MessageBoxEx.Show(ex.Message)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -15767,7 +15765,8 @@ errhandler:
 
         Try
 
-            frmPleaseWait.Show()
+            ' frmPleaseWait.Show
+            ShowPleaseWaitForm()
 
             Me.Cursor = Cursors.WaitCursor
             Dim bodytext As String = vbNullString
@@ -15910,7 +15909,8 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-            frmPleaseWait.Hide()
+            'ClosePleaseWaitForm()
+            ClosePleaseWaitForm()
 
             Dim sFullFileName As String = FileIO.SpecialDirectories.MyDocuments & "\" & sFileName
             If Not FileInUse(sFullFileName) Then aDoc.SaveAs(sFullFileName)
@@ -15924,10 +15924,11 @@ errhandler:
             WordApp = Nothing
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+
             Exit Sub
 
         Catch ex As Exception
-            frmPleaseWait.Hide()
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
@@ -16251,7 +16252,6 @@ errhandler:
     Private Sub ItemPanel1_Leave(ByVal sender As Object, ByVal e As System.EventArgs) Handles ItemPanel1.Leave
         ItemPanel1.Hide()
     End Sub
-
 
 
 #End Region
@@ -16793,7 +16793,8 @@ errhandler:
         frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
         frmInputBox.ShowDialog()
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
-        If frmInputBox.txtInputBox.Text <> "minutiae8" Then
+
+        If frmInputBox.txtInputBox.Text <> "^^^px7600d" Then
             MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -17230,6 +17231,7 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
+        FileOwner = ShortOfficeName & "_" & ShortDistrictName
         AdminPrevilege = False
         frmFISBackupList.SetTitleAndSize()
         Me.Cursor = Cursors.Default
@@ -17250,17 +17252,23 @@ errhandler:
         frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
         frmInputBox.ShowDialog()
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
-        If frmInputBox.txtInputBox.Text <> "minutiae8" Then
+
+        If frmInputBox.txtInputBox.Text = "minutiae8" Then
+            FileOwner = "Admin_" & ShortOfficeName & "_" & ShortDistrictName
+        ElseIf frmInputBox.txtInputBox.Text = "^^^px7600d" Then
+            FileOwner = "Admin"
+        Else
             MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
+
         AdminPrevilege = True
         frmFISBackupList.SetTitleAndSize()
         frmFISBackupList.Show()
     End Sub
 
 #End Region
-   
+
 
     '---------------------------------------------END APPLICATION-----------------------------------
 
@@ -17302,4 +17310,8 @@ errhandler:
 #End Region
 
 
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        ShowPleaseWaitForm()
+    End Sub
 End Class
