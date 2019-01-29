@@ -36,7 +36,7 @@ Partial Class frmPleaseWait
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX1.Location = New System.Drawing.Point(102, 60)
+        Me.LabelX1.Location = New System.Drawing.Point(102, 59)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(122, 30)
         Me.LabelX1.TabIndex = 0
@@ -50,7 +50,7 @@ Partial Class frmPleaseWait
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(126, 6)
+        Me.CircularProgress1.Location = New System.Drawing.Point(126, 5)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Donut
         Me.CircularProgress1.Size = New System.Drawing.Size(75, 50)

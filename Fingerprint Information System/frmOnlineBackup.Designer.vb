@@ -323,7 +323,7 @@ Partial Class frmOnlineBackup
         Me.Bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
-        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblSelectedFile, Me.lblTotalFileSize})
+        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblTotalFileSize, Me.lblSelectedFile})
         Me.Bar1.Location = New System.Drawing.Point(0, 459)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(801, 23)
