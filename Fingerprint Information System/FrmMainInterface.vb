@@ -16456,26 +16456,8 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim blTakeBackup As Boolean = False
-
-            Dim lastbackupdate As Date = Now
-
-            If My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Nothing) Is Nothing Then
-                blTakeBackup = True
-            Else
-                lastbackupdate = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Now))
-            End If
-
-            Dim dt As Date = lastbackupdate.AddDays(backupperiod)
-
-            If Now >= dt Or blTakeBackup Then
-                pgrDownloadInstaller.Visible = True
-                pgrDownloadInstaller.Value = 0
-                pgrDownloadInstaller.Text = "Uploading Backup 0%"
-                Me.StatusBar.RecalcLayout()
-                bgwOnlineAutoBackup.RunWorkerAsync()
-            End If
-
+            bgwOnlineAutoBackup.RunWorkerAsync(backupperiod)
+         
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -16515,6 +16497,31 @@ errhandler:
             If BackupFolderID = "" Then
                 BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
             End If
+
+
+            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
+            List.Fields = "files(id, modifiedTime)"
+
+            Dim blTakeBackup As Boolean = False
+            Results = List.Execute
+
+            If Results.Files.Count = 0 Then blTakeBackup = True
+            Dim lastbackupdate As Date = Now
+
+            If Results.Files.Count > 0 Then
+                lastbackupdate = Results.Files(0).ModifiedTime
+            End If
+
+            Dim backupperiod As Integer = e.Argument
+
+            Dim dt As Date = lastbackupdate.AddDays(backupperiod)
+
+            If Now >= dt Or blTakeBackup Then
+                bgwOnlineAutoBackup.ReportProgress(True)
+            Else
+                Exit Sub
+            End If
+
 
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
@@ -16561,8 +16568,17 @@ errhandler:
 
     Private Sub bgwOnlineAutoBackup_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwOnlineAutoBackup.ProgressChanged
 
-        Me.pgrDownloadInstaller.Value = e.ProgressPercentage
-        Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
+        If TypeOf e.UserState Is Boolean Then
+            pgrDownloadInstaller.Visible = True
+            pgrDownloadInstaller.Value = 0
+            pgrDownloadInstaller.Text = "Uploading Backup 0%"
+            Me.StatusBar.RecalcLayout()
+        Else
+            Me.pgrDownloadInstaller.Value = e.ProgressPercentage
+            Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
+        End If
+
+      
         '  Me.pgrDownloadInstaller.Text = "Uploading Backup: " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
     End Sub
 
@@ -17308,8 +17324,6 @@ errhandler:
         End
     End Sub
 #End Region
-
-
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         ShowPleaseWaitForm()
