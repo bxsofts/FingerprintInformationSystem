@@ -16499,7 +16499,7 @@ errhandler:
             End If
 
 
-            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
+            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and fullText contains '" & ShortOfficeName & "_ " & ShortDistrictName & "_AutoBackup'"
             List.Fields = "files(id, modifiedTime)"
 
             Dim blTakeBackup As Boolean = False
@@ -16517,7 +16517,7 @@ errhandler:
             Dim dt As Date = lastbackupdate.AddDays(backupperiod)
 
             If Now >= dt Or blTakeBackup Then
-                bgwOnlineAutoBackup.ReportProgress(True)
+                bgwOnlineAutoBackup.ReportProgress(0, True)
             Else
                 Exit Sub
             End If
@@ -16588,7 +16588,6 @@ errhandler:
         pgrDownloadInstaller.Text = ""
 
         If uUploadStatus = UploadStatus.Completed Then
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastOnlineBackupDate", Now, Microsoft.Win32.RegistryValueKind.String)
             ShowDesktopAlert("Database backed up to Google Drive.")
         End If
 
