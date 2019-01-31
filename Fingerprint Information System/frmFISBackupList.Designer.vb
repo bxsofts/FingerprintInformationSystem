@@ -312,12 +312,15 @@ Partial Class frmFISBackupList
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "folder small.png")
-        Me.ImageList1.Images.SetKeyName(1, "exe.png")
-        Me.ImageList1.Images.SetKeyName(2, "Hopstarter-Office-2010-Microsoft-Office-Access.ico")
-        Me.ImageList1.Images.SetKeyName(3, "file.png")
-        Me.ImageList1.Images.SetKeyName(4, "return-32.png")
-        Me.ImageList1.Images.SetKeyName(5, "gdrive_icon-icons.com_48.png")
+        Me.ImageList1.Images.SetKeyName(0, "Folder small 16x16.png")
+        Me.ImageList1.Images.SetKeyName(1, "gdrive round 48x48.png")
+        Me.ImageList1.Images.SetKeyName(2, "Back 16x16.png")
+        Me.ImageList1.Images.SetKeyName(3, "MS Access.png")
+        Me.ImageList1.Images.SetKeyName(4, "Exe 16x16.png")
+        Me.ImageList1.Images.SetKeyName(5, "PDF.png")
+        Me.ImageList1.Images.SetKeyName(6, "Word.png")
+        Me.ImageList1.Images.SetKeyName(7, "Excel.png")
+        Me.ImageList1.Images.SetKeyName(8, "File16x16.png")
         '
         'PanelEx3
         '

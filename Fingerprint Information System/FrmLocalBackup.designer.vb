@@ -43,8 +43,8 @@ Partial Class FrmLocalBackup
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
-        Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
+        Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1.SuspendLayout()
         Me.PanelEx1.SuspendLayout()
@@ -57,7 +57,7 @@ Partial Class FrmLocalBackup
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "Hopstarter-Office-2010-Microsoft-Office-Access.ico")
+        Me.ImageList1.Images.SetKeyName(0, "MS Access.png")
         Me.ImageList1.Images.SetKeyName(1, "gdrive_icon-icons.com_62760.png")
         '
         'btnRestoreDatabase
@@ -299,19 +299,19 @@ Partial Class FrmLocalBackup
         Me.lblCount.Name = "lblCount"
         Me.lblCount.Width = 140
         '
-        'lblSelectedFile
-        '
-        Me.lblSelectedFile.BeginGroup = True
-        Me.lblSelectedFile.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
-        Me.lblSelectedFile.Name = "lblSelectedFile"
-        Me.lblSelectedFile.Width = 300
-        '
         'lblTotalFileSize
         '
         Me.lblTotalFileSize.BeginGroup = True
         Me.lblTotalFileSize.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
         Me.lblTotalFileSize.Name = "lblTotalFileSize"
         Me.lblTotalFileSize.Width = 200
+        '
+        'lblSelectedFile
+        '
+        Me.lblSelectedFile.BeginGroup = True
+        Me.lblSelectedFile.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
+        Me.lblSelectedFile.Name = "lblSelectedFile"
+        Me.lblSelectedFile.Width = 300
         '
         'PanelEx2
         '

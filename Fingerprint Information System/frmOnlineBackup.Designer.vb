@@ -44,8 +44,8 @@ Partial Class frmOnlineBackup
         Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
-        Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
+        Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.bgwService = New System.ComponentModel.BackgroundWorker()
         Me.bgwUpload = New System.ComponentModel.BackgroundWorker()
@@ -74,7 +74,7 @@ Partial Class frmOnlineBackup
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "Google-Drive-icon.png")
-        Me.ImageList1.Images.SetKeyName(1, "Hopstarter-Office-2010-Microsoft-Office-Access.ico")
+        Me.ImageList1.Images.SetKeyName(1, "MS Access.png")
         Me.ImageList1.Images.SetKeyName(2, "gdrive_icon-icons.com_62760.png")
         '
         'btnRemoveBackupFile
@@ -338,19 +338,19 @@ Partial Class frmOnlineBackup
         Me.lblCount.Name = "lblCount"
         Me.lblCount.Width = 140
         '
-        'lblSelectedFile
-        '
-        Me.lblSelectedFile.BeginGroup = True
-        Me.lblSelectedFile.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
-        Me.lblSelectedFile.Name = "lblSelectedFile"
-        Me.lblSelectedFile.Width = 270
-        '
         'lblTotalFileSize
         '
         Me.lblTotalFileSize.BeginGroup = True
         Me.lblTotalFileSize.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
         Me.lblTotalFileSize.Name = "lblTotalFileSize"
         Me.lblTotalFileSize.Width = 200
+        '
+        'lblSelectedFile
+        '
+        Me.lblSelectedFile.BeginGroup = True
+        Me.lblSelectedFile.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
+        Me.lblSelectedFile.Name = "lblSelectedFile"
+        Me.lblSelectedFile.Width = 270
         '
         'PanelEx2
         '

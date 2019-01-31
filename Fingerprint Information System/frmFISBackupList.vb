@@ -31,6 +31,17 @@ Public Class frmFISBackupList
     Dim ServiceCreated As Boolean = False
     Dim CurrentFolderName As String = ""
 
+    Public Enum ImageIndex
+        Folder = 0
+        GoogleDrive = 1
+        ReturnBack = 2
+        MSAccess = 3
+        Exe = 4
+        PDF = 5
+        Word = 6
+        Excel = 7
+        Others = 8
+    End Enum
 
 #Region "LOAD DATA"
 
@@ -111,8 +122,6 @@ Public Class frmFISBackupList
             If TypeOf e.UserState Is String Then
                 lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
                 Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
-                '  If uSelectedFile <> "" Then Me.listViewEx1.FindItemWithText(FileOwner & "_" & uSelectedFile)
-                '  uSelectedFile = ""
             End If
 
         Catch ex As Exception
@@ -160,7 +169,7 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add("root")
                 item.SubItems.Add("")
-                item.ImageIndex = 5 'google drive icon
+                item.ImageIndex = ImageIndex.GoogleDrive 'google drive icon
                 bgwListFiles.ReportProgress(1, item)
             Else
                 item = New ListViewItem("\" & CurrentFolderName)
@@ -168,7 +177,7 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add(FolderID)
                 item.SubItems.Add("")
-                If CurrentFolderName = "My Drive" Then item.ImageIndex = 5 Else item.ImageIndex = 4 'back icon
+                If CurrentFolderName = "My Drive" Then item.ImageIndex = ImageIndex.GoogleDrive Else item.ImageIndex = ImageIndex.ReturnBack 'back icon
                 bgwListFiles.ReportProgress(1, item)
             End If
 
@@ -179,18 +188,24 @@ Public Class frmFISBackupList
 
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.SubItems.Add("") 'size for folder
-                    item.ImageIndex = 0
+                    item.ImageIndex = ImageIndex.Folder
                 ElseIf Result.MimeType = "application/x-msdownload" Then ' 
-                    item.ImageIndex = 1 'exe
-                    item.SubItems.Add(CalculateFileSize(Result.Size))
+                    item.ImageIndex = ImageIndex.Exe 'exe
                 ElseIf Result.MimeType = "database/mdb" Or Result.MimeType = "files/mdb" Then
-                    item.ImageIndex = 2 'mdb
-                    item.SubItems.Add(CalculateFileSize(Result.Size))
+                    item.ImageIndex = ImageIndex.MSAccess 'mdb
+                ElseIf Result.MimeType = "files/pdf" Then
+                    item.ImageIndex = ImageIndex.PDF
+                ElseIf Result.MimeType = "files/docx" Then
+                    item.ImageIndex = ImageIndex.Word
+                ElseIf Result.MimeType = "files/xlsx" Then
+                    item.ImageIndex = ImageIndex.Excel
                 Else
-                    item.ImageIndex = 3 'others
-                    item.SubItems.Add(CalculateFileSize(Result.Size))
+                    item.ImageIndex = ImageIndex.Others 'others
                 End If
 
+                If item.ImageIndex > 2 Then
+                    item.SubItems.Add(CalculateFileSize(Result.Size))
+                End If
                 item.SubItems.Add(Result.Id)
 
                 If Result.Description = "FIS Backup Folder" Then
@@ -202,7 +217,7 @@ Public Class frmFISBackupList
                 End If
 
 
-                If AdminPrevilege Or CurrentFolderName = FileOwner Or CurrentFolderName = "InstallerFile" Or CurrentFolderName = "General Files" Or item.ImageIndex = 0 And Result.Name <> "VersionFolder" Then
+                If AdminPrevilege Or CurrentFolderName = FileOwner Or CurrentFolderName = "InstallerFile" Or CurrentFolderName = "General Files" Or item.ImageIndex = ImageIndex.Folder And Result.Name <> "VersionFolder" Then
                     bgwListFiles.ReportProgress(2, item) 'report all files
                 ElseIf item.SubItems(4).Text = FileOwner Then
                     bgwListFiles.ReportProgress(2, item) 'list all folders except version folder
@@ -240,7 +255,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex > 0 And Me.listViewEx1.SelectedItems(0).ImageIndex < 4 Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
             If MessageBoxEx.Show("Do you want to download the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                 DownloadSelectedFile()
                 Exit Sub
@@ -383,7 +398,7 @@ Public Class frmFISBackupList
             item.SubItems.Add(Result.Id)
             item.SubItems.Add(Result.Description)
 
-            item.ImageIndex = 0
+            item.ImageIndex = ImageIndex.Folder
             Me.listViewEx1.Items.Add(item)
 
             If listViewEx1.Items.Count > 0 Then
@@ -494,9 +509,9 @@ Public Class frmFISBackupList
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(file.Description)
                 If file.MimeType = "files/mdb" Then
-                    item.ImageIndex = 2 'mdb
+                    item.ImageIndex = ImageIndex.MSAccess 'mdb
                 Else
-                    item.ImageIndex = 3 'others
+                    item.ImageIndex = ImageIndex.Others 'others
                 End If
                 bgwUploadFile.ReportProgress(100, item)
             End If
@@ -582,7 +597,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = 0 Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
             MessageBoxEx.Show("Cannot download Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -710,7 +725,7 @@ Public Class frmFISBackupList
         End If
 
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = 0 And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And CurrentFolderName <> FileOwner Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And CurrentFolderName <> FileOwner Then
             MessageBoxEx.Show("You are not authorized to delete the selected folder. You can delete folders inside '" & FileOwner & "' Folder or folders created by you only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -726,7 +741,13 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        Dim result As DialogResult = MessageBoxEx.Show("Do you really want to remove the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        Dim msg As String = ""
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
+            msg = "Do you really want to remove the selected folder?"
+        Else
+            msg = "Do you really want to remove the selected file?"
+        End If
+        Dim result As DialogResult = MessageBoxEx.Show(msg, strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
         If result = Windows.Forms.DialogResult.No Then
             Exit Sub
@@ -797,6 +818,7 @@ Public Class frmFISBackupList
         Me.CenterToScreen()
         Me.BringToFront()
     End Sub
+
    
 End Class
 
