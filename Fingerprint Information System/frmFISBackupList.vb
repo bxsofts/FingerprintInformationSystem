@@ -40,7 +40,10 @@ Public Class frmFISBackupList
         PDF = 5
         Word = 6
         Excel = 7
-        Others = 8
+        PowerPoint = 8
+        TXT = 9
+        Image = 10
+        Others = 11
     End Enum
 
 #Region "LOAD DATA"
@@ -189,23 +192,14 @@ Public Class frmFISBackupList
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = ImageIndex.Folder
-                ElseIf Result.MimeType = "application/x-msdownload" Then ' 
-                    item.ImageIndex = ImageIndex.Exe 'exe
-                ElseIf Result.MimeType = "database/mdb" Or Result.MimeType = "files/mdb" Then
-                    item.ImageIndex = ImageIndex.MSAccess 'mdb
-                ElseIf Result.MimeType = "files/pdf" Then
-                    item.ImageIndex = ImageIndex.PDF
-                ElseIf Result.MimeType = "files/docx" Then
-                    item.ImageIndex = ImageIndex.Word
-                ElseIf Result.MimeType = "files/xlsx" Then
-                    item.ImageIndex = ImageIndex.Excel
                 Else
-                    item.ImageIndex = ImageIndex.Others 'others
+                    item.ImageIndex = GetImageIndex(Result.MimeType)
                 End If
 
                 If item.ImageIndex > 2 Then
                     item.SubItems.Add(CalculateFileSize(Result.Size))
                 End If
+
                 item.SubItems.Add(Result.Id)
 
                 If Result.Description = "FIS Backup Folder" Then
@@ -508,11 +502,7 @@ Public Class frmFISBackupList
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(file.Description)
-                If file.MimeType = "files/mdb" Then
-                    item.ImageIndex = ImageIndex.MSAccess 'mdb
-                Else
-                    item.ImageIndex = ImageIndex.Others 'others
-                End If
+                item.ImageIndex = GetImageIndex(file.MimeType)
                 bgwUploadFile.ReportProgress(100, item)
             End If
 
@@ -819,6 +809,41 @@ Public Class frmFISBackupList
         Me.BringToFront()
     End Sub
 
-   
+    Private Function GetImageIndex(mimeType As String) As Integer
+        Dim index As Integer
+        Select Case mimeType.ToLower
+            Case "application/x-msdownload"
+                index = ImageIndex.Exe 'exe
+            Case "files/exe"
+                index = ImageIndex.Exe 'exe
+            Case "database/mdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case "files/mdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case "files/accdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case "files/pdf"
+                index = ImageIndex.PDF
+            Case "files/docx"
+                index = ImageIndex.Word
+            Case "files/xlsx"
+                index = ImageIndex.Excel
+            Case "files/pptx"
+                index = ImageIndex.PowerPoint
+            Case "files/txt"
+                index = ImageIndex.TXT
+            Case "files/jpg"
+                index = ImageIndex.Image
+            Case "files/jpeg"
+                index = ImageIndex.Image
+            Case "files/png"
+                index = ImageIndex.Image
+            Case "files/bmp"
+                index = ImageIndex.Image
+            Case Else
+                index = ImageIndex.Others
+        End Select
+        Return index
+    End Function
 End Class
 

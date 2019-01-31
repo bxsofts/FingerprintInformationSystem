@@ -317,10 +317,13 @@ Partial Class frmFISBackupList
         Me.ImageList1.Images.SetKeyName(2, "Back 16x16.png")
         Me.ImageList1.Images.SetKeyName(3, "MS Access.png")
         Me.ImageList1.Images.SetKeyName(4, "Exe 16x16.png")
-        Me.ImageList1.Images.SetKeyName(5, "PDF.png")
+        Me.ImageList1.Images.SetKeyName(5, "Pdf (2).png")
         Me.ImageList1.Images.SetKeyName(6, "Word.png")
         Me.ImageList1.Images.SetKeyName(7, "Excel.png")
-        Me.ImageList1.Images.SetKeyName(8, "File16x16.png")
+        Me.ImageList1.Images.SetKeyName(8, "powerpoint.png")
+        Me.ImageList1.Images.SetKeyName(9, "txt.png")
+        Me.ImageList1.Images.SetKeyName(10, "jpg_jpeg-512.png")
+        Me.ImageList1.Images.SetKeyName(11, "file.png")
         '
         'PanelEx3
         '
