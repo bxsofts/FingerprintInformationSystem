@@ -16516,7 +16516,7 @@ errhandler:
 
             Dim dt As Date = lastbackupdate.AddDays(backupperiod)
 
-            If Now >= dt Or blTakeBackup Then
+            If Now.Date >= dt.Date Or blTakeBackup Then
                 bgwOnlineAutoBackup.ReportProgress(0, True)
             Else
                 Exit Sub

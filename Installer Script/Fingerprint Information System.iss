@@ -120,7 +120,7 @@ Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Info
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
 Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\Scripts\PinToTaskbar.exe; DestDir: {app}\; Flags: ignoreversion
-Source: .\Scripts\syspin.exe; DestDir: {app}\; Flags: ignoreversion
+; Source: .\Scripts\syspin.exe; DestDir: {app}\; Flags: ignoreversion
 
 
 [Registry]
@@ -187,7 +187,8 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\TabColorSettings; ValueType: string; ValueName: TabStyle; ValueData: 9; Flags: noerror uninsdeletekey createvalueifdoesntexist
 
 [Run]
-Filename: {app}\syspin.exe; Tasks: Pintotaskbar;  Parameters: """{app}\Fingerprint Information System.exe"" ""c:5386""" ; Flags: runhidden
+; Filename: {app}\syspin.exe; Tasks: Pintotaskbar;  Parameters: """{app}\Fingerprint Information System.exe"" c:""Pin To Taskbar""" ; Flags: runhidden
+Filename: {app}\PinToTaskbar.exe; Tasks: Pintotaskbar  ; Flags: runhidden
 Filename: "{app}\ReportViewer2010.exe"; StatusMsg: "Installing Report Viewer. Please wait..."; Parameters: "/q"
 Filename: {app}\Fingerprint Information System.exe; Description: {cm:LaunchProgram,Fingerprint Information System}; Flags: nowait postinstall skipifsilent runascurrentuser; WorkingDir: {app}
 [UninstallDelete]

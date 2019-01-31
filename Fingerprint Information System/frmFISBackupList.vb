@@ -433,6 +433,13 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        For i = 0 To Me.listViewEx1.Items.Count - 1
+            If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
+                MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+        Next
+
         dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
         dFormatedFileSize = CalculateFileSize(dFileSize)
 

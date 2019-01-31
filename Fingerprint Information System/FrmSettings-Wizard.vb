@@ -47,7 +47,7 @@ Public Class FrmSettingsWizard
 
             Me.chkAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 30)
-            If autobackuptime = "TextBoxItem1" Or firstrun Then
+            If autobackuptime = "TextBoxItem1" Then
                 autobackuptime = "30"
             End If
 
