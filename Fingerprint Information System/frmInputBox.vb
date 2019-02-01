@@ -8,6 +8,7 @@
         On Error Resume Next
         
         Me.txtInputBox.Focus()
+        Me.txtInputBox.SelectionLength = 0
         ButtonClicked = "Cancel"
     End Sub
     Public Sub SetTitleandMessage(ByVal Title As String, ByVal Message As String, ByVal PasswordChar As Boolean, Optional ByVal DefaultValue As String = "")

@@ -50,6 +50,7 @@ Partial Class frmFISBackupList
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnRename = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -63,7 +64,7 @@ Partial Class frmFISBackupList
         Me.btnDownloadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnDownloadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownloadFile.Image = CType(resources.GetObject("btnDownloadFile.Image"), System.Drawing.Image)
-        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 293)
+        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 247)
         Me.btnDownloadFile.Name = "btnDownloadFile"
         Me.btnDownloadFile.Size = New System.Drawing.Size(131, 59)
         Me.btnDownloadFile.TabIndex = 4
@@ -75,10 +76,10 @@ Partial Class frmFISBackupList
         Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
-        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 374)
+        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 387)
         Me.btnRemoveFile.Name = "btnRemoveFile"
         Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
-        Me.btnRemoveFile.TabIndex = 5
+        Me.btnRemoveFile.TabIndex = 6
         Me.btnRemoveFile.Text = "Remove"
         '
         'bgwDownloadFile
@@ -95,6 +96,7 @@ Partial Class frmFISBackupList
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx2.Controls.Add(Me.btnRename)
         Me.PanelEx2.Controls.Add(Me.btnNewFolder)
         Me.PanelEx2.Controls.Add(Me.btnUploadFile)
         Me.PanelEx2.Controls.Add(Me.btnDownloadFile)
@@ -119,7 +121,7 @@ Partial Class frmFISBackupList
         Me.btnNewFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnNewFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewFolder.Image = CType(resources.GetObject("btnNewFolder.Image"), System.Drawing.Image)
-        Me.btnNewFolder.Location = New System.Drawing.Point(16, 131)
+        Me.btnNewFolder.Location = New System.Drawing.Point(16, 107)
         Me.btnNewFolder.Name = "btnNewFolder"
         Me.btnNewFolder.Size = New System.Drawing.Size(131, 59)
         Me.btnNewFolder.TabIndex = 2
@@ -131,7 +133,7 @@ Partial Class frmFISBackupList
         Me.btnUploadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnUploadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadFile.Image = CType(resources.GetObject("btnUploadFile.Image"), System.Drawing.Image)
-        Me.btnUploadFile.Location = New System.Drawing.Point(16, 212)
+        Me.btnUploadFile.Location = New System.Drawing.Point(16, 177)
         Me.btnUploadFile.Name = "btnUploadFile"
         Me.btnUploadFile.Size = New System.Drawing.Size(131, 59)
         Me.btnUploadFile.TabIndex = 3
@@ -143,7 +145,7 @@ Partial Class frmFISBackupList
         Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(16, 50)
+        Me.btnRefresh.Location = New System.Drawing.Point(16, 37)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
         Me.btnRefresh.TabIndex = 1
@@ -322,7 +324,7 @@ Partial Class frmFISBackupList
         Me.ImageList1.Images.SetKeyName(7, "Excel.png")
         Me.ImageList1.Images.SetKeyName(8, "powerpoint.png")
         Me.ImageList1.Images.SetKeyName(9, "txt.png")
-        Me.ImageList1.Images.SetKeyName(10, "jpg_jpeg-512.png")
+        Me.ImageList1.Images.SetKeyName(10, "jpeg.png")
         Me.ImageList1.Images.SetKeyName(11, "file.png")
         '
         'PanelEx3
@@ -373,6 +375,18 @@ Partial Class frmFISBackupList
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'btnRename
+        '
+        Me.btnRename.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
+        Me.btnRename.Location = New System.Drawing.Point(16, 317)
+        Me.btnRename.Name = "btnRename"
+        Me.btnRename.Size = New System.Drawing.Size(131, 59)
+        Me.btnRename.TabIndex = 5
+        Me.btnRename.Text = "Rename"
+        '
         'frmFISBackupList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -421,4 +435,5 @@ Partial Class frmFISBackupList
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents UploadedBy As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnNewFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnRename As DevComponents.DotNetBar.ButtonX
 End Class

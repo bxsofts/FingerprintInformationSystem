@@ -13246,8 +13246,9 @@ errhandler:
         Me.txtFPANumber.Focus()
         Dim ctrl As Control
         For Each ctrl In Me.PanelFPA.Controls 'clear all textboxes
+            Me.dtChalanDate.Text = vbNullString
             If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.Editors.IntegerInput Then
-                If (ctrl.Name <> txtFPAYear.Name) And ctrl.Name <> txtFPATreasury.Name And ctrl.Name <> txtFPAAmount.Name And ctrl.Name <> txtHeadOfAccount.Name Then ctrl.Text = vbNullString
+                If (ctrl.Name <> txtFPAYear.Name) And ctrl.Name <> txtFPATreasury.Name And ctrl.Name <> txtHeadOfAccount.Name Then ctrl.Text = vbNullString
             End If
         Next
     End Sub
@@ -14242,7 +14243,7 @@ errhandler:
             wdBooks("DI").Range.Text = Me.SOCDatagrid.SelectedCells(2).FormattedValue
             wdBooks("DR").Range.Text = Me.SOCDatagrid.SelectedCells(3).FormattedValue
             wdBooks("DO").Range.Text = Me.SOCDatagrid.SelectedCells(4).Value.ToString
-            wdBooks("PO").Range.Text = Me.SOCDatagrid.SelectedCells(8).Value.ToString
+            wdBooks("PO").Range.Text = Me.SOCDatagrid.SelectedCells(8).Value.ToString & vbNewLine
             wdBooks("NC").Range.Text = Me.SOCDatagrid.SelectedCells(15).Value.ToString
             wdBooks("MO").Range.Text = Me.SOCDatagrid.SelectedCells(16).Value.ToString
             wdBooks("PL").Range.Text = Me.SOCDatagrid.SelectedCells(17).Value.ToString
@@ -17324,7 +17325,5 @@ errhandler:
     End Sub
 #End Region
 
-    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        ShowPleaseWaitForm()
-    End Sub
+ 
 End Class

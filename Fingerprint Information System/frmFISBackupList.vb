@@ -242,12 +242,6 @@ Public Class frmFISBackupList
         End If
        
 
-        Me.Cursor = Cursors.WaitCursor
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
             If MessageBoxEx.Show("Do you want to download the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
@@ -257,6 +251,13 @@ Public Class frmFISBackupList
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
         End If
 
         Try
@@ -341,11 +342,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-
         If CurrentFolderName = "InstallerFile" And Not AdminPrevilege Then
             MessageBoxEx.Show("Creation of new Folder is not allowed in 'InstallerFile' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -366,6 +362,14 @@ Public Class frmFISBackupList
         Try
 
             Me.Cursor = Cursors.WaitCursor
+
+
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+
             Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
 
 
@@ -418,12 +422,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
         If CurrentFolderName = "InstallerFile" And Not AdminPrevilege Then
             MessageBoxEx.Show("Uploading of files is not allowed in 'InstallerFile' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -459,6 +457,13 @@ Public Class frmFISBackupList
         End If
 
         Me.Cursor = Cursors.WaitCursor
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         CircularProgress1.ProgressBarType = eCircularProgressType.Line
         CircularProgress1.Visible = True
         CircularProgress1.ProgressText = "0"
@@ -566,12 +571,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
         If Me.listViewEx1.Items.Count = 0 Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -593,6 +592,13 @@ Public Class frmFISBackupList
         End If
 
         Me.Cursor = Cursors.WaitCursor
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         CircularProgress1.ProgressBarType = eCircularProgressType.Line
         CircularProgress1.Visible = True
         CircularProgress1.ProgressText = 0
@@ -689,11 +695,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-
         If Me.listViewEx1.Items.Count = 0 Then
             MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -725,11 +726,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
 
         Dim msg As String = ""
         If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
@@ -743,9 +739,15 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
         Try
-            Me.Cursor = Cursors.WaitCursor
+
             RemoveFile(listViewEx1.SelectedItems(0).SubItems(3).Text, False)
             Me.listViewEx1.SelectedItems(0).Remove()
             GetDriveUsageDetails()
@@ -789,6 +791,87 @@ Public Class frmFISBackupList
     End Sub
 
 
+#End Region
+
+
+#Region "RENAME FILES"
+    Private Sub btnRename_Click(sender As Object, e As EventArgs) Handles btnRename.Click
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowActionInProgressMessage()
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.Items.Count = 0 Then
+            MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 0 Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).Text = "FIS Backup" Or Me.listViewEx1.SelectedItems(0).Text = "InstallerFile" Or Me.listViewEx1.SelectedItems(0).Text = "VersionFolder" Then
+            MessageBoxEx.Show("Renaming is not allowed for the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And CurrentFolderName <> FileOwner Then
+            MessageBoxEx.Show("You are not authorized to rename the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text = FileOwner And CurrentFolderName = "FIS Backup" Then
+            MessageBoxEx.Show("Renaming is not allowed for the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And AdminPrevilege = False And CurrentFolderName <> FileOwner Then
+            MessageBoxEx.Show("You are not authorized to rename the selected file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+       
+        Dim oldfilename As String = Me.listViewEx1.SelectedItems(0).Text
+        Dim extension As String = ""
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
+            extension = My.Computer.FileSystem.GetFileInfo(oldfilename).Extension
+            oldfilename = oldfilename.Replace(extension, "")
+        End If
+
+        frmInputBox.SetTitleandMessage("Enter New Name", "Enter New Name", False, oldfilename)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Dim newfilename As String = frmInputBox.txtInputBox.Text
+
+        Try
+            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            request.Name = newfilename & extension
+            request.Description = FileOwner
+            FISService.Files.Update(request, listViewEx1.SelectedItems(0).SubItems(3).Text).Execute()
+            Me.listViewEx1.SelectedItems(0).Text = request.Name
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 #End Region
 
 
@@ -845,5 +928,6 @@ Public Class frmFISBackupList
         End Select
         Return index
     End Function
+
 End Class
 
