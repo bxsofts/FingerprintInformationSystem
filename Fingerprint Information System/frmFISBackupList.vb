@@ -31,6 +31,9 @@ Public Class frmFISBackupList
     Dim ServiceCreated As Boolean = False
     Dim CurrentFolderName As String = ""
 
+    Dim CurrentFolderPath As String = ""
+    Dim ParentFolderPath As String = ""
+
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -55,6 +58,8 @@ Public Class frmFISBackupList
 
         Me.lblDriveSpaceUsed.Text = ""
         Me.lblItemCount.Text = ""
+        CurrentFolderPath = ""
+        ParentFolderPath = ""
 
         CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
         JsonPath = CredentialPath & "\FISServiceAccount.json"
@@ -141,7 +146,7 @@ Public Class frmFISBackupList
         CircularProgress1.Hide()
         lblProgressStatus.Hide()
         blListIsLoading = False
-
+        LabelX1.Text = CurrentFolderPath
     End Sub
 
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
@@ -172,6 +177,8 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add("root")
                 item.SubItems.Add("")
+                CurrentFolderPath = "\My Drive"
+                ParentFolderPath = "\My Drive"
                 item.ImageIndex = ImageIndex.GoogleDrive 'google drive icon
                 bgwListFiles.ReportProgress(1, item)
             Else
@@ -180,7 +187,13 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add(FolderID)
                 item.SubItems.Add("")
-                If CurrentFolderName = "My Drive" Then item.ImageIndex = ImageIndex.GoogleDrive Else item.ImageIndex = ImageIndex.ReturnBack 'back icon
+
+                If CurrentFolderName = "My Drive" Then
+                    item.ImageIndex = ImageIndex.GoogleDrive
+                Else
+                    item.ImageIndex = ImageIndex.ReturnBack 'back icon
+                End If
+
                 bgwListFiles.ReportProgress(1, item)
             End If
 
@@ -240,7 +253,7 @@ Public Class frmFISBackupList
             ShowActionInProgressMessage()
             Exit Sub
         End If
-       
+
 
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
@@ -269,17 +282,23 @@ Public Class frmFISBackupList
                 Dim Result = List.Execute
                 If Result.Parents Is Nothing Then
                     id = "root"
+                    CurrentFolderPath = "\My Drive"
+                    ParentFolderPath = "\My Drive"
                 Else
                     id = Result.Parents.First
                     List = FISService.Files.Get(id)
                     List.Fields = "name"
                     CurrentFolderName = List.Execute.Name
+                    CurrentFolderPath = ParentFolderPath
                 End If
             Else
                 CurrentFolderName = Me.listViewEx1.SelectedItems(0).Text
                 CurrentFolderID = Me.listViewEx1.SelectedItems(0).SubItems(3).Text
                 id = CurrentFolderID
+                ParentFolderPath = CurrentFolderPath
+                CurrentFolderPath = GetFullFolderPath(ParentFolderPath, CurrentFolderName, True)
             End If
+
 
             CircularProgress1.ProgressText = ""
             ' lblProgressStatus.Text = "Please wait..."
@@ -330,6 +349,62 @@ Public Class frmFISBackupList
         bgwListFiles.RunWorkerAsync("root")
     End Sub
 
+    Private Function GetFullFolderPath(sFullFolderPath As String, sCurrentFolderName As String, blAppend As Boolean) As String
+        If sCurrentFolderName = "My Drive" Then
+            sFullFolderPath = "\My Drive"
+        Else
+            If blAppend Then sFullFolderPath = sFullFolderPath & "\" & sCurrentFolderName
+            If Not blAppend Then
+                sFullFolderPath = sFullFolderPath.TrimEnd("\")
+
+                Dim l = sFullFolderPath.Length
+                Dim p = sFullFolderPath.IndexOf("\")
+                If p = -1 Then p = l
+                sFullFolderPath = sFullFolderPath.Remove(p, l - p)
+            End If
+
+        End If
+        Return sFullFolderPath.Replace("\\", "\")
+    End Function
+
+    Private Function GetImageIndex(mimeType As String) As Integer
+        Dim index As Integer
+        Select Case mimeType.ToLower
+            Case "application/x-msdownload"
+                index = ImageIndex.Exe 'exe
+            Case "files/exe"
+                index = ImageIndex.Exe 'exe
+            Case "database/mdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case "files/mdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case "files/accdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case "files/pdf"
+                index = ImageIndex.PDF
+            Case "files/docx"
+                index = ImageIndex.Word
+            Case "files/xlsx"
+                index = ImageIndex.Excel
+            Case "files/pptx"
+                index = ImageIndex.PowerPoint
+            Case "files/txt"
+                index = ImageIndex.TXT
+            Case "files/jpg"
+                index = ImageIndex.Image
+            Case "files/jpeg"
+                index = ImageIndex.Image
+            Case "files/png"
+                index = ImageIndex.Image
+            Case "files/bmp"
+                index = ImageIndex.Image
+            Case Else
+                index = ImageIndex.Others
+        End Select
+        Return index
+    End Function
+
+
 #End Region
 
 
@@ -339,6 +414,11 @@ Public Class frmFISBackupList
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowActionInProgressMessage()
+            Exit Sub
+        End If
+
+        If CurrentFolderName = "" Or CurrentFolderName = "My Drive" And Not AdminPrevilege Then
+            MessageBoxEx.Show("Creation of new Folder is not allowed in 'My Drive' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -892,42 +972,6 @@ Public Class frmFISBackupList
         Me.BringToFront()
     End Sub
 
-    Private Function GetImageIndex(mimeType As String) As Integer
-        Dim index As Integer
-        Select Case mimeType.ToLower
-            Case "application/x-msdownload"
-                index = ImageIndex.Exe 'exe
-            Case "files/exe"
-                index = ImageIndex.Exe 'exe
-            Case "database/mdb"
-                index = ImageIndex.MSAccess 'mdb
-            Case "files/mdb"
-                index = ImageIndex.MSAccess 'mdb
-            Case "files/accdb"
-                index = ImageIndex.MSAccess 'mdb
-            Case "files/pdf"
-                index = ImageIndex.PDF
-            Case "files/docx"
-                index = ImageIndex.Word
-            Case "files/xlsx"
-                index = ImageIndex.Excel
-            Case "files/pptx"
-                index = ImageIndex.PowerPoint
-            Case "files/txt"
-                index = ImageIndex.TXT
-            Case "files/jpg"
-                index = ImageIndex.Image
-            Case "files/jpeg"
-                index = ImageIndex.Image
-            Case "files/png"
-                index = ImageIndex.Image
-            Case "files/bmp"
-                index = ImageIndex.Image
-            Case Else
-                index = ImageIndex.Others
-        End Select
-        Return index
-    End Function
-
+   
 End Class
 

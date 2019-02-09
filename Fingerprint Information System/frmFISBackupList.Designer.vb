@@ -30,6 +30,7 @@ Partial Class frmFISBackupList
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnRename = New DevComponents.DotNetBar.ButtonX()
         Me.btnNewFolder = New DevComponents.DotNetBar.ButtonX()
         Me.btnUploadFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
@@ -50,7 +51,7 @@ Partial Class frmFISBackupList
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.btnRename = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -114,6 +115,18 @@ Partial Class frmFISBackupList
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
+        '
+        'btnRename
+        '
+        Me.btnRename.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
+        Me.btnRename.Location = New System.Drawing.Point(16, 317)
+        Me.btnRename.Name = "btnRename"
+        Me.btnRename.Size = New System.Drawing.Size(131, 59)
+        Me.btnRename.TabIndex = 5
+        Me.btnRename.Text = "Rename"
         '
         'btnNewFolder
         '
@@ -201,6 +214,7 @@ Partial Class frmFISBackupList
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel1.Controls.Add(Me.LabelX1)
         Me.GroupPanel1.Controls.Add(Me.lblProgressStatus)
         Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
@@ -375,17 +389,18 @@ Partial Class frmFISBackupList
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'btnRename
+        'LabelX1
         '
-        Me.btnRename.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
-        Me.btnRename.Location = New System.Drawing.Point(16, 317)
-        Me.btnRename.Name = "btnRename"
-        Me.btnRename.Size = New System.Drawing.Size(131, 59)
-        Me.btnRename.TabIndex = 5
-        Me.btnRename.Text = "Rename"
+        Me.LabelX1.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(9, 354)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(47, 18)
+        Me.LabelX1.TabIndex = 5
+        Me.LabelX1.Text = "LabelX1"
         '
         'frmFISBackupList
         '
@@ -405,6 +420,7 @@ Partial Class frmFISBackupList
         Me.PanelEx2.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel1.ResumeLayout(False)
+        Me.GroupPanel1.PerformLayout()
         Me.PanelEx3.ResumeLayout(False)
         Me.PanelEx1.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -436,4 +452,5 @@ Partial Class frmFISBackupList
     Friend WithEvents UploadedBy As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnNewFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnRename As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
 End Class
