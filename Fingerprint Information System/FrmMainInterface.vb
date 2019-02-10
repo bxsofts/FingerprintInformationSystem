@@ -16500,7 +16500,7 @@ errhandler:
             End If
 
 
-            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and fullText contains '" & ShortOfficeName & "_ " & ShortDistrictName & "_AutoBackup'"
+            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and fullText contains '" & ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup'"
             List.Fields = "files(id, modifiedTime)"
 
             Dim blTakeBackup As Boolean = False
@@ -16531,7 +16531,7 @@ errhandler:
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = ShortOfficeName & "_ " & ShortDistrictName & "_AutoBackup"
+            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup"
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -16785,146 +16785,6 @@ errhandler:
 #End Region
 
 
-#Region "UPLOAD INSTALLER"
-
-    Private Sub btnUploadInstallerFile_Click(sender As Object, e As EventArgs) Handles btnUploadInstallerFile.Click
-        Me.Cursor = Cursors.WaitCursor
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Uploading Backup") Then
-            MessageBoxEx.Show("Another File Upload is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Downloading Installer") Then
-            MessageBoxEx.Show("Another File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        Me.Cursor = Cursors.Default
-        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
-        frmInputBox.ShowDialog()
-        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
-
-        If frmInputBox.txtInputBox.Text <> "^^^px7600d" Then
-            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        OpenFileDialog1.Filter = "Exe File|*.exe"
-        OpenFileDialog1.FileName = ""
-        OpenFileDialog1.Title = "Select " & strAppName & "Installer File"
-        OpenFileDialog1.AutoUpgradeEnabled = True
-        OpenFileDialog1.RestoreDirectory = True 'remember last directory
-        Dim uSelectedFile As String = ""
-        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
-            Application.DoEvents() 'first close the selection window
-            uSelectedFile = OpenFileDialog1.FileName
-        Else
-            Exit Sub
-        End If
-
-        dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
-        dFormatedFileSize = CalculateFileSize(dFileSize)
-
-        pgrDownloadInstaller.Visible = True
-        pgrDownloadInstaller.Value = 0
-        pgrDownloadInstaller.Text = "Uploading Installer 0%"
-        Me.StatusBar.RecalcLayout()
-
-        cpgrDownloadInstaller.ProgressColor = GetProgressColor()
-        cpgrDownloadInstaller.ProgressText = "0"
-        rbrDownloadInstaller.Visible = True
-        cpgrDownloadInstaller.IsRunning = True
-        rbrDownloadInstaller.Text = "Uploading"
-
-        bgwUploadInstaller.RunWorkerAsync(uSelectedFile)
-
-    End Sub
-
-
-    Private Sub bgwUploadInstaller_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadInstaller.DoWork
-
-        Try
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
-
-            Dim FISService As DriveService = New DriveService
-            Dim Scopes As String() = {DriveService.Scope.Drive}
-
-            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
-
-            Dim List = FISService.Files.List()
-            List.Q = "name contains 'Fingerprint Information System V' and name contains '.exe' and trashed = false"
-            List.Fields = "files(name, id)"
-
-            Dim Results = List.Execute
-
-            If Results.Files.Count > 0 Then
-                InstallerFileID = Results.Files(0).Id
-            End If
-
-            If InstallerFileID = "" Then Exit Sub
-
-            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
-            request.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
-            request.Description = "Admin"
-            request.MimeType = "application/x-msdownload"
-
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(e.Argument)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
-
-            Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(request, InstallerFileID, Stream, "application/x-msdownload")
-            UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-
-            AddHandler UpdateRequest.ProgressChanged, AddressOf Update_ProgressChanged
-
-            UpdateRequest.Upload()
-            Stream.Close()
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-        End Try
-
-    End Sub
-
-    Private Sub Update_ProgressChanged(Progress As IUploadProgress)
-        Control.CheckForIllegalCrossThreadCalls = False
-        uBytesUploaded = Progress.BytesSent
-        uUploadStatus = Progress.Status
-        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-        bgwUploadInstaller.ReportProgress(percent, uBytesUploaded)
-    End Sub
-    Private Sub bgwUploadInstaller_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadInstaller.ProgressChanged
-        Me.pgrDownloadInstaller.Value = e.ProgressPercentage
-        Me.cpgrDownloadInstaller.ProgressText = e.ProgressPercentage
-        Me.pgrDownloadInstaller.Text = "Uploading Installer " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
-    End Sub
-
-    Private Sub bgwUploadInstaller_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadInstaller.RunWorkerCompleted
-
-        rbrDownloadInstaller.Visible = False
-        pgrDownloadInstaller.Visible = False
-        pgrDownloadInstaller.Value = 0
-        pgrDownloadInstaller.Text = ""
-
-        If uUploadStatus = UploadStatus.Completed Then
-            ShowDesktopAlert("Installer File uploaded to Google Drive.")
-        End If
-
-        If uUploadStatus = UploadStatus.Failed Then
-            ShowDesktopAlert("Installer File upload failed.")
-        End If
-
-    End Sub
-
-#End Region
-
-
 #Region "DOWNLOAD INSTALLER"
 
     Private Sub btnDownloadInstallerInBrowser_Click(sender As Object, e As EventArgs) Handles btnDownloadInstallerInBrowser.Click
@@ -16943,11 +16803,6 @@ errhandler:
 
     Private Sub btnDownloadInstaller_Click(sender As Object, e As EventArgs) Handles btnDownloadInstallerFile.Click
         Me.Cursor = Cursors.WaitCursor
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
 
         If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Uploading Backup") Then
             MessageBoxEx.Show("Another File Upload is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -16956,6 +16811,12 @@ errhandler:
 
         If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Downloading Installer") Then
             MessageBoxEx.Show("Another File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -17001,40 +16862,59 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
+
+            Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false"
-            List.Fields = "files(name, id, webViewLink)"
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Installer File'"
+            List.Fields = "files(id)"
 
             Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwDownloadInstaller.ReportProgress(100, "Installer File folder not found")
+                Exit Sub
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+            List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false and '" & parentid & "' in parents"
+            List.Fields = "files(name, id, webViewLink)"
+
+            Results = List.Execute
 
             If Results.Files.Count > 0 Then
                 InstallerFileName = Results.Files(0).Name
                 InstallerFileID = Results.Files(0).Id
+                Dim request = FISService.Files.Get(InstallerFileID)
+                request.Fields = "size"
+                Dim file = request.Execute
+
+                dFileSize = file.Size
+                dFormatedFileSize = CalculateFileSize(dFileSize)
+
+                Dim fStream = New System.IO.FileStream(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+                m.ChunkSize = 256 * 1024
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+            Else
+                bgwDownloadInstaller.ReportProgress(100, "File not found")
+
             End If
 
-            Dim request = FISService.Files.Get(InstallerFileID)
-            request.Fields = "size"
-            Dim file = request.Execute
-
-            dFileSize = file.Size
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            Dim fStream = New System.IO.FileStream(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
-            Dim mStream = New System.IO.MemoryStream
-
-            Dim m = request.MediaDownloader
-            m.ChunkSize = 256 * 1024
-
-            AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
-
-            request.DownloadWithStatus(mStream)
-
-            If dDownloadStatus = DownloadStatus.Completed Then
-                mStream.WriteTo(fStream)
-            End If
-
-            fStream.Close()
-            mStream.Close()
 
 
         Catch ex As Exception
@@ -17048,14 +16928,21 @@ errhandler:
         dBytesDownloaded = Progress.BytesDownloaded
         dDownloadStatus = Progress.Status
         Dim percent = CInt((dBytesDownloaded / dFileSize) * 100)
-        bgwDownloadInstaller.ReportProgress(percent, dBytesDownloaded)
+        bgwDownloadInstaller.ReportProgress(percent)
     End Sub
 
     Private Sub bgwDownloadInstaller_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadInstaller.ProgressChanged
         cpgrDownloadInstaller.ProgressText = e.ProgressPercentage
         pgrDownloadInstaller.Value = e.ProgressPercentage
         pgrDownloadInstaller.Text = "Downloading Installer " & e.ProgressPercentage & "% " & CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
-        ' pgrDownloadInstaller.Text = "Downloading Installer: " & CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
+
+        If e.UserState = "File not found" Then
+            MessageBoxEx.Show("Installer File not found. Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+        If e.UserState = "Installer File folder not found" Then
+            MessageBoxEx.Show("Installer File folder not found. Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
     Private Sub bgwDownloadInstaller_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadInstaller.RunWorkerCompleted
 
@@ -17072,21 +16959,11 @@ errhandler:
         End If
 
     End Sub
-    Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
-        Dim updateavailable As Boolean = CheckForUpdates()
-        bgwUpdateChecker.ReportProgress(100, updateavailable)
-    End Sub
 
-    Private Sub bgwUpdateChecker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateChecker.ProgressChanged
-        If e.ProgressPercentage = 100 And e.UserState = True Then
-            If MessageBoxEx.Show("A new version '" & strAppName & " V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
-                ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
-                DownloadInstaller()
-            End If
-        End If
-    End Sub
+#End Region
 
 
+#Region "CHECK FOR UPDATE"
 
     Private Sub CheckForUpdatesAtStartup()
         If InternetAvailable() = False Then
@@ -17134,11 +17011,26 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
+            Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false"
-            List.Fields = "files(name, id, webViewLink)"
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Installer File'"
+            List.Fields = "files(id)"
 
             Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Return False
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+            List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false and '" & parentid & "' in parents"
+
+            List.Fields = "files(name, id, webViewLink)"
+
+            Results = List.Execute
 
             If Results.Files.Count > 0 Then
                 InstallerFileVersion = Results.Files(0).Name
@@ -17157,6 +17049,19 @@ errhandler:
         End Try
     End Function
 
+    Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
+        Dim updateavailable As Boolean = CheckForUpdates()
+        bgwUpdateChecker.ReportProgress(100, updateavailable)
+    End Sub
+
+    Private Sub bgwUpdateChecker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateChecker.ProgressChanged
+        If e.ProgressPercentage = 100 And e.UserState = True Then
+            If MessageBoxEx.Show("A new version '" & strAppName & " V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+                ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
+                DownloadInstaller()
+            End If
+        End If
+    End Sub
 
 #End Region
 
@@ -17239,7 +17144,7 @@ errhandler:
 
 
 #Region "FIS ONLINE FILE LIST"
-    Private Sub btnFISOnlineFileListBasic_Click(sender As Object, e As EventArgs) Handles btnOnlineFileTransfer.Click
+    Private Sub btnBasicOnlineFileTransfer_Click(sender As Object, e As EventArgs) Handles btnBasicOnlineFileTransfer.Click
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
@@ -17248,39 +17153,29 @@ errhandler:
             Exit Sub
         End If
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
-        AdminPrevilege = False
+        LocalAdmin = False
+        SuperAdmin = False
+        LocalUser = True
         frmFISBackupList.SetTitleAndSize()
+        frmFISBackupList.btnUpdateFileContent.Visible = False
         Me.Cursor = Cursors.Default
         frmFISBackupList.Show()
     End Sub
 
-    Private Sub btnFISFileList_Click(sender As Object, e As EventArgs) Handles btnFISOnlineFileList.Click
+    Private Sub btnAdminOnlineFileTransfer_Click(sender As Object, e As EventArgs) Handles btnAdminOnlineFileTransfer.Click
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        If InternetAvailable() = False Then
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-        Me.Cursor = Cursors.Default
-        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
-        frmInputBox.ShowDialog()
-        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
-
-        If frmInputBox.txtInputBox.Text = "minutiae8" Then
-            FileOwner = "Admin_" & ShortOfficeName & "_" & ShortDistrictName
-        ElseIf frmInputBox.txtInputBox.Text = "^^^px7600d" Then
-            FileOwner = "Admin"
-        Else
-            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
+        If SetAdminPrivilege() Then
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+            frmFISBackupList.SetTitleAndSize()
+            frmFISBackupList.Show()
         End If
 
-        AdminPrevilege = True
-        frmFISBackupList.SetTitleAndSize()
-        frmFISBackupList.Show()
     End Sub
 
 #End Region

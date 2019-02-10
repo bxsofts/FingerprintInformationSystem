@@ -11,6 +11,10 @@ Imports Google.Apis.Download
 Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
+
+Imports System.Runtime.InteropServices
+Imports System.Drawing
+
 Public Class frmFISBackupList
 
     Dim FISService As DriveService = New DriveService
@@ -34,6 +38,8 @@ Public Class frmFISBackupList
     Dim CurrentFolderPath As String = ""
     Dim ParentFolderPath As String = ""
 
+    Dim SelectedFileID As String = ""
+    Dim SelectedFileIndex As Integer = 0
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -53,13 +59,21 @@ Public Class frmFISBackupList
 
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
+
+        If SuperAdmin Then
+            Me.btnUpdateFileContent.Visible = True
+        Else
+            Me.btnUpdateFileContent.Visible = False
+        End If
+
         SetTitleAndSize()
         Me.CenterToScreen()
 
         Me.lblDriveSpaceUsed.Text = ""
         Me.lblItemCount.Text = ""
-        CurrentFolderPath = ""
-        ParentFolderPath = ""
+
+        CurrentFolderPath = "\My Drive"
+        ParentFolderPath = "\My Drive"
 
         CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
         JsonPath = CredentialPath & "\FISServiceAccount.json"
@@ -92,6 +106,7 @@ Public Class frmFISBackupList
         blDownloadIsProgressing = False
         blListIsLoading = False
 
+        '  ImageList1.Images.Add(GetFileIcon(".exe"))
         bgwListFiles.RunWorkerAsync("root")
 
     End Sub
@@ -146,7 +161,7 @@ Public Class frmFISBackupList
         CircularProgress1.Hide()
         lblProgressStatus.Hide()
         blListIsLoading = False
-        LabelX1.Text = CurrentFolderPath
+        ShortenCurrentFolderPath()
     End Sub
 
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
@@ -177,8 +192,6 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add("root")
                 item.SubItems.Add("")
-                CurrentFolderPath = "\My Drive"
-                ParentFolderPath = "\My Drive"
                 item.ImageIndex = ImageIndex.GoogleDrive 'google drive icon
                 bgwListFiles.ReportProgress(1, item)
             Else
@@ -223,8 +236,11 @@ Public Class frmFISBackupList
                     item.SubItems.Add(Result.Description)
                 End If
 
-
-                If AdminPrevilege Or CurrentFolderName = FileOwner Or CurrentFolderName = "InstallerFile" Or CurrentFolderName = "General Files" Or item.ImageIndex = ImageIndex.Folder And Result.Name <> "VersionFolder" Then
+                If SuperAdmin Then
+                    bgwListFiles.ReportProgress(2, item) 'report all files
+                ElseIf LocalAdmin And Result.Name <> "VersionFolder" Then 'report all except versionfolder
+                    bgwListFiles.ReportProgress(2, item)
+                ElseIf CurrentFolderName = FileOwner Or CurrentFolderPath.StartsWith("\My Drive\Installer File") Or CurrentFolderPath.StartsWith("\My Drive\General Files") Or item.ImageIndex = ImageIndex.Folder And Result.Name <> "VersionFolder" Then
                     bgwListFiles.ReportProgress(2, item) 'report all files
                 ElseIf item.SubItems(4).Text = FileOwner Then
                     bgwListFiles.ReportProgress(2, item) 'list all folders except version folder
@@ -250,7 +266,7 @@ Public Class frmFISBackupList
         End If
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -274,7 +290,6 @@ Public Class frmFISBackupList
         End If
 
         Try
-            ' CurrentFolderName = ""
             Dim id As String = ""
             If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
                 Dim List As FilesResource.GetRequest = FISService.Files.Get(CurrentFolderID)
@@ -288,6 +303,7 @@ Public Class frmFISBackupList
                     id = Result.Parents.First
                     List = FISService.Files.Get(id)
                     List.Fields = "name"
+                    ParentFolderPath = GetFullFolderPath(ParentFolderPath, CurrentFolderName, False)
                     CurrentFolderName = List.Execute.Name
                     CurrentFolderPath = ParentFolderPath
                 End If
@@ -327,7 +343,7 @@ Public Class frmFISBackupList
     Private Sub RefreshFileList(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -338,6 +354,10 @@ Public Class frmFISBackupList
             Exit Sub
         End If
         CurrentFolderID = "root"
+
+        CurrentFolderPath = "\My Drive"
+        ParentFolderPath = "\My Drive"
+
         Me.listViewEx1.Items.Clear()
         CircularProgress1.ProgressText = ""
         lblProgressStatus.Text = "Fetching Files from Google Drive..."
@@ -354,15 +374,7 @@ Public Class frmFISBackupList
             sFullFolderPath = "\My Drive"
         Else
             If blAppend Then sFullFolderPath = sFullFolderPath & "\" & sCurrentFolderName
-            If Not blAppend Then
-                sFullFolderPath = sFullFolderPath.TrimEnd("\")
-
-                Dim l = sFullFolderPath.Length
-                Dim p = sFullFolderPath.IndexOf("\")
-                If p = -1 Then p = l
-                sFullFolderPath = sFullFolderPath.Remove(p, l - p)
-            End If
-
+            If Not blAppend Then sFullFolderPath = sFullFolderPath.Replace("\" & sCurrentFolderName, "")
         End If
         Return sFullFolderPath.Replace("\\", "\")
     End Function
@@ -404,6 +416,16 @@ Public Class frmFISBackupList
         Return index
     End Function
 
+    Private Sub ShortenCurrentFolderPath()
+        Try
+            lblCurrentFolderPath.Text = CompactString(CurrentFolderPath, lblCurrentFolderPath.Width, lblCurrentFolderPath.Font, TextFormatFlags.PathEllipsis)
+            If lblCurrentFolderPath.Text.Contains("...") Then lblCurrentFolderPath.Tooltip = CurrentFolderPath
+        Catch ex As Exception
+            lblCurrentFolderPath.Text = CurrentFolderPath
+            lblCurrentFolderPath.Tooltip = CurrentFolderPath
+        End Try
+
+    End Sub
 
 #End Region
 
@@ -413,24 +435,39 @@ Public Class frmFISBackupList
     Private Sub btnNewFolder_Click(sender As Object, e As EventArgs) Handles btnNewFolder.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
-        If CurrentFolderName = "" Or CurrentFolderName = "My Drive" And Not AdminPrevilege Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'My Drive' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If CurrentFolderPath = "\My Drive" And Not SuperAdmin Then
+            MessageBoxEx.Show("Creation of new Folder is not allowed in 'My Drive' folder.  Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If CurrentFolderName = "InstallerFile" And Not AdminPrevilege Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'InstallerFile' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If CurrentFolderPath = "\My Drive\FIS Backup" And Not SuperAdmin Then
+            MessageBoxEx.Show("Creation of new Folder is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
+            MessageBoxEx.Show("Creation of new Folder is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
         frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False)
         frmInputBox.ShowDialog()
         Dim FolderName As String = frmInputBox.txtInputBox.Text
-        If frmInputBox.ButtonClicked <> "OK" Or Trim(FolderName) = "" Then Exit Sub
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+
+        If Trim(FolderName) = "" Then
+            MessageBoxEx.Show("Invalid folder name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If IsValidFileName(FolderName) = False Then
+            MessageBoxEx.Show("Folder name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
 
         For i = 0 To Me.listViewEx1.Items.Count - 1
             If Me.listViewEx1.Items(i).Text.ToLower = FolderName.ToLower Then
@@ -491,6 +528,7 @@ Public Class frmFISBackupList
 
     End Sub
 
+
 #End Region
 
 
@@ -498,12 +536,22 @@ Public Class frmFISBackupList
 
     Private Sub btnUploadFile_Click(sender As Object, e As EventArgs) Handles btnUploadFile.Click
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
-        If CurrentFolderName = "InstallerFile" And Not AdminPrevilege Then
-            MessageBoxEx.Show("Uploading of files is not allowed in 'InstallerFile' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If CurrentFolderPath = "\My Drive" And Not SuperAdmin Then
+            MessageBoxEx.Show("Uploading of files is not allowed in 'My Drive' folder. Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If CurrentFolderPath = "\My Drive\FIS Backup" And Not SuperAdmin Then
+            MessageBoxEx.Show("Uploading of files is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
+            MessageBoxEx.Show("Uploading of files is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -592,6 +640,10 @@ Public Class frmFISBackupList
             End If
 
             Stream.Close()
+
+            If uUploadStatus = UploadStatus.Completed Then
+                GetDriveUsageDetails()
+            End If
         Catch ex As Exception
             blUploadIsProgressing = False
             Me.Cursor = Cursors.Default
@@ -627,9 +679,6 @@ Public Class frmFISBackupList
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
-
-            GetDriveUsageDetails()
-
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -647,7 +696,7 @@ Public Class frmFISBackupList
 
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -771,7 +820,7 @@ Public Class frmFISBackupList
     Private Sub DeleteSelectedFile(sender As Object, e As EventArgs) Handles btnRemoveFile.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -785,34 +834,39 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+        Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
+        Dim SelectedItemOwner As String = Me.listViewEx1.SelectedItems(0).SubItems(4).Text
+        SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+
+        Dim blFileIsFolder As Boolean = False
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blFileIsFolder = True
+
+        If SelectedItemText.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).Text = "FIS Backup" Or Me.listViewEx1.SelectedItems(0).Text = "InstallerFile" Or Me.listViewEx1.SelectedItems(0).Text = "VersionFolder" Then
-            MessageBoxEx.Show("Deletion is not allowed for the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
 
+        If Not SuperAdmin Then
+            Dim msg1 As String = "file."
+            If blFileIsFolder Then msg1 = "folder."
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And CurrentFolderName <> FileOwner Then
-            MessageBoxEx.Show("You are not authorized to delete the selected folder. You can delete folders inside '" & FileOwner & "' Folder or folders created by you only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And AdminPrevilege = False And CurrentFolderName <> FileOwner Then
-            MessageBoxEx.Show("You are not authorized to delete the selected file. You can delete files inside '" & FileOwner & "' Folder or files created by you only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
+            If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
+                MessageBoxEx.Show("You are not authorized to delete the selected " & msg1, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
         End If
 
 
         Dim msg As String = ""
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
+
+
+        If blFileIsFolder Then
             msg = "Do you really want to remove the selected folder?"
         Else
             msg = "Do you really want to remove the selected file?"
         End If
+
         Dim result As DialogResult = MessageBoxEx.Show(msg, strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
         If result = Windows.Forms.DialogResult.No Then
@@ -828,10 +882,17 @@ Public Class frmFISBackupList
 
         Try
 
-            RemoveFile(listViewEx1.SelectedItems(0).SubItems(3).Text, False)
-            Me.listViewEx1.SelectedItems(0).Remove()
+            RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, False)
+            Me.listViewEx1.Items(SelectedFileIndex).Remove()
             GetDriveUsageDetails()
-            frmMainInterface.ShowDesktopAlert("Selected file deleted from Google Drive.")
+
+            If blFileIsFolder Then
+                msg = "Selected folder deleted from Google Drive."
+            Else
+                msg = "Selected file deleted from Google Drive."
+            End If
+            frmMainInterface.ShowDesktopAlert(msg)
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -878,7 +939,7 @@ Public Class frmFISBackupList
     Private Sub btnRename_Click(sender As Object, e As EventArgs) Handles btnRename.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -892,33 +953,28 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+        Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
+        Dim SelectedItemOwner As String = Me.listViewEx1.SelectedItems(0).SubItems(4).Text
+
+        Dim blFileIsFolder As Boolean = False
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blFileIsFolder = True
+
+        If SelectedItemText.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).Text = "FIS Backup" Or Me.listViewEx1.SelectedItems(0).Text = "InstallerFile" Or Me.listViewEx1.SelectedItems(0).Text = "VersionFolder" Then
-            MessageBoxEx.Show("Renaming is not allowed for the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
+        Dim msg1 As String = "file"
+        If blFileIsFolder Then msg1 = "folder"
+
+        If Not SuperAdmin Then
+            If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
+                MessageBoxEx.Show("You are not authorized to rename the selected " & msg1 & ".", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
         End If
 
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And CurrentFolderName <> FileOwner Then
-            MessageBoxEx.Show("You are not authorized to rename the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And AdminPrevilege = False And Me.listViewEx1.SelectedItems(0).SubItems(4).Text = FileOwner And CurrentFolderName = "FIS Backup" Then
-            MessageBoxEx.Show("Renaming is not allowed for the selected folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If Me.listViewEx1.SelectedItems(0).SubItems(4).Text <> FileOwner And AdminPrevilege = False And CurrentFolderName <> FileOwner Then
-            MessageBoxEx.Show("You are not authorized to rename the selected file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-       
         Dim oldfilename As String = Me.listViewEx1.SelectedItems(0).Text
         Dim extension As String = ""
 
@@ -931,6 +987,32 @@ Public Class frmFISBackupList
         frmInputBox.ShowDialog()
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
 
+        Dim newfilename As String = frmInputBox.txtInputBox.Text
+
+        If Trim(newfilename) = "" Then
+            MessageBoxEx.Show("Invalid " & msg1 & " name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If IsValidFileName(newfilename) = False Then
+            MessageBoxEx.Show("File name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If newfilename = oldfilename Then
+            Exit Sub
+        End If
+
+        If Not blFileIsFolder Then newfilename = newfilename & extension
+
+        Dim SelectedItemIndex As Integer = Me.listViewEx1.SelectedItems(0).Index
+        For i = 0 To Me.listViewEx1.Items.Count - 1
+            If i <> SelectedItemIndex And Me.listViewEx1.Items(i).Text.ToLower = newfilename.ToLower Then
+                MessageBoxEx.Show("Another " & msg1 & " with name '" & newfilename & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+        Next
+
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -938,14 +1020,23 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        Dim newfilename As String = frmInputBox.txtInputBox.Text
-
         Try
             Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
-            request.Name = newfilename & extension
+            request.Name = newfilename
             request.Description = FileOwner
-            FISService.Files.Update(request, listViewEx1.SelectedItems(0).SubItems(3).Text).Execute()
-            Me.listViewEx1.SelectedItems(0).Text = request.Name
+            SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+            Dim id As String = listViewEx1.SelectedItems(0).SubItems(3).Text
+            FISService.Files.Update(request, id).Execute()
+
+            Dim List As FilesResource.GetRequest = FISService.Files.Get(id)
+            List.Fields = "id, name, modifiedTime, description"
+            Dim Result = List.Execute
+
+            Me.listViewEx1.Items(SelectedFileIndex).Text = Result.Name
+            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -955,10 +1046,206 @@ Public Class frmFISBackupList
 #End Region
 
 
+#Region "UPDATE FILE CONTENT"
+
+    Private Sub btnUpdateFileContent_Click(sender As Object, e As EventArgs) Handles btnUpdateFileContent.Click
+
+        If Not SuperAdmin Then
+            MessageBoxEx.Show("You are not authorized to update file content.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+         If Me.listViewEx1.Items.Count = 0 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 0 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
+            MessageBoxEx.Show("Cannot update folder. Select file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        OpenFileDialog1.Filter = "Exe File|*.exe"
+        OpenFileDialog1.Filter = "All Files|*.*"
+        OpenFileDialog1.FileName = ""
+        OpenFileDialog1.Title = "Select File to Upload"
+        OpenFileDialog1.AutoUpgradeEnabled = True
+        OpenFileDialog1.RestoreDirectory = True 'remember last directory
+
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
+            Application.DoEvents() 'first close the selection window
+            uSelectedFile = OpenFileDialog1.FileName
+        Else
+            Exit Sub
+        End If
+
+        SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+        Dim sFileName As String = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name
+        For i = 0 To Me.listViewEx1.Items.Count - 1
+            If i <> SelectedFileIndex And Me.listViewEx1.Items(i).Text.ToLower = sFileName.ToLower Then
+                MessageBoxEx.Show("Another file with name '" & sFileName & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+        Next
+
+        dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
+        dFormatedFileSize = CalculateFileSize(dFileSize)
+
+        If dFileSize >= 25 * 1048576 Then '25MB
+            If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                Exit Sub
+            End If
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        CircularProgress1.ProgressBarType = eCircularProgressType.Line
+        CircularProgress1.Visible = True
+        CircularProgress1.ProgressText = "0"
+        CircularProgress1.IsRunning = True
+        lblProgressStatus.Text = "Uploading File..."
+        lblProgressStatus.Visible = True
+
+        SelectedFileID = Me.listViewEx1.Items(SelectedFileIndex).SubItems(3).Text
+        bgwUpdateFileContent.RunWorkerAsync(uSelectedFile)
+
+    End Sub
+
+    Private Sub bgwUpdateFileContent_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateFileContent.DoWork
+
+        Try
+            blUploadIsProgressing = True
+
+            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            request.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
+            request.MimeType = "files/" & My.Computer.FileSystem.GetFileInfo(e.Argument).Extension.Replace(".", "")
+            request.Description = FileOwner
+
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(e.Argument)
+            Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+            Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(request, SelectedFileID, Stream, request.MimeType)
+            UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+
+            AddHandler UpdateRequest.ProgressChanged, AddressOf Update_ProgressChanged
+
+            UpdateRequest.Fields = "id, name, size, modifiedTime, mimeType, description"
+            UpdateRequest.Upload()
+            Stream.Close()
+
+            If uUploadStatus = UploadStatus.Completed Then
+                Dim file As Google.Apis.Drive.v3.Data.File = UpdateRequest.ResponseBody
+                bgwUpdateFileContent.ReportProgress(100, file)
+                GetDriveUsageDetails()
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            blUploadIsProgressing = False
+        End Try
+
+    End Sub
+
+    Private Sub Update_ProgressChanged(Progress As IUploadProgress)
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwUpdateFileContent.ReportProgress(percent)
+    End Sub
+    Private Sub bgwUpdateFileContent_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateFileContent.ProgressChanged
+
+        CircularProgress1.ProgressText = e.ProgressPercentage
+        lblProgressStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+
+        If TypeOf e.UserState Is Google.Apis.Drive.v3.Data.File Then
+            Dim file As Google.Apis.Drive.v3.Data.File = e.UserState
+            Me.listViewEx1.Items(SelectedFileIndex).Text = file.Name
+            Dim modifiedtime As DateTime = file.ModifiedTime
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(2).Text = CalculateFileSize(file.Size)
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = file.Description
+            Me.listViewEx1.Items(SelectedFileIndex).ImageIndex = GetImageIndex(file.MimeType)
+        End If
+
+    End Sub
+
+    Private Sub bgwUpdateFileContent_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpdateFileContent.RunWorkerCompleted
+
+        CircularProgress1.Visible = False
+        lblProgressStatus.Visible = False
+        blUploadIsProgressing = False
+
+        If uUploadStatus = UploadStatus.Completed Then
+            MessageBoxEx.Show("File updated successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        If dDownloadStatus = DownloadStatus.Failed Then
+            MessageBoxEx.Show("File update failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+#End Region
+
+    Private Sub ChangeParentFolder(sender As Object, e As EventArgs) ' Handles ButtonX1.Click
+        Dim List = FISService.Files.List()
+        List.Q = "name contains 'VersionFolder' and trashed = false"
+        List.Fields = "files(name, id)"
+
+        Dim Results = List.Execute
+        Dim InstallerFileID As String = ""
+        If Results.Files.Count > 0 Then
+            InstallerFileID = Results.Files(0).Id
+        End If
+
+        Dim newparentfolderid As String = Me.listViewEx1.SelectedItems(0).SubItems(3).Text
+
+        If InstallerFileID = "" Then Exit Sub
+
+        Dim request = FISService.Files.Get(InstallerFileID)
+        request.Fields = "parents"
+        Dim file = request.Execute
+        Dim previousparent = file.Parents
+
+        Dim updateRequest = FISService.Files.Update(New Google.Apis.Drive.v3.Data.File, InstallerFileID)
+        updateRequest.Fields = "id, parents"
+        updateRequest.AddParents = "root"
+        updateRequest.RemoveParents = previousparent(0)
+        file = updateRequest.Execute
+    End Sub
+
+    Private Sub btnSetAdminPrivilege_Click(sender As Object, e As EventArgs) Handles btnSetAdminPrivilege.Click
+        SetAdminPrivilege()
+        SetTitleAndSize()
+    End Sub
+
     Public Sub SetTitleAndSize()
         Me.Text = "FIS Online File List - " & FileOwner
         Me.TitleText = "<b>FIS Online File List - " & FileOwner & "</b>"
-        If AdminPrevilege Then
+
+        If SuperAdmin Then
             Me.listViewEx1.Columns(3).Width = 290
             Me.Width = 1150
         Else
@@ -973,5 +1260,18 @@ Public Class frmFISBackupList
     End Sub
 
    
+    Private Function GetFileIcon(extension As String) As Icon
+
+        Dim fileName As String = "c:\test" & extension
+
+        Dim ico As Icon
+        If My.Computer.FileSystem.FileExists(fileName) Then
+            ico = Drawing.Icon.ExtractAssociatedIcon(fileName)
+        Else
+            System.IO.File.Create(fileName).Dispose()
+            ico = Drawing.Icon.ExtractAssociatedIcon(fileName)
+        End If
+        Return ico
+    End Function
 End Class
 

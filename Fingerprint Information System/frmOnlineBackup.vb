@@ -228,7 +228,7 @@ Public Class frmOnlineBackup
     Private Sub RefreshBackupList() Handles btnRefresh.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -369,7 +369,7 @@ Public Class frmOnlineBackup
     Private Sub UploadBackup() Handles btnBackupDatabase.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-            ShowActionInProgressMessage()
+            ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
@@ -533,7 +533,7 @@ Public Class frmOnlineBackup
         Try
 
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-                ShowActionInProgressMessage()
+                ShowFileTransferInProgressMessage()
                 Exit Sub
             End If
 
@@ -700,7 +700,7 @@ Public Class frmOnlineBackup
     Private Sub RestoreSelectedFile() Handles btnRestoreDatabase.Click
         Try
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-                ShowActionInProgressMessage()
+                ShowFileTransferInProgressMessage()
                 Exit Sub
             End If
 
@@ -772,7 +772,7 @@ Public Class frmOnlineBackup
         Try
 
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-                ShowActionInProgressMessage()
+                ShowFileTransferInProgressMessage()
                 Exit Sub
             End If
 
@@ -849,7 +849,7 @@ Public Class frmOnlineBackup
         Try
 
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
-                ShowActionInProgressMessage()
+                ShowFileTransferInProgressMessage()
                 Exit Sub
             End If
 

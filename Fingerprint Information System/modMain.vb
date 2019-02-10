@@ -2,6 +2,7 @@
 Imports System.Threading 'to create a mutex which will ensure that only one application is running
 Imports DevComponents.DotNetBar
 Imports DevComponents.DotNetBar.Rendering
+
 Module modMain
     Public strAppName As String = "Fingerprint Information System"
     Public strRegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System"
@@ -67,7 +68,9 @@ Module modMain
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
-    Public AdminPrevilege As Boolean = False
+    Public LocalAdmin As Boolean = False
+    Public SuperAdmin As Boolean = False
+    Public LocalUser As Boolean = True
     Public FileOwner As String = ""
 
     Public blDownloadIsProgressing As Boolean
@@ -258,7 +261,7 @@ Module modMain
         Return CalculatedSize.ToString & SizeType
     End Function
 
-    Public Sub ShowActionInProgressMessage()
+    Public Sub ShowFileTransferInProgressMessage()
         If blDownloadIsProgressing Then
             MessageBoxEx.Show("File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -291,6 +294,62 @@ Module modMain
         On Error Resume Next
         frmNewPleaseWaitForm.BeginInvoke(New Action(Sub() frmNewPleaseWaitForm.Close()))
     End Sub
+
+    Public Function CompactString(InputString As String, ControlWidth As Integer,
+   ControlFont As Drawing.Font,
+   FormatFlags As Windows.Forms.TextFormatFlags) As String
+
+        Dim Result As String = String.Copy(InputString)
+
+        TextRenderer.MeasureText(Result, ControlFont, New Drawing.Size(ControlWidth, 0),
+            FormatFlags Or TextFormatFlags.ModifyString)
+
+        Return Result
+
+    End Function
+
+    Public Function SetAdminPrivilege() As Boolean
+        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then Return False
+        frmFISBackupList.btnUpdateFileContent.Visible = False
+        If frmInputBox.txtInputBox.Text = "minutiae8" Then
+            FileOwner = "Admin_" & ShortOfficeName & "_" & ShortDistrictName
+            LocalAdmin = True
+            SuperAdmin = False
+            LocalUser = False
+            Return True
+        ElseIf frmInputBox.txtInputBox.Text = "^^^px7600d" Then
+            FileOwner = "Admin"
+            SuperAdmin = True
+            LocalAdmin = False
+            LocalUser = False
+            frmFISBackupList.btnUpdateFileContent.Visible = True
+            Return True
+        Else
+            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            FileOwner = ShortOfficeName & "_" & ShortDistrictName
+            SuperAdmin = False
+            LocalAdmin = False
+            LocalUser = True
+            Return False
+        End If
+    End Function
+
+    Public Function IsValidFileName(ByVal FileName As String) As Boolean
+
+        If FileName Is Nothing Then
+            Return False
+        End If
+
+        For Each badChar As Char In System.IO.Path.GetInvalidFileNameChars
+            If InStr(FileName, badChar) > 0 Then
+                Return False
+            End If
+        Next
+
+        Return True
+    End Function
 End Module
 
 
@@ -323,3 +382,4 @@ Class ListViewItemComparer
 
   
 End Class
+
