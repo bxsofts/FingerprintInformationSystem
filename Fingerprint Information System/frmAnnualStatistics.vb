@@ -614,7 +614,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
-                aDoc.SaveAs(SaveFileName)
+                aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
 

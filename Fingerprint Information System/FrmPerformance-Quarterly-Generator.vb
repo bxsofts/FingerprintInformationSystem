@@ -767,7 +767,7 @@ Public Class frmQuarterlyPerformance
             aDoc.Activate()
 
             If My.Computer.FileSystem.FileExists(PerfFileName) = False And AllowSave() Then
-                aDoc.SaveAs(PerfFileName)
+                aDoc.SaveAs(PerfFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
             aDoc = Nothing

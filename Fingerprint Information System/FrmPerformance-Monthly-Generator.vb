@@ -619,7 +619,7 @@ Public Class frmMonthlyPerformance
             aDoc.Activate()
 
             If My.Computer.FileSystem.FileExists(PerfFileName) = False And IsMonthStatement And blAllowSave Then
-                aDoc.SaveAs(PerfFileName)
+                aDoc.SaveAs(PerfFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
             aDoc = Nothing

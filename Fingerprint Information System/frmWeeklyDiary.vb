@@ -194,7 +194,7 @@ Public Class frmWeeklyDiary
                 wdDoc.Activate()
 
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDoc.SaveAs(sfilename)
+                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 ReleaseObject(wdTbl)

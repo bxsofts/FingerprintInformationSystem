@@ -651,7 +651,7 @@ errhandler:
 
 
             If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
-                wdDoc.SaveAs(args.sFileName)
+                wdDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
             For delay = 91 To 100
@@ -924,7 +924,7 @@ errhandler:
             Next
 
             If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
-                wdDoc.SaveAs(args.sFileName)
+                wdDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
             For delay = 91 To 100
@@ -1274,7 +1274,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDoc.SaveAs(sfilename)
+                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
                 For delay = 91 To 100
                     bgwTR56.ReportProgress(delay)
@@ -1458,7 +1458,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDocTA.SaveAs(sfilename)
+                    wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 For delay = 91 To 100
@@ -1762,7 +1762,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDoc.SaveAs(sfilename)
+                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 For delay = 91 To 100
@@ -2041,7 +2041,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDocTA.SaveAs(sfilename)
+                    wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 For delay = 91 To 100
@@ -2301,7 +2301,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDoc.SaveAs(sfilename)
+                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 For delay = 91 To 100
@@ -2464,7 +2464,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDocTA.SaveAs(sfilename)
+                    wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 wdDocTN.Close()
@@ -2758,7 +2758,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDoc.SaveAs(sfilename)
+                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 For delay = 91 To 100
@@ -3031,7 +3031,7 @@ errhandler:
 
                 Dim sfilename As String = TAFileName("TA Bill")
                 If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDocTA.SaveAs(sfilename)
+                    wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 wdDocTN.Close()
@@ -3093,7 +3093,7 @@ errhandler:
 
 
             If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                wdDoc.SaveAs(sfilename)
+                wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
             wdApp.Visible = True

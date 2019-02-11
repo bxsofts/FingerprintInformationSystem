@@ -12,9 +12,6 @@ Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
-Imports System.Runtime.InteropServices
-Imports System.Drawing
-
 Public Class frmFISBackupList
 
     Dim FISService As DriveService = New DriveService
@@ -1060,7 +1057,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-         If Me.listViewEx1.Items.Count = 0 Then
+        If Me.listViewEx1.Items.Count = 0 Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -1259,7 +1256,7 @@ Public Class frmFISBackupList
         Me.BringToFront()
     End Sub
 
-   
+
     Private Function GetFileIcon(extension As String) As Icon
 
         Dim fileName As String = "c:\test" & extension

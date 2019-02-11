@@ -500,7 +500,7 @@ Public Class FrmSOCGraveCrimes
             End If
 
             If My.Computer.FileSystem.FileExists(SaveFileName) = False And blSaveFile Then
-                aDoc.SaveAs(SaveFileName)
+                aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
             For delay = 96 To 100

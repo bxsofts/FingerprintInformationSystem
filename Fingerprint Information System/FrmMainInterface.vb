@@ -14269,7 +14269,7 @@ errhandler:
             ClosePleaseWaitForm()
 
             Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\FacingSheet.docx"
-            If Not FileInUse(sFileName) Then wdDoc.SaveAs(sFileName)
+            If Not FileInUse(sFileName) Then wdDoc.SaveAs(sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
             wdApp.Visible = True
             wdApp.Activate()
@@ -15914,7 +15914,7 @@ errhandler:
             ClosePleaseWaitForm()
 
             Dim sFullFileName As String = FileIO.SpecialDirectories.MyDocuments & "\" & sFileName
-            If Not FileInUse(sFullFileName) Then aDoc.SaveAs(sFullFileName)
+            If Not FileInUse(sFullFileName) Then aDoc.SaveAs(sFullFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
             WordApp.Visible = True
             WordApp.Activate()

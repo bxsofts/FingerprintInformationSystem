@@ -435,7 +435,7 @@ Public Class frmAttendanceStmt
                 aDoc.Activate()
 
                 If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
-                    aDoc.SaveAs(SaveFileName)
+                    aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 aDoc = Nothing
