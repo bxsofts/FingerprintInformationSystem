@@ -30,12 +30,12 @@ Partial Class frmFISBackupList
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
         Me.btnUpdateFileContent = New DevComponents.DotNetBar.ButtonX()
         Me.btnRename = New DevComponents.DotNetBar.ButtonX()
         Me.btnNewFolder = New DevComponents.DotNetBar.ButtonX()
         Me.btnUploadFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
@@ -55,6 +55,7 @@ Partial Class frmFISBackupList
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
+        Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -68,7 +69,7 @@ Partial Class frmFISBackupList
         Me.btnDownloadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnDownloadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownloadFile.Image = CType(resources.GetObject("btnDownloadFile.Image"), System.Drawing.Image)
-        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 247)
+        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 226)
         Me.btnDownloadFile.Name = "btnDownloadFile"
         Me.btnDownloadFile.Size = New System.Drawing.Size(131, 59)
         Me.btnDownloadFile.TabIndex = 4
@@ -80,7 +81,7 @@ Partial Class frmFISBackupList
         Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
-        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 387)
+        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 358)
         Me.btnRemoveFile.Name = "btnRemoveFile"
         Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
         Me.btnRemoveFile.TabIndex = 6
@@ -100,6 +101,7 @@ Partial Class frmFISBackupList
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx2.Controls.Add(Me.btnGetAdminPrivilege)
         Me.PanelEx2.Controls.Add(Me.btnUpdateFileContent)
         Me.PanelEx2.Controls.Add(Me.btnRename)
         Me.PanelEx2.Controls.Add(Me.btnNewFolder)
@@ -111,7 +113,7 @@ Partial Class frmFISBackupList
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelEx2.Location = New System.Drawing.Point(803, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(163, 482)
+        Me.PanelEx2.Size = New System.Drawing.Size(163, 512)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -120,15 +122,28 @@ Partial Class frmFISBackupList
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
         '
+        'btnGetAdminPrivilege
+        '
+        Me.btnGetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGetAdminPrivilege.Image = CType(resources.GetObject("btnGetAdminPrivilege.Image"), System.Drawing.Image)
+        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(16, 423)
+        Me.btnGetAdminPrivilege.Name = "btnGetAdminPrivilege"
+        Me.btnGetAdminPrivilege.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
+        Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(131, 59)
+        Me.btnGetAdminPrivilege.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnGetAdminPrivilege.TabIndex = 7
+        Me.btnGetAdminPrivilege.Text = "Admin"
+        '
         'btnUpdateFileContent
         '
         Me.btnUpdateFileContent.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnUpdateFileContent.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnUpdateFileContent.Location = New System.Drawing.Point(16, 454)
+        Me.btnUpdateFileContent.Location = New System.Drawing.Point(16, 486)
         Me.btnUpdateFileContent.Name = "btnUpdateFileContent"
         Me.btnUpdateFileContent.Size = New System.Drawing.Size(131, 23)
         Me.btnUpdateFileContent.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnUpdateFileContent.TabIndex = 7
+        Me.btnUpdateFileContent.TabIndex = 8
         Me.btnUpdateFileContent.Text = "Update File"
         '
         'btnRename
@@ -137,7 +152,7 @@ Partial Class frmFISBackupList
         Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
-        Me.btnRename.Location = New System.Drawing.Point(16, 317)
+        Me.btnRename.Location = New System.Drawing.Point(16, 293)
         Me.btnRename.Name = "btnRename"
         Me.btnRename.Size = New System.Drawing.Size(131, 59)
         Me.btnRename.TabIndex = 5
@@ -149,7 +164,7 @@ Partial Class frmFISBackupList
         Me.btnNewFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnNewFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewFolder.Image = CType(resources.GetObject("btnNewFolder.Image"), System.Drawing.Image)
-        Me.btnNewFolder.Location = New System.Drawing.Point(16, 107)
+        Me.btnNewFolder.Location = New System.Drawing.Point(16, 96)
         Me.btnNewFolder.Name = "btnNewFolder"
         Me.btnNewFolder.Size = New System.Drawing.Size(131, 59)
         Me.btnNewFolder.TabIndex = 2
@@ -161,7 +176,7 @@ Partial Class frmFISBackupList
         Me.btnUploadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnUploadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadFile.Image = CType(resources.GetObject("btnUploadFile.Image"), System.Drawing.Image)
-        Me.btnUploadFile.Location = New System.Drawing.Point(16, 177)
+        Me.btnUploadFile.Location = New System.Drawing.Point(16, 161)
         Me.btnUploadFile.Name = "btnUploadFile"
         Me.btnUploadFile.Size = New System.Drawing.Size(131, 59)
         Me.btnUploadFile.TabIndex = 3
@@ -173,23 +188,11 @@ Partial Class frmFISBackupList
         Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(16, 37)
+        Me.btnRefresh.Location = New System.Drawing.Point(16, 31)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
         Me.btnRefresh.TabIndex = 1
         Me.btnRefresh.Text = "Refresh List"
-        '
-        'btnSetAdminPrivilege
-        '
-        Me.btnSetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSetAdminPrivilege.Location = New System.Drawing.Point(677, 375)
-        Me.btnSetAdminPrivilege.Name = "btnSetAdminPrivilege"
-        Me.btnSetAdminPrivilege.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
-        Me.btnSetAdminPrivilege.Size = New System.Drawing.Size(75, 23)
-        Me.btnSetAdminPrivilege.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSetAdminPrivilege.TabIndex = 7
-        Me.btnSetAdminPrivilege.Text = "Admin"
         '
         'lblDriveSpaceUsed
         '
@@ -206,7 +209,7 @@ Partial Class frmFISBackupList
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblItemCount, Me.lblDriveSpaceUsed, Me.lblCurrentFolderPath})
-        Me.Bar1.Location = New System.Drawing.Point(0, 459)
+        Me.Bar1.Location = New System.Drawing.Point(0, 489)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(803, 23)
         Me.Bar1.Stretch = True
@@ -250,13 +253,12 @@ Partial Class frmFISBackupList
         Me.GroupPanel1.Controls.Add(Me.lblProgressStatus)
         Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
-        Me.GroupPanel1.Controls.Add(Me.btnSetAdminPrivilege)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(803, 459)
+        Me.GroupPanel1.Size = New System.Drawing.Size(803, 489)
         '
         '
         '
@@ -340,7 +342,7 @@ Partial Class frmFISBackupList
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(797, 453)
+        Me.listViewEx1.Size = New System.Drawing.Size(797, 483)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -383,7 +385,7 @@ Partial Class frmFISBackupList
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(803, 482)
+        Me.PanelEx3.Size = New System.Drawing.Size(803, 512)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -403,7 +405,7 @@ Partial Class frmFISBackupList
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(966, 482)
+        Me.PanelEx1.Size = New System.Drawing.Size(966, 512)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -426,11 +428,16 @@ Partial Class frmFISBackupList
         Me.bgwUpdateFileContent.WorkerReportsProgress = True
         Me.bgwUpdateFileContent.WorkerSupportsCancellation = True
         '
+        'bgwGetPassword
+        '
+        Me.bgwGetPassword.WorkerReportsProgress = True
+        Me.bgwGetPassword.WorkerSupportsCancellation = True
+        '
         'frmFISBackupList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(966, 482)
+        Me.ClientSize = New System.Drawing.Size(966, 512)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -476,7 +483,8 @@ Partial Class frmFISBackupList
     Friend WithEvents btnNewFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnRename As DevComponents.DotNetBar.ButtonX
     Friend WithEvents lblCurrentFolderPath As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents btnSetAdminPrivilege As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGetAdminPrivilege As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnUpdateFileContent As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwUpdateFileContent As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwGetPassword As System.ComponentModel.BackgroundWorker
 End Class

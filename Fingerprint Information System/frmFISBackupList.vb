@@ -38,6 +38,8 @@ Public Class frmFISBackupList
     Dim SelectedFileID As String = ""
     Dim SelectedFileIndex As Integer = 0
 
+    Dim blPasswordFetched As Boolean = False
+
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -117,6 +119,8 @@ Public Class frmFISBackupList
 
             ListFiles(e.Argument, False)
             GetDriveUsageDetails()
+            If Not blPasswordFetched Then blPasswordFetched = GetAdminPasswords()
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             blListIsLoading = False
@@ -168,7 +172,7 @@ Public Class frmFISBackupList
 
 
             Dim item As ListViewItem
-
+           
             If FolderID = "root" Then
                 item = New ListViewItem("\My Drive")
                 item.SubItems.Add("")
@@ -219,14 +223,14 @@ Public Class frmFISBackupList
                     item.SubItems.Add(Result.Description)
                 End If
 
-                If SuperAdmin Then
+                If SuperAdmin Or item.SubItems(4).Text = FileOwner Then
                     bgwListFiles.ReportProgress(2, item) 'report all files
-                ElseIf LocalAdmin And Result.Name <> "VersionFolder" Then 'report all except versionfolder
+                End If
+                If LocalAdmin And Not Result.Name.StartsWith("..") Then 'report all except hidden folders
                     bgwListFiles.ReportProgress(2, item)
-                ElseIf CurrentFolderName = FileOwner Or CurrentFolderPath.StartsWith("\My Drive\Installer File") Or CurrentFolderPath.StartsWith("\My Drive\General Files") Or item.ImageIndex = ImageIndex.Folder And Result.Name <> "VersionFolder" Then
-                    bgwListFiles.ReportProgress(2, item) 'report all files
-                ElseIf item.SubItems(4).Text = FileOwner Then
-                    bgwListFiles.ReportProgress(2, item) 'list all folders except version folder
+                End If
+                If LocalUser And CurrentFolderName = FileOwner Or item.ImageIndex = ImageIndex.Folder And Not Result.Name.StartsWith(".") Then
+                    bgwListFiles.ReportProgress(2, item) 'report all files except hidden folders
                 End If
 
             Next
@@ -300,11 +304,9 @@ Public Class frmFISBackupList
 
 
             CircularProgress1.ProgressText = ""
-            ' lblProgressStatus.Text = "Please wait..."
             CircularProgress1.IsRunning = True
             CircularProgress1.ProgressBarType = eCircularProgressType.Donut
             CircularProgress1.Show()
-            ' lblProgressStatus.Show()
 
             Me.listViewEx1.Items.Clear()
             bgwListFiles.RunWorkerAsync(id)
@@ -318,7 +320,7 @@ Public Class frmFISBackupList
     End Sub
 
 
-    Private Sub RefreshFileList(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Private Sub RefreshFileList() Handles btnRefresh.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -565,6 +567,7 @@ Public Class frmFISBackupList
         End If
 
         ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
+        System.Threading.Thread.Sleep(500)
         bgwUploadFile.RunWorkerAsync(uSelectedFile)
 
     End Sub
@@ -797,8 +800,8 @@ Public Class frmFISBackupList
         Dim SelectedItemOwner As String = Me.listViewEx1.SelectedItems(0).SubItems(4).Text
         SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
 
-        Dim blFileIsFolder As Boolean = False
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blFileIsFolder = True
+        Dim blSelectedItemIsFolder As Boolean = False
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blSelectedItemIsFolder = True
 
         If SelectedItemText.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -808,7 +811,7 @@ Public Class frmFISBackupList
 
         If Not SuperAdmin Then
             Dim msg1 As String = "file."
-            If blFileIsFolder Then msg1 = "folder."
+            If blSelectedItemIsFolder Then msg1 = "folder."
 
             If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
                 MessageBoxEx.Show("You are not authorized to delete the selected " & msg1, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -816,11 +819,10 @@ Public Class frmFISBackupList
             End If
         End If
 
-
         Dim msg As String = ""
 
 
-        If blFileIsFolder Then
+        If blSelectedItemIsFolder Then
             msg = "Do you really want to remove the selected folder?"
         Else
             msg = "Do you really want to remove the selected file?"
@@ -843,9 +845,10 @@ Public Class frmFISBackupList
 
             RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, False)
             Me.listViewEx1.Items(SelectedFileIndex).Remove()
+            lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
             GetDriveUsageDetails()
 
-            If blFileIsFolder Then
+            If blSelectedItemIsFolder Then
                 msg = "Selected folder deleted from Google Drive."
             Else
                 msg = "Selected file deleted from Google Drive."
@@ -915,8 +918,8 @@ Public Class frmFISBackupList
         Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
         Dim SelectedItemOwner As String = Me.listViewEx1.SelectedItems(0).SubItems(4).Text
 
-        Dim blFileIsFolder As Boolean = False
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blFileIsFolder = True
+        Dim blSelectedItemIsFolder As Boolean = False
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blSelectedItemIsFolder = True
 
         If SelectedItemText.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -924,7 +927,7 @@ Public Class frmFISBackupList
         End If
 
         Dim msg1 As String = "file"
-        If blFileIsFolder Then msg1 = "folder"
+        If blSelectedItemIsFolder Then msg1 = "folder"
 
         If Not SuperAdmin Then
             If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
@@ -933,6 +936,11 @@ Public Class frmFISBackupList
             End If
         End If
 
+
+        If blSelectedItemIsFolder And SuperAdmin And (SelectedItemText = "LocalAdminPass" Or SelectedItemText = "SuperAdminPass") Then
+            SetAdminPassword(SelectedItemText)
+            Exit Sub
+        End If
 
         Dim oldfilename As String = Me.listViewEx1.SelectedItems(0).Text
         Dim extension As String = ""
@@ -962,7 +970,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Not blFileIsFolder Then newfilename = newfilename & extension
+        If Not blSelectedItemIsFolder Then newfilename = newfilename & extension
 
         Dim SelectedItemIndex As Integer = Me.listViewEx1.SelectedItems(0).Index
         For i = 0 To Me.listViewEx1.Items.Count - 1
@@ -1169,38 +1177,34 @@ Public Class frmFISBackupList
 #End Region
 
 
-#Region "SET ADMIN PASSWORD"
-    Private Sub btnSetAdminPrivilege_Click(sender As Object, e As EventArgs) Handles btnSetAdminPrivilege.Click
-        Me.Cursor = Cursors.WaitCursor
-        ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
-        Dim blPasswordFetched As Boolean = GetAdminPasswords()
-        HideProgressControls()
-        If blPasswordFetched Then
-            SetAdminPrivilege()
-            SetTitleAndSize()
-        Else
-            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
-      
-        Me.Cursor = Cursors.Default
-    End Sub
+#Region "ADMIN PRIVILEGE & PASSWORD"
+
 
     Private Sub SetAdminPassword(SelectedPassword As String)
+
+        frmInputBox.SetTitleandMessage("Enter New " & SelectedPassword, "Enter New " & SelectedPassword, False)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+        If frmInputBox.txtInputBox.Text = "" Then Exit Sub
+
+        Dim NewPassword As String = frmInputBox.txtInputBox.Text
+
+        If NewPassword = "" Then
+            MessageBoxEx.Show("Invalid Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+        SelectedFileID = Me.listViewEx1.SelectedItems(0).SubItems(3).Text
+        Me.Cursor = Cursors.WaitCursor
         Try
-            frmInputBox.SetTitleandMessage("Enter " & SelectedPassword, "Enter " & SelectedPassword, False)
-            frmInputBox.ShowDialog()
-            If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
-            If frmInputBox.txtInputBox.Text = "" Then Exit Sub
 
-            Me.Cursor = Cursors.WaitCursor
-            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            Dim request As New Google.Apis.Drive.v3.Data.File
+
             request.Name = SelectedPassword
-            request.Description = frmInputBox.txtInputBox.Text
-            SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
-            Dim id As String = listViewEx1.SelectedItems(0).SubItems(3).Text
-            FISService.Files.Update(request, id).Execute()
-
-            Dim List As FilesResource.GetRequest = FISService.Files.Get(id)
+            request.Description = NewPassword
+            FISService.Files.Update(request, SelectedFileID).Execute()
+            Dim List As FilesResource.GetRequest = FISService.Files.Get(SelectedFileID)
             List.Fields = "id, name, modifiedTime, description"
             Dim Result = List.Execute
 
@@ -1208,14 +1212,47 @@ Public Class frmFISBackupList
             Dim modifiedtime As DateTime = Result.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
-
+            MessageBoxEx.Show(Result.Name & " updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.Cursor = Cursors.Default
-            MessageBoxEx.Show(SelectedPassword & " updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
     End Sub
+
+    Private Sub btnGetAdminPrivilege_Click(sender As Object, e As EventArgs) Handles btnGetAdminPrivilege.Click
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+        If Not blPasswordFetched Then
+            Me.Cursor = Cursors.WaitCursor
+            ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
+        End If
+        bgwGetPassword.RunWorkerAsync()
+
+    End Sub
+
+    Private Sub bgwGetPassword_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwGetPassword.DoWork
+        If Not blPasswordFetched Then blPasswordFetched = GetAdminPasswords()
+        bgwGetPassword.ReportProgress(100, blPasswordFetched)
+    End Sub
+
+    Private Sub bgwGetPassword_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwGetPassword.ProgressChanged
+        HideProgressControls()
+        If e.UserState = True Then
+            Dim adminprivilege As Boolean = SetAdminPrivilege()
+            If adminprivilege = True Then '
+                SetTitleAndSize()
+                RefreshFileList()
+            End If
+        Else
+            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
 
 #End Region
 
@@ -1247,19 +1284,21 @@ Public Class frmFISBackupList
     End Sub
 
     Public Sub SetTitleAndSize()
-        Me.Text = "FIS Online File List - " & FileOwner
-        Me.TitleText = "<b>FIS Online File List - " & FileOwner & "</b>"
+        Dim Header As String = ""
+        If SuperAdmin Then Header = "Super Admin"
+        If LocalAdmin Then Header = "Local Admin"
+        If LocalUser Then Header = FileOwner
+        Me.Text = "FIS Online File List - " & Header
+        Me.TitleText = "<b>FIS Online File List - " & Header & "</b>"
 
         If SuperAdmin Then
-            Me.listViewEx1.Columns(3).Width = 290
-            Me.Width = 1150
+            Me.listViewEx1.Columns(3).Width = 100
         Else
             Me.listViewEx1.Columns(3).Width = 0
-            Me.Width = 990
         End If
 
-        Me.CircularProgress1.Location = New Point((Me.listViewEx1.Width - Me.CircularProgress1.Width) / 2, Me.CircularProgress1.Location.Y)
-        Me.lblProgressStatus.Location = New Point((Me.listViewEx1.Width - Me.lblProgressStatus.Width) / 2, Me.lblProgressStatus.Location.Y)
+        '   Me.CircularProgress1.Location = New Point((Me.listViewEx1.Width - Me.CircularProgress1.Width) / 2, Me.CircularProgress1.Location.Y)
+        '  Me.lblProgressStatus.Location = New Point((Me.listViewEx1.Width - Me.lblProgressStatus.Width) / 2, Me.lblProgressStatus.Location.Y)
         Me.CenterToScreen()
         Me.BringToFront()
     End Sub
@@ -1282,5 +1321,7 @@ Public Class frmFISBackupList
         CircularProgress1.Hide()
         lblProgressStatus.Hide()
     End Sub
+
+    
 End Class
 

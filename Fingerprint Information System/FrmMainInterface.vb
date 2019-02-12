@@ -17095,7 +17095,7 @@ errhandler:
 
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'VersionFolder'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '.VersionFolder'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -17166,35 +17166,6 @@ errhandler:
         frmFISBackupList.Show()
     End Sub
 
-    Private Sub btnAdminOnlineFileTransfer_Click(sender As Object, e As EventArgs) Handles btnAdminOnlineFileTransfer.Click
-        If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
-
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        ShowPleaseWaitForm()
-        If InternetAvailable() = False Then
-            ClosePleaseWaitForm()
-            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        If Not GetAdminPasswords() Then
-            ClosePleaseWaitForm()
-            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        ClosePleaseWaitForm()
-        Me.Cursor = Cursors.Default
-
-        If SetAdminPrivilege() Then
-            frmFISBackupList.SetTitleAndSize()
-            frmFISBackupList.Show()
-        End If
-
-
-    End Sub
 
 #End Region
 
