@@ -3,6 +3,15 @@ Imports System.Threading 'to create a mutex which will ensure that only one appl
 Imports DevComponents.DotNetBar
 Imports DevComponents.DotNetBar.Rendering
 
+Imports Google
+Imports Google.Apis.Auth.OAuth2
+Imports Google.Apis.Drive.v3
+Imports Google.Apis.Drive.v3.Data
+Imports Google.Apis.Services
+Imports Google.Apis.Download
+Imports Google.Apis.Upload
+Imports Google.Apis.Util.Store
+Imports Google.Apis.Requests
 Module modMain
     Public strAppName As String = "Fingerprint Information System"
     Public strRegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System"
@@ -67,6 +76,9 @@ Module modMain
     Public boolUseTIinLetter As Boolean = True
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+
+    Public SuperAdminPass As String = "^^^px7600d"
+    Public LocalAdminPass As String = "minutiae8"
 
     Public LocalAdmin As Boolean = False
     Public SuperAdmin As Boolean = False
@@ -308,33 +320,7 @@ Module modMain
 
     End Function
 
-    Public Function SetAdminPrivilege() As Boolean
-        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
-        frmInputBox.ShowDialog()
-        If frmInputBox.ButtonClicked <> "OK" Then Return False
-        frmFISBackupList.btnUpdateFileContent.Visible = False
-        If frmInputBox.txtInputBox.Text = "minutiae8" Then
-            FileOwner = "Admin_" & ShortOfficeName & "_" & ShortDistrictName
-            LocalAdmin = True
-            SuperAdmin = False
-            LocalUser = False
-            Return True
-        ElseIf frmInputBox.txtInputBox.Text = "^^^px7600d" Then
-            FileOwner = "Admin"
-            SuperAdmin = True
-            LocalAdmin = False
-            LocalUser = False
-            frmFISBackupList.btnUpdateFileContent.Visible = True
-            Return True
-        Else
-            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            FileOwner = ShortOfficeName & "_" & ShortDistrictName
-            SuperAdmin = False
-            LocalAdmin = False
-            LocalUser = True
-            Return False
-        End If
-    End Function
+    
 
     Public Function IsValidFileName(ByVal FileName As String) As Boolean
 
@@ -349,6 +335,89 @@ Module modMain
         Next
 
         Return True
+    End Function
+
+    Public Function GetAdminPasswords() As Boolean
+        Try
+
+        SuperAdminPass = "^^^px7600d"
+        LocalAdminPass = "minutiae8"
+
+        Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+        Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
+        Dim FISService As DriveService = New DriveService
+        Dim Scopes As String() = {DriveService.Scope.Drive}
+        Dim VersionFolder As String = "Version"
+        Dim VersionFolderID As String = ""
+
+
+        Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+        FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+
+        Dim parentid As String = ""
+        Dim List = FISService.Files.List()
+
+        List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '^Pass#Word^'"
+        List.Fields = "files(id)"
+
+        Dim Results = List.Execute
+
+        Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Return False
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+        List.Q = "trashed = false and '" & parentid & "' in parents" ' list all files in parent folder. 
+
+        List.Fields = "nextPageToken, files(id, name, description)"
+        List.OrderBy = "folder, name" 'sorting order
+
+            Results = List.Execute
+
+            cnt = Results.Files.Count
+            If cnt = 0 Then Return False
+            For Each Result In Results.Files
+                If Result.Name = "SuperAdminPass" Then SuperAdminPass = Result.Description
+                If Result.Name = "LocalAdminPass" Then LocalAdminPass = Result.Description
+            Next
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function SetAdminPrivilege() As Boolean
+        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then Return False
+        frmFISBackupList.btnUpdateFileContent.Visible = False
+
+        If frmInputBox.txtInputBox.Text = SuperAdminPass Then
+            FileOwner = "Admin"
+            SuperAdmin = True
+            LocalAdmin = False
+            LocalUser = False
+            frmFISBackupList.btnUpdateFileContent.Visible = True
+            Return True
+        ElseIf frmInputBox.txtInputBox.Text = LocalAdminPass Then
+            FileOwner = "Admin_" & ShortOfficeName & "_" & ShortDistrictName
+            LocalAdmin = True
+            SuperAdmin = False
+            LocalUser = False
+            Return True
+        Else
+            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            FileOwner = ShortOfficeName & "_" & ShortDistrictName
+            SuperAdmin = False
+            LocalAdmin = False
+            LocalUser = True
+            Return False
+        End If
     End Function
 End Module
 

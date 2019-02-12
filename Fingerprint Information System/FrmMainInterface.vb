@@ -16975,18 +16975,22 @@ errhandler:
 
     Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
         Me.Cursor = Cursors.WaitCursor
+        ShowPleaseWaitForm()
         If InternetAvailable() = False Then
+            ClosePleaseWaitForm()
             MessageBoxEx.Show("No internet connection detected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
         If CheckForUpdates() Then
+            ClosePleaseWaitForm()
             If MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
                 ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
                 DownloadInstaller()
             End If
         Else
+            ClosePleaseWaitForm()
             MessageBoxEx.Show("You are using the latest version.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
@@ -17166,20 +17170,33 @@ errhandler:
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        ShowPleaseWaitForm()
+        If InternetAvailable() = False Then
+            ClosePleaseWaitForm()
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If Not GetAdminPasswords() Then
+            ClosePleaseWaitForm()
+            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        ClosePleaseWaitForm()
+        Me.Cursor = Cursors.Default
+
         If SetAdminPrivilege() Then
-            If InternetAvailable() = False Then
-                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
             frmFISBackupList.SetTitleAndSize()
             frmFISBackupList.Show()
         End If
 
+
     End Sub
 
 #End Region
-
 
     '---------------------------------------------END APPLICATION-----------------------------------
 

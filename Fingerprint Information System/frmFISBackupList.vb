@@ -37,6 +37,7 @@ Public Class frmFISBackupList
 
     Dim SelectedFileID As String = ""
     Dim SelectedFileIndex As Integer = 0
+
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -91,13 +92,7 @@ Public Class frmFISBackupList
         ServiceCreated = False
         CurrentFolderName = ""
 
-        CircularProgress1.ProgressText = ""
-        lblProgressStatus.Text = "Fetching Files from Google Drive..."
-        CircularProgress1.IsRunning = True
-        CircularProgress1.ProgressColor = GetProgressColor()
-        CircularProgress1.ProgressBarType = eCircularProgressType.Donut
-        CircularProgress1.Show()
-        lblProgressStatus.Show()
+        ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
 
         blUploadIsProgressing = False
         blDownloadIsProgressing = False
@@ -133,8 +128,6 @@ Public Class frmFISBackupList
 
     Private Sub bgwListFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwListFiles.ProgressChanged
         Try
-
-
             If TypeOf e.UserState Is ListViewItem Then
                 listViewEx1.Items.Add(e.UserState)
             End If
@@ -151,12 +144,7 @@ Public Class frmFISBackupList
     End Sub
     Private Sub bgwListFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwListFiles.RunWorkerCompleted
         Me.Cursor = Cursors.Default
-        CircularProgress1.IsRunning = False
-        CircularProgress1.ProgressText = ""
-        CircularProgress1.ProgressBarType = eCircularProgressType.Line
-        lblProgressStatus.Text = ""
-        CircularProgress1.Hide()
-        lblProgressStatus.Hide()
+        HideProgressControls()
         blListIsLoading = False
         ShortenCurrentFolderPath()
     End Sub
@@ -164,8 +152,6 @@ Public Class frmFISBackupList
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
         Try
             Dim List As FilesResource.ListRequest = FISService.Files.List()
-
-            Dim showuserfileonly As String = ""
 
             If ShowTrashedFiles Then
                 List.Q = "trashed = true"
@@ -323,12 +309,7 @@ Public Class frmFISBackupList
             Me.listViewEx1.Items.Clear()
             bgwListFiles.RunWorkerAsync(id)
         Catch ex As Exception
-            CircularProgress1.IsRunning = False
-            CircularProgress1.ProgressText = ""
-            CircularProgress1.ProgressBarType = eCircularProgressType.Line
-            lblProgressStatus.Text = ""
-            CircularProgress1.Hide()
-            lblProgressStatus.Hide()
+            HideProgressControls()
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
@@ -356,13 +337,7 @@ Public Class frmFISBackupList
         ParentFolderPath = "\My Drive"
 
         Me.listViewEx1.Items.Clear()
-        CircularProgress1.ProgressText = ""
-        lblProgressStatus.Text = "Fetching Files from Google Drive..."
-        CircularProgress1.IsRunning = True
-        CircularProgress1.ProgressColor = GetProgressColor()
-        CircularProgress1.ProgressBarType = eCircularProgressType.Donut
-        CircularProgress1.Show()
-        lblProgressStatus.Show()
+        ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         bgwListFiles.RunWorkerAsync("root")
     End Sub
 
@@ -589,13 +564,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        CircularProgress1.ProgressBarType = eCircularProgressType.Line
-        CircularProgress1.Visible = True
-        CircularProgress1.ProgressText = "0"
-        CircularProgress1.IsRunning = True
-        lblProgressStatus.Text = "Uploading File..."
-        lblProgressStatus.Visible = True
-
+        ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
         bgwUploadFile.RunWorkerAsync(uSelectedFile)
 
     End Sub
@@ -666,8 +635,7 @@ Public Class frmFISBackupList
     End Sub
     Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadFile.RunWorkerCompleted
 
-        CircularProgress1.Visible = False
-        lblProgressStatus.Visible = False
+        HideProgressControls()
         blUploadIsProgressing = False
 
         If uUploadStatus = UploadStatus.Completed Then
@@ -725,12 +693,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        CircularProgress1.ProgressBarType = eCircularProgressType.Line
-        CircularProgress1.Visible = True
-        CircularProgress1.ProgressText = 0
-        CircularProgress1.IsRunning = True
-        lblProgressStatus.Text = "Downloading File..."
-        lblProgressStatus.Visible = True
+        ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
         Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
         If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> "" Then
@@ -795,8 +758,7 @@ Public Class frmFISBackupList
     End Sub
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadFile.RunWorkerCompleted
 
-        CircularProgress1.Visible = False
-        lblProgressStatus.Visible = False
+        HideProgressControls()
         blDownloadIsProgressing = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
@@ -1067,13 +1029,19 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+        Dim SelectedFileName = Me.listViewEx1.SelectedItems(0).Text
+        If SelectedFileName.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And Not SelectedFileName = "SuperAdminPass" And Not SelectedFileName = "LocalAdminPass" Then
             MessageBoxEx.Show("Cannot update folder. Select file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If SelectedFileName = "SuperAdminPass" Or SelectedFileName = "LocalAdminPass" Then
+            SetAdminPassword(SelectedFileName)
             Exit Sub
         End If
 
@@ -1117,12 +1085,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        CircularProgress1.ProgressBarType = eCircularProgressType.Line
-        CircularProgress1.Visible = True
-        CircularProgress1.ProgressText = "0"
-        CircularProgress1.IsRunning = True
-        lblProgressStatus.Text = "Uploading File..."
-        lblProgressStatus.Visible = True
+        ShowProgressControls("0", "Updating File...", eCircularProgressType.Line)
 
         SelectedFileID = Me.listViewEx1.Items(SelectedFileIndex).SubItems(3).Text
         bgwUpdateFileContent.RunWorkerAsync(uSelectedFile)
@@ -1189,8 +1152,7 @@ Public Class frmFISBackupList
 
     Private Sub bgwUpdateFileContent_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpdateFileContent.RunWorkerCompleted
 
-        CircularProgress1.Visible = False
-        lblProgressStatus.Visible = False
+        HideProgressControls()
         blUploadIsProgressing = False
 
         If uUploadStatus = UploadStatus.Completed Then
@@ -1202,6 +1164,57 @@ Public Class frmFISBackupList
         End If
 
         Me.Cursor = Cursors.Default
+    End Sub
+
+#End Region
+
+
+#Region "SET ADMIN PASSWORD"
+    Private Sub btnSetAdminPrivilege_Click(sender As Object, e As EventArgs) Handles btnSetAdminPrivilege.Click
+        Me.Cursor = Cursors.WaitCursor
+        ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
+        Dim blPasswordFetched As Boolean = GetAdminPasswords()
+        HideProgressControls()
+        If blPasswordFetched Then
+            SetAdminPrivilege()
+            SetTitleAndSize()
+        Else
+            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+      
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SetAdminPassword(SelectedPassword As String)
+        Try
+            frmInputBox.SetTitleandMessage("Enter " & SelectedPassword, "Enter " & SelectedPassword, False)
+            frmInputBox.ShowDialog()
+            If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+            If frmInputBox.txtInputBox.Text = "" Then Exit Sub
+
+            Me.Cursor = Cursors.WaitCursor
+            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            request.Name = SelectedPassword
+            request.Description = frmInputBox.txtInputBox.Text
+            SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+            Dim id As String = listViewEx1.SelectedItems(0).SubItems(3).Text
+            FISService.Files.Update(request, id).Execute()
+
+            Dim List As FilesResource.GetRequest = FISService.Files.Get(id)
+            List.Fields = "id, name, modifiedTime, description"
+            Dim Result = List.Execute
+
+            Me.listViewEx1.Items(SelectedFileIndex).Text = Result.Name
+            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
+            Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
+
+            Me.Cursor = Cursors.Default
+            MessageBoxEx.Show(SelectedPassword & " updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
 #End Region
@@ -1233,11 +1246,6 @@ Public Class frmFISBackupList
         file = updateRequest.Execute
     End Sub
 
-    Private Sub btnSetAdminPrivilege_Click(sender As Object, e As EventArgs) Handles btnSetAdminPrivilege.Click
-        SetAdminPrivilege()
-        SetTitleAndSize()
-    End Sub
-
     Public Sub SetTitleAndSize()
         Me.Text = "FIS Online File List - " & FileOwner
         Me.TitleText = "<b>FIS Online File List - " & FileOwner & "</b>"
@@ -1257,18 +1265,22 @@ Public Class frmFISBackupList
     End Sub
 
 
-    Private Function GetFileIcon(extension As String) As Icon
-
-        Dim fileName As String = "c:\test" & extension
-
-        Dim ico As Icon
-        If My.Computer.FileSystem.FileExists(fileName) Then
-            ico = Drawing.Icon.ExtractAssociatedIcon(fileName)
-        Else
-            System.IO.File.Create(fileName).Dispose()
-            ico = Drawing.Icon.ExtractAssociatedIcon(fileName)
-        End If
-        Return ico
-    End Function
+    Private Sub ShowProgressControls(ProgressText As String, StatusText As String, ProgressType As eCircularProgressType)
+        CircularProgress1.ProgressText = ProgressText
+        lblProgressStatus.Text = StatusText
+        CircularProgress1.IsRunning = True
+        CircularProgress1.ProgressColor = GetProgressColor()
+        CircularProgress1.ProgressBarType = ProgressType
+        CircularProgress1.Show()
+        lblProgressStatus.Show()
+    End Sub
+    Private Sub HideProgressControls()
+        CircularProgress1.IsRunning = False
+        CircularProgress1.ProgressText = ""
+        CircularProgress1.ProgressBarType = eCircularProgressType.Line
+        lblProgressStatus.Text = ""
+        CircularProgress1.Hide()
+        lblProgressStatus.Hide()
+    End Sub
 End Class
 
