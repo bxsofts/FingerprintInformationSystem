@@ -39,12 +39,22 @@ Public Class frmOnlineBackup
     Dim FileOwner As String = ""
     Dim TotalFileSize As Long = 0
 
+    Dim blPasswordFetched As Boolean = False
+
+    Dim sAdmin As Boolean = False
+    Dim lAdmin As Boolean = False
+    Dim lUser As Boolean = True
+
+    Dim MasterBackupFolderID As String = ""
+    Dim CurrentFolder As String = ""
 #Region "FORM LOAD EVENTS"
 
     Private Sub CreateService() Handles MyBase.Load
 
         Me.Cursor = Cursors.WaitCursor
+        lUser = True
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
+        SetFormTitle(FileOwner)
         BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
 
         If My.Computer.FileSystem.DirectoryExists(BackupPath) = False Then
@@ -52,7 +62,7 @@ Public Class frmOnlineBackup
         End If
 
         BackupFolder = FileOwner
-
+        CurrentFolder = BackupFolder
         BackupFolderID = ""
         Me.lblTotalFileSize.Text = ""
         Try
@@ -83,8 +93,7 @@ Public Class frmOnlineBackup
             blDownloadIsProgressing = False
             blListIsLoading = False
 
-
-            FetchFilesFromDrive(False)
+            LoadFilesInUserBackupFolder(False)
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -99,20 +108,12 @@ Public Class frmOnlineBackup
 
 #Region "CREATE SERVICE AND LOAD DATA"
 
-    Private Sub FetchFilesFromDrive(ShowNoFileFoundMessage As Boolean)
+    Private Sub LoadFilesInUserBackupFolder(ShowNoFileFoundMessage As Boolean)
         Me.listViewEx1.Items.Clear()
         listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
         listViewEx1.Sort()
 
-
-        CircularProgress1.ProgressText = ""
-        lblProgressStatus.Text = "Fetching Files from Google Drive..."
-        CircularProgress1.IsRunning = True
-        CircularProgress1.ProgressColor = GetProgressColor()
-        CircularProgress1.ProgressBarType = eCircularProgressType.Donut
-        CircularProgress1.Show()
-        lblProgressStatus.Show()
-
+        ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         NoFileFoundMessage = ShowNoFileFoundMessage
 
         bgwService.RunWorkerAsync()
@@ -149,6 +150,7 @@ Public Class frmOnlineBackup
                 bgwService.ReportProgress(50, item)
             Next
 
+            MasterBackupFolderID = GetMasterBackupFolderID()
             BackupFolderID = GetUserBackupFolderID()
             Dim List = FISService.Files.List()
 
@@ -156,11 +158,8 @@ Public Class frmOnlineBackup
                 BackupFolderID = CreateUserBackupFolder()
             End If
 
-            '  Dim parentlist As New List(Of String)
-            '  parentlist.Add(BackupFolderID)
-
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
-            ' List.Q = "mimeType = 'database/mdb'" ' list all files
+
             List.Fields = "nextPageToken, files(id, name, modifiedTime, size, description)"
 
             Dim Results = List.Execute
@@ -178,6 +177,8 @@ Public Class frmOnlineBackup
                 item.ImageIndex = 0
                 bgwService.ReportProgress(90, item)
             Next
+
+            If Not blPasswordFetched Then blPasswordFetched = GetAdminPasswords()
 
         Catch ex As Exception
             blListIsLoading = False
@@ -199,14 +200,10 @@ Public Class frmOnlineBackup
         End If
 
     End Sub
-    Private Sub bgServiceBackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwService.RunWorkerCompleted
+    Private Sub bgwServiceBackgroundWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwService.RunWorkerCompleted
 
         DisplayInformation()
-        CircularProgress1.IsRunning = False
-        CircularProgress1.ProgressText = ""
-        lblProgressStatus.Text = ""
-        CircularProgress1.Hide()
-        lblProgressStatus.Hide()
+        HideProgressControls()
         blListIsLoading = False
 
         Me.Cursor = Cursors.Default
@@ -238,7 +235,12 @@ Public Class frmOnlineBackup
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        FetchFilesFromDrive(True)
+        If lUser Then
+            LoadFilesInUserBackupFolder(True)
+        Else
+            LoadFilesInMasterBackupFolder()
+        End If
+
     End Sub
 
 #End Region
@@ -279,9 +281,9 @@ Public Class frmOnlineBackup
             Dim parentlist As New List(Of String)
             Dim masterfolderid As String = GetMasterBackupFolderID()
 
-            If masterfolderid = "" Then
-                masterfolderid = CreateMasterBackupFolder()
-            End If
+            ' If masterfolderid = "" Then
+            '  masterfolderid = CreateMasterBackupFolder()
+            ' End If
 
             parentlist.Add(masterfolderid)
 
@@ -317,7 +319,7 @@ Public Class frmOnlineBackup
 
             NewDirectory = request.Execute()
             id = NewDirectory.Id
-            CreateSharing(id, "fingerprintinformationsystem@gmail.com")
+            ShareFile(id, "fingerprintinformationsystem@gmail.com")
             Return id
         Catch ex As Exception
             ' ShowErrorMessage(ex)
@@ -350,7 +352,7 @@ Public Class frmOnlineBackup
         End Try
     End Function
 
-    Private Sub CreateSharing(fileid As String, email As String)
+    Private Sub ShareFile(fileid As String, email As String)
         Dim userPermission As Permission = New Permission
         userPermission.Type = "user"
         userPermission.Role = "writer"
@@ -364,7 +366,6 @@ Public Class frmOnlineBackup
 
 
 #Region "BACKUP DATABASE"
-
 
     Private Sub UploadBackup() Handles btnBackupDatabase.Click
 
@@ -380,13 +381,7 @@ Public Class frmOnlineBackup
             Exit Sub
         End If
 
-        CircularProgress1.ProgressBarType = eCircularProgressType.Line
-        CircularProgress1.ProgressText = "0"
-        Me.CircularProgress1.Show()
-        lblProgressStatus.Text = "Uploading File..."
-        Me.lblProgressStatus.Show()
-        Me.CircularProgress1.IsRunning = True
-
+        ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
         bgwUpload.RunWorkerAsync()
 
 
@@ -479,8 +474,8 @@ Public Class frmOnlineBackup
 
 
     Private Sub bgwUpload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpload.RunWorkerCompleted
-        CircularProgress1.Visible = False
-        lblProgressStatus.Visible = False
+
+        HideProgressControls()
         blUploadIsProgressing = False
 
         DisplayInformation()
@@ -513,12 +508,7 @@ Public Class frmOnlineBackup
             args.DownloadFileName = BackupPath & "\" & args.SelectedFileName
             args.BackupDate = Me.listViewEx1.SelectedItems(0).SubItems(1).Text
 
-            CircularProgress1.ProgressText = "0"
-            lblProgressStatus.Text = "Downloading File..."
-            CircularProgress1.IsRunning = True
-            CircularProgress1.ProgressBarType = eCircularProgressType.Line
-            CircularProgress1.Show()
-            lblProgressStatus.Show()
+            ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
             Me.Cursor = Cursors.WaitCursor
 
             bgwDownload.RunWorkerAsync(args)
@@ -644,8 +634,8 @@ Public Class frmOnlineBackup
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
 
         Me.Cursor = Cursors.Default
-        CircularProgress1.Visible = False
-        lblProgressStatus.Visible = False
+        HideProgressControls()
+
         blDownloadIsProgressing = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
@@ -771,6 +761,11 @@ Public Class frmOnlineBackup
     Private Sub OpenFileInMSAccess(sender As Object, e As EventArgs) Handles btnOpenFileMSAccess.Click, listViewEx1.DoubleClick
         Try
 
+            If Not lUser Then
+                ListViewEx1_DoubleClick_AllBackups()
+                Exit Sub
+            End If
+
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
                 ShowFileTransferInProgressMessage()
                 Exit Sub
@@ -785,6 +780,7 @@ Public Class frmOnlineBackup
                 DevComponents.DotNetBar.MessageBoxEx.Show("Please select a file", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
+
 
 
             strBackupFile = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
@@ -949,11 +945,6 @@ Public Class frmOnlineBackup
         On Error Resume Next
 
         Me.lblCount.Text = "No. of Backup Files: " & Me.listViewEx1.Items.Count
-        If Me.listViewEx1.SelectedItems.Count > 0 Then
-            Me.lblSelectedFile.Text = Me.listViewEx1.SelectedItems(0).Text
-        Else
-            Me.lblSelectedFile.Text = "No file selected"
-        End If
 
     End Sub
 
@@ -961,6 +952,235 @@ Public Class frmOnlineBackup
 #End Region
 
 
+#Region "LOAD ALL BACKUPS"
+
+    Private Sub btnGetAdminPrivilege_Click(sender As Object, e As EventArgs) Handles btnGetAdminPrivilege.Click
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+        If sAdmin Or lAdmin Then
+            '  MessageBoxEx.Show("You are in Admin mode.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '  Exit Sub
+        End If
+
+        If Not blPasswordFetched Then
+            Me.Cursor = Cursors.WaitCursor
+            ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
+        End If
+        bgwGetPassword.RunWorkerAsync()
+    End Sub
+
+    Private Sub bgwGetPassword_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwGetPassword.DoWork
+
+        If Not blPasswordFetched Then blPasswordFetched = GetAdminPasswords()
+        bgwGetPassword.ReportProgress(100, blPasswordFetched)
+    End Sub
+
+    Private Sub bgwGetPassword_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwGetPassword.ProgressChanged
+        HideProgressControls()
+        If e.UserState = True Then
+            Dim adminprivilege As Boolean = SetAdminPrivilege()
+            If adminprivilege = True Then '
+                LoadFilesInMasterBackupFolder()
+            End If
+        Else
+            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub LoadFilesInMasterBackupFolder()
+        Me.listViewEx1.Items.Clear()
+        listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Ascending)
+        listViewEx1.Sort()
+        ShowProgressControls("", "", eCircularProgressType.Donut)
+        SetFormTitle("FIS Backup")
+        bgwListFiles.RunWorkerAsync(MasterBackupFolderID)
+    End Sub
+    Private Function SetAdminPrivilege() As Boolean
+        frmInputBox.SetTitleandMessage("Enter Admin Password", "Enter Admin Password", True)
+        frmInputBox.ShowDialog()
+        If frmInputBox.ButtonClicked <> "OK" Then
+            Return False
+        End If
+
+        If frmInputBox.txtInputBox.Text = SuperAdminPass Then
+            sAdmin = True
+            lAdmin = False
+            lUser = False
+            Return True
+        ElseIf frmInputBox.txtInputBox.Text = LocalAdminPass Then
+            lAdmin = True
+            sAdmin = False
+            lUser = False
+            Return True
+        Else
+            MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            sAdmin = False
+            lAdmin = False
+            lUser = True
+            Return False
+        End If
+    End Function
+
+    Private Sub bgwListFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwListFiles.DoWork
+        blListIsLoading = True
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            ListFiles(e.Argument, False)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            blListIsLoading = False
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwListFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwListFiles.ProgressChanged
+        Try
+            If TypeOf e.UserState Is ListViewItem Then
+                listViewEx1.Items.Add(e.UserState)
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+    Private Sub bgwListFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwListFiles.RunWorkerCompleted
+        Me.Cursor = Cursors.Default
+        HideProgressControls()
+        blListIsLoading = False
+    End Sub
+
+    Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
+        Try
+            Dim List As FilesResource.ListRequest = FISService.Files.List()
+
+            If ShowTrashedFiles Then
+                List.Q = "trashed = true"
+            Else
+                List.Q = "trashed = false and '" & FolderID & "' in parents" ' list all files in parent folder. 
+            End If
+
+
+            List.PageSize = 100 ' maximum file list
+            List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, description)"
+            List.OrderBy = "folder, name" 'sorting order
+
+            Dim Results As FileList = List.Execute
+
+            Dim item As ListViewItem
+
+            Dim ResultIsFolder As Boolean = False
+            For Each Result In Results.Files
+                item = New ListViewItem(Result.Name)
+                Dim modifiedtime As DateTime = Result.ModifiedTime
+                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+                item.SubItems.Add(Result.Id)
+                If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
+                    item.SubItems.Add("") 'size for folder
+                    item.ImageIndex = 3
+                    ResultIsFolder = True
+                Else
+                    item.ImageIndex = 2
+                    ResultIsFolder = False
+                    item.SubItems.Add(CalculateFileSize(Result.Size))
+                End If
+                item.SubItems.Add(Result.Description)
+                bgwListFiles.ReportProgress(2, item)
+            Next
+
+            bgwListFiles.ReportProgress(3, FolderID)
+            '  CurrentFolderID = FolderID
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+
+    End Sub
+
+
+    Private Sub ListViewEx1_DoubleClick_AllBackups() ' Handles listViewEx1.DoubleClick
+
+
+        If Me.listViewEx1.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = 2 Then
+            If MessageBoxEx.Show("Do you want to download the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                DownloadSelectedFile()
+                Exit Sub
+            Else
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Try
+            Dim CurrentFolderName = Me.listViewEx1.SelectedItems(0).Text
+            Dim CurrentFolderID = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
+            SetFormTitle(CurrentFolderName)
+            CircularProgress1.ProgressText = ""
+            CircularProgress1.IsRunning = True
+            CircularProgress1.ProgressBarType = eCircularProgressType.Donut
+            CircularProgress1.Show()
+
+            Me.listViewEx1.Items.Clear()
+            bgwListFiles.RunWorkerAsync(CurrentFolderID)
+        Catch ex As Exception
+            HideProgressControls()
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+
+
+    End Sub
+
+#End Region
+
+    Private Sub ShowProgressControls(ProgressText As String, StatusText As String, ProgressType As eCircularProgressType)
+        CircularProgress1.ProgressText = ProgressText
+        lblProgressStatus.Text = StatusText
+        CircularProgress1.IsRunning = True
+        CircularProgress1.ProgressColor = GetProgressColor()
+        CircularProgress1.ProgressBarType = ProgressType
+        CircularProgress1.Show()
+        lblProgressStatus.Show()
+    End Sub
+
+    Private Sub HideProgressControls()
+        CircularProgress1.IsRunning = False
+        CircularProgress1.ProgressText = ""
+        CircularProgress1.ProgressBarType = eCircularProgressType.Line
+        lblProgressStatus.Text = ""
+        CircularProgress1.Hide()
+        lblProgressStatus.Hide()
+    End Sub
+
+    Private Sub SetFormTitle(ByVal Header As String)
+        Me.Text = "Online Database Backup List - " & Header
+        Me.TitleText = "<b>Online Database Backup List - " & Header & "</b>"
+        Me.lblSelectedFolder.Text = Header
+    End Sub
     Public Class DownloadArgs
         Public ID As String
         Public SelectedFileName As String
@@ -968,5 +1188,5 @@ Public Class frmOnlineBackup
         Public BackupDate As String
     End Class
 
-
+  
 End Class

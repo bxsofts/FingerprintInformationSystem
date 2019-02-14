@@ -40,6 +40,7 @@ Public Class frmFISBackupList
 
     Dim blPasswordFetched As Boolean = False
 
+    Dim RecoverPassword As String = ""
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -59,6 +60,14 @@ Public Class frmFISBackupList
 
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
+
+        RecoverPassword = My.Computer.Registry.GetValue(strGeneralSettingsPath, "RecoverPassword", "0")
+        If RecoverPassword = "1" Then
+            FileOwner = "Admin"
+            SuperAdmin = True
+            LocalAdmin = False
+            LocalUser = False
+        End If
 
         If SuperAdmin Then
             Me.btnUpdateFileContent.Visible = True
@@ -264,11 +273,14 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        If Me.listViewEx1.SelectedItems(0).Text = "\My Drive" Then
+            Exit Sub
+        End If
+
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
         End If
-
 
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
@@ -1190,8 +1202,6 @@ Public Class frmFISBackupList
 
 
 #Region "ADMIN PRIVILEGE & PASSWORD"
-
-
     Private Sub SetAdminPassword(SelectedPassword As String)
 
         frmInputBox.SetTitleandMessage("Enter New " & SelectedPassword, "Enter New " & SelectedPassword, False)
@@ -1252,6 +1262,7 @@ Public Class frmFISBackupList
     End Sub
 
     Private Sub bgwGetPassword_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwGetPassword.DoWork
+
         If Not blPasswordFetched Then blPasswordFetched = GetAdminPasswords()
         bgwGetPassword.ReportProgress(100, blPasswordFetched)
     End Sub
@@ -1333,6 +1344,7 @@ Public Class frmFISBackupList
         CircularProgress1.Show()
         lblProgressStatus.Show()
     End Sub
+
     Private Sub HideProgressControls()
         CircularProgress1.IsRunning = False
         CircularProgress1.ProgressText = ""
