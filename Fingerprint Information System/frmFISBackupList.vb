@@ -233,13 +233,13 @@ Public Class frmFISBackupList
                         If Not Result.Name.StartsWith("..") Then bgwListFiles.ReportProgress(2, item)
                     Case ShortOfficeName & "_" & ShortDistrictName
                         If Not Result.Name.StartsWith(".") Then 'if not hidden item
-                            If CurrentFolderPath.Contains(FileOwner) Then
+                            If CurrentFolderPath.Contains(FileOwner) Then 'if path name contains fileowner
                                 bgwListFiles.ReportProgress(2, item)
-                            ElseIf item.SubItems(4).Text = FileOwner Then
+                            ElseIf item.SubItems(4).Text = FileOwner Then 'if file owner
                                 bgwListFiles.ReportProgress(2, item)
-                            ElseIf ResultIsFolder Then
+                            ElseIf ResultIsFolder Then 'if folder
                                 bgwListFiles.ReportProgress(2, item)
-                            ElseIf Not CurrentFolderPath.StartsWith("\My Drive\FIS Backup\") Then
+                            ElseIf Not CurrentFolderPath.StartsWith("\My Drive\FIS Backup\") Then 'if not folder
                                 bgwListFiles.ReportProgress(2, item)
                             End If
                         End If
@@ -1237,6 +1237,12 @@ Public Class frmFISBackupList
             ShowFileTransferInProgressMessage()
             Exit Sub
         End If
+
+        If SuperAdmin Or LocalAdmin Then
+            MessageBoxEx.Show("You are in Admin mode.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         If Not blPasswordFetched Then
             Me.Cursor = Cursors.WaitCursor
             ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
@@ -1256,7 +1262,9 @@ Public Class frmFISBackupList
             Dim adminprivilege As Boolean = SetAdminPrivilege()
             If adminprivilege = True Then '
                 SetTitleAndSize()
-                RefreshFileList()
+                Me.listViewEx1.Items.Clear()
+                ShowProgressControls("", "", eCircularProgressType.Donut)
+                bgwListFiles.RunWorkerAsync(CurrentFolderID)
             End If
         Else
             MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)

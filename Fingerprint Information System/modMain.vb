@@ -358,7 +358,7 @@ Module modMain
 
         Dim parentid As String = ""
         Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '.Pass#Word#'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..Pass#Word#'"
         List.Fields = "files(id)"
 
         Dim Results = List.Execute

@@ -17095,7 +17095,7 @@ errhandler:
 
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '.VersionFolder'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..VersionFolder'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
