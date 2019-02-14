@@ -197,6 +197,7 @@ Public Class frmFISBackupList
                 bgwListFiles.ReportProgress(1, item)
             End If
 
+            Dim ResultIsFolder As Boolean = False
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
                 Dim modifiedtime As DateTime = Result.ModifiedTime
@@ -205,8 +206,10 @@ Public Class frmFISBackupList
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = ImageIndex.Folder
+                    ResultIsFolder = True
                 Else
                     item.ImageIndex = GetImageIndex(Result.MimeType)
+                    ResultIsFolder = False
                 End If
 
                 If item.ImageIndex > 2 Then
@@ -223,15 +226,24 @@ Public Class frmFISBackupList
                     item.SubItems.Add(Result.Description)
                 End If
 
-                If SuperAdmin Or item.SubItems(4).Text = FileOwner Then
-                    bgwListFiles.ReportProgress(2, item) 'report all files
-                End If
-                If LocalAdmin And Not Result.Name.StartsWith("..") Then 'report all except hidden folders
-                    bgwListFiles.ReportProgress(2, item)
-                End If
-                If LocalUser And CurrentFolderName = FileOwner Or item.ImageIndex = ImageIndex.Folder And Not Result.Name.StartsWith(".") Then
-                    bgwListFiles.ReportProgress(2, item) 'report all files except hidden folders
-                End If
+                Select Case FileOwner
+                    Case "Admin"
+                        bgwListFiles.ReportProgress(2, item)
+                    Case "Admin_" & ShortOfficeName & "_" & ShortDistrictName
+                        If Not Result.Name.StartsWith("..") Then bgwListFiles.ReportProgress(2, item)
+                    Case ShortOfficeName & "_" & ShortDistrictName
+                        If Not Result.Name.StartsWith(".") Then 'if not hidden item
+                            If CurrentFolderPath.Contains(FileOwner) Then
+                                bgwListFiles.ReportProgress(2, item)
+                            ElseIf item.SubItems(4).Text = FileOwner Then
+                                bgwListFiles.ReportProgress(2, item)
+                            ElseIf ResultIsFolder Then
+                                bgwListFiles.ReportProgress(2, item)
+                            ElseIf Not CurrentFolderPath.StartsWith("\My Drive\FIS Backup\") Then
+                                bgwListFiles.ReportProgress(2, item)
+                            End If
+                        End If
+                End Select
 
             Next
 
