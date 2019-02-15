@@ -43,16 +43,16 @@ Partial Class frmOnlineBackup
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
+        Me.lblSelectedFolder = New DevComponents.DotNetBar.LabelItem()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
-        Me.bgwService = New System.ComponentModel.BackgroundWorker()
+        Me.btnViewAllBackupFiles = New DevComponents.DotNetBar.ButtonX()
+        Me.bgwListUserFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwUpload = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
-        Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
-        Me.lblSelectedFolder = New DevComponents.DotNetBar.LabelItem()
+        Me.bgwListAllFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -66,10 +66,10 @@ Partial Class frmOnlineBackup
         Me.btnBackupDatabase.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnBackupDatabase.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBackupDatabase.Image = CType(resources.GetObject("btnBackupDatabase.Image"), System.Drawing.Image)
-        Me.btnBackupDatabase.Location = New System.Drawing.Point(23, 12)
+        Me.btnBackupDatabase.Location = New System.Drawing.Point(23, 77)
         Me.btnBackupDatabase.Name = "btnBackupDatabase"
         Me.btnBackupDatabase.Size = New System.Drawing.Size(117, 59)
-        Me.btnBackupDatabase.TabIndex = 1
+        Me.btnBackupDatabase.TabIndex = 2
         Me.btnBackupDatabase.Text = "Upload"
         '
         'ImageList1
@@ -99,10 +99,10 @@ Partial Class frmOnlineBackup
         Me.btnDownloadDatabase.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnDownloadDatabase.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownloadDatabase.Image = CType(resources.GetObject("btnDownloadDatabase.Image"), System.Drawing.Image)
-        Me.btnDownloadDatabase.Location = New System.Drawing.Point(23, 77)
+        Me.btnDownloadDatabase.Location = New System.Drawing.Point(23, 142)
         Me.btnDownloadDatabase.Name = "btnDownloadDatabase"
         Me.btnDownloadDatabase.Size = New System.Drawing.Size(117, 59)
-        Me.btnDownloadDatabase.TabIndex = 2
+        Me.btnDownloadDatabase.TabIndex = 3
         Me.btnDownloadDatabase.Text = "Download"
         '
         'btnRefresh
@@ -111,10 +111,10 @@ Partial Class frmOnlineBackup
         Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(23, 142)
+        Me.btnRefresh.Location = New System.Drawing.Point(23, 12)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(117, 59)
-        Me.btnRefresh.TabIndex = 3
+        Me.btnRefresh.TabIndex = 1
         Me.btnRefresh.Text = "Refresh"
         '
         'btnRestoreDatabase
@@ -335,12 +335,18 @@ Partial Class frmOnlineBackup
         Me.Bar1.TabIndex = 24
         Me.Bar1.TabStop = False
         '
+        'lblSelectedFolder
+        '
+        Me.lblSelectedFolder.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
+        Me.lblSelectedFolder.Name = "lblSelectedFolder"
+        Me.lblSelectedFolder.Width = 150
+        '
         'lblCount
         '
         Me.lblCount.BeginGroup = True
         Me.lblCount.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
         Me.lblCount.Name = "lblCount"
-        Me.lblCount.Width = 140
+        Me.lblCount.Width = 160
         '
         'lblTotalFileSize
         '
@@ -353,13 +359,13 @@ Partial Class frmOnlineBackup
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx2.Controls.Add(Me.btnGetAdminPrivilege)
+        Me.PanelEx2.Controls.Add(Me.btnViewAllBackupFiles)
         Me.PanelEx2.Controls.Add(Me.btnBackupDatabase)
         Me.PanelEx2.Controls.Add(Me.btnDownloadDatabase)
+        Me.PanelEx2.Controls.Add(Me.btnRefresh)
         Me.PanelEx2.Controls.Add(Me.btnOpenFileMSAccess)
         Me.PanelEx2.Controls.Add(Me.btnRemoveBackupFile)
         Me.PanelEx2.Controls.Add(Me.btnOpenBackupFolder)
-        Me.PanelEx2.Controls.Add(Me.btnRefresh)
         Me.PanelEx2.Controls.Add(Me.btnRestoreDatabase)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
@@ -374,23 +380,23 @@ Partial Class frmOnlineBackup
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
         '
-        'btnGetAdminPrivilege
+        'btnViewAllBackupFiles
         '
-        Me.btnGetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGetAdminPrivilege.Image = CType(resources.GetObject("btnGetAdminPrivilege.Image"), System.Drawing.Image)
-        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(23, 467)
-        Me.btnGetAdminPrivilege.Name = "btnGetAdminPrivilege"
-        Me.btnGetAdminPrivilege.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
-        Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(117, 59)
-        Me.btnGetAdminPrivilege.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnGetAdminPrivilege.TabIndex = 8
-        Me.btnGetAdminPrivilege.Text = "Admin"
+        Me.btnViewAllBackupFiles.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnViewAllBackupFiles.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnViewAllBackupFiles.Image = CType(resources.GetObject("btnViewAllBackupFiles.Image"), System.Drawing.Image)
+        Me.btnViewAllBackupFiles.Location = New System.Drawing.Point(23, 467)
+        Me.btnViewAllBackupFiles.Name = "btnViewAllBackupFiles"
+        Me.btnViewAllBackupFiles.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
+        Me.btnViewAllBackupFiles.Size = New System.Drawing.Size(117, 59)
+        Me.btnViewAllBackupFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnViewAllBackupFiles.TabIndex = 8
+        Me.btnViewAllBackupFiles.Text = "View All Backups"
         '
-        'bgwService
+        'bgwListUserFiles
         '
-        Me.bgwService.WorkerReportsProgress = True
-        Me.bgwService.WorkerSupportsCancellation = True
+        Me.bgwListUserFiles.WorkerReportsProgress = True
+        Me.bgwListUserFiles.WorkerSupportsCancellation = True
         '
         'bgwUpload
         '
@@ -407,16 +413,10 @@ Partial Class frmOnlineBackup
         Me.bgwGetPassword.WorkerReportsProgress = True
         Me.bgwGetPassword.WorkerSupportsCancellation = True
         '
-        'bgwListFiles
+        'bgwListAllFiles
         '
-        Me.bgwListFiles.WorkerReportsProgress = True
-        Me.bgwListFiles.WorkerSupportsCancellation = True
-        '
-        'lblSelectedFolder
-        '
-        Me.lblSelectedFolder.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
-        Me.lblSelectedFolder.Name = "lblSelectedFolder"
-        Me.lblSelectedFolder.Width = 150
+        Me.bgwListAllFiles.WorkerReportsProgress = True
+        Me.bgwListAllFiles.WorkerSupportsCancellation = True
         '
         'frmOnlineBackup
         '
@@ -462,7 +462,7 @@ Partial Class frmOnlineBackup
     Friend WithEvents FileID As System.Windows.Forms.ColumnHeader
     Friend WithEvents Bar1 As DevComponents.DotNetBar.Bar
     Friend WithEvents lblCount As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents bgwService As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwListUserFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents lblProgressStatus As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
@@ -470,8 +470,8 @@ Partial Class frmOnlineBackup
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
     Friend WithEvents UploadedBy As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblTotalFileSize As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents btnGetAdminPrivilege As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnViewAllBackupFiles As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwGetPassword As System.ComponentModel.BackgroundWorker
-    Friend WithEvents bgwListFiles As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwListAllFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblSelectedFolder As DevComponents.DotNetBar.LabelItem
 End Class
