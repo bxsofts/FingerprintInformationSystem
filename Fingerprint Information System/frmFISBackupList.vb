@@ -666,11 +666,10 @@ Public Class frmFISBackupList
         blUploadIsProgressing = False
 
         If uUploadStatus = UploadStatus.Completed Then
-            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
+            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -880,6 +879,9 @@ Public Class frmFISBackupList
             frmMainInterface.ShowDesktopAlert(msg)
 
             Me.Cursor = Cursors.Default
+
+            SelectNextItem(SelectedFileIndex)
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -901,6 +903,16 @@ Public Class frmFISBackupList
         End Try
     End Sub
 
+    Private Sub SelectNextItem(SelectedFileIndex)
+        On Error Resume Next
+        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+        End If
+
+        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        End If
+    End Sub
 #End Region
 
 

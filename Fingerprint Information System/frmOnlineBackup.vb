@@ -46,6 +46,7 @@ Public Class frmOnlineBackup
 
     Dim MasterBackupFolderID As String = ""
     Dim CurrentFolderName As String = ""
+
 #Region "FORM LOAD EVENTS"
 
     Private Sub CreateService() Handles MyBase.Load
@@ -112,7 +113,7 @@ Public Class frmOnlineBackup
 
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         NoFileFoundMessage = ShowNoFileFoundMessage
-
+        CurrentFolderName = FileOwner
         bgwListUserFiles.RunWorkerAsync()
     End Sub
 
@@ -124,23 +125,6 @@ Public Class frmOnlineBackup
 
             FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
-
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchTopLevelOnly, "FingerPrintBackup*.mdb")
-
-                Dim FileName = My.Computer.FileSystem.GetName(foundFile)
-
-                Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
-                Dim filesize = CalculateFileSize(My.Computer.FileSystem.GetFileInfo(FullFilePath).Length)
-                Dim Filedate As DateTime = DateTime.ParseExact(FileName.Replace("FingerPrintBackup-", "").Replace(".mdb", ""), BackupDateFormatString, culture)
-
-                Dim item As ListViewItem = New ListViewItem(FileName) 'name
-                item.SubItems.Add(Filedate.ToString("dd-MM-yyyy HH:mm:ss")) 'backuptime
-                item.SubItems.Add("Downloaded File") 'fileid
-                item.SubItems.Add(filesize) 'size
-                item.SubItems.Add("Downloaded File") 'remarks
-                item.ImageIndex = 1
-                bgwListUserFiles.ReportProgress(50, item)
-            Next
 
             MasterBackupFolderID = GetMasterBackupFolderID()
             BackupFolderID = GetUserBackupFolderID()
@@ -166,7 +150,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(CalculateFileSize(Result.Size)) 'size
                 item.SubItems.Add(Result.Description)
 
-                item.ImageIndex = 0
+                item.ImageIndex = 2
                 bgwListUserFiles.ReportProgress(90, item)
             Next
 
@@ -360,6 +344,12 @@ Public Class frmOnlineBackup
 
     Private Sub UploadBackup() Handles btnBackupDatabase.Click
 
+        If CurrentFolderName <> FileOwner Then
+            MessageBoxEx.Show("Cannot upload backup to '" & CurrentFolderName & "' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
@@ -429,7 +419,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(FileOwner)
-                item.ImageIndex = 0
+                item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size
             End If
@@ -462,8 +452,6 @@ Public Class frmOnlineBackup
         End If
 
     End Sub
-
-
     Private Sub bgwUpload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpload.RunWorkerCompleted
 
         HideProgressControls()
@@ -473,12 +461,11 @@ Public Class frmOnlineBackup
 
         If uUploadStatus = UploadStatus.Completed Then
             Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
-            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(0).Selected = True
             End If
+            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
@@ -522,33 +509,21 @@ Public Class frmOnlineBackup
             strBackupFile = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
             Dim id As String = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
 
-            If id <> "Downloaded File" Then 'download and use
+            Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The file will be downloaded and opened in Microsoft Access.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
 
-                Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The file will be downloaded and opened in Microsoft Access.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
-
-                If result = Windows.Forms.DialogResult.Cancel Then
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                Me.Cursor = Cursors.WaitCursor
-                If InternetAvailable() = False Then
-                    MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                DownloadOpen = True
-                DownloadFileFromDrive()
-            Else
-                DownloadOpen = False
-                Me.Cursor = Cursors.WaitCursor
-                If My.Computer.FileSystem.FileExists(strBackupFile) Then
-                    Shell("explorer.exe " & strBackupFile, AppWinStyle.MaximizedFocus)
-                Else
-                    MessageBoxEx.Show("Cannot open file. File is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
+            If result = Windows.Forms.DialogResult.Cancel Then
                 Me.Cursor = Cursors.Default
+                Exit Sub
             End If
+
+            Me.Cursor = Cursors.WaitCursor
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+            DownloadOpen = True
+            DownloadFileFromDrive()
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -608,14 +583,15 @@ Public Class frmOnlineBackup
 
 
             Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
-            If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> FileOwner Then
-                fname = CurrentFolderName & "_" & fname
-            End If
 
             If CurrentFolderName = FileOwner Then
                 strBackupFile = BackupPath & "\" & fname
             Else
-                strBackupFile = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
+                Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
+                If My.Computer.FileSystem.DirectoryExists(f) = False Then
+                    My.Computer.FileSystem.CreateDirectory(f)
+                End If
+                strBackupFile = f & "\" & fname
             End If
 
             Dim args As DownloadArgs = New DownloadArgs
@@ -656,18 +632,6 @@ Public Class frmOnlineBackup
 
             If dDownloadStatus = DownloadStatus.Completed Then
                 mStream.WriteTo(fStream)
-                If CurrentFolderName = FileOwner Then
-                    Dim item As ListViewItem = New ListViewItem(args.SelectedFileName)
-                    item.SubItems.Add(args.BackupDate)
-                    item.SubItems.Add("Downloaded File")
-                    item.SubItems.Add(dFormatedFileSize)
-                    item.SubItems.Add("Downloaded File")
-                    item.ImageIndex = 1
-                    bgwDownload.ReportProgress(100, item)
-                Else
-                    bgwDownload.ReportProgress(100, args.DownloadFileName) 'show  in explorer
-                End If
-              
             End If
 
             fStream.Close()
@@ -783,6 +747,11 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
+            If CurrentFolderName <> FileOwner Then
+                Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The backup file you selected is uploaded by '" & CurrentFolderName & "'." & vbNewLine & "Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                If r = Windows.Forms.DialogResult.No Then Exit Sub
+            End If
+
             Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Restoring the database will overwrite the existing database." & vbNewLine & "Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
             If result = Windows.Forms.DialogResult.Yes Then
@@ -790,16 +759,7 @@ Public Class frmOnlineBackup
                 strBackupFile = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
                 Dim id As String = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
 
-                If id <> "Downloaded File" Then 'download and use
-
-                    result = DevComponents.DotNetBar.MessageBoxEx.Show("The file will be downloaded and restored.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
-
-                    If result = Windows.Forms.DialogResult.Cancel Then
-                        Me.Cursor = Cursors.Default
-                        Exit Sub
-                    End If
-
-                    Me.Cursor = Cursors.WaitCursor
+                Me.Cursor = Cursors.WaitCursor
 
                     If InternetAvailable() = False Then
                         MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -808,20 +768,6 @@ Public Class frmOnlineBackup
                     End If
                     DownloadRestore = True
                     DownloadFileFromDrive()
-                Else
-                    DownloadRestore = False
-                    Me.Cursor = Cursors.WaitCursor
-                    If My.Computer.FileSystem.FileExists(strBackupFile) Then
-                        My.Computer.FileSystem.CopyFile(strBackupFile, sDatabaseFile, True)
-                        boolRestored = True
-                        Me.Close()
-                        Exit Sub
-                    Else
-                        MessageBoxEx.Show("Cannot restore. Backup file is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                    Me.Cursor = Cursors.Default
-                End If
-
             End If
 
         Catch ex As Exception
@@ -836,29 +782,10 @@ Public Class frmOnlineBackup
 #End Region
 
 
-    Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click
-        On Error Resume Next
-
-        If Me.listViewEx1.SelectedItems.Count > 0 Then
-            If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "Downloaded File" Then
-                Call Shell("explorer.exe /select," & BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text, AppWinStyle.NormalFocus)
-                Exit Sub
-            End If
-        End If
-
-        If Not FileIO.FileSystem.DirectoryExists(BackupPath) Then
-            FileIO.FileSystem.CreateDirectory(BackupPath)
-        End If
-
-        Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
-    End Sub
-
-
-
 #Region "REMOVE FILE"
     Private Sub RemoveBackupFileFromDrive() Handles btnRemoveBackupFile.Click
         Try
-            
+
 
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
                 ShowFileTransferInProgressMessage()
@@ -1033,6 +960,7 @@ Public Class frmOnlineBackup
         listViewEx1.Sort()
         ShowProgressControls("", "", eCircularProgressType.Donut)
         SetFormTitle("FIS Backup")
+        CurrentFolderName = "FIS Backup"
         bgwListAllFiles.RunWorkerAsync(MasterBackupFolderID)
     End Sub
 
@@ -1090,6 +1018,9 @@ Public Class frmOnlineBackup
         Me.Cursor = Cursors.Default
         DisplayInformation()
         HideProgressControls()
+        If listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.Items(0).Selected = True
+        End If
         blListIsLoading = False
     End Sub
 
@@ -1178,6 +1109,8 @@ Public Class frmOnlineBackup
         End If
 
         Try
+            listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
+            listViewEx1.Sort()
             CurrentFolderName = Me.listViewEx1.SelectedItems(0).Text
             Dim CurrentFolderID = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
             SetFormTitle(CurrentFolderName)
@@ -1198,6 +1131,59 @@ Public Class frmOnlineBackup
     End Sub
 
 #End Region
+
+    Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click
+        On Error Resume Next
+
+        If CurrentFolderName = FileOwner Then
+            If Me.listViewEx1.SelectedItems.Count > 0 Then
+                Dim file As String = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
+                If My.Computer.FileSystem.FileExists(file) Then
+                    Call Shell("explorer.exe /select," & file, AppWinStyle.NormalFocus)
+                    Exit Sub
+                End If
+            End If
+
+            If Not My.Computer.FileSystem.DirectoryExists(BackupPath) Then
+                My.Computer.FileSystem.CreateDirectory(BackupPath)
+            End If
+            Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
+
+        ElseIf CurrentFolderName = "FIS Backup" Then
+            Dim f As String = strAppUserPath & "\FIS Backup"
+            If My.Computer.FileSystem.DirectoryExists(f) = False Then
+                My.Computer.FileSystem.CreateDirectory(f)
+            End If
+            If Me.listViewEx1.SelectedItems.Count > 0 Then
+                If My.Computer.FileSystem.DirectoryExists(f & "\" & Me.listViewEx1.SelectedItems(0).Text) Then
+                    Call Shell("explorer.exe /select," & f & "\" & Me.listViewEx1.SelectedItems(0).Text, AppWinStyle.NormalFocus)
+                    Exit Sub
+                End If
+            End If
+            Call Shell("explorer.exe " & f, AppWinStyle.NormalFocus)
+
+        Else
+            Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
+            If Not FileIO.FileSystem.DirectoryExists(f) Then
+                FileIO.FileSystem.CreateDirectory(f)
+            End If
+            If Me.listViewEx1.SelectedItems.Count > 0 Then
+                Dim file As String = f & "\" & Me.listViewEx1.SelectedItems(0).Text
+                If My.Computer.FileSystem.FileExists(file) Then
+                    Call Shell("explorer.exe /select," & file, AppWinStyle.NormalFocus)
+                    Exit Sub
+                End If
+            End If
+
+            Call Shell("explorer.exe " & f, AppWinStyle.NormalFocus)
+
+        End If
+
+
+
+
+
+    End Sub
 
     Private Sub ShowProgressControls(ProgressText As String, StatusText As String, ProgressType As eCircularProgressType)
         CircularProgress1.ProgressText = ProgressText
