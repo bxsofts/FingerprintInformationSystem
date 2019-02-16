@@ -722,11 +722,22 @@ Public Class frmFISBackupList
         ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
         Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
-        If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> "" Then
-            fname = CurrentFolderName & "_" & fname
-        End If
+        If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> (ShortOfficeName & "_" & ShortDistrictName) Then
+            Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
+            If My.Computer.FileSystem.DirectoryExists(f) = False Then
+                My.Computer.FileSystem.CreateDirectory(f)
+            End If
+            SaveFileName = f & "\" & fname
+        ElseIf fname.StartsWith("FingerPrintBackup-") And CurrentFolderName = (ShortOfficeName & "_" & ShortDistrictName) Then
+            Dim f As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
 
-        SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
+            If My.Computer.FileSystem.DirectoryExists(f) = False Then
+                My.Computer.FileSystem.CreateDirectory(f)
+            End If
+            SaveFileName = f & "\" & fname
+        Else
+            SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
+        End If
         bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems(0).SubItems(3).Text) ' fileid
     End Sub
 
