@@ -16448,8 +16448,6 @@ errhandler:
     Private Sub TakeAutoOnlineBackup()
 
         Try
-
-
             Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
             If backupperiod = 0 Then Exit Sub
 
@@ -16523,7 +16521,7 @@ errhandler:
                 Exit Sub
             End If
 
-            LatestSOCNumber = FindLatestSOCNumber()
+            FindLatestSOCNumberAndDI()
 
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
@@ -16532,7 +16530,7 @@ errhandler:
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; Last SOC No: " & LatestSOCNumber
+            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & LatestSOCNumber & "; " & LatestSOCDI
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -16631,7 +16629,7 @@ errhandler:
             Exit Sub
         End If
         boolRestored = False
-        LatestSOCNumber = FindLatestSOCNumber()
+        FindLatestSOCNumberAndDI()
         frmOnlineBackup.ShowDialog()
         If boolRestored Then
             LoadRecordsAfterRestore()
@@ -16643,7 +16641,7 @@ errhandler:
         Cursor = Cursors.Default
     End Sub
 
-    Private Function FindLatestSOCNumber() As String
+    Private Sub FindLatestSOCNumberAndDI()
         Try
             Dim FPDS As New FingerPrintDataSet
             Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
@@ -16652,14 +16650,15 @@ errhandler:
 
             SOCTblAdptr.FillByLatestSOCRecord(FPDS.SOCRegister)
             If FPDS.SOCRegister.Count = 1 Then
-                Return FPDS.SOCRegister(0).SOCNumber
+                LatestSOCNumber = FPDS.SOCRegister(0).SOCNumber
+                LatestSOCDI = FPDS.SOCRegister(0).DateOfInspection.ToString("dd-MM-yyyy")
             End If
-            Return "NIL"
         Catch ex As Exception
-            Return "NIL"
+            LatestSOCNumber = ""
+            LatestSOCDI = ""
         End Try
 
-    End Function
+    End Sub
     Private Sub LoadRecordsAfterRestore()
         Try
 

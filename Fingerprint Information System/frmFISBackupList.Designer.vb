@@ -356,7 +356,7 @@ Partial Class frmFISBackupList
         'UploadedBy
         '
         Me.UploadedBy.Text = "Uploaded By"
-        Me.UploadedBy.Width = 290
+        Me.UploadedBy.Width = 280
         '
         'ImageList1
         '

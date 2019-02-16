@@ -42,6 +42,7 @@ Partial Class frmOnlineBackup
         Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Remarks = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblSelectedFolder = New DevComponents.DotNetBar.LabelItem()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
@@ -53,7 +54,6 @@ Partial Class frmOnlineBackup
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.bgwListAllFiles = New System.ComponentModel.BackgroundWorker()
-        Me.Remarks = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -303,7 +303,7 @@ Partial Class frmOnlineBackup
         'BackupTime
         '
         Me.BackupTime.Text = "Backup Time"
-        Me.BackupTime.Width = 223
+        Me.BackupTime.Width = 135
         '
         'FileID
         '
@@ -318,7 +318,12 @@ Partial Class frmOnlineBackup
         'UploadedBy
         '
         Me.UploadedBy.Text = "Uploaded By"
-        Me.UploadedBy.Width = 150
+        Me.UploadedBy.Width = 175
+        '
+        'Remarks
+        '
+        Me.Remarks.Text = "Remarks"
+        Me.Remarks.Width = 220
         '
         'Bar1
         '
@@ -418,11 +423,6 @@ Partial Class frmOnlineBackup
         '
         Me.bgwListAllFiles.WorkerReportsProgress = True
         Me.bgwListAllFiles.WorkerSupportsCancellation = True
-        '
-        'Remarks
-        '
-        Me.Remarks.Text = "Remarks"
-        Me.Remarks.Width = 150
         '
         'frmOnlineBackup
         '

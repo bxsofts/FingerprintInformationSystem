@@ -150,17 +150,22 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(CalculateFileSize(Result.Size)) 'size
 
                 Dim Description As String = Result.Description
-                Dim SplitText() = Strings.Split(Description, "; ")
-                Dim u = SplitText.GetUpperBound(0)
 
-                If u = 0 Then
-                    item.SubItems.Add(SplitText(0)) 'uploaded by
-                    item.SubItems.Add("") 'remarks
-                End If
+                If IsDate(Description) Or Description = "" Then
+                    item.SubItems.Add(CurrentFolderName)
+                Else
+                    Dim SplitText() = Strings.Split(Description, "; ")
+                    Dim u = SplitText.GetUpperBound(0)
 
-                If u = 1 Then
-                    item.SubItems.Add(SplitText(0)) 'uploaded by
-                    item.SubItems.Add(SplitText(1)) 'remarks
+                    If u = 0 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add("") 'remarks
+                    End If
+
+                    If u = 2 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add("Last SOC No: " & SplitText(1) & ", DI: " & SplitText(2)) 'remarks
+                    End If
                 End If
 
                 item.ImageIndex = 2
@@ -398,7 +403,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = FileOwner & "; Last SOC No: " & LatestSOCNumber
+            body.Description = FileOwner & "; " & LatestSOCNumber & "; " & LatestSOCDI
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -432,7 +437,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(FileOwner)
-                item.SubItems.Add("Last SOC No: " & LatestSOCNumber)
+                item.SubItems.Add("Last SOC No: " & LatestSOCNumber & ", DI: " & LatestSOCDI)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size
@@ -1067,12 +1072,39 @@ Public Class frmOnlineBackup
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = 3
                     item.SubItems.Add(Result.Description)
+                    item.SubItems.Add("") 'remarks
                     bgwListAllFiles.ReportProgress(2, item)
                 ElseIf Result.MimeType = "database/mdb" Then
                     item.ImageIndex = 2
                     item.SubItems.Add(CalculateFileSize(Result.Size))
                     TotalFileSize = TotalFileSize + Result.Size
-                    item.SubItems.Add(Result.Description)
+
+                    Dim Description As String = Result.Description
+
+                    Dim SplitText() = Strings.Split(Description, "; ")
+                    Dim u = SplitText.GetUpperBound(0)
+
+                    If u = 0 Then
+                        If sAdmin Then
+                            item.SubItems.Add(Description)
+                            item.SubItems.Add("") 'remarks
+                        Else
+                            If IsDate(Description) Or Description = "" Then
+                                item.SubItems.Add(CurrentFolderName)
+                                item.SubItems.Add("") 'remarks
+                            Else
+                                item.SubItems.Add(SplitText(0)) 'uploaded by
+                                item.SubItems.Add("") 'remarks
+                            End If
+                        End If
+
+                    End If
+
+                    If u = 2 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add("Last SOC No: " & SplitText(1) & ", DI: " & SplitText(2)) 'remarks
+                    End If
+
                     bgwListAllFiles.ReportProgress(2, item)
                 End If
             Next

@@ -227,13 +227,24 @@ Public Class frmFISBackupList
 
                 item.SubItems.Add(Result.Id)
 
-                If Result.Description = "FIS Backup Folder" Then
-                    item.SubItems.Add(Result.Name)
-                ElseIf IsDate(Result.Description) Or Result.Description = "" Then
-                    item.SubItems.Add(CurrentFolderName)
+                Dim Description As String = Result.Description
+                If SuperAdmin Then
+                    item.SubItems.Add(Description)
                 Else
-                    item.SubItems.Add(Result.Description)
+                    If Description = "FIS Backup Folder" Then
+                        item.SubItems.Add(Result.Name)
+                    ElseIf IsDate(Description) Or Description = "" Then
+                        item.SubItems.Add(CurrentFolderName)
+                    Else
+                        Dim SplitText() = Strings.Split(Description, "; ")
+                        Dim u = SplitText.GetUpperBound(0)
+
+                        If u >= 0 Then
+                            item.SubItems.Add(SplitText(0)) 'uploaded by
+                        End If
+                    End If
                 End If
+               
 
                 Select Case FileOwner
                     Case "Admin"

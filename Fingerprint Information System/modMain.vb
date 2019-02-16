@@ -91,6 +91,7 @@ Module modMain
 
     Public frmNewPleaseWaitForm As New frmPleaseWait
     Public LatestSOCNumber As String = ""
+    Public LatestSOCDI As String = ""
 
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
