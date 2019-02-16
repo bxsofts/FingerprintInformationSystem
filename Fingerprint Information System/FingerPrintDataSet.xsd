@@ -1048,6 +1048,18 @@ ORDER BY PoliceStation</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByLatestSOCRecord" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy56" GeneratorSourceName="FillByLatestSOCRecord" GetMethodModifier="Public" GetMethodName="GetDataBy56" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy56" UserSourceName="FillByLatestSOCRecord">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        TOP 1 SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, 
+                         ChancePrintsDeveloped, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, InvestigatingOfficer, Gist, 
+                         ComparisonDetails, Remarks, GraveCrime, FileStatus, CPsIdentified, IdentificationDate, IdentifiedBy, IdentifiedAs, IdentificationNumber
+FROM            SOCRegister
+ORDER BY DateOfInspection DESC, SOCYear DESC</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByNumber" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy27" GeneratorSourceName="FillByNumber" GetMethodModifier="Public" GetMethodName="GetDataBy27" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy27" UserSourceName="FillByNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
@@ -5017,7 +5029,7 @@ WHERE     (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountBlankIDNumber" Modifier="Public" Name="CountBlankIDNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="CountBlankIDNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountBlankIDNumber" Modifier="Public" Name="CountBlankIDNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="CountBlankIDNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(*) AS Expr1
@@ -5029,7 +5041,7 @@ WHERE        (IdentificationNumber = ?) AND (FileStatus = 'identified')</Command
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountOfficer" Modifier="Public" Name="CountOfficer" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="CountOfficer">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountOfficer" Modifier="Public" Name="CountOfficer" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="CountOfficer">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT     COUNT(InvestigatingOfficer) AS Expr1
@@ -5052,7 +5064,7 @@ WHERE     (InvestigatingOfficer = ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="ScalarQueryCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="ScalarQueryCPsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -5065,7 +5077,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -5078,7 +5090,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="ScalarQuerySOCsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -5092,7 +5104,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</Com
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateIDRNumber" Modifier="Public" Name="UpdateIDRNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="UpdateIDRNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateIDRNumber" Modifier="Public" Name="UpdateIDRNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="UpdateIDRNumber">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -7100,7 +7112,7 @@ WHERE        (SettingsID = ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowClassName="OfficerTableRow" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_UserTableName="OfficerTable">
+        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_UserTableName="OfficerTable" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_RowClassName="OfficerTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OfficerID" msprop:Generator_ColumnVarNameInTable="columnOfficerID" msprop:Generator_ColumnPropNameInRow="OfficerID" msprop:Generator_ColumnPropNameInTable="OfficerIDColumn" msprop:Generator_UserColumnName="OfficerID" type="xs:int" />
@@ -7149,7 +7161,7 @@ WHERE        (SettingsID = ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_UserTableName="Settings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowClassName="SettingsRow">
+        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowClassName="SettingsRow" msprop:Generator_UserTableName="Settings" msprop:Generator_RowEvArgName="SettingsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsID" msprop:Generator_ColumnVarNameInTable="columnSettingsID" msprop:Generator_ColumnPropNameInRow="SettingsID" msprop:Generator_ColumnPropNameInTable="SettingsIDColumn" msprop:Generator_UserColumnName="SettingsID" type="xs:int" />

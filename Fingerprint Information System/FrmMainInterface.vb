@@ -16406,7 +16406,7 @@ errhandler:
 
             body.Parents = parentlist
             body.Name = BackupFolder
-            body.Description = ShortOfficeName & "_" & ShortDistrictName
+            body.Description = ShortOfficeName & "_" & ShortDistrictName 
             body.MimeType = "application/vnd.google-apps.folder"
 
             Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
@@ -16523,6 +16523,7 @@ errhandler:
                 Exit Sub
             End If
 
+            LatestSOCNumber = FindLatestSOCNumber()
 
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
@@ -16531,7 +16532,7 @@ errhandler:
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup"
+            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; Last SOC No: " & LatestSOCNumber
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -16596,7 +16597,7 @@ errhandler:
 #End Region
 
 
-#Region "RESTORE DATABASE"
+#Region "BACKUP AND RESTORE DATABASE"
 
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
@@ -16630,6 +16631,7 @@ errhandler:
             Exit Sub
         End If
         boolRestored = False
+        LatestSOCNumber = FindLatestSOCNumber()
         frmOnlineBackup.ShowDialog()
         If boolRestored Then
             LoadRecordsAfterRestore()
@@ -16641,6 +16643,23 @@ errhandler:
         Cursor = Cursors.Default
     End Sub
 
+    Private Function FindLatestSOCNumber() As String
+        Try
+            Dim FPDS As New FingerPrintDataSet
+            Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
+            SOCTblAdptr.Connection.ConnectionString = sConString
+            SOCTblAdptr.Connection.Open()
+
+            SOCTblAdptr.FillByLatestSOCRecord(FPDS.SOCRegister)
+            If FPDS.SOCRegister.Count = 1 Then
+                Return FPDS.SOCRegister(0).SOCNumber
+            End If
+            Return "NIL"
+        Catch ex As Exception
+            Return "NIL"
+        End Try
+
+    End Function
     Private Sub LoadRecordsAfterRestore()
         Try
 

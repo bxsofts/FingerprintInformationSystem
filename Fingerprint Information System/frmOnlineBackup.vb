@@ -148,7 +148,20 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(Result.Id) 'id
                 TotalFileSize = TotalFileSize + Result.Size
                 item.SubItems.Add(CalculateFileSize(Result.Size)) 'size
-                item.SubItems.Add(Result.Description)
+
+                Dim Description As String = Result.Description
+                Dim SplitText() = Strings.Split(Description, "; ")
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u = 0 Then
+                    item.SubItems.Add(SplitText(0)) 'uploaded by
+                    item.SubItems.Add("") 'remarks
+                End If
+
+                If u = 1 Then
+                    item.SubItems.Add(SplitText(0)) 'uploaded by
+                    item.SubItems.Add(SplitText(1)) 'remarks
+                End If
 
                 item.ImageIndex = 2
                 bgwListUserFiles.ReportProgress(90, item)
@@ -385,7 +398,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = FileOwner
+            body.Description = FileOwner & "; Last SOC No: " & LatestSOCNumber
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -419,6 +432,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(FileOwner)
+                item.SubItems.Add("Last SOC No: " & LatestSOCNumber)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size

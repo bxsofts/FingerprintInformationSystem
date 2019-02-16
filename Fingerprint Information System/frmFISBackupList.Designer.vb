@@ -295,7 +295,7 @@ Partial Class frmFISBackupList
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(295, 271)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(295, 295)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
         Me.lblProgressStatus.TabIndex = 4
@@ -310,7 +310,7 @@ Partial Class frmFISBackupList
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(338, 146)
+        Me.CircularProgress1.Location = New System.Drawing.Point(338, 170)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -356,7 +356,7 @@ Partial Class frmFISBackupList
         'UploadedBy
         '
         Me.UploadedBy.Text = "Uploaded By"
-        Me.UploadedBy.Width = 160
+        Me.UploadedBy.Width = 290
         '
         'ImageList1
         '

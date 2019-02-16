@@ -90,6 +90,8 @@ Module modMain
     Public blListIsLoading As Boolean
 
     Public frmNewPleaseWaitForm As New frmPleaseWait
+    Public LatestSOCNumber As String = ""
+
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
