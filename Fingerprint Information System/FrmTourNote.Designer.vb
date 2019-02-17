@@ -57,7 +57,7 @@ Partial Class FrmTourNote
         Me.btnGenerateBlankTR56A = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateBlankTourNote = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateBlankTR47 = New DevComponents.DotNetBar.ButtonX()
-        Me.btnBlankTR47Outer = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateBlankTR47Outer = New DevComponents.DotNetBar.ButtonItem()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -66,9 +66,9 @@ Partial Class FrmTourNote
         Me.chkThreeRows = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkSingleRow = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.btnOpenTABillFolder = New DevComponents.DotNetBar.ButtonX()
-        Me.btnShowTourNote = New DevComponents.DotNetBar.ButtonX()
-        Me.btnTABill = New DevComponents.DotNetBar.ButtonX()
-        Me.btnShowTABillOuter = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateTourNote = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateTABill = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGenerateTABillOuter = New DevComponents.DotNetBar.ButtonItem()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -139,9 +139,9 @@ Partial Class FrmTourNote
         Me.PanelEx3.Controls.Add(Me.PanelSOC)
         Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx3.Location = New System.Drawing.Point(404, 0)
+        Me.PanelEx3.Location = New System.Drawing.Point(430, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(888, 733)
+        Me.PanelEx3.Size = New System.Drawing.Size(862, 733)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -189,7 +189,7 @@ Partial Class FrmTourNote
         Me.SOCDatagrid.SelectAllSignVisible = False
         Me.SOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.SOCDatagrid.ShowCellErrors = False
-        Me.SOCDatagrid.Size = New System.Drawing.Size(888, 659)
+        Me.SOCDatagrid.Size = New System.Drawing.Size(862, 659)
         Me.SOCDatagrid.TabIndex = 43
         Me.SOCDatagrid.TabStop = False
         '
@@ -205,7 +205,7 @@ Partial Class FrmTourNote
         '
         Me.SelectRow.HeaderText = "Select"
         Me.SelectRow.Name = "SelectRow"
-        Me.SelectRow.Width = 80
+        Me.SelectRow.Width = 70
         '
         'DateOfInspectionDataGridViewTextBoxColumn
         '
@@ -233,6 +233,7 @@ Partial Class FrmTourNote
         Me.CrimeNumberDataGridViewTextBoxColumn.HeaderText = "Cr.No."
         Me.CrimeNumberDataGridViewTextBoxColumn.Name = "CrimeNumberDataGridViewTextBoxColumn"
         Me.CrimeNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.CrimeNumberDataGridViewTextBoxColumn.Width = 90
         '
         'PlaceOfOccurrenceDataGridViewTextBoxColumn
         '
@@ -250,7 +251,7 @@ Partial Class FrmTourNote
         Me.InvestigatingOfficer.HeaderText = "Inspecting Officer"
         Me.InvestigatingOfficer.Name = "InvestigatingOfficer"
         Me.InvestigatingOfficer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.InvestigatingOfficer.Width = 210
+        Me.InvestigatingOfficer.Width = 200
         '
         'SOCRegisterBindingSource
         '
@@ -279,7 +280,7 @@ Partial Class FrmTourNote
         Me.StatusBar.Location = New System.Drawing.Point(0, 703)
         Me.StatusBar.MaximumSize = New System.Drawing.Size(0, 30)
         Me.StatusBar.Name = "StatusBar"
-        Me.StatusBar.Size = New System.Drawing.Size(888, 30)
+        Me.StatusBar.Size = New System.Drawing.Size(862, 30)
         Me.StatusBar.Stretch = True
         Me.StatusBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.StatusBar.TabIndex = 42
@@ -345,7 +346,7 @@ Partial Class FrmTourNote
         Me.PanelSOC.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelSOC.Location = New System.Drawing.Point(0, 0)
         Me.PanelSOC.Name = "PanelSOC"
-        Me.PanelSOC.Size = New System.Drawing.Size(888, 44)
+        Me.PanelSOC.Size = New System.Drawing.Size(862, 44)
         Me.PanelSOC.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSOC.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelSOC.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -367,7 +368,7 @@ Partial Class FrmTourNote
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(404, 733)
+        Me.PanelEx2.Size = New System.Drawing.Size(430, 733)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -386,9 +387,9 @@ Partial Class FrmTourNote
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTourNote)
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTR47)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel3.Location = New System.Drawing.Point(12, 466)
+        Me.GroupPanel3.Location = New System.Drawing.Point(8, 466)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(379, 103)
+        Me.GroupPanel3.Size = New System.Drawing.Size(412, 103)
         '
         '
         '
@@ -427,11 +428,11 @@ Partial Class FrmTourNote
         '
         Me.CircularProgress2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress2.FocusCuesEnabled = False
-        Me.CircularProgress2.Location = New System.Drawing.Point(3, 6)
+        Me.CircularProgress2.Location = New System.Drawing.Point(3, 4)
         Me.CircularProgress2.Name = "CircularProgress2"
         Me.CircularProgress2.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress2.ProgressTextVisible = True
-        Me.CircularProgress2.Size = New System.Drawing.Size(367, 70)
+        Me.CircularProgress2.Size = New System.Drawing.Size(400, 70)
         Me.CircularProgress2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress2.TabIndex = 48
         Me.CircularProgress2.TabStop = False
@@ -440,9 +441,9 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateBlankTR56A.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateBlankTR56A.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateBlankTR56A.Location = New System.Drawing.Point(263, 13)
+        Me.btnGenerateBlankTR56A.Location = New System.Drawing.Point(281, 13)
         Me.btnGenerateBlankTR56A.Name = "btnGenerateBlankTR56A"
-        Me.btnGenerateBlankTR56A.Size = New System.Drawing.Size(107, 55)
+        Me.btnGenerateBlankTR56A.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateBlankTR56A.TabIndex = 15
         Me.btnGenerateBlankTR56A.Text = "Blank TR 56A"
         '
@@ -450,9 +451,9 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateBlankTourNote.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateBlankTourNote.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateBlankTourNote.Location = New System.Drawing.Point(3, 13)
+        Me.btnGenerateBlankTourNote.Location = New System.Drawing.Point(5, 13)
         Me.btnGenerateBlankTourNote.Name = "btnGenerateBlankTourNote"
-        Me.btnGenerateBlankTourNote.Size = New System.Drawing.Size(107, 55)
+        Me.btnGenerateBlankTourNote.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateBlankTourNote.TabIndex = 13
         Me.btnGenerateBlankTourNote.Text = "Blank Tour Note"
         '
@@ -460,18 +461,18 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateBlankTR47.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateBlankTR47.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateBlankTR47.Location = New System.Drawing.Point(133, 13)
+        Me.btnGenerateBlankTR47.Location = New System.Drawing.Point(143, 13)
         Me.btnGenerateBlankTR47.Name = "btnGenerateBlankTR47"
-        Me.btnGenerateBlankTR47.Size = New System.Drawing.Size(107, 55)
-        Me.btnGenerateBlankTR47.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnBlankTR47Outer})
+        Me.btnGenerateBlankTR47.Size = New System.Drawing.Size(122, 55)
+        Me.btnGenerateBlankTR47.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnGenerateBlankTR47Outer})
         Me.btnGenerateBlankTR47.TabIndex = 14
         Me.btnGenerateBlankTR47.Text = "Blank TR 47"
         '
-        'btnBlankTR47Outer
+        'btnGenerateBlankTR47Outer
         '
-        Me.btnBlankTR47Outer.GlobalItem = False
-        Me.btnBlankTR47Outer.Name = "btnBlankTR47Outer"
-        Me.btnBlankTR47Outer.Text = "Blank TR 47 Outer"
+        Me.btnGenerateBlankTR47Outer.GlobalItem = False
+        Me.btnGenerateBlankTR47Outer.Name = "btnGenerateBlankTR47Outer"
+        Me.btnGenerateBlankTR47Outer.Text = "Blank TR 47 Outer"
         '
         'GroupPanel2
         '
@@ -481,12 +482,12 @@ Partial Class FrmTourNote
         Me.GroupPanel2.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel2.Controls.Add(Me.PanelEx4)
         Me.GroupPanel2.Controls.Add(Me.btnOpenTABillFolder)
-        Me.GroupPanel2.Controls.Add(Me.btnShowTourNote)
-        Me.GroupPanel2.Controls.Add(Me.btnTABill)
+        Me.GroupPanel2.Controls.Add(Me.btnGenerateTourNote)
+        Me.GroupPanel2.Controls.Add(Me.btnGenerateTABill)
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel2.Location = New System.Drawing.Point(12, 261)
+        Me.GroupPanel2.Location = New System.Drawing.Point(8, 261)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(379, 190)
+        Me.GroupPanel2.Size = New System.Drawing.Size(412, 190)
         '
         '
         '
@@ -529,7 +530,7 @@ Partial Class FrmTourNote
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(367, 64)
+        Me.CircularProgress1.Size = New System.Drawing.Size(400, 64)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 47
         Me.CircularProgress1.TabStop = False
@@ -543,9 +544,9 @@ Partial Class FrmTourNote
         Me.PanelEx4.Controls.Add(Me.chkThreeRows)
         Me.PanelEx4.Controls.Add(Me.chkSingleRow)
         Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx4.Location = New System.Drawing.Point(3, 3)
+        Me.PanelEx4.Location = New System.Drawing.Point(5, 3)
         Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(367, 93)
+        Me.PanelEx4.Size = New System.Drawing.Size(398, 93)
         Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -619,41 +620,41 @@ Partial Class FrmTourNote
         '
         Me.btnOpenTABillFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenTABillFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenTABillFolder.Location = New System.Drawing.Point(263, 102)
+        Me.btnOpenTABillFolder.Location = New System.Drawing.Point(281, 102)
         Me.btnOpenTABillFolder.Name = "btnOpenTABillFolder"
-        Me.btnOpenTABillFolder.Size = New System.Drawing.Size(107, 55)
+        Me.btnOpenTABillFolder.Size = New System.Drawing.Size(122, 55)
         Me.btnOpenTABillFolder.TabIndex = 46
         Me.btnOpenTABillFolder.Text = "Open TA Folder"
         '
-        'btnShowTourNote
+        'btnGenerateTourNote
         '
-        Me.btnShowTourNote.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnShowTourNote.BackColor = System.Drawing.Color.Transparent
-        Me.btnShowTourNote.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnShowTourNote.Location = New System.Drawing.Point(3, 102)
-        Me.btnShowTourNote.Name = "btnShowTourNote"
-        Me.btnShowTourNote.Size = New System.Drawing.Size(107, 55)
-        Me.btnShowTourNote.TabIndex = 10
-        Me.btnShowTourNote.Text = " Show Tour Note"
-        Me.btnShowTourNote.TextColor = System.Drawing.Color.Red
+        Me.btnGenerateTourNote.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateTourNote.BackColor = System.Drawing.Color.Transparent
+        Me.btnGenerateTourNote.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateTourNote.Location = New System.Drawing.Point(5, 102)
+        Me.btnGenerateTourNote.Name = "btnGenerateTourNote"
+        Me.btnGenerateTourNote.Size = New System.Drawing.Size(122, 55)
+        Me.btnGenerateTourNote.TabIndex = 10
+        Me.btnGenerateTourNote.Text = "Generate Tour Note"
+        Me.btnGenerateTourNote.TextColor = System.Drawing.Color.Red
         '
-        'btnTABill
+        'btnGenerateTABill
         '
-        Me.btnTABill.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnTABill.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnTABill.Location = New System.Drawing.Point(133, 102)
-        Me.btnTABill.Name = "btnTABill"
-        Me.btnTABill.Size = New System.Drawing.Size(107, 55)
-        Me.btnTABill.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnShowTABillOuter})
-        Me.btnTABill.TabIndex = 45
-        Me.btnTABill.Text = " Show TA Bill"
-        Me.btnTABill.TextColor = System.Drawing.Color.Red
+        Me.btnGenerateTABill.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateTABill.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateTABill.Location = New System.Drawing.Point(143, 102)
+        Me.btnGenerateTABill.Name = "btnGenerateTABill"
+        Me.btnGenerateTABill.Size = New System.Drawing.Size(122, 55)
+        Me.btnGenerateTABill.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnGenerateTABillOuter})
+        Me.btnGenerateTABill.TabIndex = 45
+        Me.btnGenerateTABill.Text = "Generate TA Bill"
+        Me.btnGenerateTABill.TextColor = System.Drawing.Color.Red
         '
-        'btnShowTABillOuter
+        'btnGenerateTABillOuter
         '
-        Me.btnShowTABillOuter.GlobalItem = False
-        Me.btnShowTABillOuter.Name = "btnShowTABillOuter"
-        Me.btnShowTABillOuter.Text = "Show TA Bill Outer"
+        Me.btnGenerateTABillOuter.GlobalItem = False
+        Me.btnGenerateTABillOuter.Name = "btnGenerateTABillOuter"
+        Me.btnGenerateTABillOuter.Text = "Generate TA Bill Outer"
         '
         'GroupPanel1
         '
@@ -667,9 +668,9 @@ Partial Class FrmTourNote
         Me.GroupPanel1.Controls.Add(Me.cmbMonth)
         Me.GroupPanel1.Controls.Add(Me.LabelX1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel1.Location = New System.Drawing.Point(12, 140)
+        Me.GroupPanel1.Location = New System.Drawing.Point(8, 140)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(379, 106)
+        Me.GroupPanel1.Size = New System.Drawing.Size(412, 106)
         '
         '
         '
@@ -742,7 +743,7 @@ Partial Class FrmTourNote
         Me.cmbSOCOfficer.MaxDropDownItems = 15
         Me.cmbSOCOfficer.MaxLength = 255
         Me.cmbSOCOfficer.Name = "cmbSOCOfficer"
-        Me.cmbSOCOfficer.Size = New System.Drawing.Size(307, 29)
+        Me.cmbSOCOfficer.Size = New System.Drawing.Size(351, 29)
         Me.cmbSOCOfficer.TabIndex = 7
         Me.cmbSOCOfficer.WatermarkText = "Select Officer Name"
         '
@@ -757,7 +758,7 @@ Partial Class FrmTourNote
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(282, 9)
+        Me.txtYear.Location = New System.Drawing.Point(326, 9)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 2000
         Me.txtYear.Name = "txtYear"
@@ -809,9 +810,9 @@ Partial Class FrmTourNote
         Me.GroupPanel5.Controls.Add(Me.chkUsePO)
         Me.GroupPanel5.Controls.Add(Me.txtStartingLocation)
         Me.GroupPanel5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel5.Location = New System.Drawing.Point(12, 7)
+        Me.GroupPanel5.Location = New System.Drawing.Point(8, 7)
         Me.GroupPanel5.Name = "GroupPanel5"
-        Me.GroupPanel5.Size = New System.Drawing.Size(379, 118)
+        Me.GroupPanel5.Size = New System.Drawing.Size(412, 118)
         '
         '
         '
@@ -916,7 +917,7 @@ Partial Class FrmTourNote
         Me.txtStartingLocation.Location = New System.Drawing.Point(52, 5)
         Me.txtStartingLocation.MaxLength = 45
         Me.txtStartingLocation.Name = "txtStartingLocation"
-        Me.txtStartingLocation.Size = New System.Drawing.Size(307, 29)
+        Me.txtStartingLocation.Size = New System.Drawing.Size(351, 29)
         Me.txtStartingLocation.TabIndex = 1
         Me.txtStartingLocation.WatermarkText = "From"
         '
@@ -927,9 +928,9 @@ Partial Class FrmTourNote
         Me.PanelEx5.Controls.Add(Me.lblSavedTABill)
         Me.PanelEx5.Controls.Add(Me.lblSavedTourNote)
         Me.PanelEx5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx5.Location = New System.Drawing.Point(12, 584)
+        Me.PanelEx5.Location = New System.Drawing.Point(8, 584)
         Me.PanelEx5.Name = "PanelEx5"
-        Me.PanelEx5.Size = New System.Drawing.Size(379, 80)
+        Me.PanelEx5.Size = New System.Drawing.Size(412, 80)
         Me.PanelEx5.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -1049,7 +1050,7 @@ Partial Class FrmTourNote
     End Sub
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents btnShowTourNote As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateTourNote As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents txtYear As DevComponents.Editors.IntegerInput
@@ -1080,25 +1081,18 @@ Partial Class FrmTourNote
     Friend WithEvents lblOfficerName As DevComponents.DotNetBar.LabelItem
     Friend WithEvents lblPEN As DevComponents.DotNetBar.LabelItem
     Friend WithEvents lblBasicPay As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents btnTABill As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnGenerateTABill As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnOpenTABillFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnGenerateBlankTR56A As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnGenerateBlankTR47 As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PanelEx4 As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents SOCNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SelectRow As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents DateOfInspectionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PoliceStationDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CrimeNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PlaceOfOccurrenceDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents InvestigatingOfficer As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents chkUseSavedTourNote As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents lblSavedTourNote As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblSavedTABill As DevComponents.DotNetBar.LabelX
     Friend WithEvents PanelEx5 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lblDA As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents btnShowTABillOuter As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnGenerateTABillOuter As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents GroupPanel3 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
@@ -1112,5 +1106,12 @@ Partial Class FrmTourNote
     Friend WithEvents bgwTR56ThreeLine As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwTR47 As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwTR47ThreeLine As System.ComponentModel.BackgroundWorker
-    Friend WithEvents btnBlankTR47Outer As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnGenerateBlankTR47Outer As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents SOCNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SelectRow As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents DateOfInspectionDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PoliceStationDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CrimeNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PlaceOfOccurrenceDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents InvestigatingOfficer As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

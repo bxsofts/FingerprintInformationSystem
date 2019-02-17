@@ -424,7 +424,7 @@ Public Class FrmTourNote
 
 #Region "GENERATE TOUR NOTE"
 
-    Private Sub ShowTourNote() Handles btnShowTourNote.Click
+    Private Sub ShowTourNote() Handles btnGenerateTourNote.Click
         Try
 
         Catch ex As Exception
@@ -955,7 +955,7 @@ errhandler:
 
 
 #Region "GENERATE NON GAZATTED TA BILL"
-    Private Sub ShowTABill() Handles btnTABill.Click
+    Private Sub ShowTABill() Handles btnGenerateTABill.Click
         Try
 
             If Me.cmbSOCOfficer.SelectedIndex < 0 Then
@@ -3112,7 +3112,7 @@ errhandler:
 
     End Sub
 
-    Private Sub btnShowTABillOuter_Click(sender As Object, e As EventArgs) Handles btnShowTABillOuter.Click
+    Private Sub btnShowTABillOuter_Click(sender As Object, e As EventArgs) Handles btnGenerateTABillOuter.Click
         If SelectedOfficerName.Contains(", TI") Then
             GenerateTR47Outer(SelectedOfficerName.Replace(", TI", ""), "Tester Inspector")
         Else
@@ -3121,7 +3121,7 @@ errhandler:
         End If
     End Sub
 
-    Private Sub GenerateBlankTR47Outer() Handles btnBlankTR47Outer.Click
+    Private Sub GenerateBlankTR47Outer() Handles btnGenerateBlankTR47Outer.Click
         Try
 
             Dim TemplateFile As String = strAppUserPath & "\WordTemplates\TR47OuterBlank.docx"
@@ -3205,21 +3205,33 @@ errhandler:
     Private Sub DisplayFileStatus()
         On Error Resume Next
         If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
+            Me.btnGenerateTourNote.Text = "Show Tour Note"
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved Tour Note - Exists"
             Me.chkSingleRow.Checked = True
         ElseIf My.Computer.FileSystem.FileExists(TAFileName("Tour Note - T")) Then
+            Me.btnGenerateTourNote.Text = "Show Tour Note"
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved Tour Note - Exists"
             Me.chkThreeRows.Checked = True
         Else
+            Me.btnGenerateTourNote.Text = "Generate Tour Note"
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved Tour Note - Nil"
             ' Me.chkSingleRow.Checked = True
         End If
 
         If My.Computer.FileSystem.FileExists(TAFileName("TA Bill")) Then
+            Me.btnGenerateTABill.Text = "Show TA Bill"
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved TA Bill - Exists"
         Else
+            Me.btnGenerateTABill.Text = "Generate TA Bill"
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved TA Bill - Nil"
         End If
+
+        If My.Computer.FileSystem.FileExists(TAFileName("TA Bill Outer")) Then
+            Me.btnGenerateTABillOuter.Text = "Show TA Bill Outer"
+        Else
+            Me.btnGenerateTABillOuter.Text = "Generate TA Bill Outer"
+        End If
+
     End Sub
 
 
