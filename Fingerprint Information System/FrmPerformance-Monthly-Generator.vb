@@ -12,6 +12,8 @@ Public Class frmMonthlyPerformance
     Private Sub LoadForm() Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
+        Me.lblCurrentMonth.Text = ""
+        Me.lblPreviousMonth.Text = ""
         ShowPleaseWaitForm()
         Me.DataGridViewX1.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.CircularProgress1.ProgressColor = GetProgressColor()
@@ -170,7 +172,17 @@ Public Class frmMonthlyPerformance
 
 #Region "GENERATE REPORT"
 
-    Private Sub GeneratePerformanceStatement() Handles btnGeneratePerformanceStatement.Click
+    Private Sub btnGeneratePerformanceStatement_Click(sender As Object, e As EventArgs) Handles btnGeneratePerformanceStatement.Click
+        ShowPleaseWaitForm()
+        lblCurrentMonth.Text = ""
+        lblPreviousMonth.Text = ""
+        Application.DoEvents()
+        GeneratePerformanceStatement()
+        ClosePleaseWaitForm()
+        frmMainInterface.ShowDesktopAlert("Performance Statement Generated.")
+    End Sub
+
+    Private Sub GeneratePerformanceStatement()
 
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
@@ -194,6 +206,8 @@ Public Class frmMonthlyPerformance
 
         If My.Computer.FileSystem.FileExists(PerfFileName) Then
             LoadPerformanceFromSavedFile(PerfFileName, 0) 'generate from saved file
+            Me.lblCurrentMonth.Text = ""
+            Me.lblPreviousMonth.Text = "Statement generated from Saved File"
         Else
             GeneratePreviousMonthFromDBorFile()
 
@@ -212,6 +226,7 @@ Public Class frmMonthlyPerformance
 
             Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m1, True) & " " & y1
             GenerateMonthValuesFromDB(d1, d2, 3) 'generate month 1 from db
+            Me.lblCurrentMonth.Text = Me.DataGridViewX1.Columns(3).HeaderText & " - Generated from Database"
         End If
 
         InsertBlankValues()
@@ -274,14 +289,15 @@ Public Class frmMonthlyPerformance
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
             LoadPerformanceFromSavedFile(SavedFileName, 2) 'generate previous month from file
+            Me.lblPreviousMonth.Text = Me.DataGridViewX1.Columns(2).HeaderText & " - Generated from Saved File of Previous Month"
         Else
             Dim d = Date.DaysInMonth(y, m)
             Dim d1 As Date = New Date(y, m, 1)
             Dim d2 As Date = New Date(y, m, d)
 
             Me.DataGridViewX1.Columns(2).HeaderText = MonthName(m, True) & " " & y
-
             GenerateMonthValuesFromDB(d1, d2, 2) 'generate previous month from db
+            Me.lblPreviousMonth.Text = Me.DataGridViewX1.Columns(2).HeaderText & " - Generated from Database"
         End If
     End Sub
 
@@ -329,7 +345,9 @@ Public Class frmMonthlyPerformance
 
     Private Sub GenerateForPeriod(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateSelectedPeriodValues.Click
         On Error Resume Next
-
+        Me.lblPreviousMonth.Text = ""
+        Me.lblCurrentMonth.Text = ""
+        Application.DoEvents()
         Dim d1 As Date = Me.dtFrom.Value
         Dim d2 As Date = Me.dtTo.Value
 
@@ -339,6 +357,7 @@ Public Class frmMonthlyPerformance
             Exit Sub
         End If
 
+        ShowPleaseWaitForm()
         Me.Cursor = Cursors.WaitCursor
         ClearAllFields()
         Me.lblHeader.Text = UCase("statement of performance for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text)
@@ -348,6 +367,8 @@ Public Class frmMonthlyPerformance
         GenerateMonthValuesFromDB(d1, d2, 3)
         IsMonthStatement = False
         Me.Cursor = Cursors.Default
+        ClosePleaseWaitForm()
+        frmMainInterface.ShowDesktopAlert("Performance Statement Generated")
     End Sub
 
 #End Region
@@ -357,6 +378,8 @@ Public Class frmMonthlyPerformance
 
     Private Sub ClearAllFields() Handles btnClearAllFields.Click
         On Error Resume Next
+        lblCurrentMonth.Text = ""
+        lblPreviousMonth.Text = ""
         For i As Short = 0 To 19
             Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
@@ -674,5 +697,6 @@ Public Class frmMonthlyPerformance
         mwe.Handled = True
     End Sub
 
+  
   
 End Class

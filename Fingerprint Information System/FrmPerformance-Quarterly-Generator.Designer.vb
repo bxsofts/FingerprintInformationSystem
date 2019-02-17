@@ -45,6 +45,8 @@ Partial Class frmQuarterlyPerformance
         Me.DaRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
         Me.CdRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.lblMonth1 = New DevComponents.DotNetBar.LabelX()
+        Me.lblPreviousQuarter = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnClearAllFields = New DevComponents.DotNetBar.ButtonX()
@@ -64,6 +66,8 @@ Partial Class frmQuarterlyPerformance
         Me.PresentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bgwSaveStatement = New System.ComponentModel.BackgroundWorker()
+        Me.lblMonth3 = New DevComponents.DotNetBar.LabelX()
+        Me.lblMonth2 = New DevComponents.DotNetBar.LabelX()
         CType(Me.PerformanceBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,7 +109,7 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(3, 19)
+        Me.LabelX6.Location = New System.Drawing.Point(6, 19)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.Size = New System.Drawing.Size(46, 18)
         Me.LabelX6.TabIndex = 37
@@ -179,6 +183,10 @@ Partial Class frmQuarterlyPerformance
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx2.Controls.Add(Me.lblMonth3)
+        Me.PanelEx2.Controls.Add(Me.lblMonth2)
+        Me.PanelEx2.Controls.Add(Me.lblMonth1)
+        Me.PanelEx2.Controls.Add(Me.lblPreviousQuarter)
         Me.PanelEx2.Controls.Add(Me.GroupPanel2)
         Me.PanelEx2.Controls.Add(Me.GroupPanel1)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
@@ -194,6 +202,32 @@ Partial Class frmQuarterlyPerformance
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 4
+        '
+        'lblMonth1
+        '
+        Me.lblMonth1.AutoSize = True
+        '
+        '
+        '
+        Me.lblMonth1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblMonth1.Location = New System.Drawing.Point(16, 317)
+        Me.lblMonth1.Name = "lblMonth1"
+        Me.lblMonth1.Size = New System.Drawing.Size(51, 18)
+        Me.lblMonth1.TabIndex = 58
+        Me.lblMonth1.Text = "Month 1"
+        '
+        'lblPreviousQuarter
+        '
+        Me.lblPreviousQuarter.AutoSize = True
+        '
+        '
+        '
+        Me.lblPreviousQuarter.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPreviousQuarter.Location = New System.Drawing.Point(16, 285)
+        Me.lblPreviousQuarter.Name = "lblPreviousQuarter"
+        Me.lblPreviousQuarter.Size = New System.Drawing.Size(98, 18)
+        Me.lblPreviousQuarter.TabIndex = 59
+        Me.lblPreviousQuarter.Text = "Previous Quarter"
         '
         'GroupPanel2
         '
@@ -499,6 +533,32 @@ Partial Class frmQuarterlyPerformance
         Me.bgwSaveStatement.WorkerReportsProgress = True
         Me.bgwSaveStatement.WorkerSupportsCancellation = True
         '
+        'lblMonth3
+        '
+        Me.lblMonth3.AutoSize = True
+        '
+        '
+        '
+        Me.lblMonth3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblMonth3.Location = New System.Drawing.Point(16, 381)
+        Me.lblMonth3.Name = "lblMonth3"
+        Me.lblMonth3.Size = New System.Drawing.Size(51, 18)
+        Me.lblMonth3.TabIndex = 60
+        Me.lblMonth3.Text = "Month 3"
+        '
+        'lblMonth2
+        '
+        Me.lblMonth2.AutoSize = True
+        '
+        '
+        '
+        Me.lblMonth2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblMonth2.Location = New System.Drawing.Point(16, 349)
+        Me.lblMonth2.Name = "lblMonth2"
+        Me.lblMonth2.Size = New System.Drawing.Size(51, 18)
+        Me.lblMonth2.TabIndex = 61
+        Me.lblMonth2.Text = "Month 2"
+        '
         'frmQuarterlyPerformance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
@@ -520,6 +580,7 @@ Partial Class frmQuarterlyPerformance
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
+        Me.PanelEx2.PerformLayout()
         Me.GroupPanel2.ResumeLayout(False)
         Me.GroupPanel1.ResumeLayout(False)
         Me.GroupPanel1.PerformLayout()
@@ -559,4 +620,8 @@ Partial Class frmQuarterlyPerformance
     Friend WithEvents RemarksDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnGeneratePerformanceStatement As DevComponents.DotNetBar.ButtonX
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
+    Friend WithEvents lblMonth1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblPreviousQuarter As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblMonth3 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblMonth2 As DevComponents.DotNetBar.LabelX
 End Class

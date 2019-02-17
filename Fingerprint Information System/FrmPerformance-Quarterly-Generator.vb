@@ -16,6 +16,16 @@ Public Class frmQuarterlyPerformance
 
     Private Sub FormLoadEvents() Handles MyBase.Load
         On Error Resume Next
+        lblMonth1.Visible = False
+        lblMonth2.Visible = False
+        lblMonth3.Visible = False
+        lblPreviousQuarter.Visible = False
+
+        lblMonth1.Text = ""
+        lblMonth2.Text = ""
+        lblMonth3.Text = ""
+        lblPreviousQuarter.Text = ""
+
         ShowPleaseWaitForm()
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
@@ -36,6 +46,10 @@ Public Class frmQuarterlyPerformance
         Control.CheckForIllegalCrossThreadCalls = False
 
         GeneratePerformanceStatement()
+        lblMonth1.Visible = True
+        lblMonth2.Visible = True
+        lblMonth3.Visible = True
+        lblPreviousQuarter.Visible = True
        ClosePleaseWaitForm()
     End Sub
 
@@ -150,10 +164,30 @@ Public Class frmQuarterlyPerformance
 
 #Region "GENERATE REPORTS"
 
-    Private Sub GeneratePerformanceStatement() Handles btnGeneratePerformanceStatement.Click
+    Private Sub btnGeneratePerformanceStatement_Click(sender As Object, e As EventArgs) Handles btnGeneratePerformanceStatement.Click
+        lblMonth1.Visible = False
+        lblMonth2.Visible = False
+        lblMonth3.Visible = False
+        lblPreviousQuarter.Visible = False
+
+        lblMonth1.Text = ""
+        lblMonth2.Text = ""
+        lblMonth3.Text = ""
+        lblPreviousQuarter.Text = ""
+        Application.DoEvents()
+        ShowPleaseWaitForm()
+        GeneratePerformanceStatement()
+        lblMonth1.Visible = True
+        lblMonth2.Visible = True
+        lblMonth3.Visible = True
+        lblPreviousQuarter.Visible = True
+        ClosePleaseWaitForm()
+    End Sub
+
+    Private Sub GeneratePerformanceStatement() ' Handles btnGeneratePerformanceStatement.Click
+
         Me.Cursor = Cursors.WaitCursor
         Me.DataGridViewX1.Cursor = Cursors.WaitCursor
-
         PerfFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
         ClearAllFields()
         GenerateHeaderTexts()
@@ -161,6 +195,7 @@ Public Class frmQuarterlyPerformance
 
         If My.Computer.FileSystem.FileExists(PerfFileName) Then
             LoadPerformanceFromSavedFile(PerfFileName)
+            lblPreviousQuarter.Text = "Statement generated from Saved File"
         Else
             GeneratePreviousQuarterValuesFromDBorFile()
             GenerateSelectedQuarterValuesFromDBorFile()
@@ -169,6 +204,7 @@ Public Class frmQuarterlyPerformance
         InsertBlankValues()
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub LoadPerformanceFromSavedFile(SavedFileName)
@@ -217,8 +253,10 @@ Public Class frmQuarterlyPerformance
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
             GenerateMonthValuesFromFile(SavedFileName, 7, 2)
+            lblPreviousQuarter.Text = "Q" & q & " " & y & "  - Generated from Saved File"
         Else
             GeneratePreviousQuarterValuesFromDB()
+            lblPreviousQuarter.Text = "Q" & q & " " & y & " - Generated from Database"
         End If
 
     End Sub
@@ -290,20 +328,26 @@ Public Class frmQuarterlyPerformance
 
         If FileIO.FileSystem.FileExists(FileName1) Then
             GenerateMonthValuesFromFile(FileName1, 4, 3)
+            lblMonth1.Text = Me.DataGridViewX1.Columns(3).HeaderText & " - Generated from Saved File"
         Else
             GenerateMonthValuesFromDB(d1, d2, 3)
+            lblMonth1.Text = Me.DataGridViewX1.Columns(3).HeaderText & " - Generated from Database"
         End If
 
         If FileIO.FileSystem.FileExists(FileName2) Then
             GenerateMonthValuesFromFile(FileName2, 4, 4)
+            lblMonth2.Text = Me.DataGridViewX1.Columns(4).HeaderText & " - Generated from Saved File"
         Else
             GenerateMonthValuesFromDB(d3, d4, 4)
+            lblMonth2.Text = Me.DataGridViewX1.Columns(4).HeaderText & " - Generated from Database"
         End If
 
         If FileIO.FileSystem.FileExists(FileName3) Then
             GenerateMonthValuesFromFile(FileName3, 4, 5)
+            lblMonth3.Text = Me.DataGridViewX1.Columns(5).HeaderText & " - Generated from Saved File"
         Else
             GenerateMonthValuesFromDB(d5, d6, 5)
+            lblMonth3.Text = Me.DataGridViewX1.Columns(5).HeaderText & " - Generated from Database"
         End If
 
     End Sub
@@ -487,11 +531,14 @@ Public Class frmQuarterlyPerformance
 #End Region
 
 
-
 #Region "CLEAR FIELDS"
 
     Private Sub ClearAllFields() Handles btnClearAllFields.Click
         On Error Resume Next
+        lblMonth1.Text = ""
+        lblMonth2.Text = ""
+        lblMonth3.Text = ""
+        lblPreviousQuarter.Text = ""
         For i As Short = 0 To 19
             Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
@@ -827,4 +874,6 @@ Public Class frmQuarterlyPerformance
         Dim mwe As HandledMouseEventArgs = DirectCast(e, HandledMouseEventArgs)
         mwe.Handled = True
     End Sub
+
+  
 End Class
