@@ -318,6 +318,7 @@ Public Class frmMainInterface
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
 
             If CreateTable = 1 Then
+                CreateLastModificationTable()
                 CreateSOCReportRegisterTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
@@ -963,6 +964,10 @@ Public Class frmMainInterface
         If Me.IDRRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRRegisterTableAdapter.Connection.Close()
         Me.IDRRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.IDRRegisterTableAdapter.Connection.Open()
+
+        If Me.LastModificationTableAdapter.Connection.State = ConnectionState.Open Then Me.LastModificationTableAdapter.Connection.Close()
+        Me.LastModificationTableAdapter.Connection.ConnectionString = sConString
+        Me.LastModificationTableAdapter.Connection.Open()
     End Sub
 #End Region
 
@@ -6496,7 +6501,6 @@ errhandler:
                     UpdateOfficerList()
                     ShowDesktopAlert("Selected officer deleted")
                 End If
-                Exit Sub
             End If
 
             '###################   SOC ##############
@@ -6806,6 +6810,7 @@ errhandler:
                 End If
             End If
 
+            InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -6982,6 +6987,7 @@ errhandler:
                 End If
             End If
 
+            InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -7661,6 +7667,7 @@ errhandler:
             ConnectToDatabase()
             LoadOfficerToMemory()
 
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -8321,7 +8328,7 @@ errhandler:
             InitializeSOCFields()
             IncrementSOCNumber(OriginalSOCNumber)
 
-
+            InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -8542,6 +8549,7 @@ errhandler:
             Me.btnSaveSOC.Text = "Save"
             SOCEditMode = False
 
+            InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
 
         Catch ex As Exception
@@ -8741,6 +8749,7 @@ errhandler:
 
             Me.btnSaveSOC.Text = "Save"
             SOCEditMode = False
+            InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
 
         Catch ex As Exception
@@ -8775,7 +8784,7 @@ errhandler:
         End If
 
         Me.SOCRegisterTableAdapter.UpdatePhotoReceived(y, soc)
-
+        InsertOrUpdateLastModificationDate(Now)
         ShowDesktopAlert("Photo received status set to '" & y & "'")
     End Sub
 #End Region
@@ -9429,6 +9438,7 @@ errhandler:
     End Sub
 
     Private Sub bgwUpdateIDRNumber_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpdateIDRNumber.RunWorkerCompleted
+        InsertOrUpdateLastModificationDate(Now)
         System.Threading.Thread.Sleep(3000)
         LoadRecordsToAllTablesDependingOnCurrentYearSettings()
     End Sub
@@ -9777,7 +9787,7 @@ errhandler:
         InitializeRSOCFields()
         IncrementRSOCNumber(OriginalRSOCSerialNumber)
 
-
+            InsertOrUpdateLastModificationDate(Now)
         DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -9922,7 +9932,7 @@ errhandler:
 
         Me.btnSaveRSOC.Text = "Save"
         RSOCEditMode = False
-
+            InsertOrUpdateLastModificationDate(Now)
         DisplayDatabaseInformation()
        
 
@@ -9999,7 +10009,7 @@ errhandler:
 
         Me.btnSaveRSOC.Text = "Save"
         RSOCEditMode = False
-
+            InsertOrUpdateLastModificationDate(Now)
         DisplayDatabaseInformation()
          
 
@@ -10417,7 +10427,7 @@ errhandler:
 
         InitializeDAFields()
         IncrementDANumber(OriginalDANumber)
-
+            InsertOrUpdateLastModificationDate(Now)
 
         DisplayDatabaseInformation()
         Catch ex As Exception
@@ -10495,7 +10505,7 @@ errhandler:
         Me.btnSaveDA.Text = "Save"
         DAEditMode = False
         ClearDAImage()
-
+            InsertOrUpdateLastModificationDate(Now)
         DisplayDatabaseInformation()
         
         Catch ex As Exception
@@ -10584,7 +10594,7 @@ errhandler:
         DAEditMode = False
         ClearDAImage()
         DisplayDatabaseInformation()
-       
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -11367,7 +11377,7 @@ errhandler:
 
             InitializeIDFields()
             IncrementIDNumber(OriginalIDNumber)
-
+            InsertOrUpdateLastModificationDate(Now)
 
             DisplayDatabaseInformation()
 
@@ -11446,7 +11456,8 @@ errhandler:
         GenerateNewIDNumber()
         Me.btnSaveID.Text = "Save"
         IDEditMode = False
-        DisplayDatabaseInformation()
+            DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now)
         Exit Sub
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -11529,7 +11540,7 @@ errhandler:
         Me.btnSaveID.Text = "Save"
         IDEditMode = False
             DisplayDatabaseInformation()
-
+            InsertOrUpdateLastModificationDate(Now)
          Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -12185,6 +12196,7 @@ errhandler:
         InitializeACFields()
         IncrementACNumber(OriginalACNumber)
             DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now)
          Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -12260,7 +12272,7 @@ errhandler:
         ACEditMode = False
 
         DisplayDatabaseInformation()
-
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -12340,15 +12352,13 @@ errhandler:
         Me.btnSaveAC.Text = "Save"
         ACEditMode = False
         DisplayDatabaseInformation()
-        
+            InsertOrUpdateLastModificationDate(Now)
+
          Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Me.ACRegisterBindingSource.Position = Me.ACRegisterBindingSource.Find("ACNumber", OriginalACNumber)
         End Try
-
-
-
     End Sub
 #End Region
 
@@ -12929,7 +12939,8 @@ errhandler:
         InitializeCDFields()
         IncrementCDNumber(OriginalCDNumber)
 
-        DisplayDatabaseInformation()
+            DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now)
          Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13009,7 +13020,7 @@ errhandler:
             CDEditMode = False
 
             DisplayDatabaseInformation()
-
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13226,7 +13237,7 @@ errhandler:
         Me.btnSaveCD.Text = "Save"
         CDEditMode = False
             DisplayDatabaseInformation()
-
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13453,9 +13464,8 @@ errhandler:
 
         InitializeFPAFields()
         IncrementFPANumber(OriginalFPANumber)
-
-
-        DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now)
+            DisplayDatabaseInformation()
        Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13540,7 +13550,7 @@ errhandler:
         Me.btnSaveFPA.Text = "Save"
         FPAEditMode = False
         DisplayDatabaseInformation()
-       
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13601,7 +13611,8 @@ errhandler:
         FPAEditMode = False
 
         DisplayDatabaseInformation()
-        
+            InsertOrUpdateLastModificationDate(Now)
+
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13891,7 +13902,8 @@ errhandler:
 
 
         PSListChanged = True
-        DisplayDatabaseInformation()
+            DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now)
        Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13994,7 +14006,7 @@ errhandler:
         NewDataMode()
         PSListChanged = True
         DisplayDatabaseInformation()
-      
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -14038,7 +14050,7 @@ errhandler:
         NewDataMode()
         PSListChanged = True
         DisplayDatabaseInformation()
-
+            InsertOrUpdateLastModificationDate(Now)
        
          Catch ex As Exception
             ShowErrorMessage(ex)
@@ -14103,6 +14115,7 @@ errhandler:
 
             ShowDesktopAlert("Office Settings updated!")
             OfficeSettingsEditMode(False)
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -15980,6 +15993,7 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             'ShowErrorMessage(ex)
         End Try
@@ -15998,6 +16012,7 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -16016,9 +16031,31 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
-
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Public Sub CreateLastModificationTable()
+        Try
+            If DoesTableExist("LastModification", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE LastModification (ID integer primary key, LastModifiedDate Date)", con)
+
+            cmd.ExecuteNonQuery()
+            Application.DoEvents()
+
+            If DoesTableExist("LastModification", sConString) Then
+                InsertOrUpdateLastModificationDate(Now)
+            End If
+
+        Catch ex As Exception
+            'ShowErrorMessage(ex)
         End Try
     End Sub
 
@@ -16112,6 +16149,8 @@ errhandler:
         cmd1.ExecuteNonQuery()
 
         con.Close()
+
+        InsertOrUpdateLastModificationDate(Now)
         ' MsgBox(Err.Description)
     End Sub
 
@@ -16143,7 +16182,6 @@ errhandler:
         End Try
 
     End Function
-
 
 
     Public Function DoesFieldExist(ByVal tblName As String, _
@@ -16683,6 +16721,7 @@ errhandler:
             Next
 
             CreateSOCReportRegisterTable()
+            CreateLastModificationTable()
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
@@ -16747,7 +16786,7 @@ errhandler:
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
             OfficeSettingsEditMode(False)
-
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -17187,6 +17226,38 @@ errhandler:
 
 #End Region
 
+#Region "SYNC DATABASE"
+
+    Private Sub InsertOrUpdateLastModificationDate(NewDate As Date)
+        Try
+            Dim ID As Integer = 1
+            Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
+            If FingerPrintDataSet.LastModification.Count = 0 Then
+                Me.LastModificationTableAdapter.Insert(ID, NewDate)
+            Else
+                Me.LastModificationTableAdapter.UpdateQuery(ID, NewDate, ID)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Function GetLastModificationDate() As Date
+        Try
+            Dim ID As Integer = 1
+            Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
+            Dim lastdate As Date = Now
+            If FingerPrintDataSet.LastModification.Count = 1 Then
+                lastdate = FingerPrintDataSet.LastModification(0).LastModifiedDate
+            End If
+            Return lastdate
+        Catch ex As Exception
+            Return Now
+        End Try
+       
+    End Function
+
+#End Region
     '---------------------------------------------END APPLICATION-----------------------------------
 
 #Region "END APPLICATION"
@@ -17226,5 +17297,5 @@ errhandler:
     End Sub
 #End Region
 
- 
+
 End Class
