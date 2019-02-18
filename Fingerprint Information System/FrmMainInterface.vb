@@ -14434,7 +14434,7 @@ errhandler:
                 IDDetails = IIf(CPID = 1, "one chance print is identifed as the ..... finger impression of one ", ConvertNumberToWord(CPID).ToString.ToLower & " chance prints are identifed as the ..... finger impressions of one ") & Me.SOCDatagrid.SelectedCells(28).Value & ". He is previously involved in CR.No..... u/s.... of ....... P.S."
             End If
 
-            Dim IDOfficer As String = ". The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "."
+            Dim IDOfficer As String = vbTab & "The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "."
 
             Dim PO As String = "Residence of Sri. " & Trim(Me.SOCDatagrid.SelectedCells(15).Value.ToString)
 
@@ -14478,7 +14478,7 @@ errhandler:
 
             Dim IdentificationText As String = ""
 
-
+            Dim TextToBold As String = ""
             BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti
             IdentificationText = BodyText
 
@@ -14486,6 +14486,7 @@ errhandler:
 
             If CPD = 0 Then 'nil print
                 BodyText = BodyText & "." & vbNewLine & vbTab & "It is intimated that no useful chance prints were obtained from the scene of crime. Hence no further action is pending with this office in this regard. This is for information."
+                TextToBold = "no useful chance prints"
             End If
 
             '--------------------------ONE PRINT---------------------
@@ -14496,10 +14497,12 @@ errhandler:
 
                 If CPU = 1 Then
                     BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is unfit for comparison. Hence no further action is pending with this office in this regard. This is for information."
+                    TextToBold = "the chance print is unfit for comparison"
                 End If
 
                 If CPE = 1 Then
                     BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is eliminated as the finger impression of the inmate. Hence no further action is pending with this office in this regard. This is for information."
+                    TextToBold = "the chance print is eliminated"
                 End If
 
                 If CPR = 1 Then
@@ -14516,10 +14519,12 @@ errhandler:
 
             If CPD > 1 And CPU = CPD And CPR = 0 Then 'all unfit
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "It is intimated that all the chance prints are unfit for comparison. Hence no further action is pending with this office in this regard. This is for information."
+                TextToBold = "all the chance prints are unfit for comparison"
             End If
 
             If CPD > 1 And CPE = CPD And CPR = 0 Then 'all eliminated
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "It is intimated that all the chance prints are eliminated as the finger impressions of inmates. Hence no further action is pending with this office in this regard. This is for information."
+                TextToBold = "all the chance prints are eliminated"
             End If
 
             If CPD > 1 And CPU <> CPD And CPE <> CPD And CPR = 0 Then 'all eliminated or unfit
@@ -14529,7 +14534,7 @@ errhandler:
 
             If CPD > 1 And CPR = CPD Then 'all remain
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
-                IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with Bureau records, " & IDDetails & IDOfficer
+                IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with Bureau records, " & IDDetails & vbNewLine & IDOfficer
 
                 If ReportNature = "Preliminary" Then
                     BodyText = BodyText & vbNewLine & vbTab & "The chance prints are under comparison and the result of comparison will be intimated at the earliest."
@@ -14540,7 +14545,7 @@ errhandler:
                 IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. The chance prints were photographed by " & Photographer
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
-                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & IIf(CPR = 1, ". On comparing the remaining chance print with Bureau records, ", ". On comparing the remaining chance prints with Bureau records, ") & IDDetails & IDOfficer
+                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & IIf(CPR = 1, ". On comparing the remaining chance print with Bureau records, ", ". On comparing the remaining chance prints with Bureau records, ") & IDDetails & vbNewLine & IDOfficer
             End If
 
             If CPD > 0 And CPR <> CPD And CPR <> 0 And CPU <> 0 And CPE = 0 Then 'some remains
@@ -14549,7 +14554,7 @@ errhandler:
 
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
-                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ") & IDDetails & IDOfficer
+                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ") & IDDetails & vbNewLine & IDOfficer
             End If
 
 
@@ -14559,7 +14564,7 @@ errhandler:
 
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
-                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ") & IDDetails & IDOfficer
+                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ") & IDDetails & vbNewLine & IDOfficer
             End If
 
             If CPD = 1 Then
@@ -14743,6 +14748,14 @@ errhandler:
             WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
             WordApp.Selection.ParagraphFormat.LineSpacing = 14
             WordApp.Selection.TypeText(BodyText.Replace("..", "."))
+
+            If TextToBold <> "" Then
+                Dim rng As Word.Range = aDoc.Range
+                Dim f As Boolean = rng.Find.Execute(TextToBold)
+                If f Then rng.Font.Bold = 1
+            End If
+           
+        
             If ReportNature.ToLower = "identification report - letter" Then
                 WordApp.Selection.TypeText(vbNewLine)
                 WordApp.Selection.TypeText(vbTab & "This is for information.")
@@ -14761,7 +14774,6 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
-
 
             ClosePleaseWaitForm()
 
