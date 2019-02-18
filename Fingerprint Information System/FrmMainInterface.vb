@@ -14795,7 +14795,7 @@ errhandler:
 
     Private Sub GenerateIdentificationCoB(ByVal message As String, ByVal Receiver As String)
         Try
-            ShowPleaseWaitForm()
+
             message = message.Replace("..", ".")
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
