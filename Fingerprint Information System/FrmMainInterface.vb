@@ -112,6 +112,7 @@ Public Class frmMainInterface
     Public uBytesUploaded As Long
 
     Dim blAutoBackupInProgress As Boolean = False
+    Dim blCheckAutoBackup As Boolean = False
 #End Region
 
 
@@ -438,7 +439,7 @@ Public Class frmMainInterface
 
         CheckForUpdatesAtStartup()
         UploadVersionInfoToDrive()
-
+        AlertLocalBackupCount()
         If DBExists = False Then
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
@@ -16488,15 +16489,16 @@ errhandler:
     Private Sub TakeAutoOnlineBackup()
 
         Try
+
             Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
             If backupperiod = 0 Then Exit Sub
 
             If InternetAvailable() = False Then
                 Exit Sub
             End If
-
+            blCheckAutoBackup = True
             bgwOnlineAutoBackup.RunWorkerAsync(backupperiod)
-         
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -16559,6 +16561,7 @@ errhandler:
                 bgwOnlineAutoBackup.ReportProgress(0, True)
                 blAutoBackupInProgress = True
             Else
+                blCheckAutoBackup = False
                 Exit Sub
             End If
 
@@ -16596,6 +16599,7 @@ errhandler:
 
         Catch ex As Exception
             blAutoBackupInProgress = False
+            blCheckAutoBackup = False
             ' ShowErrorMessage(ex)
         End Try
     End Sub
@@ -16630,6 +16634,7 @@ errhandler:
         pgrDownloadInstaller.Value = 0
         pgrDownloadInstaller.Text = ""
         blAutoBackupInProgress = False
+        blCheckAutoBackup = False
         If uUploadStatus = UploadStatus.Completed Then
             ShowDesktopAlert("Database backed up to Google Drive.")
         End If
@@ -16660,6 +16665,15 @@ errhandler:
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub AlertLocalBackupCount()
+        Dim BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
+        Dim x = My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
+        If x.Count > 10 Then
+            If MessageBoxEx.Show("There are more than 10 backup files in Local Backup Folder. Press 'OK' to open the Backup Folder and remove unwanted files.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.OK Then
+                Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
+            End If
+        End If
+    End Sub
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
@@ -17219,7 +17233,7 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        TakeAutoOnlineBackup()
+        If Not blCheckAutoBackup Then TakeAutoOnlineBackup()
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
         LocalAdmin = False
         SuperAdmin = False
