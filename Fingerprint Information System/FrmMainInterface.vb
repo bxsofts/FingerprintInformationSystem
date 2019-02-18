@@ -110,13 +110,15 @@ Public Class frmMainInterface
     Public uUploadStatus As UploadStatus
     Dim dFormatedFileSize As String = ""
     Public uBytesUploaded As Long
+
+    Dim blAutoBackupInProgress As Boolean = False
 #End Region
 
 
 #Region "FORM LOAD EVENTS"
 
     Private Sub LoadForm() Handles MyBase.Load
-       
+
         On Error Resume Next
         ChangeCursor(Cursors.WaitCursor)
 
@@ -389,7 +391,7 @@ Public Class frmMainInterface
 
         Me.txtHeadOfAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
 
-      
+
 
         Dim dm As String = Today.ToString("dd/MM/yyyy", culture)
         dm = Strings.Left(dm, 5)
@@ -16555,6 +16557,7 @@ errhandler:
 
             If Now.Date >= dt.Date Or blTakeBackup Then
                 bgwOnlineAutoBackup.ReportProgress(0, True)
+                blAutoBackupInProgress = True
             Else
                 Exit Sub
             End If
@@ -16592,6 +16595,7 @@ errhandler:
             UploadRequest.Upload()
 
         Catch ex As Exception
+            blAutoBackupInProgress = False
             ' ShowErrorMessage(ex)
         End Try
     End Sub
@@ -16625,7 +16629,7 @@ errhandler:
         pgrDownloadInstaller.Visible = False
         pgrDownloadInstaller.Value = 0
         pgrDownloadInstaller.Text = ""
-
+        blAutoBackupInProgress = False
         If uUploadStatus = UploadStatus.Completed Then
             ShowDesktopAlert("Database backed up to Google Drive.")
         End If
@@ -16667,6 +16671,7 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
+
         boolRestored = False
         FindLatestSOCNumberAndDI()
         frmOnlineBackup.ShowDialog()
@@ -17214,6 +17219,7 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
+        TakeAutoOnlineBackup()
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
         LocalAdmin = False
         SuperAdmin = False
@@ -17226,6 +17232,7 @@ errhandler:
 
 
 #End Region
+
 
 #Region "SYNC DATABASE"
 
@@ -17262,10 +17269,23 @@ errhandler:
     '---------------------------------------------END APPLICATION-----------------------------------
 
 #Region "END APPLICATION"
-    Private Sub EndApplication() Handles btnExit.Click, MyBase.FormClosed
+
+    Private Sub frmMainInterface_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        e.Cancel = True
+        EndApplication()
+        
+    End Sub
+
+    Private Sub EndApplication() Handles btnExit.Click ', MyBase.FormClosed
 
 
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
+
+        If blAutoBackupInProgress Then
+            If MessageBoxEx.Show("Auto Backup of Database is in progress. Do you want to close the application?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                Exit Sub
+            End If
+        End If
 
         On Error Resume Next
         SaveSOCDatagridColumnWidth()
