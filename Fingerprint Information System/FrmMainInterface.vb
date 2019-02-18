@@ -17257,6 +17257,17 @@ errhandler:
     End Sub
 
 
+    Private Sub btnPersonalOnlineFiles_Click(sender As Object, e As EventArgs) Handles btnPersonalOnlineFiles.Click
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        Me.Cursor = Cursors.Default
+        frmPersonalFileStorage.Show()
+    End Sub
 #End Region
 
 

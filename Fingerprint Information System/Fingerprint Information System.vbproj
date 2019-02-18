@@ -178,6 +178,12 @@
     <Compile Include="frmFISBackupList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPersonalFileStorage.Designer.vb">
+      <DependentUpon>frmPersonalFileStorage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPersonalFileStorage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmProgressBar.Designer.vb">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </Compile>
@@ -486,6 +492,9 @@
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
     <EmbeddedResource Include="frmFISBackupList.resx">
       <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPersonalFileStorage.resx">
+      <DependentUpon>frmPersonalFileStorage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProgressBar.resx">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
