@@ -46,7 +46,7 @@ Public Class frmOnlineBackup
 
     Dim MasterBackupFolderID As String = ""
     Dim CurrentFolderName As String = ""
-
+    Dim LastModifiedDate As String = ""
 #Region "FORM LOAD EVENTS"
 
     Private Sub CreateService() Handles MyBase.Load
@@ -90,7 +90,7 @@ Public Class frmOnlineBackup
             blUploadIsProgressing = False
             blDownloadIsProgressing = False
             blListIsLoading = False
-
+            LastModifiedDate = frmMainInterface.GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
             LoadFilesInUserBackupFolder(False)
 
         Catch ex As Exception
@@ -159,12 +159,14 @@ Public Class frmOnlineBackup
 
                     If u = 0 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add("") 'last modified date
                         item.SubItems.Add("") 'remarks
                     End If
 
-                    If u = 2 Then
+                    If u = 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add("Last SOC No: " & SplitText(1) & ", DI: " & SplitText(2)) 'remarks
+                        item.SubItems.Add(SplitText(1)) 'last modified date
+                        item.SubItems.Add("Last SOC No: " & SplitText(2) & ", DI: " & SplitText(3)) 'remarks
                     End If
                 End If
 
@@ -403,7 +405,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = FileOwner & "; " & LatestSOCNumber & "; " & LatestSOCDI
+            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -437,6 +439,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(FileOwner)
+                item.SubItems.Add(LastModifiedDate)
                 item.SubItems.Add("Last SOC No: " & LatestSOCNumber & ", DI: " & LatestSOCDI)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
@@ -1087,22 +1090,26 @@ Public Class frmOnlineBackup
                     If u = 0 Then
                         If sAdmin Then
                             item.SubItems.Add(Description)
+                            item.SubItems.Add("") 'last modified date
                             item.SubItems.Add("") 'remarks
                         Else
                             If IsDate(Description) Or Description = "" Then
                                 item.SubItems.Add(CurrentFolderName)
+                                item.SubItems.Add("") 'last modified date
                                 item.SubItems.Add("") 'remarks
                             Else
                                 item.SubItems.Add(SplitText(0)) 'uploaded by
+                                item.SubItems.Add("") 'last modified date
                                 item.SubItems.Add("") 'remarks
                             End If
                         End If
 
                     End If
 
-                    If u = 2 Then
+                    If u = 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add("Last SOC No: " & SplitText(1) & ", DI: " & SplitText(2)) 'remarks
+                        item.SubItems.Add(SplitText(1)) 'last modified date
+                        item.SubItems.Add("Last SOC No: " & SplitText(2) & ", DI: " & SplitText(3)) 'remarks
                     End If
 
                     bgwListAllFiles.ReportProgress(2, item)

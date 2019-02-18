@@ -16568,7 +16568,8 @@ errhandler:
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & LatestSOCNumber & "; " & LatestSOCDI
+            Dim dtlastbackup As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
+            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & dtlastbackup & "; " & LatestSOCNumber & "; " & LatestSOCDI
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -17242,7 +17243,7 @@ errhandler:
         End Try
     End Sub
 
-    Private Function GetLastModificationDate() As Date
+    Public Function GetLastModificationDate() As Date
         Try
             Dim ID As Integer = 1
             Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
@@ -17254,7 +17255,7 @@ errhandler:
         Catch ex As Exception
             Return Now
         End Try
-       
+
     End Function
 
 #End Region

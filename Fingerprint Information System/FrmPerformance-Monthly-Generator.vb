@@ -36,7 +36,8 @@ Public Class frmMonthlyPerformance
         Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
-       ClosePleaseWaitForm()
+        ClosePleaseWaitForm()
+        frmMainInterface.ShowDesktopAlert("Performance Statement generated.")
     End Sub
 
     Private Sub ConnectToDatabase()
@@ -179,7 +180,7 @@ Public Class frmMonthlyPerformance
         Application.DoEvents()
         GeneratePerformanceStatement()
         ClosePleaseWaitForm()
-        frmMainInterface.ShowDesktopAlert("Performance Statement Generated.")
+        frmMainInterface.ShowDesktopAlert("Performance Statement generated.")
     End Sub
 
     Private Sub GeneratePerformanceStatement()
@@ -368,7 +369,7 @@ Public Class frmMonthlyPerformance
         IsMonthStatement = False
         Me.Cursor = Cursors.Default
         ClosePleaseWaitForm()
-        frmMainInterface.ShowDesktopAlert("Performance Statement Generated")
+        frmMainInterface.ShowDesktopAlert("Performance Statement generated")
     End Sub
 
 #End Region
