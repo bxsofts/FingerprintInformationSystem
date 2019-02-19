@@ -46,7 +46,7 @@ Partial Class frmOnlineBackup
         Me.Remarks = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblSelectedFolder = New DevComponents.DotNetBar.LabelItem()
-        Me.lblCount = New DevComponents.DotNetBar.LabelItem()
+        Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.btnViewAllBackupFiles = New DevComponents.DotNetBar.ButtonX()
@@ -338,7 +338,7 @@ Partial Class frmOnlineBackup
         Me.Bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
-        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblSelectedFolder, Me.lblCount, Me.lblTotalFileSize})
+        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblSelectedFolder, Me.lblItemCount, Me.lblTotalFileSize})
         Me.Bar1.Location = New System.Drawing.Point(0, 516)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(1037, 23)
@@ -353,12 +353,12 @@ Partial Class frmOnlineBackup
         Me.lblSelectedFolder.Name = "lblSelectedFolder"
         Me.lblSelectedFolder.Width = 150
         '
-        'lblCount
+        'lblItemCount
         '
-        Me.lblCount.BeginGroup = True
-        Me.lblCount.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
-        Me.lblCount.Name = "lblCount"
-        Me.lblCount.Width = 160
+        Me.lblItemCount.BeginGroup = True
+        Me.lblItemCount.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
+        Me.lblItemCount.Name = "lblItemCount"
+        Me.lblItemCount.Width = 160
         '
         'lblTotalFileSize
         '
@@ -473,7 +473,7 @@ Partial Class frmOnlineBackup
     Friend WithEvents BackupTime As System.Windows.Forms.ColumnHeader
     Friend WithEvents FileID As System.Windows.Forms.ColumnHeader
     Friend WithEvents Bar1 As DevComponents.DotNetBar.Bar
-    Friend WithEvents lblCount As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents lblItemCount As DevComponents.DotNetBar.LabelItem
     Friend WithEvents bgwListUserFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents lblProgressStatus As DevComponents.DotNetBar.LabelX

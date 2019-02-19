@@ -15,10 +15,12 @@ Imports Google.Apis.Download
 Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 
+
 Public Class frmPersonalFileStorage
     Dim GDService As DriveService = New DriveService
     Dim CredentialFilePath As String
-    Public JsonFile As String
+    Dim JsonFile As String
+    Dim TokenFile As String = ""
 
     Dim CurrentFolderID As String = "root"
     Public dBytesDownloaded As Long
@@ -30,9 +32,7 @@ Public Class frmPersonalFileStorage
     Public dFileSize As Long
     Dim dFormatedFileSize As String = ""
     Public SaveFileName As String = ""
-    Dim ServiceCreated As Boolean = False
     Dim CurrentFolderName As String = ""
-
     Dim CurrentFolderPath As String = ""
     Dim ParentFolderPath As String = ""
 
@@ -59,8 +59,11 @@ Public Class frmPersonalFileStorage
 
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
+        Me.Text = "Personal File Storage"
+        Me.TitleText = "<b>Personal File Storage</b>"
         Me.CenterToScreen()
         Me.btnLogin.Image = My.Resources.Login
+        ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
         btnLogin.Text = "Login"
         Me.lblDriveSpaceUsed.Text = ""
         Me.lblItemCount.Text = ""
@@ -77,7 +80,6 @@ Public Class frmPersonalFileStorage
         End If
 
         Me.listViewEx1.Items.Clear()
-        ServiceCreated = False
         CurrentFolderName = ""
         blUploadIsProgressing = False
         blDownloadIsProgressing = False
@@ -93,22 +95,29 @@ Public Class frmPersonalFileStorage
             ShowFileTransferInProgressMessage()
             Exit Sub
         End If
-       
+
         Me.listViewEx1.Items.Clear()
+
         If Not FileIO.FileSystem.FileExists(JsonFile) Then 'if copy failed
             MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
-
-        Dim TokenFile As String = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user" ' token file is created after authentication
+        TokenFile = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user" ' token file is created after authentication
 
         If btnLogin.Text = "Logout" Then
-            My.Computer.FileSystem.DeleteFile(TokenFile)
+            Me.Cursor = Cursors.WaitCursor
+            ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
             GDService.Dispose()
-            ServiceCreated = False
             btnLogin.Image = My.Resources.Login
             btnLogin.Text = "Login"
+            Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -120,7 +129,6 @@ Public Class frmPersonalFileStorage
 
         Try
             bgwListFiles.RunWorkerAsync("root")
-            Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -130,26 +138,27 @@ Public Class frmPersonalFileStorage
         blListIsLoading = True
         Me.Cursor = Cursors.WaitCursor
         Try
-            If ServiceCreated = False Then
-                bgwListFiles.ReportProgress(1, "Waiting for User Authentication...")
-                Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
-                Dim Scopes As String() = {DriveService.Scope.Drive}
+            bgwListFiles.ReportProgress(1, "Waiting for User Authentication...")
+            Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
+            Dim Scopes As String() = {DriveService.Scope.Drive}
 
-                Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialFilePath, True)).Result
+            Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, "user", CancellationToken.None, New FileDataStore(CredentialFilePath, True)).Result
 
-                GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
-                ServiceCreated = True
-                bgwListFiles.ReportProgress(1, "Logout")
+          
+            GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
+
+            If Not My.Computer.FileSystem.FileExists(TokenFile) Then
+                Exit Sub
             End If
-
+            bgwListFiles.ReportProgress(1, "Logout")
             bgwListFiles.ReportProgress(1, "Fetching Files from Google Drive...")
+            SetFormTitle()
             ListFiles(e.Argument, False)
             GetDriveUsageDetails()
 
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             blListIsLoading = False
-            ServiceCreated = False
             bgwListFiles.ReportProgress(1, "Login")
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -160,12 +169,13 @@ Public Class frmPersonalFileStorage
         Try
             If TypeOf e.UserState Is ListViewItem Then
                 listViewEx1.Items.Add(e.UserState)
+                If Me.listViewEx1.Items.Count = 1 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
             End If
 
             If TypeOf e.UserState Is String Then
-                If e.UserState = "Creating Google Drive Service..." Then
+                If e.UserState = "Waiting for User Authentication..." Then
                     ShowProgressControls("", "Waiting for User Authentication...", eCircularProgressType.Donut)
-                ElseIf e.UserState = "Waiting for User Authentication..." Then
+                ElseIf e.UserState = "Fetching Files from Google Drive..." Then
                     ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
                 ElseIf e.UserState = "Logout" Then
                     btnLogin.Image = My.Resources.Logout
@@ -187,7 +197,6 @@ Public Class frmPersonalFileStorage
         blListIsLoading = False
         ShortenCurrentFolderPath()
         lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
-        If Me.listViewEx1.Items.Count > 0 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
     End Sub
 
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
@@ -201,7 +210,7 @@ Public Class frmPersonalFileStorage
             End If
 
 
-            List.PageSize = 100 ' maximum file list
+            List.PageSize = 1000 ' maximum file list
             List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime)"
             List.OrderBy = "folder, name" 'sorting order
 
@@ -215,7 +224,6 @@ Public Class frmPersonalFileStorage
                 item.SubItems.Add("")
                 item.SubItems.Add("")
                 item.SubItems.Add("root")
-                item.SubItems.Add("")
                 item.ImageIndex = ImageIndex.GoogleDrive 'google drive icon
                 bgwListFiles.ReportProgress(1, item)
             Else
@@ -223,7 +231,6 @@ Public Class frmPersonalFileStorage
                 item.SubItems.Add("")
                 item.SubItems.Add("")
                 item.SubItems.Add(FolderID)
-                item.SubItems.Add("")
 
                 If CurrentFolderName = "My Drive" Then
                     item.ImageIndex = ImageIndex.GoogleDrive
@@ -238,6 +245,7 @@ Public Class frmPersonalFileStorage
                 item = New ListViewItem(Result.Name)
                 Dim modifiedtime As DateTime = Result.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+
                 If Not Result.Size Is Nothing Then
                     item.SubItems.Add(CalculateFileSize(Result.Size))
                 Else
@@ -245,7 +253,6 @@ Public Class frmPersonalFileStorage
                 End If
 
                 item.SubItems.Add(Result.Id)
-                item.SubItems.Add("")
 
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.ImageIndex = ImageIndex.Folder
@@ -257,7 +264,6 @@ Public Class frmPersonalFileStorage
 
             Next
 
-            bgwListFiles.ReportProgress(3, FolderID)
             CurrentFolderID = FolderID
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -284,7 +290,7 @@ Public Class frmPersonalFileStorage
         End If
 
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 And Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "" Then
             If MessageBoxEx.Show("Do you want to download the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                 DownloadSelectedFile()
                 Exit Sub
@@ -292,6 +298,11 @@ Public Class frmPersonalFileStorage
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 And Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Then
+            MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
 
         Me.Cursor = Cursors.WaitCursor
@@ -334,13 +345,13 @@ Public Class frmPersonalFileStorage
             CircularProgress1.Show()
 
             Me.listViewEx1.Items.Clear()
+            Me.lblItemCount.Text = "Item Count:"
             bgwListFiles.RunWorkerAsync(id)
         Catch ex As Exception
             HideProgressControls()
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
-
 
     End Sub
 
@@ -349,6 +360,11 @@ Public Class frmPersonalFileStorage
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+        If btnLogin.Text = "Login" Then
+            MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -364,6 +380,7 @@ Public Class frmPersonalFileStorage
         ParentFolderPath = "\My Drive"
 
         Me.listViewEx1.Items.Clear()
+        Me.lblItemCount.Text = "Item Count:"
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         bgwListFiles.RunWorkerAsync("root")
     End Sub
@@ -442,18 +459,8 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-        If CurrentFolderPath = "\My Drive" And Not SuperAdmin Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'My Drive' folder.  Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If CurrentFolderPath = "\My Drive\FIS Backup" And Not SuperAdmin Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If btnLogin.Text = "Login" Then
+            MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -499,12 +506,12 @@ Public Class frmPersonalFileStorage
             NewDirectory.Parents = parentlist
             NewDirectory.Name = FolderName
             NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            NewDirectory.Description = FileOwner
+
 
             NewDirectory = GDService.Files.Create(NewDirectory).Execute
 
             Dim List As FilesResource.GetRequest = GDService.Files.Get(NewDirectory.Id)
-            List.Fields = "id, modifiedTime, description"
+            List.Fields = "id, modifiedTime"
             Dim Result = List.Execute
 
             Dim item As ListViewItem
@@ -514,7 +521,6 @@ Public Class frmPersonalFileStorage
             item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
             item.SubItems.Add("")
             item.SubItems.Add(Result.Id)
-            item.SubItems.Add(Result.Description)
 
             item.ImageIndex = ImageIndex.Folder
             Me.listViewEx1.Items.Add(item)
@@ -522,7 +528,7 @@ Public Class frmPersonalFileStorage
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
-
+            lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -538,23 +544,14 @@ Public Class frmPersonalFileStorage
 #Region "UPLOAD FILE"
 
     Private Sub btnUploadFile_Click(sender As Object, e As EventArgs) Handles btnUploadFile.Click
+
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
         End If
 
-        If CurrentFolderPath = "\My Drive" And Not SuperAdmin Then
-            MessageBoxEx.Show("Uploading of files is not allowed in 'My Drive' folder. Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If CurrentFolderPath = "\My Drive\FIS Backup" And Not SuperAdmin Then
-            MessageBoxEx.Show("Uploading of files is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
-        If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
-            MessageBoxEx.Show("Uploading of files is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If btnLogin.Text = "Login" Then
+            MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -607,8 +604,9 @@ Public Class frmPersonalFileStorage
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
-            body.MimeType = "files/" & My.Computer.FileSystem.GetFileInfo(e.Argument).Extension.Replace(".", "")
-            body.Description = FileOwner
+            Dim extension As String = My.Computer.FileSystem.GetFileInfo(e.Argument).Extension
+            body.MimeType = "files/" & extension.Replace(".", "")
+
 
             Dim parentlist As New List(Of String)
             parentlist.Add(CurrentFolderID)
@@ -622,7 +620,7 @@ Public Class frmPersonalFileStorage
 
             AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
 
-            UploadRequest.Fields = "id, name, mimeType, size, modifiedTime, description"
+            UploadRequest.Fields = "id, name, mimeType, size, modifiedTime"
             UploadRequest.Upload()
 
             If uUploadStatus = UploadStatus.Completed Then
@@ -632,8 +630,7 @@ Public Class frmPersonalFileStorage
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(file.Id)
-                item.SubItems.Add(file.Description)
-                item.ImageIndex = GetImageIndex(file.MimeType)
+                item.ImageIndex = GetImageIndex(extension)
                 bgwUploadFile.ReportProgress(100, item)
             End If
 
@@ -680,6 +677,7 @@ Public Class frmPersonalFileStorage
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -716,6 +714,11 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
+        If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Then
+            MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         Me.Cursor = Cursors.WaitCursor
 
         If InternetAvailable() = False Then
@@ -727,22 +730,8 @@ Public Class frmPersonalFileStorage
         ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
         Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
-        If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> (ShortOfficeName & "_" & ShortDistrictName) Then
-            Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
-            If My.Computer.FileSystem.DirectoryExists(f) = False Then
-                My.Computer.FileSystem.CreateDirectory(f)
-            End If
-            SaveFileName = f & "\" & fname
-        ElseIf fname.StartsWith("FingerPrintBackup-") And CurrentFolderName = (ShortOfficeName & "_" & ShortDistrictName) Then
-            Dim f As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
+        SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
 
-            If My.Computer.FileSystem.DirectoryExists(f) = False Then
-                My.Computer.FileSystem.CreateDirectory(f)
-            End If
-            SaveFileName = f & "\" & fname
-        Else
-            SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
-        End If
         bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems(0).SubItems(3).Text) ' fileid
     End Sub
 
@@ -836,7 +825,6 @@ Public Class frmPersonalFileStorage
         End If
 
         Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
-        Dim SelectedItemOwner As String = Me.listViewEx1.SelectedItems(0).SubItems(4).Text
         SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
 
         Dim blSelectedItemIsFolder As Boolean = False
@@ -847,16 +835,6 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-
-        If Not SuperAdmin Then
-            Dim msg1 As String = "file."
-            If blSelectedItemIsFolder Then msg1 = "folder."
-
-            If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
-                MessageBoxEx.Show("You are not authorized to delete the selected " & msg1, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-        End If
 
         Dim msg As String = ""
 
@@ -882,10 +860,9 @@ Public Class frmPersonalFileStorage
 
         Try
 
-            RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, False)
+            RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, True)
             Me.listViewEx1.Items(SelectedFileIndex).Remove()
             lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
-            GetDriveUsageDetails()
 
             If blSelectedItemIsFolder Then
                 msg = "Selected folder deleted from Google Drive."
@@ -932,7 +909,7 @@ Public Class frmPersonalFileStorage
 #End Region
 
 
-#Region "FILE SIZE"
+#Region "USER EMAIL AND FILE SIZE"
 
     Private Sub GetDriveUsageDetails()
         Try
@@ -942,6 +919,20 @@ Public Class frmPersonalFileStorage
             Me.lblDriveSpaceUsed.Text = "Drive Space used: " & CalculateFileSize(abt.StorageQuota.UsageInDrive) & "/" & CalculateFileSize(abt.StorageQuota.Limit)
         Catch ex As Exception
             Me.lblDriveSpaceUsed.Text = ""
+        End Try
+    End Sub
+
+    Private Sub SetFormTitle()
+        Try
+            Dim request = GDService.About.Get
+            request.Fields = "user"
+            Dim abt = request.Execute
+            Dim email = abt.User.EmailAddress
+            Me.Text = "Personal File Storage - " & email
+            Me.TitleText = "<b>Personal File Storage - " & email & "</b>"
+        Catch ex As Exception
+            Me.Text = "Personal File Storage"
+            Me.TitleText = "<b>Personal File Storage</b>"
         End Try
     End Sub
 
@@ -968,7 +959,6 @@ Public Class frmPersonalFileStorage
         End If
 
         Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
-        Dim SelectedItemOwner As String = Me.listViewEx1.SelectedItems(0).SubItems(4).Text
 
         Dim blSelectedItemIsFolder As Boolean = False
         If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blSelectedItemIsFolder = True
@@ -981,21 +971,13 @@ Public Class frmPersonalFileStorage
         Dim msg1 As String = "file"
         If blSelectedItemIsFolder Then msg1 = "folder"
 
-        If Not SuperAdmin Then
-            If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
-                MessageBoxEx.Show("You are not authorized to rename the selected " & msg1 & ".", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-        End If
-
-
 
         Dim oldfilename As String = Me.listViewEx1.SelectedItems(0).Text
         Dim extension As String = ""
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
             extension = My.Computer.FileSystem.GetFileInfo(oldfilename).Extension
-            oldfilename = oldfilename.Replace(extension, "")
+            If extension <> "" Then oldfilename = oldfilename.Replace(extension, "")
         End If
 
         frmInputBox.SetTitleandMessage("Enter New Name", "Enter New Name", False, oldfilename)
@@ -1038,19 +1020,17 @@ Public Class frmPersonalFileStorage
         Try
             Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
             request.Name = newfilename
-            request.Description = FileOwner
             SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
             Dim id As String = listViewEx1.SelectedItems(0).SubItems(3).Text
             GDService.Files.Update(request, id).Execute()
 
             Dim List As FilesResource.GetRequest = GDService.Files.Get(id)
-            List.Fields = "id, name, modifiedTime, description"
+            List.Fields = "id, name, modifiedTime"
             Dim Result = List.Execute
 
             Me.listViewEx1.Items(SelectedFileIndex).Text = Result.Name
             Dim modifiedtime As DateTime = Result.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
-            Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
 
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -1079,13 +1059,5 @@ Public Class frmPersonalFileStorage
         lblProgressStatus.Hide()
     End Sub
 
-    Private Sub RefreshFileList(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
-    End Sub
-    Private Sub DownloadSelectedFile(sender As Object, e As EventArgs) Handles btnDownloadFile.Click
-
-    End Sub
-    Private Sub CreateOAuthService(sender As Object, e As EventArgs) Handles btnLogin.Click
-
-    End Sub
 End Class

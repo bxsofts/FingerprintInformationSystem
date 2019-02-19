@@ -108,6 +108,8 @@ Public Class frmOnlineBackup
 
     Private Sub LoadFilesInUserBackupFolder(ShowNoFileFoundMessage As Boolean)
         Me.listViewEx1.Items.Clear()
+        Me.lblTotalFileSize.Text = ""
+        Me.lblItemCount.Text = ""
         listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
         listViewEx1.Sort()
 
@@ -135,7 +137,7 @@ Public Class frmOnlineBackup
             End If
 
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
-
+            List.PageSize = 1000
             List.Fields = "nextPageToken, files(id, name, modifiedTime, size, description)"
 
             Dim Results = List.Execute
@@ -212,7 +214,6 @@ Public Class frmOnlineBackup
         If e.Error IsNot Nothing Then
             MessageBoxEx.Show(e.Error.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-
         Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
     End Sub
 
@@ -922,16 +923,16 @@ Public Class frmOnlineBackup
 
     End Sub
 
-    Private Sub DisplayInformation() Handles listViewEx1.Click, listViewEx1.ItemSelectionChanged
+    Private Sub DisplayInformation()
         On Error Resume Next
         If Me.lblSelectedFolder.Text = "FIS Backup" Then
-            Me.lblCount.Text = "No. of Backup Folders: " & Me.listViewEx1.Items.Count
+            Me.lblItemCount.Text = "No. of Backup Folders: " & Me.listViewEx1.Items.Count
             Me.lblTotalFileSize.Text = ""
         Else
-            Me.lblCount.Text = "No. of Backup Files: " & Me.listViewEx1.Items.Count
+            Me.lblItemCount.Text = "No. of Backup Files: " & Me.listViewEx1.Items.Count
             Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
         End If
-       
+
     End Sub
 
 
@@ -978,6 +979,8 @@ Public Class frmOnlineBackup
 
     Private Sub LoadFilesInMasterBackupFolder()
         Me.listViewEx1.Items.Clear()
+        Me.lblTotalFileSize.Text = ""
+        Me.lblItemCount.Text = ""
         listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Ascending)
         listViewEx1.Sort()
         ShowProgressControls("", "", eCircularProgressType.Donut)
@@ -1057,7 +1060,7 @@ Public Class frmOnlineBackup
             End If
 
 
-            List.PageSize = 100 ' maximum file list
+            List.PageSize = 1000 ' maximum file list
             List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, description)"
             List.OrderBy = "folder, name" 'sorting order
 
@@ -1173,6 +1176,8 @@ Public Class frmOnlineBackup
             CircularProgress1.Show()
 
             Me.listViewEx1.Items.Clear()
+            Me.lblTotalFileSize.Text = ""
+            Me.lblItemCount.Text = ""
             bgwListAllFiles.RunWorkerAsync(CurrentFolderID)
         Catch ex As Exception
             HideProgressControls()

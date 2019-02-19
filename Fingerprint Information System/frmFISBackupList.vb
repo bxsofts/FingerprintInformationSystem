@@ -79,8 +79,8 @@ Public Class frmFISBackupList
         SetTitleAndSize()
         Me.CenterToScreen()
 
-        Me.lblDriveSpaceUsed.Text = ""
-        Me.lblItemCount.Text = ""
+        Me.lblDriveSpaceUsed.Text = "Drive Space used: "
+        Me.lblItemCount.Text = "Item Count: "
 
         CurrentFolderPath = "\My Drive"
         ParentFolderPath = "\My Drive"
@@ -101,6 +101,7 @@ Public Class frmFISBackupList
         End If
 
         Me.listViewEx1.Items.Clear()
+        Me.lblItemCount.Text = "Item Count: "
         ServiceCreated = False
         CurrentFolderName = ""
 
@@ -139,13 +140,12 @@ Public Class frmFISBackupList
             ShowErrorMessage(ex)
         End Try
     End Sub
-
     Private Sub bgwListFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwListFiles.ProgressChanged
         Try
             If TypeOf e.UserState Is ListViewItem Then
                 listViewEx1.Items.Add(e.UserState)
+                If Me.listViewEx1.Items.Count = 1 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
             End If
-
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -157,7 +157,6 @@ Public Class frmFISBackupList
         HideProgressControls()
         blListIsLoading = False
         lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
-        If Me.listViewEx1.Items.Count > 0 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
         ShortenCurrentFolderPath()
     End Sub
 
@@ -172,7 +171,7 @@ Public Class frmFISBackupList
             End If
 
 
-            List.PageSize = 100 ' maximum file list
+            List.PageSize = 1000 ' maximum file list
             List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, description)"
             List.OrderBy = "folder, name" 'sorting order
 
@@ -180,7 +179,7 @@ Public Class frmFISBackupList
 
 
             Dim item As ListViewItem
-           
+
             If FolderID = "root" Then
                 item = New ListViewItem("\My Drive")
                 item.SubItems.Add("")
@@ -221,7 +220,11 @@ Public Class frmFISBackupList
                 End If
 
                 If item.ImageIndex > 2 Then
-                    item.SubItems.Add(CalculateFileSize(Result.Size))
+                    If Not Result.Size Is Nothing Then
+                        item.SubItems.Add(CalculateFileSize(Result.Size))
+                    Else
+                        item.SubItems.Add("")
+                    End If
                 End If
 
                 item.SubItems.Add(Result.Id)
@@ -243,7 +246,7 @@ Public Class frmFISBackupList
                         End If
                     End If
                 End If
-               
+
 
                 Select Case FileOwner
                     Case "Admin"
@@ -266,7 +269,7 @@ Public Class frmFISBackupList
 
             Next
 
-            bgwListFiles.ReportProgress(3, FolderID)
+            ' bgwListFiles.ReportProgress(3, FolderID)
             CurrentFolderID = FolderID
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -343,6 +346,7 @@ Public Class frmFISBackupList
             CircularProgress1.Show()
 
             Me.listViewEx1.Items.Clear()
+            Me.lblItemCount.Text = "Item Count: "
             bgwListFiles.RunWorkerAsync(id)
         Catch ex As Exception
             HideProgressControls()
@@ -373,6 +377,7 @@ Public Class frmFISBackupList
         ParentFolderPath = "\My Drive"
 
         Me.listViewEx1.Items.Clear()
+        Me.lblItemCount.Text = "Item Count: "
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         bgwListFiles.RunWorkerAsync("root")
     End Sub
@@ -531,7 +536,7 @@ Public Class frmFISBackupList
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
-
+            lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -616,7 +621,8 @@ Public Class frmFISBackupList
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
-            body.MimeType = "files/" & My.Computer.FileSystem.GetFileInfo(e.Argument).Extension.Replace(".", "")
+            Dim extension As String = My.Computer.FileSystem.GetFileInfo(e.Argument).Extension
+            body.MimeType = "files/" & extension.Replace(".", "")
             body.Description = FileOwner
 
             Dim parentlist As New List(Of String)
@@ -642,7 +648,7 @@ Public Class frmFISBackupList
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(file.Description)
-                item.ImageIndex = GetImageIndex(file.MimeType)
+                item.ImageIndex = GetImageIndex(extension)
                 bgwUploadFile.ReportProgress(100, item)
             End If
 
@@ -678,7 +684,7 @@ Public Class frmFISBackupList
 
         HideProgressControls()
         blUploadIsProgressing = False
-
+        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
         If uUploadStatus = UploadStatus.Completed Then
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
@@ -689,6 +695,7 @@ Public Class frmFISBackupList
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -722,6 +729,11 @@ Public Class frmFISBackupList
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
             MessageBoxEx.Show("Cannot download Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Then
+            MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -904,7 +916,6 @@ Public Class frmFISBackupList
             frmMainInterface.ShowDesktopAlert(msg)
 
             Me.Cursor = Cursors.Default
-
             SelectNextItem(SelectedFileIndex)
 
         Catch ex As Exception
@@ -950,7 +961,7 @@ Public Class frmFISBackupList
             Dim abt = request.Execute
             Me.lblDriveSpaceUsed.Text = "Drive Space used: " & CalculateFileSize(abt.StorageQuota.UsageInDrive) & "/" & CalculateFileSize(abt.StorageQuota.Limit)
         Catch ex As Exception
-            Me.lblDriveSpaceUsed.Text = ""
+            Me.lblDriveSpaceUsed.Text = "Drive Space used:"
         End Try
     End Sub
 
@@ -1311,6 +1322,7 @@ Public Class frmFISBackupList
             If adminprivilege = True Then '
                 SetTitleAndSize()
                 Me.listViewEx1.Items.Clear()
+                Me.lblItemCount.Text = "Item Count: "
                 ShowProgressControls("", "", eCircularProgressType.Donut)
                 bgwListFiles.RunWorkerAsync(CurrentFolderID)
             End If

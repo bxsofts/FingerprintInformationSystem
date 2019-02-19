@@ -37,16 +37,12 @@ Partial Class frmPersonalFileStorage
         Me.UploadedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
         Me.lblCurrentFolderPath = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
-        Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
-        Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
-        Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.btnLogin = New DevComponents.DotNetBar.ButtonX()
         Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
         Me.btnRename = New DevComponents.DotNetBar.ButtonX()
@@ -55,6 +51,9 @@ Partial Class frmPersonalFileStorage
         Me.btnDownloadFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRemoveFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
+        Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
+        Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
+        Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -165,7 +164,7 @@ Partial Class frmPersonalFileStorage
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(295, 295)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(333, 314)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
         Me.lblProgressStatus.TabIndex = 4
@@ -180,7 +179,7 @@ Partial Class frmPersonalFileStorage
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(338, 170)
+        Me.CircularProgress1.Location = New System.Drawing.Point(376, 189)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -200,7 +199,7 @@ Partial Class frmPersonalFileStorage
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID, Me.Description})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -221,27 +220,22 @@ Partial Class frmPersonalFileStorage
         'FileName
         '
         Me.FileName.Text = "File Name"
-        Me.FileName.Width = 300
+        Me.FileName.Width = 404
         '
         'UploadedDate
         '
         Me.UploadedDate.Text = "Uploaded Date"
-        Me.UploadedDate.Width = 153
+        Me.UploadedDate.Width = 166
         '
         'FileSize
         '
         Me.FileSize.Text = "File Size"
-        Me.FileSize.Width = 87
+        Me.FileSize.Width = 93
         '
         'FileID
         '
         Me.FileID.Text = "File ID"
-        Me.FileID.Width = 157
-        '
-        'Description
-        '
-        Me.Description.Text = "Description"
-        Me.Description.Width = 196
+        Me.FileID.Width = 0
         '
         'ImageList1
         '
@@ -252,14 +246,14 @@ Partial Class frmPersonalFileStorage
         Me.ImageList1.Images.SetKeyName(2, "Back 16x16.png")
         Me.ImageList1.Images.SetKeyName(3, "MS Access.png")
         Me.ImageList1.Images.SetKeyName(4, "Exe 16x16.png")
-        Me.ImageList1.Images.SetKeyName(5, "Pdf (2).png")
+        Me.ImageList1.Images.SetKeyName(5, "PDF.png")
         Me.ImageList1.Images.SetKeyName(6, "Word.png")
         Me.ImageList1.Images.SetKeyName(7, "Excel.png")
         Me.ImageList1.Images.SetKeyName(8, "powerpoint.png")
         Me.ImageList1.Images.SetKeyName(9, "txt.png")
         Me.ImageList1.Images.SetKeyName(10, "jpeg.png")
         Me.ImageList1.Images.SetKeyName(11, "rar.png")
-        Me.ImageList1.Images.SetKeyName(12, "file.png")
+        Me.ImageList1.Images.SetKeyName(12, "BlankFile.png")
         '
         'Bar1
         '
@@ -321,21 +315,6 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
-        '
-        'bgwUpdateFileContent
-        '
-        Me.bgwUpdateFileContent.WorkerReportsProgress = True
-        Me.bgwUpdateFileContent.WorkerSupportsCancellation = True
-        '
-        'bgwListFiles
-        '
-        Me.bgwListFiles.WorkerReportsProgress = True
-        Me.bgwListFiles.WorkerSupportsCancellation = True
-        '
-        'bgwDownloadFile
-        '
-        Me.bgwDownloadFile.WorkerReportsProgress = True
-        Me.bgwDownloadFile.WorkerSupportsCancellation = True
         '
         'btnLogin
         '
@@ -433,6 +412,21 @@ Partial Class frmPersonalFileStorage
         Me.btnRefresh.TabIndex = 2
         Me.btnRefresh.Text = "Refresh List"
         '
+        'bgwUpdateFileContent
+        '
+        Me.bgwUpdateFileContent.WorkerReportsProgress = True
+        Me.bgwUpdateFileContent.WorkerSupportsCancellation = True
+        '
+        'bgwListFiles
+        '
+        Me.bgwListFiles.WorkerReportsProgress = True
+        Me.bgwListFiles.WorkerSupportsCancellation = True
+        '
+        'bgwDownloadFile
+        '
+        Me.bgwDownloadFile.WorkerReportsProgress = True
+        Me.bgwDownloadFile.WorkerSupportsCancellation = True
+        '
         'frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -486,5 +480,4 @@ Partial Class frmPersonalFileStorage
     Friend WithEvents bgwListFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownloadFile As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnLogin As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents Description As System.Windows.Forms.ColumnHeader
 End Class

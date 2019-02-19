@@ -28,7 +28,14 @@ Partial Class frmFISBackupList
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
         Me.btnUpdateFileContent = New DevComponents.DotNetBar.ButtonX()
+        Me.btnRename = New DevComponents.DotNetBar.ButtonX()
+        Me.btnNewFolder = New DevComponents.DotNetBar.ButtonX()
+        Me.btnUploadFile = New DevComponents.DotNetBar.ButtonX()
+        Me.btnDownloadFile = New DevComponents.DotNetBar.ButtonX()
+        Me.btnRemoveFile = New DevComponents.DotNetBar.ButtonX()
+        Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
@@ -49,13 +56,6 @@ Partial Class frmFISBackupList
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
-        Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
-        Me.btnRename = New DevComponents.DotNetBar.ButtonX()
-        Me.btnNewFolder = New DevComponents.DotNetBar.ButtonX()
-        Me.btnUploadFile = New DevComponents.DotNetBar.ButtonX()
-        Me.btnDownloadFile = New DevComponents.DotNetBar.ButtonX()
-        Me.btnRemoveFile = New DevComponents.DotNetBar.ButtonX()
-        Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -98,6 +98,19 @@ Partial Class frmFISBackupList
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
         '
+        'btnGetAdminPrivilege
+        '
+        Me.btnGetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGetAdminPrivilege.Image = CType(resources.GetObject("btnGetAdminPrivilege.Image"), System.Drawing.Image)
+        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(16, 423)
+        Me.btnGetAdminPrivilege.Name = "btnGetAdminPrivilege"
+        Me.btnGetAdminPrivilege.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
+        Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(131, 59)
+        Me.btnGetAdminPrivilege.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnGetAdminPrivilege.TabIndex = 7
+        Me.btnGetAdminPrivilege.Text = "Admin"
+        '
         'btnUpdateFileContent
         '
         Me.btnUpdateFileContent.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
@@ -108,6 +121,78 @@ Partial Class frmFISBackupList
         Me.btnUpdateFileContent.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnUpdateFileContent.TabIndex = 8
         Me.btnUpdateFileContent.Text = "Update File"
+        '
+        'btnRename
+        '
+        Me.btnRename.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
+        Me.btnRename.Location = New System.Drawing.Point(16, 293)
+        Me.btnRename.Name = "btnRename"
+        Me.btnRename.Size = New System.Drawing.Size(131, 59)
+        Me.btnRename.TabIndex = 5
+        Me.btnRename.Text = "Rename"
+        '
+        'btnNewFolder
+        '
+        Me.btnNewFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnNewFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnNewFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewFolder.Image = CType(resources.GetObject("btnNewFolder.Image"), System.Drawing.Image)
+        Me.btnNewFolder.Location = New System.Drawing.Point(16, 96)
+        Me.btnNewFolder.Name = "btnNewFolder"
+        Me.btnNewFolder.Size = New System.Drawing.Size(131, 59)
+        Me.btnNewFolder.TabIndex = 2
+        Me.btnNewFolder.Text = "New Folder"
+        '
+        'btnUploadFile
+        '
+        Me.btnUploadFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnUploadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnUploadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUploadFile.Image = CType(resources.GetObject("btnUploadFile.Image"), System.Drawing.Image)
+        Me.btnUploadFile.Location = New System.Drawing.Point(16, 161)
+        Me.btnUploadFile.Name = "btnUploadFile"
+        Me.btnUploadFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnUploadFile.TabIndex = 3
+        Me.btnUploadFile.Text = "Upload"
+        '
+        'btnDownloadFile
+        '
+        Me.btnDownloadFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDownloadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDownloadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadFile.Image = CType(resources.GetObject("btnDownloadFile.Image"), System.Drawing.Image)
+        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 226)
+        Me.btnDownloadFile.Name = "btnDownloadFile"
+        Me.btnDownloadFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnDownloadFile.TabIndex = 4
+        Me.btnDownloadFile.Text = "Download"
+        '
+        'btnRemoveFile
+        '
+        Me.btnRemoveFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
+        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 358)
+        Me.btnRemoveFile.Name = "btnRemoveFile"
+        Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnRemoveFile.TabIndex = 6
+        Me.btnRemoveFile.Text = "Remove"
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
+        Me.btnRefresh.Location = New System.Drawing.Point(16, 31)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
+        Me.btnRefresh.TabIndex = 1
+        Me.btnRefresh.Text = "Refresh List"
         '
         'lblDriveSpaceUsed
         '
@@ -282,14 +367,14 @@ Partial Class frmFISBackupList
         Me.ImageList1.Images.SetKeyName(2, "Back 16x16.png")
         Me.ImageList1.Images.SetKeyName(3, "MS Access.png")
         Me.ImageList1.Images.SetKeyName(4, "Exe 16x16.png")
-        Me.ImageList1.Images.SetKeyName(5, "Pdf (2).png")
+        Me.ImageList1.Images.SetKeyName(5, "PDF.png")
         Me.ImageList1.Images.SetKeyName(6, "Word.png")
         Me.ImageList1.Images.SetKeyName(7, "Excel.png")
         Me.ImageList1.Images.SetKeyName(8, "powerpoint.png")
         Me.ImageList1.Images.SetKeyName(9, "txt.png")
         Me.ImageList1.Images.SetKeyName(10, "jpeg.png")
         Me.ImageList1.Images.SetKeyName(11, "rar.png")
-        Me.ImageList1.Images.SetKeyName(12, "file.png")
+        Me.ImageList1.Images.SetKeyName(12, "BlankFile.png")
         '
         'PanelEx3
         '
@@ -348,91 +433,6 @@ Partial Class frmFISBackupList
         '
         Me.bgwGetPassword.WorkerReportsProgress = True
         Me.bgwGetPassword.WorkerSupportsCancellation = True
-        '
-        'btnGetAdminPrivilege
-        '
-        Me.btnGetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnGetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGetAdminPrivilege.Image = CType(resources.GetObject("btnGetAdminPrivilege.Image"), System.Drawing.Image)
-        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(16, 423)
-        Me.btnGetAdminPrivilege.Name = "btnGetAdminPrivilege"
-        Me.btnGetAdminPrivilege.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
-        Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(131, 59)
-        Me.btnGetAdminPrivilege.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnGetAdminPrivilege.TabIndex = 7
-        Me.btnGetAdminPrivilege.Text = "Admin"
-        '
-        'btnRename
-        '
-        Me.btnRename.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
-        Me.btnRename.Location = New System.Drawing.Point(16, 293)
-        Me.btnRename.Name = "btnRename"
-        Me.btnRename.Size = New System.Drawing.Size(131, 59)
-        Me.btnRename.TabIndex = 5
-        Me.btnRename.Text = "Rename"
-        '
-        'btnNewFolder
-        '
-        Me.btnNewFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnNewFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnNewFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewFolder.Image = CType(resources.GetObject("btnNewFolder.Image"), System.Drawing.Image)
-        Me.btnNewFolder.Location = New System.Drawing.Point(16, 96)
-        Me.btnNewFolder.Name = "btnNewFolder"
-        Me.btnNewFolder.Size = New System.Drawing.Size(131, 59)
-        Me.btnNewFolder.TabIndex = 2
-        Me.btnNewFolder.Text = "New Folder"
-        '
-        'btnUploadFile
-        '
-        Me.btnUploadFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnUploadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnUploadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUploadFile.Image = CType(resources.GetObject("btnUploadFile.Image"), System.Drawing.Image)
-        Me.btnUploadFile.Location = New System.Drawing.Point(16, 161)
-        Me.btnUploadFile.Name = "btnUploadFile"
-        Me.btnUploadFile.Size = New System.Drawing.Size(131, 59)
-        Me.btnUploadFile.TabIndex = 3
-        Me.btnUploadFile.Text = "Upload"
-        '
-        'btnDownloadFile
-        '
-        Me.btnDownloadFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnDownloadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnDownloadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDownloadFile.Image = CType(resources.GetObject("btnDownloadFile.Image"), System.Drawing.Image)
-        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 226)
-        Me.btnDownloadFile.Name = "btnDownloadFile"
-        Me.btnDownloadFile.Size = New System.Drawing.Size(131, 59)
-        Me.btnDownloadFile.TabIndex = 4
-        Me.btnDownloadFile.Text = "Download"
-        '
-        'btnRemoveFile
-        '
-        Me.btnRemoveFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
-        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 358)
-        Me.btnRemoveFile.Name = "btnRemoveFile"
-        Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
-        Me.btnRemoveFile.TabIndex = 6
-        Me.btnRemoveFile.Text = "Remove"
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(16, 31)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
-        Me.btnRefresh.TabIndex = 1
-        Me.btnRefresh.Text = "Refresh List"
         '
         'frmFISBackupList
         '

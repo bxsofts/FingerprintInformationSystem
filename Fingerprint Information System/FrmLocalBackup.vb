@@ -39,8 +39,8 @@ Public Class FrmLocalBackup
             ' End If
 
         Next
-        Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
         DisplayInformation()
+        Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
 
         Me.listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
         Me.listViewEx1.Sort()
@@ -72,10 +72,11 @@ Public Class FrmLocalBackup
             item.SubItems.Add(CalculateFileSize(fsize))
             item.ImageIndex = 0
 
-            Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
+
             frmMainInterface.ShowDesktopAlert("Database backed up successfully.")
             Application.DoEvents()
             DisplayInformation()
+            Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(0).Selected = True
             End If
@@ -215,12 +216,11 @@ Public Class FrmLocalBackup
             TotalFileSize -= fsize
             My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
             Me.listViewEx1.SelectedItems(0).Remove()
-            Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
-
             Application.DoEvents()
             frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
             SelectNextItem(SelectedFileIndex)
             DisplayInformation()
+            Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
         End If
 
     End Sub

@@ -16505,9 +16505,6 @@ errhandler:
             Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
             If backupperiod = 0 Then Exit Sub
 
-            If InternetAvailable() = False Then
-                Exit Sub
-            End If
             blCheckAutoBackup = True
             bgwOnlineAutoBackup.RunWorkerAsync(backupperiod)
 
@@ -16518,6 +16515,10 @@ errhandler:
     Private Sub bgwOnlineAutoBackup_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwOnlineAutoBackup.DoWork
 
         Try
+            If InternetAvailable() = False Then
+                Exit Sub
+            End If
+
             Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
             Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
@@ -17055,9 +17056,7 @@ errhandler:
 #Region "CHECK FOR UPDATE"
 
     Private Sub CheckForUpdatesAtStartup()
-        If InternetAvailable() = False Then
-            Exit Sub
-        End If
+        
         bgwUpdateChecker.RunWorkerAsync()
 
     End Sub
@@ -17143,6 +17142,9 @@ errhandler:
     End Function
 
     Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
+        If InternetAvailable() = False Then
+            Exit Sub
+        End If
         Dim updateavailable As Boolean = CheckForUpdates()
         bgwUpdateChecker.ReportProgress(100, updateavailable)
     End Sub
@@ -17162,17 +17164,14 @@ errhandler:
 #Region "VERSION FILE"
 
     Private Sub UploadVersionInfoToDrive()
-
-        If InternetAvailable() = False Then
-            Exit Sub
-        End If
-
         bgwVersionUploader.RunWorkerAsync()
-
     End Sub
 
     Private Sub bgwVersionUploader_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwVersionUploader.DoWork
         Try
+            If InternetAvailable() = False Then
+                Exit Sub
+            End If
 
             Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
             Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
@@ -17356,307 +17355,5 @@ errhandler:
 #End Region
 
 
-    Private Sub ShowSettingsWizard(sender As Object, e As EventArgs) Handles btnSettingsWizard.Click
-
-    End Sub
-    Private Sub OpenTemplatesFolder(sender As Object, e As EventArgs) Handles btnOpenTemplatesFolder.Click
-
-    End Sub
-    Private Sub OpenRegedit(sender As Object, e As EventArgs) Handles btnOpenRegedit.Click
-
-    End Sub
-    Private Sub CheckForUpdatesManually(sender As Object, e As EventArgs) Handles btnCheckUpdate.Click
-
-    End Sub
-    Private Sub DeleteSelectedItem(sender As Object, e As EventArgs) Handles btnDeleteContext.Click, btnDelete.Click
-
-    End Sub
-    Private Sub DeleteAllRecords(sender As Object, e As EventArgs) Handles btnDeleteAll.Click
-
-    End Sub
-    Private Sub OpenRecordForEditing(sender As Object, e As EventArgs) Handles btnEditContext.Click, btnEdit.Click
-
-    End Sub
-    Private Sub OpenRecord(sender As Object, e As EventArgs) Handles btnOpenContext.Click, btnOpen.Click
-
-    End Sub
-    Private Sub NewDataMode(sender As Object, e As EventArgs) Handles btnNewEntry.Click
-
-    End Sub
-    Private Sub HideDataEntryFields(sender As Object, e As EventArgs) Handles btnShowHideFields.Click
-
-    End Sub
-    Private Sub ShowOrHideAllFieldsOnButtonClick(sender As Object, e As EventArgs) Handles btnHideAllDataEntryFields.Click
-
-    End Sub
-    Private Sub LoadRecordsToTableWithAlertMessage(sender As Object, e As EventArgs) Handles btnReload.Click
-
-    End Sub
-    Private Sub LoadRecordsToAllTablesWithMessage(sender As Object, e As EventArgs) Handles btnReloadRecordsToAllTables.Click
-
-    End Sub
-    Private Sub LoadSpecifiedMonthsRecords(sender As Object, e As EventArgs) Handles btnLoadSpecifiedMonthsRecords.Click
-
-    End Sub
-    Private Sub LoadThisMonthsRecords(sender As Object, e As EventArgs) Handles btnLoadThisMonthRecords.Click
-
-    End Sub
-    Private Sub LoadSelectedYearRecords(sender As Object, e As EventArgs) Handles btnLoadSelectedYearRecords.Click
-
-    End Sub
-    Private Sub LoadThisYearRecordsWithMesage(sender As Object, e As EventArgs) Handles btnLoadThisYearRecords.Click
-
-    End Sub
-    Private Sub GenerateWeeklyDiary(sender As Object, e As EventArgs) Handles btnWeeklyDiary.Click
-
-    End Sub
-    Private Sub GenerateTourNote(sender As Object, e As EventArgs) Handles btnTourNote.Click
-
-    End Sub
-    Private Sub AnnualStatistics(sender As Object, e As EventArgs) Handles btnAnnualStatics.Click
-
-    End Sub
-    Private Sub ShowQuarterlyPerformance(sender As Object, e As EventArgs) Handles btnQuarterlyPerformance.Click
-
-    End Sub
-    Private Sub ShowMonthlyPerformance(sender As Object, e As EventArgs) Handles btnMonthlyPerformance.Click
-
-    End Sub
-    Private Sub ShowIndividualPerformance(sender As Object, e As EventArgs) Handles btnMonthlyIndividual.Click, btnIndividualPerformance.Click
-
-    End Sub
-    Private Sub GenerateRevenueIncomeStatement(sender As Object, e As EventArgs) Handles btnRevenueCollectionStatement.Click
-
-    End Sub
-    Private Sub ShowPSList(sender As Object, e As EventArgs) Handles btnPSList.Click
-
-    End Sub
-    Private Sub CurrentACRegister(sender As Object, e As EventArgs) Handles btnCurrentAC.Click
-
-    End Sub
-    Private Sub ACRegister(sender As Object, e As EventArgs) Handles btnACRegister.Click
-
-    End Sub
-    Private Sub CurrentIDRegister(sender As Object, e As EventArgs) Handles btnCurrentID.Click
-
-    End Sub
-    Private Sub IDRegister(sender As Object, e As EventArgs) Handles btnIDRegister.Click
-
-    End Sub
-    Private Sub CurrentCDRegister(sender As Object, e As EventArgs) Handles btnCurrentCD.Click
-
-    End Sub
-    Private Sub CDRegister(sender As Object, e As EventArgs) Handles btnCDRegister.Click
-
-    End Sub
-    Private Sub GenerateFPASlip(sender As Object, e As EventArgs) Handles btnGenerateFPSlipMain.Click, btnFPAGenerateSlipFormContext.Click, btnFPAGenerateSlipForm.Click
-
-    End Sub
-    Private Sub GenerateBlankFPAForm(sender As Object, e As EventArgs) Handles btnFPABlankSlipForm.Click
-
-    End Sub
-    Private Sub FPANotice(sender As Object, e As EventArgs) Handles btnFPANotice.Click
-
-    End Sub
-    Private Sub ShowFPAApplicationForm(sender As Object, e As EventArgs) Handles btnFPAApplicationForm.Click
-
-    End Sub
-    Private Sub ShowMonthWiseFPAStatistics(sender As Object, e As EventArgs) Handles btnMonthWiseFPAStatistics.Click
-
-    End Sub
-    Private Sub CurrentFPARegister(sender As Object, e As EventArgs) Handles btnCurrentFPA.Click
-
-    End Sub
-    Private Sub FPARegister(sender As Object, e As EventArgs) Handles btnFPARegister.Click
-
-    End Sub
-    Private Sub ShowFPAStstistics(sender As Object, e As EventArgs) Handles btnMonthlyFPA.Click, btnFPAStatement.Click
-
-    End Sub
-    Private Sub ShowPSWiseDAStatistics(sender As Object, e As EventArgs) Handles btnPSWiseDAStatistics.Click
-
-    End Sub
-    Private Sub ShowMonthWiseDAStatistics(sender As Object, e As EventArgs) Handles btnMonthWiseDAStatistics.Click
-
-    End Sub
-    Private Sub CurrentDARegister(sender As Object, e As EventArgs) Handles btnCurrentDA.Click
-
-    End Sub
-    Private Sub DARegister(sender As Object, e As EventArgs) Handles btnDARegister.Click
-
-    End Sub
-    Private Sub ShowDASlipStatementAllPS(sender As Object, e As EventArgs) Handles btnMonthlyDA.Click, btnDAStatementAllPS.Click
-
-    End Sub
-    Private Sub GenerateSOCreport(sender As Object, e As EventArgs) Handles btnSOCReportContext.Click, btnSOCReport2.Click, btnSOCReport.Click
-
-    End Sub
-    Private Sub ForwardPhotograph(sender As Object, e As EventArgs) Handles btnPhotographForwarding.Click, btnForwardPhoto.Click
-
-    End Sub
-    Private Sub SOCPhotoNotReceived(sender As Object, e As EventArgs) Handles btnPhotoNotRecieved.Click
-
-    End Sub
-    Private Sub ShowSOCPrintRemainingCases(sender As Object, e As EventArgs) Handles btnPrintRemainingCases.Click
-
-    End Sub
-    Private Sub ShowMonthWiseSOCStatistics(sender As Object, e As EventArgs) Handles btnMonthWiseSOCPerformance.Click
-
-    End Sub
-    Private Sub ShowSOCStatistics(sender As Object, e As EventArgs) Handles btnSOCStatistics.Click
-
-    End Sub
-    Private Sub CurrentSOCRegister(sender As Object, e As EventArgs) Handles btnCurrentSOC.Click
-
-    End Sub
-    Private Sub SOCRegister(sender As Object, e As EventArgs) Handles btnSOCRegister.Click
-
-    End Sub
-    Private Sub ShowGraveCrimeReport(sender As Object, e As EventArgs) Handles btnGraveCrimeStatement.Click, btnGraveCrimeReport.Click
-
-    End Sub
-    Private Sub ShowConciseSOCStatement(sender As Object, e As EventArgs) Handles btnConciseSOCStatement.Click
-
-    End Sub
-    Private Sub ShowSOCReportStatement(sender As Object, e As EventArgs) Handles btnStatementofSOCReports.Click
-
-    End Sub
-    Private Sub ShowSOCStatement(sender As Object, e As EventArgs) Handles btnSOCStatement.Click, btnMonthlySOC.Click
-
-    End Sub
-    Private Sub OnlineDatabaseBackup(sender As Object, e As EventArgs) Handles btnOnlineBackup.Click
-
-    End Sub
-    Private Sub LocalDatabaseBackup(sender As Object, e As EventArgs) Handles btnLocalBackup.Click
-
-    End Sub
-    Private Sub EndApplication(sender As Object, e As EventArgs) Handles btnExit.Click
-
-    End Sub
-    Private Sub PSSaveButtonAction(sender As Object, e As EventArgs) Handles btnSavePS.Click
-
-    End Sub
-    Private Sub IDSaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveID.Click
-
-    End Sub
-    Private Sub ClearIDFields(sender As Object, e As EventArgs) Handles btnClearIDFields.Click
-
-    End Sub
-    Private Sub SearchID(sender As Object, e As EventArgs) Handles btnSearchID.Click
-
-    End Sub
-    Private Sub SearchWithIDNumber(sender As Object, e As EventArgs) Handles btnIDFindByNumber.Click
-
-    End Sub
-    Private Sub ViewIDSlipImage(sender As Object, e As EventArgs) Handles btnViewIDSlipContext.Click, btnIDViewFPSlip.Click
-
-    End Sub
-    Private Sub ACSaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveAC.Click
-
-    End Sub
-    Private Sub ClearACFields(sender As Object, e As EventArgs) Handles btnClearACFields.Click
-
-    End Sub
-    Private Sub SearchAC(sender As Object, e As EventArgs) Handles btnSearchAC.Click
-
-    End Sub
-    Private Sub SearchWithACNumber(sender As Object, e As EventArgs) Handles btnACFindByNumber.Click
-
-    End Sub
-    Private Sub ViewACSlipImage(sender As Object, e As EventArgs) Handles btnViewACSlipContext.Click, btnACViewFPSlip.Click
-
-    End Sub
-    Private Sub FPASaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveFPA.Click
-
-    End Sub
-    Private Sub ClearFPAFields(sender As Object, e As EventArgs) Handles btnClearFPAFields.Click
-
-    End Sub
-    Private Sub SearchFPA(sender As Object, e As EventArgs) Handles btnSearchFPA.Click
-
-    End Sub
-    Private Sub SearchFPAInYear(sender As Object, e As EventArgs) Handles btnSearchInFPAYear.Click
-
-    End Sub
-    Private Sub SearchWithFPANumber(sender As Object, e As EventArgs) Handles btnFPAFindByNumber.Click
-
-    End Sub
-    Private Sub CDSaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveCD.Click
-
-    End Sub
-    Private Sub ClearCDFields(sender As Object, e As EventArgs) Handles btnClearCDFields.Click
-
-    End Sub
-    Private Sub SearchCD(sender As Object, e As EventArgs) Handles btnSearchCD.Click
-
-    End Sub
-    Private Sub SearchCDInSelectedYear(sender As Object, e As EventArgs) Handles btnSearchCDInYear.Click
-
-    End Sub
-    Private Sub SearchWithCDNumber(sender As Object, e As EventArgs) Handles btnCDFindByNumber.Click
-
-    End Sub
-    Private Sub RSOCSaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveRSOC.Click
-
-    End Sub
-    Private Sub ClearRSOCFields(sender As Object, e As EventArgs) Handles btnClearRSOC.Click
-
-    End Sub
-    Private Sub SearchRSOC(sender As Object, e As EventArgs) Handles btnSearchRSOC.Click
-
-    End Sub
-    Private Sub SearchWithRSOCSerialNumber(sender As Object, e As EventArgs) Handles btnRSOCFindByNumber.Click
-
-    End Sub
-    Private Sub DASaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveDA.Click
-
-    End Sub
-    Private Sub ClearDAFields(sender As Object, e As EventArgs) Handles btnClearDAFields.Click
-
-    End Sub
-    Private Sub SearchDA(sender As Object, e As EventArgs) Handles btnSearchDA.Click
-
-    End Sub
-    Private Sub SearchDAInSelectedYear(sender As Object, e As EventArgs) Handles btnSearchDAInYear.Click
-
-    End Sub
-    Private Sub SearchWithDANumber(sender As Object, e As EventArgs) Handles btnDAFindByNumber.Click
-
-    End Sub
-    Private Sub ViewDASlipImage(sender As Object, e As EventArgs) Handles btnViewDASlipContext.Click, btnViewDASlip.Click
-
-    End Sub
-    Private Sub SaveOfficerList(sender As Object, e As EventArgs) Handles btnSaveIO.Click
-
-    End Sub
-    Private Sub SaveOfficeSettings(sender As Object, e As EventArgs) Handles btnSaveOfficeSettings.Click
-
-    End Sub
-    Private Sub SOCSaveButtonAction(sender As Object, e As EventArgs) Handles btnSaveSOC.Click
-
-    End Sub
-    Private Sub ClearSOCFields(sender As Object, e As EventArgs) Handles btnClearSOC.Click
-
-    End Sub
-    Private Sub SearchSOC(sender As Object, e As EventArgs) Handles btnSearchSOC.Click
-
-    End Sub
-    Private Sub SearchWithGraveCrime(sender As Object, e As EventArgs) Handles btnSearchWithGraveCrime.Click
-
-    End Sub
-    Private Sub SearchSOCInSelectedYear(sender As Object, e As EventArgs) Handles btnSearchSOCInYear.Click
-
-    End Sub
-    Private Sub SearchWithSOCNumber(sender As Object, e As EventArgs) Handles btnSOCFindByNumber.Click
-
-    End Sub
-    Private Sub LocateChancePrints(sender As Object, e As EventArgs) Handles btnLocateCP.Click
-
-    End Sub
-    Private Sub LocateFPSlipImage(sender As Object, e As EventArgs) Handles btnLocateFPSlip.Click
-
-    End Sub
-    Private Sub ShowSOCFacingSheet(sender As Object, e As EventArgs) Handles btnSOCFacingSheet.Click, btnFacingSheetMenu.Click, btnFacingSheetContext.Click, btnFacingSheet.Click
-
-    End Sub
+  
 End Class
