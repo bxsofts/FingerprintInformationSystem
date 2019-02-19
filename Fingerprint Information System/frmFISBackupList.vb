@@ -53,7 +53,8 @@ Public Class frmFISBackupList
         PowerPoint = 8
         TXT = 9
         Image = 10
-        Others = 11
+        Zip = 11
+        Others = 12
     End Enum
 
 #Region "LOAD DATA"
@@ -145,10 +146,6 @@ Public Class frmFISBackupList
                 listViewEx1.Items.Add(e.UserState)
             End If
 
-            If TypeOf e.UserState Is String Then
-                lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
-                Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
-            End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -159,6 +156,8 @@ Public Class frmFISBackupList
         Me.Cursor = Cursors.Default
         HideProgressControls()
         blListIsLoading = False
+        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
+        If Me.listViewEx1.Items.Count > 0 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
         ShortenCurrentFolderPath()
     End Sub
 
@@ -217,7 +216,7 @@ Public Class frmFISBackupList
                     item.ImageIndex = ImageIndex.Folder
                     ResultIsFolder = True
                 Else
-                    item.ImageIndex = GetImageIndex(Result.MimeType)
+                    item.ImageIndex = GetImageIndex(My.Computer.FileSystem.GetFileInfo(Result.Name).Extension)
                     ResultIsFolder = False
                 End If
 
@@ -393,32 +392,36 @@ Public Class frmFISBackupList
         Select Case mimeType.ToLower
             Case "application/x-msdownload"
                 index = ImageIndex.Exe 'exe
-            Case "files/exe"
+            Case ".exe"
                 index = ImageIndex.Exe 'exe
             Case "database/mdb"
                 index = ImageIndex.MSAccess 'mdb
-            Case "files/mdb"
+            Case ".mdb"
                 index = ImageIndex.MSAccess 'mdb
-            Case "files/accdb"
+            Case ".accdb"
                 index = ImageIndex.MSAccess 'mdb
-            Case "files/pdf"
+            Case ".pdf"
                 index = ImageIndex.PDF
-            Case "files/docx"
+            Case ".docx"
                 index = ImageIndex.Word
-            Case "files/xlsx"
+            Case ".xlsx"
                 index = ImageIndex.Excel
-            Case "files/pptx"
+            Case ".pptx"
                 index = ImageIndex.PowerPoint
-            Case "files/txt"
+            Case ".txt"
                 index = ImageIndex.TXT
-            Case "files/jpg"
+            Case ".jpg"
                 index = ImageIndex.Image
-            Case "files/jpeg"
+            Case ".jpeg"
                 index = ImageIndex.Image
-            Case "files/png"
+            Case ".png"
                 index = ImageIndex.Image
-            Case "files/bmp"
+            Case ".bmp"
                 index = ImageIndex.Image
+            Case ".zip"
+                index = ImageIndex.Zip
+            Case ".rar"
+                index = ImageIndex.Zip
             Case Else
                 index = ImageIndex.Others
         End Select

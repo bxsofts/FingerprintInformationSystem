@@ -51,7 +51,8 @@ Public Class frmPersonalFileStorage
         PowerPoint = 8
         TXT = 9
         Image = 10
-        Others = 11
+        Zip = 11
+        Others = 12
     End Enum
 
 #Region "LOAD DATA"
@@ -59,7 +60,8 @@ Public Class frmPersonalFileStorage
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
         Me.CenterToScreen()
-
+        Me.btnLogin.Image = My.Resources.Login
+        btnLogin.Text = "Login"
         Me.lblDriveSpaceUsed.Text = ""
         Me.lblItemCount.Text = ""
 
@@ -71,7 +73,7 @@ Public Class frmPersonalFileStorage
 
         If Not FileIO.FileSystem.FileExists(JsonFile) Then 'copy from application folder
             My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
-            FileSystem.FileCopy(strAppPath & "\FISOAuth2.json", CredentialFilePath & "\OAuth2.json")
+            FileSystem.FileCopy(strAppPath & "\FISOAuth2.json", CredentialFilePath & "\FISOAuth2.json")
         End If
 
         Me.listViewEx1.Items.Clear()
@@ -87,21 +89,35 @@ Public Class frmPersonalFileStorage
     End Sub
 
     Private Sub CreateOAuthService() Handles btnLogin.Click
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+       
         Me.listViewEx1.Items.Clear()
-
         If Not FileIO.FileSystem.FileExists(JsonFile) Then 'if copy failed
             MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
+
         Dim TokenFile As String = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-user" ' token file is created after authentication
 
+        If btnLogin.Text = "Logout" Then
+            My.Computer.FileSystem.DeleteFile(TokenFile)
+            GDService.Dispose()
+            ServiceCreated = False
+            btnLogin.Image = My.Resources.Login
+            btnLogin.Text = "Login"
+            Exit Sub
+        End If
+
         If Not FileIO.FileSystem.FileExists(TokenFile) Then 'check for token file.
-            MsgBox("The application will now open your browser. Please enter your gmail id and password to authenticate.", MsgBoxStyle.Information)
+            '  If MessageBoxEx.Show("The application will now open your browser. Please enter your gmail id and password to authenticate.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Cancel Then Exit Sub
         End If
 
         Me.Cursor = Cursors.WaitCursor
-        ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
+
         Try
             bgwListFiles.RunWorkerAsync("root")
             Me.Cursor = Cursors.Default
@@ -115,6 +131,7 @@ Public Class frmPersonalFileStorage
         Me.Cursor = Cursors.WaitCursor
         Try
             If ServiceCreated = False Then
+                bgwListFiles.ReportProgress(1, "Waiting for User Authentication...")
                 Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
                 Dim Scopes As String() = {DriveService.Scope.Drive}
 
@@ -122,8 +139,10 @@ Public Class frmPersonalFileStorage
 
                 GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
                 ServiceCreated = True
+                bgwListFiles.ReportProgress(1, "Logout")
             End If
 
+            bgwListFiles.ReportProgress(1, "Fetching Files from Google Drive...")
             ListFiles(e.Argument, False)
             GetDriveUsageDetails()
 
@@ -131,6 +150,7 @@ Public Class frmPersonalFileStorage
         Catch ex As Exception
             blListIsLoading = False
             ServiceCreated = False
+            bgwListFiles.ReportProgress(1, "Login")
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
@@ -143,8 +163,17 @@ Public Class frmPersonalFileStorage
             End If
 
             If TypeOf e.UserState Is String Then
-                lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
-                Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
+                If e.UserState = "Creating Google Drive Service..." Then
+                    ShowProgressControls("", "Waiting for User Authentication...", eCircularProgressType.Donut)
+                ElseIf e.UserState = "Waiting for User Authentication..." Then
+                    ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
+                ElseIf e.UserState = "Logout" Then
+                    btnLogin.Image = My.Resources.Logout
+                    btnLogin.Text = "Logout"
+                ElseIf e.UserState = "Login" Then
+                    btnLogin.Image = My.Resources.Login
+                    btnLogin.Text = "Login"
+                End If
             End If
 
         Catch ex As Exception
@@ -157,6 +186,8 @@ Public Class frmPersonalFileStorage
         HideProgressControls()
         blListIsLoading = False
         ShortenCurrentFolderPath()
+        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
+        If Me.listViewEx1.Items.Count > 0 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
     End Sub
 
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
@@ -378,6 +409,10 @@ Public Class frmPersonalFileStorage
                 index = ImageIndex.Image
             Case ".bmp"
                 index = ImageIndex.Image
+            Case ".zip"
+                index = ImageIndex.Zip
+            Case ".rar"
+                index = ImageIndex.Zip
             Case Else
                 index = ImageIndex.Others
         End Select
@@ -1044,4 +1079,13 @@ Public Class frmPersonalFileStorage
         lblProgressStatus.Hide()
     End Sub
 
+    Private Sub RefreshFileList(sender As Object, e As EventArgs) Handles btnRefresh.Click
+
+    End Sub
+    Private Sub DownloadSelectedFile(sender As Object, e As EventArgs) Handles btnDownloadFile.Click
+
+    End Sub
+    Private Sub CreateOAuthService(sender As Object, e As EventArgs) Handles btnLogin.Click
+
+    End Sub
 End Class

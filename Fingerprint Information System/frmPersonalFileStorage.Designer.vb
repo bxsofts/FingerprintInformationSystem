@@ -37,12 +37,16 @@ Partial Class frmPersonalFileStorage
         Me.UploadedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
         Me.lblCurrentFolderPath = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
+        Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
+        Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.btnLogin = New DevComponents.DotNetBar.ButtonX()
         Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
         Me.btnRename = New DevComponents.DotNetBar.ButtonX()
@@ -51,10 +55,6 @@ Partial Class frmPersonalFileStorage
         Me.btnDownloadFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRemoveFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnRefresh = New DevComponents.DotNetBar.ButtonX()
-        Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
-        Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
-        Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
-        Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -238,6 +238,11 @@ Partial Class frmPersonalFileStorage
         Me.FileID.Text = "File ID"
         Me.FileID.Width = 157
         '
+        'Description
+        '
+        Me.Description.Text = "Description"
+        Me.Description.Width = 196
+        '
         'ImageList1
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -253,7 +258,8 @@ Partial Class frmPersonalFileStorage
         Me.ImageList1.Images.SetKeyName(8, "powerpoint.png")
         Me.ImageList1.Images.SetKeyName(9, "txt.png")
         Me.ImageList1.Images.SetKeyName(10, "jpeg.png")
-        Me.ImageList1.Images.SetKeyName(11, "file.png")
+        Me.ImageList1.Images.SetKeyName(11, "rar.png")
+        Me.ImageList1.Images.SetKeyName(12, "file.png")
         '
         'Bar1
         '
@@ -316,12 +322,27 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
         '
+        'bgwUpdateFileContent
+        '
+        Me.bgwUpdateFileContent.WorkerReportsProgress = True
+        Me.bgwUpdateFileContent.WorkerSupportsCancellation = True
+        '
+        'bgwListFiles
+        '
+        Me.bgwListFiles.WorkerReportsProgress = True
+        Me.bgwListFiles.WorkerSupportsCancellation = True
+        '
+        'bgwDownloadFile
+        '
+        Me.bgwDownloadFile.WorkerReportsProgress = True
+        Me.bgwDownloadFile.WorkerSupportsCancellation = True
+        '
         'btnLogin
         '
         Me.btnLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnLogin.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.Image = CType(resources.GetObject("btnLogin.Image"), System.Drawing.Image)
+        Me.btnLogin.Image = Global.FingerprintInformationSystem.My.Resources.Resources.Login
         Me.btnLogin.Location = New System.Drawing.Point(16, 7)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(131, 59)
@@ -411,26 +432,6 @@ Partial Class frmPersonalFileStorage
         Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
         Me.btnRefresh.TabIndex = 2
         Me.btnRefresh.Text = "Refresh List"
-        '
-        'bgwUpdateFileContent
-        '
-        Me.bgwUpdateFileContent.WorkerReportsProgress = True
-        Me.bgwUpdateFileContent.WorkerSupportsCancellation = True
-        '
-        'bgwListFiles
-        '
-        Me.bgwListFiles.WorkerReportsProgress = True
-        Me.bgwListFiles.WorkerSupportsCancellation = True
-        '
-        'bgwDownloadFile
-        '
-        Me.bgwDownloadFile.WorkerReportsProgress = True
-        Me.bgwDownloadFile.WorkerSupportsCancellation = True
-        '
-        'Description
-        '
-        Me.Description.Text = "Description"
-        Me.Description.Width = 196
         '
         'frmPersonalFileStorage
         '

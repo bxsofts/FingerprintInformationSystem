@@ -23,7 +23,6 @@ Partial Class frmMainInterface
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainInterface))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -112,6 +111,7 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle86 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle87 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle88 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainInterface))
         Me.RibbonTabItem6 = New DevComponents.DotNetBar.RibbonTabItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar12 = New DevComponents.DotNetBar.RibbonBar()
@@ -142,115 +142,16 @@ Partial Class frmMainInterface
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
         Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar17 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnExit = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar6 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnAbout = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar5 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnBasicOnlineFileTransfer = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar4 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnLocalBackup = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOnlineBackup = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar2 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnViewReports = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem2 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCStatement = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnShowIdentifiedRecords = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnListOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGistOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnStatementofSOCReports = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnConciseSOCStatement = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGraveCrimeReport = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCFacingSheet = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCRegister = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCurrentSOC = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCStatistics = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthWiseSOCPerformance = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnPrintRemainingCases = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnPhotoNotRecieved = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnPhotographForwarding = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCReport = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem3 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAStatementAllPS = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDARegister = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCurrentDA = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthWiseDAStatistics = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnPSWiseDAStatistics = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem4 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAStatement = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPARegister = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCurrentFPA = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthWiseFPAStatistics = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAApplicationForm = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPANotice = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPABlankSlipForm = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAGenerateSlipForm = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem7 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCDRegister = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCurrentCD = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem8 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDRegister = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCurrentID = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem6 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnACRegister = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCurrentAC = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnPSList = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthlyStatements = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthlySOC = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthlyDA = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthlyFPA = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRevenueCollectionStatement = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthlyIndividual = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGraveCrimeStatement = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnListOfMonthlyIDCases = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRBNilReport = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnVigilanceCase = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnAttendanceStmt2 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCL = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnAttendance = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIndividualPerformanceCL = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRBWarrant = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCCL = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnTABill = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnForwardPhoto = New DevComponents.DotNetBar.ButtonItem()
-        Me.chkUseTIAtBottomOfLetter = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.btnPerformance = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnMonthlyPerformance = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnQuarterlyPerformance = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIndividualPerformance = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnAnnualStatics = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFacingSheetMenu = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCReport2 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem5 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnAttendanceStmt = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnTourNote = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnWeeklyDiary = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnReload = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnLoadThisYearRecords = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnLoadSelectedYearRecords = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnLoadThisMonthRecords = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnLoadSpecifiedMonthsRecords = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnReloadRecordsToAllTables = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchMain = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnShowHideFields = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnHideAllDataEntryFields = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpen = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDeleteAll = New DevComponents.DotNetBar.ButtonItem()
-        Me.chkPreventDeletion = New DevComponents.DotNetBar.CheckBoxItem()
         Me.RibbonPanel5 = New DevComponents.DotNetBar.RibbonPanel()
         Me.rbrDownloadInstaller = New DevComponents.DotNetBar.RibbonBar()
         Me.cpgrDownloadInstaller = New DevComponents.DotNetBar.CircularProgressItem()
         Me.RibbonBar16 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnCheckUpdate = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDownloadInstallerFile = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDownloadInstallerInBrowser = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar7 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpenRegedit = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnOpenTemplatesFolder = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar9 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer9 = New DevComponents.DotNetBar.ItemContainer()
         Me.chkShowPopups = New DevComponents.DotNetBar.CheckBoxItem()
@@ -487,19 +388,10 @@ Partial Class frmMainInterface
         Me.txtSOCIdentificationDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.ButtonItem18 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenRecord = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnEditContextMenu = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDeleteContextMenu = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnViewContextMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem19 = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem20 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem21 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem22 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem23 = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem24 = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem25 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem26 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem27 = New DevComponents.DotNetBar.ButtonItem()
-        Me.ButtonItem28 = New DevComponents.DotNetBar.ButtonItem()
         Me.StatusBar = New DevComponents.DotNetBar.Bar()
         Me.lblRegisterNameStatusBar = New DevComponents.DotNetBar.LabelItem()
         Me.lblNumberOfRecords = New DevComponents.DotNetBar.LabelItem()
@@ -551,7 +443,6 @@ Partial Class frmMainInterface
         Me.lblSOCPhoto = New DevComponents.DotNetBar.LabelX()
         Me.lblSOCComplainant = New DevComponents.DotNetBar.LabelX()
         Me.lblSOCPO = New DevComponents.DotNetBar.LabelX()
-        Me.btnFacingSheet = New DevComponents.DotNetBar.ButtonX()
         Me.txtSOCDateOfPhotography = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX74 = New DevComponents.DotNetBar.LabelX()
         Me.DataGridContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
@@ -565,11 +456,9 @@ Partial Class frmMainInterface
         Me.btnViewDASlipContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnViewIDSlipContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnViewACSlipContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnLocateFPSlip = New DevComponents.DotNetBar.ButtonItem()
         Me.btnImportCP = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSelcetCPs = New DevComponents.DotNetBar.ButtonItem()
         Me.btnViewCP = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnLocateCP = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSOCReportContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFacingSheetContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIDRShowInSoCRegister = New DevComponents.DotNetBar.ButtonItem()
@@ -597,13 +486,6 @@ Partial Class frmMainInterface
         Me.LabelX37 = New DevComponents.DotNetBar.LabelX()
         Me.chkAppendSOCYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.txtSOCYear = New DevComponents.Editors.IntegerInput()
-        Me.btnSearchSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSOCFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchSOCInYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchWithGraveCrime = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSOCAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveSOC = New DevComponents.DotNetBar.ButtonX()
         Me.txtSOCPlace = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.cmbSOCPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.txtSOCComparisonDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -636,7 +518,6 @@ Partial Class frmMainInterface
         Me.SOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel10 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx7 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnSaveOfficeSettings = New DevComponents.DotNetBar.ButtonX()
         Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.txtWeeklyDiary = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX154 = New DevComponents.DotNetBar.LabelX()
@@ -688,7 +569,6 @@ Partial Class frmMainInterface
         Me.BasicPay = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ScaleOfPay = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DARate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnSaveIO = New DevComponents.DotNetBar.ButtonX()
         Me.IOTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel2 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
@@ -702,7 +582,6 @@ Partial Class frmMainInterface
         Me.lblDAFather = New DevComponents.DotNetBar.LabelX()
         Me.lblDAAlias = New DevComponents.DotNetBar.LabelX()
         Me.lblDAName = New DevComponents.DotNetBar.LabelX()
-        Me.btnViewDASlip = New DevComponents.DotNetBar.ButtonX()
         Me.txtDANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX50 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX49 = New DevComponents.DotNetBar.LabelX()
@@ -723,12 +602,6 @@ Partial Class frmMainInterface
         Me.btnDAClearFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.btnDAScanFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.btnDASelectFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSearchDA = New DevComponents.DotNetBar.ButtonX()
-        Me.btnDAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchDAInYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearDAFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveDA = New DevComponents.DotNetBar.ButtonX()
         Me.txtDASection = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtDACrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtDAHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -783,11 +656,6 @@ Partial Class frmMainInterface
         Me.LabelX98 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX102 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX103 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSearchRSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnRSOCFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRSOCAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearRSOC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveRSOC = New DevComponents.DotNetBar.ButtonX()
         Me.cmbRSOCPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.txtRSOCRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.cmbRSOCOfficer = New DevComponents.DotNetBar.Controls.ComboBoxEx()
@@ -819,12 +687,6 @@ Partial Class frmMainInterface
         Me.LabelX88 = New DevComponents.DotNetBar.LabelX()
         Me.chkAppendCDYear = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.txtCDYear = New DevComponents.Editors.IntegerInput()
-        Me.btnSearchCD = New DevComponents.DotNetBar.ButtonX()
-        Me.btnCDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchCDInYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnCDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearCDFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveCD = New DevComponents.DotNetBar.ButtonX()
         Me.cmbCDPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.txtCDRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtCDDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -862,12 +724,6 @@ Partial Class frmMainInterface
         Me.txtFPANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtFPAAmount = New DevComponents.Editors.IntegerInput()
         Me.LabelX69 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSearchFPA = New DevComponents.DotNetBar.ButtonX()
-        Me.btnFPAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnSearchInFPAYear = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearFPAFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX67 = New DevComponents.DotNetBar.LabelX()
         Me.txtFPATreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX66 = New DevComponents.DotNetBar.LabelX()
@@ -903,7 +759,6 @@ Partial Class frmMainInterface
         Me.lblACName = New DevComponents.DotNetBar.LabelX()
         Me.lblACFather = New DevComponents.DotNetBar.LabelX()
         Me.lblACAlias = New DevComponents.DotNetBar.LabelX()
-        Me.btnACViewFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX128 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX129 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX130 = New DevComponents.DotNetBar.LabelX()
@@ -919,11 +774,6 @@ Partial Class frmMainInterface
         Me.btnACClearFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.btnACScanFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.btnACSelectFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSearchAC = New DevComponents.DotNetBar.ButtonX()
-        Me.btnACFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnACAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearACFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveAC = New DevComponents.DotNetBar.ButtonX()
         Me.txtACSection = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtACCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtACHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -963,7 +813,6 @@ Partial Class frmMainInterface
         Me.lblIDName = New DevComponents.DotNetBar.LabelX()
         Me.lblIDFather = New DevComponents.DotNetBar.LabelX()
         Me.lblIDAlias = New DevComponents.DotNetBar.LabelX()
-        Me.btnIDViewFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX106 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX108 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX112 = New DevComponents.DotNetBar.LabelX()
@@ -979,11 +828,6 @@ Partial Class frmMainInterface
         Me.btnIDClearFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.btnIDScanFPSlip = New DevComponents.DotNetBar.ButtonX()
         Me.btnIDSelectFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSearchID = New DevComponents.DotNetBar.ButtonX()
-        Me.btnIDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearIDFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveID = New DevComponents.DotNetBar.ButtonX()
         Me.txtIDSection = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtIDCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtIDHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -1020,7 +864,6 @@ Partial Class frmMainInterface
         Me.cmbSHO = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.ComboItem18 = New DevComponents.Editors.ComboItem()
         Me.ComboItem19 = New DevComponents.Editors.ComboItem()
-        Me.btnSavePS = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX79 = New DevComponents.DotNetBar.LabelX()
         Me.txtDistance = New DevComponents.Editors.IntegerInput()
         Me.txtPhoneNumber1 = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -1118,7 +961,164 @@ Partial Class frmMainInterface
         Me.bgwUpdateChecker = New System.ComponentModel.BackgroundWorker()
         Me.bgwVersionUploader = New System.ComponentModel.BackgroundWorker()
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
+        Me.btnFacingSheet = New DevComponents.DotNetBar.ButtonX()
+        Me.btnLocateFPSlip = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnLocateCP = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSOCFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchSOCInYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchWithGraveCrime = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveOfficeSettings = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveIO = New DevComponents.DotNetBar.ButtonX()
+        Me.btnViewDASlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchDA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnDAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchDAInYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearDAFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveDA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchRSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnRSOCFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRSOCAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearRSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveRSOC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchCD = New DevComponents.DotNetBar.ButtonX()
+        Me.btnCDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchCDInYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearCDFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveCD = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchFPA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnFPAFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchInFPAYear = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearFPAFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
+        Me.btnACViewFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchAC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnACFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnACAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearACFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveAC = New DevComponents.DotNetBar.ButtonX()
+        Me.btnIDViewFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchID = New DevComponents.DotNetBar.ButtonX()
+        Me.btnIDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearIDFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveID = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSavePS = New DevComponents.DotNetBar.ButtonX()
+        Me.btnExit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnAbout = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnBasicOnlineFileTransfer = New DevComponents.DotNetBar.ButtonItem()
         Me.btnPersonalOnlineFiles = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnLocalBackup = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOnlineBackup = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnViewReports = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCStatement = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnShowIdentifiedRecords = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnListOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGistOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnStatementofSOCReports = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnConciseSOCStatement = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGraveCrimeReport = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCFacingSheet = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCRegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCurrentSOC = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCStatistics = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthWiseSOCPerformance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnPrintRemainingCases = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnPhotoNotRecieved = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnPhotographForwarding = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCReport = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem3 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDAStatementAllPS = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDARegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCurrentDA = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthWiseDAStatistics = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnPSWiseDAStatistics = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem4 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAStatement = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPARegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCurrentFPA = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthWiseFPAStatistics = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAApplicationForm = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPANotice = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPABlankSlipForm = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAGenerateSlipForm = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem7 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCDRegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCurrentCD = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem8 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDRegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCurrentID = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem6 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnACRegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCurrentAC = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnPSList = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthlyStatements = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthlySOC = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthlyDA = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthlyFPA = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRevenueCollectionStatement = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthlyIndividual = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGraveCrimeStatement = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnListOfMonthlyIDCases = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRBNilReport = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnVigilanceCase = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnAttendanceStmt2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnCL = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnAttendance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIndividualPerformanceCL = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRBWarrant = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCCL = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnTABill = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnForwardPhoto = New DevComponents.DotNetBar.ButtonItem()
+        Me.chkUseTIAtBottomOfLetter = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.btnPerformance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnMonthlyPerformance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnQuarterlyPerformance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIndividualPerformance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnAnnualStatics = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFacingSheetMenu = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCReport2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem5 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnAttendanceStmt = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnTourNote = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnWeeklyDiary = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnReload = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnLoadThisYearRecords = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnLoadSelectedYearRecords = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnLoadThisMonthRecords = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnLoadSpecifiedMonthsRecords = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnReloadRecordsToAllTables = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSearchMain = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnShowHideFields = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnHideAllDataEntryFields = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpen = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDeleteAll = New DevComponents.DotNetBar.ButtonItem()
+        Me.chkPreventDeletion = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.btnCheckUpdate = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadInstallerFile = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadInstallerInBrowser = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSettingsWizard = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenRegedit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenTemplatesFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnEditContextMenu = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDeleteContextMenu = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnViewContextMenu = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem21 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem22 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem23 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem26 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem27 = New DevComponents.DotNetBar.ButtonItem()
+        Me.ButtonItem28 = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1594,7 +1594,7 @@ Partial Class frmMainInterface
         Me.RibbonBar17.DragDropSupport = true
         Me.RibbonBar17.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnExit})
         Me.RibbonBar17.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar17.Location = New System.Drawing.Point(1245, 0)
+        Me.RibbonBar17.Location = New System.Drawing.Point(1270, 0)
         Me.RibbonBar17.Name = "RibbonBar17"
         Me.RibbonBar17.Size = New System.Drawing.Size(71, 93)
         Me.RibbonBar17.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1608,13 +1608,6 @@ Partial Class frmMainInterface
         '
         '
         Me.RibbonBar17.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnExit
-        '
-        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"),System.Drawing.Image)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlQ)
-        Me.btnExit.SubItemsExpandWidth = 14
         '
         'RibbonBar6
         '
@@ -1633,7 +1626,7 @@ Partial Class frmMainInterface
         Me.RibbonBar6.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RibbonBar6.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAbout})
         Me.RibbonBar6.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar6.Location = New System.Drawing.Point(1185, 0)
+        Me.RibbonBar6.Location = New System.Drawing.Point(1210, 0)
         Me.RibbonBar6.Name = "RibbonBar6"
         Me.RibbonBar6.Size = New System.Drawing.Size(60, 93)
         Me.RibbonBar6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1648,14 +1641,6 @@ Partial Class frmMainInterface
         '
         '
         Me.RibbonBar6.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnAbout
-        '
-        Me.btnAbout.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnAbout.Image = CType(resources.GetObject("btnAbout.Image"),System.Drawing.Image)
-        Me.btnAbout.Name = "btnAbout"
-        Me.btnAbout.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlI)
-        Me.btnAbout.SubItemsExpandWidth = 14
         '
         'RibbonBar5
         '
@@ -1676,11 +1661,11 @@ Partial Class frmMainInterface
         Me.RibbonBar5.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar5.Location = New System.Drawing.Point(1049, 0)
         Me.RibbonBar5.Name = "RibbonBar5"
-        Me.RibbonBar5.Size = New System.Drawing.Size(136, 93)
+        Me.RibbonBar5.Size = New System.Drawing.Size(161, 93)
         Me.RibbonBar5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar5.TabIndex = 11
         Me.RibbonBar5.TabStop = false
-        Me.RibbonBar5.Text = "ONLINE FILE STORAGE"
+        Me.RibbonBar5.Text = "ONLINE FILE STORE"
         '
         '
         '
@@ -1689,15 +1674,6 @@ Partial Class frmMainInterface
         '
         '
         Me.RibbonBar5.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnBasicOnlineFileTransfer
-        '
-        Me.btnBasicOnlineFileTransfer.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnBasicOnlineFileTransfer.Image = CType(resources.GetObject("btnBasicOnlineFileTransfer.Image"),System.Drawing.Image)
-        Me.btnBasicOnlineFileTransfer.ImagePosition = DevComponents.DotNetBar.eImagePosition.Bottom
-        Me.btnBasicOnlineFileTransfer.Name = "btnBasicOnlineFileTransfer"
-        Me.btnBasicOnlineFileTransfer.SubItemsExpandWidth = 14
-        Me.btnBasicOnlineFileTransfer.Text = "Common"
         '
         'RibbonBar4
         '
@@ -1732,25 +1708,6 @@ Partial Class frmMainInterface
         '
         Me.RibbonBar4.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'btnLocalBackup
-        '
-        Me.btnLocalBackup.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnLocalBackup.Image = CType(resources.GetObject("btnLocalBackup.Image"),System.Drawing.Image)
-        Me.btnLocalBackup.ImageSmall = CType(resources.GetObject("btnLocalBackup.ImageSmall"),System.Drawing.Image)
-        Me.btnLocalBackup.Name = "btnLocalBackup"
-        Me.btnLocalBackup.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlR)
-        Me.btnLocalBackup.SubItemsExpandWidth = 14
-        Me.btnLocalBackup.Text = "Local"
-        '
-        'btnOnlineBackup
-        '
-        Me.btnOnlineBackup.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnOnlineBackup.Image = CType(resources.GetObject("btnOnlineBackup.Image"),System.Drawing.Image)
-        Me.btnOnlineBackup.Name = "btnOnlineBackup"
-        Me.btnOnlineBackup.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlB)
-        Me.btnOnlineBackup.SubItemsExpandWidth = 14
-        Me.btnOnlineBackup.Text = "Online"
-        '
         'RibbonBar2
         '
         Me.RibbonBar2.AutoOverflowEnabled = true
@@ -1784,501 +1741,6 @@ Partial Class frmMainInterface
         '
         Me.RibbonBar2.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'btnViewReports
-        '
-        Me.btnViewReports.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnViewReports.Image = CType(resources.GetObject("btnViewReports.Image"),System.Drawing.Image)
-        Me.btnViewReports.Name = "btnViewReports"
-        Me.btnViewReports.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem2, Me.ButtonItem3, Me.ButtonItem4, Me.ButtonItem7, Me.ButtonItem8, Me.ButtonItem6, Me.btnPSList, Me.btnMonthlyStatements, Me.btnCL, Me.btnPerformance, Me.btnFacingSheetMenu, Me.btnSOCReport2, Me.ButtonItem5})
-        Me.btnViewReports.SubItemsExpandWidth = 14
-        Me.btnViewReports.Text = "Reports"
-        '
-        'ButtonItem2
-        '
-        Me.ButtonItem2.Name = "ButtonItem2"
-        Me.ButtonItem2.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSOCStatement, Me.btnShowIdentifiedRecords, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnStatementofSOCReports, Me.btnConciseSOCStatement, Me.btnGraveCrimeReport, Me.btnSOCFacingSheet, Me.btnSOCRegister, Me.btnCurrentSOC, Me.btnSOCStatistics, Me.btnMonthWiseSOCPerformance, Me.btnPrintRemainingCases, Me.btnPhotoNotRecieved, Me.btnPhotographForwarding, Me.btnSOCReport})
-        Me.ButtonItem2.Text = "SOC"
-        '
-        'btnSOCStatement
-        '
-        Me.btnSOCStatement.BeginGroup = true
-        Me.btnSOCStatement.ForeColor = System.Drawing.Color.Red
-        Me.btnSOCStatement.Name = "btnSOCStatement"
-        Me.btnSOCStatement.Text = "SOC Statement"
-        '
-        'btnShowIdentifiedRecords
-        '
-        Me.btnShowIdentifiedRecords.BeginGroup = true
-        Me.btnShowIdentifiedRecords.Name = "btnShowIdentifiedRecords"
-        Me.btnShowIdentifiedRecords.Text = "Show Identified Records"
-        '
-        'btnListOfIdentifiedCases
-        '
-        Me.btnListOfIdentifiedCases.ForeColor = System.Drawing.Color.Red
-        Me.btnListOfIdentifiedCases.Name = "btnListOfIdentifiedCases"
-        Me.btnListOfIdentifiedCases.Text = "List of Identified Cases"
-        '
-        'btnGistOfIdentifiedCases
-        '
-        Me.btnGistOfIdentifiedCases.ForeColor = System.Drawing.Color.Red
-        Me.btnGistOfIdentifiedCases.Name = "btnGistOfIdentifiedCases"
-        Me.btnGistOfIdentifiedCases.Text = "Gist of identified Cases"
-        '
-        'btnStatementofSOCReports
-        '
-        Me.btnStatementofSOCReports.BeginGroup = true
-        Me.btnStatementofSOCReports.Name = "btnStatementofSOCReports"
-        Me.btnStatementofSOCReports.Text = "Statement of SOC Reports"
-        '
-        'btnConciseSOCStatement
-        '
-        Me.btnConciseSOCStatement.Name = "btnConciseSOCStatement"
-        Me.btnConciseSOCStatement.Text = "Mini Statement (PS wise SOC)"
-        '
-        'btnGraveCrimeReport
-        '
-        Me.btnGraveCrimeReport.ForeColor = System.Drawing.Color.Red
-        Me.btnGraveCrimeReport.Name = "btnGraveCrimeReport"
-        Me.btnGraveCrimeReport.Text = "Statement of Grave Crimes"
-        '
-        'btnSOCFacingSheet
-        '
-        Me.btnSOCFacingSheet.BeginGroup = true
-        Me.btnSOCFacingSheet.ForeColor = System.Drawing.Color.Red
-        Me.btnSOCFacingSheet.Name = "btnSOCFacingSheet"
-        Me.btnSOCFacingSheet.Text = "Facing Sheet"
-        '
-        'btnSOCRegister
-        '
-        Me.btnSOCRegister.BeginGroup = true
-        Me.btnSOCRegister.Name = "btnSOCRegister"
-        Me.btnSOCRegister.Text = "Print View - SOC Register"
-        '
-        'btnCurrentSOC
-        '
-        Me.btnCurrentSOC.Name = "btnCurrentSOC"
-        Me.btnCurrentSOC.Text = "Print View - Currently Loaded Records"
-        '
-        'btnSOCStatistics
-        '
-        Me.btnSOCStatistics.BeginGroup = true
-        Me.btnSOCStatistics.Name = "btnSOCStatistics"
-        Me.btnSOCStatistics.Text = "Statistics"
-        '
-        'btnMonthWiseSOCPerformance
-        '
-        Me.btnMonthWiseSOCPerformance.Name = "btnMonthWiseSOCPerformance"
-        Me.btnMonthWiseSOCPerformance.Text = "Month Wise Statistics"
-        '
-        'btnPrintRemainingCases
-        '
-        Me.btnPrintRemainingCases.BeginGroup = true
-        Me.btnPrintRemainingCases.Name = "btnPrintRemainingCases"
-        Me.btnPrintRemainingCases.Text = "Print Remaining Cases"
-        '
-        'btnPhotoNotRecieved
-        '
-        Me.btnPhotoNotRecieved.Name = "btnPhotoNotRecieved"
-        Me.btnPhotoNotRecieved.Text = "Photo Not Received Cases"
-        '
-        'btnPhotographForwarding
-        '
-        Me.btnPhotographForwarding.BeginGroup = true
-        Me.btnPhotographForwarding.ForeColor = System.Drawing.Color.Red
-        Me.btnPhotographForwarding.Name = "btnPhotographForwarding"
-        Me.btnPhotographForwarding.Text = "Forward Photograph"
-        '
-        'btnSOCReport
-        '
-        Me.btnSOCReport.BeginGroup = true
-        Me.btnSOCReport.ForeColor = System.Drawing.Color.Red
-        Me.btnSOCReport.Icon = CType(resources.GetObject("btnSOCReport.Icon"),System.Drawing.Icon)
-        Me.btnSOCReport.Name = "btnSOCReport"
-        Me.btnSOCReport.Text = "SOC Report"
-        '
-        'ButtonItem3
-        '
-        Me.ButtonItem3.Name = "ButtonItem3"
-        Me.ButtonItem3.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAStatementAllPS, Me.btnDARegister, Me.btnCurrentDA, Me.btnMonthWiseDAStatistics, Me.btnPSWiseDAStatistics})
-        Me.ButtonItem3.Text = "DA"
-        '
-        'btnDAStatementAllPS
-        '
-        Me.btnDAStatementAllPS.BeginGroup = true
-        Me.btnDAStatementAllPS.ForeColor = System.Drawing.Color.Red
-        Me.btnDAStatementAllPS.Name = "btnDAStatementAllPS"
-        Me.btnDAStatementAllPS.Text = "DA Statement"
-        '
-        'btnDARegister
-        '
-        Me.btnDARegister.BeginGroup = true
-        Me.btnDARegister.Name = "btnDARegister"
-        Me.btnDARegister.Text = "Print View - DA Register"
-        '
-        'btnCurrentDA
-        '
-        Me.btnCurrentDA.Name = "btnCurrentDA"
-        Me.btnCurrentDA.Text = "Print View - Currently Loaded Records"
-        '
-        'btnMonthWiseDAStatistics
-        '
-        Me.btnMonthWiseDAStatistics.BeginGroup = true
-        Me.btnMonthWiseDAStatistics.Name = "btnMonthWiseDAStatistics"
-        Me.btnMonthWiseDAStatistics.Text = "Month Wise DA Statistics"
-        '
-        'btnPSWiseDAStatistics
-        '
-        Me.btnPSWiseDAStatistics.Name = "btnPSWiseDAStatistics"
-        Me.btnPSWiseDAStatistics.Text = "Station Wise DA Statistics"
-        '
-        'ButtonItem4
-        '
-        Me.ButtonItem4.Name = "ButtonItem4"
-        Me.ButtonItem4.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAStatement, Me.btnFPARegister, Me.btnCurrentFPA, Me.btnMonthWiseFPAStatistics, Me.btnFPAApplicationForm, Me.btnFPANotice, Me.btnFPABlankSlipForm, Me.btnFPAGenerateSlipForm})
-        Me.ButtonItem4.Text = "FP Attestation"
-        '
-        'btnFPAStatement
-        '
-        Me.btnFPAStatement.ForeColor = System.Drawing.Color.Red
-        Me.btnFPAStatement.Name = "btnFPAStatement"
-        Me.btnFPAStatement.Text = "FP Attestation Statement"
-        '
-        'btnFPARegister
-        '
-        Me.btnFPARegister.BeginGroup = true
-        Me.btnFPARegister.Name = "btnFPARegister"
-        Me.btnFPARegister.Text = "Print View - FPA Register"
-        '
-        'btnCurrentFPA
-        '
-        Me.btnCurrentFPA.Name = "btnCurrentFPA"
-        Me.btnCurrentFPA.Text = "Print View - Currently Loaded Records"
-        '
-        'btnMonthWiseFPAStatistics
-        '
-        Me.btnMonthWiseFPAStatistics.Name = "btnMonthWiseFPAStatistics"
-        Me.btnMonthWiseFPAStatistics.Text = "Month Wise Statistics"
-        '
-        'btnFPAApplicationForm
-        '
-        Me.btnFPAApplicationForm.BeginGroup = true
-        Me.btnFPAApplicationForm.ForeColor = System.Drawing.Color.Red
-        Me.btnFPAApplicationForm.Name = "btnFPAApplicationForm"
-        Me.btnFPAApplicationForm.Text = "Application Form"
-        '
-        'btnFPANotice
-        '
-        Me.btnFPANotice.ForeColor = System.Drawing.Color.Red
-        Me.btnFPANotice.Name = "btnFPANotice"
-        Me.btnFPANotice.Text = "Attestation Notice"
-        '
-        'btnFPABlankSlipForm
-        '
-        Me.btnFPABlankSlipForm.BeginGroup = true
-        Me.btnFPABlankSlipForm.ForeColor = System.Drawing.Color.Red
-        Me.btnFPABlankSlipForm.Name = "btnFPABlankSlipForm"
-        Me.btnFPABlankSlipForm.Text = "Fingerprint Slip Form - Blank"
-        '
-        'btnFPAGenerateSlipForm
-        '
-        Me.btnFPAGenerateSlipForm.ForeColor = System.Drawing.Color.Red
-        Me.btnFPAGenerateSlipForm.Name = "btnFPAGenerateSlipForm"
-        Me.btnFPAGenerateSlipForm.Text = "Fingerprint Slip Form - Generate"
-        '
-        'ButtonItem7
-        '
-        Me.ButtonItem7.BeginGroup = true
-        Me.ButtonItem7.Name = "ButtonItem7"
-        Me.ButtonItem7.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCDRegister, Me.btnCurrentCD})
-        Me.ButtonItem7.Text = "Court Duty"
-        '
-        'btnCDRegister
-        '
-        Me.btnCDRegister.Name = "btnCDRegister"
-        Me.btnCDRegister.Text = "Print View - CD Register"
-        '
-        'btnCurrentCD
-        '
-        Me.btnCurrentCD.Name = "btnCurrentCD"
-        Me.btnCurrentCD.Text = "Print View - Currently Loaded Records"
-        '
-        'ButtonItem8
-        '
-        Me.ButtonItem8.Name = "ButtonItem8"
-        Me.ButtonItem8.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDRegister, Me.btnCurrentID})
-        Me.ButtonItem8.Text = "Identified Slips"
-        '
-        'btnIDRegister
-        '
-        Me.btnIDRegister.Name = "btnIDRegister"
-        Me.btnIDRegister.Text = "Print View - Register"
-        '
-        'btnCurrentID
-        '
-        Me.btnCurrentID.Name = "btnCurrentID"
-        Me.btnCurrentID.Text = "Print View - Currently Loaded Records"
-        '
-        'ButtonItem6
-        '
-        Me.ButtonItem6.Name = "ButtonItem6"
-        Me.ButtonItem6.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnACRegister, Me.btnCurrentAC})
-        Me.ButtonItem6.Text = "Active Criminal"
-        '
-        'btnACRegister
-        '
-        Me.btnACRegister.Name = "btnACRegister"
-        Me.btnACRegister.Text = "Print View - Register"
-        '
-        'btnCurrentAC
-        '
-        Me.btnCurrentAC.Name = "btnCurrentAC"
-        Me.btnCurrentAC.Text = "Print View - Currently Loaded Records"
-        '
-        'btnPSList
-        '
-        Me.btnPSList.BeginGroup = true
-        Me.btnPSList.Name = "btnPSList"
-        Me.btnPSList.Text = "List of Police Stations"
-        '
-        'btnMonthlyStatements
-        '
-        Me.btnMonthlyStatements.BeginGroup = true
-        Me.btnMonthlyStatements.ForeColor = System.Drawing.Color.Red
-        Me.btnMonthlyStatements.Name = "btnMonthlyStatements"
-        Me.btnMonthlyStatements.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlySOC, Me.btnMonthlyDA, Me.btnMonthlyFPA, Me.btnRevenueCollectionStatement, Me.btnMonthlyIndividual, Me.btnGraveCrimeStatement, Me.btnListOfMonthlyIDCases, Me.btnRBNilReport, Me.btnVigilanceCase, Me.btnAttendanceStmt2})
-        Me.btnMonthlyStatements.Text = "Monthly Statements"
-        '
-        'btnMonthlySOC
-        '
-        Me.btnMonthlySOC.Name = "btnMonthlySOC"
-        Me.btnMonthlySOC.Text = "SOC Statement"
-        '
-        'btnMonthlyDA
-        '
-        Me.btnMonthlyDA.Name = "btnMonthlyDA"
-        Me.btnMonthlyDA.Text = "DA Statement"
-        '
-        'btnMonthlyFPA
-        '
-        Me.btnMonthlyFPA.Name = "btnMonthlyFPA"
-        Me.btnMonthlyFPA.Text = "FP Attestation Statement"
-        '
-        'btnRevenueCollectionStatement
-        '
-        Me.btnRevenueCollectionStatement.Name = "btnRevenueCollectionStatement"
-        Me.btnRevenueCollectionStatement.Text = "Revenue Collection Statement"
-        '
-        'btnMonthlyIndividual
-        '
-        Me.btnMonthlyIndividual.Name = "btnMonthlyIndividual"
-        Me.btnMonthlyIndividual.Text = "Individual Performance"
-        '
-        'btnGraveCrimeStatement
-        '
-        Me.btnGraveCrimeStatement.Name = "btnGraveCrimeStatement"
-        Me.btnGraveCrimeStatement.Text = "Grave Crime Statement"
-        '
-        'btnListOfMonthlyIDCases
-        '
-        Me.btnListOfMonthlyIDCases.Name = "btnListOfMonthlyIDCases"
-        Me.btnListOfMonthlyIDCases.Text = "List of Identified Cases"
-        '
-        'btnRBNilReport
-        '
-        Me.btnRBNilReport.Name = "btnRBNilReport"
-        Me.btnRBNilReport.Text = "Rail/Bus Warrant NIL Report"
-        '
-        'btnVigilanceCase
-        '
-        Me.btnVigilanceCase.Name = "btnVigilanceCase"
-        Me.btnVigilanceCase.Text = "Case Against Staff NIL Report"
-        '
-        'btnAttendanceStmt2
-        '
-        Me.btnAttendanceStmt2.BeginGroup = true
-        Me.btnAttendanceStmt2.ForeColor = System.Drawing.Color.Red
-        Me.btnAttendanceStmt2.Name = "btnAttendanceStmt2"
-        Me.btnAttendanceStmt2.Text = "Attendance Statement"
-        '
-        'btnCL
-        '
-        Me.btnCL.ForeColor = System.Drawing.Color.Red
-        Me.btnCL.Name = "btnCL"
-        Me.btnCL.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAttendance, Me.btnIndividualPerformanceCL, Me.btnRBWarrant, Me.btnSOCCL, Me.btnTABill, Me.btnForwardPhoto, Me.chkUseTIAtBottomOfLetter})
-        Me.btnCL.Text = "Covering Letters"
-        '
-        'btnAttendance
-        '
-        Me.btnAttendance.Name = "btnAttendance"
-        Me.btnAttendance.Text = "Attendance"
-        '
-        'btnIndividualPerformanceCL
-        '
-        Me.btnIndividualPerformanceCL.Name = "btnIndividualPerformanceCL"
-        Me.btnIndividualPerformanceCL.Text = "Individual Performance"
-        '
-        'btnRBWarrant
-        '
-        Me.btnRBWarrant.Name = "btnRBWarrant"
-        Me.btnRBWarrant.Text = "Rail/Bus Warrant"
-        '
-        'btnSOCCL
-        '
-        Me.btnSOCCL.Name = "btnSOCCL"
-        Me.btnSOCCL.Text = "SOC and DA Statement"
-        '
-        'btnTABill
-        '
-        Me.btnTABill.Name = "btnTABill"
-        Me.btnTABill.Text = "TA Bill"
-        '
-        'btnForwardPhoto
-        '
-        Me.btnForwardPhoto.BeginGroup = true
-        Me.btnForwardPhoto.Name = "btnForwardPhoto"
-        Me.btnForwardPhoto.Text = "SOC - Forward Photograph"
-        '
-        'chkUseTIAtBottomOfLetter
-        '
-        Me.chkUseTIAtBottomOfLetter.BeginGroup = true
-        Me.chkUseTIAtBottomOfLetter.Checked = true
-        Me.chkUseTIAtBottomOfLetter.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkUseTIAtBottomOfLetter.Name = "chkUseTIAtBottomOfLetter"
-        Me.chkUseTIAtBottomOfLetter.Text = "Include TI Name in Letter"
-        '
-        'btnPerformance
-        '
-        Me.btnPerformance.BeginGroup = true
-        Me.btnPerformance.ForeColor = System.Drawing.Color.Red
-        Me.btnPerformance.Name = "btnPerformance"
-        Me.btnPerformance.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlyPerformance, Me.btnQuarterlyPerformance, Me.btnIndividualPerformance, Me.btnAnnualStatics})
-        Me.btnPerformance.Text = "Performance Statements"
-        '
-        'btnMonthlyPerformance
-        '
-        Me.btnMonthlyPerformance.ForeColor = System.Drawing.Color.Red
-        Me.btnMonthlyPerformance.Name = "btnMonthlyPerformance"
-        Me.btnMonthlyPerformance.Text = "Monthly"
-        '
-        'btnQuarterlyPerformance
-        '
-        Me.btnQuarterlyPerformance.Name = "btnQuarterlyPerformance"
-        Me.btnQuarterlyPerformance.Text = "Quarterly"
-        '
-        'btnIndividualPerformance
-        '
-        Me.btnIndividualPerformance.BeginGroup = true
-        Me.btnIndividualPerformance.ForeColor = System.Drawing.Color.Red
-        Me.btnIndividualPerformance.Name = "btnIndividualPerformance"
-        Me.btnIndividualPerformance.Text = "Individual"
-        '
-        'btnAnnualStatics
-        '
-        Me.btnAnnualStatics.BeginGroup = true
-        Me.btnAnnualStatics.Name = "btnAnnualStatics"
-        Me.btnAnnualStatics.Text = "Annual Statistics"
-        '
-        'btnFacingSheetMenu
-        '
-        Me.btnFacingSheetMenu.BeginGroup = true
-        Me.btnFacingSheetMenu.Name = "btnFacingSheetMenu"
-        Me.btnFacingSheetMenu.Text = "Facing Sheet"
-        '
-        'btnSOCReport2
-        '
-        Me.btnSOCReport2.Name = "btnSOCReport2"
-        Me.btnSOCReport2.Text = "SOC Report"
-        '
-        'ButtonItem5
-        '
-        Me.ButtonItem5.BeginGroup = true
-        Me.ButtonItem5.ForeColor = System.Drawing.Color.Red
-        Me.ButtonItem5.Name = "ButtonItem5"
-        Me.ButtonItem5.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAttendanceStmt, Me.btnTourNote, Me.btnWeeklyDiary})
-        Me.ButtonItem5.Text = "Other Statements"
-        '
-        'btnAttendanceStmt
-        '
-        Me.btnAttendanceStmt.BeginGroup = true
-        Me.btnAttendanceStmt.Name = "btnAttendanceStmt"
-        Me.btnAttendanceStmt.Text = "Attendance"
-        '
-        'btnTourNote
-        '
-        Me.btnTourNote.BeginGroup = true
-        Me.btnTourNote.ForeColor = System.Drawing.Color.Red
-        Me.btnTourNote.Name = "btnTourNote"
-        Me.btnTourNote.Text = "Tour Note/TA Bill"
-        '
-        'btnWeeklyDiary
-        '
-        Me.btnWeeklyDiary.BeginGroup = true
-        Me.btnWeeklyDiary.Name = "btnWeeklyDiary"
-        Me.btnWeeklyDiary.Text = "Weekly Diary"
-        '
-        'btnReload
-        '
-        Me.btnReload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnReload.Image = CType(resources.GetObject("btnReload.Image"),System.Drawing.Image)
-        Me.btnReload.ImageSmall = CType(resources.GetObject("btnReload.ImageSmall"),System.Drawing.Image)
-        Me.btnReload.Name = "btnReload"
-        Me.btnReload.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5)
-        Me.btnReload.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnLoadThisYearRecords, Me.btnLoadSelectedYearRecords, Me.btnLoadThisMonthRecords, Me.btnLoadSpecifiedMonthsRecords, Me.btnReloadRecordsToAllTables})
-        Me.btnReload.SubItemsExpandWidth = 14
-        Me.btnReload.Text = "Reload"
-        '
-        'btnLoadThisYearRecords
-        '
-        Me.btnLoadThisYearRecords.Name = "btnLoadThisYearRecords"
-        Me.btnLoadThisYearRecords.Text = "Load Records of this year"
-        '
-        'btnLoadSelectedYearRecords
-        '
-        Me.btnLoadSelectedYearRecords.Name = "btnLoadSelectedYearRecords"
-        Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Year'"
-        '
-        'btnLoadThisMonthRecords
-        '
-        Me.btnLoadThisMonthRecords.BeginGroup = true
-        Me.btnLoadThisMonthRecords.Name = "btnLoadThisMonthRecords"
-        Me.btnLoadThisMonthRecords.Text = "Load Records of this month"
-        '
-        'btnLoadSpecifiedMonthsRecords
-        '
-        Me.btnLoadSpecifiedMonthsRecords.Name = "btnLoadSpecifiedMonthsRecords"
-        Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date of Inspection'"
-        '
-        'btnReloadRecordsToAllTables
-        '
-        Me.btnReloadRecordsToAllTables.BeginGroup = true
-        Me.btnReloadRecordsToAllTables.Name = "btnReloadRecordsToAllTables"
-        Me.btnReloadRecordsToAllTables.Text = "Reload Records to all tables"
-        '
-        'btnSearchMain
-        '
-        Me.btnSearchMain.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnSearchMain.Image = CType(resources.GetObject("btnSearchMain.Image"),System.Drawing.Image)
-        Me.btnSearchMain.ImageSmall = CType(resources.GetObject("btnSearchMain.ImageSmall"),System.Drawing.Image)
-        Me.btnSearchMain.Name = "btnSearchMain"
-        Me.btnSearchMain.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlF)
-        Me.btnSearchMain.SubItemsExpandWidth = 14
-        Me.btnSearchMain.Text = "Search"
-        '
-        'btnShowHideFields
-        '
-        Me.btnShowHideFields.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnShowHideFields.Image = CType(resources.GetObject("btnShowHideFields.Image"),System.Drawing.Image)
-        Me.btnShowHideFields.Name = "btnShowHideFields"
-        Me.btnShowHideFields.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlH)
-        Me.btnShowHideFields.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnHideAllDataEntryFields})
-        Me.btnShowHideFields.SubItemsExpandWidth = 14
-        Me.btnShowHideFields.Text = "Show"
-        '
-        'btnHideAllDataEntryFields
-        '
-        Me.btnHideAllDataEntryFields.Name = "btnHideAllDataEntryFields"
-        Me.btnHideAllDataEntryFields.Text = "Show/Hide All Tables"
-        '
         'RibbonBar1
         '
         Me.RibbonBar1.AutoOverflowEnabled = true
@@ -2311,57 +1773,6 @@ Partial Class frmMainInterface
         '
         '
         Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnNewEntry
-        '
-        Me.btnNewEntry.BeginGroup = true
-        Me.btnNewEntry.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnNewEntry.Image = CType(resources.GetObject("btnNewEntry.Image"),System.Drawing.Image)
-        Me.btnNewEntry.ImageSmall = CType(resources.GetObject("btnNewEntry.ImageSmall"),System.Drawing.Image)
-        Me.btnNewEntry.Name = "btnNewEntry"
-        Me.btnNewEntry.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlN)
-        Me.btnNewEntry.SubItemsExpandWidth = 14
-        Me.btnNewEntry.Text = "New"
-        '
-        'btnOpen
-        '
-        Me.btnOpen.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnOpen.Image = CType(resources.GetObject("btnOpen.Image"),System.Drawing.Image)
-        Me.btnOpen.Name = "btnOpen"
-        Me.btnOpen.SubItemsExpandWidth = 14
-        Me.btnOpen.Text = "Open"
-        '
-        'btnEdit
-        '
-        Me.btnEdit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"),System.Drawing.Image)
-        Me.btnEdit.ImageSmall = CType(resources.GetObject("btnEdit.ImageSmall"),System.Drawing.Image)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.SubItemsExpandWidth = 14
-        Me.btnEdit.Text = "Edit"
-        '
-        'btnDelete
-        '
-        Me.btnDelete.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"),System.Drawing.Image)
-        Me.btnDelete.ImageSmall = CType(resources.GetObject("btnDelete.ImageSmall"),System.Drawing.Image)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDeleteAll, Me.chkPreventDeletion})
-        Me.btnDelete.SubItemsExpandWidth = 14
-        Me.btnDelete.Text = "Delete"
-        '
-        'btnDeleteAll
-        '
-        Me.btnDeleteAll.Name = "btnDeleteAll"
-        Me.btnDeleteAll.Text = "Delete All Records"
-        '
-        'chkPreventDeletion
-        '
-        Me.chkPreventDeletion.BeginGroup = true
-        Me.chkPreventDeletion.Checked = true
-        Me.chkPreventDeletion.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkPreventDeletion.Name = "chkPreventDeletion"
-        Me.chkPreventDeletion.Text = "Prevent Deletion"
         '
         'RibbonPanel5
         '
@@ -2459,28 +1870,6 @@ Partial Class frmMainInterface
         '
         Me.RibbonBar16.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'btnCheckUpdate
-        '
-        Me.btnCheckUpdate.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnCheckUpdate.Image = CType(resources.GetObject("btnCheckUpdate.Image"),System.Drawing.Image)
-        Me.btnCheckUpdate.Name = "btnCheckUpdate"
-        Me.btnCheckUpdate.SubItemsExpandWidth = 14
-        Me.btnCheckUpdate.Text = "Check for Updates"
-        '
-        'btnDownloadInstallerFile
-        '
-        Me.btnDownloadInstallerFile.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDownloadInstallerFile.Image = CType(resources.GetObject("btnDownloadInstallerFile.Image"),System.Drawing.Image)
-        Me.btnDownloadInstallerFile.Name = "btnDownloadInstallerFile"
-        Me.btnDownloadInstallerFile.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDownloadInstallerInBrowser})
-        Me.btnDownloadInstallerFile.SubItemsExpandWidth = 14
-        Me.btnDownloadInstallerFile.Text = "Download Installer"
-        '
-        'btnDownloadInstallerInBrowser
-        '
-        Me.btnDownloadInstallerInBrowser.Name = "btnDownloadInstallerInBrowser"
-        Me.btnDownloadInstallerInBrowser.Text = "Download Installer in Browser"
-        '
         'RibbonBar7
         '
         Me.RibbonBar7.AutoOverflowEnabled = true
@@ -2511,27 +1900,6 @@ Partial Class frmMainInterface
         '
         '
         Me.RibbonBar7.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnSettingsWizard
-        '
-        Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
-        Me.btnSettingsWizard.Name = "btnSettingsWizard"
-        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
-        Me.btnSettingsWizard.SubItemsExpandWidth = 14
-        Me.btnSettingsWizard.Text = "Settings Wizard"
-        '
-        'btnOpenRegedit
-        '
-        Me.btnOpenRegedit.BeginGroup = true
-        Me.btnOpenRegedit.Name = "btnOpenRegedit"
-        Me.btnOpenRegedit.Text = "Open Regedit"
-        '
-        'btnOpenTemplatesFolder
-        '
-        Me.btnOpenTemplatesFolder.BeginGroup = true
-        Me.btnOpenTemplatesFolder.Name = "btnOpenTemplatesFolder"
-        Me.btnOpenTemplatesFolder.Text = "Open Templates Folder"
         '
         'RibbonBar9
         '
@@ -5190,32 +4558,6 @@ Partial Class frmMainInterface
         Me.btnOpenRecord.Name = "btnOpenRecord"
         Me.btnOpenRecord.Text = "Open"
         '
-        'btnEditContextMenu
-        '
-        Me.btnEditContextMenu.BeginGroup = true
-        Me.btnEditContextMenu.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnEditContextMenu.Image = CType(resources.GetObject("btnEditContextMenu.Image"),System.Drawing.Image)
-        Me.btnEditContextMenu.Name = "btnEditContextMenu"
-        Me.btnEditContextMenu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
-        Me.btnEditContextMenu.Text = "Edit"
-        '
-        'btnDeleteContextMenu
-        '
-        Me.btnDeleteContextMenu.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDeleteContextMenu.Image = CType(resources.GetObject("btnDeleteContextMenu.Image"),System.Drawing.Image)
-        Me.btnDeleteContextMenu.Name = "btnDeleteContextMenu"
-        Me.btnDeleteContextMenu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
-        Me.btnDeleteContextMenu.Text = "Delete"
-        '
-        'btnViewContextMenu
-        '
-        Me.btnViewContextMenu.BeginGroup = true
-        Me.btnViewContextMenu.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnViewContextMenu.Image = CType(resources.GetObject("btnViewContextMenu.Image"),System.Drawing.Image)
-        Me.btnViewContextMenu.Name = "btnViewContextMenu"
-        Me.btnViewContextMenu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlV)
-        Me.btnViewContextMenu.Text = "View"
-        '
         'ButtonItem19
         '
         Me.ButtonItem19.AutoExpandOnClick = true
@@ -5230,32 +4572,6 @@ Partial Class frmMainInterface
         Me.ButtonItem20.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlO)
         Me.ButtonItem20.Text = "Open"
         '
-        'ButtonItem21
-        '
-        Me.ButtonItem21.BeginGroup = true
-        Me.ButtonItem21.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem21.Image = CType(resources.GetObject("ButtonItem21.Image"),System.Drawing.Image)
-        Me.ButtonItem21.Name = "ButtonItem21"
-        Me.ButtonItem21.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
-        Me.ButtonItem21.Text = "Edit"
-        '
-        'ButtonItem22
-        '
-        Me.ButtonItem22.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem22.Image = CType(resources.GetObject("ButtonItem22.Image"),System.Drawing.Image)
-        Me.ButtonItem22.Name = "ButtonItem22"
-        Me.ButtonItem22.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
-        Me.ButtonItem22.Text = "Delete"
-        '
-        'ButtonItem23
-        '
-        Me.ButtonItem23.BeginGroup = true
-        Me.ButtonItem23.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem23.Image = CType(resources.GetObject("ButtonItem23.Image"),System.Drawing.Image)
-        Me.ButtonItem23.Name = "ButtonItem23"
-        Me.ButtonItem23.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlV)
-        Me.ButtonItem23.Text = "View"
-        '
         'ButtonItem24
         '
         Me.ButtonItem24.AutoExpandOnClick = true
@@ -5269,32 +4585,6 @@ Partial Class frmMainInterface
         Me.ButtonItem25.Name = "ButtonItem25"
         Me.ButtonItem25.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlO)
         Me.ButtonItem25.Text = "Open"
-        '
-        'ButtonItem26
-        '
-        Me.ButtonItem26.BeginGroup = true
-        Me.ButtonItem26.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem26.Image = CType(resources.GetObject("ButtonItem26.Image"),System.Drawing.Image)
-        Me.ButtonItem26.Name = "ButtonItem26"
-        Me.ButtonItem26.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
-        Me.ButtonItem26.Text = "Edit"
-        '
-        'ButtonItem27
-        '
-        Me.ButtonItem27.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem27.Image = CType(resources.GetObject("ButtonItem27.Image"),System.Drawing.Image)
-        Me.ButtonItem27.Name = "ButtonItem27"
-        Me.ButtonItem27.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
-        Me.ButtonItem27.Text = "Delete"
-        '
-        'ButtonItem28
-        '
-        Me.ButtonItem28.BeginGroup = true
-        Me.ButtonItem28.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.ButtonItem28.Image = CType(resources.GetObject("ButtonItem28.Image"),System.Drawing.Image)
-        Me.ButtonItem28.Name = "ButtonItem28"
-        Me.ButtonItem28.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlV)
-        Me.ButtonItem28.Text = "View"
         '
         'StatusBar
         '
@@ -6149,18 +5439,6 @@ Partial Class frmMainInterface
         Me.lblSOCPO.TabIndex = 134
         Me.lblSOCPO.Text = "<font color=""#ED1C24"">^</font><b></b>"
         '
-        'btnFacingSheet
-        '
-        Me.btnFacingSheet.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnFacingSheet.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnFacingSheet.Image = CType(resources.GetObject("btnFacingSheet.Image"),System.Drawing.Image)
-        Me.btnFacingSheet.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnFacingSheet.Location = New System.Drawing.Point(1218, 249)
-        Me.btnFacingSheet.Name = "btnFacingSheet"
-        Me.btnFacingSheet.Size = New System.Drawing.Size(110, 73)
-        Me.btnFacingSheet.TabIndex = 33
-        Me.btnFacingSheet.Text = "Facing Sheet"
-        '
         'txtSOCDateOfPhotography
         '
         Me.txtSOCDateOfPhotography.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
@@ -6289,12 +5567,6 @@ Partial Class frmMainInterface
         Me.btnViewACSlipContext.Name = "btnViewACSlipContext"
         Me.btnViewACSlipContext.Text = "View FP Slip"
         '
-        'btnLocateFPSlip
-        '
-        Me.btnLocateFPSlip.Image = CType(resources.GetObject("btnLocateFPSlip.Image"),System.Drawing.Image)
-        Me.btnLocateFPSlip.Name = "btnLocateFPSlip"
-        Me.btnLocateFPSlip.Text = "Locate FP Slip"
-        '
         'btnImportCP
         '
         Me.btnImportCP.BeginGroup = true
@@ -6314,12 +5586,6 @@ Partial Class frmMainInterface
         Me.btnViewCP.Icon = CType(resources.GetObject("btnViewCP.Icon"),System.Drawing.Icon)
         Me.btnViewCP.Name = "btnViewCP"
         Me.btnViewCP.Text = "View Chance Prints"
-        '
-        'btnLocateCP
-        '
-        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"),System.Drawing.Image)
-        Me.btnLocateCP.Name = "btnLocateCP"
-        Me.btnLocateCP.Text = "Locate Chance Prints"
         '
         'btnSOCReportContext
         '
@@ -6706,69 +5972,6 @@ Partial Class frmMainInterface
         Me.txtSOCYear.TabIndex = 1
         Me.txtSOCYear.Value = 1900
         Me.txtSOCYear.WatermarkText = "Year"
-        '
-        'btnSearchSOC
-        '
-        Me.btnSearchSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchSOC.Image = CType(resources.GetObject("btnSearchSOC.Image"),System.Drawing.Image)
-        Me.btnSearchSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchSOC.Location = New System.Drawing.Point(1218, 93)
-        Me.btnSearchSOC.Name = "btnSearchSOC"
-        Me.btnSearchSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchSOC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSOCFindByNumber, Me.btnSearchSOCInYear, Me.btnSearchWithGraveCrime, Me.btnSOCAdvancedSearch})
-        Me.btnSearchSOC.TabIndex = 31
-        Me.btnSearchSOC.Text = "Search"
-        '
-        'btnSOCFindByNumber
-        '
-        Me.btnSOCFindByNumber.GlobalItem = false
-        Me.btnSOCFindByNumber.Name = "btnSOCFindByNumber"
-        Me.btnSOCFindByNumber.Text = "Find by SOC Number"
-        '
-        'btnSearchSOCInYear
-        '
-        Me.btnSearchSOCInYear.BeginGroup = true
-        Me.btnSearchSOCInYear.GlobalItem = false
-        Me.btnSearchSOCInYear.Name = "btnSearchSOCInYear"
-        Me.btnSearchSOCInYear.Text = "Search in selected Year"
-        '
-        'btnSearchWithGraveCrime
-        '
-        Me.btnSearchWithGraveCrime.GlobalItem = false
-        Me.btnSearchWithGraveCrime.Name = "btnSearchWithGraveCrime"
-        Me.btnSearchWithGraveCrime.Text = "Search with Grave Crime Value"
-        '
-        'btnSOCAdvancedSearch
-        '
-        Me.btnSOCAdvancedSearch.BeginGroup = true
-        Me.btnSOCAdvancedSearch.GlobalItem = false
-        Me.btnSOCAdvancedSearch.Name = "btnSOCAdvancedSearch"
-        Me.btnSOCAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearSOC
-        '
-        Me.btnClearSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearSOC.Image = CType(resources.GetObject("btnClearSOC.Image"),System.Drawing.Image)
-        Me.btnClearSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearSOC.Location = New System.Drawing.Point(1218, 171)
-        Me.btnClearSOC.Name = "btnClearSOC"
-        Me.btnClearSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearSOC.TabIndex = 32
-        Me.btnClearSOC.Text = "Clear All Fields"
-        '
-        'btnSaveSOC
-        '
-        Me.btnSaveSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveSOC.Image = CType(resources.GetObject("btnSaveSOC.Image"),System.Drawing.Image)
-        Me.btnSaveSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveSOC.Location = New System.Drawing.Point(1218, 14)
-        Me.btnSaveSOC.Name = "btnSaveSOC"
-        Me.btnSaveSOC.Size = New System.Drawing.Size(110, 74)
-        Me.btnSaveSOC.TabIndex = 30
-        Me.btnSaveSOC.Text = "Save"
         '
         'txtSOCPlace
         '
@@ -7410,18 +6613,6 @@ Partial Class frmMainInterface
         Me.PanelEx7.Style.GradientAngle = 90
         Me.PanelEx7.TabIndex = 22
         '
-        'btnSaveOfficeSettings
-        '
-        Me.btnSaveOfficeSettings.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveOfficeSettings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveOfficeSettings.Image = CType(resources.GetObject("btnSaveOfficeSettings.Image"),System.Drawing.Image)
-        Me.btnSaveOfficeSettings.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveOfficeSettings.Location = New System.Drawing.Point(1034, 96)
-        Me.btnSaveOfficeSettings.Name = "btnSaveOfficeSettings"
-        Me.btnSaveOfficeSettings.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveOfficeSettings.TabIndex = 14
-        Me.btnSaveOfficeSettings.Text = "Save"
-        '
         'GroupPanel5
         '
         Me.GroupPanel5.BackColor = System.Drawing.Color.Transparent
@@ -7614,7 +6805,7 @@ Partial Class frmMainInterface
         Me.LabelX159.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX159.Location = New System.Drawing.Point(258, 23)
         Me.LabelX159.Name = "LabelX159"
-        Me.LabelX159.Size = New System.Drawing.Size(120, 34)
+        Me.LabelX159.Size = New System.Drawing.Size(167, 18)
         Me.LabelX159.TabIndex = 31
         Me.LabelX159.Text = "<font color=""#ED1C24""><font color=""#ED1C24""><font color=""#BA1419"">(Only the numbe"& _ 
     "r is needed)</font></font></font>"
@@ -8317,18 +7508,6 @@ Partial Class frmMainInterface
         Me.DARate.HeaderText = "DA Rate"
         Me.DARate.Name = "DARate"
         '
-        'btnSaveIO
-        '
-        Me.btnSaveIO.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveIO.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveIO.Image = CType(resources.GetObject("btnSaveIO.Image"),System.Drawing.Image)
-        Me.btnSaveIO.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveIO.Location = New System.Drawing.Point(330, 309)
-        Me.btnSaveIO.Name = "btnSaveIO"
-        Me.btnSaveIO.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveIO.TabIndex = 6
-        Me.btnSaveIO.Text = "Save"
-        '
         'IOTabItem
         '
         Me.IOTabItem.AttachedControl = Me.TabControlPanel5
@@ -8588,18 +7767,6 @@ Partial Class frmMainInterface
         Me.lblDAName.Size = New System.Drawing.Size(11, 22)
         Me.lblDAName.TabIndex = 136
         Me.lblDAName.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'btnViewDASlip
-        '
-        Me.btnViewDASlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnViewDASlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnViewDASlip.Image = CType(resources.GetObject("btnViewDASlip.Image"),System.Drawing.Image)
-        Me.btnViewDASlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnViewDASlip.Location = New System.Drawing.Point(1163, 266)
-        Me.btnViewDASlip.Name = "btnViewDASlip"
-        Me.btnViewDASlip.Size = New System.Drawing.Size(110, 73)
-        Me.btnViewDASlip.TabIndex = 19
-        Me.btnViewDASlip.Text = "View DA Slip"
         '
         'txtDANumberOnly
         '
@@ -8868,63 +8035,6 @@ Partial Class frmMainInterface
         Me.btnDASelectFPSlip.TabIndex = 15
         Me.btnDASelectFPSlip.TabStop = false
         Me.btnDASelectFPSlip.Text = "Select"
-        '
-        'btnSearchDA
-        '
-        Me.btnSearchDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchDA.Image = CType(resources.GetObject("btnSearchDA.Image"),System.Drawing.Image)
-        Me.btnSearchDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchDA.Location = New System.Drawing.Point(1163, 96)
-        Me.btnSearchDA.Name = "btnSearchDA"
-        Me.btnSearchDA.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchDA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAFindByNumber, Me.btnSearchDAInYear, Me.btnDAAdvancedSearch})
-        Me.btnSearchDA.TabIndex = 17
-        Me.btnSearchDA.Text = "Search"
-        '
-        'btnDAFindByNumber
-        '
-        Me.btnDAFindByNumber.GlobalItem = false
-        Me.btnDAFindByNumber.Name = "btnDAFindByNumber"
-        Me.btnDAFindByNumber.Text = "Find by DA Number"
-        '
-        'btnSearchDAInYear
-        '
-        Me.btnSearchDAInYear.BeginGroup = true
-        Me.btnSearchDAInYear.GlobalItem = false
-        Me.btnSearchDAInYear.Name = "btnSearchDAInYear"
-        Me.btnSearchDAInYear.Text = "Search in selected Year"
-        '
-        'btnDAAdvancedSearch
-        '
-        Me.btnDAAdvancedSearch.BeginGroup = true
-        Me.btnDAAdvancedSearch.GlobalItem = false
-        Me.btnDAAdvancedSearch.Name = "btnDAAdvancedSearch"
-        Me.btnDAAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearDAFields
-        '
-        Me.btnClearDAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearDAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearDAFields.Image = CType(resources.GetObject("btnClearDAFields.Image"),System.Drawing.Image)
-        Me.btnClearDAFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearDAFields.Location = New System.Drawing.Point(1163, 181)
-        Me.btnClearDAFields.Name = "btnClearDAFields"
-        Me.btnClearDAFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearDAFields.TabIndex = 18
-        Me.btnClearDAFields.Text = "Clear All Fields"
-        '
-        'btnSaveDA
-        '
-        Me.btnSaveDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveDA.Image = CType(resources.GetObject("btnSaveDA.Image"),System.Drawing.Image)
-        Me.btnSaveDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveDA.Location = New System.Drawing.Point(1163, 11)
-        Me.btnSaveDA.Name = "btnSaveDA"
-        Me.btnSaveDA.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveDA.TabIndex = 16
-        Me.btnSaveDA.Text = "Save"
         '
         'txtDASection
         '
@@ -9940,56 +9050,6 @@ Partial Class frmMainInterface
         Me.LabelX103.TabIndex = 59
         Me.LabelX103.Text = "<font color=""#ED1C24"">*</font><b></b>"
         '
-        'btnSearchRSOC
-        '
-        Me.btnSearchRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchRSOC.Image = CType(resources.GetObject("btnSearchRSOC.Image"),System.Drawing.Image)
-        Me.btnSearchRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchRSOC.Location = New System.Drawing.Point(1189, 102)
-        Me.btnSearchRSOC.Name = "btnSearchRSOC"
-        Me.btnSearchRSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchRSOC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRSOCFindByNumber, Me.btnRSOCAdvancedSearch})
-        Me.btnSearchRSOC.TabIndex = 12
-        Me.btnSearchRSOC.Text = "Search"
-        '
-        'btnRSOCFindByNumber
-        '
-        Me.btnRSOCFindByNumber.GlobalItem = false
-        Me.btnRSOCFindByNumber.Name = "btnRSOCFindByNumber"
-        Me.btnRSOCFindByNumber.Text = "Find By Number"
-        '
-        'btnRSOCAdvancedSearch
-        '
-        Me.btnRSOCAdvancedSearch.BeginGroup = true
-        Me.btnRSOCAdvancedSearch.GlobalItem = false
-        Me.btnRSOCAdvancedSearch.Name = "btnRSOCAdvancedSearch"
-        Me.btnRSOCAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearRSOC
-        '
-        Me.btnClearRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearRSOC.Image = CType(resources.GetObject("btnClearRSOC.Image"),System.Drawing.Image)
-        Me.btnClearRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearRSOC.Location = New System.Drawing.Point(1189, 193)
-        Me.btnClearRSOC.Name = "btnClearRSOC"
-        Me.btnClearRSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearRSOC.TabIndex = 13
-        Me.btnClearRSOC.Text = "Clear All Fields"
-        '
-        'btnSaveRSOC
-        '
-        Me.btnSaveRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveRSOC.Image = CType(resources.GetObject("btnSaveRSOC.Image"),System.Drawing.Image)
-        Me.btnSaveRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveRSOC.Location = New System.Drawing.Point(1189, 11)
-        Me.btnSaveRSOC.Name = "btnSaveRSOC"
-        Me.btnSaveRSOC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveRSOC.TabIndex = 11
-        Me.btnSaveRSOC.Text = "Save"
-        '
         'cmbRSOCPoliceStation
         '
         Me.cmbRSOCPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
@@ -10580,63 +9640,6 @@ Partial Class frmMainInterface
         Me.txtCDYear.TabIndex = 1
         Me.txtCDYear.Value = 1900
         Me.txtCDYear.WatermarkText = "Year"
-        '
-        'btnSearchCD
-        '
-        Me.btnSearchCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchCD.Image = CType(resources.GetObject("btnSearchCD.Image"),System.Drawing.Image)
-        Me.btnSearchCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchCD.Location = New System.Drawing.Point(990, 86)
-        Me.btnSearchCD.Name = "btnSearchCD"
-        Me.btnSearchCD.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchCD.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCDFindByNumber, Me.btnSearchCDInYear, Me.btnCDAdvancedSearch})
-        Me.btnSearchCD.TabIndex = 12
-        Me.btnSearchCD.Text = "Search"
-        '
-        'btnCDFindByNumber
-        '
-        Me.btnCDFindByNumber.GlobalItem = false
-        Me.btnCDFindByNumber.Name = "btnCDFindByNumber"
-        Me.btnCDFindByNumber.Text = "Find by CD Number"
-        '
-        'btnSearchCDInYear
-        '
-        Me.btnSearchCDInYear.BeginGroup = true
-        Me.btnSearchCDInYear.GlobalItem = false
-        Me.btnSearchCDInYear.Name = "btnSearchCDInYear"
-        Me.btnSearchCDInYear.Text = "Search in selected Year"
-        '
-        'btnCDAdvancedSearch
-        '
-        Me.btnCDAdvancedSearch.BeginGroup = true
-        Me.btnCDAdvancedSearch.GlobalItem = false
-        Me.btnCDAdvancedSearch.Name = "btnCDAdvancedSearch"
-        Me.btnCDAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearCDFields
-        '
-        Me.btnClearCDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearCDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearCDFields.Image = CType(resources.GetObject("btnClearCDFields.Image"),System.Drawing.Image)
-        Me.btnClearCDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearCDFields.Location = New System.Drawing.Point(990, 165)
-        Me.btnClearCDFields.Name = "btnClearCDFields"
-        Me.btnClearCDFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearCDFields.TabIndex = 13
-        Me.btnClearCDFields.Text = "Clear All Fields"
-        '
-        'btnSaveCD
-        '
-        Me.btnSaveCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveCD.Image = CType(resources.GetObject("btnSaveCD.Image"),System.Drawing.Image)
-        Me.btnSaveCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveCD.Location = New System.Drawing.Point(990, 7)
-        Me.btnSaveCD.Name = "btnSaveCD"
-        Me.btnSaveCD.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveCD.TabIndex = 11
-        Me.btnSaveCD.Text = "Save"
         '
         'cmbCDPoliceStation
         '
@@ -11370,60 +10373,6 @@ Partial Class frmMainInterface
         Me.LabelX69.TabIndex = 129
         Me.LabelX69.Text = "<font color=""#ED1C24"">*</font><b></b>"
         '
-        'btnSearchFPA
-        '
-        Me.btnSearchFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchFPA.Image = CType(resources.GetObject("btnSearchFPA.Image"),System.Drawing.Image)
-        Me.btnSearchFPA.Location = New System.Drawing.Point(1177, 69)
-        Me.btnSearchFPA.Name = "btnSearchFPA"
-        Me.btnSearchFPA.Size = New System.Drawing.Size(141, 50)
-        Me.btnSearchFPA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAFindByNumber, Me.btnSearchInFPAYear, Me.btnFPAAdvancedSearch})
-        Me.btnSearchFPA.TabIndex = 74
-        Me.btnSearchFPA.Text = "Search"
-        '
-        'btnFPAFindByNumber
-        '
-        Me.btnFPAFindByNumber.GlobalItem = false
-        Me.btnFPAFindByNumber.Name = "btnFPAFindByNumber"
-        Me.btnFPAFindByNumber.Text = "Find by FPA Number"
-        '
-        'btnSearchInFPAYear
-        '
-        Me.btnSearchInFPAYear.BeginGroup = true
-        Me.btnSearchInFPAYear.GlobalItem = false
-        Me.btnSearchInFPAYear.Name = "btnSearchInFPAYear"
-        Me.btnSearchInFPAYear.Text = "Search in selected Year"
-        '
-        'btnFPAAdvancedSearch
-        '
-        Me.btnFPAAdvancedSearch.BeginGroup = true
-        Me.btnFPAAdvancedSearch.GlobalItem = false
-        Me.btnFPAAdvancedSearch.Name = "btnFPAAdvancedSearch"
-        Me.btnFPAAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearFPAFields
-        '
-        Me.btnClearFPAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearFPAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearFPAFields.Image = CType(resources.GetObject("btnClearFPAFields.Image"),System.Drawing.Image)
-        Me.btnClearFPAFields.Location = New System.Drawing.Point(1177, 126)
-        Me.btnClearFPAFields.Name = "btnClearFPAFields"
-        Me.btnClearFPAFields.Size = New System.Drawing.Size(141, 50)
-        Me.btnClearFPAFields.TabIndex = 75
-        Me.btnClearFPAFields.Text = "Clear All Fields"
-        '
-        'btnSaveFPA
-        '
-        Me.btnSaveFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveFPA.Image = CType(resources.GetObject("btnSaveFPA.Image"),System.Drawing.Image)
-        Me.btnSaveFPA.Location = New System.Drawing.Point(1177, 12)
-        Me.btnSaveFPA.Name = "btnSaveFPA"
-        Me.btnSaveFPA.Size = New System.Drawing.Size(141, 50)
-        Me.btnSaveFPA.TabIndex = 73
-        Me.btnSaveFPA.Text = "Save"
-        '
         'LabelX67
         '
         Me.LabelX67.AutoSize = true
@@ -12106,18 +11055,6 @@ Partial Class frmMainInterface
         Me.lblACAlias.TabIndex = 136
         Me.lblACAlias.Text = "<font color=""#ED1C24"">^</font><b></b>"
         '
-        'btnACViewFPSlip
-        '
-        Me.btnACViewFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnACViewFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnACViewFPSlip.Image = CType(resources.GetObject("btnACViewFPSlip.Image"),System.Drawing.Image)
-        Me.btnACViewFPSlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnACViewFPSlip.Location = New System.Drawing.Point(1163, 266)
-        Me.btnACViewFPSlip.Name = "btnACViewFPSlip"
-        Me.btnACViewFPSlip.Size = New System.Drawing.Size(110, 73)
-        Me.btnACViewFPSlip.TabIndex = 18
-        Me.btnACViewFPSlip.Text = "View FP Slip"
-        '
         'LabelX128
         '
         Me.LabelX128.AutoSize = true
@@ -12307,56 +11244,6 @@ Partial Class frmMainInterface
         Me.btnACSelectFPSlip.TabIndex = 15
         Me.btnACSelectFPSlip.TabStop = false
         Me.btnACSelectFPSlip.Text = "Select"
-        '
-        'btnSearchAC
-        '
-        Me.btnSearchAC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchAC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchAC.Image = CType(resources.GetObject("btnSearchAC.Image"),System.Drawing.Image)
-        Me.btnSearchAC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchAC.Location = New System.Drawing.Point(1163, 96)
-        Me.btnSearchAC.Name = "btnSearchAC"
-        Me.btnSearchAC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchAC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnACFindByNumber, Me.btnACAdvancedSearch})
-        Me.btnSearchAC.TabIndex = 16
-        Me.btnSearchAC.Text = "Search"
-        '
-        'btnACFindByNumber
-        '
-        Me.btnACFindByNumber.GlobalItem = false
-        Me.btnACFindByNumber.Name = "btnACFindByNumber"
-        Me.btnACFindByNumber.Text = "Find by Number"
-        '
-        'btnACAdvancedSearch
-        '
-        Me.btnACAdvancedSearch.BeginGroup = true
-        Me.btnACAdvancedSearch.GlobalItem = false
-        Me.btnACAdvancedSearch.Name = "btnACAdvancedSearch"
-        Me.btnACAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearACFields
-        '
-        Me.btnClearACFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearACFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearACFields.Image = CType(resources.GetObject("btnClearACFields.Image"),System.Drawing.Image)
-        Me.btnClearACFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearACFields.Location = New System.Drawing.Point(1163, 181)
-        Me.btnClearACFields.Name = "btnClearACFields"
-        Me.btnClearACFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearACFields.TabIndex = 17
-        Me.btnClearACFields.Text = "Clear All Fields"
-        '
-        'btnSaveAC
-        '
-        Me.btnSaveAC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveAC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveAC.Image = CType(resources.GetObject("btnSaveAC.Image"),System.Drawing.Image)
-        Me.btnSaveAC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveAC.Location = New System.Drawing.Point(1163, 11)
-        Me.btnSaveAC.Name = "btnSaveAC"
-        Me.btnSaveAC.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveAC.TabIndex = 15
-        Me.btnSaveAC.Text = "Save"
         '
         'txtACSection
         '
@@ -13060,18 +11947,6 @@ Partial Class frmMainInterface
         Me.lblIDAlias.TabIndex = 136
         Me.lblIDAlias.Text = "<font color=""#ED1C24"">^</font><b></b>"
         '
-        'btnIDViewFPSlip
-        '
-        Me.btnIDViewFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnIDViewFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnIDViewFPSlip.Image = CType(resources.GetObject("btnIDViewFPSlip.Image"),System.Drawing.Image)
-        Me.btnIDViewFPSlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnIDViewFPSlip.Location = New System.Drawing.Point(1163, 266)
-        Me.btnIDViewFPSlip.Name = "btnIDViewFPSlip"
-        Me.btnIDViewFPSlip.Size = New System.Drawing.Size(110, 73)
-        Me.btnIDViewFPSlip.TabIndex = 19
-        Me.btnIDViewFPSlip.Text = "View FP Slip"
-        '
         'LabelX106
         '
         Me.LabelX106.AutoSize = true
@@ -13261,56 +12136,6 @@ Partial Class frmMainInterface
         Me.btnIDSelectFPSlip.TabIndex = 15
         Me.btnIDSelectFPSlip.TabStop = false
         Me.btnIDSelectFPSlip.Text = "Select"
-        '
-        'btnSearchID
-        '
-        Me.btnSearchID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchID.Image = CType(resources.GetObject("btnSearchID.Image"),System.Drawing.Image)
-        Me.btnSearchID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchID.Location = New System.Drawing.Point(1163, 96)
-        Me.btnSearchID.Name = "btnSearchID"
-        Me.btnSearchID.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchID.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDFindByNumber, Me.btnIDAdvancedSearch})
-        Me.btnSearchID.TabIndex = 17
-        Me.btnSearchID.Text = "Search"
-        '
-        'btnIDFindByNumber
-        '
-        Me.btnIDFindByNumber.GlobalItem = false
-        Me.btnIDFindByNumber.Name = "btnIDFindByNumber"
-        Me.btnIDFindByNumber.Text = "Find by Number"
-        '
-        'btnIDAdvancedSearch
-        '
-        Me.btnIDAdvancedSearch.BeginGroup = true
-        Me.btnIDAdvancedSearch.GlobalItem = false
-        Me.btnIDAdvancedSearch.Name = "btnIDAdvancedSearch"
-        Me.btnIDAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearIDFields
-        '
-        Me.btnClearIDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearIDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearIDFields.Image = CType(resources.GetObject("btnClearIDFields.Image"),System.Drawing.Image)
-        Me.btnClearIDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearIDFields.Location = New System.Drawing.Point(1163, 181)
-        Me.btnClearIDFields.Name = "btnClearIDFields"
-        Me.btnClearIDFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearIDFields.TabIndex = 18
-        Me.btnClearIDFields.Text = "Clear All Fields"
-        '
-        'btnSaveID
-        '
-        Me.btnSaveID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveID.Image = CType(resources.GetObject("btnSaveID.Image"),System.Drawing.Image)
-        Me.btnSaveID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveID.Location = New System.Drawing.Point(1163, 11)
-        Me.btnSaveID.Name = "btnSaveID"
-        Me.btnSaveID.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveID.TabIndex = 16
-        Me.btnSaveID.Text = "Save"
         '
         'txtIDSection
         '
@@ -13904,18 +12729,6 @@ Partial Class frmMainInterface
         'ComboItem19
         '
         Me.ComboItem19.Text = "SI"
-        '
-        'btnSavePS
-        '
-        Me.btnSavePS.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSavePS.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSavePS.Image = CType(resources.GetObject("btnSavePS.Image"),System.Drawing.Image)
-        Me.btnSavePS.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSavePS.Location = New System.Drawing.Point(270, 88)
-        Me.btnSavePS.Name = "btnSavePS"
-        Me.btnSavePS.Size = New System.Drawing.Size(110, 73)
-        Me.btnSavePS.TabIndex = 6
-        Me.btnSavePS.Text = "Save"
         '
         'LabelX79
         '
@@ -14656,6 +13469,507 @@ Partial Class frmMainInterface
         '
         Me.LastModificationTableAdapter.ClearBeforeFill = true
         '
+        'btnFacingSheet
+        '
+        Me.btnFacingSheet.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnFacingSheet.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnFacingSheet.Image = CType(resources.GetObject("btnFacingSheet.Image"),System.Drawing.Image)
+        Me.btnFacingSheet.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnFacingSheet.Location = New System.Drawing.Point(1218, 249)
+        Me.btnFacingSheet.Name = "btnFacingSheet"
+        Me.btnFacingSheet.Size = New System.Drawing.Size(110, 73)
+        Me.btnFacingSheet.TabIndex = 33
+        Me.btnFacingSheet.Text = "Facing Sheet"
+        '
+        'btnLocateFPSlip
+        '
+        Me.btnLocateFPSlip.Image = CType(resources.GetObject("btnLocateFPSlip.Image"),System.Drawing.Image)
+        Me.btnLocateFPSlip.Name = "btnLocateFPSlip"
+        Me.btnLocateFPSlip.Text = "Locate FP Slip"
+        '
+        'btnLocateCP
+        '
+        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"),System.Drawing.Image)
+        Me.btnLocateCP.Name = "btnLocateCP"
+        Me.btnLocateCP.Text = "Locate Chance Prints"
+        '
+        'btnSearchSOC
+        '
+        Me.btnSearchSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchSOC.Image = CType(resources.GetObject("btnSearchSOC.Image"),System.Drawing.Image)
+        Me.btnSearchSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchSOC.Location = New System.Drawing.Point(1218, 93)
+        Me.btnSearchSOC.Name = "btnSearchSOC"
+        Me.btnSearchSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchSOC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSOCFindByNumber, Me.btnSearchSOCInYear, Me.btnSearchWithGraveCrime, Me.btnSOCAdvancedSearch})
+        Me.btnSearchSOC.TabIndex = 31
+        Me.btnSearchSOC.Text = "Search"
+        '
+        'btnSOCFindByNumber
+        '
+        Me.btnSOCFindByNumber.GlobalItem = false
+        Me.btnSOCFindByNumber.Name = "btnSOCFindByNumber"
+        Me.btnSOCFindByNumber.Text = "Find by SOC Number"
+        '
+        'btnSearchSOCInYear
+        '
+        Me.btnSearchSOCInYear.BeginGroup = true
+        Me.btnSearchSOCInYear.GlobalItem = false
+        Me.btnSearchSOCInYear.Name = "btnSearchSOCInYear"
+        Me.btnSearchSOCInYear.Text = "Search in selected Year"
+        '
+        'btnSearchWithGraveCrime
+        '
+        Me.btnSearchWithGraveCrime.GlobalItem = false
+        Me.btnSearchWithGraveCrime.Name = "btnSearchWithGraveCrime"
+        Me.btnSearchWithGraveCrime.Text = "Search with Grave Crime Value"
+        '
+        'btnSOCAdvancedSearch
+        '
+        Me.btnSOCAdvancedSearch.BeginGroup = true
+        Me.btnSOCAdvancedSearch.GlobalItem = false
+        Me.btnSOCAdvancedSearch.Name = "btnSOCAdvancedSearch"
+        Me.btnSOCAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearSOC
+        '
+        Me.btnClearSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearSOC.Image = CType(resources.GetObject("btnClearSOC.Image"),System.Drawing.Image)
+        Me.btnClearSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearSOC.Location = New System.Drawing.Point(1218, 171)
+        Me.btnClearSOC.Name = "btnClearSOC"
+        Me.btnClearSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearSOC.TabIndex = 32
+        Me.btnClearSOC.Text = "Clear All Fields"
+        '
+        'btnSaveSOC
+        '
+        Me.btnSaveSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveSOC.Image = CType(resources.GetObject("btnSaveSOC.Image"),System.Drawing.Image)
+        Me.btnSaveSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveSOC.Location = New System.Drawing.Point(1218, 14)
+        Me.btnSaveSOC.Name = "btnSaveSOC"
+        Me.btnSaveSOC.Size = New System.Drawing.Size(110, 74)
+        Me.btnSaveSOC.TabIndex = 30
+        Me.btnSaveSOC.Text = "Save"
+        '
+        'btnSaveOfficeSettings
+        '
+        Me.btnSaveOfficeSettings.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveOfficeSettings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveOfficeSettings.Image = CType(resources.GetObject("btnSaveOfficeSettings.Image"),System.Drawing.Image)
+        Me.btnSaveOfficeSettings.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveOfficeSettings.Location = New System.Drawing.Point(1034, 96)
+        Me.btnSaveOfficeSettings.Name = "btnSaveOfficeSettings"
+        Me.btnSaveOfficeSettings.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveOfficeSettings.TabIndex = 14
+        Me.btnSaveOfficeSettings.Text = "Save"
+        '
+        'btnSaveIO
+        '
+        Me.btnSaveIO.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveIO.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveIO.Image = CType(resources.GetObject("btnSaveIO.Image"),System.Drawing.Image)
+        Me.btnSaveIO.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveIO.Location = New System.Drawing.Point(330, 309)
+        Me.btnSaveIO.Name = "btnSaveIO"
+        Me.btnSaveIO.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveIO.TabIndex = 6
+        Me.btnSaveIO.Text = "Save"
+        '
+        'btnViewDASlip
+        '
+        Me.btnViewDASlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnViewDASlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnViewDASlip.Image = CType(resources.GetObject("btnViewDASlip.Image"),System.Drawing.Image)
+        Me.btnViewDASlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnViewDASlip.Location = New System.Drawing.Point(1163, 266)
+        Me.btnViewDASlip.Name = "btnViewDASlip"
+        Me.btnViewDASlip.Size = New System.Drawing.Size(110, 73)
+        Me.btnViewDASlip.TabIndex = 19
+        Me.btnViewDASlip.Text = "View DA Slip"
+        '
+        'btnSearchDA
+        '
+        Me.btnSearchDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchDA.Image = CType(resources.GetObject("btnSearchDA.Image"),System.Drawing.Image)
+        Me.btnSearchDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchDA.Location = New System.Drawing.Point(1163, 96)
+        Me.btnSearchDA.Name = "btnSearchDA"
+        Me.btnSearchDA.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchDA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAFindByNumber, Me.btnSearchDAInYear, Me.btnDAAdvancedSearch})
+        Me.btnSearchDA.TabIndex = 17
+        Me.btnSearchDA.Text = "Search"
+        '
+        'btnDAFindByNumber
+        '
+        Me.btnDAFindByNumber.GlobalItem = false
+        Me.btnDAFindByNumber.Name = "btnDAFindByNumber"
+        Me.btnDAFindByNumber.Text = "Find by DA Number"
+        '
+        'btnSearchDAInYear
+        '
+        Me.btnSearchDAInYear.BeginGroup = true
+        Me.btnSearchDAInYear.GlobalItem = false
+        Me.btnSearchDAInYear.Name = "btnSearchDAInYear"
+        Me.btnSearchDAInYear.Text = "Search in selected Year"
+        '
+        'btnDAAdvancedSearch
+        '
+        Me.btnDAAdvancedSearch.BeginGroup = true
+        Me.btnDAAdvancedSearch.GlobalItem = false
+        Me.btnDAAdvancedSearch.Name = "btnDAAdvancedSearch"
+        Me.btnDAAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearDAFields
+        '
+        Me.btnClearDAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearDAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearDAFields.Image = CType(resources.GetObject("btnClearDAFields.Image"),System.Drawing.Image)
+        Me.btnClearDAFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearDAFields.Location = New System.Drawing.Point(1163, 181)
+        Me.btnClearDAFields.Name = "btnClearDAFields"
+        Me.btnClearDAFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearDAFields.TabIndex = 18
+        Me.btnClearDAFields.Text = "Clear All Fields"
+        '
+        'btnSaveDA
+        '
+        Me.btnSaveDA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveDA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveDA.Image = CType(resources.GetObject("btnSaveDA.Image"),System.Drawing.Image)
+        Me.btnSaveDA.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveDA.Location = New System.Drawing.Point(1163, 11)
+        Me.btnSaveDA.Name = "btnSaveDA"
+        Me.btnSaveDA.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveDA.TabIndex = 16
+        Me.btnSaveDA.Text = "Save"
+        '
+        'btnSearchRSOC
+        '
+        Me.btnSearchRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchRSOC.Image = CType(resources.GetObject("btnSearchRSOC.Image"),System.Drawing.Image)
+        Me.btnSearchRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchRSOC.Location = New System.Drawing.Point(1189, 102)
+        Me.btnSearchRSOC.Name = "btnSearchRSOC"
+        Me.btnSearchRSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchRSOC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRSOCFindByNumber, Me.btnRSOCAdvancedSearch})
+        Me.btnSearchRSOC.TabIndex = 12
+        Me.btnSearchRSOC.Text = "Search"
+        '
+        'btnRSOCFindByNumber
+        '
+        Me.btnRSOCFindByNumber.GlobalItem = false
+        Me.btnRSOCFindByNumber.Name = "btnRSOCFindByNumber"
+        Me.btnRSOCFindByNumber.Text = "Find By Number"
+        '
+        'btnRSOCAdvancedSearch
+        '
+        Me.btnRSOCAdvancedSearch.BeginGroup = true
+        Me.btnRSOCAdvancedSearch.GlobalItem = false
+        Me.btnRSOCAdvancedSearch.Name = "btnRSOCAdvancedSearch"
+        Me.btnRSOCAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearRSOC
+        '
+        Me.btnClearRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearRSOC.Image = CType(resources.GetObject("btnClearRSOC.Image"),System.Drawing.Image)
+        Me.btnClearRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearRSOC.Location = New System.Drawing.Point(1189, 193)
+        Me.btnClearRSOC.Name = "btnClearRSOC"
+        Me.btnClearRSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearRSOC.TabIndex = 13
+        Me.btnClearRSOC.Text = "Clear All Fields"
+        '
+        'btnSaveRSOC
+        '
+        Me.btnSaveRSOC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveRSOC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveRSOC.Image = CType(resources.GetObject("btnSaveRSOC.Image"),System.Drawing.Image)
+        Me.btnSaveRSOC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveRSOC.Location = New System.Drawing.Point(1189, 11)
+        Me.btnSaveRSOC.Name = "btnSaveRSOC"
+        Me.btnSaveRSOC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveRSOC.TabIndex = 11
+        Me.btnSaveRSOC.Text = "Save"
+        '
+        'btnSearchCD
+        '
+        Me.btnSearchCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchCD.Image = CType(resources.GetObject("btnSearchCD.Image"),System.Drawing.Image)
+        Me.btnSearchCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchCD.Location = New System.Drawing.Point(990, 86)
+        Me.btnSearchCD.Name = "btnSearchCD"
+        Me.btnSearchCD.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchCD.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCDFindByNumber, Me.btnSearchCDInYear, Me.btnCDAdvancedSearch})
+        Me.btnSearchCD.TabIndex = 12
+        Me.btnSearchCD.Text = "Search"
+        '
+        'btnCDFindByNumber
+        '
+        Me.btnCDFindByNumber.GlobalItem = false
+        Me.btnCDFindByNumber.Name = "btnCDFindByNumber"
+        Me.btnCDFindByNumber.Text = "Find by CD Number"
+        '
+        'btnSearchCDInYear
+        '
+        Me.btnSearchCDInYear.BeginGroup = true
+        Me.btnSearchCDInYear.GlobalItem = false
+        Me.btnSearchCDInYear.Name = "btnSearchCDInYear"
+        Me.btnSearchCDInYear.Text = "Search in selected Year"
+        '
+        'btnCDAdvancedSearch
+        '
+        Me.btnCDAdvancedSearch.BeginGroup = true
+        Me.btnCDAdvancedSearch.GlobalItem = false
+        Me.btnCDAdvancedSearch.Name = "btnCDAdvancedSearch"
+        Me.btnCDAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearCDFields
+        '
+        Me.btnClearCDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearCDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearCDFields.Image = CType(resources.GetObject("btnClearCDFields.Image"),System.Drawing.Image)
+        Me.btnClearCDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearCDFields.Location = New System.Drawing.Point(990, 165)
+        Me.btnClearCDFields.Name = "btnClearCDFields"
+        Me.btnClearCDFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearCDFields.TabIndex = 13
+        Me.btnClearCDFields.Text = "Clear All Fields"
+        '
+        'btnSaveCD
+        '
+        Me.btnSaveCD.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveCD.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveCD.Image = CType(resources.GetObject("btnSaveCD.Image"),System.Drawing.Image)
+        Me.btnSaveCD.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveCD.Location = New System.Drawing.Point(990, 7)
+        Me.btnSaveCD.Name = "btnSaveCD"
+        Me.btnSaveCD.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveCD.TabIndex = 11
+        Me.btnSaveCD.Text = "Save"
+        '
+        'btnSearchFPA
+        '
+        Me.btnSearchFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchFPA.Image = CType(resources.GetObject("btnSearchFPA.Image"),System.Drawing.Image)
+        Me.btnSearchFPA.Location = New System.Drawing.Point(1177, 69)
+        Me.btnSearchFPA.Name = "btnSearchFPA"
+        Me.btnSearchFPA.Size = New System.Drawing.Size(141, 50)
+        Me.btnSearchFPA.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAFindByNumber, Me.btnSearchInFPAYear, Me.btnFPAAdvancedSearch})
+        Me.btnSearchFPA.TabIndex = 74
+        Me.btnSearchFPA.Text = "Search"
+        '
+        'btnFPAFindByNumber
+        '
+        Me.btnFPAFindByNumber.GlobalItem = false
+        Me.btnFPAFindByNumber.Name = "btnFPAFindByNumber"
+        Me.btnFPAFindByNumber.Text = "Find by FPA Number"
+        '
+        'btnSearchInFPAYear
+        '
+        Me.btnSearchInFPAYear.BeginGroup = true
+        Me.btnSearchInFPAYear.GlobalItem = false
+        Me.btnSearchInFPAYear.Name = "btnSearchInFPAYear"
+        Me.btnSearchInFPAYear.Text = "Search in selected Year"
+        '
+        'btnFPAAdvancedSearch
+        '
+        Me.btnFPAAdvancedSearch.BeginGroup = true
+        Me.btnFPAAdvancedSearch.GlobalItem = false
+        Me.btnFPAAdvancedSearch.Name = "btnFPAAdvancedSearch"
+        Me.btnFPAAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearFPAFields
+        '
+        Me.btnClearFPAFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearFPAFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearFPAFields.Image = CType(resources.GetObject("btnClearFPAFields.Image"),System.Drawing.Image)
+        Me.btnClearFPAFields.Location = New System.Drawing.Point(1177, 126)
+        Me.btnClearFPAFields.Name = "btnClearFPAFields"
+        Me.btnClearFPAFields.Size = New System.Drawing.Size(141, 50)
+        Me.btnClearFPAFields.TabIndex = 75
+        Me.btnClearFPAFields.Text = "Clear All Fields"
+        '
+        'btnSaveFPA
+        '
+        Me.btnSaveFPA.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveFPA.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveFPA.Image = CType(resources.GetObject("btnSaveFPA.Image"),System.Drawing.Image)
+        Me.btnSaveFPA.Location = New System.Drawing.Point(1177, 12)
+        Me.btnSaveFPA.Name = "btnSaveFPA"
+        Me.btnSaveFPA.Size = New System.Drawing.Size(141, 50)
+        Me.btnSaveFPA.TabIndex = 73
+        Me.btnSaveFPA.Text = "Save"
+        '
+        'btnACViewFPSlip
+        '
+        Me.btnACViewFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnACViewFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnACViewFPSlip.Image = CType(resources.GetObject("btnACViewFPSlip.Image"),System.Drawing.Image)
+        Me.btnACViewFPSlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnACViewFPSlip.Location = New System.Drawing.Point(1163, 266)
+        Me.btnACViewFPSlip.Name = "btnACViewFPSlip"
+        Me.btnACViewFPSlip.Size = New System.Drawing.Size(110, 73)
+        Me.btnACViewFPSlip.TabIndex = 18
+        Me.btnACViewFPSlip.Text = "View FP Slip"
+        '
+        'btnSearchAC
+        '
+        Me.btnSearchAC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchAC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchAC.Image = CType(resources.GetObject("btnSearchAC.Image"),System.Drawing.Image)
+        Me.btnSearchAC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchAC.Location = New System.Drawing.Point(1163, 96)
+        Me.btnSearchAC.Name = "btnSearchAC"
+        Me.btnSearchAC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchAC.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnACFindByNumber, Me.btnACAdvancedSearch})
+        Me.btnSearchAC.TabIndex = 16
+        Me.btnSearchAC.Text = "Search"
+        '
+        'btnACFindByNumber
+        '
+        Me.btnACFindByNumber.GlobalItem = false
+        Me.btnACFindByNumber.Name = "btnACFindByNumber"
+        Me.btnACFindByNumber.Text = "Find by Number"
+        '
+        'btnACAdvancedSearch
+        '
+        Me.btnACAdvancedSearch.BeginGroup = true
+        Me.btnACAdvancedSearch.GlobalItem = false
+        Me.btnACAdvancedSearch.Name = "btnACAdvancedSearch"
+        Me.btnACAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearACFields
+        '
+        Me.btnClearACFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearACFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearACFields.Image = CType(resources.GetObject("btnClearACFields.Image"),System.Drawing.Image)
+        Me.btnClearACFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearACFields.Location = New System.Drawing.Point(1163, 181)
+        Me.btnClearACFields.Name = "btnClearACFields"
+        Me.btnClearACFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearACFields.TabIndex = 17
+        Me.btnClearACFields.Text = "Clear All Fields"
+        '
+        'btnSaveAC
+        '
+        Me.btnSaveAC.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveAC.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveAC.Image = CType(resources.GetObject("btnSaveAC.Image"),System.Drawing.Image)
+        Me.btnSaveAC.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveAC.Location = New System.Drawing.Point(1163, 11)
+        Me.btnSaveAC.Name = "btnSaveAC"
+        Me.btnSaveAC.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveAC.TabIndex = 15
+        Me.btnSaveAC.Text = "Save"
+        '
+        'btnIDViewFPSlip
+        '
+        Me.btnIDViewFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnIDViewFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnIDViewFPSlip.Image = CType(resources.GetObject("btnIDViewFPSlip.Image"),System.Drawing.Image)
+        Me.btnIDViewFPSlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnIDViewFPSlip.Location = New System.Drawing.Point(1163, 266)
+        Me.btnIDViewFPSlip.Name = "btnIDViewFPSlip"
+        Me.btnIDViewFPSlip.Size = New System.Drawing.Size(110, 73)
+        Me.btnIDViewFPSlip.TabIndex = 19
+        Me.btnIDViewFPSlip.Text = "View FP Slip"
+        '
+        'btnSearchID
+        '
+        Me.btnSearchID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchID.Image = CType(resources.GetObject("btnSearchID.Image"),System.Drawing.Image)
+        Me.btnSearchID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchID.Location = New System.Drawing.Point(1163, 96)
+        Me.btnSearchID.Name = "btnSearchID"
+        Me.btnSearchID.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchID.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDFindByNumber, Me.btnIDAdvancedSearch})
+        Me.btnSearchID.TabIndex = 17
+        Me.btnSearchID.Text = "Search"
+        '
+        'btnIDFindByNumber
+        '
+        Me.btnIDFindByNumber.GlobalItem = false
+        Me.btnIDFindByNumber.Name = "btnIDFindByNumber"
+        Me.btnIDFindByNumber.Text = "Find by Number"
+        '
+        'btnIDAdvancedSearch
+        '
+        Me.btnIDAdvancedSearch.BeginGroup = true
+        Me.btnIDAdvancedSearch.GlobalItem = false
+        Me.btnIDAdvancedSearch.Name = "btnIDAdvancedSearch"
+        Me.btnIDAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearIDFields
+        '
+        Me.btnClearIDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearIDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearIDFields.Image = CType(resources.GetObject("btnClearIDFields.Image"),System.Drawing.Image)
+        Me.btnClearIDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearIDFields.Location = New System.Drawing.Point(1163, 181)
+        Me.btnClearIDFields.Name = "btnClearIDFields"
+        Me.btnClearIDFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearIDFields.TabIndex = 18
+        Me.btnClearIDFields.Text = "Clear All Fields"
+        '
+        'btnSaveID
+        '
+        Me.btnSaveID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveID.Image = CType(resources.GetObject("btnSaveID.Image"),System.Drawing.Image)
+        Me.btnSaveID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveID.Location = New System.Drawing.Point(1163, 11)
+        Me.btnSaveID.Name = "btnSaveID"
+        Me.btnSaveID.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveID.TabIndex = 16
+        Me.btnSaveID.Text = "Save"
+        '
+        'btnSavePS
+        '
+        Me.btnSavePS.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSavePS.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSavePS.Image = CType(resources.GetObject("btnSavePS.Image"),System.Drawing.Image)
+        Me.btnSavePS.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSavePS.Location = New System.Drawing.Point(270, 88)
+        Me.btnSavePS.Name = "btnSavePS"
+        Me.btnSavePS.Size = New System.Drawing.Size(110, 73)
+        Me.btnSavePS.TabIndex = 6
+        Me.btnSavePS.Text = "Save"
+        '
+        'btnExit
+        '
+        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"),System.Drawing.Image)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlQ)
+        Me.btnExit.SubItemsExpandWidth = 14
+        '
+        'btnAbout
+        '
+        Me.btnAbout.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnAbout.Image = CType(resources.GetObject("btnAbout.Image"),System.Drawing.Image)
+        Me.btnAbout.Name = "btnAbout"
+        Me.btnAbout.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlI)
+        Me.btnAbout.SubItemsExpandWidth = 14
+        '
+        'btnBasicOnlineFileTransfer
+        '
+        Me.btnBasicOnlineFileTransfer.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnBasicOnlineFileTransfer.Image = CType(resources.GetObject("btnBasicOnlineFileTransfer.Image"),System.Drawing.Image)
+        Me.btnBasicOnlineFileTransfer.ImagePosition = DevComponents.DotNetBar.eImagePosition.Bottom
+        Me.btnBasicOnlineFileTransfer.Name = "btnBasicOnlineFileTransfer"
+        Me.btnBasicOnlineFileTransfer.SubItemsExpandWidth = 14
+        Me.btnBasicOnlineFileTransfer.Text = "Common"
+        '
         'btnPersonalOnlineFiles
         '
         Me.btnPersonalOnlineFiles.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
@@ -14664,6 +13978,692 @@ Partial Class frmMainInterface
         Me.btnPersonalOnlineFiles.Name = "btnPersonalOnlineFiles"
         Me.btnPersonalOnlineFiles.SubItemsExpandWidth = 14
         Me.btnPersonalOnlineFiles.Text = "Personal"
+        '
+        'btnLocalBackup
+        '
+        Me.btnLocalBackup.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnLocalBackup.Image = CType(resources.GetObject("btnLocalBackup.Image"),System.Drawing.Image)
+        Me.btnLocalBackup.ImageSmall = CType(resources.GetObject("btnLocalBackup.ImageSmall"),System.Drawing.Image)
+        Me.btnLocalBackup.Name = "btnLocalBackup"
+        Me.btnLocalBackup.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlR)
+        Me.btnLocalBackup.SubItemsExpandWidth = 14
+        Me.btnLocalBackup.Text = "Local"
+        '
+        'btnOnlineBackup
+        '
+        Me.btnOnlineBackup.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnOnlineBackup.Image = CType(resources.GetObject("btnOnlineBackup.Image"),System.Drawing.Image)
+        Me.btnOnlineBackup.Name = "btnOnlineBackup"
+        Me.btnOnlineBackup.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlB)
+        Me.btnOnlineBackup.SubItemsExpandWidth = 14
+        Me.btnOnlineBackup.Text = "Online"
+        '
+        'btnViewReports
+        '
+        Me.btnViewReports.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnViewReports.Image = CType(resources.GetObject("btnViewReports.Image"),System.Drawing.Image)
+        Me.btnViewReports.Name = "btnViewReports"
+        Me.btnViewReports.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem2, Me.ButtonItem3, Me.ButtonItem4, Me.ButtonItem7, Me.ButtonItem8, Me.ButtonItem6, Me.btnPSList, Me.btnMonthlyStatements, Me.btnCL, Me.btnPerformance, Me.btnFacingSheetMenu, Me.btnSOCReport2, Me.ButtonItem5})
+        Me.btnViewReports.SubItemsExpandWidth = 14
+        Me.btnViewReports.Text = "Reports"
+        '
+        'ButtonItem2
+        '
+        Me.ButtonItem2.Name = "ButtonItem2"
+        Me.ButtonItem2.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnSOCStatement, Me.btnShowIdentifiedRecords, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnStatementofSOCReports, Me.btnConciseSOCStatement, Me.btnGraveCrimeReport, Me.btnSOCFacingSheet, Me.btnSOCRegister, Me.btnCurrentSOC, Me.btnSOCStatistics, Me.btnMonthWiseSOCPerformance, Me.btnPrintRemainingCases, Me.btnPhotoNotRecieved, Me.btnPhotographForwarding, Me.btnSOCReport})
+        Me.ButtonItem2.Text = "SOC"
+        '
+        'btnSOCStatement
+        '
+        Me.btnSOCStatement.BeginGroup = true
+        Me.btnSOCStatement.ForeColor = System.Drawing.Color.Red
+        Me.btnSOCStatement.Name = "btnSOCStatement"
+        Me.btnSOCStatement.Text = "SOC Statement"
+        '
+        'btnShowIdentifiedRecords
+        '
+        Me.btnShowIdentifiedRecords.BeginGroup = true
+        Me.btnShowIdentifiedRecords.Name = "btnShowIdentifiedRecords"
+        Me.btnShowIdentifiedRecords.Text = "Show Identified Records"
+        '
+        'btnListOfIdentifiedCases
+        '
+        Me.btnListOfIdentifiedCases.ForeColor = System.Drawing.Color.Red
+        Me.btnListOfIdentifiedCases.Name = "btnListOfIdentifiedCases"
+        Me.btnListOfIdentifiedCases.Text = "List of Identified Cases"
+        '
+        'btnGistOfIdentifiedCases
+        '
+        Me.btnGistOfIdentifiedCases.ForeColor = System.Drawing.Color.Red
+        Me.btnGistOfIdentifiedCases.Name = "btnGistOfIdentifiedCases"
+        Me.btnGistOfIdentifiedCases.Text = "Gist of identified Cases"
+        '
+        'btnStatementofSOCReports
+        '
+        Me.btnStatementofSOCReports.BeginGroup = true
+        Me.btnStatementofSOCReports.Name = "btnStatementofSOCReports"
+        Me.btnStatementofSOCReports.Text = "Statement of SOC Reports"
+        '
+        'btnConciseSOCStatement
+        '
+        Me.btnConciseSOCStatement.Name = "btnConciseSOCStatement"
+        Me.btnConciseSOCStatement.Text = "Mini Statement (PS wise SOC)"
+        '
+        'btnGraveCrimeReport
+        '
+        Me.btnGraveCrimeReport.ForeColor = System.Drawing.Color.Red
+        Me.btnGraveCrimeReport.Name = "btnGraveCrimeReport"
+        Me.btnGraveCrimeReport.Text = "Statement of Grave Crimes"
+        '
+        'btnSOCFacingSheet
+        '
+        Me.btnSOCFacingSheet.BeginGroup = true
+        Me.btnSOCFacingSheet.ForeColor = System.Drawing.Color.Red
+        Me.btnSOCFacingSheet.Name = "btnSOCFacingSheet"
+        Me.btnSOCFacingSheet.Text = "Facing Sheet"
+        '
+        'btnSOCRegister
+        '
+        Me.btnSOCRegister.BeginGroup = true
+        Me.btnSOCRegister.Name = "btnSOCRegister"
+        Me.btnSOCRegister.Text = "Print View - SOC Register"
+        '
+        'btnCurrentSOC
+        '
+        Me.btnCurrentSOC.Name = "btnCurrentSOC"
+        Me.btnCurrentSOC.Text = "Print View - Currently Loaded Records"
+        '
+        'btnSOCStatistics
+        '
+        Me.btnSOCStatistics.BeginGroup = true
+        Me.btnSOCStatistics.Name = "btnSOCStatistics"
+        Me.btnSOCStatistics.Text = "Statistics"
+        '
+        'btnMonthWiseSOCPerformance
+        '
+        Me.btnMonthWiseSOCPerformance.Name = "btnMonthWiseSOCPerformance"
+        Me.btnMonthWiseSOCPerformance.Text = "Month Wise Statistics"
+        '
+        'btnPrintRemainingCases
+        '
+        Me.btnPrintRemainingCases.BeginGroup = true
+        Me.btnPrintRemainingCases.Name = "btnPrintRemainingCases"
+        Me.btnPrintRemainingCases.Text = "Print Remaining Cases"
+        '
+        'btnPhotoNotRecieved
+        '
+        Me.btnPhotoNotRecieved.Name = "btnPhotoNotRecieved"
+        Me.btnPhotoNotRecieved.Text = "Photo Not Received Cases"
+        '
+        'btnPhotographForwarding
+        '
+        Me.btnPhotographForwarding.BeginGroup = true
+        Me.btnPhotographForwarding.ForeColor = System.Drawing.Color.Red
+        Me.btnPhotographForwarding.Name = "btnPhotographForwarding"
+        Me.btnPhotographForwarding.Text = "Forward Photograph"
+        '
+        'btnSOCReport
+        '
+        Me.btnSOCReport.BeginGroup = true
+        Me.btnSOCReport.ForeColor = System.Drawing.Color.Red
+        Me.btnSOCReport.Icon = CType(resources.GetObject("btnSOCReport.Icon"),System.Drawing.Icon)
+        Me.btnSOCReport.Name = "btnSOCReport"
+        Me.btnSOCReport.Text = "SOC Report"
+        '
+        'ButtonItem3
+        '
+        Me.ButtonItem3.Name = "ButtonItem3"
+        Me.ButtonItem3.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDAStatementAllPS, Me.btnDARegister, Me.btnCurrentDA, Me.btnMonthWiseDAStatistics, Me.btnPSWiseDAStatistics})
+        Me.ButtonItem3.Text = "DA"
+        '
+        'btnDAStatementAllPS
+        '
+        Me.btnDAStatementAllPS.BeginGroup = true
+        Me.btnDAStatementAllPS.ForeColor = System.Drawing.Color.Red
+        Me.btnDAStatementAllPS.Name = "btnDAStatementAllPS"
+        Me.btnDAStatementAllPS.Text = "DA Statement"
+        '
+        'btnDARegister
+        '
+        Me.btnDARegister.BeginGroup = true
+        Me.btnDARegister.Name = "btnDARegister"
+        Me.btnDARegister.Text = "Print View - DA Register"
+        '
+        'btnCurrentDA
+        '
+        Me.btnCurrentDA.Name = "btnCurrentDA"
+        Me.btnCurrentDA.Text = "Print View - Currently Loaded Records"
+        '
+        'btnMonthWiseDAStatistics
+        '
+        Me.btnMonthWiseDAStatistics.BeginGroup = true
+        Me.btnMonthWiseDAStatistics.Name = "btnMonthWiseDAStatistics"
+        Me.btnMonthWiseDAStatistics.Text = "Month Wise DA Statistics"
+        '
+        'btnPSWiseDAStatistics
+        '
+        Me.btnPSWiseDAStatistics.Name = "btnPSWiseDAStatistics"
+        Me.btnPSWiseDAStatistics.Text = "Station Wise DA Statistics"
+        '
+        'ButtonItem4
+        '
+        Me.ButtonItem4.Name = "ButtonItem4"
+        Me.ButtonItem4.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnFPAStatement, Me.btnFPARegister, Me.btnCurrentFPA, Me.btnMonthWiseFPAStatistics, Me.btnFPAApplicationForm, Me.btnFPANotice, Me.btnFPABlankSlipForm, Me.btnFPAGenerateSlipForm})
+        Me.ButtonItem4.Text = "FP Attestation"
+        '
+        'btnFPAStatement
+        '
+        Me.btnFPAStatement.ForeColor = System.Drawing.Color.Red
+        Me.btnFPAStatement.Name = "btnFPAStatement"
+        Me.btnFPAStatement.Text = "FP Attestation Statement"
+        '
+        'btnFPARegister
+        '
+        Me.btnFPARegister.BeginGroup = true
+        Me.btnFPARegister.Name = "btnFPARegister"
+        Me.btnFPARegister.Text = "Print View - FPA Register"
+        '
+        'btnCurrentFPA
+        '
+        Me.btnCurrentFPA.Name = "btnCurrentFPA"
+        Me.btnCurrentFPA.Text = "Print View - Currently Loaded Records"
+        '
+        'btnMonthWiseFPAStatistics
+        '
+        Me.btnMonthWiseFPAStatistics.Name = "btnMonthWiseFPAStatistics"
+        Me.btnMonthWiseFPAStatistics.Text = "Month Wise Statistics"
+        '
+        'btnFPAApplicationForm
+        '
+        Me.btnFPAApplicationForm.BeginGroup = true
+        Me.btnFPAApplicationForm.ForeColor = System.Drawing.Color.Red
+        Me.btnFPAApplicationForm.Name = "btnFPAApplicationForm"
+        Me.btnFPAApplicationForm.Text = "Application Form"
+        '
+        'btnFPANotice
+        '
+        Me.btnFPANotice.ForeColor = System.Drawing.Color.Red
+        Me.btnFPANotice.Name = "btnFPANotice"
+        Me.btnFPANotice.Text = "Attestation Notice"
+        '
+        'btnFPABlankSlipForm
+        '
+        Me.btnFPABlankSlipForm.BeginGroup = true
+        Me.btnFPABlankSlipForm.ForeColor = System.Drawing.Color.Red
+        Me.btnFPABlankSlipForm.Name = "btnFPABlankSlipForm"
+        Me.btnFPABlankSlipForm.Text = "Fingerprint Slip Form - Blank"
+        '
+        'btnFPAGenerateSlipForm
+        '
+        Me.btnFPAGenerateSlipForm.ForeColor = System.Drawing.Color.Red
+        Me.btnFPAGenerateSlipForm.Name = "btnFPAGenerateSlipForm"
+        Me.btnFPAGenerateSlipForm.Text = "Fingerprint Slip Form - Generate"
+        '
+        'ButtonItem7
+        '
+        Me.ButtonItem7.BeginGroup = true
+        Me.ButtonItem7.Name = "ButtonItem7"
+        Me.ButtonItem7.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCDRegister, Me.btnCurrentCD})
+        Me.ButtonItem7.Text = "Court Duty"
+        '
+        'btnCDRegister
+        '
+        Me.btnCDRegister.Name = "btnCDRegister"
+        Me.btnCDRegister.Text = "Print View - CD Register"
+        '
+        'btnCurrentCD
+        '
+        Me.btnCurrentCD.Name = "btnCurrentCD"
+        Me.btnCurrentCD.Text = "Print View - Currently Loaded Records"
+        '
+        'ButtonItem8
+        '
+        Me.ButtonItem8.Name = "ButtonItem8"
+        Me.ButtonItem8.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDRegister, Me.btnCurrentID})
+        Me.ButtonItem8.Text = "Identified Slips"
+        '
+        'btnIDRegister
+        '
+        Me.btnIDRegister.Name = "btnIDRegister"
+        Me.btnIDRegister.Text = "Print View - Register"
+        '
+        'btnCurrentID
+        '
+        Me.btnCurrentID.Name = "btnCurrentID"
+        Me.btnCurrentID.Text = "Print View - Currently Loaded Records"
+        '
+        'ButtonItem6
+        '
+        Me.ButtonItem6.Name = "ButtonItem6"
+        Me.ButtonItem6.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnACRegister, Me.btnCurrentAC})
+        Me.ButtonItem6.Text = "Active Criminal"
+        '
+        'btnACRegister
+        '
+        Me.btnACRegister.Name = "btnACRegister"
+        Me.btnACRegister.Text = "Print View - Register"
+        '
+        'btnCurrentAC
+        '
+        Me.btnCurrentAC.Name = "btnCurrentAC"
+        Me.btnCurrentAC.Text = "Print View - Currently Loaded Records"
+        '
+        'btnPSList
+        '
+        Me.btnPSList.BeginGroup = true
+        Me.btnPSList.Name = "btnPSList"
+        Me.btnPSList.Text = "List of Police Stations"
+        '
+        'btnMonthlyStatements
+        '
+        Me.btnMonthlyStatements.BeginGroup = true
+        Me.btnMonthlyStatements.ForeColor = System.Drawing.Color.Red
+        Me.btnMonthlyStatements.Name = "btnMonthlyStatements"
+        Me.btnMonthlyStatements.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlySOC, Me.btnMonthlyDA, Me.btnMonthlyFPA, Me.btnRevenueCollectionStatement, Me.btnMonthlyIndividual, Me.btnGraveCrimeStatement, Me.btnListOfMonthlyIDCases, Me.btnRBNilReport, Me.btnVigilanceCase, Me.btnAttendanceStmt2})
+        Me.btnMonthlyStatements.Text = "Monthly Statements"
+        '
+        'btnMonthlySOC
+        '
+        Me.btnMonthlySOC.Name = "btnMonthlySOC"
+        Me.btnMonthlySOC.Text = "SOC Statement"
+        '
+        'btnMonthlyDA
+        '
+        Me.btnMonthlyDA.Name = "btnMonthlyDA"
+        Me.btnMonthlyDA.Text = "DA Statement"
+        '
+        'btnMonthlyFPA
+        '
+        Me.btnMonthlyFPA.Name = "btnMonthlyFPA"
+        Me.btnMonthlyFPA.Text = "FP Attestation Statement"
+        '
+        'btnRevenueCollectionStatement
+        '
+        Me.btnRevenueCollectionStatement.Name = "btnRevenueCollectionStatement"
+        Me.btnRevenueCollectionStatement.Text = "Revenue Collection Statement"
+        '
+        'btnMonthlyIndividual
+        '
+        Me.btnMonthlyIndividual.Name = "btnMonthlyIndividual"
+        Me.btnMonthlyIndividual.Text = "Individual Performance"
+        '
+        'btnGraveCrimeStatement
+        '
+        Me.btnGraveCrimeStatement.Name = "btnGraveCrimeStatement"
+        Me.btnGraveCrimeStatement.Text = "Grave Crime Statement"
+        '
+        'btnListOfMonthlyIDCases
+        '
+        Me.btnListOfMonthlyIDCases.Name = "btnListOfMonthlyIDCases"
+        Me.btnListOfMonthlyIDCases.Text = "List of Identified Cases"
+        '
+        'btnRBNilReport
+        '
+        Me.btnRBNilReport.Name = "btnRBNilReport"
+        Me.btnRBNilReport.Text = "Rail/Bus Warrant NIL Report"
+        '
+        'btnVigilanceCase
+        '
+        Me.btnVigilanceCase.Name = "btnVigilanceCase"
+        Me.btnVigilanceCase.Text = "Case Against Staff NIL Report"
+        '
+        'btnAttendanceStmt2
+        '
+        Me.btnAttendanceStmt2.BeginGroup = true
+        Me.btnAttendanceStmt2.ForeColor = System.Drawing.Color.Red
+        Me.btnAttendanceStmt2.Name = "btnAttendanceStmt2"
+        Me.btnAttendanceStmt2.Text = "Attendance Statement"
+        '
+        'btnCL
+        '
+        Me.btnCL.ForeColor = System.Drawing.Color.Red
+        Me.btnCL.Name = "btnCL"
+        Me.btnCL.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAttendance, Me.btnIndividualPerformanceCL, Me.btnRBWarrant, Me.btnSOCCL, Me.btnTABill, Me.btnForwardPhoto, Me.chkUseTIAtBottomOfLetter})
+        Me.btnCL.Text = "Covering Letters"
+        '
+        'btnAttendance
+        '
+        Me.btnAttendance.Name = "btnAttendance"
+        Me.btnAttendance.Text = "Attendance"
+        '
+        'btnIndividualPerformanceCL
+        '
+        Me.btnIndividualPerformanceCL.Name = "btnIndividualPerformanceCL"
+        Me.btnIndividualPerformanceCL.Text = "Individual Performance"
+        '
+        'btnRBWarrant
+        '
+        Me.btnRBWarrant.Name = "btnRBWarrant"
+        Me.btnRBWarrant.Text = "Rail/Bus Warrant"
+        '
+        'btnSOCCL
+        '
+        Me.btnSOCCL.Name = "btnSOCCL"
+        Me.btnSOCCL.Text = "SOC and DA Statement"
+        '
+        'btnTABill
+        '
+        Me.btnTABill.Name = "btnTABill"
+        Me.btnTABill.Text = "TA Bill"
+        '
+        'btnForwardPhoto
+        '
+        Me.btnForwardPhoto.BeginGroup = true
+        Me.btnForwardPhoto.Name = "btnForwardPhoto"
+        Me.btnForwardPhoto.Text = "SOC - Forward Photograph"
+        '
+        'chkUseTIAtBottomOfLetter
+        '
+        Me.chkUseTIAtBottomOfLetter.BeginGroup = true
+        Me.chkUseTIAtBottomOfLetter.Checked = true
+        Me.chkUseTIAtBottomOfLetter.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkUseTIAtBottomOfLetter.Name = "chkUseTIAtBottomOfLetter"
+        Me.chkUseTIAtBottomOfLetter.Text = "Include TI Name in Letter"
+        '
+        'btnPerformance
+        '
+        Me.btnPerformance.BeginGroup = true
+        Me.btnPerformance.ForeColor = System.Drawing.Color.Red
+        Me.btnPerformance.Name = "btnPerformance"
+        Me.btnPerformance.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlyPerformance, Me.btnQuarterlyPerformance, Me.btnIndividualPerformance, Me.btnAnnualStatics})
+        Me.btnPerformance.Text = "Performance Statements"
+        '
+        'btnMonthlyPerformance
+        '
+        Me.btnMonthlyPerformance.ForeColor = System.Drawing.Color.Red
+        Me.btnMonthlyPerformance.Name = "btnMonthlyPerformance"
+        Me.btnMonthlyPerformance.Text = "Monthly"
+        '
+        'btnQuarterlyPerformance
+        '
+        Me.btnQuarterlyPerformance.Name = "btnQuarterlyPerformance"
+        Me.btnQuarterlyPerformance.Text = "Quarterly"
+        '
+        'btnIndividualPerformance
+        '
+        Me.btnIndividualPerformance.BeginGroup = true
+        Me.btnIndividualPerformance.ForeColor = System.Drawing.Color.Red
+        Me.btnIndividualPerformance.Name = "btnIndividualPerformance"
+        Me.btnIndividualPerformance.Text = "Individual"
+        '
+        'btnAnnualStatics
+        '
+        Me.btnAnnualStatics.BeginGroup = true
+        Me.btnAnnualStatics.Name = "btnAnnualStatics"
+        Me.btnAnnualStatics.Text = "Annual Statistics"
+        '
+        'btnFacingSheetMenu
+        '
+        Me.btnFacingSheetMenu.BeginGroup = true
+        Me.btnFacingSheetMenu.Name = "btnFacingSheetMenu"
+        Me.btnFacingSheetMenu.Text = "Facing Sheet"
+        '
+        'btnSOCReport2
+        '
+        Me.btnSOCReport2.Name = "btnSOCReport2"
+        Me.btnSOCReport2.Text = "SOC Report"
+        '
+        'ButtonItem5
+        '
+        Me.ButtonItem5.BeginGroup = true
+        Me.ButtonItem5.ForeColor = System.Drawing.Color.Red
+        Me.ButtonItem5.Name = "ButtonItem5"
+        Me.ButtonItem5.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAttendanceStmt, Me.btnTourNote, Me.btnWeeklyDiary})
+        Me.ButtonItem5.Text = "Other Statements"
+        '
+        'btnAttendanceStmt
+        '
+        Me.btnAttendanceStmt.BeginGroup = true
+        Me.btnAttendanceStmt.Name = "btnAttendanceStmt"
+        Me.btnAttendanceStmt.Text = "Attendance"
+        '
+        'btnTourNote
+        '
+        Me.btnTourNote.BeginGroup = true
+        Me.btnTourNote.ForeColor = System.Drawing.Color.Red
+        Me.btnTourNote.Name = "btnTourNote"
+        Me.btnTourNote.Text = "Tour Note/TA Bill"
+        '
+        'btnWeeklyDiary
+        '
+        Me.btnWeeklyDiary.BeginGroup = true
+        Me.btnWeeklyDiary.Name = "btnWeeklyDiary"
+        Me.btnWeeklyDiary.Text = "Weekly Diary"
+        '
+        'btnReload
+        '
+        Me.btnReload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnReload.Image = CType(resources.GetObject("btnReload.Image"),System.Drawing.Image)
+        Me.btnReload.ImageSmall = CType(resources.GetObject("btnReload.ImageSmall"),System.Drawing.Image)
+        Me.btnReload.Name = "btnReload"
+        Me.btnReload.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5)
+        Me.btnReload.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnLoadThisYearRecords, Me.btnLoadSelectedYearRecords, Me.btnLoadThisMonthRecords, Me.btnLoadSpecifiedMonthsRecords, Me.btnReloadRecordsToAllTables})
+        Me.btnReload.SubItemsExpandWidth = 14
+        Me.btnReload.Text = "Reload"
+        '
+        'btnLoadThisYearRecords
+        '
+        Me.btnLoadThisYearRecords.Name = "btnLoadThisYearRecords"
+        Me.btnLoadThisYearRecords.Text = "Load Records of this year"
+        '
+        'btnLoadSelectedYearRecords
+        '
+        Me.btnLoadSelectedYearRecords.Name = "btnLoadSelectedYearRecords"
+        Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Year'"
+        '
+        'btnLoadThisMonthRecords
+        '
+        Me.btnLoadThisMonthRecords.BeginGroup = true
+        Me.btnLoadThisMonthRecords.Name = "btnLoadThisMonthRecords"
+        Me.btnLoadThisMonthRecords.Text = "Load Records of this month"
+        '
+        'btnLoadSpecifiedMonthsRecords
+        '
+        Me.btnLoadSpecifiedMonthsRecords.Name = "btnLoadSpecifiedMonthsRecords"
+        Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date of Inspection'"
+        '
+        'btnReloadRecordsToAllTables
+        '
+        Me.btnReloadRecordsToAllTables.BeginGroup = true
+        Me.btnReloadRecordsToAllTables.Name = "btnReloadRecordsToAllTables"
+        Me.btnReloadRecordsToAllTables.Text = "Reload Records to all tables"
+        '
+        'btnSearchMain
+        '
+        Me.btnSearchMain.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnSearchMain.Image = CType(resources.GetObject("btnSearchMain.Image"),System.Drawing.Image)
+        Me.btnSearchMain.ImageSmall = CType(resources.GetObject("btnSearchMain.ImageSmall"),System.Drawing.Image)
+        Me.btnSearchMain.Name = "btnSearchMain"
+        Me.btnSearchMain.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlF)
+        Me.btnSearchMain.SubItemsExpandWidth = 14
+        Me.btnSearchMain.Text = "Search"
+        '
+        'btnShowHideFields
+        '
+        Me.btnShowHideFields.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnShowHideFields.Image = CType(resources.GetObject("btnShowHideFields.Image"),System.Drawing.Image)
+        Me.btnShowHideFields.Name = "btnShowHideFields"
+        Me.btnShowHideFields.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlH)
+        Me.btnShowHideFields.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnHideAllDataEntryFields})
+        Me.btnShowHideFields.SubItemsExpandWidth = 14
+        Me.btnShowHideFields.Text = "Show"
+        '
+        'btnHideAllDataEntryFields
+        '
+        Me.btnHideAllDataEntryFields.Name = "btnHideAllDataEntryFields"
+        Me.btnHideAllDataEntryFields.Text = "Show/Hide All Tables"
+        '
+        'btnNewEntry
+        '
+        Me.btnNewEntry.BeginGroup = true
+        Me.btnNewEntry.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnNewEntry.Image = CType(resources.GetObject("btnNewEntry.Image"),System.Drawing.Image)
+        Me.btnNewEntry.ImageSmall = CType(resources.GetObject("btnNewEntry.ImageSmall"),System.Drawing.Image)
+        Me.btnNewEntry.Name = "btnNewEntry"
+        Me.btnNewEntry.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlN)
+        Me.btnNewEntry.SubItemsExpandWidth = 14
+        Me.btnNewEntry.Text = "New"
+        '
+        'btnOpen
+        '
+        Me.btnOpen.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnOpen.Image = CType(resources.GetObject("btnOpen.Image"),System.Drawing.Image)
+        Me.btnOpen.Name = "btnOpen"
+        Me.btnOpen.SubItemsExpandWidth = 14
+        Me.btnOpen.Text = "Open"
+        '
+        'btnEdit
+        '
+        Me.btnEdit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"),System.Drawing.Image)
+        Me.btnEdit.ImageSmall = CType(resources.GetObject("btnEdit.ImageSmall"),System.Drawing.Image)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.SubItemsExpandWidth = 14
+        Me.btnEdit.Text = "Edit"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"),System.Drawing.Image)
+        Me.btnDelete.ImageSmall = CType(resources.GetObject("btnDelete.ImageSmall"),System.Drawing.Image)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDeleteAll, Me.chkPreventDeletion})
+        Me.btnDelete.SubItemsExpandWidth = 14
+        Me.btnDelete.Text = "Delete"
+        '
+        'btnDeleteAll
+        '
+        Me.btnDeleteAll.Name = "btnDeleteAll"
+        Me.btnDeleteAll.Text = "Delete All Records"
+        '
+        'chkPreventDeletion
+        '
+        Me.chkPreventDeletion.BeginGroup = true
+        Me.chkPreventDeletion.Checked = true
+        Me.chkPreventDeletion.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkPreventDeletion.Name = "chkPreventDeletion"
+        Me.chkPreventDeletion.Text = "Prevent Deletion"
+        '
+        'btnCheckUpdate
+        '
+        Me.btnCheckUpdate.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnCheckUpdate.Image = CType(resources.GetObject("btnCheckUpdate.Image"),System.Drawing.Image)
+        Me.btnCheckUpdate.Name = "btnCheckUpdate"
+        Me.btnCheckUpdate.SubItemsExpandWidth = 14
+        Me.btnCheckUpdate.Text = "Check for Updates"
+        '
+        'btnDownloadInstallerFile
+        '
+        Me.btnDownloadInstallerFile.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDownloadInstallerFile.Image = CType(resources.GetObject("btnDownloadInstallerFile.Image"),System.Drawing.Image)
+        Me.btnDownloadInstallerFile.Name = "btnDownloadInstallerFile"
+        Me.btnDownloadInstallerFile.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnDownloadInstallerInBrowser})
+        Me.btnDownloadInstallerFile.SubItemsExpandWidth = 14
+        Me.btnDownloadInstallerFile.Text = "Download Installer"
+        '
+        'btnDownloadInstallerInBrowser
+        '
+        Me.btnDownloadInstallerInBrowser.Name = "btnDownloadInstallerInBrowser"
+        Me.btnDownloadInstallerInBrowser.Text = "Download Installer in Browser"
+        '
+        'btnSettingsWizard
+        '
+        Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
+        Me.btnSettingsWizard.Name = "btnSettingsWizard"
+        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
+        Me.btnSettingsWizard.SubItemsExpandWidth = 14
+        Me.btnSettingsWizard.Text = "Settings Wizard"
+        '
+        'btnOpenRegedit
+        '
+        Me.btnOpenRegedit.BeginGroup = true
+        Me.btnOpenRegedit.Name = "btnOpenRegedit"
+        Me.btnOpenRegedit.Text = "Open Regedit"
+        '
+        'btnOpenTemplatesFolder
+        '
+        Me.btnOpenTemplatesFolder.BeginGroup = true
+        Me.btnOpenTemplatesFolder.Name = "btnOpenTemplatesFolder"
+        Me.btnOpenTemplatesFolder.Text = "Open Templates Folder"
+        '
+        'btnEditContextMenu
+        '
+        Me.btnEditContextMenu.BeginGroup = true
+        Me.btnEditContextMenu.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnEditContextMenu.Image = CType(resources.GetObject("btnEditContextMenu.Image"),System.Drawing.Image)
+        Me.btnEditContextMenu.Name = "btnEditContextMenu"
+        Me.btnEditContextMenu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
+        Me.btnEditContextMenu.Text = "Edit"
+        '
+        'btnDeleteContextMenu
+        '
+        Me.btnDeleteContextMenu.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDeleteContextMenu.Image = CType(resources.GetObject("btnDeleteContextMenu.Image"),System.Drawing.Image)
+        Me.btnDeleteContextMenu.Name = "btnDeleteContextMenu"
+        Me.btnDeleteContextMenu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
+        Me.btnDeleteContextMenu.Text = "Delete"
+        '
+        'btnViewContextMenu
+        '
+        Me.btnViewContextMenu.BeginGroup = true
+        Me.btnViewContextMenu.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnViewContextMenu.Image = CType(resources.GetObject("btnViewContextMenu.Image"),System.Drawing.Image)
+        Me.btnViewContextMenu.Name = "btnViewContextMenu"
+        Me.btnViewContextMenu.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlV)
+        Me.btnViewContextMenu.Text = "View"
+        '
+        'ButtonItem21
+        '
+        Me.ButtonItem21.BeginGroup = true
+        Me.ButtonItem21.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItem21.Image = CType(resources.GetObject("ButtonItem21.Image"),System.Drawing.Image)
+        Me.ButtonItem21.Name = "ButtonItem21"
+        Me.ButtonItem21.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
+        Me.ButtonItem21.Text = "Edit"
+        '
+        'ButtonItem22
+        '
+        Me.ButtonItem22.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItem22.Image = CType(resources.GetObject("ButtonItem22.Image"),System.Drawing.Image)
+        Me.ButtonItem22.Name = "ButtonItem22"
+        Me.ButtonItem22.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
+        Me.ButtonItem22.Text = "Delete"
+        '
+        'ButtonItem23
+        '
+        Me.ButtonItem23.BeginGroup = true
+        Me.ButtonItem23.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItem23.Image = CType(resources.GetObject("ButtonItem23.Image"),System.Drawing.Image)
+        Me.ButtonItem23.Name = "ButtonItem23"
+        Me.ButtonItem23.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlV)
+        Me.ButtonItem23.Text = "View"
+        '
+        'ButtonItem26
+        '
+        Me.ButtonItem26.BeginGroup = true
+        Me.ButtonItem26.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItem26.Image = CType(resources.GetObject("ButtonItem26.Image"),System.Drawing.Image)
+        Me.ButtonItem26.Name = "ButtonItem26"
+        Me.ButtonItem26.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
+        Me.ButtonItem26.Text = "Edit"
+        '
+        'ButtonItem27
+        '
+        Me.ButtonItem27.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItem27.Image = CType(resources.GetObject("ButtonItem27.Image"),System.Drawing.Image)
+        Me.ButtonItem27.Name = "ButtonItem27"
+        Me.ButtonItem27.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
+        Me.ButtonItem27.Text = "Delete"
+        '
+        'ButtonItem28
+        '
+        Me.ButtonItem28.BeginGroup = true
+        Me.ButtonItem28.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.ButtonItem28.Image = CType(resources.GetObject("ButtonItem28.Image"),System.Drawing.Image)
+        Me.ButtonItem28.Name = "ButtonItem28"
+        Me.ButtonItem28.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlV)
+        Me.ButtonItem28.Text = "View"
         '
         'frmMainInterface
         '
