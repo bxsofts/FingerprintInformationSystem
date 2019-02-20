@@ -39,6 +39,7 @@ Public Class frmPersonalFileStorage
     Dim SelectedFileID As String = ""
     Dim SelectedFileIndex As Integer = 0
 
+    Dim ShowStatusText As Boolean
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -84,7 +85,6 @@ Public Class frmPersonalFileStorage
         blUploadIsProgressing = False
         blDownloadIsProgressing = False
         blListIsLoading = False
-
         Me.Cursor = Cursors.Default
 
 
@@ -126,7 +126,7 @@ Public Class frmPersonalFileStorage
         End If
 
         Me.Cursor = Cursors.WaitCursor
-
+        ShowStatusText = True
         Try
             bgwListFiles.RunWorkerAsync("root")
         Catch ex As Exception
@@ -151,7 +151,12 @@ Public Class frmPersonalFileStorage
                 Exit Sub
             End If
             bgwListFiles.ReportProgress(1, "Logout")
-            bgwListFiles.ReportProgress(1, "Fetching Files from Google Drive...")
+            If ShowStatusText Then
+                bgwListFiles.ReportProgress(1, "Fetching Files from Google Drive...")
+            Else
+                bgwListFiles.ReportProgress(1, "")
+            End If
+
             SetFormTitle()
             ListFiles(e.Argument, False)
             GetDriveUsageDetails()
@@ -183,6 +188,8 @@ Public Class frmPersonalFileStorage
                 ElseIf e.UserState = "Login" Then
                     btnLogin.Image = My.Resources.Login
                     btnLogin.Text = "Login"
+                ElseIf e.UserState = "" Then
+                    ShowProgressControls("", "", eCircularProgressType.Donut)
                 End If
             End If
 
@@ -312,6 +319,7 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
+        ShowStatusText = False
         Try
             Dim id As String = ""
             If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
@@ -1047,7 +1055,12 @@ Public Class frmPersonalFileStorage
         CircularProgress1.ProgressColor = GetProgressColor()
         CircularProgress1.ProgressBarType = ProgressType
         CircularProgress1.Show()
-        lblProgressStatus.Show()
+        If StatusText = "" Then
+            lblProgressStatus.Hide()
+        Else
+            lblProgressStatus.Show()
+        End If
+
     End Sub
 
     Private Sub HideProgressControls()

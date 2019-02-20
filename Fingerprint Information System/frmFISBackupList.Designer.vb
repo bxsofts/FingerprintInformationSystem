@@ -291,6 +291,7 @@ Partial Class frmFISBackupList
         '
         'lblProgressStatus
         '
+        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -305,6 +306,7 @@ Partial Class frmFISBackupList
         '
         'CircularProgress1
         '
+        Me.CircularProgress1.BackColor = System.Drawing.Color.White
         '
         '
         '

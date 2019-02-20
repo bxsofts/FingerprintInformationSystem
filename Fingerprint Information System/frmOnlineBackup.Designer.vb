@@ -241,6 +241,7 @@ Partial Class frmOnlineBackup
         '
         'lblProgressStatus
         '
+        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
         '
         '
         '
@@ -254,6 +255,7 @@ Partial Class frmOnlineBackup
         '
         'CircularProgress1
         '
+        Me.CircularProgress1.BackColor = System.Drawing.Color.White
         '
         '
         '

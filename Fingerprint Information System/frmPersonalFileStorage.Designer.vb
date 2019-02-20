@@ -85,7 +85,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1042, 549)
+        Me.PanelEx1.Size = New System.Drawing.Size(1085, 549)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -104,7 +104,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(879, 549)
+        Me.PanelEx3.Size = New System.Drawing.Size(922, 549)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -127,7 +127,7 @@ Partial Class frmPersonalFileStorage
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(879, 526)
+        Me.GroupPanel1.Size = New System.Drawing.Size(922, 526)
         '
         '
         '
@@ -160,11 +160,12 @@ Partial Class frmPersonalFileStorage
         '
         'lblProgressStatus
         '
+        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
         '
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(333, 314)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(690, 314)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
         Me.lblProgressStatus.TabIndex = 4
@@ -174,12 +175,13 @@ Partial Class frmPersonalFileStorage
         '
         'CircularProgress1
         '
+        Me.CircularProgress1.BackColor = System.Drawing.Color.White
         '
         '
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(376, 189)
+        Me.CircularProgress1.Location = New System.Drawing.Point(733, 189)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -211,7 +213,7 @@ Partial Class frmPersonalFileStorage
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(873, 520)
+        Me.listViewEx1.Size = New System.Drawing.Size(916, 520)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -265,7 +267,7 @@ Partial Class frmPersonalFileStorage
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblItemCount, Me.lblDriveSpaceUsed, Me.lblCurrentFolderPath})
         Me.Bar1.Location = New System.Drawing.Point(0, 526)
         Me.Bar1.Name = "Bar1"
-        Me.Bar1.Size = New System.Drawing.Size(879, 23)
+        Me.Bar1.Size = New System.Drawing.Size(922, 23)
         Me.Bar1.Stretch = True
         Me.Bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Bar1.TabIndex = 24
@@ -305,7 +307,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx2.Controls.Add(Me.btnRefresh)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelEx2.Location = New System.Drawing.Point(879, 0)
+        Me.PanelEx2.Location = New System.Drawing.Point(922, 0)
         Me.PanelEx2.Name = "PanelEx2"
         Me.PanelEx2.Size = New System.Drawing.Size(163, 549)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -431,7 +433,7 @@ Partial Class frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1042, 549)
+        Me.ClientSize = New System.Drawing.Size(1085, 549)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
