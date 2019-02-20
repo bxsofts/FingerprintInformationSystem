@@ -732,7 +732,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Then
+        If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Or Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "0B" Then
             MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
