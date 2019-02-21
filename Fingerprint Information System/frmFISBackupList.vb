@@ -95,7 +95,7 @@ Public Class frmFISBackupList
         Me.listViewEx1.Items.Clear()
         Me.lblItemCount.Text = "Item Count: "
         ServiceCreated = False
-        CurrentFolderName = ""
+        CurrentFolderName = "\My Drive"
 
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
 
@@ -313,6 +313,7 @@ Public Class frmFISBackupList
                 Dim Result = List.Execute
                 If Result.Parents Is Nothing Then
                     id = "root"
+                    CurrentFolderName = "\My Drive"
                     CurrentFolderPath = "\My Drive"
                     ParentFolderPath = "\My Drive"
                 Else
@@ -364,7 +365,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
         CurrentFolderID = "root"
-
+        CurrentFolderName = "\My Drive"
         CurrentFolderPath = "\My Drive"
         ParentFolderPath = "\My Drive"
 
@@ -1001,7 +1002,7 @@ Public Class frmFISBackupList
         End If
 
 
-        If blSelectedItemIsFolder And SuperAdmin And (SelectedItemText = "LocalAdminPass" Or SelectedItemText = "SuperAdminPass") Then
+        If CurrentFolderName = AdminPasswordFolderName And SuperAdmin And (SelectedItemText = "LocalAdminPass" Or SelectedItemText = "SuperAdminPass") Then
             SetAdminPassword(SelectedItemText)
             Exit Sub
         End If
@@ -1107,12 +1108,12 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder And Not SelectedFileName = "SuperAdminPass" And Not SelectedFileName = "LocalAdminPass" Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
             MessageBoxEx.Show("Cannot update folder. Select file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If SelectedFileName = "SuperAdminPass" Or SelectedFileName = "LocalAdminPass" Then
+        If CurrentFolderName = AdminPasswordFolderName And (SelectedFileName = "SuperAdminPass" Or SelectedFileName = "LocalAdminPass") Then
             SetAdminPassword(SelectedFileName)
             Exit Sub
         End If
@@ -1264,7 +1265,7 @@ Public Class frmFISBackupList
             Dim request As New Google.Apis.Drive.v3.Data.File
 
             request.Name = SelectedPassword
-            request.Description = NewPassword
+            request.Description = EncryptText(NewPassword)
             FISService.Files.Update(request, SelectedFileID).Execute()
             Dim List As FilesResource.GetRequest = FISService.Files.Get(SelectedFileID)
             List.Fields = "id, name, modifiedTime, description"

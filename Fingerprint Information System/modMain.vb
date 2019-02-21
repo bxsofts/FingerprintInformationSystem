@@ -80,7 +80,8 @@ Module modMain
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
-    Public PasswordFolderName As String = "..D4FvarcFNt/t7C/rcJltjylRSXzzthOS"
+    Public AdminPasswordFolderName As String = "..D4FvarcFNt/t7C/rcJltjylRSXzzthOS"
+    Public UserPasswordFolderName As String = "..FAmDGDDYUnMfj45TryHY0B4ot4lMVHgcixHjrAdWfUA="
     Public SuperAdminPass As String = ""
     Public LocalAdminPass As String = ""
 
@@ -328,7 +329,7 @@ Module modMain
 
     End Function
 
-    
+
 
     Public Function IsValidFileName(ByVal FileName As String) As Boolean
 
@@ -366,7 +367,7 @@ Module modMain
 
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & PasswordFolderName & "'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & AdminPasswordFolderName & "'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -388,8 +389,8 @@ Module modMain
             cnt = Results.Files.Count
             If cnt = 0 Then Return False
             For Each Result In Results.Files
-                If Result.Name = EncryptText("SuperAdminPass") Then SuperAdminPass = Result.Description
-                If Result.Name = EncryptText("LocalAdminPass") Then LocalAdminPass = Result.Description
+                If Result.Name = "SuperAdminPass" Then SuperAdminPass = Result.Description
+                If Result.Name = "LocalAdminPass" Then LocalAdminPass = Result.Description
             Next
 
             Return True
@@ -407,14 +408,15 @@ Module modMain
 
         frmFISBackupList.btnUpdateFileContent.Visible = False
 
-        If frmInputBox.txtInputBox.Text = SuperAdminPass Then
+        Dim pass As String = EncryptText(frmInputBox.txtInputBox.Text)
+        If pass = SuperAdminPass Then
             FileOwner = "Admin"
             SuperAdmin = True
             LocalAdmin = False
             LocalUser = False
             frmFISBackupList.btnUpdateFileContent.Visible = True
             Return True
-        ElseIf frmInputBox.txtInputBox.Text = LocalAdminPass Then
+        ElseIf pass = LocalAdminPass Then
             FileOwner = "Admin_" & ShortOfficeName & "_" & ShortDistrictName
             LocalAdmin = True
             SuperAdmin = False

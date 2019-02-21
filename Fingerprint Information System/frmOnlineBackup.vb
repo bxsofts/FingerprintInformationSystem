@@ -1006,12 +1006,13 @@ Public Class frmOnlineBackup
             Return False
         End If
 
-        If frmInputBox.txtInputBox.Text = SuperAdminPass Then
+        Dim pass As String = EncryptText(frmInputBox.txtInputBox.Text)
+        If pass = SuperAdminPass Then
             sAdmin = True
             lAdmin = False
             lUser = False
             Return True
-        ElseIf frmInputBox.txtInputBox.Text = LocalAdminPass Then
+        ElseIf pass = LocalAdminPass Then
             lAdmin = True
             sAdmin = False
             lUser = False

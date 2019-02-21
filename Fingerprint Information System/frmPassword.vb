@@ -91,7 +91,7 @@ Public Class frmPassword
 
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & PasswordFolderName & "'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserPasswordFolderName & "'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -195,7 +195,7 @@ Public Class frmPassword
 
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & PasswordFolderName & "'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserPasswordFolderName & "'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
