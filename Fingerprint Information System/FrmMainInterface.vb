@@ -17196,24 +17196,22 @@ errhandler:
                 Exit Sub
             End If
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and name contains '" & ShortDistrictName & "' and trashed = false and '" & VersionFolderID & "' in parents"
-            List.Fields = "files(id, name)"
+            List.Q = "mimeType = 'files/.fisver' and name = '" & FullDistrictName & "' and trashed = false and '" & VersionFolderID & "' in parents"
+            List.Fields = "files(id, name, description)"
 
             Results = List.Execute
 
             Dim VersionFileID As String = ""
-            Dim VersionFileName As String = ""
+            Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
             Dim VersionFile = New Google.Apis.Drive.v3.Data.File
-            VersionFile.Description = ShortOfficeName & "_" & ShortDistrictName
+            VersionFile.Description = LocalVersion
 
             cnt = Results.Files.Count
 
             If cnt > 0 Then 'update version
                 VersionFileID = Results.Files(0).Id
-                VersionFileName = Results.Files(0).Name
-                Dim LocalVersion As String = ShortDistrictName & " - V" & My.Application.Info.Version.ToString.Substring(0, 4)
-                If VersionFileName <> LocalVersion Then
-                    VersionFile.Name = LocalVersion
+                Dim RemoteVersion As String = Results.Files(0).Description
+                If RemoteVersion <> LocalVersion Then
                     VersionFile = FISService.Files.Update(VersionFile, VersionFileID).Execute
                 End If
 
@@ -17222,10 +17220,9 @@ errhandler:
                 parentlist.Add(VersionFolderID) 'parent forlder
 
                 VersionFile.Parents = parentlist
-                VersionFile.Name = ShortDistrictName & " - V" & My.Application.Info.Version.ToString.Substring(0, 4)
-                VersionFile.MimeType = "application/vnd.google-apps.folder"
+                VersionFile.Name = FullDistrictName
+                VersionFile.MimeType = "files/.fisver"
                 VersionFile = FISService.Files.Create(VersionFile).Execute
-                Exit Sub
             End If
 
         Catch ex As Exception
