@@ -5,9 +5,6 @@ Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Drive.v3
 Imports Google.Apis.Drive.v3.Data
 Imports Google.Apis.Services
-Imports Google.Apis.Download
-Imports Google.Apis.Upload
-Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
 Public Class frmPassword
@@ -94,7 +91,7 @@ Public Class frmPassword
 
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..Pass#Word#'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & PasswordFolderName & "'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -198,7 +195,7 @@ Public Class frmPassword
 
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..Pass#Word#'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & PasswordFolderName & "'"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -206,6 +203,7 @@ Public Class frmPassword
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
                 bgwGetPassword.ReportProgress(100, "")
+                Exit Sub
             Else
                 parentid = Results.Files(0).Id
             End If
@@ -253,6 +251,7 @@ Public Class frmPassword
 
         If TypeOf e.UserState Is Exception Then
             ShowErrorMessage(e.UserState)
+            ' MessageBoxEx.Show("Unable to get user authentication.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         Me.Cursor = Cursors.Default
     End Sub
@@ -273,12 +272,7 @@ Public Class frmPassword
         Me.txtUserID.Focus()
     End Sub
 
-    Private Function EncryptText(plaintext As String) As String
-        Dim WrapperPass As String = "/J2nUqpS"
-        Dim Wrapper As New Simple3Des(WrapperPass)
-        Dim cipherText As String = Wrapper.EncryptData(plaintext)
-        Return cipherText
-    End Function
+   
 
     Private Sub frmPassword_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Me.txtUserID.Focus()

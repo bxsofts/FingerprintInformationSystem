@@ -482,10 +482,10 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-        If IsValidFileName(FolderName) = False Then
-            MessageBoxEx.Show("Folder name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
+        '   If IsValidFileName(FolderName) = False Then
+        'MessageBoxEx.Show("Folder name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '  Exit Sub
+        '  End If
 
         For i = 0 To Me.listViewEx1.Items.Count - 1
             If Me.listViewEx1.Items(i).Text.ToLower = FolderName.ToLower Then
@@ -999,7 +999,7 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-        If IsValidFileName(newfilename) = False Then
+        If IsValidFileName(newfilename) = False And Not blSelectedItemIsFolder Then
             MessageBoxEx.Show("File name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If

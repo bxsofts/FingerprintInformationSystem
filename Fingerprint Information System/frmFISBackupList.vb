@@ -62,14 +62,6 @@ Public Class frmFISBackupList
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
 
-        RecoverPassword = My.Computer.Registry.GetValue(strGeneralSettingsPath, "RecoverPassword", "0")
-        If RecoverPassword = "1" Then
-            FileOwner = "Admin"
-            SuperAdmin = True
-            LocalAdmin = False
-            LocalUser = False
-        End If
-
         If SuperAdmin Then
             Me.btnUpdateFileContent.Visible = True
         Else
@@ -481,10 +473,10 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If IsValidFileName(FolderName) = False Then
-            MessageBoxEx.Show("Folder name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
+        '  If IsValidFileName(FolderName) = False Then
+        'MessageBoxEx.Show("Folder name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' Exit Sub
+        '  End If
 
         For i = 0 To Me.listViewEx1.Items.Count - 1
             If Me.listViewEx1.Items(i).Text.ToLower = FolderName.ToLower Then
@@ -1019,7 +1011,7 @@ Public Class frmFISBackupList
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
             extension = My.Computer.FileSystem.GetFileInfo(oldfilename).Extension
-            oldfilename = oldfilename.Replace(extension, "")
+            If extension <> "" Then oldfilename = oldfilename.Replace(extension, "")
         End If
 
         frmInputBox.SetTitleandMessage("Enter New Name", "Enter New Name", False, oldfilename)
@@ -1033,7 +1025,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If IsValidFileName(newfilename) = False Then
+        If IsValidFileName(newfilename) = False And Not blSelectedItemIsFolder Then
             MessageBoxEx.Show("File name contains invalid characters.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -1301,6 +1293,20 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        RecoverPassword = My.Computer.Registry.GetValue(strGeneralSettingsPath, "RecoverPassword", "0")
+        If RecoverPassword = "1" Then
+            SuperAdminPass = "^^^px7600d"
+            Dim adminprivilege As Boolean = SetAdminPrivilege()
+            If adminprivilege = True Then '
+                SetTitleAndSize()
+                Me.listViewEx1.Items.Clear()
+                Me.lblItemCount.Text = "Item Count: "
+                ShowProgressControls("", "", eCircularProgressType.Donut)
+                bgwListFiles.RunWorkerAsync(CurrentFolderID)
+            End If
+        Exit Sub
+        End If
+
         If Not blPasswordFetched Then
             Me.Cursor = Cursors.WaitCursor
             ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
@@ -1327,7 +1333,7 @@ Public Class frmFISBackupList
                 bgwListFiles.RunWorkerAsync(CurrentFolderID)
             End If
         Else
-            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Unable to get user authentication.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
         Me.Cursor = Cursors.Default

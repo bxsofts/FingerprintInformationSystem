@@ -953,6 +953,16 @@ Public Class frmOnlineBackup
             Exit Sub
         End If
 
+        Dim RecoverPassword As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "RecoverPassword", "0")
+        If RecoverPassword = "1" Then
+            SuperAdminPass = "^^^px7600d"
+            Dim adminprivilege As Boolean = SetAdminPrivilege()
+            If adminprivilege = True Then '
+               LoadFilesInMasterBackupFolder()
+            End If
+            Exit Sub
+        End If
+
         If Not blPasswordFetched Then
             Me.Cursor = Cursors.WaitCursor
             ShowProgressControls("", "Please Wait...", eCircularProgressType.Donut)
@@ -971,7 +981,7 @@ Public Class frmOnlineBackup
         If e.UserState = True Then
             If SetAdminPrivilege() Then LoadFilesInMasterBackupFolder()
         Else
-            MessageBoxEx.Show("Connection Failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Unable to get user authentication.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
         Me.Cursor = Cursors.Default

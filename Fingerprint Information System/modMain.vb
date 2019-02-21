@@ -80,8 +80,9 @@ Module modMain
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
-    Public SuperAdminPass As String = "^^^px7600d"
-    Public LocalAdminPass As String = "minutiae8"
+    Public PasswordFolderName As String = "..D4FvarcFNt/t7C/rcJltjylRSXzzthOS"
+    Public SuperAdminPass As String = ""
+    Public LocalAdminPass As String = ""
 
     Public LocalAdmin As Boolean = False
     Public SuperAdmin As Boolean = False
@@ -347,48 +348,48 @@ Module modMain
     Public Function GetAdminPasswords() As Boolean
         Try
 
-        SuperAdminPass = "^^^px7600d"
-        LocalAdminPass = "minutiae8"
+            SuperAdminPass = ""
+            LocalAdminPass = ""
 
-        Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-        Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
+            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
 
-        Dim FISService As DriveService = New DriveService
-        Dim Scopes As String() = {DriveService.Scope.Drive}
-        Dim VersionFolder As String = "Version"
-        Dim VersionFolderID As String = ""
-
-
-        Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-        FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim VersionFolder As String = "Version"
+            Dim VersionFolderID As String = ""
 
 
-        Dim parentid As String = ""
-        Dim List = FISService.Files.List()
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..Pass#Word#'"
-        List.Fields = "files(id)"
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-        Dim Results = List.Execute
 
-        Dim cnt = Results.Files.Count
+            Dim parentid As String = ""
+            Dim List = FISService.Files.List()
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & PasswordFolderName & "'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
             If cnt = 0 Then
                 Return False
             Else
                 parentid = Results.Files(0).Id
             End If
 
-        List.Q = "trashed = false and '" & parentid & "' in parents" ' list all files in parent folder. 
+            List.Q = "trashed = false and '" & parentid & "' in parents" ' list all files in parent folder. 
 
-        List.Fields = "nextPageToken, files(id, name, description)"
-        List.OrderBy = "folder, name" 'sorting order
+            List.Fields = "nextPageToken, files(id, name, description)"
+            List.OrderBy = "folder, name" 'sorting order
 
             Results = List.Execute
 
             cnt = Results.Files.Count
             If cnt = 0 Then Return False
             For Each Result In Results.Files
-                If Result.Name = "SuperAdminPass" Then SuperAdminPass = Result.Description
-                If Result.Name = "LocalAdminPass" Then LocalAdminPass = Result.Description
+                If Result.Name = EncryptText("SuperAdminPass") Then SuperAdminPass = Result.Description
+                If Result.Name = EncryptText("LocalAdminPass") Then LocalAdminPass = Result.Description
             Next
 
             Return True
@@ -427,6 +428,13 @@ Module modMain
             LocalUser = True
             Return False
         End If
+    End Function
+
+    Public Function EncryptText(plaintext As String) As String
+        Dim WrapperPass As String = "/J2nUqpS"
+        Dim Wrapper As New Simple3Des(WrapperPass)
+        Dim cipherText As String = Wrapper.EncryptData(plaintext)
+        Return cipherText
     End Function
 End Module
 
