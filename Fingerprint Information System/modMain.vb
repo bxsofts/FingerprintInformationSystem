@@ -14,6 +14,7 @@ Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
 Imports System.Security.Cryptography
+Imports DevComponents.DotNetBar.Controls
 
 Module modMain
     Public strAppName As String = "Fingerprint Information System"
@@ -99,6 +100,12 @@ Module modMain
     Public LatestSOCDI As String = ""
 
     Public blUserAuthenticated As Boolean = False
+    Public UserName As String = "user"
+
+    Public CredentialFilePath As String = ""
+
+    Public JsonPath As String = ""
+
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
@@ -352,8 +359,7 @@ Module modMain
             SuperAdminPass = ""
             LocalAdminPass = ""
 
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
@@ -438,6 +444,20 @@ Module modMain
         Dim cipherText As String = Wrapper.EncryptData(plaintext)
         Return cipherText
     End Function
+
+    Public Sub ShowDesktopAlert(ByVal msg As String)
+        On Error Resume Next
+        If frmMainInterface.chkShowPopups.Checked Then
+            If msg.EndsWith("!") = False And msg.EndsWith(".") = False Then
+                msg = msg & "."
+            End If
+
+            DesktopAlert.PlaySound = frmMainInterface.chkPlaySound.Checked
+            DesktopAlert.AutoCloseTimeOut = 3
+            DesktopAlert.Show("<u><h5>" & strAppName & "</h5></u>" & msg, eAlertPosition.BottomRight)
+        End If
+
+    End Sub
 End Module
 
 
@@ -468,7 +488,7 @@ Class ListViewItemComparer
         Return returnVal
     End Function
 
-  
+
 End Class
 
 

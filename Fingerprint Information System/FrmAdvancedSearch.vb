@@ -645,45 +645,45 @@ Public Class FrmAdvancedSearch
                 Case "SOC"
                     frmMainInterface.FingerPrintDataSet.SOCRegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.SOCRegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.SOCDatagrid.RowCount = 1, "1 Record", frmMainInterface.SOCDatagrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.SOCDatagrid.RowCount = 1, "1 Record", frmMainInterface.SOCDatagrid.RowCount & " Records"))
                 Case "RSOC"
                     frmMainInterface.FingerPrintDataSet.SOCReportRegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.SOCReportRegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.RSOCDatagrid.RowCount = 1, "1 Record", frmMainInterface.RSOCDatagrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.RSOCDatagrid.RowCount = 1, "1 Record", frmMainInterface.RSOCDatagrid.RowCount & " Records"))
 
                 Case "DA"
 
                     frmMainInterface.FingerPrintDataSet.DARegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.DARegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.DADatagrid.RowCount = 1, "1 Record", frmMainInterface.DADatagrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.DADatagrid.RowCount = 1, "1 Record", frmMainInterface.DADatagrid.RowCount & " Records"))
 
                 Case "ID"
 
                     frmMainInterface.FingerPrintDataSet.IdentifiedSlipsRegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.IdentifiedSlipsRegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.IDDatagrid.RowCount = 1, "1 Record", frmMainInterface.IDDatagrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.IDDatagrid.RowCount = 1, "1 Record", frmMainInterface.IDDatagrid.RowCount & " Records"))
 
                 Case "AC"
                     frmMainInterface.FingerPrintDataSet.ActiveCriminalsRegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.ActiveCriminalsRegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.ACDatagrid.RowCount = 1, "1 Record", frmMainInterface.ACDatagrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.ACDatagrid.RowCount = 1, "1 Record", frmMainInterface.ACDatagrid.RowCount & " Records"))
 
                 Case "FPA"
 
                     frmMainInterface.FingerPrintDataSet.FPAttestationRegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.FPAttestationRegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.FPADataGrid.RowCount = 1, "1 Record", frmMainInterface.FPADataGrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.FPADataGrid.RowCount = 1, "1 Record", frmMainInterface.FPADataGrid.RowCount & " Records"))
 
 
                 Case "CD"
                     frmMainInterface.FingerPrintDataSet.CDRegister.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.CDRegister)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.CDDataGrid.RowCount = 1, "1 Record", frmMainInterface.CDDataGrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.CDDataGrid.RowCount = 1, "1 Record", frmMainInterface.CDDataGrid.RowCount & " Records"))
 
                 Case "IDR"
                     frmMainInterface.FingerPrintDataSet.IdentifiedCases.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.IdentifiedCases)
-                    frmMainInterface.ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.IDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.IDRDataGrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.IDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.IDRDataGrid.RowCount & " Records"))
             End Select
 
 

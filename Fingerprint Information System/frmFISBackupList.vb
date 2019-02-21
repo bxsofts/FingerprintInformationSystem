@@ -16,8 +16,6 @@ Public Class frmFISBackupList
 
     Dim FISService As DriveService = New DriveService
     Dim FISAccountServiceCredential As GoogleCredential
-    Public CredentialPath As String
-    Public JsonPath As String
 
     Dim CurrentFolderID As String = "root"
     Public dBytesDownloaded As Long
@@ -30,8 +28,8 @@ Public Class frmFISBackupList
     Dim dFormatedFileSize As String = ""
     Public SaveFileName As String = ""
     Dim ServiceCreated As Boolean = False
-    Dim CurrentFolderName As String = ""
 
+    Dim CurrentFolderName As String = ""
     Dim CurrentFolderPath As String = ""
     Dim ParentFolderPath As String = ""
 
@@ -60,6 +58,9 @@ Public Class frmFISBackupList
 #Region "LOAD DATA"
 
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+
+       
         Me.Cursor = Cursors.WaitCursor
 
         If SuperAdmin Then
@@ -76,13 +77,14 @@ Public Class frmFISBackupList
 
         CurrentFolderPath = "\My Drive"
         ParentFolderPath = "\My Drive"
+        CurrentFolderName = "My Drive"
 
-        CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
-        JsonPath = CredentialPath & "\FISServiceAccount.json"
+
+        JsonPath = CredentialFilePath & "\FISServiceAccount.json"
 
         If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
-            My.Computer.FileSystem.CreateDirectory(CredentialPath)
-            FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialPath & "\FISServiceAccount.json")
+            My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+            FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
         End If
 
         If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
@@ -95,7 +97,7 @@ Public Class frmFISBackupList
         Me.listViewEx1.Items.Clear()
         Me.lblItemCount.Text = "Item Count: "
         ServiceCreated = False
-        CurrentFolderName = "\My Drive"
+
 
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
 
@@ -105,7 +107,10 @@ Public Class frmFISBackupList
 
         '  ImageList1.Images.Add(GetFileIcon(".exe"))
         bgwListFiles.RunWorkerAsync("root")
-
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
 
@@ -288,7 +293,7 @@ Public Class frmFISBackupList
         End If
 
 
-        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 Then
+        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 And (Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "" And Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "0B") Then
             If MessageBoxEx.Show("Do you want to download the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                 DownloadSelectedFile()
                 Exit Sub
@@ -296,6 +301,11 @@ Public Class frmFISBackupList
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
+        End If
+
+        If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 And (Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Or Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "0B") Then
+            MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
 
         Me.Cursor = Cursors.WaitCursor
@@ -313,7 +323,7 @@ Public Class frmFISBackupList
                 Dim Result = List.Execute
                 If Result.Parents Is Nothing Then
                     id = "root"
-                    CurrentFolderName = "\My Drive"
+                    CurrentFolderName = "My Drive"
                     CurrentFolderPath = "\My Drive"
                     ParentFolderPath = "\My Drive"
                 Else
@@ -365,7 +375,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
         CurrentFolderID = "root"
-        CurrentFolderName = "\My Drive"
+        CurrentFolderName = "My Drive"
         CurrentFolderPath = "\My Drive"
         ParentFolderPath = "\My Drive"
 
@@ -464,7 +474,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False)
+        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False, "New Folder")
         frmInputBox.ShowDialog()
         Dim FolderName As String = frmInputBox.txtInputBox.Text
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
@@ -530,6 +540,7 @@ Public Class frmFISBackupList
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
             lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
+            ShowDesktopAlert("New Folder created successfully.")
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -906,7 +917,7 @@ Public Class frmFISBackupList
             Else
                 msg = "Selected file deleted from Google Drive."
             End If
-            frmMainInterface.ShowDesktopAlert(msg)
+            ShowDesktopAlert(msg)
 
             Me.Cursor = Cursors.Default
             SelectNextItem(SelectedFileIndex)
@@ -991,12 +1002,12 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        Dim msg1 As String = "file"
-        If blSelectedItemIsFolder Then msg1 = "folder"
+        Dim ftype As String = "file"
+        If blSelectedItemIsFolder Then ftype = "folder"
 
         If Not SuperAdmin Then
             If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
-                MessageBoxEx.Show("You are not authorized to rename the selected " & msg1 & ".", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("You are not authorized to rename the selected " & ftype & ".", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
         End If
@@ -1022,7 +1033,7 @@ Public Class frmFISBackupList
         Dim newfilename As String = frmInputBox.txtInputBox.Text
 
         If Trim(newfilename) = "" Then
-            MessageBoxEx.Show("Invalid " & msg1 & " name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Invalid " & ftype & " name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -1040,7 +1051,7 @@ Public Class frmFISBackupList
         Dim SelectedItemIndex As Integer = Me.listViewEx1.SelectedItems(0).Index
         For i = 0 To Me.listViewEx1.Items.Count - 1
             If i <> SelectedItemIndex And Me.listViewEx1.Items(i).Text.ToLower = newfilename.ToLower Then
-                MessageBoxEx.Show("Another " & msg1 & " with name '" & newfilename & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("Another " & ftype & " with name '" & newfilename & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
         Next
@@ -1068,7 +1079,7 @@ Public Class frmFISBackupList
             Dim modifiedtime As DateTime = Result.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
-
+            ShowDesktopAlert("Selected " & ftype & " renamed successfully.")
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default

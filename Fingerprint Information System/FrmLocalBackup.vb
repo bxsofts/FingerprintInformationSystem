@@ -73,7 +73,7 @@ Public Class FrmLocalBackup
             item.ImageIndex = 0
 
 
-            frmMainInterface.ShowDesktopAlert("Database backed up successfully.")
+            ShowDesktopAlert("Database backed up successfully.")
             Application.DoEvents()
             DisplayInformation()
             Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
@@ -217,7 +217,7 @@ Public Class FrmLocalBackup
             My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
             Me.listViewEx1.SelectedItems(0).Remove()
             Application.DoEvents()
-            frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
+            ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
             SelectNextItem(SelectedFileIndex)
             DisplayInformation()
             Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)

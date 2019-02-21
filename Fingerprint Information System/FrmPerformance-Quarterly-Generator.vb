@@ -51,7 +51,7 @@ Public Class frmQuarterlyPerformance
         lblMonth3.Visible = True
         lblPreviousQuarter.Visible = True
         ClosePleaseWaitForm()
-        frmMainInterface.ShowDesktopAlert("Performance Statement generated.")
+        ShowDesktopAlert("Performance Statement generated.")
     End Sub
 
     Sub SetDays()
@@ -183,7 +183,7 @@ Public Class frmQuarterlyPerformance
         lblMonth3.Visible = True
         lblPreviousQuarter.Visible = True
         ClosePleaseWaitForm()
-        frmMainInterface.ShowDesktopAlert("Performance Statement generated")
+        ShowDesktopAlert("Performance Statement generated")
     End Sub
 
     Private Sub GeneratePerformanceStatement() ' Handles btnGeneratePerformanceStatement.Click

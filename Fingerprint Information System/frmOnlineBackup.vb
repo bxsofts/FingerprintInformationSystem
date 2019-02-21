@@ -22,8 +22,7 @@ Public Class frmOnlineBackup
     Dim BackupFolder As String
     Dim BackupFolderID As String
     Dim BackupPath As String = ""
-    Public CredentialPath As String
-    Public JsonPath As String
+    Public CredentialFilePath As String
     Public NoFileFoundMessage As Boolean = False
     Public dBytesDownloaded As Long
     Public dDownloadStatus As DownloadStatus
@@ -71,12 +70,9 @@ Public Class frmOnlineBackup
         Me.lblTotalFileSize.Text = ""
         Try
 
-            CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
-            JsonPath = CredentialPath & "\FISServiceAccount.json"
-
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
-                My.Computer.FileSystem.CreateDirectory(CredentialPath)
-                FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialPath & "\FISServiceAccount.json")
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+                FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
             End If
 
 
@@ -207,7 +203,7 @@ Public Class frmOnlineBackup
             Me.listViewEx1.Items(0).Selected = True
         End If
         If NoFileFoundMessage And listViewEx1.Items.Count = 0 Then
-            frmMainInterface.ShowDesktopAlert("No online Backup Files were found.")
+            ShowDesktopAlert("No online Backup Files were found.")
             NoFileFoundMessage = False
         End If
 
@@ -857,7 +853,7 @@ Public Class frmOnlineBackup
                 My.Computer.FileSystem.DeleteFile(SelectedFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
                 Me.listViewEx1.SelectedItems(0).Remove()
                 Application.DoEvents()
-                frmMainInterface.ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
+                ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
             Else 'remove online file
 
                 If InternetAvailable() = False Then
@@ -875,7 +871,7 @@ Public Class frmOnlineBackup
                 TotalFileSize -= file.Size
                 Me.listViewEx1.SelectedItems(0).Remove()
                 Application.DoEvents()
-                frmMainInterface.ShowDesktopAlert("Selected backup file deleted from Google Drive.")
+                ShowDesktopAlert("Selected backup file deleted from Google Drive.")
             End If
 
             Me.Cursor = Cursors.Default

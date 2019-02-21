@@ -324,20 +324,20 @@ Partial Class frmPersonalFileStorage
         Me.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnLogin.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.Image = Global.FingerprintInformationSystem.My.Resources.Resources.Login
-        Me.btnLogin.Location = New System.Drawing.Point(16, 7)
+        Me.btnLogin.Location = New System.Drawing.Point(9, 7)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(131, 59)
+        Me.btnLogin.Size = New System.Drawing.Size(144, 59)
         Me.btnLogin.TabIndex = 1
-        Me.btnLogin.Text = "Login"
+        Me.btnLogin.Text = "Google Login"
         '
         'btnGetAdminPrivilege
         '
         Me.btnGetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnGetAdminPrivilege.Image = CType(resources.GetObject("btnGetAdminPrivilege.Image"), System.Drawing.Image)
-        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(16, 483)
+        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(9, 483)
         Me.btnGetAdminPrivilege.Name = "btnGetAdminPrivilege"
-        Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(131, 59)
+        Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(144, 59)
         Me.btnGetAdminPrivilege.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnGetAdminPrivilege.TabIndex = 8
         Me.btnGetAdminPrivilege.Text = "Admin"
@@ -348,9 +348,9 @@ Partial Class frmPersonalFileStorage
         Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
-        Me.btnRename.Location = New System.Drawing.Point(16, 347)
+        Me.btnRename.Location = New System.Drawing.Point(9, 347)
         Me.btnRename.Name = "btnRename"
-        Me.btnRename.Size = New System.Drawing.Size(131, 59)
+        Me.btnRename.Size = New System.Drawing.Size(144, 59)
         Me.btnRename.TabIndex = 6
         Me.btnRename.Text = "Rename"
         '
@@ -360,9 +360,9 @@ Partial Class frmPersonalFileStorage
         Me.btnNewFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnNewFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewFolder.Image = CType(resources.GetObject("btnNewFolder.Image"), System.Drawing.Image)
-        Me.btnNewFolder.Location = New System.Drawing.Point(16, 143)
+        Me.btnNewFolder.Location = New System.Drawing.Point(9, 143)
         Me.btnNewFolder.Name = "btnNewFolder"
-        Me.btnNewFolder.Size = New System.Drawing.Size(131, 59)
+        Me.btnNewFolder.Size = New System.Drawing.Size(144, 59)
         Me.btnNewFolder.TabIndex = 3
         Me.btnNewFolder.Text = "New Folder"
         '
@@ -372,9 +372,9 @@ Partial Class frmPersonalFileStorage
         Me.btnUploadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnUploadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadFile.Image = CType(resources.GetObject("btnUploadFile.Image"), System.Drawing.Image)
-        Me.btnUploadFile.Location = New System.Drawing.Point(16, 211)
+        Me.btnUploadFile.Location = New System.Drawing.Point(9, 211)
         Me.btnUploadFile.Name = "btnUploadFile"
-        Me.btnUploadFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnUploadFile.Size = New System.Drawing.Size(144, 59)
         Me.btnUploadFile.TabIndex = 4
         Me.btnUploadFile.Text = "Upload"
         '
@@ -384,9 +384,9 @@ Partial Class frmPersonalFileStorage
         Me.btnDownloadFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnDownloadFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownloadFile.Image = CType(resources.GetObject("btnDownloadFile.Image"), System.Drawing.Image)
-        Me.btnDownloadFile.Location = New System.Drawing.Point(16, 279)
+        Me.btnDownloadFile.Location = New System.Drawing.Point(9, 279)
         Me.btnDownloadFile.Name = "btnDownloadFile"
-        Me.btnDownloadFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnDownloadFile.Size = New System.Drawing.Size(144, 59)
         Me.btnDownloadFile.TabIndex = 5
         Me.btnDownloadFile.Text = "Download"
         '
@@ -396,9 +396,9 @@ Partial Class frmPersonalFileStorage
         Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
-        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 415)
+        Me.btnRemoveFile.Location = New System.Drawing.Point(9, 415)
         Me.btnRemoveFile.Name = "btnRemoveFile"
-        Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
+        Me.btnRemoveFile.Size = New System.Drawing.Size(144, 59)
         Me.btnRemoveFile.TabIndex = 7
         Me.btnRemoveFile.Text = "Remove"
         '
@@ -408,9 +408,9 @@ Partial Class frmPersonalFileStorage
         Me.btnRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(16, 75)
+        Me.btnRefresh.Location = New System.Drawing.Point(9, 75)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
+        Me.btnRefresh.Size = New System.Drawing.Size(144, 59)
         Me.btnRefresh.TabIndex = 2
         Me.btnRefresh.Text = "Refresh List"
         '

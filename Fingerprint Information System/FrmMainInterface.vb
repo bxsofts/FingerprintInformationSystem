@@ -432,6 +432,8 @@ Public Class frmMainInterface
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
 
+        CopyCredentialFiles()
+
         If Me.chkTakeAutoBackup.Checked Then
             TakeAutoLocalBackup()
             TakeAutoOnlineBackup()
@@ -2151,21 +2153,6 @@ Public Class frmMainInterface
         If s Then v = 1 Else v = 0
 
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "PlaySound", v, Microsoft.Win32.RegistryValueKind.String)
-    End Sub
-
-    Public Sub ShowDesktopAlert(ByVal msg As String)
-        On Error Resume Next
-        If Me.chkShowPopups.Checked Then
-            If msg.EndsWith("!") = False And msg.EndsWith(".") = False Then
-                msg = msg & "."
-            End If
-
-            DesktopAlert.PlaySound = Me.chkPlaySound.Checked
-            DesktopAlert.AutoCloseTimeOut = 3
-
-            DesktopAlert.Show("<u><h5>" & strAppName & "</h5></u>" & msg, eAlertPosition.BottomRight)
-        End If
-
     End Sub
 
     Public Sub SetRandomDesktopAlertColor()
@@ -16446,6 +16433,37 @@ errhandler:
 
 #Region "AUTO ONLINE BACKUP"
 
+    Private Sub CopyCredentialFiles()
+        Try
+
+            CredentialFilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) & "\" & strAppName
+
+            JsonPath = CredentialFilePath & "\FISServiceAccount.json"
+
+            If Not FileIO.FileSystem.DirectoryExists(CredentialFilePath) Then
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+            End If
+
+            Dim jsonfile As String = CredentialFilePath & "\FISServiceAccount.json"
+            If Not FileIO.FileSystem.FileExists(jsonfile) Then 'copy from application folder
+                FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
+            End If
+
+            jsonfile = CredentialFilePath & "\FISOAuth2.json"
+            If Not FileIO.FileSystem.FileExists(jsonfile) Then 'copy from application folder
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+                FileSystem.FileCopy(strAppPath & "\FISOAuth2.json", CredentialFilePath & "\FISOAuth2.json")
+            End If
+
+            If FileIO.FileSystem.DirectoryExists(strAppUserPath & "\GoogleDriveAuthentication") Then
+                System.IO.Directory.Delete(strAppUserPath & "\GoogleDriveAuthentication", True)
+            End If
+
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
         Try
             Dim id As String = ""
@@ -16519,8 +16537,6 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
                 Exit Sub
             End If
@@ -16638,7 +16654,7 @@ errhandler:
             Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
         End If
 
-      
+
         '  Me.pgrDownloadInstaller.Text = "Uploading Backup: " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
     End Sub
 
@@ -16940,8 +16956,8 @@ errhandler:
     Private Sub bgwDownloadInstaller_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadInstaller.DoWork
         Try
 
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
+
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
@@ -17056,7 +17072,7 @@ errhandler:
 #Region "CHECK FOR UPDATE"
 
     Private Sub CheckForUpdatesAtStartup()
-        
+
         bgwUpdateChecker.RunWorkerAsync()
 
     End Sub
@@ -17087,8 +17103,8 @@ errhandler:
 
     Private Function CheckForUpdates() As Boolean
 
-        Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-        Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
+
         If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
             Return False
         End If
@@ -17173,8 +17189,7 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim CredentialPath As String = strAppUserPath & "\GoogleDriveAuthentication"
-            Dim JsonPath As String = CredentialPath & "\FISServiceAccount.json"
+
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
 
@@ -17255,6 +17270,11 @@ errhandler:
 
     Private Sub btnPersonalOnlineFiles_Click(sender As Object, e As EventArgs) Handles btnPersonalOnlineFiles.Click
         On Error Resume Next
+        If frmPersonalFileStorage.Visible Then
+            frmPersonalFileStorage.Activate()
+            Exit Sub
+        End If
+
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)

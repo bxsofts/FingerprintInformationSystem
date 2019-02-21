@@ -11,21 +11,21 @@ Public Class frmPassword
 
     Dim FISService As DriveService = New DriveService
     Dim FISAccountServiceCredential As GoogleCredential
-    Public CredentialPath As String
-    Public JsonPath As String
-
+    Public CredentialFilePath As String
 
     Private Sub frmPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+
+       
         Me.txtPassword1.UseSystemPasswordChar = True
         Me.txtPassword2.UseSystemPasswordChar = True
+        UserName = "user"
+
         InitializeComponents()
 
-        CredentialPath = strAppUserPath & "\GoogleDriveAuthentication"
-        JsonPath = CredentialPath & "\FISServiceAccount.json"
-
         If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
-            My.Computer.FileSystem.CreateDirectory(CredentialPath)
-            FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialPath & "\FISServiceAccount.json")
+            My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+            FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
         End If
 
         If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
@@ -38,7 +38,10 @@ Public Class frmPassword
         Dim Scopes As String() = {DriveService.Scope.Drive}
         FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
         FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
-
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
 
@@ -147,7 +150,7 @@ Public Class frmPassword
 
         If TypeOf e.UserState Is Boolean Then
             If e.UserState = True Then
-                frmMainInterface.ShowDesktopAlert("New user created.")
+                ShowDesktopAlert("New user created.")
                 InitializeComponents()
             End If
         End If
@@ -155,8 +158,10 @@ Public Class frmPassword
         If TypeOf e.UserState Is Exception Then
             ShowErrorMessage(e.UserState)
         End If
-        Me.Cursor = Cursors.Default
+    End Sub
 
+    Private Sub bgwSetPassword_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwSetPassword.RunWorkerCompleted
+        Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -243,6 +248,7 @@ Public Class frmPassword
                     Me.txtPassword1.Text = ""
                     Me.txtPassword1.Focus()
                 Else
+                    UserName = Me.txtUserID.Text
                     blUserAuthenticated = True
                     Me.Close()
                 End If
@@ -253,9 +259,12 @@ Public Class frmPassword
             ShowErrorMessage(e.UserState)
             ' MessageBoxEx.Show("Unable to get user authentication.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-        Me.Cursor = Cursors.Default
+
     End Sub
 
+    Private Sub bgwGetPassword_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwGetPassword.RunWorkerCompleted
+        Me.Cursor = Cursors.Default
+    End Sub
 
 #End Region
 
@@ -278,5 +287,7 @@ Public Class frmPassword
         Me.txtUserID.Focus()
     End Sub
 
+   
+  
    
 End Class
