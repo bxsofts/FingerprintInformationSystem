@@ -221,6 +221,11 @@ Public Class frmPersonalFileStorage
             If ShowTrashedFiles Then
                 List.Q = "trashed = true"
             Else
+                ' If FolderID = "root" Then
+                '  List.Q = "trashed = false and sharedWithMe = true"
+                '   Else
+                '  List.Q = "trashed = false and '" & FolderID & "' in parents" ' list all files in parent folder. 
+                ' End If
                 List.Q = "trashed = false and '" & FolderID & "' in parents" ' list all files in parent folder. 
             End If
 
