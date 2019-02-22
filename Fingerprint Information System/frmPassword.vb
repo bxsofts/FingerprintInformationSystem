@@ -248,7 +248,7 @@ Public Class frmPassword
                     Me.txtPassword1.Text = ""
                     Me.txtPassword1.Focus()
                 Else
-                    UserName = Me.txtUserID.Text
+                    UserName = Me.txtUserID.Text.Trim
                     blUserAuthenticated = True
                     Me.Close()
                 End If

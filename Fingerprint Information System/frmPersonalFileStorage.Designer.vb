@@ -30,19 +30,31 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
+        Me.SideNav1 = New DevComponents.DotNetBar.Controls.SideNav()
+        Me.SideNavPanel1 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.FileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UploadedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileOwner = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.SideNavPanel3 = New DevComponents.DotNetBar.Controls.SideNavPanel()
+        Me.SideNavPanel2 = New DevComponents.DotNetBar.Controls.SideNavPanel()
+        Me.SideNavItem1 = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.Separator1 = New DevComponents.DotNetBar.Separator()
+        Me.btnMyFiles = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.btnSharedWithMe = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.Separator2 = New DevComponents.DotNetBar.Separator()
+        Me.btnSettings = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
         Me.lblCurrentFolderPath = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnShareFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnLogin = New DevComponents.DotNetBar.ButtonX()
         Me.btnGetAdminPrivilege = New DevComponents.DotNetBar.ButtonX()
         Me.btnRename = New DevComponents.DotNetBar.ButtonX()
@@ -54,10 +66,13 @@ Partial Class frmPersonalFileStorage
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
-        Me.btnShareFile = New DevComponents.DotNetBar.ButtonX()
+        Me.SideNavItem2 = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.SideNavItem3 = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
+        Me.SideNav1.SuspendLayout()
+        Me.SideNavPanel1.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
         Me.SuspendLayout()
@@ -86,7 +101,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1085, 627)
+        Me.PanelEx1.Size = New System.Drawing.Size(1226, 627)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -105,7 +120,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(922, 627)
+        Me.PanelEx3.Size = New System.Drawing.Size(1063, 627)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -120,15 +135,13 @@ Partial Class frmPersonalFileStorage
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel1.Controls.Add(Me.lblProgressStatus)
-        Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
-        Me.GroupPanel1.Controls.Add(Me.listViewEx1)
+        Me.GroupPanel1.Controls.Add(Me.SideNav1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(922, 604)
+        Me.GroupPanel1.Size = New System.Drawing.Size(1063, 604)
         '
         '
         '
@@ -159,20 +172,32 @@ Partial Class frmPersonalFileStorage
         Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel1.TabIndex = 25
         '
-        'lblProgressStatus
+        'SideNav1
         '
-        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
+        Me.SideNav1.Controls.Add(Me.SideNavPanel3)
+        Me.SideNav1.Controls.Add(Me.SideNavPanel2)
+        Me.SideNav1.Controls.Add(Me.SideNavPanel1)
+        Me.SideNav1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNav1.EnableClose = False
+        Me.SideNav1.EnableMaximize = False
+        Me.SideNav1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SideNavItem1, Me.Separator1, Me.btnMyFiles, Me.btnSharedWithMe, Me.Separator2, Me.btnSettings, Me.SideNavItem3})
+        Me.SideNav1.Location = New System.Drawing.Point(0, 0)
+        Me.SideNav1.Name = "SideNav1"
+        Me.SideNav1.Padding = New System.Windows.Forms.Padding(1)
+        Me.SideNav1.Size = New System.Drawing.Size(1057, 598)
+        Me.SideNav1.TabIndex = 5
         '
+        'SideNavPanel1
         '
-        '
-        Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(690, 314)
-        Me.lblProgressStatus.Name = "lblProgressStatus"
-        Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
-        Me.lblProgressStatus.TabIndex = 4
-        Me.lblProgressStatus.Text = "Fetching Files from Google Drive..."
-        Me.lblProgressStatus.TextAlignment = System.Drawing.StringAlignment.Center
-        Me.lblProgressStatus.Visible = False
+        Me.SideNavPanel1.Controls.Add(Me.CircularProgress1)
+        Me.SideNavPanel1.Controls.Add(Me.lblProgressStatus)
+        Me.SideNavPanel1.Controls.Add(Me.listViewEx1)
+        Me.SideNavPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNavPanel1.Location = New System.Drawing.Point(136, 31)
+        Me.SideNavPanel1.Name = "SideNavPanel1"
+        Me.SideNavPanel1.Size = New System.Drawing.Size(916, 566)
+        Me.SideNavPanel1.TabIndex = 2
+        Me.SideNavPanel1.Visible = False
         '
         'CircularProgress1
         '
@@ -182,7 +207,7 @@ Partial Class frmPersonalFileStorage
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(733, 189)
+        Me.CircularProgress1.Location = New System.Drawing.Point(732, 207)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -191,6 +216,21 @@ Partial Class frmPersonalFileStorage
         Me.CircularProgress1.TabIndex = 3
         Me.CircularProgress1.TabStop = False
         Me.CircularProgress1.Visible = False
+        '
+        'lblProgressStatus
+        '
+        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblProgressStatus.Location = New System.Drawing.Point(689, 336)
+        Me.lblProgressStatus.Name = "lblProgressStatus"
+        Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
+        Me.lblProgressStatus.TabIndex = 4
+        Me.lblProgressStatus.Text = "Fetching Files from Google Drive..."
+        Me.lblProgressStatus.TextAlignment = System.Drawing.StringAlignment.Center
+        Me.lblProgressStatus.Visible = False
         '
         'listViewEx1
         '
@@ -202,7 +242,7 @@ Partial Class frmPersonalFileStorage
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID, Me.FileOwner})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -214,7 +254,7 @@ Partial Class frmPersonalFileStorage
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(916, 598)
+        Me.listViewEx1.Size = New System.Drawing.Size(916, 566)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -240,6 +280,11 @@ Partial Class frmPersonalFileStorage
         Me.FileID.Text = "File ID"
         Me.FileID.Width = 0
         '
+        'FileOwner
+        '
+        Me.FileOwner.Text = "Shared By"
+        Me.FileOwner.Width = 247
+        '
         'ImageList1
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -258,6 +303,73 @@ Partial Class frmPersonalFileStorage
         Me.ImageList1.Images.SetKeyName(11, "rar.png")
         Me.ImageList1.Images.SetKeyName(12, "BlankFile.png")
         '
+        'SideNavPanel3
+        '
+        Me.SideNavPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNavPanel3.Location = New System.Drawing.Point(136, 31)
+        Me.SideNavPanel3.Name = "SideNavPanel3"
+        Me.SideNavPanel3.Size = New System.Drawing.Size(916, 566)
+        Me.SideNavPanel3.TabIndex = 10
+        '
+        'SideNavPanel2
+        '
+        Me.SideNavPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNavPanel2.Location = New System.Drawing.Point(136, 31)
+        Me.SideNavPanel2.Name = "SideNavPanel2"
+        Me.SideNavPanel2.Size = New System.Drawing.Size(916, 566)
+        Me.SideNavPanel2.TabIndex = 6
+        Me.SideNavPanel2.Visible = False
+        '
+        'SideNavItem1
+        '
+        Me.SideNavItem1.IsSystemMenu = True
+        Me.SideNavItem1.Name = "SideNavItem1"
+        Me.SideNavItem1.Symbol = ""
+        Me.SideNavItem1.Text = "Menu"
+        '
+        'Separator1
+        '
+        Me.Separator1.FixedSize = New System.Drawing.Size(3, 1)
+        Me.Separator1.Name = "Separator1"
+        Me.Separator1.Padding.Bottom = 2
+        Me.Separator1.Padding.Left = 6
+        Me.Separator1.Padding.Right = 6
+        Me.Separator1.Padding.Top = 2
+        Me.Separator1.SeparatorOrientation = DevComponents.DotNetBar.eDesignMarkerOrientation.Vertical
+        '
+        'btnMyFiles
+        '
+        Me.btnMyFiles.Name = "btnMyFiles"
+        Me.btnMyFiles.Panel = Me.SideNavPanel1
+        Me.btnMyFiles.Symbol = ""
+        Me.btnMyFiles.Text = "My Files"
+        '
+        'btnSharedWithMe
+        '
+        Me.btnSharedWithMe.Name = "btnSharedWithMe"
+        Me.btnSharedWithMe.Panel = Me.SideNavPanel2
+        Me.btnSharedWithMe.Symbol = "59603"
+        Me.btnSharedWithMe.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material
+        Me.btnSharedWithMe.Text = "Shared with Me"
+        '
+        'Separator2
+        '
+        Me.Separator2.FixedSize = New System.Drawing.Size(3, 1)
+        Me.Separator2.Name = "Separator2"
+        Me.Separator2.Padding.Bottom = 2
+        Me.Separator2.Padding.Left = 6
+        Me.Separator2.Padding.Right = 6
+        Me.Separator2.Padding.Top = 2
+        Me.Separator2.SeparatorOrientation = DevComponents.DotNetBar.eDesignMarkerOrientation.Vertical
+        '
+        'btnSettings
+        '
+        Me.btnSettings.Checked = True
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Panel = Me.SideNavPanel3
+        Me.btnSettings.Symbol = ""
+        Me.btnSettings.Text = "Settings"
+        '
         'Bar1
         '
         Me.Bar1.AntiAlias = True
@@ -268,7 +380,7 @@ Partial Class frmPersonalFileStorage
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblItemCount, Me.lblDriveSpaceUsed, Me.lblCurrentFolderPath})
         Me.Bar1.Location = New System.Drawing.Point(0, 604)
         Me.Bar1.Name = "Bar1"
-        Me.Bar1.Size = New System.Drawing.Size(922, 23)
+        Me.Bar1.Size = New System.Drawing.Size(1063, 23)
         Me.Bar1.Stretch = True
         Me.Bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Bar1.TabIndex = 24
@@ -309,7 +421,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx2.Controls.Add(Me.btnRefresh)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelEx2.Location = New System.Drawing.Point(922, 0)
+        Me.PanelEx2.Location = New System.Drawing.Point(1063, 0)
         Me.PanelEx2.Name = "PanelEx2"
         Me.PanelEx2.Size = New System.Drawing.Size(163, 627)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -319,6 +431,18 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 16
+        '
+        'btnShareFile
+        '
+        Me.btnShareFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnShareFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnShareFile.Image = CType(resources.GetObject("btnShareFile.Image"), System.Drawing.Image)
+        Me.btnShareFile.Location = New System.Drawing.Point(9, 351)
+        Me.btnShareFile.Name = "btnShareFile"
+        Me.btnShareFile.Size = New System.Drawing.Size(144, 59)
+        Me.btnShareFile.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnShareFile.TabIndex = 6
+        Me.btnShareFile.Text = "Share"
         '
         'btnLogin
         '
@@ -431,28 +555,28 @@ Partial Class frmPersonalFileStorage
         Me.bgwDownloadFile.WorkerReportsProgress = True
         Me.bgwDownloadFile.WorkerSupportsCancellation = True
         '
-        'btnShareFile
+        'SideNavItem2
         '
-        Me.btnShareFile.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnShareFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnShareFile.Image = CType(resources.GetObject("btnShareFile.Image"), System.Drawing.Image)
-        Me.btnShareFile.Location = New System.Drawing.Point(9, 351)
-        Me.btnShareFile.Name = "btnShareFile"
-        Me.btnShareFile.Size = New System.Drawing.Size(144, 59)
-        Me.btnShareFile.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnShareFile.TabIndex = 6
-        Me.btnShareFile.Text = "Share"
+        Me.SideNavItem2.Name = "SideNavItem2"
+        Me.SideNavItem2.Symbol = ""
+        Me.SideNavItem2.Text = "SideNavItem2"
+        '
+        'SideNavItem3
+        '
+        Me.SideNavItem3.Name = "SideNavItem3"
+        Me.SideNavItem3.Symbol = ""
+        Me.SideNavItem3.Text = "SideNavItem3"
         '
         'frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1085, 627)
+        Me.ClientSize = New System.Drawing.Size(1226, 627)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmPersonalFileStorage"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -461,6 +585,9 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.GroupPanel1.ResumeLayout(False)
+        Me.SideNav1.ResumeLayout(False)
+        Me.SideNav1.PerformLayout()
+        Me.SideNavPanel1.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -497,4 +624,17 @@ Partial Class frmPersonalFileStorage
     Friend WithEvents bgwDownloadFile As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnLogin As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnShareFile As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents SideNav1 As DevComponents.DotNetBar.Controls.SideNav
+    Friend WithEvents SideNavPanel1 As DevComponents.DotNetBar.Controls.SideNavPanel
+    Friend WithEvents SideNavItem1 As DevComponents.DotNetBar.Controls.SideNavItem
+    Friend WithEvents Separator1 As DevComponents.DotNetBar.Separator
+    Friend WithEvents btnMyFiles As DevComponents.DotNetBar.Controls.SideNavItem
+    Friend WithEvents SideNavPanel3 As DevComponents.DotNetBar.Controls.SideNavPanel
+    Friend WithEvents btnSharedWithMe As DevComponents.DotNetBar.Controls.SideNavItem
+    Friend WithEvents btnSettings As DevComponents.DotNetBar.Controls.SideNavItem
+    Friend WithEvents SideNavPanel2 As DevComponents.DotNetBar.Controls.SideNavPanel
+    Friend WithEvents Separator2 As DevComponents.DotNetBar.Separator
+    Friend WithEvents FileOwner As System.Windows.Forms.ColumnHeader
+    Friend WithEvents SideNavItem2 As DevComponents.DotNetBar.Controls.SideNavItem
+    Friend WithEvents SideNavItem3 As DevComponents.DotNetBar.Controls.SideNavItem
 End Class

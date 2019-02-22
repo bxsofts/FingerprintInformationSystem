@@ -39,6 +39,8 @@ Public Class frmPersonalFileStorage
     Dim SelectedFileIndex As Integer = 0
 
     Dim ShowStatusText As Boolean
+
+    Dim blShowSharedWithMe As Boolean = False
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -79,16 +81,23 @@ Public Class frmPersonalFileStorage
             FileSystem.FileCopy(strAppPath & "\FISOAuth2.json", CredentialFilePath & "\FISOAuth2.json")
         End If
 
+        blShowSharedWithMe = False
+
+        Me.CircularProgress1.Parent = Me.listViewEx1
+        Me.lblProgressStatus.Parent = Me.listViewEx1
+        Me.lblProgressStatus.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+
         Me.listViewEx1.Items.Clear()
         blUploadIsProgressing = False
         blDownloadIsProgressing = False
         blListIsLoading = False
+        CreateOAuthService()
         Me.Cursor = Cursors.Default
 
 
     End Sub
 
-    Private Sub CreateOAuthService() Handles btnLogin.Click
+    Private Sub CreateOAuthService() ' Handles btnLogin.Click
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
@@ -109,7 +118,7 @@ Public Class frmPersonalFileStorage
         End If
 
 
-       
+
         If btnLogin.Text = "Google Logout" Then
             Me.Cursor = Cursors.WaitCursor
             ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
@@ -221,21 +230,24 @@ Public Class frmPersonalFileStorage
             If ShowTrashedFiles Then
                 List.Q = "trashed = true"
             Else
-                ' If FolderID = "root" Then
-                '  List.Q = "trashed = false and sharedWithMe = true"
-                '   Else
-                '  List.Q = "trashed = false and '" & FolderID & "' in parents" ' list all files in parent folder. 
-                ' End If
-                List.Q = "trashed = false and '" & FolderID & "' in parents" ' list all files in parent folder. 
+                If FolderID = "root" Then
+                    If blShowSharedWithMe Then
+                        List.Q = "trashed = false and sharedWithMe = true"
+                    Else
+                        List.Q = "trashed = false and 'root' in parents" ' list all files in root
+                    End If
+                Else
+                    List.Q = "trashed = false and '" & FolderID & "' in parents" ' list all files in parent folder. 
+                End If
+
             End If
 
 
             List.PageSize = 1000 ' maximum file list
-            List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime)"
+            List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, owners)"
             List.OrderBy = "folder, name" 'sorting order
 
             Dim Results As FileList = List.Execute
-
 
             Dim item As ListViewItem
 
@@ -244,6 +256,7 @@ Public Class frmPersonalFileStorage
                 item.SubItems.Add("")
                 item.SubItems.Add("")
                 item.SubItems.Add("root")
+                item.SubItems.Add("")
                 item.ImageIndex = ImageIndex.GoogleDrive 'google drive icon
                 bgwListFiles.ReportProgress(1, item)
             Else
@@ -251,6 +264,7 @@ Public Class frmPersonalFileStorage
                 item.SubItems.Add("")
                 item.SubItems.Add("")
                 item.SubItems.Add(FolderID)
+                item.SubItems.Add("")
 
                 If CurrentFolderName = "My Drive" Then
                     item.ImageIndex = ImageIndex.GoogleDrive
@@ -273,6 +287,14 @@ Public Class frmPersonalFileStorage
                 End If
 
                 item.SubItems.Add(Result.Id)
+
+                If blShowSharedWithMe Then
+                    Dim owner = Result.Owners(0)
+                    item.SubItems.Add(owner.DisplayName)
+                Else
+                    item.SubItems.Add("")
+                End If
+               
 
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.ImageIndex = ImageIndex.Folder
@@ -482,10 +504,16 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
+        If blShowSharedWithMe Then
+            MessageBoxEx.Show("New folder creation is not allowed in 'Shared with Me' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         If btnLogin.Text = "Google Login" Then
             MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
+
 
         frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False, "New Folder")
         frmInputBox.ShowDialog()
@@ -571,6 +599,11 @@ Public Class frmPersonalFileStorage
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+        If blShowSharedWithMe Then
+            MessageBoxEx.Show("File upload is not allowed in 'Shared with Me' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -838,6 +871,11 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
+        If blShowSharedWithMe Then
+            MessageBoxEx.Show("Deletion is not allowed in 'Shared with Me' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         If Me.listViewEx1.Items.Count = 0 Then
             MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -884,7 +922,8 @@ Public Class frmPersonalFileStorage
 
         Try
 
-            RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, True)
+            Dim removed As Boolean = RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, True)
+            If Not removed Then Exit Sub
             Me.listViewEx1.Items(SelectedFileIndex).Remove()
             lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
 
@@ -905,7 +944,7 @@ Public Class frmPersonalFileStorage
         End Try
     End Sub
 
-    Private Sub RemoveFile(FileID As String, SendToTrash As Boolean)
+    Private Function RemoveFile(FileID As String, SendToTrash As Boolean) As Boolean
         Try
             If SendToTrash Then
                 Dim tFile = New Google.Apis.Drive.v3.Data.File
@@ -914,11 +953,13 @@ Public Class frmPersonalFileStorage
             Else
                 GDService.Files.Delete(FileID).Execute()
             End If
+            Return True
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
+            Return False
         End Try
-    End Sub
+    End Function
 
     Private Sub SelectNextItem(SelectedFileIndex)
         On Error Resume Next
@@ -969,6 +1010,11 @@ Public Class frmPersonalFileStorage
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+        If blShowSharedWithMe Then
+            MessageBoxEx.Show("Rename is not allowed in 'Shared with Me' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -1064,6 +1110,88 @@ Public Class frmPersonalFileStorage
     End Sub
 #End Region
 
+
+
+#Region "SHARE FILES"
+    Private Sub btnShareFile_Click(sender As Object, e As EventArgs) Handles btnShareFile.Click
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+        If blShowSharedWithMe Then
+            MessageBoxEx.Show("Files in 'Shared with Me' folder cannot be shared.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.Items.Count = 0 Then
+            MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 0 Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
+
+        Dim blSelectedItemIsFolder As Boolean = False
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blSelectedItemIsFolder = True
+
+        If SelectedItemText.StartsWith("\") Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim ftype As String = "file"
+        If blSelectedItemIsFolder Then ftype = "folder"
+
+        frmInputBox.SetTitleandMessage("Share File", "Enter email id of recepient", False)
+        frmInputBox.txtInputBox.WatermarkText = "Enter email id of recepient. eg: xyz@xxx.com"
+        frmInputBox.ShowDialog()
+        frmInputBox.txtInputBox.WatermarkText = ""
+        Dim email As String = frmInputBox.txtInputBox.Text
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+        If Not ValidEmail(email) Then
+            MessageBoxEx.Show("Invalid email id.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        Me.Cursor = Cursors.WaitCursor
+
+        If (ShareFile(listViewEx1.SelectedItems(0).SubItems(3).Text, email)) Then
+            ShowDesktopAlert("Selected " & ftype & " shared successfully.")
+        Else
+            MessageBoxEx.Show("Sharing failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Function ValidEmail(email As String) As Boolean
+        Try
+            Dim a As New System.Net.Mail.MailAddress(email)
+        Catch
+            Return False
+        End Try
+        Return True
+    End Function
+
+    Private Function ShareFile(fileid As String, email As String)
+        Try
+            Dim userPermission As Permission = New Permission
+            userPermission.Type = "user"
+            userPermission.Role = "reader"
+            userPermission.EmailAddress = email
+            Dim request = GDService.Permissions.Create(userPermission, fileid)
+            request.Fields = "id"
+            request.Execute()
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
+    End Function
+#End Region
+
     Private Sub ShowProgressControls(ProgressText As String, StatusText As String, ProgressType As eCircularProgressType)
         CircularProgress1.ProgressText = ProgressText
         lblProgressStatus.Text = StatusText
@@ -1086,6 +1214,21 @@ Public Class frmPersonalFileStorage
         lblProgressStatus.Text = ""
         CircularProgress1.Hide()
         lblProgressStatus.Hide()
+    End Sub
+
+
+    Private Sub btnSharedWithMe_Click(sender As Object, e As EventArgs) Handles btnSharedWithMe.Click
+        Me.listViewEx1.Columns(4).Text = "Shared By"
+        Me.listViewEx1.Parent = Me.SideNavPanel2
+        blShowSharedWithMe = True
+        RefreshFileList()
+    End Sub
+
+    Private Sub btnMyFiles_Click(sender As Object, e As EventArgs) Handles btnMyFiles.Click
+        Me.listViewEx1.Columns(4).Text = ""
+        Me.listViewEx1.Parent = Me.SideNavPanel1
+        blShowSharedWithMe = False
+        RefreshFileList()
     End Sub
 
 

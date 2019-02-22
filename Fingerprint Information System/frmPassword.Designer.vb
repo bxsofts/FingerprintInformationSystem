@@ -91,6 +91,7 @@ Partial Class frmPassword
         Me.txtUserID.PreventEnterBeep = True
         Me.txtUserID.Size = New System.Drawing.Size(187, 25)
         Me.txtUserID.TabIndex = 0
+        Me.txtUserID.WatermarkText = "User ID"
         '
         'txtPassword1
         '
@@ -109,6 +110,7 @@ Partial Class frmPassword
         Me.txtPassword1.PreventEnterBeep = True
         Me.txtPassword1.Size = New System.Drawing.Size(187, 25)
         Me.txtPassword1.TabIndex = 1
+        Me.txtPassword1.WatermarkText = "Password"
         '
         'txtPassword2
         '
@@ -127,6 +129,7 @@ Partial Class frmPassword
         Me.txtPassword2.PreventEnterBeep = True
         Me.txtPassword2.Size = New System.Drawing.Size(187, 25)
         Me.txtPassword2.TabIndex = 2
+        Me.txtPassword2.WatermarkText = "Confirm Password"
         '
         'lblNewUser
         '
