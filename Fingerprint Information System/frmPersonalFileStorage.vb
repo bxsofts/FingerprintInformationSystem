@@ -64,7 +64,7 @@ Public Class frmPersonalFileStorage
         Me.Text = "Personal File Storage - " & UserName
         Me.TitleText = "<b>Personal File Storage - " & UserName & "</b>"
         Me.CenterToScreen()
-        Me.btnLogin.Image = My.Resources.Login
+
         ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
         btnLogin.Text = "Google Login"
         Me.lblDriveSpaceUsed.Text = ""
@@ -97,13 +97,11 @@ Public Class frmPersonalFileStorage
 
     End Sub
 
-    Private Sub CreateOAuthService() ' Handles btnLogin.Click
+    Private Sub CreateOAuthService() Handles btnLogin.Click
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
         End If
-
-        Me.listViewEx1.Items.Clear()
 
         If Not FileIO.FileSystem.FileExists(JsonFile) Then 'if copy failed
             MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -120,15 +118,23 @@ Public Class frmPersonalFileStorage
 
 
         If btnLogin.Text = "Google Logout" Then
+
+            If MessageBoxEx.Show("If you logout, you will need to enter the Google credentials again for Login. Do you want to Logout?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.No Then
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             Me.Cursor = Cursors.WaitCursor
-            ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
+            If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
             GDService.Dispose()
-            btnLogin.Image = My.Resources.Login
             btnLogin.Text = "Google Login"
+            Me.listViewEx1.Items.Clear()
             Me.Cursor = Cursors.Default
+            ShowDesktopAlert("Logged out successfully")
             Exit Sub
         End If
 
+        Me.listViewEx1.Items.Clear()
         TokenFile = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-" & UserName ' token file is created after authentication
 
 
@@ -1232,4 +1238,5 @@ Public Class frmPersonalFileStorage
     End Sub
 
 
+    
 End Class

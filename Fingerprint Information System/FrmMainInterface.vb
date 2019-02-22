@@ -17269,8 +17269,6 @@ errhandler:
 
 
     Private Sub btnPersonalOnlineFiles_Click(sender As Object, e As EventArgs) Handles btnPersonalOnlineFiles.Click
-        frmPersonalFileStorage.Show()
-        Exit Sub
         On Error Resume Next
         If frmPersonalFileStorage.Visible Then
             frmPersonalFileStorage.Activate()
