@@ -45,11 +45,11 @@ Partial Class frmPersonalFileStorage
         Me.SideNavItem1 = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.Separator1 = New DevComponents.DotNetBar.Separator()
         Me.btnLogin = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.Separator2 = New DevComponents.DotNetBar.Separator()
         Me.btnMyFiles = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.btnSharedWithMe = New DevComponents.DotNetBar.Controls.SideNavItem()
-        Me.Separator2 = New DevComponents.DotNetBar.Separator()
-        Me.SideNavItem3 = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.Separator3 = New DevComponents.DotNetBar.Separator()
+        Me.btnChangePassword = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblDriveSpaceUsed = New DevComponents.DotNetBar.LabelItem()
@@ -176,7 +176,7 @@ Partial Class frmPersonalFileStorage
         Me.SideNav1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SideNav1.EnableClose = False
         Me.SideNav1.EnableMaximize = False
-        Me.SideNav1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SideNavItem1, Me.Separator1, Me.btnLogin, Me.Separator2, Me.btnMyFiles, Me.btnSharedWithMe, Me.Separator3, Me.SideNavItem3})
+        Me.SideNav1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SideNavItem1, Me.Separator1, Me.btnLogin, Me.Separator2, Me.btnMyFiles, Me.btnSharedWithMe, Me.Separator3, Me.btnChangePassword})
         Me.SideNav1.Location = New System.Drawing.Point(0, 0)
         Me.SideNav1.Name = "SideNav1"
         Me.SideNav1.Padding = New System.Windows.Forms.Padding(1)
@@ -330,6 +330,16 @@ Partial Class frmPersonalFileStorage
         Me.btnLogin.Symbol = ""
         Me.btnLogin.Text = "Google Login"
         '
+        'Separator2
+        '
+        Me.Separator2.FixedSize = New System.Drawing.Size(3, 1)
+        Me.Separator2.Name = "Separator2"
+        Me.Separator2.Padding.Bottom = 2
+        Me.Separator2.Padding.Left = 6
+        Me.Separator2.Padding.Right = 6
+        Me.Separator2.Padding.Top = 2
+        Me.Separator2.SeparatorOrientation = DevComponents.DotNetBar.eDesignMarkerOrientation.Vertical
+        '
         'btnMyFiles
         '
         Me.btnMyFiles.Checked = True
@@ -346,23 +356,6 @@ Partial Class frmPersonalFileStorage
         Me.btnSharedWithMe.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material
         Me.btnSharedWithMe.Text = "Shared with Me"
         '
-        'Separator2
-        '
-        Me.Separator2.FixedSize = New System.Drawing.Size(3, 1)
-        Me.Separator2.Name = "Separator2"
-        Me.Separator2.Padding.Bottom = 2
-        Me.Separator2.Padding.Left = 6
-        Me.Separator2.Padding.Right = 6
-        Me.Separator2.Padding.Top = 2
-        Me.Separator2.SeparatorOrientation = DevComponents.DotNetBar.eDesignMarkerOrientation.Vertical
-        '
-        'SideNavItem3
-        '
-        Me.SideNavItem3.Name = "SideNavItem3"
-        Me.SideNavItem3.Symbol = "58284"
-        Me.SideNavItem3.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material
-        Me.SideNavItem3.Text = "Change Password"
-        '
         'Separator3
         '
         Me.Separator3.FixedSize = New System.Drawing.Size(3, 1)
@@ -372,6 +365,13 @@ Partial Class frmPersonalFileStorage
         Me.Separator3.Padding.Right = 6
         Me.Separator3.Padding.Top = 2
         Me.Separator3.SeparatorOrientation = DevComponents.DotNetBar.eDesignMarkerOrientation.Vertical
+        '
+        'btnChangePassword
+        '
+        Me.btnChangePassword.Name = "btnChangePassword"
+        Me.btnChangePassword.Symbol = "58284"
+        Me.btnChangePassword.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material
+        Me.btnChangePassword.Text = "Change Password"
         '
         'Bar1
         '
@@ -598,6 +598,6 @@ Partial Class frmPersonalFileStorage
     Friend WithEvents FileOwner As System.Windows.Forms.ColumnHeader
     Friend WithEvents SideNavItem2 As DevComponents.DotNetBar.Controls.SideNavItem
     Friend WithEvents btnLogin As DevComponents.DotNetBar.Controls.SideNavItem
-    Friend WithEvents SideNavItem3 As DevComponents.DotNetBar.Controls.SideNavItem
+    Friend WithEvents btnChangePassword As DevComponents.DotNetBar.Controls.SideNavItem
     Friend WithEvents Separator3 As DevComponents.DotNetBar.Separator
 End Class

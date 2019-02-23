@@ -33,6 +33,7 @@ Partial Class frmPassword
         Me.btnLogin = New DevComponents.DotNetBar.ButtonX()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.bgwSetPassword = New System.ComponentModel.BackgroundWorker()
+        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
         Me.SuspendLayout()
         '
         'LabelX1
@@ -150,7 +151,7 @@ Partial Class frmPassword
         Me.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnLogin.Location = New System.Drawing.Point(262, 7)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(134, 56)
+        Me.btnLogin.Size = New System.Drawing.Size(134, 58)
         Me.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnLogin.TabIndex = 3
         Me.btnLogin.Text = "Login"
@@ -165,12 +166,24 @@ Partial Class frmPassword
         Me.bgwSetPassword.WorkerReportsProgress = True
         Me.bgwSetPassword.WorkerSupportsCancellation = True
         '
+        'btnCancel
+        '
+        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancel.Location = New System.Drawing.Point(262, 71)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(134, 25)
+        Me.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnCancel.TabIndex = 4
+        Me.btnCancel.Text = "Cancel"
+        '
         'frmPassword
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(396, 96)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.lblNewUser)
         Me.Controls.Add(Me.txtPassword2)
@@ -205,4 +218,5 @@ Partial Class frmPassword
     Friend WithEvents btnLogin As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwGetPassword As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwSetPassword As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnCancel As DevComponents.DotNetBar.ButtonX
 End Class

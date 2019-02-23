@@ -100,7 +100,9 @@ Module modMain
     Public LatestSOCDI As String = ""
 
     Public blUserAuthenticated As Boolean = False
-    Public UserName As String = "user"
+    Public blAuthenticatePasswordChange As Boolean = False
+    Public blChangeAndUpdatePassword As Boolean = False
+    Public oAuthUserID As String = "user"
 
     Public CredentialFilePath As String = ""
 

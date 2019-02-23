@@ -16,28 +16,50 @@ Public Class frmPassword
     Private Sub frmPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
 
-       
+            blUserAuthenticated = False
+
         Me.txtPassword1.UseSystemPasswordChar = True
         Me.txtPassword2.UseSystemPasswordChar = True
-        UserName = "user"
 
-        InitializeComponents()
+            InitializeComponents()
 
-        If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
-            My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
-            FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
-        End If
+            If blAuthenticatePasswordChange Then
+                Me.txtUserID.Text = oAuthUserID
+                Me.txtPassword1.Text = ""
+                Me.txtPassword2.Text = ""
+                Me.lblNewUser.Visible = False
+                Me.txtUserID.Enabled = False
+                Me.txtPassword1.Focus()
+                Me.btnLogin.Text = "Authenticate"
+            End If
 
-        If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
-            Me.Cursor = Cursors.Default
-            MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Close()
-            Exit Sub
-        End If
+            If blChangeAndUpdatePassword Then
+                Me.txtUserID.Text = oAuthUserID
+                Me.txtPassword1.Text = ""
+                Me.txtPassword2.Text = ""
+                Me.txtPassword2.Visible = True
+                Me.lblPassword2.Visible = True
+                Me.lblNewUser.Visible = False
+                Me.txtUserID.Enabled = False
+                Me.txtPassword1.Focus()
+                Me.btnLogin.Text = "Save"
+            End If
 
-        Dim Scopes As String() = {DriveService.Scope.Drive}
-        FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-        FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+                FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
+            End If
+
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
+                Me.Cursor = Cursors.Default
+                MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Close()
+                Exit Sub
+            End If
+
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -117,8 +139,8 @@ Public Class frmPassword
             Results = List.Execute
 
             cnt = Results.Files.Count
-            If cnt = 0 Then
-                Dim encryptedpassword As String = EncryptText(uid.SubItems(1).Text)
+            Dim encryptedpassword As String = EncryptText(uid.SubItems(1).Text)
+            If cnt = 0 Then 'create new user
                 Dim NewFile = New Google.Apis.Drive.v3.Data.File
                 Dim parentlist As New List(Of String)
                 parentlist.Add(parentid) 'parent forlder
@@ -130,8 +152,16 @@ Public Class frmPassword
                 NewFile = FISService.Files.Create(NewFile).Execute
                 bgwSetPassword.ReportProgress(100, True)
             Else
-                Dim pwd = Results.Files(0).Description
-                bgwSetPassword.ReportProgress(100, pwd)
+                If blChangeAndUpdatePassword Then
+                    Dim id As String = Results.Files(0).Id
+                    Dim request As New Google.Apis.Drive.v3.Data.File
+                    request.Description = encryptedpassword
+                    FISService.Files.Update(request, id).Execute()
+                    bgwSetPassword.ReportProgress(100, "Password updated.")
+                Else
+                    bgwSetPassword.ReportProgress(100, "User ID already exists.")
+                End If
+
             End If
 
         Catch ex As Exception
@@ -142,15 +172,18 @@ Public Class frmPassword
     Private Sub bgwSetPassword_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwSetPassword.ProgressChanged
 
         If TypeOf e.UserState Is String Then
-            If e.UserState <> "" Then
-                MessageBoxEx.Show("User ID already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.txtUserID.Focus()
+            MessageBoxEx.Show(e.UserState, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtUserID.Focus()
+            If blChangeAndUpdatePassword Then
+                blChangeAndUpdatePassword = False
+                Me.Dispose()
+                Me.Close()
             End If
         End If
 
         If TypeOf e.UserState Is Boolean Then
             If e.UserState = True Then
-                ShowDesktopAlert("New user created.")
+                MessageBoxEx.Show("New user created.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 InitializeComponents()
             End If
         End If
@@ -165,6 +198,7 @@ Public Class frmPassword
     End Sub
 #End Region
 
+
 #Region "LOGIN USER"
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
@@ -178,7 +212,8 @@ Public Class frmPassword
             txtPassword1.Focus()
             Exit Sub
         End If
-        If btnLogin.Text = "Login" Then LoginUser()
+
+        If btnLogin.Text = "Login" Or btnLogin.Text = "Authenticate" Then LoginUser()
         If btnLogin.Text = "Save" Then SaveUser()
     End Sub
 
@@ -247,8 +282,12 @@ Public Class frmPassword
                     MessageBoxEx.Show("Incorrect password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Me.txtPassword1.Text = ""
                     Me.txtPassword1.Focus()
+                    If blAuthenticatePasswordChange Then
+                        blUserAuthenticated = False
+                        Me.Close()
+                    End If
                 Else
-                    UserName = Me.txtUserID.Text.Trim
+                    oAuthUserID = Me.txtUserID.Text.Trim
                     blUserAuthenticated = True
                     Me.Close()
                 End If
@@ -268,12 +307,18 @@ Public Class frmPassword
 
 #End Region
 
+
+#Region "CHANGE PASSWORD"
+
+
+#End Region
+
     Private Sub InitializeComponents()
+        Me.txtUserID.Enabled = True
         Me.txtUserID.Text = ""
         Me.txtPassword1.Text = ""
         Me.txtPassword2.Text = ""
         Me.btnLogin.Text = "Login"
-
         Me.lblPassword2.Visible = False
         Me.txtPassword2.Visible = False
         Me.lblNewUser.Visible = True
@@ -281,13 +326,19 @@ Public Class frmPassword
         Me.txtUserID.Focus()
     End Sub
 
-   
+
 
     Private Sub frmPassword_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        Me.txtUserID.Focus()
+        If blChangeAndUpdatePassword Or blAuthenticatePasswordChange Then
+            Me.txtPassword1.Focus()
+        Else
+            Me.txtUserID.Focus()
+        End If
+
     End Sub
 
-   
-  
-   
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.Close()
+    End Sub
 End Class

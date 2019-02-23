@@ -61,8 +61,8 @@ Public Class frmPersonalFileStorage
 
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
-        Me.Text = "Personal File Storage - " & UserName
-        Me.TitleText = "<b>Personal File Storage - " & UserName & "</b>"
+        Me.Text = "Personal File Storage - " & oAuthUserID
+        Me.TitleText = "<b>Personal File Storage - " & oAuthUserID & "</b>"
         Me.CenterToScreen()
 
         ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
@@ -135,7 +135,7 @@ Public Class frmPersonalFileStorage
         End If
 
         Me.listViewEx1.Items.Clear()
-        TokenFile = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-" & UserName ' token file is created after authentication
+        TokenFile = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-" & oAuthUserID ' token file is created after authentication
 
 
         If Not FileIO.FileSystem.FileExists(TokenFile) Then 'check for token file.
@@ -165,7 +165,7 @@ Public Class frmPersonalFileStorage
 
             '  Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, UserName, CancellationToken.None, New FileDataStore(CredentialFilePath, True)).Result
 
-            Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, UserName, CancellationToken.None, New FileDataStore(strAppName)).Result
+            Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, oAuthUserID, CancellationToken.None, New FileDataStore(strAppName)).Result
 
             GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
 
@@ -300,7 +300,7 @@ Public Class frmPersonalFileStorage
                 Else
                     item.SubItems.Add("")
                 End If
-               
+
 
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.ImageIndex = ImageIndex.Folder
@@ -999,11 +999,11 @@ Public Class frmPersonalFileStorage
             request.Fields = "user"
             Dim abt = request.Execute
             Dim email = abt.User.EmailAddress
-            Me.Text = "Personal File Storage - " & UserName & " - " & email
-            Me.TitleText = "<b>Personal File Storage - " & UserName & " - " & email & "</b>"
+            Me.Text = "Personal File Storage - " & oAuthUserID & " - " & email
+            Me.TitleText = "<b>Personal File Storage - " & oAuthUserID & " - " & email & "</b>"
         Catch ex As Exception
-            Me.Text = "Personal File Storage - " & UserName
-            Me.TitleText = "<b>Personal File Storage - " & UserName & "</b>"
+            Me.Text = "Personal File Storage - " & oAuthUserID
+            Me.TitleText = "<b>Personal File Storage - " & oAuthUserID & "</b>"
         End Try
     End Sub
 
@@ -1117,7 +1117,6 @@ Public Class frmPersonalFileStorage
 #End Region
 
 
-
 #Region "SHARE FILES"
     Private Sub btnShareFile_Click(sender As Object, e As EventArgs) Handles btnShareFile.Click
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
@@ -1154,9 +1153,7 @@ Public Class frmPersonalFileStorage
         If blSelectedItemIsFolder Then ftype = "folder"
 
         frmInputBox.SetTitleandMessage("Share File", "Enter email id of recepient", False)
-        frmInputBox.txtInputBox.WatermarkText = "Enter email id of recepient. eg: xyz@xxx.com"
         frmInputBox.ShowDialog()
-        frmInputBox.txtInputBox.WatermarkText = ""
         Dim email As String = frmInputBox.txtInputBox.Text
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
         If Not ValidEmail(email) Then
@@ -1237,6 +1234,26 @@ Public Class frmPersonalFileStorage
         RefreshFileList()
     End Sub
 
+#Region "CHANGE PASSWORD"
 
+    Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
+        If Not MessageBoxEx.Show("Enter your current local password to authenticate.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then Exit Sub
+
+        blAuthenticatePasswordChange = True
+        frmPassword.ShowDialog()
+
+        If blUserAuthenticated Then
+            If MessageBoxEx.Show("Enter new password and confirm.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
+                blChangeAndUpdatePassword = True
+                frmPassword.ShowDialog()
+            End If
+        End If
+
+        blChangeAndUpdatePassword = False
+        blAuthenticatePasswordChange = False
+    End Sub
+
+#End Region
     
+  
 End Class
