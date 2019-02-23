@@ -34,6 +34,7 @@ Partial Class frmPassword
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.bgwSetPassword = New System.ComponentModel.BackgroundWorker()
         Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.SuspendLayout()
         '
         'LabelX1
@@ -177,12 +178,26 @@ Partial Class frmPassword
         Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Cancel"
         '
+        'CircularProgress1
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(262, 7)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.Size = New System.Drawing.Size(134, 59)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 0
+        '
         'frmPassword
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(396, 96)
+        Me.Controls.Add(Me.CircularProgress1)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.lblNewUser)
@@ -219,4 +234,5 @@ Partial Class frmPassword
     Friend WithEvents bgwGetPassword As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwSetPassword As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnCancel As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
 End Class

@@ -15,8 +15,11 @@ Public Class frmPassword
 
     Private Sub frmPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-
-            blUserAuthenticated = False
+            CircularProgress1.IsRunning = False
+            CircularProgress1.ProgressText = ""
+            CircularProgress1.ProgressBarType = eCircularProgressType.Dot
+            CircularProgress1.Visible = False
+            CircularProgress1.ProgressColor = GetProgressColor()
 
         Me.txtPassword1.UseSystemPasswordChar = True
         Me.txtPassword2.UseSystemPasswordChar = True
@@ -99,6 +102,9 @@ Public Class frmPassword
             End If
 
             Me.Cursor = Cursors.WaitCursor
+
+            CircularProgress1.Visible = True
+            CircularProgress1.IsRunning = True
 
             Dim uid As New ListViewItem(Me.txtUserID.Text.Trim)
             uid.SubItems.Add(Me.txtPassword1.Text)
@@ -194,6 +200,8 @@ Public Class frmPassword
     End Sub
 
     Private Sub bgwSetPassword_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwSetPassword.RunWorkerCompleted
+        CircularProgress1.Visible = False
+        CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
     End Sub
 #End Region
@@ -220,6 +228,10 @@ Public Class frmPassword
     Private Sub LoginUser()
         Try
             Me.Cursor = Cursors.WaitCursor
+
+            CircularProgress1.Visible = True
+            CircularProgress1.IsRunning = True
+
             bgwGetPassword.RunWorkerAsync(Me.txtUserID.Text.Trim)
 
         Catch ex As Exception
@@ -302,6 +314,8 @@ Public Class frmPassword
     End Sub
 
     Private Sub bgwGetPassword_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwGetPassword.RunWorkerCompleted
+        CircularProgress1.Visible = False
+        CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
     End Sub
 

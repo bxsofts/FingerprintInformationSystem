@@ -414,7 +414,7 @@ Public Class frmPersonalFileStorage
         End If
 
         If btnLogin.Text = "Google Login" Then
-            MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please login using Google ID. Press 'Google Login' button.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -516,7 +516,7 @@ Public Class frmPersonalFileStorage
         End If
 
         If btnLogin.Text = "Google Login" Then
-            MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please login using Google ID. Press 'Google Login' button.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -614,7 +614,7 @@ Public Class frmPersonalFileStorage
         End If
 
         If btnLogin.Text = "Google Login" Then
-            MessageBoxEx.Show("Please login first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please login using Google ID. Press 'Google Login' button.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
