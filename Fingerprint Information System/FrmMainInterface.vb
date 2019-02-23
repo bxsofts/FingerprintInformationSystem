@@ -17283,7 +17283,12 @@ errhandler:
         End If
         Me.Cursor = Cursors.Default
         frmPassword.ShowDialog()
-        If blUserAuthenticated Then frmPersonalFileStorage.Show()
+        If blUserAuthenticated Then
+            blUserAuthenticated = False
+            frmPersonalFileStorage.Show()
+        End If
+
+
     End Sub
 #End Region
 

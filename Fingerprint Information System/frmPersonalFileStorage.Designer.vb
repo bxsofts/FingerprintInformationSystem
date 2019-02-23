@@ -65,6 +65,7 @@ Partial Class frmPersonalFileStorage
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -72,6 +73,7 @@ Partial Class frmPersonalFileStorage
         Me.SideNavPanel1.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'bgwGetPassword
@@ -132,6 +134,7 @@ Partial Class frmPersonalFileStorage
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel1.Controls.Add(Me.PictureBox1)
         Me.GroupPanel1.Controls.Add(Me.SideNav1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -532,6 +535,15 @@ Partial Class frmPersonalFileStorage
         Me.bgwDownloadFile.WorkerReportsProgress = True
         Me.bgwDownloadFile.WorkerSupportsCancellation = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 440)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(49, 49)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 10
+        Me.PictureBox1.TabStop = False
+        '
         'frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -555,6 +567,7 @@ Partial Class frmPersonalFileStorage
         Me.SideNavPanel1.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -600,4 +613,5 @@ Partial Class frmPersonalFileStorage
     Friend WithEvents btnLogin As DevComponents.DotNetBar.Controls.SideNavItem
     Friend WithEvents btnChangePassword As DevComponents.DotNetBar.Controls.SideNavItem
     Friend WithEvents Separator3 As DevComponents.DotNetBar.Separator
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 End Class

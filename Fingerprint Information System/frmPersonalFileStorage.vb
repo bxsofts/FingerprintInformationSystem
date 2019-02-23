@@ -1,6 +1,7 @@
 ﻿Imports DevComponents.DotNetBar
 Imports System.Threading
 Imports System.Threading.Tasks
+Imports System.Net
 Imports System.Net.Http
 Imports System.Net.Http.Headers
 Imports System.IO
@@ -64,6 +65,10 @@ Public Class frmPersonalFileStorage
         Me.Text = "Personal File Storage - " & oAuthUserID
         Me.TitleText = "<b>Personal File Storage - " & oAuthUserID & "</b>"
         Me.CenterToScreen()
+
+        SideNav1.SelectedItem = btnMyFiles
+
+        Me.PictureBox1.Hide()
 
         ' If My.Computer.FileSystem.FileExists(TokenFile) Then My.Computer.FileSystem.DeleteFile(TokenFile)
         btnLogin.Text = "Google Login"
@@ -129,6 +134,8 @@ Public Class frmPersonalFileStorage
             GDService.Dispose()
             btnLogin.Text = "Google Login"
             Me.listViewEx1.Items.Clear()
+            PictureBox1.Image = Nothing
+            PictureBox1.Hide()
             Me.Cursor = Cursors.Default
             ShowDesktopAlert("Logged out successfully")
             Exit Sub
@@ -169,7 +176,7 @@ Public Class frmPersonalFileStorage
 
             GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
 
-            If Not My.Computer.FileSystem.FileExists(TokenFile) Then
+            If GDService.ApplicationName <> strAppName Then
                 Exit Sub
             End If
 
@@ -180,7 +187,7 @@ Public Class frmPersonalFileStorage
                 bgwListFiles.ReportProgress(1, "")
             End If
 
-            SetFormTitle()
+            GetUserInfoAndSetFormTitle()
             ListFiles(e.Argument, False)
             GetDriveUsageDetails()
 
@@ -993,7 +1000,7 @@ Public Class frmPersonalFileStorage
         End Try
     End Sub
 
-    Private Sub SetFormTitle()
+    Private Sub GetUserInfoAndSetFormTitle()
         Try
             Dim request = GDService.About.Get
             request.Fields = "user"
@@ -1001,13 +1008,23 @@ Public Class frmPersonalFileStorage
             Dim email = abt.User.EmailAddress
             Me.Text = "Personal File Storage - " & oAuthUserID & " - " & email
             Me.TitleText = "<b>Personal File Storage - " & oAuthUserID & " - " & email & "</b>"
+            SetUserImage(abt.User.PhotoLink)
         Catch ex As Exception
             Me.Text = "Personal File Storage - " & oAuthUserID
             Me.TitleText = "<b>Personal File Storage - " & oAuthUserID & "</b>"
         End Try
     End Sub
 
-
+    Private Sub SetUserImage(imagelink As String)
+        Try
+            Dim wClient As WebClient = New WebClient
+            Dim wImage As Bitmap = Bitmap.FromStream(New MemoryStream(wClient.DownloadData(imagelink)))
+            PictureBox1.Image = wImage
+            PictureBox1.Show()
+        Catch ex As Exception
+            PictureBox1.Hide()
+        End Try
+    End Sub
 #End Region
 
 
