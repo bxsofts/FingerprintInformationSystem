@@ -130,6 +130,7 @@ Partial Class frmFISBackupList
         Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
         Me.btnRename.Location = New System.Drawing.Point(16, 293)
         Me.btnRename.Name = "btnRename"
+        Me.btnRename.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2)
         Me.btnRename.Size = New System.Drawing.Size(131, 59)
         Me.btnRename.TabIndex = 5
         Me.btnRename.Text = "Rename"
@@ -178,6 +179,7 @@ Partial Class frmFISBackupList
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
         Me.btnRemoveFile.Location = New System.Drawing.Point(16, 358)
         Me.btnRemoveFile.Name = "btnRemoveFile"
+        Me.btnRemoveFile.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Del)
         Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
         Me.btnRemoveFile.TabIndex = 6
         Me.btnRemoveFile.Text = "Remove"
@@ -190,6 +192,7 @@ Partial Class frmFISBackupList
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
         Me.btnRefresh.Location = New System.Drawing.Point(16, 31)
         Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5)
         Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
         Me.btnRefresh.TabIndex = 1
         Me.btnRefresh.Text = "Refresh List"
@@ -325,6 +328,7 @@ Partial Class frmFISBackupList
         'listViewEx1
         '
         Me.listViewEx1.Alignment = System.Windows.Forms.ListViewAlignment.Left
+        Me.listViewEx1.AllowDrop = True
         Me.listViewEx1.BackColor = System.Drawing.Color.White
         '
         '

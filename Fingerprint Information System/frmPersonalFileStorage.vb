@@ -164,7 +164,6 @@ Public Class frmPersonalFileStorage
     End Sub
     Private Sub CreateServiceAndLoadData(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwListFiles.DoWork
         blListIsLoading = True
-        Me.Cursor = Cursors.WaitCursor
         Try
             bgwListFiles.ReportProgress(1, "Waiting for User Authentication...")
             Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
@@ -177,6 +176,7 @@ Public Class frmPersonalFileStorage
             GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
 
             If GDService.ApplicationName <> strAppName Then
+                bgwListFiles.ReportProgress(1, "Authentication failed.")
                 Exit Sub
             End If
 
@@ -191,11 +191,9 @@ Public Class frmPersonalFileStorage
             ListFiles(e.Argument, False)
             GetDriveUsageDetails()
 
-            Me.Cursor = Cursors.Default
         Catch ex As Exception
             blListIsLoading = False
             bgwListFiles.ReportProgress(1, "Login")
-            Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
     End Sub
@@ -210,6 +208,8 @@ Public Class frmPersonalFileStorage
             If TypeOf e.UserState Is String Then
                 If e.UserState = "Waiting for User Authentication..." Then
                     ShowProgressControls("", "Waiting for User Authentication...", eCircularProgressType.Donut)
+                ElseIf e.UserState = "Authentication failed." Then
+                    MessageBoxEx.Show("Authentication failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ElseIf e.UserState = "Fetching Files from Google Drive..." Then
                     ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
                 ElseIf e.UserState = "Logout" Then
@@ -711,7 +711,6 @@ Public Class frmPersonalFileStorage
             End If
         Catch ex As Exception
             blUploadIsProgressing = False
-            Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
     End Sub
@@ -751,6 +750,84 @@ Public Class frmPersonalFileStorage
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub listViewEx1_DragDrop(sender As Object, e As DragEventArgs) Handles listViewEx1.DragDrop
+
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+
+           If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+                ShowFileTransferInProgressMessage()
+                Exit Sub
+            End If
+
+            If blShowSharedWithMe Then
+                MessageBoxEx.Show("File upload is not allowed in 'Shared with Me' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If btnLogin.Text = "Google Login" Then
+                MessageBoxEx.Show("Please login using Google ID. Press 'Google Login' button.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
+
+            If filePaths.Count > 1 Then
+                MessageBoxEx.Show("Drop only one file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim filepath As String = filePaths(0)
+
+            If My.Computer.FileSystem.DirectoryExists(filepath) Then
+                MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Not My.Computer.FileSystem.FileExists(filepath) Then
+                MessageBoxEx.Show("Dropped file does not exist.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            uSelectedFile = filepath
+
+            For i = 0 To Me.listViewEx1.Items.Count - 1
+                If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
+                    MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+            Next
+
+            dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
+            dFormatedFileSize = CalculateFileSize(dFileSize)
+
+            If dFileSize >= 25 * 1048576 Then '25MB
+                If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                    Exit Sub
+                End If
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
+            System.Threading.Thread.Sleep(200)
+            bgwUploadFile.RunWorkerAsync(uSelectedFile)
+
+        End If
+    End Sub
+
+    Private Sub listViewEx1_DragEnter(sender As Object, e As DragEventArgs) Handles listViewEx1.DragEnter
+        If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
 #End Region
 
 
@@ -836,7 +913,6 @@ Public Class frmPersonalFileStorage
 
         Catch ex As Exception
             blDownloadIsProgressing = False
-            Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
 
@@ -976,12 +1052,12 @@ Public Class frmPersonalFileStorage
 
     Private Sub SelectNextItem(SelectedFileIndex)
         On Error Resume Next
-        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+        If SelectedFileIndex < listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 < count 10 
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True 'select 5
         End If
 
-        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        If SelectedFileIndex = listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 = count 5 
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True 'select 5
         End If
     End Sub
 #End Region
@@ -1212,6 +1288,28 @@ Public Class frmPersonalFileStorage
     End Function
 #End Region
 
+
+#Region "CHANGE PASSWORD"
+
+    Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
+        If Not MessageBoxEx.Show("Enter your current local password to authenticate.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then Exit Sub
+
+        blAuthenticatePasswordChange = True
+        frmPassword.ShowDialog()
+
+        If blUserAuthenticated Then
+            If MessageBoxEx.Show("Enter new password and confirm.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
+                blChangeAndUpdatePassword = True
+                frmPassword.ShowDialog()
+            End If
+        End If
+
+        blChangeAndUpdatePassword = False
+        blAuthenticatePasswordChange = False
+    End Sub
+
+#End Region
+
     Private Sub ShowProgressControls(ProgressText As String, StatusText As String, ProgressType As eCircularProgressType)
         CircularProgress1.ProgressText = ProgressText
         lblProgressStatus.Text = StatusText
@@ -1251,26 +1349,11 @@ Public Class frmPersonalFileStorage
         RefreshFileList()
     End Sub
 
-#Region "CHANGE PASSWORD"
-
-    Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
-        If Not MessageBoxEx.Show("Enter your current local password to authenticate.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then Exit Sub
-
-        blAuthenticatePasswordChange = True
-        frmPassword.ShowDialog()
-
-        If blUserAuthenticated Then
-            If MessageBoxEx.Show("Enter new password and confirm.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = Windows.Forms.DialogResult.OK Then
-                blChangeAndUpdatePassword = True
-                frmPassword.ShowDialog()
-            End If
-        End If
-
-        blChangeAndUpdatePassword = False
-        blAuthenticatePasswordChange = False
+    Private Sub listViewEx1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listViewEx1.SelectedIndexChanged
+        On Error Resume Next
+        Me.listViewEx1.SelectedItems(0).EnsureVisible()
     End Sub
 
-#End Region
     
   
 End Class

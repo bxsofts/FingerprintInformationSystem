@@ -23,12 +23,12 @@ Partial Class FrmTourNote
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTourNote))
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
@@ -52,6 +52,10 @@ Partial Class FrmTourNote
         Me.lblDA = New DevComponents.DotNetBar.LabelItem()
         Me.PanelSOC = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.pnlBackup = New DevComponents.DotNetBar.PanelEx()
+        Me.CircularProgress3 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.btnUploadToGoogleDrive = New DevComponents.DotNetBar.ButtonX()
+        Me.lblBackup = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.CircularProgress2 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGenerateBlankTR56A = New DevComponents.DotNetBar.ButtonX()
@@ -82,7 +86,7 @@ Partial Class FrmTourNote
         Me.chkUsePS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkUsePO = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.txtStartingLocation = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.PanelEx5 = New DevComponents.DotNetBar.PanelEx()
+        Me.pnlStatus = New DevComponents.DotNetBar.PanelEx()
         Me.lblSavedTABill = New DevComponents.DotNetBar.LabelX()
         Me.lblSavedTourNote = New DevComponents.DotNetBar.LabelX()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
@@ -95,6 +99,7 @@ Partial Class FrmTourNote
         Me.bgwTR56ThreeLine = New System.ComponentModel.BackgroundWorker()
         Me.bgwTR47 = New System.ComponentModel.BackgroundWorker()
         Me.bgwTR47ThreeLine = New System.ComponentModel.BackgroundWorker()
+        Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         CType(Me.SOCDatagrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -102,13 +107,14 @@ Partial Class FrmTourNote
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StatusBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
+        Me.pnlBackup.SuspendLayout()
         Me.GroupPanel3.SuspendLayout()
         Me.GroupPanel2.SuspendLayout()
         Me.PanelEx4.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel5.SuspendLayout()
-        Me.PanelEx5.SuspendLayout()
+        Me.pnlStatus.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelEx1
@@ -156,34 +162,34 @@ Partial Class FrmTourNote
         Me.SOCDatagrid.AllowUserToDeleteRows = False
         Me.SOCDatagrid.AutoGenerateColumns = False
         Me.SOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.SOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.SOCDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SOCNumberDataGridViewTextBoxColumn, Me.SelectRow, Me.DateOfInspectionDataGridViewTextBoxColumn, Me.PoliceStationDataGridViewTextBoxColumn, Me.CrimeNumberDataGridViewTextBoxColumn, Me.PlaceOfOccurrenceDataGridViewTextBoxColumn, Me.InvestigatingOfficer})
         Me.SOCDatagrid.DataSource = Me.SOCRegisterBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle11
         Me.SOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.SOCDatagrid.Location = New System.Drawing.Point(0, 44)
         Me.SOCDatagrid.MultiSelect = False
         Me.SOCDatagrid.Name = "SOCDatagrid"
         Me.SOCDatagrid.RowHeadersWidth = 50
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle12
         Me.SOCDatagrid.RowTemplate.Height = 40
         Me.SOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.SOCDatagrid.SelectAllSignVisible = False
@@ -210,8 +216,8 @@ Partial Class FrmTourNote
         'DateOfInspectionDataGridViewTextBoxColumn
         '
         Me.DateOfInspectionDataGridViewTextBoxColumn.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle8
         Me.DateOfInspectionDataGridViewTextBoxColumn.HeaderText = "DI"
         Me.DateOfInspectionDataGridViewTextBoxColumn.Name = "DateOfInspectionDataGridViewTextBoxColumn"
         Me.DateOfInspectionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -220,8 +226,8 @@ Partial Class FrmTourNote
         'PoliceStationDataGridViewTextBoxColumn
         '
         Me.PoliceStationDataGridViewTextBoxColumn.DataPropertyName = "PoliceStation"
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PoliceStationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PoliceStationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle9
         Me.PoliceStationDataGridViewTextBoxColumn.HeaderText = "Police Station"
         Me.PoliceStationDataGridViewTextBoxColumn.Name = "PoliceStationDataGridViewTextBoxColumn"
         Me.PoliceStationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -238,8 +244,8 @@ Partial Class FrmTourNote
         'PlaceOfOccurrenceDataGridViewTextBoxColumn
         '
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DataPropertyName = "PlaceOfOccurrence"
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle10
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.HeaderText = "Place of Occurrence"
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.Name = "PlaceOfOccurrenceDataGridViewTextBoxColumn"
         Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
@@ -359,11 +365,12 @@ Partial Class FrmTourNote
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx2.Controls.Add(Me.pnlBackup)
         Me.PanelEx2.Controls.Add(Me.GroupPanel3)
         Me.PanelEx2.Controls.Add(Me.GroupPanel2)
         Me.PanelEx2.Controls.Add(Me.GroupPanel1)
         Me.PanelEx2.Controls.Add(Me.GroupPanel5)
-        Me.PanelEx2.Controls.Add(Me.PanelEx5)
+        Me.PanelEx2.Controls.Add(Me.pnlStatus)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
@@ -377,6 +384,67 @@ Partial Class FrmTourNote
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 43
         '
+        'pnlBackup
+        '
+        Me.pnlBackup.CanvasColor = System.Drawing.SystemColors.Control
+        Me.pnlBackup.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.pnlBackup.Controls.Add(Me.CircularProgress3)
+        Me.pnlBackup.Controls.Add(Me.btnUploadToGoogleDrive)
+        Me.pnlBackup.Controls.Add(Me.lblBackup)
+        Me.pnlBackup.DisabledBackColor = System.Drawing.Color.Empty
+        Me.pnlBackup.Location = New System.Drawing.Point(8, 622)
+        Me.pnlBackup.Name = "pnlBackup"
+        Me.pnlBackup.Size = New System.Drawing.Size(412, 66)
+        Me.pnlBackup.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.pnlBackup.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.pnlBackup.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.pnlBackup.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.pnlBackup.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.pnlBackup.Style.GradientAngle = 90
+        Me.pnlBackup.TabIndex = 54
+        '
+        'CircularProgress3
+        '
+        '
+        '
+        '
+        Me.CircularProgress3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress3.Dock = System.Windows.Forms.DockStyle.Right
+        Me.CircularProgress3.FocusCuesEnabled = False
+        Me.CircularProgress3.Location = New System.Drawing.Point(281, 0)
+        Me.CircularProgress3.Name = "CircularProgress3"
+        Me.CircularProgress3.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress3.ProgressTextVisible = True
+        Me.CircularProgress3.Size = New System.Drawing.Size(131, 66)
+        Me.CircularProgress3.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress3.TabIndex = 49
+        Me.CircularProgress3.TabStop = False
+        '
+        'btnUploadToGoogleDrive
+        '
+        Me.btnUploadToGoogleDrive.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnUploadToGoogleDrive.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnUploadToGoogleDrive.Image = CType(resources.GetObject("btnUploadToGoogleDrive.Image"), System.Drawing.Image)
+        Me.btnUploadToGoogleDrive.Location = New System.Drawing.Point(281, 6)
+        Me.btnUploadToGoogleDrive.Name = "btnUploadToGoogleDrive"
+        Me.btnUploadToGoogleDrive.Size = New System.Drawing.Size(122, 55)
+        Me.btnUploadToGoogleDrive.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnUploadToGoogleDrive.TabIndex = 47
+        Me.btnUploadToGoogleDrive.Text = "Backup"
+        '
+        'lblBackup
+        '
+        Me.lblBackup.AutoSize = True
+        '
+        '
+        '
+        Me.lblBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblBackup.Location = New System.Drawing.Point(19, 24)
+        Me.lblBackup.Name = "lblBackup"
+        Me.lblBackup.Size = New System.Drawing.Size(262, 18)
+        Me.lblBackup.TabIndex = 46
+        Me.lblBackup.Text = "Backup TA Bill and Tour Note to Google Drive"
+        '
         'GroupPanel3
         '
         Me.GroupPanel3.BackColor = System.Drawing.Color.Transparent
@@ -387,9 +455,9 @@ Partial Class FrmTourNote
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTourNote)
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTR47)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel3.Location = New System.Drawing.Point(8, 466)
+        Me.GroupPanel3.Location = New System.Drawing.Point(8, 453)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(412, 103)
+        Me.GroupPanel3.Size = New System.Drawing.Size(412, 93)
         '
         '
         '
@@ -428,11 +496,11 @@ Partial Class FrmTourNote
         '
         Me.CircularProgress2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress2.FocusCuesEnabled = False
-        Me.CircularProgress2.Location = New System.Drawing.Point(3, 4)
+        Me.CircularProgress2.Location = New System.Drawing.Point(3, 3)
         Me.CircularProgress2.Name = "CircularProgress2"
         Me.CircularProgress2.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress2.ProgressTextVisible = True
-        Me.CircularProgress2.Size = New System.Drawing.Size(400, 70)
+        Me.CircularProgress2.Size = New System.Drawing.Size(400, 64)
         Me.CircularProgress2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress2.TabIndex = 48
         Me.CircularProgress2.TabStop = False
@@ -441,7 +509,7 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateBlankTR56A.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateBlankTR56A.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateBlankTR56A.Location = New System.Drawing.Point(281, 13)
+        Me.btnGenerateBlankTR56A.Location = New System.Drawing.Point(281, 7)
         Me.btnGenerateBlankTR56A.Name = "btnGenerateBlankTR56A"
         Me.btnGenerateBlankTR56A.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateBlankTR56A.TabIndex = 15
@@ -451,7 +519,7 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateBlankTourNote.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateBlankTourNote.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateBlankTourNote.Location = New System.Drawing.Point(5, 13)
+        Me.btnGenerateBlankTourNote.Location = New System.Drawing.Point(5, 7)
         Me.btnGenerateBlankTourNote.Name = "btnGenerateBlankTourNote"
         Me.btnGenerateBlankTourNote.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateBlankTourNote.TabIndex = 13
@@ -461,7 +529,7 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateBlankTR47.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateBlankTR47.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateBlankTR47.Location = New System.Drawing.Point(143, 13)
+        Me.btnGenerateBlankTR47.Location = New System.Drawing.Point(143, 7)
         Me.btnGenerateBlankTR47.Name = "btnGenerateBlankTR47"
         Me.btnGenerateBlankTR47.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateBlankTR47.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnGenerateBlankTR47Outer})
@@ -485,7 +553,7 @@ Partial Class FrmTourNote
         Me.GroupPanel2.Controls.Add(Me.btnGenerateTourNote)
         Me.GroupPanel2.Controls.Add(Me.btnGenerateTABill)
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel2.Location = New System.Drawing.Point(8, 261)
+        Me.GroupPanel2.Location = New System.Drawing.Point(8, 252)
         Me.GroupPanel2.Name = "GroupPanel2"
         Me.GroupPanel2.Size = New System.Drawing.Size(412, 190)
         '
@@ -668,7 +736,7 @@ Partial Class FrmTourNote
         Me.GroupPanel1.Controls.Add(Me.cmbMonth)
         Me.GroupPanel1.Controls.Add(Me.LabelX1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel1.Location = New System.Drawing.Point(8, 140)
+        Me.GroupPanel1.Location = New System.Drawing.Point(8, 135)
         Me.GroupPanel1.Name = "GroupPanel1"
         Me.GroupPanel1.Size = New System.Drawing.Size(412, 106)
         '
@@ -921,23 +989,23 @@ Partial Class FrmTourNote
         Me.txtStartingLocation.TabIndex = 1
         Me.txtStartingLocation.WatermarkText = "From"
         '
-        'PanelEx5
+        'pnlStatus
         '
-        Me.PanelEx5.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx5.Controls.Add(Me.lblSavedTABill)
-        Me.PanelEx5.Controls.Add(Me.lblSavedTourNote)
-        Me.PanelEx5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx5.Location = New System.Drawing.Point(8, 584)
-        Me.PanelEx5.Name = "PanelEx5"
-        Me.PanelEx5.Size = New System.Drawing.Size(412, 80)
-        Me.PanelEx5.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx5.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx5.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx5.Style.GradientAngle = 90
-        Me.PanelEx5.TabIndex = 45
+        Me.pnlStatus.CanvasColor = System.Drawing.SystemColors.Control
+        Me.pnlStatus.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.pnlStatus.Controls.Add(Me.lblSavedTABill)
+        Me.pnlStatus.Controls.Add(Me.lblSavedTourNote)
+        Me.pnlStatus.DisabledBackColor = System.Drawing.Color.Empty
+        Me.pnlStatus.Location = New System.Drawing.Point(8, 556)
+        Me.pnlStatus.Name = "pnlStatus"
+        Me.pnlStatus.Size = New System.Drawing.Size(412, 57)
+        Me.pnlStatus.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.pnlStatus.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.pnlStatus.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.pnlStatus.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.pnlStatus.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.pnlStatus.Style.GradientAngle = 90
+        Me.pnlStatus.TabIndex = 45
         '
         'lblSavedTABill
         '
@@ -946,7 +1014,7 @@ Partial Class FrmTourNote
         '
         '
         Me.lblSavedTABill.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSavedTABill.Location = New System.Drawing.Point(19, 35)
+        Me.lblSavedTABill.Location = New System.Drawing.Point(19, 31)
         Me.lblSavedTABill.Name = "lblSavedTABill"
         Me.lblSavedTABill.Size = New System.Drawing.Size(76, 18)
         Me.lblSavedTABill.TabIndex = 47
@@ -959,7 +1027,7 @@ Partial Class FrmTourNote
         '
         '
         Me.lblSavedTourNote.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSavedTourNote.Location = New System.Drawing.Point(19, 11)
+        Me.lblSavedTourNote.Location = New System.Drawing.Point(19, 7)
         Me.lblSavedTourNote.Name = "lblSavedTourNote"
         Me.lblSavedTourNote.Size = New System.Drawing.Size(97, 18)
         Me.lblSavedTourNote.TabIndex = 46
@@ -1012,6 +1080,11 @@ Partial Class FrmTourNote
         Me.bgwTR47ThreeLine.WorkerReportsProgress = True
         Me.bgwTR47ThreeLine.WorkerSupportsCancellation = True
         '
+        'bgwUploadFile
+        '
+        Me.bgwUploadFile.WorkerReportsProgress = True
+        Me.bgwUploadFile.WorkerSupportsCancellation = True
+        '
         'FrmTourNote
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1034,6 +1107,8 @@ Partial Class FrmTourNote
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.StatusBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
+        Me.pnlBackup.ResumeLayout(False)
+        Me.pnlBackup.PerformLayout()
         Me.GroupPanel3.ResumeLayout(False)
         Me.GroupPanel2.ResumeLayout(False)
         Me.PanelEx4.ResumeLayout(False)
@@ -1043,8 +1118,8 @@ Partial Class FrmTourNote
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel5.ResumeLayout(False)
         Me.GroupPanel5.PerformLayout()
-        Me.PanelEx5.ResumeLayout(False)
-        Me.PanelEx5.PerformLayout()
+        Me.pnlStatus.ResumeLayout(False)
+        Me.pnlStatus.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1090,7 +1165,7 @@ Partial Class FrmTourNote
     Friend WithEvents chkUseSavedTourNote As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents lblSavedTourNote As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblSavedTABill As DevComponents.DotNetBar.LabelX
-    Friend WithEvents PanelEx5 As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents pnlStatus As DevComponents.DotNetBar.PanelEx
     Friend WithEvents lblDA As DevComponents.DotNetBar.LabelItem
     Friend WithEvents btnGenerateTABillOuter As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents GroupPanel3 As DevComponents.DotNetBar.Controls.GroupPanel
@@ -1114,4 +1189,9 @@ Partial Class FrmTourNote
     Friend WithEvents CrimeNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PlaceOfOccurrenceDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents InvestigatingOfficer As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents pnlBackup As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents btnUploadToGoogleDrive As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents lblBackup As DevComponents.DotNetBar.LabelX
+    Friend WithEvents CircularProgress3 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
 End Class

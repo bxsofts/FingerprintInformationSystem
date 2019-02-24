@@ -91,6 +91,7 @@ Partial Class frmOnlineBackup
         Me.btnRemoveBackupFile.Image = CType(resources.GetObject("btnRemoveBackupFile.Image"), System.Drawing.Image)
         Me.btnRemoveBackupFile.Location = New System.Drawing.Point(23, 272)
         Me.btnRemoveBackupFile.Name = "btnRemoveBackupFile"
+        Me.btnRemoveBackupFile.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Del)
         Me.btnRemoveBackupFile.Size = New System.Drawing.Size(117, 59)
         Me.btnRemoveBackupFile.TabIndex = 5
         Me.btnRemoveBackupFile.Text = "Remove"
@@ -115,6 +116,7 @@ Partial Class frmOnlineBackup
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
         Me.btnRefresh.Location = New System.Drawing.Point(23, 12)
         Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5)
         Me.btnRefresh.Size = New System.Drawing.Size(117, 59)
         Me.btnRefresh.TabIndex = 1
         Me.btnRefresh.Text = "Refresh"

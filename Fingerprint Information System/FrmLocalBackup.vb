@@ -228,12 +228,13 @@ Public Class FrmLocalBackup
 
     Private Sub SelectNextItem(SelectedFileIndex)
         On Error Resume Next
-        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+       
+        If SelectedFileIndex < listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 < count 10 
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True 'select 5
         End If
 
-        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        If SelectedFileIndex = listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 = count 5 
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True 'select 5
         End If
     End Sub
 
@@ -341,16 +342,9 @@ Public Class FrmLocalBackup
 
     End Function
 
-    Private Sub DisplayInformation() Handles listViewEx1.Click, listViewEx1.ItemSelectionChanged
+    Private Sub DisplayInformation() 'Handles listViewEx1.Click, listViewEx1.ItemSelectionChanged
         On Error Resume Next
-
         Me.lblCount.Text = "No. of Backup Files: " & Me.listViewEx1.Items.Count
-        If Me.listViewEx1.SelectedItems.Count > 0 Then
-            Me.lblSelectedFile.Text = Me.listViewEx1.SelectedItems(0).Text
-        Else
-            Me.lblSelectedFile.Text = "No file selected"
-        End If
-
     End Sub
 
     

@@ -154,7 +154,7 @@ Module modMain
     End Sub
 
 
-    Public Function InternetAvailable() As Boolean
+    Public Function InternetAvailable1() As Boolean
 
         Dim objUrl As New System.Uri("http://www.google.com/")
         Dim objWebReq As System.Net.WebRequest
@@ -174,6 +174,31 @@ Module modMain
 
     End Function
 
+    Public Function InternetAvailable() As Boolean
+
+        Dim InternetFunction As String = "0"
+        If My.Computer.Registry.GetValue(strGeneralSettingsPath, "InternetFunction", Nothing) Is Nothing Then
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "InternetFunction", "0", Microsoft.Win32.RegistryValueKind.String)
+        Else
+            InternetFunction = My.Computer.Registry.GetValue(strGeneralSettingsPath, "InternetFunction", "0")
+        End If
+
+
+        If InternetFunction = "1" Then
+            Return InternetAvailable1()
+        End If
+
+        If My.Computer.Network.IsAvailable Then
+            Try
+                Dim IPHost As Net.IPHostEntry = Net.Dns.GetHostEntry("www.google.com")
+                Return True
+            Catch
+                Return False
+            End Try
+        Else
+            Return False
+        End If
+    End Function
     Public Function ConvertToDate(strDate As String)
 
         Dim ConvertedDate As Date = Date.ParseExact(strDate, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)

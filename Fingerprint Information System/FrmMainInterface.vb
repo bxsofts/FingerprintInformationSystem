@@ -16466,25 +16466,20 @@ errhandler:
     End Sub
     Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
         Try
-            Dim id As String = ""
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
-
-            Dim parentlist As New List(Of String)
             Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
 
+            Dim parentlist As New List(Of String)
             parentlist.Add(masterfolderid)
 
-            body.Parents = parentlist
-            body.Name = BackupFolder
-            body.Description = ShortOfficeName & "_" & ShortDistrictName 
-            body.MimeType = "application/vnd.google-apps.folder"
-
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
-
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+            NewDirectory.Name = BackupFolder
+            NewDirectory.Parents = parentlist
+            NewDirectory.MimeType = "application/vnd.google-apps.folder"
+            NewDirectory.Description = BackupFolder '
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
             NewDirectory = request.Execute()
-            id = NewDirectory.Id
-            Return id
+
+            Return NewDirectory.Id
         Catch ex As Exception
             ' ShowErrorMessage(ex)
             Return ""

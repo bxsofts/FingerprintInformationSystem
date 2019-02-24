@@ -265,30 +265,24 @@ Public Class frmOnlineBackup
     End Function
 
     Private Function CreateUserBackupFolder()
-        Try
-            Dim id As String = ""
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
 
-            Dim parentlist As New List(Of String)
+        Try
+
             Dim masterfolderid As String = GetMasterBackupFolderID()
 
-            ' If masterfolderid = "" Then
-            '  masterfolderid = CreateMasterBackupFolder()
-            ' End If
-
+            Dim parentlist As New List(Of String)
             parentlist.Add(masterfolderid)
 
-            body.Parents = parentlist
-            body.Name = BackupFolder
-            body.Description = ShortOfficeName & "-" & ShortDistrictName
-            body.MimeType = "application/vnd.google-apps.folder"
-
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
-
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+            NewDirectory.Name = BackupFolder
+            NewDirectory.Parents = parentlist
+            NewDirectory.MimeType = "application/vnd.google-apps.folder"
+            NewDirectory.Description = ShortOfficeName & "_" & ShortDistrictName
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
             NewDirectory = request.Execute()
-            id = NewDirectory.Id
-            Return id
+
+            Return NewDirectory.Id
+
         Catch ex As Exception
             ' ShowErrorMessage(ex)
             Return ""
@@ -299,15 +293,13 @@ Public Class frmOnlineBackup
     Private Function CreateMasterBackupFolder() As String
         Try
             Dim id As String = ""
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-
             Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
 
-            body.Name = "FIS Backup"
-            body.Description = "Admin"
-            body.MimeType = "application/vnd.google-apps.folder"
+            NewDirectory.Name = "FIS Backup"
+            NewDirectory.Description = "Admin"
+            NewDirectory.MimeType = "application/vnd.google-apps.folder"
 
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(body)
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
 
             NewDirectory = request.Execute()
             id = NewDirectory.Id
@@ -780,13 +772,13 @@ Public Class frmOnlineBackup
 
                 Me.Cursor = Cursors.WaitCursor
 
-                    If InternetAvailable() = False Then
-                        MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Me.Cursor = Cursors.Default
-                        Exit Sub
-                    End If
-                    DownloadRestore = True
-                    DownloadFileFromDrive()
+                If InternetAvailable() = False Then
+                    MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
+                DownloadRestore = True
+                DownloadFileFromDrive()
             End If
 
         Catch ex As Exception
@@ -831,14 +823,14 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
-            Dim msg As String = ""
+            Dim ftype As String = ""
             If Me.listViewEx1.SelectedItems(0).ImageIndex = 3 Then
-                msg = "folder"
+                ftype = "folder"
             Else
-                msg = "file"
+                ftype = "file"
             End If
 
-            Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to remove the selected " & msg & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to remove the selected " & ftype & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
             If result = Windows.Forms.DialogResult.No Then
                 Exit Sub
@@ -849,30 +841,27 @@ Public Class frmOnlineBackup
             Dim id As String = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
             Dim SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
 
-            If id = "Downloaded File" Then 'delete local file
-                My.Computer.FileSystem.DeleteFile(SelectedFile, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
-                Me.listViewEx1.SelectedItems(0).Remove()
-                Application.DoEvents()
-                ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
-            Else 'remove online file
 
-                If InternetAvailable() = False Then
-                    MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                Dim request = FISService.Files.Get(id)
-                request.Fields = "size"
-                Dim file = request.Execute
-
-                Dim DeleteRequest = FISService.Files.Delete(id)
-                DeleteRequest.Execute()
-                TotalFileSize -= file.Size
-                Me.listViewEx1.SelectedItems(0).Remove()
-                Application.DoEvents()
-                ShowDesktopAlert("Selected backup file deleted from Google Drive.")
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
             End If
+
+            Dim request = FISService.Files.Get(id)
+            request.Fields = "size"
+            Dim file = request.Execute
+
+            Dim DeleteRequest = FISService.Files.Delete(id)
+            DeleteRequest.Execute()
+            If Not file.Size Is Nothing Then
+                TotalFileSize -= file.Size
+            End If
+
+            Me.listViewEx1.SelectedItems(0).Remove()
+            Application.DoEvents()
+            ShowDesktopAlert("Selected " & ftype & " deleted from Google Drive.")
+
 
             Me.Cursor = Cursors.Default
 
@@ -889,12 +878,12 @@ Public Class frmOnlineBackup
 
     Private Sub SelectNextItem(SelectedFileIndex)
         On Error Resume Next
-        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+        If SelectedFileIndex < listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 < count 10 
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True 'select 5
         End If
 
-        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        If SelectedFileIndex = listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 = count 5 
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True 'select 5
         End If
     End Sub
 
@@ -954,7 +943,7 @@ Public Class frmOnlineBackup
             SuperAdminPass = "^^^px7600d"
             Dim adminprivilege As Boolean = SetAdminPrivilege()
             If adminprivilege = True Then '
-               LoadFilesInMasterBackupFolder()
+                LoadFilesInMasterBackupFolder()
             End If
             Exit Sub
         End If
@@ -1281,6 +1270,6 @@ Public Class frmOnlineBackup
         Public BackupDate As String
     End Class
 
-  
+
 
 End Class

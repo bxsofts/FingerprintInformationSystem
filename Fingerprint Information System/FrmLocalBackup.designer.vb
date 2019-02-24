@@ -44,7 +44,6 @@ Partial Class FrmLocalBackup
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
-        Me.lblSelectedFile = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1.SuspendLayout()
         Me.PanelEx1.SuspendLayout()
@@ -155,6 +154,7 @@ Partial Class FrmLocalBackup
         Me.listViewEx1.ForeColor = System.Drawing.Color.Black
         Me.listViewEx1.FullRowSelect = True
         Me.listViewEx1.GridLines = True
+        Me.listViewEx1.HideSelection = False
         Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
         Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
@@ -284,7 +284,7 @@ Partial Class FrmLocalBackup
         Me.Bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
-        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblTotalFileSize, Me.lblSelectedFile})
+        Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblTotalFileSize})
         Me.Bar1.Location = New System.Drawing.Point(0, 491)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(757, 23)
@@ -305,13 +305,6 @@ Partial Class FrmLocalBackup
         Me.lblTotalFileSize.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
         Me.lblTotalFileSize.Name = "lblTotalFileSize"
         Me.lblTotalFileSize.Width = 200
-        '
-        'lblSelectedFile
-        '
-        Me.lblSelectedFile.BeginGroup = True
-        Me.lblSelectedFile.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
-        Me.lblSelectedFile.Name = "lblSelectedFile"
-        Me.lblSelectedFile.Width = 300
         '
         'PanelEx2
         '
@@ -384,7 +377,6 @@ Partial Class FrmLocalBackup
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents Bar1 As DevComponents.DotNetBar.Bar
     Friend WithEvents lblCount As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents lblSelectedFile As DevComponents.DotNetBar.LabelItem
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblTotalFileSize As DevComponents.DotNetBar.LabelItem

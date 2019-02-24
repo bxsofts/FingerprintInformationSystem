@@ -538,6 +538,7 @@ Public Class frmFISBackupList
 
             If listViewEx1.Items.Count > 0 Then
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
+                Me.listViewEx1.SelectedItems(0).EnsureVisible()
             End If
             lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
             ShowDesktopAlert("New Folder created successfully.")
@@ -614,7 +615,7 @@ Public Class frmFISBackupList
         End If
 
         ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
-        System.Threading.Thread.Sleep(500)
+        System.Threading.Thread.Sleep(200)
         bgwUploadFile.RunWorkerAsync(uSelectedFile)
 
     End Sub
@@ -703,6 +704,90 @@ Public Class frmFISBackupList
         Me.Cursor = Cursors.Default
     End Sub
 
+
+    Private Sub listViewEx1_DragDrop(sender As Object, e As DragEventArgs) Handles listViewEx1.DragDrop
+
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+
+            If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+                ShowFileTransferInProgressMessage()
+                Exit Sub
+            End If
+
+            If CurrentFolderPath = "\My Drive" And Not SuperAdmin Then
+                MessageBoxEx.Show("Uploading of files is not allowed in 'My Drive' folder. Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If CurrentFolderPath = "\My Drive\FIS Backup" And Not SuperAdmin Then
+                MessageBoxEx.Show("Uploading of files is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
+                MessageBoxEx.Show("Uploading of files is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
+
+            If filePaths.Count > 1 Then
+                MessageBoxEx.Show("Drop only one file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim filepath As String = filePaths(0)
+
+            If My.Computer.FileSystem.DirectoryExists(filepath) Then
+                MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Not My.Computer.FileSystem.FileExists(filepath) Then
+                MessageBoxEx.Show("Dropped file does not exist.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            uSelectedFile = filepath
+
+            For i = 0 To Me.listViewEx1.Items.Count - 1
+                If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
+                    MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+            Next
+
+            dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
+            dFormatedFileSize = CalculateFileSize(dFileSize)
+
+            If dFileSize >= 25 * 1048576 Then '25MB
+                If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                    Exit Sub
+                End If
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
+            System.Threading.Thread.Sleep(200)
+            bgwUploadFile.RunWorkerAsync(uSelectedFile)
+
+        End If
+    End Sub
+
+    Private Sub listViewEx1_DragEnter(sender As Object, e As DragEventArgs) Handles listViewEx1.DragEnter
+        If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
+            e.Effect = DragDropEffects.Copy
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
 #End Region
 
 
@@ -945,12 +1030,12 @@ Public Class frmFISBackupList
 
     Private Sub SelectNextItem(SelectedFileIndex)
         On Error Resume Next
-        If SelectedFileIndex > listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True
+        If SelectedFileIndex < listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 < count 10 
+            Me.listViewEx1.Items(SelectedFileIndex).Selected = True 'select 5
         End If
 
-        If SelectedFileIndex <= listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then
-            Me.listViewEx1.Items(SelectedFileIndex).Selected = True
+        If SelectedFileIndex = listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 = count 5 
+            Me.listViewEx1.Items(SelectedFileIndex - 1).Selected = True 'select 5
         End If
     End Sub
 #End Region
@@ -1421,6 +1506,10 @@ Public Class frmFISBackupList
         lblProgressStatus.Hide()
     End Sub
 
-    
+
+    Private Sub listViewEx1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listViewEx1.SelectedIndexChanged
+        On Error Resume Next
+        Me.listViewEx1.SelectedItems(0).EnsureVisible()
+    End Sub
 End Class
 

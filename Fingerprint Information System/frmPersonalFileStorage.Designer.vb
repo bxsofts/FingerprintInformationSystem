@@ -30,6 +30,7 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.SideNav1 = New DevComponents.DotNetBar.Controls.SideNav()
         Me.SideNavPanel1 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
@@ -65,15 +66,14 @@ Partial Class frmPersonalFileStorage
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SideNav1.SuspendLayout()
         Me.SideNavPanel1.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'bgwGetPassword
@@ -172,6 +172,15 @@ Partial Class frmPersonalFileStorage
         Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel1.TabIndex = 25
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 440)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(49, 49)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 10
+        Me.PictureBox1.TabStop = False
+        '
         'SideNav1
         '
         Me.SideNav1.Controls.Add(Me.SideNavPanel1)
@@ -233,6 +242,7 @@ Partial Class frmPersonalFileStorage
         'listViewEx1
         '
         Me.listViewEx1.Alignment = System.Windows.Forms.ListViewAlignment.Left
+        Me.listViewEx1.AllowDrop = True
         Me.listViewEx1.BackColor = System.Drawing.Color.White
         '
         '
@@ -456,6 +466,7 @@ Partial Class frmPersonalFileStorage
         Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
         Me.btnRename.Location = New System.Drawing.Point(13, 365)
         Me.btnRename.Name = "btnRename"
+        Me.btnRename.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2)
         Me.btnRename.Size = New System.Drawing.Size(131, 59)
         Me.btnRename.TabIndex = 6
         Me.btnRename.Text = "Rename"
@@ -504,6 +515,7 @@ Partial Class frmPersonalFileStorage
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
         Me.btnRemoveFile.Location = New System.Drawing.Point(13, 432)
         Me.btnRemoveFile.Name = "btnRemoveFile"
+        Me.btnRemoveFile.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Del)
         Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
         Me.btnRemoveFile.TabIndex = 7
         Me.btnRemoveFile.Text = "Remove"
@@ -516,6 +528,7 @@ Partial Class frmPersonalFileStorage
         Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
         Me.btnRefresh.Location = New System.Drawing.Point(13, 30)
         Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5)
         Me.btnRefresh.Size = New System.Drawing.Size(131, 59)
         Me.btnRefresh.TabIndex = 1
         Me.btnRefresh.Text = "Refresh List"
@@ -535,15 +548,6 @@ Partial Class frmPersonalFileStorage
         Me.bgwDownloadFile.WorkerReportsProgress = True
         Me.bgwDownloadFile.WorkerSupportsCancellation = True
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 440)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(49, 49)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 10
-        Me.PictureBox1.TabStop = False
-        '
         'frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -562,12 +566,12 @@ Partial Class frmPersonalFileStorage
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.GroupPanel1.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SideNav1.ResumeLayout(False)
         Me.SideNav1.PerformLayout()
         Me.SideNavPanel1.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

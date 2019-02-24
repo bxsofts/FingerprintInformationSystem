@@ -11,8 +11,7 @@ Public Class frmPassword
 
     Dim FISService As DriveService = New DriveService
     Dim FISAccountServiceCredential As GoogleCredential
-    Public CredentialFilePath As String
-
+   
     Private Sub frmPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             CircularProgress1.IsRunning = False
