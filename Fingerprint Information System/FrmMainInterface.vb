@@ -2162,6 +2162,7 @@ Public Class frmMainInterface
         Else
             DesktopAlert.AlertColor = eDesktopAlertColor.Default
         End If
+        Dim c As eDesktopAlertColor = CType(Color.Red.ToArgb, eDesktopAlertColor)
     End Sub
 
 #End Region

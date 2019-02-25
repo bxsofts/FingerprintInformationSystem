@@ -3399,8 +3399,6 @@ errhandler:
                 End If
             End If
 
-
-
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try

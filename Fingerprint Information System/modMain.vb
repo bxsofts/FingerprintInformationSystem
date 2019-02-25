@@ -231,22 +231,38 @@ Module modMain
         End Try
     End Sub
 
-    Public Function GetRandomColor() As String
+    Public Function GetRandomColor()
+
+        Randomize()
+        Dim rnd = New Random()
+
+        Dim randomColour As String = "-16748352" 'blue
+
+        Try
+            randomColour = Color.FromArgb(&HFF000000 Or Rnd.Next(&HFFFFFF + 1)).ToArgb
+        Catch ex As Exception
+            randomColour = "-16748352" 'blue
+        End Try
+        Return randomColour
+    End Function
+    Public Function GetRandomColor1() As String
         Dim colorList(11) As String
-        colorList(0) = "-4194304"
-        colorList(1) = "-65536"
-        colorList(2) = "-16384"
-        colorList(3) = "-8421505"
-        colorList(4) = "-7155632"
-        colorList(5) = "-16732080"
-        colorList(6) = "-16731920"
-        colorList(7) = "-16748352"
-        colorList(8) = "-16768928"
-        colorList(9) = "-9424736"
-        colorList(10) = "-551354"
+        colorList(0) = "-4194304" 'dark red
+        colorList(1) = "-65536" 'medium red
+        colorList(2) = "-16384" 'orange
+        colorList(3) = "-8421505" 'dark green
+        colorList(4) = "-7155632" 'green
+        colorList(5) = "-16732080" 'green
+        colorList(6) = "-16731920" 'blue
+        colorList(7) = "-16748352" 'blue
+        colorList(8) = "-16768928" 'dark blue
+        colorList(9) = "-9424736" 'violet
+        colorList(10) = "-551354" 'orange
 
         Dim rnd = New Random()
         Dim randomColour = colorList(rnd.Next(0, 10))
+
+        
         Return randomColour
     End Function
 
