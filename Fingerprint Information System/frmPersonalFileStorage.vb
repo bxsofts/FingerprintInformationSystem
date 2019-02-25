@@ -124,7 +124,7 @@ Public Class frmPersonalFileStorage
 
         If btnLogin.Text = "Google Logout" Then
 
-            If MessageBoxEx.Show("If you logout, you will need to enter the Google credentials again for Login. Do you want to Logout?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.No Then
+            If MessageBoxEx.Show("Logout is not necessary. If you logout, you will need to enter the Google credentials again for Login. Do you want to Logout?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.No Then
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If

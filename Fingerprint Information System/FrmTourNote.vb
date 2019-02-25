@@ -84,20 +84,20 @@ Public Class FrmTourNote
         Me.Cursor = Cursors.WaitCursor
         boolGenerateRecords = False
 
-        CircularProgress1.ProgressText = ""
-        CircularProgress1.ProgressColor = GetProgressColor()
-        CircularProgress1.IsRunning = False
-        CircularProgress1.Hide()
+        cprgGenerateFiles.ProgressText = ""
+        cprgGenerateFiles.ProgressColor = GetProgressColor()
+        cprgGenerateFiles.IsRunning = False
+        cprgGenerateFiles.Hide()
 
-        CircularProgress2.ProgressText = ""
-        CircularProgress2.ProgressColor = GetProgressColor()
-        CircularProgress2.IsRunning = False
-        CircularProgress2.Hide()
+        cprgBlankForms.ProgressText = ""
+        cprgBlankForms.ProgressColor = GetProgressColor()
+        cprgBlankForms.IsRunning = False
+        cprgBlankForms.Hide()
 
-        CircularProgress3.ProgressText = ""
-        CircularProgress3.ProgressColor = GetProgressColor()
-        CircularProgress3.IsRunning = False
-        CircularProgress3.Hide()
+        cprgBackup.ProgressText = ""
+        cprgBackup.ProgressColor = GetProgressColor()
+        cprgBackup.IsRunning = False
+        cprgBackup.Hide()
 
         Me.pnlBackup.Visible = False
         Me.pnlStatus.Visible = False
@@ -313,7 +313,7 @@ Public Class FrmTourNote
         AutoTickRecords()
     End Sub
 
-    Private Sub AutoTickRecords() Handles cmbSOCOfficer.SelectedIndexChanged
+    Private Sub AutoTickRecords() ' Handles cmbSOCOfficer.SelectedIndexChanged
 
         On Error Resume Next
         Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
@@ -334,9 +334,13 @@ Public Class FrmTourNote
         Next
         DisplaySelectedRecordCount()
         DisplayFileStatus()
-        blUploadAuthenticated = False
+
     End Sub
 
+    Private Sub cmbSOCOfficer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSOCOfficer.SelectedIndexChanged
+        AutoTickRecords()
+        blUploadAuthenticated = False
+    End Sub
     Private Sub SelectAllRecords() Handles btnSelectAll.Click
         On Error Resume Next
 
@@ -389,9 +393,9 @@ Public Class FrmTourNote
 
     Private Sub GenerateBlankForm(FileName As String)
         Me.Cursor = Cursors.WaitCursor
-        Me.CircularProgress2.Show()
-        Me.CircularProgress2.ProgressText = ""
-        Me.CircularProgress2.IsRunning = True
+        Me.cprgBlankForms.Show()
+        Me.cprgBlankForms.ProgressText = ""
+        Me.cprgBlankForms.IsRunning = True
         bgwBlankForms.RunWorkerAsync(FileName)
     End Sub
 
@@ -437,18 +441,18 @@ Public Class FrmTourNote
     End Sub
 
     Private Sub bgwBlankForms_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwBlankForms.ProgressChanged
-        Me.CircularProgress2.ProgressText = e.ProgressPercentage
+        Me.cprgBlankForms.ProgressText = e.ProgressPercentage
     End Sub
 
     Private Sub BGWRunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwBlankForms.RunWorkerCompleted, bgwSingleTN.RunWorkerCompleted, bgwThreeTN.RunWorkerCompleted, bgwTR56.RunWorkerCompleted, bgwTR56ThreeLine.RunWorkerCompleted, bgwTR47.RunWorkerCompleted, bgwTR47ThreeLine.RunWorkerCompleted
 
-        CircularProgress1.IsRunning = False
-        CircularProgress1.ProgressText = ""
-        CircularProgress1.Hide()
+        cprgGenerateFiles.IsRunning = False
+        cprgGenerateFiles.ProgressText = ""
+        cprgGenerateFiles.Hide()
 
-        CircularProgress2.IsRunning = False
-        CircularProgress2.ProgressText = ""
-        CircularProgress2.Hide()
+        cprgBlankForms.IsRunning = False
+        cprgBlankForms.ProgressText = ""
+        cprgBlankForms.Hide()
 
         DisplayFileStatus()
         Me.Cursor = Cursors.Default
@@ -534,9 +538,9 @@ errhandler:
             args.UsePS = chkUsePS.Checked
 
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generating from selected records..."
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -716,7 +720,7 @@ errhandler:
     End Sub
 
     Private Sub CatchBGWProgressChangedEvent(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwSingleTN.ProgressChanged, bgwThreeTN.ProgressChanged, bgwTR56.ProgressChanged, bgwTR56ThreeLine.ProgressChanged, bgwTR47.ProgressChanged, bgwTR47ThreeLine.ProgressChanged
-        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+        Me.cprgGenerateFiles.ProgressText = e.ProgressPercentage
     End Sub
 
     Private Sub GenerateThreeLineTourNote()
@@ -760,9 +764,9 @@ errhandler:
             args.Year = Me.txtYear.Text
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
@@ -1113,9 +1117,9 @@ errhandler:
             args.TAFromRecord = True
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
@@ -1145,9 +1149,9 @@ errhandler:
             args.TAFromRecord = False
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             bgwTR56.RunWorkerAsync(args)
 
@@ -1556,9 +1560,9 @@ errhandler:
             args.TAFromRecord = True
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
             Me.Cursor = Cursors.WaitCursor
 
@@ -1586,9 +1590,9 @@ errhandler:
             args.TAFromRecord = False
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             Me.Cursor = Cursors.WaitCursor
             bgwTR56ThreeLine.RunWorkerAsync(args)
@@ -2158,9 +2162,9 @@ errhandler:
             args.TAFromRecord = True
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
@@ -2187,9 +2191,9 @@ errhandler:
             args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
             args.TAFromRecord = False
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             Me.Cursor = Cursors.WaitCursor
             bgwTR47.RunWorkerAsync(args)
@@ -2565,9 +2569,9 @@ errhandler:
             args.TAFromRecord = True
             args.UsePS = chkUsePS.Checked
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
 
             Me.Cursor = Cursors.WaitCursor
@@ -2594,9 +2598,9 @@ errhandler:
             args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
             args.TAFromRecord = False
 
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
+            Me.cprgGenerateFiles.Show()
+            Me.cprgGenerateFiles.ProgressText = ""
+            Me.cprgGenerateFiles.IsRunning = True
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from saved Tour Note..."
             Me.Cursor = Cursors.WaitCursor
             bgwTR47ThreeLine.RunWorkerAsync(args)
@@ -3241,9 +3245,8 @@ errhandler:
 
             If Not blUploadAuthenticated Then
                 frmPassword.ShowDialog()
+                If Not blUserAuthenticated Then Exit Sub
             End If
-
-            If Not blUserAuthenticated Then Exit Sub
 
             blUploadAuthenticated = True
 
@@ -3266,8 +3269,8 @@ errhandler:
 
             Me.Cursor = Cursors.WaitCursor
 
-            CircularProgress3.Visible = True
-            CircularProgress3.IsRunning = True
+            cprgBackup.Visible = True
+            cprgBackup.IsRunning = True
 
             bgwUploadFile.RunWorkerAsync()
 
@@ -3279,7 +3282,7 @@ errhandler:
 
     Private Sub bgwUploadFile_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadFile.DoWork
         Try
-            bgwUploadFile.ReportProgress(1, "Creating Google Drive Service...")
+            bgwUploadFile.ReportProgress(0, "Creating Google Drive Service...")
             Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
             Dim Scopes As String() = {DriveService.Scope.Drive}
 
@@ -3288,7 +3291,7 @@ errhandler:
             GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
 
             If GDService.ApplicationName <> strAppName Then
-                bgwUploadFile.ReportProgress(1, "Google Drive Service failed.")
+                bgwUploadFile.ReportProgress(0, "Google Drive Service failed.")
                 Exit Sub
             End If
 
@@ -3302,7 +3305,7 @@ errhandler:
 
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
-                bgwUploadFile.ReportProgress(1, "Creating TA Bill folder...")
+                bgwUploadFile.ReportProgress(0, "Creating TA Bill folder...")
                 Threading.Thread.Sleep(100)
                 Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
                 NewDirectory.Name = "TA Bills"
@@ -3369,6 +3372,9 @@ errhandler:
                 UploadRequest.Upload()
                 Stream.Close()
 
+                If uUploadStatus = UploadStatus.Completed Then
+                    bgwUploadFile.ReportProgress(100, TAFileType & " uploaded.")
+                End If
             Else 'file exists. Update contetnt
 
                 bgwUploadFile.ReportProgress(0, "Updating " & TAFileType & "...")
@@ -3387,11 +3393,13 @@ errhandler:
                 AddHandler UpdateRequest.ProgressChanged, AddressOf Upload_ProgressChanged
                 UpdateRequest.Upload()
                 Stream.Close()
+
+                If uUploadStatus = UploadStatus.Completed Then
+                    bgwUploadFile.ReportProgress(100, TAFileType & " updated.")
+                End If
             End If
 
-            If uUploadStatus = UploadStatus.Completed Then
-                bgwUploadFile.ReportProgress(100, TAFileType & " updated.")
-            End If
+
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -3408,7 +3416,7 @@ errhandler:
     End Sub
 
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
-        CircularProgress1.ProgressText = e.ProgressPercentage
+        cprgBackup.ProgressText = e.ProgressPercentage
 
         If TypeOf e.UserState Is String Then
             If e.ProgressPercentage = 100 Then
@@ -3419,8 +3427,8 @@ errhandler:
     End Sub
     Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadFile.RunWorkerCompleted
 
-        CircularProgress3.Visible = False
-        CircularProgress3.IsRunning = False
+        cprgBackup.Visible = False
+        cprgBackup.IsRunning = False
 
         Me.Cursor = Cursors.Default
         Me.lblBackup.Text = "Backup TA Bill and Tour Note to Google Drive"
@@ -3521,6 +3529,7 @@ errhandler:
 
 
 
+   
 End Class
 
 

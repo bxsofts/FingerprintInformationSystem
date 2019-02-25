@@ -53,17 +53,17 @@ Partial Class FrmTourNote
         Me.PanelSOC = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.pnlBackup = New DevComponents.DotNetBar.PanelEx()
-        Me.CircularProgress3 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.cprgBackup = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnUploadToGoogleDrive = New DevComponents.DotNetBar.ButtonX()
         Me.lblBackup = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.CircularProgress2 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.cprgBlankForms = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGenerateBlankTR56A = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateBlankTourNote = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateBlankTR47 = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateBlankTR47Outer = New DevComponents.DotNetBar.ButtonItem()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.cprgGenerateFiles = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
         Me.chkUseSavedTourNote = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
@@ -388,7 +388,7 @@ Partial Class FrmTourNote
         '
         Me.pnlBackup.CanvasColor = System.Drawing.SystemColors.Control
         Me.pnlBackup.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.pnlBackup.Controls.Add(Me.CircularProgress3)
+        Me.pnlBackup.Controls.Add(Me.cprgBackup)
         Me.pnlBackup.Controls.Add(Me.btnUploadToGoogleDrive)
         Me.pnlBackup.Controls.Add(Me.lblBackup)
         Me.pnlBackup.DisabledBackColor = System.Drawing.Color.Empty
@@ -403,22 +403,22 @@ Partial Class FrmTourNote
         Me.pnlBackup.Style.GradientAngle = 90
         Me.pnlBackup.TabIndex = 54
         '
-        'CircularProgress3
+        'cprgBackup
         '
         '
         '
         '
-        Me.CircularProgress3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress3.Dock = System.Windows.Forms.DockStyle.Right
-        Me.CircularProgress3.FocusCuesEnabled = False
-        Me.CircularProgress3.Location = New System.Drawing.Point(281, 0)
-        Me.CircularProgress3.Name = "CircularProgress3"
-        Me.CircularProgress3.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress3.ProgressTextVisible = True
-        Me.CircularProgress3.Size = New System.Drawing.Size(131, 66)
-        Me.CircularProgress3.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress3.TabIndex = 49
-        Me.CircularProgress3.TabStop = False
+        Me.cprgBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.cprgBackup.Dock = System.Windows.Forms.DockStyle.Right
+        Me.cprgBackup.FocusCuesEnabled = False
+        Me.cprgBackup.Location = New System.Drawing.Point(281, 0)
+        Me.cprgBackup.Name = "cprgBackup"
+        Me.cprgBackup.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Donut
+        Me.cprgBackup.ProgressColor = System.Drawing.Color.Red
+        Me.cprgBackup.Size = New System.Drawing.Size(131, 66)
+        Me.cprgBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.cprgBackup.TabIndex = 49
+        Me.cprgBackup.TabStop = False
         '
         'btnUploadToGoogleDrive
         '
@@ -450,7 +450,7 @@ Partial Class FrmTourNote
         Me.GroupPanel3.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel3.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel3.Controls.Add(Me.CircularProgress2)
+        Me.GroupPanel3.Controls.Add(Me.cprgBlankForms)
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTR56A)
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTourNote)
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTR47)
@@ -489,21 +489,21 @@ Partial Class FrmTourNote
         Me.GroupPanel3.TabIndex = 47
         Me.GroupPanel3.Text = "Blank Forms"
         '
-        'CircularProgress2
+        'cprgBlankForms
         '
         '
         '
         '
-        Me.CircularProgress2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress2.FocusCuesEnabled = False
-        Me.CircularProgress2.Location = New System.Drawing.Point(3, 3)
-        Me.CircularProgress2.Name = "CircularProgress2"
-        Me.CircularProgress2.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress2.ProgressTextVisible = True
-        Me.CircularProgress2.Size = New System.Drawing.Size(400, 64)
-        Me.CircularProgress2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress2.TabIndex = 48
-        Me.CircularProgress2.TabStop = False
+        Me.cprgBlankForms.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.cprgBlankForms.FocusCuesEnabled = False
+        Me.cprgBlankForms.Location = New System.Drawing.Point(3, 3)
+        Me.cprgBlankForms.Name = "cprgBlankForms"
+        Me.cprgBlankForms.ProgressColor = System.Drawing.Color.Red
+        Me.cprgBlankForms.ProgressTextVisible = True
+        Me.cprgBlankForms.Size = New System.Drawing.Size(400, 64)
+        Me.cprgBlankForms.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.cprgBlankForms.TabIndex = 48
+        Me.cprgBlankForms.TabStop = False
         '
         'btnGenerateBlankTR56A
         '
@@ -547,7 +547,7 @@ Partial Class FrmTourNote
         Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel2.Controls.Add(Me.CircularProgress1)
+        Me.GroupPanel2.Controls.Add(Me.cprgGenerateFiles)
         Me.GroupPanel2.Controls.Add(Me.PanelEx4)
         Me.GroupPanel2.Controls.Add(Me.btnOpenTABillFolder)
         Me.GroupPanel2.Controls.Add(Me.btnGenerateTourNote)
@@ -587,21 +587,21 @@ Partial Class FrmTourNote
         Me.GroupPanel2.TabIndex = 47
         Me.GroupPanel2.Text = "Step 3 : Generate Tour Note"
         '
-        'CircularProgress1
+        'cprgGenerateFiles
         '
         '
         '
         '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(3, 99)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(400, 64)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 47
-        Me.CircularProgress1.TabStop = False
+        Me.cprgGenerateFiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.cprgGenerateFiles.FocusCuesEnabled = False
+        Me.cprgGenerateFiles.Location = New System.Drawing.Point(3, 99)
+        Me.cprgGenerateFiles.Name = "cprgGenerateFiles"
+        Me.cprgGenerateFiles.ProgressColor = System.Drawing.Color.Red
+        Me.cprgGenerateFiles.ProgressTextVisible = True
+        Me.cprgGenerateFiles.Size = New System.Drawing.Size(400, 64)
+        Me.cprgGenerateFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.cprgGenerateFiles.TabIndex = 47
+        Me.cprgGenerateFiles.TabStop = False
         '
         'PanelEx4
         '
@@ -1172,11 +1172,11 @@ Partial Class FrmTourNote
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GroupPanel5 As DevComponents.DotNetBar.Controls.GroupPanel
-    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents cprgGenerateFiles As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwBlankForms As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwSingleTN As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwThreeTN As System.ComponentModel.BackgroundWorker
-    Friend WithEvents CircularProgress2 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents cprgBlankForms As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwTR56 As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwTR56ThreeLine As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwTR47 As System.ComponentModel.BackgroundWorker
@@ -1192,6 +1192,6 @@ Partial Class FrmTourNote
     Friend WithEvents pnlBackup As DevComponents.DotNetBar.PanelEx
     Friend WithEvents btnUploadToGoogleDrive As DevComponents.DotNetBar.ButtonX
     Friend WithEvents lblBackup As DevComponents.DotNetBar.LabelX
-    Friend WithEvents CircularProgress3 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents cprgBackup As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
 End Class
