@@ -262,7 +262,6 @@ Module modMain
         Dim rnd = New Random()
         Dim randomColour = colorList(rnd.Next(0, 10))
 
-        
         Return randomColour
     End Function
 

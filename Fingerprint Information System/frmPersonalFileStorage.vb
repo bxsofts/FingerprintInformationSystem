@@ -213,10 +213,8 @@ Public Class frmPersonalFileStorage
                 ElseIf e.UserState = "Fetching Files from Google Drive..." Then
                     ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
                 ElseIf e.UserState = "Logout" Then
-                    btnLogin.Image = My.Resources.Logout
                     btnLogin.Text = "Google Logout"
                 ElseIf e.UserState = "Login" Then
-                    btnLogin.Image = My.Resources.Login
                     btnLogin.Text = "Google Login"
                 ElseIf e.UserState = "" Then
                     ShowProgressControls("", "", eCircularProgressType.Donut)
