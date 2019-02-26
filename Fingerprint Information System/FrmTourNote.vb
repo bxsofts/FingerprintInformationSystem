@@ -221,6 +221,7 @@ Public Class FrmTourNote
 
         boolGenerateRecords = True
         GenerateRecords()
+
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -338,6 +339,7 @@ Public Class FrmTourNote
 
     Private Sub cmbSOCOfficer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSOCOfficer.SelectedIndexChanged
         AutoTickRecords()
+        RenameAndMoveOldTAFiles()
         blUploadAuthenticated = False
     End Sub
     Private Sub SelectAllRecords() Handles btnSelectAll.Click
@@ -3496,12 +3498,54 @@ errhandler:
     End Sub
 
     Private Function TAFileName(FileName As String) As String
-        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & SelectedOfficerName.Replace(",", "")
+        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & (SelectedOfficerName.Replace(",", "")) & "\" & Me.txtYear.Text
         System.IO.Directory.CreateDirectory(SaveFolder)
         Dim m = Me.cmbMonth.SelectedIndex + 1
-        TAFileName = SaveFolder & "\" & Me.txtYear.Text & " - " & m.ToString("D2") & " - " & FileName & ".docx"
+        TAFileName = SaveFolder & "\" & m.ToString("D2") & " - " & Me.txtYear.Text & " - " & FileName & ".docx"
     End Function
 
+    
+    Private Sub RenameAndMoveOldTAFiles()
+        Try
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & SelectedOfficerName.Replace(",", ""), FileIO.SearchOption.SearchTopLevelOnly, "*.docx")
+
+                If foundFile Is Nothing Then
+                    Exit Sub
+                End If
+
+                Dim OldFileName As String
+                Dim NewFileName As String
+
+                OldFileName = My.Computer.FileSystem.GetName(foundFile)
+
+                Dim SplitText() = Strings.Split(OldFileName, " - ")
+                Dim u = SplitText.GetUpperBound(0)
+
+
+                If u >= 2 Then
+                    Dim y As String = SplitText(0)
+                    Dim m As String = SplitText(1)
+                    Dim f As String = SplitText(2)
+
+                    If u = 3 Then
+                        f = f & " - " & SplitText(3)
+                    End If
+
+                    Dim SaveFolder As String = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & y
+                    My.Computer.FileSystem.CreateDirectory(SaveFolder)
+
+                    NewFileName = SaveFolder & "\" & m & " - " & y & " - " & f
+
+                    My.Computer.FileSystem.MoveFile(foundFile, NewFileName)
+
+                End If
+            Next
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub PreventMouseScrolling(sender As Object, e As MouseEventArgs) Handles cmbMonth.MouseWheel, cmbSOCOfficer.MouseWheel
         Dim mwe As HandledMouseEventArgs = DirectCast(e, HandledMouseEventArgs)
         mwe.Handled = True
@@ -3551,7 +3595,7 @@ errhandler:
 
 
 
-   
+
 End Class
 
 

@@ -287,13 +287,16 @@ Public Class FrmLocalBackup
         If RenameOldBackupFiles = "0" Then Exit Sub
         Dim OldFormatString As String = "dd-MM-yyyy-hh-mm-ss-tt"
         '  Dim NewFormatString As String = BackupDateFormatString
-        Dim OldFileName As String
-        Dim NewFileName As String
+       
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchTopLevelOnly, "FingerPrintBackup*.fpbbk")
             If foundFile Is Nothing Then
+                My.Computer.Registry.SetValue(strGeneralSettingsPath, "RenameOldBackupFiles", "0", Microsoft.Win32.RegistryValueKind.String)
                 Exit Sub
             End If
+            Dim OldFileName As String
+            Dim NewFileName As String
+
             OldFileName = My.Computer.FileSystem.GetName(foundFile)
             If OldFileName.Contains("-AM") Or OldFileName.Contains("-PM") Then
                 Dim Filedate As DateTime = DateTime.ParseExact(OldFileName.Replace("FingerPrintBackup-", "").Replace(".fpbbk", ""), OldFormatString, culture)
