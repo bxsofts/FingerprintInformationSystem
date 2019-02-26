@@ -20,7 +20,7 @@ Public Class frmWeeklyDiary
     Dim dtWeeklyDiaryFrom As Date
     Dim dtWeeklyDiaryTo As Date
     Dim TemplateFile As String
-    Dim sfilename As String
+    Dim sFileName As String
 
     Dim GDService As DriveService = New DriveService
     Dim JsonFile As String
@@ -66,6 +66,9 @@ Public Class frmWeeklyDiary
             Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.SocRegisterTableAdapter1.Connection.Open()
             Control.CheckForIllegalCrossThreadCalls = False
+
+            RenameAndMoveOldFiles()
+
         Catch ex As Exception
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
         End Try
@@ -85,11 +88,11 @@ Public Class frmWeeklyDiary
             dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
             dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & Year(dtWeeklyDiaryFrom).ToString
             System.IO.Directory.CreateDirectory(SaveFolder)
-            sfilename = SaveFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
-            If My.Computer.FileSystem.FileExists(sfilename) Then
-                Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+            sFileName = SaveFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
+            If My.Computer.FileSystem.FileExists(sFileName) Then
+                Shell("explorer.exe " & sFileName, AppWinStyle.MaximizedFocus)
                 Exit Sub
             End If
 
@@ -227,8 +230,8 @@ Public Class frmWeeklyDiary
                 wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
                 wdDoc.Activate()
 
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
-                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                If My.Computer.FileSystem.FileExists(sFileName) = False Then
+                    wdDoc.SaveAs(sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
                 ReleaseObject(wdTbl)
@@ -375,6 +378,42 @@ Public Class frmWeeklyDiary
     End Sub
 
 
+    Private Sub RenameAndMoveOldFiles()
+        Try
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", ""), FileIO.SearchOption.SearchTopLevelOnly, "*.docx")
+
+                If foundFile Is Nothing Then
+                    Exit Sub
+                End If
+
+                Dim OldFileName As String
+                Dim NewFileName As String
+
+                OldFileName = My.Computer.FileSystem.GetName(foundFile)
+
+                Dim SplitText() = Strings.Split(OldFileName, " - ")
+                Dim u = SplitText.GetUpperBound(0)
+
+
+                If u = 1 Then
+                    Dim y As String = SplitText(1)
+                    y = y.Substring(0, 4)
+
+                    Dim SaveFolder As String = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & y
+                    My.Computer.FileSystem.CreateDirectory(SaveFolder)
+
+                    NewFileName = SaveFolder & "\" & OldFileName
+
+                    My.Computer.FileSystem.MoveFile(foundFile, NewFileName)
+
+                End If
+            Next
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 #End Region
 
 
@@ -383,7 +422,7 @@ Public Class frmWeeklyDiary
 
         Try
 
-            Dim WeeklyDiaryFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
+            Dim WeeklyDiaryFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & (Me.MonthCalendarAdv1.SelectedDate.Year).ToString
             WeeklyDiaryFile = WeeklyDiaryFolder & "\Weekly Diary - " & Me.MonthCalendarAdv1.SelectedDate.ToString("yyyy-MM-dd") & ".docx"
 
             If My.Computer.FileSystem.FileExists(WeeklyDiaryFile) = False Then
