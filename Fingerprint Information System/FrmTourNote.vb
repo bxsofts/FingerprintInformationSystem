@@ -16,10 +16,6 @@ Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 Imports System.Threading
 
-
-
-
-
 Public Class FrmTourNote
     Dim d1 As Date
     Dim d2 As Date
@@ -76,7 +72,7 @@ Public Class FrmTourNote
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
-   
+
 
     Private Sub LoadForm() Handles Me.Load
         On Error Resume Next
@@ -3459,6 +3455,7 @@ errhandler:
     End Sub
 
 #End Region
+
     Private Sub btnOpenTABillFolder_Click(sender As Object, e As EventArgs) Handles btnOpenTABillFolder.Click
         Try
 
@@ -3504,7 +3501,7 @@ errhandler:
         TAFileName = SaveFolder & "\" & m.ToString("D2") & " - " & Me.txtYear.Text & " - " & FileName & ".docx"
     End Function
 
-    
+
     Private Sub RenameAndMoveOldTAFiles()
         Try
 

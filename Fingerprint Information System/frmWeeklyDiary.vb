@@ -20,6 +20,8 @@ Public Class frmWeeklyDiary
     Dim dtWeeklyDiaryFrom As Date
     Dim dtWeeklyDiaryTo As Date
     Dim TemplateFile As String
+
+    Dim WeeklyDiaryFolder As String
     Dim sFileName As String
 
     Dim GDService As DriveService = New DriveService
@@ -88,9 +90,9 @@ Public Class frmWeeklyDiary
             dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
             dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & Year(dtWeeklyDiaryFrom).ToString
-            System.IO.Directory.CreateDirectory(SaveFolder)
-            sFileName = SaveFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
+            WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & dtWeeklyDiaryFrom.Year.ToString
+            System.IO.Directory.CreateDirectory(WeeklyDiaryFolder)
+            sFileName = WeeklyDiaryFolder & "\Weekly Diary - " & dtWeeklyDiaryFrom.ToString("yyyy-MM-dd") & ".docx"
             If My.Computer.FileSystem.FileExists(sFileName) Then
                 Shell("explorer.exe " & sFileName, AppWinStyle.MaximizedFocus)
                 Exit Sub
@@ -354,7 +356,7 @@ Public Class frmWeeklyDiary
 
     Private Sub btnOpenWeeklyDiaryFolder_Click(sender As Object, e As EventArgs) Handles btnOpenWeeklyDiaryFolder.Click
         Try
-            Dim WeeklyDiaryFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
+            WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & Me.MonthCalendarAdv1.SelectedDate.Year.ToString
             Dim sfilename = WeeklyDiaryFolder & "\Weekly Diary - " & Me.MonthCalendarAdv1.SelectedDate.ToString("yyyy-MM-dd") & ".docx"
 
             If FileIO.FileSystem.FileExists(sfilename) Then
@@ -422,7 +424,7 @@ Public Class frmWeeklyDiary
 
         Try
 
-            Dim WeeklyDiaryFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & (Me.MonthCalendarAdv1.SelectedDate.Year).ToString
+            WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & Me.MonthCalendarAdv1.SelectedDate.Year.ToString
             WeeklyDiaryFile = WeeklyDiaryFolder & "\Weekly Diary - " & Me.MonthCalendarAdv1.SelectedDate.ToString("yyyy-MM-dd") & ".docx"
 
             If My.Computer.FileSystem.FileExists(WeeklyDiaryFile) = False Then

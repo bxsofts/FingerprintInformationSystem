@@ -49,9 +49,10 @@ Partial Class frmWeeklyDiary
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX3.Location = New System.Drawing.Point(18, 31)
         Me.LabelX3.Name = "LabelX3"
-        Me.LabelX3.Size = New System.Drawing.Size(99, 18)
+        Me.LabelX3.Size = New System.Drawing.Size(107, 20)
         Me.LabelX3.TabIndex = 22
         Me.LabelX3.Text = "Week starting on"
         '
@@ -59,11 +60,12 @@ Partial Class frmWeeklyDiary
         '
         Me.btnGenerateWeeklyDiary.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateWeeklyDiary.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateWeeklyDiary.Image = CType(resources.GetObject("btnGenerateWeeklyDiary.Image"), System.Drawing.Image)
         Me.btnGenerateWeeklyDiary.Location = New System.Drawing.Point(328, 9)
         Me.btnGenerateWeeklyDiary.Name = "btnGenerateWeeklyDiary"
-        Me.btnGenerateWeeklyDiary.Size = New System.Drawing.Size(138, 39)
+        Me.btnGenerateWeeklyDiary.Size = New System.Drawing.Size(143, 44)
         Me.btnGenerateWeeklyDiary.TabIndex = 1
-        Me.btnGenerateWeeklyDiary.Text = "Weekly Diary"
+        Me.btnGenerateWeeklyDiary.Text = "Generate"
         '
         'PanelEx1
         '
@@ -83,7 +85,7 @@ Partial Class frmWeeklyDiary
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(480, 205)
+        Me.PanelEx1.Size = New System.Drawing.Size(483, 212)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -99,11 +101,11 @@ Partial Class frmWeeklyDiary
         '
         Me.cprgBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.cprgBackup.FocusCuesEnabled = False
-        Me.cprgBackup.Location = New System.Drawing.Point(328, 146)
+        Me.cprgBackup.Location = New System.Drawing.Point(328, 159)
         Me.cprgBackup.Name = "cprgBackup"
         Me.cprgBackup.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Donut
         Me.cprgBackup.ProgressColor = System.Drawing.Color.Red
-        Me.cprgBackup.Size = New System.Drawing.Size(138, 52)
+        Me.cprgBackup.Size = New System.Drawing.Size(143, 44)
         Me.cprgBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.cprgBackup.TabIndex = 49
         Me.cprgBackup.TabStop = False
@@ -113,12 +115,12 @@ Partial Class frmWeeklyDiary
         Me.btnUploadToGoogleDrive.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnUploadToGoogleDrive.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnUploadToGoogleDrive.Image = CType(resources.GetObject("btnUploadToGoogleDrive.Image"), System.Drawing.Image)
-        Me.btnUploadToGoogleDrive.Location = New System.Drawing.Point(328, 146)
+        Me.btnUploadToGoogleDrive.Location = New System.Drawing.Point(328, 159)
         Me.btnUploadToGoogleDrive.Name = "btnUploadToGoogleDrive"
-        Me.btnUploadToGoogleDrive.Size = New System.Drawing.Size(138, 52)
+        Me.btnUploadToGoogleDrive.Size = New System.Drawing.Size(143, 44)
         Me.btnUploadToGoogleDrive.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnUploadToGoogleDrive.TabIndex = 4
-        Me.btnUploadToGoogleDrive.Text = "Backup"
+        Me.btnUploadToGoogleDrive.Text = "Drive Backup"
         '
         'lblBackup
         '
@@ -127,7 +129,7 @@ Partial Class frmWeeklyDiary
         '
         '
         Me.lblBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblBackup.Location = New System.Drawing.Point(95, 162)
+        Me.lblBackup.Location = New System.Drawing.Point(95, 170)
         Me.lblBackup.Name = "lblBackup"
         Me.lblBackup.Size = New System.Drawing.Size(215, 18)
         Me.lblBackup.TabIndex = 46
@@ -199,9 +201,10 @@ Partial Class frmWeeklyDiary
         '
         Me.btnCoveringLetter.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnCoveringLetter.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCoveringLetter.Location = New System.Drawing.Point(328, 55)
+        Me.btnCoveringLetter.Image = CType(resources.GetObject("btnCoveringLetter.Image"), System.Drawing.Image)
+        Me.btnCoveringLetter.Location = New System.Drawing.Point(328, 59)
         Me.btnCoveringLetter.Name = "btnCoveringLetter"
-        Me.btnCoveringLetter.Size = New System.Drawing.Size(138, 39)
+        Me.btnCoveringLetter.Size = New System.Drawing.Size(143, 44)
         Me.btnCoveringLetter.TabIndex = 2
         Me.btnCoveringLetter.Text = "Covering Letter"
         '
@@ -209,9 +212,10 @@ Partial Class frmWeeklyDiary
         '
         Me.btnOpenWeeklyDiaryFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenWeeklyDiaryFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenWeeklyDiaryFolder.Location = New System.Drawing.Point(328, 101)
+        Me.btnOpenWeeklyDiaryFolder.Image = CType(resources.GetObject("btnOpenWeeklyDiaryFolder.Image"), System.Drawing.Image)
+        Me.btnOpenWeeklyDiaryFolder.Location = New System.Drawing.Point(328, 109)
         Me.btnOpenWeeklyDiaryFolder.Name = "btnOpenWeeklyDiaryFolder"
-        Me.btnOpenWeeklyDiaryFolder.Size = New System.Drawing.Size(138, 39)
+        Me.btnOpenWeeklyDiaryFolder.Size = New System.Drawing.Size(143, 44)
         Me.btnOpenWeeklyDiaryFolder.TabIndex = 3
         Me.btnOpenWeeklyDiaryFolder.Text = "Open Folder"
         '
@@ -238,7 +242,7 @@ Partial Class frmWeeklyDiary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(480, 205)
+        Me.ClientSize = New System.Drawing.Size(483, 212)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False

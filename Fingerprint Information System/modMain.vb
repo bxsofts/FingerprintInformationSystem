@@ -231,7 +231,7 @@ Module modMain
         End Try
     End Sub
 
-    Public Function GetRandomColor()
+    Public Function GetRandomColor1()
 
         Randomize()
         Dim rnd = New Random()
@@ -239,30 +239,53 @@ Module modMain
         Dim randomColour As String = "-16748352" 'blue
 
         Try
-            randomColour = Color.FromArgb(&HFF000000 Or Rnd.Next(&HFFFFFF + 1)).ToArgb
+            randomColour = Color.FromArgb(&HFF000000 Or rnd.Next(&HFFFFFF + 1)).ToArgb
         Catch ex As Exception
             randomColour = "-16748352" 'blue
         End Try
         Return randomColour
     End Function
-    Public Function GetRandomColor1() As String
-        Dim colorList(11) As String
-        colorList(0) = "-4194304" 'dark red
-        colorList(1) = "-65536" 'medium red
-        colorList(2) = "-16384" 'orange
-        colorList(3) = "-8421505" 'dark green
-        colorList(4) = "-7155632" 'green
-        colorList(5) = "-16732080" 'green
-        colorList(6) = "-16731920" 'blue
-        colorList(7) = "-16748352" 'blue
-        colorList(8) = "-16768928" 'dark blue
-        colorList(9) = "-9424736" 'violet
-        colorList(10) = "-551354" 'orange
+    Public Function GetRandomColor() As String
+        Try
 
-        Dim rnd = New Random()
-        Dim randomColour = colorList(rnd.Next(0, 10))
+            Dim colorList(25) As String
+            colorList(0) = "-4194304" 'dark red
+            colorList(1) = "-65536" 'medium red
+            colorList(2) = "-16384" 'orange
+            colorList(3) = "-8421505" 'dark green
+            colorList(4) = "-7155632" 'green
+            colorList(5) = "-16732080" 'green
+            colorList(6) = "-16731920" 'blue
+            colorList(7) = "-16748352" 'blue
+            colorList(8) = "-16768928" 'dark blue
+            colorList(9) = "-9424736" 'violet
+            colorList(10) = "-551354" 'orange
 
-        Return randomColour
+            colorList(11) = Color.Violet.ToArgb.ToString
+            colorList(12) = Color.Indigo.ToArgb.ToString
+            colorList(13) = Color.Blue.ToArgb.ToString
+            colorList(14) = Color.Green.ToArgb.ToString
+            colorList(15) = Color.Yellow.ToArgb.ToString
+            colorList(16) = Color.Orange.ToArgb.ToString
+            colorList(17) = Color.Black.ToArgb.ToString
+            colorList(18) = Color.Red.ToArgb.ToString
+
+            colorList(19) = Color.Pink.ToArgb.ToString
+            colorList(20) = Color.Purple.ToArgb.ToString
+            colorList(21) = Color.Magenta.ToArgb.ToString
+            colorList(22) = Color.Maroon.ToArgb.ToString
+            colorList(23) = Color.Honeydew.ToArgb.ToString
+            colorList(24) = Color.IndianRed.ToArgb.ToString
+
+            Randomize()
+            Dim rnd = New Random()
+            Dim randomColour = colorList(rnd.Next(0, colorList.Count - 1))
+
+            Return randomColour
+
+        Catch ex As Exception
+            Return Color.Blue.ToArgb.ToString
+        End Try
     End Function
 
     Public Function GetProgressColor() As System.Drawing.Color
