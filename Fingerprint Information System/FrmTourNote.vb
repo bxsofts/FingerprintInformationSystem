@@ -12,7 +12,6 @@ Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Drive.v3
 Imports Google.Apis.Drive.v3.Data
 Imports Google.Apis.Services
-Imports Google.Apis.Download
 Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 Imports System.Threading
@@ -3272,7 +3271,7 @@ errhandler:
             cprgBackup.Visible = True
             cprgBackup.IsRunning = True
 
-            bgwUploadFile.RunWorkerAsync()
+            bgwUploadFile.RunWorkerAsync(Me.txtYear.Text)
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -3313,21 +3312,46 @@ errhandler:
                 Dim request As FilesResource.CreateRequest = GDService.Files.Create(NewDirectory)
                 NewDirectory = request.Execute()
                 tafolderid = NewDirectory.Id
-                bgwUploadFile.ReportProgress(100, "TA Bill folder created.")
             Else
                 tafolderid = Results.Files(0).Id
             End If
 
+            Dim parentlist As New List(Of String)
+            parentlist.Add(tafolderid)
+
+            Dim SubFolderName As String = e.Argument
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & SubFolderName & "' and '" & tafolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+
+            cnt = Results.Files.Count
+
+            Dim subfolderid As String = ""
+            If cnt = 0 Then
+                bgwUploadFile.ReportProgress(0, "Creating TA Bill sub folder...")
+                Threading.Thread.Sleep(100)
+                Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                NewDirectory.Name = SubFolderName
+                NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                NewDirectory.Parents = parentlist
+                Dim request As FilesResource.CreateRequest = GDService.Files.Create(NewDirectory)
+                NewDirectory = request.Execute()
+                subfolderid = NewDirectory.Id
+            Else
+                subfolderid = Results.Files(0).Id
+            End If
+
             If TourNoteFile <> "" Then
-                UploadTAFile(TourNoteFile, tafolderid, "Tour Note")
+                UploadTAFile(TourNoteFile, subfolderid, "Tour Note")
             End If
 
             If TABillFile <> "" Then
-                UploadTAFile(TABillFile, tafolderid, "TA Bill")
+                UploadTAFile(TABillFile, subfolderid, "TA Bill")
             End If
 
             If TABillOuterFile <> "" Then
-                UploadTAFile(TABillOuterFile, tafolderid, "TA Outer")
+                UploadTAFile(TABillOuterFile, subfolderid, "TA Outer")
             End If
 
         Catch ex As Exception
