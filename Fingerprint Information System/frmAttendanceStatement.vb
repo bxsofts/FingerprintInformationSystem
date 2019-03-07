@@ -30,7 +30,6 @@ Public Class frmAttendanceStmt
             m = m - 1
         End If
 
-        Dim d As Integer = Date.DaysInMonth(y, m)
 
         dtFrom.Value = New DateTime(y, m, 11)
 
@@ -42,6 +41,7 @@ Public Class frmAttendanceStmt
         dtTo.Value = New DateTime(y, m + 1, 10)
         Control.CheckForIllegalCrossThreadCalls = False
 
+        RenameAndMoveOldFiles()
     End Sub
 
     Private Function GetArrayLength()
@@ -140,13 +140,17 @@ Public Class frmAttendanceStmt
             Exit Sub
         End If
 
+        Dim m As String = d2.Month.ToString("D2")
+
+        Dim y As String = d2.Year.ToString
+
         If Me.chkTI.Checked Then
-            SaveFileName = "Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            SaveFileName = m & " - Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
         Else
-            SaveFileName = "Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            SaveFileName = m & " - Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
         End If
 
-        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement"
+        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
         System.IO.Directory.CreateDirectory(SaveFolder)
         SaveFileName = SaveFolder & "\" & SaveFileName & ".docx"
 
@@ -618,4 +622,91 @@ Public Class frmAttendanceStmt
     End Class
 
    
+  
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+
+            Dim d1 = Me.dtFrom.Value
+            Dim d2 = Me.dtTo.Value
+
+            Dim m As String = d2.Month.ToString("D2")
+
+            Dim y As String = d2.Year.ToString
+
+            If Me.chkTI.Checked Then
+                SaveFileName = m & " - Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            Else
+                SaveFileName = m & " - Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            End If
+
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
+            System.IO.Directory.CreateDirectory(SaveFolder)
+            SaveFileName = SaveFolder & "\" & SaveFileName & ".docx"
+
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
+            Else
+                Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
+            End If
+
+
+        Catch ex As Exception
+            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+
+        End Try
+
+    End Sub
+
+    Private Sub RenameAndMoveOldFiles()
+        Try
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement", FileIO.SearchOption.SearchTopLevelOnly, "*.docx")
+
+                If foundFile Is Nothing Then
+                    Exit Sub
+                End If
+
+                Dim OldFileName As String
+                Dim NewFileName As String
+
+                OldFileName = My.Computer.FileSystem.GetName(foundFile)
+
+                Dim y As String = OldFileName.Substring(OldFileName.Length - 9, 4)
+
+                Dim m As String = OldFileName.Substring(OldFileName.Length - 12, 2)
+
+                Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement" & "\" & y
+
+                My.Computer.FileSystem.CreateDirectory(SaveFolder)
+
+                NewFileName = SaveFolder & "\" & m & " - " & OldFileName
+
+                My.Computer.FileSystem.MoveFile(foundFile, NewFileName)
+
+            Next
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub dtTo_GotFocus(sender As Object, e As EventArgs) Handles dtTo.GotFocus
+        Try
+            Dim m = Me.dtFrom.Value.Month
+
+            Dim y = Me.dtFrom.Value.Year
+
+            If m = 12 Then
+                m = 1
+                y = y + 1
+            Else
+                m = m + 1
+            End If
+
+            dtTo.Value = New DateTime(y, m, 10)
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

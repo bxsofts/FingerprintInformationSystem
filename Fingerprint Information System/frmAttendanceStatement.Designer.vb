@@ -39,6 +39,7 @@ Partial Class frmAttendanceStmt
         Me.chkStaff = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwAttendance = New System.ComponentModel.BackgroundWorker()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx2.SuspendLayout()
         Me.GroupPanel6.SuspendLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,7 +59,7 @@ Partial Class frmAttendanceStmt
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(514, 313)
+        Me.PanelEx2.Size = New System.Drawing.Size(514, 358)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -73,6 +74,7 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel6.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.GroupPanel6.Controls.Add(Me.CircularProgress1)
+        Me.GroupPanel6.Controls.Add(Me.btnOpenFolder)
         Me.GroupPanel6.Controls.Add(Me.btnGenerateCL)
         Me.GroupPanel6.Controls.Add(Me.LabelX1)
         Me.GroupPanel6.Controls.Add(Me.dtTo)
@@ -82,7 +84,7 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel6.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel6.Location = New System.Drawing.Point(12, 192)
         Me.GroupPanel6.Name = "GroupPanel6"
-        Me.GroupPanel6.Size = New System.Drawing.Size(492, 114)
+        Me.GroupPanel6.Size = New System.Drawing.Size(492, 163)
         '
         '
         '
@@ -122,11 +124,11 @@ Partial Class frmAttendanceStmt
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(345, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(343, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(141, 90)
+        Me.CircularProgress1.Size = New System.Drawing.Size(143, 139)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 26
         Me.CircularProgress1.TabStop = False
@@ -135,7 +137,7 @@ Partial Class frmAttendanceStmt
         '
         Me.btnGenerateCL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateCL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateCL.Location = New System.Drawing.Point(354, 48)
+        Me.btnGenerateCL.Location = New System.Drawing.Point(354, 52)
         Me.btnGenerateCL.Name = "btnGenerateCL"
         Me.btnGenerateCL.Size = New System.Drawing.Size(115, 36)
         Me.btnGenerateCL.TabIndex = 8
@@ -148,7 +150,7 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(24, 13)
+        Me.LabelX1.Location = New System.Drawing.Point(24, 39)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(32, 18)
         Me.LabelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -173,7 +175,7 @@ Partial Class frmAttendanceStmt
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(194, 37)
+        Me.dtTo.Location = New System.Drawing.Point(76, 76)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -215,7 +217,7 @@ Partial Class frmAttendanceStmt
         '
         Me.btnGenerateAttendance.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateAttendance.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateAttendance.Location = New System.Drawing.Point(354, 4)
+        Me.btnGenerateAttendance.Location = New System.Drawing.Point(354, 7)
         Me.btnGenerateAttendance.Name = "btnGenerateAttendance"
         Me.btnGenerateAttendance.Size = New System.Drawing.Size(115, 36)
         Me.btnGenerateAttendance.TabIndex = 7
@@ -239,7 +241,7 @@ Partial Class frmAttendanceStmt
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(24, 37)
+        Me.dtFrom.Location = New System.Drawing.Point(76, 33)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -284,7 +286,7 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(194, 13)
+        Me.LabelX2.Location = New System.Drawing.Point(24, 82)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 13
@@ -445,16 +447,26 @@ Partial Class frmAttendanceStmt
         Me.bgwAttendance.WorkerReportsProgress = True
         Me.bgwAttendance.WorkerSupportsCancellation = True
         '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(354, 96)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(115, 36)
+        Me.btnOpenFolder.TabIndex = 9
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
         'frmAttendanceStmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(514, 313)
+        Me.ClientSize = New System.Drawing.Size(514, 358)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -491,4 +503,5 @@ Partial Class frmAttendanceStmt
     Friend WithEvents bgwAttendance As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents btnGenerateCL As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
 End Class

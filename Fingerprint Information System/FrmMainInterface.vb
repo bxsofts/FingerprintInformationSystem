@@ -14424,7 +14424,7 @@ errhandler:
 
             Dim IDOfficer As String = vbTab & "The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "."
 
-            Dim PO As String = "Residence of Sri. " & Trim(Me.SOCDatagrid.SelectedCells(15).Value.ToString)
+            Dim PO As String = Trim(Me.SOCDatagrid.SelectedCells(8).Value.ToString)
 
             If PO <> "" Then
                 PO = "(" & PO.Replace(vbNewLine, ", ") & ") "
