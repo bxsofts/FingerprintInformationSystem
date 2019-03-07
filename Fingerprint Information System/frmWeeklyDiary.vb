@@ -36,8 +36,15 @@ Public Class frmWeeklyDiary
     Dim blUploadAuthenticated As Boolean = False
 
     Dim WeeklyDiaryFile As String
+    Dim TotalFileCount As String = "0"
 
 #Region "GENERATE WEEKLY DIARY"
+
+    Private Sub frmWeeklyDiary_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cprgBackup.Visible Then
+            MessageBoxEx.Show("File upload is in progress. Upload will continue in the background.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
 
     Private Sub frmWeeklyDiary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
@@ -46,10 +53,13 @@ Public Class frmWeeklyDiary
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = False
 
-            cprgBackup.ProgressText = ""
-            cprgBackup.ProgressColor = GetProgressColor()
-            cprgBackup.IsRunning = False
-            cprgBackup.Hide()
+
+            If bgwUploadAllFiles.IsBusy = False And bgwUploadFile.IsBusy = False Then
+                cprgBackup.ProgressText = ""
+                cprgBackup.ProgressColor = GetProgressColor()
+                cprgBackup.IsRunning = False
+                cprgBackup.Hide()
+            End If
 
             blUploadAuthenticated = False
 
@@ -419,8 +429,8 @@ Public Class frmWeeklyDiary
 #End Region
 
 
-#Region "BACKUP TO GOOGLE DRIVE"
-    Private Sub btnUploadToGoogleDrive_Click(sender As Object, e As EventArgs) Handles btnUploadToGoogleDrive.Click
+#Region "BACKUP TO GOOGLE DRIVE SINGLE FILE"
+    Private Sub btnUploadToGoogleDrive_Click(sender As Object, e As EventArgs) Handles btnBackupSingleFile.Click
 
         Try
 
@@ -468,6 +478,7 @@ Public Class frmWeeklyDiary
 
             cprgBackup.Visible = True
             cprgBackup.IsRunning = True
+            cprgBackup.ProgressTextVisible = False
             lblBackup.Visible = True
 
             Dim year As String = Me.MonthCalendarAdv1.SelectedDate.Year.ToString
@@ -616,11 +627,12 @@ Public Class frmWeeklyDiary
         uBytesUploaded = Progress.BytesSent
         uUploadStatus = Progress.Status
         Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-        bgwUploadFile.ReportProgress(percent, uBytesUploaded)
+        ' bgwUploadFile.ReportProgress(percent, uBytesUploaded)
     End Sub
 
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
-        cprgBackup.ProgressText = e.ProgressPercentage
+
+        '  cprgBackup.ProgressText = e.ProgressPercentage
 
         If TypeOf e.UserState Is String Then
             If e.ProgressPercentage = 100 Then
@@ -638,7 +650,216 @@ Public Class frmWeeklyDiary
         Me.lblBackup.Text = "Backup Weekly Diary to Google Drive"
     End Sub
 
+
 #End Region
 
+
+#Region "BACKUP ALL FILES TO GOOGLE DRIVE"
+
+
+    Private Sub btnBackupAllFiles_Click(sender As Object, e As EventArgs) Handles btnBackupAllFiles.Click
+        Try
+
+            WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(WeeklyDiaryFolder, FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
+
+                If foundFile Is Nothing Then
+                    MessageBoxEx.Show("No Weekly Diary Files found.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+            Next
+
+
+            Me.Cursor = Cursors.WaitCursor
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+            Me.Cursor = Cursors.Default
+
+            If Not blUploadAuthenticated Then
+                frmPassword.ShowDialog()
+                If Not blUserAuthenticated Then Exit Sub
+            End If
+
+            blUploadAuthenticated = True
+
+
+            JsonFile = CredentialFilePath & "\FISOAuth2.json"
+
+            If Not FileIO.FileSystem.FileExists(JsonFile) Then 'copy from application folder
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+                FileSystem.FileCopy(strAppPath & "\FISOAuth2.json", CredentialFilePath & "\FISOAuth2.json")
+            End If
+
+            TokenFile = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-" & oAuthUserID ' token file is created after authentication
+
+            If Not FileIO.FileSystem.FileExists(TokenFile) Then 'check for token file.
+                If MessageBoxEx.Show("The application will now open your browser. Please enter your Google ID and password to authenticate.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Cancel Then
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+
+            cprgBackup.Visible = True
+            cprgBackup.IsRunning = True
+            cprgBackup.ProgressTextVisible = True
+            cprgBackup.ProgressText = "0"
+            lblBackup.Visible = True
+
+            bgwUploadAllFiles.RunWorkerAsync()
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+
+    Private Sub bgwUploadAllFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadAllFiles.DoWork
+
+        Try
+            WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
+
+            bgwUploadAllFiles.ReportProgress(0, "Creating Google Drive Service...")
+            Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, oAuthUserID, CancellationToken.None, New FileDataStore(strAppName)).Result
+
+            GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
+
+            If GDService.ApplicationName <> strAppName Then
+                bgwUploadAllFiles.ReportProgress(0, "Google Drive Service failed.")
+                Exit Sub
+            End If
+
+            Dim masterfolderid As String = ""
+            Dim List = GDService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Weekly Diary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwUploadAllFiles.ReportProgress(0, "Creating Weekly Diary folder...")
+                Threading.Thread.Sleep(100)
+                Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                NewDirectory.Name = "Weekly Diary"
+                NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                Dim request As FilesResource.CreateRequest = GDService.Files.Create(NewDirectory)
+                NewDirectory = request.Execute()
+                masterfolderid = NewDirectory.Id
+            Else
+                masterfolderid = Results.Files(0).Id
+            End If
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(masterfolderid)
+
+            Dim foundFile = My.Computer.FileSystem.GetFiles(FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", ""), FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
+
+            TotalFileCount = foundFile.Count
+
+            For i = 0 To foundFile.Count - 1
+              
+                Dim wdFile = foundFile(i)
+                Dim SubFolderName As String = My.Computer.FileSystem.GetFileInfo(wdFile).Directory.Name
+
+                List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & SubFolderName & "' and '" & masterfolderid & "' in parents"
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+
+                cnt = Results.Files.Count
+
+                Dim subfolderid As String = ""
+                If cnt = 0 Then
+                    bgwUploadAllFiles.ReportProgress(0, "Creating Weekly Diary sub folder...")
+                    Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                    NewDirectory.Name = SubFolderName
+                    NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                    NewDirectory.Parents = parentlist
+                    Dim request As FilesResource.CreateRequest = GDService.Files.Create(NewDirectory)
+                    NewDirectory = request.Execute()
+                    subfolderid = NewDirectory.Id
+                Else
+                    subfolderid = Results.Files(0).Id
+                End If
+
+
+
+                Dim fName As String = My.Computer.FileSystem.GetFileInfo(wdFile).Name
+                dFileSize = My.Computer.FileSystem.GetFileInfo(wdFile).Length
+
+                Dim parentlist1 As New List(Of String)
+                parentlist1.Add(subfolderid)
+
+                List = GDService.Files.List()
+                List.Q = "name = '" & fName & "' and trashed = false and '" & subfolderid & "' in parents" ' list files in parent folder. 
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+                cnt = Results.Files.Count
+                If cnt = 0 Then 'if file not exists then create new file
+
+                    bgwUploadAllFiles.ReportProgress(i + 1, "Uploading " & fName & " ...")
+
+                    Dim body As New Google.Apis.Drive.v3.Data.File()
+                    body.Parents = parentlist1
+                    body.Name = My.Computer.FileSystem.GetFileInfo(wdFile).Name
+                    body.MimeType = "files/docx"
+
+                    Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(wdFile)
+                    Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+                    Dim UploadRequest As FilesResource.CreateMediaUpload = GDService.Files.Create(body, Stream, body.MimeType)
+                    UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                    AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+                    UploadRequest.Upload()
+                    Stream.Close()
+
+                    If uUploadStatus = UploadStatus.Completed Then
+                        bgwUploadAllFiles.ReportProgress(100, fName & " uploaded.")
+                    End If
+                Else
+                    bgwUploadAllFiles.ReportProgress(i + 1, "Skipping " & fName & " ...")
+                End If
+            Next
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwUploadAllFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadAllFiles.ProgressChanged
+
+        If TypeOf e.UserState Is String Then
+
+            If e.UserState.ToString.StartsWith("Uploading") Or e.UserState.ToString.StartsWith("Skipping") Then
+                cprgBackup.ProgressText = e.ProgressPercentage & "/" & TotalFileCount
+            End If
+
+            lblBackup.Text = e.UserState
+        End If
+    End Sub
+
+    Private Sub bgwUploadAllFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadAllFiles.RunWorkerCompleted
+        cprgBackup.Visible = False
+        cprgBackup.IsRunning = False
+
+        Me.Cursor = Cursors.Default
+        ShowDesktopAlert("Upload completed.")
+        Me.lblBackup.Text = "Backup Weekly Diary to Google Drive"
+    End Sub
+#End Region
 
 End Class

@@ -3397,7 +3397,7 @@ errhandler:
                 If uUploadStatus = UploadStatus.Completed Then
                     bgwUploadFile.ReportProgress(100, TAFileType & " uploaded.")
                 End If
-            Else 'file exists. Update contetnt
+            Else 'file exists. Update content
 
                 bgwUploadFile.ReportProgress(0, "Updating " & TAFileType & "...")
                 Threading.Thread.Sleep(100)

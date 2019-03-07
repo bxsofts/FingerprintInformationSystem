@@ -27,7 +27,8 @@ Partial Class frmWeeklyDiary
         Me.btnGenerateWeeklyDiary = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.cprgBackup = New DevComponents.DotNetBar.Controls.CircularProgress()
-        Me.btnUploadToGoogleDrive = New DevComponents.DotNetBar.ButtonX()
+        Me.btnBackupAllFiles = New DevComponents.DotNetBar.ButtonX()
+        Me.btnBackupSingleFile = New DevComponents.DotNetBar.ButtonItem()
         Me.lblBackup = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.lblSelectedDate = New DevComponents.DotNetBar.LabelX()
@@ -38,6 +39,7 @@ Partial Class frmWeeklyDiary
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwWeeklyDiary = New System.ComponentModel.BackgroundWorker()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
+        Me.bgwUploadAllFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -72,7 +74,7 @@ Partial Class frmWeeklyDiary
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx1.Controls.Add(Me.cprgBackup)
-        Me.PanelEx1.Controls.Add(Me.btnUploadToGoogleDrive)
+        Me.PanelEx1.Controls.Add(Me.btnBackupAllFiles)
         Me.PanelEx1.Controls.Add(Me.lblBackup)
         Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.lblSelectedDate)
@@ -105,22 +107,30 @@ Partial Class frmWeeklyDiary
         Me.cprgBackup.Name = "cprgBackup"
         Me.cprgBackup.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Donut
         Me.cprgBackup.ProgressColor = System.Drawing.Color.Red
+        Me.cprgBackup.ProgressTextVisible = True
         Me.cprgBackup.Size = New System.Drawing.Size(143, 44)
         Me.cprgBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.cprgBackup.TabIndex = 49
         Me.cprgBackup.TabStop = False
         '
-        'btnUploadToGoogleDrive
+        'btnBackupAllFiles
         '
-        Me.btnUploadToGoogleDrive.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnUploadToGoogleDrive.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnUploadToGoogleDrive.Image = CType(resources.GetObject("btnUploadToGoogleDrive.Image"), System.Drawing.Image)
-        Me.btnUploadToGoogleDrive.Location = New System.Drawing.Point(328, 159)
-        Me.btnUploadToGoogleDrive.Name = "btnUploadToGoogleDrive"
-        Me.btnUploadToGoogleDrive.Size = New System.Drawing.Size(143, 44)
-        Me.btnUploadToGoogleDrive.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnUploadToGoogleDrive.TabIndex = 4
-        Me.btnUploadToGoogleDrive.Text = "Drive Backup"
+        Me.btnBackupAllFiles.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnBackupAllFiles.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnBackupAllFiles.Image = CType(resources.GetObject("btnBackupAllFiles.Image"), System.Drawing.Image)
+        Me.btnBackupAllFiles.Location = New System.Drawing.Point(328, 159)
+        Me.btnBackupAllFiles.Name = "btnBackupAllFiles"
+        Me.btnBackupAllFiles.Size = New System.Drawing.Size(143, 44)
+        Me.btnBackupAllFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnBackupAllFiles.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnBackupSingleFile})
+        Me.btnBackupAllFiles.TabIndex = 4
+        Me.btnBackupAllFiles.Text = "Drive Backup"
+        '
+        'btnBackupSingleFile
+        '
+        Me.btnBackupSingleFile.GlobalItem = False
+        Me.btnBackupSingleFile.Name = "btnBackupSingleFile"
+        Me.btnBackupSingleFile.Text = "Backup Current Weekly Diary File"
         '
         'lblBackup
         '
@@ -129,11 +139,11 @@ Partial Class frmWeeklyDiary
         '
         '
         Me.lblBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblBackup.Location = New System.Drawing.Point(95, 170)
+        Me.lblBackup.Location = New System.Drawing.Point(31, 172)
         Me.lblBackup.Name = "lblBackup"
-        Me.lblBackup.Size = New System.Drawing.Size(215, 18)
+        Me.lblBackup.Size = New System.Drawing.Size(244, 18)
         Me.lblBackup.TabIndex = 46
-        Me.lblBackup.Text = "Backup Weekly Diary to Google Drive"
+        Me.lblBackup.Text = "Backup Weekly Diary to your Google Drive"
         '
         'CircularProgress1
         '
@@ -238,6 +248,11 @@ Partial Class frmWeeklyDiary
         Me.bgwUploadFile.WorkerReportsProgress = True
         Me.bgwUploadFile.WorkerSupportsCancellation = True
         '
+        'bgwUploadAllFiles
+        '
+        Me.bgwUploadAllFiles.WorkerReportsProgress = True
+        Me.bgwUploadAllFiles.WorkerSupportsCancellation = True
+        '
         'frmWeeklyDiary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -273,8 +288,10 @@ Partial Class frmWeeklyDiary
     Friend WithEvents lblSelectedDate As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwWeeklyDiary As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
-    Friend WithEvents btnUploadToGoogleDrive As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnBackupAllFiles As DevComponents.DotNetBar.ButtonX
     Friend WithEvents cprgBackup As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents lblBackup As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnBackupSingleFile As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents bgwUploadAllFiles As System.ComponentModel.BackgroundWorker
 End Class
