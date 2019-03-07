@@ -26,6 +26,7 @@ Partial Class frmAttendanceStmt
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel6 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.btnGenerateCL = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
@@ -39,7 +40,6 @@ Partial Class frmAttendanceStmt
         Me.chkStaff = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwAttendance = New System.ComponentModel.BackgroundWorker()
-        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx2.SuspendLayout()
         Me.GroupPanel6.SuspendLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -133,11 +133,21 @@ Partial Class frmAttendanceStmt
         Me.CircularProgress1.TabIndex = 26
         Me.CircularProgress1.TabStop = False
         '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(354, 95)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(115, 36)
+        Me.btnOpenFolder.TabIndex = 9
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
         'btnGenerateCL
         '
         Me.btnGenerateCL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateCL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateCL.Location = New System.Drawing.Point(354, 52)
+        Me.btnGenerateCL.Location = New System.Drawing.Point(354, 51)
         Me.btnGenerateCL.Name = "btnGenerateCL"
         Me.btnGenerateCL.Size = New System.Drawing.Size(115, 36)
         Me.btnGenerateCL.TabIndex = 8
@@ -446,16 +456,6 @@ Partial Class frmAttendanceStmt
         '
         Me.bgwAttendance.WorkerReportsProgress = True
         Me.bgwAttendance.WorkerSupportsCancellation = True
-        '
-        'btnOpenFolder
-        '
-        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenFolder.Location = New System.Drawing.Point(354, 96)
-        Me.btnOpenFolder.Name = "btnOpenFolder"
-        Me.btnOpenFolder.Size = New System.Drawing.Size(115, 36)
-        Me.btnOpenFolder.TabIndex = 9
-        Me.btnOpenFolder.Text = "Open Folder"
         '
         'frmAttendanceStmt
         '

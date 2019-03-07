@@ -396,8 +396,10 @@ Public Class frmFISBackupList
     End Function
 
     Private Function GetImageIndex(mimeType As String) As Integer
+
+        Dim mime = mimeType.ToLower.Replace("files/", ".")
         Dim index As Integer
-        Select Case mimeType.ToLower
+        Select Case mime
             Case "application/x-msdownload"
                 index = ImageIndex.Exe 'exe
             Case ".exe"
