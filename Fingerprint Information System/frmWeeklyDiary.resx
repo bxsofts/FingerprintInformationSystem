@@ -121,7 +121,7 @@
   <data name="btnGenerateWeeklyDiary.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAiCAYAAAAtZZsLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw4AAAsOAUC+4UEAAA+7SURBVFhHtZh5WFNn2sYPhMFq1dpaW7TWpY6ly7S168x0
+        YQUAAAAJcEhZcwAACw0AAAsNAe0HwCwAAA+7SURBVFhHtZh5WFNn2sYPhMFq1dpaW7TWpY6ly7S168x0
         pp1e08VardoKbd2oQlVklX1HFFmCsggIgrKGTbaEkISQnSwQEggERTZxx61W69ZaE957XoLWdqbt1/7x
         vVzPdZJzDpxf7vtZ3sAwv7F6cmS2q4cPSuzGjr0c2YSePHFB9z7RDWNKPWmNrjiniyhv0IRyfNVBpc/9
         958aqjCw2kJrWbKNB+3U2yqYFt8yRue6l1FsLma0IVW/9ejfd828V8YA9Yw5u5llA82T7B/htKMrQ0gM
@@ -194,7 +194,7 @@
   <data name="btnBackupAllFiles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw0AAAsNAe0HwCwAAAtFSURBVFhHrVkLcFRXGb43CaVgy0BVChZ1AEteCEmAbHiT
+        YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAAAtFSURBVFhHrVkLcFRXGb43CaVgy0BVChZ1AEteCEmAbHiT
         kIRHKQVKNyEBQVsRRgdIwIJgSyl5AAnvBhISKqXTAQVBx6oDAqJIB0gIBAoClY7KS0JeuwmQ7N7d4/f/
         55zNTVihnXFnvjmPe+453/3+x7n3rGE85jc2r9FIznXziLG5bjM5rzHUPhzXnkJ/BDANWAi8DawElgCZ
         wCDg2Tb3YA6ai/owH837OArBr9FN+sakHK4HiI3NdXVUhPaBYN34DUKMKxQiZW2LSM5/wEhZ2yxSC3xi
@@ -248,7 +248,7 @@
   <data name="btnCoveringLetter.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw4AAAsOAUC+4UEAAAU9SURBVFhHxZldbBRVFMen+zULPNgETdBSAiZG9Ml3H9Qn
+        YQUAAAAJcEhZcwAACw0AAAsNAe0HwCwAAAU9SURBVFhHxZldbBRVFMen+zULPNgETdBSAiZG9Ml3H9Qn
         E/x48UWNAfTJJ6K0IAZjW7XdbUsr2BaIwWjDR30hfqTsSkkkRmOMNk2qqHRLaU0QcbU0VKQfM3P//s+d
         GbqU0s7ObnGSf+7szty7vznn3HvO3DWMgiORhmFSckjLzxFXKsLPIaUiiRSijx1SFXrgOhh7Mk7hzwY/
         50D6Zr8N3jPYnS8cdSJyZ3vWNtqyISHN65BqVSKlNtFyT1NPea2cFyU+7JPJtHpmY4faIHCbjxVAZuxg
@@ -277,7 +277,7 @@
   <data name="btnOpenWeeklyDiaryFolder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw0AAAsNAe0HwCwAABAgSURBVFhHlZh3cFRXlsbp8VbN+p+tmXLV1mzt2B6P2WEJ
+        YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAABAgSURBVFhHlZh3cFRXlsbp8VbN+p+tmXLV1mzt2B6P2WEJ
         GrDBxgYzsMAYewgmmGzA2KTBxgSTDRhJJGOkBoQxQSQRBEhGIJAQ0EIgklDupFYndc45qqV+umfPuS0Y
         M27Pzr6qU13v6rXer79zvnNDj1FZVT3oeijPF72+sWbc71bWbXh5Ze22362q2/PK6vqcV9c15Pbc2CT+
         w6Zmce+tMnHGdoX4tW9axG/kqsVD8rTi4Yf04j8fM4rHFpjEE89ZxNOL7OI5JQ7xglKXeGm5W7z8hle8

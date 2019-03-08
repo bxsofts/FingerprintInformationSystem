@@ -69,10 +69,16 @@ Public Class FrmTourNote
 
     Dim blUploadAuthenticated As Boolean = False
 
+    Dim TotalFileCount As String = "0"
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
-
+    Private Sub FrmTourNote_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cprgBackup.Visible Then
+            MessageBoxEx.Show("File upload is in progress. Upload will continue in the background.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+        SaveTourStartLocation()
+    End Sub
 
     Private Sub LoadForm() Handles Me.Load
         On Error Resume Next
@@ -89,12 +95,15 @@ Public Class FrmTourNote
         cprgBlankForms.IsRunning = False
         cprgBlankForms.Hide()
 
-        cprgBackup.ProgressText = ""
         cprgBackup.ProgressColor = GetProgressColor()
-        cprgBackup.IsRunning = False
-        cprgBackup.Hide()
 
-        Me.pnlBackup.Visible = False
+        If bgwUploadAllFiles.IsBusy = False And bgwUploadFile.IsBusy = False Then
+            cprgBackup.ProgressText = ""
+            cprgBackup.IsRunning = False
+            cprgBackup.Hide()
+        End If
+
+        Me.pnlBackup.Visible = True
         Me.pnlStatus.Visible = False
 
         Me.lblSavedTourNote.Text = ""
@@ -221,7 +230,7 @@ Public Class FrmTourNote
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub SaveTourStartLocation() Handles Me.FormClosed, txtStartingLocation.Validated
+    Private Sub SaveTourStartLocation() Handles txtStartingLocation.Validated
         On Error Resume Next
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "TourStartingLocation", Me.txtStartingLocation.Text, Microsoft.Win32.RegistryValueKind.String)
     End Sub
@@ -778,6 +787,7 @@ errhandler:
 
 
     Private Sub bgwThreeTN_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwThreeTN.DoWork
+
         Try
 
             Dim delay As Integer = 0
@@ -846,7 +856,7 @@ errhandler:
             Dim TblRowCount = wdTbl.Rows.Count - 2 ' 3-2 =1
             Dim RowCountRequired = args.SelectedRecordsCount * 3 - TblRowCount
             Dim rc = 1
-            If args.SelectedRecordsCount > TblRowCount Then
+            If args.SelectedRecordsCount >= TblRowCount Then
                 For rc = 1 To RowCountRequired
                     wdTbl.Rows.Add()
                 Next
@@ -987,6 +997,7 @@ errhandler:
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
+
     End Sub
 
 
@@ -3192,17 +3203,24 @@ errhandler:
 #End Region
 
 
-#Region "BACKUP TO GOOGLE DRIVE"
-    Private Sub btnUploadToGoogleDrive_Click(sender As Object, e As EventArgs) Handles btnUploadToGoogleDrive.Click
+#Region "BACKUP SELECTED MONTH FILE TO GOOGLE DRIVE"
+    Private Sub btnUploadSelectedMonthTAFiles_Click(sender As Object, e As EventArgs) Handles btnUploadSelectedMonthTAFiles.Click
 
         Try
+
+            If Me.cmbSOCOfficer.SelectedIndex < 0 Then
+                MessageBoxEx.Show("Select Officer Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.cmbSOCOfficer.Focus()
+                Exit Sub
+            End If
 
             TourNoteFile = TAFileName("Tour Note")
 
             If Not My.Computer.FileSystem.FileExists(TourNoteFile) Then
                 TourNoteFile = TAFileName("Tour Note - T")
-            ElseIf Not My.Computer.FileSystem.FileExists(TourNoteFile) Then
-                TourNoteFile = ""
+                If Not My.Computer.FileSystem.FileExists(TourNoteFile) Then
+                    TourNoteFile = ""
+                End If
             End If
 
             TABillFile = TAFileName("TA Bill")
@@ -3268,6 +3286,8 @@ errhandler:
 
             cprgBackup.Visible = True
             cprgBackup.IsRunning = True
+            cprgBackup.ProgressTextVisible = False
+            cprgBackup.ProgressText = ""
 
             bgwUploadFile.RunWorkerAsync(Me.txtYear.Text)
 
@@ -3432,11 +3452,9 @@ errhandler:
         uBytesUploaded = Progress.BytesSent
         uUploadStatus = Progress.Status
         Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-        bgwUploadFile.ReportProgress(percent, uBytesUploaded)
     End Sub
 
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
-        cprgBackup.ProgressText = e.ProgressPercentage
 
         If TypeOf e.UserState Is String Then
             If e.ProgressPercentage = 100 Then
@@ -3453,6 +3471,226 @@ errhandler:
         Me.Cursor = Cursors.Default
         Me.lblBackup.Text = "Backup TA Bill and Tour Note to Google Drive"
     End Sub
+
+#End Region
+
+
+
+#Region "UPLOAD ALL FILES TO GOOGLE DRIVE"
+
+    Private Sub btnUploadToGoogleDrive_Click_1(sender As Object, e As EventArgs) Handles btnUploadAllFiles.Click
+
+        Try
+            Dim TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\"
+
+            If Me.cmbSOCOfficer.SelectedIndex >= 0 Then
+                Dim officer = Me.cmbSOCOfficer.SelectedItem.ToString
+                TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & officer.Replace(",", "")
+                FileIO.FileSystem.CreateDirectory(TABillFolder)
+            Else
+                MessageBoxEx.Show("Select Officer Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.cmbSOCOfficer.Focus()
+                Exit Sub
+            End If
+
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(TABillFolder, FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
+
+                If foundFile Is Nothing Then
+                    MessageBoxEx.Show("No TA Bill Files found.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+            Next
+
+            Me.Cursor = Cursors.WaitCursor
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+            Me.Cursor = Cursors.Default
+
+            If Not blUploadAuthenticated Then
+                frmPassword.ShowDialog()
+                If Not blUserAuthenticated Then Exit Sub
+            End If
+
+            blUploadAuthenticated = True
+
+
+            JsonFile = CredentialFilePath & "\FISOAuth2.json"
+
+            If Not FileIO.FileSystem.FileExists(JsonFile) Then 'copy from application folder
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+                FileSystem.FileCopy(strAppPath & "\FISOAuth2.json", CredentialFilePath & "\FISOAuth2.json")
+            End If
+
+            TokenFile = CredentialFilePath & "\Google.Apis.Auth.OAuth2.Responses.TokenResponse-" & oAuthUserID ' token file is created after authentication
+
+            If Not FileIO.FileSystem.FileExists(TokenFile) Then 'check for token file.
+                If MessageBoxEx.Show("The application will now open your browser. Please enter your Google ID and password to authenticate.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Cancel Then
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+
+            cprgBackup.Visible = True
+            cprgBackup.IsRunning = True
+            cprgBackup.ProgressTextVisible = True
+            cprgBackup.ProgressText = "0"
+
+            bgwUploadAllFiles.RunWorkerAsync(TABillFolder)
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+
+
+    Private Sub bgwUploadAllFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadAllFiles.DoWork
+        Try
+            Dim TABillFolder = e.Argument
+
+            bgwUploadAllFiles.ReportProgress(0, "Creating Google Drive Service...")
+            Dim fStream As FileStream = New FileStream(JsonFile, FileMode.Open, FileAccess.Read)
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim sUserCredential As UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(fStream).Secrets, Scopes, oAuthUserID, CancellationToken.None, New FileDataStore(strAppName)).Result
+
+            GDService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = sUserCredential, .ApplicationName = strAppName})
+
+            If GDService.ApplicationName <> strAppName Then
+                bgwUploadAllFiles.ReportProgress(0, "Google Drive Service failed.")
+                Exit Sub
+            End If
+
+            Dim masterfolderid As String = ""
+            Dim List = GDService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'TA Bills'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwUploadAllFiles.ReportProgress(0, "Creating TA Bill folder...")
+                Threading.Thread.Sleep(100)
+                Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                NewDirectory.Name = "TA Bills"
+                NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                Dim request As FilesResource.CreateRequest = GDService.Files.Create(NewDirectory)
+                NewDirectory = request.Execute()
+                masterfolderid = NewDirectory.Id
+            Else
+                masterfolderid = Results.Files(0).Id
+            End If
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(masterfolderid)
+
+            Dim foundFile = My.Computer.FileSystem.GetFiles(TABillFolder, FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
+
+            TotalFileCount = foundFile.Count
+
+            For i = 0 To foundFile.Count - 1
+
+                Dim taFile = foundFile(i)
+                Dim SubFolderName As String = My.Computer.FileSystem.GetFileInfo(taFile).Directory.Name
+
+                List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & SubFolderName & "' and '" & masterfolderid & "' in parents"
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+
+                cnt = Results.Files.Count
+
+                Dim subfolderid As String = ""
+                If cnt = 0 Then
+                    bgwUploadAllFiles.ReportProgress(0, "Creating TA Bill sub folder...")
+                    Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                    NewDirectory.Name = SubFolderName
+                    NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                    NewDirectory.Parents = parentlist
+                    Dim request As FilesResource.CreateRequest = GDService.Files.Create(NewDirectory)
+                    NewDirectory = request.Execute()
+                    subfolderid = NewDirectory.Id
+                Else
+                    subfolderid = Results.Files(0).Id
+                End If
+
+
+
+                Dim fName As String = My.Computer.FileSystem.GetFileInfo(taFile).Name
+                dFileSize = My.Computer.FileSystem.GetFileInfo(taFile).Length
+
+                Dim parentlist1 As New List(Of String)
+                parentlist1.Add(subfolderid)
+
+                List = GDService.Files.List()
+                List.Q = "name = '" & fName & "' and trashed = false and '" & subfolderid & "' in parents" ' list files in parent folder. 
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+                cnt = Results.Files.Count
+                If cnt = 0 Then 'if file not exists then create new file
+
+                    bgwUploadAllFiles.ReportProgress(i + 1, "Uploading " & fName & " ...")
+
+                    Dim body As New Google.Apis.Drive.v3.Data.File()
+                    body.Parents = parentlist1
+                    body.Name = My.Computer.FileSystem.GetFileInfo(taFile).Name
+                    body.MimeType = "files/docx"
+
+                    Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(taFile)
+                    Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+                    Dim UploadRequest As FilesResource.CreateMediaUpload = GDService.Files.Create(body, Stream, body.MimeType)
+                    UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                    AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+                    UploadRequest.Upload()
+                    Stream.Close()
+
+                    If uUploadStatus = UploadStatus.Completed Then
+                        bgwUploadAllFiles.ReportProgress(100, fName & " uploaded.")
+                    End If
+                Else
+                    bgwUploadAllFiles.ReportProgress(i + 1, "Skipping " & fName & " ...")
+                End If
+            Next
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwUploadAllFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadAllFiles.ProgressChanged
+
+        If TypeOf e.UserState Is String Then
+
+            If e.UserState.ToString.StartsWith("Uploading") Or e.UserState.ToString.StartsWith("Skipping") Then
+                cprgBackup.ProgressText = e.ProgressPercentage & "/" & TotalFileCount
+            End If
+
+            lblBackup.Text = e.UserState
+        End If
+    End Sub
+
+    Private Sub bgwUploadAllFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadAllFiles.RunWorkerCompleted
+        cprgBackup.Visible = False
+        cprgBackup.IsRunning = False
+
+        Me.Cursor = Cursors.Default
+        ShowDesktopAlert("Upload completed.")
+        Me.lblBackup.Text = "Backup TA Bill and Tour Note to Google Drive"
+    End Sub
+
 
 #End Region
 
@@ -3551,19 +3789,16 @@ errhandler:
     Private Sub DisplayFileStatus()
         On Error Resume Next
 
-        Dim blShowBackupMenu As Boolean = False
         pnlStatus.Visible = True
 
         If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
             Me.btnGenerateTourNote.Text = "Show Tour Note"
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved Tour Note - Exists"
             Me.chkSingleRow.Checked = True
-            blShowBackupMenu = True
         ElseIf My.Computer.FileSystem.FileExists(TAFileName("Tour Note - T")) Then
             Me.btnGenerateTourNote.Text = "Show Tour Note"
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved Tour Note - Exists"
             Me.chkThreeRows.Checked = True
-            blShowBackupMenu = True
         Else
             Me.btnGenerateTourNote.Text = "Generate Tour Note"
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved Tour Note - Nil"
@@ -3573,7 +3808,6 @@ errhandler:
         If My.Computer.FileSystem.FileExists(TAFileName("TA Bill")) Then
             Me.btnGenerateTABill.Text = "Show TA Bill"
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved TA Bill - Exists"
-            blShowBackupMenu = True
         Else
             Me.btnGenerateTABill.Text = "Generate TA Bill"
             Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Saved TA Bill - Nil"
@@ -3585,14 +3819,10 @@ errhandler:
             Me.btnGenerateTABillOuter.Text = "Generate TA Bill Outer"
         End If
 
-        pnlBackup.Visible = blShowBackupMenu
-
     End Sub
 
 
-
-
-
+  
 End Class
 
 

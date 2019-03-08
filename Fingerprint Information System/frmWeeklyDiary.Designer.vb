@@ -130,7 +130,7 @@ Partial Class frmWeeklyDiary
         '
         Me.btnBackupSingleFile.GlobalItem = False
         Me.btnBackupSingleFile.Name = "btnBackupSingleFile"
-        Me.btnBackupSingleFile.Text = "Backup Current Weekly Diary File"
+        Me.btnBackupSingleFile.Text = "Backup selected week's Diary File"
         '
         'lblBackup
         '

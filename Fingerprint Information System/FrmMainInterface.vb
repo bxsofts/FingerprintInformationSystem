@@ -15960,9 +15960,8 @@ errhandler:
     Private Sub GenerateTourNote() Handles btnTourNote.Click
         On Error Resume Next
 
-        FrmTourNote.Show()
         FrmTourNote.WindowState = FormWindowState.Maximized
-        FrmTourNote.BringToFront()
+        FrmTourNote.ShowDialog()
     End Sub
 #End Region
 

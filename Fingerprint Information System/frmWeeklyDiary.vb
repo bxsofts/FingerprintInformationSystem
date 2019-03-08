@@ -53,10 +53,10 @@ Public Class frmWeeklyDiary
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = False
 
+            cprgBackup.ProgressColor = GetProgressColor()
 
             If bgwUploadAllFiles.IsBusy = False And bgwUploadFile.IsBusy = False Then
                 cprgBackup.ProgressText = ""
-                cprgBackup.ProgressColor = GetProgressColor()
                 cprgBackup.IsRunning = False
                 cprgBackup.Hide()
             End If
@@ -430,11 +430,12 @@ Public Class frmWeeklyDiary
 
 
 #Region "BACKUP TO GOOGLE DRIVE SINGLE FILE"
-    Private Sub btnUploadToGoogleDrive_Click(sender As Object, e As EventArgs) Handles btnBackupSingleFile.Click
+    Private Sub btnBackupSingleFile_Click(sender As Object, e As EventArgs) Handles btnBackupSingleFile.Click
 
         Try
 
             WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "") & "\" & Me.MonthCalendarAdv1.SelectedDate.Year.ToString
+
             WeeklyDiaryFile = WeeklyDiaryFolder & "\Weekly Diary - " & Me.MonthCalendarAdv1.SelectedDate.ToString("yyyy-MM-dd") & ".docx"
 
             If My.Computer.FileSystem.FileExists(WeeklyDiaryFile) = False Then
@@ -479,7 +480,6 @@ Public Class frmWeeklyDiary
             cprgBackup.Visible = True
             cprgBackup.IsRunning = True
             cprgBackup.ProgressTextVisible = False
-            lblBackup.Visible = True
 
             Dim year As String = Me.MonthCalendarAdv1.SelectedDate.Year.ToString
             bgwUploadFile.RunWorkerAsync(year)
@@ -662,6 +662,8 @@ Public Class frmWeeklyDiary
 
             WeeklyDiaryFolder = FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", "")
 
+            FileIO.FileSystem.CreateDirectory(WeeklyDiaryFolder)
+
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(WeeklyDiaryFolder, FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
 
                 If foundFile Is Nothing Then
@@ -709,7 +711,6 @@ Public Class frmWeeklyDiary
             cprgBackup.IsRunning = True
             cprgBackup.ProgressTextVisible = True
             cprgBackup.ProgressText = "0"
-            lblBackup.Visible = True
 
             bgwUploadAllFiles.RunWorkerAsync()
 
@@ -763,7 +764,7 @@ Public Class frmWeeklyDiary
             Dim parentlist As New List(Of String)
             parentlist.Add(masterfolderid)
 
-            Dim foundFile = My.Computer.FileSystem.GetFiles(FileIO.SpecialDirectories.MyDocuments & "\Weekly Diary\" & TI.Replace(",", ""), FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
+            Dim foundFile = My.Computer.FileSystem.GetFiles(WeeklyDiaryFolder, FileIO.SearchOption.SearchAllSubDirectories, "*.docx")
 
             TotalFileCount = foundFile.Count
 

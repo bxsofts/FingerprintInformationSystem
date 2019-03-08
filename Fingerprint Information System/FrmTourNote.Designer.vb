@@ -54,7 +54,8 @@ Partial Class FrmTourNote
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.pnlBackup = New DevComponents.DotNetBar.PanelEx()
         Me.cprgBackup = New DevComponents.DotNetBar.Controls.CircularProgress()
-        Me.btnUploadToGoogleDrive = New DevComponents.DotNetBar.ButtonX()
+        Me.btnUploadAllFiles = New DevComponents.DotNetBar.ButtonX()
+        Me.btnUploadSelectedMonthTAFiles = New DevComponents.DotNetBar.ButtonItem()
         Me.lblBackup = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.cprgBlankForms = New DevComponents.DotNetBar.Controls.CircularProgress()
@@ -100,6 +101,7 @@ Partial Class FrmTourNote
         Me.bgwTR47 = New System.ComponentModel.BackgroundWorker()
         Me.bgwTR47ThreeLine = New System.ComponentModel.BackgroundWorker()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
+        Me.bgwUploadAllFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         CType(Me.SOCDatagrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -389,10 +391,10 @@ Partial Class FrmTourNote
         Me.pnlBackup.CanvasColor = System.Drawing.SystemColors.Control
         Me.pnlBackup.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.pnlBackup.Controls.Add(Me.cprgBackup)
-        Me.pnlBackup.Controls.Add(Me.btnUploadToGoogleDrive)
+        Me.pnlBackup.Controls.Add(Me.btnUploadAllFiles)
         Me.pnlBackup.Controls.Add(Me.lblBackup)
         Me.pnlBackup.DisabledBackColor = System.Drawing.Color.Empty
-        Me.pnlBackup.Location = New System.Drawing.Point(8, 622)
+        Me.pnlBackup.Location = New System.Drawing.Point(8, 558)
         Me.pnlBackup.Name = "pnlBackup"
         Me.pnlBackup.Size = New System.Drawing.Size(412, 66)
         Me.pnlBackup.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -409,28 +411,36 @@ Partial Class FrmTourNote
         '
         '
         Me.cprgBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.cprgBackup.Dock = System.Windows.Forms.DockStyle.Right
         Me.cprgBackup.FocusCuesEnabled = False
-        Me.cprgBackup.Location = New System.Drawing.Point(281, 0)
+        Me.cprgBackup.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cprgBackup.Location = New System.Drawing.Point(279, 3)
         Me.cprgBackup.Name = "cprgBackup"
         Me.cprgBackup.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Donut
         Me.cprgBackup.ProgressColor = System.Drawing.Color.Red
-        Me.cprgBackup.Size = New System.Drawing.Size(131, 66)
+        Me.cprgBackup.ProgressTextVisible = True
+        Me.cprgBackup.Size = New System.Drawing.Size(133, 60)
         Me.cprgBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.cprgBackup.TabIndex = 49
         Me.cprgBackup.TabStop = False
         '
-        'btnUploadToGoogleDrive
+        'btnUploadAllFiles
         '
-        Me.btnUploadToGoogleDrive.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnUploadToGoogleDrive.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnUploadToGoogleDrive.Image = CType(resources.GetObject("btnUploadToGoogleDrive.Image"), System.Drawing.Image)
-        Me.btnUploadToGoogleDrive.Location = New System.Drawing.Point(281, 6)
-        Me.btnUploadToGoogleDrive.Name = "btnUploadToGoogleDrive"
-        Me.btnUploadToGoogleDrive.Size = New System.Drawing.Size(122, 55)
-        Me.btnUploadToGoogleDrive.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnUploadToGoogleDrive.TabIndex = 47
-        Me.btnUploadToGoogleDrive.Text = "Backup"
+        Me.btnUploadAllFiles.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnUploadAllFiles.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnUploadAllFiles.Image = CType(resources.GetObject("btnUploadAllFiles.Image"), System.Drawing.Image)
+        Me.btnUploadAllFiles.Location = New System.Drawing.Point(281, 6)
+        Me.btnUploadAllFiles.Name = "btnUploadAllFiles"
+        Me.btnUploadAllFiles.Size = New System.Drawing.Size(122, 55)
+        Me.btnUploadAllFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnUploadAllFiles.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnUploadSelectedMonthTAFiles})
+        Me.btnUploadAllFiles.TabIndex = 47
+        Me.btnUploadAllFiles.Text = "Backup"
+        '
+        'btnUploadSelectedMonthTAFiles
+        '
+        Me.btnUploadSelectedMonthTAFiles.GlobalItem = False
+        Me.btnUploadSelectedMonthTAFiles.Name = "btnUploadSelectedMonthTAFiles"
+        Me.btnUploadSelectedMonthTAFiles.Text = "Upload selected month's TA Files"
         '
         'lblBackup
         '
@@ -439,7 +449,7 @@ Partial Class FrmTourNote
         '
         '
         Me.lblBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblBackup.Location = New System.Drawing.Point(19, 24)
+        Me.lblBackup.Location = New System.Drawing.Point(11, 24)
         Me.lblBackup.Name = "lblBackup"
         Me.lblBackup.Size = New System.Drawing.Size(262, 18)
         Me.lblBackup.TabIndex = 46
@@ -633,7 +643,7 @@ Partial Class FrmTourNote
         Me.chkUseSavedTourNote.Checked = True
         Me.chkUseSavedTourNote.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkUseSavedTourNote.CheckValue = "Y"
-        Me.chkUseSavedTourNote.Location = New System.Drawing.Point(13, 65)
+        Me.chkUseSavedTourNote.Location = New System.Drawing.Point(11, 65)
         Me.chkUseSavedTourNote.Name = "chkUseSavedTourNote"
         Me.chkUseSavedTourNote.Size = New System.Drawing.Size(243, 18)
         Me.chkUseSavedTourNote.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -647,7 +657,7 @@ Partial Class FrmTourNote
         '
         '
         Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX7.Location = New System.Drawing.Point(13, 22)
+        Me.LabelX7.Location = New System.Drawing.Point(11, 22)
         Me.LabelX7.Name = "LabelX7"
         Me.LabelX7.Size = New System.Drawing.Size(104, 18)
         Me.LabelX7.TabIndex = 44
@@ -996,7 +1006,7 @@ Partial Class FrmTourNote
         Me.pnlStatus.Controls.Add(Me.lblSavedTABill)
         Me.pnlStatus.Controls.Add(Me.lblSavedTourNote)
         Me.pnlStatus.DisabledBackColor = System.Drawing.Color.Empty
-        Me.pnlStatus.Location = New System.Drawing.Point(8, 556)
+        Me.pnlStatus.Location = New System.Drawing.Point(8, 636)
         Me.pnlStatus.Name = "pnlStatus"
         Me.pnlStatus.Size = New System.Drawing.Size(412, 57)
         Me.pnlStatus.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -1014,7 +1024,7 @@ Partial Class FrmTourNote
         '
         '
         Me.lblSavedTABill.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSavedTABill.Location = New System.Drawing.Point(19, 31)
+        Me.lblSavedTABill.Location = New System.Drawing.Point(11, 31)
         Me.lblSavedTABill.Name = "lblSavedTABill"
         Me.lblSavedTABill.Size = New System.Drawing.Size(76, 18)
         Me.lblSavedTABill.TabIndex = 47
@@ -1027,7 +1037,7 @@ Partial Class FrmTourNote
         '
         '
         Me.lblSavedTourNote.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSavedTourNote.Location = New System.Drawing.Point(19, 7)
+        Me.lblSavedTourNote.Location = New System.Drawing.Point(11, 7)
         Me.lblSavedTourNote.Name = "lblSavedTourNote"
         Me.lblSavedTourNote.Size = New System.Drawing.Size(97, 18)
         Me.lblSavedTourNote.TabIndex = 46
@@ -1085,6 +1095,11 @@ Partial Class FrmTourNote
         Me.bgwUploadFile.WorkerReportsProgress = True
         Me.bgwUploadFile.WorkerSupportsCancellation = True
         '
+        'bgwUploadAllFiles
+        '
+        Me.bgwUploadAllFiles.WorkerReportsProgress = True
+        Me.bgwUploadAllFiles.WorkerSupportsCancellation = True
+        '
         'FrmTourNote
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1095,6 +1110,8 @@ Partial Class FrmTourNote
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FrmTourNote"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tour Note/TA Bill Generator"
@@ -1190,8 +1207,10 @@ Partial Class FrmTourNote
     Friend WithEvents PlaceOfOccurrenceDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents InvestigatingOfficer As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pnlBackup As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents btnUploadToGoogleDrive As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnUploadAllFiles As DevComponents.DotNetBar.ButtonX
     Friend WithEvents lblBackup As DevComponents.DotNetBar.LabelX
     Friend WithEvents cprgBackup As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnUploadSelectedMonthTAFiles As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents bgwUploadAllFiles As System.ComponentModel.BackgroundWorker
 End Class
