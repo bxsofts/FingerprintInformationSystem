@@ -1913,6 +1913,8 @@ errhandler:
                 Dim distance As String = ""
                 Dim dt As String = ""
                 Dim iteration As Integer = CInt(50 / TNRowCount)
+
+
                 For i = 3 To TNRowCount
 
                     dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
@@ -1958,113 +1960,23 @@ errhandler:
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
                     distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                     distance = distance.Replace("km", "").Trim()
+                    Dim details As String = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim() 'details
                     wdTblTA.Cell(j, 7).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
-                    wdTblTA.Cell(j, 14).Range.Text = 0 'total
-                    wdTblTA.Cell(j, 16).Range.Text = 0 ' net
-                    wdTblTA.Cell(j, 17).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim() 'details
+
+                    If Not details.ToLower.StartsWith("halt") Then
+                        wdTblTA.Cell(j, 14).Range.Text = 0 'total
+                        wdTblTA.Cell(j, 16).Range.Text = 0 ' net
+                    Else
+                        wdTblTA.Cell(j, 11).Range.Text = DA ' da rate
+                        wdTblTA.Cell(j, 12).Range.Text = DA / 2 ' da amount
+                        wdTblTA.Cell(j, 14).Range.Text = DA / 2 'total
+                        wdTblTA.Cell(j, 16).Range.Text = DA / 2 ' net
+                    End If
+
+                    wdTblTA.Cell(j, 17).Range.Text = details 'details
 
                     j = j + 1
-                    i = i + 1
-
-
-
-                    dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 3).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    dt = wdTblTN.Cell(i, 3).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 4).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    wdTblTA.Cell(j, 5).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() 'halt
-                    wdTblTA.Cell(j, 11).Range.Text = DA ' da rate
-                    wdTblTA.Cell(j, 12).Range.Text = DA / 2 ' da amount
-                    wdTblTA.Cell(j, 14).Range.Text = DA / 2 'total
-                    wdTblTA.Cell(j, 16).Range.Text = DA / 2 ' net
-                    wdTblTA.Cell(j, 17).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim() ' "Halt & Duty"
-
-                    j = j + 1
-                    i = i + 1
-
-
-                    dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 3).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    dt = wdTblTN.Cell(i, 3).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 4).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    wdTblTA.Cell(j, 5).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
-                    wdTblTA.Cell(j, 6).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' TourTo
-                    mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                    distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
-                    distance = distance.Replace("km", "").Trim()
-                    wdTblTA.Cell(j, 7).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
-                    wdTblTA.Cell(j, 14).Range.Text = 0 'total
-                    wdTblTA.Cell(j, 16).Range.Text = 0 ' net
-                    wdTblTA.Cell(j, 17).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim()
-                    j = j + 1
+                    
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR56ThreeLine.ReportProgress(delay)
@@ -2939,8 +2851,6 @@ errhandler:
                         wdApp.Selection.TypeText(vbNewLine & "")
                     End If
 
-
-
                     wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                     wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' tour to
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
@@ -2948,114 +2858,19 @@ errhandler:
                     distance = distance.Replace("km", "").Trim()
                     wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
 
-                    wdTblTA.Cell(j, 9).Range.Text = 0
-                    wdTblTA.Cell(j, 11).Range.Text = 0
+                    Dim details As String = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim()
 
-                    wdTblTA.Cell(j, 12).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim()
+                    If Not details.ToLower.StartsWith("halt") Then
+                        wdTblTA.Cell(j, 9).Range.Text = 0
+                        wdTblTA.Cell(j, 11).Range.Text = 0
+                    Else
+                        wdTblTA.Cell(j, 9).Range.Text = DA / 2
+                        wdTblTA.Cell(j, 11).Range.Text = DA / 2
+                    End If
+                    wdTblTA.Cell(j, 12).Range.Text = details 'details
 
                     j = j + 1
-                    i = i + 1
-
-                    dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 1).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    dt = wdTblTN.Cell(i, 3).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 2).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-
-                    wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' halt
-
-                    wdTblTA.Cell(j, 9).Range.Text = DA / 2
-                    wdTblTA.Cell(j, 11).Range.Text = DA / 2
-
-                    wdTblTA.Cell(j, 12).Range.Text = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim() ' "Halt & Duty"
-
-                    j = j + 1
-                    i = i + 1
-
-                    dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 1).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    dt = wdTblTN.Cell(i, 3).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 2).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-
-                    wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
-                    wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' tour to
-                    mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                    distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
-                    distance = distance.Replace("km", "").Trim()
-                    wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
-
-                    wdTblTA.Cell(j, 9).Range.Text = 0
-                    wdTblTA.Cell(j, 11).Range.Text = 0
-
-                    wdTblTA.Cell(j, 12).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim() ' R/J"
-                    j = j + 1
+                   
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR47ThreeLine.ReportProgress(delay)

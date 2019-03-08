@@ -185,7 +185,7 @@ Partial Class FrmTourNote
         Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle5
         Me.SOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.SOCDatagrid.Location = New System.Drawing.Point(0, 44)
         Me.SOCDatagrid.MultiSelect = False
         Me.SOCDatagrid.Name = "SOCDatagrid"
@@ -440,7 +440,7 @@ Partial Class FrmTourNote
         '
         Me.btnUploadSelectedMonthTAFiles.GlobalItem = False
         Me.btnUploadSelectedMonthTAFiles.Name = "btnUploadSelectedMonthTAFiles"
-        Me.btnUploadSelectedMonthTAFiles.Text = "Upload selected month's TA Files"
+        Me.btnUploadSelectedMonthTAFiles.Text = "Backup selected month's TA Files"
         '
         'lblBackup
         '
