@@ -37,6 +37,7 @@ Public Class frmDAStatement
         Me.PSWiseDACountTableAdapter.Connection.ConnectionString = sConString
         Me.PSWiseDACountTableAdapter.Connection.Open()
 
+        Me.cmbMonth.Items.Clear()
 
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))

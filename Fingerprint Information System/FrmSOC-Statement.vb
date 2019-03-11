@@ -1,7 +1,6 @@
 ﻿Imports Microsoft.Reporting.WinForms
 Imports Microsoft.Office.Interop
 
-
 Public Class frmSOCStatement
     Dim d1 As Date
     Dim d2 As Date
@@ -21,6 +20,7 @@ Public Class frmSOCStatement
         Me.SocRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SocRegisterTableAdapter.Connection.Open()
 
+        Me.cmbMonth.Items.Clear()
 
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))
@@ -335,17 +335,38 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
+           
+
+            '  aDoc.Sections(1).Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).PageNumbers.Add(Word.WdPageNumberAlignment.wdAlignPageNumberRight)
+
+            '  Dim TotalPages As String = WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument).ToString
+
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
+            
+
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
             bgwWord.ReportProgress(100)
             System.Threading.Thread.Sleep(10)
 
             WordApp.Visible = True
-
-            ' For Each section As Word.Section In aDoc.Sections
-            'section.Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Paragraphs.Alignment = 'Word.WdParagraphAlignment.wdAlignParagraphRight
-            ' section.Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).Range.Text = "Page "
-            ' section.Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).PageNumbers.Add(Word.WdPageNumberAlignment.wdAlignPageNumberRight, True)
-            '  Next
 
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -372,6 +393,6 @@ Public Class frmSOCStatement
         Me.Cursor = Cursors.Default
         Me.Close()
     End Sub
-    
+
 
 End Class

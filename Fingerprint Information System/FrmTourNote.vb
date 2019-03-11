@@ -122,6 +122,7 @@ Public Class FrmTourNote
 
         Me.txtStartingLocation.Text = TourStartLocation
 
+        Me.cmbMonth.Items.Clear()
 
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))

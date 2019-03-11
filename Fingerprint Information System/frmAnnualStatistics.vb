@@ -611,6 +611,25 @@ Public Class frmAnnualStatistics
                 System.Threading.Thread.Sleep(10)
             Next
 
+
+            aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+            aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+            aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+            Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+            aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+            aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+            Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+            aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+            aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
