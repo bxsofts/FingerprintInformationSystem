@@ -104,7 +104,7 @@ Public Class frmSOCStatement
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
 
@@ -245,7 +245,10 @@ Public Class frmSOCStatement
             Next
             delay = 62
 
-            Dim iteration As Integer = CInt(38 / RowCount)
+            Dim iteration As Integer = 0
+
+            If RowCount <> 0 Then iteration = CInt(38 / RowCount)
+
 
             For i = 3 To RowCount + 2
                 Dim j = i - 3
@@ -317,12 +320,25 @@ Public Class frmSOCStatement
 
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 3, 12).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
-            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+
+            If RowCount = 0 Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("----------  NIL  ----------")
+            End If
+
+            '    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.TypeParagraph()
+
+           
+
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
             If boolUseTIinLetter Then
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()

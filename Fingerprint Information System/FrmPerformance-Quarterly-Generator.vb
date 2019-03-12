@@ -602,7 +602,7 @@ Public Class frmQuarterlyPerformance
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 

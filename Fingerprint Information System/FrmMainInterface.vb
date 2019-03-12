@@ -14605,7 +14605,7 @@ errhandler:
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
@@ -14742,8 +14742,8 @@ errhandler:
                 Dim f As Boolean = rng.Find.Execute(TextToBold)
                 If f Then rng.Font.Bold = 1
             End If
-           
-        
+
+
             If ReportNature.ToLower = "identification report - letter" Then
                 WordApp.Selection.TypeText(vbNewLine)
                 WordApp.Selection.TypeText(vbTab & "This is for information.")
@@ -14790,7 +14790,7 @@ errhandler:
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
@@ -15050,7 +15050,7 @@ errhandler:
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
@@ -15194,7 +15194,7 @@ errhandler:
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
@@ -15856,7 +15856,7 @@ errhandler:
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 

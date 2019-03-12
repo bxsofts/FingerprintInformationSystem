@@ -117,7 +117,7 @@ Public Class FrmSOCGraveCrimes
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
             Dim RowCount = Me.SOCRegisterBindingSource.Count + 3
 
             For delay = 1 To 10

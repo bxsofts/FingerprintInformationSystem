@@ -141,7 +141,7 @@ Public Class frmFPAStatement
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
@@ -217,7 +217,7 @@ Public Class frmFPAStatement
             If RowCount = 2 Then ' No records
                 datevalue = datevalue.Replace("for the month of ", "in the month of ")
                 datevalue = datevalue.Replace("for the period from ", "during the period from ")
-                bodytext = "The Monthly Revenue Income  " & datevalue & "is NIL. This is for favour of information and necessary action."
+                bodytext = "The Monthly Revenue Income " & datevalue & " is NIL. This is for favour of information and necessary action."
             Else
                 bodytext = "Monthly Revenue Income details " & datevalue & " are furnished below for favour of information and necessary action."
             End If
@@ -447,7 +447,7 @@ Public Class frmFPAStatement
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
             For delay = 11 To 20

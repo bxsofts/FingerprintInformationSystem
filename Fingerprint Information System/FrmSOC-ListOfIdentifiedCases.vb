@@ -130,7 +130,7 @@ Public Class FrmSOC_ListOfIdentifiedCases
             Dim newTemplate As Object = False
             Dim docType As Object = 0
             Dim isVisible As Object = True
-            Dim WordApp As New Word.ApplicationClass()
+            Dim WordApp As New Word.Application()
 
             For delay = 10 To 20
                 bgwIDList.ReportProgress(delay)
