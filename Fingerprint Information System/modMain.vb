@@ -248,7 +248,8 @@ Module modMain
     Public Function GetRandomColor() As String
         Try
 
-            Dim colorList(25) As String
+            Dim colorList(22) As String
+
             colorList(0) = "-4194304" 'dark red
             colorList(1) = "-65536" 'medium red
             colorList(2) = "-16384" 'orange
@@ -262,20 +263,17 @@ Module modMain
             colorList(10) = "-551354" 'orange
 
             colorList(11) = Color.Violet.ToArgb.ToString
-            colorList(12) = Color.Indigo.ToArgb.ToString
-            colorList(13) = Color.Blue.ToArgb.ToString
-            colorList(14) = Color.Green.ToArgb.ToString
-            colorList(15) = Color.Yellow.ToArgb.ToString
-            colorList(16) = Color.Orange.ToArgb.ToString
-            colorList(17) = Color.Black.ToArgb.ToString
-            colorList(18) = Color.Red.ToArgb.ToString
+            colorList(12) = Color.Blue.ToArgb.ToString
+            colorList(13) = Color.Green.ToArgb.ToString
+            colorList(14) = Color.Orange.ToArgb.ToString
+            colorList(15) = Color.Black.ToArgb.ToString
+            colorList(16) = Color.Red.ToArgb.ToString
 
-            colorList(19) = Color.Pink.ToArgb.ToString
-            colorList(20) = Color.Purple.ToArgb.ToString
-            colorList(21) = Color.Magenta.ToArgb.ToString
-            colorList(22) = Color.Maroon.ToArgb.ToString
-            colorList(23) = Color.Honeydew.ToArgb.ToString
-            colorList(24) = Color.IndianRed.ToArgb.ToString
+            colorList(17) = Color.Pink.ToArgb.ToString
+            colorList(18) = Color.Purple.ToArgb.ToString
+            colorList(19) = Color.Magenta.ToArgb.ToString
+            colorList(20) = Color.Maroon.ToArgb.ToString
+            colorList(21) = Color.IndianRed.ToArgb.ToString
 
             Randomize()
             Dim rnd = New Random()
