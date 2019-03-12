@@ -858,6 +858,27 @@ Public Class frmAnnualStatistics
                 System.Threading.Thread.Sleep(10)
             Next
 
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
+
+
             WordApp.Selection.Tables.Item(1).Cell(rows, 11).Select()
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
@@ -984,6 +1005,28 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.TypeText(vbCrLf)
                 If iddetails <> "" Then WordApp.Selection.TypeText(vbCrLf)
             Next
+
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
+
+
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
             'WordApp.Selection.GoToPrevious(Word.WdGoToItem.wdGoToPage)
 

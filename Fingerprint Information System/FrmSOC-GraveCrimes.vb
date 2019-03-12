@@ -503,6 +503,27 @@ Public Class FrmSOCGraveCrimes
                 aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
+
+
             For delay = 96 To 100
                 bgwLetter.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)

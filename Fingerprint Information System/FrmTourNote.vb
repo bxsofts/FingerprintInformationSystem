@@ -598,20 +598,20 @@ errhandler:
                 System.Threading.Thread.Sleep(5)
             Next
 
-            Dim wdApp As Word.Application
+            Dim WordApp As Word.Application
             Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
+            WordApp = New Word.Application
 
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(args.TNTemplateFile)
-            wdDoc.Range.NoProofing = 1
+            wdDocs = WordApp.Documents
+            Dim aDoc As Word.Document = wdDocs.Add(args.TNTemplateFile)
+            aDoc.Range.NoProofing = 1
 
             For delay = 21 To 30
                 bgwSingleTN.ReportProgress(delay)
                 System.Threading.Thread.Sleep(5)
             Next
 
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+            Dim wdBooks As Word.Bookmarks = aDoc.Bookmarks
             wdBooks("Name1").Range.Text = (OfficerNameOnly & ", " & Designation & ", " & FullOfficeName & ", " & FullDistrictName).ToUpper
             wdBooks("Month").Range.Text = (args.Month & " " & args.Year).ToUpper
             wdBooks("PEN").Range.Text = PENarray(sx)
@@ -623,7 +623,7 @@ errhandler:
             wdBooks("Office1").Range.Text = FullOfficeName
             wdBooks("District1").Range.Text = FullDistrictName
 
-            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+            Dim wdTbl As Word.Table = aDoc.Range.Tables.Item(1)
 
             Dim TblRowCount = wdTbl.Rows.Count - 2 ' 3-2 =1
             Dim RowCountRequired = args.SelectedRecordsCount - TblRowCount
@@ -655,14 +655,14 @@ errhandler:
 
                     wdTbl.Cell(j, 1).Range.Text = n
                     wdTbl.Cell(j, 2).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 3).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 4).Range.Text = TourStartLocation
 
@@ -700,8 +700,29 @@ errhandler:
 
 
             If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
-                wdDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                aDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
+
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
+
 
             For delay = 91 To 100
                 bgwSingleTN.ReportProgress(delay)
@@ -710,15 +731,15 @@ errhandler:
 
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generated"
 
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            aDoc.Activate()
 
             ReleaseObject(wdTbl)
-            ReleaseObject(wdDoc)
+            ReleaseObject(aDoc)
             ReleaseObject(wdDocs)
-            wdApp = Nothing
+            WordApp = Nothing
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -827,20 +848,20 @@ errhandler:
 
 
 
-            Dim wdApp As Word.Application
+            Dim WordApp As Word.Application
             Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
+            WordApp = New Word.Application
 
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(args.TNTemplateFile)
-            wdDoc.Range.NoProofing = 1
+            wdDocs = WordApp.Documents
+            Dim aDoc As Word.Document = wdDocs.Add(args.TNTemplateFile)
+            aDoc.Range.NoProofing = 1
 
             For delay = 21 To 30
                 bgwThreeTN.ReportProgress(delay)
                 System.Threading.Thread.Sleep(5)
             Next
 
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+            Dim wdBooks As Word.Bookmarks = aDoc.Bookmarks
             wdBooks("Name1").Range.Text = (OfficerNameOnly & ", " & Designation & ", " & FullOfficeName & ", " & FullDistrictName).ToUpper
             wdBooks("Month").Range.Text = (args.Month & " " & args.Year).ToUpper
             wdBooks("PEN").Range.Text = PENarray(sx)
@@ -852,7 +873,7 @@ errhandler:
             wdBooks("Office1").Range.Text = FullOfficeName
             wdBooks("District1").Range.Text = FullDistrictName
 
-            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+            Dim wdTbl As Word.Table = aDoc.Range.Tables.Item(1)
 
             Dim TblRowCount = wdTbl.Rows.Count - 2 ' 3-2 =1
             Dim RowCountRequired = args.SelectedRecordsCount * 3 - TblRowCount
@@ -883,14 +904,14 @@ errhandler:
                     wdTbl.Cell(j, 1).Range.Text = n
 
                     wdTbl.Cell(j, 2).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 3).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 4).Range.Text = TourStartLocation
 
@@ -916,14 +937,14 @@ errhandler:
                     j = j + 1
 
                     wdTbl.Cell(j, 2).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 3).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 4).Range.Text = "Halt & Duty"
                     wdTbl.Cell(j, 8).Range.Text = "Halt & Duty"
@@ -931,14 +952,14 @@ errhandler:
                     j = j + 1
 
                     wdTbl.Cell(j, 2).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     wdTbl.Cell(j, 3).Range.Select()
-                    wdApp.Selection.TypeText(dt)
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    wdApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(dt)
+                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                    WordApp.Selection.TypeText(vbNewLine)
 
                     If Not args.UsePS Then
                         wdTbl.Cell(j, 4).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
@@ -974,8 +995,30 @@ errhandler:
             Next
 
             If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
-                wdDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                aDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
+
+
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
+
 
             For delay = 91 To 100
                 bgwThreeTN.ReportProgress(delay)
@@ -983,15 +1026,15 @@ errhandler:
             Next
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generated"
 
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            aDoc.Activate()
 
             ReleaseObject(wdTbl)
-            ReleaseObject(wdDoc)
+            ReleaseObject(aDoc)
             ReleaseObject(wdDocs)
-            wdApp = Nothing
+            WordApp = Nothing
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
