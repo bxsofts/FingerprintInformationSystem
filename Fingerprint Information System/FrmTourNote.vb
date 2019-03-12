@@ -3555,6 +3555,13 @@ errhandler:
 
     Private Sub btnOpenTABillFolder_Click(sender As Object, e As EventArgs) Handles btnOpenTABillFolder.Click
         Try
+            Dim TABillFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills"
+
+            If Me.cmbSOCOfficer.SelectedIndex < 0 Then
+                FileIO.FileSystem.CreateDirectory(TABillFolder)
+                Call Shell("explorer.exe " & TABillFolder, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
 
             Dim sFileName As String = TAFileName("TA Bill")
 
@@ -3572,12 +3579,9 @@ errhandler:
             End If
 
 
-            Dim TABillFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills"
-
             If Me.cmbSOCOfficer.SelectedIndex >= 0 Then
                 Dim officer = Me.cmbSOCOfficer.SelectedItem.ToString
                 TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & officer.Replace(",", "")
-                FileIO.FileSystem.CreateDirectory(TABillFolder)
             End If
 
             FileIO.FileSystem.CreateDirectory(TABillFolder)
