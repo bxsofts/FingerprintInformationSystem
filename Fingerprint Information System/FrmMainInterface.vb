@@ -16518,6 +16518,9 @@ errhandler:
             Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
             If backupperiod = 0 Then Exit Sub
 
+            FindLatestSOCNumberAndDI()
+            If LatestSOCNumber = "" Then Exit Sub
+
             blCheckAutoBackup = True
             bgwOnlineAutoBackup.RunWorkerAsync(backupperiod)
 
@@ -16588,8 +16591,6 @@ errhandler:
                 blCheckAutoBackup = False
                 Exit Sub
             End If
-
-            FindLatestSOCNumberAndDI()
 
             Dim BackupTime As Date = Now
             Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
