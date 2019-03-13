@@ -151,8 +151,16 @@ Module modMain
     Public Sub ShowErrorMessage(ex As Exception)
         DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-    End Sub
+        Try
+            Dim file As System.IO.StreamWriter
+            file = My.Computer.FileSystem.OpenTextFileWriter(strAppUserPath & "\ErrorLog.txt", False)
+            file.WriteLine(ex.Message)
+            file.Close()
+        Catch ex1 As Exception
 
+        End Try
+        
+    End Sub
 
     Public Function InternetAvailable1() As Boolean
 
@@ -231,24 +239,10 @@ Module modMain
         End Try
     End Sub
 
-    Public Function GetRandomColor1()
-
-        Randomize()
-        Dim rnd = New Random()
-
-        Dim randomColour As String = "-16748352" 'blue
-
-        Try
-            randomColour = Color.FromArgb(&HFF000000 Or rnd.Next(&HFFFFFF + 1)).ToArgb
-        Catch ex As Exception
-            randomColour = "-16748352" 'blue
-        End Try
-        Return randomColour
-    End Function
     Public Function GetRandomColor() As String
         Try
 
-            Dim colorList(22) As String
+            Dim colorList(23) As String
 
             colorList(0) = "-4194304" 'dark red
             colorList(1) = "-65536" 'medium red
@@ -274,6 +268,7 @@ Module modMain
             colorList(19) = Color.Magenta.ToArgb.ToString
             colorList(20) = Color.Maroon.ToArgb.ToString
             colorList(21) = Color.IndianRed.ToArgb.ToString
+            colorList(22) = Color.Yellow.ToArgb.ToString
 
             Randomize()
             Dim rnd = New Random()

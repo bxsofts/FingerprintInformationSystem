@@ -3578,7 +3578,6 @@ errhandler:
                 Exit Sub
             End If
 
-
             If Me.cmbSOCOfficer.SelectedIndex >= 0 Then
                 Dim officer = Me.cmbSOCOfficer.SelectedItem.ToString
                 TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & officer.Replace(",", "")

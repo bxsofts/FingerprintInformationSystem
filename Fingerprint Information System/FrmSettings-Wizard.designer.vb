@@ -95,6 +95,10 @@ Partial Class FrmSettingsWizard
         Me.OfficerTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.OfficerTableTableAdapter()
         Me.SettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SettingsTableAdapter()
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
+        Me.LabelX22 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX23 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX24 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX25 = New DevComponents.DotNetBar.LabelX()
         Me.SettingsWizard.SuspendLayout()
         Me.StartPage.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -248,6 +252,10 @@ Partial Class FrmSettingsWizard
         Me.wzrdPageOfficeUnit.AntiAlias = False
         Me.wzrdPageOfficeUnit.BackColor = System.Drawing.Color.Transparent
         Me.wzrdPageOfficeUnit.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.wzrdPageOfficeUnit.Controls.Add(Me.LabelX25)
+        Me.wzrdPageOfficeUnit.Controls.Add(Me.LabelX24)
+        Me.wzrdPageOfficeUnit.Controls.Add(Me.LabelX23)
+        Me.wzrdPageOfficeUnit.Controls.Add(Me.LabelX22)
         Me.wzrdPageOfficeUnit.Controls.Add(Me.txtFullDistrict)
         Me.wzrdPageOfficeUnit.Controls.Add(Me.txtShortDistrict)
         Me.wzrdPageOfficeUnit.Controls.Add(Me.LabelX2)
@@ -1302,6 +1310,62 @@ Partial Class FrmSettingsWizard
         Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
         Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
         '
+        'LabelX22
+        '
+        Me.LabelX22.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX22.ForeColor = System.Drawing.Color.Red
+        Me.LabelX22.Location = New System.Drawing.Point(519, 52)
+        Me.LabelX22.Name = "LabelX22"
+        Me.LabelX22.Size = New System.Drawing.Size(8, 18)
+        Me.LabelX22.TabIndex = 14
+        Me.LabelX22.Text = "*"
+        '
+        'LabelX23
+        '
+        Me.LabelX23.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX23.ForeColor = System.Drawing.Color.Red
+        Me.LabelX23.Location = New System.Drawing.Point(519, 93)
+        Me.LabelX23.Name = "LabelX23"
+        Me.LabelX23.Size = New System.Drawing.Size(8, 18)
+        Me.LabelX23.TabIndex = 15
+        Me.LabelX23.Text = "*"
+        '
+        'LabelX24
+        '
+        Me.LabelX24.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX24.ForeColor = System.Drawing.Color.Red
+        Me.LabelX24.Location = New System.Drawing.Point(519, 134)
+        Me.LabelX24.Name = "LabelX24"
+        Me.LabelX24.Size = New System.Drawing.Size(8, 18)
+        Me.LabelX24.TabIndex = 16
+        Me.LabelX24.Text = "*"
+        '
+        'LabelX25
+        '
+        Me.LabelX25.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX25.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX25.ForeColor = System.Drawing.Color.Red
+        Me.LabelX25.Location = New System.Drawing.Point(519, 175)
+        Me.LabelX25.Name = "LabelX25"
+        Me.LabelX25.Size = New System.Drawing.Size(8, 18)
+        Me.LabelX25.TabIndex = 17
+        Me.LabelX25.Text = "*"
+        '
         'FrmSettingsWizard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1412,4 +1476,8 @@ Partial Class FrmSettingsWizard
     Friend WithEvents LabelX21 As DevComponents.DotNetBar.LabelX
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents StyleManager1 As DevComponents.DotNetBar.StyleManager
+    Friend WithEvents LabelX25 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX24 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX23 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX22 As DevComponents.DotNetBar.LabelX
 End Class
