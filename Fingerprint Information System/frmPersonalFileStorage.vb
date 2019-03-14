@@ -997,7 +997,7 @@ Public Class frmPersonalFileStorage
 
             List.PageSize = 1000 ' maximum file list
             List.Fields = "files(id, name, mimeType, size)"
-            List.OrderBy = "folder, name" 'sorting order
+            List.OrderBy = "name" 'sorting order
 
             Dim Results As FileList = List.Execute
 
@@ -1111,6 +1111,8 @@ Public Class frmPersonalFileStorage
 
     End Sub
 #End Region
+
+
 #Region "DELETE FILE"
 
     Private Sub DeleteSelectedFile(sender As Object, e As EventArgs) Handles btnRemoveFile.Click
