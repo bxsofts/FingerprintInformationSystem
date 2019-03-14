@@ -82,8 +82,11 @@ Partial Class frmPassword
         '
         '
         '
+        Me.txtUserID.Border.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.Zoom
         Me.txtUserID.Border.Class = "TextBoxBorder"
         Me.txtUserID.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtUserID.ButtonCustom.Symbol = ""
+        Me.txtUserID.ButtonCustom.Visible = True
         Me.txtUserID.DisabledBackColor = System.Drawing.Color.White
         Me.txtUserID.FocusHighlightEnabled = True
         Me.txtUserID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -103,6 +106,8 @@ Partial Class frmPassword
         '
         Me.txtPassword1.Border.Class = "TextBoxBorder"
         Me.txtPassword1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPassword1.ButtonCustom.Symbol = ""
+        Me.txtPassword1.ButtonCustom.Visible = True
         Me.txtPassword1.DisabledBackColor = System.Drawing.Color.White
         Me.txtPassword1.FocusHighlightEnabled = True
         Me.txtPassword1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -122,6 +127,8 @@ Partial Class frmPassword
         '
         Me.txtPassword2.Border.Class = "TextBoxBorder"
         Me.txtPassword2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPassword2.ButtonCustom.Symbol = ""
+        Me.txtPassword2.ButtonCustom.Visible = True
         Me.txtPassword2.DisabledBackColor = System.Drawing.Color.White
         Me.txtPassword2.FocusHighlightEnabled = True
         Me.txtPassword2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
