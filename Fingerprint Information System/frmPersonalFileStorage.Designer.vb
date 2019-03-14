@@ -66,6 +66,7 @@ Partial Class frmPersonalFileStorage
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
+        Me.bgwDownloadFolder = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -214,7 +215,7 @@ Partial Class frmPersonalFileStorage
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(620, 157)
+        Me.CircularProgress1.Location = New System.Drawing.Point(607, 157)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -231,7 +232,7 @@ Partial Class frmPersonalFileStorage
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(577, 283)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(564, 283)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
         Me.lblProgressStatus.TabIndex = 4
@@ -548,6 +549,11 @@ Partial Class frmPersonalFileStorage
         Me.bgwDownloadFile.WorkerReportsProgress = True
         Me.bgwDownloadFile.WorkerSupportsCancellation = True
         '
+        'bgwDownloadFolder
+        '
+        Me.bgwDownloadFolder.WorkerReportsProgress = True
+        Me.bgwDownloadFolder.WorkerSupportsCancellation = True
+        '
         'frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -618,4 +624,5 @@ Partial Class frmPersonalFileStorage
     Friend WithEvents btnChangePassword As DevComponents.DotNetBar.Controls.SideNavItem
     Friend WithEvents Separator3 As DevComponents.DotNetBar.Separator
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents bgwDownloadFolder As System.ComponentModel.BackgroundWorker
 End Class

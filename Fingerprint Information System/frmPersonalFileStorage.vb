@@ -38,7 +38,9 @@ Public Class frmPersonalFileStorage
 
     Dim SelectedFileID As String = ""
     Dim SelectedFileIndex As Integer = 0
+    Dim SelectedFolderName As String = ""
 
+    Dim TotalFileCount As Integer = 0
     Dim ShowStatusText As Boolean
 
     Dim blShowSharedWithMe As Boolean = False
@@ -59,6 +61,33 @@ Public Class frmPersonalFileStorage
     End Enum
 
 #Region "LOAD DATA"
+
+    Private Sub frmPersonalFileStorage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If blDownloadIsProgressing Then
+            On Error Resume Next
+            If MessageBoxEx.Show("File download is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                If bgwDownloadFile.IsBusy Then
+                    bgwDownloadFile.CancelAsync()
+                End If
+                If bgwDownloadFolder.IsBusy Then
+                    bgwDownloadFolder.CancelAsync()
+                End If
+            End If
+        End If
+
+        If blUploadIsProgressing Then
+            If MessageBoxEx.Show("File upload is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                If bgwUploadFile.IsBusy Then
+                    bgwUploadFile.CancelAsync()
+                End If
+            End If
+        End If
+
+    End Sub
 
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
@@ -752,7 +781,7 @@ Public Class frmPersonalFileStorage
 
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
 
-           If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
                 ShowFileTransferInProgressMessage()
                 Exit Sub
             End If
@@ -855,7 +884,9 @@ Public Class frmPersonalFileStorage
         End If
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
-            MessageBoxEx.Show("Cannot download Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
+            SelectedFolderName = Me.listViewEx1.SelectedItems(0).Text
+            bgwDownloadFolder.RunWorkerAsync(Me.listViewEx1.SelectedItems(0).SubItems(3).Text) ' folderid
             Exit Sub
         End If
 
@@ -946,9 +977,140 @@ Public Class frmPersonalFileStorage
         Me.Cursor = Cursors.Default
     End Sub
 
+
+
 #End Region
 
 
+#Region "DOWNLOAD FOLDER"
+    Private Sub bgwDownloadFolder_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadFolder.DoWork
+        Try
+
+            blDownloadIsProgressing = True
+
+            Dim folderid As String = e.Argument
+
+            Dim List As FilesResource.ListRequest = GDService.Files.List()
+
+            List.Q = "trashed = false and mimeType != 'application/vnd.google-apps.folder' and'" & folderid & "' in parents" ' list all files in parent folder. 
+
+
+            List.PageSize = 1000 ' maximum file list
+            List.Fields = "files(id, name, mimeType, size)"
+            List.OrderBy = "folder, name" 'sorting order
+
+            Dim Results As FileList = List.Execute
+
+            TotalFileCount = Results.Files.Count
+
+            If TotalFileCount = 0 Then
+                Exit Sub
+            End If
+
+            Dim SaveFolder As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & SelectedFolderName
+            My.Computer.FileSystem.CreateDirectory(SaveFolder)
+
+            For i = 0 To TotalFileCount - 1
+
+                If bgwDownloadFolder.CancellationPending Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
+
+                Dim Result = Results.Files(i)
+
+                dFileSize = Result.Size
+                Dim dFileID As String = Result.Id
+                Dim dFileName As String = Result.Name
+
+                SaveFileName = SaveFolder & "\" & dFileName
+
+                If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                    Dim fsize As Long = My.Computer.FileSystem.GetFileInfo(SaveFileName).Length
+                    If fsize = dFileSize Then
+                        bgwDownloadFolder.ReportProgress(i + 1, "Skipping existing file.")
+                        Continue For
+                    Else
+                        bgwDownloadFolder.ReportProgress(i + 1, "Re-downloading file.")
+                    End If
+                End If
+
+                If dFileSize > 0 Then
+
+                    bgwDownloadFolder.ReportProgress(i + 1, dFileName)
+
+                    dFormatedFileSize = CalculateFileSize(dFileSize)
+                    dBytesDownloaded = 0
+                    bgwDownloadFolder.ReportProgress(i + 1, dBytesDownloaded)
+
+                    Dim fStream = New System.IO.FileStream(SaveFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                    Dim mStream = New System.IO.MemoryStream
+
+                    Dim request = GDService.Files.Get(dFileID)
+
+                    Dim m = request.MediaDownloader
+                    m.ChunkSize = 256 * 1024
+
+                    AddHandler m.ProgressChanged, AddressOf FolderDownload_ProgressChanged
+                    request.DownloadWithStatus(mStream)
+
+                    If dDownloadStatus = DownloadStatus.Completed Then
+                        mStream.WriteTo(fStream)
+                    End If
+
+                    fStream.Close()
+                    mStream.Close()
+                End If
+            Next
+
+        Catch ex As Exception
+            blDownloadIsProgressing = False
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+
+    Private Sub FolderDownload_ProgressChanged(Progress As IDownloadProgress)
+
+        Control.CheckForIllegalCrossThreadCalls = False
+        dBytesDownloaded = Progress.BytesDownloaded
+        dDownloadStatus = Progress.Status
+        Dim percent = CInt((dBytesDownloaded / dFileSize) * 100)
+        bgwDownloadFolder.ReportProgress(percent, dBytesDownloaded)
+
+    End Sub
+
+    Private Sub bgwDownloadFolder_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadFolder.ProgressChanged
+
+        If TypeOf e.UserState Is String Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalFileCount
+            lblProgressStatus.Text = e.UserState
+        End If
+
+        If TypeOf e.UserState Is Long Then
+            lblProgressStatus.Text = CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
+        End If
+
+    End Sub
+
+    Private Sub bgwDownloadFolder_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadFolder.RunWorkerCompleted
+
+        Me.Cursor = Cursors.Default
+        HideProgressControls()
+        blDownloadIsProgressing = False
+
+        If TotalFileCount = 0 Then
+            MessageBoxEx.Show("No files in the folder")
+            Exit Sub
+        End If
+
+        Dim folder = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & SelectedFolderName
+        If My.Computer.FileSystem.DirectoryExists(folder) Then
+            Call Shell("explorer.exe " & folder, AppWinStyle.NormalFocus)
+        End If
+
+    End Sub
+#End Region
 #Region "DELETE FILE"
 
     Private Sub DeleteSelectedFile(sender As Object, e As EventArgs) Handles btnRemoveFile.Click
@@ -1353,5 +1515,6 @@ Public Class frmPersonalFileStorage
     End Sub
 
     
+  
   
 End Class
