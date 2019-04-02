@@ -366,6 +366,8 @@ Public Class frmMainInterface
 
             LoadOfficeSettingsToTextBoxes()
 
+            LoadModusOperandi()
+
             LoadNatureOfReport()
             IncrementCircularProgress(1)
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
@@ -1785,7 +1787,7 @@ Public Class frmMainInterface
 
         Me.PSRegisterTableAdapter.Fill(FingerPrintDataSet.PoliceStationList)
         Me.PSRegisterBindingSource.MoveFirst()
-        Dim drpdwnlenght As Integer
+        Dim drpdwnlength As Integer
         For i As Short = 0 To Me.FingerPrintDataSet.PoliceStationList.Count - 1
             Dim ps As String = Me.FingerPrintDataSet.PoliceStationList(i).PoliceStation
             Me.cmbSOCPoliceStation.Items.Add(ps)
@@ -1798,12 +1800,12 @@ Public Class frmMainInterface
         Next
         PSListChanged = False
 
-        drpdwnlenght = Me.cmbSOCPoliceStation.DropDownWidth
-        Me.cmbRSOCPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbDAPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbCDPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbIDPoliceStation.DropDownWidth = drpdwnlenght
-        Me.cmbACPoliceStation.DropDownWidth = drpdwnlenght
+        drpdwnlength = Me.cmbSOCPoliceStation.DropDownWidth
+        Me.cmbRSOCPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbDAPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbCDPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbIDPoliceStation.DropDownWidth = drpdwnlength
+        Me.cmbACPoliceStation.DropDownWidth = drpdwnlength
 
 
     End Sub
@@ -1819,6 +1821,28 @@ Public Class frmMainInterface
             cmb.DropDownWidth = newlength
         End If
 
+    End Sub
+#End Region
+
+
+#Region "LOAD MODUS OPERANDI"
+
+    Private Sub LoadModusOperandi()
+        Try
+            Me.cmbSOCModus.DropDownStyle = ComboBoxStyle.DropDown
+            Dim drpdwnlength As Integer = Me.cmbSOCModus.Width
+            Me.cmbSOCModus.Items.Clear()
+
+            For Each line As String In System.IO.File.ReadLines(strAppUserPath & "\WordTemplates\Modus.txt")
+                If line.Trim <> "" Then
+                    Me.cmbSOCModus.Items.Add(line)
+                    ChangeDropdownWidth(line, cmbSOCModus)
+                End If
+            Next
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 #End Region
 
@@ -2014,6 +2038,8 @@ Public Class frmMainInterface
 
             LoadPSList()
 
+            LoadModusOperandi()
+
             InitializeOfficerTable()
             '   LoadOfficerToMemory()
             LoadOfficerListToTable()
@@ -2174,7 +2200,7 @@ Public Class frmMainInterface
     Private Sub SetAutoCompleteMode() Handles cmbAutoCompletionMode.SelectedIndexChanged
         On Error Resume Next
         Dim mode As Integer = Me.cmbAutoCompletionMode.SelectedIndex
-        Me.txtSOCModus.AutoCompleteMode = mode
+        Me.cmbSOCModus.AutoCompleteMode = mode
         Me.txtSOCPlace.AutoCompleteMode = mode
         Me.txtSOCSection.AutoCompleteMode = mode
         Me.cmbSOCPoliceStation.AutoCompleteMode = mode
@@ -2256,10 +2282,9 @@ Public Class frmMainInterface
         Dim socmodus As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet.SOCRegisterAutoText.Count - 1
             socmodus.Add(FingerPrintDataSet.SOCRegisterAutoText(i).ModusOperandi)
-            '  If modus <> Nothing Then Me.txtSOCModus.AutoCompleteCustomSource.Add(modus)
         Next (i)
-        Me.txtSOCModus.AutoCompleteSource = AutoCompleteSource.CustomSource
-        Me.txtSOCModus.AutoCompleteCustomSource = socmodus
+        Me.cmbSOCModus.AutoCompleteSource = AutoCompleteSource.CustomSource
+        Me.cmbSOCModus.AutoCompleteCustomSource = socmodus
 
         Me.SOCRegisterAutoTextTableAdapter.FillBySection(FingerPrintDataSet.SOCRegisterAutoText)
 
@@ -2494,7 +2519,7 @@ Public Class frmMainInterface
     Private Sub AddTextsToAutoCompletionList() 'when u save and search 
         On Error Resume Next
         If CurrentTab = "SOC" Then
-            If Trim(Me.txtSOCModus.Text) <> vbNullString Then Me.txtSOCModus.AutoCompleteCustomSource.Add(Trim(Me.txtSOCModus.Text))
+            '   If Trim(Me.txtSOCModus.Text) <> vbNullString Then Me.txtSOCModus.AutoCompleteCustomSource.Add(Trim(Me.txtSOCModus.Text))
             If Trim(Me.txtSOCPlace.Text) <> vbNullString Then Me.txtSOCPlace.AutoCompleteCustomSource.Add(Trim(Me.txtSOCPlace.Text))
             If Trim(Me.txtSOCSection.Text) <> vbNullString Then Me.txtSOCSection.AutoCompleteCustomSource.Add(Trim(Me.txtSOCSection.Text))
             If Trim(Me.txtSOCPhotographer.Text) <> vbNullString Then Me.txtSOCPhotographer.AutoCompleteCustomSource.Add(Trim(Me.txtSOCPhotographer.Text))
@@ -3167,7 +3192,7 @@ Public Class frmMainInterface
 
     End Sub
 
-   Private Sub HandleDatagridDataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles SOCDatagrid.DataError, RSOCDatagrid.DataError, DADatagrid.DataError, IDDatagrid.DataError, ACDatagrid.DataError, FPADataGrid.DataError, ACDatagrid.DataError, PSDataGrid.DataError
+    Private Sub HandleDatagridDataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles SOCDatagrid.DataError, RSOCDatagrid.DataError, DADatagrid.DataError, IDDatagrid.DataError, ACDatagrid.DataError, FPADataGrid.DataError, ACDatagrid.DataError, PSDataGrid.DataError
         On Error Resume Next
         e.Cancel = True
         ' MessageBoxEx.Show(e.Exception.Message, AppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -3375,7 +3400,7 @@ Public Class frmMainInterface
         LoadPSDatagridColumnDefaultWidth()
         LoadIDRDatagridColumnDefaultWidth()
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowDesktopAlert("Column widths of all tables set to default widths!")
     End Sub
 
@@ -3410,7 +3435,7 @@ Public Class frmMainInterface
                 LoadIDRDatagridColumnDefaultWidth()
         End Select
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowDesktopAlert("Column widths of the current table set to default widths!")
     End Sub
 
@@ -3865,7 +3890,7 @@ Public Class frmMainInterface
         LoadCDDatagridColumnDefaultOrder()
         LoadPSDatagridColumnDefaultOrder()
         LoadIDRDatagridColumnDefaultOrder()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowDesktopAlert("Column order of all tables set to default order!")
     End Sub
 
@@ -3874,7 +3899,7 @@ Public Class frmMainInterface
         On Error Resume Next
         If CurrentTab = "IO" Then
             MessageBoxEx.Show("This option is not available for the current table", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
         Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("This action will reset the column order of the current table. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -3909,7 +3934,7 @@ Public Class frmMainInterface
                 Exit Sub
         End Select
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         ShowDesktopAlert("Column order of the current table set to default order!")
     End Sub
 
@@ -4780,7 +4805,7 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub StopCapiltalize(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblACAddress.Click, lblACAlias.Click, lblACFather.Click, lblACName.Click, lblDAAdress.Click, lblDAAlias.Click, lblDAFather.Click, lblDAName.Click, lblIDAddress.Click, lblIDAlias.Click, lblIDFather.Click, lblIDName.Click, lblFPAAddress.Click, lblFPAName.Click, lblFPAPassport.Click, lblSOCPhoto.Click, lblSOCPO.Click, lblSOCComplainant.Click, lblAutoCapsStatus.Click
+    Private Sub StopCapiltalize(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblACAddress.Click, lblACAlias.Click, lblACFather.Click, lblACName.Click, lblDAAdress.Click, lblDAAlias.Click, lblDAFather.Click, lblIDAddress.Click, lblIDAlias.Click, lblIDFather.Click, lblIDName.Click, lblFPAAddress.Click, lblFPAPassport.Click, lblSOCPhoto.Click, lblSOCPO.Click, lblSOCComplainant.Click, lblAutoCapsStatus.Click
         On Error Resume Next
         TemporarilyStopCapitalize = Not TemporarilyStopCapitalize
         DisplayAllCapsStatus(Not TemporarilyStopCapitalize)
@@ -4932,7 +4957,7 @@ Public Class frmMainInterface
 
     Private Function ImportImageFromScannerOrCamera(ByVal SaveLocation As String, Optional ByVal FileName As String = vbNullString) As String
         On Error GoTo errhandler
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         If Me.devmanager.DeviceInfos.Count = 0 Then
             MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return vbNullString
@@ -5060,7 +5085,7 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(FPImageImportLocation)
             Call Shell("explorer.exe " & FPImageImportLocation, AppWinStyle.NormalFocus)
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -5076,7 +5101,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified DA Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -5090,7 +5115,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified Identified Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -5104,7 +5129,7 @@ errhandler:
                         Call Shell("explorer.exe /select," & location, AppWinStyle.NormalFocus)
                     Else
                         MessageBoxEx.Show("The specified Active Criminal Slip Image file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
                 Else
@@ -5113,7 +5138,7 @@ errhandler:
 
         End Select
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -5248,7 +5273,7 @@ errhandler:
             End If
         End If
         DisplayDatabaseInformation()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -5405,7 +5430,7 @@ errhandler:
             DisplayDatabaseInformation()
 
         Catch ex As Exception
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -5672,7 +5697,7 @@ errhandler:
                 Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
-                Me.txtSOCModus.Text = .SelectedCells(16).Value.ToString
+                Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
                 Me.txtSOCPropertyLost.Text = .SelectedCells(17).Value.ToString
                 Me.txtSOCPhotographer.Text = .SelectedCells(18).Value.ToString
                 Me.cmbSOCPhotoReceived.Text = .SelectedCells(19).Value.ToString
@@ -6022,7 +6047,7 @@ errhandler:
                 Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
-                Me.txtSOCModus.Text = .SelectedCells(16).Value.ToString
+                Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
                 Me.txtSOCPropertyLost.Text = .SelectedCells(17).Value.ToString
                 Me.txtSOCPhotographer.Text = .SelectedCells(18).Value.ToString
                 Me.cmbSOCPhotoReceived.Text = .SelectedCells(19).Value.ToString
@@ -6090,7 +6115,7 @@ errhandler:
                 Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
-                Me.txtSOCModus.Text = .SelectedCells(16).Value.ToString
+                Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
                 Me.txtSOCPropertyLost.Text = .SelectedCells(17).Value.ToString
                 Me.txtSOCPhotographer.Text = .SelectedCells(18).Value.ToString
                 Me.cmbSOCPhotoReceived.Text = .SelectedCells(19).Value.ToString
@@ -6432,7 +6457,7 @@ errhandler:
                 Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
-                Me.txtSOCModus.Text = .SelectedCells(16).Value.ToString
+                Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
                 Me.txtSOCPropertyLost.Text = .SelectedCells(17).Value.ToString
                 Me.txtSOCPhotographer.Text = .SelectedCells(18).Value.ToString
                 Me.cmbSOCPhotoReceived.Text = .SelectedCells(19).Value.ToString
@@ -7718,7 +7743,7 @@ errhandler:
 
     End Sub
 
-    Private Sub ClearSelectedSOCFields(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.ButtonCustomClick, dtSOCOccurrence.ButtonCustomClick, txtSOCCrimeNumber.ButtonCustomClick, txtSOCSection.ButtonCustomClick, txtSOCPlace.ButtonCustomClick, txtSOCModus.ButtonCustomClick, txtPSName.ButtonCustomClick, txtSOCPhotographer.ButtonCustomClick, txtSOCDateOfPhotography.ButtonCustomClick, txtSOCOfficer.ButtonCustom2Click
+    Private Sub ClearSelectedSOCFields(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.ButtonCustomClick, dtSOCOccurrence.ButtonCustomClick, txtSOCCrimeNumber.ButtonCustomClick, txtSOCSection.ButtonCustomClick, txtSOCPlace.ButtonCustomClick, txtPSName.ButtonCustomClick, txtSOCPhotographer.ButtonCustomClick, txtSOCDateOfPhotography.ButtonCustomClick, txtSOCOfficer.ButtonCustom2Click
         On Error Resume Next
         DirectCast(sender, Control).Text = vbNullString
 
@@ -8171,7 +8196,7 @@ errhandler:
             Dim sec = Trim(Me.txtSOCSection.Text)
             Dim po = Trim(Me.txtSOCPlace.Text)
             Dim complainant = Trim(Me.txtSOCComplainant.Text)
-            Dim mo = Trim(Me.txtSOCModus.Text)
+            Dim mo = Trim(Me.cmbSOCModus.Text)
             Dim pl = Trim(Me.txtSOCPropertyLost.Text)
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
             Dim cpunfit = Me.txtSOCCPsUnfit.Value
@@ -8356,7 +8381,7 @@ errhandler:
             Dim sec = Trim(Me.txtSOCSection.Text)
             Dim po = Trim(Me.txtSOCPlace.Text)
             Dim complainant = Trim(Me.txtSOCComplainant.Text)
-            Dim mo = Trim(Me.txtSOCModus.Text)
+            Dim mo = Trim(Me.cmbSOCModus.Text)
             Dim pl = Trim(Me.txtSOCPropertyLost.Text)
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
             Dim cpunfit = Me.txtSOCCPsUnfit.Value
@@ -8570,7 +8595,7 @@ errhandler:
             Dim sec = Trim(Me.txtSOCSection.Text)
             Dim po = Trim(Me.txtSOCPlace.Text)
             Dim complainant = Trim(Me.txtSOCComplainant.Text)
-            Dim mo = Trim(Me.txtSOCModus.Text)
+            Dim mo = Trim(Me.cmbSOCModus.Text)
             Dim pl = Trim(Me.txtSOCPropertyLost.Text)
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
             Dim cpunfit = Me.txtSOCCPsUnfit.Value
@@ -8794,339 +8819,339 @@ errhandler:
 
 
     Public Sub SearchWithSOCNumber() Handles btnSOCFindByNumber.Click
-       Try
+        Try
 
-        If Me.txtSOCNumber.Text = "" Then
-            MessageBoxEx.Show("Please enter the SOC Number to search for.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            txtSOCNumber.Focus()
-            Exit Sub
-        End If
-        Me.Cursor = Cursors.WaitCursor
-        Me.SOCRegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.SOCRegister, Me.txtSOCNumber.Text)
-        DisplayDatabaseInformation()
-        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
-        Application.DoEvents()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Me.txtSOCNumber.Text = "" Then
+                MessageBoxEx.Show("Please enter the SOC Number to search for.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtSOCNumber.Focus()
+                Exit Sub
+            End If
+            Me.Cursor = Cursors.WaitCursor
+            Me.SOCRegisterTableAdapter.FillByNumber(Me.FingerPrintDataSet.SOCRegister, Me.txtSOCNumber.Text)
+            DisplayDatabaseInformation()
+            ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+            Application.DoEvents()
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
     Private Sub SearchWithGraveCrime() Handles btnSearchWithGraveCrime.Click
-       Try
-        Me.Cursor = Cursors.WaitCursor
-        Me.SOCRegisterTableAdapter.FillByGraveCrime(Me.FingerPrintDataSet.SOCRegister, Me.chkGraveCrime.Checked)
-        DisplayDatabaseInformation()
-        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
-        Application.DoEvents()
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Me.SOCRegisterTableAdapter.FillByGraveCrime(Me.FingerPrintDataSet.SOCRegister, Me.chkGraveCrime.Checked)
+            DisplayDatabaseInformation()
+            ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+            Application.DoEvents()
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
     End Sub
 
     Public Sub SearchSOC() Handles btnSearchSOC.Click
-       Try
-        Me.Cursor = Cursors.WaitCursor
+        Try
+            Me.Cursor = Cursors.WaitCursor
 
-        Dim sNumber = Me.txtSOCNumber.Text
+            Dim sNumber = Me.txtSOCNumber.Text
 
-        Dim dti = Me.dtSOCInspection.ValueObject
-        Dim dtr = Me.dtSOCReport.ValueObject
-        Dim dto = Me.dtSOCOccurrence.Text
-        Dim ps = cmbSOCPoliceStation.Text
-        Dim cr = txtSOCCrimeNumber.Text
-        Dim sec = txtSOCSection.Text
-        Dim po = txtSOCPlace.Text
-        Dim complainant = txtSOCComplainant.Text
-        Dim mo = txtSOCModus.Text
-        Dim pl = txtSOCPropertyLost.Text
-        Dim cpdeveloped = Me.txtSOCCPsDeveloped.Text
-        Dim cpunfit = Me.txtSOCCPsUnfit.Text
-        Dim cpeliminated = Me.txtSOCCPsEliminated.Text
-        Dim cpremaining = Me.txtSOCCPsRemaining.Text
-        Dim cpdetails = txtSOCCPDetails.Text
-        Dim photographer = Me.txtSOCPhotographer.Text
-        Dim photoreceived = Me.cmbSOCPhotoReceived.Text
-        Dim dateofreceptionofphoto = txtSOCDateOfPhotography.Text
-        Dim gist = Me.txtSOCGist.Text
-        Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
-        Dim comparison = txtSOCComparisonDetails.Text
-        Dim identificationdeatils = txtSOCIdentificationDetails.Text
+            Dim dti = Me.dtSOCInspection.ValueObject
+            Dim dtr = Me.dtSOCReport.ValueObject
+            Dim dto = Me.dtSOCOccurrence.Text
+            Dim ps = cmbSOCPoliceStation.Text
+            Dim cr = txtSOCCrimeNumber.Text
+            Dim sec = txtSOCSection.Text
+            Dim po = txtSOCPlace.Text
+            Dim complainant = txtSOCComplainant.Text
+            Dim mo = cmbSOCModus.Text
+            Dim pl = txtSOCPropertyLost.Text
+            Dim cpdeveloped = Me.txtSOCCPsDeveloped.Text
+            Dim cpunfit = Me.txtSOCCPsUnfit.Text
+            Dim cpeliminated = Me.txtSOCCPsEliminated.Text
+            Dim cpremaining = Me.txtSOCCPsRemaining.Text
+            Dim cpdetails = txtSOCCPDetails.Text
+            Dim photographer = Me.txtSOCPhotographer.Text
+            Dim photoreceived = Me.cmbSOCPhotoReceived.Text
+            Dim dateofreceptionofphoto = txtSOCDateOfPhotography.Text
+            Dim gist = Me.txtSOCGist.Text
+            Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
+            Dim comparison = txtSOCComparisonDetails.Text
+            Dim identificationdeatils = txtSOCIdentificationDetails.Text
 
-        Dim filestatus = Me.cmbFileStatus.Text
-        Dim identifiedby = Me.cmbIdentifiedByOfficer.Text
-        Dim cpsidentified = Me.txtCPsIdentified.Text
-        Dim dtidentified = Me.dtIdentificationDate.ValueObject
+            Dim filestatus = Me.cmbFileStatus.Text
+            Dim identifiedby = Me.cmbIdentifiedByOfficer.Text
+            Dim cpsidentified = Me.txtCPsIdentified.Text
+            Dim dtidentified = Me.dtIdentificationDate.ValueObject
 
-        If SearchSetting = 0 Then
-            sNumber = sNumber & "%"
-            dto = dto & "%"
-            ps = ps & "%"
-            cr = cr & "%"
-            sec = sec & "%"
-            po = po & "%"
-            complainant = complainant & "%"
-            mo = mo & "%"
-            pl = pl & "%"
-            cpdeveloped = cpdeveloped & "%"
-            cpunfit = cpunfit & "%"
-            cpeliminated = cpeliminated & "%"
-            cpremaining = cpremaining & "%"
-            cpdetails = cpdetails & "%"
-            photographer = photographer & "%"
-            photoreceived = photoreceived & "%"
-            dateofreceptionofphoto = dateofreceptionofphoto & "%"
-            gist = gist & "%"
-            inspectingofficer = inspectingofficer & "%"
-            comparison = comparison & "%"
-            identificationdeatils = identificationdeatils & "%"
-            filestatus = filestatus & "%"
-            identifiedby = identifiedby & "%"
-            cpsidentified = cpsidentified & "%"
+            If SearchSetting = 0 Then
+                sNumber = sNumber & "%"
+                dto = dto & "%"
+                ps = ps & "%"
+                cr = cr & "%"
+                sec = sec & "%"
+                po = po & "%"
+                complainant = complainant & "%"
+                mo = mo & "%"
+                pl = pl & "%"
+                cpdeveloped = cpdeveloped & "%"
+                cpunfit = cpunfit & "%"
+                cpeliminated = cpeliminated & "%"
+                cpremaining = cpremaining & "%"
+                cpdetails = cpdetails & "%"
+                photographer = photographer & "%"
+                photoreceived = photoreceived & "%"
+                dateofreceptionofphoto = dateofreceptionofphoto & "%"
+                gist = gist & "%"
+                inspectingofficer = inspectingofficer & "%"
+                comparison = comparison & "%"
+                identificationdeatils = identificationdeatils & "%"
+                filestatus = filestatus & "%"
+                identifiedby = identifiedby & "%"
+                cpsidentified = cpsidentified & "%"
 
-        End If
-
-
-        If SearchSetting = 1 Then
-            If sNumber = vbNullString Then sNumber = "%"
-            If dto = vbNullString Then dto = "%"
-            If ps = vbNullString Then ps = "%"
-            If cr = vbNullString Then cr = "%"
-            If sec = vbNullString Then sec = "%"
-            If po = vbNullString Then po = "%"
-            If complainant = vbNullString Then complainant = "%"
-            If mo = vbNullString Then mo = "%"
-            If pl = vbNullString Then pl = "%"
-            If cpdeveloped = vbNullString Then cpdeveloped = "%"
-            If cpunfit = vbNullString Then cpunfit = "%"
-            If cpeliminated = vbNullString Then cpeliminated = "%"
-            If cpremaining = vbNullString Then cpremaining = "%"
-            If cpdetails = vbNullString Then cpdetails = "%"
-            If photographer = vbNullString Then photographer = "%"
-            If photoreceived = vbNullString Then photoreceived = "%"
-            If cmbSOCPhotoReceived.Text = vbNullString Then dateofreceptionofphoto = "%"
-            If gist = vbNullString Then gist = "%"
-            If inspectingofficer = vbNullString Then inspectingofficer = "%"
-            If comparison = vbNullString Then comparison = "%"
-            If identificationdeatils = vbNullString Then identificationdeatils = "%"
-
-            If filestatus = vbNullString Then filestatus = "%"
-            If identifiedby = vbNullString Then identifiedby = "%"
-            If cpsidentified = vbNullString Then cpsidentified = "%"
-
-        End If
-
-        If SearchSetting = 2 Then
+            End If
 
 
-            sNumber = "%" & sNumber & "%"
-            dto = "%" & dto & "%"
-            ps = "%" & ps & "%"
-            cr = "%" & cr & "%"
-            sec = "%" & sec & "%"
-            po = "%" & po & "%"
-            complainant = "%" & complainant & "%"
-            mo = "%" & mo & "%"
-            pl = "%" & pl & "%"
-            cpdeveloped = "%" & cpdeveloped & "%"
-            cpunfit = "%" & cpunfit & "%"
-            cpeliminated = "%" & cpeliminated & "%"
-            cpremaining = "%" & cpremaining & "%"
-            cpdetails = "%" & cpdetails & "%"
-            photographer = "%" & photographer & "%"
-            photoreceived = "%" & photoreceived & "%"
-            dateofreceptionofphoto = "%" & dateofreceptionofphoto & "%"
-            gist = "%" & gist & "%"
-            inspectingofficer = "%" & inspectingofficer & "%"
-            comparison = "%" & comparison & "%"
-            identificationdeatils = "%" & identificationdeatils & "%"
-            filestatus = "%" & filestatus & "%"
-            identifiedby = "%" & identifiedby & "%"
-            cpsidentified = "%" & cpsidentified & "%"
-        End If
+            If SearchSetting = 1 Then
+                If sNumber = vbNullString Then sNumber = "%"
+                If dto = vbNullString Then dto = "%"
+                If ps = vbNullString Then ps = "%"
+                If cr = vbNullString Then cr = "%"
+                If sec = vbNullString Then sec = "%"
+                If po = vbNullString Then po = "%"
+                If complainant = vbNullString Then complainant = "%"
+                If mo = vbNullString Then mo = "%"
+                If pl = vbNullString Then pl = "%"
+                If cpdeveloped = vbNullString Then cpdeveloped = "%"
+                If cpunfit = vbNullString Then cpunfit = "%"
+                If cpeliminated = vbNullString Then cpeliminated = "%"
+                If cpremaining = vbNullString Then cpremaining = "%"
+                If cpdetails = vbNullString Then cpdetails = "%"
+                If photographer = vbNullString Then photographer = "%"
+                If photoreceived = vbNullString Then photoreceived = "%"
+                If cmbSOCPhotoReceived.Text = vbNullString Then dateofreceptionofphoto = "%"
+                If gist = vbNullString Then gist = "%"
+                If inspectingofficer = vbNullString Then inspectingofficer = "%"
+                If comparison = vbNullString Then comparison = "%"
+                If identificationdeatils = vbNullString Then identificationdeatils = "%"
 
-        If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
-            Me.SOCRegisterTableAdapter.FillWithoutDIDR(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
-        End If
+                If filestatus = vbNullString Then filestatus = "%"
+                If identifiedby = vbNullString Then identifiedby = "%"
+                If cpsidentified = vbNullString Then cpsidentified = "%"
 
-        If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
-            Me.SOCRegisterTableAdapter.FillByDIDR(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
-        End If
+            End If
 
-        If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
-            Me.SOCRegisterTableAdapter.FillByDR(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
-        End If
+            If SearchSetting = 2 Then
 
-        If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
-            Me.SOCRegisterTableAdapter.FillByDI(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
-        End If
 
-        DisplayDatabaseInformation()
-        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
-        Application.DoEvents()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                sNumber = "%" & sNumber & "%"
+                dto = "%" & dto & "%"
+                ps = "%" & ps & "%"
+                cr = "%" & cr & "%"
+                sec = "%" & sec & "%"
+                po = "%" & po & "%"
+                complainant = "%" & complainant & "%"
+                mo = "%" & mo & "%"
+                pl = "%" & pl & "%"
+                cpdeveloped = "%" & cpdeveloped & "%"
+                cpunfit = "%" & cpunfit & "%"
+                cpeliminated = "%" & cpeliminated & "%"
+                cpremaining = "%" & cpremaining & "%"
+                cpdetails = "%" & cpdetails & "%"
+                photographer = "%" & photographer & "%"
+                photoreceived = "%" & photoreceived & "%"
+                dateofreceptionofphoto = "%" & dateofreceptionofphoto & "%"
+                gist = "%" & gist & "%"
+                inspectingofficer = "%" & inspectingofficer & "%"
+                comparison = "%" & comparison & "%"
+                identificationdeatils = "%" & identificationdeatils & "%"
+                filestatus = "%" & filestatus & "%"
+                identifiedby = "%" & identifiedby & "%"
+                cpsidentified = "%" & cpsidentified & "%"
+            End If
+
+            If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
+                Me.SOCRegisterTableAdapter.FillWithoutDIDR(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+            End If
+
+            If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
+                Me.SOCRegisterTableAdapter.FillByDIDR(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+            End If
+
+            If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
+                Me.SOCRegisterTableAdapter.FillByDR(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+            End If
+
+            If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
+                Me.SOCRegisterTableAdapter.FillByDI(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+            End If
+
+            DisplayDatabaseInformation()
+            ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+            Application.DoEvents()
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
     Public Sub SearchSOCInSelectedYear() Handles btnSearchSOCInYear.Click
-       Try
-        Me.Cursor = Cursors.WaitCursor
-        Dim y As String = Me.txtSOCYear.Text
-        If y = vbNullString Then
-            MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtSOCYear.Focus()
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim y As String = Me.txtSOCYear.Text
+            If y = vbNullString Then
+                MessageBoxEx.Show("Please enter the year in the year field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtSOCYear.Focus()
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
 
             Dim d1 As Date = New Date(y, 1, 1)
             Dim d2 As Date = New Date(y, 12, 31)
-        Dim sNumber = Me.txtSOCNumber.Text
+            Dim sNumber = Me.txtSOCNumber.Text
 
-        Dim dti = Me.dtSOCInspection.ValueObject
-        Dim dtr = Me.dtSOCReport.ValueObject
-        Dim dto = Me.dtSOCOccurrence.Text
-        Dim ps = cmbSOCPoliceStation.Text
-        Dim cr = txtSOCCrimeNumber.Text
-        Dim sec = txtSOCSection.Text
-        Dim po = txtSOCPlace.Text
-        Dim complainant = txtSOCComplainant.Text
-        Dim mo = txtSOCModus.Text
-        Dim pl = txtSOCPropertyLost.Text
-        Dim cpdeveloped = Me.txtSOCCPsDeveloped.Text
-        Dim cpunfit = Me.txtSOCCPsUnfit.Text
-        Dim cpeliminated = Me.txtSOCCPsEliminated.Text
-        Dim cpremaining = Me.txtSOCCPsRemaining.Text
-        Dim cpdetails = txtSOCCPDetails.Text
-        Dim photographer = Me.txtSOCPhotographer.Text
-        Dim photoreceived = Me.cmbSOCPhotoReceived.Text
-        Dim dateofreceptionofphoto = txtSOCDateOfPhotography.Text
-        Dim gist = Me.txtSOCGist.Text
-        Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
-        Dim comparison = txtSOCComparisonDetails.Text
-        Dim identificationdetails = txtSOCIdentificationDetails.Text
-        Dim filestatus = Me.cmbFileStatus.Text
-        Dim identifiedby = Me.cmbIdentifiedByOfficer.Text
-        Dim cpsidentified = Me.txtCPsIdentified.Text
-        Dim dtidentified = Me.dtIdentificationDate.ValueObject
+            Dim dti = Me.dtSOCInspection.ValueObject
+            Dim dtr = Me.dtSOCReport.ValueObject
+            Dim dto = Me.dtSOCOccurrence.Text
+            Dim ps = cmbSOCPoliceStation.Text
+            Dim cr = txtSOCCrimeNumber.Text
+            Dim sec = txtSOCSection.Text
+            Dim po = txtSOCPlace.Text
+            Dim complainant = txtSOCComplainant.Text
+            Dim mo = cmbSOCModus.Text
+            Dim pl = txtSOCPropertyLost.Text
+            Dim cpdeveloped = Me.txtSOCCPsDeveloped.Text
+            Dim cpunfit = Me.txtSOCCPsUnfit.Text
+            Dim cpeliminated = Me.txtSOCCPsEliminated.Text
+            Dim cpremaining = Me.txtSOCCPsRemaining.Text
+            Dim cpdetails = txtSOCCPDetails.Text
+            Dim photographer = Me.txtSOCPhotographer.Text
+            Dim photoreceived = Me.cmbSOCPhotoReceived.Text
+            Dim dateofreceptionofphoto = txtSOCDateOfPhotography.Text
+            Dim gist = Me.txtSOCGist.Text
+            Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
+            Dim comparison = txtSOCComparisonDetails.Text
+            Dim identificationdetails = txtSOCIdentificationDetails.Text
+            Dim filestatus = Me.cmbFileStatus.Text
+            Dim identifiedby = Me.cmbIdentifiedByOfficer.Text
+            Dim cpsidentified = Me.txtCPsIdentified.Text
+            Dim dtidentified = Me.dtIdentificationDate.ValueObject
 
-        If SearchSetting = 0 Then
-            sNumber = sNumber & "%"
-            dto = dto & "%"
-            ps = ps & "%"
-            cr = cr & "%"
-            sec = sec & "%"
-            po = po & "%"
-            complainant = complainant & "%"
-            mo = mo & "%"
-            pl = pl & "%"
-            cpdeveloped = cpdeveloped & "%"
-            cpunfit = cpunfit & "%"
-            cpeliminated = cpeliminated & "%"
-            cpremaining = cpremaining & "%"
-            cpdetails = cpdetails & "%"
-            photographer = photographer & "%"
-            photoreceived = photoreceived & "%"
-            dateofreceptionofphoto = dateofreceptionofphoto & "%"
-            gist = gist & "%"
-            inspectingofficer = inspectingofficer & "%"
-            comparison = comparison & "%"
-            identificationdetails = identificationdetails & "%"
-            filestatus = filestatus & "%"
-            identifiedby = identifiedby & "%"
-            cpsidentified = cpsidentified & "%"
-        End If
-
-
-        If SearchSetting = 1 Then
-            If sNumber = vbNullString Then sNumber = "%"
-            If dto = vbNullString Then dto = "%"
-            If ps = vbNullString Then ps = "%"
-            If cr = vbNullString Then cr = "%"
-            If sec = vbNullString Then sec = "%"
-            If po = vbNullString Then po = "%"
-            If complainant = vbNullString Then complainant = "%"
-            If mo = vbNullString Then mo = "%"
-            If pl = vbNullString Then pl = "%"
-            If cpdeveloped = vbNullString Then cpdeveloped = "%"
-            If cpunfit = vbNullString Then cpunfit = "%"
-            If cpeliminated = vbNullString Then cpeliminated = "%"
-            If cpremaining = vbNullString Then cpremaining = "%"
-            If cpdetails = vbNullString Then cpdetails = "%"
-            If photographer = vbNullString Then photographer = "%"
-            If photoreceived = vbNullString Then photoreceived = "%"
-            If cmbSOCPhotoReceived.Text = vbNullString Then dateofreceptionofphoto = "%"
-            If gist = vbNullString Then gist = "%"
-            If inspectingofficer = vbNullString Then inspectingofficer = "%"
-            If comparison = vbNullString Then comparison = "%"
-            If identificationdetails = vbNullString Then identificationdetails = "%"
-            If filestatus = vbNullString Then filestatus = "%"
-            If identifiedby = vbNullString Then identifiedby = "%"
-            If cpsidentified = vbNullString Then cpsidentified = "%"
-        End If
-
-        If SearchSetting = 2 Then
+            If SearchSetting = 0 Then
+                sNumber = sNumber & "%"
+                dto = dto & "%"
+                ps = ps & "%"
+                cr = cr & "%"
+                sec = sec & "%"
+                po = po & "%"
+                complainant = complainant & "%"
+                mo = mo & "%"
+                pl = pl & "%"
+                cpdeveloped = cpdeveloped & "%"
+                cpunfit = cpunfit & "%"
+                cpeliminated = cpeliminated & "%"
+                cpremaining = cpremaining & "%"
+                cpdetails = cpdetails & "%"
+                photographer = photographer & "%"
+                photoreceived = photoreceived & "%"
+                dateofreceptionofphoto = dateofreceptionofphoto & "%"
+                gist = gist & "%"
+                inspectingofficer = inspectingofficer & "%"
+                comparison = comparison & "%"
+                identificationdetails = identificationdetails & "%"
+                filestatus = filestatus & "%"
+                identifiedby = identifiedby & "%"
+                cpsidentified = cpsidentified & "%"
+            End If
 
 
-            sNumber = "%" & sNumber & "%"
-            dto = "%" & dto & "%"
-            ps = "%" & ps & "%"
-            cr = "%" & cr & "%"
-            sec = "%" & sec & "%"
-            po = "%" & po & "%"
-            complainant = "%" & complainant & "%"
-            mo = "%" & mo & "%"
-            pl = "%" & pl & "%"
-            cpdeveloped = "%" & cpdeveloped & "%"
-            cpunfit = "%" & cpunfit & "%"
-            cpeliminated = "%" & cpeliminated & "%"
-            cpremaining = "%" & cpremaining & "%"
-            cpdetails = "%" & cpdetails & "%"
-            photographer = "%" & photographer & "%"
-            photoreceived = "%" & photoreceived & "%"
-            dateofreceptionofphoto = "%" & dateofreceptionofphoto & "%"
-            gist = "%" & gist & "%"
-            inspectingofficer = "%" & inspectingofficer & "%"
-            comparison = "%" & comparison & "%"
-            identificationdetails = "%" & identificationdetails & "%"
-            filestatus = "%" & filestatus & "%"
-            identifiedby = "%" & identifiedby & "%"
-            cpsidentified = "%" & cpsidentified & "%"
-        End If
+            If SearchSetting = 1 Then
+                If sNumber = vbNullString Then sNumber = "%"
+                If dto = vbNullString Then dto = "%"
+                If ps = vbNullString Then ps = "%"
+                If cr = vbNullString Then cr = "%"
+                If sec = vbNullString Then sec = "%"
+                If po = vbNullString Then po = "%"
+                If complainant = vbNullString Then complainant = "%"
+                If mo = vbNullString Then mo = "%"
+                If pl = vbNullString Then pl = "%"
+                If cpdeveloped = vbNullString Then cpdeveloped = "%"
+                If cpunfit = vbNullString Then cpunfit = "%"
+                If cpeliminated = vbNullString Then cpeliminated = "%"
+                If cpremaining = vbNullString Then cpremaining = "%"
+                If cpdetails = vbNullString Then cpdetails = "%"
+                If photographer = vbNullString Then photographer = "%"
+                If photoreceived = vbNullString Then photoreceived = "%"
+                If cmbSOCPhotoReceived.Text = vbNullString Then dateofreceptionofphoto = "%"
+                If gist = vbNullString Then gist = "%"
+                If inspectingofficer = vbNullString Then inspectingofficer = "%"
+                If comparison = vbNullString Then comparison = "%"
+                If identificationdetails = vbNullString Then identificationdetails = "%"
+                If filestatus = vbNullString Then filestatus = "%"
+                If identifiedby = vbNullString Then identifiedby = "%"
+                If cpsidentified = vbNullString Then cpsidentified = "%"
+            End If
 
-        If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
-            Me.SOCRegisterTableAdapter.FillWithoutDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
-        End If
+            If SearchSetting = 2 Then
 
-        If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
-            Me.SOCRegisterTableAdapter.FillByDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
-        End If
 
-        If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
-            Me.SOCRegisterTableAdapter.FillByDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
-        End If
+                sNumber = "%" & sNumber & "%"
+                dto = "%" & dto & "%"
+                ps = "%" & ps & "%"
+                cr = "%" & cr & "%"
+                sec = "%" & sec & "%"
+                po = "%" & po & "%"
+                complainant = "%" & complainant & "%"
+                mo = "%" & mo & "%"
+                pl = "%" & pl & "%"
+                cpdeveloped = "%" & cpdeveloped & "%"
+                cpunfit = "%" & cpunfit & "%"
+                cpeliminated = "%" & cpeliminated & "%"
+                cpremaining = "%" & cpremaining & "%"
+                cpdetails = "%" & cpdetails & "%"
+                photographer = "%" & photographer & "%"
+                photoreceived = "%" & photoreceived & "%"
+                dateofreceptionofphoto = "%" & dateofreceptionofphoto & "%"
+                gist = "%" & gist & "%"
+                inspectingofficer = "%" & inspectingofficer & "%"
+                comparison = "%" & comparison & "%"
+                identificationdetails = "%" & identificationdetails & "%"
+                filestatus = "%" & filestatus & "%"
+                identifiedby = "%" & identifiedby & "%"
+                cpsidentified = "%" & cpsidentified & "%"
+            End If
 
-        If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
-            Me.SOCRegisterTableAdapter.FillByDISelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
-        End If
+            If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
+                Me.SOCRegisterTableAdapter.FillWithoutDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+            End If
 
-        DisplayDatabaseInformation()
-        ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
-        Application.DoEvents()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
+                Me.SOCRegisterTableAdapter.FillByDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+            End If
+
+            If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
+                Me.SOCRegisterTableAdapter.FillByDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+            End If
+
+            If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
+                Me.SOCRegisterTableAdapter.FillByDISelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+            End If
+
+            DisplayDatabaseInformation()
+            ShowDesktopAlert("Search finished. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
+            Application.DoEvents()
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -16800,6 +16825,9 @@ errhandler:
             Next
 
             LoadPSList()
+
+            LoadModusOperandi()
+
             InitializeOfficerTable()
             LoadOfficerToMemory()
             LoadOfficerListToTable()
