@@ -222,6 +222,12 @@
     <Compile Include="FrmSOC-ListOfIdentifiedCases.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUpdateAlert.Designer.vb">
+      <DependentUpon>frmUpdateAlert.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateAlert.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmWeeklyDiary.Designer.vb">
       <DependentUpon>frmWeeklyDiary.vb</DependentUpon>
     </Compile>
@@ -680,6 +686,9 @@
     <EmbeddedResource Include="FrmTourNote.resx">
       <DependentUpon>FrmTourNote.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateAlert.resx">
+      <DependentUpon>frmUpdateAlert.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmViewChancePrints.resx">
       <DependentUpon>FrmViewChancePrints.vb</DependentUpon>

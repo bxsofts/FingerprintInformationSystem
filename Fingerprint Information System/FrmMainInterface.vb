@@ -17102,6 +17102,10 @@ errhandler:
     End Sub
 
     Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
+
+        frmUpdateAlert.ShowDialog()
+        Exit Sub
+
         Me.Cursor = Cursors.WaitCursor
         ShowPleaseWaitForm()
         If InternetAvailable() = False Then
