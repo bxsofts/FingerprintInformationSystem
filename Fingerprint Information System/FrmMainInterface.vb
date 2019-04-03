@@ -103,7 +103,7 @@ Public Class frmMainInterface
     Dim InstallerFileName As String = ""
     Dim InstallerFileID As String = ""
     Dim InstallerFileURL As String = "" '"https://drive.google.com/file/d/1vyGdhxjXUWjkcgTE_rTT7juiMSBA-UKc/view"
-    Dim InstallerFileVersion As String = ""
+
     Public dBytesDownloaded As Long
     Public dDownloadStatus As DownloadStatus
     Public dFileSize As Long
@@ -16980,9 +16980,6 @@ errhandler:
     Private Sub bgwDownloadInstaller_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadInstaller.DoWork
         Try
 
-
-
-
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
             Dim VersionFolder As String = "Version"
@@ -17045,8 +17042,6 @@ errhandler:
 
             End If
 
-
-
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -17103,9 +17098,6 @@ errhandler:
 
     Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
 
-        frmUpdateAlert.ShowDialog()
-        Exit Sub
-
         Me.Cursor = Cursors.WaitCursor
         ShowPleaseWaitForm()
         If InternetAvailable() = False Then
@@ -17117,7 +17109,18 @@ errhandler:
 
         If CheckForUpdates() Then
             ClosePleaseWaitForm()
-            If MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+            Application.DoEvents()
+            blDownloadUpdate = False
+
+            If My.Computer.FileSystem.FileExists(strAppUserPath & "\VersionHistory.rtf") Then
+                frmUpdateAlert.ShowDialog()
+            Else
+                Dim d = MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                If d = Windows.Forms.DialogResult.Yes Then blDownloadUpdate = True
+            End If
+
+
+            If blDownloadUpdate Then
                 ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
                 DownloadInstaller()
             End If
@@ -17130,8 +17133,6 @@ errhandler:
     End Sub
 
     Private Function CheckForUpdates() As Boolean
-
-
 
         If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
             Return False
@@ -17174,7 +17175,28 @@ errhandler:
                 InstallerFileURL = Results.Files(0).WebViewLink
                 InstallerFileVersion = InstallerFileVersion.Substring(InstallerFileVersion.Length - 8).Remove(4)
                 Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
+
                 If InstallerFileVersion > LocalVersion Then
+
+                    List.Q = "name = 'VersionHistory.rtf' and trashed = false"
+                    List.Fields = "files(name, id)"
+
+                    Results = List.Execute
+
+                    If Results.Files.Count > 0 Then
+                        Dim fileid = Results.Files(0).Id
+                        Dim request = FISService.Files.Get(fileid)
+
+                        Dim fStream = New System.IO.FileStream(strAppUserPath & "\VersionHistory.rtf", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                        Dim mStream = New System.IO.MemoryStream
+
+                        request.DownloadWithStatus(mStream)
+
+                        mStream.WriteTo(fStream)
+
+                        fStream.Close()
+                        mStream.Close()
+                    End If
                     Return True
                 End If
             End If
@@ -17184,6 +17206,7 @@ errhandler:
             Return False
         End Try
     End Function
+
 
     Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
         If InternetAvailable() = False Then
@@ -17195,12 +17218,24 @@ errhandler:
 
     Private Sub bgwUpdateChecker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateChecker.ProgressChanged
         If e.ProgressPercentage = 100 And e.UserState = True Then
-            If MessageBoxEx.Show("A new version '" & strAppName & " V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information) = Windows.Forms.DialogResult.Yes Then
+
+            blDownloadUpdate = False
+
+            If My.Computer.FileSystem.FileExists(strAppUserPath & "\VersionHistory.rtf") Then
+                frmUpdateAlert.ShowDialog()
+            Else
+                Dim d = MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                If d = Windows.Forms.DialogResult.Yes Then blDownloadUpdate = True
+            End If
+
+            If blDownloadUpdate Then
                 ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
                 DownloadInstaller()
             End If
+
         End If
     End Sub
+
 
 #End Region
 
