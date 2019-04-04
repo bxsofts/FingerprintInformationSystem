@@ -125,7 +125,12 @@ Public Class frmSOCStatement
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.Paragraphs.DecreaseSpacing()
 
-            WordApp.Selection.TypeText(("STATEMENT OF SCENES OF CRIME INSPECTED BY " & FullOfficeName & ", " & FullDistrictName & " " & vbCrLf & headertext).ToUpper)
+            WordApp.Selection.Font.Underline = 1
+            WordApp.Selection.TypeText((FullOfficeName & ", " & FullDistrictName).ToUpper & vbCrLf)
+
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeText("SCENE OF CRIME STATEMENT " & headertext.ToUpper)
+
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.TypeParagraph()
@@ -145,19 +150,19 @@ Public Class frmSOCStatement
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.Tables.Item(1).AllowAutoFit = True
-            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(30, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(40, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(75, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
-            'WordApp.Selection.Tables.Item(1).Columns(12).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
+            '  WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(35, Word.WdRulerStyle.wdAdjustFirstColumn) 'sl
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(40, Word.WdRulerStyle.wdAdjustFirstColumn) 'socno
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'ps
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn) 'di
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn) 'do
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'po
+            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(75, Word.WdRulerStyle.wdAdjustFirstColumn) 'pl
+            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn) 'mo
+            WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpd
+            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpu
+            WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpr
+            WordApp.Selection.Tables.Item(1).Columns(12).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'fpe
 
             For delay = 31 To 40
                 bgwWord.ReportProgress(delay)
@@ -167,7 +172,7 @@ Public Class frmSOCStatement
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Sl.No.")
+            WordApp.Selection.TypeText("Sl.No")
 
 
             WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
@@ -193,42 +198,37 @@ Public Class frmSOCStatement
             WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Inspecting Officer")
+            WordApp.Selection.TypeText("Place of Occurrence")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Place of Occurrence")
+            WordApp.Selection.TypeText("Property Lost")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Property Lost")
+            WordApp.Selection.TypeText("Modus Operandi")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Modus Operandi")
+            WordApp.Selection.TypeText("No. of CPs Developed")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("No. of CPs Developed")
+            WordApp.Selection.TypeText("No. of CPs unfit & inmate")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 11).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Photographer & Date on photographed")
+            WordApp.Selection.TypeText("No. of CPs remain for search & Details of comparison")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 12).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Photographer & Date on photographed")
-
-            WordApp.Selection.Tables.Item(1).Cell(1, 12).Select()
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Details of Comparison and Disposal")
+            WordApp.Selection.TypeText("Name of FP Expert who inspected the SOC")
 
             For delay = 41 To 50
                 bgwWord.ReportProgress(delay)
@@ -269,45 +269,51 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfOccurrence)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
-                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).InvestigatingOfficer)
-
-                WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PlaceOfOccurrence)
 
-                WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
+                WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                 WordApp.Selection.Font.Name = "Rupee Foradian"
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.Font.Size = 8
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PropertyLost)
 
-                WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
-                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).ModusOperandi)
+                WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
+                Dim mo = Me.FingerPrintDataSet.SOCRegister(j).ModusOperandi
 
-                WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
+                Dim SplitText() = Strings.Split(mo, " - ")
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u = 0 Then
+                    mo = SplitText(0)
+                End If
+
+                If u = 1 Then
+                    mo = SplitText(1)
+                End If
+
+                WordApp.Selection.TypeText(mo)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 Dim cpdeveloped As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped
                 WordApp.Selection.TypeText(cpdeveloped)
 
+                WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
+                Dim cpunfit As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit
+                Dim cpinmate As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated
+                WordApp.Selection.TypeText("Unfit - " & cpunfit & vbCrLf & "Inmate - " & cpinmate)
+
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                Dim photographer As String = Me.FingerPrintDataSet.SOCRegister(j).Photographer.ToLower
-
-                If photographer <> "" And photographer <> "no photographer" Then
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).Photographer & vbNewLine & Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
-                Else
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).Photographer)
-                End If
-
-                WordApp.Selection.Tables.Item(1).Cell(i, 12).Select()
+                Dim cpr As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsRemaining
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails
                 If Trim(Remarks) = "" Then
-                    If cpdeveloped = 0 Then Remarks = "No action pending"
-                    If cpdeveloped > 0 Then
-                        Dim cpremaining As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsRemaining
-                        If cpremaining > 0 Then Remarks = "Search continuing"
-                        If cpremaining = 0 Then Remarks = "Fully eliminated or unfit"
-                    End If
+                    If cpdeveloped = 0 Or cpr = 0 Then Remarks = "No action pending."
+                    If cpdeveloped > 0 And cpr > 0 Then Remarks = "Search continuing."
                 End If
-                WordApp.Selection.TypeText(Remarks)
+                WordApp.Selection.TypeText("CPs remaining - " & cpr & vbCrLf & Remarks)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 12).Select()
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).InvestigatingOfficer)
 
                 For delay = delay To delay + iteration
                     If delay < 99 Then

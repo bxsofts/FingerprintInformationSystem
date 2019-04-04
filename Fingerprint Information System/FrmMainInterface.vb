@@ -7935,48 +7935,7 @@ errhandler:
 
         If Me.txtSOCCPsDeveloped.Value = 0 Then
             Me.txtSOCComparisonDetails.Text = "No action pending."
-            Exit Sub
         End If
-
-        Me.txtSOCComparisonDetails.Clear()
-
-        If Me.txtSOCCPsDeveloped.Value = Me.txtSOCCPsUnfit.Value Then
-            If Me.txtSOCCPsDeveloped.Value = 1 Then
-                Me.txtSOCComparisonDetails.Text = "Unfit"
-            Else
-                Me.txtSOCComparisonDetails.Text = "All CPs unfit"
-            End If
-            Exit Sub
-        End If
-
-        If Me.txtSOCCPsDeveloped.Value = Me.txtSOCCPsEliminated.Value Then
-            If Me.txtSOCCPsDeveloped.Value = 1 Then
-                Me.txtSOCComparisonDetails.Text = "Eliminated"
-            Else
-                Me.txtSOCComparisonDetails.Text = "All CPs eliminated"
-            End If
-            Exit Sub
-        End If
-
-        If Me.txtSOCCPsUnfit.Value = 1 Then Me.txtSOCComparisonDetails.Text = "1 CP unfit"
-        If Me.txtSOCCPsUnfit.Value > 1 Then Me.txtSOCComparisonDetails.Text = Me.txtSOCCPsUnfit.Text & " CPs unfit"
-        If Me.txtSOCCPsEliminated.Value = 1 Then
-            If Me.txtSOCComparisonDetails.Text.Length = 0 Then
-                Me.txtSOCComparisonDetails.Text = Me.txtSOCComparisonDetails.Text & "1 CP eliminated"
-            Else
-                Me.txtSOCComparisonDetails.Text = Me.txtSOCComparisonDetails.Text & vbNewLine & "1 CP eliminated"
-            End If
-        End If
-
-        If Me.txtSOCCPsEliminated.Value > 1 Then
-            If Me.txtSOCComparisonDetails.Text.Length = 0 Then
-                Me.txtSOCComparisonDetails.Text = Me.txtSOCComparisonDetails.Text & Me.txtSOCCPsEliminated.Text & " CPs eliminated"
-            Else
-                Me.txtSOCComparisonDetails.Text = Me.txtSOCComparisonDetails.Text & vbNewLine & Me.txtSOCCPsEliminated.Text & " CPs eliminated"
-            End If
-        End If
-
-        Me.txtSOCComparisonDetails.Select(Me.txtSOCComparisonDetails.Text.Length, 0)
 
     End Sub
 
