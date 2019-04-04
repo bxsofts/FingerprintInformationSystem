@@ -272,10 +272,13 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PlaceOfOccurrence)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
-                WordApp.Selection.Font.Name = "Rupee Foradian"
-                WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 8
-                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PropertyLost)
+                Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
+                If pl.Contains("`") Then
+                    WordApp.Selection.Font.Name = "Rupee Foradian"
+                    WordApp.Selection.Font.Size = 8
+                End If
+               
+                WordApp.Selection.TypeText(pl)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                 Dim mo = Me.FingerPrintDataSet.SOCRegister(j).ModusOperandi

@@ -343,8 +343,8 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.MinimizeBox = False
         Me.Name = "FrmSOC_ListOfIdentifiedCases"
         Me.ShowInTaskbar = False
-        Me.Text = "List of Identified Cases"
-        Me.TitleText = "<b>List of Identified Cases</b>"
+        Me.Text = "Identification Statement"
+        Me.TitleText = "<b>Identification Statement</b>"
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()

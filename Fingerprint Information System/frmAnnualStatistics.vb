@@ -813,7 +813,7 @@ Public Class frmAnnualStatistics
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
-            
+
 
             If idcount >= 1 Then
                 For i = 2 To rows
