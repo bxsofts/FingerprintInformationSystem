@@ -121,6 +121,11 @@ Public Class frmMainInterface
     Private Sub LoadForm() Handles MyBase.Load
 
         On Error Resume Next
+
+        If Not frmSplashScreen.Visible Then
+            ShowPleaseWaitForm()
+        End If
+
         ChangeCursor(Cursors.WaitCursor)
 
         frmSplashScreen.ShowProgressBar()
@@ -141,6 +146,10 @@ Public Class frmMainInterface
         If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
+
+        If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
+        Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
+        Me.CommonSettingsTableAdapter1.Connection.Open()
 
         LoadOfficeSettingsToMemory()
 
@@ -363,7 +372,7 @@ Public Class frmMainInterface
             IncrementCircularProgress(3)
             LoadOfficerListToTable()
 
-            LoadOfficeSettingsToMemory()
+            '   LoadOfficeSettingsToMemory()
 
             LoadOfficeSettingsToTextBoxes()
 
@@ -423,11 +432,13 @@ Public Class frmMainInterface
         ' Me.BringToFront()
         ' Me.Activate()
 
-        SetForegroundWindow(MyBase.Handle)
-
         ChangeCursor(Cursors.Default)
         System.Threading.Thread.Sleep(1000)
+        ClosePleaseWaitForm()
         frmSplashScreen.CloseForm()
+
+        SetForegroundWindow(MyBase.Handle)
+
         SetRandomDesktopAlertColor()
         ShowDesktopAlert("Welcome to " & strAppName & "!<br/>" & msg)
 
@@ -851,6 +862,12 @@ Public Class frmMainInterface
             CPImageImportLocation = Me.FingerPrintDataSet.Settings(0).CPImageImportLocation
         End If
 
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "PdlIdentificationStatement")
+        count = Me.FingerPrintDataSet.CommonSettings.Count
+        If count = 1 Then
+            PdlIdentificationStatement = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
+        End If
+
     End Sub
 
 
@@ -869,6 +886,7 @@ Public Class frmMainInterface
         Me.txtGraveCrime.Text = PdlGraveCrime
         Me.txtVigilanceCase.Text = PdlVigilanceCase
         Me.txtWeeklyDiary.Text = PdlWeeklyDiary
+        Me.txtIdentificationPdlNumber.Text = PdlIdentificationStatement.Trim
         OfficeSettingsEditMode(False)
     End Sub
     Public Sub SetWindowTitle()
@@ -894,6 +912,9 @@ Public Class frmMainInterface
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
+        If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
+        Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
+        Me.CommonSettingsTableAdapter1.Connection.Open()
 
         If Me.SOCRegisterAutoTextTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterAutoTextTableAdapter.Connection.Close()
         Me.SOCRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
@@ -2020,7 +2041,9 @@ Public Class frmMainInterface
         FrmSettingsWizard.ShowDialog()
 
         If boolSettingsWizardCancelled = False Then
+            ShowPleaseWaitForm()
             ReloadDataAfterSettingsWizardClose()
+            ClosePleaseWaitForm()
         End If
 
         boolSettingsWizardCancelled = False
@@ -14056,6 +14079,7 @@ errhandler:
         Me.txtGraveCrime.Enabled = allow
         Me.txtVigilanceCase.Enabled = allow
         Me.txtWeeklyDiary.Enabled = allow
+        Me.txtIdentificationPdlNumber.Enabled = allow
     End Sub
     Private Sub SaveOfficeSettings() Handles btnSaveOfficeSettings.Click
         Try
@@ -14077,6 +14101,7 @@ errhandler:
             PdlGraveCrime = IIf(Me.txtGraveCrime.Text = "", "   ", Me.txtGraveCrime.Text)
             PdlVigilanceCase = IIf(Me.txtVigilanceCase.Text = "", "   ", Me.txtVigilanceCase.Text)
             PdlWeeklyDiary = IIf(Me.txtWeeklyDiary.Text = "", "   ", Me.txtWeeklyDiary.Text)
+            PdlIdentificationStatement = IIf(Me.txtIdentificationPdlNumber.Text = "", "   ", Me.txtIdentificationPdlNumber.Text)
 
             Me.SettingsTableAdapter1.Fill(Me.FingerPrintDataSet1.Settings)
             Dim count = Me.FingerPrintDataSet1.Settings.Count
@@ -14087,6 +14112,14 @@ errhandler:
             Else
                 Me.SettingsTableAdapter1.UpdateQuery(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, FPImageImportLocation, CPImageImportLocation, PdlAttendance, PdlIndividualPerformance, PdlRBWarrant, PdlSOCDAStatement, PdlTABill, PdlFPAttestation, PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
             End If
+
+            Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet1.CommonSettings, "PdlIdentificationStatement")
+            If Me.FingerPrintDataSet1.CommonSettings.Count = 0 Then
+                Me.CommonSettingsTableAdapter1.Insert("PdlIdentificationStatement", PdlIdentificationStatement, "")
+            Else
+                Me.CommonSettingsTableAdapter1.UpdateQuery(PdlIdentificationStatement, "", "PdlIdentificationStatement")
+            End If
+
             SetWindowTitle()
 
             ShowDesktopAlert("Office Settings updated!")

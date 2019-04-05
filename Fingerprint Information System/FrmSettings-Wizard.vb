@@ -15,9 +15,6 @@ Public Class FrmSettingsWizard
             ShowDotNetWarning()
             boolSettingsWizardCancelled = False
 
-
-
-
             If (firstrun = False And boolShowWizard = False) Then
                 frmMainInterface.Show()
                 Me.Close()
@@ -64,9 +61,14 @@ Public Class FrmSettingsWizard
             Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
             Me.SettingsTableAdapter1.Connection.Open()
 
+            If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
+            Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
+            Me.CommonSettingsTableAdapter1.Connection.Open()
+
             PdlGraveCrime = Trim(My.Computer.Registry.GetValue(strGeneralSettingsPath, "PdlGraveCrime", "12"))
             PdlVigilanceCase = Trim(My.Computer.Registry.GetValue(strGeneralSettingsPath, "PdlVigilanceCase", "6"))
             PdlWeeklyDiary = Trim(My.Computer.Registry.GetValue(strGeneralSettingsPath, "PdlWeeklyDiary", ""))
+
 
             If frmMainInterface.DoesTableExist("Settings", sConString) = False Then 'older version of database
                 frmMainInterface.CreateSettingsTable()
@@ -159,6 +161,22 @@ Public Class FrmSettingsWizard
                 Me.txtPhotographer.Text = IIf(Me.FingerPrintDataSet1.OfficerTable(0).Photographer = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).Photographer)
             End If
 
+            If frmMainInterface.DoesTableExist("CommonSettings", sConString) = False Then 'older version of database
+                frmMainInterface.CreateCommonSettingsTable()
+                Application.DoEvents()
+                PdlIdentificationStatement = ""
+            Else
+                Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet1.CommonSettings, "PdlIdentificationStatement")
+                If Me.FingerPrintDataSet1.CommonSettings.Count = 0 Then
+                    PdlIdentificationStatement = ""
+                End If
+
+                If Me.FingerPrintDataSet1.CommonSettings.Count = 1 Then
+                    PdlIdentificationStatement = Me.FingerPrintDataSet1.CommonSettings(0).SettingsValue
+                End If
+            End If
+
+            Me.txtIdentificationStmt.Text = PdlIdentificationStatement.Trim
 
             Me.SettingsWizard.SelectedPageIndex = 0
             Exit Sub
@@ -273,6 +291,9 @@ Public Class FrmSettingsWizard
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.SettingsTableAdapter1.Connection.Open()
 
+        If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
+        Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
+        Me.CommonSettingsTableAdapter1.Connection.Open()
 
         Me.OfficerTableTableAdapter1.Fill(Me.FingerPrintDataSet1.OfficerTable)
         Dim cnt = Me.FingerPrintDataSet1.OfficerTable.Count
@@ -310,6 +331,7 @@ Public Class FrmSettingsWizard
         PdlGraveCrime = IIf(Me.txtGraveCrime.Text = "", "   ", Me.txtGraveCrime.Text)
         PdlVigilanceCase = IIf(Me.txtVigilanceCase.Text = "", "   ", Me.txtVigilanceCase.Text)
         PdlWeeklyDiary = IIf(Me.txtWeeklyDiary.Text = "", "   ", Me.txtWeeklyDiary.Text)
+        PdlIdentificationStatement = IIf(Me.txtIdentificationStmt.Text = "", "   ", Me.txtIdentificationStmt.Text)
 
         CPImageImportLocation = Me.lblCPLocation.Text
         FPImageImportLocation = Me.lblFPLocation.Text
@@ -324,11 +346,18 @@ Public Class FrmSettingsWizard
             Me.SettingsTableAdapter1.UpdateQuery(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, FPImageImportLocation, CPImageImportLocation, PdlAttendance, PdlIndividualPerformance, PdlRBWarrant, PdlSOCDAStatement, PdlTABill, PdlFPAttestation, PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
         End If
 
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet1.CommonSettings, "PdlIdentificationStatement")
+        If Me.FingerPrintDataSet1.CommonSettings.Count = 0 Then
+            Me.CommonSettingsTableAdapter1.Insert("PdlIdentificationStatement", PdlIdentificationStatement, "")
+        Else
+            Me.CommonSettingsTableAdapter1.UpdateQuery(PdlIdentificationStatement, "", "PdlIdentificationStatement")
+        End If
+
+
         boolSettingsWizardCancelled = False
 
         frmMainInterface.Show()
         Me.Hide()
-
     End Sub
 
     Private Sub AfterUnitPageDisplayed(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.WizardPageChangeEventArgs) Handles wzrdPageOfficeUnit.AfterPageDisplayed

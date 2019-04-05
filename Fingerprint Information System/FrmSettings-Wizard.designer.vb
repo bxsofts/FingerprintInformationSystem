@@ -58,6 +58,8 @@ Partial Class FrmSettingsWizard
         Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
         Me.wzrdPagePeriodical = New DevComponents.DotNetBar.WizardPage()
+        Me.txtIdentificationStmt = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX26 = New DevComponents.DotNetBar.LabelX()
         Me.txtWeeklyDiary = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX21 = New DevComponents.DotNetBar.LabelX()
         Me.txtVigilanceCase = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -99,6 +101,7 @@ Partial Class FrmSettingsWizard
         Me.OfficerTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.OfficerTableTableAdapter()
         Me.SettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SettingsTableAdapter()
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
+        Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.SettingsWizard.SuspendLayout()
         Me.StartPage.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -291,7 +294,7 @@ Partial Class FrmSettingsWizard
         '
         Me.LabelX25.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX25.ForeColor = System.Drawing.Color.Red
-        Me.LabelX25.Location = New System.Drawing.Point(519, 175)
+        Me.LabelX25.Location = New System.Drawing.Point(515, 173)
         Me.LabelX25.Name = "LabelX25"
         Me.LabelX25.Size = New System.Drawing.Size(8, 18)
         Me.LabelX25.TabIndex = 17
@@ -305,7 +308,7 @@ Partial Class FrmSettingsWizard
         '
         Me.LabelX24.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX24.ForeColor = System.Drawing.Color.Red
-        Me.LabelX24.Location = New System.Drawing.Point(519, 134)
+        Me.LabelX24.Location = New System.Drawing.Point(515, 132)
         Me.LabelX24.Name = "LabelX24"
         Me.LabelX24.Size = New System.Drawing.Size(8, 18)
         Me.LabelX24.TabIndex = 16
@@ -319,7 +322,7 @@ Partial Class FrmSettingsWizard
         '
         Me.LabelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX23.ForeColor = System.Drawing.Color.Red
-        Me.LabelX23.Location = New System.Drawing.Point(519, 93)
+        Me.LabelX23.Location = New System.Drawing.Point(515, 91)
         Me.LabelX23.Name = "LabelX23"
         Me.LabelX23.Size = New System.Drawing.Size(8, 18)
         Me.LabelX23.TabIndex = 15
@@ -333,7 +336,7 @@ Partial Class FrmSettingsWizard
         '
         Me.LabelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX22.ForeColor = System.Drawing.Color.Red
-        Me.LabelX22.Location = New System.Drawing.Point(519, 52)
+        Me.LabelX22.Location = New System.Drawing.Point(515, 50)
         Me.LabelX22.Name = "LabelX22"
         Me.LabelX22.Size = New System.Drawing.Size(8, 18)
         Me.LabelX22.TabIndex = 14
@@ -351,7 +354,7 @@ Partial Class FrmSettingsWizard
         Me.txtFullDistrict.FocusHighlightEnabled = True
         Me.txtFullDistrict.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFullDistrict.ForeColor = System.Drawing.Color.Black
-        Me.txtFullDistrict.Location = New System.Drawing.Point(204, 129)
+        Me.txtFullDistrict.Location = New System.Drawing.Point(204, 127)
         Me.txtFullDistrict.MaxLength = 255
         Me.txtFullDistrict.Name = "txtFullDistrict"
         Me.txtFullDistrict.Size = New System.Drawing.Size(309, 29)
@@ -371,7 +374,7 @@ Partial Class FrmSettingsWizard
         Me.txtShortDistrict.FocusHighlightEnabled = True
         Me.txtShortDistrict.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtShortDistrict.ForeColor = System.Drawing.Color.Black
-        Me.txtShortDistrict.Location = New System.Drawing.Point(204, 170)
+        Me.txtShortDistrict.Location = New System.Drawing.Point(204, 168)
         Me.txtShortDistrict.MaxLength = 255
         Me.txtShortDistrict.Name = "txtShortDistrict"
         Me.txtShortDistrict.Size = New System.Drawing.Size(309, 29)
@@ -386,7 +389,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(83, 175)
+        Me.LabelX2.Location = New System.Drawing.Point(83, 173)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(114, 18)
         Me.LabelX2.TabIndex = 13
@@ -399,7 +402,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(83, 134)
+        Me.LabelX5.Location = New System.Drawing.Point(83, 132)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.Size = New System.Drawing.Size(104, 18)
         Me.LabelX5.TabIndex = 12
@@ -417,7 +420,7 @@ Partial Class FrmSettingsWizard
         Me.txtShortOffice.FocusHighlightEnabled = True
         Me.txtShortOffice.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtShortOffice.ForeColor = System.Drawing.Color.Black
-        Me.txtShortOffice.Location = New System.Drawing.Point(204, 88)
+        Me.txtShortOffice.Location = New System.Drawing.Point(204, 86)
         Me.txtShortOffice.MaxLength = 255
         Me.txtShortOffice.Name = "txtShortOffice"
         Me.txtShortOffice.Size = New System.Drawing.Size(309, 29)
@@ -437,7 +440,7 @@ Partial Class FrmSettingsWizard
         Me.txtFullOffice.FocusHighlightEnabled = True
         Me.txtFullOffice.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFullOffice.ForeColor = System.Drawing.Color.Black
-        Me.txtFullOffice.Location = New System.Drawing.Point(204, 47)
+        Me.txtFullOffice.Location = New System.Drawing.Point(204, 45)
         Me.txtFullOffice.MaxLength = 255
         Me.txtFullOffice.Name = "txtFullOffice"
         Me.txtFullOffice.Size = New System.Drawing.Size(309, 29)
@@ -452,7 +455,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(83, 93)
+        Me.LabelX6.Location = New System.Drawing.Point(83, 91)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.Size = New System.Drawing.Size(107, 18)
         Me.LabelX6.TabIndex = 8
@@ -522,7 +525,7 @@ Partial Class FrmSettingsWizard
         Me.txtPhotographer.FocusHighlightEnabled = True
         Me.txtPhotographer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPhotographer.ForeColor = System.Drawing.Color.Black
-        Me.txtPhotographer.Location = New System.Drawing.Point(204, 189)
+        Me.txtPhotographer.Location = New System.Drawing.Point(204, 187)
         Me.txtPhotographer.Name = "txtPhotographer"
         Me.txtPhotographer.Size = New System.Drawing.Size(309, 29)
         Me.txtPhotographer.TabIndex = 24
@@ -536,7 +539,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX17.Location = New System.Drawing.Point(83, 194)
+        Me.LabelX17.Location = New System.Drawing.Point(83, 192)
         Me.LabelX17.Name = "LabelX17"
         Me.LabelX17.Size = New System.Drawing.Size(81, 18)
         Me.LabelX17.TabIndex = 25
@@ -554,7 +557,7 @@ Partial Class FrmSettingsWizard
         Me.txtFPS.FocusHighlightEnabled = True
         Me.txtFPS.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFPS.ForeColor = System.Drawing.Color.Black
-        Me.txtFPS.Location = New System.Drawing.Point(204, 152)
+        Me.txtFPS.Location = New System.Drawing.Point(204, 150)
         Me.txtFPS.Name = "txtFPS"
         Me.txtFPS.Size = New System.Drawing.Size(309, 29)
         Me.txtFPS.TabIndex = 22
@@ -568,7 +571,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX16.Location = New System.Drawing.Point(83, 157)
+        Me.LabelX16.Location = New System.Drawing.Point(83, 155)
         Me.LabelX16.Name = "LabelX16"
         Me.LabelX16.Size = New System.Drawing.Size(71, 18)
         Me.LabelX16.TabIndex = 23
@@ -586,7 +589,7 @@ Partial Class FrmSettingsWizard
         Me.txtFPE2.FocusHighlightEnabled = True
         Me.txtFPE2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFPE2.ForeColor = System.Drawing.Color.Black
-        Me.txtFPE2.Location = New System.Drawing.Point(204, 77)
+        Me.txtFPE2.Location = New System.Drawing.Point(204, 76)
         Me.txtFPE2.Name = "txtFPE2"
         Me.txtFPE2.Size = New System.Drawing.Size(309, 29)
         Me.txtFPE2.TabIndex = 18
@@ -605,7 +608,7 @@ Partial Class FrmSettingsWizard
         Me.txtFPE3.FocusHighlightEnabled = True
         Me.txtFPE3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFPE3.ForeColor = System.Drawing.Color.Black
-        Me.txtFPE3.Location = New System.Drawing.Point(204, 114)
+        Me.txtFPE3.Location = New System.Drawing.Point(204, 113)
         Me.txtFPE3.Name = "txtFPE3"
         Me.txtFPE3.Size = New System.Drawing.Size(309, 29)
         Me.txtFPE3.TabIndex = 19
@@ -619,7 +622,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX12.Location = New System.Drawing.Point(83, 119)
+        Me.LabelX12.Location = New System.Drawing.Point(83, 118)
         Me.LabelX12.Name = "LabelX12"
         Me.LabelX12.Size = New System.Drawing.Size(69, 18)
         Me.LabelX12.TabIndex = 21
@@ -632,7 +635,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX13.Location = New System.Drawing.Point(83, 82)
+        Me.LabelX13.Location = New System.Drawing.Point(83, 81)
         Me.LabelX13.Name = "LabelX13"
         Me.LabelX13.Size = New System.Drawing.Size(69, 18)
         Me.LabelX13.TabIndex = 20
@@ -650,7 +653,7 @@ Partial Class FrmSettingsWizard
         Me.txtFPE1.FocusHighlightEnabled = True
         Me.txtFPE1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFPE1.ForeColor = System.Drawing.Color.Black
-        Me.txtFPE1.Location = New System.Drawing.Point(204, 40)
+        Me.txtFPE1.Location = New System.Drawing.Point(204, 39)
         Me.txtFPE1.Name = "txtFPE1"
         Me.txtFPE1.Size = New System.Drawing.Size(309, 29)
         Me.txtFPE1.TabIndex = 17
@@ -669,7 +672,7 @@ Partial Class FrmSettingsWizard
         Me.txtTI.FocusHighlightEnabled = True
         Me.txtTI.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTI.ForeColor = System.Drawing.Color.Black
-        Me.txtTI.Location = New System.Drawing.Point(204, 4)
+        Me.txtTI.Location = New System.Drawing.Point(204, 2)
         Me.txtTI.Name = "txtTI"
         Me.txtTI.Size = New System.Drawing.Size(309, 29)
         Me.txtTI.TabIndex = 15
@@ -683,7 +686,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX14.Location = New System.Drawing.Point(83, 45)
+        Me.LabelX14.Location = New System.Drawing.Point(83, 44)
         Me.LabelX14.Name = "LabelX14"
         Me.LabelX14.Size = New System.Drawing.Size(69, 18)
         Me.LabelX14.TabIndex = 16
@@ -710,6 +713,8 @@ Partial Class FrmSettingsWizard
         Me.wzrdPagePeriodical.AntiAlias = False
         Me.wzrdPagePeriodical.BackColor = System.Drawing.Color.Transparent
         Me.wzrdPagePeriodical.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.wzrdPagePeriodical.Controls.Add(Me.txtIdentificationStmt)
+        Me.wzrdPagePeriodical.Controls.Add(Me.LabelX26)
         Me.wzrdPagePeriodical.Controls.Add(Me.txtWeeklyDiary)
         Me.wzrdPagePeriodical.Controls.Add(Me.LabelX21)
         Me.wzrdPagePeriodical.Controls.Add(Me.txtVigilanceCase)
@@ -748,6 +753,37 @@ Partial Class FrmSettingsWizard
         Me.wzrdPagePeriodical.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.wzrdPagePeriodical.TabIndex = 13
         '
+        'txtIdentificationStmt
+        '
+        Me.txtIdentificationStmt.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIdentificationStmt.Border.Class = "TextBoxBorder"
+        Me.txtIdentificationStmt.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIdentificationStmt.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIdentificationStmt.FocusHighlightEnabled = True
+        Me.txtIdentificationStmt.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIdentificationStmt.ForeColor = System.Drawing.Color.Black
+        Me.txtIdentificationStmt.Location = New System.Drawing.Point(220, 138)
+        Me.txtIdentificationStmt.MaxLength = 2
+        Me.txtIdentificationStmt.Name = "txtIdentificationStmt"
+        Me.txtIdentificationStmt.Size = New System.Drawing.Size(90, 29)
+        Me.txtIdentificationStmt.TabIndex = 4
+        '
+        'LabelX26
+        '
+        Me.LabelX26.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX26.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX26.Location = New System.Drawing.Point(73, 143)
+        Me.LabelX26.Name = "LabelX26"
+        Me.LabelX26.Size = New System.Drawing.Size(140, 18)
+        Me.LabelX26.TabIndex = 32
+        Me.LabelX26.Text = "Identification Statement"
+        '
         'txtWeeklyDiary
         '
         Me.txtWeeklyDiary.BackColor = System.Drawing.Color.White
@@ -760,11 +796,11 @@ Partial Class FrmSettingsWizard
         Me.txtWeeklyDiary.FocusHighlightEnabled = True
         Me.txtWeeklyDiary.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWeeklyDiary.ForeColor = System.Drawing.Color.Black
-        Me.txtWeeklyDiary.Location = New System.Drawing.Point(466, 148)
+        Me.txtWeeklyDiary.Location = New System.Drawing.Point(466, 173)
         Me.txtWeeklyDiary.MaxLength = 2
         Me.txtWeeklyDiary.Name = "txtWeeklyDiary"
         Me.txtWeeklyDiary.Size = New System.Drawing.Size(90, 29)
-        Me.txtWeeklyDiary.TabIndex = 9
+        Me.txtWeeklyDiary.TabIndex = 10
         '
         'LabelX21
         '
@@ -773,7 +809,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX21.Location = New System.Drawing.Point(327, 152)
+        Me.LabelX21.Location = New System.Drawing.Point(327, 178)
         Me.LabelX21.Name = "LabelX21"
         Me.LabelX21.Size = New System.Drawing.Size(77, 18)
         Me.LabelX21.TabIndex = 30
@@ -791,11 +827,11 @@ Partial Class FrmSettingsWizard
         Me.txtVigilanceCase.FocusHighlightEnabled = True
         Me.txtVigilanceCase.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtVigilanceCase.ForeColor = System.Drawing.Color.Black
-        Me.txtVigilanceCase.Location = New System.Drawing.Point(466, 113)
+        Me.txtVigilanceCase.Location = New System.Drawing.Point(466, 138)
         Me.txtVigilanceCase.MaxLength = 2
         Me.txtVigilanceCase.Name = "txtVigilanceCase"
         Me.txtVigilanceCase.Size = New System.Drawing.Size(90, 29)
-        Me.txtVigilanceCase.TabIndex = 8
+        Me.txtVigilanceCase.TabIndex = 9
         '
         'LabelX20
         '
@@ -804,7 +840,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX20.Location = New System.Drawing.Point(327, 117)
+        Me.LabelX20.Location = New System.Drawing.Point(327, 143)
         Me.LabelX20.Name = "LabelX20"
         Me.LabelX20.Size = New System.Drawing.Size(83, 18)
         Me.LabelX20.TabIndex = 28
@@ -822,7 +858,7 @@ Partial Class FrmSettingsWizard
         Me.txtGraveCrime.FocusHighlightEnabled = True
         Me.txtGraveCrime.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtGraveCrime.ForeColor = System.Drawing.Color.Black
-        Me.txtGraveCrime.Location = New System.Drawing.Point(210, 78)
+        Me.txtGraveCrime.Location = New System.Drawing.Point(220, 103)
         Me.txtGraveCrime.MaxLength = 2
         Me.txtGraveCrime.Name = "txtGraveCrime"
         Me.txtGraveCrime.Size = New System.Drawing.Size(90, 29)
@@ -835,7 +871,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX19.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX19.Location = New System.Drawing.Point(73, 82)
+        Me.LabelX19.Location = New System.Drawing.Point(73, 108)
         Me.LabelX19.Name = "LabelX19"
         Me.LabelX19.Size = New System.Drawing.Size(72, 18)
         Me.LabelX19.TabIndex = 26
@@ -853,7 +889,7 @@ Partial Class FrmSettingsWizard
         Me.txtFPAttestation.FocusHighlightEnabled = True
         Me.txtFPAttestation.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFPAttestation.ForeColor = System.Drawing.Color.Black
-        Me.txtFPAttestation.Location = New System.Drawing.Point(210, 43)
+        Me.txtFPAttestation.Location = New System.Drawing.Point(220, 68)
         Me.txtFPAttestation.MaxLength = 2
         Me.txtFPAttestation.Name = "txtFPAttestation"
         Me.txtFPAttestation.Size = New System.Drawing.Size(90, 29)
@@ -866,7 +902,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX18.Location = New System.Drawing.Point(73, 47)
+        Me.LabelX18.Location = New System.Drawing.Point(73, 73)
         Me.LabelX18.Name = "LabelX18"
         Me.LabelX18.Size = New System.Drawing.Size(86, 18)
         Me.LabelX18.TabIndex = 24
@@ -879,7 +915,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX11.Location = New System.Drawing.Point(327, 12)
+        Me.LabelX11.Location = New System.Drawing.Point(73, 9)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.Size = New System.Drawing.Size(167, 18)
         Me.LabelX11.TabIndex = 1
@@ -898,11 +934,11 @@ Partial Class FrmSettingsWizard
         Me.txtTABill.FocusHighlightEnabled = True
         Me.txtTABill.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTABill.ForeColor = System.Drawing.Color.Black
-        Me.txtTABill.Location = New System.Drawing.Point(466, 78)
+        Me.txtTABill.Location = New System.Drawing.Point(466, 103)
         Me.txtTABill.MaxLength = 2
         Me.txtTABill.Name = "txtTABill"
         Me.txtTABill.Size = New System.Drawing.Size(90, 29)
-        Me.txtTABill.TabIndex = 7
+        Me.txtTABill.TabIndex = 8
         '
         'txtRBWarrant
         '
@@ -916,11 +952,11 @@ Partial Class FrmSettingsWizard
         Me.txtRBWarrant.FocusHighlightEnabled = True
         Me.txtRBWarrant.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRBWarrant.ForeColor = System.Drawing.Color.Black
-        Me.txtRBWarrant.Location = New System.Drawing.Point(210, 148)
+        Me.txtRBWarrant.Location = New System.Drawing.Point(466, 33)
         Me.txtRBWarrant.MaxLength = 2
         Me.txtRBWarrant.Name = "txtRBWarrant"
         Me.txtRBWarrant.Size = New System.Drawing.Size(90, 29)
-        Me.txtRBWarrant.TabIndex = 5
+        Me.txtRBWarrant.TabIndex = 6
         '
         'txtSOCDAStatement
         '
@@ -934,11 +970,11 @@ Partial Class FrmSettingsWizard
         Me.txtSOCDAStatement.FocusHighlightEnabled = True
         Me.txtSOCDAStatement.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSOCDAStatement.ForeColor = System.Drawing.Color.Black
-        Me.txtSOCDAStatement.Location = New System.Drawing.Point(466, 43)
+        Me.txtSOCDAStatement.Location = New System.Drawing.Point(466, 68)
         Me.txtSOCDAStatement.MaxLength = 2
         Me.txtSOCDAStatement.Name = "txtSOCDAStatement"
         Me.txtSOCDAStatement.Size = New System.Drawing.Size(90, 29)
-        Me.txtSOCDAStatement.TabIndex = 6
+        Me.txtSOCDAStatement.TabIndex = 7
         '
         'txtIndividualPerformance
         '
@@ -952,11 +988,11 @@ Partial Class FrmSettingsWizard
         Me.txtIndividualPerformance.FocusHighlightEnabled = True
         Me.txtIndividualPerformance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtIndividualPerformance.ForeColor = System.Drawing.Color.Black
-        Me.txtIndividualPerformance.Location = New System.Drawing.Point(210, 113)
+        Me.txtIndividualPerformance.Location = New System.Drawing.Point(220, 173)
         Me.txtIndividualPerformance.MaxLength = 2
         Me.txtIndividualPerformance.Name = "txtIndividualPerformance"
         Me.txtIndividualPerformance.Size = New System.Drawing.Size(90, 29)
-        Me.txtIndividualPerformance.TabIndex = 4
+        Me.txtIndividualPerformance.TabIndex = 5
         '
         'txtAttendance
         '
@@ -970,7 +1006,7 @@ Partial Class FrmSettingsWizard
         Me.txtAttendance.FocusHighlightEnabled = True
         Me.txtAttendance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAttendance.ForeColor = System.Drawing.Color.Black
-        Me.txtAttendance.Location = New System.Drawing.Point(210, 8)
+        Me.txtAttendance.Location = New System.Drawing.Point(220, 33)
         Me.txtAttendance.MaxLength = 2
         Me.txtAttendance.Name = "txtAttendance"
         Me.txtAttendance.Size = New System.Drawing.Size(90, 29)
@@ -983,7 +1019,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX10.Location = New System.Drawing.Point(327, 82)
+        Me.LabelX10.Location = New System.Drawing.Point(327, 108)
         Me.LabelX10.Name = "LabelX10"
         Me.LabelX10.Size = New System.Drawing.Size(39, 18)
         Me.LabelX10.TabIndex = 18
@@ -996,7 +1032,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(327, 47)
+        Me.LabelX3.Location = New System.Drawing.Point(327, 73)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(133, 18)
         Me.LabelX3.TabIndex = 17
@@ -1009,7 +1045,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(73, 152)
+        Me.LabelX4.Location = New System.Drawing.Point(327, 38)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(99, 18)
         Me.LabelX4.TabIndex = 16
@@ -1022,7 +1058,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX8.Location = New System.Drawing.Point(73, 117)
+        Me.LabelX8.Location = New System.Drawing.Point(73, 178)
         Me.LabelX8.Name = "LabelX8"
         Me.LabelX8.Size = New System.Drawing.Size(134, 18)
         Me.LabelX8.TabIndex = 15
@@ -1035,7 +1071,7 @@ Partial Class FrmSettingsWizard
         '
         '
         Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX9.Location = New System.Drawing.Point(73, 12)
+        Me.LabelX9.Location = New System.Drawing.Point(73, 38)
         Me.LabelX9.Name = "LabelX9"
         Me.LabelX9.Size = New System.Drawing.Size(67, 18)
         Me.LabelX9.TabIndex = 14
@@ -1133,7 +1169,7 @@ Partial Class FrmSettingsWizard
         Me.Label7.AutoSize = True
         Me.Label7.BackColor = System.Drawing.Color.Transparent
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(339, 122)
+        Me.Label7.Location = New System.Drawing.Point(339, 121)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(33, 15)
         Me.Label7.TabIndex = 60
@@ -1151,7 +1187,7 @@ Partial Class FrmSettingsWizard
         Me.txtBackupInterval.FocusHighlightEnabled = True
         Me.txtBackupInterval.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBackupInterval.ForeColor = System.Drawing.Color.Black
-        Me.txtBackupInterval.Location = New System.Drawing.Point(268, 116)
+        Me.txtBackupInterval.Location = New System.Drawing.Point(268, 115)
         Me.txtBackupInterval.MaxLength = 2
         Me.txtBackupInterval.Name = "txtBackupInterval"
         Me.txtBackupInterval.Size = New System.Drawing.Size(65, 27)
@@ -1366,6 +1402,10 @@ Partial Class FrmSettingsWizard
         Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
         Me.StyleManager1.MetroColorParameters = New DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer)), System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(115, Byte), Integer), CType(CType(199, Byte), Integer)))
         '
+        'CommonSettingsTableAdapter1
+        '
+        Me.CommonSettingsTableAdapter1.ClearBeforeFill = True
+        '
         'FrmSettingsWizard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -1480,4 +1520,7 @@ Partial Class FrmSettingsWizard
     Friend WithEvents LabelX24 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX23 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX22 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents txtIdentificationStmt As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents LabelX26 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents CommonSettingsTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter
 End Class
