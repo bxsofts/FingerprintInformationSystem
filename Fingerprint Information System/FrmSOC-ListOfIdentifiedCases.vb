@@ -10,6 +10,9 @@ Public Class FrmSOC_ListOfIdentifiedCases
     Dim d2 As Date
 
     Dim strStatementPeriod As String = ""
+
+    Dim blsavefile As Boolean = False
+    Dim SaveFileName As String
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -74,6 +77,17 @@ Public Class FrmSOC_ListOfIdentifiedCases
                         d1 = New Date(y, m, 1)
                         d2 = New Date(y, m, d)
                         strStatementPeriod = " FOR THE MONTH OF  " & Me.cmbMonth.Text.ToUpper & " " & Me.txtYear.Text
+
+                        blsavefile = True
+                        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement\" & y
+                        System.IO.Directory.CreateDirectory(SaveFolder)
+                        SaveFileName = SaveFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+
+                        If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                            Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+                            Me.Cursor = Cursors.Default
+                            Exit Sub
+                        End If
                     Else
                         MessageBoxEx.Show("Please select the year", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         Me.txtYear.Focus()
@@ -90,6 +104,7 @@ Public Class FrmSOC_ListOfIdentifiedCases
                         Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
+                    blsavefile = False
                     strStatementPeriod = " FOR THE PERIOD FROM " & Me.dtFrom.Text & " TO " & Me.dtTo.Text
             End Select
 
@@ -408,6 +423,8 @@ Public Class FrmSOC_ListOfIdentifiedCases
                 System.Threading.Thread.Sleep(10)
             Next
 
+            If Not FileInUse(SaveFileName) And blsavefile And idcount > 0 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -435,5 +452,26 @@ Public Class FrmSOC_ListOfIdentifiedCases
     End Sub
 
 
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+            Dim m = Me.cmbMonth.SelectedIndex + 1
+            Dim y = Me.txtYear.Value
 
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement"
+            System.IO.Directory.CreateDirectory(SaveFolder)
+            Dim sFileName = SaveFolder & "\" & y & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+
+            If My.Computer.FileSystem.FileExists(sFileName) Then
+                Call Shell("explorer.exe /select," & sFileName, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+            Else
+                Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
+            End If
+
+        Catch ex As Exception
+            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+   
 End Class

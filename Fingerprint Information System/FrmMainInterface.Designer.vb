@@ -208,6 +208,7 @@ Partial Class frmMainInterface
         Me.btnAttendanceStmt2 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnAttendance = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGraveCrimeCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIndividualPerformanceCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRBWarrant = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSOCCL = New DevComponents.DotNetBar.ButtonItem()
@@ -1117,7 +1118,7 @@ Partial Class frmMainInterface
         Me.bgwUpdateChecker = New System.ComponentModel.BackgroundWorker()
         Me.bgwVersionUploader = New System.ComponentModel.BackgroundWorker()
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
-        Me.btnGraveCrimeCL = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIdentificationStmtCL = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -2112,13 +2113,18 @@ Partial Class frmMainInterface
         '
         Me.btnCL.ForeColor = System.Drawing.Color.Red
         Me.btnCL.Name = "btnCL"
-        Me.btnCL.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAttendance, Me.btnGraveCrimeCL, Me.btnIndividualPerformanceCL, Me.btnRBWarrant, Me.btnSOCCL, Me.btnTABill, Me.btnForwardPhoto, Me.chkUseTIAtBottomOfLetter})
+        Me.btnCL.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnAttendance, Me.btnGraveCrimeCL, Me.btnIdentificationStmtCL, Me.btnIndividualPerformanceCL, Me.btnRBWarrant, Me.btnSOCCL, Me.btnTABill, Me.btnForwardPhoto, Me.chkUseTIAtBottomOfLetter})
         Me.btnCL.Text = "Covering Letters"
         '
         'btnAttendance
         '
         Me.btnAttendance.Name = "btnAttendance"
         Me.btnAttendance.Text = "Attendance"
+        '
+        'btnGraveCrimeCL
+        '
+        Me.btnGraveCrimeCL.Name = "btnGraveCrimeCL"
+        Me.btnGraveCrimeCL.Text = "Grave Crime Statement"
         '
         'btnIndividualPerformanceCL
         '
@@ -14630,10 +14636,10 @@ Partial Class frmMainInterface
         '
         Me.LastModificationTableAdapter.ClearBeforeFill = true
         '
-        'btnGraveCrimeCL
+        'btnIdentificationStmtCL
         '
-        Me.btnGraveCrimeCL.Name = "btnGraveCrimeCL"
-        Me.btnGraveCrimeCL.Text = "Grave Crime"
+        Me.btnIdentificationStmtCL.Name = "btnIdentificationStmtCL"
+        Me.btnIdentificationStmtCL.Text = "Identification Statement"
         '
         'frmMainInterface
         '
@@ -15780,5 +15786,6 @@ End Sub
     Friend WithEvents btnPersonalOnlineFiles As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents cmbSOCModus As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnGraveCrimeCL As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnIdentificationStmtCL As DevComponents.DotNetBar.ButtonItem
 
 End Class

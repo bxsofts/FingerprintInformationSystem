@@ -198,7 +198,7 @@ Public Class FrmSOCGraveCrimes
                         System.Threading.Thread.Sleep(2)
                     Next
 
-                    If Not FileInUse(SaveFileName) And blsavefile Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                    '    If Not FileInUse(SaveFileName) And blsavefile Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
                     WordApp.Visible = True
                     WordApp.Activate()
@@ -524,7 +524,7 @@ Public Class FrmSOCGraveCrimes
             End If
 
 
-            If Not FileInUse(SaveFileName) And blsavefile Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And blsavefile And RowCount > 3 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
          
             For delay = 96 To 100
                 bgwLetter.ReportProgress(delay)

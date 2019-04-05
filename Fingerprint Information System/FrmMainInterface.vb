@@ -15762,7 +15762,7 @@ errhandler:
 
 
 #Region "COVERING LETTERS"
-    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click, btnGraveCrimeCL.Click
+    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click, btnGraveCrimeCL.Click, btnIdentificationStmtCL.Click
 
         Try
 
@@ -15838,6 +15838,12 @@ errhandler:
                     bodytext = "I am submitting here with the Grave Crime statement for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlGraveCrime
                     sFileName = "CL - Grave Crime Statement.docx"
+                Case btnIdentificationStmtCL.Name
+                    m2 = MonthName(m2) & " " & y2
+                    subject = "Identification Statement – " & m2 & " - submitting of - reg:- "
+                    bodytext = "I am submitting here with the Identification statement for the month of " & m2 & " for favour of necessary action."
+                    PdlNumber = PdlIdentificationStatement
+                    sFileName = "CL - Identification Statement.docx"
             End Select
 
 

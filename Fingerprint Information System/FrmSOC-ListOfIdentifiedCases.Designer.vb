@@ -26,6 +26,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.IDCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
@@ -37,6 +38,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.txtYear = New DevComponents.Editors.IntegerInput()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -58,6 +60,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx1.Controls.Add(Me.LabelX6)
         Me.PanelEx1.Controls.Add(Me.LabelX4)
         Me.PanelEx1.Controls.Add(Me.cmbMonth)
         Me.PanelEx1.Controls.Add(Me.CircularProgress1)
@@ -69,11 +72,12 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.PanelEx1.Controls.Add(Me.LabelX2)
         Me.PanelEx1.Controls.Add(Me.txtYear)
         Me.PanelEx1.Controls.Add(Me.btnGenerateByMonth)
+        Me.PanelEx1.Controls.Add(Me.btnOpenFolder)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(512, 101)
+        Me.PanelEx1.Size = New System.Drawing.Size(512, 126)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -81,6 +85,19 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 32
+        '
+        'LabelX6
+        '
+        Me.LabelX6.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX6.Location = New System.Drawing.Point(161, 91)
+        Me.LabelX6.Name = "LabelX6"
+        Me.LabelX6.Size = New System.Drawing.Size(213, 18)
+        Me.LabelX6.TabIndex = 59
+        Me.LabelX6.Text = "Open Identification Statement Folder"
         '
         'LabelX4
         '
@@ -122,11 +139,11 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(389, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(392, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(123, 101)
+        Me.CircularProgress1.Size = New System.Drawing.Size(120, 126)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 54
         Me.CircularProgress1.TabStop = False
@@ -135,7 +152,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         '
         Me.btnGeneratebyPeriod.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGeneratebyPeriod.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(392, 62)
+        Me.btnGeneratebyPeriod.Location = New System.Drawing.Point(392, 49)
         Me.btnGeneratebyPeriod.Name = "btnGeneratebyPeriod"
         Me.btnGeneratebyPeriod.Size = New System.Drawing.Size(110, 29)
         Me.btnGeneratebyPeriod.TabIndex = 5
@@ -148,7 +165,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(225, 67)
+        Me.LabelX1.Location = New System.Drawing.Point(225, 54)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(17, 18)
         Me.LabelX1.TabIndex = 18
@@ -161,7 +178,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(12, 67)
+        Me.LabelX3.Location = New System.Drawing.Point(12, 54)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(72, 18)
         Me.LabelX3.TabIndex = 17
@@ -185,7 +202,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(90, 62)
+        Me.dtFrom.Location = New System.Drawing.Point(90, 49)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -241,7 +258,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(259, 62)
+        Me.dtTo.Location = New System.Drawing.Point(259, 49)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -323,6 +340,16 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.btnGenerateByMonth.TabIndex = 2
         Me.btnGenerateByMonth.Text = "Generate"
         '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(392, 86)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(110, 29)
+        Me.btnOpenFolder.TabIndex = 60
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
         'bgwIDList
         '
         Me.bgwIDList.WorkerReportsProgress = True
@@ -332,7 +359,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(512, 101)
+        Me.ClientSize = New System.Drawing.Size(512, 126)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -369,4 +396,6 @@ Partial Class FrmSOC_ListOfIdentifiedCases
     Friend WithEvents bgwIDList As System.ComponentModel.BackgroundWorker
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents cmbMonth As DevComponents.DotNetBar.Controls.ComboBoxEx
+    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
 End Class

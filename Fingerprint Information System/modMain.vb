@@ -50,6 +50,7 @@ Module modMain
     Public PdlGraveCrime As String = ""
     Public PdlVigilanceCase As String = ""
     Public PdlWeeklyDiary As String = ""
+    Public PdlIdentificationStatement As String = ""
 
     Public SuggestedLocation = SuggestLocation()
     Public CPImageImportLocation As String = SuggestedLocation & "\Chance Prints"
