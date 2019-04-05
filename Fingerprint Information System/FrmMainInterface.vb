@@ -323,6 +323,7 @@ Public Class frmMainInterface
             If CreateTable = 1 Then
                 CreateLastModificationTable()
                 CreateSOCReportRegisterTable()
+                CreateCommonSettingsTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
@@ -16053,10 +16054,30 @@ errhandler:
             End If
 
         Catch ex As Exception
-            'ShowErrorMessage(ex)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 
+    Public Sub CreateCommonSettingsTable()
+        Try
+            If DoesTableExist("CommonSettings", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE CommonSettings (SettingsName VARCHAR(255)WITH COMPRESSION , SettingsValue VARCHAR(255)WITH COMPRESSION, Remarks VARCHAR(255)WITH COMPRESSION)", con)
+
+            cmd.ExecuteNonQuery()
+            Application.DoEvents()
+
+            InsertOrUpdateLastModificationDate(Now)
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
     Public Sub ModifyTables()
         On Error Resume Next
         Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
@@ -16763,6 +16784,7 @@ errhandler:
 
             CreateSOCReportRegisterTable()
             CreateLastModificationTable()
+            CreateCommonSettingsTable()
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)

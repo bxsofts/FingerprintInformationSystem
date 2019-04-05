@@ -209,6 +209,7 @@ Partial Class frmMainInterface
         Me.btnCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnAttendance = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGraveCrimeCL = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIdentificationStmtCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIndividualPerformanceCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRBWarrant = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSOCCL = New DevComponents.DotNetBar.ButtonItem()
@@ -1118,7 +1119,6 @@ Partial Class frmMainInterface
         Me.bgwUpdateChecker = New System.ComponentModel.BackgroundWorker()
         Me.bgwVersionUploader = New System.ComponentModel.BackgroundWorker()
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
-        Me.btnIdentificationStmtCL = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -2125,6 +2125,11 @@ Partial Class frmMainInterface
         '
         Me.btnGraveCrimeCL.Name = "btnGraveCrimeCL"
         Me.btnGraveCrimeCL.Text = "Grave Crime Statement"
+        '
+        'btnIdentificationStmtCL
+        '
+        Me.btnIdentificationStmtCL.Name = "btnIdentificationStmtCL"
+        Me.btnIdentificationStmtCL.Text = "Identification Statement"
         '
         'btnIndividualPerformanceCL
         '
@@ -14635,11 +14640,6 @@ Partial Class frmMainInterface
         'LastModificationTableAdapter
         '
         Me.LastModificationTableAdapter.ClearBeforeFill = true
-        '
-        'btnIdentificationStmtCL
-        '
-        Me.btnIdentificationStmtCL.Name = "btnIdentificationStmtCL"
-        Me.btnIdentificationStmtCL.Text = "Identification Statement"
         '
         'frmMainInterface
         '
