@@ -15762,7 +15762,7 @@ errhandler:
 
 
 #Region "COVERING LETTERS"
-    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click
+    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click, btnGraveCrimeCL.Click
 
         Try
 
@@ -15832,6 +15832,12 @@ errhandler:
                     bodytext = "No case has been Registered or Investigated or being investigated by Local Police / CBCID / Vigilance Department against any of the staff working in this unit during the month of " & m2 & ". This is for favour of information and necessary action."
                     PdlNumber = PdlVigilanceCase
                     sFileName = "CL - Vigilance Case Statement.docx"
+                Case btnGraveCrimeCL.Name
+                    m2 = MonthName(m2) & " " & y2
+                    subject = "Grave Crime Details – " & m2 & " - submitting of - reg:- "
+                    bodytext = "I am submitting here with the Grave Crime statement for the month of " & m2 & " for favour of necessary action."
+                    PdlNumber = PdlGraveCrime
+                    sFileName = "CL - Grave Crime Statement.docx"
             End Select
 
 
