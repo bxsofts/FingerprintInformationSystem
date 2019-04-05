@@ -5,8 +5,8 @@ Public Class frmSOCStatement
     Dim d1 As Date
     Dim d2 As Date
     Dim headertext As String = vbNullString
-
-
+    Dim blsavefile As Boolean = False
+    Dim SaveFileName As String
 
     Sub SetDays() Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
@@ -67,7 +67,7 @@ Public Class frmSOCStatement
                         Exit Sub
                     End If
                     headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-
+                    blsavefile = False
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
                     Dim y = Me.txtYear.Value
@@ -75,6 +75,17 @@ Public Class frmSOCStatement
                     d1 = New Date(y, m, 1)
                     d2 = New Date(y, m, d)
                     headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+
+                    blsavefile = True
+                    Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement\" & y
+                    System.IO.Directory.CreateDirectory(SaveFolder)
+                    SaveFileName = SaveFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+
+                    If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                        Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+                        Me.Cursor = Cursors.Default
+                        Exit Sub
+                    End If
             End Select
 
             Me.SocRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
@@ -154,7 +165,7 @@ Public Class frmSOCStatement
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(35, Word.WdRulerStyle.wdAdjustFirstColumn) 'sl
             WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(45, Word.WdRulerStyle.wdAdjustFirstColumn) 'socno
             WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'ps
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn) 'di
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn) 'di
             WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn) 'do
             WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'po
             WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(75, Word.WdRulerStyle.wdAdjustFirstColumn) 'pl
@@ -263,7 +274,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).PoliceStation & vbNewLine & "Cr.No. " & Me.FingerPrintDataSet.SOCRegister(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.SOCRegister(j).SectionOfLaw)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yy", culture))
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfOccurrence)
@@ -391,6 +402,8 @@ Public Class frmSOCStatement
             bgwWord.ReportProgress(100)
             System.Threading.Thread.Sleep(10)
 
+            If Not FileInUse(SaveFileName) And blsavefile Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+
             WordApp.Visible = True
 
             WordApp.Activate()
@@ -419,5 +432,25 @@ Public Class frmSOCStatement
         Me.Close()
     End Sub
 
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+            Dim m = Me.cmbMonth.SelectedIndex + 1
+            Dim y = Me.txtYear.Value
+
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement"
+            System.IO.Directory.CreateDirectory(SaveFolder)
+            Dim sFileName = SaveFolder & "\" & y & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+
+            If My.Computer.FileSystem.FileExists(sFileName) Then
+                Call Shell("explorer.exe /select," & sFileName, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+            Else
+                Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
+            End If
+
+        Catch ex As Exception
+            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 End Class

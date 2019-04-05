@@ -29,6 +29,8 @@ Partial Class frmSOCStatement
         Me.SocRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwWord = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -72,6 +74,7 @@ Partial Class frmSOCStatement
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx2.Controls.Add(Me.LabelX6)
         Me.PanelEx2.Controls.Add(Me.CircularProgress1)
         Me.PanelEx2.Controls.Add(Me.btnGenerateByMonth)
         Me.PanelEx2.Controls.Add(Me.LabelX4)
@@ -83,11 +86,12 @@ Partial Class frmSOCStatement
         Me.PanelEx2.Controls.Add(Me.btnGenerateByDate)
         Me.PanelEx2.Controls.Add(Me.dtFrom)
         Me.PanelEx2.Controls.Add(Me.dtTo)
+        Me.PanelEx2.Controls.Add(Me.btnOpenFolder)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(537, 97)
+        Me.PanelEx2.Size = New System.Drawing.Size(537, 121)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -95,6 +99,29 @@ Partial Class frmSOCStatement
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 23
+        '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(420, 82)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(98, 29)
+        Me.btnOpenFolder.TabIndex = 59
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
+        'LabelX6
+        '
+        Me.LabelX6.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX6.Location = New System.Drawing.Point(234, 87)
+        Me.LabelX6.Name = "LabelX6"
+        Me.LabelX6.Size = New System.Drawing.Size(160, 18)
+        Me.LabelX6.TabIndex = 58
+        Me.LabelX6.Text = "Open SOC Statement Folder"
         '
         'CircularProgress1
         '
@@ -108,7 +135,7 @@ Partial Class frmSOCStatement
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(117, 97)
+        Me.CircularProgress1.Size = New System.Drawing.Size(117, 121)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 48
         Me.CircularProgress1.TabStop = False
@@ -195,7 +222,7 @@ Partial Class frmSOCStatement
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(243, 63)
+        Me.LabelX2.Location = New System.Drawing.Point(243, 52)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 13
@@ -208,7 +235,7 @@ Partial Class frmSOCStatement
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(11, 63)
+        Me.LabelX1.Location = New System.Drawing.Point(11, 52)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(72, 18)
         Me.LabelX1.TabIndex = 12
@@ -218,7 +245,7 @@ Partial Class frmSOCStatement
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(420, 57)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(420, 46)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 29)
         Me.btnGenerateByDate.TabIndex = 6
@@ -242,7 +269,7 @@ Partial Class frmSOCStatement
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(99, 57)
+        Me.dtFrom.Location = New System.Drawing.Point(99, 46)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -298,7 +325,7 @@ Partial Class frmSOCStatement
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(284, 57)
+        Me.dtTo.Location = New System.Drawing.Point(284, 46)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -340,7 +367,7 @@ Partial Class frmSOCStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 97)
+        Me.ClientSize = New System.Drawing.Size(537, 121)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -380,4 +407,6 @@ Partial Class frmSOCStatement
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
 End Class
