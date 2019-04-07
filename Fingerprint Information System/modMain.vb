@@ -152,17 +152,17 @@ Module modMain
     End Sub
 
     Public Sub ShowErrorMessage(ex As Exception)
+
+        On Error Resume Next
+        frmPleaseWait.Close()
+        frmSplashScreen.CloseForm()
         DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-        Try
             Dim file As System.IO.StreamWriter
             file = My.Computer.FileSystem.OpenTextFileWriter(strAppUserPath & "\ErrorLog.txt", False)
             file.WriteLine(ex.Message)
             file.Close()
-        Catch ex1 As Exception
 
-        End Try
-        
     End Sub
 
     Public Function InternetAvailable1() As Boolean

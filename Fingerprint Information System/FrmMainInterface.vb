@@ -331,6 +331,7 @@ Public Class frmMainInterface
 
             If CreateTable = 1 Then
                 CreateLastModificationTable()
+                CreateIdentificationRegisterTable()
                 CreateSOCReportRegisterTable()
                 CreateCommonSettingsTable()
                 ModifyTables()
@@ -16111,6 +16112,48 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
     End Sub
+
+    Public Sub CreateIdentificationRegisterTable()
+        Try
+            If DoesTableExist("IdentificationRegister", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, CPsIdentified VARCHAR(3) WITH COMPRESSION, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingerIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION )", con)
+
+            cmd.ExecuteNonQuery()
+            Application.DoEvents()
+
+            CopyValuesToIdentificationRegisterTable()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
+
+    Public Sub CopyValuesToIdentificationRegisterTable()
+        Try
+            If Not DoesTableExist("IdentificationRegister", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("INSERT INTO IdentificationRegister (IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, CulpritName, IdentificationDetails) SELECT IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, IdentifiedAs, Remarks FROM SOCRegister where FileStatus = 'Identified'", con)
+
+            cmd.ExecuteNonQuery()
+            Application.DoEvents()
+
+            InsertOrUpdateLastModificationDate(Now)
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
     Public Sub ModifyTables()
         On Error Resume Next
         Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
@@ -16193,6 +16236,7 @@ errhandler:
             Dim id = 1
             Me.SettingsTableAdapter1.UpdateNullFields(PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
         End If
+
 
         Dim cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN Remarks MEMO", con)
         cmd1.ExecuteNonQuery()
