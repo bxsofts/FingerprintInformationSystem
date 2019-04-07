@@ -99,7 +99,7 @@ Public Class frmMonthlyPerformance
         Try
             Me.FingerPrintDataSet.Performance.RejectChanges()
 
-            Dim r(19) As FingerPrintDataSet.PerformanceRow
+            Dim r(22) As FingerPrintDataSet.PerformanceRow
 
             Dim i As Integer = 0
             For i = 0 To 5
@@ -115,13 +115,33 @@ Public Class frmMonthlyPerformance
             r(7).SlNo = "7b"
             Me.FingerPrintDataSet.Performance.Rows.Add(r(7))
 
-            For i = 8 To 19
+            r(8) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(8).SlNo = "7c"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(8))
+
+            r(9) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(9).SlNo = "8"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(9))
+
+            r(10) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(10).SlNo = "9a"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(10))
+
+            r(11) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(11).SlNo = "9b"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(11))
+
+            r(12) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
+            r(12).SlNo = "9c"
+            Me.FingerPrintDataSet.Performance.Rows.Add(r(12))
+
+            For i = 13 To 21
                 r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
                 r(i).SlNo = i
                 Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
             Next
 
-            For i = 0 To 19
+            For i = 0 To 21
                 Me.DataGridViewX1.Rows(i).Cells(1).Value = ""
                 Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
                 Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
@@ -133,30 +153,33 @@ Public Class frmMonthlyPerformance
 
             With Me.DataGridViewX1
 
-                .Rows(0).Cells(1).Value = "No. of Scenes of Crime Inspected"
-                .Rows(1).Cells(1).Value = "No. of cases in which chanceprints were developed"
-                .Rows(2).Cells(1).Value = "Total No. of chanceprints developed"
-                .Rows(3).Cells(1).Value = "No. of chanceprints unfit for comparison"
-                .Rows(4).Cells(1).Value = "No. of chanceprints eliminated"
-                .Rows(5).Cells(1).Value = "No. of chanceprints remain for search"
-                .Rows(6).Cells(1).Value = "No. of chanceprints identified"
-                .Rows(7).Cells(1).Value = "No. of cases identified through chanceprints"
-                .Rows(8).Cells(1).Value = "No. of cases in which search is continuing"
-                .Rows(9).Cells(1).Value = "No. of cases in which photographs were not received"
-                .Rows(10).Cells(1).Value = "No. of DA Slips received"
-                .Rows(11).Cells(1).Value = "No. of conviction reports received"
-                .Rows(12).Cells(1).Value = "No. of single prints recorded"
-                .Rows(13).Cells(1).Value = "No. of Court duties attended by the staff"
-                .Rows(14).Cells(1).Value = "No. of in-service courses conducted"
-                .Rows(15).Cells(1).Value = "No. of cases pending in the previous month/quarter"
-                .Rows(16).Cells(1).Value = "No. of cases in which chanceprints searched in AFIS"
-                .Rows(17).Cells(1).Value = "No. of cases identified in AFIS"
-                .Rows(18).Cells(1).Value = "No. of FP Slips attested for emmigration"
-                .Rows(19).Cells(1).Value = "Amount of Fees remitted"
+                .Rows(0).Cells(1).Value = "No. of Scenes of Crime Inspected" '1
+                .Rows(1).Cells(1).Value = "No. of cases in which chanceprints were developed" '2
+                .Rows(2).Cells(1).Value = "Total No. of chanceprints developed" '3
+                .Rows(3).Cells(1).Value = "No. of chanceprints unfit for comparison" '4
+                .Rows(4).Cells(1).Value = "No. of chanceprints eliminated" '5
+                .Rows(5).Cells(1).Value = "No. of chanceprints remain for search" '6
+                .Rows(6).Cells(1).Value = "No. of chanceprints identified" '7a
+                .Rows(7).Cells(1).Value = "No. of cases identified" '7b
+                .Rows(8).Cells(1).Value = "No. of culprits identified" '7c
+                '  .Rows(9).Cells(1).Value = "No. of cases in which search is continuing" '8
+                .Rows(9).Cells(1).Value = "No. of cases in which photographs were not received" '8
+                .Rows(10).Cells(1).Value = "No. of DA Slips received" '9a
+                .Rows(11).Cells(1).Value = "No. of DA Slips objected" '9b
+                .Rows(12).Cells(1).Value = "No. of DA Slips sent to CFPB" '9c
+                .Rows(13).Cells(1).Value = "No. of conviction reports received" '10
+                .Rows(14).Cells(1).Value = "No. of single prints recorded" '11
+                .Rows(15).Cells(1).Value = "No. of Court duties attended by the staff"
+                .Rows(16).Cells(1).Value = "No. of in-service courses conducted/taken/attended"
+                .Rows(17).Cells(1).Value = "No. of cases pending in the previous month/quarter"
+                .Rows(18).Cells(1).Value = "No. of cases in which chanceprints searched in AFIS"
+                .Rows(19).Cells(1).Value = "No. of cases identified in AFIS"
+                .Rows(20).Cells(1).Value = "No. of FP Slips attested for emmigration"
+                .Rows(21).Cells(1).Value = "Amount of Fees remitted"
 
             End With
 
-            For i = 0 To 19
+            For i = 0 To 21
                 For j = 2 To 7
                     Me.DataGridViewX1.Rows(i).Cells(j).Value = ""
                 Next
