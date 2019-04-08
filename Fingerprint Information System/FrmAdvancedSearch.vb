@@ -109,9 +109,9 @@ Public Class FrmAdvancedSearch
                 Register = "CDRegister"
 
             Case "IDR"
-                RowCount = frmMainInterface.IDRDataGrid.ColumnCount - 1
+                RowCount = frmMainInterface.JoinedIDRDataGrid.ColumnCount - 1
                 For i = 1 To RowCount
-                    Dim t As String = frmMainInterface.IDRDataGrid.Columns(i).DataPropertyName
+                    Dim t As String = frmMainInterface.JoinedIDRDataGrid.Columns(i).DataPropertyName
                     If t = "InvestigatingOfficer" Then t = "InspectingOfficer"
                     If t = "IdentifiedAs" Then t = "CulpritName"
                     If t = "ChancePrintsDeveloped" Then t = "CPsDeveloped"
@@ -122,9 +122,9 @@ Public Class FrmAdvancedSearch
 
         End Select
 
-        
+
         RowCount = Me.listViewEx1.Items.Count - 1
-        
+
         For i = 0 To RowCount
 
             Dim dgrow = New DataGridViewRow()
@@ -183,7 +183,7 @@ Public Class FrmAdvancedSearch
                 Case "CD"
                     dgtype.Value = frmMainInterface.CDDataGrid.Columns(i).ValueType.Name
                 Case "IDR"
-                    dgtype.Value = frmMainInterface.IDRDataGrid.Columns(i + 1).ValueType.Name
+                    dgtype.Value = frmMainInterface.JoinedIDRDataGrid.Columns(i + 1).ValueType.Name
             End Select
 
 
@@ -683,7 +683,7 @@ Public Class FrmAdvancedSearch
                 Case "IDR"
                     frmMainInterface.FingerPrintDataSet.IdentifiedCases.Clear()
                     da.Fill(frmMainInterface.FingerPrintDataSet.IdentifiedCases)
-                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.IDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.IDRDataGrid.RowCount & " Records"))
+                    ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.JoinedIDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.JoinedIDRDataGrid.RowCount & " Records"))
             End Select
 
 

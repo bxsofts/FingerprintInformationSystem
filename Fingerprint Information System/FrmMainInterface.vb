@@ -927,6 +927,10 @@ Public Class frmMainInterface
         Me.IdentifiedCasesTableAdapter1.Connection.ConnectionString = sConString
         Me.IdentifiedCasesTableAdapter1.Connection.Open()
 
+        If Me.JoinedIDRTableAdapter.Connection.State = ConnectionState.Open Then Me.JoinedIDRTableAdapter.Connection.Close()
+        Me.JoinedIDRTableAdapter.Connection.ConnectionString = sConString
+        Me.JoinedIDRTableAdapter.Connection.Open()
+
         If Me.RSOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.RSOCRegisterTableAdapter.Connection.Close()
         Me.RSOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.RSOCRegisterTableAdapter.Connection.Open()
@@ -992,9 +996,9 @@ Public Class frmMainInterface
         Me.ACRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.ACRegisterAutoTextTableAdapter.Connection.Open()
 
-        If Me.IDRRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.IDRRegisterTableAdapter.Connection.Close()
-        Me.IDRRegisterTableAdapter.Connection.ConnectionString = sConString
-        Me.IDRRegisterTableAdapter.Connection.Open()
+        If Me.JoinedIDRTableAdapter.Connection.State = ConnectionState.Open Then Me.JoinedIDRTableAdapter.Connection.Close()
+        Me.JoinedIDRTableAdapter.Connection.ConnectionString = sConString
+        Me.JoinedIDRTableAdapter.Connection.Open()
 
         If Me.LastModificationTableAdapter.Connection.State = ConnectionState.Open Then Me.LastModificationTableAdapter.Connection.Close()
         Me.LastModificationTableAdapter.Connection.ConnectionString = sConString
@@ -1252,10 +1256,10 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub LoadIDRRecords()
+    Private Sub LoadJoinedIDRRecords()
         Try
-            Me.IDRRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedCases)
-            Me.IDRRegisterBindingSource.MoveLast()
+            Me.JoinedIDRTableAdapter.Fill(Me.FingerPrintDataSet.JoinedIDR)
+            Me.JoinedIDRBindingSource.MoveLast()
         Catch ex As Exception
 
         End Try
@@ -1275,7 +1279,7 @@ Public Class frmMainInterface
             LoadFPARecords()
             LoadCDRecords()
         End If
-        LoadIDRRecords()
+        LoadJoinedIDRRecords()
         LoadIDRecords()
 
         If blApplicationIsRestoring Then
@@ -1310,7 +1314,7 @@ Public Class frmMainInterface
         LoadSOCRecords()
         LoadRSOCRecords()
         LoadDARecords()
-        LoadIDRRecords()
+        LoadJoinedIDRRecords()
         LoadFPARecords()
         LoadCDRecords()
         LoadIDRecords()
@@ -1368,7 +1372,7 @@ Public Class frmMainInterface
 
             Case "IDR"
                 Me.Cursor = Cursors.WaitCursor
-                LoadIDRRecords()
+                LoadJoinedIDRRecords()
                 ShowDesktopAlert("Records reloaded in Identification Register!")
                 Me.Cursor = Cursors.Default
         End Select
@@ -1439,7 +1443,7 @@ Public Class frmMainInterface
             Next
         End If
 
-        Me.IDRRegisterTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.IdentifiedCases, d1, d2)
+        Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
 
         If blApplicationIsLoading Then
@@ -1458,7 +1462,7 @@ Public Class frmMainInterface
         Me.DARegisterBindingSource.MoveLast()
         Me.FPARegisterBindingSource.MoveLast()
         Me.CDRegisterBindingSource.MoveLast()
-        Me.IDRRegisterBindingSource.MoveLast()
+        Me.JoinedIDRBindingSource.MoveLast()
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
@@ -1491,8 +1495,8 @@ Public Class frmMainInterface
                 Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
                 Me.CDRegisterBindingSource.MoveLast()
             Case "IDR"
-                Me.IDRRegisterTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.IdentifiedCases, d1, d2)
-                Me.IDRRegisterBindingSource.MoveLast()
+                Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
+                Me.JoinedIDRBindingSource.MoveLast()
             Case Else
                 ShowDesktopAlert("This option is not available for the selected register!")
                 If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -1541,8 +1545,8 @@ Public Class frmMainInterface
                 Me.CDRegisterBindingSource.MoveLast()
 
             Case "IDR"
-                Me.IDRRegisterTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.IdentifiedCases, d1, d2)
-                Me.IDRRegisterBindingSource.MoveLast()
+                Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
+                Me.JoinedIDRBindingSource.MoveLast()
 
             Case Else
                 ShowDesktopAlert("This option is not available for the selected register!")
@@ -2821,7 +2825,7 @@ Public Class frmMainInterface
             Case Me.IDRTabItem.Name
                 Me.pnlRegisterName.Text = "Identification Register"
                 CurrentTab = "IDR"
-                Me.IDRDataGrid.Focus()
+                Me.JoinedIDRDataGrid.Focus()
                 Me.btnLoadThisMonthRecords.Visible = True
                 Me.btnLoadThisYearRecords.Visible = True
                 Me.btnLoadSpecifiedMonthsRecords.Visible = False
@@ -2838,7 +2842,7 @@ Public Class frmMainInterface
 
 
 #Region "STATUSBAR TEXTS"
-    Sub DisplayDatabaseInformation() Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, IDRRegisterBindingSource.PositionChanged
+    Sub DisplayDatabaseInformation() Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged
         On Error Resume Next
         If ShowStatusTexts = False Then Exit Sub
         Me.lblHasFPSlip.Visible = False
@@ -3003,13 +3007,13 @@ Public Class frmMainInterface
             Me.lblNumberOfRecords.Visible = True
 
             Me.lblRegisterNameStatusBar.Text = "Identification Register"
-            Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.IDRRegisterBindingSource.Count
+            Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.JoinedIDRBindingSource.Count
 
 
-            Dim yearIDRcount = Me.IDRRegisterTableAdapter.ScalarQuerySOCsIdentified(y1, y2)
+            Dim yearIDRcount = Me.JoinedIDRTableAdapter.ScalarQuerySOCsIdentified(y1, y2)
             Me.lblCurrentYear.Text = "This Year : " & yearIDRcount
 
-            Dim monthIDRcount = Me.IDRRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2)
+            Dim monthIDRcount = Me.JoinedIDRTableAdapter.ScalarQuerySOCsIdentified(d1, d2)
             Me.lblCurrentMonth.Text = "This Month: " & monthIDRcount
 
         End If
@@ -3074,9 +3078,9 @@ Public Class frmMainInterface
         Me.IODatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.IODatagrid.Columns(0).DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
 
-        Me.IDRDataGrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-        Me.IDRDataGrid.Columns(0).CellTemplate.Style.Font = New Font("Segoe UI", 10, FontStyle.Bold)
-        Me.IDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+        Me.JoinedIDRDataGrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        Me.JoinedIDRDataGrid.Columns(0).CellTemplate.Style.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Me.JoinedIDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
     End Sub
 
     Private Sub ShowAllDataEntryFields(ByVal Show As Boolean)
@@ -3102,7 +3106,7 @@ Public Class frmMainInterface
         End If
     End Sub
 
-    Private Sub Datagrid_CellMouseLeave(sender As Object, e As DataGridViewCellEventArgs) Handles SOCDatagrid.CellMouseLeave, DADatagrid.CellMouseLeave, IDRDataGrid.CellMouseLeave, FPADataGrid.CellMouseLeave, CDDataGrid.CellMouseLeave, RSOCDatagrid.CellMouseLeave
+    Private Sub Datagrid_CellMouseLeave(sender As Object, e As DataGridViewCellEventArgs) Handles SOCDatagrid.CellMouseLeave, DADatagrid.CellMouseLeave, JoinedIDRDataGrid.CellMouseLeave, FPADataGrid.CellMouseLeave, CDDataGrid.CellMouseLeave, RSOCDatagrid.CellMouseLeave
 
         On Error Resume Next
         Select Case DirectCast(sender, Control).Name
@@ -3110,7 +3114,7 @@ Public Class frmMainInterface
                 Me.lblSOCGridInfo.Visible = False
             Case DADatagrid.Name
                 Me.lblDAGridInfo.Visible = False
-            Case IDRDataGrid.Name
+            Case JoinedIDRDataGrid.Name
                 Me.lblIDRGridInfo.Visible = False
             Case FPADataGrid.Name
                 Me.lblFPAGridInfo.Visible = False
@@ -3123,7 +3127,7 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub Datagrid_MouseMove(sender As Object, e As MouseEventArgs) Handles SOCDatagrid.MouseMove, DADatagrid.MouseMove, IDRDataGrid.MouseMove, FPADataGrid.MouseMove, CDDataGrid.MouseMove, RSOCDatagrid.MouseMove
+    Private Sub Datagrid_MouseMove(sender As Object, e As MouseEventArgs) Handles SOCDatagrid.MouseMove, DADatagrid.MouseMove, JoinedIDRDataGrid.MouseMove, FPADataGrid.MouseMove, CDDataGrid.MouseMove, RSOCDatagrid.MouseMove
 
         On Error Resume Next
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
@@ -3133,7 +3137,7 @@ Public Class frmMainInterface
                 Me.lblSOCGridInfo.Location = New Point(Me.lblSOCGridInfo.Location.X, e.Y)
             Case DADatagrid.Name
                 Me.lblDAGridInfo.Location = New Point(Me.lblDAGridInfo.Location.X, e.Y)
-            Case IDRDataGrid.Name
+            Case JoinedIDRDataGrid.Name
                 Me.lblIDRGridInfo.Location = New Point(Me.lblIDRGridInfo.Location.X, e.Y)
             Case FPADataGrid.Name
                 Me.lblFPAGridInfo.Location = New Point(Me.lblFPAGridInfo.Location.X, e.Y)
@@ -3145,7 +3149,7 @@ Public Class frmMainInterface
 
     End Sub
 
-    Private Sub Datagrid_CellMouseEnter(sender As Object, e As DataGridViewCellEventArgs) Handles SOCDatagrid.CellMouseEnter, DADatagrid.CellMouseEnter, IDRDataGrid.CellMouseEnter, FPADataGrid.CellMouseEnter, CDDataGrid.CellMouseEnter, RSOCDatagrid.CellMouseEnter
+    Private Sub Datagrid_CellMouseEnter(sender As Object, e As DataGridViewCellEventArgs) Handles SOCDatagrid.CellMouseEnter, DADatagrid.CellMouseEnter, JoinedIDRDataGrid.CellMouseEnter, FPADataGrid.CellMouseEnter, CDDataGrid.CellMouseEnter, RSOCDatagrid.CellMouseEnter
 
         On Error Resume Next
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
@@ -3166,11 +3170,11 @@ Public Class frmMainInterface
                     Dim dt As Date = Me.DADatagrid.Rows(e.RowIndex).Cells(2).Value
                     Me.lblDAGridInfo.Text = Strings.Format(dt, "MMM yyyy")
                 End If
-            Case IDRDataGrid.Name
+            Case JoinedIDRDataGrid.Name
                 If e.RowIndex < 0 Or e.ColumnIndex < 0 Then Me.lblIDRGridInfo.Visible = False
                 If e.RowIndex > -1 And e.ColumnIndex > -1 Then
                     Me.lblIDRGridInfo.Visible = True
-                    Dim dt As Date = Me.IDRDataGrid.Rows(e.RowIndex).Cells(2).Value
+                    Dim dt As Date = Me.JoinedIDRDataGrid.Rows(e.RowIndex).Cells(2).Value
                     Me.lblIDRGridInfo.Text = Strings.Format(dt, "MMM yyyy")
                 End If
             Case FPADataGrid.Name
@@ -3198,7 +3202,7 @@ Public Class frmMainInterface
 
 
     End Sub
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting, IODatagrid.CellPainting, IDRDataGrid.CellPainting
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting, IODatagrid.CellPainting, JoinedIDRDataGrid.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
@@ -3308,9 +3312,9 @@ Public Class frmMainInterface
 
     Private Sub SaveIDRDatagridColumnDefaultWidth()
         On Error Resume Next
-        Dim p As String = strRegistrySettingsPath & "\IDRDatagrid"
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            My.Computer.Registry.SetValue(p, "DefaultWidth" & Format(i, "00"), IDRDataGrid.Columns(i).Width.ToString, Microsoft.Win32.RegistryValueKind.String)
+        Dim p As String = strRegistrySettingsPath & "\JoinedIDRDatagrid"
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            My.Computer.Registry.SetValue(p, "DefaultWidth" & Format(i, "00"), JoinedIDRDataGrid.Columns(i).Width.ToString, Microsoft.Win32.RegistryValueKind.String)
         Next
     End Sub
 
@@ -3398,11 +3402,11 @@ Public Class frmMainInterface
 
     Private Sub LoadIDRDatagridColumnDefaultWidth()
         On Error Resume Next
-        Dim p As String = strRegistrySettingsPath & "\IDRDatagrid"
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            IDRDataGrid.Columns(i).Width = My.Computer.Registry.GetValue(p, "DefaultWidth" & Format(i, "00"), IDRDataGrid.Columns(i).Width)
+        Dim p As String = strRegistrySettingsPath & "\JoinedIDRDatagrid"
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            JoinedIDRDataGrid.Columns(i).Width = My.Computer.Registry.GetValue(p, "DefaultWidth" & Format(i, "00"), JoinedIDRDataGrid.Columns(i).Width)
         Next
-        IDRDataGrid.RowHeadersWidth = 50
+        JoinedIDRDataGrid.RowHeadersWidth = 50
     End Sub
 
 
@@ -3551,11 +3555,11 @@ Public Class frmMainInterface
 
     Private Sub SaveIDRDatagridColumnWidth()
         On Error Resume Next
-        Dim p As String = strRegistrySettingsPath & "\IDRDatagrid"
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            My.Computer.Registry.SetValue(p, "Width" & Format(i, "00"), IDRDataGrid.Columns(i).Width.ToString, Microsoft.Win32.RegistryValueKind.String)
+        Dim p As String = strRegistrySettingsPath & "\JoinedIDRDatagrid"
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            My.Computer.Registry.SetValue(p, "Width" & Format(i, "00"), JoinedIDRDataGrid.Columns(i).Width.ToString, Microsoft.Win32.RegistryValueKind.String)
         Next
-        My.Computer.Registry.SetValue(p, "RHWidth", IDRDataGrid.RowHeadersWidth, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(p, "RHWidth", JoinedIDRDataGrid.RowHeadersWidth, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 
@@ -3652,11 +3656,11 @@ Public Class frmMainInterface
 
     Private Sub LoadIDRDatagridColumnWidth()
         On Error Resume Next
-        Dim p As String = strRegistrySettingsPath & "\IDRDatagrid"
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            IDRDataGrid.Columns(i).Width = My.Computer.Registry.GetValue(p, "Width" & Format(i, "00"), IDRDataGrid.Columns(i).Width)
+        Dim p As String = strRegistrySettingsPath & "\JoinedIDRDatagrid"
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            JoinedIDRDataGrid.Columns(i).Width = My.Computer.Registry.GetValue(p, "Width" & Format(i, "00"), JoinedIDRDataGrid.Columns(i).Width)
         Next
-        IDRDataGrid.RowHeadersWidth = My.Computer.Registry.GetValue(p, "RHWidth", 60)
+        JoinedIDRDataGrid.RowHeadersWidth = My.Computer.Registry.GetValue(p, "RHWidth", 60)
     End Sub
 
 
@@ -3738,9 +3742,9 @@ Public Class frmMainInterface
 
     Private Sub SaveIDRDatagridColumnOrder()
         On Error Resume Next
-        Dim p As String = strRegistrySettingsPath & "\IDRDatagrid"
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            My.Computer.Registry.SetValue(p, "Order" & Format(i, "00"), IDRDataGrid.Columns(i).DisplayIndex, Microsoft.Win32.RegistryValueKind.String)
+        Dim p As String = strRegistrySettingsPath & "\JoinedIDRDatagrid"
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            My.Computer.Registry.SetValue(p, "Order" & Format(i, "00"), JoinedIDRDataGrid.Columns(i).DisplayIndex, Microsoft.Win32.RegistryValueKind.String)
         Next
     End Sub
 
@@ -3820,9 +3824,9 @@ Public Class frmMainInterface
 
     Private Sub LoadIDRDatagridColumnOrder()
         On Error Resume Next
-        Dim p As String = strRegistrySettingsPath & "\IDRDatagrid"
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            IDRDataGrid.Columns(i).DisplayIndex = My.Computer.Registry.GetValue(p, "Order" & Format(i, "00"), IDRDataGrid.Columns(i).DisplayIndex)
+        Dim p As String = strRegistrySettingsPath & "\JoinedIDRDatagrid"
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            JoinedIDRDataGrid.Columns(i).DisplayIndex = My.Computer.Registry.GetValue(p, "Order" & Format(i, "00"), JoinedIDRDataGrid.Columns(i).DisplayIndex)
         Next
     End Sub
 
@@ -3892,8 +3896,8 @@ Public Class frmMainInterface
 
     Private Sub LoadIDRDatagridColumnDefaultOrder()
         On Error Resume Next
-        For i = 0 To Me.IDRDataGrid.ColumnCount - 1
-            IDRDataGrid.Columns(i).DisplayIndex = i
+        For i = 0 To Me.JoinedIDRDataGrid.ColumnCount - 1
+            JoinedIDRDataGrid.Columns(i).DisplayIndex = i
         Next
     End Sub
     '------------------------------------------------------Load Default Column Orders All --------------------------
@@ -3995,7 +3999,7 @@ Public Class frmMainInterface
         End If
 
         If CurrentTab = "IDR" Then
-            Me.IDRDataGrid.Columns(SelectedColumnIndex).Frozen = Not Me.btnFreezeColumn.Checked
+            Me.JoinedIDRDataGrid.Columns(SelectedColumnIndex).Frozen = Not Me.btnFreezeColumn.Checked
         End If
     End Sub
 
@@ -4041,15 +4045,15 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub IDRDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles IDRDataGrid.RowPrePaint
+    Private Sub IDRDatagrid_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles JoinedIDRDataGrid.RowPrePaint
         Try
 
-            Dim dt As Date = IDRDataGrid.Rows(e.RowIndex).Cells(2).Value
+            Dim dt As Date = JoinedIDRDataGrid.Rows(e.RowIndex).Cells(2).Value
 
             If dt.Year Mod 2 = 0 Then
-                IDRDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
+                JoinedIDRDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableEvenColor
             Else
-                IDRDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
+                JoinedIDRDataGrid.Rows(e.RowIndex).DefaultCellStyle.BackColor = TableOddColor
             End If
 
 
@@ -4132,7 +4136,7 @@ Public Class frmMainInterface
 
 #Region "CONTEXT MENU SETTINGS"
 
-    Private Sub MouseOverDatagridAction(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles SOCDatagrid.CellMouseClick, RSOCDatagrid.CellMouseClick, DADatagrid.CellMouseClick, FPADataGrid.CellMouseClick, PSDataGrid.CellMouseClick, CDDataGrid.CellMouseClick, IDDatagrid.CellMouseClick, ACDatagrid.CellMouseClick, IDRDataGrid.CellMouseClick
+    Private Sub MouseOverDatagridAction(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles SOCDatagrid.CellMouseClick, RSOCDatagrid.CellMouseClick, DADatagrid.CellMouseClick, FPADataGrid.CellMouseClick, PSDataGrid.CellMouseClick, CDDataGrid.CellMouseClick, IDDatagrid.CellMouseClick, ACDatagrid.CellMouseClick, JoinedIDRDataGrid.CellMouseClick
         On Error Resume Next
         SelectedRowIndex = e.RowIndex
         SelectedColumnIndex = e.ColumnIndex
@@ -4172,7 +4176,7 @@ Public Class frmMainInterface
                 Me.btnFreezeColumn.Checked = Me.PSDataGrid.Columns(SelectedColumnIndex).Frozen
             End If
             If CurrentTab = "IDR" Then
-                Me.btnFreezeColumn.Checked = Me.IDRDataGrid.Columns(SelectedColumnIndex).Frozen
+                Me.btnFreezeColumn.Checked = Me.JoinedIDRDataGrid.Columns(SelectedColumnIndex).Frozen
             End If
         End If
 
@@ -4383,14 +4387,14 @@ Public Class frmMainInterface
 
         If CurrentTab = "IDR" Then 'No Context menu for IDR
 
-            If SelectedRowIndex < 0 Or SelectedRowIndex > Me.IDRDataGrid.Rows.Count - 1 Then
+            If SelectedRowIndex < 0 Or SelectedRowIndex > Me.JoinedIDRDataGrid.Rows.Count - 1 Then
                 e.Cancel = True
                 Exit Sub
             End If
 
-            Me.IDRDataGrid.Rows(SelectedRowIndex).Selected = True
-            If SelectedColumnIndex <> -1 Then Me.IDRDataGrid.SelectedCells(SelectedColumnIndex).Selected = True
-            Me.IDRRegisterBindingSource.Position = SelectedRowIndex
+            Me.JoinedIDRDataGrid.Rows(SelectedRowIndex).Selected = True
+            If SelectedColumnIndex <> -1 Then Me.JoinedIDRDataGrid.SelectedCells(SelectedColumnIndex).Selected = True
+            Me.JoinedIDRBindingSource.Position = SelectedRowIndex
             Me.btnIDRShowInSoCRegister.Visible = True
             Me.btnIdentifiedTemplateContextMenu.Visible = True
         End If
@@ -4414,7 +4418,7 @@ Public Class frmMainInterface
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
-        '  Me.IDRRegisterBindingSource.Sort = IDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & IDRDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
+        '  Me.JoinedIDRBindingSource.Sort = IDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & IDRDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
 
     End Sub
 
@@ -4445,13 +4449,13 @@ Public Class frmMainInterface
         For i = 0 To Me.PSDataGrid.Columns.Count - 1
             Me.PSDataGrid.Columns(i).SortMode = DataGridViewColumnSortMode.Programmatic
         Next
-        For i = 0 To Me.IDRDataGrid.Columns.Count - 1
-            Me.IDRDataGrid.Columns(i).SortMode = DataGridViewColumnSortMode.Programmatic
+        For i = 0 To Me.JoinedIDRDataGrid.Columns.Count - 1
+            Me.JoinedIDRDataGrid.Columns(i).SortMode = DataGridViewColumnSortMode.Programmatic
         Next
 
     End Sub
 
-    Private Sub SortColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles SOCDatagrid.ColumnHeaderMouseClick, RSOCDatagrid.ColumnHeaderMouseClick, DADatagrid.ColumnHeaderMouseClick, IDDatagrid.ColumnHeaderMouseClick, ACDatagrid.ColumnHeaderMouseClick, FPADataGrid.ColumnHeaderMouseClick, CDDataGrid.ColumnHeaderMouseClick, PSDataGrid.ColumnHeaderMouseClick, IDRDataGrid.ColumnHeaderMouseClick
+    Private Sub SortColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles SOCDatagrid.ColumnHeaderMouseClick, RSOCDatagrid.ColumnHeaderMouseClick, DADatagrid.ColumnHeaderMouseClick, IDDatagrid.ColumnHeaderMouseClick, ACDatagrid.ColumnHeaderMouseClick, FPADataGrid.ColumnHeaderMouseClick, CDDataGrid.ColumnHeaderMouseClick, PSDataGrid.ColumnHeaderMouseClick, JoinedIDRDataGrid.ColumnHeaderMouseClick
         On Error Resume Next
 
         If e.Button <> Windows.Forms.MouseButtons.Left Then
@@ -4667,29 +4671,29 @@ Public Class frmMainInterface
                     Exit Sub
                 End If
 
-            Case IDRDataGrid.Name
-                If IDRDataGrid.SortOrder = SortOrder.None Or IDRDataGrid.SortOrder = SortOrder.Descending Then
+            Case JoinedIDRDataGrid.Name
+                If JoinedIDRDataGrid.SortOrder = SortOrder.None Or JoinedIDRDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
-                        Me.IDRRegisterBindingSource.Sort = IDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & IDRDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
+                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
                     Else
-                        Me.IDRRegisterBindingSource.Sort = IDRDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
+                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowDesktopAlert("Table sorted with " & IDRDataGrid.Columns(c).HeaderText & " in Ascending order!")
+                    ShowDesktopAlert("Table sorted with " & JoinedIDRDataGrid.Columns(c).HeaderText & " in Ascending order!")
                     Exit Sub
                 End If
 
-                If IDRDataGrid.SortOrder = SortOrder.Ascending Then
+                If JoinedIDRDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
-                        Me.IDRRegisterBindingSource.Sort = IDRDataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & IDRDataGrid.Columns(1).DataPropertyName.ToString() & " DESC"
+                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & JoinedIDRDataGrid.Columns(1).DataPropertyName.ToString() & " DESC"
                     Else
-                        Me.IDRRegisterBindingSource.Sort = IDRDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
+                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    ShowDesktopAlert("Table sorted with " & IDRDataGrid.Columns(c).HeaderText & " in Descending order!")
+                    ShowDesktopAlert("Table sorted with " & JoinedIDRDataGrid.Columns(c).HeaderText & " in Descending order!")
                     Exit Sub
                 End If
 
@@ -6051,7 +6055,7 @@ errhandler:
 
 
         If CurrentTab = "IDR" Then
-            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.IDRDataGrid.SelectedCells(1).Value.ToString)
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString)
             Me.PanelSOC.Visible = True
             SOCEditMode = True
             Me.btnSaveSOC.Text = "Update"
@@ -6464,7 +6468,7 @@ errhandler:
         End If
 
         If CurrentTab = "IDR" Then
-            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.IDRDataGrid.SelectedCells(1).Value.ToString)
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString)
             Me.PanelSOC.Visible = True
             ClearSOCFields()
             With Me.SOCDatagrid
@@ -6863,7 +6867,7 @@ errhandler:
     End Sub
 
 
-    Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles SOCDatagrid.UserDeletingRow, RSOCDatagrid.UserDeletingRow, PSDataGrid.UserDeletingRow, DADatagrid.UserDeletingRow, IDDatagrid.UserDeletingRow, ACDatagrid.UserDeletingRow, CDDataGrid.UserDeletingRow, FPADataGrid.UserDeletingRow, IDRDataGrid.UserDeletingRow
+    Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles SOCDatagrid.UserDeletingRow, RSOCDatagrid.UserDeletingRow, PSDataGrid.UserDeletingRow, DADatagrid.UserDeletingRow, IDDatagrid.UserDeletingRow, ACDatagrid.UserDeletingRow, CDDataGrid.UserDeletingRow, FPADataGrid.UserDeletingRow, JoinedIDRDataGrid.UserDeletingRow
         On Error Resume Next
         e.Cancel = True
         Call DeleteSelectedItem()
@@ -8324,7 +8328,7 @@ errhandler:
                 End With
 
                 Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
-                Me.IDRRegisterBindingSource.Position = Me.IDRRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
+                Me.JoinedIDRBindingSource.Position = Me.JoinedIDRBindingSource.Find("SOCNumber", OriginalSOCNumber)
             End If
 
             InitializeSOCFields()
@@ -8537,7 +8541,7 @@ errhandler:
                 If blAddRow Then
                     Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
                 End If
-                Me.IDRRegisterBindingSource.Position = Me.IDRRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
+                Me.JoinedIDRBindingSource.Position = Me.JoinedIDRBindingSource.Find("SOCNumber", NewSOCNumber)
             End If
 
             ShowDesktopAlert("Selected Record updated successfully!")
@@ -8738,7 +8742,7 @@ errhandler:
                     Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
                 End If
 
-                Me.IDRRegisterBindingSource.Position = Me.IDRRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
+                Me.JoinedIDRBindingSource.Position = Me.JoinedIDRBindingSource.Find("SOCNumber", NewSOCNumber)
             End If
 
             ShowDesktopAlert("SOC Record overwritten!")
@@ -14941,16 +14945,16 @@ errhandler:
 
 
             If CurrentTab = "IDR" Then
-                idno = Me.IDRDataGrid.SelectedCells(0).Value.ToString()
-                SoCNumber = Me.IDRDataGrid.SelectedCells(1).Value.ToString()
-                InspectingOfficer = Me.IDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
-                IdentifyingOfficer = Me.IDRDataGrid.SelectedCells(10).Value.ToString().Replace(vbNewLine, "; ")
-                sdtid = Me.IDRDataGrid.SelectedCells(2).FormattedValue.ToString
-                dtid = Me.IDRDataGrid.SelectedCells(2).Value
-                PS = Me.IDRDataGrid.SelectedCells(4).Value.ToString
-                Cr = Me.IDRDataGrid.SelectedCells(5).Value.ToString & " u/s " & Me.IDRDataGrid.SelectedCells(6).Value.ToString
-                dtins = Me.IDRDataGrid.SelectedCells(3).FormattedValue.ToString
-                accused = Me.IDRDataGrid.SelectedCells(11).Value.ToString
+                idno = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
+                SoCNumber = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString()
+                InspectingOfficer = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
+                IdentifyingOfficer = Me.JoinedIDRDataGrid.SelectedCells(10).Value.ToString().Replace(vbNewLine, "; ")
+                sdtid = Me.JoinedIDRDataGrid.SelectedCells(2).FormattedValue.ToString
+                dtid = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+                PS = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
+                Cr = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString & " u/s " & Me.JoinedIDRDataGrid.SelectedCells(6).Value.ToString
+                dtins = Me.JoinedIDRDataGrid.SelectedCells(3).FormattedValue.ToString
+                accused = Me.JoinedIDRDataGrid.SelectedCells(11).Value.ToString
             End If
 
             If idno = "" Then
@@ -16003,7 +16007,7 @@ errhandler:
 
     Private Sub ShowIDinSoCRegister() Handles btnIDRShowInSoCRegister.Click
         Try
-            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.IDRDataGrid.SelectedCells(1).Value.ToString)
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString)
             Me.TabControl.SelectedTab = SOCTabItem
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -17555,4 +17559,7 @@ errhandler:
 
 
   
+    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
+
+    End Sub
 End Class
