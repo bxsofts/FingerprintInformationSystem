@@ -927,6 +927,10 @@ Public Class frmMainInterface
         Me.IdentifiedCasesTableAdapter1.Connection.ConnectionString = sConString
         Me.IdentifiedCasesTableAdapter1.Connection.Open()
 
+        If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+        Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+        Me.IdentificationRegisterTableAdapter1.Connection.Open()
+
         If Me.JoinedIDRTableAdapter.Connection.State = ConnectionState.Open Then Me.JoinedIDRTableAdapter.Connection.Close()
         Me.JoinedIDRTableAdapter.Connection.ConnectionString = sConString
         Me.JoinedIDRTableAdapter.Connection.Open()
@@ -5681,7 +5685,7 @@ errhandler:
 
 
         If CurrentTab = "IDR" Then
-            MessageBoxEx.Show("Please enter the identification details in SoC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ShowIdentificationRegisterDEForm()
         End If
     End Sub
 
@@ -7211,15 +7215,6 @@ errhandler:
     End Sub
 
 
-    Private Sub GenerateNewIDRNumber()
-        On Error Resume Next
-        Dim y As String = Year(Me.dtIdentificationDate.Value)
-        Dim n As String = Val(Me.IdentifiedCasesTableAdapter1.ScalarQuerySOCsIdentified(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
-
-        Me.txtSOCIDRNumber.Text = n.ToString & "/" & y
-        Me.txtSOCIDRNumber.Select(Me.txtSOCIDRNumber.Text.Length, 0)
-    End Sub
-
     Private Sub IncrementRSOCNumber(ByVal LastRSOCNumber As Long)
         On Error Resume Next
         Me.txtRSOCSerialNumber.Text = LastRSOCNumber + 1
@@ -7874,25 +7869,6 @@ errhandler:
         Me.btnEnterIdentificationDetails.Visible = visible
     End Sub
 
-    Private Sub dtIdentificationDate_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtIdentificationDate.GotFocus
-        On Error Resume Next
-        If dtIdentificationDate.Text = vbNullString Then Me.dtIdentificationDate.Value = Today
-    End Sub
-
-
-    Private Sub txtSOCIDRNumber_GotFocus(sender As Object, e As EventArgs) Handles txtSOCIDRNumber.GotFocus
-        If Me.txtSOCIDRNumber.Text <> "" Or Me.dtIdentificationDate.Text = "" Then
-            Exit Sub
-        End If
-        GenerateNewIDRNumber()
-    End Sub
-    Private Sub cmbIdentifiedByOfficer_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbIdentifiedByOfficer.GotFocus
-        Dim IDOfficer As String = Me.txtSOCOfficer.Text
-        If Not IDOfficer.Contains(";") And Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Then
-            Me.cmbIdentifiedByOfficer.Text = IDOfficer
-        End If
-
-    End Sub
 
     Private Sub ValidateChanceprintCount()
         On Error Resume Next
@@ -7978,12 +7954,7 @@ errhandler:
         Me.SOCRegisterBindingSource.Position = p
     End Sub
 
-    Private Sub EnterIdentificationDetails(sender As Object, e As EventArgs) Handles btnEnterIdentificationDetails.Click
-        FrmSOC_IdentificationDetails.Show()
-        FrmSOC_IdentificationDetails.lblSOCNumber.Text = Me.txtSOCNumber.Text
-        FrmSOC_IdentificationDetails.txtSOCIdentifiedCulpritName.Text = Me.txtSOCIdentifiedCulpritName.Text
-        FrmSOC_IdentificationDetails.txtSOCIdentificationDetails.Text = Me.txtSOCIdentificationDetails.Text
-    End Sub
+   
 #End Region
 
 
@@ -9448,6 +9419,33 @@ errhandler:
         System.Threading.Thread.Sleep(3000)
         LoadRecordsToAllTablesDependingOnCurrentYearSettings()
     End Sub
+
+#End Region
+
+
+#Region "IDENTIFICATION REGISTER"
+
+    Private Sub EnterIdentificationDetails(sender As Object, e As EventArgs) Handles btnEnterIdentificationDetails.Click
+        ShowIdentificationRegisterDEForm()
+        FrmIdentificationRegister.txtSOCNumber.Text = Me.txtSOCNumber.Text
+    End Sub
+
+    Private Sub ShowIdentificationRegisterDEForm()
+        FrmIdentificationRegister.ClearFields()
+        FrmIdentificationRegister.txtIdentificationNumber.Text = GenerateNewIDRNumber()
+        FrmIdentificationRegister.Show()
+    End Sub
+
+    Public Function GenerateNewIDRNumber()
+        Try
+            Dim y As String = Year(Today)
+            Dim n As String = Val(Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentified(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
+
+            Return n & "/" & y
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
 
 #End Region
     '-------------------------------------------RSOC DATA MANIPULATION-----------------------------------------
@@ -16282,19 +16280,36 @@ errhandler:
             Me.SettingsTableAdapter1.UpdateNullFields(PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
         End If
 
-
-        Dim cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN Remarks MEMO", con)
-        cmd1.ExecuteNonQuery()
-
-        cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN ComparisonDetails MEMO", con)
-        cmd1.ExecuteNonQuery()
-
+        ' AlterSOCRemarksColumn()
+        ' AlterSOCComparisoanDetailsColumn()
         con.Close()
 
         InsertOrUpdateLastModificationDate(Now)
         ' MsgBox(Err.Description)
     End Sub
+    Private Sub AlterSOCRemarksColumn()
+        Try
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN Remarks MEMO", con)
+            cmd1.ExecuteNonQuery()
+            con.Close()
+        Catch ex As Exception
 
+        End Try
+    End Sub
+
+    Private Sub AlterSOCComparisoanDetailsColumn()
+        Try
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd1 = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ALTER COLUMN ComparisonDetails MEMO", con)
+            cmd1.ExecuteNonQuery()
+            con.Close()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Public Function DoesTableExist(ByVal tblName As String, ByVal cnnStr As String) As Boolean
         Try
@@ -17559,7 +17574,5 @@ errhandler:
 
 
   
-    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
-
-    End Sub
+   
 End Class
