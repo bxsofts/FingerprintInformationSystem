@@ -1018,6 +1018,7 @@ Public Class frmMainInterface
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
             Me.SOCRegisterTableAdapter.RemoveNullFromIdentificationNumber("")
+            RemoveNullFromIdentificationRegister()
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
         End If
     End Sub
@@ -16122,7 +16123,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION )", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION )", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
@@ -16902,6 +16903,8 @@ errhandler:
             CreateSOCReportRegisterTable()
             CreateLastModificationTable()
             CreateCommonSettingsTable()
+            CreateIdentificationRegisterTable()
+
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
