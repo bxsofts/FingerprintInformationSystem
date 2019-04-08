@@ -335,6 +335,7 @@ Public Class frmMainInterface
                 CreateSOCReportRegisterTable()
                 CreateCommonSettingsTable()
                 ModifyTables()
+                RemoveNullFromIdentificationRegister()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
 
@@ -16121,7 +16122,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, CPsIdentified VARCHAR(3) WITH COMPRESSION, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingerIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION )", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION )", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
@@ -16145,6 +16146,45 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
+
+            InsertOrUpdateLastModificationDate(Now)
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
+
+    Private Sub RemoveNullFromIdentificationRegister()
+        Try
+
+            If Not DoesTableExist("IdentificationRegister", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("UPDATE IdentificationRegister SET NoOfCulpritsIdentified = '' where NoOfCulpritsIdentified IS NULL", con)
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "UPDATE IdentificationRegister SET NoOfCulpritsIdentified = '' where NoOfCulpritsIdentified IS NULL"
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "UPDATE IdentificationRegister SET Address = '' where Address IS NULL"
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "UPDATE IdentificationRegister SET FingersIdentified = '' where FingersIdentified IS NULL"
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "UPDATE IdentificationRegister SET HenryClassification = '' where HenryClassification IS NULL"
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "UPDATE IdentificationRegister SET DANumber = '' where DANumber IS NULL"
+            cmd.ExecuteNonQuery()
+
+            cmd.CommandText = "UPDATE IdentificationRegister SET IdentifiedFrom = '' where IdentifiedFrom IS NULL"
+            cmd.ExecuteNonQuery()
 
             InsertOrUpdateLastModificationDate(Now)
 
