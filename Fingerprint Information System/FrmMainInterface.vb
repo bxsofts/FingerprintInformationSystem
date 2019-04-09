@@ -9377,6 +9377,8 @@ errhandler:
 #End Region
 
 
+    '-------------------------------------------IDENTIFICATION REGISTER-----------------------------------------
+
 #Region "IDENTIFICATION NUMBER FIX"
 
     Private Sub bgwUpdateIDRNumber_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateIDRNumber.DoWork
@@ -9434,6 +9436,7 @@ errhandler:
         FrmIdentificationRegister.ClearFields()
         FrmIdentificationRegister.txtIdentificationNumber.Text = GenerateNewIDRNumber()
         FrmIdentificationRegister.Show()
+        FrmIdentificationRegister.BringToFront()
     End Sub
 
     Public Function GenerateNewIDRNumber()

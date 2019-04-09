@@ -1,6 +1,8 @@
 ﻿Public Class FrmIdentificationRegister
 
     Private Sub FrmSOC_IdentificationDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        On Error Resume Next
+
         Me.CenterToScreen()
         Me.txtIdentificationNumber.Select(Me.txtIdentificationNumber.Text.Length, 0)
 
@@ -23,6 +25,9 @@
         Me.cmbIdentifiedFrom.DropDownStyle = ComboBoxStyle.DropDown
         Me.cmbIdentifiedFrom.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
+        If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+        Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+        Me.IdentificationRegisterTableAdapter1.Connection.Open()
     End Sub
 
     Public Sub ClearFields()
@@ -39,34 +44,145 @@
         If dtIdentificationDate.Text = vbNullString Then Me.dtIdentificationDate.Value = Today
     End Sub
 
+    Private Sub txtCPsIdentified_GotFocus(sender As Object, e As EventArgs) Handles txtCPsIdentified.GotFocus
+        If Me.txtCPsIdentified.Text = "" Then Me.txtCPsIdentified.Value = 1
+    End Sub
+
     Private Sub txtCulpritCount_GotFocus(sender As Object, e As EventArgs) Handles txtCulpritCount.GotFocus
         If Me.txtCPsIdentified.Text = "1" Then
             Me.txtCulpritCount.Value = 1
         End If
     End Sub
 
-    Private Sub SaveDetails(sender As Object, e As EventArgs) Handles btnSave.Click
-        frmMainInterface.txtSOCIdentifiedCulpritName.Text = Me.txtCulpritName.Text
-        frmMainInterface.txtSOCIdentificationDetails.Text = Me.txtIdentificationDetails.Text
-        If Me.txtCulpritName.Text.Trim <> "" Then
-            frmMainInterface.txtSOCComparisonDetails.Text = "Identified as " & Me.txtCulpritName.Text
+    Private Function MandatoryFieldsFilled() As Boolean
+        If Me.txtIdentificationNumber.Text.Trim = "" Or Me.txtSOCNumber.Text.Trim = "" Or Me.dtIdentificationDate.IsEmpty Or Me.cmbIdentifyingOfficer.Text.Trim = "" Or Me.txtCPsIdentified.Text = "" Or Me.txtCulpritCount.Text = "" Or Me.txtCulpritName.Text.Trim = "" Or Me.txtAddress.Text.Trim = "" Or Me.txtFingersIdentified.Text.Trim = "" Or Me.txtClassification.Text.Trim = "" Or Me.cmbIdentifiedFrom.Text = "" Then
+            Return False
+        Else
+            Return True
         End If
 
-        Me.Close()
+    End Function
+
+    Sub ShowMandatoryFieldsInfo()
+        On Error Resume Next
+        Dim msg1 As String = "Please fill the following mandatory field(s):" & vbNewLine & vbNewLine
+        Dim msg As String = ""
+        Dim x As Integer = 0
+
+        If Me.txtIdentificationNumber.Text.Trim = vbNullString Then
+            msg = msg & "Identification No." & vbNewLine
+            x = 1
+        End If
+
+        If Trim(Me.txtSOCNumber.Text) = vbNullString Then
+            msg = msg & " SOC Number" & vbNewLine
+            If x <> 1 Then x = 2
+        End If
+
+        If Me.dtIdentificationDate.IsEmpty Then
+            msg = msg & " Identification Date" & vbNewLine
+            If x <> 1 And x <> 2 Then x = 3
+        End If
+        If Trim(Me.cmbIdentifyingOfficer.Text) = vbNullString Then
+            msg = msg & " Identified By" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 Then x = 4
+        End If
+        If Me.txtCPsIdentified.Text = "" Then
+            msg = msg & " No. of CPs Identified" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 Then x = 5
+        End If
+        If Me.txtCulpritCount.Text = "" Then
+            msg = msg & " No. of Culprits" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 Then x = 6
+        End If
+        If Trim(Me.txtFingersIdentified.Text) = vbNullString Then
+            msg = msg & " Fingers Identified" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 Then x = 7
+        End If
+        If Trim(Me.txtClassification.Text) = vbNullString Then
+            msg = msg & " Henry Classification" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 And x <> 7 Then x = 8
+        End If
+        If Trim(Me.cmbIdentifiedFrom.Text) = vbNullString Then
+            msg = msg & " Identified From" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 And x <> 7 And x <> 8 Then x = 9
+        End If
+
+        If Trim(Me.txtCulpritName.Text) = vbNullString Then
+            msg = msg & " Name of Culprit" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 And x <> 7 And x <> 8 And x <> 9 Then x = 10
+        End If
+
+        If Trim(Me.txtAddress.Text) = vbNullString Then
+            msg = msg & " Address" & vbNewLine
+            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 And x <> 7 And x <> 8 And x <> 9 And x <> 10 Then x = 11
+        End If
+
+        msg1 = msg1 & msg
+        DevComponents.DotNetBar.MessageBoxEx.Show(msg1, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Select Case x
+            Case 1
+                Me.txtIdentificationNumber.Focus()
+            Case 2
+                Me.txtSOCNumber.Focus()
+            Case 3
+                Me.dtIdentificationDate.Focus()
+            Case 4
+                Me.cmbIdentifyingOfficer.Focus()
+            Case 5
+                Me.txtCPsIdentified.Focus()
+            Case 6
+                Me.txtCulpritCount.Focus()
+            Case 7
+                Me.txtFingersIdentified.Focus()
+            Case 8
+                Me.txtClassification.Focus()
+            Case 9
+                Me.cmbIdentifiedFrom.Focus()
+            Case 10
+                Me.txtCulpritName.Focus()
+            Case 11
+                Me.txtAddress.Focus()
+        End Select
+
+    End Sub
+    Private Sub SaveDetails(sender As Object, e As EventArgs) Handles btnSave.Click
+        Try
+            If Not MandatoryFieldsFilled() Then
+                ShowMandatoryFieldsInfo()
+                Exit Sub
+            End If
+
+            If Me.btnSave.Text = "Save Record" Then
+                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim)
+                ShowDesktopAlert("New Identification Record saved successfully.")
+            End If
+
+            ClearFields()
+            Me.txtIdentificationNumber.Text = frmMainInterface.GenerateNewIDRNumber()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+        
+
+
+        '  Me.Close()
     End Sub
 
 
-    Private Sub IdentificationDetails() Handles txtIdentificationDetails.GotFocus
+
+    Private Sub IdentificationDetails() ' Handles txtRemarks.GotFocus
         On Error Resume Next
-        If Me.txtIdentificationDetails.Text <> vbNullString Or frmMainInterface.txtCPsIdentified.Value = 0 Then Exit Sub
+        If Me.txtRemarks.Text <> vbNullString Or frmMainInterface.txtCPsIdentified.Value = 0 Then Exit Sub
         If frmMainInterface.IDDetailsFocussed = False Then
             Dim cpid = frmMainInterface.txtCPsIdentified.Value
             Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureau records as DA No......." & vbNewLine & "DA Classification - "
 
-            Me.txtIdentificationDetails.Text = iddetails
+            Me.txtRemarks.Text = iddetails
             frmMainInterface.IDDetailsFocussed = True
         End If
-        Me.txtIdentificationDetails.Select(Me.txtIdentificationDetails.Text.Length, 0)
+        Me.txtRemarks.Select(Me.txtRemarks.Text.Length, 0)
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
