@@ -32,15 +32,16 @@ Partial Class FrmIdentificationRegister
         Me.txtIdentificationNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.lblcrt3 = New DevComponents.DotNetBar.LabelX()
         Me.lblIdentificationDate = New DevComponents.DotNetBar.LabelX()
-        Me.lblIdentificationNumber = New DevComponents.DotNetBar.LabelX()
         Me.lblIdentifiedBy = New DevComponents.DotNetBar.LabelX()
         Me.dtIdentificationDate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.cmbIdentifyingOfficer = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.lblCPsIdentified = New DevComponents.DotNetBar.LabelX()
         Me.txtCPsIdentified = New DevComponents.Editors.IntegerInput()
-        Me.txtSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX20 = New DevComponents.DotNetBar.LabelX()
+        Me.txtSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX19 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX18 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX17 = New DevComponents.DotNetBar.LabelX()
@@ -50,7 +51,6 @@ Partial Class FrmIdentificationRegister
         Me.LabelX13 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX12 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX37 = New DevComponents.DotNetBar.LabelX()
         Me.txtFingersIdentified = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.cmbIdentifiedFrom = New DevComponents.DotNetBar.Controls.ComboBoxEx()
@@ -66,6 +66,7 @@ Partial Class FrmIdentificationRegister
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
+        Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCPsIdentified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -156,7 +157,7 @@ Partial Class FrmIdentificationRegister
         Me.btnSave.Size = New System.Drawing.Size(105, 34)
         Me.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnSave.TabIndex = 16
-        Me.btnSave.Text = "Save Record"
+        Me.btnSave.Text = "Save"
         '
         'btnCancel
         '
@@ -186,7 +187,7 @@ Partial Class FrmIdentificationRegister
         Me.txtIdentificationNumber.Name = "txtIdentificationNumber"
         Me.txtIdentificationNumber.PreventEnterBeep = True
         Me.txtIdentificationNumber.Size = New System.Drawing.Size(130, 25)
-        Me.txtIdentificationNumber.TabIndex = 1
+        Me.txtIdentificationNumber.TabIndex = 0
         Me.txtIdentificationNumber.WatermarkText = "ID No"
         '
         'lblcrt3
@@ -215,19 +216,6 @@ Partial Class FrmIdentificationRegister
         Me.lblIdentificationDate.Size = New System.Drawing.Size(108, 18)
         Me.lblIdentificationDate.TabIndex = 168
         Me.lblIdentificationDate.Text = "Identification Date"
-        '
-        'lblIdentificationNumber
-        '
-        Me.lblIdentificationNumber.AutoSize = True
-        '
-        '
-        '
-        Me.lblIdentificationNumber.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIdentificationNumber.Location = New System.Drawing.Point(11, 15)
-        Me.lblIdentificationNumber.Name = "lblIdentificationNumber"
-        Me.lblIdentificationNumber.Size = New System.Drawing.Size(102, 18)
-        Me.lblIdentificationNumber.TabIndex = 167
-        Me.lblIdentificationNumber.Text = "Identification No."
         '
         'lblIdentifiedBy
         '
@@ -352,27 +340,6 @@ Partial Class FrmIdentificationRegister
         Me.txtCPsIdentified.Value = 1
         Me.txtCPsIdentified.WatermarkText = "No. of CPs Identified"
         '
-        'txtSOCNumber
-        '
-        Me.txtSOCNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtSOCNumber.Border.Class = "TextBoxBorder"
-        Me.txtSOCNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtSOCNumber.ButtonCustom.Image = CType(resources.GetObject("txtSOCNumber.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtSOCNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtSOCNumber.FocusHighlightEnabled = True
-        Me.txtSOCNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSOCNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtSOCNumber.Location = New System.Drawing.Point(135, 43)
-        Me.txtSOCNumber.MaxLength = 10
-        Me.txtSOCNumber.Name = "txtSOCNumber"
-        Me.txtSOCNumber.Size = New System.Drawing.Size(130, 25)
-        Me.txtSOCNumber.TabIndex = 2
-        Me.txtSOCNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtSOCNumber.WatermarkText = "SOC Number"
-        '
         'LabelX6
         '
         Me.LabelX6.AutoSize = True
@@ -380,16 +347,19 @@ Partial Class FrmIdentificationRegister
         '
         '
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(11, 46)
+        Me.LabelX6.Location = New System.Drawing.Point(11, 15)
         Me.LabelX6.Name = "LabelX6"
-        Me.LabelX6.Size = New System.Drawing.Size(76, 18)
+        Me.LabelX6.Size = New System.Drawing.Size(102, 18)
         Me.LabelX6.TabIndex = 174
-        Me.LabelX6.Text = "SOC Number"
+        Me.LabelX6.Text = "Identification No."
         '
         'PanelEx1
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx1.Controls.Add(Me.LabelX20)
+        Me.PanelEx1.Controls.Add(Me.txtSOCNumber)
+        Me.PanelEx1.Controls.Add(Me.LabelX1)
         Me.PanelEx1.Controls.Add(Me.LabelX19)
         Me.PanelEx1.Controls.Add(Me.LabelX18)
         Me.PanelEx1.Controls.Add(Me.LabelX17)
@@ -399,7 +369,6 @@ Partial Class FrmIdentificationRegister
         Me.PanelEx1.Controls.Add(Me.LabelX13)
         Me.PanelEx1.Controls.Add(Me.LabelX12)
         Me.PanelEx1.Controls.Add(Me.LabelX3)
-        Me.PanelEx1.Controls.Add(Me.LabelX1)
         Me.PanelEx1.Controls.Add(Me.LabelX37)
         Me.PanelEx1.Controls.Add(Me.txtFingersIdentified)
         Me.PanelEx1.Controls.Add(Me.cmbIdentifiedFrom)
@@ -413,7 +382,6 @@ Partial Class FrmIdentificationRegister
         Me.PanelEx1.Controls.Add(Me.LabelX8)
         Me.PanelEx1.Controls.Add(Me.LabelX7)
         Me.PanelEx1.Controls.Add(Me.LabelX2)
-        Me.PanelEx1.Controls.Add(Me.txtSOCNumber)
         Me.PanelEx1.Controls.Add(Me.LabelX4)
         Me.PanelEx1.Controls.Add(Me.LabelX6)
         Me.PanelEx1.Controls.Add(Me.LabelX5)
@@ -425,7 +393,6 @@ Partial Class FrmIdentificationRegister
         Me.PanelEx1.Controls.Add(Me.btnCancel)
         Me.PanelEx1.Controls.Add(Me.lblIdentificationDate)
         Me.PanelEx1.Controls.Add(Me.txtCPsIdentified)
-        Me.PanelEx1.Controls.Add(Me.lblIdentificationNumber)
         Me.PanelEx1.Controls.Add(Me.lblCPsIdentified)
         Me.PanelEx1.Controls.Add(Me.lblIdentifiedBy)
         Me.PanelEx1.Controls.Add(Me.cmbIdentifyingOfficer)
@@ -442,6 +409,53 @@ Partial Class FrmIdentificationRegister
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 176
+        '
+        'LabelX20
+        '
+        Me.LabelX20.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX20.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX20.Location = New System.Drawing.Point(271, 16)
+        Me.LabelX20.Name = "LabelX20"
+        Me.LabelX20.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX20.TabIndex = 196
+        Me.LabelX20.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'txtSOCNumber
+        '
+        Me.txtSOCNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtSOCNumber.Border.Class = "TextBoxBorder"
+        Me.txtSOCNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtSOCNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtSOCNumber.FocusHighlightEnabled = True
+        Me.txtSOCNumber.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSOCNumber.ForeColor = System.Drawing.Color.Black
+        Me.txtSOCNumber.Location = New System.Drawing.Point(135, 43)
+        Me.txtSOCNumber.MaxLength = 10
+        Me.txtSOCNumber.Name = "txtSOCNumber"
+        Me.txtSOCNumber.PreventEnterBeep = True
+        Me.txtSOCNumber.Size = New System.Drawing.Size(130, 25)
+        Me.txtSOCNumber.TabIndex = 1
+        Me.txtSOCNumber.WatermarkText = "SOC No"
+        '
+        'LabelX1
+        '
+        Me.LabelX1.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(11, 46)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(49, 18)
+        Me.LabelX1.TabIndex = 194
+        Me.LabelX1.Text = "SOC No."
         '
         'LabelX19
         '
@@ -465,7 +479,7 @@ Partial Class FrmIdentificationRegister
         '
         Me.LabelX18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX18.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX18.Location = New System.Drawing.Point(1087, 113)
+        Me.LabelX18.Location = New System.Drawing.Point(1087, 116)
         Me.LabelX18.Name = "LabelX18"
         Me.LabelX18.Size = New System.Drawing.Size(7, 22)
         Me.LabelX18.TabIndex = 192
@@ -493,7 +507,7 @@ Partial Class FrmIdentificationRegister
         '
         Me.LabelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX16.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX16.Location = New System.Drawing.Point(349, 278)
+        Me.LabelX16.Location = New System.Drawing.Point(349, 281)
         Me.LabelX16.Name = "LabelX16"
         Me.LabelX16.Size = New System.Drawing.Size(7, 22)
         Me.LabelX16.TabIndex = 190
@@ -569,20 +583,6 @@ Partial Class FrmIdentificationRegister
         Me.LabelX3.TabIndex = 185
         Me.LabelX3.Text = "<font color=""#ED1C24"">*</font><b></b>"
         '
-        'LabelX1
-        '
-        Me.LabelX1.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX1.Location = New System.Drawing.Point(271, 46)
-        Me.LabelX1.Name = "LabelX1"
-        Me.LabelX1.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX1.TabIndex = 184
-        Me.LabelX1.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
         'LabelX37
         '
         Me.LabelX37.AutoSize = True
@@ -591,7 +591,7 @@ Partial Class FrmIdentificationRegister
         '
         Me.LabelX37.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX37.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX37.Location = New System.Drawing.Point(271, 15)
+        Me.LabelX37.Location = New System.Drawing.Point(271, 46)
         Me.LabelX37.Name = "LabelX37"
         Me.LabelX37.Size = New System.Drawing.Size(7, 22)
         Me.LabelX37.TabIndex = 183
@@ -607,6 +607,7 @@ Partial Class FrmIdentificationRegister
         Me.txtFingersIdentified.Border.Class = "TextBoxBorder"
         Me.txtFingersIdentified.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.txtFingersIdentified.ButtonCustom.Image = CType(resources.GetObject("txtFingersIdentified.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtFingersIdentified.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtFingersIdentified.DisabledBackColor = System.Drawing.Color.White
         Me.txtFingersIdentified.FocusHighlightEnabled = True
         Me.txtFingersIdentified.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -821,6 +822,10 @@ Partial Class FrmIdentificationRegister
         Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
         Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'SocRegisterTableAdapter1
+        '
+        Me.SocRegisterTableAdapter1.ClearBeforeFill = True
+        '
         'FrmIdentificationRegister
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -854,13 +859,11 @@ Partial Class FrmIdentificationRegister
     Friend WithEvents txtIdentificationNumber As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents lblcrt3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblIdentificationDate As DevComponents.DotNetBar.LabelX
-    Friend WithEvents lblIdentificationNumber As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblIdentifiedBy As DevComponents.DotNetBar.LabelX
     Friend WithEvents dtIdentificationDate As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents cmbIdentifyingOfficer As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents lblCPsIdentified As DevComponents.DotNetBar.LabelX
     Friend WithEvents txtCPsIdentified As DevComponents.Editors.IntegerInput
-    Friend WithEvents txtSOCNumber As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents LabelX10 As DevComponents.DotNetBar.LabelX
@@ -875,8 +878,6 @@ Partial Class FrmIdentificationRegister
     Friend WithEvents txtClassification As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents cmbIdentifiedFrom As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents txtFingersIdentified As DevComponents.DotNetBar.Controls.TextBoxX
-    Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
-    Friend WithEvents FingerPrintDataSet1 As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents LabelX19 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX18 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX17 As DevComponents.DotNetBar.LabelX
@@ -886,6 +887,11 @@ Partial Class FrmIdentificationRegister
     Friend WithEvents LabelX13 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX12 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX37 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX20 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents txtSOCNumber As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
+    Friend WithEvents FingerPrintDataSet1 As FingerprintInformationSystem.FingerPrintDataSet
+    Friend WithEvents SocRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
 End Class

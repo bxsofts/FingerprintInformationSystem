@@ -111,6 +111,11 @@ Module modMain
 
     Public InstallerFileVersion As String = ""
     Public blDownloadUpdate As Boolean = False
+
+    Public blCloseIDRFormAfterSave As Boolean = False
+    Public blIDREditMode As Boolean = False
+    Public blIDROpenMode As Boolean = False
+    Public blIDRNewDataMode As Boolean = False
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!

@@ -5683,9 +5683,18 @@ errhandler:
             Me.txtFullOffice.Focus()
         End If
 
-
         If CurrentTab = "IDR" Then
-            ShowIdentificationRegisterDEForm()
+            blCloseIDRFormAfterSave = False
+
+            blIDRNewDataMode = True
+            blIDREditMode = False
+            blIDROpenMode = False
+
+            FrmIdentificationRegister.ClearFields()
+            FrmIdentificationRegister.txtIdentificationNumber.Text = GenerateNewIDRNumber()
+            FrmIdentificationRegister.Show()
+            FrmIdentificationRegister.BringToFront()
+
         End If
     End Sub
 
@@ -6059,50 +6068,14 @@ errhandler:
 
 
         If CurrentTab = "IDR" Then
-            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString)
-            Me.PanelSOC.Visible = True
-            SOCEditMode = True
-            Me.btnSaveSOC.Text = "Update"
-            ClearSOCFields()
+            blCloseIDRFormAfterSave = True
 
-            With Me.SOCDatagrid
-                Me.txtSOCNumber.Text = .SelectedCells(0).Value.ToString
-                Me.txtSOCNumberOnly.Text = .SelectedCells(1).Value.ToString
-                Me.dtSOCInspection.ValueObject = .SelectedCells(2).Value
-                Me.dtSOCReport.ValueObject = .SelectedCells(3).Value
-                Me.dtSOCOccurrence.Text = .SelectedCells(4).Value.ToString
-                Me.cmbSOCPoliceStation.Text = .SelectedCells(5).Value.ToString
-                Me.txtSOCCrimeNumber.Text = .SelectedCells(6).Value.ToString
-                Me.txtSOCSection.Text = .SelectedCells(7).Value.ToString
-                Me.txtSOCPlace.Text = .SelectedCells(8).Value.ToString
-                Me.txtSOCOfficer.Text = .SelectedCells(9).Value.ToString.Replace(vbNewLine, "; ")
-                Me.txtSOCCPsDeveloped.Text = .SelectedCells(10).Value.ToString
-                Me.txtSOCCPsUnfit.Text = .SelectedCells(11).Value.ToString
-                Me.txtSOCCPsEliminated.Text = .SelectedCells(12).Value.ToString
-                Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
-                Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
-                Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
-                Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
-                Me.txtSOCPropertyLost.Text = .SelectedCells(17).Value.ToString
-                Me.txtSOCPhotographer.Text = .SelectedCells(18).Value.ToString
-                Me.cmbSOCPhotoReceived.Text = .SelectedCells(19).Value.ToString
-                Me.txtSOCDateOfPhotography.Text = .SelectedCells(20).Value.ToString
-                Me.txtSOCGist.Text = .SelectedCells(21).Value.ToString
-                Me.txtSOCComparisonDetails.Text = .SelectedCells(22).Value.ToString
-                Me.chkGraveCrime.Checked = .SelectedCells(23).Value
-                Me.cmbFileStatus.Text = .SelectedCells(24).Value.ToString
-                Me.cmbIdentifiedByOfficer.Text = .SelectedCells(25).Value.ToString
-                Me.dtIdentificationDate.ValueObject = .SelectedCells(26).Value
-                Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
-                Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
-                Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
-                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
-            End With
-            OriginalSOCNumber = Me.txtSOCNumber.Text
-            Me.txtSOCNumber.Focus()
-            Me.txtSOCYear.Text = Year(Me.dtSOCInspection.Value)
-            TickOfficerList(Me.txtSOCOfficer.Text)
-            Me.TabControl.SelectedTab = SOCTabItem
+            blIDRNewDataMode = False
+            blIDREditMode = True
+            blIDROpenMode = False
+
+            FrmIdentificationRegister.Show()
+            FrmIdentificationRegister.BringToFront()
         End If
 
 
@@ -6472,47 +6445,14 @@ errhandler:
         End If
 
         If CurrentTab = "IDR" Then
-            Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString)
-            Me.PanelSOC.Visible = True
-            ClearSOCFields()
-            With Me.SOCDatagrid
-                Me.txtSOCNumber.Text = .SelectedCells(0).Value.ToString
-                Me.txtSOCNumberOnly.Text = .SelectedCells(1).Value.ToString
-                Me.dtSOCInspection.ValueObject = .SelectedCells(2).Value
-                Me.dtSOCReport.ValueObject = .SelectedCells(3).Value
-                Me.dtSOCOccurrence.Text = .SelectedCells(4).Value.ToString
-                Me.cmbSOCPoliceStation.Text = .SelectedCells(5).Value.ToString
-                Me.txtSOCCrimeNumber.Text = .SelectedCells(6).Value.ToString
-                Me.txtSOCSection.Text = .SelectedCells(7).Value.ToString
-                Me.txtSOCPlace.Text = .SelectedCells(8).Value.ToString
-                Me.txtSOCOfficer.Text = .SelectedCells(9).Value.ToString.Replace(vbNewLine, "; ")
-                Me.txtSOCCPsDeveloped.Text = .SelectedCells(10).Value.ToString
-                Me.txtSOCCPsUnfit.Text = .SelectedCells(11).Value.ToString
-                Me.txtSOCCPsEliminated.Text = .SelectedCells(12).Value.ToString
-                Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
-                Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
-                Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
-                Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
-                Me.txtSOCPropertyLost.Text = .SelectedCells(17).Value.ToString
-                Me.txtSOCPhotographer.Text = .SelectedCells(18).Value.ToString
-                Me.cmbSOCPhotoReceived.Text = .SelectedCells(19).Value.ToString
-                Me.txtSOCDateOfPhotography.Text = .SelectedCells(20).Value.ToString
-                Me.txtSOCGist.Text = .SelectedCells(21).Value.ToString
-                Me.txtSOCComparisonDetails.Text = .SelectedCells(22).Value.ToString
-                Me.chkGraveCrime.Checked = .SelectedCells(23).Value
-                Me.cmbFileStatus.Text = .SelectedCells(24).Value.ToString
-                Me.cmbIdentifiedByOfficer.Text = .SelectedCells(25).Value.ToString
-                Me.dtIdentificationDate.ValueObject = .SelectedCells(26).Value
-                Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
-                Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
-                Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
-                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
-            End With
-            OriginalSOCNumber = Me.txtSOCNumber.Text
-            Me.txtSOCNumber.Focus()
-            Me.txtSOCYear.Text = Year(Me.dtSOCInspection.Value)
-            TickOfficerList(Me.txtSOCOfficer.Text)
-            Me.TabControl.SelectedTab = SOCTabItem
+            blCloseIDRFormAfterSave = True
+
+            blIDRNewDataMode = False
+            blIDREditMode = False
+            blIDROpenMode = True
+
+            FrmIdentificationRegister.Show()
+            FrmIdentificationRegister.BringToFront()
         End If
     End Sub
 #End Region
@@ -7954,7 +7894,7 @@ errhandler:
         Me.SOCRegisterBindingSource.Position = p
     End Sub
 
-   
+
 #End Region
 
 
@@ -8304,16 +8244,16 @@ errhandler:
 
             InitializeSOCFields()
             IncrementSOCNumber(OriginalSOCNumber)
-
-            InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
+            ShowDesktopAlert("New SOC Record entered successfully!")
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 
-    Private Function SOCNumberExists(ByVal SOCNumber As String)
+    Public Function SOCNumberExists(ByVal SOCNumber As String)
         On Error Resume Next
         If Me.SOCRegisterTableAdapter.CheckSOCNumberExists(SOCNumber) = 1 Then
             Return True
@@ -9175,7 +9115,7 @@ errhandler:
             FileIO.FileSystem.CreateDirectory(CPImageImportLocation)
             Call Shell("explorer.exe " & CPImageImportLocation, AppWinStyle.NormalFocus)
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -9191,7 +9131,7 @@ errhandler:
         Else
             MessageBoxEx.Show("No chance prints have been imported for the selected SOC Number", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ImportChancePrints() Handles btnImportCP.Click
@@ -9262,7 +9202,7 @@ errhandler:
             ShowDesktopAlert(i - 1 & " images imported sucessfully!")
         End If
         DisplayDatabaseInformation()
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Exit Sub
 errhandler:
@@ -9274,7 +9214,7 @@ errhandler:
             ' ShowAlertMessage(Err.Description)
         End If
 
-         If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
 
@@ -9366,7 +9306,7 @@ errhandler:
     Private Sub LoadPhotographedDate() Handles txtSOCDateOfPhotography.GotFocus
         On Error Resume Next
         If txtSOCCPsDeveloped.Value = 0 Or Me.txtSOCPhotographer.Text = vbNullString Or Me.txtSOCPhotographer.Text.ToLower = "no photographer" Then Exit Sub
-        
+
         If PhotographedDateFocussed = False Then
             Me.txtSOCDateOfPhotography.Text = Me.dtSOCInspection.Text
             PhotographedDateFocussed = True
@@ -9428,17 +9368,22 @@ errhandler:
 #Region "IDENTIFICATION REGISTER"
 
     Private Sub EnterIdentificationDetails(sender As Object, e As EventArgs) Handles btnEnterIdentificationDetails.Click
-        ShowIdentificationRegisterDEForm()
-        FrmIdentificationRegister.txtSOCNumber.Text = Me.txtSOCNumber.Text
-    End Sub
 
-    Private Sub ShowIdentificationRegisterDEForm()
+        blCloseIDRFormAfterSave = True
+
+        blIDRNewDataMode = True
+        blIDREditMode = False
+        blIDROpenMode = False
+
         FrmIdentificationRegister.ClearFields()
+        FrmIdentificationRegister.txtSOCNumber.Text = Me.txtSOCNumber.Text
         FrmIdentificationRegister.txtIdentificationNumber.Text = GenerateNewIDRNumber()
         FrmIdentificationRegister.Show()
         FrmIdentificationRegister.BringToFront()
+
     End Sub
 
+   
     Public Function GenerateNewIDRNumber()
         Try
             Dim y As String = Year(Today)
@@ -9450,6 +9395,11 @@ errhandler:
         End Try
     End Function
 
+    Public Function NoOfCPsRemaining(SOCNumber As String) As String
+        Return Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInSOCNumber(SOCNumber)
+    End Function
+
+   
 #End Region
     '-------------------------------------------RSOC DATA MANIPULATION-----------------------------------------
 
