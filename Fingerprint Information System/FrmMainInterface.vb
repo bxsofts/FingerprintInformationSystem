@@ -6068,6 +6068,16 @@ errhandler:
 
 
         If CurrentTab = "IDR" Then
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data to edit!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             blCloseIDRFormAfterSave = True
 
             blIDRNewDataMode = False
@@ -6445,6 +6455,15 @@ errhandler:
         End If
 
         If CurrentTab = "IDR" Then
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data to open!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
             blCloseIDRFormAfterSave = True
 
             blIDRNewDataMode = False
@@ -6473,10 +6492,6 @@ errhandler:
                 Exit Sub
             End If
 
-            If CurrentTab = "IDR" Then
-                MessageBoxEx.Show("Please delete the record in SoC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
 
             If Me.chkPreventDeletion.Checked Then
                 MessageBoxEx.Show("Please click the down arrow to the right of the delete button and uncheck the box 'Prevent Deletion' to allow deletion of data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -6798,6 +6813,18 @@ errhandler:
                         Me.PSDataGrid.Rows(Me.PSDataGrid.RowCount - 1).Selected = True
                     End If
                     PSListChanged = True
+                End If
+            End If
+
+            If CurrentTab = "IDR" Then
+                If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
                 End If
             End If
 
@@ -16078,7 +16105,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION )", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer, IDRYear Integer )", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()

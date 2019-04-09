@@ -3,6 +3,8 @@
 Public Class FrmIdentificationRegister
 
     Dim OriginalIDRNumber As String = ""
+    Dim IDRN As Integer
+    Dim IDRY As Integer
     Private Sub FrmSOC_IdentificationDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         On Error Resume Next
 
@@ -212,7 +214,18 @@ Public Class FrmIdentificationRegister
                 Exit Sub
             End If
 
+           
+
+            Dim sIDRN() = Strings.Split(Me.txtIdentificationNumber.Text.Trim, "/")
+            Dim u = sIDRN.GetUpperBound(0)
+            If u = 2 Then
+                IDRN = CInt(sIDRN(0))
+                IDRY = CInt(sIDRN(1))
+            End If
+
+
             Dim blIDRNumberExists As Boolean = False
+
             If Me.IdentificationRegisterTableAdapter1.CheckIDRNumberExists(Me.txtIdentificationNumber.Text.Trim) = 1 Then
                 blIDRNumberExists = True
             End If
@@ -265,7 +278,8 @@ Public Class FrmIdentificationRegister
 
     Private Sub InsertNewRecord()
         Try
-            Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim)
+            
+            Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN, IDRY)
             AddNewIDRGridRow()
             ShowDesktopAlert("New Identification Record entered successfully.")
         Catch ex As Exception
@@ -275,7 +289,7 @@ Public Class FrmIdentificationRegister
 
     Private Sub UpdateRecord()
         Try
-            Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, OriginalIDRNumber)
+            Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN, IDRY, OriginalIDRNumber)
             UpdateIDRGridRow()
             ShowDesktopAlert("Selected Identification Record updated successfully.")
         Catch ex As Exception
