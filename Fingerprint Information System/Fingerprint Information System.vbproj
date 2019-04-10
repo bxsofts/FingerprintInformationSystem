@@ -216,10 +216,10 @@
     <Compile Include="FrmSOC-IdentificationDetails.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-ListOfIdentifiedCases.Designer.vb">
-      <DependentUpon>FrmSOC-ListOfIdentifiedCases.vb</DependentUpon>
+    <Compile Include="frmIdentificationStatement.Designer.vb">
+      <DependentUpon>frmIdentificationStatement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-ListOfIdentifiedCases.vb">
+    <Compile Include="frmIdentificationStatement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmUpdateAlert.Designer.vb">
@@ -572,8 +572,8 @@
     <EmbeddedResource Include="FrmSOC-IdentificationDetails.resx">
       <DependentUpon>FrmSOC-IdentificationDetails.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-ListOfIdentifiedCases.resx">
-      <DependentUpon>FrmSOC-ListOfIdentifiedCases.vb</DependentUpon>
+    <EmbeddedResource Include="frmIdentificationStatement.resx">
+      <DependentUpon>frmIdentificationStatement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSOC-ReportSentStatus.resx">
       <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>

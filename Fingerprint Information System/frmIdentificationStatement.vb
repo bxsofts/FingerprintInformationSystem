@@ -1,9 +1,7 @@
 ﻿Imports Microsoft.Office.Interop
 Imports DevComponents.DotNetBar
 
-Public Class FrmSOC_ListOfIdentifiedCases
-
-
+Public Class frmIdentificationStatement
 
 
     Dim d1 As Date
@@ -53,9 +51,13 @@ Public Class FrmSOC_ListOfIdentifiedCases
 
             Me.cmbMonth.Focus()
 
-            If Me.IDCasesTableAdapter1.Connection.State = ConnectionState.Open Then Me.IDCasesTableAdapter1.Connection.Close()
-            Me.IDCasesTableAdapter1.Connection.ConnectionString = sConString
-            Me.IDCasesTableAdapter1.Connection.Open()
+            If Me.JoinedIDRTableAdapter1.Connection.State = ConnectionState.Open Then Me.JoinedIDRTableAdapter1.Connection.Close()
+            Me.JoinedIDRTableAdapter1.Connection.ConnectionString = sConString
+            Me.JoinedIDRTableAdapter1.Connection.Open()
+
+            If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
+            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.SocRegisterTableAdapter1.Connection.Open()
 
             Me.Cursor = Cursors.Default
 
@@ -178,8 +180,8 @@ Public Class FrmSOC_ListOfIdentifiedCases
                 System.Threading.Thread.Sleep(10)
             Next
 
-            Me.IDCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
-            Dim idcount = Me.FingerPrintDataSet.IdentifiedCases.Count
+            Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
+            Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
             Dim rows = idcount + 2
             If rows = 2 Then rows = 3
 
@@ -206,7 +208,7 @@ Public Class FrmSOC_ListOfIdentifiedCases
                 System.Threading.Thread.Sleep(10)
             Next
 
-          
+
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -294,19 +296,24 @@ Public Class FrmSOC_ListOfIdentifiedCases
 
                     Dim j = i - 3
 
+                    Dim SOCNumber = Me.FingerPrintDataSet.JoinedIDR(j).SOCNumber
+
                     WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(j).SOCNumber)
+                    WordApp.Selection.TypeText(SOCNumber)
+
+                    Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet.SOCRegister, SOCNumber)
+                    '   Dim soccount = FingerPrintDataSet.SOCRegister.Count
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(j).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.IdentifiedCases(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.IdentifiedCases(j).SectionOfLaw)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.JoinedIDR(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.JoinedIDR(j).SectionOfLaw)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    '    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases (j).DateOfInspection.ToString("dd/MM/yyyy", culture))
+                    '    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
 
-                    Dim mo = Me.FingerPrintDataSet.IdentifiedCases(j).ModusOperandi
+                    Dim mo = Me.FingerPrintDataSet.SOCRegister(0).ModusOperandi
 
                     Dim SplitText() = Strings.Split(mo, " - ")
                     Dim u = SplitText.GetUpperBound(0)
@@ -323,45 +330,38 @@ Public Class FrmSOC_ListOfIdentifiedCases
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    Dim pl = Me.FingerPrintDataSet.IdentifiedCases(j).PropertyLost
+                    Dim pl = Me.FingerPrintDataSet.SOCRegister(0).PropertyLost
                     If pl.Contains("`") Then
                         WordApp.Selection.Font.Name = "Rupee Foradian"
                         WordApp.Selection.Font.Size = 8
                     End If
-                  
+
                     WordApp.Selection.TypeText(pl)
 
-                    '  For Each rng As Word.Range In WordApp.Selection.Words
-                    ' Dim f As Boolean = rng.Find.Execute("`")
-                    'If f Then
-                    ' rng.Font.Name = "Rupee Foradian"
-                    '  rng.Font.Size = 8
-                    '   End If
-                    '  Next
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(j).CPsIdentified)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).CPsIdentified)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(j).IdentifiedAs)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).CulpritName)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    '  WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases (j).henryclass)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).HenryClassification)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    '  WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases (j).idfromda/suspect/accsd)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentifiedFrom)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
-                    Dim io = Me.FingerPrintDataSet.IdentifiedCases(j).InvestigatingOfficer
+                    Dim io = Me.FingerPrintDataSet.JoinedIDR(j).InvestigatingOfficer
                     io = io.Replace(vbNewLine, "; ")
 
-                    Dim ido = Me.FingerPrintDataSet.IdentifiedCases(j).IdentifiedBy
+                    Dim ido = Me.FingerPrintDataSet.JoinedIDR(j).IdentifiedBy
                     ido = ido.Replace(vbNewLine, "; ")
 
                     If io <> ido Then
@@ -372,7 +372,7 @@ Public Class FrmSOC_ListOfIdentifiedCases
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(j).Remarks)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDetails)
                 Next
             End If
 
@@ -473,5 +473,5 @@ Public Class FrmSOC_ListOfIdentifiedCases
         End Try
     End Sub
 
-   
+
 End Class

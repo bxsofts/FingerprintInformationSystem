@@ -15020,8 +15020,8 @@ errhandler:
 
     Private Sub ListOfMonthlyIDCases(sender As Object, e As EventArgs) Handles btnListOfMonthlyIDCases.Click
         On Error Resume Next
-        FrmSOC_ListOfIdentifiedCases.StartPosition = FormStartPosition.CenterParent
-        FrmSOC_ListOfIdentifiedCases.ShowDialog()
+        frmIdentificationStatement.StartPosition = FormStartPosition.CenterParent
+        frmIdentificationStatement.ShowDialog()
     End Sub
     Private Sub GistOfIdentifiedCases(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGistOfIdentifiedCases.Click
         On Error Resume Next

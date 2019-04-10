@@ -14702,7 +14702,7 @@ Partial Class frmMainInterface
         Me.HenryClassificationDataGridViewTextBoxColumn.HeaderText = "Henry Classification"
         Me.HenryClassificationDataGridViewTextBoxColumn.Name = "HenryClassificationDataGridViewTextBoxColumn"
         Me.HenryClassificationDataGridViewTextBoxColumn.ReadOnly = True
-        Me.HenryClassificationDataGridViewTextBoxColumn.Width = 120
+        Me.HenryClassificationDataGridViewTextBoxColumn.Width = 150
         '
         'DANumberDataGridViewTextBoxColumn3
         '
@@ -14710,6 +14710,7 @@ Partial Class frmMainInterface
         Me.DANumberDataGridViewTextBoxColumn3.HeaderText = "DA Number"
         Me.DANumberDataGridViewTextBoxColumn3.Name = "DANumberDataGridViewTextBoxColumn3"
         Me.DANumberDataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DANumberDataGridViewTextBoxColumn3.Width = 150
         '
         'IdentifiedFromDataGridViewTextBoxColumn
         '

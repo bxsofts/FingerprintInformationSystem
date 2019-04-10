@@ -237,13 +237,14 @@ Public Class FrmIdentificationRegister
             End If
 
             If blIDREditMode Then
-                If blIDRNumberExists Then
-                    MessageBoxEx.Show("The Identification Number already exists. Please enter another number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.txtIdentificationNumber.Focus()
-                    Exit Sub
+                If Me.txtIdentificationNumber.Text.Trim <> OriginalIDRN Then
+                    If blIDRNumberExists Then
+                        MessageBoxEx.Show("The Identification Number already exists. Please enter another number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Me.txtIdentificationNumber.Focus()
+                        Exit Sub
+                    End If
                 End If
-
-                    UpdateRecord()
+                UpdateRecord()
             End If
 
 

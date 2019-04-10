@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmSOC_ListOfIdentifiedCases
+Partial Class frmIdentificationStatement
     Inherits DevComponents.DotNetBar.Office2007Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,8 +22,7 @@ Partial Class FrmSOC_ListOfIdentifiedCases
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSOC_ListOfIdentifiedCases))
-        Me.IDCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmIdentificationStatement))
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
@@ -40,16 +39,14 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
+        Me.JoinedIDRTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter()
+        Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'IDCasesTableAdapter1
-        '
-        Me.IDCasesTableAdapter1.ClearBeforeFill = True
         '
         'FingerPrintDataSet
         '
@@ -355,7 +352,15 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.bgwIDList.WorkerReportsProgress = True
         Me.bgwIDList.WorkerSupportsCancellation = True
         '
-        'FrmSOC_ListOfIdentifiedCases
+        'JoinedIDRTableAdapter1
+        '
+        Me.JoinedIDRTableAdapter1.ClearBeforeFill = True
+        '
+        'SocRegisterTableAdapter1
+        '
+        Me.SocRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'frmIdentificationStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -364,11 +369,11 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FrmSOC_ListOfIdentifiedCases"
+        Me.Name = "frmIdentificationStatement"
         Me.ShowInTaskbar = False
         Me.Text = "Identification Statement"
         Me.TitleText = "<b>Identification Statement</b>"
@@ -381,7 +386,6 @@ Partial Class FrmSOC_ListOfIdentifiedCases
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents IDCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
     Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
@@ -398,4 +402,6 @@ Partial Class FrmSOC_ListOfIdentifiedCases
     Friend WithEvents cmbMonth As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents JoinedIDRTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter
+    Friend WithEvents SocRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
 End Class
