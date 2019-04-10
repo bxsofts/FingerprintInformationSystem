@@ -4422,7 +4422,7 @@ Public Class frmMainInterface
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
-        '  Me.JoinedIDRBindingSource.Sort = IDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & IDRDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
+        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
 
     End Sub
 
@@ -4679,7 +4679,7 @@ Public Class frmMainInterface
                 If JoinedIDRDataGrid.SortOrder = SortOrder.None Or JoinedIDRDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
-                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
+                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
                     Else
                         Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     End If
@@ -4692,7 +4692,7 @@ Public Class frmMainInterface
                 If JoinedIDRDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
-                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & JoinedIDRDataGrid.Columns(1).DataPropertyName.ToString() & " DESC"
+                        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " DESC"
                     Else
                         Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     End If
@@ -16105,7 +16105,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer, IDRYear Integer )", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer)", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
@@ -16125,7 +16125,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("INSERT INTO IdentificationRegister (IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, CulpritName, IdentificationDetails) SELECT IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, IdentifiedAs, Remarks FROM SOCRegister where FileStatus = 'Identified'", con)
+            Dim cmd = New OleDb.OleDbCommand("INSERT INTO IdentificationRegister (IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, CulpritName, IdentificationDetails, IDRNumber) SELECT IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, IdentifiedAs, Remarks, VAL(IdentificationNumber) FROM SOCRegister where FileStatus = 'Identified'", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()

@@ -2,9 +2,9 @@
 
 Public Class FrmIdentificationRegister
 
-    Dim OriginalIDRNumber As String = ""
+    Dim SlNumber As Integer
+    Dim OriginalIDRN As String
     Dim IDRN As Integer
-    Dim IDRY As Integer
     Private Sub FrmSOC_IdentificationDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         On Error Resume Next
 
@@ -40,7 +40,6 @@ Public Class FrmIdentificationRegister
 
         If blIDREditMode Or blIDROpenMode Then
             LoadIDRValues()
-            OriginalIDRNumber = Me.txtIdentificationNumber.Text
         End If
     End Sub
 
@@ -85,10 +84,12 @@ Public Class FrmIdentificationRegister
                 Me.txtDANumber.Text = .SelectedCells(16).Value.ToString
                 Me.cmbIdentifiedFrom.Text = .SelectedCells(17).Value.ToString
                 Me.txtRemarks.Text = .SelectedCells(18).Value.ToString
+                SlNumber = .SelectedCells(20).Value.ToString
+                OriginalIDRN = .SelectedCells(0).Value.ToString
             Catch ex As Exception
                 ShowErrorMessage(ex)
             End Try
-           
+
         End With
     End Sub
 
@@ -214,14 +215,10 @@ Public Class FrmIdentificationRegister
                 Exit Sub
             End If
 
-           
+
 
             Dim sIDRN() = Strings.Split(Me.txtIdentificationNumber.Text.Trim, "/")
-            Dim u = sIDRN.GetUpperBound(0)
-            If u = 2 Then
-                IDRN = CInt(sIDRN(0))
-                IDRY = CInt(sIDRN(1))
-            End If
+            IDRN = CInt(sIDRN(0))
 
 
             Dim blIDRNumberExists As Boolean = False
@@ -229,6 +226,7 @@ Public Class FrmIdentificationRegister
             If Me.IdentificationRegisterTableAdapter1.CheckIDRNumberExists(Me.txtIdentificationNumber.Text.Trim) = 1 Then
                 blIDRNumberExists = True
             End If
+
             If blIDRNewDataMode Then
                 If blIDRNumberExists Then
                     MessageBoxEx.Show("The Identification Number already exists. Please enter another number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -239,20 +237,18 @@ Public Class FrmIdentificationRegister
             End If
 
             If blIDREditMode Then
-                If Me.txtIdentificationNumber.Text.Trim = OriginalIDRNumber Then 'update record
-                    UpdateRecord()
-                Else
-                    If blIDRNumberExists Then
-                        MessageBoxEx.Show("The Identification Number already exists. Please enter another number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Me.txtIdentificationNumber.Focus()
-                        Exit Sub
-                    End If
-                    UpdateRecord()
+                If blIDRNumberExists Then
+                    MessageBoxEx.Show("The Identification Number already exists. Please enter another number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Me.txtIdentificationNumber.Focus()
+                    Exit Sub
                 End If
+
+                    UpdateRecord()
             End If
 
+
             If blIDROpenMode Then
-                If Me.txtIdentificationNumber.Text.Trim = OriginalIDRNumber Then 'update record
+                If Me.txtIdentificationNumber.Text.Trim = OriginalIDRN Then 'update record
                     UpdateRecord()
                 Else
                     If blIDRNumberExists Then
@@ -260,6 +256,7 @@ Public Class FrmIdentificationRegister
                         Me.txtIdentificationNumber.Focus()
                         Exit Sub
                     End If
+
                     InsertNewRecord()
                 End If
             End If
@@ -278,8 +275,8 @@ Public Class FrmIdentificationRegister
 
     Private Sub InsertNewRecord()
         Try
-            
-            Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN, IDRY)
+
+            Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN)
             AddNewIDRGridRow()
             ShowDesktopAlert("New Identification Record entered successfully.")
         Catch ex As Exception
@@ -289,7 +286,7 @@ Public Class FrmIdentificationRegister
 
     Private Sub UpdateRecord()
         Try
-            Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN, IDRY, OriginalIDRNumber)
+            Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN, SlNumber)
             UpdateIDRGridRow()
             ShowDesktopAlert("Selected Identification Record updated successfully.")
         Catch ex As Exception
