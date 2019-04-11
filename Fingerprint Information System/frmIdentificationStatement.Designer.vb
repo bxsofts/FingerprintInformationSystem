@@ -40,7 +40,6 @@ Partial Class frmIdentificationStatement
         Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
         Me.JoinedIDRTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter()
-        Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -356,10 +355,6 @@ Partial Class frmIdentificationStatement
         '
         Me.JoinedIDRTableAdapter1.ClearBeforeFill = True
         '
-        'SocRegisterTableAdapter1
-        '
-        Me.SocRegisterTableAdapter1.ClearBeforeFill = True
-        '
         'frmIdentificationStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -403,5 +398,4 @@ Partial Class frmIdentificationStatement
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
     Friend WithEvents JoinedIDRTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter
-    Friend WithEvents SocRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
 End Class

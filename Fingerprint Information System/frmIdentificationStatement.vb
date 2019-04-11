@@ -55,10 +55,6 @@ Public Class frmIdentificationStatement
             Me.JoinedIDRTableAdapter1.Connection.ConnectionString = sConString
             Me.JoinedIDRTableAdapter1.Connection.Open()
 
-            If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
-            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
-            Me.SocRegisterTableAdapter1.Connection.Open()
-
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
@@ -67,7 +63,7 @@ Public Class frmIdentificationStatement
         End Try
     End Sub
 
-    Private Sub GenerateStatistics(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByMonth.Click, btnGeneratebyPeriod.Click
+    Private Sub GenerateStatement(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByMonth.Click, btnGeneratebyPeriod.Click
         Try
             Me.Cursor = Cursors.WaitCursor
             Select Case DirectCast(sender, Control).Name
@@ -296,14 +292,9 @@ Public Class frmIdentificationStatement
 
                     Dim j = i - 3
 
-                    Dim SOCNumber = Me.FingerPrintDataSet.JoinedIDR(j).SOCNumber
-
                     WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(SOCNumber)
-
-                    Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet.SOCRegister, SOCNumber)
-                    '   Dim soccount = FingerPrintDataSet.SOCRegister.Count
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).SOCNumber)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -313,7 +304,7 @@ Public Class frmIdentificationStatement
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                     '    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
 
-                    Dim mo = Me.FingerPrintDataSet.SOCRegister(0).ModusOperandi
+                    Dim mo = Me.FingerPrintDataSet.JoinedIDR(j).ModusOperandi
 
                     Dim SplitText() = Strings.Split(mo, " - ")
                     Dim u = SplitText.GetUpperBound(0)
@@ -330,7 +321,7 @@ Public Class frmIdentificationStatement
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    Dim pl = Me.FingerPrintDataSet.SOCRegister(0).PropertyLost
+                    Dim pl = Me.FingerPrintDataSet.JoinedIDR(j).PropertyLost
                     If pl.Contains("`") Then
                         WordApp.Selection.Font.Name = "Rupee Foradian"
                         WordApp.Selection.Font.Size = 8

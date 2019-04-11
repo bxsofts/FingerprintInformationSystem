@@ -6114,11 +6114,13 @@ WHERE        (SlNumber = ?)</CommandText>
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, 
-                         SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, 
-                         SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, 
-                         IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, IdentificationRegister.DANumber, 
-                         IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber
+                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, 
+                         SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, 
+                         IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, 
+                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, 
+                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsUnfit, 
+                         SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, 
+                         SOCRegister.Gist, SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus
 FROM            (IdentificationRegister INNER JOIN
                          SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)
 ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber</CommandText>
@@ -6149,16 +6151,35 @@ ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNu
               <Mapping SourceColumn="IdentificationDetails" DataSetColumn="IdentificationDetails" />
               <Mapping SourceColumn="IDRNumber" DataSetColumn="IDRNumber" />
               <Mapping SourceColumn="SlNumber" DataSetColumn="SlNumber" />
+              <Mapping SourceColumn="DateOfReport" DataSetColumn="DateOfReport" />
+              <Mapping SourceColumn="DateOfOccurrence" DataSetColumn="DateOfOccurrence" />
+              <Mapping SourceColumn="PlaceOfOccurrence" DataSetColumn="PlaceOfOccurrence" />
+              <Mapping SourceColumn="Complainant" DataSetColumn="Complainant" />
+              <Mapping SourceColumn="ModusOperandi" DataSetColumn="ModusOperandi" />
+              <Mapping SourceColumn="PropertyLost" DataSetColumn="PropertyLost" />
+              <Mapping SourceColumn="ChancePrintsUnfit" DataSetColumn="ChancePrintsUnfit" />
+              <Mapping SourceColumn="ChancePrintsEliminated" DataSetColumn="ChancePrintsEliminated" />
+              <Mapping SourceColumn="ChancePrintsRemaining" DataSetColumn="ChancePrintsRemaining" />
+              <Mapping SourceColumn="ChancePrintDetails" DataSetColumn="ChancePrintDetails" />
+              <Mapping SourceColumn="Photographer" DataSetColumn="Photographer" />
+              <Mapping SourceColumn="PhotoReceived" DataSetColumn="PhotoReceived" />
+              <Mapping SourceColumn="DateOfReceptionOfPhoto" DataSetColumn="DateOfReceptionOfPhoto" />
+              <Mapping SourceColumn="Gist" DataSetColumn="Gist" />
+              <Mapping SourceColumn="ComparisonDetails" DataSetColumn="ComparisonDetails" />
+              <Mapping SourceColumn="GraveCrime" DataSetColumn="GraveCrime" />
+              <Mapping SourceColumn="FileStatus" DataSetColumn="FileStatus" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByIdentifiedCases" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByIdentifiedCases" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByIdentifiedCases">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, 
-                         SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, 
-                         SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, 
-                         IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, IdentificationRegister.DANumber, 
-                         IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber
+                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, 
+                         SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, 
+                         IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, 
+                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, 
+                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsUnfit, 
+                         SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, 
+                         SOCRegister.Gist, SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus
 FROM            (IdentificationRegister INNER JOIN
                          SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)
 WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)
@@ -8108,6 +8129,113 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
               </xs:element>
               <xs:element name="IDRNumber" msprop:Generator_ColumnVarNameInTable="columnIDRNumber" msprop:Generator_ColumnPropNameInRow="IDRNumber" msprop:Generator_ColumnPropNameInTable="IDRNumberColumn" msprop:Generator_UserColumnName="IDRNumber" type="xs:int" minOccurs="0" />
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="DateOfReport" msprop:Generator_ColumnVarNameInTable="columnDateOfReport" msprop:Generator_ColumnPropNameInRow="DateOfReport" msprop:Generator_ColumnPropNameInTable="DateOfReportColumn" msprop:Generator_UserColumnName="DateOfReport" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateOfOccurrence" msprop:Generator_ColumnVarNameInTable="columnDateOfOccurrence" msprop:Generator_ColumnPropNameInRow="DateOfOccurrence" msprop:Generator_ColumnPropNameInTable="DateOfOccurrenceColumn" msprop:Generator_UserColumnName="DateOfOccurrence" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PlaceOfOccurrence" msprop:Generator_ColumnVarNameInTable="columnPlaceOfOccurrence" msprop:Generator_ColumnPropNameInRow="PlaceOfOccurrence" msprop:Generator_ColumnPropNameInTable="PlaceOfOccurrenceColumn" msprop:Generator_UserColumnName="PlaceOfOccurrence" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Complainant" msprop:Generator_ColumnVarNameInTable="columnComplainant" msprop:Generator_ColumnPropNameInRow="Complainant" msprop:Generator_ColumnPropNameInTable="ComplainantColumn" msprop:Generator_UserColumnName="Complainant" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ModusOperandi" msprop:Generator_ColumnVarNameInTable="columnModusOperandi" msprop:Generator_ColumnPropNameInRow="ModusOperandi" msprop:Generator_ColumnPropNameInTable="ModusOperandiColumn" msprop:Generator_UserColumnName="ModusOperandi" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PropertyLost" msprop:Generator_ColumnVarNameInTable="columnPropertyLost" msprop:Generator_ColumnPropNameInRow="PropertyLost" msprop:Generator_ColumnPropNameInTable="PropertyLostColumn" msprop:Generator_UserColumnName="PropertyLost" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChancePrintsUnfit" msprop:Generator_ColumnVarNameInTable="columnChancePrintsUnfit" msprop:Generator_ColumnPropNameInRow="ChancePrintsUnfit" msprop:Generator_ColumnPropNameInTable="ChancePrintsUnfitColumn" msprop:Generator_UserColumnName="ChancePrintsUnfit" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChancePrintsEliminated" msprop:Generator_ColumnVarNameInTable="columnChancePrintsEliminated" msprop:Generator_ColumnPropNameInRow="ChancePrintsEliminated" msprop:Generator_ColumnPropNameInTable="ChancePrintsEliminatedColumn" msprop:Generator_UserColumnName="ChancePrintsEliminated" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChancePrintsRemaining" msprop:Generator_ColumnVarNameInTable="columnChancePrintsRemaining" msprop:Generator_ColumnPropNameInRow="ChancePrintsRemaining" msprop:Generator_ColumnPropNameInTable="ChancePrintsRemainingColumn" msprop:Generator_UserColumnName="ChancePrintsRemaining" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChancePrintDetails" msprop:Generator_ColumnVarNameInTable="columnChancePrintDetails" msprop:Generator_ColumnPropNameInRow="ChancePrintDetails" msprop:Generator_ColumnPropNameInTable="ChancePrintDetailsColumn" msprop:Generator_UserColumnName="ChancePrintDetails" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Photographer" msprop:Generator_ColumnVarNameInTable="columnPhotographer" msprop:Generator_ColumnPropNameInRow="Photographer" msprop:Generator_ColumnPropNameInTable="PhotographerColumn" msprop:Generator_UserColumnName="Photographer" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PhotoReceived" msprop:Generator_ColumnVarNameInTable="columnPhotoReceived" msprop:Generator_ColumnPropNameInRow="PhotoReceived" msprop:Generator_ColumnPropNameInTable="PhotoReceivedColumn" msprop:Generator_UserColumnName="PhotoReceived" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DateOfReceptionOfPhoto" msprop:Generator_ColumnVarNameInTable="columnDateOfReceptionOfPhoto" msprop:Generator_ColumnPropNameInRow="DateOfReceptionOfPhoto" msprop:Generator_ColumnPropNameInTable="DateOfReceptionOfPhotoColumn" msprop:Generator_UserColumnName="DateOfReceptionOfPhoto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Gist" msprop:Generator_ColumnVarNameInTable="columnGist" msprop:Generator_ColumnPropNameInRow="Gist" msprop:Generator_ColumnPropNameInTable="GistColumn" msprop:Generator_UserColumnName="Gist" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ComparisonDetails" msprop:Generator_ColumnVarNameInTable="columnComparisonDetails" msprop:Generator_ColumnPropNameInRow="ComparisonDetails" msprop:Generator_ColumnPropNameInTable="ComparisonDetailsColumn" msprop:Generator_UserColumnName="ComparisonDetails" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GraveCrime" msprop:Generator_ColumnVarNameInTable="columnGraveCrime" msprop:Generator_ColumnPropNameInRow="GraveCrime" msprop:Generator_ColumnPropNameInTable="GraveCrimeColumn" msprop:Generator_UserColumnName="GraveCrime" type="xs:boolean" minOccurs="0" />
+              <xs:element name="FileStatus" msprop:Generator_ColumnVarNameInTable="columnFileStatus" msprop:Generator_ColumnPropNameInRow="FileStatus" msprop:Generator_ColumnPropNameInTable="FileStatusColumn" msprop:Generator_UserColumnName="FileStatus" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

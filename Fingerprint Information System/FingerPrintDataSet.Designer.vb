@@ -13157,6 +13157,40 @@ Partial Public Class FingerPrintDataSet
         
         Private columnSlNumber As Global.System.Data.DataColumn
         
+        Private columnDateOfReport As Global.System.Data.DataColumn
+        
+        Private columnDateOfOccurrence As Global.System.Data.DataColumn
+        
+        Private columnPlaceOfOccurrence As Global.System.Data.DataColumn
+        
+        Private columnComplainant As Global.System.Data.DataColumn
+        
+        Private columnModusOperandi As Global.System.Data.DataColumn
+        
+        Private columnPropertyLost As Global.System.Data.DataColumn
+        
+        Private columnChancePrintsUnfit As Global.System.Data.DataColumn
+        
+        Private columnChancePrintsEliminated As Global.System.Data.DataColumn
+        
+        Private columnChancePrintsRemaining As Global.System.Data.DataColumn
+        
+        Private columnChancePrintDetails As Global.System.Data.DataColumn
+        
+        Private columnPhotographer As Global.System.Data.DataColumn
+        
+        Private columnPhotoReceived As Global.System.Data.DataColumn
+        
+        Private columnDateOfReceptionOfPhoto As Global.System.Data.DataColumn
+        
+        Private columnGist As Global.System.Data.DataColumn
+        
+        Private columnComparisonDetails As Global.System.Data.DataColumn
+        
+        Private columnGraveCrime As Global.System.Data.DataColumn
+        
+        Private columnFileStatus As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -13361,6 +13395,142 @@ Partial Public Class FingerPrintDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DateOfReportColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateOfReport
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DateOfOccurrenceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateOfOccurrence
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PlaceOfOccurrenceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPlaceOfOccurrence
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ComplainantColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnComplainant
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ModusOperandiColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnModusOperandi
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PropertyLostColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPropertyLost
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChancePrintsUnfitColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChancePrintsUnfit
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChancePrintsEliminatedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChancePrintsEliminated
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChancePrintsRemainingColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChancePrintsRemaining
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChancePrintDetailsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChancePrintDetails
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PhotographerColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPhotographer
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PhotoReceivedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPhotoReceived
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DateOfReceptionOfPhotoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateOfReceptionOfPhoto
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property GistColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGist
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ComparisonDetailsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnComparisonDetails
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property GraveCrimeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnGraveCrime
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FileStatusColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFileStatus
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -13417,9 +13587,26 @@ Partial Public Class FingerPrintDataSet
                     ByVal DANumber As String,  _
                     ByVal IdentifiedFrom As String,  _
                     ByVal IdentificationDetails As String,  _
-                    ByVal IDRNumber As Integer) As JoinedIDRRow
+                    ByVal IDRNumber As Integer,  _
+                    ByVal DateOfReport As Date,  _
+                    ByVal DateOfOccurrence As String,  _
+                    ByVal PlaceOfOccurrence As String,  _
+                    ByVal Complainant As String,  _
+                    ByVal ModusOperandi As String,  _
+                    ByVal PropertyLost As String,  _
+                    ByVal ChancePrintsUnfit As String,  _
+                    ByVal ChancePrintsEliminated As String,  _
+                    ByVal ChancePrintsRemaining As String,  _
+                    ByVal ChancePrintDetails As String,  _
+                    ByVal Photographer As String,  _
+                    ByVal PhotoReceived As String,  _
+                    ByVal DateOfReceptionOfPhoto As String,  _
+                    ByVal Gist As String,  _
+                    ByVal ComparisonDetails As String,  _
+                    ByVal GraveCrime As Boolean,  _
+                    ByVal FileStatus As String) As JoinedIDRRow
             Dim rowJoinedIDRRow As JoinedIDRRow = CType(Me.NewRow,JoinedIDRRow)
-            Dim columnValuesArray() As Object = New Object() {IdentificationNumber, SOCNumber, IdentificationDate, DateOfInspection, PoliceStation, CrimeNumber, SectionOfLaw, InvestigatingOfficer, IdentifiedBy, ChancePrintsDeveloped, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber, Nothing}
+            Dim columnValuesArray() As Object = New Object() {IdentificationNumber, SOCNumber, IdentificationDate, DateOfInspection, PoliceStation, CrimeNumber, SectionOfLaw, InvestigatingOfficer, IdentifiedBy, ChancePrintsDeveloped, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber, Nothing, DateOfReport, DateOfOccurrence, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, Gist, ComparisonDetails, GraveCrime, FileStatus}
             rowJoinedIDRRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowJoinedIDRRow)
             Return rowJoinedIDRRow
@@ -13463,6 +13650,23 @@ Partial Public Class FingerPrintDataSet
             Me.columnIdentificationDetails = MyBase.Columns("IdentificationDetails")
             Me.columnIDRNumber = MyBase.Columns("IDRNumber")
             Me.columnSlNumber = MyBase.Columns("SlNumber")
+            Me.columnDateOfReport = MyBase.Columns("DateOfReport")
+            Me.columnDateOfOccurrence = MyBase.Columns("DateOfOccurrence")
+            Me.columnPlaceOfOccurrence = MyBase.Columns("PlaceOfOccurrence")
+            Me.columnComplainant = MyBase.Columns("Complainant")
+            Me.columnModusOperandi = MyBase.Columns("ModusOperandi")
+            Me.columnPropertyLost = MyBase.Columns("PropertyLost")
+            Me.columnChancePrintsUnfit = MyBase.Columns("ChancePrintsUnfit")
+            Me.columnChancePrintsEliminated = MyBase.Columns("ChancePrintsEliminated")
+            Me.columnChancePrintsRemaining = MyBase.Columns("ChancePrintsRemaining")
+            Me.columnChancePrintDetails = MyBase.Columns("ChancePrintDetails")
+            Me.columnPhotographer = MyBase.Columns("Photographer")
+            Me.columnPhotoReceived = MyBase.Columns("PhotoReceived")
+            Me.columnDateOfReceptionOfPhoto = MyBase.Columns("DateOfReceptionOfPhoto")
+            Me.columnGist = MyBase.Columns("Gist")
+            Me.columnComparisonDetails = MyBase.Columns("ComparisonDetails")
+            Me.columnGraveCrime = MyBase.Columns("GraveCrime")
+            Me.columnFileStatus = MyBase.Columns("FileStatus")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13510,6 +13714,40 @@ Partial Public Class FingerPrintDataSet
             MyBase.Columns.Add(Me.columnIDRNumber)
             Me.columnSlNumber = New Global.System.Data.DataColumn("SlNumber", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSlNumber)
+            Me.columnDateOfReport = New Global.System.Data.DataColumn("DateOfReport", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateOfReport)
+            Me.columnDateOfOccurrence = New Global.System.Data.DataColumn("DateOfOccurrence", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateOfOccurrence)
+            Me.columnPlaceOfOccurrence = New Global.System.Data.DataColumn("PlaceOfOccurrence", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPlaceOfOccurrence)
+            Me.columnComplainant = New Global.System.Data.DataColumn("Complainant", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnComplainant)
+            Me.columnModusOperandi = New Global.System.Data.DataColumn("ModusOperandi", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnModusOperandi)
+            Me.columnPropertyLost = New Global.System.Data.DataColumn("PropertyLost", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPropertyLost)
+            Me.columnChancePrintsUnfit = New Global.System.Data.DataColumn("ChancePrintsUnfit", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChancePrintsUnfit)
+            Me.columnChancePrintsEliminated = New Global.System.Data.DataColumn("ChancePrintsEliminated", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChancePrintsEliminated)
+            Me.columnChancePrintsRemaining = New Global.System.Data.DataColumn("ChancePrintsRemaining", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChancePrintsRemaining)
+            Me.columnChancePrintDetails = New Global.System.Data.DataColumn("ChancePrintDetails", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChancePrintDetails)
+            Me.columnPhotographer = New Global.System.Data.DataColumn("Photographer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPhotographer)
+            Me.columnPhotoReceived = New Global.System.Data.DataColumn("PhotoReceived", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPhotoReceived)
+            Me.columnDateOfReceptionOfPhoto = New Global.System.Data.DataColumn("DateOfReceptionOfPhoto", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateOfReceptionOfPhoto)
+            Me.columnGist = New Global.System.Data.DataColumn("Gist", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGist)
+            Me.columnComparisonDetails = New Global.System.Data.DataColumn("ComparisonDetails", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnComparisonDetails)
+            Me.columnGraveCrime = New Global.System.Data.DataColumn("GraveCrime", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnGraveCrime)
+            Me.columnFileStatus = New Global.System.Data.DataColumn("FileStatus", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFileStatus)
             Me.columnIdentificationNumber.MaxLength = 10
             Me.columnSOCNumber.MaxLength = 50
             Me.columnPoliceStation.MaxLength = 255
@@ -13530,6 +13768,21 @@ Partial Public Class FingerPrintDataSet
             Me.columnSlNumber.AutoIncrement = true
             Me.columnSlNumber.AutoIncrementSeed = -1
             Me.columnSlNumber.AutoIncrementStep = -1
+            Me.columnDateOfOccurrence.MaxLength = 255
+            Me.columnPlaceOfOccurrence.MaxLength = 255
+            Me.columnComplainant.MaxLength = 255
+            Me.columnModusOperandi.MaxLength = 255
+            Me.columnPropertyLost.MaxLength = 255
+            Me.columnChancePrintsUnfit.MaxLength = 10
+            Me.columnChancePrintsEliminated.MaxLength = 10
+            Me.columnChancePrintsRemaining.MaxLength = 10
+            Me.columnChancePrintDetails.MaxLength = 255
+            Me.columnPhotographer.MaxLength = 255
+            Me.columnPhotoReceived.MaxLength = 50
+            Me.columnDateOfReceptionOfPhoto.MaxLength = 50
+            Me.columnGist.MaxLength = 536870910
+            Me.columnComparisonDetails.MaxLength = 536870910
+            Me.columnFileStatus.MaxLength = 25
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -21938,6 +22191,261 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DateOfReport() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.DateOfReportColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateOfReport' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.DateOfReportColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DateOfOccurrence() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.DateOfOccurrenceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateOfOccurrence' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.DateOfOccurrenceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PlaceOfOccurrence() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.PlaceOfOccurrenceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PlaceOfOccurrence' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.PlaceOfOccurrenceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Complainant() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ComplainantColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Complainant' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ComplainantColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ModusOperandi() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ModusOperandiColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ModusOperandi' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ModusOperandiColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PropertyLost() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.PropertyLostColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PropertyLost' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.PropertyLostColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChancePrintsUnfit() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ChancePrintsUnfitColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChancePrintsUnfit' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ChancePrintsUnfitColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChancePrintsEliminated() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ChancePrintsEliminatedColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChancePrintsEliminated' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ChancePrintsEliminatedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChancePrintsRemaining() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ChancePrintsRemainingColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChancePrintsRemaining' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ChancePrintsRemainingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChancePrintDetails() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ChancePrintDetailsColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChancePrintDetails' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ChancePrintDetailsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Photographer() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.PhotographerColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Photographer' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.PhotographerColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PhotoReceived() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.PhotoReceivedColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PhotoReceived' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.PhotoReceivedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DateOfReceptionOfPhoto() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.DateOfReceptionOfPhotoColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateOfReceptionOfPhoto' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.DateOfReceptionOfPhotoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Gist() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.GistColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Gist' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.GistColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ComparisonDetails() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.ComparisonDetailsColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ComparisonDetails' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.ComparisonDetailsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property GraveCrime() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.GraveCrimeColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GraveCrime' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.GraveCrimeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property FileStatus() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableJoinedIDR.FileStatusColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FileStatus' in table 'JoinedIDR' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableJoinedIDR.FileStatusColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsIdentificationNumberNull() As Boolean
             Return Me.IsNull(Me.tableJoinedIDR.IdentificationNumberColumn)
         End Function
@@ -22186,6 +22694,210 @@ Partial Public Class FingerPrintDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetSlNumberNull()
             Me(Me.tableJoinedIDR.SlNumberColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDateOfReportNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.DateOfReportColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDateOfReportNull()
+            Me(Me.tableJoinedIDR.DateOfReportColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDateOfOccurrenceNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.DateOfOccurrenceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDateOfOccurrenceNull()
+            Me(Me.tableJoinedIDR.DateOfOccurrenceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPlaceOfOccurrenceNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.PlaceOfOccurrenceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPlaceOfOccurrenceNull()
+            Me(Me.tableJoinedIDR.PlaceOfOccurrenceColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsComplainantNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ComplainantColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetComplainantNull()
+            Me(Me.tableJoinedIDR.ComplainantColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsModusOperandiNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ModusOperandiColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetModusOperandiNull()
+            Me(Me.tableJoinedIDR.ModusOperandiColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPropertyLostNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.PropertyLostColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPropertyLostNull()
+            Me(Me.tableJoinedIDR.PropertyLostColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsChancePrintsUnfitNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ChancePrintsUnfitColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetChancePrintsUnfitNull()
+            Me(Me.tableJoinedIDR.ChancePrintsUnfitColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsChancePrintsEliminatedNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ChancePrintsEliminatedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetChancePrintsEliminatedNull()
+            Me(Me.tableJoinedIDR.ChancePrintsEliminatedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsChancePrintsRemainingNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ChancePrintsRemainingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetChancePrintsRemainingNull()
+            Me(Me.tableJoinedIDR.ChancePrintsRemainingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsChancePrintDetailsNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ChancePrintDetailsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetChancePrintDetailsNull()
+            Me(Me.tableJoinedIDR.ChancePrintDetailsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPhotographerNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.PhotographerColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPhotographerNull()
+            Me(Me.tableJoinedIDR.PhotographerColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPhotoReceivedNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.PhotoReceivedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPhotoReceivedNull()
+            Me(Me.tableJoinedIDR.PhotoReceivedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDateOfReceptionOfPhotoNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.DateOfReceptionOfPhotoColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDateOfReceptionOfPhotoNull()
+            Me(Me.tableJoinedIDR.DateOfReceptionOfPhotoColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsGistNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.GistColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetGistNull()
+            Me(Me.tableJoinedIDR.GistColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsComparisonDetailsNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.ComparisonDetailsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetComparisonDetailsNull()
+            Me(Me.tableJoinedIDR.ComparisonDetailsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsGraveCrimeNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.GraveCrimeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetGraveCrimeNull()
+            Me(Me.tableJoinedIDR.GraveCrimeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsFileStatusNull() As Boolean
+            Return Me.IsNull(Me.tableJoinedIDR.FileStatusColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetFileStatusNull()
+            Me(Me.tableJoinedIDR.FileStatusColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -55719,6 +56431,23 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("IdentificationDetails", "IdentificationDetails")
             tableMapping.ColumnMappings.Add("IDRNumber", "IDRNumber")
             tableMapping.ColumnMappings.Add("SlNumber", "SlNumber")
+            tableMapping.ColumnMappings.Add("DateOfReport", "DateOfReport")
+            tableMapping.ColumnMappings.Add("DateOfOccurrence", "DateOfOccurrence")
+            tableMapping.ColumnMappings.Add("PlaceOfOccurrence", "PlaceOfOccurrence")
+            tableMapping.ColumnMappings.Add("Complainant", "Complainant")
+            tableMapping.ColumnMappings.Add("ModusOperandi", "ModusOperandi")
+            tableMapping.ColumnMappings.Add("PropertyLost", "PropertyLost")
+            tableMapping.ColumnMappings.Add("ChancePrintsUnfit", "ChancePrintsUnfit")
+            tableMapping.ColumnMappings.Add("ChancePrintsEliminated", "ChancePrintsEliminated")
+            tableMapping.ColumnMappings.Add("ChancePrintsRemaining", "ChancePrintsRemaining")
+            tableMapping.ColumnMappings.Add("ChancePrintDetails", "ChancePrintDetails")
+            tableMapping.ColumnMappings.Add("Photographer", "Photographer")
+            tableMapping.ColumnMappings.Add("PhotoReceived", "PhotoReceived")
+            tableMapping.ColumnMappings.Add("DateOfReceptionOfPhoto", "DateOfReceptionOfPhoto")
+            tableMapping.ColumnMappings.Add("Gist", "Gist")
+            tableMapping.ColumnMappings.Add("ComparisonDetails", "ComparisonDetails")
+            tableMapping.ColumnMappings.Add("GraveCrime", "GraveCrime")
+            tableMapping.ColumnMappings.Add("FileStatus", "FileStatus")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -55737,34 +56466,50 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister"& _ 
                 ".SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspect"& _ 
-                "ion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PoliceStation, SOCRegister.CrimeNumb"& _ 
-                "er, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
-                "gister.IdentifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintsDevelope"& _ 
-                "d, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIden"& _ 
-                "tified, IdentificationRegister.CulpritName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Identific"& _ 
-                "ationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationR"& _ 
-                "egister.HenryClassification, IdentificationRegister.DANumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
-                "         IdentificationRegister.IdentifiedFrom, IdentificationRegister.Identific"& _ 
-                "ationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SO"& _ 
-                "CRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY"& _ 
-                " IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
+                "ion, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
+                "    SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
+                "gister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.C"& _ 
+                "PsIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.NoOfCulpritsIden"& _ 
+                "tified, IdentificationRegister.CulpritName, IdentificationRegister.Address, Iden"& _ 
+                "tificationRegister.FingersIdentified, IdentificationRegister.HenryClassification"& _ 
+                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.DANumber, IdentificationRegi"& _ 
+                "ster.IdentifiedFrom, IdentificationRegister.IdentificationDetails, Identificatio"& _ 
+                "nRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, "& _ 
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccu"& _ 
+                "rrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.Property"& _ 
+                "Lost, SOCRegister.ChancePrintsUnfit, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Chan"& _ 
+                "cePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDe"& _ 
+                "tails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfRe"& _ 
+                "ceptionOfPhoto, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Gist, SOCRegister.Compari"& _ 
+                "sonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (Ide"& _ 
+                "ntificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister ON Identifi"& _ 
+                "cationRegister.SOCNumber = SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationRegist"& _ 
+                "er.IdentificationDate, IdentificationRegister.IDRNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister"& _ 
                 ".SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspect"& _ 
-                "ion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PoliceStation, SOCRegister.CrimeNumb"& _ 
-                "er, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
-                "gister.IdentifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintsDevelope"& _ 
-                "d, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIden"& _ 
-                "tified, IdentificationRegister.CulpritName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Identific"& _ 
-                "ationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationR"& _ 
-                "egister.HenryClassification, IdentificationRegister.DANumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
-                "         IdentificationRegister.IdentifiedFrom, IdentificationRegister.Identific"& _ 
-                "ationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SO"& _ 
-                "CRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE   "& _ 
-                "     (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY Ident"& _ 
-                "ificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
+                "ion, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
+                "    SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
+                "gister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.C"& _ 
+                "PsIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.NoOfCulpritsIden"& _ 
+                "tified, IdentificationRegister.CulpritName, IdentificationRegister.Address, Iden"& _ 
+                "tificationRegister.FingersIdentified, IdentificationRegister.HenryClassification"& _ 
+                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.DANumber, IdentificationRegi"& _ 
+                "ster.IdentifiedFrom, IdentificationRegister.IdentificationDetails, Identificatio"& _ 
+                "nRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, "& _ 
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccu"& _ 
+                "rrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.Property"& _ 
+                "Lost, SOCRegister.ChancePrintsUnfit, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Chan"& _ 
+                "cePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDe"& _ 
+                "tails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfRe"& _ 
+                "ceptionOfPhoto, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Gist, SOCRegister.Compari"& _ 
+                "sonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (Ide"& _ 
+                "ntificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister ON Identifi"& _ 
+                "cationRegister.SOCNumber = SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationR"& _ 
+                "egister.IdentificationDate BETWEEN ? AND ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationRegister.Ide"& _ 
+                "ntificationDate, IdentificationRegister.IDRNumber"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
