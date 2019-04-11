@@ -113,6 +113,8 @@ Public Class frmMainInterface
 
     Dim blAutoBackupInProgress As Boolean = False
     Dim blCheckAutoBackup As Boolean = False
+
+    Dim blIdentificationRegisterUpdateFailed As Boolean = False
 #End Region
 
 
@@ -335,7 +337,6 @@ Public Class frmMainInterface
                 CreateSOCReportRegisterTable()
                 CreateCommonSettingsTable()
                 ModifyTables()
-                RemoveNullFromIdentificationRegister()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
 
@@ -448,6 +449,10 @@ Public Class frmMainInterface
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
 
+        If blIdentificationRegisterUpdateFailed Then
+            MessageBoxEx.Show("Identification Register Update failed. Please restart the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         CopyCredentialFiles()
 
         If Me.chkTakeAutoBackup.Checked Then
@@ -1026,8 +1031,8 @@ Public Class frmMainInterface
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
             Me.SOCRegisterTableAdapter.RemoveNullFromIdentificationNumber("")
-            RemoveNullFromIdentificationRegister()
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
+            RemoveNullFromIdentificationRegister()
         End If
     End Sub
 
@@ -16105,7 +16110,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION , FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer)", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer)", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
@@ -16146,35 +16151,17 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
-            con.Open()
-            Dim cmd = New OleDb.OleDbCommand("UPDATE IdentificationRegister SET NoOfCulpritsIdentified = '' where NoOfCulpritsIdentified IS NULL", con)
-            cmd.ExecuteNonQuery()
-
-            cmd.CommandText = "UPDATE IdentificationRegister SET NoOfCulpritsIdentified = '' where NoOfCulpritsIdentified IS NULL"
-            cmd.ExecuteNonQuery()
-
-            cmd.CommandText = "UPDATE IdentificationRegister SET Address = '' where Address IS NULL"
-            cmd.ExecuteNonQuery()
-
-            cmd.CommandText = "UPDATE IdentificationRegister SET FingersIdentified = '' where FingersIdentified IS NULL"
-            cmd.ExecuteNonQuery()
-
-            cmd.CommandText = "UPDATE IdentificationRegister SET HenryClassification = '' where HenryClassification IS NULL"
-            cmd.ExecuteNonQuery()
-
-            cmd.CommandText = "UPDATE IdentificationRegister SET DANumber = '' where DANumber IS NULL"
-            cmd.ExecuteNonQuery()
-
-            cmd.CommandText = "UPDATE IdentificationRegister SET IdentifiedFrom = '' where IdentifiedFrom IS NULL"
-            cmd.ExecuteNonQuery()
-
-            InsertOrUpdateLastModificationDate(Now)
-
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromNoOfCulprits("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromAddress("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromFingersIdentified("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromHenryClassification("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromDANumber("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentifiedFrom("")
+            blIdentificationRegisterUpdateFailed = False
 
         Catch ex As Exception
-            ShowErrorMessage(ex)
-
+            blIdentificationRegisterUpdateFailed = True
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
         End Try
     End Sub
     Public Sub ModifyTables()

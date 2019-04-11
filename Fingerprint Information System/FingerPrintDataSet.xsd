@@ -1165,7 +1165,7 @@ ORDER BY DateOfInspection DESC, SOCYear DESC</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromCPsIdentified" Modifier="Public" Name="RemoveNullFromCPsIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromCPsIdentified" Modifier="Public" Name="RemoveNullFromCPsIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy57" UserSourceName="RemoveNullFromCPsIdentified">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister 
@@ -1177,7 +1177,7 @@ WHERE        (CPsIdentified IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy42" GeneratorSourceName="RemoveNullFromFileStatus" Modifier="Public" Name="RemoveNullFromFileStatus" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="RemoveNullFromFileStatus">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy42" GeneratorSourceName="RemoveNullFromFileStatus" Modifier="Public" Name="RemoveNullFromFileStatus" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromFileStatus">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1189,7 +1189,7 @@ WHERE        (FileStatus IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy55" GeneratorSourceName="RemoveNullFromIdentificationNumber" Modifier="Public" Name="RemoveNullFromIdentificationNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="RemoveNullFromIdentificationNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy55" GeneratorSourceName="RemoveNullFromIdentificationNumber" Modifier="Public" Name="RemoveNullFromIdentificationNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="RemoveNullFromIdentificationNumber">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1201,7 +1201,7 @@ WHERE         IdentificationNumber IS NULL</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedAs" Modifier="Public" Name="RemoveNullFromIdentifiedAs" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="RemoveNullFromIdentifiedAs">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedAs" Modifier="Public" Name="RemoveNullFromIdentifiedAs" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="RemoveNullFromIdentifiedAs">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister 
@@ -1213,7 +1213,7 @@ WHERE        (IdentifiedAs IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedBy" Modifier="Public" Name="RemoveNullFromIdentifiedBy" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="RemoveNullFromIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedBy" Modifier="Public" Name="RemoveNullFromIdentifiedBy" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="RemoveNullFromIdentifiedBy">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1225,7 +1225,7 @@ WHERE        (IdentifiedBy IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDeveloped" Modifier="Public" Name="ScalarQueryCPDeveloped" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy15" UserSourceName="ScalarQueryCPDeveloped">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDeveloped" Modifier="Public" Name="ScalarQueryCPDeveloped" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="ScalarQueryCPDeveloped">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SUM(ChancePrintsDeveloped) AS Expr1
@@ -1238,7 +1238,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDevelopedByIO" Modifier="Public" Name="ScalarQueryCPDevelopedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQueryCPDevelopedByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDevelopedByIO" Modifier="Public" Name="ScalarQueryCPDevelopedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy15" UserSourceName="ScalarQueryCPDevelopedByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsDeveloped) AS Expr1
@@ -1252,7 +1252,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQueryCPDevelopedSOC" Modifier="Public" Name="ScalarQueryCPDevelopedSOC" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQueryCPDevelopedSOC">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQueryCPDevelopedSOC" Modifier="Public" Name="ScalarQueryCPDevelopedSOC" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQueryCPDevelopedSOC">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1266,7 +1266,7 @@ WHERE     (ChancePrintsDeveloped &lt;&gt; ?) and  (DateOfInspection BETWEEN ? AN
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy17" GeneratorSourceName="ScalarQueryCPEliminated" Modifier="Public" Name="ScalarQueryCPEliminated" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="ScalarQueryCPEliminated">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy17" GeneratorSourceName="ScalarQueryCPEliminated" Modifier="Public" Name="ScalarQueryCPEliminated" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQueryCPEliminated">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SUM(ChancePrintsEliminated) AS Expr1
@@ -1279,7 +1279,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemaining" Modifier="Public" Name="ScalarQueryCPRemaining" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy20" UserSourceName="ScalarQueryCPRemaining">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemaining" Modifier="Public" Name="ScalarQueryCPRemaining" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="ScalarQueryCPRemaining">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsRemaining) AS Expr1
@@ -1292,7 +1292,7 @@ WHERE        (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemainingForConciseReport" Modifier="Public" Name="ScalarQueryCPRemainingForConciseReport" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="ScalarQueryCPRemainingForConciseReport">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemainingForConciseReport" Modifier="Public" Name="ScalarQueryCPRemainingForConciseReport" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy20" UserSourceName="ScalarQueryCPRemainingForConciseReport">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsRemaining) AS Expr1
@@ -1305,7 +1305,7 @@ WHERE        (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsEliminatedByIO" Modifier="Public" Name="ScalarQueryCPsEliminatedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy22" UserSourceName="ScalarQueryCPsEliminatedByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsEliminatedByIO" Modifier="Public" Name="ScalarQueryCPsEliminatedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="ScalarQueryCPsEliminatedByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsEliminated) AS Expr1
@@ -1319,7 +1319,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy45" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy24" UserSourceName="ScalarQueryCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy45" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy22" UserSourceName="ScalarQueryCPsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -1332,7 +1332,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?) AND (FileStatus = 'Identified'
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy38" GeneratorSourceName="ScalarQueryCPsRemainingByIO" Modifier="Public" Name="ScalarQueryCPsRemainingByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy25" UserSourceName="ScalarQueryCPsRemainingByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy38" GeneratorSourceName="ScalarQueryCPsRemainingByIO" Modifier="Public" Name="ScalarQueryCPsRemainingByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy24" UserSourceName="ScalarQueryCPsRemainingByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsRemaining) AS Expr1
@@ -1346,7 +1346,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsRemainingInSOCNumber" Modifier="Public" Name="ScalarQueryCPsRemainingInSOCNumber" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy26" UserSourceName="ScalarQueryCPsRemainingInSOCNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsRemainingInSOCNumber" Modifier="Public" Name="ScalarQueryCPsRemainingInSOCNumber" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy25" UserSourceName="ScalarQueryCPsRemainingInSOCNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        ChancePrintsRemaining AS Expr1
@@ -1358,7 +1358,7 @@ WHERE        (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsUnfitByIO" Modifier="Public" Name="ScalarQueryCPsUnfitByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy33" UserSourceName="ScalarQueryCPsUnfitByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsUnfitByIO" Modifier="Public" Name="ScalarQueryCPsUnfitByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy26" UserSourceName="ScalarQueryCPsUnfitByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsUnfit) AS Expr1
@@ -1372,7 +1372,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPUnfit" Modifier="Public" Name="ScalarQueryCPUnfit" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy34" UserSourceName="ScalarQueryCPUnfit">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPUnfit" Modifier="Public" Name="ScalarQueryCPUnfit" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy33" UserSourceName="ScalarQueryCPUnfit">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SUM(ChancePrintsUnfit) AS Expr1
@@ -1385,7 +1385,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMaxNumber" Modifier="Public" Name="ScalarQueryMaxNumber" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy35" UserSourceName="ScalarQueryMaxNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMaxNumber" Modifier="Public" Name="ScalarQueryMaxNumber" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy34" UserSourceName="ScalarQueryMaxNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MAX(SOCYear) AS Expr1
@@ -1398,7 +1398,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMinNumber" Modifier="Public" Name="ScalarQueryMinNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy36" UserSourceName="ScalarQueryMinNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMinNumber" Modifier="Public" Name="ScalarQueryMinNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy35" UserSourceName="ScalarQueryMinNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MIN(SOCYear) AS Expr1
@@ -1411,7 +1411,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoNotReceived" Modifier="Public" Name="ScalarQueryPhotoNotReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy37" UserSourceName="ScalarQueryPhotoNotReceived">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoNotReceived" Modifier="Public" Name="ScalarQueryPhotoNotReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy36" UserSourceName="ScalarQueryPhotoNotReceived">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1424,7 +1424,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?) AND (PhotoReceived &lt;&gt; 'yes') 
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoReceived" Modifier="Public" Name="ScalarQueryPhotoReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy38" UserSourceName="ScalarQueryPhotoReceived">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoReceived" Modifier="Public" Name="ScalarQueryPhotoReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy37" UserSourceName="ScalarQueryPhotoReceived">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1437,7 +1437,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?) AND (PhotoReceived = 'yes') AND (Ch
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQuerySearchContinuingSOCs" Modifier="Public" Name="ScalarQuerySearchContinuingSOCs" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy42" UserSourceName="ScalarQuerySearchContinuingSOCs">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQuerySearchContinuingSOCs" Modifier="Public" Name="ScalarQuerySearchContinuingSOCs" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy38" UserSourceName="ScalarQuerySearchContinuingSOCs">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1451,7 +1451,7 @@ WHERE        (DateOfInspection BETWEEN ? AND ?) AND (FileStatus = ?)</CommandTex
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCInspected" Modifier="Public" Name="ScalarQuerySOCInspected" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy43" UserSourceName="ScalarQuerySOCInspected">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCInspected" Modifier="Public" Name="ScalarQuerySOCInspected" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy42" UserSourceName="ScalarQuerySOCInspected">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1464,7 +1464,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy44" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy43" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1477,7 +1477,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?) AND (FileStatus = 'Identified'
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy45" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy44" UserSourceName="ScalarQuerySOCsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1491,7 +1491,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?) AND 
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsInspectedByIO" Modifier="Public" Name="ScalarQuerySOCsInspectedByIO" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy46" UserSourceName="ScalarQuerySOCsInspectedByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsInspectedByIO" Modifier="Public" Name="ScalarQuerySOCsInspectedByIO" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy45" UserSourceName="ScalarQuerySOCsInspectedByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1505,7 +1505,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy43" GeneratorSourceName="UpdateFileStatusForClosedFiles" Modifier="Public" Name="UpdateFileStatusForClosedFiles" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy47" UserSourceName="UpdateFileStatusForClosedFiles">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy43" GeneratorSourceName="UpdateFileStatusForClosedFiles" Modifier="Public" Name="UpdateFileStatusForClosedFiles" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy46" UserSourceName="UpdateFileStatusForClosedFiles">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1515,7 +1515,7 @@ WHERE        (ChancePrintsRemaining = '0')</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateOfficerName" Modifier="Public" Name="UpdateOfficerName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy48" UserSourceName="UpdateOfficerName">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateOfficerName" Modifier="Public" Name="UpdateOfficerName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy47" UserSourceName="UpdateOfficerName">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    SOCRegister
@@ -1528,7 +1528,7 @@ WHERE     (InvestigatingOfficer = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdatePhotoReceived" Modifier="Public" Name="UpdatePhotoReceived" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy49" UserSourceName="UpdatePhotoReceived">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdatePhotoReceived" Modifier="Public" Name="UpdatePhotoReceived" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy48" UserSourceName="UpdatePhotoReceived">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    SOCRegister
@@ -1541,7 +1541,7 @@ WHERE     (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy25" GeneratorSourceName="UpdatePoliceStationName" Modifier="Public" Name="UpdatePoliceStationName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy52" UserSourceName="UpdatePoliceStationName">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy25" GeneratorSourceName="UpdatePoliceStationName" Modifier="Public" Name="UpdatePoliceStationName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy49" UserSourceName="UpdatePoliceStationName">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    SOCRegister
@@ -1554,7 +1554,7 @@ WHERE     (PoliceStation = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy55" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy52" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1600,7 +1600,7 @@ WHERE        (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateRemarks" Modifier="Public" Name="UpdateRemarks" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy57" UserSourceName="UpdateRemarks">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateRemarks" Modifier="Public" Name="UpdateRemarks" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy55" UserSourceName="UpdateRemarks">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -5982,7 +5982,79 @@ VALUES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="ScalarQueryCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromAddress" Modifier="Public" Name="RemoveNullFromAddress" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="RemoveNullFromAddress">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       IdentificationRegister
+SET                Address = ?
+WHERE        (Address IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="Address" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength" DbType="String" Direction="Input" ParameterName="Address" Precision="0" ProviderType="WChar" Scale="0" Size="1024" SourceColumn="Address" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromDANumber" Modifier="Public" Name="RemoveNullFromDANumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="RemoveNullFromDANumber">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       IdentificationRegister
+SET                DANumber = ?
+WHERE        (DANumber IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="DANumber" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="DANumber" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="DANumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromFingersIdentified" Modifier="Public" Name="RemoveNullFromFingersIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="RemoveNullFromFingersIdentified">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       IdentificationRegister
+SET                FingersIdentified = ?
+WHERE        (FingersIdentified IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="FingersIdentified" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="FingersIdentified" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="FingersIdentified" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromHenryClassification" Modifier="Public" Name="RemoveNullFromHenryClassification" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="RemoveNullFromHenryClassification">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       IdentificationRegister
+SET                HenryClassification = ?
+WHERE        (HenryClassification IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="HenryClassification" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="HenryClassification" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="HenryClassification" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedFrom" Modifier="Public" Name="RemoveNullFromIdentifiedFrom" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromIdentifiedFrom">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       IdentificationRegister
+SET                IdentifiedFrom = ?
+WHERE        (IdentifiedFrom IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentifiedFrom" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="IdentifiedFrom" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="IdentifiedFrom" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromNoOfCulprits" Modifier="Public" Name="RemoveNullFromNoOfCulprits" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="RemoveNullFromNoOfCulprits">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       IdentificationRegister
+SET                NoOfCulpritsIdentified = ?
+WHERE        (NoOfCulpritsIdentified IS NULL)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="NoOfCulpritsIdentified" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength(3)" DbType="String" Direction="Input" ParameterName="NoOfCulpritsIdentified" Precision="0" ProviderType="WChar" Scale="0" Size="3" SourceColumn="NoOfCulpritsIdentified" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="ScalarQueryCPsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -5995,7 +6067,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(IdentificationNumber) AS Expr1
@@ -6008,7 +6080,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -7670,7 +7742,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_UserTableName="Settings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowClassName="SettingsRow">
+        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowClassName="SettingsRow" msprop:Generator_UserTableName="Settings" msprop:Generator_RowEvArgName="SettingsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsID" msprop:Generator_ColumnVarNameInTable="columnSettingsID" msprop:Generator_ColumnPropNameInRow="SettingsID" msprop:Generator_ColumnPropNameInTable="SettingsIDColumn" msprop:Generator_UserColumnName="SettingsID" type="xs:int" />
@@ -7782,7 +7854,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent" msprop:Generator_RowClassName="LastModificationRow">
+        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_RowClassName="LastModificationRow" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -7790,7 +7862,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_RowClassName="CommonSettingsRow" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent">
+        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent" msprop:Generator_RowClassName="CommonSettingsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsName" msprop:Generator_ColumnVarNameInTable="columnSettingsName" msprop:Generator_ColumnPropNameInRow="SettingsName" msprop:Generator_ColumnPropNameInTable="SettingsNameColumn" msprop:Generator_UserColumnName="SettingsName">
@@ -7817,7 +7889,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent" msprop:Generator_RowClassName="IdentificationRegisterRow">
+        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_RowClassName="IdentificationRegisterRow" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
@@ -7910,7 +7982,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_RowClassName="JoinedIDRRow" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent">
+        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent" msprop:Generator_RowClassName="JoinedIDRRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
