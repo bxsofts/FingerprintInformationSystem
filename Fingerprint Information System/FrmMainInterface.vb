@@ -379,8 +379,6 @@ Public Class frmMainInterface
 
             LoadOfficeSettingsToTextBoxes()
 
-            LoadModusOperandi()
-
             LoadNatureOfReport()
             IncrementCircularProgress(1)
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
@@ -393,6 +391,8 @@ Public Class frmMainInterface
         '------------load auto text ---------------
 
         If chkLoadAutoTextAtStartup.Checked And DBExists Then LoadAutoTextFromDB()
+
+        LoadModusOperandi()
 
         Dim pgbarvalue = 100
         For i = pgbarvalue To 100
@@ -442,7 +442,7 @@ Public Class frmMainInterface
 
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
-
+        dtDummy.Text = vbNullString
         If blIdentificationRegisterUpdateFailed Then
             MessageBoxEx.Show("Identification Register Update failed. Please restart the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
@@ -1857,10 +1857,7 @@ Public Class frmMainInterface
 
     Private Sub LoadModusOperandi()
         Try
-            Me.cmbSOCModus.DropDownStyle = ComboBoxStyle.DropDown
-            Dim drpdwnlength As Integer = Me.cmbSOCModus.Width
             Me.cmbSOCModus.Items.Clear()
-
             For Each line As String In System.IO.File.ReadLines(strAppUserPath & "\WordTemplates\Modus.txt")
                 If line.Trim <> "" Then
                     Me.cmbSOCModus.Items.Add(line)
@@ -1868,6 +1865,9 @@ Public Class frmMainInterface
                 End If
             Next
 
+            Me.cmbSOCModus.DropDownStyle = ComboBoxStyle.DropDown
+            Me.cmbSOCModus.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            Dim drpdwnlength As Integer = Me.cmbSOCModus.Width
         Catch ex As Exception
 
         End Try
@@ -2068,7 +2068,7 @@ Public Class frmMainInterface
 
             LoadPSList()
 
-            LoadModusOperandi()
+            '    LoadModusOperandi()
 
             InitializeOfficerTable()
             '   LoadOfficerToMemory()
@@ -8064,7 +8064,7 @@ errhandler:
                 .FileStatus = filestatus
                 .IdentifiedBy = ""
                 .CPsIdentified = cpsidentified
-                .IdentificationDate = Now
+                .IdentificationDate = dtDummy.ValueObject
                 .IdentifiedAs = ""
                 .IdentificationNumber = ""
             End With
@@ -8072,7 +8072,7 @@ errhandler:
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, "", gravecrime, filestatus, cpsidentified, Now, "", "", "") 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, "", gravecrime, filestatus, cpsidentified, dtDummy.ValueObject, "", "", "") 'update the database
 
 
             InitializeSOCFields()
@@ -8202,26 +8202,18 @@ errhandler:
                     .FileStatus = filestatus
                     .IdentifiedBy = identifiedby
                     .CPsIdentified = cpsidentified
-                    .IdentificationDate = Now
+                    .IdentificationDate = dtDummy.ValueObject
                     .IdentifiedAs = identifiedas
                     .IdentificationNumber = idrnumber
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Now, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, dtDummy.ValueObject, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
                 Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
                 LoadRSOCRecords()
-            End If
-
-            If filestatus.ToLower <> "identified" Then
-                Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
-                IDRRow = Me.FingerPrintDataSet.IdentifiedCases.FindBySOCNumber(OriginalSOCNumber) 'find idr row
-                If IDRRow IsNot Nothing Then
-                    IDRRow.Delete()
-                End If
             End If
 
 
@@ -8332,14 +8324,14 @@ errhandler:
                     .FileStatus = filestatus
                     .IdentifiedBy = identifiedby
                     .CPsIdentified = cpsidentified
-                    .IdentificationDate = Now
+                    .IdentificationDate = dtDummy.ValueObject
                     .IdentifiedAs = ""
                     .IdentificationNumber = ""
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Now, cpsidentified, "", "", OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, dtDummy.ValueObject, cpsidentified, "", "", OriginalSOCNumber)
 
 
             ShowDesktopAlert("SOC Record overwritten!")
@@ -16571,7 +16563,7 @@ errhandler:
 
             LoadPSList()
 
-            LoadModusOperandi()
+            ' LoadModusOperandi()
 
             InitializeOfficerTable()
             LoadOfficerToMemory()
@@ -17184,4 +17176,7 @@ errhandler:
 
   
    
+    Private Sub FindSOCNumber(sender As Object, e As EventArgs) Handles dtSOCInspection.GotFocus
+
+    End Sub
 End Class

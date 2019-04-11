@@ -742,7 +742,7 @@ Partial Class FrmIdentificationRegister
         '
         '
         Me.LabelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX11.Location = New System.Drawing.Point(11, 438)
+        Me.LabelX11.Location = New System.Drawing.Point(11, 434)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.Size = New System.Drawing.Size(90, 18)
         Me.LabelX11.TabIndex = 182
