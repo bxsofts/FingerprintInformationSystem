@@ -386,12 +386,6 @@ Public Class frmMainInterface
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
             Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
             Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "7", autobackuptime)
-
-
-            If Me.IdentifiedCasesTableAdapter1.CountBlankIDNumber("") > 0 Then
-                bgwUpdateIDRNumber.RunWorkerAsync()
-            End If
-
         End If
 
 
@@ -927,10 +921,6 @@ Public Class frmMainInterface
         Me.SOCRegisterAutoTextTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterAutoTextTableAdapter.Connection.Open()
 
-
-        If Me.IdentifiedCasesTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentifiedCasesTableAdapter1.Connection.Close()
-        Me.IdentifiedCasesTableAdapter1.Connection.ConnectionString = sConString
-        Me.IdentifiedCasesTableAdapter1.Connection.Open()
 
         If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
         Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
@@ -2250,7 +2240,6 @@ Public Class frmMainInterface
         Me.cmbSOCPhotoReceived.AutoCompleteMode = mode
         Me.txtSOCPhotographer.AutoCompleteMode = mode
         Me.cmbFileStatus.AutoCompleteMode = mode
-        Me.cmbIdentifiedByOfficer.AutoCompleteMode = mode
 
         Me.cmbCDPoliceStation.AutoCompleteMode = mode
         Me.cmbCDOfficer.AutoCompleteMode = mode
@@ -4762,7 +4751,7 @@ Public Class frmMainInterface
         Return t
     End Function
 
-    Private Sub HandleCtrlAinMultilineTextBox(sender As Object, e As KeyEventArgs) Handles txtSOCPlace.KeyDown, txtSOCComplainant.KeyDown, txtSOCPropertyLost.KeyDown, txtSOCCPDetails.KeyDown, txtSOCGist.KeyDown, txtSOCComparisonDetails.KeyDown, txtSOCIdentificationDetails.KeyDown, txtSOCIdentifiedCulpritName.KeyDown, txtDAAddress.KeyDown, txtDARemarks.KeyDown, txtFPAAddress.KeyDown, txtFPAChalanNumber.KeyDown, txtFPARemarks.KeyDown, txtCDDetails.KeyDown, txtCDRemarks.KeyDown, txtIDAddress.KeyDown, txtIDDetails.KeyDown, txtIDRemarks.KeyDown, txtACRemarks.KeyDown, txtACAddress.KeyDown, txtRSOCRemarks.KeyDown, txtRSOCReportSentTo.KeyDown
+    Private Sub HandleCtrlAinMultilineTextBox(sender As Object, e As KeyEventArgs) Handles txtSOCPlace.KeyDown, txtSOCComplainant.KeyDown, txtSOCPropertyLost.KeyDown, txtSOCCPDetails.KeyDown, txtSOCGist.KeyDown, txtSOCComparisonDetails.KeyDown, txtDAAddress.KeyDown, txtDARemarks.KeyDown, txtFPAAddress.KeyDown, txtFPAChalanNumber.KeyDown, txtFPARemarks.KeyDown, txtCDDetails.KeyDown, txtCDRemarks.KeyDown, txtIDAddress.KeyDown, txtIDDetails.KeyDown, txtIDRemarks.KeyDown, txtACRemarks.KeyDown, txtACAddress.KeyDown, txtRSOCRemarks.KeyDown, txtRSOCReportSentTo.KeyDown
         Try
             Dim x As TextBox = DirectCast(sender, Control)
             If e.Control And e.KeyCode = Keys.A Then
@@ -5606,7 +5595,6 @@ errhandler:
             Me.txtSOCYear.Text = Year(Today)
             Me.dtSOCInspection.Value = Today
             Me.dtSOCReport.Value = Today
-            Me.dtIdentificationDate.Text = vbNullString
             Me.btnSaveSOC.Text = "Save"
         End If
 
@@ -5755,12 +5743,6 @@ errhandler:
                 Me.txtSOCComparisonDetails.Text = .SelectedCells(22).Value.ToString
                 Me.chkGraveCrime.Checked = .SelectedCells(23).Value
                 Me.cmbFileStatus.Text = .SelectedCells(24).Value.ToString
-                Me.cmbIdentifiedByOfficer.Text = .SelectedCells(25).Value.ToString
-                Me.dtIdentificationDate.ValueObject = .SelectedCells(26).Value
-                Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
-                Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
-                Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
-                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
             Me.txtSOCNumber.Focus()
@@ -6147,12 +6129,6 @@ errhandler:
                 Me.txtSOCComparisonDetails.Text = .SelectedCells(22).Value.ToString
                 Me.chkGraveCrime.Checked = .SelectedCells(23).Value
                 Me.cmbFileStatus.Text = .SelectedCells(24).Value.ToString
-                Me.cmbIdentifiedByOfficer.Text = .SelectedCells(25).Value.ToString
-                Me.dtIdentificationDate.ValueObject = .SelectedCells(26).Value
-                Me.txtCPsIdentified.Text = .SelectedCells(27).Value.ToString
-                Me.txtSOCIdentifiedCulpritName.Text = .SelectedCells(28).Value.ToString
-                Me.txtSOCIdentificationDetails.Text = .SelectedCells(29).Value.ToString
-                Me.txtSOCIDRNumber.Text = .SelectedCells(30).Value.ToString
             End With
             OriginalSOCNumber = Me.txtSOCNumber.Text
             Me.txtSOCNumber.Focus()
@@ -7390,7 +7366,6 @@ errhandler:
         x.Y = Me.txtSOCOfficer.Location.Y + Me.txtSOCOfficer.Height + 2
         Me.ItemPanel1.Location = x
 
-        Me.cmbIdentifiedByOfficer.Items.Clear()
         Me.cmbRSOCOfficer.Items.Clear()
         Me.cmbCDOfficer.Items.Clear()
 
@@ -7401,11 +7376,9 @@ errhandler:
             Me.chkTI.Visible = True
             Me.chkTI.Text = TI
             OfficerMenuVisibleItemCount = OfficerMenuVisibleItemCount + 1
-            Me.cmbIdentifiedByOfficer.Items.Add(TI)
             Me.cmbRSOCOfficer.Items.Add(TI)
             Me.cmbCDOfficer.Items.Add(TI)
             Me.txtSOCOfficer.AutoCompleteCustomSource.Add(TI)
-            Me.cmbIdentifiedByOfficer.AutoCompleteCustomSource.Add(TI)
             Me.cmbRSOCOfficer.AutoCompleteCustomSource.Add(TI)
             Me.cmbCDOfficer.AutoCompleteCustomSource.Add(TI)
         Else
@@ -7417,11 +7390,9 @@ errhandler:
             Me.chkFPE1.Visible = True
             Me.chkFPE1.Text = FPE1
             OfficerMenuVisibleItemCount = OfficerMenuVisibleItemCount + 1
-            Me.cmbIdentifiedByOfficer.Items.Add(FPE1)
             Me.cmbRSOCOfficer.Items.Add(FPE1)
             Me.cmbCDOfficer.Items.Add(FPE1)
             Me.txtSOCOfficer.AutoCompleteCustomSource.Add(FPE1)
-            Me.cmbIdentifiedByOfficer.AutoCompleteCustomSource.Add(FPE1)
             Me.cmbRSOCOfficer.AutoCompleteCustomSource.Add(FPE1)
             Me.cmbCDOfficer.AutoCompleteCustomSource.Add(FPE1)
         Else
@@ -7432,11 +7403,9 @@ errhandler:
             Me.chkFPE2.Visible = True
             Me.chkFPE2.Text = FPE2
             OfficerMenuVisibleItemCount = OfficerMenuVisibleItemCount + 1
-            Me.cmbIdentifiedByOfficer.Items.Add(FPE2)
             Me.cmbRSOCOfficer.Items.Add(FPE2)
             Me.cmbCDOfficer.Items.Add(FPE2)
             Me.txtSOCOfficer.AutoCompleteCustomSource.Add(FPE2)
-            Me.cmbIdentifiedByOfficer.AutoCompleteCustomSource.Add(FPE2)
             Me.cmbRSOCOfficer.AutoCompleteCustomSource.Add(FPE2)
             Me.cmbCDOfficer.AutoCompleteCustomSource.Add(FPE2)
         Else
@@ -7447,11 +7416,9 @@ errhandler:
             Me.chkFPE3.Visible = True
             Me.chkFPE3.Text = FPE3
             OfficerMenuVisibleItemCount = OfficerMenuVisibleItemCount + 1
-            Me.cmbIdentifiedByOfficer.Items.Add(FPE3)
             Me.cmbRSOCOfficer.Items.Add(FPE3)
             Me.cmbCDOfficer.Items.Add(FPE3)
             Me.txtSOCOfficer.AutoCompleteCustomSource.Add(FPE3)
-            Me.cmbIdentifiedByOfficer.AutoCompleteCustomSource.Add(FPE3)
             Me.cmbRSOCOfficer.AutoCompleteCustomSource.Add(FPE3)
             Me.cmbCDOfficer.AutoCompleteCustomSource.Add(FPE3)
         Else
@@ -7462,11 +7429,9 @@ errhandler:
             Me.chkFPS.Visible = True
             Me.chkFPS.Text = FPS
             OfficerMenuVisibleItemCount = OfficerMenuVisibleItemCount + 1
-            Me.cmbIdentifiedByOfficer.Items.Add(FPS)
             Me.cmbRSOCOfficer.Items.Add(FPS)
             Me.cmbCDOfficer.Items.Add(FPS)
             Me.txtSOCOfficer.AutoCompleteCustomSource.Add(FPS)
-            Me.cmbIdentifiedByOfficer.AutoCompleteCustomSource.Add(FPS)
             Me.cmbRSOCOfficer.AutoCompleteCustomSource.Add(FPS)
             Me.cmbCDOfficer.AutoCompleteCustomSource.Add(FPS)
         Else
@@ -7716,7 +7681,6 @@ errhandler:
         PhotographedDateFocussed = False
         IDDetailsFocussed = False
 
-        Me.dtIdentificationDate.Text = vbNullString
         ClearDropDownOfficerList()
     End Sub
 
@@ -7726,7 +7690,6 @@ errhandler:
         Me.txtSOCNumber.Focus()
         Me.dtSOCInspection.Text = vbNullString 'clear dob
         Me.dtSOCReport.Text = vbNullString
-        Me.dtIdentificationDate.Text = vbNullString
         Me.chkGraveCrime.Checked = False
         ClearDropDownOfficerList()
         Dim ctrl As Control
@@ -7817,28 +7780,10 @@ errhandler:
             SetComparisonDetails()
         End If
 
-        Dim visible As Boolean = False
-
         If Me.cmbFileStatus.Text.ToLower = "identified" Then
-            visible = True
+            Me.btnEnterIdentificationDetails.Visible = visible
         End If
-        Me.lblCPsIdentified.Visible = visible
-        Me.lblIdentificationDate.Visible = visible
-        Me.lblIdentifiedBy.Visible = visible
-        Me.txtCPsIdentified.Visible = visible
-        Me.cmbIdentifiedByOfficer.Visible = visible
-        Me.dtIdentificationDate.Visible = visible
-        ' Me.txtSOCIdentificationDetails.Visible = visible
-        Me.lblIdentificationNumber.Visible = visible
-        Me.lblIdentificationDate.Visible = visible
-        '  Me.txtSOCIdentifiedCulpritName.Visible = visible
-        Me.lblcrt1.Visible = visible
-        Me.lblcrt2.Visible = visible
-        Me.lblcrt3.Visible = visible
-        Me.lblcrt4.Visible = visible
-        Me.lblIdentificationNumber.Visible = visible
-        Me.txtSOCIDRNumber.Visible = visible
-        Me.btnEnterIdentificationDetails.Visible = visible
+
     End Sub
 
 
@@ -7864,13 +7809,6 @@ errhandler:
         If (Me.txtSOCCPsEliminated.Value + Me.txtSOCCPsUnfit.Value) > txtSOCCPsDeveloped.Value Then
             MessageBoxEx.Show("Sum of  eliminated CPs and unfit CPs cannot be greater than the no. of developed CPs", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtSOCCPsUnfit.Focus()
-            CPValidated = False
-            Exit Sub
-        End If
-
-        If txtCPsIdentified.Value > txtSOCCPsRemaining.Value Then
-            MessageBoxEx.Show("No. of identified CPs cannot be greater than the no. of Remaining CPs", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtCPsIdentified.Focus()
             CPValidated = False
             Exit Sub
         End If
@@ -7942,74 +7880,6 @@ errhandler:
         End If
     End Function
 
-    Function MandatoryIdentificationFieldsNotFilled() As Boolean
-        On Error Resume Next
-
-        If Me.cmbIdentifiedByOfficer.Text.Trim = vbNullString Or Me.dtIdentificationDate.IsEmpty Or Me.txtCPsIdentified.Value = 0 Or Me.txtSOCIdentifiedCulpritName.Text = vbNullString Or Me.txtSOCIDRNumber.Text = vbNullString Or Me.txtSOCIdentificationDetails.Text = vbNullString Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Private Sub ShowMandatoryIdentificationFields()
-        On Error Resume Next
-
-        Dim msg1 As String = "Please fill the following mandatory field(s):" & vbNewLine & vbNewLine
-        Dim msg As String = ""
-        Dim x As Integer = 0
-
-
-        If Trim(Me.cmbIdentifiedByOfficer.Text) = vbNullString Then
-            msg = msg & " Identified By" & vbNewLine
-            If x <> 1 Then x = 2
-        End If
-
-        If Trim(Me.dtIdentificationDate.Text) = vbNullString Then
-            msg = msg & " Date of Identification" & vbNewLine
-            If x <> 1 And x <> 2 Then x = 3
-        End If
-
-        If Trim(Me.txtSOCIDRNumber.Text) = vbNullString Then
-            msg = msg & " Identification Number" & vbNewLine
-            If x <> 1 And x <> 2 And x <> 3 Then x = 4
-        End If
-
-        If Me.txtCPsIdentified.Value = 0 Then
-            msg = msg & " No. of CPs Identified" & vbNewLine
-            If x <> 1 And x <> 2 And x <> 3 And x <> 4 Then x = 5
-        End If
-
-        If Trim(Me.txtSOCIdentifiedCulpritName.Text) = vbNullString Then
-            msg = msg & " Name of Culprit" & vbNewLine
-            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 Then x = 6
-        End If
-
-        If Trim(Me.txtSOCIdentificationDetails.Text) = vbNullString Then
-            msg = msg & " Identification Details" & vbNewLine
-            If x <> 1 And x <> 2 And x <> 3 And x <> 4 And x <> 5 And x <> 6 Then x = 7
-        End If
-
-        msg1 = msg1 & msg
-        DevComponents.DotNetBar.MessageBoxEx.Show(msg1, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-        Select Case x
-            Case 2
-                cmbIdentifiedByOfficer.Focus()
-            Case 3
-                dtIdentificationDate.Focus()
-            Case 4
-                txtSOCIDRNumber.Focus()
-            Case 5
-                txtCPsIdentified.Focus()
-            Case 6
-                txtSOCIdentifiedCulpritName.Focus()
-            Case 7
-                txtSOCIdentificationDetails.Focus()
-        End Select
-
-    End Sub
-
     Sub ShowMandatorySOCFieldsInfo()
         On Error Resume Next
         Dim msg1 As String = "Please fill the following mandatory field(s):" & vbNewLine & vbNewLine
@@ -8079,13 +7949,6 @@ errhandler:
             Exit Sub
         End If
 
-        If Me.cmbFileStatus.Text.ToLower = "identified" Then
-            If MandatoryIdentificationFieldsNotFilled() Then
-                ShowMandatoryIdentificationFields()
-                Exit Sub
-            End If
-        End If
-
         If Me.dtSOCReport.Value > Me.dtSOCInspection.Value Then
             MessageBoxEx.Show("Date of Report (" & Me.dtSOCReport.Text & ") should be on or before the Date of Inspection (" & Me.dtSOCInspection.Text & "). Please correct the error.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.dtSOCReport.Focus()
@@ -8142,35 +8005,15 @@ errhandler:
             Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
             Dim gist = Trim(Me.txtSOCGist.Text)
             Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-            Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
             Dim cpsidentified = ""
-            If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
-            Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
-            Dim idrnumber As String = Me.txtSOCIDRNumber.Text.Trim
 
-            If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
-                If comparison.ToLower.StartsWith("identified as") = False Then
-                    comparison = "Identified as " & identifiedas
-                End If
-            End If
 
             If filestatus.ToLower = "otherwise detected" Then
                 If comparison.ToLower.StartsWith("otherwise detected") = False Then
                     comparison = "Otherwise detected"
                 End If
-            End If
-
-
-            If filestatus.ToLower <> "identified" Then
-                identifiedby = ""
-                identifiedas = ""
-                identificationdetails = ""
-                cpsidentified = ""
-                Me.dtIdentificationDate.Text = ""
-                idrnumber = ""
             End If
 
 
@@ -8216,63 +8059,21 @@ errhandler:
                 .InvestigatingOfficer = officer
                 .Gist = gist
                 .ComparisonDetails = comparison
-                .Remarks = identificationdetails
+                .Remarks = ""
                 .GraveCrime = gravecrime
                 .FileStatus = filestatus
-                .IdentifiedBy = identifiedby
+                .IdentifiedBy = ""
                 .CPsIdentified = cpsidentified
-                .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                .IdentifiedAs = identifiedas
-                .IdentificationNumber = idrnumber
+                .IdentificationDate = Now
+                .IdentifiedAs = ""
+                .IdentificationNumber = ""
             End With
 
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, cpsidentified, Me.dtIdentificationDate.ValueObject, identifiedby, identifiedas, idrnumber) 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, "", gravecrime, filestatus, cpsidentified, Now, "", "", "") 'update the database
 
-            If filestatus.ToLower = "identified" Then
-                Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
-                IDRRow = Me.FingerPrintDataSet.IdentifiedCases.NewIdentifiedCasesRow
-                With IDRRow
-                    .SOCNumber = OriginalSOCNumber
-                    .SOCYear = sYear
-                    .DateOfInspection = Me.dtSOCInspection.ValueObject
-
-                    If Me.dtSOCReport.IsEmpty = False Then .DateOfReport = dtSOCReport.Value
-
-                    .DateOfOccurrence = dto
-                    .PoliceStation = ps
-                    .CrimeNumber = cr
-                    .SectionOfLaw = sec
-                    .PlaceOfOccurrence = po
-                    .Complainant = complainant
-                    .ModusOperandi = mo
-                    .PropertyLost = pl
-                    .ChancePrintsDeveloped = cpdeveloped
-                    .ChancePrintsUnfit = cpunfit
-                    .ChancePrintsEliminated = cpeliminated
-                    .ChancePrintsRemaining = cpremaining
-                    .ChancePrintDetails = cpdetails
-                    .Photographer = photographer
-                    .PhotoReceived = photoreceived
-                    .DateOfReceptionOfPhoto = dateofreceptionofphoto
-                    .InvestigatingOfficer = officer
-                    .Gist = gist
-                    .ComparisonDetails = comparison
-                    .Remarks = identificationdetails
-                    .GraveCrime = gravecrime
-                    .FileStatus = filestatus
-                    .IdentifiedBy = identifiedby
-                    .CPsIdentified = cpsidentified
-                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                    .IdentifiedAs = identifiedas
-                    .IdentificationNumber = idrnumber
-                End With
-
-                Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
-                Me.JoinedIDRBindingSource.Position = Me.JoinedIDRBindingSource.Find("SOCNumber", OriginalSOCNumber)
-            End If
 
             InitializeSOCFields()
             IncrementSOCNumber(OriginalSOCNumber)
@@ -8327,14 +8128,14 @@ errhandler:
             Dim gist = Trim(Me.txtSOCGist.Text)
             Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
             Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-            Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
+            Dim identificationdetails = ""
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
+            Dim identifiedby As String = ""
             Dim cpsidentified = ""
-            If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
-            Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
-            Dim idrnumber As String = Me.txtSOCIDRNumber.Text.Trim
+            cpsidentified = ""
+            Dim identifiedas = ""
+            Dim idrnumber As String = ""
 
             If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
                 If comparison.ToLower.StartsWith("identified as") = False Then
@@ -8350,15 +8151,6 @@ errhandler:
                 If comparison.ToLower.StartsWith("otherwise detected") = False Then
                     comparison = "Otherwise detected"
                 End If
-            End If
-
-            If filestatus.ToLower <> "identified" Then
-                identifiedby = ""
-                identifiedas = ""
-                identificationdetails = ""
-                cpsidentified = ""
-                Me.dtIdentificationDate.Text = ""
-                idrnumber = ""
             End If
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
@@ -8410,14 +8202,14 @@ errhandler:
                     .FileStatus = filestatus
                     .IdentifiedBy = identifiedby
                     .CPsIdentified = cpsidentified
-                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
+                    .IdentificationDate = Now
                     .IdentifiedAs = identifiedas
                     .IdentificationNumber = idrnumber
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Now, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
                 Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
@@ -8432,60 +8224,6 @@ errhandler:
                 End If
             End If
 
-            If filestatus.ToLower = "identified" Then
-                Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
-                IDRRow = Me.FingerPrintDataSet.IdentifiedCases.FindBySOCNumber(OriginalSOCNumber) 'find idr row
-
-                Dim blAddRow As Boolean = False
-                If IDRRow Is Nothing Then
-                    IDRRow = Me.FingerPrintDataSet.IdentifiedCases.NewIdentifiedCasesRow 'create one
-                    blAddRow = True
-                End If
-
-                With IDRRow
-                    .SOCNumber = NewSOCNumber
-                    .SOCYear = sYear
-                    .DateOfInspection = dtSOCInspection.Value
-
-                    If Me.dtSOCReport.IsEmpty = False Then
-                        .DateOfReport = dtSOCReport.Value
-                    Else
-                        .DateOfReport = Nothing
-                    End If
-
-                    .DateOfOccurrence = dto
-                    .PoliceStation = ps
-                    .CrimeNumber = cr
-                    .SectionOfLaw = sec
-                    .PlaceOfOccurrence = po
-                    .Complainant = complainant
-                    .ModusOperandi = mo
-                    .PropertyLost = pl
-                    .ChancePrintsDeveloped = cpdeveloped
-                    .ChancePrintsUnfit = cpunfit
-                    .ChancePrintsEliminated = cpeliminated
-                    .ChancePrintsRemaining = cpremaining
-                    .ChancePrintDetails = cpdetails
-                    .Photographer = photographer
-                    .PhotoReceived = photoreceived
-                    .DateOfReceptionOfPhoto = dateofreceptionofphoto
-                    .InvestigatingOfficer = officer
-                    .Gist = gist
-                    .ComparisonDetails = comparison
-                    .Remarks = identificationdetails
-                    .GraveCrime = gravecrime
-                    .FileStatus = filestatus
-                    .IdentifiedBy = identifiedby
-                    .CPsIdentified = cpsidentified
-                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                    .IdentifiedAs = identifiedas
-                    .IdentificationNumber = idrnumber
-                End With
-                If blAddRow Then
-                    Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
-                End If
-                Me.JoinedIDRBindingSource.Position = Me.JoinedIDRBindingSource.Find("SOCNumber", NewSOCNumber)
-            End If
 
             ShowDesktopAlert("Selected Record updated successfully!")
 
@@ -8541,25 +8279,13 @@ errhandler:
             Dim gist = Trim(Me.txtSOCGist.Text)
             Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
             Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-            Dim identificationdetails = Trim(Me.txtSOCIdentificationDetails.Text)
+            Dim identificationdetails = ""
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim identifiedby As String = Trim(Me.cmbIdentifiedByOfficer.Text)
+            Dim identifiedby As String = ""
             Dim cpsidentified = ""
-            If Me.txtCPsIdentified.Value <> 0 Then cpsidentified = Me.txtCPsIdentified.Value
+            cpsidentified = ""
 
-            Dim identifiedas = Me.txtSOCIdentifiedCulpritName.Text.Trim
-            Dim idrnumber As String = Me.txtSOCIDRNumber.Text.Trim
-
-            If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
-                If comparison.ToLower.StartsWith("identified as") = False Then
-                    comparison = "Identified as " & identifiedas
-                End If
-            End If
-
-            If filestatus.ToLower <> "identified" And comparison.ToLower.StartsWith("identified as") Then
-                comparison = ""
-            End If
 
             If filestatus.ToLower = "otherwise detected" Then
                 If comparison.ToLower.StartsWith("otherwise detected") = False Then
@@ -8567,14 +8293,6 @@ errhandler:
                 End If
             End If
 
-            If filestatus.ToLower <> "identified" Then
-                identifiedby = ""
-                identifiedas = ""
-                identificationdetails = ""
-                cpsidentified = ""
-                Me.dtIdentificationDate.Text = ""
-                idrnumber = ""
-            End If
 
             Dim oldRow As FingerPrintDataSet.SOCRegisterRow 'add a new row to insert values
             oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
@@ -8614,79 +8332,15 @@ errhandler:
                     .FileStatus = filestatus
                     .IdentifiedBy = identifiedby
                     .CPsIdentified = cpsidentified
-                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                    .IdentifiedAs = identifiedas
-                    .IdentificationNumber = idrnumber
+                    .IdentificationDate = Now
+                    .IdentifiedAs = ""
+                    .IdentificationNumber = ""
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Me.dtIdentificationDate.ValueObject, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, Now, cpsidentified, "", "", OriginalSOCNumber)
 
-            If filestatus.ToLower <> "identified" Then
-                Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
-                IDRRow = Me.FingerPrintDataSet.IdentifiedCases.FindBySOCNumber(OriginalSOCNumber) 'find idr row
-                If IDRRow IsNot Nothing Then
-                    IDRRow.Delete()
-                End If
-            End If
-
-            If filestatus.ToLower = "identified" Then
-                Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'add a new row to insert values
-                IDRRow = Me.FingerPrintDataSet.IdentifiedCases.FindBySOCNumber(OriginalSOCNumber)
-
-                Dim blAddRow As Boolean = False
-                If IDRRow Is Nothing Then
-                    IDRRow = Me.FingerPrintDataSet.IdentifiedCases.NewIdentifiedCasesRow 'create one
-                    blAddRow = True
-                End If
-
-                With IDRRow
-                    .SOCNumber = NewSOCNumber
-                    .SOCYear = sYear
-                    .DateOfInspection = dtSOCInspection.Value
-
-                    If Me.dtSOCReport.IsEmpty = False Then
-                        .DateOfReport = dtSOCReport.Value
-                    Else
-                        .DateOfReport = Nothing
-                    End If
-
-                    .DateOfOccurrence = dto
-                    .PoliceStation = ps
-                    .CrimeNumber = cr
-                    .SectionOfLaw = sec
-                    .PlaceOfOccurrence = po
-                    .Complainant = complainant
-                    .ModusOperandi = mo
-                    .PropertyLost = pl
-                    .ChancePrintsDeveloped = cpdeveloped
-                    .ChancePrintsUnfit = cpunfit
-                    .ChancePrintsEliminated = cpeliminated
-                    .ChancePrintsRemaining = cpremaining
-                    .ChancePrintDetails = cpdetails
-                    .Photographer = photographer
-                    .PhotoReceived = photoreceived
-                    .DateOfReceptionOfPhoto = dateofreceptionofphoto
-                    .InvestigatingOfficer = officer
-                    .Gist = gist
-                    .ComparisonDetails = comparison
-                    .Remarks = identificationdetails
-                    .GraveCrime = gravecrime
-                    .FileStatus = filestatus
-                    .IdentifiedBy = identifiedby
-                    .CPsIdentified = cpsidentified
-                    .IdentificationDate = Me.dtIdentificationDate.ValueObject
-                    .IdentifiedAs = identifiedas
-                    .IdentificationNumber = idrnumber
-                End With
-
-                If blAddRow Then
-                    Me.FingerPrintDataSet.IdentifiedCases.Rows.Add(IDRRow) ' add the row to the table
-                End If
-
-                Me.JoinedIDRBindingSource.Position = Me.JoinedIDRBindingSource.Find("SOCNumber", NewSOCNumber)
-            End If
 
             ShowDesktopAlert("SOC Record overwritten!")
 
@@ -8814,12 +8468,12 @@ errhandler:
             Dim gist = Me.txtSOCGist.Text
             Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
             Dim comparison = txtSOCComparisonDetails.Text
-            Dim identificationdeatils = txtSOCIdentificationDetails.Text
+            Dim identificationdeatils = ""
 
             Dim filestatus = Me.cmbFileStatus.Text
-            Dim identifiedby = Me.cmbIdentifiedByOfficer.Text
-            Dim cpsidentified = Me.txtCPsIdentified.Text
-            Dim dtidentified = Me.dtIdentificationDate.ValueObject
+            Dim identifiedby = ""
+            Dim cpsidentified = ""
+            Dim dtidentified = Now
 
             If SearchSetting = 0 Then
                 sNumber = sNumber & "%"
@@ -8971,11 +8625,9 @@ errhandler:
             Dim gist = Me.txtSOCGist.Text
             Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
             Dim comparison = txtSOCComparisonDetails.Text
-            Dim identificationdetails = txtSOCIdentificationDetails.Text
+            Dim identificationdetails = ""
             Dim filestatus = Me.cmbFileStatus.Text
-            Dim identifiedby = Me.cmbIdentifiedByOfficer.Text
-            Dim cpsidentified = Me.txtCPsIdentified.Text
-            Dim dtidentified = Me.dtIdentificationDate.ValueObject
+           
 
             If SearchSetting = 0 Then
                 sNumber = sNumber & "%"
@@ -9000,8 +8652,6 @@ errhandler:
                 comparison = comparison & "%"
                 identificationdetails = identificationdetails & "%"
                 filestatus = filestatus & "%"
-                identifiedby = identifiedby & "%"
-                cpsidentified = cpsidentified & "%"
             End If
 
 
@@ -9028,8 +8678,6 @@ errhandler:
                 If comparison = vbNullString Then comparison = "%"
                 If identificationdetails = vbNullString Then identificationdetails = "%"
                 If filestatus = vbNullString Then filestatus = "%"
-                If identifiedby = vbNullString Then identifiedby = "%"
-                If cpsidentified = vbNullString Then cpsidentified = "%"
             End If
 
             If SearchSetting = 2 Then
@@ -9057,8 +8705,6 @@ errhandler:
                 comparison = "%" & comparison & "%"
                 identificationdetails = "%" & identificationdetails & "%"
                 filestatus = "%" & filestatus & "%"
-                identifiedby = "%" & identifiedby & "%"
-                cpsidentified = "%" & cpsidentified & "%"
             End If
 
             If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
@@ -16947,11 +16593,7 @@ errhandler:
                 System.Threading.Thread.Sleep(50)
             Next
 
-            If Me.IdentifiedCasesTableAdapter1.CountBlankIDNumber("") > 0 Then
-                bgwUpdateIDRNumber.RunWorkerAsync()
-            Else
-                LoadRecordsToAllTablesDependingOnCurrentYearSettings()
-            End If
+            LoadRecordsToAllTablesDependingOnCurrentYearSettings()
 
             If Me.btnOpen.Enabled = False Then
                 EnableControls()

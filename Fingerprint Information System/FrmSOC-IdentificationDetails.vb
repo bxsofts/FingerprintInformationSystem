@@ -12,8 +12,8 @@ Public Class FrmIdentificationRegister
         Me.txtIdentificationNumber.Select(Me.txtIdentificationNumber.Text.Length, 0)
 
         Me.cmbIdentifyingOfficer.Items.Clear()
-        For i = 0 To frmMainInterface.cmbIdentifiedByOfficer.Items.Count - 1
-            Me.cmbIdentifyingOfficer.Items.Add(frmMainInterface.cmbIdentifiedByOfficer.Items(i).ToString)
+        For i = 0 To frmMainInterface.cmbRSOCOfficer.Items.Count - 1
+            Me.cmbIdentifyingOfficer.Items.Add(frmMainInterface.cmbRSOCOfficer.Items(i).ToString)
         Next
 
         Me.cmbIdentifyingOfficer.DropDownStyle = ComboBoxStyle.DropDown
@@ -353,13 +353,12 @@ Public Class FrmIdentificationRegister
     End Sub
     Private Sub IdentificationDetails() ' Handles txtRemarks.GotFocus
         On Error Resume Next
-        If Me.txtRemarks.Text <> vbNullString Or frmMainInterface.txtCPsIdentified.Value = 0 Then Exit Sub
-        If frmMainInterface.IDDetailsFocussed = False Then
-            Dim cpid = frmMainInterface.txtCPsIdentified.Value
-            Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureau records as DA No......." & vbNewLine & "DA Classification - "
 
-            Me.txtRemarks.Text = iddetails
-            frmMainInterface.IDDetailsFocussed = True
+        If frmMainInterface.IDDetailsFocussed = False Then
+
+            '  Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureaurecords as DA No......." & vbNewLine & "DA Classification - "
+
+          
         End If
         Me.txtRemarks.Select(Me.txtRemarks.Text.Length, 0)
     End Sub
