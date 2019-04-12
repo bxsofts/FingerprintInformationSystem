@@ -14548,7 +14548,7 @@ errhandler:
     End Sub
 
 
-    Private Sub ListOfMonthlyIDCases(sender As Object, e As EventArgs) Handles btnListOfMonthlyIDCases.Click
+    Private Sub ListOfMonthlyIDCases(sender As Object, e As EventArgs) Handles btnIdentificationStatement2.Click, btnIdentificationStatement.Click
         On Error Resume Next
         frmIdentificationStatement.StartPosition = FormStartPosition.CenterParent
         frmIdentificationStatement.ShowDialog()
