@@ -48,9 +48,16 @@ Public Class frmAnnualStatistics
             If Me.FPARegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter1.Connection.Close()
             Me.FPARegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.FPARegisterTableAdapter1.Connection.Open()
-            If Me.IDCasesTableAdapter1.Connection.State = ConnectionState.Open Then Me.IDCasesTableAdapter1.Connection.Close()
-            Me.IDCasesTableAdapter1.Connection.ConnectionString = sConString
-            Me.IDCasesTableAdapter1.Connection.Open()
+
+
+            If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+            Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.IdentificationRegisterTableAdapter1.Connection.Open()
+
+            If Me.JoinedIDRTableAdapter1.Connection.State = ConnectionState.Open Then Me.JoinedIDRTableAdapter1.Connection.Close()
+            Me.JoinedIDRTableAdapter1.Connection.ConnectionString = sConString
+            Me.JoinedIDRTableAdapter1.Connection.Open()
+
 
             Me.Cursor = Cursors.Default
 
@@ -301,13 +308,14 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(6, 2).Select()
             WordApp.Selection.TypeText("No. of chance prints identified as culprits during the year")
             WordApp.Selection.Tables.Item(1).Cell(6, 3).Select()
-            Dim x As Integer = Me.SocRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2)
+            Dim x As Integer = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2)
             WordApp.Selection.TypeText(x)
 
             WordApp.Selection.Tables.Item(1).Cell(7, 2).Select()
             WordApp.Selection.TypeText("No. of  cases identified during the year")
             WordApp.Selection.Tables.Item(1).Cell(7, 3).Select()
-            WordApp.Selection.TypeText(Me.SocRegisterTableAdapter1.ScalarQuerySOCsIdentified(d1, d2))
+            WordApp.Selection.TypeText(Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentified(d1, d2))
+
             WordApp.Selection.Tables.Item(1).Cell(8, 2).Select()
             WordApp.Selection.TypeText("No. of  cases pending at the beginning of the year")
 
@@ -483,9 +491,9 @@ Public Class frmAnnualStatistics
 
             '------------------------------ DETAILS OF IDENTIFIED CASES -----------------------
 
-            Me.IDCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
+            Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
 
-            Dim idcount = Me.FingerPrintDataSet.IdentifiedCases.Count
+            Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
             Dim rows = idcount + 1
             If rows = 1 Then rows = 2
             WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbNewLine & "V. DETAILS OF IDENTIFIED CASES" & vbNewLine)
@@ -534,15 +542,15 @@ Public Class frmAnnualStatistics
                     WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                     WordApp.Selection.TypeText(i - 1)
                     WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).PoliceStation)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).PoliceStation)
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).CrimeNumber)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).CrimeNumber)
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).SectionOfLaw)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).SectionOfLaw)
                     WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).PropertyLost.Replace("`", "Rs."))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).PropertyLost.Replace("`", "Rs."))
                     WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).IdentifiedAs)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).CulpritName)
                 Next
             End If
 
@@ -565,27 +573,27 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                WordApp.Selection.TypeText(i + 1 & ". No." & Me.FingerPrintDataSet.IdentifiedCases(i).SOCNumber & "/SOC/" & ShortOfficeName & "/" & ShortDistrictName & vbNewLine)
+                WordApp.Selection.TypeText(i + 1 & ". No." & Me.FingerPrintDataSet.JoinedIDR(i).SOCNumber & "/SOC/" & ShortOfficeName & "/" & ShortDistrictName & vbNewLine)
 
                 WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-                Dim ps = Me.FingerPrintDataSet.IdentifiedCases(i).PoliceStation
+                Dim ps = Me.FingerPrintDataSet.JoinedIDR(i).PoliceStation
                 If ps.EndsWith("P.S") = False Then ps += " P.S"
-                Dim cr = Me.FingerPrintDataSet.IdentifiedCases(i).CrimeNumber
-                Dim us = Me.FingerPrintDataSet.IdentifiedCases(i).SectionOfLaw
-                Dim dtin = Me.FingerPrintDataSet.IdentifiedCases(i).DateOfInspection
+                Dim cr = Me.FingerPrintDataSet.JoinedIDR(i).CrimeNumber
+                Dim us = Me.FingerPrintDataSet.JoinedIDR(i).SectionOfLaw
+                Dim dtin = Me.FingerPrintDataSet.JoinedIDR(i).DateOfInspection
                 Dim dtinstr = dtin.ToString("dd/MM/yyyy", culture)
-                Dim dtid = Me.FingerPrintDataSet.IdentifiedCases(i).IdentificationDate
+                Dim dtid = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDate
                 Dim dtidstr = dtid.ToString("dd/MM/yyyy", culture)
-                Dim ino = Me.FingerPrintDataSet.IdentifiedCases(i).InvestigatingOfficer.Replace(vbNewLine, ", ")
-                Dim ido = Me.FingerPrintDataSet.IdentifiedCases(i).IdentifiedBy
+                Dim ino = Me.FingerPrintDataSet.JoinedIDR(i).InvestigatingOfficer.Replace(vbNewLine, ", ")
+                Dim ido = Me.FingerPrintDataSet.JoinedIDR(i).IdentifiedBy
 
                 ino = Replace(Replace(Replace(Replace(ino, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 ido = Replace(Replace(Replace(Replace(ido, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
-                Dim gist = Me.FingerPrintDataSet.IdentifiedCases(i).Gist.Trim
-                Dim iddetails = Me.FingerPrintDataSet.IdentifiedCases(i).Remarks.Trim
-                Dim identifiedas = Me.FingerPrintDataSet.IdentifiedCases(i).IdentifiedAs.Trim
+                Dim gist = Me.FingerPrintDataSet.JoinedIDR(i).Gist.Trim
+                Dim iddetails = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDetails.Trim
+                Dim identifiedas = Me.FingerPrintDataSet.JoinedIDR(i).CulpritName.Trim
                 WordApp.Selection.TypeText(vbTab & ps & ", Cr.No. " & cr & " u/s " & us)
                 WordApp.Selection.TypeText(vbNewLine)
                 WordApp.Selection.TypeText(vbTab & "Date of Inspection - " & dtinstr)
@@ -715,8 +723,8 @@ Public Class frmAnnualStatistics
                 System.Threading.Thread.Sleep(10)
             Next
 
-            Me.IDCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
-            Dim idcount = Me.FingerPrintDataSet.IdentifiedCases.Count
+            Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
+            Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
             Dim rows = idcount + 1
             If rows = 1 Then rows = 2
 
@@ -822,34 +830,34 @@ Public Class frmAnnualStatistics
                     WordApp.Selection.TypeText(i - 1)
                     WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).SOCNumber)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).SOCNumber)
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.IdentifiedCases(i - 2).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.IdentifiedCases(i - 2).SectionOfLaw)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.JoinedIDR(i - 2).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.JoinedIDR(i - 2).SectionOfLaw)
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).DateOfInspection.ToString("dd/MM/yyyy", culture))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).DateOfInspection.ToString("dd/MM/yyyy", culture))
                     WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).InvestigatingOfficer)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).InvestigatingOfficer)
                     WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).ChancePrintsDeveloped)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).ChancePrintsDeveloped)
                     WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).CPsIdentified)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).CPsIdentified)
                     WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).IdentifiedBy)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).IdentifiedBy)
                     WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).IdentificationDate.ToString("dd/MM/yyyy", culture))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).IdentificationDate.ToString("dd/MM/yyyy", culture))
                     WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).IdentifiedAs)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).CulpritName)
                     WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.IdentifiedCases(i - 2).Remarks)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).IdentificationDetails)
                 Next
             End If
 
@@ -949,8 +957,8 @@ Public Class frmAnnualStatistics
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.TypeText(vbCrLf & Header & vbCrLf)
-            Me.IDCasesTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.IdentifiedCases, d1, d2)
-            Dim idcount = Me.FingerPrintDataSet.IdentifiedCases.Count
+            Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
+            Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
 
             For delay = 30 To 40
                 bgwIDGist.ReportProgress(delay)
@@ -962,7 +970,7 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
-                Dim FileNo As String = Me.FingerPrintDataSet.IdentifiedCases(i).SOCNumber
+                Dim FileNo As String = Me.FingerPrintDataSet.JoinedIDR(i).SOCNumber
                 Dim line() = Strings.Split(FileNo, "/")
                 FileNo = line(0) & "/SOC/" & line(1)
 
@@ -971,21 +979,21 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-                Dim ps = Me.FingerPrintDataSet.IdentifiedCases(i).PoliceStation
+                Dim ps = Me.FingerPrintDataSet.JoinedIDR(i).PoliceStation
                 If ps.EndsWith("P.S") = False Then ps += " P.S"
-                Dim cr = Me.FingerPrintDataSet.IdentifiedCases(i).CrimeNumber
-                Dim us = Me.FingerPrintDataSet.IdentifiedCases(i).SectionOfLaw
-                Dim dtin = Me.FingerPrintDataSet.IdentifiedCases(i).DateOfInspection
+                Dim cr = Me.FingerPrintDataSet.JoinedIDR(i).CrimeNumber
+                Dim us = Me.FingerPrintDataSet.JoinedIDR(i).SectionOfLaw
+                Dim dtin = Me.FingerPrintDataSet.JoinedIDR(i).DateOfInspection
                 Dim dtinstr = dtin.ToString("dd/MM/yyyy", culture)
-                Dim dtid = Me.FingerPrintDataSet.IdentifiedCases(i).IdentificationDate
+                Dim dtid = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDate
                 Dim dtidstr = dtid.ToString("dd/MM/yyyy", culture)
-                Dim ino = Me.FingerPrintDataSet.IdentifiedCases(i).InvestigatingOfficer.Replace(vbCrLf, ", ")
-                Dim ido = Me.FingerPrintDataSet.IdentifiedCases(i).IdentifiedBy
+                Dim ino = Me.FingerPrintDataSet.JoinedIDR(i).InvestigatingOfficer.Replace(vbCrLf, ", ")
+                Dim ido = Me.FingerPrintDataSet.JoinedIDR(i).IdentifiedBy
                 ino = Replace(Replace(Replace(Replace(ino, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 ido = Replace(Replace(Replace(Replace(ido, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
-                Dim gist = Me.FingerPrintDataSet.IdentifiedCases(i).Gist.Trim
-                Dim iddetails = Me.FingerPrintDataSet.IdentifiedCases(i).Remarks.Trim
-                Dim identifiedas = Me.FingerPrintDataSet.IdentifiedCases(i).IdentifiedAs.Trim
+                Dim gist = Me.FingerPrintDataSet.JoinedIDR(i).Gist.Trim
+                Dim iddetails = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDetails.Trim
+                Dim identifiedas = Me.FingerPrintDataSet.JoinedIDR(i).CulpritName.Trim
                 WordApp.Selection.TypeText(vbTab & ps & ", Cr.No. " & cr & " u/s " & us)
                 WordApp.Selection.TypeText(vbCrLf)
                 WordApp.Selection.TypeText(vbTab & "Date of Inspection - " & dtinstr)

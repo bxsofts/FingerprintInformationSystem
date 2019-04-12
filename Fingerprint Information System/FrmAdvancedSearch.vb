@@ -681,8 +681,8 @@ Public Class FrmAdvancedSearch
                     ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.CDDataGrid.RowCount = 1, "1 Record", frmMainInterface.CDDataGrid.RowCount & " Records"))
 
                 Case "IDR"
-                    frmMainInterface.FingerPrintDataSet.IdentifiedCases.Clear()
-                    da.Fill(frmMainInterface.FingerPrintDataSet.IdentifiedCases)
+                    frmMainInterface.FingerPrintDataSet.IdentificationRegister.Clear()
+                    da.Fill(frmMainInterface.FingerPrintDataSet.IdentificationRegister)
                     ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.JoinedIDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.JoinedIDRDataGrid.RowCount & " Records"))
             End Select
 

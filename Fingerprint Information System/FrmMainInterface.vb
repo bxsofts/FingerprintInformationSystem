@@ -6519,11 +6519,6 @@ errhandler:
                     oldRow = Me.FingerPrintDataSet.SOCRegister.FindBySOCNumber(OriginalSOCNumber)
                     oldRow.Delete()
 
-                    Dim IDRRow As FingerPrintDataSet.IdentifiedCasesRow 'find old row
-                    IDRRow = Me.FingerPrintDataSet.IdentifiedCases.FindBySOCNumber(OriginalSOCNumber)
-                    If IDRRow IsNot Nothing Then
-                        IDRRow.Delete()
-                    End If
                     Me.SOCRegisterTableAdapter.DeleteSelectedRecord(OriginalSOCNumber)
                     ShowDesktopAlert("Selected SOC record deleted!")
                     If Me.SOCDatagrid.SelectedRows.Count = 0 And Me.SOCDatagrid.RowCount <> 0 Then
@@ -8988,51 +8983,6 @@ errhandler:
 
 
     '-------------------------------------------IDENTIFICATION REGISTER-----------------------------------------
-
-#Region "IDENTIFICATION NUMBER FIX"
-
-    Private Sub bgwUpdateIDRNumber_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateIDRNumber.DoWork
-        Try
-
-            Dim FPDS As New FingerPrintDataSet
-            Dim IDRTblAdptr As New FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
-            IDRTblAdptr.Connection.ConnectionString = sConString
-            IDRTblAdptr.Connection.Open()
-
-            IDRTblAdptr.Fill(FPDS.IdentifiedCases)
-            Dim idrnum As String = ""
-            Dim idrnum1 As String = ""
-            Dim y As String = ""
-            Dim y1 As String = ""
-            Dim j As Integer = 0
-
-            For i = 0 To FPDS.IdentifiedCases.Rows.Count - 1
-
-                idrnum = FPDS.IdentifiedCases(i).IdentificationNumber
-                idrnum1 = idrnum
-                y = FPDS.IdentifiedCases(i).IdentificationDate.Year
-                If y <> y1 Then
-                    y1 = y
-                    j = 0
-                End If
-                j = j + 1
-                idrnum = j & "/" & y1
-                If idrnum1 = "" Then
-                    IDRTblAdptr.UpdateIDRNumber(idrnum, FPDS.IdentifiedCases(i).SOCNumber)
-                End If
-            Next
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-        End Try
-    End Sub
-
-    Private Sub bgwUpdateIDRNumber_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpdateIDRNumber.RunWorkerCompleted
-        InsertOrUpdateLastModificationDate(Now)
-        System.Threading.Thread.Sleep(3000)
-        LoadRecordsToAllTablesDependingOnCurrentYearSettings()
-    End Sub
-
-#End Region
 
 
 #Region "IDENTIFICATION REGISTER"
@@ -17174,9 +17124,5 @@ errhandler:
 #End Region
 
 
-  
-   
-    Private Sub FindSOCNumber(sender As Object, e As EventArgs) Handles dtSOCInspection.GotFocus
 
-    End Sub
 End Class

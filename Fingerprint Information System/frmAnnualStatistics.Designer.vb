@@ -40,9 +40,10 @@ Partial Class frmAnnualStatistics
         Me.DaRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.FPARegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
-        Me.IDCasesTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter()
         Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
         Me.bgwIDGist = New System.ComponentModel.BackgroundWorker()
+        Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
+        Me.JoinedIDRTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -322,10 +323,6 @@ Partial Class frmAnnualStatistics
         '
         Me.FPARegisterTableAdapter1.ClearBeforeFill = True
         '
-        'IDCasesTableAdapter1
-        '
-        Me.IDCasesTableAdapter1.ClearBeforeFill = True
-        '
         'bgwIDList
         '
         Me.bgwIDList.WorkerReportsProgress = True
@@ -335,6 +332,14 @@ Partial Class frmAnnualStatistics
         '
         Me.bgwIDGist.WorkerReportsProgress = True
         Me.bgwIDGist.WorkerSupportsCancellation = True
+        '
+        'IdentificationRegisterTableAdapter1
+        '
+        Me.IdentificationRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'JoinedIDRTableAdapter1
+        '
+        Me.JoinedIDRTableAdapter1.ClearBeforeFill = True
         '
         'frmAnnualStatistics
         '
@@ -377,9 +382,10 @@ Partial Class frmAnnualStatistics
     Friend WithEvents DaRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter
     Friend WithEvents SocRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
     Friend WithEvents FPARegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
-    Friend WithEvents IDCasesTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentifiedCasesTableAdapter
     Friend WithEvents btnGeneratebyPeriod As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwIDList As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwIDGist As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
+    Friend WithEvents JoinedIDRTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter
 End Class

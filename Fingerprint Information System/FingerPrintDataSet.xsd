@@ -1165,7 +1165,7 @@ ORDER BY DateOfInspection DESC, SOCYear DESC</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromCPsIdentified" Modifier="Public" Name="RemoveNullFromCPsIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy57" UserSourceName="RemoveNullFromCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromCPsIdentified" Modifier="Public" Name="RemoveNullFromCPsIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromCPsIdentified">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister 
@@ -1177,7 +1177,7 @@ WHERE        (CPsIdentified IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy42" GeneratorSourceName="RemoveNullFromFileStatus" Modifier="Public" Name="RemoveNullFromFileStatus" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromFileStatus">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy42" GeneratorSourceName="RemoveNullFromFileStatus" Modifier="Public" Name="RemoveNullFromFileStatus" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="RemoveNullFromFileStatus">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1189,7 +1189,7 @@ WHERE        (FileStatus IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy55" GeneratorSourceName="RemoveNullFromIdentificationNumber" Modifier="Public" Name="RemoveNullFromIdentificationNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="RemoveNullFromIdentificationNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy55" GeneratorSourceName="RemoveNullFromIdentificationNumber" Modifier="Public" Name="RemoveNullFromIdentificationNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="RemoveNullFromIdentificationNumber">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1201,7 +1201,7 @@ WHERE         IdentificationNumber IS NULL</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedAs" Modifier="Public" Name="RemoveNullFromIdentifiedAs" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="RemoveNullFromIdentifiedAs">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedAs" Modifier="Public" Name="RemoveNullFromIdentifiedAs" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="RemoveNullFromIdentifiedAs">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister 
@@ -1213,7 +1213,7 @@ WHERE        (IdentifiedAs IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedBy" Modifier="Public" Name="RemoveNullFromIdentifiedBy" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="RemoveNullFromIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedBy" Modifier="Public" Name="RemoveNullFromIdentifiedBy" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="RemoveNullFromIdentifiedBy">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1225,7 +1225,7 @@ WHERE        (IdentifiedBy IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDeveloped" Modifier="Public" Name="ScalarQueryCPDeveloped" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="ScalarQueryCPDeveloped">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDeveloped" Modifier="Public" Name="ScalarQueryCPDeveloped" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy15" UserSourceName="ScalarQueryCPDeveloped">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SUM(ChancePrintsDeveloped) AS Expr1
@@ -1238,7 +1238,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDevelopedByIO" Modifier="Public" Name="ScalarQueryCPDevelopedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy15" UserSourceName="ScalarQueryCPDevelopedByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPDevelopedByIO" Modifier="Public" Name="ScalarQueryCPDevelopedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQueryCPDevelopedByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsDeveloped) AS Expr1
@@ -1252,7 +1252,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQueryCPDevelopedSOC" Modifier="Public" Name="ScalarQueryCPDevelopedSOC" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQueryCPDevelopedSOC">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQueryCPDevelopedSOC" Modifier="Public" Name="ScalarQueryCPDevelopedSOC" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQueryCPDevelopedSOC">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1266,7 +1266,7 @@ WHERE     (ChancePrintsDeveloped &lt;&gt; ?) and  (DateOfInspection BETWEEN ? AN
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy17" GeneratorSourceName="ScalarQueryCPEliminated" Modifier="Public" Name="ScalarQueryCPEliminated" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQueryCPEliminated">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy17" GeneratorSourceName="ScalarQueryCPEliminated" Modifier="Public" Name="ScalarQueryCPEliminated" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="ScalarQueryCPEliminated">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SUM(ChancePrintsEliminated) AS Expr1
@@ -1279,7 +1279,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemaining" Modifier="Public" Name="ScalarQueryCPRemaining" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="ScalarQueryCPRemaining">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemaining" Modifier="Public" Name="ScalarQueryCPRemaining" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy20" UserSourceName="ScalarQueryCPRemaining">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsRemaining) AS Expr1
@@ -1292,7 +1292,7 @@ WHERE        (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemainingForConciseReport" Modifier="Public" Name="ScalarQueryCPRemainingForConciseReport" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy20" UserSourceName="ScalarQueryCPRemainingForConciseReport">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPRemainingForConciseReport" Modifier="Public" Name="ScalarQueryCPRemainingForConciseReport" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="ScalarQueryCPRemainingForConciseReport">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsRemaining) AS Expr1
@@ -1305,7 +1305,7 @@ WHERE        (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsEliminatedByIO" Modifier="Public" Name="ScalarQueryCPsEliminatedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="ScalarQueryCPsEliminatedByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsEliminatedByIO" Modifier="Public" Name="ScalarQueryCPsEliminatedByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy22" UserSourceName="ScalarQueryCPsEliminatedByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsEliminated) AS Expr1
@@ -1319,7 +1319,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy45" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy22" UserSourceName="ScalarQueryCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy45" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy24" UserSourceName="ScalarQueryCPsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -1332,7 +1332,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?) AND (FileStatus = 'Identified'
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy38" GeneratorSourceName="ScalarQueryCPsRemainingByIO" Modifier="Public" Name="ScalarQueryCPsRemainingByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy24" UserSourceName="ScalarQueryCPsRemainingByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy38" GeneratorSourceName="ScalarQueryCPsRemainingByIO" Modifier="Public" Name="ScalarQueryCPsRemainingByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy25" UserSourceName="ScalarQueryCPsRemainingByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsRemaining) AS Expr1
@@ -1346,7 +1346,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsRemainingInSOCNumber" Modifier="Public" Name="ScalarQueryCPsRemainingInSOCNumber" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy25" UserSourceName="ScalarQueryCPsRemainingInSOCNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsRemainingInSOCNumber" Modifier="Public" Name="ScalarQueryCPsRemainingInSOCNumber" QueryType="Scalar" ScalarCallRetval="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy26" UserSourceName="ScalarQueryCPsRemainingInSOCNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        ChancePrintsRemaining AS Expr1
@@ -1358,7 +1358,7 @@ WHERE        (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsUnfitByIO" Modifier="Public" Name="ScalarQueryCPsUnfitByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy26" UserSourceName="ScalarQueryCPsUnfitByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsUnfitByIO" Modifier="Public" Name="ScalarQueryCPsUnfitByIO" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy33" UserSourceName="ScalarQueryCPsUnfitByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(ChancePrintsUnfit) AS Expr1
@@ -1372,7 +1372,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPUnfit" Modifier="Public" Name="ScalarQueryCPUnfit" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy33" UserSourceName="ScalarQueryCPUnfit">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPUnfit" Modifier="Public" Name="ScalarQueryCPUnfit" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy34" UserSourceName="ScalarQueryCPUnfit">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     SUM(ChancePrintsUnfit) AS Expr1
@@ -1385,7 +1385,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMaxNumber" Modifier="Public" Name="ScalarQueryMaxNumber" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy34" UserSourceName="ScalarQueryMaxNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMaxNumber" Modifier="Public" Name="ScalarQueryMaxNumber" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy35" UserSourceName="ScalarQueryMaxNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MAX(SOCYear) AS Expr1
@@ -1398,7 +1398,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMinNumber" Modifier="Public" Name="ScalarQueryMinNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy35" UserSourceName="ScalarQueryMinNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryMinNumber" Modifier="Public" Name="ScalarQueryMinNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy36" UserSourceName="ScalarQueryMinNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     MIN(SOCYear) AS Expr1
@@ -1411,7 +1411,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoNotReceived" Modifier="Public" Name="ScalarQueryPhotoNotReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy36" UserSourceName="ScalarQueryPhotoNotReceived">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoNotReceived" Modifier="Public" Name="ScalarQueryPhotoNotReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy37" UserSourceName="ScalarQueryPhotoNotReceived">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1424,7 +1424,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?) AND (PhotoReceived &lt;&gt; 'yes') 
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoReceived" Modifier="Public" Name="ScalarQueryPhotoReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy37" UserSourceName="ScalarQueryPhotoReceived">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryPhotoReceived" Modifier="Public" Name="ScalarQueryPhotoReceived" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy38" UserSourceName="ScalarQueryPhotoReceived">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1437,7 +1437,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?) AND (PhotoReceived = 'yes') AND (Ch
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQuerySearchContinuingSOCs" Modifier="Public" Name="ScalarQuerySearchContinuingSOCs" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy38" UserSourceName="ScalarQuerySearchContinuingSOCs">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy20" GeneratorSourceName="ScalarQuerySearchContinuingSOCs" Modifier="Public" Name="ScalarQuerySearchContinuingSOCs" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy42" UserSourceName="ScalarQuerySearchContinuingSOCs">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1451,7 +1451,7 @@ WHERE        (DateOfInspection BETWEEN ? AND ?) AND (FileStatus = ?)</CommandTex
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCInspected" Modifier="Public" Name="ScalarQuerySOCInspected" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy42" UserSourceName="ScalarQuerySOCInspected">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCInspected" Modifier="Public" Name="ScalarQuerySOCInspected" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy43" UserSourceName="ScalarQuerySOCInspected">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
@@ -1464,7 +1464,7 @@ WHERE     (DateOfInspection BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy43" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy44" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1477,7 +1477,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?) AND (FileStatus = 'Identified'
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy44" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy45" UserSourceName="ScalarQuerySOCsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1491,7 +1491,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?) AND 
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsInspectedByIO" Modifier="Public" Name="ScalarQuerySOCsInspectedByIO" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy45" UserSourceName="ScalarQuerySOCsInspectedByIO">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsInspectedByIO" Modifier="Public" Name="ScalarQuerySOCsInspectedByIO" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy46" UserSourceName="ScalarQuerySOCsInspectedByIO">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -1505,7 +1505,7 @@ WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy43" GeneratorSourceName="UpdateFileStatusForClosedFiles" Modifier="Public" Name="UpdateFileStatusForClosedFiles" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy46" UserSourceName="UpdateFileStatusForClosedFiles">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy43" GeneratorSourceName="UpdateFileStatusForClosedFiles" Modifier="Public" Name="UpdateFileStatusForClosedFiles" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy47" UserSourceName="UpdateFileStatusForClosedFiles">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1515,7 +1515,7 @@ WHERE        (ChancePrintsRemaining = '0')</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateOfficerName" Modifier="Public" Name="UpdateOfficerName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy47" UserSourceName="UpdateOfficerName">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateOfficerName" Modifier="Public" Name="UpdateOfficerName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy48" UserSourceName="UpdateOfficerName">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    SOCRegister
@@ -1528,7 +1528,7 @@ WHERE     (InvestigatingOfficer = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdatePhotoReceived" Modifier="Public" Name="UpdatePhotoReceived" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy48" UserSourceName="UpdatePhotoReceived">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdatePhotoReceived" Modifier="Public" Name="UpdatePhotoReceived" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy49" UserSourceName="UpdatePhotoReceived">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    SOCRegister
@@ -1541,7 +1541,7 @@ WHERE     (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy25" GeneratorSourceName="UpdatePoliceStationName" Modifier="Public" Name="UpdatePoliceStationName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy49" UserSourceName="UpdatePoliceStationName">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy25" GeneratorSourceName="UpdatePoliceStationName" Modifier="Public" Name="UpdatePoliceStationName" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy52" UserSourceName="UpdatePoliceStationName">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE    SOCRegister
@@ -1554,7 +1554,7 @@ WHERE     (PoliceStation = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy52" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy55" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -1600,7 +1600,7 @@ WHERE        (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateRemarks" Modifier="Public" Name="UpdateRemarks" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy55" UserSourceName="UpdateRemarks">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateRemarks" Modifier="Public" Name="UpdateRemarks" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy57" UserSourceName="UpdateRemarks">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       SOCRegister
@@ -4786,351 +4786,6 @@ WHERE        (SOCNumber = ?)</CommandText>
               </DbSource>
             </Sources>
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="IdentifiedCasesTableAdapter" GeneratorDataComponentClassName="IdentifiedCasesTableAdapter" Name="IdentifiedCases" UserDataComponentName="IdentifiedCasesTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <DeleteCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM `SOCRegister` WHERE ((`SOCNumber` = ?) AND ((? = 1 AND `SOCYear` IS NULL) OR (`SOCYear` = ?)) AND ((? = 1 AND `DateOfInspection` IS NULL) OR (`DateOfInspection` = ?)) AND ((? = 1 AND `DateOfReport` IS NULL) OR (`DateOfReport` = ?)) AND ((? = 1 AND `DateOfOccurrence` IS NULL) OR (`DateOfOccurrence` = ?)) AND ((? = 1 AND `PoliceStation` IS NULL) OR (`PoliceStation` = ?)) AND ((? = 1 AND `CrimeNumber` IS NULL) OR (`CrimeNumber` = ?)) AND ((? = 1 AND `SectionOfLaw` IS NULL) OR (`SectionOfLaw` = ?)) AND ((? = 1 AND `PlaceOfOccurrence` IS NULL) OR (`PlaceOfOccurrence` = ?)) AND ((? = 1 AND `Complainant` IS NULL) OR (`Complainant` = ?)) AND ((? = 1 AND `ModusOperandi` IS NULL) OR (`ModusOperandi` = ?)) AND ((? = 1 AND `PropertyLost` IS NULL) OR (`PropertyLost` = ?)) AND ((? = 1 AND `ChancePrintsDeveloped` IS NULL) OR (`ChancePrintsDeveloped` = ?)) AND ((? = 1 AND `ChancePrintsUnfit` IS NULL) OR (`ChancePrintsUnfit` = ?)) AND ((? = 1 AND `ChancePrintsEliminated` IS NULL) OR (`ChancePrintsEliminated` = ?)) AND ((? = 1 AND `ChancePrintsRemaining` IS NULL) OR (`ChancePrintsRemaining` = ?)) AND ((? = 1 AND `ChancePrintDetails` IS NULL) OR (`ChancePrintDetails` = ?)) AND ((? = 1 AND `Photographer` IS NULL) OR (`Photographer` = ?)) AND ((? = 1 AND `PhotoReceived` IS NULL) OR (`PhotoReceived` = ?)) AND ((? = 1 AND `DateOfReceptionOfPhoto` IS NULL) OR (`DateOfReceptionOfPhoto` = ?)) AND ((? = 1 AND `InvestigatingOfficer` IS NULL) OR (`InvestigatingOfficer` = ?)) AND ((? = 1 AND `GraveCrime` IS NULL) OR (`GraveCrime` = ?)) AND ((? = 1 AND `FileStatus` IS NULL) OR (`FileStatus` = ?)) AND ((? = 1 AND `CPsIdentified` IS NULL) OR (`CPsIdentified` = ?)) AND ((? = 1 AND `IdentificationDate` IS NULL) OR (`IdentificationDate` = ?)) AND ((? = 1 AND `IdentifiedBy` IS NULL) OR (`IdentifiedBy` = ?)) AND ((? = 1 AND `IdentifiedAs` IS NULL) OR (`IdentifiedAs` = ?)) AND ((? = 1 AND `IdentificationNumber` IS NULL) OR (`IdentificationNumber` = ?)))</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_SOCNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SOCNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_SOCYear" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SOCYear" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_SOCYear" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SOCYear" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfInspection" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfInspection" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_DateOfInspection" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfInspection" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfReport" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfReport" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_DateOfReport" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfReport" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfOccurrence" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfOccurrence" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_DateOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PoliceStation" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PoliceStation" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PoliceStation" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PoliceStation" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CrimeNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="CrimeNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_CrimeNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CrimeNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_SectionOfLaw" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SectionOfLaw" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_SectionOfLaw" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SectionOfLaw" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PlaceOfOccurrence" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PlaceOfOccurrence" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PlaceOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PlaceOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Complainant" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="Complainant" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_Complainant" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Complainant" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ModusOperandi" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ModusOperandi" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ModusOperandi" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ModusOperandi" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PropertyLost" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PropertyLost" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PropertyLost" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PropertyLost" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsDeveloped" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsDeveloped" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsDeveloped" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsDeveloped" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsUnfit" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsUnfit" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsUnfit" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsUnfit" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsEliminated" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsEliminated" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsEliminated" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsEliminated" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsRemaining" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsRemaining" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsRemaining" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsRemaining" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintDetails" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintDetails" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintDetails" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintDetails" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Photographer" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="Photographer" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_Photographer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Photographer" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PhotoReceived" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PhotoReceived" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PhotoReceived" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PhotoReceived" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfReceptionOfPhoto" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfReceptionOfPhoto" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_DateOfReceptionOfPhoto" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfReceptionOfPhoto" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_InvestigatingOfficer" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_InvestigatingOfficer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_GraveCrime" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="GraveCrime" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="Original_GraveCrime" Precision="0" ProviderType="Boolean" Scale="0" Size="0" SourceColumn="GraveCrime" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FileStatus" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="FileStatus" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FileStatus" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FileStatus" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CPsIdentified" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="CPsIdentified" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_CPsIdentified" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CPsIdentified" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentificationDate" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentifiedBy" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentifiedBy" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_IdentifiedBy" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedBy" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentifiedAs" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentifiedAs" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_IdentifiedAs" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedAs" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentificationNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentificationNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_IdentificationNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentificationNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </DeleteCommand>
-                <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO `SOCRegister` (`SOCNumber`, `SOCYear`, `DateOfInspection`, `DateOfReport`, `DateOfOccurrence`, `PoliceStation`, `CrimeNumber`, `SectionOfLaw`, `PlaceOfOccurrence`, `Complainant`, `ModusOperandi`, `PropertyLost`, `ChancePrintsDeveloped`, `ChancePrintsUnfit`, `ChancePrintsEliminated`, `ChancePrintsRemaining`, `ChancePrintDetails`, `Photographer`, `PhotoReceived`, `DateOfReceptionOfPhoto`, `InvestigatingOfficer`, `Gist`, `ComparisonDetails`, `Remarks`, `GraveCrime`, `FileStatus`, `CPsIdentified`, `IdentificationDate`, `IdentifiedBy`, `IdentifiedAs`, `IdentificationNumber`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="SOCNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SOCNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="SOCYear" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SOCYear" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="DateOfInspection" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfInspection" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="DateOfReport" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfReport" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DateOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PoliceStation" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PoliceStation" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="CrimeNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CrimeNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="SectionOfLaw" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SectionOfLaw" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PlaceOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PlaceOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Complainant" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Complainant" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ModusOperandi" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ModusOperandi" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PropertyLost" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PropertyLost" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsDeveloped" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsDeveloped" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsUnfit" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsUnfit" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsEliminated" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsEliminated" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsRemaining" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsRemaining" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintDetails" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintDetails" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Photographer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Photographer" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PhotoReceived" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PhotoReceived" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DateOfReceptionOfPhoto" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfReceptionOfPhoto" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="InvestigatingOfficer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Gist" Precision="0" ProviderType="LongVarWChar" Scale="0" Size="0" SourceColumn="Gist" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ComparisonDetails" Precision="0" ProviderType="LongVarWChar" Scale="0" Size="0" SourceColumn="ComparisonDetails" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Remarks" Precision="0" ProviderType="LongVarWChar" Scale="0" Size="0" SourceColumn="Remarks" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="GraveCrime" Precision="0" ProviderType="Boolean" Scale="0" Size="0" SourceColumn="GraveCrime" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FileStatus" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FileStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="CPsIdentified" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CPsIdentified" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="IdentifiedBy" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedBy" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="IdentifiedAs" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedAs" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="IdentificationNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentificationNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </InsertCommand>
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsDeveloped, 
-                         ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, InvestigatingOfficer, Gist, ComparisonDetails, Remarks, 
-                         GraveCrime, FileStatus, CPsIdentified, IdentificationDate, IdentifiedBy, IdentifiedAs, IdentificationNumber
-FROM            SOCRegister
-WHERE        (FileStatus = 'Identified')
-ORDER BY IdentificationDate</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-                <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE `SOCRegister` SET `SOCNumber` = ?, `SOCYear` = ?, `DateOfInspection` = ?, `DateOfReport` = ?, `DateOfOccurrence` = ?, `PoliceStation` = ?, `CrimeNumber` = ?, `SectionOfLaw` = ?, `PlaceOfOccurrence` = ?, `Complainant` = ?, `ModusOperandi` = ?, `PropertyLost` = ?, `ChancePrintsDeveloped` = ?, `ChancePrintsUnfit` = ?, `ChancePrintsEliminated` = ?, `ChancePrintsRemaining` = ?, `ChancePrintDetails` = ?, `Photographer` = ?, `PhotoReceived` = ?, `DateOfReceptionOfPhoto` = ?, `InvestigatingOfficer` = ?, `Gist` = ?, `ComparisonDetails` = ?, `Remarks` = ?, `GraveCrime` = ?, `FileStatus` = ?, `CPsIdentified` = ?, `IdentificationDate` = ?, `IdentifiedBy` = ?, `IdentifiedAs` = ?, `IdentificationNumber` = ? WHERE ((`SOCNumber` = ?) AND ((? = 1 AND `SOCYear` IS NULL) OR (`SOCYear` = ?)) AND ((? = 1 AND `DateOfInspection` IS NULL) OR (`DateOfInspection` = ?)) AND ((? = 1 AND `DateOfReport` IS NULL) OR (`DateOfReport` = ?)) AND ((? = 1 AND `DateOfOccurrence` IS NULL) OR (`DateOfOccurrence` = ?)) AND ((? = 1 AND `PoliceStation` IS NULL) OR (`PoliceStation` = ?)) AND ((? = 1 AND `CrimeNumber` IS NULL) OR (`CrimeNumber` = ?)) AND ((? = 1 AND `SectionOfLaw` IS NULL) OR (`SectionOfLaw` = ?)) AND ((? = 1 AND `PlaceOfOccurrence` IS NULL) OR (`PlaceOfOccurrence` = ?)) AND ((? = 1 AND `Complainant` IS NULL) OR (`Complainant` = ?)) AND ((? = 1 AND `ModusOperandi` IS NULL) OR (`ModusOperandi` = ?)) AND ((? = 1 AND `PropertyLost` IS NULL) OR (`PropertyLost` = ?)) AND ((? = 1 AND `ChancePrintsDeveloped` IS NULL) OR (`ChancePrintsDeveloped` = ?)) AND ((? = 1 AND `ChancePrintsUnfit` IS NULL) OR (`ChancePrintsUnfit` = ?)) AND ((? = 1 AND `ChancePrintsEliminated` IS NULL) OR (`ChancePrintsEliminated` = ?)) AND ((? = 1 AND `ChancePrintsRemaining` IS NULL) OR (`ChancePrintsRemaining` = ?)) AND ((? = 1 AND `ChancePrintDetails` IS NULL) OR (`ChancePrintDetails` = ?)) AND ((? = 1 AND `Photographer` IS NULL) OR (`Photographer` = ?)) AND ((? = 1 AND `PhotoReceived` IS NULL) OR (`PhotoReceived` = ?)) AND ((? = 1 AND `DateOfReceptionOfPhoto` IS NULL) OR (`DateOfReceptionOfPhoto` = ?)) AND ((? = 1 AND `InvestigatingOfficer` IS NULL) OR (`InvestigatingOfficer` = ?)) AND ((? = 1 AND `GraveCrime` IS NULL) OR (`GraveCrime` = ?)) AND ((? = 1 AND `FileStatus` IS NULL) OR (`FileStatus` = ?)) AND ((? = 1 AND `CPsIdentified` IS NULL) OR (`CPsIdentified` = ?)) AND ((? = 1 AND `IdentificationDate` IS NULL) OR (`IdentificationDate` = ?)) AND ((? = 1 AND `IdentifiedBy` IS NULL) OR (`IdentifiedBy` = ?)) AND ((? = 1 AND `IdentifiedAs` IS NULL) OR (`IdentifiedAs` = ?)) AND ((? = 1 AND `IdentificationNumber` IS NULL) OR (`IdentificationNumber` = ?)))</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="SOCNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SOCNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="SOCYear" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SOCYear" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="DateOfInspection" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfInspection" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="DateOfReport" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfReport" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DateOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PoliceStation" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PoliceStation" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="CrimeNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CrimeNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="SectionOfLaw" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SectionOfLaw" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PlaceOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PlaceOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Complainant" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Complainant" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ModusOperandi" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ModusOperandi" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PropertyLost" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PropertyLost" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsDeveloped" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsDeveloped" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsUnfit" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsUnfit" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsEliminated" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsEliminated" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintsRemaining" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsRemaining" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChancePrintDetails" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintDetails" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Photographer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Photographer" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="PhotoReceived" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PhotoReceived" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DateOfReceptionOfPhoto" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfReceptionOfPhoto" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="InvestigatingOfficer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Gist" Precision="0" ProviderType="LongVarWChar" Scale="0" Size="0" SourceColumn="Gist" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ComparisonDetails" Precision="0" ProviderType="LongVarWChar" Scale="0" Size="0" SourceColumn="ComparisonDetails" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Remarks" Precision="0" ProviderType="LongVarWChar" Scale="0" Size="0" SourceColumn="Remarks" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="GraveCrime" Precision="0" ProviderType="Boolean" Scale="0" Size="0" SourceColumn="GraveCrime" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FileStatus" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FileStatus" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="CPsIdentified" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CPsIdentified" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="IdentifiedBy" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedBy" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="IdentifiedAs" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedAs" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="IdentificationNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentificationNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_SOCNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SOCNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_SOCYear" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SOCYear" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_SOCYear" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SOCYear" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfInspection" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfInspection" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_DateOfInspection" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfInspection" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfReport" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfReport" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_DateOfReport" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="DateOfReport" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfOccurrence" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfOccurrence" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_DateOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PoliceStation" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PoliceStation" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PoliceStation" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PoliceStation" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CrimeNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="CrimeNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_CrimeNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CrimeNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_SectionOfLaw" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SectionOfLaw" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_SectionOfLaw" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="SectionOfLaw" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PlaceOfOccurrence" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PlaceOfOccurrence" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PlaceOfOccurrence" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PlaceOfOccurrence" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Complainant" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="Complainant" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_Complainant" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Complainant" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ModusOperandi" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ModusOperandi" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ModusOperandi" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ModusOperandi" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PropertyLost" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PropertyLost" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PropertyLost" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PropertyLost" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsDeveloped" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsDeveloped" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsDeveloped" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsDeveloped" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsUnfit" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsUnfit" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsUnfit" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsUnfit" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsEliminated" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsEliminated" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsEliminated" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsEliminated" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintsRemaining" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintsRemaining" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintsRemaining" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintsRemaining" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChancePrintDetails" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChancePrintDetails" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChancePrintDetails" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChancePrintDetails" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Photographer" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="Photographer" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_Photographer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Photographer" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_PhotoReceived" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="PhotoReceived" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_PhotoReceived" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="PhotoReceived" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_DateOfReceptionOfPhoto" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="DateOfReceptionOfPhoto" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_DateOfReceptionOfPhoto" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DateOfReceptionOfPhoto" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_InvestigatingOfficer" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_InvestigatingOfficer" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_GraveCrime" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="GraveCrime" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="Original_GraveCrime" Precision="0" ProviderType="Boolean" Scale="0" Size="0" SourceColumn="GraveCrime" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FileStatus" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="FileStatus" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FileStatus" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FileStatus" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_CPsIdentified" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="CPsIdentified" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_CPsIdentified" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="CPsIdentified" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentificationDate" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentifiedBy" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentifiedBy" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_IdentifiedBy" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedBy" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentifiedAs" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentifiedAs" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_IdentifiedAs" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentifiedAs" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_IdentificationNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="IdentificationNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_IdentificationNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="IdentificationNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </UpdateCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="SOCNumber" DataSetColumn="SOCNumber" />
-              <Mapping SourceColumn="SOCYear" DataSetColumn="SOCYear" />
-              <Mapping SourceColumn="DateOfInspection" DataSetColumn="DateOfInspection" />
-              <Mapping SourceColumn="DateOfReport" DataSetColumn="DateOfReport" />
-              <Mapping SourceColumn="DateOfOccurrence" DataSetColumn="DateOfOccurrence" />
-              <Mapping SourceColumn="PoliceStation" DataSetColumn="PoliceStation" />
-              <Mapping SourceColumn="CrimeNumber" DataSetColumn="CrimeNumber" />
-              <Mapping SourceColumn="SectionOfLaw" DataSetColumn="SectionOfLaw" />
-              <Mapping SourceColumn="PlaceOfOccurrence" DataSetColumn="PlaceOfOccurrence" />
-              <Mapping SourceColumn="Complainant" DataSetColumn="Complainant" />
-              <Mapping SourceColumn="ModusOperandi" DataSetColumn="ModusOperandi" />
-              <Mapping SourceColumn="PropertyLost" DataSetColumn="PropertyLost" />
-              <Mapping SourceColumn="ChancePrintDetails" DataSetColumn="ChancePrintDetails" />
-              <Mapping SourceColumn="InvestigatingOfficer" DataSetColumn="InvestigatingOfficer" />
-              <Mapping SourceColumn="ComparisonDetails" DataSetColumn="ComparisonDetails" />
-              <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
-              <Mapping SourceColumn="ChancePrintsDeveloped" DataSetColumn="ChancePrintsDeveloped" />
-              <Mapping SourceColumn="ChancePrintsUnfit" DataSetColumn="ChancePrintsUnfit" />
-              <Mapping SourceColumn="ChancePrintsEliminated" DataSetColumn="ChancePrintsEliminated" />
-              <Mapping SourceColumn="ChancePrintsRemaining" DataSetColumn="ChancePrintsRemaining" />
-              <Mapping SourceColumn="Photographer" DataSetColumn="Photographer" />
-              <Mapping SourceColumn="PhotoReceived" DataSetColumn="PhotoReceived" />
-              <Mapping SourceColumn="DateOfReceptionOfPhoto" DataSetColumn="DateOfReceptionOfPhoto" />
-              <Mapping SourceColumn="Gist" DataSetColumn="Gist" />
-              <Mapping SourceColumn="GraveCrime" DataSetColumn="GraveCrime" />
-              <Mapping SourceColumn="FileStatus" DataSetColumn="FileStatus" />
-              <Mapping SourceColumn="IdentifiedBy" DataSetColumn="IdentifiedBy" />
-              <Mapping SourceColumn="IdentificationDate" DataSetColumn="IdentificationDate" />
-              <Mapping SourceColumn="CPsIdentified" DataSetColumn="CPsIdentified" />
-              <Mapping SourceColumn="IdentifiedAs" DataSetColumn="IdentifiedAs" />
-              <Mapping SourceColumn="IdentificationNumber" DataSetColumn="IdentificationNumber" />
-            </Mappings>
-            <Sources>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CheckSOCNumberExists" Modifier="Public" Name="CheckSOCNumberExists" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="CheckSOCNumberExists">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT     COUNT(SOCNumber) AS Expr1
-FROM         SOCRegister
-WHERE     (SOCNumber = ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="false" AutogeneratedName="Param1" ColumnName="SOCNumber" DataSourceName="" DataTypeServer="DbType.StringFixedLength(50)" DbType="String" Direction="Input" ParameterName="SOCNumber" Precision="0" ProviderType="WChar" Scale="0" Size="50" SourceColumn="SOCNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountBlankIDNumber" Modifier="Public" Name="CountBlankIDNumber" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="CountBlankIDNumber">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        COUNT(*) AS Expr1
-FROM            SOCRegister
-WHERE        (IdentificationNumber = ?) AND (FileStatus = 'identified')</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentificationNumber" DataSourceName="SOCRegister" DataTypeServer="DbType.StringFixedLength(10)" DbType="String" Direction="Input" ParameterName="IdentificationNumber" Precision="0" ProviderType="WChar" Scale="0" Size="10" SourceColumn="IdentificationNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountOfficer" Modifier="Public" Name="CountOfficer" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="CountOfficer">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT     COUNT(InvestigatingOfficer) AS Expr1
-FROM         SOCRegister
-WHERE     (InvestigatingOfficer = ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="InvestigatingOfficer" DataSourceName="" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="InvestigatingOfficer" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="InvestigatingOfficer" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="SOCRegister" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByIdentifiedCases" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy50" GeneratorSourceName="FillByIdentifiedCases" GetMethodModifier="Public" GetMethodName="GetDataBy50" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy50" UserSourceName="FillByIdentifiedCases">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, IdentificationDate, IdentificationNumber, IdentifiedAs, IdentifiedBy, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer, PlaceOfOccurrence, PoliceStation, PropertyLost, Remarks, SOCNumber, SOCYear, SectionOfLaw FROM SOCRegister WHERE (FileStatus = 'Identified') AND (IdentificationDate BETWEEN ? AND ?) ORDER BY IdentificationDate, SOCYear</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentificationDate" DataSourceName="SOCRegister" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="IdentificationDate" DataSourceName="SOCRegister" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="ScalarQueryCPsIdentified">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
-FROM            SOCRegister
-WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentificationDate" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="IdentificationDate" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="ScalarQuerySOCsIdentified">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
-FROM            SOCRegister
-WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentificationDate" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="IdentificationDate" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="ScalarQuerySOCsIdentifiedBy">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
-FROM            SOCRegister
-WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentifiedBy" DataSourceName="" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="IdentifiedBy" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="IdentifiedBy" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="IdentificationDate" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param3" ColumnName="IdentificationDate" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
-                    </Parameters>
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateIDRNumber" Modifier="Public" Name="UpdateIDRNumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="UpdateIDRNumber">
-                <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>UPDATE       SOCRegister
-SET                IdentificationNumber = ?
-WHERE        (SOCNumber = ?)</CommandText>
-                    <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentificationNumber" DataSourceName="SOCRegister" DataTypeServer="DbType.StringFixedLength(10)" DbType="String" Direction="Input" ParameterName="IdentificationNumber" Precision="0" ProviderType="WChar" Scale="0" Size="10" SourceColumn="IdentificationNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="SOCNumber" DataSourceName="SOCRegister" DataTypeServer="DbType.StringFixedLength(50)" DbType="String" Direction="Input" ParameterName="Original_SOCNumber" Precision="0" ProviderType="WChar" Scale="0" Size="50" SourceColumn="SOCNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
-                    </Parameters>
-                  </DbCommand>
-                </UpdateCommand>
-              </DbSource>
-            </Sources>
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="OfficerTableTableAdapter" GeneratorDataComponentClassName="OfficerTableTableAdapter" Name="OfficerTable" UserDataComponentName="OfficerTableTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="OfficerTable" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -6076,6 +5731,20 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentificationDate" DataSourceName="IdentificationRegister" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="IdentificationDate" DataSourceName="IdentificationRegister" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
+FROM            IdentificationRegister
+WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="IdentifiedBy" DataSourceName="IdentificationRegister" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="IdentifiedBy" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="IdentifiedBy" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="IdentificationDate" DataSourceName="IdentificationRegister" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param3" ColumnName="IdentificationDate" DataSourceName="IdentificationRegister" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="IdentificationDate1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="IdentificationDate" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -7527,194 +7196,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="IdentifiedCases" msprop:Generator_UserTableName="IdentifiedCases" msprop:Generator_RowEvArgName="IdentifiedCasesRowChangeEvent" msprop:Generator_TableVarName="tableIdentifiedCases" msprop:Generator_TablePropName="IdentifiedCases" msprop:Generator_RowDeletingName="IdentifiedCasesRowDeleting" msprop:Generator_RowChangingName="IdentifiedCasesRowChanging" msprop:Generator_RowDeletedName="IdentifiedCasesRowDeleted" msprop:Generator_RowEvHandlerName="IdentifiedCasesRowChangeEventHandler" msprop:Generator_TableClassName="IdentifiedCasesDataTable" msprop:Generator_RowChangedName="IdentifiedCasesRowChanged" msprop:Generator_RowClassName="IdentifiedCasesRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="SOCNumber" msprop:Generator_ColumnVarNameInTable="columnSOCNumber" msprop:Generator_ColumnPropNameInRow="SOCNumber" msprop:Generator_ColumnPropNameInTable="SOCNumberColumn" msprop:Generator_UserColumnName="SOCNumber">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="SOCYear" msprop:Generator_ColumnVarNameInTable="columnSOCYear" msprop:Generator_ColumnPropNameInRow="SOCYear" msprop:Generator_ColumnPropNameInTable="SOCYearColumn" msprop:Generator_UserColumnName="SOCYear" type="xs:int" minOccurs="0" />
-              <xs:element name="DateOfInspection" msprop:Generator_ColumnVarNameInTable="columnDateOfInspection" msprop:Generator_ColumnPropNameInRow="DateOfInspection" msprop:Generator_ColumnPropNameInTable="DateOfInspectionColumn" msprop:Generator_UserColumnName="DateOfInspection" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="DateOfReport" msprop:Generator_ColumnVarNameInTable="columnDateOfReport" msprop:Generator_ColumnPropNameInRow="DateOfReport" msprop:Generator_ColumnPropNameInTable="DateOfReportColumn" msprop:Generator_UserColumnName="DateOfReport" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="DateOfOccurrence" msprop:Generator_ColumnVarNameInTable="columnDateOfOccurrence" msprop:Generator_ColumnPropNameInRow="DateOfOccurrence" msprop:Generator_ColumnPropNameInTable="DateOfOccurrenceColumn" msprop:Generator_UserColumnName="DateOfOccurrence" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="PoliceStation" msprop:Generator_ColumnVarNameInTable="columnPoliceStation" msprop:Generator_ColumnPropNameInRow="PoliceStation" msprop:Generator_ColumnPropNameInTable="PoliceStationColumn" msprop:Generator_UserColumnName="PoliceStation" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="CrimeNumber" msprop:Generator_ColumnVarNameInTable="columnCrimeNumber" msprop:Generator_ColumnPropNameInRow="CrimeNumber" msprop:Generator_ColumnPropNameInTable="CrimeNumberColumn" msprop:Generator_UserColumnName="CrimeNumber" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="SectionOfLaw" msprop:Generator_ColumnVarNameInTable="columnSectionOfLaw" msprop:Generator_ColumnPropNameInRow="SectionOfLaw" msprop:Generator_ColumnPropNameInTable="SectionOfLawColumn" msprop:Generator_UserColumnName="SectionOfLaw" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="PlaceOfOccurrence" msprop:Generator_ColumnVarNameInTable="columnPlaceOfOccurrence" msprop:Generator_ColumnPropNameInRow="PlaceOfOccurrence" msprop:Generator_ColumnPropNameInTable="PlaceOfOccurrenceColumn" msprop:Generator_UserColumnName="PlaceOfOccurrence" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Complainant" msprop:Generator_ColumnVarNameInTable="columnComplainant" msprop:Generator_ColumnPropNameInRow="Complainant" msprop:Generator_ColumnPropNameInTable="ComplainantColumn" msprop:Generator_UserColumnName="Complainant" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ModusOperandi" msprop:Generator_ColumnVarNameInTable="columnModusOperandi" msprop:Generator_ColumnPropNameInRow="ModusOperandi" msprop:Generator_ColumnPropNameInTable="ModusOperandiColumn" msprop:Generator_UserColumnName="ModusOperandi" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="PropertyLost" msprop:Generator_ColumnVarNameInTable="columnPropertyLost" msprop:Generator_ColumnPropNameInRow="PropertyLost" msprop:Generator_ColumnPropNameInTable="PropertyLostColumn" msprop:Generator_UserColumnName="PropertyLost" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ChancePrintDetails" msprop:Generator_ColumnVarNameInTable="columnChancePrintDetails" msprop:Generator_ColumnPropNameInRow="ChancePrintDetails" msprop:Generator_ColumnPropNameInTable="ChancePrintDetailsColumn" msprop:Generator_UserColumnName="ChancePrintDetails" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="InvestigatingOfficer" msprop:Generator_ColumnVarNameInTable="columnInvestigatingOfficer" msprop:Generator_ColumnPropNameInRow="InvestigatingOfficer" msprop:Generator_ColumnPropNameInTable="InvestigatingOfficerColumn" msprop:Generator_UserColumnName="InvestigatingOfficer" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ComparisonDetails" msprop:Generator_ColumnVarNameInTable="columnComparisonDetails" msprop:Generator_ColumnPropNameInRow="ComparisonDetails" msprop:Generator_ColumnPropNameInTable="ComparisonDetailsColumn" msprop:Generator_UserColumnName="ComparisonDetails" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="536870910" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="536870910" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ChancePrintsDeveloped" msprop:Generator_ColumnVarNameInTable="columnChancePrintsDeveloped" msprop:Generator_ColumnPropNameInRow="ChancePrintsDeveloped" msprop:Generator_ColumnPropNameInTable="ChancePrintsDevelopedColumn" msprop:Generator_UserColumnName="ChancePrintsDeveloped" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ChancePrintsUnfit" msprop:Generator_ColumnVarNameInTable="columnChancePrintsUnfit" msprop:Generator_ColumnPropNameInRow="ChancePrintsUnfit" msprop:Generator_ColumnPropNameInTable="ChancePrintsUnfitColumn" msprop:Generator_UserColumnName="ChancePrintsUnfit" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ChancePrintsEliminated" msprop:Generator_ColumnVarNameInTable="columnChancePrintsEliminated" msprop:Generator_ColumnPropNameInRow="ChancePrintsEliminated" msprop:Generator_ColumnPropNameInTable="ChancePrintsEliminatedColumn" msprop:Generator_UserColumnName="ChancePrintsEliminated" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ChancePrintsRemaining" msprop:Generator_ColumnVarNameInTable="columnChancePrintsRemaining" msprop:Generator_ColumnPropNameInRow="ChancePrintsRemaining" msprop:Generator_ColumnPropNameInTable="ChancePrintsRemainingColumn" msprop:Generator_UserColumnName="ChancePrintsRemaining" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Photographer" msprop:Generator_ColumnVarNameInTable="columnPhotographer" msprop:Generator_ColumnPropNameInRow="Photographer" msprop:Generator_ColumnPropNameInTable="PhotographerColumn" msprop:Generator_UserColumnName="Photographer" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="PhotoReceived" msprop:Generator_ColumnVarNameInTable="columnPhotoReceived" msprop:Generator_ColumnPropNameInRow="PhotoReceived" msprop:Generator_ColumnPropNameInTable="PhotoReceivedColumn" msprop:Generator_UserColumnName="PhotoReceived" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="DateOfReceptionOfPhoto" msprop:Generator_ColumnVarNameInTable="columnDateOfReceptionOfPhoto" msprop:Generator_ColumnPropNameInRow="DateOfReceptionOfPhoto" msprop:Generator_ColumnPropNameInTable="DateOfReceptionOfPhotoColumn" msprop:Generator_UserColumnName="DateOfReceptionOfPhoto" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Gist" msprop:Generator_ColumnVarNameInTable="columnGist" msprop:Generator_ColumnPropNameInRow="Gist" msprop:Generator_ColumnPropNameInTable="GistColumn" msprop:Generator_UserColumnName="Gist" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="536870910" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="GraveCrime" msprop:Generator_ColumnVarNameInTable="columnGraveCrime" msprop:Generator_ColumnPropNameInRow="GraveCrime" msprop:Generator_ColumnPropNameInTable="GraveCrimeColumn" msprop:Generator_UserColumnName="GraveCrime" type="xs:boolean" minOccurs="0" />
-              <xs:element name="FileStatus" msprop:Generator_ColumnVarNameInTable="columnFileStatus" msprop:Generator_ColumnPropNameInRow="FileStatus" msprop:Generator_ColumnPropNameInTable="FileStatusColumn" msprop:Generator_UserColumnName="FileStatus" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="IdentifiedBy" msprop:Generator_ColumnVarNameInTable="columnIdentifiedBy" msprop:Generator_ColumnPropNameInRow="IdentifiedBy" msprop:Generator_ColumnPropNameInTable="IdentifiedByColumn" msprop:Generator_UserColumnName="IdentifiedBy" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="255" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="IdentificationDate" msprop:Generator_ColumnVarNameInTable="columnIdentificationDate" msprop:Generator_ColumnPropNameInRow="IdentificationDate" msprop:Generator_ColumnPropNameInTable="IdentificationDateColumn" msprop:Generator_UserColumnName="IdentificationDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="CPsIdentified" msprop:Generator_ColumnVarNameInTable="columnCPsIdentified" msprop:Generator_ColumnPropNameInRow="CPsIdentified" msprop:Generator_ColumnPropNameInTable="CPsIdentifiedColumn" msprop:Generator_UserColumnName="CPsIdentified" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="3" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="IdentifiedAs" msprop:Generator_ColumnVarNameInTable="columnIdentifiedAs" msprop:Generator_ColumnPropNameInRow="IdentifiedAs" msprop:Generator_ColumnPropNameInTable="IdentifiedAsColumn" msprop:Generator_UserColumnName="IdentifiedAs" type="xs:string" minOccurs="0" />
-              <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_UserTableName="OfficerTable" msprop:Generator_RowClassName="OfficerTableRow">
+        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowClassName="OfficerTableRow" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_UserTableName="OfficerTable">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OfficerID" msprop:Generator_ColumnVarNameInTable="columnOfficerID" msprop:Generator_ColumnPropNameInRow="OfficerID" msprop:Generator_ColumnPropNameInTable="OfficerIDColumn" msprop:Generator_UserColumnName="OfficerID" type="xs:int" />
@@ -7763,7 +7245,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowClassName="SettingsRow" msprop:Generator_UserTableName="Settings" msprop:Generator_RowEvArgName="SettingsRowChangeEvent">
+        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_UserTableName="Settings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowClassName="SettingsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsID" msprop:Generator_ColumnVarNameInTable="columnSettingsID" msprop:Generator_ColumnPropNameInRow="SettingsID" msprop:Generator_ColumnPropNameInTable="SettingsIDColumn" msprop:Generator_UserColumnName="SettingsID" type="xs:int" />
@@ -7875,7 +7357,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_RowClassName="LastModificationRow" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent">
+        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent" msprop:Generator_RowClassName="LastModificationRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -7883,7 +7365,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent" msprop:Generator_RowClassName="CommonSettingsRow">
+        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_RowClassName="CommonSettingsRow" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsName" msprop:Generator_ColumnVarNameInTable="columnSettingsName" msprop:Generator_ColumnPropNameInRow="SettingsName" msprop:Generator_ColumnPropNameInTable="SettingsNameColumn" msprop:Generator_UserColumnName="SettingsName">
@@ -7910,7 +7392,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_RowClassName="IdentificationRegisterRow" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent">
+        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent" msprop:Generator_RowClassName="IdentificationRegisterRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
@@ -8003,7 +7485,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent" msprop:Generator_RowClassName="JoinedIDRRow">
+        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_RowClassName="JoinedIDRRow" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
@@ -8316,10 +7798,6 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
     <xs:unique name="SOCReportRegister_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:SOCReportRegister" />
       <xs:field xpath="mstns:SerialNo" />
-    </xs:unique>
-    <xs:unique name="IdentifiedCases_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:IdentifiedCases" />
-      <xs:field xpath="mstns:SOCNumber" />
     </xs:unique>
     <xs:unique name="OfficerTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:OfficerTable" />
