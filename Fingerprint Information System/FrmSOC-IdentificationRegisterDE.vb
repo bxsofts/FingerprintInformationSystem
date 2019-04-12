@@ -1,6 +1,6 @@
 ﻿Imports DevComponents.DotNetBar
 
-Public Class FrmIdentificationRegister
+Public Class FrmIdentificationRegisterDE
 
     Dim SlNumber As Integer
     Dim OriginalIDRN As String
@@ -279,6 +279,7 @@ Public Class FrmIdentificationRegister
 
             Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text, Me.txtCPsIdentified.Value, Me.txtCulpritCount.Value, Me.txtCulpritName.Text.Trim, Me.txtAddress.Text.Trim, Me.txtFingersIdentified.Text.Trim, Me.txtClassification.Text.Trim, Me.txtDANumber.Text.Trim, Me.cmbIdentifiedFrom.Text, Me.txtRemarks.Text.Trim, IDRN)
             AddNewIDRGridRow()
+            Me.SocRegisterTableAdapter1.UpdateQuerySetFileStatus("Identified", Me.txtSOCNumber.Text.Trim)
             ShowDesktopAlert("New Identification Record entered successfully.")
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -358,7 +359,7 @@ Public Class FrmIdentificationRegister
 
             '  Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureaurecords as DA No......." & vbNewLine & "DA Classification - "
 
-          
+
         End If
         Me.txtRemarks.Select(Me.txtRemarks.Text.Length, 0)
     End Sub

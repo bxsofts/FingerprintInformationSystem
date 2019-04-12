@@ -210,10 +210,10 @@
     <Compile Include="frmRevenueCollection.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-IdentificationDetails.Designer.vb">
-      <DependentUpon>FrmSOC-IdentificationDetails.vb</DependentUpon>
+    <Compile Include="FrmSOC-IdentificationRegisterDE.Designer.vb">
+      <DependentUpon>FrmSOC-IdentificationRegisterDE.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-IdentificationDetails.vb">
+    <Compile Include="FrmSOC-IdentificationRegisterDE.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmIdentificationStatement.Designer.vb">
@@ -569,8 +569,8 @@
     <EmbeddedResource Include="frmRevenueCollection.resx">
       <DependentUpon>frmRevenueCollection.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-IdentificationDetails.resx">
-      <DependentUpon>FrmSOC-IdentificationDetails.vb</DependentUpon>
+    <EmbeddedResource Include="FrmSOC-IdentificationRegisterDE.resx">
+      <DependentUpon>FrmSOC-IdentificationRegisterDE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmIdentificationStatement.resx">
       <DependentUpon>frmIdentificationStatement.vb</DependentUpon>

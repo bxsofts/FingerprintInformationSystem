@@ -5679,10 +5679,10 @@ errhandler:
             blIDREditMode = False
             blIDROpenMode = False
 
-            FrmIdentificationRegister.ClearFields()
-            FrmIdentificationRegister.txtIdentificationNumber.Text = GenerateNewIDRNumber()
-            FrmIdentificationRegister.Show()
-            FrmIdentificationRegister.BringToFront()
+            FrmIdentificationRegisterDE.ClearFields()
+            FrmIdentificationRegisterDE.txtIdentificationNumber.Text = GenerateNewIDRNumber()
+            FrmIdentificationRegisterDE.Show()
+            FrmIdentificationRegisterDE.BringToFront()
 
         End If
     End Sub
@@ -6067,8 +6067,8 @@ errhandler:
             blIDREditMode = True
             blIDROpenMode = False
 
-            FrmIdentificationRegister.Show()
-            FrmIdentificationRegister.BringToFront()
+            FrmIdentificationRegisterDE.Show()
+            FrmIdentificationRegisterDE.BringToFront()
         End If
 
 
@@ -6447,8 +6447,8 @@ errhandler:
             blIDREditMode = False
             blIDROpenMode = True
 
-            FrmIdentificationRegister.Show()
-            FrmIdentificationRegister.BringToFront()
+            FrmIdentificationRegisterDE.Show()
+            FrmIdentificationRegisterDE.BringToFront()
         End If
     End Sub
 #End Region
@@ -8591,7 +8591,7 @@ errhandler:
             Dim comparison = txtSOCComparisonDetails.Text
             Dim identificationdetails = ""
             Dim filestatus = Me.cmbFileStatus.Text
-           
+
 
             If SearchSetting = 0 Then
                 sNumber = sNumber & "%"
@@ -8964,15 +8964,15 @@ errhandler:
         blIDREditMode = False
         blIDROpenMode = False
 
-        FrmIdentificationRegister.ClearFields()
-        FrmIdentificationRegister.txtSOCNumber.Text = Me.txtSOCNumber.Text
-        FrmIdentificationRegister.txtIdentificationNumber.Text = GenerateNewIDRNumber()
-        FrmIdentificationRegister.Show()
-        FrmIdentificationRegister.BringToFront()
+        FrmIdentificationRegisterDE.ClearFields()
+        FrmIdentificationRegisterDE.txtSOCNumber.Text = Me.txtSOCNumber.Text
+        FrmIdentificationRegisterDE.txtIdentificationNumber.Text = GenerateNewIDRNumber()
+        FrmIdentificationRegisterDE.Show()
+        FrmIdentificationRegisterDE.BringToFront()
 
     End Sub
 
-   
+
     Public Function GenerateNewIDRNumber()
         Try
             Dim y As String = Year(Today)
@@ -8988,7 +8988,7 @@ errhandler:
         Return Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInSOCNumber(SOCNumber)
     End Function
 
-   
+
 #End Region
     '-------------------------------------------RSOC DATA MANIPULATION-----------------------------------------
 

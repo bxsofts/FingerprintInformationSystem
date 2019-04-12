@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmIdentificationRegister
+Partial Class FrmIdentificationRegisterDE
     Inherits DevComponents.DotNetBar.Office2007Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class FrmIdentificationRegister
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmIdentificationRegister))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmIdentificationRegisterDE))
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.txtCulpritName = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -826,7 +826,7 @@ Partial Class FrmIdentificationRegister
         '
         Me.SocRegisterTableAdapter1.ClearBeforeFill = True
         '
-        'FrmIdentificationRegister
+        'FrmIdentificationRegisterDE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -838,7 +838,7 @@ Partial Class FrmIdentificationRegister
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "FrmIdentificationRegister"
+        Me.Name = "FrmIdentificationRegisterDE"
         Me.Text = "Identification Details"
         Me.TitleText = "<b>Identification Details</b>"
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).EndInit()
