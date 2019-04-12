@@ -43,6 +43,7 @@ Partial Class FrmIndividualPerformance
         Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         Me.CDRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
+        Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
         Me.PanelEx2.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -359,6 +360,10 @@ Partial Class FrmIndividualPerformance
         Me.bgwLetter.WorkerReportsProgress = True
         Me.bgwLetter.WorkerSupportsCancellation = True
         '
+        'IdentificationRegisterTableAdapter1
+        '
+        Me.IdentificationRegisterTableAdapter1.ClearBeforeFill = True
+        '
         'FrmIndividualPerformance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -405,4 +410,5 @@ Partial Class FrmIndividualPerformance
     Friend WithEvents chkIncludeTI As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
+    Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
 End Class

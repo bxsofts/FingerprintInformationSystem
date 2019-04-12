@@ -40,6 +40,10 @@ Public Class FrmIndividualPerformance
         Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
+        If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+        Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+        Me.IdentificationRegisterTableAdapter1.Connection.Open()
+
         Me.cmbMonth.Items.Clear()
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))
@@ -305,7 +309,7 @@ Public Class FrmIndividualPerformance
                 WordApp.Selection.TypeText(cpr)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
-                Dim cpi As String = Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentifiedBy(io, d1, d2).ToString
+                Dim cpi As String = Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentifiedBy(io, d1, d2).ToString
                 If cpi = "" Or cpi = "0" Then cpi = "-"
                 WordApp.Selection.TypeText(cpi)
 

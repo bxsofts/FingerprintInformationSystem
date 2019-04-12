@@ -1015,12 +1015,8 @@ Public Class frmMainInterface
             Me.DARegisterTableAdapter.UpdateModusOperandi("")
             Me.SOCRegisterTableAdapter.RemoveNullFromFileStatus("")
             Me.SOCRegisterTableAdapter.UpdateFileStatusForClosedFiles()
-            Me.SOCRegisterTableAdapter.RemoveNullFromCPsIdentified("")
-            Me.SOCRegisterTableAdapter.RemoveNullFromIdentifiedBy("")
-            Me.SOCRegisterTableAdapter.RemoveNullFromIdentifiedAs("")
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
-            Me.SOCRegisterTableAdapter.RemoveNullFromIdentificationNumber("")
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
             RemoveNullFromIdentificationRegister()
         End If
@@ -8002,7 +7998,6 @@ errhandler:
             Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim cpsidentified = ""
 
 
             If filestatus.ToLower = "otherwise detected" Then
@@ -8057,17 +8052,12 @@ errhandler:
                 .Remarks = ""
                 .GraveCrime = gravecrime
                 .FileStatus = filestatus
-                .IdentifiedBy = ""
-                .CPsIdentified = cpsidentified
-                .IdentificationDate = dtDummy.ValueObject
-                .IdentifiedAs = ""
-                .IdentificationNumber = ""
             End With
 
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, "", gravecrime, filestatus, cpsidentified, dtDummy.ValueObject, "", "", "") 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, "", gravecrime, filestatus) 'update the database
 
 
             InitializeSOCFields()
@@ -8195,16 +8185,11 @@ errhandler:
                     .Remarks = identificationdetails
                     .GraveCrime = gravecrime
                     .FileStatus = filestatus
-                    .IdentifiedBy = identifiedby
-                    .CPsIdentified = cpsidentified
-                    .IdentificationDate = dtDummy.ValueObject
-                    .IdentifiedAs = identifiedas
-                    .IdentificationNumber = idrnumber
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, dtDummy.ValueObject, cpsidentified, identifiedas, idrnumber, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, OriginalSOCNumber)
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
                 Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
@@ -8269,9 +8254,6 @@ errhandler:
             Dim identificationdetails = ""
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim identifiedby As String = ""
-            Dim cpsidentified = ""
-            cpsidentified = ""
 
 
             If filestatus.ToLower = "otherwise detected" Then
@@ -8317,16 +8299,11 @@ errhandler:
                     .Remarks = identificationdetails
                     .GraveCrime = gravecrime
                     .FileStatus = filestatus
-                    .IdentifiedBy = identifiedby
-                    .CPsIdentified = cpsidentified
-                    .IdentificationDate = dtDummy.ValueObject
-                    .IdentifiedAs = ""
-                    .IdentificationNumber = ""
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, identifiedby, dtDummy.ValueObject, cpsidentified, "", "", OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, OriginalSOCNumber)
 
 
             ShowDesktopAlert("SOC Record overwritten!")
@@ -8719,14 +8696,6 @@ errhandler:
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
-    End Sub
-
-    Private Sub ShowIdentifiedRecords(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnShowIdentifiedRecords.Click
-        On Error Resume Next
-        Me.SOCRegisterTableAdapter.FillByIdentififiedCases(FingerPrintDataSet.SOCRegister)
-        DisplayDatabaseInformation()
-        ShowDesktopAlert("Identified Records Loaded. Found " & IIf(Me.SOCDatagrid.RowCount < 2, Me.SOCDatagrid.RowCount & " Record", Me.SOCDatagrid.RowCount & " Records"))
-        Application.DoEvents()
     End Sub
 
 #End Region
@@ -14447,35 +14416,6 @@ errhandler:
     End Sub
 
 
-    Private Function FindIdentificationSerialNumber(strSOCNumber As String, IDDate As Date)
-        Try
-            Dim FPDS As New FingerPrintDataSet
-            Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
-            SOCTblAdptr.Connection.ConnectionString = sConString
-            SOCTblAdptr.Connection.Open()
-
-            Dim y As Integer = DateAndTime.Year(IDDate)
-            Dim dt1 As Date = New Date(y, 1, 1)
-            Dim dt2 As Date = New Date(y, 12, 31)
-
-            SOCTblAdptr.FillByIdentificationYear(FPDS.SOCRegister, dt1, dt2)
-            Dim cnt As Integer = FPDS.SOCRegister.Count
-            Dim SerialNumber As String = ""
-            For i = 0 To cnt - 1
-                If FPDS.SOCRegister(i).SOCNumber = strSOCNumber Then
-                    SerialNumber = i + 1
-                    Exit For
-                End If
-            Next
-
-            Return SerialNumber & "/" & y
-        Catch ex As Exception
-            Return "   /" & DateAndTime.Year(IDDate)
-        End Try
-
-    End Function
-
-
     Private Sub GenerateIdentifiedFileDocket() Handles btnIdentifiedTemplateContextMenu.Click
 
         Try
@@ -14528,9 +14468,6 @@ errhandler:
                 accused = Me.JoinedIDRDataGrid.SelectedCells(11).Value.ToString
             End If
 
-            If idno = "" Then
-                idno = FindIdentificationSerialNumber(SoCNumber, dtid)
-            End If
 
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -17125,4 +17062,7 @@ errhandler:
 
 
 
+    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
+
+    End Sub
 End Class

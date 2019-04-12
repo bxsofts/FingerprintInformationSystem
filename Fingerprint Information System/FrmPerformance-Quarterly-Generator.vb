@@ -96,6 +96,10 @@ Public Class frmQuarterlyPerformance
         If Me.PerformanceTableAdapter.Connection.State = ConnectionState.Open Then Me.PerformanceTableAdapter.Connection.Close()
         Me.PerformanceTableAdapter.Connection.ConnectionString = sConString
         Me.PerformanceTableAdapter.Connection.Open()
+
+        If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+        Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+        Me.IdentificationRegisterTableAdapter1.Connection.Open()
     End Sub
 
     Private Sub CreateDatagridRows()
@@ -363,7 +367,7 @@ Public Class frmQuarterlyPerformance
         Me.DataGridViewX1.Rows(3).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
         Me.DataGridViewX1.Rows(4).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
         Me.DataGridViewX1.Rows(5).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
-        Me.DataGridViewX1.Rows(6).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsIdentified(d1, d2))
+        Me.DataGridViewX1.Rows(6).Cells(Column).Value = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2))
         Me.DataGridViewX1.Rows(7).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
 
         Me.DataGridViewX1.Rows(8).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
