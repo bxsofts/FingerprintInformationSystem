@@ -67,6 +67,9 @@ Partial Class FrmIdentificationRegisterDE
         Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
+        Me.SocRegisterAutoTextTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterAutoTextTableAdapter()
+        Me.lblSOCNumberWarning = New DevComponents.DotNetBar.LabelX()
+        Me.lblCPCountWarning = New DevComponents.DotNetBar.LabelX()
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCPsIdentified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -357,6 +360,8 @@ Partial Class FrmIdentificationRegisterDE
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx1.Controls.Add(Me.lblCPCountWarning)
+        Me.PanelEx1.Controls.Add(Me.lblSOCNumberWarning)
         Me.PanelEx1.Controls.Add(Me.LabelX20)
         Me.PanelEx1.Controls.Add(Me.txtSOCNumber)
         Me.PanelEx1.Controls.Add(Me.LabelX1)
@@ -826,6 +831,40 @@ Partial Class FrmIdentificationRegisterDE
         '
         Me.SocRegisterTableAdapter1.ClearBeforeFill = True
         '
+        'SocRegisterAutoTextTableAdapter1
+        '
+        Me.SocRegisterAutoTextTableAdapter1.ClearBeforeFill = True
+        '
+        'lblSOCNumberWarning
+        '
+        Me.lblSOCNumberWarning.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOCNumberWarning.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOCNumberWarning.ForeColor = System.Drawing.Color.Red
+        Me.lblSOCNumberWarning.Location = New System.Drawing.Point(284, 46)
+        Me.lblSOCNumberWarning.Name = "lblSOCNumberWarning"
+        Me.lblSOCNumberWarning.Size = New System.Drawing.Size(144, 18)
+        Me.lblSOCNumberWarning.TabIndex = 197
+        Me.lblSOCNumberWarning.Text = "Error: SOC No. not found"
+        Me.lblSOCNumberWarning.Visible = False
+        '
+        'lblCPCountWarning
+        '
+        Me.lblCPCountWarning.AutoSize = True
+        '
+        '
+        '
+        Me.lblCPCountWarning.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblCPCountWarning.ForeColor = System.Drawing.Color.Red
+        Me.lblCPCountWarning.Location = New System.Drawing.Point(284, 140)
+        Me.lblCPCountWarning.Name = "lblCPCountWarning"
+        Me.lblCPCountWarning.Size = New System.Drawing.Size(159, 18)
+        Me.lblCPCountWarning.TabIndex = 198
+        Me.lblCPCountWarning.Text = "Error: CPs remaining is Zero"
+        Me.lblCPCountWarning.Visible = False
+        '
         'FrmIdentificationRegisterDE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -894,4 +933,7 @@ Partial Class FrmIdentificationRegisterDE
     Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
     Friend WithEvents FingerPrintDataSet1 As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents SocRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
+    Friend WithEvents SocRegisterAutoTextTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterAutoTextTableAdapter
+    Friend WithEvents lblCPCountWarning As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblSOCNumberWarning As DevComponents.DotNetBar.LabelX
 End Class

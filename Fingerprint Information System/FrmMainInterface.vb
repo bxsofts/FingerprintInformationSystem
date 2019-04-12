@@ -4410,7 +4410,7 @@ Public Class frmMainInterface
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
-        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
+        ' Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
 
     End Sub
 
@@ -5671,8 +5671,7 @@ errhandler:
         End If
 
         If CurrentTab = "IDR" Then
-            blCloseIDRFormAfterSave = False
-
+           
             blIDRNewDataMode = True
             blIDREditMode = False
             blIDROpenMode = False
@@ -6059,8 +6058,6 @@ errhandler:
                 Exit Sub
             End If
 
-            blCloseIDRFormAfterSave = True
-
             blIDRNewDataMode = False
             blIDREditMode = True
             blIDROpenMode = False
@@ -6439,7 +6436,6 @@ errhandler:
                 DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
-            blCloseIDRFormAfterSave = True
 
             blIDRNewDataMode = False
             blIDREditMode = False
@@ -7758,19 +7754,12 @@ errhandler:
         Me.cmbFileStatus.Select(Me.cmbFileStatus.Text.Length, 0)
     End Sub
 
-    Private Sub cmbFileStatus_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFileStatus.Validated
+    Private Sub cmbFileStatus_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFileStatus.Validated, cmbFileStatus.TextChanged
         On Error Resume Next
         If Me.cmbFileStatus.Text.ToLower <> "identified" And Me.txtSOCComparisonDetails.Text.ToLower.StartsWith("identified as") Then
             Me.txtSOCComparisonDetails.Text = ""
             SetComparisonDetails()
         End If
-
-        If Me.cmbFileStatus.Text.ToLower = "identified" Then
-            Me.btnEnterIdentificationDetails.Visible = True
-        Else
-            Me.btnEnterIdentificationDetails.Visible = False
-        End If
-
     End Sub
 
 
@@ -8914,23 +8903,6 @@ errhandler:
 
 #Region "IDENTIFICATION REGISTER"
 
-    Private Sub EnterIdentificationDetails(sender As Object, e As EventArgs) Handles btnEnterIdentificationDetails.Click
-
-        blCloseIDRFormAfterSave = True
-
-        blIDRNewDataMode = True
-        blIDREditMode = False
-        blIDROpenMode = False
-
-        FrmIdentificationRegisterDE.ClearFields()
-        FrmIdentificationRegisterDE.txtSOCNumber.Text = Me.txtSOCNumber.Text
-        FrmIdentificationRegisterDE.txtIdentificationNumber.Text = GenerateNewIDRNumber()
-        FrmIdentificationRegisterDE.Show()
-        FrmIdentificationRegisterDE.BringToFront()
-
-    End Sub
-
-
     Public Function GenerateNewIDRNumber()
         Try
             Dim y As String = Year(Today)
@@ -8948,6 +8920,7 @@ errhandler:
 
 
 #End Region
+
     '-------------------------------------------RSOC DATA MANIPULATION-----------------------------------------
 
 #Region "RSOC DATA ENTRY FIELDS SETTINGS"

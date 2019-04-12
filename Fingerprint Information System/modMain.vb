@@ -112,7 +112,6 @@ Module modMain
     Public InstallerFileVersion As String = ""
     Public blDownloadUpdate As Boolean = False
 
-    Public blCloseIDRFormAfterSave As Boolean = False
     Public blIDREditMode As Boolean = False
     Public blIDROpenMode As Boolean = False
     Public blIDRNewDataMode As Boolean = False
