@@ -94,7 +94,7 @@ Public Class frmMainInterface
     Dim ClipBoardText As String = ""
     Dim PhotographerFieldFocussed As Boolean = False
     Dim PhotographedDateFocussed As Boolean = False
-    Public IDDetailsFocussed As Boolean = False
+
     Dim IOSelectedRow As Integer
 
     Dim TableEvenColor As Color
@@ -366,6 +366,11 @@ Public Class frmMainInterface
 
 
             LoadPSListOnLoad()
+
+            Me.cmbFileStatus.Items.Add("Closed")
+            Me.cmbFileStatus.Items.Add("Identified")
+            Me.cmbFileStatus.Items.Add("Otherwise Detected")
+
             IncrementCircularProgress(1)
 
             lblDesignation.Visible = False
@@ -442,7 +447,7 @@ Public Class frmMainInterface
 
         btnViewReports.AutoExpandOnClick = True
         blApplicationIsLoading = False
-        dtDummy.Text = vbNullString
+
         If blIdentificationRegisterUpdateFailed Then
             MessageBoxEx.Show("Identification Register Update failed. Please restart the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
@@ -1789,13 +1794,6 @@ Public Class frmMainInterface
 
         PSListChanged = False
 
-        Me.cmbFileStatus.Items.Add("Closed")
-        Me.cmbFileStatus.Items.Add("Identified")
-        Me.cmbFileStatus.Items.Add("Otherwise Detected")
-        Me.cmbFileStatus.AutoCompleteCustomSource.Add("Closed")
-        Me.cmbFileStatus.AutoCompleteCustomSource.Add("Identified")
-        Me.cmbFileStatus.AutoCompleteCustomSource.Add("Otherwise Detected")
-        ' 
     End Sub
 
 
@@ -7670,7 +7668,6 @@ errhandler:
         Me.chkGraveCrime.Checked = False
         PhotographerFieldFocussed = False
         PhotographedDateFocussed = False
-        IDDetailsFocussed = False
 
         ClearDropDownOfficerList()
     End Sub
@@ -7691,8 +7688,6 @@ errhandler:
         Next
         PhotographerFieldFocussed = False
         PhotographedDateFocussed = False
-        IDDetailsFocussed = False
-
     End Sub
 
     Private Sub ClearSelectedSOCFields(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.ButtonCustomClick, dtSOCOccurrence.ButtonCustomClick, txtSOCCrimeNumber.ButtonCustomClick, txtSOCSection.ButtonCustomClick, txtSOCPlace.ButtonCustomClick, txtPSName.ButtonCustomClick, txtSOCPhotographer.ButtonCustomClick, txtSOCDateOfPhotography.ButtonCustomClick, txtSOCOfficer.ButtonCustom2Click
@@ -7747,15 +7742,14 @@ errhandler:
     End Sub
 
     Private Sub SetFileStatus() Handles cmbFileStatus.GotFocus
+        On Error Resume Next
 
-        If Me.cmbFileStatus.Text.ToLower <> "identified" And Me.txtSOCComparisonDetails.Text.ToLower.StartsWith("identified as") Then
-            Me.txtSOCComparisonDetails.Text = ""
-            SetComparisonDetails()
+        If Me.txtSOCCPsRemaining.Text = "" Then
+            Exit Sub
         End If
 
-        If Me.txtSOCCPsRemaining.Text = "" Then Exit Sub
-        If Me.txtSOCCPsRemaining.Value = 0 Then
-            Me.cmbFileStatus.SelectedItem = Me.cmbFileStatus.Items.Item(0)
+        If Me.txtSOCCPsRemaining.Value = 0 And Me.cmbFileStatus.Text.Trim = "" Then
+            Me.cmbFileStatus.SelectedIndex = 0
         End If
 
         If Me.txtSOCCPsRemaining.Value > 0 And Me.cmbFileStatus.Text.ToLower <> "closed" And Me.cmbFileStatus.Text.ToLower <> "identified" And Me.cmbFileStatus.Text.ToLower <> "otherwise detected" Then
@@ -7764,7 +7758,7 @@ errhandler:
         Me.cmbFileStatus.Select(Me.cmbFileStatus.Text.Length, 0)
     End Sub
 
-    Private Sub cmbFileStatus_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFileStatus.Validated, cmbFileStatus.TextChanged
+    Private Sub cmbFileStatus_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmbFileStatus.Validated
         On Error Resume Next
         If Me.cmbFileStatus.Text.ToLower <> "identified" And Me.txtSOCComparisonDetails.Text.ToLower.StartsWith("identified as") Then
             Me.txtSOCComparisonDetails.Text = ""
@@ -7772,7 +7766,9 @@ errhandler:
         End If
 
         If Me.cmbFileStatus.Text.ToLower = "identified" Then
-            Me.btnEnterIdentificationDetails.Visible = visible
+            Me.btnEnterIdentificationDetails.Visible = True
+        Else
+            Me.btnEnterIdentificationDetails.Visible = False
         End If
 
     End Sub
@@ -7840,6 +7836,8 @@ errhandler:
         On Error Resume Next
 
         If Me.txtSOCComparisonDetails.Text <> vbNullString Then Exit Sub
+
+        If Me.txtSOCCPsRemaining.Text = "" Then Exit Sub
 
         If Me.txtSOCCPsDeveloped.Value = 0 Then
             Me.txtSOCComparisonDetails.Text = "No action pending."
@@ -7995,14 +7993,14 @@ errhandler:
             Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
             Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
             Dim gist = Trim(Me.txtSOCGist.Text)
-            Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
+            Dim comparisondetails = Trim(Me.txtSOCComparisonDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
 
 
             If filestatus.ToLower = "otherwise detected" Then
-                If comparison.ToLower.StartsWith("otherwise detected") = False Then
-                    comparison = "Otherwise detected"
+                If comparisondetails.ToLower.StartsWith("otherwise detected") = False Then
+                    comparisondetails = "Otherwise detected"
                 End If
             End If
 
@@ -8048,8 +8046,7 @@ errhandler:
                 .DateOfReceptionOfPhoto = dateofreceptionofphoto
                 .InvestigatingOfficer = officer
                 .Gist = gist
-                .ComparisonDetails = comparison
-                .Remarks = ""
+                .ComparisonDetails = comparisondetails
                 .GraveCrime = gravecrime
                 .FileStatus = filestatus
             End With
@@ -8057,7 +8054,7 @@ errhandler:
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, "", gravecrime, filestatus) 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus) 'update the database
 
 
             InitializeSOCFields()
@@ -8112,29 +8109,15 @@ errhandler:
             Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
             Dim gist = Trim(Me.txtSOCGist.Text)
             Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
-            Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-            Dim identificationdetails = ""
+            Dim comparisondetails = Trim(Me.txtSOCComparisonDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim identifiedby As String = ""
-            Dim cpsidentified = ""
-            cpsidentified = ""
-            Dim identifiedas = ""
-            Dim idrnumber As String = ""
 
-            If filestatus.ToLower = "identified" And identifiedas <> vbNullString Then
-                If comparison.ToLower.StartsWith("identified as") = False Then
-                    comparison = "Identified as " & identifiedas
-                End If
-            End If
 
-            If filestatus.ToLower <> "identified" And comparison.ToLower.StartsWith("identified as") Then
-                comparison = ""
-            End If
 
             If filestatus.ToLower = "otherwise detected" Then
-                If comparison.ToLower.StartsWith("otherwise detected") = False Then
-                    comparison = "Otherwise detected"
+                If comparisondetails.ToLower.StartsWith("otherwise detected") = False Then
+                    comparisondetails = "Otherwise detected"
                 End If
             End If
 
@@ -8181,15 +8164,14 @@ errhandler:
                     .DateOfReceptionOfPhoto = dateofreceptionofphoto
                     .InvestigatingOfficer = officer
                     .Gist = gist
-                    .ComparisonDetails = comparison
-                    .Remarks = identificationdetails
+                    .ComparisonDetails = comparisondetails
                     .GraveCrime = gravecrime
                     .FileStatus = filestatus
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, OriginalSOCNumber)
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
                 Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
@@ -8200,7 +8182,6 @@ errhandler:
             ShowDesktopAlert("Selected Record updated successfully!")
 
             InitializeSOCFields()
-            ' IncrementSOCNumber(NewSOCNumber)
             GenerateNewSOCNumber()
             Me.dtSOCInspection.Value = Today
             Me.dtSOCReport.Value = Today
@@ -8250,15 +8231,14 @@ errhandler:
             Dim dateofreceptionofphoto = Trim(Me.txtSOCDateOfPhotography.Text)
             Dim gist = Trim(Me.txtSOCGist.Text)
             Dim officer = Trim(Me.txtSOCOfficer.Text).Replace("; ", vbNewLine)
-            Dim comparison = Trim(Me.txtSOCComparisonDetails.Text)
-            Dim identificationdetails = ""
+            Dim comparisondetails = Trim(Me.txtSOCComparisonDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
 
 
             If filestatus.ToLower = "otherwise detected" Then
-                If comparison.ToLower.StartsWith("otherwise detected") = False Then
-                    comparison = "Otherwise detected"
+                If comparisondetails.ToLower.StartsWith("otherwise detected") = False Then
+                    comparisondetails = "Otherwise detected"
                 End If
             End If
 
@@ -8295,15 +8275,14 @@ errhandler:
                     .DateOfReceptionOfPhoto = dateofreceptionofphoto
                     .InvestigatingOfficer = officer
                     .Gist = gist
-                    .ComparisonDetails = comparison
-                    .Remarks = identificationdetails
+                    .ComparisonDetails = comparisondetails
                     .GraveCrime = gravecrime
                     .FileStatus = filestatus
                 End With
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparison, identificationdetails, gravecrime, filestatus, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, OriginalSOCNumber)
 
 
             ShowDesktopAlert("SOC Record overwritten!")
@@ -8431,13 +8410,9 @@ errhandler:
             Dim dateofreceptionofphoto = txtSOCDateOfPhotography.Text
             Dim gist = Me.txtSOCGist.Text
             Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
-            Dim comparison = txtSOCComparisonDetails.Text
-            Dim identificationdeatils = ""
+            Dim comparisondetails = txtSOCComparisonDetails.Text
 
             Dim filestatus = Me.cmbFileStatus.Text
-            Dim identifiedby = ""
-            Dim cpsidentified = ""
-            Dim dtidentified = Now
 
             If SearchSetting = 0 Then
                 sNumber = sNumber & "%"
@@ -8459,12 +8434,8 @@ errhandler:
                 dateofreceptionofphoto = dateofreceptionofphoto & "%"
                 gist = gist & "%"
                 inspectingofficer = inspectingofficer & "%"
-                comparison = comparison & "%"
-                identificationdeatils = identificationdeatils & "%"
+                comparisondetails = comparisondetails & "%"
                 filestatus = filestatus & "%"
-                identifiedby = identifiedby & "%"
-                cpsidentified = cpsidentified & "%"
-
             End If
 
 
@@ -8488,18 +8459,12 @@ errhandler:
                 If cmbSOCPhotoReceived.Text = vbNullString Then dateofreceptionofphoto = "%"
                 If gist = vbNullString Then gist = "%"
                 If inspectingofficer = vbNullString Then inspectingofficer = "%"
-                If comparison = vbNullString Then comparison = "%"
-                If identificationdeatils = vbNullString Then identificationdeatils = "%"
-
+                If comparisondetails = vbNullString Then comparisondetails = "%"
                 If filestatus = vbNullString Then filestatus = "%"
-                If identifiedby = vbNullString Then identifiedby = "%"
-                If cpsidentified = vbNullString Then cpsidentified = "%"
 
             End If
 
             If SearchSetting = 2 Then
-
-
                 sNumber = "%" & sNumber & "%"
                 dto = "%" & dto & "%"
                 ps = "%" & ps & "%"
@@ -8519,27 +8484,24 @@ errhandler:
                 dateofreceptionofphoto = "%" & dateofreceptionofphoto & "%"
                 gist = "%" & gist & "%"
                 inspectingofficer = "%" & inspectingofficer & "%"
-                comparison = "%" & comparison & "%"
-                identificationdeatils = "%" & identificationdeatils & "%"
+                comparisondetails = "%" & comparisondetails & "%"
                 filestatus = "%" & filestatus & "%"
-                identifiedby = "%" & identifiedby & "%"
-                cpsidentified = "%" & cpsidentified & "%"
             End If
 
             If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
-                Me.SOCRegisterTableAdapter.FillWithoutDIDR(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+                Me.SOCRegisterTableAdapter.FillWithoutDIDR(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDIDR(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+                Me.SOCRegisterTableAdapter.FillByDIDR(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDR(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+                Me.SOCRegisterTableAdapter.FillByDR(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
-                Me.SOCRegisterTableAdapter.FillByDI(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdeatils, photographer, photoreceived, dateofreceptionofphoto, gist)
+                Me.SOCRegisterTableAdapter.FillByDI(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             DisplayDatabaseInformation()
@@ -8589,7 +8551,6 @@ errhandler:
             Dim gist = Me.txtSOCGist.Text
             Dim inspectingofficer = txtSOCOfficer.Text.Replace("; ", vbNewLine)
             Dim comparison = txtSOCComparisonDetails.Text
-            Dim identificationdetails = ""
             Dim filestatus = Me.cmbFileStatus.Text
 
 
@@ -8614,7 +8575,6 @@ errhandler:
                 gist = gist & "%"
                 inspectingofficer = inspectingofficer & "%"
                 comparison = comparison & "%"
-                identificationdetails = identificationdetails & "%"
                 filestatus = filestatus & "%"
             End If
 
@@ -8640,7 +8600,6 @@ errhandler:
                 If gist = vbNullString Then gist = "%"
                 If inspectingofficer = vbNullString Then inspectingofficer = "%"
                 If comparison = vbNullString Then comparison = "%"
-                If identificationdetails = vbNullString Then identificationdetails = "%"
                 If filestatus = vbNullString Then filestatus = "%"
             End If
 
@@ -8667,24 +8626,23 @@ errhandler:
                 gist = "%" & gist & "%"
                 inspectingofficer = "%" & inspectingofficer & "%"
                 comparison = "%" & comparison & "%"
-                identificationdetails = "%" & identificationdetails & "%"
                 filestatus = "%" & filestatus & "%"
             End If
 
             If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
-                Me.SOCRegisterTableAdapter.FillWithoutDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+                Me.SOCRegisterTableAdapter.FillWithoutDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+                Me.SOCRegisterTableAdapter.FillByDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+                Me.SOCRegisterTableAdapter.FillByDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
-                Me.SOCRegisterTableAdapter.FillByDISelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, identificationdetails, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2)
+                Me.SOCRegisterTableAdapter.FillByDISelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             DisplayDatabaseInformation()
@@ -15524,7 +15482,7 @@ errhandler:
     End Sub
 #End Region
 
-
+    '----------------------------------------CREATE TABLE-------------------------------------------------------
 #Region "CREATE TABLE"
 
 
@@ -15683,10 +15641,32 @@ errhandler:
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromDANumber("")
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentifiedFrom("")
             blIdentificationRegisterUpdateFailed = False
-
+            '   RemoveSOCRegisterIDFields()
         Catch ex As Exception
             blIdentificationRegisterUpdateFailed = True
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+    End Sub
+
+    Private Sub RemoveSOCRegisterIDFields()
+        Try
+            If Not DoesTableExist("IdentificationRegister", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister DROP COLUMN IdentificationDate, CPsIdentified, IdentifiedBy, IdentifiedAs, Remarks, IdentificationNumber", con)
+
+            cmd.ExecuteNonQuery()
+            Application.DoEvents()
+
+            InsertOrUpdateLastModificationDate(Now)
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
         End Try
     End Sub
     Public Sub ModifyTables()
@@ -17061,8 +17041,4 @@ errhandler:
 #End Region
 
 
-
-    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
-
-    End Sub
 End Class

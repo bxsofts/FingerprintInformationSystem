@@ -356,12 +356,8 @@ Public Class FrmIdentificationRegisterDE
     Private Sub IdentificationDetails() ' Handles txtRemarks.GotFocus
         On Error Resume Next
 
-        If frmMainInterface.IDDetailsFocussed = False Then
+        '  Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureaurecords as DA No......." & vbNewLine & "DA Classification - "
 
-            '  Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureaurecords as DA No......." & vbNewLine & "DA Classification - "
-
-
-        End If
         Me.txtRemarks.Select(Me.txtRemarks.Text.Length, 0)
     End Sub
 
