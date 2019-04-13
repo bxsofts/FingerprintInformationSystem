@@ -449,9 +449,10 @@ Public Class frmMainInterface
         blApplicationIsLoading = False
 
         If blIdentificationRegisterUpdateFailed Then
-            MessageBoxEx.Show("Identification Register Update failed. Please restart the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
+            MessageBoxEx.Show("The application will now close to complete the updation. Please restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            EndApplication()
         End If
+
         CopyCredentialFiles()
 
         If Me.chkTakeAutoBackup.Checked Then
@@ -4182,11 +4183,6 @@ Public Class frmMainInterface
     Private Sub DataGridContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles DataGridContextMenuBar.PopupOpen
 
         On Error Resume Next
-        If CurrentTab = "IDR" Then
-            Me.btnDeleteContext.Visible = False
-        Else
-            Me.btnDeleteContext.Visible = True
-        End If
 
         Me.btnFacingSheetContext.Visible = False
         Me.btnSOCReportContext.Visible = False
@@ -6469,7 +6465,7 @@ errhandler:
             End If
 
             If CurrentTab = "IO" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " : " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " : " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
                     IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
@@ -6493,7 +6489,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete SoC No. " & Me.SOCDatagrid.SelectedCells(0).Value.ToString() & " from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete SoC No. " & Me.SOCDatagrid.SelectedCells(0).Value.ToString() & " from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6530,7 +6526,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.RSOCDatagrid.SelectedCells(0).Value.ToString() & " from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.RSOCDatagrid.SelectedCells(0).Value.ToString() & " from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6541,7 +6537,7 @@ errhandler:
 
 
                     OriginalRSOCSerialNumber = Me.RSOCDatagrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.SOCReportRegisterRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.SOCReportRegisterRow
                     oldRow = Me.FingerPrintDataSet.SOCReportRegister.FindBySerialNo(OriginalRSOCSerialNumber)
                     oldRow.Delete()
 
@@ -6568,7 +6564,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete DA No." & Me.DADatagrid.SelectedCells(0).Value.ToString() & " from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete DA No." & Me.DADatagrid.SelectedCells(0).Value.ToString() & " from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6579,7 +6575,7 @@ errhandler:
 
 
                     OriginalDANumber = Me.DADatagrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.DARegisterRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.DARegisterRow
                     oldRow = Me.FingerPrintDataSet.DARegister.FindByDANumber(OriginalDANumber)
                     oldRow.Delete()
 
@@ -6607,7 +6603,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.IDDatagrid.SelectedCells(0).Value.ToString() & " from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.IDDatagrid.SelectedCells(0).Value.ToString() & " from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6618,7 +6614,7 @@ errhandler:
 
 
                     OriginalIDNumber = Me.IDDatagrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.IdentifiedSlipsRegisterRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.IdentifiedSlipsRegisterRow
                     oldRow = Me.FingerPrintDataSet.IdentifiedSlipsRegister.FindByIDNumber(OriginalIDNumber)
                     oldRow.Delete()
 
@@ -6646,7 +6642,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.ACDatagrid.SelectedCells(0).Value.ToString() & " from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.ACDatagrid.SelectedCells(0).Value.ToString() & " from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6657,7 +6653,7 @@ errhandler:
 
 
                     OriginalACNumber = Me.ACDatagrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.ActiveCriminalsRegisterRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.ActiveCriminalsRegisterRow
                     oldRow = Me.FingerPrintDataSet.ActiveCriminalsRegister.FindByACNumber(OriginalACNumber)
                     oldRow.Delete()
 
@@ -6684,7 +6680,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.CDDataGrid.SelectedCells(0).Value.ToString() & " from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record No. " & Me.CDDataGrid.SelectedCells(0).Value.ToString() & " from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6695,7 +6691,7 @@ errhandler:
 
 
                     OriginalCDNumber = Me.CDDataGrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.CDRegisterRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.CDRegisterRow
                     oldRow = Me.FingerPrintDataSet.CDRegister.FindByCDNumberWithYear(OriginalCDNumber)
                     oldRow.Delete()
 
@@ -6721,7 +6717,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete FPA No. " & Me.FPADataGrid.SelectedCells(0).Value.ToString() & " from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete FPA No. " & Me.FPADataGrid.SelectedCells(0).Value.ToString() & " from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6732,7 +6728,7 @@ errhandler:
 
 
                     OriginalFPANumber = Me.FPADataGrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.FPAttestationRegisterRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.FPAttestationRegisterRow
                     oldRow = Me.FingerPrintDataSet.FPAttestationRegister.FindByFPNumber(OriginalFPANumber)
                     oldRow.Delete()
 
@@ -6757,7 +6753,7 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Police Station " & Me.PSDataGrid.SelectedCells(0).Value.ToString() & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Police Station " & Me.PSDataGrid.SelectedCells(0).Value.ToString() & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6768,7 +6764,7 @@ errhandler:
 
 
                     OriginalPSName = Me.PSDataGrid.SelectedCells(0).Value.ToString()
-                    Dim oldRow As FingerPrintDataSet.PoliceStationListRow 'add a new row to insert values
+                    Dim oldRow As FingerPrintDataSet.PoliceStationListRow
                     oldRow = Me.FingerPrintDataSet.PoliceStationList.FindByPoliceStation(OriginalPSName)
                     oldRow.Delete()
 
@@ -6790,6 +6786,27 @@ errhandler:
                 If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
                     DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Exit Sub
+                End If
+
+                If FrmIdentificationRegisterDE.Visible Then
+                    MessageBoxEx.Show("Identification Register Data Entry Form is open. Please close it first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = MessageBoxEx.Show("Do you really want to delete Identification No. " & Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString() & " from Identification Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    Dim IdentificationNumber = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
+                    Dim oldRow As FingerPrintDataSet.JoinedIDRRow
+                    oldRow = Me.FingerPrintDataSet.JoinedIDR.FindBySlNumber(Me.JoinedIDRDataGrid.SelectedCells(20).Value.ToString())
+                    oldRow.Delete()
+
+                    Me.IdentificationRegisterTableAdapter1.DeleteSelectedRecord(IdentificationNumber)
+                    ShowDesktopAlert("Selected record deleted!")
+                    If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 And Me.JoinedIDRDataGrid.RowCount <> 0 Then
+                        Me.JoinedIDRDataGrid.Rows(Me.JoinedIDRDataGrid.RowCount - 1).Selected = True
+                    End If
                 End If
             End If
 
@@ -6832,7 +6849,7 @@ errhandler:
 
             '###################   SOC  ##############
             If CurrentTab = "SOC" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6848,7 +6865,7 @@ errhandler:
             End If
 
             If CurrentTab = "RSOC" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from SOC Reports Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6866,7 +6883,7 @@ errhandler:
 
 
             If CurrentTab = "FPA" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from FP Attestation Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6882,7 +6899,7 @@ errhandler:
             End If
 
             If CurrentTab = "DA" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from DA Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6899,7 +6916,7 @@ errhandler:
 
 
             If CurrentTab = "ID" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Identified Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6915,7 +6932,7 @@ errhandler:
             End If
 
             If CurrentTab = "AC" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Active Criminal Slips Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6934,7 +6951,7 @@ errhandler:
 
 
             If CurrentTab = "CD" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Court Duty Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6953,7 +6970,7 @@ errhandler:
             '###################   PS ##############
 
             If CurrentTab = "PS" Then
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Police Station List?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Error, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Police Station List?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
@@ -6970,6 +6987,23 @@ errhandler:
                 End If
             End If
 
+            '###################   IDR   ##############
+
+            If CurrentTab = "IDR" Then
+
+                If FrmIdentificationRegisterDE.Visible Then
+                    MessageBoxEx.Show("Identification Register Data Entry Form is open. Please close it first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Identification Register?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Me.IdentificationRegisterTableAdapter1.DeleteAllRecords()
+                    Me.IdentificationRegisterTableAdapter1.Fill(Me.FingerPrintDataSet.IdentificationRegister)
+                    ShowDesktopAlert("All records deleted from Identification Register!")
+                End If
+            End If
             InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
         Catch ex As Exception
@@ -15590,6 +15624,7 @@ errhandler:
             cmd.ExecuteNonQuery()
             Application.DoEvents()
 
+            System.Threading.Thread.Sleep(2000)
             InsertOrUpdateLastModificationDate(Now)
 
 
@@ -16432,6 +16467,12 @@ errhandler:
             End If
             OfficeSettingsEditMode(False)
             InsertOrUpdateLastModificationDate(Now)
+
+            If blIdentificationRegisterUpdateFailed Then
+                MessageBoxEx.Show("The application will now close to complete the restore. Please restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                EndApplication()
+            End If
+
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default

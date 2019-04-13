@@ -5568,7 +5568,15 @@ WHERE        (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteQuery" Modifier="Public" Name="DeleteQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="DeleteQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAllRecords" Modifier="Public" Name="DeleteAllRecords" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="DeleteAllRecords">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM IdentificationRegister</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteSelectedRecord" Modifier="Public" Name="DeleteSelectedRecord" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="DeleteSelectedRecord">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM IdentificationRegister
@@ -5579,7 +5587,7 @@ WHERE        (IdentificationNumber = ?)</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertQuery" Modifier="Public" Name="InsertQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="InsertQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertQuery" Modifier="Public" Name="InsertQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="InsertQuery">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO IdentificationRegister
@@ -5605,7 +5613,7 @@ VALUES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromAddress" Modifier="Public" Name="RemoveNullFromAddress" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="RemoveNullFromAddress">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromAddress" Modifier="Public" Name="RemoveNullFromAddress" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="RemoveNullFromAddress">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5617,7 +5625,7 @@ WHERE        (Address IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromDANumber" Modifier="Public" Name="RemoveNullFromDANumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="RemoveNullFromDANumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromDANumber" Modifier="Public" Name="RemoveNullFromDANumber" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="RemoveNullFromDANumber">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5629,7 +5637,7 @@ WHERE        (DANumber IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromFingersIdentified" Modifier="Public" Name="RemoveNullFromFingersIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy6" UserSourceName="RemoveNullFromFingersIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromFingersIdentified" Modifier="Public" Name="RemoveNullFromFingersIdentified" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromFingersIdentified">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5641,7 +5649,7 @@ WHERE        (FingersIdentified IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromHenryClassification" Modifier="Public" Name="RemoveNullFromHenryClassification" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy7" UserSourceName="RemoveNullFromHenryClassification">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromHenryClassification" Modifier="Public" Name="RemoveNullFromHenryClassification" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="RemoveNullFromHenryClassification">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5653,7 +5661,7 @@ WHERE        (HenryClassification IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedFrom" Modifier="Public" Name="RemoveNullFromIdentifiedFrom" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy8" UserSourceName="RemoveNullFromIdentifiedFrom">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromIdentifiedFrom" Modifier="Public" Name="RemoveNullFromIdentifiedFrom" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="RemoveNullFromIdentifiedFrom">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5665,7 +5673,7 @@ WHERE        (IdentifiedFrom IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromNoOfCulprits" Modifier="Public" Name="RemoveNullFromNoOfCulprits" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy9" UserSourceName="RemoveNullFromNoOfCulprits">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromNoOfCulprits" Modifier="Public" Name="RemoveNullFromNoOfCulprits" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="RemoveNullFromNoOfCulprits">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5677,7 +5685,7 @@ WHERE        (NoOfCulpritsIdentified IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy10" UserSourceName="ScalarQueryCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="ScalarQueryCPsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -5690,7 +5698,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        MAX(IDRNumber) AS Expr1
@@ -5703,7 +5711,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="ScalarQuerySOCsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -5717,7 +5725,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</Com
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -7132,7 +7140,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_UserTableName="OfficerTable" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_RowClassName="OfficerTableRow">
+        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowClassName="OfficerTableRow" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_UserTableName="OfficerTable">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OfficerID" msprop:Generator_ColumnVarNameInTable="columnOfficerID" msprop:Generator_ColumnPropNameInRow="OfficerID" msprop:Generator_ColumnPropNameInTable="OfficerIDColumn" msprop:Generator_UserColumnName="OfficerID" type="xs:int" />
@@ -7546,7 +7554,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="IDRNumber" msprop:Generator_ColumnVarNameInTable="columnIDRNumber" msprop:Generator_ColumnPropNameInRow="IDRNumber" msprop:Generator_ColumnPropNameInTable="IDRNumberColumn" msprop:Generator_UserColumnName="IDRNumber" type="xs:int" minOccurs="0" />
-              <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" minOccurs="0" />
+              <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
               <xs:element name="DateOfReport" msprop:Generator_ColumnVarNameInTable="columnDateOfReport" msprop:Generator_ColumnPropNameInRow="DateOfReport" msprop:Generator_ColumnPropNameInTable="DateOfReportColumn" msprop:Generator_UserColumnName="DateOfReport" type="xs:dateTime" minOccurs="0" />
               <xs:element name="DateOfOccurrence" msprop:Generator_ColumnVarNameInTable="columnDateOfOccurrence" msprop:Generator_ColumnPropNameInRow="DateOfOccurrence" msprop:Generator_ColumnPropNameInTable="DateOfOccurrenceColumn" msprop:Generator_UserColumnName="DateOfOccurrence" minOccurs="0">
                 <xs:simpleType>
@@ -7753,6 +7761,10 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
     </xs:unique>
     <xs:unique name="IdentificationRegister_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:IdentificationRegister" />
+      <xs:field xpath="mstns:SlNumber" />
+    </xs:unique>
+    <xs:unique name="JoinedIDR_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:JoinedIDR" />
       <xs:field xpath="mstns:SlNumber" />
     </xs:unique>
   </xs:element>
