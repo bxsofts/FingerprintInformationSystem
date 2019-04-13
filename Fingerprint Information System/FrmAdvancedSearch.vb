@@ -15,7 +15,7 @@ Public Class FrmAdvancedSearch
         SetDatagridFont()
         CreateDatagridTable()
         Me.txtSQL.Text = "Select * from " & Register
-        If CurrentTab = "IDR" Then Me.txtSQL.Text = "Select * from " & Register & " where FileStatus = 'identified'"
+
         SQLTextChanged = False
     End Sub
 
@@ -109,16 +109,15 @@ Public Class FrmAdvancedSearch
                 Register = "CDRegister"
 
             Case "IDR"
-                RowCount = frmMainInterface.JoinedIDRDataGrid.ColumnCount - 1
-                For i = 1 To RowCount
+                RowCount = frmMainInterface.JoinedIDRDataGrid.ColumnCount - 3
+                For i = 0 To RowCount
                     Dim t As String = frmMainInterface.JoinedIDRDataGrid.Columns(i).DataPropertyName
                     If t = "InvestigatingOfficer" Then t = "InspectingOfficer"
-                    If t = "IdentifiedAs" Then t = "CulpritName"
                     If t = "ChancePrintsDeveloped" Then t = "CPsDeveloped"
-                    If t = "Remarks" Then t = "IdentificationDetails"
                     Me.listViewEx1.Items.Add(t)
                 Next
-                Register = "SOCRegister"
+                ' Register = "IdentificationRegister INNER JOIN SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber"
+                Register = "IdentificationRegister"
 
         End Select
 
@@ -437,7 +436,6 @@ Public Class FrmAdvancedSearch
     Private Sub GenerateSQL(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateSQL.Click, btnSearch.Click
         Try
             Dim sql As String = "Select * from " & Register & " where "
-            If CurrentTab = "IDR" Then sql = "Select * from " & Register & " where FileStatus = 'identified' AND "
             Dim SelectedCount As Integer = 0
 
             For i = 0 To RowCount
@@ -548,7 +546,7 @@ Public Class FrmAdvancedSearch
             sql = sql.Replace("CONTAINS", "")
             sql = sql.Replace("STARTS WITH", "")
 
-            If CurrentTab = "IDR" Then sql = sql & " ORDER BY IdentificationDate"
+          
             Me.txtSQL.Text = sql
 
             If DirectCast(sender, Control).Name = btnSearch.Name Then
@@ -614,8 +612,38 @@ Public Class FrmAdvancedSearch
             SQLText = Strings.Replace(SQLText, "InspectingOfficer", "InvestigatingOfficer", , , CompareMethod.Text)
             SQLText = Strings.Replace(SQLText, "CDNumber", "CDNumberWithYear", , , CompareMethod.Text)
             SQLText = Strings.Replace(SQLText, "CPsDeveloped", "ChancePrintsDeveloped", , , CompareMethod.Text)
-            SQLText = Strings.Replace(SQLText, "CulpritName", "IdentifiedAs", , , CompareMethod.Text)
-            SQLText = Strings.Replace(SQLText, "IdentificationDetails", "Remarks", , , CompareMethod.Text)
+
+            If CurrentTab = "IDR" Then
+                SQLText = SQLText.Replace("from IdentificationRegister", " from (IdentificationRegister INNER JOIN SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)")
+                SQLText = SQLText & " ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
+
+                SQLText = SQLText.Replace("IdentificationNumber", "IdentificationRegister.IdentificationNumber")
+                SQLText = SQLText.Replace("SOCNumber", "SOCRegister.SOCNumber")
+                SQLText = SQLText.Replace("IdentificationDate", "IdentificationRegister.IdentificationDate")
+                SQLText = SQLText.Replace("DateOfInspection", "SOCRegister.DateOfInspection")
+                SQLText = SQLText.Replace("PoliceStation", "SOCRegister.PoliceStation")
+                SQLText = SQLText.Replace("CrimeNumber", "SOCRegister.CrimeNumber")
+                SQLText = SQLText.Replace("SectionOfLaw", "SOCRegister.SectionOfLaw")
+                SQLText = SQLText.Replace("InvestigatingOfficer", "SOCRegister.InvestigatingOfficer")
+                SQLText = SQLText.Replace("IdentifiedBy", "SOCRegister.IdentifiedBy")
+                SQLText = SQLText.Replace("ChancePrintsDeveloped", "SOCRegister.ChancePrintsDeveloped")
+                SQLText = SQLText.Replace("CPsIdentified", "IdentificationRegister.CPsIdentified")
+                SQLText = SQLText.Replace("NoOfCulpritsIdentified", "IdentificationRegister.NoOfCulpritsIdentified")
+                SQLText = SQLText.Replace("CulpritName", "IdentificationRegister.CulpritName")
+                SQLText = SQLText.Replace("Address", "IdentificationRegister.Address")
+                SQLText = SQLText.Replace("FingersIdentified", "IdentificationRegister.FingersIdentified")
+                SQLText = SQLText.Replace("HenryClassification", "IdentificationRegister.HenryClassification")
+                SQLText = SQLText.Replace("DANumber", "IdentificationRegister.DANumber")
+                SQLText = SQLText.Replace("IdentifiedFrom", "IdentificationRegister.IdentifiedFrom")
+                SQLText = SQLText.Replace("IdentificationDetails", "IdentificationRegister.IdentificationDetails")
+                SQLText = SQLText.Replace("SOCRegister.SOCRegister", "SOCRegister")
+                SQLText = SQLText.Replace("IdentificationRegister.IdentificationRegister", "IdentificationRegister")
+                SQLText = SQLText.Replace("IdentificationRegister.SOCRegister", "IdentificationRegister")
+                SQLText = SQLText.Replace("*", "IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber")
+                ' SQLText = SQLText.Replace("*", "IdentificationRegister.*, SOCRegister.*")
+                Me.txtSQL.Text = SQLText
+            End If
+
 
             If Trim(SQLText.ToUpper).StartsWith("DELETE") Then
                 Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("You are about to DELETE records from " & Register & ". Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)
@@ -681,8 +709,8 @@ Public Class FrmAdvancedSearch
                     ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.CDDataGrid.RowCount = 1, "1 Record", frmMainInterface.CDDataGrid.RowCount & " Records"))
 
                 Case "IDR"
-                    frmMainInterface.FingerPrintDataSet.IdentificationRegister.Clear()
-                    da.Fill(frmMainInterface.FingerPrintDataSet.IdentificationRegister)
+                    frmMainInterface.FingerPrintDataSet.JoinedIDR.Clear()
+                    da.Fill(frmMainInterface.FingerPrintDataSet.JoinedIDR)
                     ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.JoinedIDRDataGrid.RowCount = 1, "1 Record", frmMainInterface.JoinedIDRDataGrid.RowCount & " Records"))
             End Select
 

@@ -22,8 +22,8 @@ Partial Class FrmAdvancedSearch
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmAdvancedSearch))
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -140,7 +140,7 @@ Partial Class FrmAdvancedSearch
         '
         Me.btnSearchSQL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnSearchSQL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchSQL.Location = New System.Drawing.Point(871, 548)
+        Me.btnSearchSQL.Location = New System.Drawing.Point(871, 545)
         Me.btnSearchSQL.Name = "btnSearchSQL"
         Me.btnSearchSQL.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlF)
         Me.btnSearchSQL.Size = New System.Drawing.Size(118, 58)
@@ -151,23 +151,23 @@ Partial Class FrmAdvancedSearch
         '
         Me.DataGrid.AllowUserToAddRows = False
         Me.DataGrid.AllowUserToDeleteRows = False
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGrid.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGrid.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.DataGrid.Location = New System.Drawing.Point(0, 5)
         Me.DataGrid.Name = "DataGrid"
@@ -179,7 +179,7 @@ Partial Class FrmAdvancedSearch
         '
         Me.btnClearAllFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnClearAllFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearAllFields.Location = New System.Drawing.Point(871, 27)
+        Me.btnClearAllFields.Location = New System.Drawing.Point(871, 323)
         Me.btnClearAllFields.Name = "btnClearAllFields"
         Me.btnClearAllFields.Size = New System.Drawing.Size(118, 58)
         Me.btnClearAllFields.TabIndex = 3
@@ -412,7 +412,7 @@ Partial Class FrmAdvancedSearch
         Me.btnSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
-        Me.btnSearch.Location = New System.Drawing.Point(871, 106)
+        Me.btnSearch.Location = New System.Drawing.Point(871, 397)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlF)
         Me.btnSearch.Size = New System.Drawing.Size(118, 58)
@@ -423,7 +423,7 @@ Partial Class FrmAdvancedSearch
         '
         Me.btnGenerateSQL.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateSQL.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateSQL.Location = New System.Drawing.Point(871, 466)
+        Me.btnGenerateSQL.Location = New System.Drawing.Point(871, 471)
         Me.btnGenerateSQL.Name = "btnGenerateSQL"
         Me.btnGenerateSQL.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlG)
         Me.btnGenerateSQL.Size = New System.Drawing.Size(118, 58)
