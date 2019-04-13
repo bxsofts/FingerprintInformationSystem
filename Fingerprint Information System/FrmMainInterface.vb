@@ -115,6 +115,7 @@ Public Class frmMainInterface
     Dim blCheckAutoBackup As Boolean = False
 
     Dim blIdentificationRegisterUpdateFailed As Boolean = False
+    Dim blRestartApplication As Boolean = False
 #End Region
 
 
@@ -449,7 +450,9 @@ Public Class frmMainInterface
         blApplicationIsLoading = False
 
         If blIdentificationRegisterUpdateFailed Then
-            MessageBoxEx.Show("The application will now close to complete the updation. Please restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            System.Threading.Thread.Sleep(3000)
+            MessageBoxEx.Show("The application will now close to complete the updation and restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            blRestartApplication = True
             EndApplication()
         End If
 
@@ -16332,6 +16335,7 @@ errhandler:
             End If
         End If
     End Sub
+
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
@@ -16469,7 +16473,9 @@ errhandler:
             InsertOrUpdateLastModificationDate(Now)
 
             If blIdentificationRegisterUpdateFailed Then
-                MessageBoxEx.Show("The application will now close to complete the restore. Please restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                System.Threading.Thread.Sleep(3000)
+                MessageBoxEx.Show("The application will now close to complete the restore and restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                blRestartApplication = True
                 EndApplication()
             End If
 
@@ -17008,7 +17014,7 @@ errhandler:
     Private Sub frmMainInterface_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         e.Cancel = True
         EndApplication()
-        
+
     End Sub
 
     Private Sub EndApplication() Handles btnExit.Click ', MyBase.FormClosed
@@ -17048,6 +17054,9 @@ errhandler:
         SaveQuicktoolbarSettings()
         objMutex.Close()
         objMutex = Nothing
+        If blRestartApplication Then
+            Process.Start(strAppPath & "\RestartFIS.exe")
+        End If
         Me.Dispose()
         End
     End Sub
