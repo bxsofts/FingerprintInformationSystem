@@ -5677,7 +5677,6 @@ errhandler:
             blIDROpenMode = False
 
             FrmIdentificationRegisterDE.ClearFields()
-            FrmIdentificationRegisterDE.txtIdentificationNumber.Text = GenerateNewIDRNumber()
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
 

@@ -39,6 +39,8 @@ Partial Class FrmIdentificationRegisterDE
         Me.txtCPsIdentified = New DevComponents.Editors.IntegerInput()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.lblCPCountWarning = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOCNumberWarning = New DevComponents.DotNetBar.LabelX()
         Me.LabelX20 = New DevComponents.DotNetBar.LabelX()
         Me.txtSOCNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -68,8 +70,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.SocRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.SocRegisterAutoTextTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterAutoTextTableAdapter()
-        Me.lblSOCNumberWarning = New DevComponents.DotNetBar.LabelX()
-        Me.lblCPCountWarning = New DevComponents.DotNetBar.LabelX()
+        Me.btnClearFields = New DevComponents.DotNetBar.ButtonX()
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtCPsIdentified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -155,11 +156,11 @@ Partial Class FrmIdentificationRegisterDE
         '
         Me.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSave.Location = New System.Drawing.Point(855, 339)
+        Me.btnSave.Location = New System.Drawing.Point(720, 339)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(105, 34)
         Me.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSave.TabIndex = 16
+        Me.btnSave.TabIndex = 14
         Me.btnSave.Text = "Save"
         '
         'btnCancel
@@ -170,7 +171,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 34)
         Me.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnCancel.TabIndex = 17
+        Me.btnCancel.TabIndex = 16
         Me.btnCancel.Text = "Cancel"
         '
         'txtIdentificationNumber
@@ -360,6 +361,7 @@ Partial Class FrmIdentificationRegisterDE
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx1.Controls.Add(Me.btnClearFields)
         Me.PanelEx1.Controls.Add(Me.lblCPCountWarning)
         Me.PanelEx1.Controls.Add(Me.lblSOCNumberWarning)
         Me.PanelEx1.Controls.Add(Me.LabelX20)
@@ -414,6 +416,36 @@ Partial Class FrmIdentificationRegisterDE
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 176
+        '
+        'lblCPCountWarning
+        '
+        Me.lblCPCountWarning.AutoSize = True
+        '
+        '
+        '
+        Me.lblCPCountWarning.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblCPCountWarning.ForeColor = System.Drawing.Color.Red
+        Me.lblCPCountWarning.Location = New System.Drawing.Point(284, 140)
+        Me.lblCPCountWarning.Name = "lblCPCountWarning"
+        Me.lblCPCountWarning.Size = New System.Drawing.Size(159, 18)
+        Me.lblCPCountWarning.TabIndex = 198
+        Me.lblCPCountWarning.Text = "Error: CPs remaining is Zero"
+        Me.lblCPCountWarning.Visible = False
+        '
+        'lblSOCNumberWarning
+        '
+        Me.lblSOCNumberWarning.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOCNumberWarning.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOCNumberWarning.ForeColor = System.Drawing.Color.Red
+        Me.lblSOCNumberWarning.Location = New System.Drawing.Point(284, 46)
+        Me.lblSOCNumberWarning.Name = "lblSOCNumberWarning"
+        Me.lblSOCNumberWarning.Size = New System.Drawing.Size(144, 18)
+        Me.lblSOCNumberWarning.TabIndex = 197
+        Me.lblSOCNumberWarning.Text = "Error: SOC No. not found"
+        Me.lblSOCNumberWarning.Visible = False
         '
         'LabelX20
         '
@@ -568,7 +600,7 @@ Partial Class FrmIdentificationRegisterDE
         '
         Me.LabelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX12.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX12.Location = New System.Drawing.Point(349, 105)
+        Me.LabelX12.Location = New System.Drawing.Point(349, 110)
         Me.LabelX12.Name = "LabelX12"
         Me.LabelX12.Size = New System.Drawing.Size(7, 22)
         Me.LabelX12.TabIndex = 186
@@ -835,35 +867,16 @@ Partial Class FrmIdentificationRegisterDE
         '
         Me.SocRegisterAutoTextTableAdapter1.ClearBeforeFill = True
         '
-        'lblSOCNumberWarning
+        'btnClearFields
         '
-        Me.lblSOCNumberWarning.AutoSize = True
-        '
-        '
-        '
-        Me.lblSOCNumberWarning.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblSOCNumberWarning.ForeColor = System.Drawing.Color.Red
-        Me.lblSOCNumberWarning.Location = New System.Drawing.Point(284, 46)
-        Me.lblSOCNumberWarning.Name = "lblSOCNumberWarning"
-        Me.lblSOCNumberWarning.Size = New System.Drawing.Size(144, 18)
-        Me.lblSOCNumberWarning.TabIndex = 197
-        Me.lblSOCNumberWarning.Text = "Error: SOC No. not found"
-        Me.lblSOCNumberWarning.Visible = False
-        '
-        'lblCPCountWarning
-        '
-        Me.lblCPCountWarning.AutoSize = True
-        '
-        '
-        '
-        Me.lblCPCountWarning.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblCPCountWarning.ForeColor = System.Drawing.Color.Red
-        Me.lblCPCountWarning.Location = New System.Drawing.Point(284, 140)
-        Me.lblCPCountWarning.Name = "lblCPCountWarning"
-        Me.lblCPCountWarning.Size = New System.Drawing.Size(159, 18)
-        Me.lblCPCountWarning.TabIndex = 198
-        Me.lblCPCountWarning.Text = "Error: CPs remaining is Zero"
-        Me.lblCPCountWarning.Visible = False
+        Me.btnClearFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearFields.Location = New System.Drawing.Point(850, 339)
+        Me.btnClearFields.Name = "btnClearFields"
+        Me.btnClearFields.Size = New System.Drawing.Size(105, 34)
+        Me.btnClearFields.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnClearFields.TabIndex = 15
+        Me.btnClearFields.Text = "Clear"
         '
         'FrmIdentificationRegisterDE
         '
@@ -936,4 +949,5 @@ Partial Class FrmIdentificationRegisterDE
     Friend WithEvents SocRegisterAutoTextTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterAutoTextTableAdapter
     Friend WithEvents lblCPCountWarning As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblSOCNumberWarning As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnClearFields As DevComponents.DotNetBar.ButtonX
 End Class

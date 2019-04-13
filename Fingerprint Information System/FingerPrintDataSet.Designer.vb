@@ -51162,8 +51162,8 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(12) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(12).Connection = Me.Connection
-            Me._commandCollection(12).CommandText = "SELECT        COUNT(IdentificationNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            Identificatio" & _
-                "nRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(12).CommandText = "SELECT        MAX(IDRNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WH" & _
+                "ERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(12).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(12).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(12).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -52031,7 +52031,7 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function ScalarQuerySOCsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
+        Public Overridable Overloads Function ScalarQuerySOCsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Object
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(12)
             If (IdentificationDate.HasValue = True) Then
                 command.Parameters(0).Value = CType(IdentificationDate.Value, Date)
@@ -52058,9 +52058,9 @@ Namespace FingerPrintDataSetTableAdapters
             End Try
             If ((returnValue Is Nothing) _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Integer)()
+                Return Nothing
             Else
-                Return New Global.System.Nullable(Of Integer)(CType(returnValue, Integer))
+                Return CType(returnValue, Object)
             End If
         End Function
 
@@ -52382,25 +52382,26 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister" & _
                 ".SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspect" & _
-                "ion, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                     " & _
-                "    SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe" & _
-                "gister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.C" & _
-                "PsIdentified, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         IdentificationRegister.NoOfCulpritsIden" & _
-                "tified, IdentificationRegister.CulpritName, IdentificationRegister.Address, Iden" & _
-                "tificationRegister.FingersIdentified, IdentificationRegister.HenryClassification" & _
-                ", " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         IdentificationRegister.DANumber, IdentificationRegi" & _
-                "ster.IdentifiedFrom, IdentificationRegister.IdentificationDetails, Identificatio" & _
-                "nRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, " & _
-                "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccu" & _
-                "rrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.Property" & _
-                "Lost, SOCRegister.ChancePrintsUnfit, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.Chan" & _
-                "cePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDe" & _
-                "tails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfRe" & _
-                "ceptionOfPhoto, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.Gist, SOCRegister.Compari" & _
-                "sonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            (Ide" & _
-                "ntificationRegister INNER JOIN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister ON Identifi" & _
-                "cationRegister.SOCNumber = SOCRegister.SOCNumber)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY IdentificationRegist" & _
-                "er.IdentificationDate, IdentificationRegister.IDRNumber"
+                "ion, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.PoliceStation, SOCRegister.CrimeNumb" & _
+                "er, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe" & _
+                "gister.IdentifiedBy, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.ChancePrintsDevelope" & _
+                "d, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIden" & _
+                "tified, IdentificationRegister.CulpritName, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Identific" & _
+                "ationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationR" & _
+                "egister.HenryClassification, IdentificationRegister.DANumber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                " & _
+                "         IdentificationRegister.IdentifiedFrom, IdentificationRegister.Identific" & _
+                "ationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber," & _
+                " " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.DateOfReport, SOCRegister.DateOfOccurren" & _
+                "ce, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOpe" & _
+                "randi, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.PropertyLost, SOCRegister.ChancePr" & _
+                "intsUnfit, SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining" & _
+                ", " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.ChancePrintDetails, SOCRegister.Photogr" & _
+                "apher, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegiste" & _
+                "r.Gist, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister.ComparisonDetails, SOCRegister.Gr" & _
+                "aveCrime, SOCRegister.FileStatus" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            (IdentificationRegister INNER " & _
+                "JOIN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         SOCRegister ON IdentificationRegister.SOCNumber =" & _
+                " SOCRegister.SOCNumber)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY IdentificationRegister.IdentificationDate, Ide" & _
+                "ntificationRegister.IDRNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(1).Connection = Me.Connection

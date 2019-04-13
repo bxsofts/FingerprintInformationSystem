@@ -5,6 +5,8 @@ Public Class FrmIdentificationRegisterDE
     Dim SlNumber As Integer
     Dim OriginalIDRN As String
     Dim IDRN As Integer
+
+#Region "FORM LOAD EVENTS"
     Private Sub FrmSOC_IdentificationDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         On Error Resume Next
 
@@ -49,31 +51,6 @@ Public Class FrmIdentificationRegisterDE
         LoadSOCNumberAutoCompletionTexts()
     End Sub
 
-    Public Sub ClearFields()
-        On Error Resume Next
-        For Each ctrl As Control In Me.PanelEx1.Controls 'clear all textboxes
-            If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.DotNetBar.Controls.ComboBoxEx Or TypeOf (ctrl) Is DevComponents.Editors.IntegerInput Then
-                ctrl.Text = ""
-            End If
-        Next
-        Me.dtIdentificationDate.IsEmpty = True
-    End Sub
-
-    Private Sub dtIdentificationDate_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtIdentificationDate.GotFocus
-        On Error Resume Next
-        ValidateSOCNumber()
-        If dtIdentificationDate.Text = vbNullString Then Me.dtIdentificationDate.Value = Today
-    End Sub
-
-    Private Sub txtCPsIdentified_GotFocus(sender As Object, e As EventArgs) Handles txtCPsIdentified.GotFocus
-        If Me.txtCPsIdentified.Text = "" Then Me.txtCPsIdentified.Value = 1
-    End Sub
-
-    Private Sub txtCulpritCount_GotFocus(sender As Object, e As EventArgs) Handles txtCulpritCount.GotFocus
-        If Me.txtCPsIdentified.Text = "1" Then
-            Me.txtCulpritCount.Value = 1
-        End If
-    End Sub
 
     Private Sub LoadIDRValues()
         With frmMainInterface.JoinedIDRDataGrid
@@ -117,6 +94,62 @@ Public Class FrmIdentificationRegisterDE
         End Try
     End Sub
 
+#End Region
+
+
+#Region "DATA FIELD SETTINGS"
+
+    Public Sub ClearFields()
+        On Error Resume Next
+        For Each ctrl As Control In Me.PanelEx1.Controls 'clear all textboxes
+            If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.DotNetBar.Controls.ComboBoxEx Or TypeOf (ctrl) Is DevComponents.Editors.IntegerInput Then
+                ctrl.Text = ""
+            End If
+        Next
+        Me.dtIdentificationDate.IsEmpty = True
+        Me.txtIdentificationNumber.Text = frmMainInterface.GenerateNewIDRNumber()
+    End Sub
+
+    Private Sub dtIdentificationDate_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles dtIdentificationDate.GotFocus
+        On Error Resume Next
+        ValidateSOCNumber()
+        If dtIdentificationDate.Text = vbNullString Then Me.dtIdentificationDate.Value = Today
+    End Sub
+
+    Private Sub txtCPsIdentified_GotFocus(sender As Object, e As EventArgs) Handles txtCPsIdentified.GotFocus
+        If Me.txtCPsIdentified.Text = "" Then Me.txtCPsIdentified.Value = 1
+    End Sub
+
+    Private Sub txtCulpritCount_GotFocus(sender As Object, e As EventArgs) Handles txtCulpritCount.GotFocus
+        If Me.txtCPsIdentified.Text = "1" Then
+            Me.txtCulpritCount.Value = 1
+        End If
+
+    End Sub
+
+    Private Sub HandleMultiAccusedTexts(sender As Object, e As EventArgs) Handles txtFingersIdentified.GotFocus, txtClassification.GotFocus, txtDANumber.GotFocus, txtCulpritName.GotFocus, txtAddress.GotFocus
+        Try
+            Dim txtbox As TextBox = DirectCast(sender, Control)
+            If txtbox.Text <> "" Then Exit Sub
+
+            Dim n As Integer = txtCulpritCount.Value
+            If n > 1 Then
+                Dim t As String = ""
+                For i = 1 To n
+                    t = t & "A" & i & " - " & vbCrLf ' IIf(i < n, vbCrLf, "")
+                Next
+                txtbox.Text = t
+                txtbox.SelectionStart = 6
+                txtbox.SelectionLength = 0
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+#End Region
+
+#Region "VALIDATION"
 
     Private Function MandatoryFieldsFilled() As Boolean
         If Me.txtIdentificationNumber.Text.Trim = "" Or Me.txtSOCNumber.Text.Trim = "" Or Me.dtIdentificationDate.IsEmpty Or Me.cmbIdentifyingOfficer.Text.Trim = "" Or Me.txtCPsIdentified.Text = "" Or Me.txtCulpritCount.Text = "" Or Me.txtCulpritName.Text.Trim = "" Or Me.txtAddress.Text.Trim = "" Or Me.txtFingersIdentified.Text.Trim = "" Or Me.txtClassification.Text.Trim = "" Or Me.cmbIdentifiedFrom.Text = "" Then
@@ -233,6 +266,10 @@ Public Class FrmIdentificationRegisterDE
 
         End Try
     End Sub
+
+#End Region
+
+#Region "SAVE DATA"
     Private Sub SaveDetails(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             If Not MandatoryFieldsFilled() Then
@@ -262,6 +299,11 @@ Public Class FrmIdentificationRegisterDE
                 Exit Sub
             End If
 
+            If CPsIdentified < Me.txtCulpritCount.Value Then
+                MessageBoxEx.Show("No. of Culprits identified (" & Me.txtCulpritCount.Value & ") is invalid.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtCulpritCount.Focus()
+                Exit Sub
+            End If
 
 
             Dim sIDRN() = Strings.Split(Me.txtIdentificationNumber.Text.Trim, "/")
@@ -309,11 +351,14 @@ Public Class FrmIdentificationRegisterDE
                 End If
             End If
 
+            UpdateSOCDatagrid()
+
             If blIDREditMode Or blIDROpenMode Then
                 Me.Close()
             End If
+
             ClearFields()
-            Me.txtIdentificationNumber.Text = frmMainInterface.GenerateNewIDRNumber()
+
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -330,7 +375,7 @@ Public Class FrmIdentificationRegisterDE
 
             Dim comparisondetails As String = "Identified as " & Me.txtCulpritName.Text.Trim
             Me.SocRegisterTableAdapter1.UpdateQuerySetFileStatus("Identified", comparisondetails, Me.txtSOCNumber.Text.Trim)
-            UpdateSOCDatagrid()
+
             ShowDesktopAlert("New Identification Record entered successfully.")
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -345,7 +390,7 @@ Public Class FrmIdentificationRegisterDE
 
             Dim comparisondetails As String = "Identified as " & Me.txtCulpritName.Text.Trim
             Me.SocRegisterTableAdapter1.UpdateQuerySetFileStatus("Identified", comparisondetails, Me.txtSOCNumber.Text.Trim)
-            UpdateSOCDatagrid()
+
             ShowDesktopAlert("Selected Identification Record updated successfully.")
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -355,11 +400,17 @@ Public Class FrmIdentificationRegisterDE
     Private Sub UpdateSOCDatagrid()
         Try
             Dim index = frmMainInterface.SOCRegisterBindingSource.Find("SOCNumber", Me.txtSOCNumber.Text.Trim)
-            frmMainInterface.SOCDatagrid.InvalidateRow(index)
+            If index > -1 Then
+                frmMainInterface.SOCRegisterBindingSource.Position = index
+                frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(22).Value = "Identified as " & Me.txtCulpritName.Text.Trim
+                frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(24).Value = "Identified"
+            End If
+
         Catch ex As Exception
 
         End Try
     End Sub
+
     Private Sub UpdateIDRGridRow()
         With frmMainInterface.JoinedIDRDataGrid
             Try
@@ -415,6 +466,7 @@ Public Class FrmIdentificationRegisterDE
             ShowErrorMessage(ex)
         End Try
     End Sub
+
     Private Sub IdentificationDetails() ' Handles txtRemarks.GotFocus
         On Error Resume Next
 
@@ -423,9 +475,13 @@ Public Class FrmIdentificationRegisterDE
         Me.txtRemarks.Select(Me.txtRemarks.Text.Length, 0)
     End Sub
 
+#End Region
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
 
+    Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
+        ClearFields()
+    End Sub
 End Class
