@@ -476,6 +476,7 @@ Public Class frmMainInterface
 
 #End Region
 
+    '
 
 #Region "COLOR STYLES" 'sets Color themes for the form
 
@@ -786,9 +787,6 @@ Public Class frmMainInterface
         Me.txtSOCNumber.Focus()
         IncrementCircularProgress(1)
 
-
-
-
         Me.chkAutoCapitalize.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoCapitalize", 1)
         TemporarilyStopCapitalize = Not Me.chkAutoCapitalize.Checked
         DisplayAllCapsStatus(Me.chkAutoCapitalize.Checked)
@@ -809,8 +807,6 @@ Public Class frmMainInterface
         If searchsetting = 1 Then Me.rdoBeginsWith.Checked = True
         If searchsetting = 2 Then Me.rdoFullText.Checked = True
         If searchsetting = 3 Then Me.rdoAnyWhere.Checked = True
-
-
 
         Dim hcolor As Integer = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HighLightColor", 5) 'none
         Me.cmbHighlightColor.SelectedIndex = hcolor - 1
@@ -844,6 +840,7 @@ Public Class frmMainInterface
         Me.chkACLoadOtherDetails.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "LoadDAtoAC", 1)
         Me.btnRandomColor.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseRandomColor", 1)
 
+        Me.txtLoadSelectedYearRecords.Text = Year(Today)
     End Sub
 
 
@@ -880,7 +877,6 @@ Public Class frmMainInterface
 
     End Sub
 
-
     Public Sub LoadOfficeSettingsToTextBoxes()
         OfficeSettingsEditMode(True)
         Me.txtFullDistrict.Text = FullDistrictName
@@ -899,6 +895,7 @@ Public Class frmMainInterface
         Me.txtIdentificationPdlNumber.Text = PdlIdentificationStatement.Trim
         OfficeSettingsEditMode(False)
     End Sub
+
     Public Sub SetWindowTitle()
         Dim version As String = " V" & My.Application.Info.Version.ToString.Substring(0, 4)
 
@@ -1472,303 +1469,65 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub LoadThisYearRecordsWithMesage() Handles btnLoadThisYearRecords.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        Dim y As String = Year(Today)
-        Dim d1 As Date = New Date(y, 1, 1)
-        Dim d2 As Date = New Date(y, 12, 31)
+    Private Sub LoadRecordsOfTheSelectedYear(sender As Object, e As KeyEventArgs) Handles txtLoadSelectedYearRecords.KeyDown
 
-        Select Case CurrentTab
-            Case "SOC"
-                Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-                Me.SOCRegisterBindingSource.MoveLast()
+        Try
 
-            Case "RSOC"
-                Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
-                Me.RSOCRegisterBindingSource.MoveLast()
+            If e.KeyCode <> Keys.Enter Then Exit Sub
+            Dim y As Integer = CInt(Me.txtLoadSelectedYearRecords.Text)
 
-            Case "DA"
-                Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-                Me.DARegisterBindingSource.MoveLast()
+            Select Case CurrentTab
+                Case "PS"
+                    ShowDesktopAlert("This option is not available for the selected register!")
+                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                    Exit Sub
+            End Select
 
-            Case "FPA"
-                Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-                Me.FPARegisterBindingSource.MoveLast()
-            Case "CD"
-                Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
-                Me.CDRegisterBindingSource.MoveLast()
-            Case "IDR"
-                Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
-                Me.JoinedIDRBindingSource.MoveLast()
-            Case Else
-                ShowDesktopAlert("This option is not available for the selected register!")
-                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                Exit Sub
-        End Select
 
-        If CurrentTab <> "RSOC" Then
-            ShowDesktopAlert("This Year's " & CurrentTab & " records loaded!")
-        Else
-            ShowDesktopAlert("This Year's SOC Reports Register loaded!")
-        End If
 
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Dim d1 As Date = New Date(y, 1, 1)
+            Dim d2 As Date = New Date(y, 12, 31)
+
+            Select Case CurrentTab
+                Case "SOC"
+                    Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+                    Me.SOCRegisterBindingSource.MoveLast()
+
+                Case "RSOC"
+                    Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
+                    Me.RSOCRegisterBindingSource.MoveLast()
+
+                Case "DA"
+                    Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
+                    Me.DARegisterBindingSource.MoveLast()
+
+                Case "CD"
+                    Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
+                    Me.CDRegisterBindingSource.MoveLast()
+
+                Case "FPA"
+                    Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
+                    Me.FPARegisterBindingSource.MoveLast()
+
+                Case "IDR"
+                    Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
+                    Me.JoinedIDRBindingSource.MoveLast()
+
+            End Select
+
+            If CurrentTab <> "RSOC" Then
+                ShowDesktopAlert(pnlRegisterName.Text & " records of year " & y & " loaded!")
+            Else
+                ShowDesktopAlert("SOC Reports Register records of year " & y & " loaded!")
+            End If
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        End Try
     End Sub
 
-
-    Private Sub LoadThisMonthsRecords() Handles btnLoadThisMonthRecords.Click
-        On Error Resume Next
-
-        Me.Cursor = Cursors.WaitCursor
-        Dim m As String = Month(Today)
-        Dim y As String = Year(Today)
-        Dim d1 As Date = New Date(y, m, 1)
-        Dim d As Integer = Date.DaysInMonth(y, m)
-        Dim d2 As Date = New Date(y, m, d)
-
-        Select Case CurrentTab
-            Case "SOC"
-                Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-                Me.SOCRegisterBindingSource.MoveLast()
-
-            Case "RSOC"
-                Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
-                Me.RSOCRegisterBindingSource.MoveLast()
-
-            Case "DA"
-                Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-                Me.DARegisterBindingSource.MoveLast()
-
-            Case "FPA"
-                Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-                Me.FPARegisterBindingSource.MoveLast()
-
-            Case "CD"
-                Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
-                Me.CDRegisterBindingSource.MoveLast()
-
-            Case "IDR"
-                Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
-                Me.JoinedIDRBindingSource.MoveLast()
-
-            Case Else
-                ShowDesktopAlert("This option is not available for the selected register!")
-                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                Exit Sub
-        End Select
-
-        If CurrentTab <> "RSOC" Then
-            ShowDesktopAlert("This Month's " & CurrentTab & " records loaded!")
-        Else
-            ShowDesktopAlert("This Month's SOC Reports Register loaded!")
-        End If
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-    End Sub
-
-
-
-    Private Sub LoadSpecifiedMonthsRecords() Handles btnLoadSpecifiedMonthsRecords.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-
-        Dim m = Month(Today)
-        Dim y = Year(Today)
-        Dim d1 As Date = New Date(y, m, 1)
-        Dim d As Integer = Date.DaysInMonth(y, m)
-        Dim d2 As Date = New Date(y, m, d)
-
-        Select Case CurrentTab
-            Case "SOC"
-
-                If Me.dtSOCInspection.IsEmpty Then
-                    MessageBoxEx.Show("Please enter a date in the 'Date of Inspection' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtSOCInspection.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                m = Month(Me.dtSOCInspection.Value)
-                y = Year(Me.dtSOCInspection.Value)
-                d1 = New Date(y, m, 1)
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d)
-
-                Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-                Me.SOCRegisterBindingSource.MoveLast()
-
-            Case "RSOC"
-                If Me.dtRSOCReportSentOn.IsEmpty Then
-                    MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtRSOCReportSentOn.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                m = Month(Me.dtRSOCReportSentOn.Value)
-                y = Year(Me.dtRSOCReportSentOn.Value)
-                d1 = New Date(y, m, 1)
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d)
-
-                Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
-                Me.RSOCRegisterBindingSource.MoveLast()
-
-            Case "DA"
-                If Me.dtDAEntry.IsEmpty Then
-                    MessageBoxEx.Show("Please enter a date in the 'Date of Entry' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtDAEntry.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                m = Month(Me.dtDAEntry.Value)
-                y = Year(Me.dtDAEntry.Value)
-                d1 = New Date(y, m, 1)
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d)
-
-                Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-                Me.DARegisterBindingSource.MoveLast()
-
-            Case "FPA"
-                If Me.dtFPADate.IsEmpty Then
-                    MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtFPADate.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                m = Month(Me.dtFPADate.Value)
-                y = Year(Me.dtFPADate.Value)
-                d1 = New Date(y, m, 1)
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d)
-
-                Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-                Me.FPARegisterBindingSource.MoveLast()
-            Case "CD"
-                If Me.dtCDExamination.IsEmpty Then
-                    MessageBoxEx.Show("Please enter a date in the 'Date' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtCDExamination.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-
-                m = Month(Me.dtCDExamination.Value)
-                y = Year(Me.dtCDExamination.Value)
-                d1 = New Date(y, m, 1)
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d)
-
-                Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
-                Me.CDRegisterBindingSource.MoveLast()
-            Case Else
-                ShowDesktopAlert("This option is not available for the selected register!")
-                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                Exit Sub
-        End Select
-
-        If CurrentTab <> "RSOC" Then
-            ShowDesktopAlert("Specified Month's " & CurrentTab & " records loaded!")
-        Else
-            ShowDesktopAlert("Specified Month's SOC Reports Register loaded!")
-        End If
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-    End Sub
-
-
-    Private Sub LoadSelectedYearRecords() Handles btnLoadSelectedYearRecords.Click
-
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        Dim y = Year(Today)
-        Select Case CurrentTab
-            Case "SOC"
-                If Me.txtSOCYear.Text = "" Then
-                    MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.txtSOCYear.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                y = Me.txtSOCYear.Text
-
-            Case "RSOC"
-                If Me.dtRSOCReportSentOn.IsEmpty Then
-                    MessageBoxEx.Show("Please enter a date in the 'Date of Sending Report' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.dtRSOCReportSentOn.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                y = Year(Me.dtRSOCReportSentOn.Value)
-
-            Case "DA"
-                If Me.txtDAYear.Text = "" Then
-                    MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.txtDAYear.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                y = Me.txtDAYear.Text
-
-            Case "FPA"
-                If Me.txtFPAYear.Text = "" Then
-                    MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.txtFPAYear.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                y = Me.txtFPAYear.Text
-
-            Case "CD"
-                If Me.txtCDYear.Text = "" Then
-                    MessageBoxEx.Show("Please enter the year in the 'Year' field", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.txtCDYear.Focus()
-                    If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                    Exit Sub
-                End If
-                y = Me.txtCDYear.Text
-            Case Else
-                ShowDesktopAlert("This option is not available for the selected register!")
-                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-                Exit Sub
-        End Select
-
-
-
-        Dim d1 As Date = New Date(y, 1, 1)
-        Dim d2 As Date = New Date(y, 12, 31)
-
-        Select Case CurrentTab
-            Case "SOC"
-                Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-                Me.SOCRegisterBindingSource.MoveLast()
-
-            Case "RSOC"
-                Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
-                Me.RSOCRegisterBindingSource.MoveLast()
-
-            Case "DA"
-                Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
-                Me.DARegisterBindingSource.MoveLast()
-
-            Case "CD"
-                Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
-                Me.CDRegisterBindingSource.MoveLast()
-
-            Case "FPA"
-                Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-                Me.FPARegisterBindingSource.MoveLast()
-
-        End Select
-
-        If CurrentTab <> "RSOC" Then
-            ShowDesktopAlert("Specified Year's " & CurrentTab & " records loaded!")
-        Else
-            ShowDesktopAlert("Specified Year's SOC Reports Register loaded!")
-        End If
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-    End Sub
 #End Region
 
 
@@ -2655,10 +2414,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         Me.btnFacingSheetContext.Visible = False
-        Me.btnLoadThisMonthRecords.Visible = False
-        Me.btnLoadThisYearRecords.Visible = False
-        Me.btnLoadSpecifiedMonthsRecords.Visible = False
-        Me.btnLoadSelectedYearRecords.Visible = False
+        Me.txtLoadSelectedYearRecords.Visible = False
 
         Select Case e.NewTab.Name
 
@@ -2674,12 +2430,7 @@ Public Class frmMainInterface
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveSOC
                 Me.btnFacingSheetContext.Visible = True
-                Me.btnLoadThisMonthRecords.Visible = True
-                Me.btnLoadThisYearRecords.Visible = True
-                Me.btnLoadSpecifiedMonthsRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Year'"
-                Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date of Inspection'"
+                Me.txtLoadSelectedYearRecords.Visible = True
                 Me.SOCDatagrid.Cursor = Cursors.Default
 
 
@@ -2695,13 +2446,7 @@ Public Class frmMainInterface
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveRSOC
                 Me.RSOCDatagrid.Cursor = Cursors.Default
-                Me.btnLoadThisMonthRecords.Visible = True
-                Me.btnLoadThisYearRecords.Visible = True
-                Me.btnLoadSpecifiedMonthsRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Date of Sending Report'"
-                Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date of Sending Report'"
-
+                Me.txtLoadSelectedYearRecords.Visible = True
 
             Case Me.DATabItem.Name
                 Me.pnlRegisterName.Text = "Daily Arrest Slips Register"
@@ -2716,13 +2461,7 @@ Public Class frmMainInterface
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveDA
                 Me.DADatagrid.Cursor = Cursors.Default
-                Me.btnLoadThisMonthRecords.Visible = True
-                Me.btnLoadThisYearRecords.Visible = True
-                Me.btnLoadSpecifiedMonthsRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Year'"
-                Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date of Entry'"
-
+                Me.txtLoadSelectedYearRecords.Visible = True
 
             Case Me.IDTabItem.Name
                 Me.pnlRegisterName.Text = "Identified Slips Register"
@@ -2763,12 +2502,7 @@ Public Class frmMainInterface
 
                 Me.AcceptButton = btnSaveFPA
                 Me.FPADataGrid.Cursor = Cursors.Default
-                Me.btnLoadThisMonthRecords.Visible = True
-                Me.btnLoadThisYearRecords.Visible = True
-                Me.btnLoadSpecifiedMonthsRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Year'"
-                Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date'"
+                Me.txtLoadSelectedYearRecords.Visible = True
 
 
             Case Me.PSTabItem.Name
@@ -2792,12 +2526,7 @@ Public Class frmMainInterface
                 If PSListChanged Then LoadPSList()
                 Me.AcceptButton = btnSaveCD
                 Me.CDDataGrid.Cursor = Cursors.Default
-                Me.btnLoadThisMonthRecords.Visible = True
-                Me.btnLoadThisYearRecords.Visible = True
-                Me.btnLoadSpecifiedMonthsRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Visible = True
-                Me.btnLoadSelectedYearRecords.Text = "Load Records of the year specified in 'Year'"
-                Me.btnLoadSpecifiedMonthsRecords.Text = "Load Records of the month specified in 'Date'"
+                Me.txtLoadSelectedYearRecords.Visible = True
 
             Case Me.IOTabItem.Name
                 Me.pnlRegisterName.Text = "List of Officers"
@@ -2822,10 +2551,7 @@ Public Class frmMainInterface
                 Me.pnlRegisterName.Text = "Identification Register"
                 CurrentTab = "IDR"
                 Me.JoinedIDRDataGrid.Focus()
-                Me.btnLoadThisMonthRecords.Visible = True
-                Me.btnLoadThisYearRecords.Visible = True
-                Me.btnLoadSpecifiedMonthsRecords.Visible = False
-                Me.btnLoadSelectedYearRecords.Visible = False
+                Me.txtLoadSelectedYearRecords.Visible = True
 
         End Select
 
@@ -4866,9 +4592,9 @@ Public Class frmMainInterface
 
 
 #Region "ALLOW NUMBER ONLY"
-    Private Sub AllowOnlyNumberKeys(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAutoBackupPeriod.KeyDown
+    Private Sub AllowOnlyNumberKeys(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAutoBackupPeriod.KeyDown ' txtLoadRecordsOfTheYear.KeyDown
         On Error Resume Next
-        If e.KeyCode <> Keys.NumPad0 And e.KeyCode <> Keys.NumPad1 And e.KeyCode <> Keys.NumPad2 And e.KeyCode <> Keys.NumPad3 And e.KeyCode <> Keys.NumPad4 And e.KeyCode <> Keys.NumPad5 And e.KeyCode <> Keys.NumPad6 And e.KeyCode <> Keys.NumPad7 And e.KeyCode <> Keys.NumPad8 And e.KeyCode <> Keys.NumPad9 And e.KeyCode <> Keys.D0 And e.KeyCode <> Keys.D1 And e.KeyCode <> Keys.D2 And e.KeyCode <> Keys.D3 And e.KeyCode <> Keys.D4 And e.KeyCode <> Keys.D5 And e.KeyCode <> Keys.D6 And e.KeyCode <> Keys.D7 And e.KeyCode <> Keys.D8 And e.KeyCode <> Keys.D9 And e.KeyCode <> Keys.Back And e.KeyCode <> Keys.Enter And e.KeyCode <> Keys.Delete And e.KeyCode <> Keys.Left And e.KeyCode <> Keys.Right And e.KeyCode <> Keys.End And e.KeyCode <> Keys.Home Then e.SuppressKeyPress = True
+        If e.KeyCode <> Keys.NumPad0 And e.KeyCode <> Keys.NumPad1 And e.KeyCode <> Keys.NumPad2 And e.KeyCode <> Keys.NumPad3 And e.KeyCode <> Keys.NumPad4 And e.KeyCode <> Keys.NumPad5 And e.KeyCode <> Keys.NumPad6 And e.KeyCode <> Keys.NumPad7 And e.KeyCode <> Keys.NumPad8 And e.KeyCode <> Keys.NumPad9 And e.KeyCode <> Keys.D0 And e.KeyCode <> Keys.D1 And e.KeyCode <> Keys.D2 And e.KeyCode <> Keys.D3 And e.KeyCode <> Keys.D4 And e.KeyCode <> Keys.D5 And e.KeyCode <> Keys.D6 And e.KeyCode <> Keys.D7 And e.KeyCode <> Keys.D8 And e.KeyCode <> Keys.D9 And e.KeyCode <> Keys.Back And e.KeyCode <> Keys.Enter And e.KeyCode <> Keys.Delete And e.KeyCode <> Keys.Left And e.KeyCode <> Keys.Right And e.KeyCode <> Keys.End And e.KeyCode <> Keys.Home And e.KeyCode <> Keys.Enter Then e.SuppressKeyPress = True
     End Sub
 
     Private Sub AllowOnlyNumberKeysAndSlash(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSOCNumber.KeyDown, txtDANumber.KeyDown, txtFPANumber.KeyDown, txtCDNumber.KeyDown
@@ -4876,9 +4602,7 @@ Public Class frmMainInterface
         If e.KeyCode <> Keys.NumPad0 And e.KeyCode <> Keys.NumPad1 And e.KeyCode <> Keys.NumPad2 And e.KeyCode <> Keys.NumPad3 And e.KeyCode <> Keys.NumPad4 And e.KeyCode <> Keys.NumPad5 And e.KeyCode <> Keys.NumPad6 And e.KeyCode <> Keys.NumPad7 And e.KeyCode <> Keys.NumPad8 And e.KeyCode <> Keys.NumPad9 And e.KeyCode <> Keys.D0 And e.KeyCode <> Keys.D1 And e.KeyCode <> Keys.D2 And e.KeyCode <> Keys.D3 And e.KeyCode <> Keys.D4 And e.KeyCode <> Keys.D5 And e.KeyCode <> Keys.D6 And e.KeyCode <> Keys.D7 And e.KeyCode <> Keys.D8 And e.KeyCode <> Keys.D9 And e.KeyCode <> Keys.Back And e.KeyCode <> Keys.Enter And e.KeyCode <> Keys.Delete And e.KeyCode <> Keys.Left And e.KeyCode <> Keys.Right And e.KeyCode <> Keys.Divide And e.KeyCode <> Keys.OemQuestion And e.KeyCode <> Keys.End And e.KeyCode <> Keys.Home Then e.SuppressKeyPress = True
 
     End Sub
-
-
-    Private Sub PreventPasting(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.GotFocus, txtDANumber.GotFocus, txtFPANumber.GotFocus, txtCDNumber.GotFocus, txtAutoBackupPeriod.GotFocus
+    Private Sub PreventPasting(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.GotFocus, txtDANumber.GotFocus, txtFPANumber.GotFocus, txtCDNumber.GotFocus, txtAutoBackupPeriod.GotFocus, txtLoadSelectedYearRecords.GotFocus
         On Error Resume Next
         If My.Computer.Clipboard.ContainsText Then
             ClipBoardText = My.Computer.Clipboard.GetText
@@ -4886,7 +4610,7 @@ Public Class frmMainInterface
         End If
     End Sub
 
-    Private Sub RestoreClipBoardText(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.LostFocus, txtDANumber.LostFocus, txtFPANumber.LostFocus, txtCDNumber.LostFocus, txtAutoBackupPeriod.LostFocus
+    Private Sub RestoreClipBoardText(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSOCNumber.LostFocus, txtDANumber.LostFocus, txtFPANumber.LostFocus, txtCDNumber.LostFocus, txtAutoBackupPeriod.LostFocus, txtLoadSelectedYearRecords.LostFocus
         On Error Resume Next
         If ClipBoardText <> "" Then My.Computer.Clipboard.SetText(ClipBoardText)
     End Sub
@@ -7121,7 +6845,7 @@ errhandler:
                 End If
 
             Case "IDR"
-                MessageBoxEx.Show("This register is for view only. Please use SoC Register to add/edit records.")
+                MessageBoxEx.Show("Use SoC Register to add/edit records.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End Select
 
@@ -17068,4 +16792,5 @@ errhandler:
 #End Region
 
 
+  
 End Class
