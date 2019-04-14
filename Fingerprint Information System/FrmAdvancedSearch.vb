@@ -182,7 +182,7 @@ Public Class FrmAdvancedSearch
                 Case "CD"
                     dgtype.Value = frmMainInterface.CDDataGrid.Columns(i).ValueType.Name
                 Case "IDR"
-                    dgtype.Value = frmMainInterface.JoinedIDRDataGrid.Columns(i + 1).ValueType.Name
+                    dgtype.Value = frmMainInterface.JoinedIDRDataGrid.Columns(i).ValueType.Name
             End Select
 
 
