@@ -51062,7 +51062,7 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(15) {}
+            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(16) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        SlNumber, IdentificationNumber, SOCNumber, IdentificationDate, Iden" & _
@@ -51195,6 +51195,13 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(16) = New Global.System.Data.OleDb.OleDbCommand()
+            Me._commandCollection(16).Connection = Me.Connection
+            Me._commandCollection(16).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                NoOfCulpritsIdentified = " & _
+                "?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (CPsIdentified = ?)"
+            Me._commandCollection(16).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Original, False, Nothing))
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -52201,6 +52208,38 @@ Namespace FingerPrintDataSetTableAdapters
                 command.Parameters(13).Value = Global.System.DBNull.Value
             End If
             command.Parameters(14).Value = CType(Original_SlNumber, Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open()
+            End If
+            Dim returnValue As Integer
+            Try
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close()
+                End If
+            End Try
+            Return returnValue
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function UpdateQuerySetCulpritCount(ByVal NoOfCulpritsIdentified As String, ByVal Original_CPsIdentified As String) As Integer
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(16)
+            If (NoOfCulpritsIdentified Is Nothing) Then
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(0).Value = CType(NoOfCulpritsIdentified, String)
+            End If
+            If (Original_CPsIdentified Is Nothing) Then
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(1).Value = CType(Original_CPsIdentified, String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then

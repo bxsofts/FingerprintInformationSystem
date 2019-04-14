@@ -15494,7 +15494,6 @@ errhandler:
     '----------------------------------------CREATE TABLE-------------------------------------------------------
 #Region "CREATE TABLE"
 
-
     Public Sub CreateSOCReportRegisterTable()
         Try
             If DoesTableExist("SOCReportRegister", sConString) Then
@@ -15513,7 +15512,6 @@ errhandler:
         End Try
     End Sub
 
-
     Public Sub CreateOfficerTable()
         Try
             If DoesTableExist("OfficerTable", sConString) Then
@@ -15531,7 +15529,6 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
     End Sub
-
 
     Public Sub CreateSettingsTable()
         Try
@@ -15645,11 +15642,19 @@ errhandler:
             End If
 
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromNoOfCulprits("")
+            Thread.Sleep(500)
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromAddress("")
+            Thread.Sleep(500)
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromFingersIdentified("")
+            Thread.Sleep(500)
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromHenryClassification("")
+            Thread.Sleep(500)
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromDANumber("")
+            Thread.Sleep(500)
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentifiedFrom("")
+            Thread.Sleep(500)
+            Me.IdentificationRegisterTableAdapter1.UpdateQuerySetCulpritCount("1", "1")
+            Thread.Sleep(500)
             blIdentificationRegisterUpdateFailed = False
             '   RemoveSOCRegisterIDFields()
         Catch ex As Exception
