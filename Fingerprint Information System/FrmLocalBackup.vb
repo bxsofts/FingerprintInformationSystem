@@ -44,6 +44,7 @@ Public Class FrmLocalBackup
 
         Me.listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
         Me.listViewEx1.Sort()
+        If Me.listViewEx1.Items.Count > 0 Then Me.listViewEx1.Items(0).Selected = True
     End Sub
 
     Private Sub TakeBackup() Handles btnBackupDatabase.Click

@@ -15324,11 +15324,10 @@ errhandler:
             cmd.ExecuteNonQuery()
 
             CopyValuesToIdentificationRegisterTable()
-
-            RemoveNullFromIdentificationRegister()
-
             CreateCulpritsRegisterTable()
 
+            RemoveNullFromIdentificationRegister()
+            Thread.Sleep(1000)
             CopyValuesToCulpritsRegisterTable()
         Catch ex As Exception
             ShowErrorMessage(ex)
