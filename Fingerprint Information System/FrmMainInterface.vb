@@ -476,7 +476,6 @@ Public Class frmMainInterface
 
 #End Region
 
-    '
 
 #Region "COLOR STYLES" 'sets Color themes for the form
 
@@ -1515,11 +1514,7 @@ Public Class frmMainInterface
 
             End Select
 
-            If CurrentTab <> "RSOC" Then
-                ShowDesktopAlert(pnlRegisterName.Text & " records of year " & y & " loaded!")
-            Else
-                ShowDesktopAlert("SOC Reports Register records of year " & y & " loaded!")
-            End If
+            ShowDesktopAlert(pnlRegisterName.Text & " records of year " & y & " loaded!")
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
@@ -6843,10 +6838,8 @@ errhandler:
                 Else
                     Me.txtCDNumber.Focus()
                 End If
-
-            Case "IDR"
-                MessageBoxEx.Show("Use SoC Register to add/edit records.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            Case Else
+                MessageBoxEx.Show("This option is not available.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End Select
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
