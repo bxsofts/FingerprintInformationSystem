@@ -5391,15 +5391,15 @@ errhandler:
         End If
 
         If CurrentTab = "IDR" Then
-           
+            Me.Cursor = Cursors.WaitCursor
             blIDRNewDataMode = True
             blIDREditMode = False
             blIDROpenMode = False
 
-            FrmIdentificationRegisterDE.ClearFields()
+            FrmIdentificationRegisterDE.ClearAllFields()
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
-
+            Cursor = Cursors.Default
         End If
     End Sub
 
@@ -5777,12 +5777,14 @@ errhandler:
                 Exit Sub
             End If
 
+            Me.Cursor = Cursors.WaitCursor
             blIDRNewDataMode = False
             blIDREditMode = True
             blIDROpenMode = False
 
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
+            Me.Cursor = Cursors.Default
         End If
 
 
@@ -6156,12 +6158,14 @@ errhandler:
                 Exit Sub
             End If
 
+            Me.Cursor = Cursors.WaitCursor
             blIDRNewDataMode = False
             blIDREditMode = False
             blIDROpenMode = True
 
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
+            Me.Cursor = Cursors.Default
         End If
     End Sub
 #End Region
