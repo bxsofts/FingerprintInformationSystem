@@ -158,7 +158,7 @@ Module modMain
     Public Sub ShowErrorMessage(ex As Exception)
 
         On Error Resume Next
-        frmPleaseWait.Close()
+        ClosePleaseWaitForm()
         frmSplashScreen.CloseForm()
         DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
 

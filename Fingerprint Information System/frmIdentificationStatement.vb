@@ -336,7 +336,17 @@ Public Class frmIdentificationStatement
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).CulpritName)
+
+                    Dim CulpritName As String = Me.FingerPrintDataSet.JoinedIDR(j).CulpritName
+                    Dim Address As String = Me.FingerPrintDataSet.JoinedIDR(j).Address
+
+                    Dim joinedaddress As String = CulpritName & ", " & Address
+
+                    If CulpritName.StartsWith("A1") Then
+                        joinedaddress = SplitNameAndAddress(CulpritName, Address)
+                    End If
+
+                    WordApp.Selection.TypeText(joinedaddress)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -442,6 +452,30 @@ Public Class frmIdentificationStatement
         Me.Close()
     End Sub
 
+    Private Function SplitNameAndAddress(CulpritName As String, Address As String) As String
+        Try
+            Dim SplitCN() As String = CulpritName.Split(vbCrLf)
+            Dim SplitAddress() As String = Address.Split(vbCrLf)
+
+            If SplitCN.Length = SplitAddress.Length Then
+                Dim name As String = ""
+                Dim addrs As String = ""
+                Dim joinedaddress As String = ""
+                For i = 0 To SplitCN.Length - 1
+                    name = name & SplitCN(i)
+                    addrs = addrs & SplitAddress(i)
+                    joinedaddress = joinedaddress & name & " ," & addrs & vbCrLf
+                Next
+                Return joinedaddress.Trim
+            Else
+                Return CulpritName & ", " & Address
+            End If
+           
+        Catch ex As Exception
+            Return CulpritName & ", " & Address
+        End Try
+       
+    End Function
 
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try

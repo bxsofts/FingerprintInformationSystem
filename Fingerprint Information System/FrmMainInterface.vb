@@ -1007,6 +1007,8 @@ Public Class frmMainInterface
         If Me.LastModificationTableAdapter.Connection.State = ConnectionState.Open Then Me.LastModificationTableAdapter.Connection.Close()
         Me.LastModificationTableAdapter.Connection.ConnectionString = sConString
         Me.LastModificationTableAdapter.Connection.Open()
+
+
     End Sub
 #End Region
 
@@ -1023,7 +1025,7 @@ Public Class frmMainInterface
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
-            RemoveNullFromIdentificationRegister()
+            ' RemoveNullFromIdentificationRegister()
         End If
     End Sub
 
@@ -15308,6 +15310,7 @@ errhandler:
         End Try
     End Sub
 
+
     Public Sub CreateIdentificationRegisterTable()
         Try
             If DoesTableExist("IdentificationRegister", sConString) Then
@@ -15319,9 +15322,14 @@ errhandler:
             Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer)", con)
 
             cmd.ExecuteNonQuery()
-            Application.DoEvents()
 
             CopyValuesToIdentificationRegisterTable()
+
+            RemoveNullFromIdentificationRegister()
+
+            CreateCulpritsRegisterTable()
+
+            CopyValuesToCulpritsRegisterTable()
         Catch ex As Exception
             ShowErrorMessage(ex)
 
@@ -15339,9 +15347,42 @@ errhandler:
             Dim cmd = New OleDb.OleDbCommand("INSERT INTO IdentificationRegister (IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, CulpritName, IdentificationDetails, IDRNumber) SELECT IdentificationNumber, SOCNumber, IdentificationDate, CPsIdentified, IdentifiedBy, IdentifiedAs, Remarks, VAL(IdentificationNumber) FROM SOCRegister where FileStatus = 'Identified'", con)
 
             cmd.ExecuteNonQuery()
-            Application.DoEvents()
 
-            System.Threading.Thread.Sleep(2000)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
+    Public Sub CreateCulpritsRegisterTable()
+        Try
+            If DoesTableExist("CulpritsRegister", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE CulpritsRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION,  FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION)", con)
+
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
+
+    Public Sub CopyValuesToCulpritsRegisterTable()
+        Try
+            If Not DoesTableExist("CulpritsRegister", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("INSERT INTO CulpritsRegister (IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails) SELECT IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails FROM IdentificationRegister", con)
+
+            cmd.ExecuteNonQuery()
+           
             InsertOrUpdateLastModificationDate(Now)
 
 
@@ -15350,6 +15391,7 @@ errhandler:
 
         End Try
     End Sub
+    
 
     Private Sub RemoveNullFromIdentificationRegister()
         Try
@@ -15358,22 +15400,26 @@ errhandler:
                 Exit Sub
             End If
 
+            If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+            Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.IdentificationRegisterTableAdapter1.Connection.Open()
+
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromNoOfCulprits("")
-            Thread.Sleep(500)
+
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromAddress("")
-            Thread.Sleep(500)
+
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromFingersIdentified("")
-            Thread.Sleep(500)
+
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromHenryClassification("")
-            Thread.Sleep(500)
+
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromDANumber("")
-            Thread.Sleep(500)
+
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentifiedFrom("")
-            Thread.Sleep(500)
+
             Me.IdentificationRegisterTableAdapter1.UpdateQuerySetCulpritCount("1", "1")
-            Thread.Sleep(500)
+
             blIdentificationRegisterUpdateFailed = False
-            '   RemoveSOCRegisterIDFields()
+
         Catch ex As Exception
             blIdentificationRegisterUpdateFailed = True
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
