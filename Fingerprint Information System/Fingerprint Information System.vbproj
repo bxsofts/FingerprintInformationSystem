@@ -180,6 +180,12 @@
     <Compile Include="frmFISBackupList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmIdentificationCulpritDetails.Designer.vb">
+      <DependentUpon>frmIdentificationCulpritDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmIdentificationCulpritDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPassword.Designer.vb">
       <DependentUpon>frmPassword.vb</DependentUpon>
     </Compile>
@@ -506,6 +512,9 @@
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
     <EmbeddedResource Include="frmFISBackupList.resx">
       <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmIdentificationCulpritDetails.resx">
+      <DependentUpon>frmIdentificationCulpritDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPassword.resx">
       <DependentUpon>frmPassword.vb</DependentUpon>
