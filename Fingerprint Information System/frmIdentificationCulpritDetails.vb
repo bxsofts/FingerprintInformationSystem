@@ -22,7 +22,7 @@ Public Class frmIdentificationCulpritDetails
         Me.cmbIdentifiedFrom.DropDownStyle = ComboBoxStyle.DropDown
         Me.cmbIdentifiedFrom.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
-        If Me.btnSave.Text = "Update" Then
+        If Me.btnSave.Text = "Update List" Then
             LoadDataFromDGV()
         End If
 
@@ -153,6 +153,11 @@ Public Class frmIdentificationCulpritDetails
 
         CPsUsed = CPsUsed + Me.txtCPsIdentified.Value
 
+        If btnSave.Text = "Update List" Then
+            Dim oldcpcount = Val(FrmIdentificationRegisterDE.dgv.SelectedRows(0).Cells(4).Value)
+            CPsUsed = CPsUsed - oldcpcount
+        End If
+
         If CPsUsed > CPR Then
             MessageBoxEx.Show("Total no. of CPs entered (" & CPsUsed & ") exceeds the number of CPs remaining (" & CPR & ")", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtCPsIdentified.Focus()
@@ -163,7 +168,7 @@ Public Class frmIdentificationCulpritDetails
             SaveDetails()
         End If
 
-        If btnSave.Text = "Update" Then
+        If btnSave.Text = "Update List" Then
             UpdateDetails()
         End If
     End Sub
@@ -172,6 +177,7 @@ Public Class frmIdentificationCulpritDetails
 
             Dim dgvr As FingerPrintDataSet.CulpritsRegisterRow = FrmIdentificationRegisterDE.FingerPrintDataSet1.CulpritsRegister.NewCulpritsRegisterRow
             With dgvr
+                .IdentificationNumber = FrmIdentificationRegisterDE.txtIdentificationNumber.Text.Trim
                 .CulpritName = Me.txtCulpritName.Text.Trim
                 .Address = Me.txtAddress.Text.Trim
                 .CPsIdentified = Me.txtCPsIdentified.Value
@@ -202,15 +208,32 @@ Public Class frmIdentificationCulpritDetails
 
     Private Sub UpdateDetails()
         Try
+            Dim oldRow As FingerPrintDataSet.CulpritsRegisterRow = FrmIdentificationRegisterDE.FingerPrintDataSet1.CulpritsRegister.Rows(FrmIdentificationRegisterDE.dgv.SelectedRows(0).Index)
+
+            If oldRow IsNot Nothing Then
+                With oldRow
+                    .IdentificationNumber = FrmIdentificationRegisterDE.txtIdentificationNumber.Text.Trim
+                    .CulpritName = Me.txtCulpritName.Text.Trim
+                    .Address = Me.txtAddress.Text.Trim()
+                    .CPsIdentified = Me.txtCPsIdentified.Value
+                    .FingersIdentified = Me.txtFingersIdentified.Text.Trim
+                    .HenryClassification = Me.txtClassification.Text.Trim
+                    .DANumber = Me.txtDANumber.Text.Trim
+                    .IdentifiedFrom = Me.cmbIdentifiedFrom.Text.Trim
+                    .IdentificationDetails = Me.txtRemarks.Text.Trim
+                End With
+            End If
+
             With FrmIdentificationRegisterDE.dgv.SelectedRows(0)
-                .Cells(2).Value = Me.txtCulpritName.Text.Trim
-                .Cells(3).Value = Me.txtAddress.Text.Trim
-                .Cells(4).Value = Me.txtCPsIdentified.Value
-                .Cells(5).Value = Me.txtFingersIdentified.Text.Trim
-                .Cells(6).Value = Me.txtClassification.Text.Trim
-                .Cells(7).Value = Me.txtDANumber.Text.Trim
-                .Cells(8).Value = Me.cmbIdentifiedFrom.Text.Trim
-                .Cells(9).Value = Me.txtRemarks.Text.Trim
+                '  .Cells(1).Value = FrmIdentificationRegisterDE.txtIdentificationNumber.Text.Trim
+                ' .Cells(2).Value = Me.txtCulpritName.Text.Trim
+                '  .Cells(3).Value = Me.txtAddress.Text.Trim
+                '  .Cells(4).Value = Me.txtCPsIdentified.Value
+                '  .Cells(5).Value = Me.txtFingersIdentified.Text.Trim
+                '  .Cells(6).Value = Me.txtClassification.Text.Trim
+                '  .Cells(7).Value = Me.txtDANumber.Text.Trim
+                ' .Cells(8).Value = Me.cmbIdentifiedFrom.Text.Trim
+                ' .Cells(9).Value = Me.txtRemarks.Text.Trim
             End With
 
             ClearFields()

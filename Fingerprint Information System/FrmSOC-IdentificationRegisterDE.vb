@@ -58,6 +58,7 @@ Public Class FrmIdentificationRegisterDE
     Private Sub LoadIDRValues()
         Try
             With frmMainInterface.JoinedIDRDataGrid
+                CPR = Val(frmMainInterface.NoOfCPsRemaining(.SelectedCells(1).Value))
                 Me.txtIdentificationNumber.Text = .SelectedCells(0).Value.ToString
                 Me.txtSOCNumber.Text = .SelectedCells(1).Value.ToString
                 Me.dtIdentificationDate.ValueObject = .SelectedCells(2).Value
@@ -65,7 +66,8 @@ Public Class FrmIdentificationRegisterDE
                 IDRSerialNumber = .SelectedCells(20).Value.ToString
                 OriginalIDRNumber = .SelectedCells(0).Value.ToString
             End With
-
+            lblSOCNumberWarning.Text = "No. of CPs remaining: " & CPR
+            lblSOCNumberWarning.Visible = False
             CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, Me.txtIdentificationNumber.Text)
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -105,6 +107,7 @@ Public Class FrmIdentificationRegisterDE
         Next
         Me.dtIdentificationDate.IsEmpty = True
         Me.txtIdentificationNumber.Text = frmMainInterface.GenerateNewIDRNumber()
+        Me.lblSOCNumberWarning.Visible = False
     End Sub
 
     Private Sub txtSOCNumber_LostFocus(sender As Object, e As EventArgs) Handles txtSOCNumber.LostFocus
@@ -236,7 +239,7 @@ Public Class FrmIdentificationRegisterDE
             Exit Sub
         End If
 
-        frmIdentificationCulpritDetails.btnSave.Text = "Update"
+        frmIdentificationCulpritDetails.btnSave.Text = "Update List"
         frmIdentificationCulpritDetails.Show()
         frmIdentificationCulpritDetails.BringToFront()
 
@@ -261,9 +264,10 @@ Public Class FrmIdentificationRegisterDE
 
             If reply = Windows.Forms.DialogResult.No Then Exit Sub
 
-            Dim SlNo As Integer = dgv.SelectedRows(0).Cells(0).Value
-            Dim oldrow As FingerPrintDataSet.CulpritsRegisterRow = Me.FingerPrintDataSet1.CulpritsRegister.FindBySlNumber(SlNo)
-            oldrow.Delete()
+            ' Dim SlNo As Integer = dgv.SelectedRows(0).Cells(0).Value
+            ' Dim oldrow As FingerPrintDataSet.CulpritsRegisterRow = Me.FingerPrintDataSet1.CulpritsRegister.FindBySlNumber(SlNo)
+            '  oldrow.Delete()
+            Me.CulpritsRegisterBindingSource.RemoveCurrent()
             If Me.dgv.SelectedRows.Count = 0 And Me.dgv.RowCount <> 0 Then
                 Me.dgv.Rows(Me.dgv.RowCount - 1).Selected = True
             End If
@@ -280,7 +284,6 @@ Public Class FrmIdentificationRegisterDE
     End Sub
 
 #End Region
-
 
 
 #Region "SAVE DATA"
@@ -391,17 +394,19 @@ Public Class FrmIdentificationRegisterDE
 
 
             For i = 0 To c - 1
-                CulpritName = CulpritName & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(2).Value, dgv.Rows(i).Cells(2).Value)
-                Address = Address & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(3).Value, dgv.Rows(i).Cells(3).Value)
+                CulpritName = CulpritName & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(2).Value, dgv.Rows(i).Cells(2).Value)
+                Address = Address & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(3).Value, dgv.Rows(i).Cells(3).Value)
                 CPsIdentified = CPsIdentified + Val(dgv.Rows(i).Cells(4).Value)
-                FingersIdentified = FingersIdentified & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(5).Value, dgv.Rows(i).Cells(5).Value)
-                Classification = Classification & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(6).Value, dgv.Rows(i).Cells(6).Value)
-                DANumber = DANumber & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(7).Value, dgv.Rows(i).Cells(7).Value)
-                IdentifiedFrom = IdentifiedFrom & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(8).Value, dgv.Rows(i).Cells(8).Value)
-                Remarks = Remarks & vbCrLf & IIf(c > 0, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(9).Value, dgv.Rows(i).Cells(9).Value)
+                FingersIdentified = FingersIdentified & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(5).Value, dgv.Rows(i).Cells(5).Value)
+                Classification = Classification & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(6).Value, dgv.Rows(i).Cells(6).Value)
+                DANumber = DANumber & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(7).Value, dgv.Rows(i).Cells(7).Value)
+                IdentifiedFrom = IdentifiedFrom & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(8).Value, dgv.Rows(i).Cells(8).Value)
+                Remarks = Remarks & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(9).Value, dgv.Rows(i).Cells(9).Value)
             Next
 
-            If Not blUpdate Then ' if new record
+            Me.CulpritsRegisterTableAdapter1.Update(Me.FingerPrintDataSet1.CulpritsRegister)
+
+            If Not blUpdate Then
                 Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN)
 
                 Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegister, Me.txtSOCNumber.Text.Trim)
