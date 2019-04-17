@@ -37,7 +37,7 @@
     <Shape ID="DesignTable:CommonSettings" ZOrder="8" X="1000" Y="-157" Height="191" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:IdentificationRegister" ZOrder="2" X="977" Y="-55" Height="476" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:JoinedIDR" ZOrder="3" X="25" Y="225" Height="400" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:CulpritsRegister" ZOrder="1" X="964" Y="-103" Height="286" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
+    <Shape ID="DesignTable:CulpritsRegister" ZOrder="1" X="964" Y="-103" Height="343" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="216" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

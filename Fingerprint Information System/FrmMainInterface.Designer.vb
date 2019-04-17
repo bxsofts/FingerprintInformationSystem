@@ -1104,6 +1104,7 @@ Partial Class frmMainInterface
         Me.SettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SettingsTableAdapter()
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
+        Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -14334,6 +14335,10 @@ Partial Class frmMainInterface
         '
         Me.CommonSettingsTableAdapter1.ClearBeforeFill = true
         '
+        'CulpritsRegisterTableAdapter1
+        '
+        Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
+        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -15465,5 +15470,6 @@ End Sub
     Friend WithEvents btnIdentificationRegister As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnIdentificationStatement As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents txtLoadSelectedYearRecords As DevComponents.DotNetBar.TextBoxItem
+    Friend WithEvents CulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter
 
 End Class

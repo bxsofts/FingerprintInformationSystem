@@ -1008,7 +1008,9 @@ Public Class frmMainInterface
         Me.LastModificationTableAdapter.Connection.ConnectionString = sConString
         Me.LastModificationTableAdapter.Connection.Open()
 
-
+        If Me.CulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CulpritsRegisterTableAdapter1.Connection.Close()
+        Me.CulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
+        Me.CulpritsRegisterTableAdapter1.Connection.Open()
     End Sub
 #End Region
 
@@ -6526,11 +6528,26 @@ errhandler:
                 If reply = Windows.Forms.DialogResult.Yes Then
 
                     Dim IdentificationNumber = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
+                    Dim SOCNo = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString()
+
                     Dim oldRow As FingerPrintDataSet.JoinedIDRRow
                     oldRow = Me.FingerPrintDataSet.JoinedIDR.FindBySlNumber(Me.JoinedIDRDataGrid.SelectedCells(20).Value.ToString())
                     oldRow.Delete()
 
                     Me.IdentificationRegisterTableAdapter1.DeleteSelectedRecord(IdentificationNumber)
+                    Me.CulpritsRegisterTableAdapter1.DeleteQuery(IdentificationNumber)
+
+                    Dim count = Me.IdentificationRegisterTableAdapter1.CheckSOCNumberExists(SOCNo)
+
+                    If count = 0 Then
+                        Me.SOCRegisterTableAdapter.UpdateQuerySetFileStatus("", "", SOCNo)
+                    End If
+
+                    If count > 0 Then
+                        Me.SOCRegisterTableAdapter.UpdateQuerySetFileStatus("Identified", "", SOCNo)
+                    End If
+
+
                     ShowDesktopAlert("Selected record deleted!")
                     If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 And Me.JoinedIDRDataGrid.RowCount <> 0 Then
                         Me.JoinedIDRDataGrid.Rows(Me.JoinedIDRDataGrid.RowCount - 1).Selected = True

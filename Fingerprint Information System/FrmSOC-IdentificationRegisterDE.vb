@@ -58,7 +58,7 @@ Public Class FrmIdentificationRegisterDE
     Private Sub LoadIDRValues()
         Try
             With frmMainInterface.JoinedIDRDataGrid
-                CPR = Val(frmMainInterface.NoOfCPsRemaining(.SelectedCells(1).Value))
+                CPR = Val(Me.SocRegisterTableAdapter1.ScalarQueryCPsRemainingInSOCNumber(.SelectedCells(1).Value))
                 Me.txtIdentificationNumber.Text = .SelectedCells(0).Value.ToString
                 Me.txtSOCNumber.Text = .SelectedCells(1).Value.ToString
                 Me.dtIdentificationDate.ValueObject = .SelectedCells(2).Value
@@ -124,7 +124,8 @@ Public Class FrmIdentificationRegisterDE
             End If
 
             Me.lblSOCNumberWarning.Visible = True
-            CPR = Val(frmMainInterface.NoOfCPsRemaining(SOCNumber))
+            CPR = Val(Me.SocRegisterTableAdapter1.ScalarQueryCPsRemainingInSOCNumber(SOCNumber))
+
             If CPR = 0 Then
                 lblSOCNumberWarning.Text = "Error: No. of CPs remaining is Zero"
             End If
