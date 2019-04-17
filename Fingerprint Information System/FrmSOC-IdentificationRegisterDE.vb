@@ -95,11 +95,8 @@ Public Class FrmIdentificationRegisterDE
 
 
 #Region "DATA FIELD SETTINGS"
-    Public Sub ClearAllFields()
-        ClearIDFields()
-    End Sub
 
-    Private Sub ClearIDFields()
+    Public Sub ClearIDFields()
         For Each ctrl As Control In Me.PanelEx1.Controls 'clear all textboxes
             If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.DotNetBar.Controls.ComboBoxEx Or TypeOf (ctrl) Is DevComponents.Editors.IntegerInput Then
                 ctrl.Text = ""
@@ -108,6 +105,7 @@ Public Class FrmIdentificationRegisterDE
         Me.dtIdentificationDate.IsEmpty = True
         Me.txtIdentificationNumber.Text = frmMainInterface.GenerateNewIDRNumber()
         Me.lblSOCNumberWarning.Visible = False
+        CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, "")
     End Sub
 
     Private Sub txtSOCNumber_LostFocus(sender As Object, e As EventArgs) Handles txtSOCNumber.LostFocus
@@ -476,7 +474,7 @@ Public Class FrmIdentificationRegisterDE
 
             ClearIDFields()
 
-            CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, Me.txtIdentificationNumber.Text)
+
 
         Catch ex As Exception
             ShowErrorMessage(ex)

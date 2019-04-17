@@ -224,18 +224,6 @@ Public Class frmIdentificationCulpritDetails
                 End With
             End If
 
-            With FrmIdentificationRegisterDE.dgv.SelectedRows(0)
-                '  .Cells(1).Value = FrmIdentificationRegisterDE.txtIdentificationNumber.Text.Trim
-                ' .Cells(2).Value = Me.txtCulpritName.Text.Trim
-                '  .Cells(3).Value = Me.txtAddress.Text.Trim
-                '  .Cells(4).Value = Me.txtCPsIdentified.Value
-                '  .Cells(5).Value = Me.txtFingersIdentified.Text.Trim
-                '  .Cells(6).Value = Me.txtClassification.Text.Trim
-                '  .Cells(7).Value = Me.txtDANumber.Text.Trim
-                ' .Cells(8).Value = Me.cmbIdentifiedFrom.Text.Trim
-                ' .Cells(9).Value = Me.txtRemarks.Text.Trim
-            End With
-
             ClearFields()
             Me.Close()
 

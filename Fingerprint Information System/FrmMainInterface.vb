@@ -5398,7 +5398,7 @@ errhandler:
             blIDREditMode = False
             blIDROpenMode = False
 
-            FrmIdentificationRegisterDE.ClearAllFields()
+            FrmIdentificationRegisterDE.ClearidFields()
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
             Cursor = Cursors.Default
@@ -6539,12 +6539,25 @@ errhandler:
 
                     Dim count = Me.IdentificationRegisterTableAdapter1.CheckSOCNumberExists(SOCNo)
 
+                    Dim index = Me.SOCRegisterBindingSource.Find("SOCNumber", SOCNo)
+                    
+
                     If count = 0 Then
                         Me.SOCRegisterTableAdapter.UpdateQuerySetFileStatus("", "", SOCNo)
+                        If index > -1 Then
+                            Me.SOCRegisterBindingSource.Position = index
+                            Me.SOCDatagrid.SelectedRows(0).Cells(22).Value = ""
+                            Me.SOCDatagrid.SelectedRows(0).Cells(24).Value = ""
+                        End If
                     End If
 
                     If count > 0 Then
                         Me.SOCRegisterTableAdapter.UpdateQuerySetFileStatus("Identified", "", SOCNo)
+                        If index > -1 Then
+                            Me.SOCRegisterBindingSource.Position = index
+                            Me.SOCDatagrid.SelectedRows(0).Cells(22).Value = "Identified"
+                            Me.SOCDatagrid.SelectedRows(0).Cells(24).Value = ""
+                        End If
                     End If
 
 
