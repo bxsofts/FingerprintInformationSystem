@@ -1105,6 +1105,7 @@ Partial Class frmMainInterface
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
+        Me.btnShowIdentifiedDocket = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1963,7 +1964,7 @@ Partial Class frmMainInterface
         'btnIdentificationRegister
         '
         Me.btnIdentificationRegister.Name = "btnIdentificationRegister"
-        Me.btnIdentificationRegister.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIdentificationStatement, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases})
+        Me.btnIdentificationRegister.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIdentificationStatement, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnShowIdentifiedDocket})
         Me.btnIdentificationRegister.Text = "Identification Register"
         '
         'btnIdentificationStatement
@@ -14339,6 +14340,13 @@ Partial Class frmMainInterface
         '
         Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
         '
+        'btnShowIdentifiedDocket
+        '
+        Me.btnShowIdentifiedDocket.BeginGroup = true
+        Me.btnShowIdentifiedDocket.ForeColor = System.Drawing.Color.Red
+        Me.btnShowIdentifiedDocket.Name = "btnShowIdentifiedDocket"
+        Me.btnShowIdentifiedDocket.Text = "Show 'Identified File' Docket"
+        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -15471,5 +15479,6 @@ End Sub
     Friend WithEvents btnIdentificationStatement As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents txtLoadSelectedYearRecords As DevComponents.DotNetBar.TextBoxItem
     Friend WithEvents CulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter
+    Friend WithEvents btnShowIdentifiedDocket As DevComponents.DotNetBar.ButtonItem
 
 End Class

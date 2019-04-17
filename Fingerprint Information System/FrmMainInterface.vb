@@ -3971,10 +3971,6 @@ Public Class frmMainInterface
                 Me.btnPhotoReceivedContext.Checked = False
             End If
 
-            If UCase(Me.SOCDatagrid.SelectedCells(24).Value.ToString) = "IDENTIFIED" Then
-                Me.btnIdentifiedTemplateContextMenu.Visible = True
-            End If
-
         End If
 
 
@@ -14135,6 +14131,20 @@ errhandler:
         End Try
     End Sub
 
+    Private Sub btnShowIdentifiedDocket_Click(sender As Object, e As EventArgs) Handles btnShowIdentifiedDocket.Click
+        If Me.JoinedIDRDataGrid.RowCount = 0 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("No data to open!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        GenerateIdentifiedFileDocket()
+
+    End Sub
 
     Private Sub GenerateIdentifiedFileDocket() Handles btnIdentifiedTemplateContextMenu.Click
 
@@ -14155,38 +14165,19 @@ errhandler:
             Dim InspectingOfficer As String = ""
             Dim IdentifyingOfficer As String = ""
             Dim sdtid As String = ""
-            Dim dtid As Date = Today
             Dim PS As String = ""
             Dim Cr As String = ""
             Dim dtins As String = ""
-            Dim accused As String = ""
+           
 
-            If CurrentTab = "SOC" Then
-                idno = Me.SOCDatagrid.SelectedCells(30).Value.ToString()
-                SoCNumber = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
-                InspectingOfficer = Me.SOCDatagrid.SelectedCells(9).Value.ToString().Replace(vbNewLine, "; ")
-                IdentifyingOfficer = Me.SOCDatagrid.SelectedCells(25).Value.ToString().Replace(vbNewLine, "; ")
-                sdtid = Me.SOCDatagrid.SelectedCells(26).FormattedValue.ToString
-                dtid = Me.SOCDatagrid.SelectedCells(26).Value
-                PS = Me.SOCDatagrid.SelectedCells(5).Value.ToString
-                Cr = Me.SOCDatagrid.SelectedCells(6).Value.ToString & " u/s " & Me.SOCDatagrid.SelectedCells(7).Value.ToString
-                dtins = Me.SOCDatagrid.SelectedCells(2).FormattedValue.ToString
-                accused = Me.SOCDatagrid.SelectedCells(28).Value.ToString
-            End If
-
-
-            If CurrentTab = "IDR" Then
-                idno = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
-                SoCNumber = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString()
-                InspectingOfficer = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
-                IdentifyingOfficer = Me.JoinedIDRDataGrid.SelectedCells(10).Value.ToString().Replace(vbNewLine, "; ")
-                sdtid = Me.JoinedIDRDataGrid.SelectedCells(2).FormattedValue.ToString
-                dtid = Me.JoinedIDRDataGrid.SelectedCells(2).Value
-                PS = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
-                Cr = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString & " u/s " & Me.JoinedIDRDataGrid.SelectedCells(6).Value.ToString
-                dtins = Me.JoinedIDRDataGrid.SelectedCells(3).FormattedValue.ToString
-                accused = Me.JoinedIDRDataGrid.SelectedCells(11).Value.ToString
-            End If
+            idno = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
+            SoCNumber = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString()
+            InspectingOfficer = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
+            IdentifyingOfficer = Me.JoinedIDRDataGrid.SelectedCells(8).Value.ToString().Replace(vbNewLine, "; ")
+            sdtid = Me.JoinedIDRDataGrid.SelectedCells(2).FormattedValue.ToString
+            PS = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
+            Cr = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString & " u/s " & Me.JoinedIDRDataGrid.SelectedCells(6).Value.ToString
+            dtins = Me.JoinedIDRDataGrid.SelectedCells(3).FormattedValue.ToString
 
 
             Dim wdApp As Word.Application
@@ -14227,7 +14218,33 @@ errhandler:
             wdBooks("Cr").Range.Text = Cr
             wdBooks("DIns").Range.Text = dtins
             wdBooks("Did").Range.Text = sdtid
-            wdBooks("Accused").Range.Text = accused & vbNewLine
+
+            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, idno)
+            Dim c As Integer = Me.FingerPrintDataSet1.CulpritsRegister.Rows.Count
+
+            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
+            For rc = 1 To c - 1
+                wdTbl.Rows.Add()
+            Next
+            Dim k = 8
+            For i = 0 To c - 1
+                If c > 1 Then
+                    wdTbl.Cell(k, 3).Range.Select()
+                    wdApp.Selection.TypeText("A" & (i + 1) & ".")
+                End If
+
+                wdTbl.Cell(k, 4).Range.Select()
+                wdApp.Selection.TypeText(Me.FingerPrintDataSet1.CulpritsRegister(i).CulpritName.Trim & vbCrLf & Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim & vbCrLf & vbCrLf & "Classification: " & Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim & vbCrLf)
+                k = k + 1
+            Next
+
+            If c = 1 Then
+                wdTbl.Cell(k - 1, 3).Merge(wdTbl.Cell(k - 1, 4))
+            End If
+
+            wdTbl.Borders.Enable = 0
+
             If InspectingOfficer = IdentifyingOfficer Then
                 wdBooks("FPEIns").Range.Text = "Inspected and Identified by: " & InspectingOfficer
                 wdBooks("FPEId").Range.Text = ""
@@ -16864,5 +16881,4 @@ errhandler:
 #End Region
 
 
-  
 End Class
