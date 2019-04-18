@@ -160,11 +160,24 @@ Module modMain
         On Error Resume Next
         ClosePleaseWaitForm()
         frmSplashScreen.CloseForm()
-        DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        Dim trace = New Diagnostics.StackTrace(ex, True)
+        Dim line As String = Strings.Right(trace.ToString, 5)
+        Dim strMethod As String = ""
+        Dim i As Integer = 0
+
+        For Each sf As StackFrame In trace.GetFrames
+            i = i + 1
+            strMethod = strMethod & i & " - " & sf.GetMethod().ReflectedType.ToString & " " & sf.GetMethod().Name & vbCrLf
+        Next
+
+        Dim message As String = "Error at Line No. " & line.Trim & " - " & ex.Message & vbCrLf & vbCrLf & "Methods : " & vbCrLf & strMethod
+
+        DevComponents.DotNetBar.MessageBoxEx.Show(message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
 
             Dim file As System.IO.StreamWriter
             file = My.Computer.FileSystem.OpenTextFileWriter(strAppUserPath & "\ErrorLog.txt", False)
-            file.WriteLine(ex.Message)
+        file.WriteLine(message.Trim)
             file.Close()
 
     End Sub

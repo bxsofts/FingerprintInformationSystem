@@ -51796,1251 +51796,1294 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(16) {}
+            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(17) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT        SlNumber, IdentificationNumber, SOCNumber, IdentificationDate, Iden"& _ 
-                "tifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersId"& _ 
-                "entified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         HenryClassification, DANumber, IdentifiedFr"& _ 
-                "om, IdentificationDetails, IDRNumber"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OR"& _ 
+            Me._commandCollection(0).CommandText = "SELECT        SlNumber, IdentificationNumber, SOCNumber, IdentificationDate, Iden" & _
+                "tifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersId" & _
+                "entified, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         HenryClassification, DANumber, IdentifiedFr" & _
+                "om, IdentificationDetails, IDRNumber" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OR" & _
                 "DER BY IdentificationDate, IDRNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT        COUNT(IdentificationNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Identificatio"& _ 
-                "nRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationNumber = ?)"
+            Me._commandCollection(1).CommandText = "SELECT        COUNT(IdentificationNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            Identificatio" & _
+                "nRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (IdentificationNumber = ?)"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(2) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+            Me._commandCollection(2).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & _
                 "WHERE        (SOCNumber = ?)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(3) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(3).Connection = Me.Connection
             Me._commandCollection(3).CommandText = "DELETE FROM IdentificationRegister"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "DELETE FROM IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationNumber = ?)"
+            Me._commandCollection(4).CommandText = "DELETE FROM IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (IdentificationNumber = ?)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
             Me._commandCollection(5) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "INSERT INTO IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (IdentificationNumbe"& _ 
-                "r, SOCNumber, IdentificationDate, IdentifiedBy, CPsIdentified, NoOfCulpritsIdent"& _ 
-                "ified, CulpritName, Address, FingersIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Henry"& _ 
-                "Classification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VAL"& _ 
+            Me._commandCollection(5).CommandText = "INSERT INTO IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (IdentificationNumbe" & _
+                "r, SOCNumber, IdentificationDate, IdentifiedBy, CPsIdentified, NoOfCulpritsIdent" & _
+                "ified, CulpritName, Address, FingersIdentified, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Henry" & _
+                "Classification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "VAL" & _
                 "UES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CulpritName", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CulpritName", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DANumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CulpritName", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CulpritName", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Address", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DANumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(6) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Address = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE       "& _ 
+            Me._commandCollection(6).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                Address = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE       " & _
                 " (Address IS NULL)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Address", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(7) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(7).Connection = Me.Connection
-            Me._commandCollection(7).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                DANumber = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE      "& _ 
+            Me._commandCollection(7).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                DANumber = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE      " & _
                 "  (DANumber IS NULL)"
             Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DANumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DANumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(8).Connection = Me.Connection
-            Me._commandCollection(8).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                FingersIdentified = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WH"& _ 
+            Me._commandCollection(8).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                FingersIdentified = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WH" & _
                 "ERE        (FingersIdentified IS NULL)"
             Me._commandCollection(8).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(9).Connection = Me.Connection
-            Me._commandCollection(9).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                HenryClassification = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+            Me._commandCollection(9).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                HenryClassification = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & _
                 "WHERE        (HenryClassification IS NULL)"
             Me._commandCollection(9).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(10).Connection = Me.Connection
-            Me._commandCollection(10).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                IdentifiedFrom = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE"& _ 
+            Me._commandCollection(10).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                IdentifiedFrom = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE" & _
                 "        (IdentifiedFrom IS NULL)"
             Me._commandCollection(10).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(11).Connection = Me.Connection
-            Me._commandCollection(11).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                NoOfCulpritsIdentified = "& _ 
-                "?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (NoOfCulpritsIdentified IS NULL)"
+            Me._commandCollection(11).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                NoOfCulpritsIdentified = " & _
+                "?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (NoOfCulpritsIdentified IS NULL)"
             Me._commandCollection(11).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(12) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(12).Connection = Me.Connection
-            Me._commandCollection(12).CommandText = "SELECT        SUM(CPsIdentified) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(12).CommandText = "SELECT        SUM(CPsIdentified) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            IdentificationRegister" & _
+                "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(12).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(13).Connection = Me.Connection
-            Me._commandCollection(13).CommandText = "SELECT        MAX(IDRNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WH"& _ 
-                "ERE        (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(13).CommandText = "SELECT        SUM(NoOfCulpritsIdentified) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            Identificatio" & _
+                "nRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(13).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(14).Connection = Me.Connection
-            Me._commandCollection(14).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(14).CommandText = "SELECT        MAX(IDRNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WH" & _
+                "ERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(14).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(15) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(15).Connection = Me.Connection
-            Me._commandCollection(15).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                IdentificationNumber = ?,"& _ 
-                " SOCNumber = ?, IdentificationDate = ?, IdentifiedBy = ?, CPsIdentified = ?, NoO"& _ 
-                "fCulpritsIdentified = ?, CulpritName = ?, Address = ?, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                       "& _ 
-                "  FingersIdentified = ?, HenryClassification = ?, DANumber = ?, IdentifiedFrom ="& _ 
-                " ?, IdentificationDetails = ?, IDRNumber = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SlNumber = ?)"
+            Me._commandCollection(15).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & _
+                "WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(15).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CulpritName", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CulpritName", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DANumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(16) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(16).Connection = Me.Connection
-            Me._commandCollection(16).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                NoOfCulpritsIdentified = "& _ 
-                "?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (CPsIdentified = ?)"
+            Me._commandCollection(16).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                IdentificationNumber = ?," & _
+                " SOCNumber = ?, IdentificationDate = ?, IdentifiedBy = ?, CPsIdentified = ?, NoO" & _
+                "fCulpritsIdentified = ?, CulpritName = ?, Address = ?, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                       " & _
+                "  FingersIdentified = ?, HenryClassification = ?, DANumber = ?, IdentifiedFrom =" & _
+                " ?, IdentificationDetails = ?, IDRNumber = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SlNumber = ?)"
             Me._commandCollection(16).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CulpritName", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CulpritName", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Address", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DANumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(17) = New Global.System.Data.OleDb.OleDbCommand()
+            Me._commandCollection(17).Connection = Me.Connection
+            Me._commandCollection(17).CommandText = "UPDATE       IdentificationRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                NoOfCulpritsIdentified = " & _
+                "?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (CPsIdentified = ?)"
+            Me._commandCollection(17).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Original, False, Nothing))
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As FingerPrintDataSet.IdentificationRegisterDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)> _
+        Public Overridable Overloads Function Fill(ByVal dataTable As FingerPrintDataSet.IdentificationRegisterDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = true) Then
-                dataTable.Clear
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As FingerPrintDataSet.IdentificationRegisterDataTable
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)> _
+        Public Overridable Overloads Function GetData() As FingerPrintDataSet.IdentificationRegisterDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As FingerPrintDataSet.IdentificationRegisterDataTable = New FingerPrintDataSet.IdentificationRegisterDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataTable As FingerPrintDataSet.IdentificationRegisterDataTable) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataTable As FingerPrintDataSet.IdentificationRegisterDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataSet As FingerPrintDataSet) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataSet As FingerPrintDataSet) As Integer
             Return Me.Adapter.Update(dataSet, "IdentificationRegister")
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_SlNumber As Integer, ByVal Original_IdentificationNumber As String, ByVal Original_SOCNumber As String, ByVal Original_IdentificationDate As Global.System.Nullable(Of Date), ByVal Original_IdentifiedBy As String, ByVal Original_CPsIdentified As String, ByVal Original_NoOfCulpritsIdentified As String, ByVal Original_CulpritName As String, ByVal Original_FingersIdentified As String, ByVal Original_HenryClassification As String, ByVal Original_DANumber As String, ByVal Original_IdentifiedFrom As String, ByVal Original_IDRNumber As Global.System.Nullable(Of Integer)) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_SlNumber,Integer)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)> _
+        Public Overridable Overloads Function Delete(ByVal Original_SlNumber As Integer, ByVal Original_IdentificationNumber As String, ByVal Original_SOCNumber As String, ByVal Original_IdentificationDate As Global.System.Nullable(Of Date), ByVal Original_IdentifiedBy As String, ByVal Original_CPsIdentified As String, ByVal Original_NoOfCulpritsIdentified As String, ByVal Original_CulpritName As String, ByVal Original_FingersIdentified As String, ByVal Original_HenryClassification As String, ByVal Original_DANumber As String, ByVal Original_IdentifiedFrom As String, ByVal Original_IDRNumber As Global.System.Nullable(Of Integer)) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_SlNumber, Integer)
             If (Original_IdentificationNumber Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_IdentificationNumber,String)
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_IdentificationNumber, String)
             End If
             If (Original_SOCNumber Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_SOCNumber,String)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_SOCNumber, String)
             End If
-            If (Original_IdentificationDate.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_IdentificationDate.Value,Date)
+            If (Original_IdentificationDate.HasValue = True) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_IdentificationDate.Value, Date)
             Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             If (Original_IdentifiedBy Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_IdentifiedBy,String)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_IdentifiedBy, String)
             End If
             If (Original_CPsIdentified Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_CPsIdentified,String)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_CPsIdentified, String)
             End If
             If (Original_NoOfCulpritsIdentified Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_NoOfCulpritsIdentified,String)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_NoOfCulpritsIdentified, String)
             End If
             If (Original_CulpritName Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_CulpritName,String)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_CulpritName, String)
             End If
             If (Original_FingersIdentified Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_FingersIdentified,String)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_FingersIdentified, String)
             End If
             If (Original_HenryClassification Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_HenryClassification,String)
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_HenryClassification, String)
             End If
             If (Original_DANumber Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_DANumber,String)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_DANumber, String)
             End If
             If (Original_IdentifiedFrom Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_IdentifiedFrom,String)
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_IdentifiedFrom, String)
             End If
-            If (Original_IDRNumber.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_IDRNumber.Value,Integer)
+            If (Original_IDRNumber.HasValue = True) Then
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0, Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_IDRNumber.Value, Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1, Object)
                 Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open
+                Me.Adapter.DeleteCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close
+                    Me.Adapter.DeleteCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer)) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)> _
+        Public Overridable Overloads Function Insert(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             If (IdentificationNumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(0).Value = CType(IdentificationNumber,String)
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(IdentificationNumber, String)
             End If
             If (SOCNumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(SOCNumber,String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(SOCNumber, String)
             End If
-            If (IdentificationDate.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(IdentificationDate.Value, Date)
             Else
                 Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (IdentifiedBy Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(3).Value = CType(IdentifiedBy,String)
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(IdentifiedBy, String)
             End If
             If (CPsIdentified Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(CPsIdentified,String)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(CPsIdentified, String)
             End If
             If (NoOfCulpritsIdentified Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(NoOfCulpritsIdentified,String)
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(NoOfCulpritsIdentified, String)
             End If
             If (CulpritName Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(CulpritName,String)
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(CulpritName, String)
             End If
             If (Address Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Address,String)
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Address, String)
             End If
             If (FingersIdentified Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(FingersIdentified,String)
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(FingersIdentified, String)
             End If
             If (HenryClassification Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(HenryClassification,String)
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(HenryClassification, String)
             End If
             If (DANumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(DANumber,String)
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(DANumber, String)
             End If
             If (IdentifiedFrom Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(IdentifiedFrom,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(IdentifiedFrom, String)
             End If
             If (IdentificationDetails Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(IdentificationDetails,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(IdentificationDetails, String)
             End If
-            If (IDRNumber.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(IDRNumber.Value,Integer)
+            If (IDRNumber.HasValue = True) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(IDRNumber.Value, Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open
+                Me.Adapter.InsertCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close
+                    Me.Adapter.InsertCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal IdentificationNumber As String,  _
-                    ByVal SOCNumber As String,  _
-                    ByVal IdentificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal IdentifiedBy As String,  _
-                    ByVal CPsIdentified As String,  _
-                    ByVal NoOfCulpritsIdentified As String,  _
-                    ByVal CulpritName As String,  _
-                    ByVal Address As String,  _
-                    ByVal FingersIdentified As String,  _
-                    ByVal HenryClassification As String,  _
-                    ByVal DANumber As String,  _
-                    ByVal IdentifiedFrom As String,  _
-                    ByVal IdentificationDetails As String,  _
-                    ByVal IDRNumber As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_SlNumber As Integer,  _
-                    ByVal Original_IdentificationNumber As String,  _
-                    ByVal Original_SOCNumber As String,  _
-                    ByVal Original_IdentificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal Original_IdentifiedBy As String,  _
-                    ByVal Original_CPsIdentified As String,  _
-                    ByVal Original_NoOfCulpritsIdentified As String,  _
-                    ByVal Original_CulpritName As String,  _
-                    ByVal Original_FingersIdentified As String,  _
-                    ByVal Original_HenryClassification As String,  _
-                    ByVal Original_DANumber As String,  _
-                    ByVal Original_IdentifiedFrom As String,  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
+        Public Overridable Overloads Function Update( _
+                    ByVal IdentificationNumber As String, _
+                    ByVal SOCNumber As String, _
+                    ByVal IdentificationDate As Global.System.Nullable(Of Date), _
+                    ByVal IdentifiedBy As String, _
+                    ByVal CPsIdentified As String, _
+                    ByVal NoOfCulpritsIdentified As String, _
+                    ByVal CulpritName As String, _
+                    ByVal Address As String, _
+                    ByVal FingersIdentified As String, _
+                    ByVal HenryClassification As String, _
+                    ByVal DANumber As String, _
+                    ByVal IdentifiedFrom As String, _
+                    ByVal IdentificationDetails As String, _
+                    ByVal IDRNumber As Global.System.Nullable(Of Integer), _
+                    ByVal Original_SlNumber As Integer, _
+                    ByVal Original_IdentificationNumber As String, _
+                    ByVal Original_SOCNumber As String, _
+                    ByVal Original_IdentificationDate As Global.System.Nullable(Of Date), _
+                    ByVal Original_IdentifiedBy As String, _
+                    ByVal Original_CPsIdentified As String, _
+                    ByVal Original_NoOfCulpritsIdentified As String, _
+                    ByVal Original_CulpritName As String, _
+                    ByVal Original_FingersIdentified As String, _
+                    ByVal Original_HenryClassification As String, _
+                    ByVal Original_DANumber As String, _
+                    ByVal Original_IdentifiedFrom As String, _
                     ByVal Original_IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             If (IdentificationNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(IdentificationNumber,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(IdentificationNumber, String)
             End If
             If (SOCNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SOCNumber,String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(SOCNumber, String)
             End If
-            If (IdentificationDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(IdentificationDate.Value, Date)
             Else
                 Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (IdentifiedBy Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(IdentifiedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(IdentifiedBy, String)
             End If
             If (CPsIdentified Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(CPsIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(CPsIdentified, String)
             End If
             If (NoOfCulpritsIdentified Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(NoOfCulpritsIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(NoOfCulpritsIdentified, String)
             End If
             If (CulpritName Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(CulpritName,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(CulpritName, String)
             End If
             If (Address Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Address,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Address, String)
             End If
             If (FingersIdentified Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(FingersIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(FingersIdentified, String)
             End If
             If (HenryClassification Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(HenryClassification,String)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(HenryClassification, String)
             End If
             If (DANumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(DANumber,String)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(DANumber, String)
             End If
             If (IdentifiedFrom Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(IdentifiedFrom,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(IdentifiedFrom, String)
             End If
             If (IdentificationDetails Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(IdentificationDetails,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(IdentificationDetails, String)
             End If
-            If (IDRNumber.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(IDRNumber.Value,Integer)
+            If (IDRNumber.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(IDRNumber.Value, Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_SlNumber,Integer)
+            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_SlNumber, Integer)
             If (Original_IdentificationNumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_IdentificationNumber,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_IdentificationNumber, String)
             End If
             If (Original_SOCNumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_SOCNumber,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_SOCNumber, String)
             End If
-            If (Original_IdentificationDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_IdentificationDate.Value,Date)
+            If (Original_IdentificationDate.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_IdentificationDate.Value, Date)
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
             If (Original_IdentifiedBy Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_IdentifiedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_IdentifiedBy, String)
             End If
             If (Original_CPsIdentified Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_CPsIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_CPsIdentified, String)
             End If
             If (Original_NoOfCulpritsIdentified Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_NoOfCulpritsIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_NoOfCulpritsIdentified, String)
             End If
             If (Original_CulpritName Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_CulpritName,String)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_CulpritName, String)
             End If
             If (Original_FingersIdentified Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(30).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_FingersIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_FingersIdentified, String)
             End If
             If (Original_HenryClassification Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_HenryClassification,String)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_HenryClassification, String)
             End If
             If (Original_DANumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(34).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_DANumber,String)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_DANumber, String)
             End If
             If (Original_IdentifiedFrom Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(36).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Original_IdentifiedFrom,String)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Original_IdentifiedFrom, String)
             End If
-            If (Original_IDRNumber.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Original_IDRNumber.Value,Integer)
+            If (Original_IDRNumber.HasValue = True) Then
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(0, Object)
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Original_IDRNumber.Value, Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(1, Object)
                 Me.Adapter.UpdateCommand.Parameters(38).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open
+                Me.Adapter.UpdateCommand.Connection.Open()
             End If
-            Try 
+            Try
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close
+                    Me.Adapter.UpdateCommand.Connection.Close()
                 End If
             End Try
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function CheckIDRNumberExists(ByVal IdentificationNumber As String) As Global.System.Nullable(Of Integer)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function CheckIDRNumberExists(ByVal IdentificationNumber As String) As Global.System.Nullable(Of Integer)
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(1)
             If (IdentificationNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(IdentificationNumber,String)
+                command.Parameters(0).Value = CType(IdentificationNumber, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Object
-            Try 
+            Try
                 returnValue = command.ExecuteScalar
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
-            If ((returnValue Is Nothing)  _
+            If ((returnValue Is Nothing) _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
                 Return New Global.System.Nullable(Of Integer)()
             Else
-                Return New Global.System.Nullable(Of Integer)(CType(returnValue,Integer))
+                Return New Global.System.Nullable(Of Integer)(CType(returnValue, Integer))
             End If
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function CheckSOCNumberExists(ByVal SOCNumber As String) As Global.System.Nullable(Of Integer)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function CheckSOCNumberExists(ByVal SOCNumber As String) As Global.System.Nullable(Of Integer)
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(2)
             If (SOCNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(SOCNumber,String)
+                command.Parameters(0).Value = CType(SOCNumber, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Object
-            Try 
+            Try
                 returnValue = command.ExecuteScalar
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
-            If ((returnValue Is Nothing)  _
+            If ((returnValue Is Nothing) _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
                 Return New Global.System.Nullable(Of Integer)()
             Else
-                Return New Global.System.Nullable(Of Integer)(CType(returnValue,Integer))
+                Return New Global.System.Nullable(Of Integer)(CType(returnValue, Integer))
             End If
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
-        Public Overloads Overridable Function DeleteAllRecords() As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, False)> _
+        Public Overridable Overloads Function DeleteAllRecords() As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(3)
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
-        Public Overloads Overridable Function DeleteSelectedRecord(ByVal IdentificationNumber As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, False)> _
+        Public Overridable Overloads Function DeleteSelectedRecord(ByVal IdentificationNumber As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(4)
             If (IdentificationNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(IdentificationNumber,String)
+                command.Parameters(0).Value = CType(IdentificationNumber, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
-        Public Overloads Overridable Function InsertQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer)) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, False)> _
+        Public Overridable Overloads Function InsertQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(5)
             If (IdentificationNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(IdentificationNumber,String)
+                command.Parameters(0).Value = CType(IdentificationNumber, String)
             End If
             If (SOCNumber Is Nothing) Then
                 command.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(1).Value = CType(SOCNumber,String)
+                command.Parameters(1).Value = CType(SOCNumber, String)
             End If
-            If (IdentificationDate.HasValue = true) Then
-                command.Parameters(2).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate.HasValue = True) Then
+                command.Parameters(2).Value = CType(IdentificationDate.Value, Date)
             Else
                 command.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (IdentifiedBy Is Nothing) Then
                 command.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(3).Value = CType(IdentifiedBy,String)
+                command.Parameters(3).Value = CType(IdentifiedBy, String)
             End If
             If (CPsIdentified Is Nothing) Then
                 command.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(4).Value = CType(CPsIdentified,String)
+                command.Parameters(4).Value = CType(CPsIdentified, String)
             End If
             If (NoOfCulpritsIdentified Is Nothing) Then
                 command.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(5).Value = CType(NoOfCulpritsIdentified,String)
+                command.Parameters(5).Value = CType(NoOfCulpritsIdentified, String)
             End If
             If (CulpritName Is Nothing) Then
                 command.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(6).Value = CType(CulpritName,String)
+                command.Parameters(6).Value = CType(CulpritName, String)
             End If
             If (Address Is Nothing) Then
                 command.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(7).Value = CType(Address,String)
+                command.Parameters(7).Value = CType(Address, String)
             End If
             If (FingersIdentified Is Nothing) Then
                 command.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(8).Value = CType(FingersIdentified,String)
+                command.Parameters(8).Value = CType(FingersIdentified, String)
             End If
             If (HenryClassification Is Nothing) Then
                 command.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(9).Value = CType(HenryClassification,String)
+                command.Parameters(9).Value = CType(HenryClassification, String)
             End If
             If (DANumber Is Nothing) Then
                 command.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(10).Value = CType(DANumber,String)
+                command.Parameters(10).Value = CType(DANumber, String)
             End If
             If (IdentifiedFrom Is Nothing) Then
                 command.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(11).Value = CType(IdentifiedFrom,String)
+                command.Parameters(11).Value = CType(IdentifiedFrom, String)
             End If
             If (IdentificationDetails Is Nothing) Then
                 command.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(12).Value = CType(IdentificationDetails,String)
+                command.Parameters(12).Value = CType(IdentificationDetails, String)
             End If
-            If (IDRNumber.HasValue = true) Then
-                command.Parameters(13).Value = CType(IDRNumber.Value,Integer)
+            If (IDRNumber.HasValue = True) Then
+                command.Parameters(13).Value = CType(IDRNumber.Value, Integer)
             Else
                 command.Parameters(13).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromAddress(ByVal Address As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function RemoveNullFromAddress(ByVal Address As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(6)
             If (Address Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(Address,String)
+                command.Parameters(0).Value = CType(Address, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromDANumber(ByVal DANumber As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function RemoveNullFromDANumber(ByVal DANumber As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(7)
             If (DANumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(DANumber,String)
+                command.Parameters(0).Value = CType(DANumber, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromFingersIdentified(ByVal FingersIdentified As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function RemoveNullFromFingersIdentified(ByVal FingersIdentified As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(8)
             If (FingersIdentified Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(FingersIdentified,String)
+                command.Parameters(0).Value = CType(FingersIdentified, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromHenryClassification(ByVal HenryClassification As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function RemoveNullFromHenryClassification(ByVal HenryClassification As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(9)
             If (HenryClassification Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(HenryClassification,String)
+                command.Parameters(0).Value = CType(HenryClassification, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromIdentifiedFrom(ByVal IdentifiedFrom As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function RemoveNullFromIdentifiedFrom(ByVal IdentifiedFrom As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(10)
             If (IdentifiedFrom Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(IdentifiedFrom,String)
+                command.Parameters(0).Value = CType(IdentifiedFrom, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromNoOfCulprits(ByVal NoOfCulpritsIdentified As String) As Integer
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function RemoveNullFromNoOfCulprits(ByVal NoOfCulpritsIdentified As String) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(11)
             If (NoOfCulpritsIdentified Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(NoOfCulpritsIdentified,String)
+                command.Parameters(0).Value = CType(NoOfCulpritsIdentified, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function ScalarQueryCPsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function ScalarQueryCPsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(12)
-            If (IdentificationDate.HasValue = true) Then
-                command.Parameters(0).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate.HasValue = True) Then
+                command.Parameters(0).Value = CType(IdentificationDate.Value, Date)
             Else
                 command.Parameters(0).Value = Global.System.DBNull.Value
             End If
-            If (IdentificationDate1.HasValue = true) Then
-                command.Parameters(1).Value = CType(IdentificationDate1.Value,Date)
+            If (IdentificationDate1.HasValue = True) Then
+                command.Parameters(1).Value = CType(IdentificationDate1.Value, Date)
             Else
                 command.Parameters(1).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Object
-            Try 
+            Try
                 returnValue = command.ExecuteScalar
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
-            If ((returnValue Is Nothing)  _
+            If ((returnValue Is Nothing) _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
                 Return New Global.System.Nullable(Of Double)()
             Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+                Return New Global.System.Nullable(Of Double)(CType(returnValue, Double))
             End If
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function ScalarQuerySOCsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Object
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function ScalarQueryCulpritCount(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(13)
-            If (IdentificationDate.HasValue = true) Then
-                command.Parameters(0).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate.HasValue = True) Then
+                command.Parameters(0).Value = CType(IdentificationDate.Value, Date)
             Else
                 command.Parameters(0).Value = Global.System.DBNull.Value
             End If
-            If (IdentificationDate1.HasValue = true) Then
-                command.Parameters(1).Value = CType(IdentificationDate1.Value,Date)
+            If (IdentificationDate1.HasValue = True) Then
+                command.Parameters(1).Value = CType(IdentificationDate1.Value, Date)
             Else
                 command.Parameters(1).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Object
-            Try 
+            Try
                 returnValue = command.ExecuteScalar
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
-            If ((returnValue Is Nothing)  _
+            If ((returnValue Is Nothing) _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return Nothing
+                Return New Global.System.Nullable(Of Double)()
             Else
-                Return CType(returnValue,Object)
+                Return New Global.System.Nullable(Of Double)(CType(returnValue, Double))
             End If
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function ScalarQuerySOCsIdentifiedBy(ByVal IdentifiedBy As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function ScalarQuerySOCsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Object
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(14)
-            If (IdentifiedBy Is Nothing) Then
-                command.Parameters(0).Value = Global.System.DBNull.Value
+            If (IdentificationDate.HasValue = True) Then
+                command.Parameters(0).Value = CType(IdentificationDate.Value, Date)
             Else
-                command.Parameters(0).Value = CType(IdentifiedBy,String)
+                command.Parameters(0).Value = Global.System.DBNull.Value
             End If
-            If (IdentificationDate.HasValue = true) Then
-                command.Parameters(1).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate1.HasValue = True) Then
+                command.Parameters(1).Value = CType(IdentificationDate1.Value, Date)
             Else
                 command.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (IdentificationDate1.HasValue = true) Then
-                command.Parameters(2).Value = CType(IdentificationDate1.Value,Date)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open()
+            End If
+            Dim returnValue As Object
+            Try
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close()
+                End If
+            End Try
+            If ((returnValue Is Nothing) _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return Nothing
+            Else
+                Return CType(returnValue, Object)
+            End If
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function ScalarQuerySOCsIdentifiedBy(ByVal IdentifiedBy As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(15)
+            If (IdentifiedBy Is Nothing) Then
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(0).Value = CType(IdentifiedBy, String)
+            End If
+            If (IdentificationDate.HasValue = True) Then
+                command.Parameters(1).Value = CType(IdentificationDate.Value, Date)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (IdentificationDate1.HasValue = True) Then
+                command.Parameters(2).Value = CType(IdentificationDate1.Value, Date)
             Else
                 command.Parameters(2).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Object
-            Try 
+            Try
                 returnValue = command.ExecuteScalar
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
-            If ((returnValue Is Nothing)  _
+            If ((returnValue Is Nothing) _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
                 Return New Global.System.Nullable(Of Integer)()
             Else
-                Return New Global.System.Nullable(Of Integer)(CType(returnValue,Integer))
+                Return New Global.System.Nullable(Of Integer)(CType(returnValue, Integer))
             End If
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function UpdateQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer), ByVal Original_SlNumber As Integer) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(15)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function UpdateQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer), ByVal Original_SlNumber As Integer) As Integer
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(16)
             If (IdentificationNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(IdentificationNumber,String)
+                command.Parameters(0).Value = CType(IdentificationNumber, String)
             End If
             If (SOCNumber Is Nothing) Then
                 command.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(1).Value = CType(SOCNumber,String)
+                command.Parameters(1).Value = CType(SOCNumber, String)
             End If
-            If (IdentificationDate.HasValue = true) Then
-                command.Parameters(2).Value = CType(IdentificationDate.Value,Date)
+            If (IdentificationDate.HasValue = True) Then
+                command.Parameters(2).Value = CType(IdentificationDate.Value, Date)
             Else
                 command.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (IdentifiedBy Is Nothing) Then
                 command.Parameters(3).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(3).Value = CType(IdentifiedBy,String)
+                command.Parameters(3).Value = CType(IdentifiedBy, String)
             End If
             If (CPsIdentified Is Nothing) Then
                 command.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(4).Value = CType(CPsIdentified,String)
+                command.Parameters(4).Value = CType(CPsIdentified, String)
             End If
             If (NoOfCulpritsIdentified Is Nothing) Then
                 command.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(5).Value = CType(NoOfCulpritsIdentified,String)
+                command.Parameters(5).Value = CType(NoOfCulpritsIdentified, String)
             End If
             If (CulpritName Is Nothing) Then
                 command.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(6).Value = CType(CulpritName,String)
+                command.Parameters(6).Value = CType(CulpritName, String)
             End If
             If (Address Is Nothing) Then
                 command.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(7).Value = CType(Address,String)
+                command.Parameters(7).Value = CType(Address, String)
             End If
             If (FingersIdentified Is Nothing) Then
                 command.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(8).Value = CType(FingersIdentified,String)
+                command.Parameters(8).Value = CType(FingersIdentified, String)
             End If
             If (HenryClassification Is Nothing) Then
                 command.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(9).Value = CType(HenryClassification,String)
+                command.Parameters(9).Value = CType(HenryClassification, String)
             End If
             If (DANumber Is Nothing) Then
                 command.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(10).Value = CType(DANumber,String)
+                command.Parameters(10).Value = CType(DANumber, String)
             End If
             If (IdentifiedFrom Is Nothing) Then
                 command.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(11).Value = CType(IdentifiedFrom,String)
+                command.Parameters(11).Value = CType(IdentifiedFrom, String)
             End If
             If (IdentificationDetails Is Nothing) Then
                 command.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(12).Value = CType(IdentificationDetails,String)
+                command.Parameters(12).Value = CType(IdentificationDetails, String)
             End If
-            If (IDRNumber.HasValue = true) Then
-                command.Parameters(13).Value = CType(IDRNumber.Value,Integer)
+            If (IDRNumber.HasValue = True) Then
+                command.Parameters(13).Value = CType(IDRNumber.Value, Integer)
             Else
                 command.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            command.Parameters(14).Value = CType(Original_SlNumber,Integer)
+            command.Parameters(14).Value = CType(Original_SlNumber, Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function UpdateQuerySetCulpritCount(ByVal NoOfCulpritsIdentified As String, ByVal Original_CPsIdentified As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(16)
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
+        Public Overridable Overloads Function UpdateQuerySetCulpritCount(ByVal NoOfCulpritsIdentified As String, ByVal Original_CPsIdentified As String) As Integer
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(17)
             If (NoOfCulpritsIdentified Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(NoOfCulpritsIdentified,String)
+                command.Parameters(0).Value = CType(NoOfCulpritsIdentified, String)
             End If
             If (Original_CPsIdentified Is Nothing) Then
                 command.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(1).Value = CType(Original_CPsIdentified,String)
+                command.Parameters(1).Value = CType(Original_CPsIdentified, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
+                command.Connection.Open()
             End If
             Dim returnValue As Integer
-            Try 
+            Try
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
+                    command.Connection.Close()
                 End If
             End Try
             Return returnValue
         End Function
     End Class
-    
+
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
     '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     Global.System.ComponentModel.ToolboxItem(true),  _
-     Global.System.ComponentModel.DataObjectAttribute(true),  _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"), _
+     Global.System.ComponentModel.ToolboxItem(True), _
+     Global.System.ComponentModel.DataObjectAttribute(True), _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" & _
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
     Partial Public Class JoinedIDRTableAdapter
         Inherits Global.System.ComponentModel.Component
-        
+
         Private WithEvents _adapter As Global.System.Data.OleDb.OleDbDataAdapter
-        
+
         Private _connection As Global.System.Data.OleDb.OleDbConnection
-        
+
         Private _transaction As Global.System.Data.OleDb.OleDbTransaction
-        
+
         Private _commandCollection() As Global.System.Data.OleDb.OleDbCommand
-        
+
         Private _clearBeforeFill As Boolean
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
-            MyBase.New
-            Me.ClearBeforeFill = true
+            MyBase.New()
+            Me.ClearBeforeFill = True
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Friend ReadOnly Property Adapter() As Global.System.Data.OleDb.OleDbDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter
+                    Me.InitAdapter()
                 End If
                 Return Me._adapter
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Friend Property Connection() As Global.System.Data.OleDb.OleDbConnection
             Get
                 If (Me._connection Is Nothing) Then
-                    Me.InitConnection
+                    Me.InitConnection()
                 End If
                 Return Me._connection
             End Get
-            Set
+            Set(value As Global.System.Data.OleDb.OleDbConnection)
                 Me._connection = value
                 If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
                     Me.Adapter.InsertCommand.Connection = value
@@ -53054,65 +53097,65 @@ Namespace FingerPrintDataSetTableAdapters
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i),Global.System.Data.OleDb.OleDbCommand).Connection = value
+                        CType(Me.CommandCollection(i), Global.System.Data.OleDb.OleDbCommand).Connection = value
                     End If
                     i = (i + 1)
                 Loop
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Friend Property Transaction() As Global.System.Data.OleDb.OleDbTransaction
             Get
                 Return Me._transaction
             End Get
-            Set
+            Set(value As Global.System.Data.OleDb.OleDbTransaction)
                 Me._transaction = value
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     Me.CommandCollection(i).Transaction = Me._transaction
                     i = (i + 1)
                 Loop
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
                     Me.Adapter.DeleteCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
                     Me.Adapter.InsertCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing)  _
+                If ((Not (Me.Adapter) Is Nothing) _
                             AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
                     Me.Adapter.UpdateCommand.Transaction = Me._transaction
                 End If
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected ReadOnly Property CommandCollection() As Global.System.Data.OleDb.OleDbCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection
+                    Me.InitCommandCollection()
                 End If
                 Return Me._commandCollection
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Property ClearBeforeFill() As Boolean
             Get
                 Return Me._clearBeforeFill
             End Get
-            Set
+            Set(value As Boolean)
                 Me._clearBeforeFill = value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Private Sub InitAdapter()
             Me._adapter = New Global.System.Data.OleDb.OleDbDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
@@ -53158,16 +53201,16 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("FileStatus", "FileStatus")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
             Me._connection.ConnectionString = Global.FingerprintInformationSystem.My.MySettings.Default.FingerPrintConnectionString
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Private Sub InitCommandCollection()
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(3) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()

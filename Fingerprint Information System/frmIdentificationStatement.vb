@@ -55,6 +55,14 @@ Public Class frmIdentificationStatement
             Me.JoinedIDRTableAdapter1.Connection.ConnectionString = sConString
             Me.JoinedIDRTableAdapter1.Connection.Open()
 
+            If Me.CulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CulpritsRegisterTableAdapter1.Connection.Close()
+            Me.CulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.CulpritsRegisterTableAdapter1.Connection.Open()
+
+            If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
+            Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.IdentificationRegisterTableAdapter1.Connection.Open()
+
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
@@ -130,7 +138,7 @@ Public Class frmIdentificationStatement
             Dim delay As Integer = 0
             bgwIDList.ReportProgress(0)
             System.Threading.Thread.Sleep(10)
-            For delay = 1 To 10
+            For delay = 0 To 10
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
@@ -151,6 +159,7 @@ Public Class frmIdentificationStatement
             Next
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+            WordApp.Visible = True
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
@@ -177,13 +186,15 @@ Public Class frmIdentificationStatement
             Next
 
             Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
-            Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
-            Dim rows = idcount + 2
-            If rows = 2 Then rows = 3
+
+            Dim idcount As Integer = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2))
+
+            Dim rowcount = idcount + 2
+            If rowcount = 2 Then rowcount = 3
 
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 10
-            WordApp.Selection.Tables.Add(WordApp.Selection.Range, rows, 11)
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, rowcount, 11)
             'WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             ' WordApp.Selection.Tables.Item(1).AllowAutoFit = True
@@ -284,8 +295,9 @@ Public Class frmIdentificationStatement
             Next
 
 
+
             If idcount > 0 Then
-                For i = 3 To rows
+                For i = 3 To rowcount
                     WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                     WordApp.Selection.TypeText(i - 2)
@@ -337,24 +349,74 @@ Public Class frmIdentificationStatement
                     WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
-                    Dim CulpritName As String = Me.FingerPrintDataSet.JoinedIDR(j).CulpritName
-                    Dim Address As String = Me.FingerPrintDataSet.JoinedIDR(j).Address
+                    Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
 
-                    Dim joinedaddress As String = CulpritName & ", " & Address
+                    Dim c As Integer = Me.FingerPrintDataSet.CulpritsRegister.Rows.Count
 
-                    If CulpritName.StartsWith("A1") Then
-                        joinedaddress = SplitNameAndAddress(CulpritName, Address)
+                    Dim joinedaddress As String = ""
+                    Dim culpritname As String = ""
+                    Dim address As String = ""
+                    Dim classification As String = ""
+                    Dim identifiedfrom As String = ""
+
+                    ' If c > 1 Then
+                    'Dim rowrequired = c - 1
+                    '  For rc = 1 To rowrequired
+                    'WordApp.Selection.Tables.Item(1).Rows.Add()
+                    ' Next
+                    ' End If
+
+                    If c > 1 Then
+                        WordApp.Selection.Tables.Item(1).Cell(i, 7).Split(c)
+                        WordApp.Selection.Tables.Item(1).Cell(i, 8).Split(c)
+                        WordApp.Selection.Tables.Item(1).Cell(i, 9).Split(c)
                     End If
 
-                    WordApp.Selection.TypeText(joinedaddress)
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).HenryClassification)
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentifiedFrom)
+                    '   For k = 0 To c - 1
+
+                    'culpritname = IIf(c > 1, "A" & (k + 1) & " - " & Me.FingerPrintDataSet.CulpritsRegister(k).CulpritName.Trim, Me.FingerPrintDataSet.CulpritsRegister(k).CulpritName.Trim)
+
+                    '    address = Me.FingerPrintDataSet.CulpritsRegister(k).Address.Trim
+                    '
+                    '  classification = classification & vbCrLf & IIf(c > 1, "A" & (k + 1) & " - " & Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification.Trim, Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification.Trim)
+
+                    '  identifiedfrom = identifiedfrom & vbCrLf & IIf(c > 1, "A" & (k + 1) & " - " & Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom.Trim, Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom.Trim)
+
+                    '   joinedaddress = joinedaddress & vbCrLf & culpritname & vbCrLf & address
+
+                    '  Next k
+
+                    Dim x = i 'x= i = 3
+                    Dim k = 0
+                    For k = 0 To c - 1 'c-1 =1, k=0 to 1, k= 1
+
+                        culpritname = Me.FingerPrintDataSet.CulpritsRegister(k).CulpritName
+
+                        address = Me.FingerPrintDataSet.CulpritsRegister(k).Address
+
+                        classification = Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification
+
+                        identifiedfrom = Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom
+
+                        joinedaddress = culpritname & vbCrLf & address
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 7).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText(joinedaddress.Trim)
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 8).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText(classification.Trim)
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 9).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText(identifiedfrom.Trim)
+
+                        x = x + 1 'x= 4, x= 5
+
+                    Next k 'k = 1, k= 2
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -370,11 +432,8 @@ Public Class frmIdentificationStatement
                     End If
 
                     WordApp.Selection.TypeText(ido)
-
-                    WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDetails)
-                Next
+                    i = x - k + 1 '5-2+1 = 4
+                Next i ' i= 5
             End If
 
 
@@ -384,7 +443,7 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(rows, 11).Select()
+            WordApp.Selection.Tables.Item(1).Cell(WordApp.Selection.Tables.Item(1).Rows.Count, 11).Select()
 
             If idcount = 0 Then
                 WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
@@ -424,7 +483,7 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            If Not FileInUse(SaveFileName) And blsavefile And idcount > 0 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            '  If Not FileInUse(SaveFileName) And blsavefile And idcount > 0 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -452,30 +511,6 @@ Public Class frmIdentificationStatement
         Me.Close()
     End Sub
 
-    Private Function SplitNameAndAddress(CulpritName As String, Address As String) As String
-        Try
-            Dim SplitCN() As String = CulpritName.Split(vbCrLf)
-            Dim SplitAddress() As String = Address.Split(vbCrLf)
-
-            If SplitCN.Length = SplitAddress.Length Then
-                Dim name As String = ""
-                Dim addrs As String = ""
-                Dim joinedaddress As String = ""
-                For i = 0 To SplitCN.Length - 1
-                    name = name & SplitCN(i)
-                    addrs = addrs & SplitAddress(i)
-                    joinedaddress = joinedaddress & name & " ," & addrs & vbCrLf
-                Next
-                Return joinedaddress.Trim
-            Else
-                Return CulpritName & ", " & Address
-            End If
-           
-        Catch ex As Exception
-            Return CulpritName & ", " & Address
-        End Try
-       
-    End Function
 
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
