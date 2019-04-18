@@ -1262,8 +1262,20 @@ Public Class frmMainInterface
 
     Private Sub LoadJoinedIDRRecords()
         Try
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim oldrow As String = ""
+            If Me.JoinedIDRDataGrid.SelectedRows.Count > 0 Then
+                oldrow = Me.JoinedIDRDataGrid.SelectedRows(0).Cells(0).Value
+            End If
+
             Me.JoinedIDRTableAdapter.Fill(Me.FingerPrintDataSet.JoinedIDR)
-            Me.JoinedIDRBindingSource.MoveLast()
+
+            Dim p = Me.JoinedIDRBindingSource.Find("IdentificationNumber", oldrow)
+            If p >= 0 Then Me.JoinedIDRBindingSource.Position = p
+
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+           
         Catch ex As Exception
 
         End Try
