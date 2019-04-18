@@ -59,6 +59,11 @@ Public Class frmIdentificationStatement
             Me.CulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.CulpritsRegisterTableAdapter1.Connection.Open()
 
+            If Me.JoinedCulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.JoinedCulpritsRegisterTableAdapter1.Connection.Close()
+            Me.JoinedCulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.JoinedCulpritsRegisterTableAdapter1.Connection.Open()
+
+
             If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
             Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.IdentificationRegisterTableAdapter1.Connection.Open()
@@ -159,7 +164,7 @@ Public Class frmIdentificationStatement
             Next
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
-            WordApp.Visible = True
+            WordApp.Visible = False
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
@@ -186,29 +191,35 @@ Public Class frmIdentificationStatement
             Next
 
             Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
+            Dim rcount = FingerPrintDataSet.JoinedIDR.Rows.Count + 2
+            If rcount = 2 Then rcount = 3
 
-            Dim idcount As Integer = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2))
+            Dim idcount As Integer = Me.JoinedCulpritsRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2)
+
 
             Dim rowcount = idcount + 2
             If rowcount = 2 Then rowcount = 3
 
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 10
-            WordApp.Selection.Tables.Add(WordApp.Selection.Range, rowcount, 11)
+
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, rcount, 12)
+
             'WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             ' WordApp.Selection.Tables.Item(1).AllowAutoFit = True
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(35, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(45, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            '  WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+
 
             For delay = 31 To 40
                 bgwIDList.ReportProgress(delay)
@@ -230,9 +241,14 @@ Public Class frmIdentificationStatement
             WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Police Station, Crime Number & Section of Law")
+            WordApp.Selection.TypeText("Date of Identification")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Police Station, Crime Number & Section of Law")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("M.O.")
@@ -242,22 +258,22 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Property Lost")
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("No. of CPs Identified")
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Name and Address of the Culprit")
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Henry Classification")
@@ -267,22 +283,22 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Identified from records of DA/SD/Suspect/Accused/AFIS/ Others")
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 11).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Name of FP Expert who inspected & identified the case")
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 11).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 12).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Remarks")
 
-            For i = 1 To 11
+            For i = 1 To 12
                 WordApp.Selection.Tables.Item(1).Cell(2, i).Select()
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -297,25 +313,28 @@ Public Class frmIdentificationStatement
 
 
             If idcount > 0 Then
+                Dim j = 0
                 For i = 3 To rowcount
                     WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(i - 2)
+                    WordApp.Selection.TypeText(j + 1)
 
-                    Dim j = i - 3
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                     WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).SOCNumber)
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.JoinedIDR(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.JoinedIDR(j).SectionOfLaw)
+                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDate.ToString("dd/MM/yy", culture))
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    '    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).DateOfInspection.ToString("dd/MM/yyyy", culture))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.JoinedIDR(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.JoinedIDR(j).SectionOfLaw)
 
+                    WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
+                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                   
                     Dim mo = Me.FingerPrintDataSet.JoinedIDR(j).ModusOperandi
 
                     Dim SplitText() = Strings.Split(mo, " - ")
@@ -331,7 +350,7 @@ Public Class frmIdentificationStatement
 
                     WordApp.Selection.TypeText(mo)
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
+                    WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                     Dim pl = Me.FingerPrintDataSet.JoinedIDR(j).PropertyLost
                     If pl.Contains("`") Then
@@ -342,11 +361,11 @@ Public Class frmIdentificationStatement
                     WordApp.Selection.TypeText(pl)
 
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
+                    WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                     WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).CPsIdentified)
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
+                    WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
                     Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
@@ -359,34 +378,12 @@ Public Class frmIdentificationStatement
                     Dim classification As String = ""
                     Dim identifiedfrom As String = ""
 
-                    ' If c > 1 Then
-                    'Dim rowrequired = c - 1
-                    '  For rc = 1 To rowrequired
-                    'WordApp.Selection.Tables.Item(1).Rows.Add()
-                    ' Next
-                    ' End If
-
                     If c > 1 Then
-                        WordApp.Selection.Tables.Item(1).Cell(i, 7).Split(c)
                         WordApp.Selection.Tables.Item(1).Cell(i, 8).Split(c)
                         WordApp.Selection.Tables.Item(1).Cell(i, 9).Split(c)
+                        WordApp.Selection.Tables.Item(1).Cell(i, 10).Split(c)
                     End If
 
-
-
-                    '   For k = 0 To c - 1
-
-                    'culpritname = IIf(c > 1, "A" & (k + 1) & " - " & Me.FingerPrintDataSet.CulpritsRegister(k).CulpritName.Trim, Me.FingerPrintDataSet.CulpritsRegister(k).CulpritName.Trim)
-
-                    '    address = Me.FingerPrintDataSet.CulpritsRegister(k).Address.Trim
-                    '
-                    '  classification = classification & vbCrLf & IIf(c > 1, "A" & (k + 1) & " - " & Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification.Trim, Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification.Trim)
-
-                    '  identifiedfrom = identifiedfrom & vbCrLf & IIf(c > 1, "A" & (k + 1) & " - " & Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom.Trim, Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom.Trim)
-
-                    '   joinedaddress = joinedaddress & vbCrLf & culpritname & vbCrLf & address
-
-                    '  Next k
 
                     Dim x = i 'x= i = 3
                     Dim k = 0
@@ -402,23 +399,23 @@ Public Class frmIdentificationStatement
 
                         joinedaddress = culpritname & vbCrLf & address
 
-                        WordApp.Selection.Tables.Item(1).Cell(x, 7).Select()
+                        WordApp.Selection.Tables.Item(1).Cell(x, 8).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                         WordApp.Selection.TypeText(joinedaddress.Trim)
 
-                        WordApp.Selection.Tables.Item(1).Cell(x, 8).Select()
+                        WordApp.Selection.Tables.Item(1).Cell(x, 9).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                         WordApp.Selection.TypeText(classification.Trim)
 
-                        WordApp.Selection.Tables.Item(1).Cell(x, 9).Select()
+                        WordApp.Selection.Tables.Item(1).Cell(x, 10).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                         WordApp.Selection.TypeText(identifiedfrom.Trim)
 
-                        x = x + 1 'x= 4, x= 5
+                        If k < c - 1 Then x = x + 1 'x= 4, x= 5
 
                     Next k 'k = 1, k= 2
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
+                    WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
                     Dim io = Me.FingerPrintDataSet.JoinedIDR(j).InvestigatingOfficer
@@ -432,8 +429,9 @@ Public Class frmIdentificationStatement
                     End If
 
                     WordApp.Selection.TypeText(ido)
-                    i = x - k + 1 '5-2+1 = 4
-                Next i ' i= 5
+                    i = x
+                    j = j + 1
+                Next i ' i= 4
             End If
 
 
@@ -443,9 +441,8 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(WordApp.Selection.Tables.Item(1).Rows.Count, 11).Select()
-
             If idcount = 0 Then
+                WordApp.Selection.Tables.Item(1).Cell(rcount, 12).Select()
                 WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -483,7 +480,7 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            '  If Not FileInUse(SaveFileName) And blsavefile And idcount > 0 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And blsavefile And idcount > 0 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
             WordApp.Visible = True
             WordApp.Activate()

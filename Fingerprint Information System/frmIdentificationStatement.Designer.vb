@@ -23,7 +23,6 @@ Partial Class frmIdentificationStatement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmIdentificationStatement))
-        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -39,20 +38,17 @@ Partial Class frmIdentificationStatement
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.bgwIDList = New System.ComponentModel.BackgroundWorker()
+        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.JoinedIDRTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.JoinedCulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedCulpritsRegisterTableAdapter()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'FingerPrintDataSet
-        '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'PanelEx1
         '
@@ -353,6 +349,11 @@ Partial Class frmIdentificationStatement
         Me.bgwIDList.WorkerReportsProgress = True
         Me.bgwIDList.WorkerSupportsCancellation = True
         '
+        'FingerPrintDataSet
+        '
+        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'JoinedIDRTableAdapter1
         '
         Me.JoinedIDRTableAdapter1.ClearBeforeFill = True
@@ -364,6 +365,10 @@ Partial Class frmIdentificationStatement
         'IdentificationRegisterTableAdapter1
         '
         Me.IdentificationRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'JoinedCulpritsRegisterTableAdapter1
+        '
+        Me.JoinedCulpritsRegisterTableAdapter1.ClearBeforeFill = True
         '
         'frmIdentificationStatement
         '
@@ -382,12 +387,12 @@ Partial Class frmIdentificationStatement
         Me.ShowInTaskbar = False
         Me.Text = "Identification Statement"
         Me.TitleText = "<b>Identification Statement</b>"
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -410,4 +415,5 @@ Partial Class frmIdentificationStatement
     Friend WithEvents JoinedIDRTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter
     Friend WithEvents CulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter
     Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
+    Friend WithEvents JoinedCulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedCulpritsRegisterTableAdapter
 End Class
