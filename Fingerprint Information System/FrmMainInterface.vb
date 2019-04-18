@@ -14251,7 +14251,10 @@ errhandler:
                 End If
 
                 wdTbl.Cell(k, 4).Range.Select()
-                wdApp.Selection.TypeText(Me.FingerPrintDataSet1.CulpritsRegister(i).CulpritName.Trim & vbCrLf & Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim & vbCrLf & vbCrLf & "Classification: " & Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim & vbCrLf)
+                wdApp.Selection.TypeText(Me.FingerPrintDataSet1.CulpritsRegister(i).CulpritName.Trim & vbCrLf)
+
+                wdApp.Selection.Font.Bold = 0
+                wdApp.Selection.TypeText(Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim & vbCrLf & vbCrLf & "DA Number: " & Me.FingerPrintDataSet1.CulpritsRegister(i).DANumber.Trim & vbCrLf & "Classification: " & Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim & vbCrLf)
                 k = k + 1
             Next
 
