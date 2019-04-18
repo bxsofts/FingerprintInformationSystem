@@ -184,6 +184,7 @@ Partial Class frmMainInterface
         Me.btnIdentificationStatement = New DevComponents.DotNetBar.ButtonItem()
         Me.btnListOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGistOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnShowIdentifiedDocket = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem7 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCDRegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCurrentCD = New DevComponents.DotNetBar.ButtonItem()
@@ -559,6 +560,7 @@ Partial Class frmMainInterface
         Me.btnSOCReportContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFacingSheetContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIDRShowInSoCRegister = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSOCShowInIDRRegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIdentifiedTemplateContextMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFPAGenerateSlipFormContext = New DevComponents.DotNetBar.ButtonItem()
         Me.LabelX73 = New DevComponents.DotNetBar.LabelX()
@@ -1105,7 +1107,6 @@ Partial Class frmMainInterface
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
-        Me.btnShowIdentifiedDocket = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1983,6 +1984,13 @@ Partial Class frmMainInterface
         '
         Me.btnGistOfIdentifiedCases.Name = "btnGistOfIdentifiedCases"
         Me.btnGistOfIdentifiedCases.Text = "Gist of identified Cases"
+        '
+        'btnShowIdentifiedDocket
+        '
+        Me.btnShowIdentifiedDocket.BeginGroup = true
+        Me.btnShowIdentifiedDocket.ForeColor = System.Drawing.Color.Red
+        Me.btnShowIdentifiedDocket.Name = "btnShowIdentifiedDocket"
+        Me.btnShowIdentifiedDocket.Text = "Show 'Identified File' Docket"
         '
         'ButtonItem7
         '
@@ -5908,7 +5916,7 @@ Partial Class frmMainInterface
         '
         Me.btnDatagridContextMenu.AutoExpandOnClick = true
         Me.btnDatagridContextMenu.Name = "btnDatagridContextMenu"
-        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewIDSlipContext, Me.btnViewACSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnViewCP, Me.btnLocateCP, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnIDRShowInSoCRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnFPAGenerateSlipFormContext})
+        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewIDSlipContext, Me.btnViewACSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnViewCP, Me.btnLocateCP, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnFPAGenerateSlipFormContext})
         Me.btnDatagridContextMenu.Text = "Datagrid Context Menu"
         '
         'btnOpenContext
@@ -6034,6 +6042,11 @@ Partial Class frmMainInterface
         Me.btnIDRShowInSoCRegister.BeginGroup = true
         Me.btnIDRShowInSoCRegister.Name = "btnIDRShowInSoCRegister"
         Me.btnIDRShowInSoCRegister.Text = "Show in SoC Register"
+        '
+        'btnSOCShowInIDRRegister
+        '
+        Me.btnSOCShowInIDRRegister.Name = "btnSOCShowInIDRRegister"
+        Me.btnSOCShowInIDRRegister.Text = "Show in Identification Register"
         '
         'btnIdentifiedTemplateContextMenu
         '
@@ -14340,13 +14353,6 @@ Partial Class frmMainInterface
         '
         Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
         '
-        'btnShowIdentifiedDocket
-        '
-        Me.btnShowIdentifiedDocket.BeginGroup = true
-        Me.btnShowIdentifiedDocket.ForeColor = System.Drawing.Color.Red
-        Me.btnShowIdentifiedDocket.Name = "btnShowIdentifiedDocket"
-        Me.btnShowIdentifiedDocket.Text = "Show 'Identified File' Docket"
-        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -15480,5 +15486,6 @@ End Sub
     Friend WithEvents txtLoadSelectedYearRecords As DevComponents.DotNetBar.TextBoxItem
     Friend WithEvents CulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter
     Friend WithEvents btnShowIdentifiedDocket As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnSOCShowInIDRRegister As DevComponents.DotNetBar.ButtonItem
 
 End Class

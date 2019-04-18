@@ -3928,6 +3928,7 @@ Public Class frmMainInterface
         Me.btnIdentifiedTemplateContextMenu.Visible = False
         Me.btnFPAGenerateSlipFormContext.Visible = False
         Me.btnIDRShowInSoCRegister.Visible = False
+        Me.btnSOCShowInIDRRegister.Visible = False
 
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
@@ -3971,6 +3972,9 @@ Public Class frmMainInterface
                 Me.btnPhotoReceivedContext.Checked = False
             End If
 
+            If UCase(Me.SOCDatagrid.SelectedCells(24).Value.ToString) = "IDENTIFIED" Then
+                Me.btnSOCShowInIDRRegister.Visible = True
+            End If
         End If
 
 
@@ -15252,12 +15256,28 @@ errhandler:
 
     Private Sub ShowIDinSoCRegister() Handles btnIDRShowInSoCRegister.Click
         Try
+            Me.Cursor = Cursors.WaitCursor
             Me.SOCRegisterTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.SOCRegister, Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString)
             Me.TabControl.SelectedTab = SOCTabItem
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
 
+    End Sub
+
+
+    Private Sub btnSOCShowInIDRRegister_Click(sender As Object, e As EventArgs) Handles btnSOCShowInIDRRegister.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Me.JoinedIDRTableAdapter.FillBySOCNumber(Me.FingerPrintDataSet.JoinedIDR, Me.SOCDatagrid.SelectedCells(0).Value.ToString)
+            Me.TabControl.SelectedTab = IDRTabItem
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 #End Region
 
@@ -16881,4 +16901,5 @@ errhandler:
 #End Region
 
 
+   
 End Class
