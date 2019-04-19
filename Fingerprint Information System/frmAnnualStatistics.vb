@@ -58,6 +58,14 @@ Public Class frmAnnualStatistics
             Me.JoinedIDRTableAdapter1.Connection.ConnectionString = sConString
             Me.JoinedIDRTableAdapter1.Connection.Open()
 
+            If Me.CulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CulpritsRegisterTableAdapter1.Connection.Close()
+            Me.CulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.CulpritsRegisterTableAdapter1.Connection.Open()
+
+            If Me.JoinedCulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.JoinedCulpritsRegisterTableAdapter1.Connection.Close()
+            Me.JoinedCulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.JoinedCulpritsRegisterTableAdapter1.Connection.Open()
+
 
             Me.Cursor = Cursors.Default
 
@@ -120,6 +128,7 @@ Public Class frmAnnualStatistics
             If Me.Text = "List of Identified Cases" Then bgwIDList.RunWorkerAsync()
             If Me.Text = "Gist of Identified Cases" Then bgwIDGist.RunWorkerAsync()
 
+            Control.CheckForIllegalCrossThreadCalls = False
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -128,12 +137,14 @@ Public Class frmAnnualStatistics
 
     End Sub
 
+#Region "ANNUAL STATISTICS"
+
     Private Sub bgwAnnualStatistics_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAnnualStatistics.DoWork
         Try
 
             Dim delay As Integer = 0
             Dim blSaveFile As Boolean = False
-            
+
             For delay = 1 To 10
                 bgwAnnualStatistics.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -148,7 +159,7 @@ Public Class frmAnnualStatistics
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
-           
+
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             If WordApp.Version < 12 Then
@@ -676,12 +687,16 @@ Public Class frmAnnualStatistics
         Me.Close()
     End Sub
 
+#End Region
+
+#Region "LIST OF IDENTIFIED CASES"
+
     Private Sub bgwIDList_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwIDList.DoWork
         Try
             Dim delay As Integer = 0
             bgwIDList.ReportProgress(0)
             System.Threading.Thread.Sleep(10)
-            For delay = 1 To 10
+            For delay = 0 To 10
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
@@ -702,6 +717,7 @@ Public Class frmAnnualStatistics
             Next
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+            WordApp.Visible = False
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
@@ -710,82 +726,91 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Document.PageSetup.TopMargin = 50
             WordApp.Selection.Document.PageSetup.BottomMargin = 50
             WordApp.Selection.NoProofing = 1
-            WordApp.Selection.Font.Size = 14
+            WordApp.Selection.Font.Size = 12
             WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
 
+            WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
 
-            WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
-            WordApp.Selection.Font.Size = 12
-            WordApp.Selection.TypeText(vbNewLine & Header & vbNewLine)
+
+            WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbCrLf)
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeText(Header & vbNewLine)
+
             For delay = 21 To 30
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
 
             Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
-            Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
-            Dim rows = idcount + 1
-            If rows = 1 Then rows = 2
+            Dim rcount = FingerPrintDataSet.JoinedIDR.Rows.Count + 2
+            If rcount = 2 Then rcount = 3
+
+            Dim idcount As Integer = Me.JoinedCulpritsRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2)
+
+
+            Dim rowcount = idcount + 2
+            If rowcount = 2 Then rowcount = 3
 
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 10
-            WordApp.Selection.Tables.Add(WordApp.Selection.Range, rows, 11)
+
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, rcount, 12)
+
             'WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
-            WordApp.Selection.Tables.Item(1).AllowAutoFit = True
-            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(30, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(40, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
-            'WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
+            ' WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(35, Word.WdRulerStyle.wdAdjustFirstColumn) 'sl
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(53, Word.WdRulerStyle.wdAdjustFirstColumn) 'idno
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(53, Word.WdRulerStyle.wdAdjustFirstColumn) 'socno
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(56, Word.WdRulerStyle.wdAdjustFirstColumn) 'dtid
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(56, Word.WdRulerStyle.wdAdjustFirstColumn) 'dtins
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn) 'ps
+            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpsid
+            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'name address
+            WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn) 'fingers
+            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn) 'da & class
+            WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn) 'iddfrom
+            ' WordApp.Selection.Tables.Item(1).Columns(12).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn) 'fpe
 
             For delay = 31 To 40
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
 
+
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Sl.No.")
+            WordApp.Selection.TypeText("Sl.No")
 
 
             WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("SOC No.")
+            WordApp.Selection.TypeText("ID No.")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Police Station, Crime Number & Section of Law")
+            WordApp.Selection.TypeText("SOC No.")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Date of Inspection")
-
-            For delay = 41 To 50
-                bgwIDList.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
+            WordApp.Selection.TypeText("Date of Identification")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Name of Inspecting Officer")
+            WordApp.Selection.TypeText("Date of Inspection")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("No. of CPs Developed")
+            WordApp.Selection.TypeText("Police Station, Crime Number & Section of Law")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
             WordApp.Selection.Font.Bold = 1
@@ -795,27 +820,39 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Name of Identifying Officer")
+            WordApp.Selection.TypeText("Name and Address of the Culprit")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Fingers Identified")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("DA Number & Henry Classification")
 
             For delay = 51 To 60
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Identification Date")
-
-            WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Name of Culprit")
-
             WordApp.Selection.Tables.Item(1).Cell(1, 11).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Identification Details")
+            WordApp.Selection.TypeText("Identified from")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 12).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Inspected & Identified by")
+
+            For i = 1 To 12
+                WordApp.Selection.Tables.Item(1).Cell(2, i).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(i)
+            Next
 
             For delay = 61 To 70
                 bgwIDList.ReportProgress(delay)
@@ -823,48 +860,127 @@ Public Class frmAnnualStatistics
             Next
 
 
-            If idcount >= 1 Then
-                For i = 2 To rows
+
+            If idcount > 0 Then
+                Dim j = 0
+                For i = 3 To rowcount
                     WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(i - 1)
+                    WordApp.Selection.TypeText(j + 1)
+
                     WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).SOCNumber)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
+
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.JoinedIDR(i - 2).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.JoinedIDR(i - 2).SectionOfLaw)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).SOCNumber)
+
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).DateOfInspection.ToString("dd/MM/yyyy", culture))
-                    WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).InvestigatingOfficer)
-                    WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).ChancePrintsDeveloped)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDate.ToString("dd/MM/yy", culture))
+
+                    WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
+                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).DateOfInspection.ToString("dd/MM/yy", culture))
+
+                    WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
+                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).PoliceStation & vbNewLine & "Cr.No." & Me.FingerPrintDataSet.JoinedIDR(j).CrimeNumber & vbNewLine & "u/s " & Me.FingerPrintDataSet.JoinedIDR(j).SectionOfLaw)
+
                     WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).CPsIdentified)
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).CPsIdentified)
+
                     WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).IdentifiedBy)
-                    WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
+
+                    Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
+
+                    Dim c As Integer = Me.FingerPrintDataSet.CulpritsRegister.Rows.Count
+
+                    Dim joinedaddress As String = ""
+                    Dim culpritname As String = ""
+                    Dim address As String = ""
+                    Dim classification As String = ""
+                    Dim identifiedfrom As String = ""
+                    Dim danumber As String = ""
+                    Dim finger As String = ""
+                    If c > 1 Then
+                        WordApp.Selection.Tables.Item(1).Cell(i, 8).Split(c) ' name & address
+                        WordApp.Selection.Tables.Item(1).Cell(i, 9).Split(c) ' fingers
+                        WordApp.Selection.Tables.Item(1).Cell(i, 10).Split(c) ' da & class
+                        WordApp.Selection.Tables.Item(1).Cell(i, 11).Split(c) ' idd from
+                    End If
+
+
+                    Dim x = i 'x= i = 3
+                    Dim k = 0
+                    For k = 0 To c - 1 'c-1 =1, k=0 to 1, k= 1
+
+                        culpritname = Me.FingerPrintDataSet.CulpritsRegister(k).CulpritName
+                        address = Me.FingerPrintDataSet.CulpritsRegister(k).Address
+                        joinedaddress = culpritname & vbCrLf & address
+                        finger = Me.FingerPrintDataSet.CulpritsRegister(k).FingersIdentified
+                        danumber = Me.FingerPrintDataSet.CulpritsRegister(k).DANumber
+                        classification = Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification
+                        identifiedfrom = Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 8).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText(joinedaddress.Trim)
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 9).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText(finger.Trim)
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 10).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText("DA No. - " & danumber.Trim & vbCrLf & vbCrLf & "H/C - " & classification.Trim)
+
+                        WordApp.Selection.Tables.Item(1).Cell(x, 11).Select()
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.TypeText(identifiedfrom.Trim)
+
+                        If k < c - 1 Then x = x + 1 'x= 4, x= 5
+
+                    Next k 'k = 1, k= 2
+
+                    WordApp.Selection.Tables.Item(1).Cell(i, 12).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).IdentificationDate.ToString("dd/MM/yyyy", culture))
-                    WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).CulpritName)
-                    WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(i - 2).IdentificationDetails)
-                Next
+
+                    Dim io = Me.FingerPrintDataSet.JoinedIDR(j).InvestigatingOfficer
+                    io = io.Replace(vbNewLine, "; ")
+
+                    Dim ido = Me.FingerPrintDataSet.JoinedIDR(j).IdentifiedBy
+                    ido = ido.Replace(vbNewLine, "; ")
+
+                    If io <> ido Then
+                        ido = "Inspected by " & io & vbCrLf & vbCrLf & "Identified by " & ido
+                    End If
+
+                    WordApp.Selection.TypeText(ido)
+                    i = x
+                    j = j + 1
+                Next i ' i= 4
             End If
+
+
 
             For delay = 71 To 80
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
+
+            If idcount = 0 Then
+                WordApp.Selection.Tables.Item(1).Cell(rcount, 12).Select()
+                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("----------  NIL  ----------")
+            End If
+
 
             If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
                 aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
@@ -887,13 +1003,14 @@ Public Class frmAnnualStatistics
             End If
 
 
-            WordApp.Selection.Tables.Item(1).Cell(rows, 11).Select()
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
+
 
             For delay = 81 To 100
                 bgwIDList.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
+
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -908,6 +1025,10 @@ Public Class frmAnnualStatistics
         End Try
     End Sub
 
+#End Region
+
+
+#Region "GIST OF IDENTIFIED CASES"
     Private Sub bgwIDGist_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwIDGist.DoWork
         Try
             Dim delay As Integer = 0
@@ -957,6 +1078,8 @@ Public Class frmAnnualStatistics
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.TypeText(vbCrLf & Header & vbCrLf)
+
+
             Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
             Dim idcount = Me.FingerPrintDataSet.JoinedIDR.Count
 
@@ -979,6 +1102,7 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+
                 Dim ps = Me.FingerPrintDataSet.JoinedIDR(i).PoliceStation
                 If ps.EndsWith("P.S") = False Then ps += " P.S"
                 Dim cr = Me.FingerPrintDataSet.JoinedIDR(i).CrimeNumber
@@ -992,8 +1116,26 @@ Public Class frmAnnualStatistics
                 ino = Replace(Replace(Replace(Replace(ino, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 ido = Replace(Replace(Replace(Replace(ido, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 Dim gist = Me.FingerPrintDataSet.JoinedIDR(i).Gist.Trim
-                Dim iddetails = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDetails.Trim
+
                 Dim identifiedas = Me.FingerPrintDataSet.JoinedIDR(i).CulpritName.Trim
+
+                Dim idnum As String = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationNumber.Trim
+                Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(FingerPrintDataSet.CulpritsRegister, idnum)
+                Dim cnt = FingerPrintDataSet.CulpritsRegister.Rows.Count
+
+                Dim iddetails As String = ""
+                For j = 0 To cnt - 1
+                    Dim cpid = FingerPrintDataSet.CulpritsRegister(j).CPsIdentified
+                    Dim finger As String = FingerPrintDataSet.CulpritsRegister(j).FingersIdentified
+                    Dim culprit As String = FingerPrintDataSet.CulpritsRegister(j).CulpritName
+                    Dim da As String = FingerPrintDataSet.CulpritsRegister(j).DANumber
+                    Dim classification As String = FingerPrintDataSet.CulpritsRegister(j).HenryClassification
+
+                    iddetails = iddetails & vbCrLf & vbTab & vbTab & Strings.StrConv(ConvertNumberToWord(cpid), VbStrConv.ProperCase) & IIf(cpid = 1, " chance print is identified as the " & finger & " finger impression", " chance prints are identified as the " & finger & " finger impressions") & " of " & culprit & ". DA No. " & da & ", Classification - " & classification
+                Next
+
+
+
                 WordApp.Selection.TypeText(vbTab & ps & ", Cr.No. " & cr & " u/s " & us)
                 WordApp.Selection.TypeText(vbCrLf)
                 WordApp.Selection.TypeText(vbTab & "Date of Inspection - " & dtinstr)
@@ -1009,10 +1151,10 @@ Public Class frmAnnualStatistics
                 If gist <> "" Then WordApp.Selection.TypeText(vbCrLf)
                 WordApp.Selection.TypeText(vbTab & vbTab & gist)
                 WordApp.Selection.TypeText(vbCrLf)
-                WordApp.Selection.TypeText(vbTab & vbTab & iddetails)
+                WordApp.Selection.TypeText(vbTab & vbTab & iddetails.Trim)
                 WordApp.Selection.TypeText(vbCrLf)
                 If iddetails <> "" Then WordApp.Selection.TypeText(vbCrLf)
-            Next
+            Next i
 
             If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
                 aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
@@ -1055,6 +1197,9 @@ Public Class frmAnnualStatistics
         End Try
     End Sub
 
+#End Region
+
+
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
             Dim sFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics\"
@@ -1074,4 +1219,6 @@ Public Class frmAnnualStatistics
             DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
         End Try
     End Sub
+
+  
 End Class

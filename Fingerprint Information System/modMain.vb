@@ -182,6 +182,83 @@ Module modMain
 
     End Sub
 
+    Public Function ConvertNumberToWord(ByVal Number As Integer)
+        Try
+            Dim t As String = Number.ToString
+            Select Case Number
+                Case 1
+                    t = "one"
+                Case 2
+                    t = "two"
+                Case 3
+                    t = "three"
+                Case 4
+                    t = "four"
+                Case 5
+                    t = "five"
+                Case 6
+                    t = "six"
+                Case 7
+                    t = "seven"
+                Case 8
+                    t = "eight"
+                Case 9
+                    t = "nine"
+                Case 10
+                    t = "ten"
+                Case 11
+                    t = "eleven"
+                Case 12
+                    t = "twelve"
+                Case 13
+                    t = "thirteen"
+                Case 14
+                    t = "fourteen"
+                Case 15
+                    t = "fifteen"
+                Case 16
+                    t = "sixteen"
+                Case 17
+                    t = "seventeen"
+                Case 18
+                    t = "eighteen"
+                Case 19
+                    t = "nineteen"
+
+                Case 20
+                    t = "twenty"
+                Case 21
+                    t = "twenty one"
+                Case 22
+                    t = "twenty two"
+                Case 23
+                    t = "twenty three"
+                Case 24
+                    t = "twenty four"
+                Case 25
+                    t = "twenty five"
+                Case 26
+                    t = "twenty six"
+                Case 27
+                    t = "twenty seven"
+                Case 28
+                    t = "twenty eight"
+                Case 29
+                    t = "twenty nine"
+                Case 30
+                    t = "thirty"
+
+
+                Case Else
+                    t = Number.ToString
+            End Select
+            Return t
+        Catch ex As Exception
+            Return Number.ToString
+        End Try
+
+    End Function
+
     Public Function InternetAvailable1() As Boolean
 
         Dim objUrl As New System.Uri("http://www.google.com/")

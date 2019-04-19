@@ -206,6 +206,13 @@ Public Class FrmIdentificationRegisterDE
 #Region "CULPRIT DETAILS ENTRY"
 
     Private Sub btnAddCulprit_Click(sender As Object, e As EventArgs) Handles btnAddCulprit.Click
+
+        If Me.txtSOCNumber.Text.Trim = "" Then
+            MessageBoxEx.Show("Please enter SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txtSOCNumber.Focus()
+            Exit Sub
+        End If
+
         If CPR = 0 Then
             MessageBoxEx.Show("The No. of CPs remaining is Zero for the selected SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -479,13 +486,6 @@ Public Class FrmIdentificationRegisterDE
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
-    End Sub
-
-
-    Private Sub IdentificationDetails() ' Handles txtRemarks.GotFocus
-        On Error Resume Next
-
-        '  Dim iddetails As String = frmMainInterface.ConvertToProperCase(frmMainInterface.ConvertNumberToWord(cpid)) & IIf(cpid = 1, " chance print is identified as the ............. finger impression", " chance prints are identified as the ............. finger impressions") & " of one " & Me.txtCulpritName.Text & ". He is accused in Cr. No......... of P.S. His fingerprint slip is registered in the Bureaurecords as DA No......." & vbNewLine & "DA Classification - "
     End Sub
 
 #End Region

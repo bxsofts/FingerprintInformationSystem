@@ -44,6 +44,8 @@ Partial Class frmAnnualStatistics
         Me.bgwIDGist = New System.ComponentModel.BackgroundWorker()
         Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
         Me.JoinedIDRTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter()
+        Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
+        Me.JoinedCulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedCulpritsRegisterTableAdapter()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -341,6 +343,14 @@ Partial Class frmAnnualStatistics
         '
         Me.JoinedIDRTableAdapter1.ClearBeforeFill = True
         '
+        'CulpritsRegisterTableAdapter1
+        '
+        Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = True
+        '
+        'JoinedCulpritsRegisterTableAdapter1
+        '
+        Me.JoinedCulpritsRegisterTableAdapter1.ClearBeforeFill = True
+        '
         'frmAnnualStatistics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -388,4 +398,6 @@ Partial Class frmAnnualStatistics
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
     Friend WithEvents JoinedIDRTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedIDRTableAdapter
+    Friend WithEvents CulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter
+    Friend WithEvents JoinedCulpritsRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.JoinedCulpritsRegisterTableAdapter
 End Class

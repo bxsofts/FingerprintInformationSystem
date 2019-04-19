@@ -14254,7 +14254,12 @@ errhandler:
                 wdApp.Selection.TypeText(Me.FingerPrintDataSet1.CulpritsRegister(i).CulpritName.Trim & vbCrLf)
 
                 wdApp.Selection.Font.Bold = 0
-                wdApp.Selection.TypeText(Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim & vbCrLf & vbCrLf & "DA Number: " & Me.FingerPrintDataSet1.CulpritsRegister(i).DANumber.Trim & vbCrLf & "Classification: " & Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim & vbCrLf)
+                Dim da = Me.FingerPrintDataSet1.CulpritsRegister(i).DANumber.Trim
+                Dim hc = Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim
+                Dim address = Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim
+
+                Dim iddetails As String = address & vbCrLf & IIf(da = "", "", vbCrLf & "DA Number: " & da) & vbCrLf & IIf(hc = "", "", "Classification: " & hc) & vbCrLf
+                wdApp.Selection.TypeText(iddetails)
                 k = k + 1
             Next
 
@@ -14931,85 +14936,6 @@ errhandler:
         End If
 
     End Function
-
-    Public Function ConvertNumberToWord(ByVal Number As Integer)
-        Try
-            Dim t As String = Number.ToString
-            Select Case Number
-                Case 1
-                    t = "one"
-                Case 2
-                    t = "two"
-                Case 3
-                    t = "three"
-                Case 4
-                    t = "four"
-                Case 5
-                    t = "five"
-                Case 6
-                    t = "six"
-                Case 7
-                    t = "seven"
-                Case 8
-                    t = "eight"
-                Case 9
-                    t = "nine"
-                Case 10
-                    t = "ten"
-                Case 11
-                    t = "eleven"
-                Case 12
-                    t = "twelve"
-                Case 13
-                    t = "thirteen"
-                Case 14
-                    t = "fourteen"
-                Case 15
-                    t = "fifteen"
-                Case 16
-                    t = "sixteen"
-                Case 17
-                    t = "seventeen"
-                Case 18
-                    t = "eighteen"
-                Case 19
-                    t = "nineteen"
-
-                Case 20
-                    t = "twenty"
-                Case 21
-                    t = "twenty one"
-                Case 22
-                    t = "twenty two"
-                Case 23
-                    t = "twenty three"
-                Case 24
-                    t = "twenty four"
-                Case 25
-                    t = "twenty five"
-                Case 26
-                    t = "twenty six"
-                Case 27
-                    t = "twenty seven"
-                Case 28
-                    t = "twenty eight"
-                Case 29
-                    t = "twenty nine"
-                Case 30
-                    t = "thirty"
-
-
-                Case Else
-                    t = Number.ToString
-            End Select
-            Return t
-        Catch ex As Exception
-            Return Number.ToString
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        End Try
-
-    End Function
-
 
     Private Sub ACRegister() Handles btnACRegister.Click
         On Error Resume Next

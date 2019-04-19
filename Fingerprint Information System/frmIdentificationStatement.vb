@@ -178,8 +178,9 @@ Public Class frmIdentificationStatement
             WordApp.Selection.Font.Underline = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
 
-            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.ParagraphFormat.SpaceAfter = 1
             WordApp.Selection.Paragraphs.DecreaseSpacing()
+
 
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbCrLf)
             WordApp.Selection.Font.Underline = 0
@@ -425,7 +426,7 @@ Public Class frmIdentificationStatement
                     ido = ido.Replace(vbNewLine, "; ")
 
                     If io <> ido Then
-                        ido = "Inspected by " & io & vbCrLf & "Identified by " & ido
+                        ido = "Inspected by " & io & vbCrLf & vbCrLf & "Identified by " & ido
                     End If
 
                     WordApp.Selection.TypeText(ido)
