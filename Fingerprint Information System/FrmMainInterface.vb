@@ -8720,6 +8720,16 @@ errhandler:
     End Function
 
 
+    Private Sub btnShowIdentifiedCases_Click(sender As Object, e As EventArgs) Handles btnShowIdentifiedCases.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Me.SOCRegisterTableAdapter.FillByFileStatus(Me.FingerPrintDataSet.SOCRegister, "Identified")
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 #End Region
 
     '-------------------------------------------RSOC DATA MANIPULATION-----------------------------------------

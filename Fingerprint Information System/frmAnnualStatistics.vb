@@ -1072,12 +1072,14 @@ Public Class frmAnnualStatistics
             WordApp.Selection.NoProofing = 1
             WordApp.Selection.Font.Size = 14
             WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.ParagraphFormat.SpaceAfter = 1
 
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
             WordApp.Selection.Font.Size = 11
-            WordApp.Selection.TypeText(vbCrLf & Header & vbCrLf)
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeText(vbCrLf & Header & vbCrLf & vbCrLf)
 
 
             Me.JoinedIDRTableAdapter1.FillByIdentifiedCases(FingerPrintDataSet.JoinedIDR, d1, d2)
