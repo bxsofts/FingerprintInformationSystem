@@ -14623,13 +14623,6 @@ errhandler:
         frmSOCRegister.BringToFront()
     End Sub
 
-    Private Sub SOCMiniRegister() ' Handles btnMiniSOCRegister.Click
-        On Error Resume Next
-        frmMiniSOCRegister.Show()
-        frmMiniSOCRegister.WindowState = FormWindowState.Maximized
-        frmMiniSOCRegister.BringToFront()
-    End Sub
-
     Private Sub SOCPhotoNotReceived() Handles btnPhotoNotRecieved.Click
         On Error Resume Next
         frmPhotoNotReceived.Show()
