@@ -1026,6 +1026,7 @@ Public Class frmMainInterface
             Me.SOCRegisterTableAdapter.UpdateFileStatusForClosedFiles()
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
+            Me.SOCRegisterTableAdapter.UpdateQuerySetBlankCPsIdentifiedToZero("0", "")
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
             ' RemoveNullFromIdentificationRegister()
         End If
