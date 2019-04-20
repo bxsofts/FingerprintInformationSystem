@@ -57,7 +57,7 @@ Public Class FrmMonthWiseSOCStatistics
                 .NumberOfPrintsDeveloped = Val(Me.SocRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
                 .NumberOfPrintsEliminated = Val(Me.SocRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
                 .NumberOfPrintsUnfit = Val(Me.SocRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-                .NumberOfPrintsRemaining = Val(Me.SocRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
+                .NumberOfPrintsRemaining = Val(Me.SocRegisterTableAdapter.ScalarQueryCPsRemainingInDI(d1, d2))
                 .NumberOfPhotoNotReceived = Val(Me.SocRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
                 .NumberOfPhotoReceived = Val(.NumberOfPrintDevelopedSOC) - Val(.NumberOfPhotoNotReceived)
                 .NumberOfSOCsSearchContinuing = Val(Me.SocRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))

@@ -2616,7 +2616,7 @@ Public Class frmMainInterface
             Dim yearcpcount = Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(y1, y2)
             Dim yearcpunfit = Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(y1, y2)
             Dim yearcpelim = Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(y1, y2)
-            Dim yearcprem = Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(y1, y2)
+            Dim yearcprem = Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInDI(y1, y2)
 
             Me.lblCurrentYear.Text = "This Year : " & yearsoccount
 
@@ -2624,7 +2624,7 @@ Public Class frmMainInterface
             Dim monthcpcount = Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2)
             Dim monthcpunfit = Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2)
             Dim monthcpelim = Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2)
-            Dim monthcprem = Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2)
+            Dim monthcprem = Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInDI(d1, d2)
             Me.lblCurrentMonth.Text = "This Month: " & monthsoccount
 
 
@@ -5457,7 +5457,8 @@ errhandler:
                 Me.txtSOCCPsDeveloped.Text = .SelectedCells(10).Value.ToString
                 Me.txtSOCCPsUnfit.Text = .SelectedCells(11).Value.ToString
                 Me.txtSOCCPsEliminated.Text = .SelectedCells(12).Value.ToString
-                Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
+
+
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
                 Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
@@ -5843,7 +5844,8 @@ errhandler:
                 Me.txtSOCCPsDeveloped.Text = .SelectedCells(10).Value.ToString
                 Me.txtSOCCPsUnfit.Text = .SelectedCells(11).Value.ToString
                 Me.txtSOCCPsEliminated.Text = .SelectedCells(12).Value.ToString
-                Me.txtSOCCPsRemaining.Text = .SelectedCells(13).Value.ToString
+
+
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
                 Me.cmbSOCModus.Text = .SelectedCells(16).Value.ToString
@@ -7528,12 +7530,11 @@ errhandler:
         Me.dtSOCOccurrence.Select(Me.dtSOCOccurrence.Text.Length, 0)
     End Sub
 
-    Private Sub CalculateChanceprintCount() Handles txtSOCCPsDeveloped.Validated, txtSOCCPsEliminated.Validated, txtSOCCPsUnfit.Validated, txtSOCCPsRemaining.Validated
+    Private Sub CalculateChanceprintCount() Handles txtSOCCPsDeveloped.Validated, txtSOCCPsEliminated.Validated, txtSOCCPsUnfit.Validated
         On Error Resume Next
         If txtSOCCPsDeveloped.Text = vbNullString Then Me.txtSOCCPsDeveloped.Text = "0"
         If txtSOCCPsUnfit.Text = vbNullString Then Me.txtSOCCPsUnfit.Text = "0"
         If txtSOCCPsEliminated.Text = vbNullString Then Me.txtSOCCPsEliminated.Text = "0"
-        Me.txtSOCCPsRemaining.Text = Me.txtSOCCPsDeveloped.Value - Me.txtSOCCPsUnfit.Value - txtSOCCPsEliminated.Value
 
         'SetFileStatus()
     End Sub
@@ -7541,15 +7542,13 @@ errhandler:
     Private Sub SetFileStatus() Handles cmbFileStatus.GotFocus
         On Error Resume Next
 
-        If Me.txtSOCCPsRemaining.Text = "" Then
-            Exit Sub
-        End If
+        Dim cpsremaining = Me.txtSOCCPsDeveloped.Value - (Me.txtSOCCPsEliminated.Value + Me.txtSOCCPsUnfit.Value)
 
-        If Me.txtSOCCPsRemaining.Value = 0 And Me.cmbFileStatus.Text.Trim = "" Then
+        If cpsremaining = 0 And Me.cmbFileStatus.Text.Trim = "" Then
             Me.cmbFileStatus.SelectedIndex = 0
         End If
 
-        If Me.txtSOCCPsRemaining.Value > 0 And Me.cmbFileStatus.Text.ToLower <> "closed" And Me.cmbFileStatus.Text.ToLower <> "identified" And Me.cmbFileStatus.Text.ToLower <> "otherwise detected" Then
+        If cpsremaining > 0 And Me.cmbFileStatus.Text.ToLower <> "closed" And Me.cmbFileStatus.Text.ToLower <> "identified" And Me.cmbFileStatus.Text.ToLower <> "otherwise detected" Then
             Me.cmbFileStatus.Text = ""
         End If
         Me.cmbFileStatus.Select(Me.cmbFileStatus.Text.Length, 0)
@@ -7570,7 +7569,6 @@ errhandler:
         If txtSOCCPsUnfit.Text = vbNullString Then Me.txtSOCCPsUnfit.Text = "0"
         If txtSOCCPsEliminated.Text = vbNullString Then Me.txtSOCCPsEliminated.Text = "0"
 
-        Me.txtSOCCPsRemaining.Text = Me.txtSOCCPsDeveloped.Value - Me.txtSOCCPsUnfit.Value - txtSOCCPsEliminated.Value
         If Me.txtSOCCPsUnfit.Value > txtSOCCPsDeveloped.Value Then
             MessageBoxEx.Show("No. of unfit CPs cannot be greater than the no. of developed CPs", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtSOCCPsUnfit.Focus()
@@ -7626,8 +7624,6 @@ errhandler:
         On Error Resume Next
 
         If Me.txtSOCComparisonDetails.Text <> vbNullString Then Exit Sub
-
-        If Me.txtSOCCPsRemaining.Text = "" Then Exit Sub
 
         If Me.txtSOCCPsDeveloped.Value = 0 Then
             Me.txtSOCComparisonDetails.Text = "No action pending."
@@ -7776,7 +7772,7 @@ errhandler:
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
             Dim cpunfit = Me.txtSOCCPsUnfit.Value
             Dim cpeliminated = Me.txtSOCCPsEliminated.Value
-            Dim cpremaining = Me.txtSOCCPsRemaining.Value
+
             Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
             Dim photographer = Trim(Me.txtSOCPhotographer.Text)
             Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
@@ -7786,7 +7782,7 @@ errhandler:
             Dim comparisondetails = Trim(Me.txtSOCComparisonDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-
+            Dim cpsidentified As String = ""
 
             If filestatus.ToLower = "otherwise detected" Then
                 If comparisondetails.ToLower.StartsWith("otherwise detected") = False Then
@@ -7829,7 +7825,7 @@ errhandler:
                 .ChancePrintsDeveloped = cpdeveloped
                 .ChancePrintsUnfit = cpunfit
                 .ChancePrintsEliminated = cpeliminated
-                .ChancePrintsRemaining = cpremaining
+
                 .ChancePrintDetails = cpdetails
                 .Photographer = photographer
                 .PhotoReceived = photoreceived
@@ -7839,12 +7835,13 @@ errhandler:
                 .ComparisonDetails = comparisondetails
                 .GraveCrime = gravecrime
                 .FileStatus = filestatus
+                .CPsIdentified = ""
             End With
 
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
 
-            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus) 'update the database
+            Me.SOCRegisterTableAdapter.Insert(OriginalSOCNumber, sYear, Me.dtSOCInspection.ValueObject, Me.dtSOCReport.ValueObject, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, cpsidentified) 'update the database
 
 
             InitializeSOCFields()
@@ -7892,7 +7889,7 @@ errhandler:
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
             Dim cpunfit = Me.txtSOCCPsUnfit.Value
             Dim cpeliminated = Me.txtSOCCPsEliminated.Value
-            Dim cpremaining = Me.txtSOCCPsRemaining.Value
+
             Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
             Dim photographer = Trim(Me.txtSOCPhotographer.Text)
             Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
@@ -7947,7 +7944,7 @@ errhandler:
                     .ChancePrintsDeveloped = cpdeveloped
                     .ChancePrintsUnfit = cpunfit
                     .ChancePrintsEliminated = cpeliminated
-                    .ChancePrintsRemaining = cpremaining
+
                     .ChancePrintDetails = cpdetails
                     .Photographer = photographer
                     .PhotoReceived = photoreceived
@@ -7961,7 +7958,7 @@ errhandler:
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, OriginalSOCNumber)
 
             If LCase(NewSOCNumber) <> LCase(OriginalSOCNumber) Then
                 Me.RSOCRegisterTableAdapter.UpdateRSOCWithSOCEdit(NewSOCNumber, sYear, dti, ps, cr, officer, OriginalSOCNumber)
@@ -8014,7 +8011,7 @@ errhandler:
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Value
             Dim cpunfit = Me.txtSOCCPsUnfit.Value
             Dim cpeliminated = Me.txtSOCCPsEliminated.Value
-            Dim cpremaining = Me.txtSOCCPsRemaining.Value
+
             Dim cpdetails = Trim(Me.txtSOCCPDetails.Text)
             Dim photographer = Trim(Me.txtSOCPhotographer.Text)
             Dim photoreceived = Trim(Me.cmbSOCPhotoReceived.Text)
@@ -8058,7 +8055,7 @@ errhandler:
                     .ChancePrintsDeveloped = cpdeveloped
                     .ChancePrintsUnfit = cpunfit
                     .ChancePrintsEliminated = cpeliminated
-                    .ChancePrintsRemaining = cpremaining
+
                     .ChancePrintDetails = cpdetails
                     .Photographer = photographer
                     .PhotoReceived = photoreceived
@@ -8072,7 +8069,7 @@ errhandler:
             End If
             Me.SOCRegisterBindingSource.Position = Me.SOCRegisterBindingSource.Find("SOCNumber", NewSOCNumber)
 
-            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, OriginalSOCNumber)
+            Me.SOCRegisterTableAdapter.UpdateQuery(NewSOCNumber, sYear, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, photographer, photoreceived, dateofreceptionofphoto, officer, gist, comparisondetails, gravecrime, filestatus, OriginalSOCNumber)
 
 
             ShowDesktopAlert("SOC Record overwritten!")
@@ -8193,7 +8190,7 @@ errhandler:
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Text
             Dim cpunfit = Me.txtSOCCPsUnfit.Text
             Dim cpeliminated = Me.txtSOCCPsEliminated.Text
-            Dim cpremaining = Me.txtSOCCPsRemaining.Text
+
             Dim cpdetails = txtSOCCPDetails.Text
             Dim photographer = Me.txtSOCPhotographer.Text
             Dim photoreceived = Me.cmbSOCPhotoReceived.Text
@@ -8217,7 +8214,7 @@ errhandler:
                 cpdeveloped = cpdeveloped & "%"
                 cpunfit = cpunfit & "%"
                 cpeliminated = cpeliminated & "%"
-                cpremaining = cpremaining & "%"
+
                 cpdetails = cpdetails & "%"
                 photographer = photographer & "%"
                 photoreceived = photoreceived & "%"
@@ -8242,7 +8239,7 @@ errhandler:
                 If cpdeveloped = vbNullString Then cpdeveloped = "%"
                 If cpunfit = vbNullString Then cpunfit = "%"
                 If cpeliminated = vbNullString Then cpeliminated = "%"
-                If cpremaining = vbNullString Then cpremaining = "%"
+
                 If cpdetails = vbNullString Then cpdetails = "%"
                 If photographer = vbNullString Then photographer = "%"
                 If photoreceived = vbNullString Then photoreceived = "%"
@@ -8267,7 +8264,7 @@ errhandler:
                 cpdeveloped = "%" & cpdeveloped & "%"
                 cpunfit = "%" & cpunfit & "%"
                 cpeliminated = "%" & cpeliminated & "%"
-                cpremaining = "%" & cpremaining & "%"
+
                 cpdetails = "%" & cpdetails & "%"
                 photographer = "%" & photographer & "%"
                 photoreceived = "%" & photoreceived & "%"
@@ -8279,19 +8276,19 @@ errhandler:
             End If
 
             If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
-                Me.SOCRegisterTableAdapter.FillWithoutDIDR(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
+                Me.SOCRegisterTableAdapter.FillWithoutDIDR(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDIDR(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
+                Me.SOCRegisterTableAdapter.FillByDIDR(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDR(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
+                Me.SOCRegisterTableAdapter.FillByDR(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
-                Me.SOCRegisterTableAdapter.FillByDI(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
+                Me.SOCRegisterTableAdapter.FillByDI(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparisondetails, photographer, photoreceived, dateofreceptionofphoto, gist, filestatus)
             End If
 
             DisplayDatabaseInformation()
@@ -8333,7 +8330,7 @@ errhandler:
             Dim cpdeveloped = Me.txtSOCCPsDeveloped.Text
             Dim cpunfit = Me.txtSOCCPsUnfit.Text
             Dim cpeliminated = Me.txtSOCCPsEliminated.Text
-            Dim cpremaining = Me.txtSOCCPsRemaining.Text
+
             Dim cpdetails = txtSOCCPDetails.Text
             Dim photographer = Me.txtSOCPhotographer.Text
             Dim photoreceived = Me.cmbSOCPhotoReceived.Text
@@ -8357,7 +8354,7 @@ errhandler:
                 cpdeveloped = cpdeveloped & "%"
                 cpunfit = cpunfit & "%"
                 cpeliminated = cpeliminated & "%"
-                cpremaining = cpremaining & "%"
+
                 cpdetails = cpdetails & "%"
                 photographer = photographer & "%"
                 photoreceived = photoreceived & "%"
@@ -8382,7 +8379,7 @@ errhandler:
                 If cpdeveloped = vbNullString Then cpdeveloped = "%"
                 If cpunfit = vbNullString Then cpunfit = "%"
                 If cpeliminated = vbNullString Then cpeliminated = "%"
-                If cpremaining = vbNullString Then cpremaining = "%"
+
                 If cpdetails = vbNullString Then cpdetails = "%"
                 If photographer = vbNullString Then photographer = "%"
                 If photoreceived = vbNullString Then photoreceived = "%"
@@ -8408,7 +8405,7 @@ errhandler:
                 cpdeveloped = "%" & cpdeveloped & "%"
                 cpunfit = "%" & cpunfit & "%"
                 cpeliminated = "%" & cpeliminated & "%"
-                cpremaining = "%" & cpremaining & "%"
+
                 cpdetails = "%" & cpdetails & "%"
                 photographer = "%" & photographer & "%"
                 photoreceived = "%" & photoreceived & "%"
@@ -8420,19 +8417,19 @@ errhandler:
             End If
 
             If Me.dtSOCInspection.IsEmpty And Me.dtSOCReport.IsEmpty Then
-                Me.SOCRegisterTableAdapter.FillWithoutDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
+                Me.SOCRegisterTableAdapter.FillWithoutDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
+                Me.SOCRegisterTableAdapter.FillByDIDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = True And Me.dtSOCReport.IsEmpty = False Then
-                Me.SOCRegisterTableAdapter.FillByDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
+                Me.SOCRegisterTableAdapter.FillByDRSelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dtr, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             If Me.dtSOCInspection.IsEmpty = False And Me.dtSOCReport.IsEmpty = True Then
-                Me.SOCRegisterTableAdapter.FillByDISelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpremaining, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
+                Me.SOCRegisterTableAdapter.FillByDISelectedYear(FingerPrintDataSet.SOCRegister, sNumber, dti, dto, ps, cr, sec, po, complainant, mo, pl, cpdeveloped, cpunfit, cpeliminated, cpdetails, inspectingofficer, comparison, photographer, photoreceived, dateofreceptionofphoto, gist, d1, d2, filestatus)
             End If
 
             DisplayDatabaseInformation()
@@ -8851,7 +8848,8 @@ errhandler:
                 Dim CPDeveloped As Integer = CInt(.ChancePrintsDeveloped)
                 Dim CPUnfit As Integer = CInt(.ChancePrintsUnfit)
                 Dim CPEliminated As Integer = CInt(.ChancePrintsEliminated)
-                Dim CPRemaining As Integer = CInt(.ChancePrintsRemaining)
+                Dim CPIdentified As Integer = CInt(.CPsIdentified)
+                Dim CPRemaining As Integer = CPDeveloped - CPUnfit - CPEliminated - CPIdentified
 
 
                 If CPDeveloped = 0 Then 'nil print
@@ -15455,7 +15453,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister DROP COLUMN IdentificationDate, CPsIdentified, IdentifiedBy, IdentifiedAs, Remarks, IdentificationNumber", con)
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister DROP COLUMN IdentificationDate, IdentifiedBy, IdentifiedAs, Remarks, IdentificationNumber", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()

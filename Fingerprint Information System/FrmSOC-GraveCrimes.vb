@@ -459,7 +459,8 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                Dim cpr As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsRemaining
+                Dim cpr As Integer = CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit) - CInt(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
+
                 WordApp.Selection.TypeText(cpr)
 
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails

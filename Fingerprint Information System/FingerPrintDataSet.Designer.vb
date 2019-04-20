@@ -1923,8 +1923,6 @@ Partial Public Class FingerPrintDataSet
         
         Private columnChancePrintsEliminated As Global.System.Data.DataColumn
         
-        Private columnChancePrintsRemaining As Global.System.Data.DataColumn
-        
         Private columnPhotographer As Global.System.Data.DataColumn
         
         Private columnPhotoReceived As Global.System.Data.DataColumn
@@ -1938,6 +1936,8 @@ Partial Public Class FingerPrintDataSet
         Private columnFileStatus As Global.System.Data.DataColumn
         
         Private columnComparisonDetails As Global.System.Data.DataColumn
+        
+        Private columnCPsIdentified As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -2112,14 +2112,6 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property ChancePrintsRemainingColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnChancePrintsRemaining
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property PhotographerColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnPhotographer
@@ -2171,6 +2163,14 @@ Partial Public Class FingerPrintDataSet
         Public ReadOnly Property ComparisonDetailsColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnComparisonDetails
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CPsIdentifiedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCPsIdentified
             End Get
         End Property
         
@@ -2229,16 +2229,16 @@ Partial Public Class FingerPrintDataSet
                     ByVal ChancePrintsDeveloped As String,  _
                     ByVal ChancePrintsUnfit As String,  _
                     ByVal ChancePrintsEliminated As String,  _
-                    ByVal ChancePrintsRemaining As String,  _
                     ByVal Photographer As String,  _
                     ByVal PhotoReceived As String,  _
                     ByVal DateOfReceptionOfPhoto As String,  _
                     ByVal Gist As String,  _
                     ByVal GraveCrime As Boolean,  _
                     ByVal FileStatus As String,  _
-                    ByVal ComparisonDetails As String) As SOCRegisterRow
+                    ByVal ComparisonDetails As String,  _
+                    ByVal CPsIdentified As String) As SOCRegisterRow
             Dim rowSOCRegisterRow As SOCRegisterRow = CType(Me.NewRow,SOCRegisterRow)
-            Dim columnValuesArray() As Object = New Object() {SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintDetails, InvestigatingOfficer, ChancePrintsDeveloped, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, Photographer, PhotoReceived, DateOfReceptionOfPhoto, Gist, GraveCrime, FileStatus, ComparisonDetails}
+            Dim columnValuesArray() As Object = New Object() {SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintDetails, InvestigatingOfficer, ChancePrintsDeveloped, ChancePrintsUnfit, ChancePrintsEliminated, Photographer, PhotoReceived, DateOfReceptionOfPhoto, Gist, GraveCrime, FileStatus, ComparisonDetails, CPsIdentified}
             rowSOCRegisterRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSOCRegisterRow)
             Return rowSOCRegisterRow
@@ -2284,7 +2284,6 @@ Partial Public Class FingerPrintDataSet
             Me.columnChancePrintsDeveloped = MyBase.Columns("ChancePrintsDeveloped")
             Me.columnChancePrintsUnfit = MyBase.Columns("ChancePrintsUnfit")
             Me.columnChancePrintsEliminated = MyBase.Columns("ChancePrintsEliminated")
-            Me.columnChancePrintsRemaining = MyBase.Columns("ChancePrintsRemaining")
             Me.columnPhotographer = MyBase.Columns("Photographer")
             Me.columnPhotoReceived = MyBase.Columns("PhotoReceived")
             Me.columnDateOfReceptionOfPhoto = MyBase.Columns("DateOfReceptionOfPhoto")
@@ -2292,6 +2291,7 @@ Partial Public Class FingerPrintDataSet
             Me.columnGraveCrime = MyBase.Columns("GraveCrime")
             Me.columnFileStatus = MyBase.Columns("FileStatus")
             Me.columnComparisonDetails = MyBase.Columns("ComparisonDetails")
+            Me.columnCPsIdentified = MyBase.Columns("CPsIdentified")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2331,8 +2331,6 @@ Partial Public Class FingerPrintDataSet
             MyBase.Columns.Add(Me.columnChancePrintsUnfit)
             Me.columnChancePrintsEliminated = New Global.System.Data.DataColumn("ChancePrintsEliminated", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnChancePrintsEliminated)
-            Me.columnChancePrintsRemaining = New Global.System.Data.DataColumn("ChancePrintsRemaining", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnChancePrintsRemaining)
             Me.columnPhotographer = New Global.System.Data.DataColumn("Photographer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPhotographer)
             Me.columnPhotoReceived = New Global.System.Data.DataColumn("PhotoReceived", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -2347,6 +2345,8 @@ Partial Public Class FingerPrintDataSet
             MyBase.Columns.Add(Me.columnFileStatus)
             Me.columnComparisonDetails = New Global.System.Data.DataColumn("ComparisonDetails", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnComparisonDetails)
+            Me.columnCPsIdentified = New Global.System.Data.DataColumn("CPsIdentified", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCPsIdentified)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSOCNumber}, true))
             Me.columnSOCNumber.AllowDBNull = false
             Me.columnSOCNumber.Unique = true
@@ -2364,13 +2364,13 @@ Partial Public Class FingerPrintDataSet
             Me.columnChancePrintsDeveloped.MaxLength = 10
             Me.columnChancePrintsUnfit.MaxLength = 10
             Me.columnChancePrintsEliminated.MaxLength = 10
-            Me.columnChancePrintsRemaining.MaxLength = 10
             Me.columnPhotographer.MaxLength = 255
             Me.columnPhotoReceived.MaxLength = 50
             Me.columnDateOfReceptionOfPhoto.MaxLength = 50
             Me.columnGist.MaxLength = 536870910
             Me.columnFileStatus.MaxLength = 25
             Me.columnComparisonDetails.MaxLength = 536870910
+            Me.columnCPsIdentified.MaxLength = 3
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -14640,21 +14640,6 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ChancePrintsRemaining() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableSOCRegister.ChancePrintsRemainingColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChancePrintsRemaining' in table 'SOCRegister' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSOCRegister.ChancePrintsRemainingColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Photographer() As String
             Get
                 Try 
@@ -14755,6 +14740,21 @@ Partial Public Class FingerPrintDataSet
             End Get
             Set
                 Me(Me.tableSOCRegister.ComparisonDetailsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CPsIdentified() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSOCRegister.CPsIdentifiedColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CPsIdentified' in table 'SOCRegister' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSOCRegister.CPsIdentifiedColumn) = value
             End Set
         End Property
         
@@ -14952,18 +14952,6 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsChancePrintsRemainingNull() As Boolean
-            Return Me.IsNull(Me.tableSOCRegister.ChancePrintsRemainingColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetChancePrintsRemainingNull()
-            Me(Me.tableSOCRegister.ChancePrintsRemainingColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsPhotographerNull() As Boolean
             Return Me.IsNull(Me.tableSOCRegister.PhotographerColumn)
         End Function
@@ -15044,6 +15032,18 @@ Partial Public Class FingerPrintDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetComparisonDetailsNull()
             Me(Me.tableSOCRegister.ComparisonDetailsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCPsIdentifiedNull() As Boolean
+            Return Me.IsNull(Me.tableSOCRegister.CPsIdentifiedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCPsIdentifiedNull()
+            Me(Me.tableSOCRegister.CPsIdentifiedColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -26233,7 +26233,6 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("ChancePrintsDeveloped", "ChancePrintsDeveloped")
             tableMapping.ColumnMappings.Add("ChancePrintsUnfit", "ChancePrintsUnfit")
             tableMapping.ColumnMappings.Add("ChancePrintsEliminated", "ChancePrintsEliminated")
-            tableMapping.ColumnMappings.Add("ChancePrintsRemaining", "ChancePrintsRemaining")
             tableMapping.ColumnMappings.Add("Photographer", "Photographer")
             tableMapping.ColumnMappings.Add("PhotoReceived", "PhotoReceived")
             tableMapping.ColumnMappings.Add("DateOfReceptionOfPhoto", "DateOfReceptionOfPhoto")
@@ -26241,86 +26240,22 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("GraveCrime", "GraveCrime")
             tableMapping.ColumnMappings.Add("FileStatus", "FileStatus")
             tableMapping.ColumnMappings.Add("ComparisonDetails", "ComparisonDetails")
+            tableMapping.ColumnMappings.Add("CPsIdentified", "CPsIdentified")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `SOCRegister` WHERE ((`SOCNumber` = ?) AND ((? = 1 AND `SOCYear` IS N"& _ 
-                "ULL) OR (`SOCYear` = ?)) AND ((? = 1 AND `DateOfInspection` IS NULL) OR (`DateOf"& _ 
-                "Inspection` = ?)) AND ((? = 1 AND `DateOfReport` IS NULL) OR (`DateOfReport` = ?"& _ 
-                ")) AND ((? = 1 AND `DateOfOccurrence` IS NULL) OR (`DateOfOccurrence` = ?)) AND "& _ 
-                "((? = 1 AND `PoliceStation` IS NULL) OR (`PoliceStation` = ?)) AND ((? = 1 AND `"& _ 
-                "CrimeNumber` IS NULL) OR (`CrimeNumber` = ?)) AND ((? = 1 AND `SectionOfLaw` IS "& _ 
-                "NULL) OR (`SectionOfLaw` = ?)) AND ((? = 1 AND `PlaceOfOccurrence` IS NULL) OR ("& _ 
-                "`PlaceOfOccurrence` = ?)) AND ((? = 1 AND `Complainant` IS NULL) OR (`Complainan"& _ 
-                "t` = ?)) AND ((? = 1 AND `ModusOperandi` IS NULL) OR (`ModusOperandi` = ?)) AND "& _ 
-                "((? = 1 AND `PropertyLost` IS NULL) OR (`PropertyLost` = ?)) AND ((? = 1 AND `Ch"& _ 
-                "ancePrintsDeveloped` IS NULL) OR (`ChancePrintsDeveloped` = ?)) AND ((? = 1 AND "& _ 
-                "`ChancePrintsUnfit` IS NULL) OR (`ChancePrintsUnfit` = ?)) AND ((? = 1 AND `Chan"& _ 
-                "cePrintsEliminated` IS NULL) OR (`ChancePrintsEliminated` = ?)) AND ((? = 1 AND "& _ 
-                "`ChancePrintsRemaining` IS NULL) OR (`ChancePrintsRemaining` = ?)) AND ((? = 1 A"& _ 
-                "ND `ChancePrintDetails` IS NULL) OR (`ChancePrintDetails` = ?)) AND ((? = 1 AND "& _ 
-                "`Photographer` IS NULL) OR (`Photographer` = ?)) AND ((? = 1 AND `PhotoReceived`"& _ 
-                " IS NULL) OR (`PhotoReceived` = ?)) AND ((? = 1 AND `DateOfReceptionOfPhoto` IS "& _ 
-                "NULL) OR (`DateOfReceptionOfPhoto` = ?)) AND ((? = 1 AND `InvestigatingOfficer` "& _ 
-                "IS NULL) OR (`InvestigatingOfficer` = ?)) AND ((? = 1 AND `GraveCrime` IS NULL) "& _ 
-                "OR (`GraveCrime` = ?)) AND ((? = 1 AND `FileStatus` IS NULL) OR (`FileStatus` = "& _ 
-                "?)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM `SOCRegister` WHERE ((`SOCNumber` = ?))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCYear", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCYear", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfInspection", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfReport", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReport", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfReport", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReport", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfOccurrence", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfOccurrence", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PoliceStation", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PoliceStation", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PoliceStation", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PoliceStation", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_CrimeNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CrimeNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CrimeNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CrimeNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_SectionOfLaw", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SectionOfLaw", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SectionOfLaw", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SectionOfLaw", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PlaceOfOccurrence", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PlaceOfOccurrence", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PlaceOfOccurrence", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PlaceOfOccurrence", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Complainant", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Complainant", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Complainant", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Complainant", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ModusOperandi", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ModusOperandi", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ModusOperandi", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ModusOperandi", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PropertyLost", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyLost", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyLost", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyLost", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintDetails", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Photographer", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Photographer", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Photographer", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Photographer", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PhotoReceived", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PhotoReceived", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfReceptionOfPhoto", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReceptionOfPhoto", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfReceptionOfPhoto", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReceptionOfPhoto", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_GraveCrime", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GraveCrime", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GraveCrime", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_FileStatus", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FileStatus", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_FileStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FileStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `SOCRegister` (`SOCNumber`, `SOCYear`, `DateOfInspection`, `DateOfRep"& _ 
                 "ort`, `DateOfOccurrence`, `PoliceStation`, `CrimeNumber`, `SectionOfLaw`, `Place"& _ 
                 "OfOccurrence`, `Complainant`, `ModusOperandi`, `PropertyLost`, `ChancePrintsDeve"& _ 
-                "loped`, `ChancePrintsUnfit`, `ChancePrintsEliminated`, `ChancePrintsRemaining`, "& _ 
-                "`ChancePrintDetails`, `Photographer`, `PhotoReceived`, `DateOfReceptionOfPhoto`,"& _ 
-                " `InvestigatingOfficer`, `Gist`, `ComparisonDetails`, `GraveCrime`, `FileStatus`"& _ 
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?"& _ 
-                ", ?)"
+                "loped`, `ChancePrintsUnfit`, `ChancePrintsEliminated`, `ChancePrintDetails`, `Ph"& _ 
+                "otographer`, `PhotoReceived`, `DateOfReceptionOfPhoto`, `InvestigatingOfficer`, "& _ 
+                "`Gist`, `ComparisonDetails`, `GraveCrime`, `FileStatus`, `CPsIdentified`) VALUES"& _ 
+                " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCYear", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -26337,7 +26272,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Photographer", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Photographer", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PhotoReceived", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -26347,35 +26281,17 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GraveCrime", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE `SOCRegister` SET `SOCNumber` = ?, `SOCYear` = ?, `DateOfInspection` = ?, "& _ 
                 "`DateOfReport` = ?, `DateOfOccurrence` = ?, `PoliceStation` = ?, `CrimeNumber` ="& _ 
                 " ?, `SectionOfLaw` = ?, `PlaceOfOccurrence` = ?, `Complainant` = ?, `ModusOperan"& _ 
                 "di` = ?, `PropertyLost` = ?, `ChancePrintsDeveloped` = ?, `ChancePrintsUnfit` = "& _ 
-                "?, `ChancePrintsEliminated` = ?, `ChancePrintsRemaining` = ?, `ChancePrintDetail"& _ 
-                "s` = ?, `Photographer` = ?, `PhotoReceived` = ?, `DateOfReceptionOfPhoto` = ?, `"& _ 
-                "InvestigatingOfficer` = ?, `Gist` = ?, `ComparisonDetails` = ?, `GraveCrime` = ?"& _ 
-                ", `FileStatus` = ? WHERE ((`SOCNumber` = ?) AND ((? = 1 AND `SOCYear` IS NULL) O"& _ 
-                "R (`SOCYear` = ?)) AND ((? = 1 AND `DateOfInspection` IS NULL) OR (`DateOfInspec"& _ 
-                "tion` = ?)) AND ((? = 1 AND `DateOfReport` IS NULL) OR (`DateOfReport` = ?)) AND"& _ 
-                " ((? = 1 AND `DateOfOccurrence` IS NULL) OR (`DateOfOccurrence` = ?)) AND ((? = "& _ 
-                "1 AND `PoliceStation` IS NULL) OR (`PoliceStation` = ?)) AND ((? = 1 AND `CrimeN"& _ 
-                "umber` IS NULL) OR (`CrimeNumber` = ?)) AND ((? = 1 AND `SectionOfLaw` IS NULL) "& _ 
-                "OR (`SectionOfLaw` = ?)) AND ((? = 1 AND `PlaceOfOccurrence` IS NULL) OR (`Place"& _ 
-                "OfOccurrence` = ?)) AND ((? = 1 AND `Complainant` IS NULL) OR (`Complainant` = ?"& _ 
-                ")) AND ((? = 1 AND `ModusOperandi` IS NULL) OR (`ModusOperandi` = ?)) AND ((? = "& _ 
-                "1 AND `PropertyLost` IS NULL) OR (`PropertyLost` = ?)) AND ((? = 1 AND `ChancePr"& _ 
-                "intsDeveloped` IS NULL) OR (`ChancePrintsDeveloped` = ?)) AND ((? = 1 AND `Chanc"& _ 
-                "ePrintsUnfit` IS NULL) OR (`ChancePrintsUnfit` = ?)) AND ((? = 1 AND `ChancePrin"& _ 
-                "tsEliminated` IS NULL) OR (`ChancePrintsEliminated` = ?)) AND ((? = 1 AND `Chanc"& _ 
-                "ePrintsRemaining` IS NULL) OR (`ChancePrintsRemaining` = ?)) AND ((? = 1 AND `Ch"& _ 
-                "ancePrintDetails` IS NULL) OR (`ChancePrintDetails` = ?)) AND ((? = 1 AND `Photo"& _ 
-                "grapher` IS NULL) OR (`Photographer` = ?)) AND ((? = 1 AND `PhotoReceived` IS NU"& _ 
-                "LL) OR (`PhotoReceived` = ?)) AND ((? = 1 AND `DateOfReceptionOfPhoto` IS NULL) "& _ 
-                "OR (`DateOfReceptionOfPhoto` = ?)) AND ((? = 1 AND `InvestigatingOfficer` IS NUL"& _ 
-                "L) OR (`InvestigatingOfficer` = ?)) AND ((? = 1 AND `GraveCrime` IS NULL) OR (`G"& _ 
-                "raveCrime` = ?)) AND ((? = 1 AND `FileStatus` IS NULL) OR (`FileStatus` = ?)))"
+                "?, `ChancePrintsEliminated` = ?, `ChancePrintDetails` = ?, `Photographer` = ?, `"& _ 
+                "PhotoReceived` = ?, `DateOfReceptionOfPhoto` = ?, `InvestigatingOfficer` = ?, `G"& _ 
+                "ist` = ?, `ComparisonDetails` = ?, `GraveCrime` = ?, `FileStatus` = ?, `CPsIdent"& _ 
+                "ified` = ? WHERE ((`SOCNumber` = ?))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCYear", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -26392,7 +26308,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Photographer", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Photographer", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PhotoReceived", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -26402,51 +26317,8 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GraveCrime", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCYear", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCYear", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfInspection", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfReport", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReport", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfReport", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReport", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfOccurrence", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfOccurrence", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PoliceStation", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PoliceStation", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PoliceStation", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PoliceStation", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_CrimeNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CrimeNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CrimeNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CrimeNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_SectionOfLaw", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SectionOfLaw", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SectionOfLaw", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SectionOfLaw", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PlaceOfOccurrence", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PlaceOfOccurrence", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PlaceOfOccurrence", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PlaceOfOccurrence", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Complainant", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Complainant", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Complainant", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Complainant", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ModusOperandi", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ModusOperandi", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ModusOperandi", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ModusOperandi", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PropertyLost", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyLost", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PropertyLost", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PropertyLost", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_ChancePrintDetails", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ChancePrintDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_Photographer", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Photographer", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_Photographer", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Photographer", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PhotoReceived", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PhotoReceived", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_DateOfReceptionOfPhoto", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReceptionOfPhoto", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_DateOfReceptionOfPhoto", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfReceptionOfPhoto", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_GraveCrime", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GraveCrime", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "GraveCrime", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_FileStatus", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FileStatus", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_FileStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FileStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -26459,84 +26331,81 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(52) {}
+            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(50) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT        SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrenc" & _
-                "e, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " " & _
-                "                        ModusOperandi, PropertyLost, ChancePrintsDeveloped, Chan" & _
-                "cePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails" & _
-                ", Photographer, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         PhotoReceived, DateOfReceptionOfPhoto" & _
-                ", InvestigatingOfficer, Gist, ComparisonDetails, GraveCrime, FileStatus" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(0).CommandText = "SELECT        SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrenc"& _ 
+                "e, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
+                "                        ModusOperandi, PropertyLost, ChancePrintsDeveloped, Chan"& _ 
+                "cePrintsUnfit, ChancePrintsEliminated, ChancePrintDetails, Photographer, PhotoRe"& _ 
+                "ceived, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         DateOfReceptionOfPhoto, InvestigatingOfficer,"& _ 
+                " Gist, ComparisonDetails, GraveCrime, FileStatus, CPsIdentified"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM           "& _ 
+                " SOCRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (SOCNum" & _
+            Me._commandCollection(1).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM         SOCRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE     (SOCNum"& _ 
                 "ber = ?)"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(2) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT     COUNT(InvestigatingOfficer) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE " & _
+            Me._commandCollection(2).CommandText = "SELECT     COUNT(InvestigatingOfficer) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM         SOCRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE "& _ 
                 "    (InvestigatingOfficer = ?)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(3) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT     COUNT(PoliceStation) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (Po" & _
+            Me._commandCollection(3).CommandText = "SELECT     COUNT(PoliceStation) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM         SOCRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE     (Po"& _ 
                 "liceStation = ?)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(4) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (Police" & _
+            Me._commandCollection(4).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM         SOCRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE     (Police"& _ 
                 "Station = ?) AND (DateOfInspection BETWEEN ? AND ?)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(5) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(5).Connection = Me.Connection
             Me._commandCollection(5).CommandText = "DELETE FROM SOCRegister"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "DELETE FROM SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (SOCNumber = ?)"
+            Me._commandCollection(6).CommandText = "DELETE FROM SOCRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE     (SOCNumber = ?)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._commandCollection(7) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(7).Connection = Me.Connection
-            Me._commandCollection(7).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (DateOfInspection BETWEEN ? AND ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY " & _
-                "DateOfInspection, SOCYear"
+            Me._commandCollection(7).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim"& _ 
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn"& _ 
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi"& _ 
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer"& _ 
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL"& _ 
+                "aw FROM SOCRegister WHERE (DateOfInspection BETWEEN ? AND ?) ORDER BY DateOfInsp"& _ 
+                "ection, SOCYear"
             Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(8) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(8).Connection = Me.Connection
-            Me._commandCollection(8).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?)" & _
-                " AND (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE " & _
-                "?) AND (SectionOfLaw LIKE ?) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         AND (PlaceOfOccurrence L" & _
-                "IKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIK" & _
-                "E ?) AND (ChancePrintsDeveloped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePr" & _
-                "intsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintsRemaining" & _
-                " LIKE ?) AND (ChancePrintDetails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Investi" & _
-                "gatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND (Photographer LIKE ?) A" & _
-                "ND (PhotoReceived LIKE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "            " & _
-                "             (Gist LIKE ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, S" & _
-                "OCYear"
+            Me._commandCollection(8).CommandText = "SELECT        CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePri" & _
+                "ntsEliminated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfReceptionOfP" & _
+                "hoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, ModusOpe" & _
+                "randi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOccurrence" & _
+                ", PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM           " & _
+                " SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?) AND (Da" & _
+                "teOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (" & _
+                "SectionOfLaw LIKE ?) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         AND (PlaceOfOccurrence LIKE ?) A" & _
+                "ND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIKE ?) AND" & _
+                " (ChancePrintsDeveloped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsUnfi" & _
+                "t LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintDetails LIKE ?) AN" & _
+                "D (InvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "               " & _
+                "          AND (Photographer LIKE ?) AND (PhotoReceived LIKE ?) AND (DateOfRecept" & _
+                "ionOfPhoto LIKE ?) AND (Gist LIKE ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfIns" & _
+                "pection, SOCYear"
             Me._commandCollection(8).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26551,7 +26420,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26562,23 +26430,21 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(8).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(9).Connection = Me.Connection
-            Me._commandCollection(9).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?)" & _
-                " AND (DateOfReport = ?) AND (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?)" & _
-                " AND (CrimeNumber LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (SectionOfLaw LIKE ?) A" & _
-                "ND (PlaceOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?" & _
-                ") AND (PropertyLost LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsDevelope" & _
-                "d LIKE ?) AND (ChancePrintsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND" & _
-                " (ChancePrintsRemaining LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintDetai" & _
-                "ls LIKE ?) AND (InvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND " & _
-                "(Photographer LIKE ?) AND (PhotoReceived LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         " & _
-                "(DateOfReceptionOfPhoto LIKE ?) AND (Gist LIKE ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER" & _
-                " BY DateOfInspection, SOCYear"
+            Me._commandCollection(9).CommandText = "SELECT        CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePri" & _
+                "ntsEliminated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfReceptionOfP" & _
+                "hoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, ModusOpe" & _
+                "randi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOccurrence" & _
+                ", PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM           " & _
+                " SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?) AND (Da" & _
+                "teOfReport = ?) AND (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (Cr" & _
+                "imeNumber LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (SectionOfLaw LIKE ?) AND (Plac" & _
+                "eOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (P" & _
+                "ropertyLost LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsDeveloped LIKE ?" & _
+                ") AND (ChancePrintsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (Chance" & _
+                "PrintDetails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (InvestigatingOfficer LIKE ?" & _
+                ") AND (ComparisonDetails LIKE ?) AND (Photographer LIKE ?) AND (PhotoReceived LI" & _
+                "KE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Gist L" & _
+                "IKE ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(9).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26594,7 +26460,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26605,23 +26470,22 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(10).Connection = Me.Connection
-            Me._commandCollection(10).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?)" & _
-                " AND (DateOfReport = ?) AND (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?)" & _
-                " AND (CrimeNumber LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (SectionOfLaw LIKE ?) A" & _
-                "ND (PlaceOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?" & _
-                ") AND (PropertyLost LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsDevelope" & _
-                "d LIKE ?) AND (ChancePrintsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND" & _
-                " (ChancePrintsRemaining LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintDetai" & _
-                "ls LIKE ?) AND (InvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND " & _
-                "(Photographer LIKE ?) AND (PhotoReceived LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         " & _
-                "(DateOfReceptionOfPhoto LIKE ?) AND (Gist LIKE ?) AND (DateOfInspection BETWEEN " & _
-                "? AND ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(10).CommandText = "SELECT        CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePri" & _
+                "ntsEliminated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfReceptionOfP" & _
+                "hoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, ModusOpe" & _
+                "randi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOccurrence" & _
+                ", PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM           " & _
+                " SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?) AND (Da" & _
+                "teOfReport = ?) AND (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (Cr" & _
+                "imeNumber LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (SectionOfLaw LIKE ?) AND (Plac" & _
+                "eOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (P" & _
+                "ropertyLost LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsDeveloped LIKE ?" & _
+                ") AND (ChancePrintsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (Chance" & _
+                "PrintDetails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (InvestigatingOfficer LIKE ?" & _
+                ") AND (ComparisonDetails LIKE ?) AND (Photographer LIKE ?) AND (PhotoReceived LI" & _
+                "KE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Gist L" & _
+                "IKE ?) AND (DateOfInspection BETWEEN ? AND ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY " & _
+                "DateOfInspection, SOCYear"
             Me._commandCollection(10).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26637,7 +26501,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26650,23 +26513,20 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(10).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(11).Connection = Me.Connection
-            Me._commandCollection(11).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfInspection = ?)" & _
-                " AND (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE " & _
-                "?) AND (SectionOfLaw LIKE ?) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         AND (PlaceOfOccurrence L" & _
-                "IKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIK" & _
-                "E ?) AND (ChancePrintsDeveloped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePr" & _
-                "intsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintsRemaining" & _
-                " LIKE ?) AND (ChancePrintDetails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Investi" & _
-                "gatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND (Photographer LIKE ?) A" & _
-                "ND (PhotoReceived LIKE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "            " & _
-                "             (Gist LIKE ?) AND (DateOfInspection BETWEEN ? AND ?) AND (FileStatu" & _
-                "s LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(11).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (SOCNumber LIKE ?) AND (DateOfInspection = ?) AND (Dat" & _
+                "eOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (S" & _
+                "ectionOfLaw LIKE ?) AND (PlaceOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND " & _
+                "(ModusOperandi LIKE ?) AND (PropertyLost LIKE ?) AND (ChancePrintsDeveloped LIKE" & _
+                " ?) AND (ChancePrintsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?)  AND (Cha" & _
+                "ncePrintDetails LIKE ?) AND (InvestigatingOfficer LIKE ?) AND (ComparisonDetails" & _
+                " LIKE ?) AND (Photographer LIKE ?) AND (PhotoReceived LIKE ?) AND (DateOfRecepti" & _
+                "onOfPhoto LIKE ?) AND (Gist LIKE ?) AND (DateOfInspection BETWEEN ? AND ?) AND (" & _
+                "FileStatus LIKE ?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(11).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26681,7 +26541,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26699,23 +26558,20 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(12).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(13) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(13).Connection = Me.Connection
-            Me._commandCollection(13).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfReport = ?) AND" & _
-                " (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) A" & _
-                "ND (SectionOfLaw LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (PlaceOfOccurrence LIKE " & _
-                "?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIKE ?)" & _
-                " AND (ChancePrintsDeveloped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrints" & _
-                "Unfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintsRemaining LIK" & _
-                "E ?) AND (ChancePrintDetails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Investigati" & _
-                "ngOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND (Photographer LIKE ?) AND (" & _
-                "PhotoReceived LIKE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                " & _
-                "         (Gist LIKE ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYe" & _
-                "ar"
+            Me._commandCollection(13).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (SOCNumber LIKE ?) AND (DateOfReport = ?) AND (DateOfO" & _
+                "ccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (Secti" & _
+                "onOfLaw LIKE ?) AND (PlaceOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (Mod" & _
+                "usOperandi LIKE ?) AND (PropertyLost LIKE ?) AND (ChancePrintsDeveloped LIKE ?) " & _
+                "AND (ChancePrintsUnfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePr" & _
+                "intDetails LIKE ?) AND (InvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE" & _
+                " ?) AND (Photographer LIKE ?) AND (PhotoReceived LIKE ?) AND (DateOfReceptionOfP" & _
+                "hoto LIKE ?) AND (Gist LIKE ?) AND (FileStatus LIKE ?) ORDER BY DateOfInspection" & _
+                ", SOCYear"
             Me._commandCollection(13).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfReport", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfReport", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26730,7 +26586,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26741,23 +26596,21 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(14).Connection = Me.Connection
-            Me._commandCollection(14).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfReport = ?) AND" & _
-                " (DateOfOccurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) A" & _
-                "ND (SectionOfLaw LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (PlaceOfOccurrence LIKE " & _
-                "?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIKE ?)" & _
-                " AND (ChancePrintsDeveloped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrints" & _
-                "Unfit LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintsRemaining LIK" & _
-                "E ?) AND (ChancePrintDetails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Investigati" & _
-                "ngOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND (Photographer LIKE ?) AND (" & _
-                "PhotoReceived LIKE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                " & _
-                "         (Gist LIKE ?) AND (DateOfInspection BETWEEN ? AND ?) AND (FileStatus LI" & _
-                "KE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(14).CommandText = "SELECT        CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePri" & _
+                "ntsEliminated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfReceptionOfP" & _
+                "hoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, ModusOpe" & _
+                "randi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOccurrence" & _
+                ", PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM           " & _
+                " SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfReport = ?) AND (DateOf" & _
+                "Occurrence LIKE ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (Sect" & _
+                "ionOfLaw LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (PlaceOfOccurrence LIKE ?) AND (" & _
+                "Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIKE ?) AND (Ch" & _
+                "ancePrintsDeveloped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsUnfit LI" & _
+                "KE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintDetails LIKE ?) AND (I" & _
+                "nvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                   " & _
+                "      AND (Photographer LIKE ?) AND (PhotoReceived LIKE ?) AND (DateOfReceptionO" & _
+                "fPhoto LIKE ?) AND (Gist LIKE ?) AND (DateOfInspection BETWEEN ? AND ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  " & _
+                "                       (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(14).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfReport", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfReport", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26772,7 +26625,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26785,115 +26637,105 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(15) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(15).Connection = Me.Connection
-            Me._commandCollection(15).CommandText = "SELECT        SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrenc" & _
-                "e, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " " & _
-                "                        ModusOperandi, PropertyLost, ChancePrintsDeveloped, Chan" & _
-                "cePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails" & _
-                ", Photographer, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         PhotoReceived, DateOfReceptionOfPhoto" & _
-                ", InvestigatingOfficer, Gist, ComparisonDetails, GraveCrime, FileStatus" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (FileStatus = ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, " & _
-                "SOCYear"
+            Me._commandCollection(15).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (FileStatus = ?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(15).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(16) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(16).Connection = Me.Connection
-            Me._commandCollection(16).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (GraveCrime = ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, " & _
-                "SOCYear"
+            Me._commandCollection(16).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (GraveCrime = ?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(16).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 2, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "GraveCrime", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(17) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(17).Connection = Me.Connection
-            Me._commandCollection(17).CommandText = "SELECT ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, ChanceP" & _
-                "rintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & _
-                "DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileSt" & _
-                "atus, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Phot" & _
-                "ographer, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, Se" & _
-                "ctionOfLaw FROM SOCRegister WHERE (DateOfInspection BETWEEN ? AND ?) AND (GraveC" & _
-                "rime = ?) ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(17).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (DateOfInspection BETWEEN ? AND ?) AND (GraveCrime = ?" & _
+                ") ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(17).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 2, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "GraveCrime", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(18) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(18).Connection = Me.Connection
-            Me._commandCollection(18).CommandText = "SELECT ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, ChanceP" & _
-                "rintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & _
-                "DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileSt" & _
-                "atus, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Phot" & _
-                "ographer, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, Se" & _
-                "ctionOfLaw FROM SOCRegister WHERE (InvestigatingOfficer LIKE ?) AND (DateOfInspe" & _
-                "ction = ?) ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(18).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (InvestigatingOfficer LIKE ?) AND (DateOfInspection = " & _
+                "?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(18).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(18).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(18).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(19) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(19).Connection = Me.Connection
-            Me._commandCollection(19).CommandText = "SELECT TOP 1 ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, C" & _
-                "hancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNu" & _
-                "mber, DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, " & _
-                "FileStatus, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived" & _
-                ", Photographer, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYe" & _
-                "ar, SectionOfLaw FROM SOCRegister ORDER BY DateOfInspection DESC, SOCYear DESC"
+            Me._commandCollection(19).CommandText = "SELECT TOP 1 CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrin" & _
+                "tsEliminated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, Da" & _
+                "teOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStat" & _
+                "us, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photog" & _
+                "rapher, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, Sect" & _
+                "ionOfLaw FROM SOCRegister ORDER BY DateOfInspection DESC, SOCYear DESC"
             Me._commandCollection(19).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(20) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(20).Connection = Me.Connection
-            Me._commandCollection(20).CommandText = "SELECT ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, ChanceP" & _
-                "rintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & _
-                "DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileSt" & _
-                "atus, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Phot" & _
-                "ographer, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, Se" & _
-                "ctionOfLaw FROM SOCRegister WHERE (SOCNumber = ?)"
+            Me._commandCollection(20).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (SOCNumber = ?)"
             Me._commandCollection(20).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(21) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(21).Connection = Me.Connection
-            Me._commandCollection(21).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (ChancePrintsDeveloped <> '0') AND (DateOfIns" & _
-                "pection BETWEEN ? AND ?) AND (PhotoReceived <> 'yes')" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection" & _
-                ", SOCYear"
+            Me._commandCollection(21).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (ChancePrintsDeveloped <> '0') AND (DateOfInspection B" & _
+                "ETWEEN ? AND ?) AND (PhotoReceived <> 'yes') ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(21).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(22) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(22).Connection = Me.Connection
-            Me._commandCollection(22).CommandText = "SELECT ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, ChanceP" & _
-                "rintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & _
-                "DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileSt" & _
-                "atus, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Phot" & _
-                "ographer, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, Se" & _
-                "ctionOfLaw FROM SOCRegister WHERE (SOCNumber = ?) ORDER BY DateOfInspection, SOC" & _
-                "Year"
+            Me._commandCollection(22).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (SOCNumber = ?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(22).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(22).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(23).Connection = Me.Connection
-            Me._commandCollection(23).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfOccurrence LIKE" & _
-                " ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (SectionOfLaw LIKE ?" & _
-                ") AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (PlaceOfOccurrence LIKE ?) AND (Complainant LIK" & _
-                "E ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIKE ?) AND (ChancePrintsDevel" & _
-                "oped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsUnfit LIKE ?) AND (Chan" & _
-                "cePrintsEliminated LIKE ?) AND (ChancePrintsRemaining LIKE ?) AND (ChancePrintDe" & _
-                "tails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (InvestigatingOfficer LIKE ?) AND (" & _
-                "ComparisonDetails LIKE ?) AND (Photographer LIKE ?) AND (PhotoReceived LIKE ?) A" & _
-                "ND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Gist LIKE ?) " & _
-                "AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(23).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (SOCNumber LIKE ?) AND (DateOfOccurrence LIKE ?) AND (" & _
+                "PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (SectionOfLaw LIKE ?) AND (Pl" & _
+                "aceOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND " & _
+                "(PropertyLost LIKE ?) AND (ChancePrintsDeveloped LIKE ?) AND (ChancePrintsUnfit " & _
+                "LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintDetails LIKE ?) AND " & _
+                "(InvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND (Photographer L" & _
+                "IKE ?) AND (PhotoReceived LIKE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND (Gist " & _
+                "LIKE ?) AND (FileStatus LIKE ?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(23).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfOccurrence", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26907,7 +26749,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26918,23 +26759,20 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(23).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(24).Connection = Me.Connection
-            Me._commandCollection(24).CommandText = "SELECT        ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, " & _
-                "ChancePrintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeN" & _
-                "umber, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         DateOfInspection, DateOfOccurrence, DateOfRece" & _
-                "ptionOfPhoto, DateOfReport, FileStatus, Gist, GraveCrime, InvestigatingOfficer, " & _
-                "ModusOperandi, PhotoReceived, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Photographer, PlaceOfOc" & _
-                "currence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfLaw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM   " & _
-                "         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber LIKE ?) AND (DateOfOccurrence LIKE" & _
-                " ?) AND (PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (SectionOfLaw LIKE ?" & _
-                ") AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (PlaceOfOccurrence LIKE ?) AND (Complainant LIK" & _
-                "E ?) AND (ModusOperandi LIKE ?) AND (PropertyLost LIKE ?) AND (ChancePrintsDevel" & _
-                "oped LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (ChancePrintsUnfit LIKE ?) AND (Chan" & _
-                "cePrintsEliminated LIKE ?) AND (ChancePrintsRemaining LIKE ?) AND (ChancePrintDe" & _
-                "tails LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (InvestigatingOfficer LIKE ?) AND (" & _
-                "ComparisonDetails LIKE ?) AND (Photographer LIKE ?) AND (PhotoReceived LIKE ?) A" & _
-                "ND (DateOfReceptionOfPhoto LIKE ?) AND " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         (Gist LIKE ?) " & _
-                "AND (DateOfInspection BETWEEN ? AND ?) AND (FileStatus LIKE ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateOfI" & _
-                "nspection, SOCYear"
+            Me._commandCollection(24).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (SOCNumber LIKE ?) AND (DateOfOccurrence LIKE ?) AND (" & _
+                "PoliceStation LIKE ?) AND (CrimeNumber LIKE ?) AND (SectionOfLaw LIKE ?) AND (Pl" & _
+                "aceOfOccurrence LIKE ?) AND (Complainant LIKE ?) AND (ModusOperandi LIKE ?) AND " & _
+                "(PropertyLost LIKE ?) AND (ChancePrintsDeveloped LIKE ?) AND (ChancePrintsUnfit " & _
+                "LIKE ?) AND (ChancePrintsEliminated LIKE ?) AND (ChancePrintDetails LIKE ?) AND " & _
+                "(InvestigatingOfficer LIKE ?) AND (ComparisonDetails LIKE ?) AND (Photographer L" & _
+                "IKE ?) AND (PhotoReceived LIKE ?) AND (DateOfReceptionOfPhoto LIKE ?) AND (Gist " & _
+                "LIKE ?) AND (DateOfInspection BETWEEN ? AND ?) AND (FileStatus LIKE ?) ORDER BY " & _
+                "DateOfInspection, SOCYear"
             Me._commandCollection(24).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfOccurrence", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26948,7 +26786,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -26961,13 +26798,13 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(24).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(25) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(25).Connection = Me.Connection
-            Me._commandCollection(25).CommandText = "SELECT ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsEliminated, ChanceP" & _
-                "rintsRemaining, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, " & _
-                "DateOfInspection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileSt" & _
-                "atus, Gist, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Phot" & _
-                "ographer, PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, Se" & _
-                "ctionOfLaw FROM SOCRegister WHERE (DateOfInspection BETWEEN ? AND ?) AND (Invest" & _
-                "igatingOfficer LIKE ?) ORDER BY DateOfInspection, SOCYear"
+            Me._commandCollection(25).CommandText = "SELECT CPsIdentified, ChancePrintDetails, ChancePrintsDeveloped, ChancePrintsElim" & _
+                "inated, ChancePrintsUnfit, ComparisonDetails, Complainant, CrimeNumber, DateOfIn" & _
+                "spection, DateOfOccurrence, DateOfReceptionOfPhoto, DateOfReport, FileStatus, Gi" & _
+                "st, GraveCrime, InvestigatingOfficer, ModusOperandi, PhotoReceived, Photographer" & _
+                ", PlaceOfOccurrence, PoliceStation, PropertyLost, SOCNumber, SOCYear, SectionOfL" & _
+                "aw FROM SOCRegister WHERE (DateOfInspection BETWEEN ? AND ?) AND (InvestigatingO" & _
+                "fficer LIKE ?) ORDER BY DateOfInspection, SOCYear"
             Me._commandCollection(25).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(25).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(25).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
@@ -27011,196 +26848,183 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(30).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(31) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(31).Connection = Me.Connection
-            Me._commandCollection(31).CommandText = "SELECT        SUM(ChancePrintsRemaining) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "W" & _
-                "HERE        (DateOfInspection BETWEEN ? AND ?)"
+            Me._commandCollection(31).CommandText = "SELECT        SUM(ChancePrintsEliminated) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & _
+                "WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?" & _
+                ")"
             Me._commandCollection(31).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(31).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(31).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(32) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(32).Connection = Me.Connection
-            Me._commandCollection(32).CommandText = "SELECT        SUM(ChancePrintsRemaining) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "W" & _
-                "HERE        (DateOfInspection BETWEEN ? AND ?)"
+            Me._commandCollection(32).CommandText = "SELECT        SUM(val(ChancePrintsDeveloped) - (val(ChancePrintsUnfit) + val(Chan" & _
+                "cePrintsEliminated) + val(CPsIdentified))) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & _
+                "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND" & _
+                " ?)"
             Me._commandCollection(32).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(32).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(32).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(32).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(33) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(33).Connection = Me.Connection
-            Me._commandCollection(33).CommandText = "SELECT        SUM(ChancePrintsEliminated) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & _
-                "WHERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?" & _
-                ")"
+            Me._commandCollection(33).CommandText = "SELECT        SUM(val(ChancePrintsDeveloped) - (val(ChancePrintsUnfit) + val(Chan" & _
+                "cePrintsEliminated) + val(CPsIdentified))) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & _
+                "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (DateOfInspection BETWEEN ? AND ?)"
             Me._commandCollection(33).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(33).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(33).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(34) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(34).Connection = Me.Connection
-            Me._commandCollection(34).CommandText = "SELECT        SUM(ChancePrintsRemaining) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "W" & _
-                "HERE        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?)" & _
-                ""
+            Me._commandCollection(34).CommandText = "SELECT        val(ChancePrintsDeveloped) - (val(ChancePrintsUnfit) + val(ChancePr" & _
+                "intsEliminated) + val(CPsIdentified)) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHE" & _
+                "RE        (SOCNumber = ?)"
             Me._commandCollection(34).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(35) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(35).Connection = Me.Connection
-            Me._commandCollection(35).CommandText = "SELECT        ChancePrintsRemaining AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE " & _
-                "       (SOCNumber = ?)"
+            Me._commandCollection(35).CommandText = "SELECT        SUM(ChancePrintsUnfit) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE" & _
+                "        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?)"
             Me._commandCollection(35).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(36) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(36).Connection = Me.Connection
-            Me._commandCollection(36).CommandText = "SELECT        SUM(ChancePrintsUnfit) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE" & _
-                "        (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?)"
+            Me._commandCollection(36).CommandText = "SELECT     SUM(ChancePrintsUnfit) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (" & _
+                "DateOfInspection BETWEEN ? AND ?)"
             Me._commandCollection(36).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(36).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(36).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(37) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(37).Connection = Me.Connection
-            Me._commandCollection(37).CommandText = "SELECT     SUM(ChancePrintsUnfit) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (" & _
-                "DateOfInspection BETWEEN ? AND ?)"
+            Me._commandCollection(37).CommandText = "SELECT     MAX(SOCYear) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOfInsp" & _
+                "ection BETWEEN ? AND ?)"
             Me._commandCollection(37).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(37).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(37).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(38) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(38).Connection = Me.Connection
-            Me._commandCollection(38).CommandText = "SELECT     MAX(SOCYear) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOfInsp" & _
+            Me._commandCollection(38).CommandText = "SELECT     MIN(SOCYear) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOfInsp" & _
                 "ection BETWEEN ? AND ?)"
             Me._commandCollection(38).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(38).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(38).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(39) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(39).Connection = Me.Connection
-            Me._commandCollection(39).CommandText = "SELECT     MIN(SOCYear) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOfInsp" & _
-                "ection BETWEEN ? AND ?)"
+            Me._commandCollection(39).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOf" & _
+                "Inspection BETWEEN ? AND ?) AND (PhotoReceived <> 'yes') AND (ChancePrintsDevelo" & _
+                "ped <> '0')"
             Me._commandCollection(39).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(39).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(39).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(40) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(40).Connection = Me.Connection
             Me._commandCollection(40).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOf" & _
-                "Inspection BETWEEN ? AND ?) AND (PhotoReceived <> 'yes') AND (ChancePrintsDevelo" & _
-                "ped <> '0')"
+                "Inspection BETWEEN ? AND ?) AND (PhotoReceived = 'yes') AND (ChancePrintsDevelop" & _
+                "ed <> '0')"
             Me._commandCollection(40).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(40).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(40).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(41) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(41).Connection = Me.Connection
-            Me._commandCollection(41).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOf" & _
-                "Inspection BETWEEN ? AND ?) AND (PhotoReceived = 'yes') AND (ChancePrintsDevelop" & _
-                "ed <> '0')"
+            Me._commandCollection(41).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE      " & _
+                "  (DateOfInspection BETWEEN ? AND ?) AND (FileStatus = ?)"
             Me._commandCollection(41).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(41).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(41).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(41).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(42) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(42).Connection = Me.Connection
-            Me._commandCollection(42).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE      " & _
-                "  (DateOfInspection BETWEEN ? AND ?) AND (FileStatus = ?)"
+            Me._commandCollection(42).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOf" & _
+                "Inspection BETWEEN ? AND ?)"
             Me._commandCollection(42).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(42).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(42).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(42).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(43) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(43).Connection = Me.Connection
-            Me._commandCollection(43).CommandText = "SELECT     COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM         SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (DateOf" & _
-                "Inspection BETWEEN ? AND ?)"
+            Me._commandCollection(43).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE      " & _
+                "  (IdentificationDate BETWEEN ? AND ?) AND (FileStatus = 'Identified')"
             Me._commandCollection(43).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(43).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(43).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(43).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(43).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(44) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(44).Connection = Me.Connection
             Me._commandCollection(44).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE      " & _
-                "  (IdentificationDate BETWEEN ? AND ?) AND (FileStatus = 'Identified')"
+                "  (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?)"
             Me._commandCollection(44).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(44).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(44).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(44).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(44).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(44).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(45) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(45).Connection = Me.Connection
-            Me._commandCollection(45).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE      " & _
-                "  (InvestigatingOfficer LIKE ?) AND (DateOfInspection BETWEEN ? AND ?)"
+            Me._commandCollection(45).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                FileStatus = 'Closed'" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        " & _
+                "(ChancePrintsRemaining = '0')"
             Me._commandCollection(45).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(45).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(45).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(45).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(46) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(46).Connection = Me.Connection
-            Me._commandCollection(46).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                FileStatus = 'Closed'" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        " & _
-                "(ChancePrintsRemaining = '0')"
+            Me._commandCollection(46).CommandText = "UPDATE    SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET              InvestigatingOfficer = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (Inve" & _
+                "stigatingOfficer = ?)"
             Me._commandCollection(46).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(46).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(46).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Original, False, Nothing))
             Me._commandCollection(47) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(47).Connection = Me.Connection
-            Me._commandCollection(47).CommandText = "UPDATE    SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET              InvestigatingOfficer = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (Inve" & _
-                "stigatingOfficer = ?)"
+            Me._commandCollection(47).CommandText = "UPDATE    SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET              PhotoReceived = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (SOCNumber =" & _
+                " ?)"
             Me._commandCollection(47).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(47).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(47).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(47).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PhotoReceived", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(47).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
             Me._commandCollection(48) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(48).Connection = Me.Connection
-            Me._commandCollection(48).CommandText = "UPDATE    SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET              PhotoReceived = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (SOCNumber =" & _
-                " ?)"
+            Me._commandCollection(48).CommandText = "UPDATE    SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET              PoliceStation = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (PoliceStati" & _
+                "on = ?)"
             Me._commandCollection(48).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(48).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PhotoReceived", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(48).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(48).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(48).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Original, False, Nothing))
             Me._commandCollection(49) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(49).Connection = Me.Connection
-            Me._commandCollection(49).CommandText = "UPDATE    SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET              PoliceStation = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE     (PoliceStati" & _
-                "on = ?)"
-            Me._commandCollection(49).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Original, False, Nothing))
-            Me._commandCollection(50) = New Global.System.Data.OleDb.OleDbCommand()
-            Me._commandCollection(50).Connection = Me.Connection
-            Me._commandCollection(50).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                SOCNumber = ?, SOCYear = ?, DateOfIn" & _
+            Me._commandCollection(49).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                SOCNumber = ?, SOCYear = ?, DateOfIn" & _
                 "spection = ?, DateOfReport = ?, DateOfOccurrence = ?, PoliceStation = ?, CrimeNu" & _
                 "mber = ?, SectionOfLaw = ?, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         PlaceOfOccurrence = ?, Co" & _
                 "mplainant = ?, ModusOperandi = ?, PropertyLost = ?, ChancePrintsDeveloped = ?, C" & _
                 "hancePrintsUnfit = ?, ChancePrintsEliminated = ?, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         Cha" & _
-                "ncePrintsRemaining = ?, ChancePrintDetails = ?, Photographer = ?, PhotoReceived " & _
-                "= ?, DateOfReceptionOfPhoto = ?, InvestigatingOfficer = ?, Gist = ?, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "         " & _
-                "                ComparisonDetails = ?, GraveCrime = ?, FileStatus = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE    " & _
-                "    (SOCNumber = ?)"
-            Me._commandCollection(50).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCYear", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfReport", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfReport", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfOccurrence", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CrimeNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CrimeNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SectionOfLaw", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SectionOfLaw", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PlaceOfOccurrence", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PlaceOfOccurrence", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Complainant", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Complainant", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ModusOperandi", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ModusOperandi", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyLost", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PropertyLost", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Photographer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Photographer", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PhotoReceived", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfReceptionOfPhoto", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfReceptionOfPhoto", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Gist", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Gist", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 2, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "GraveCrime", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
-            Me._commandCollection(51) = New Global.System.Data.OleDb.OleDbCommand()
-            Me._commandCollection(51).Connection = Me.Connection
-            Me._commandCollection(51).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                ChancePrintsRemaining = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE    " & _
-                "    (SOCNumber = ?)"
-            Me._commandCollection(51).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(51).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsRemaining", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsRemaining", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(51).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
-            Me._commandCollection(52) = New Global.System.Data.OleDb.OleDbCommand()
-            Me._commandCollection(52).Connection = Me.Connection
-            Me._commandCollection(52).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                FileStatus = ?, ComparisonDetails = " & _
+                "ncePrintDetails = ?, Photographer = ?, PhotoReceived = ?, DateOfReceptionOfPhoto" & _
+                " = ?, InvestigatingOfficer = ?, Gist = ?, ComparisonDetails = ?, GraveCrime = ?," & _
+                "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                          FileStatus = ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber = ?)"
+            Me._commandCollection(49).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCYear", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCYear", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfInspection", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfInspection", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfReport", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfReport", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfOccurrence", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfOccurrence", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PoliceStation", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PoliceStation", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CrimeNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "CrimeNumber", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SectionOfLaw", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SectionOfLaw", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PlaceOfOccurrence", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PlaceOfOccurrence", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Complainant", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Complainant", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ModusOperandi", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ModusOperandi", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PropertyLost", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PropertyLost", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsDeveloped", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsDeveloped", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsUnfit", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsUnfit", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintsEliminated", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintsEliminated", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ChancePrintDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ChancePrintDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Photographer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Photographer", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PhotoReceived", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "PhotoReceived", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DateOfReceptionOfPhoto", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "DateOfReceptionOfPhoto", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("InvestigatingOfficer", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "InvestigatingOfficer", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Gist", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "Gist", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("GraveCrime", Global.System.Data.OleDb.OleDbType.[Boolean], 2, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "GraveCrime", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(49).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(50) = New Global.System.Data.OleDb.OleDbCommand()
+            Me._commandCollection(50).Connection = Me.Connection
+            Me._commandCollection(50).CommandText = "UPDATE       SOCRegister" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SET                FileStatus = ?, ComparisonDetails = " & _
                 "?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (SOCNumber = ?)"
-            Me._commandCollection(52).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(52).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(52).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
-            Me._commandCollection(52).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
+            Me._commandCollection(50).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FileStatus", Global.System.Data.OleDb.OleDbType.WChar, 25, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FileStatus", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("ComparisonDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ComparisonDetails", Global.System.Data.DataRowVersion.Current, False, Nothing))
+            Me._commandCollection(50).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "SOCNumber", Global.System.Data.DataRowVersion.Original, False, Nothing))
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -27290,7 +27114,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -27365,50 +27188,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -27435,7 +27253,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -27510,50 +27327,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -27580,7 +27392,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -27660,50 +27471,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -27731,7 +27537,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -27811,50 +27616,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -27881,7 +27681,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -27963,60 +27762,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
             End If
             If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection1.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection2.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection2.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection2.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(23).Value = CType(DateOfInspection2.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(24).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(23).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -28044,7 +27838,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -28126,60 +27919,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
             End If
             If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection1.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection2.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection2.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection2.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(23).Value = CType(DateOfInspection2.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(24).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(23).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -28205,7 +27993,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -28282,60 +28069,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection1.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection2.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection2.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection2.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection2.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(23).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -28362,7 +28144,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -28439,60 +28220,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection1.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection2.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection2.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection2.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection2.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(23).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -28542,7 +28318,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -28617,50 +28392,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -28687,7 +28457,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -28762,50 +28531,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -28831,7 +28595,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -28908,60 +28671,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (DateOfInspection.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection1.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(23).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -28988,7 +28746,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -29065,60 +28822,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
             End If
             If (DateOfInspection.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection1.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(23).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -29163,9 +28915,13 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByGraveCrime(ByVal dataTable As FingerPrintDataSet.SOCRegisterDataTable, ByVal GraveCrime As Boolean) As Integer
+        Public Overridable Overloads Function FillByGraveCrime(ByVal dataTable As FingerPrintDataSet.SOCRegisterDataTable, ByVal GraveCrime As Global.System.Nullable(Of Boolean)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(16)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(GraveCrime, Boolean)
+            If (GraveCrime.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(GraveCrime.Value, Boolean)
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
             End If
@@ -29177,9 +28933,13 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDataBy39(ByVal GraveCrime As Boolean) As FingerPrintDataSet.SOCRegisterDataTable
+        Public Overridable Overloads Function GetDataBy39(ByVal GraveCrime As Global.System.Nullable(Of Boolean)) As FingerPrintDataSet.SOCRegisterDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(16)
-            Me.Adapter.SelectCommand.Parameters(0).Value = CType(GraveCrime, Boolean)
+            If (GraveCrime.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(GraveCrime.Value, Boolean)
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
@@ -29314,7 +29074,7 @@ Namespace FingerPrintDataSetTableAdapters
         Public Overridable Overloads Function FillByNumber(ByVal dataTable As FingerPrintDataSet.SOCRegisterDataTable, ByVal SOCNumber As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(20)
             If (SOCNumber Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("SOCNumber")
             Else
                 Me.Adapter.SelectCommand.Parameters(0).Value = CType(SOCNumber, String)
             End If
@@ -29332,7 +29092,7 @@ Namespace FingerPrintDataSetTableAdapters
         Public Overridable Overloads Function GetDataBy27(ByVal SOCNumber As String) As FingerPrintDataSet.SOCRegisterDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(20)
             If (SOCNumber Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(0).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("SOCNumber")
             Else
                 Me.Adapter.SelectCommand.Parameters(0).Value = CType(SOCNumber, String)
             End If
@@ -29437,7 +29197,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -29507,50 +29266,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(11).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -29576,7 +29330,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -29646,50 +29399,45 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(11).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Gist, String)
             End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -29714,7 +29462,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -29786,60 +29533,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(11).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Gist, String)
             End If
             If (DateOfInspection.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfInspection.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection1.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection1.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
             End If
             If (Me.ClearBeforeFill = True) Then
                 dataTable.Clear()
@@ -29865,7 +29607,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal InvestigatingOfficer As String, _
                     ByVal ComparisonDetails As String, _
@@ -29937,60 +29678,55 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.SelectCommand.Parameters(11).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.SelectCommand.Parameters(13).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.SelectCommand.Parameters(12).Value = CType(ChancePrintDetails, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(14).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.SelectCommand.Parameters(13).Value = CType(InvestigatingOfficer, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(15).Value = CType(ComparisonDetails, String)
+                Me.Adapter.SelectCommand.Parameters(14).Value = CType(ComparisonDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(16).Value = CType(Photographer, String)
+                Me.Adapter.SelectCommand.Parameters(15).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(17).Value = CType(PhotoReceived, String)
+                Me.Adapter.SelectCommand.Parameters(16).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.SelectCommand.Parameters(17).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(19).Value = CType(Gist, String)
+                Me.Adapter.SelectCommand.Parameters(18).Value = CType(Gist, String)
             End If
             If (DateOfInspection.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection.Value, Date)
+                Me.Adapter.SelectCommand.Parameters(19).Value = CType(DateOfInspection.Value, Date)
+            Else
+                Me.Adapter.SelectCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection1.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(20).Value = CType(DateOfInspection1.Value, Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
-            If (DateOfInspection1.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(21).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
-            End If
             If (FileStatus Is Nothing) Then
-                Me.Adapter.SelectCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.SelectCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(22).Value = CType(FileStatus, String)
+                Me.Adapter.SelectCommand.Parameters(21).Value = CType(FileStatus, String)
             End If
             Dim dataTable As FingerPrintDataSet.SOCRegisterDataTable = New FingerPrintDataSet.SOCRegisterDataTable()
             Me.Adapter.Fill(dataTable)
@@ -30083,183 +29819,11 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)> _
-        Public Overridable Overloads Function Delete( _
-                    ByVal Original_SOCNumber As String, _
-                    ByVal Original_SOCYear As Global.System.Nullable(Of Integer), _
-                    ByVal Original_DateOfInspection As Global.System.Nullable(Of Date), _
-                    ByVal Original_DateOfReport As Global.System.Nullable(Of Date), _
-                    ByVal Original_DateOfOccurrence As String, _
-                    ByVal Original_PoliceStation As String, _
-                    ByVal Original_CrimeNumber As String, _
-                    ByVal Original_SectionOfLaw As String, _
-                    ByVal Original_PlaceOfOccurrence As String, _
-                    ByVal Original_Complainant As String, _
-                    ByVal Original_ModusOperandi As String, _
-                    ByVal Original_PropertyLost As String, _
-                    ByVal Original_ChancePrintsDeveloped As String, _
-                    ByVal Original_ChancePrintsUnfit As String, _
-                    ByVal Original_ChancePrintsEliminated As String, _
-                    ByVal Original_ChancePrintsRemaining As String, _
-                    ByVal Original_ChancePrintDetails As String, _
-                    ByVal Original_Photographer As String, _
-                    ByVal Original_PhotoReceived As String, _
-                    ByVal Original_DateOfReceptionOfPhoto As String, _
-                    ByVal Original_InvestigatingOfficer As String, _
-                    ByVal Original_GraveCrime As Boolean, _
-                    ByVal Original_FileStatus As String) As Integer
+        Public Overridable Overloads Function Delete(ByVal Original_SOCNumber As String) As Integer
             If (Original_SOCNumber Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_SOCNumber, String)
-            End If
-            If (Original_SOCYear.HasValue = True) Then
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_SOCYear.Value, Integer)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            If (Original_DateOfInspection.HasValue = True) Then
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_DateOfInspection.Value, Date)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
-            End If
-            If (Original_DateOfReport.HasValue = True) Then
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_DateOfReport.Value, Date)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
-            End If
-            If (Original_DateOfOccurrence Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_DateOfOccurrence, String)
-            End If
-            If (Original_PoliceStation Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_PoliceStation, String)
-            End If
-            If (Original_CrimeNumber Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_CrimeNumber, String)
-            End If
-            If (Original_SectionOfLaw Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_SectionOfLaw, String)
-            End If
-            If (Original_PlaceOfOccurrence Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_PlaceOfOccurrence, String)
-            End If
-            If (Original_Complainant Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_Complainant, String)
-            End If
-            If (Original_ModusOperandi Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_ModusOperandi, String)
-            End If
-            If (Original_PropertyLost Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_PropertyLost, String)
-            End If
-            If (Original_ChancePrintsDeveloped Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_ChancePrintsDeveloped, String)
-            End If
-            If (Original_ChancePrintsUnfit Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_ChancePrintsUnfit, String)
-            End If
-            If (Original_ChancePrintsEliminated Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(28).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_ChancePrintsEliminated, String)
-            End If
-            If (Original_ChancePrintsRemaining Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(30).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(Original_ChancePrintsRemaining, String)
-            End If
-            If (Original_ChancePrintDetails Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(32).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(Original_ChancePrintDetails, String)
-            End If
-            If (Original_Photographer Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(34).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(Original_Photographer, String)
-            End If
-            If (Original_PhotoReceived Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(36).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(36).Value = CType(Original_PhotoReceived, String)
-            End If
-            If (Original_DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(38).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(38).Value = CType(Original_DateOfReceptionOfPhoto, String)
-            End If
-            If (Original_InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(39).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(40).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(39).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(40).Value = CType(Original_InvestigatingOfficer, String)
-            End If
-            Me.Adapter.DeleteCommand.Parameters(41).Value = CType(0, Object)
-            Me.Adapter.DeleteCommand.Parameters(42).Value = CType(Original_GraveCrime, Boolean)
-            If (Original_FileStatus Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(43).Value = CType(1, Object)
-                Me.Adapter.DeleteCommand.Parameters(44).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(43).Value = CType(0, Object)
-                Me.Adapter.DeleteCommand.Parameters(44).Value = CType(Original_FileStatus, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
@@ -30296,7 +29860,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal Photographer As String, _
                     ByVal PhotoReceived As String, _
@@ -30305,7 +29868,8 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal Gist As String, _
                     ByVal ComparisonDetails As String, _
                     ByVal GraveCrime As Boolean, _
-                    ByVal FileStatus As String) As Integer
+                    ByVal FileStatus As String, _
+                    ByVal CPsIdentified As String) As Integer
             If (SOCNumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -30381,51 +29945,51 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(14).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ChancePrintDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(InvestigatingOfficer, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(Gist, String)
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(Gist, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(ComparisonDetails, String)
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(ComparisonDetails, String)
             End If
-            Me.Adapter.InsertCommand.Parameters(23).Value = CType(GraveCrime, Boolean)
+            Me.Adapter.InsertCommand.Parameters(22).Value = CType(GraveCrime, Boolean)
             If (FileStatus Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(FileStatus, String)
+            End If
+            If (CPsIdentified Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(24).Value = CType(FileStatus, String)
+                Me.Adapter.InsertCommand.Parameters(24).Value = CType(CPsIdentified, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
@@ -30462,7 +30026,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal Photographer As String, _
                     ByVal PhotoReceived As String, _
@@ -30472,29 +30035,8 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ComparisonDetails As String, _
                     ByVal GraveCrime As Boolean, _
                     ByVal FileStatus As String, _
-                    ByVal Original_SOCNumber As String, _
-                    ByVal Original_SOCYear As Global.System.Nullable(Of Integer), _
-                    ByVal Original_DateOfInspection As Global.System.Nullable(Of Date), _
-                    ByVal Original_DateOfReport As Global.System.Nullable(Of Date), _
-                    ByVal Original_DateOfOccurrence As String, _
-                    ByVal Original_PoliceStation As String, _
-                    ByVal Original_CrimeNumber As String, _
-                    ByVal Original_SectionOfLaw As String, _
-                    ByVal Original_PlaceOfOccurrence As String, _
-                    ByVal Original_Complainant As String, _
-                    ByVal Original_ModusOperandi As String, _
-                    ByVal Original_PropertyLost As String, _
-                    ByVal Original_ChancePrintsDeveloped As String, _
-                    ByVal Original_ChancePrintsUnfit As String, _
-                    ByVal Original_ChancePrintsEliminated As String, _
-                    ByVal Original_ChancePrintsRemaining As String, _
-                    ByVal Original_ChancePrintDetails As String, _
-                    ByVal Original_Photographer As String, _
-                    ByVal Original_PhotoReceived As String, _
-                    ByVal Original_DateOfReceptionOfPhoto As String, _
-                    ByVal Original_InvestigatingOfficer As String, _
-                    ByVal Original_GraveCrime As Boolean, _
-                    ByVal Original_FileStatus As String) As Integer
+                    ByVal CPsIdentified As String, _
+                    ByVal Original_SOCNumber As String) As Integer
             If (SOCNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -30570,205 +30112,56 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(14).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ChancePrintDetails, String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ChancePrintDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Photographer, String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(PhotoReceived, String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(InvestigatingOfficer, String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(InvestigatingOfficer, String)
             End If
             If (Gist Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Gist, String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Gist, String)
             End If
             If (ComparisonDetails Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(ComparisonDetails, String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(ComparisonDetails, String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(23).Value = CType(GraveCrime, Boolean)
+            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(GraveCrime, Boolean)
             If (FileStatus Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(FileStatus, String)
+            End If
+            If (CPsIdentified Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(FileStatus, String)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(CPsIdentified, String)
             End If
             If (Original_SOCNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_SOCNumber, String)
-            End If
-            If (Original_SOCYear.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_SOCYear.Value, Integer)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
-            End If
-            If (Original_DateOfInspection.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_DateOfInspection.Value, Date)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
-            End If
-            If (Original_DateOfReport.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_DateOfReport.Value, Date)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
-            End If
-            If (Original_DateOfOccurrence Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_DateOfOccurrence, String)
-            End If
-            If (Original_PoliceStation Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_PoliceStation, String)
-            End If
-            If (Original_CrimeNumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_CrimeNumber, String)
-            End If
-            If (Original_SectionOfLaw Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_SectionOfLaw, String)
-            End If
-            If (Original_PlaceOfOccurrence Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_PlaceOfOccurrence, String)
-            End If
-            If (Original_Complainant Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(43).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(Original_Complainant, String)
-            End If
-            If (Original_ModusOperandi Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(45).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(45).Value = CType(Original_ModusOperandi, String)
-            End If
-            If (Original_PropertyLost Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(47).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(47).Value = CType(Original_PropertyLost, String)
-            End If
-            If (Original_ChancePrintsDeveloped Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(49).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(Original_ChancePrintsDeveloped, String)
-            End If
-            If (Original_ChancePrintsUnfit Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(51).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(Original_ChancePrintsUnfit, String)
-            End If
-            If (Original_ChancePrintsEliminated Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(53).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(53).Value = CType(Original_ChancePrintsEliminated, String)
-            End If
-            If (Original_ChancePrintsRemaining Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(55).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(Original_ChancePrintsRemaining, String)
-            End If
-            If (Original_ChancePrintDetails Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(57).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(Original_ChancePrintDetails, String)
-            End If
-            If (Original_Photographer Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(59).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(Original_Photographer, String)
-            End If
-            If (Original_PhotoReceived Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(60).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(61).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(60).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(61).Value = CType(Original_PhotoReceived, String)
-            End If
-            If (Original_DateOfReceptionOfPhoto Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(62).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(63).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(62).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(63).Value = CType(Original_DateOfReceptionOfPhoto, String)
-            End If
-            If (Original_InvestigatingOfficer Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(64).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(65).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(64).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(65).Value = CType(Original_InvestigatingOfficer, String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(66).Value = CType(0, Object)
-            Me.Adapter.UpdateCommand.Parameters(67).Value = CType(Original_GraveCrime, Boolean)
-            If (Original_FileStatus Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(68).Value = CType(1, Object)
-                Me.Adapter.UpdateCommand.Parameters(69).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(68).Value = CType(0, Object)
-                Me.Adapter.UpdateCommand.Parameters(69).Value = CType(Original_FileStatus, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
@@ -30804,7 +30197,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal Photographer As String, _
                     ByVal PhotoReceived As String, _
@@ -30814,30 +30206,9 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ComparisonDetails As String, _
                     ByVal GraveCrime As Boolean, _
                     ByVal FileStatus As String, _
-                    ByVal Original_SOCNumber As String, _
-                    ByVal Original_SOCYear As Global.System.Nullable(Of Integer), _
-                    ByVal Original_DateOfInspection As Global.System.Nullable(Of Date), _
-                    ByVal Original_DateOfReport As Global.System.Nullable(Of Date), _
-                    ByVal Original_DateOfOccurrence As String, _
-                    ByVal Original_PoliceStation As String, _
-                    ByVal Original_CrimeNumber As String, _
-                    ByVal Original_SectionOfLaw As String, _
-                    ByVal Original_PlaceOfOccurrence As String, _
-                    ByVal Original_Complainant As String, _
-                    ByVal Original_ModusOperandi As String, _
-                    ByVal Original_PropertyLost As String, _
-                    ByVal Original_ChancePrintsDeveloped As String, _
-                    ByVal Original_ChancePrintsUnfit As String, _
-                    ByVal Original_ChancePrintsEliminated As String, _
-                    ByVal Original_ChancePrintsRemaining As String, _
-                    ByVal Original_ChancePrintDetails As String, _
-                    ByVal Original_Photographer As String, _
-                    ByVal Original_PhotoReceived As String, _
-                    ByVal Original_DateOfReceptionOfPhoto As String, _
-                    ByVal Original_InvestigatingOfficer As String, _
-                    ByVal Original_GraveCrime As Boolean, _
-                    ByVal Original_FileStatus As String) As Integer
-            Return Me.Update(Original_SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsDeveloped, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, InvestigatingOfficer, Gist, ComparisonDetails, GraveCrime, FileStatus, Original_SOCNumber, Original_SOCYear, Original_DateOfInspection, Original_DateOfReport, Original_DateOfOccurrence, Original_PoliceStation, Original_CrimeNumber, Original_SectionOfLaw, Original_PlaceOfOccurrence, Original_Complainant, Original_ModusOperandi, Original_PropertyLost, Original_ChancePrintsDeveloped, Original_ChancePrintsUnfit, Original_ChancePrintsEliminated, Original_ChancePrintsRemaining, Original_ChancePrintDetails, Original_Photographer, Original_PhotoReceived, Original_DateOfReceptionOfPhoto, Original_InvestigatingOfficer, Original_GraveCrime, Original_FileStatus)
+                    ByVal CPsIdentified As String, _
+                    ByVal Original_SOCNumber As String) As Integer
+            Return Me.Update(Original_SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsDeveloped, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, InvestigatingOfficer, Gist, ComparisonDetails, GraveCrime, FileStatus, CPsIdentified, Original_SOCNumber)
         End Function
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -31207,8 +30578,90 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function ScalarQueryCPRemaining(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Object
+        Public Overridable Overloads Function ScalarQueryCPsEliminatedByIO(ByVal InvestigatingOfficer As String, ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(31)
+            If (InvestigatingOfficer Is Nothing) Then
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(0).Value = CType(InvestigatingOfficer, String)
+            End If
+            If (DateOfInspection.HasValue = True) Then
+                command.Parameters(1).Value = CType(DateOfInspection.Value, Date)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection1.HasValue = True) Then
+                command.Parameters(2).Value = CType(DateOfInspection1.Value, Date)
+            Else
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open()
+            End If
+            Dim returnValue As Object
+            Try
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close()
+                End If
+            End Try
+            If ((returnValue Is Nothing) _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return New Global.System.Nullable(Of Double)()
+            Else
+                Return New Global.System.Nullable(Of Double)(CType(returnValue, Double))
+            End If
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function ScalarQueryCPsRemainingByIO(ByVal InvestigatingOfficer As String, ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Object
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(32)
+            If (InvestigatingOfficer Is Nothing) Then
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(0).Value = CType(InvestigatingOfficer, String)
+            End If
+            If (DateOfInspection.HasValue = True) Then
+                command.Parameters(1).Value = CType(DateOfInspection.Value, Date)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (DateOfInspection1.HasValue = True) Then
+                command.Parameters(2).Value = CType(DateOfInspection1.Value, Date)
+            Else
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open()
+            End If
+            Dim returnValue As Object
+            Try
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close()
+                End If
+            End Try
+            If ((returnValue Is Nothing) _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return Nothing
+            Else
+                Return CType(returnValue, Object)
+            End If
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function ScalarQueryCPsRemainingInDI(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Object
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(33)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31243,126 +30696,8 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function ScalarQueryCPRemainingForConciseReport(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(32)
-            If (DateOfInspection.HasValue = True) Then
-                command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
-            Else
-                command.Parameters(0).Value = Global.System.DBNull.Value
-            End If
-            If (DateOfInspection1.HasValue = True) Then
-                command.Parameters(1).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                command.Parameters(1).Value = Global.System.DBNull.Value
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open()
-            End If
-            Dim returnValue As Object
-            Try
-                returnValue = command.ExecuteScalar
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close()
-                End If
-            End Try
-            If ((returnValue Is Nothing) _
-                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
-            Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue, Double))
-            End If
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function ScalarQueryCPsEliminatedByIO(ByVal InvestigatingOfficer As String, ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(33)
-            If (InvestigatingOfficer Is Nothing) Then
-                command.Parameters(0).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(0).Value = CType(InvestigatingOfficer, String)
-            End If
-            If (DateOfInspection.HasValue = True) Then
-                command.Parameters(1).Value = CType(DateOfInspection.Value, Date)
-            Else
-                command.Parameters(1).Value = Global.System.DBNull.Value
-            End If
-            If (DateOfInspection1.HasValue = True) Then
-                command.Parameters(2).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                command.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open()
-            End If
-            Dim returnValue As Object
-            Try
-                returnValue = command.ExecuteScalar
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close()
-                End If
-            End Try
-            If ((returnValue Is Nothing) _
-                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
-            Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue, Double))
-            End If
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function ScalarQueryCPsRemainingByIO(ByVal InvestigatingOfficer As String, ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
+        Public Overridable Overloads Function ScalarQueryCPsRemainingInSOCNumber(ByVal SOCNumber As String) As Object
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(34)
-            If (InvestigatingOfficer Is Nothing) Then
-                command.Parameters(0).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(0).Value = CType(InvestigatingOfficer, String)
-            End If
-            If (DateOfInspection.HasValue = True) Then
-                command.Parameters(1).Value = CType(DateOfInspection.Value, Date)
-            Else
-                command.Parameters(1).Value = Global.System.DBNull.Value
-            End If
-            If (DateOfInspection1.HasValue = True) Then
-                command.Parameters(2).Value = CType(DateOfInspection1.Value, Date)
-            Else
-                command.Parameters(2).Value = Global.System.DBNull.Value
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open()
-            End If
-            Dim returnValue As Object
-            Try
-                returnValue = command.ExecuteScalar
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close()
-                End If
-            End Try
-            If ((returnValue Is Nothing) _
-                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
-            Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue, Double))
-            End If
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function ScalarQueryCPsRemainingInSOCNumber(ByVal SOCNumber As String) As String
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(35)
             If (SOCNumber Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("SOCNumber")
             Else
@@ -31385,7 +30720,7 @@ Namespace FingerPrintDataSetTableAdapters
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
                 Return Nothing
             Else
-                Return CType(returnValue, String)
+                Return CType(returnValue, Object)
             End If
         End Function
 
@@ -31393,7 +30728,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQueryCPsUnfitByIO(ByVal InvestigatingOfficer As String, ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(36)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(35)
             If (InvestigatingOfficer Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -31434,7 +30769,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQueryCPUnfit(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(37)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(36)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31470,7 +30805,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQueryMaxNumber(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(38)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(37)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31506,7 +30841,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQueryMinNumber(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(39)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(38)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31542,7 +30877,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQueryPhotoNotReceived(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(40)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(39)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31578,7 +30913,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQueryPhotoReceived(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(41)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(40)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31614,7 +30949,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQuerySearchContinuingSOCs(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date), ByVal FileStatus As String) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(42)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(41)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31655,7 +30990,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQuerySOCInspected(ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(43)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(42)
             If (DateOfInspection.HasValue = True) Then
                 command.Parameters(0).Value = CType(DateOfInspection.Value, Date)
             Else
@@ -31691,7 +31026,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQuerySOCsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(44)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(43)
             If (IdentificationDate.HasValue = True) Then
                 command.Parameters(0).Value = CType(IdentificationDate.Value, Date)
             Else
@@ -31727,7 +31062,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
         Public Overridable Overloads Function ScalarQuerySOCsInspectedByIO(ByVal InvestigatingOfficer As String, ByVal DateOfInspection As Global.System.Nullable(Of Date), ByVal DateOfInspection1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(45)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(44)
             If (InvestigatingOfficer Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -31769,7 +31104,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
         Public Overridable Overloads Function UpdateFileStatusForClosedFiles() As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(46)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(45)
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -31791,7 +31126,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
         Public Overridable Overloads Function UpdateOfficerName(ByVal InvestigatingOfficer As String, ByVal Original_InvestigatingOfficer As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(47)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(46)
             If (InvestigatingOfficer Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -31823,7 +31158,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
         Public Overridable Overloads Function UpdatePhotoReceived(ByVal PhotoReceived As String, ByVal Original_SOCNumber As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(48)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(47)
             If (PhotoReceived Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -31855,7 +31190,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
         Public Overridable Overloads Function UpdatePoliceStationName(ByVal PoliceStation As String, ByVal Original_PoliceStation As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(49)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(48)
             If (PoliceStation Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -31902,7 +31237,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal ChancePrintsDeveloped As String, _
                     ByVal ChancePrintsUnfit As String, _
                     ByVal ChancePrintsEliminated As String, _
-                    ByVal ChancePrintsRemaining As String, _
                     ByVal ChancePrintDetails As String, _
                     ByVal Photographer As String, _
                     ByVal PhotoReceived As String, _
@@ -31913,7 +31247,7 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal GraveCrime As Boolean, _
                     ByVal FileStatus As String, _
                     ByVal Original_SOCNumber As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(50)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(49)
             If (SOCNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -31989,56 +31323,51 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 command.Parameters(14).Value = CType(ChancePrintsEliminated, String)
             End If
-            If (ChancePrintsRemaining Is Nothing) Then
+            If (ChancePrintDetails Is Nothing) Then
                 command.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(15).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (ChancePrintDetails Is Nothing) Then
-                command.Parameters(16).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(16).Value = CType(ChancePrintDetails, String)
+                command.Parameters(15).Value = CType(ChancePrintDetails, String)
             End If
             If (Photographer Is Nothing) Then
-                command.Parameters(17).Value = Global.System.DBNull.Value
+                command.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(17).Value = CType(Photographer, String)
+                command.Parameters(16).Value = CType(Photographer, String)
             End If
             If (PhotoReceived Is Nothing) Then
-                command.Parameters(18).Value = Global.System.DBNull.Value
+                command.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(18).Value = CType(PhotoReceived, String)
+                command.Parameters(17).Value = CType(PhotoReceived, String)
             End If
             If (DateOfReceptionOfPhoto Is Nothing) Then
-                command.Parameters(19).Value = Global.System.DBNull.Value
+                command.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(19).Value = CType(DateOfReceptionOfPhoto, String)
+                command.Parameters(18).Value = CType(DateOfReceptionOfPhoto, String)
             End If
             If (InvestigatingOfficer Is Nothing) Then
-                command.Parameters(20).Value = Global.System.DBNull.Value
+                command.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(20).Value = CType(InvestigatingOfficer, String)
+                command.Parameters(19).Value = CType(InvestigatingOfficer, String)
             End If
             If (Gist Is Nothing) Then
+                command.Parameters(20).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(20).Value = CType(Gist, String)
+            End If
+            If (ComparisonDetails Is Nothing) Then
                 command.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(21).Value = CType(Gist, String)
+                command.Parameters(21).Value = CType(ComparisonDetails, String)
             End If
-            If (ComparisonDetails Is Nothing) Then
-                command.Parameters(22).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(22).Value = CType(ComparisonDetails, String)
-            End If
-            command.Parameters(23).Value = CType(GraveCrime, Boolean)
+            command.Parameters(22).Value = CType(GraveCrime, Boolean)
             If (FileStatus Is Nothing) Then
+                command.Parameters(23).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(23).Value = CType(FileStatus, String)
+            End If
+            If (Original_SOCNumber Is Nothing) Then
                 command.Parameters(24).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(24).Value = CType(FileStatus, String)
-            End If
-            If (Original_SOCNumber Is Nothing) Then
-                command.Parameters(25).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(25).Value = CType(Original_SOCNumber, String)
+                command.Parameters(24).Value = CType(Original_SOCNumber, String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
@@ -32055,71 +31384,39 @@ Namespace FingerPrintDataSetTableAdapters
             End Try
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
-        Public Overridable Overloads Function UpdateQuerySetCPsRemaining(ByVal ChancePrintsRemaining As String, ByVal Original_SOCNumber As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(51)
-            If (ChancePrintsRemaining Is Nothing) Then
-                command.Parameters(0).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(0).Value = CType(ChancePrintsRemaining, String)
-            End If
-            If (Original_SOCNumber Is Nothing) Then
-                command.Parameters(1).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(1).Value = CType(Original_SOCNumber, String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open()
-            End If
-            Dim returnValue As Integer
-            Try
-                returnValue = command.ExecuteNonQuery
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close()
-                End If
-            End Try
-            Return returnValue
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, False)> _
-        Public Overridable Overloads Function UpdateQuerySetFileStatus(ByVal FileStatus As String, ByVal ComparisonDetails As String, ByVal Original_SOCNumber As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(52)
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
+        Public Overloads Overridable Function UpdateQuerySetFileStatus(ByVal FileStatus As String, ByVal ComparisonDetails As String, ByVal Original_SOCNumber As String) As Integer
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(50)
             If (FileStatus Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(0).Value = CType(FileStatus, String)
+                command.Parameters(0).Value = CType(FileStatus,String)
             End If
             If (ComparisonDetails Is Nothing) Then
                 command.Parameters(1).Value = Global.System.DBNull.Value
             Else
-                command.Parameters(1).Value = CType(ComparisonDetails, String)
+                command.Parameters(1).Value = CType(ComparisonDetails,String)
             End If
             If (Original_SOCNumber Is Nothing) Then
-                command.Parameters(2).Value = Global.System.DBNull.Value
+                Throw New Global.System.ArgumentNullException("Original_SOCNumber")
             Else
-                command.Parameters(2).Value = CType(Original_SOCNumber, String)
+                command.Parameters(2).Value = CType(Original_SOCNumber,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open()
+                command.Connection.Open
             End If
             Dim returnValue As Integer
-            Try
+            Try 
                 returnValue = command.ExecuteNonQuery
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close()
+                    command.Connection.Close
                 End If
             End Try
             Return returnValue

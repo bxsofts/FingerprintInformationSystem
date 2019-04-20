@@ -99,7 +99,7 @@ Public Class frmSOCStatistics
         Dim p2 = Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2).ToString
         Dim p3 = Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2).ToString
         Dim p4 = Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2).ToString
-        Dim p5 = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPRemaining(d1, d2))
+        Dim p5 = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInDI(d1, d2))
         Dim p6 = Me.SOCRegisterTableAdapter.ScalarQueryPhotoReceived(d1, d2).ToString
         Dim p7 = Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2).ToString
 

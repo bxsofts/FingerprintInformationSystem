@@ -318,7 +318,8 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText("Unfit - " & cpunfit & vbCrLf & "Inmate - " & cpinmate)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                Dim cpr As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsRemaining
+                Dim cpr As Integer = CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit) - CInt(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
+
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails
                 If Trim(Remarks) = "" Then
                     If cpdeveloped = 0 Or cpr = 0 Then Remarks = "No action pending."

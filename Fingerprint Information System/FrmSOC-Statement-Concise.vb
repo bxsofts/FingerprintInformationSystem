@@ -114,7 +114,8 @@ Public Class frmConciseSOCReport
             parms(3) = New ReportParameter("CPDeveloped", Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
             parms(4) = New ReportParameter("CPUnfit", Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
             parms(5) = New ReportParameter("CPEliminated", Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-            parms(6) = New ReportParameter("CPRemaining", Me.SOCRegisterTableAdapter.ScalarQueryCPRemainingForConciseReport(d1, d2))
+            Dim cpremaining As Integer = Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInDI(d1, d2)
+            parms(6) = New ReportParameter("CPRemaining", cpremaining)
         End If
         ReportViewer1.LocalReport.SetParameters(parms)
     End Sub
