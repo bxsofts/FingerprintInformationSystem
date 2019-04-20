@@ -285,7 +285,7 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("Police Station" & vbNewLine & "Cr.No." & vbNewLine & "Section")
+            WordApp.Selection.TypeText("Police Station, " & vbNewLine & "Cr.No. & " & vbNewLine & "Section of Law")
 
             WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
             WordApp.Selection.Font.Bold = 1
