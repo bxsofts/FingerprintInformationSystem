@@ -445,28 +445,31 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Tables.Item(1).Cell(i, 9).Select()
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                Dim cpd = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped
-                WordApp.Selection.TypeText(cpd)
+                Dim cpdeveloped = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped
+                WordApp.Selection.TypeText(cpdeveloped)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                '  WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
-                Dim cpunfit As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit
-                Dim cpinmate As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated
-                WordApp.Selection.TypeText("UNF - " & cpunfit & vbCrLf & "INM - " & cpinmate)
+
+
+                Dim cpunfit As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit)
+                Dim cpinmate As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated)
+                Dim cpidentified As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
+
+                WordApp.Selection.TypeText("UNF - " & cpunfit & vbCrLf & "INM - " & cpinmate & IIf(cpidentified > 0, vbCrLf & "IDd - " & cpidentified, ""))
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                Dim cpr As Integer = CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit) - CInt(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
+                Dim cpr As Integer = cpdeveloped - (cpinmate + cpunfit + cpidentified)
 
                 WordApp.Selection.TypeText(cpr)
 
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails
                 If Trim(Remarks) = "" Then
-                    If cpd = 0 Or cpr = 0 Then Remarks = "No action pending."
-                    If cpd > 0 And cpr > 0 Then Remarks = "Search continuing."
+                    If cpdeveloped = 0 Or cpr = 0 Then Remarks = "No action pending."
+                    If cpdeveloped > 0 And cpr > 0 Then Remarks = "Search continuing."
                 End If
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 12).Select()
