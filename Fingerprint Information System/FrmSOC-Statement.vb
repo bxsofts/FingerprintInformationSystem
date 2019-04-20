@@ -171,7 +171,7 @@ Public Class frmSOCStatement
             WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(75, Word.WdRulerStyle.wdAdjustFirstColumn) 'pl
             WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn) 'mo
             WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpd
-            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(55, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpu
+            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpu
             WordApp.Selection.Tables.Item(1).Columns(11).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'cpr
             WordApp.Selection.Tables.Item(1).Columns(12).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn) 'fpe
 
@@ -313,12 +313,14 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(cpdeveloped)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
-                Dim cpunfit As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit
-                Dim cpinmate As Integer = Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated
-                WordApp.Selection.TypeText("Unfit - " & cpunfit & vbCrLf & "Inmate - " & cpinmate)
+                Dim cpunfit As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit)
+                Dim cpinmate As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated)
+                Dim cpidentified As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
+
+                WordApp.Selection.TypeText("Unfit - " & cpunfit & vbCrLf & "Inmate - " & cpinmate & IIf(cpidentified > 0, vbCrLf & "Identified - " & cpidentified, ""))
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                Dim cpr As Integer = CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsDeveloped) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated) - CInt(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit) - CInt(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
+                Dim cpr As Integer = cpdeveloped - (cpinmate + cpunfit + cpidentified)
 
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails
                 If Trim(Remarks) = "" Then
