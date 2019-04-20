@@ -8,7 +8,7 @@ Public Class frmConciseSOCReport
 
     Dim d1 As Date
     Dim d2 As Date
-    Dim parms(6) As ReportParameter
+    Dim parms(2) As ReportParameter
     Dim headertext As String = vbNullString
 
     
@@ -100,24 +100,17 @@ Public Class frmConciseSOCReport
 
 
     Sub GenerateOnLoad()
-        On Error Resume Next
-        Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-        parms(0) = New ReportParameter("Header", headertext)
-        parms(1) = New ReportParameter("OfficeName", FullOfficeName)
-        parms(2) = New ReportParameter("District", FullDistrictName)
-        If Me.FingerPrintDataSet.SOCRegister.Count = 0 Then
-            parms(3) = New ReportParameter("CPDeveloped", "0")
-            parms(4) = New ReportParameter("CPUnfit", "0")
-            parms(5) = New ReportParameter("CPEliminated", "0")
-            parms(6) = New ReportParameter("CPRemaining", "0")
-        Else
-            parms(3) = New ReportParameter("CPDeveloped", Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-            parms(4) = New ReportParameter("CPUnfit", Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-            parms(5) = New ReportParameter("CPEliminated", Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-            Dim cpremaining As Integer = Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInDI(d1, d2)
-            parms(6) = New ReportParameter("CPRemaining", cpremaining)
-        End If
-        ReportViewer1.LocalReport.SetParameters(parms)
+        Try
+            Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+            parms(0) = New ReportParameter("Header", headertext)
+            parms(1) = New ReportParameter("OfficeName", FullOfficeName)
+            parms(2) = New ReportParameter("District", FullDistrictName)
+
+            ReportViewer1.LocalReport.SetParameters(parms)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+       
     End Sub
 
     Private Sub PrintReport() Handles btnPrint.Click

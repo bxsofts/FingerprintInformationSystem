@@ -314,13 +314,13 @@ Public Class frmSOCStatement
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
                 Dim cpunfit As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsUnfit)
-                Dim cpinmate As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated)
+                Dim cpeliminated As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).ChancePrintsEliminated)
                 Dim cpidentified As Integer = Val(Me.FingerPrintDataSet.SOCRegister(j).CPsIdentified)
 
-                WordApp.Selection.TypeText("Unfit - " & cpunfit & vbCrLf & "Inmate - " & cpinmate & IIf(cpidentified > 0, vbCrLf & "Identified - " & cpidentified, ""))
+                WordApp.Selection.TypeText("Unfit - " & cpunfit & vbCrLf & "Inmate - " & cpeliminated & IIf(cpidentified > 0, vbCrLf & "Identified - " & cpidentified, ""))
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 11).Select()
-                Dim cpr As Integer = cpdeveloped - (cpinmate + cpunfit + cpidentified)
+                Dim cpr As Integer = cpdeveloped - (cpeliminated + cpunfit + cpidentified)
 
                 Dim Remarks = Me.FingerPrintDataSet.SOCRegister(j).ComparisonDetails
                 If Trim(Remarks) = "" Then
