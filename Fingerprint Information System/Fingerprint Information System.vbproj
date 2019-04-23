@@ -698,7 +698,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Identified Slips Register.rdlc" />
     <EmbeddedResource Include="List of Police Stations.rdlc" />
-    <EmbeddedResource Include="List of print remaining cases.rdlc" />
     <EmbeddedResource Include="Month Wise DA Statistics.rdlc" />
     <EmbeddedResource Include="Month Wise FPA Statistics.rdlc" />
     <EmbeddedResource Include="Month Wise SOC Statistics.rdlc" />

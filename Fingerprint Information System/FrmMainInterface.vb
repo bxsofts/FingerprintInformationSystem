@@ -14634,9 +14634,8 @@ errhandler:
 
     Private Sub ShowSOCPrintRemainingCases() Handles btnPrintRemainingCases.Click
         On Error Resume Next
-        FrmSOCPrintRemainingCases.Show()
-        FrmSOCPrintRemainingCases.WindowState = FormWindowState.Maximized
-        FrmSOCPrintRemainingCases.BringToFront()
+        FrmSOCPrintRemainingCases.ShowDialog()
+        ' FrmSOCPrintRemainingCases.BringToFront()
     End Sub
 
     Private Sub DARegister() Handles btnDARegister.Click
