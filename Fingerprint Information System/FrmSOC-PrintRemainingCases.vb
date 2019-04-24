@@ -62,6 +62,8 @@ Public Class FrmSOCPrintRemainingCases
 
             frmMainInterface.FingerPrintDataSet.SOCRegister.Clear()
             da.Fill(frmMainInterface.FingerPrintDataSet.SOCRegister)
+            ' da.Fill(Me.FingerPrintDataSet.SOCRegister)
+
             ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.SOCDatagrid.RowCount = 1, "1 Record", frmMainInterface.SOCDatagrid.RowCount & " Records"))
 
             Me.Cursor = Cursors.Default
@@ -75,4 +77,11 @@ Public Class FrmSOCPrintRemainingCases
     End Sub
 
 
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs)
+        Try
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

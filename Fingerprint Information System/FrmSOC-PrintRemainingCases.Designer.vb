@@ -22,9 +22,7 @@ Partial Class FrmSOCPrintRemainingCases
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSOCPrintRemainingCases))
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
@@ -44,16 +42,11 @@ Partial Class FrmSOCPrintRemainingCases
         Me.ComboItem3 = New DevComponents.Editors.ComboItem()
         Me.ComboItem4 = New DevComponents.Editors.ComboItem()
         Me.ComboItem5 = New DevComponents.Editors.ComboItem()
-        Me.PrintRemainingCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.PrintRemainingCasesTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PrintRemainingCasesTableAdapter()
         Me.PanelEx2.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PrintRemainingCasesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelEx2
@@ -77,7 +70,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(521, 127)
+        Me.PanelEx2.Size = New System.Drawing.Size(519, 127)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -318,7 +311,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.intCPCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.intCPCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.intCPCount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.intCPCount.Location = New System.Drawing.Point(154, 10)
+        Me.intCPCount.Location = New System.Drawing.Point(165, 10)
         Me.intCPCount.MinValue = 0
         Me.intCPCount.Name = "intCPCount"
         Me.intCPCount.ShowUpDown = True
@@ -337,7 +330,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.cmbOperator.Items.AddRange(New Object() {Me.ComboItem1, Me.ComboItem2, Me.ComboItem3, Me.ComboItem4, Me.ComboItem5})
         Me.cmbOperator.Location = New System.Drawing.Point(98, 9)
         Me.cmbOperator.Name = "cmbOperator"
-        Me.cmbOperator.Size = New System.Drawing.Size(48, 26)
+        Me.cmbOperator.Size = New System.Drawing.Size(50, 26)
         Me.cmbOperator.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.cmbOperator.TabIndex = 0
         '
@@ -374,25 +367,11 @@ Partial Class FrmSOCPrintRemainingCases
         '
         Me.ComboItem5.Text = "<>"
         '
-        'PrintRemainingCasesBindingSource
-        '
-        Me.PrintRemainingCasesBindingSource.DataMember = "PrintRemainingCases"
-        Me.PrintRemainingCasesBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'FingerPrintDataSet
-        '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PrintRemainingCasesTableAdapter
-        '
-        Me.PrintRemainingCasesTableAdapter.ClearBeforeFill = True
-        '
         'FrmSOCPrintRemainingCases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(521, 127)
+        Me.ClientSize = New System.Drawing.Size(519, 127)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -411,15 +390,9 @@ Partial Class FrmSOCPrintRemainingCases
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PrintRemainingCasesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents PrintRemainingCasesBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
-    Friend WithEvents PrintRemainingCasesTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PrintRemainingCasesTableAdapter
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents btnGenerateByMonth As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
