@@ -82,7 +82,7 @@ Public Class frmWeeklyDiary
             RenameAndMoveOldFiles()
 
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
 
 
@@ -124,7 +124,7 @@ Public Class frmWeeklyDiary
             Me.bgwWeeklyDiary.RunWorkerAsync("WeeklyDiary")
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
 
         End Try
@@ -322,7 +322,7 @@ Public Class frmWeeklyDiary
             End If
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
 
         End Try
@@ -358,7 +358,7 @@ Public Class frmWeeklyDiary
 
             Me.bgwWeeklyDiary.RunWorkerAsync("CL")
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -380,7 +380,7 @@ Public Class frmWeeklyDiary
 
             Call Shell("explorer.exe " & WeeklyDiaryFolder, AppWinStyle.NormalFocus)
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 

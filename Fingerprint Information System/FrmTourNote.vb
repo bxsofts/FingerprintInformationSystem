@@ -391,7 +391,7 @@ Public Class FrmTourNote
 
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
 
         End Try
@@ -2089,7 +2089,7 @@ errhandler:
             End If
             GenerateBlankForm(TemplateFile)
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
 
@@ -2544,7 +2544,7 @@ errhandler:
 
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -2570,7 +2570,7 @@ errhandler:
             bgwTR47ThreeLine.RunWorkerAsync(args)
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -2914,7 +2914,7 @@ errhandler:
                     wdTblTA.Cell(j, 12).Range.Text = details 'details
 
                     j = j + 1
-                   
+
                     For delay = delay To delay + iteration
                         If delay < 91 Then
                             bgwTR47ThreeLine.ReportProgress(delay)
@@ -3015,7 +3015,7 @@ errhandler:
             wdApp = Nothing
             Me.Cursor = Cursors.Default
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
 
@@ -3588,7 +3588,7 @@ errhandler:
             Call Shell("explorer.exe " & TABillFolder, AppWinStyle.NormalFocus)
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
         End Try
 
 

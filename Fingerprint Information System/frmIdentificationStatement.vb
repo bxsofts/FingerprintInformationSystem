@@ -527,7 +527,7 @@ Public Class frmIdentificationStatement
             End If
 
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 

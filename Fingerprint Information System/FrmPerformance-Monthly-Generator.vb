@@ -716,7 +716,7 @@ Public Class frmMonthlyPerformance
             Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
 
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 

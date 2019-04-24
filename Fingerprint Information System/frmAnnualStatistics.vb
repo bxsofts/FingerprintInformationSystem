@@ -1218,7 +1218,7 @@ Public Class frmAnnualStatistics
 
             Call Shell("explorer.exe " & sFolder, AppWinStyle.NormalFocus)
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 

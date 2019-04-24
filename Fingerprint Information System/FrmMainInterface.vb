@@ -579,7 +579,7 @@ Public Class frmMainInterface
             End If
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 
@@ -7437,7 +7437,7 @@ errhandler:
 
             InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 
@@ -14300,8 +14300,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            ClosePleaseWaitForm()
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
 
@@ -14733,8 +14732,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            ClosePleaseWaitForm()
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -14772,8 +14770,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            ClosePleaseWaitForm()
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -14852,8 +14849,7 @@ errhandler:
             wdApp = Nothing
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         Catch ex As Exception
-            ClosePleaseWaitForm()
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -14982,7 +14978,7 @@ errhandler:
             frmWeeklyDiary.ShowDialog()
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         End Try
@@ -15721,7 +15717,7 @@ errhandler:
             My.Computer.Registry.SetValue("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Applets\Regedit", "LastKey", strGeneralSettingsPath)
             Process.Start("regedit")
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 
@@ -15737,7 +15733,7 @@ errhandler:
             End If
 
         Catch ex As Exception
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 

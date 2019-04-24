@@ -180,6 +180,7 @@ Public Class FrmIndividualPerformance
             Dim isVisible As Object = True
             Dim WordApp As New Word.Application()
 
+
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
             For delay = 11 To 20
                 bgwLetter.ReportProgress(delay)
@@ -304,14 +305,22 @@ Public Class FrmIndividualPerformance
                 WordApp.Selection.TypeText(cpu)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
-                Dim cpr As String = Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingByIO(io, d1, d2).ToString
+                Dim cpr As String = Val(cpd) - Val(cpe) - Val(cpu) ' Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingByIO(io, d1, d2).ToString
                 If cpr = "" Or cpr = "0" Then cpr = "-"
                 WordApp.Selection.TypeText(cpr)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
-                Dim cpi As String = Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentifiedBy(io, d1, d2).ToString
+                Dim cpi As String = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentifiedBy(io, d1, d2).ToString
                 If cpi = "" Or cpi = "0" Then cpi = "-"
-                WordApp.Selection.TypeText(cpi)
+
+                Dim soci As String = Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentifiedBy(io, d1, d2).ToString
+                If soci = "" Or soci = "0" Then soci = "-"
+
+                If cpi = "-" And soci = "-" Then
+                    WordApp.Selection.TypeText(cpi)
+                Else
+                    WordApp.Selection.TypeText(cpi & "/" & soci)
+                End If
 
                 For delay = delay To delay + iteration
                     If delay < 90 Then
@@ -369,7 +378,7 @@ Public Class FrmIndividualPerformance
             WordApp = Nothing
 
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message & vbNewLine & vbNewLine & "Please make sure that Microsoft Word is installed in your system.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 

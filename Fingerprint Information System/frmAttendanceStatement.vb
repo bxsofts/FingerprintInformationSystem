@@ -589,7 +589,7 @@ Public Class frmAttendanceStmt
                 WordApp = Nothing
             End If
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -652,7 +652,7 @@ Public Class frmAttendanceStmt
 
 
         Catch ex As Exception
-            DevComponents.DotNetBar.MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
 
         End Try
 

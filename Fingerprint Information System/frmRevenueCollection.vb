@@ -133,7 +133,7 @@ Public Class frmRevenueCollection
             Me.Close()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
-            MessageBoxEx.Show(ex.Message)
+            ShowErrorMessage(ex)
         End Try
     End Sub
 
