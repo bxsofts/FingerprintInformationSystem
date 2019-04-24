@@ -6544,6 +6544,8 @@ errhandler:
 
                     Dim IdentificationNumber = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
                     Dim SOCNo = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString()
+                    Dim selectedcpsidentified As Integer = Val(Me.JoinedIDRDataGrid.SelectedCells(10).Value)
+                    Dim oldcpsidentified As Integer = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentifiedBySOCNumber(SOCNo)
 
                     Dim oldRow As FingerPrintDataSet.JoinedIDRRow
                     oldRow = Me.FingerPrintDataSet.JoinedIDR.FindBySlNumber(Me.JoinedIDRDataGrid.SelectedCells(20).Value.ToString())
@@ -6555,24 +6557,28 @@ errhandler:
                     Dim count = Me.IdentificationRegisterTableAdapter1.CheckSOCNumberExists(SOCNo)
 
                     Dim index = Me.SOCRegisterBindingSource.Find("SOCNumber", SOCNo)
-                    
+
 
                     If count = 0 Then
-                        Me.SOCRegisterTableAdapter.UpdateQuerySetFileStatus("", "", SOCNo)
+                        Me.SOCRegisterTableAdapter.UpdateQuerySetIdentificationDetails("", "", "0", SOCNo)
                         If index > -1 Then
                             Me.SOCRegisterBindingSource.Position = index
                             Me.SOCDatagrid.SelectedRows(0).Cells(22).Value = ""
                             Me.SOCDatagrid.SelectedRows(0).Cells(24).Value = ""
+                            Me.SOCDatagrid.SelectedRows(0).Cells(13).Value = "0"
                         End If
                     End If
 
                     If count > 0 Then
-                        Me.SOCRegisterTableAdapter.UpdateQuerySetFileStatus("Identified", "", SOCNo)
+                        Dim cpremaining = oldcpsidentified - selectedcpsidentified
+                        Me.SOCRegisterTableAdapter.UpdateQuerySetIdentificationDetails("Identified", "", cpremaining.ToString, SOCNo)
                         If index > -1 Then
                             Me.SOCRegisterBindingSource.Position = index
-                            Me.SOCDatagrid.SelectedRows(0).Cells(22).Value = "Identified"
-                            Me.SOCDatagrid.SelectedRows(0).Cells(24).Value = ""
+                            Me.SOCDatagrid.SelectedRows(0).Cells(22).Value = ""
+                            Me.SOCDatagrid.SelectedRows(0).Cells(24).Value = "Identified"
+                            Me.SOCDatagrid.SelectedRows(0).Cells(13).Value = cpremaining.ToString
                         End If
+
                     End If
 
 

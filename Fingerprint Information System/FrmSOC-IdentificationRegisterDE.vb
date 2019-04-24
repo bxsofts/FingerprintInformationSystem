@@ -24,8 +24,6 @@ Public Class FrmIdentificationRegisterDE
         Me.cmbIdentifyingOfficer.DropDownStyle = ComboBoxStyle.DropDown
         Me.cmbIdentifyingOfficer.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
-
-
         If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
         Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
         Me.IdentificationRegisterTableAdapter1.Connection.Open()
@@ -76,7 +74,7 @@ Public Class FrmIdentificationRegisterDE
 
     Private Sub LoadSOCNumberAutoCompletionTexts()
         Try
-            Me.SocRegisterAutoTextTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegisterAutoText)
+            Me.SocRegisterAutoTextTableAdapter1.FillByCPRemainingSOCNumber(FingerPrintDataSet1.SOCRegisterAutoText)
 
             Dim socno As New AutoCompleteStringCollection
             For i As Long = 0 To FingerPrintDataSet1.SOCRegisterAutoText.Count - 1
@@ -215,16 +213,18 @@ Public Class FrmIdentificationRegisterDE
 
         If CPR = 0 Then
             MessageBoxEx.Show("The No. of CPs remaining is Zero for the selected SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txtSOCNumber.Focus()
             Exit Sub
         End If
 
-        Dim CPsIdentified As Integer
+        Dim CPsIdentified As Integer = 0
+
         For i = 0 To Me.dgv.RowCount - 1
             CPsIdentified = CPsIdentified + Val(dgv.Rows(i).Cells(4).Value)
         Next
 
         If CPR = CPsIdentified Then
-            MessageBoxEx.Show("Culprit details already entered for the " & CPR & " chance prints.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Culprit details already entered for the " & IIf(CPR = 1, " chance print.", " chance prints."), strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -324,6 +324,7 @@ Public Class FrmIdentificationRegisterDE
 
             If CPR = 0 Then
                 MessageBoxEx.Show("The No. of CPs remaining is Zero for the selected SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtSOCNumber.Focus()
                 Exit Sub
             End If
 
@@ -384,7 +385,7 @@ Public Class FrmIdentificationRegisterDE
         Try
 
             Dim c As Integer = Me.dgv.RowCount
-
+            Dim SOCNum As String = Me.txtSOCNumber.Text.Trim
             Dim CulpritName As String = ""
             Dim Address As String = ""
             Dim CPsIdentified As Integer
@@ -394,6 +395,14 @@ Public Class FrmIdentificationRegisterDE
             Dim DANumber As String = ""
             Dim IdentifiedFrom As String = ""
             Dim Remarks As String = ""
+
+
+            Dim soccount As Integer = Me.IdentificationRegisterTableAdapter1.CheckSOCNumberExists(SOCNum)
+            Dim PrevCPsIdentified As Integer = 0
+
+            If soccount > 0 Then
+                PrevCPsIdentified = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentifiedBySOCNumber(SOCNum)
+            End If
 
             Dim sIDRN() = Strings.Split(Me.txtIdentificationNumber.Text.Trim, "/")
             IDRN = CInt(sIDRN(0))
@@ -413,13 +422,13 @@ Public Class FrmIdentificationRegisterDE
             Me.CulpritsRegisterTableAdapter1.Update(Me.FingerPrintDataSet1.CulpritsRegister)
 
             If Not blUpdate Then
-                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN)
+                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNum, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN)
 
-                Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegister, Me.txtSOCNumber.Text.Trim)
+                Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegister, SOCNum)
                 Dim dgvr As FingerPrintDataSet.JoinedIDRRow = frmMainInterface.FingerPrintDataSet.JoinedIDR.NewJoinedIDRRow
                 With dgvr
                     .IdentificationNumber = Me.txtIdentificationNumber.Text.Trim
-                    .SOCNumber = Me.txtSOCNumber.Text.Trim
+                    .SOCNumber = SOCNum
                     .IdentificationDate = Me.dtIdentificationDate.Value
                     .DateOfInspection = FingerPrintDataSet1.SOCRegister(0).DateOfInspection
                     .PoliceStation = FingerPrintDataSet1.SOCRegister(0).PoliceStation
@@ -444,11 +453,11 @@ Public Class FrmIdentificationRegisterDE
 
                 ShowDesktopAlert("New Identification Record entered successfully.")
             Else ' Edit mode
-                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, Me.txtSOCNumber.Text.Trim, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, IDRSerialNumber)
+                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNum, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, IDRSerialNumber)
 
                 With frmMainInterface.JoinedIDRDataGrid
                     .SelectedCells(0).Value = Me.txtIdentificationNumber.Text.Trim
-                    .SelectedCells(1).Value = Me.txtSOCNumber.Text.Trim
+                    .SelectedCells(1).Value = SOCNum
                     .SelectedCells(2).Value = Me.dtIdentificationDate.Value
                     .SelectedCells(8).Value = Me.cmbIdentifyingOfficer.Text.Trim
                     .SelectedCells(10).Value = CPsIdentified.ToString
@@ -465,14 +474,19 @@ Public Class FrmIdentificationRegisterDE
                 ShowDesktopAlert("Selected Identification Record updated successfully.")
             End If
 
-            Dim comparisondetails As String = "Identified as " & CulpritName
-            Me.SocRegisterTableAdapter1.UpdateQuerySetFileStatus("Identified", comparisondetails, Me.txtSOCNumber.Text.Trim)
 
-            Dim index = frmMainInterface.SOCRegisterBindingSource.Find("SOCNumber", Me.txtSOCNumber.Text.Trim)
+            Dim TotalCPsIdentified As Integer = PrevCPsIdentified + CPsIdentified
+
+            Dim comparisondetails As String = "Identified as " & CulpritName
+
+            Me.SocRegisterTableAdapter1.UpdateQuerySetIdentificationDetails("Identified", comparisondetails, TotalCPsIdentified.ToString, SOCNum)
+
+            Dim index = frmMainInterface.SOCRegisterBindingSource.Find("SOCNumber", SOCNum)
             If index > -1 Then
                 frmMainInterface.SOCRegisterBindingSource.Position = index
                 frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(22).Value = "Identified as " & CulpritName
                 frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(24).Value = "Identified"
+                frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(13).Value = TotalCPsIdentified.ToString
             End If
 
             If blIDREditMode Or blIDROpenMode Then
