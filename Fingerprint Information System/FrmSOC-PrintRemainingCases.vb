@@ -25,6 +25,8 @@ Public Class FrmSOCPrintRemainingCases
         d1 = Me.dtFrom.Value
         d2 = Today
 
+        Me.intCPCount.Value = 0
+        Me.cmbOperator.SelectedIndex = 1
         Me.cmbMonth.Focus()
         Me.Cursor = Cursors.Default
     End Sub
@@ -49,14 +51,27 @@ Public Class FrmSOCPrintRemainingCases
 
             End Select
 
-            frmMainInterface.SOCRegisterTableAdapter.FillByCPsRemainingGreaterThan(frmMainInterface.FingerPrintDataSet.SOCRegister, d1, d2, "0")
+            frmMainInterface.TabControl.SelectedTab = frmMainInterface.SOCTabItem
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim SQLText = "SELECT SOCNumber, SOCYear, DateOfInspection, DateOfReport, DateOfOccurrence, PoliceStation, CrimeNumber, SectionOfLaw, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsDeveloped, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, InvestigatingOfficer, Gist, ComparisonDetails, GraveCrime, FileStatus, CPsIdentified FROM SOCRegister WHERE DateOfInspection BETWEEN #" & d1 & "# AND #" & d2 & "# AND (val(ChancePrintsDeveloped) - val(ChancePrintsUnfit) - val(ChancePrintsEliminated) - val(CPsIdentified) " & Me.cmbOperator.SelectedItem.ToString & " " & Me.intCPCount.Value & " ) ORDER BY DateOfInspection, SOCYear "
+
+            Dim cmd As OleDb.OleDbCommand = New OleDb.OleDbCommand(SQLText, con)
+            Dim da As New OleDb.OleDbDataAdapter(cmd)
+
+            frmMainInterface.FingerPrintDataSet.SOCRegister.Clear()
+            da.Fill(frmMainInterface.FingerPrintDataSet.SOCRegister)
+            ShowDesktopAlert("Search finished. Found " & IIf(frmMainInterface.SOCDatagrid.RowCount = 1, "1 Record", frmMainInterface.SOCDatagrid.RowCount & " Records"))
+
             Me.Cursor = Cursors.Default
+            con.Close()
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
-       
+
     End Sub
 
 

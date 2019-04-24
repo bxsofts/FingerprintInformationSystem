@@ -36,6 +36,14 @@ Partial Class FrmSOCPrintRemainingCases
         Me.btnGenerateByDate = New DevComponents.DotNetBar.ButtonX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.intCPCount = New DevComponents.Editors.IntegerInput()
+        Me.cmbOperator = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.ComboItem1 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem2 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem3 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem4 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem5 = New DevComponents.Editors.ComboItem()
         Me.PrintRemainingCasesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PrintRemainingCasesTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PrintRemainingCasesTableAdapter()
@@ -43,6 +51,7 @@ Partial Class FrmSOCPrintRemainingCases
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PrintRemainingCasesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,6 +60,9 @@ Partial Class FrmSOCPrintRemainingCases
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx2.Controls.Add(Me.LabelX5)
+        Me.PanelEx2.Controls.Add(Me.cmbOperator)
+        Me.PanelEx2.Controls.Add(Me.intCPCount)
         Me.PanelEx2.Controls.Add(Me.btnGenerateByMonth)
         Me.PanelEx2.Controls.Add(Me.LabelX4)
         Me.PanelEx2.Controls.Add(Me.LabelX3)
@@ -65,7 +77,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(521, 106)
+        Me.PanelEx2.Size = New System.Drawing.Size(521, 127)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -78,10 +90,10 @@ Partial Class FrmSOCPrintRemainingCases
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(411, 10)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(411, 50)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
-        Me.btnGenerateByMonth.Size = New System.Drawing.Size(98, 33)
-        Me.btnGenerateByMonth.TabIndex = 3
+        Me.btnGenerateByMonth.Size = New System.Drawing.Size(98, 29)
+        Me.btnGenerateByMonth.TabIndex = 4
         Me.btnGenerateByMonth.Text = "Generate"
         '
         'LabelX4
@@ -91,7 +103,7 @@ Partial Class FrmSOCPrintRemainingCases
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(222, 17)
+        Me.LabelX4.Location = New System.Drawing.Point(234, 55)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 30
@@ -104,7 +116,7 @@ Partial Class FrmSOCPrintRemainingCases
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(9, 17)
+        Me.LabelX3.Location = New System.Drawing.Point(9, 55)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 29
@@ -121,13 +133,13 @@ Partial Class FrmSOCPrintRemainingCases
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(268, 12)
+        Me.txtYear.Location = New System.Drawing.Point(268, 50)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 0
         Me.txtYear.Name = "txtYear"
         Me.txtYear.ShowUpDown = True
         Me.txtYear.Size = New System.Drawing.Size(117, 29)
-        Me.txtYear.TabIndex = 2
+        Me.txtYear.TabIndex = 3
         Me.txtYear.Value = 1900
         Me.txtYear.WatermarkText = "Year"
         '
@@ -141,12 +153,12 @@ Partial Class FrmSOCPrintRemainingCases
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(87, 12)
+        Me.cmbMonth.Location = New System.Drawing.Point(98, 48)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
         Me.cmbMonth.Size = New System.Drawing.Size(117, 29)
-        Me.cmbMonth.TabIndex = 1
+        Me.cmbMonth.TabIndex = 2
         Me.cmbMonth.WatermarkText = "Month"
         '
         'LabelX2
@@ -156,7 +168,7 @@ Partial Class FrmSOCPrintRemainingCases
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(222, 68)
+        Me.LabelX2.Location = New System.Drawing.Point(234, 95)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 13
@@ -169,7 +181,7 @@ Partial Class FrmSOCPrintRemainingCases
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(9, 68)
+        Me.LabelX1.Location = New System.Drawing.Point(9, 95)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(72, 18)
         Me.LabelX1.TabIndex = 12
@@ -179,10 +191,10 @@ Partial Class FrmSOCPrintRemainingCases
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(411, 61)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(411, 90)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
-        Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 33)
-        Me.btnGenerateByDate.TabIndex = 6
+        Me.btnGenerateByDate.Size = New System.Drawing.Size(98, 29)
+        Me.btnGenerateByDate.TabIndex = 7
         Me.btnGenerateByDate.Text = "Generate"
         '
         'dtFrom
@@ -203,7 +215,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(87, 63)
+        Me.dtFrom.Location = New System.Drawing.Point(98, 90)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -237,7 +249,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.dtFrom.MonthCalendar.TodayButtonVisible = True
         Me.dtFrom.Name = "dtFrom"
         Me.dtFrom.Size = New System.Drawing.Size(117, 29)
-        Me.dtFrom.TabIndex = 4
+        Me.dtFrom.TabIndex = 5
         Me.dtFrom.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtFrom.WatermarkText = "From"
         '
@@ -259,7 +271,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(268, 63)
+        Me.dtTo.Location = New System.Drawing.Point(268, 90)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -293,9 +305,74 @@ Partial Class FrmSOCPrintRemainingCases
         Me.dtTo.MonthCalendar.TodayButtonVisible = True
         Me.dtTo.Name = "dtTo"
         Me.dtTo.Size = New System.Drawing.Size(117, 29)
-        Me.dtTo.TabIndex = 5
+        Me.dtTo.TabIndex = 6
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
+        '
+        'intCPCount
+        '
+        '
+        '
+        '
+        Me.intCPCount.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.intCPCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.intCPCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.intCPCount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.intCPCount.Location = New System.Drawing.Point(154, 10)
+        Me.intCPCount.MinValue = 0
+        Me.intCPCount.Name = "intCPCount"
+        Me.intCPCount.ShowUpDown = True
+        Me.intCPCount.Size = New System.Drawing.Size(50, 25)
+        Me.intCPCount.TabIndex = 1
+        '
+        'cmbOperator
+        '
+        Me.cmbOperator.DisplayMember = "Text"
+        Me.cmbOperator.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbOperator.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbOperator.ForeColor = System.Drawing.Color.Black
+        Me.cmbOperator.FormattingEnabled = True
+        Me.cmbOperator.ItemHeight = 20
+        Me.cmbOperator.Items.AddRange(New Object() {Me.ComboItem1, Me.ComboItem2, Me.ComboItem3, Me.ComboItem4, Me.ComboItem5})
+        Me.cmbOperator.Location = New System.Drawing.Point(98, 9)
+        Me.cmbOperator.Name = "cmbOperator"
+        Me.cmbOperator.Size = New System.Drawing.Size(48, 26)
+        Me.cmbOperator.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.cmbOperator.TabIndex = 0
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(9, 13)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(83, 18)
+        Me.LabelX5.TabIndex = 34
+        Me.LabelX5.Text = "CPs remaining"
+        '
+        'ComboItem1
+        '
+        Me.ComboItem1.Text = "="
+        '
+        'ComboItem2
+        '
+        Me.ComboItem2.Text = ">"
+        '
+        'ComboItem3
+        '
+        Me.ComboItem3.Text = ">="
+        '
+        'ComboItem4
+        '
+        Me.ComboItem4.Text = "<="
+        '
+        'ComboItem5
+        '
+        Me.ComboItem5.Text = "<>"
         '
         'PrintRemainingCasesBindingSource
         '
@@ -315,7 +392,7 @@ Partial Class FrmSOCPrintRemainingCases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(521, 106)
+        Me.ClientSize = New System.Drawing.Size(521, 127)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -333,6 +410,7 @@ Partial Class FrmSOCPrintRemainingCases
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PrintRemainingCasesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -353,4 +431,12 @@ Partial Class FrmSOCPrintRemainingCases
     Friend WithEvents btnGenerateByDate As DevComponents.DotNetBar.ButtonX
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
+    Friend WithEvents intCPCount As DevComponents.Editors.IntegerInput
+    Friend WithEvents cmbOperator As DevComponents.DotNetBar.Controls.ComboBoxEx
+    Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents ComboItem1 As DevComponents.Editors.ComboItem
+    Friend WithEvents ComboItem2 As DevComponents.Editors.ComboItem
+    Friend WithEvents ComboItem3 As DevComponents.Editors.ComboItem
+    Friend WithEvents ComboItem4 As DevComponents.Editors.ComboItem
+    Friend WithEvents ComboItem5 As DevComponents.Editors.ComboItem
 End Class
