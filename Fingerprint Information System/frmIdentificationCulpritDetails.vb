@@ -2,8 +2,6 @@
 
 Public Class frmIdentificationCulpritDetails
 
-    Dim CPR As Integer
-
 #Region "FORM LOAD EVENTS"
     Private Sub frmIdentificationCulpritDetails_Load(sender As Object, e As EventArgs) Handles Me.Load
         On Error Resume Next
@@ -25,9 +23,7 @@ Public Class frmIdentificationCulpritDetails
         If Me.btnSave.Text = "Update List" Then
             LoadDataFromDGV()
         End If
-
-        CPR = Val(frmMainInterface.NoOfCPsRemaining(FrmIdentificationRegisterDE.txtSOCNumber.Text.Trim))
-        Me.txtCPsIdentified.MaxValue = CPR
+       
     End Sub
 
     Public Sub ClearFields()
@@ -146,23 +142,6 @@ Public Class frmIdentificationCulpritDetails
             Exit Sub
         End If
 
-        Dim CPsUsed As Integer
-        For i = 0 To FrmIdentificationRegisterDE.dgv.RowCount - 1
-            CPsUsed = CPsUsed + Val(FrmIdentificationRegisterDE.dgv.Rows(i).Cells(4).Value)
-        Next
-
-        CPsUsed = CPsUsed + Me.txtCPsIdentified.Value
-
-        If btnSave.Text = "Update List" Then
-            Dim oldcpcount = Val(FrmIdentificationRegisterDE.dgv.SelectedRows(0).Cells(4).Value)
-            CPsUsed = CPsUsed - oldcpcount
-        End If
-
-        If CPsUsed > CPR Then
-            MessageBoxEx.Show("Total no. of CPs entered (" & CPsUsed & ") exceeds the number of CPs remaining (" & CPR & ")", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtCPsIdentified.Focus()
-            Exit Sub
-        End If
 
         If btnSave.Text = "Add to List" Then
             SaveDetails()
@@ -196,10 +175,6 @@ Public Class frmIdentificationCulpritDetails
             For i = 0 To FrmIdentificationRegisterDE.dgv.RowCount - 1
                 CPsIdentified = CPsIdentified + Val(FrmIdentificationRegisterDE.dgv.Rows(i).Cells(4).Value)
             Next
-
-            If CPR = CPsIdentified Then
-                Me.Close()
-            End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)

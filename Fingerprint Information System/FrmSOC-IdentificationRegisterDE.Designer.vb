@@ -40,7 +40,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.btnSaveRecord = New DevComponents.DotNetBar.ButtonX()
         Me.dgv = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.CulpritsRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.IdentificationNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.btnEditCulprit = New DevComponents.DotNetBar.ButtonX()
         Me.btnRemoveCulprit = New DevComponents.DotNetBar.ButtonX()
@@ -59,7 +59,6 @@ Partial Class FrmIdentificationRegisterDE
         Me.SocRegisterAutoTextTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterAutoTextTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.SlNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentificationNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CulpritNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AddressDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CPsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,12 +67,13 @@ Partial Class FrmIdentificationRegisterDE
         Me.DANumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentificationDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CulpritsRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CulpritsRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CulpritsRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtIdentificationNumber
@@ -367,10 +367,13 @@ Partial Class FrmIdentificationRegisterDE
         Me.dgv.TabIndex = 203
         Me.dgv.TabStop = False
         '
-        'CulpritsRegisterBindingSource
+        'IdentificationNumber
         '
-        Me.CulpritsRegisterBindingSource.DataMember = "CulpritsRegister"
-        Me.CulpritsRegisterBindingSource.DataSource = Me.FingerPrintDataSet1
+        Me.IdentificationNumber.DataPropertyName = "IdentificationNumber"
+        Me.IdentificationNumber.HeaderText = "IdentificationNumber"
+        Me.IdentificationNumber.Name = "IdentificationNumber"
+        Me.IdentificationNumber.ReadOnly = True
+        Me.IdentificationNumber.Visible = False
         '
         'FingerPrintDataSet1
         '
@@ -566,14 +569,6 @@ Partial Class FrmIdentificationRegisterDE
         Me.SlNumberDataGridViewTextBoxColumn.ReadOnly = True
         Me.SlNumberDataGridViewTextBoxColumn.Visible = False
         '
-        'IdentificationNumber
-        '
-        Me.IdentificationNumber.DataPropertyName = "IdentificationNumber"
-        Me.IdentificationNumber.HeaderText = "IdentificationNumber"
-        Me.IdentificationNumber.Name = "IdentificationNumber"
-        Me.IdentificationNumber.ReadOnly = True
-        Me.IdentificationNumber.Visible = False
-        '
         'CulpritNameDataGridViewTextBoxColumn
         '
         Me.CulpritNameDataGridViewTextBoxColumn.DataPropertyName = "CulpritName"
@@ -638,6 +633,11 @@ Partial Class FrmIdentificationRegisterDE
         Me.IdentificationDetailsDataGridViewTextBoxColumn.ReadOnly = True
         Me.IdentificationDetailsDataGridViewTextBoxColumn.Width = 170
         '
+        'CulpritsRegisterBindingSource
+        '
+        Me.CulpritsRegisterBindingSource.DataMember = "CulpritsRegister"
+        Me.CulpritsRegisterBindingSource.DataSource = Me.FingerPrintDataSet1
+        '
         'FrmIdentificationRegisterDE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -658,8 +658,8 @@ Partial Class FrmIdentificationRegisterDE
         Me.PanelEx1.PerformLayout()
         Me.GroupPanel1.ResumeLayout(False)
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CulpritsRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CulpritsRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

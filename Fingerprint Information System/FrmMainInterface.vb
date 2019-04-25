@@ -5411,7 +5411,6 @@ errhandler:
             blIDREditMode = False
             blIDROpenMode = False
 
-            FrmIdentificationRegisterDE.ClearidFields()
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
             Cursor = Cursors.Default
@@ -8707,17 +8706,6 @@ errhandler:
 
 
 #Region "IDENTIFICATION REGISTER"
-
-    Public Function GenerateNewIDRNumber()
-        Try
-            Dim y As String = Year(Today)
-            Dim n As String = Val(Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentified(New Date(y, 1, 1), New Date(y, 12, 31))) + 1
-
-            Return n & "/" & y
-        Catch ex As Exception
-            Return ""
-        End Try
-    End Function
 
     Public Function NoOfCPsRemaining(SOCNumber As String) As String
         Return Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInSOCNumber(SOCNumber)
