@@ -56,7 +56,7 @@ Public Class FrmIdentificationRegisterDE
     Private Sub LoadIDRValues()
         Try
             With frmMainInterface.JoinedIDRDataGrid
-                CPR = Val(Me.SocRegisterTableAdapter1.ScalarQueryCPsRemainingInSOCNumber(.SelectedCells(1).Value))
+                CPR = FindCPsRemaining(.SelectedCells(1).Value)
                 Me.txtIdentificationNumber.Text = .SelectedCells(0).Value.ToString
                 Me.txtSOCNumber.Text = .SelectedCells(1).Value.ToString
                 Me.dtIdentificationDate.ValueObject = .SelectedCells(2).Value
@@ -120,7 +120,8 @@ Public Class FrmIdentificationRegisterDE
             End If
 
             Me.lblSOCNumberWarning.Visible = True
-            CPR = Val(Me.SocRegisterTableAdapter1.ScalarQueryCPsRemainingInSOCNumber(SOCNumber))
+           
+            CPR = FindCPsRemaining(SOCNumber)
 
             If CPR = 0 Then
                 lblSOCNumberWarning.Text = "Error: No. of CPs remaining is Zero"
@@ -140,6 +141,24 @@ Public Class FrmIdentificationRegisterDE
         If dtIdentificationDate.Text = vbNullString Then Me.dtIdentificationDate.Value = Today
     End Sub
 
+    Public Function FindCPsRemaining(SOCNumber As String) As Integer
+        Try
+            Dim cpd As Integer = Me.SocRegisterTableAdapter1.ScalarQueryCPsDevelopedInSOCNumber(SOCNumber)
+            Dim cpu As Integer = Me.SocRegisterTableAdapter1.ScalarQueryCPsUnfitInSOCNumber(SOCNumber)
+            Dim cpe As Integer = Me.SocRegisterTableAdapter1.ScalarQueryCPsEliminatedInSOCNumber(SOCNumber)
+
+            Dim soccount As Integer = Me.IdentificationRegisterTableAdapter1.CheckSOCNumberExists(SOCNumber)
+            Dim cpi As Integer = 0
+            If soccount > 0 Then
+                cpi = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentifiedBySOCNumber(SOCNumber)
+            End If
+
+            Return (cpd - cpu - cpe - cpi)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Return 0
+        End Try
+    End Function
 
 #End Region
 
@@ -204,15 +223,22 @@ Public Class FrmIdentificationRegisterDE
 #Region "CULPRIT DETAILS ENTRY"
 
     Private Sub btnAddCulprit_Click(sender As Object, e As EventArgs) Handles btnAddCulprit.Click
+        Dim SOCNumber = Me.txtSOCNumber.Text.Trim
 
-        If Me.txtSOCNumber.Text.Trim = "" Then
+        If SOCNumber = "" Then
             MessageBoxEx.Show("Please enter SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtSOCNumber.Focus()
             Exit Sub
         End If
 
+        If Not frmMainInterface.SOCNumberExists(SOCNumber) Then
+            MessageBoxEx.Show("Entered SOC Number " & SOCNumber & " does not exist. First enter the SOC details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtSOCNumber.Focus()
+            Exit Sub
+        End If
+
         If CPR = 0 Then
-            MessageBoxEx.Show("The No. of CPs remaining is Zero for the selected SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("The No. of CPs remaining is Zero for the entered SOC Number " & SOCNumber, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtSOCNumber.Focus()
             Exit Sub
         End If
@@ -323,7 +349,7 @@ Public Class FrmIdentificationRegisterDE
             Next
 
             If CPR = 0 Then
-                MessageBoxEx.Show("The No. of CPs remaining is Zero for the selected SOC Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("The No. of CPs remaining is Zero for the entered SOC Number " & SOCNumber, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 txtSOCNumber.Focus()
                 Exit Sub
             End If
