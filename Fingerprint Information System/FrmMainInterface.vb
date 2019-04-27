@@ -362,6 +362,7 @@ Public Class frmMainInterface
 
             If Me.chkLoadRecordsAtStartup.Checked Then
                 LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+                Me.JoinedIDRBindingSource.MoveLast()
                 IncrementCircularProgress(1)
             End If
 
@@ -1264,6 +1265,8 @@ Public Class frmMainInterface
     Private Sub LoadJoinedIDRRecords()
         Try
             Me.Cursor = Cursors.WaitCursor
+
+            Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
 
             Dim oldrow As String = ""
             If Me.JoinedIDRDataGrid.SelectedRows.Count > 0 Then
@@ -4147,7 +4150,7 @@ Public Class frmMainInterface
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
-        ' Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
+        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
 
     End Sub
 
@@ -4197,6 +4200,12 @@ Public Class frmMainInterface
         Select Case DirectCast(sender, Control).Name
 
             Case SOCDatagrid.Name
+
+                Dim oldrow As String = ""
+                If Me.SOCDatagrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.SOCDatagrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If SOCDatagrid.SortOrder = SortOrder.None Or SOCDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
@@ -4207,10 +4216,7 @@ Public Class frmMainInterface
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
-
-                If SOCDatagrid.SortOrder = SortOrder.Ascending Then
+                ElseIf SOCDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
                         Me.SOCRegisterBindingSource.Sort = SOCDatagrid.Columns(2).DataPropertyName.ToString() & " DESC, " & SOCDatagrid.Columns(1).DataPropertyName.ToString() & " DESC"
@@ -4219,11 +4225,18 @@ Public Class frmMainInterface
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & SOCDatagrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
+                Dim p = Me.SOCRegisterBindingSource.Find("SOCNumber", oldrow)
+                If p >= 0 Then Me.SOCRegisterBindingSource.Position = p
 
             Case RSOCDatagrid.Name
+
+                Dim oldrow As String = ""
+                If Me.RSOCDatagrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.RSOCDatagrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If RSOCDatagrid.SortOrder = SortOrder.None Or RSOCDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 1 Then
@@ -4234,10 +4247,8 @@ Public Class frmMainInterface
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
 
-                If RSOCDatagrid.SortOrder = SortOrder.Ascending Then
+                ElseIf RSOCDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 1 Then
                         Me.RSOCRegisterBindingSource.Sort = RSOCDatagrid.Columns(3).DataPropertyName.ToString() & " DESC, " & RSOCDatagrid.Columns(2).DataPropertyName.ToString() & " DESC"
@@ -4246,13 +4257,18 @@ Public Class frmMainInterface
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & RSOCDatagrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
-
+                Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
+                If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
 
 
             Case DADatagrid.Name
+                Dim oldrow As String = ""
+                If Me.DADatagrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.DADatagrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If DADatagrid.SortOrder = SortOrder.None Or DADatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
@@ -4263,10 +4279,8 @@ Public Class frmMainInterface
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
 
-                If DADatagrid.SortOrder = SortOrder.Ascending Then
+                ElseIf DADatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
                         Me.DARegisterBindingSource.Sort = DADatagrid.Columns(2).DataPropertyName.ToString() & " DESC, " & DADatagrid.Columns(1).DataPropertyName.ToString() & " DESC"
@@ -4275,56 +4289,69 @@ Public Class frmMainInterface
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & DADatagrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
-
+                Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
+                If p >= 0 Then Me.DARegisterBindingSource.Position = p
 
 
 
             Case IDDatagrid.Name
+
+                Dim oldrow As String = ""
+                If Me.IDDatagrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.IDDatagrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If IDDatagrid.SortOrder = SortOrder.None Or IDDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
-
-                If IDDatagrid.SortOrder = SortOrder.Ascending Then
+                ElseIf IDDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.IDRegisterBindingSource.Sort = IDDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & IDDatagrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
-
+                Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
+                If p >= 0 Then Me.IDRegisterBindingSource.Position = p
 
 
 
             Case ACDatagrid.Name
+
+                Dim oldrow As String = ""
+                If Me.ACDatagrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.ACDatagrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If ACDatagrid.SortOrder = SortOrder.None Or ACDatagrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
 
-                If ACDatagrid.SortOrder = SortOrder.Ascending Then
+                ElseIf ACDatagrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.ACRegisterBindingSource.Sort = ACDatagrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & ACDatagrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
-
+                Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
+                If p >= 0 Then Me.ACRegisterBindingSource.Position = p
 
 
 
             Case FPADataGrid.Name
+
+                Dim oldrow As String = ""
+                If Me.FPADataGrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.FPADataGrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If FPADataGrid.SortOrder = SortOrder.None Or FPADataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
@@ -4335,10 +4362,8 @@ Public Class frmMainInterface
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
 
-                If FPADataGrid.SortOrder = SortOrder.Ascending Then
+                ElseIf FPADataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
                         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " DESC"
@@ -4347,13 +4372,21 @@ Public Class frmMainInterface
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & FPADataGrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
+
                 End If
 
+                Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
+                If p >= 0 Then Me.FPARegisterBindingSource.Position = p
 
 
 
             Case CDDataGrid.Name
+
+                Dim oldrow As String = ""
+                If Me.CDDataGrid.SelectedRows.Count <> 0 Then
+                    oldrow = Me.CDDataGrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If CDDataGrid.SortOrder = SortOrder.None Or CDDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
@@ -4364,10 +4397,8 @@ Public Class frmMainInterface
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
 
-                If CDDataGrid.SortOrder = SortOrder.Ascending Then
+                ElseIf CDDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
                         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " DESC"
@@ -4376,31 +4407,34 @@ Public Class frmMainInterface
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & CDDataGrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
+
                 End If
 
 
-
-
+                Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
+                If p >= 0 Then Me.CDRegisterBindingSource.Position = p
 
             Case PSDataGrid.Name
+
                 If PSDataGrid.SortOrder = SortOrder.None Or PSDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " ASC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
-
-                If PSDataGrid.SortOrder = SortOrder.Ascending Then
+                ElseIf PSDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(c).DataPropertyName.ToString() & " DESC"
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & PSDataGrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
             Case JoinedIDRDataGrid.Name
+
+                Dim oldrow As String = ""
+                If Me.JoinedIDRDataGrid.SelectedRows.Count > 0 Then
+                    oldrow = Me.JoinedIDRDataGrid.SelectedRows(0).Cells(0).Value
+                End If
+
                 If JoinedIDRDataGrid.SortOrder = SortOrder.None Or JoinedIDRDataGrid.SortOrder = SortOrder.Descending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
@@ -4411,10 +4445,8 @@ Public Class frmMainInterface
 
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & JoinedIDRDataGrid.Columns(c).HeaderText & " in Ascending order!")
-                    Exit Sub
-                End If
 
-                If JoinedIDRDataGrid.SortOrder = SortOrder.Ascending Then
+                ElseIf JoinedIDRDataGrid.SortOrder = SortOrder.Ascending Then
                     Me.Cursor = Cursors.WaitCursor
                     If c = 0 Then
                         Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " DESC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " DESC"
@@ -4423,9 +4455,10 @@ Public Class frmMainInterface
                     End If
                     If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
                     ShowDesktopAlert("Table sorted with " & JoinedIDRDataGrid.Columns(c).HeaderText & " in Descending order!")
-                    Exit Sub
                 End If
 
+                Dim p = Me.JoinedIDRBindingSource.Find("IdentificationNumber", oldrow)
+                If p >= 0 Then Me.JoinedIDRBindingSource.Position = p
         End Select
 
 
@@ -5409,7 +5442,6 @@ errhandler:
             Me.Cursor = Cursors.WaitCursor
             blIDRNewDataMode = True
             blIDREditMode = False
-            blIDROpenMode = False
 
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
@@ -5795,7 +5827,6 @@ errhandler:
             Me.Cursor = Cursors.WaitCursor
             blIDRNewDataMode = False
             blIDREditMode = True
-            blIDROpenMode = False
 
             FrmIdentificationRegisterDE.Show()
             FrmIdentificationRegisterDE.BringToFront()
@@ -6164,24 +6195,7 @@ errhandler:
         End If
 
         If CurrentTab = "IDR" Then
-            If Me.JoinedIDRDataGrid.RowCount = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to open!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            Me.Cursor = Cursors.WaitCursor
-            blIDRNewDataMode = False
-            blIDREditMode = False
-            blIDROpenMode = True
-
-            FrmIdentificationRegisterDE.Show()
-            FrmIdentificationRegisterDE.BringToFront()
-            Me.Cursor = Cursors.Default
+            DevComponents.DotNetBar.MessageBoxEx.Show("This option is not available.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 #End Region

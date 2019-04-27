@@ -52,7 +52,7 @@ Public Class FrmIdentificationRegisterDE
         Me.txtIdentificationNumber.Select(Me.txtIdentificationNumber.Text.Length, 0)
 
 
-        If blIDREditMode Or blIDROpenMode Then
+        If blIDREditMode Then
             LoadIDRValues()
         End If
 
@@ -391,14 +391,6 @@ Public Class FrmIdentificationRegisterDE
                 blIDRNumberExists = True
             End If
 
-            If blIDROpenMode Then
-                If Me.txtIdentificationNumber.Text.Trim = OriginalIDRNumber Then 'update record
-                    blIDREditMode = True
-                Else
-                    blIDRNewDataMode = True
-                End If
-            End If
-
 
             If blIDRNewDataMode Then
 
@@ -593,7 +585,7 @@ Public Class FrmIdentificationRegisterDE
                 frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(13).Value = TotalCPsIdentified.ToString
             End If
 
-            If blIDREditMode Or blIDROpenMode Then
+            If blIDREditMode Then
                 Me.Close()
             End If
 
