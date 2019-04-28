@@ -18,13 +18,6 @@
         boolRSOCButtonClicked = True
         ReportSentTo = Me.txtReportSentTo.Text
 
-        If ReportSentTo.ToLower.Contains("sub/circle") Then
-            Dim dr = DevComponents.DotNetBar.MessageBoxEx.Show("The report is addressed to 'Sub/Circle'. Do you want to correct it?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
-            If dr = Windows.Forms.DialogResult.Yes Then
-                Me.txtReportSentTo.Focus()
-                Exit Sub
-            End If
-        End If
 
         ReportSentDate = Me.dtReportSentOn.Value
         ReportNature = Me.cmbNatureOfReport.Text
@@ -105,12 +98,13 @@
 
         Me.txtReportSentTo.Text = FindAddressFromRSOCRegister(frmMainInterface.SOCDatagrid.SelectedCells(0).Value.ToString)
         Me.dtReportSentOn.Value = Today
+
         Dim CPDeveloped As Integer = CInt(frmMainInterface.SOCDatagrid.SelectedCells(10).Value.ToString)
         Dim CPUnfit As Integer = CInt(frmMainInterface.SOCDatagrid.SelectedCells(11).Value.ToString)
         Dim CPEliminated As Integer = CInt(frmMainInterface.SOCDatagrid.SelectedCells(12).Value.ToString)
-        Dim CPRemaining As Integer = CInt(frmMainInterface.SOCDatagrid.SelectedCells(13).Value.ToString)
+        Dim CPRemaining As Integer = CPDeveloped - CPUnfit - CPEliminated
+
         Dim photoreceived As String = frmMainInterface.SOCDatagrid.SelectedCells(19).Value.ToString
-        Dim identified As String = frmMainInterface.SOCDatagrid.SelectedCells(24).Value.ToString
 
         If CPDeveloped = 0 Then 'nil print
             Me.cmbNatureOfReport.Items.Add("Nil Print")
@@ -118,13 +112,12 @@
         End If
 
 
-        If CPDeveloped > 0 And CPUnfit = CPDeveloped And CPRemaining = 0 Then 'all unfit
-
+        If CPDeveloped > 0 And CPUnfit = CPDeveloped Then 'all unfit
             Me.cmbNatureOfReport.Items.Add("Unfit")
             Me.cmbNatureOfReport.Text = "Unfit"
         End If
 
-        If CPDeveloped > 0 And CPEliminated = CPDeveloped And CPRemaining = 0 Then 'all eliminated
+        If CPDeveloped > 0 And CPEliminated = CPDeveloped Then 'all eliminated
             Me.cmbNatureOfReport.Items.Add("Eliminated")
             Me.cmbNatureOfReport.Text = "Eliminated"
         End If
@@ -142,11 +135,6 @@
             Me.cmbNatureOfReport.Items.Add("Interim")
             Me.cmbNatureOfReport.Items.Add("Preliminary")
             Me.cmbNatureOfReport.Items.Add("Untraced")
-
-            If identified.ToLower = "identified" Then
-                Me.cmbNatureOfReport.Items.Add("Identification Report - CoB")
-                Me.cmbNatureOfReport.Items.Add("Identification Report - Letter")
-            End If
 
             If photoreceived.ToLower <> "yes" Then
                 Me.cmbNatureOfReport.Items.Add("Awaiting Photographs")
@@ -173,22 +161,13 @@
                             NewReportType = "Interim"
                         Case "interim"
                             NewReportType = "Untraced"
-                        Case "identification report - cob"
-                            NewReportType = "Identification Report - Letter"
-                        Case "identification report - letter"
-                            NewReportType = "Identification Report - Letter"
                         Case Else
-
+                            NewReportType = "Preliminary"
                     End Select
 
                 Next
                 Me.cmbNatureOfReport.Text = NewReportType
             End If
-
-            If identified.ToLower = "identified" Then
-                Me.cmbNatureOfReport.Text = "Identification Report - Letter"
-            End If
-
         End If
 
         Me.txtReportSentTo.Focus()
@@ -265,7 +244,7 @@
                 address = Me.FingerPrintDataSet1.SOCReportRegister(Me.FingerPrintDataSet1.SOCReportRegister.Count - 1).ReportSentTo.ToString
             Else
                 If sho.ToUpper = "IP" Then
-                    address = "Inspector SHO" & vbNewLine & ps
+                    address = "Inspector of Police" & vbNewLine & ps
                 Else
                     address = "Sub Inspector of Police" & vbNewLine & ps
                 End If

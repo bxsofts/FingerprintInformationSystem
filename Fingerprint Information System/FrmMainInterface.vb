@@ -3945,6 +3945,8 @@ Public Class frmMainInterface
         Me.btnFPAGenerateSlipFormContext.Visible = False
         Me.btnIDRShowInSoCRegister.Visible = False
         Me.btnSOCShowInIDRRegister.Visible = False
+        Me.btnGenerateIdentificationCoB.Visible = False
+        Me.btnGenerateIdentificationLetter.Visible = False
 
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
@@ -4129,6 +4131,8 @@ Public Class frmMainInterface
             Me.JoinedIDRBindingSource.Position = SelectedRowIndex
             Me.btnIDRShowInSoCRegister.Visible = True
             Me.btnIdentifiedTemplateContextMenu.Visible = True
+            Me.btnGenerateIdentificationCoB.Visible = True
+            Me.btnGenerateIdentificationLetter.Visible = True
         End If
 
         ' DisplayDatabaseInformation()
@@ -13697,8 +13701,6 @@ errhandler:
             Me.Cursor = Cursors.WaitCursor
             Dim BodyText As String = vbNullString
             Dim InspectingOfficer As String = Me.SOCDatagrid.SelectedCells(9).Value.ToString().Replace(vbNewLine, "; ")
-            Dim IdentifyingOfficer As String = Me.SOCDatagrid.SelectedCells(25).Value.ToString().Replace(vbNewLine, "; ")
-            Dim iddate = Me.SOCDatagrid.SelectedCells(26).FormattedValue.ToString
 
 
             Dim splitname() = Strings.Split(InspectingOfficer, "; ")
@@ -13721,22 +13723,13 @@ errhandler:
             Next
 
             InspectingOfficer = Replace(Replace(Replace(Replace(InspectingOfficer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
-            IdentifyingOfficer = Replace(Replace(Replace(Replace(IdentifyingOfficer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
 
             Dim dti As String = Me.SOCDatagrid.SelectedCells(2).FormattedValue.ToString()
             Dim CPD As Integer = CInt(Me.SOCDatagrid.SelectedCells(10).Value.ToString)
             Dim CPU As Integer = CInt(Me.SOCDatagrid.SelectedCells(11).Value.ToString)
             Dim CPE As Integer = CInt(Me.SOCDatagrid.SelectedCells(12).Value.ToString)
-            Dim CPR As Integer = CInt(Me.SOCDatagrid.SelectedCells(13).Value.ToString)
-            Dim CPID As Integer = Val(Me.SOCDatagrid.SelectedCells(27).Value)
+            Dim CPR As Integer = CPD - CPU - CPE
 
-            Dim IDDetails As String = Me.SOCDatagrid.SelectedCells(29).Value.ToString
-
-            If IDDetails = "" Then
-                IDDetails = IIf(CPID = 1, "one chance print is identifed as the ..... finger impression of one ", ConvertNumberToWord(CPID).ToString.ToLower & " chance prints are identifed as the ..... finger impressions of one ") & Me.SOCDatagrid.SelectedCells(28).Value & ". He is previously involved in CR.No..... u/s.... of ....... P.S."
-            End If
-
-            Dim IDOfficer As String = vbTab & "The identification was made by Sri. " & IdentifyingOfficer & " on " & iddate & "."
 
             Dim PO As String = Trim(Me.SOCDatagrid.SelectedCells(8).Value.ToString)
 
@@ -13775,14 +13768,10 @@ errhandler:
 
             Dim cr = Me.SOCDatagrid.SelectedCells(6).Value.ToString()
             Dim us = Me.SOCDatagrid.SelectedCells(7).Value.ToString()
-            Dim idas = Me.SOCDatagrid.SelectedCells(28).Value.ToString.Replace(vbNewLine, ", ")
 
-
-            Dim IdentificationText As String = ""
 
             Dim TextToBold As String = ""
             BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti
-            IdentificationText = BodyText
 
             '--------------------------NIL PRINT---------------------
 
@@ -13795,7 +13784,6 @@ errhandler:
 
             If CPD = 1 Then 'one print
                 BodyText = BodyText & " and developed one chance print. " & Photographer
-                IdentificationText = BodyText
 
                 If CPU = 1 Then
                     BodyText = BodyText & vbNewLine & vbTab & "It is intimated that the chance print is unfit for comparison. Hence no further action is pending with this office in this regard. This is for information."
@@ -13810,7 +13798,6 @@ errhandler:
                 If CPR = 1 Then
                     BodyText = BodyText & vbNewLine & vbTab & "The chance print is under comparison and the result of comparison will be intimated at the earliest."
 
-                    IdentificationText += vbNewLine & vbTab & "On comparison with this Bureau records, " & IDDetails
                 End If
 
             End If
@@ -13836,7 +13823,6 @@ errhandler:
 
             If CPD > 1 And CPR = CPD Then 'all remain
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
-                IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with Bureau records, " & IDDetails & vbNewLine & IDOfficer
 
                 If ReportNature = "Preliminary" Then
                     BodyText = BodyText & vbNewLine & vbTab & "The chance prints are under comparison and the result of comparison will be intimated at the earliest."
@@ -13844,29 +13830,20 @@ errhandler:
             End If
 
             If CPD > 0 And CPR <> CPD And CPR <> 0 And CPE <> 0 And CPU = 0 Then 'some remains
-                IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. The chance prints were photographed by " & Photographer
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
-                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & IIf(CPR = 1, ". On comparing the remaining chance print with Bureau records, ", ". On comparing the remaining chance prints with Bureau records, ") & IDDetails & vbNewLine & IDOfficer
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
             End If
 
             If CPD > 0 And CPR <> CPD And CPR <> 0 And CPU <> 0 And CPE = 0 Then 'some remains
 
-                IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
-
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
 
-                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ") & IDDetails & vbNewLine & IDOfficer
             End If
 
 
             If CPD > 0 And CPR <> CPD And CPR <> 0 And CPU <> 0 And CPE <> 0 And CPU <> 0 Then 'some remains
 
-                IdentificationText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
-
                 BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
-
-                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ") & IDDetails & vbNewLine & IDOfficer
             End If
 
             If CPD = 1 Then
@@ -13879,16 +13856,6 @@ errhandler:
                         BodyText = "The chance print in the above case was compared with the fingerprint slips of Active Criminals / MO Criminals recorded in this bureau and remains untraced. Further comparison is being continued in the DA Slips collection and the result will be intimated as and when search is completed. This is for information."
                     Case "untraced"
                         BodyText = "The chance print developed from the scene of crime concerned in the above case remains untraced in the available records of this bureau. This is for information."
-
-                    Case "identification report - cob"
-                        Dim receiver As String = ReportSentTo.Replace(vbNewLine, ",").ToUpper
-
-                        BodyText = "REFER CR.No. " & cr & " U/S " & us & " OF " & ps.ToUpper & ". " & IDDetails.ToUpper & ". DETAILED REPORT FOLLOWS."
-                        GenerateIdentificationCoB(BodyText, receiver.Replace(vbTab, " "))
-                        Exit Sub
-                    Case "identification report - letter"
-                        BodyText = IdentificationText
-
                 End Select
             Else
                 Select Case ReportNature.ToLower
@@ -13900,16 +13867,6 @@ errhandler:
                         BodyText = "The chance prints in the above case were compared with the fingerprint slips of Active Criminals / MO Criminals recorded in this bureau and remain untraced. Further comparison is being continued in the DA Slips collection and the result will be intimated as and when search is completed. This is for information."
                     Case "untraced"
                         BodyText = "The chance prints developed from the scene of crime concerned in the above case remain untraced in the available records of this bureau. This is for information."
-                    Case "identification report - cob"
-
-                        BodyText = "REFER CR.No. " & cr & " U/S " & us & " OF " & ps.ToUpper & ". " & IDDetails.ToUpper & ". DETAILED REPORT FOLLOWS."
-
-                        Dim receiver As String = ReportSentTo.Replace(vbNewLine, ",").ToUpper
-                        GenerateIdentificationCoB(BodyText, receiver.Replace(vbTab, " "))
-                        Exit Sub
-                    Case "identification report - letter"
-                        BodyText = IdentificationText
-
                 End Select
             End If
 
@@ -13982,8 +13939,6 @@ errhandler:
                     WordApp.Selection.TypeText(vbTab & "Sub: Inspection of Scene of Crime - Interim report forwarding of - reg.")
                 Case "untraced"
                     WordApp.Selection.TypeText(vbTab & "Sub: Inspection of Scene of Crime - Untraced report forwarding of - reg.")
-                Case "identification report - letter"
-                    WordApp.Selection.TypeText(vbTab & "Sub: Identification of criminal through chance prints – report - reg.")
                 Case Else
                     WordApp.Selection.TypeText(vbTab & "Sub: Inspection of Scene of Crime - report forwarding of - reg.")
             End Select
@@ -14018,9 +13973,6 @@ errhandler:
                 Case "untraced"
                     WordApp.Selection.TypeText(vbTab & "Ref:  1. Cr.No. " & cr & " u/s " & us & " of " & ps)
                     WordApp.Selection.TypeText(vbNewLine & vbTab & "         2. This office letter of even no. dated " & dated)
-                Case "identification report - letter"
-                    WordApp.Selection.TypeText(vbTab & "Ref:  1. Cr.No. " & cr & " u/s " & us & " of " & ps)
-                    WordApp.Selection.TypeText(vbNewLine & vbTab & "         2. This office letter of even no. dated " & dated)
                 Case Else
                     WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & cr & " u/s " & us & " of " & ps)
             End Select
@@ -14043,9 +13995,6 @@ errhandler:
                     WordApp.Selection.Font.Superscript = 0
                     WordApp.Selection.TypeText(". ")
             End Select
-            If FullDistrictName.ToLower = "idukki" Then
-                BodyText = BodyText.Replace("Sri./Smt.", "Sri.")
-            End If
 
             WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
             WordApp.Selection.ParagraphFormat.LineSpacing = 14
@@ -14058,10 +14007,6 @@ errhandler:
             End If
 
 
-            If ReportNature.ToLower = "identification report - letter" Then
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & "This is for information.")
-            End If
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
@@ -14095,10 +14040,335 @@ errhandler:
         End Try
     End Sub
 
-    Private Sub GenerateIdentificationCoB(ByVal message As String, ByVal Receiver As String)
+    Private Sub GenerateIdentificationLetter() Handles btnGenerateIdentificationLetter.Click, btnGenerateIdentificationLetter2.Click
+
         Try
 
-            message = message.Replace("..", ".")
+            ShowPleaseWaitForm()
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+
+            Dim fds As FingerPrintDataSet = New FingerPrintDataSet
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
+
+            If fds.SOCRegister.Count = 0 Then
+                ClosePleaseWaitForm()
+                Me.Cursor = Cursors.Default
+                MessageBoxEx.Show("The selected SOC Number " & SOCNumber & " does not exist. Please add details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+           
+
+            Dim InspectingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
+            Dim IdentifyingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(8).Value.ToString().Replace(vbNewLine, "; ")
+
+            Dim splitname() = Strings.Split(InspectingOfficer, "; ")
+            InspectingOfficer = ""
+            Dim u = splitname.GetUpperBound(0)
+            For j = 0 To u
+                If u = 0 Then
+                    InspectingOfficer = splitname(0)
+                    Exit For
+                End If
+
+                If j = u - 1 Then
+                    InspectingOfficer += splitname(j) + " and "
+                ElseIf j = u Then
+                    InspectingOfficer += splitname(j)
+                Else
+                    InspectingOfficer += splitname(j) + ", "
+                End If
+
+            Next
+
+            InspectingOfficer = Replace(Replace(Replace(Replace(InspectingOfficer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
+            IdentifyingOfficer = Replace(Replace(Replace(Replace(IdentifyingOfficer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
+           
+           
+
+            Dim dtid As String = Me.JoinedIDRDataGrid.SelectedCells(2).FormattedValue.ToString
+            Dim dtins As String = Me.JoinedIDRDataGrid.SelectedCells(3).FormattedValue.ToString()
+            Dim CPD As Integer = Val(fds.SOCRegister(0).ChancePrintsDeveloped)
+            Dim CPU As Integer = Val(fds.SOCRegister(0).ChancePrintsUnfit)
+            Dim CPE As Integer = Val(fds.SOCRegister(0).ChancePrintsEliminated)
+            Dim CPR As Integer = CPD - CPU - CPE
+
+            Dim IDOfficer As String = vbTab & "The identification was made by Sri. " & IdentifyingOfficer & " on " & dtid & "."
+
+            Dim PO As String = Trim(fds.SOCRegister(0).PlaceOfOccurrence)
+
+            If PO <> "" Then
+                PO = "(" & PO.Replace(vbNewLine, ", ") & ") "
+            End If
+
+            Dim Photographer As String = fds.SOCRegister(0).Photographer
+
+            If Trim(Photographer) = "" Or Trim(Photographer).ToLower = "no photographer" Then
+                Photographer = ""
+            Else
+                If CPD = 1 Then
+                    Photographer = "The chance print was photographed by Sri. " & Photographer & ", Police Photographer"
+                Else
+                    Photographer = "The chance prints were photographed by Sri. " & Photographer & ", Police Photographer"
+                End If
+                Dim dtphotographed = fds.SOCRegister(0).DateOfReceptionOfPhoto
+                If dtphotographed <> vbNullString Then
+                    If dtins = dtphotographed Then
+                        dtphotographed = " on the same day."
+                    Else
+                        dtphotographed = " on " & dtphotographed & "."
+                    End If
+                Else
+                    dtphotographed = "."
+                End If
+
+                Photographer += dtphotographed
+            End If
+
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+
+            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
+
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+
+
+            If sho.ToUpper = "IP" Then
+                sho = "The Inspector of Police" & vbNewLine & vbTab & ps
+            Else
+                sho = "The Sub Inspector of Police" & vbNewLine & vbTab & ps
+            End If
+
+            Dim cr = fds.SOCRegister(0).CrimeNumber
+            Dim us = fds.SOCRegister(0).SectionOfLaw
+
+
+            Dim IdentificationText As String = ""
+
+            IdentificationText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dtins
+
+            If CPD = 1 Then 'one print
+                IdentificationText += " and developed one chance print. " & Photographer
+
+                If CPR = 1 Then
+                    IdentificationText += vbNewLine & vbTab & "On comparison with this Bureau records, "
+                End If
+
+            End If
+
+            '--------------------------MORE THAN ONE PRINT---------------------
+
+
+
+
+            If CPD > 1 And CPR = CPD Then 'all remain
+                IdentificationText += " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
+                IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with Bureau records, "
+            End If
+
+            If CPD > 0 And CPR <> CPD And CPR <> 0 And CPE <> 0 And CPU = 0 Then 'some remains
+                IdentificationText += " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
+
+
+                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & IIf(CPR = 1, ". On comparing the remaining chance print with Bureau records, ", ". On comparing the remaining chance prints with Bureau records, ")
+            End If
+
+            If CPD > 0 And CPR <> CPD And CPR <> 0 And CPU <> 0 And CPE = 0 Then 'some remains
+
+                IdentificationText += " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
+
+                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ")
+            End If
+
+
+            If CPD > 0 And CPR <> CPD And CPR <> 0 And CPU <> 0 And CPE <> 0 And CPU <> 0 Then 'some remains
+
+                IdentificationText += " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
+                IdentificationText += vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. " & IIf(CPR = 1, "On comparing the remaining chance print with Bureau records, ", "On comparing the remaining chance prints with Bureau records, ")
+            End If
+
+
+            Dim missing As Object = System.Reflection.Missing.Value
+            Dim fileName As Object = "normal.dotm"
+            Dim newTemplate As Object = False
+            Dim docType As Object = 0
+            Dim isVisible As Object = True
+            Dim WordApp As New Word.Application()
+
+            Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+
+
+            WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+            If WordApp.Version < 12 Then
+                WordApp.Selection.Document.PageSetup.LeftMargin = 72
+                WordApp.Selection.Document.PageSetup.RightMargin = 72
+                WordApp.Selection.Document.PageSetup.TopMargin = 72
+                WordApp.Selection.Document.PageSetup.BottomMargin = 72
+                WordApp.Selection.ParagraphFormat.Space15()
+            End If
+
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab)
+            WordApp.Selection.Font.Underline = 1
+
+            Dim FileNo As String = SOCNumber
+
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
+
+            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
+
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeParagraph()
+
+            If WordApp.Version < 12 Then WordApp.Selection.ParagraphFormat.Space15()
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName)
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Date: " & GenerateDate(True))
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText("From")
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & "Tester Inspector" & vbNewLine & vbTab & FullOfficeName & vbNewLine & vbTab & FullDistrictName)
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText("To")
+            WordApp.Selection.TypeText(vbNewLine)
+
+
+            WordApp.Selection.TypeText(vbTab & sho)
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText("Sir,")
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText(vbTab & "Sub: Identification of criminal through chance prints – report - reg.")
+              
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & cr & " u/s " & us & " of " & ps)
+
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+
+            WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
+            WordApp.Selection.ParagraphFormat.LineSpacing = 14
+
+            WordApp.Selection.TypeText(IdentificationText.Replace("..", "."))
+
+            Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
+            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(fds.CulpritsRegister, IDRNumber)
+
+            For i = 0 To fds.CulpritsRegister.Count - 1
+                Dim cpid = fds.CulpritsRegister(i).CPsIdentified
+                If cpid = "1" Then
+                    WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                    WordApp.Selection.Font.Bold = 1
+
+                    WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ".")
+
+                    WordApp.Selection.Font.Bold = 0
+
+                    WordApp.Selection.TypeText(" He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
+                Else
+                    WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
+                    WordApp.Selection.Font.Bold = 1
+
+                    WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ".")
+
+                    WordApp.Selection.Font.Bold = 0
+
+                    WordApp.Selection.TypeText(" He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
+                End If
+            Next
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & "This is for information.")
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
+
+            If boolUseTIinLetter Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.ParagraphFormat.Space1()
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
+
+            ClosePleaseWaitForm()
+
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            aDoc.Activate()
+
+            aDoc = Nothing
+            WordApp = Nothing
+
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub GenerateIdentificationCoB() Handles btnGenerateIdentificationCoB.Click, btnGenerateIdentificationCoB2.Click
+        Try
+            ShowPleaseWaitForm()
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+
+            Dim fds As FingerPrintDataSet = New FingerPrintDataSet
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
+
+            If fds.SOCRegister.Count = 0 Then
+                ClosePleaseWaitForm()
+                Me.Cursor = Cursors.Default
+                MessageBoxEx.Show("The selected SOC Number " & SOCNumber & " does not exist. Please add details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+
+            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
+
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+
+
+            If sho.ToUpper = "IP" Then
+                sho = "The Inspector of Police, " & ps
+            Else
+                sho = "The Sub Inspector of Police, " & ps
+            End If
+
+
+
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
             Dim newTemplate As Object = False
@@ -14128,13 +14398,13 @@ errhandler:
             WordApp.Selection.Font.Size = 12
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Underline = 0
-            WordApp.Selection.TypeText(("TO:" & vbTab & Receiver) & vbNewLine)
+            WordApp.Selection.TypeText(("TO:" & vbTab & sho.ToUpper) & vbNewLine)
             WordApp.Selection.TypeText("INF:" & vbTab & "DIRECTOR, FPB, TVPM" & vbNewLine)
             WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.Font.Bold = 1
 
-            Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+            Dim FileNo As String = SOCNumber
             Dim line() = Strings.Split(FileNo, "/")
             FileNo = line(0) & "/SOC/" & line(1)
 
@@ -14143,13 +14413,29 @@ errhandler:
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.TypeText(vbTab & message.ToUpper & vbNewLine)
-            WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
+            WordApp.Selection.TypeText(("REFER CR.NO. " & fds.SOCRegister(0).CrimeNumber & " U/S " & fds.SOCRegister(0).SectionOfLaw & " OF " & fds.SOCRegister(0).PoliceStation & ". ").ToUpper)
+
+            Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
+            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(fds.CulpritsRegister, IDRNumber)
+
+            For i = 0 To fds.CulpritsRegister.Count - 1
+                Dim cpid = fds.CulpritsRegister(i).CPsIdentified
+                If cpid = "1" Then
+                    WordApp.Selection.TypeText(("one chance print developed from the scene of crime has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ". He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
+
+                Else
+
+                    WordApp.Selection.TypeText((ConvertNumberToWord(Val(cpid)) & " chance prints developed from the scene of crime have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ". He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
+
+                End If
+            Next
+
+            WordApp.Selection.TypeText(vbCrLf & "--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
 
             WordApp.Selection.TypeText(vbNewLine)
 
             ClosePleaseWaitForm()
-
+            Me.Cursor = Cursors.Default
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -14160,6 +14446,7 @@ errhandler:
 
         Catch ex As Exception
             ClosePleaseWaitForm()
+            Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
     End Sub
