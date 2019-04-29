@@ -141,7 +141,7 @@ Public Class frmMonthlyPerformance
 
             For i = 13 To 21
                 r(i) = Me.FingerPrintDataSet.Performance.NewPerformanceRow
-                r(i).SlNo = i
+                r(i).SlNo = i - 3
                 Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
             Next
 
@@ -274,19 +274,64 @@ Public Class frmMonthlyPerformance
             Dim wdDoc As Word.Document = wdDocs.Add(SavedFileName)
             Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
 
-            If Column = 0 Then
-                For i = 0 To 19
-                    For j = 2 To 7
-                        Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
-                    Next
-                Next
-            End If
+            Dim rc As Integer = wdTbl.Rows.Count
 
-            If Column = 2 Then
-                For i = 0 To 19
-                    Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
-                Next
+            If rc = 23 Then 'old statements
+                If Column = 0 Then
+                    For i = 0 To 7
+                        For j = 2 To 7
+                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                        Next
+                    Next
+                    For i = 9 To 10
+                        For j = 2 To 7
+                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                        Next
+                    Next
+
+                    For j = 2 To 7
+                        Me.DataGridViewX1.Rows(15).Cells(j).Value = wdTbl.Cell(17, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+
+                    For i = 17 To 21
+                        For j = 2 To 7
+                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 2, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                        Next
+                    Next
+                End If
+
+                If Column = 2 Then
+                    For i = 0 To 7
+                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+
+                    For i = 9 To 10
+                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+
+                    Me.DataGridViewX1.Rows(15).Cells(2).Value = wdTbl.Cell(17, 4).Range.Text.Trim(ChrW(7)).Trim()
+
+                    For i = 17 To 21
+                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 2, 4).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+
+                End If
+            Else
+                If Column = 0 Then
+                    For i = 0 To 21
+                        For j = 2 To 7
+                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                        Next
+                    Next
+                End If
+
+                If Column = 2 Then
+                    For i = 0 To 21
+                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+                End If
             End If
+           
 
             wdDoc.Close()
             ReleaseObject(wdTbl)
@@ -334,20 +379,30 @@ Public Class frmMonthlyPerformance
 
             Me.DataGridViewX1.Rows(0).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
             Me.DataGridViewX1.Rows(1).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
-            Me.DataGridViewX1.Rows(2).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
-            Me.DataGridViewX1.Rows(3).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
-            Me.DataGridViewX1.Rows(4).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
-            Me.DataGridViewX1.Rows(5).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPsRemainingInDI(d1, d2))
-            Me.DataGridViewX1.Rows(6).Cells(Column).Value = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2))
-            Me.DataGridViewX1.Rows(7).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCsIdentified(d1, d2))
 
-            Me.DataGridViewX1.Rows(8).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+            Dim cpd As Integer = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
+            Dim cpu As Integer = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
+            Dim cpe As Integer = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
+
+            Me.DataGridViewX1.Rows(2).Cells(Column).Value = cpd
+            Me.DataGridViewX1.Rows(3).Cells(Column).Value = cpu
+            Me.DataGridViewX1.Rows(4).Cells(Column).Value = cpe
+            Me.DataGridViewX1.Rows(5).Cells(Column).Value = cpd - cpu - cpe
+            Me.DataGridViewX1.Rows(6).Cells(Column).Value = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2))
+            Me.DataGridViewX1.Rows(7).Cells(Column).Value = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryNoOfSOCsIdentified(d1, d2))
+
+            Dim culpritcount As String = Me.IdentificationRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2)
+            If culpritcount Is Nothing Then
+                culpritcount = "0"
+            End If
+            Me.DataGridViewX1.Rows(8).Cells(Column).Value = culpritcount
             Me.DataGridViewX1.Rows(9).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
             Me.DataGridViewX1.Rows(10).Cells(Column).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
-            Me.DataGridViewX1.Rows(13).Cells(Column).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
-            Me.DataGridViewX1.Rows(15).Cells(Column).Value = CalculateCasesPendingInPreviousMonth(d1)
-            Me.DataGridViewX1.Rows(18).Cells(Column).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
-            Me.DataGridViewX1.Rows(19).Cells(Column).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+            Me.DataGridViewX1.Rows(15).Cells(Column).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
+            Me.DataGridViewX1.Rows(17).Cells(Column).Value = CalculateCasesPendingInPreviousMonth(d1)
+            Me.DataGridViewX1.Rows(18).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+            Me.DataGridViewX1.Rows(20).Cells(Column).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
+            Me.DataGridViewX1.Rows(21).Cells(Column).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -408,7 +463,7 @@ Public Class frmMonthlyPerformance
         On Error Resume Next
         lblCurrentMonth.Text = ""
         lblPreviousMonth.Text = ""
-        For i As Short = 0 To 19
+        For i As Short = 0 To 21
             Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
             Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
@@ -430,7 +485,7 @@ Public Class frmMonthlyPerformance
         Dim blankvalue As String = "-"
 
 
-        For i As Short = 0 To 19
+        For i As Short = 0 To 21
             If Me.DataGridViewX1.Rows(i).Cells(2).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(2).Value = "0" Then Me.DataGridViewX1.Rows(i).Cells(2).Value = blankvalue
             If Me.DataGridViewX1.Rows(i).Cells(3).Value = "" Or Me.DataGridViewX1.Rows(i).Cells(3).Value = "0" Then Me.DataGridViewX1.Rows(i).Cells(3).Value = blankvalue
         Next
@@ -498,7 +553,7 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.TypeParagraph()
 
-            Dim RowCount = 23
+            Dim RowCount = 25
 
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 8)
@@ -525,7 +580,7 @@ Public Class frmMonthlyPerformance
                 WordApp.Selection.TypeText(i)
             Next
 
-            For i = 4 To 23
+            For i = 4 To 25
                 Dim j = i - 4
                 WordApp.Selection.Tables.Item(1).Rows(i).Height = 20
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
@@ -567,8 +622,8 @@ Public Class frmMonthlyPerformance
             Next
 
             For f = 3 To 7
-                WordApp.Selection.Tables.Item(1).Cell(23, f).Select()
-                WordApp.Selection.Tables.Item(1).Cell(23, f).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+                WordApp.Selection.Tables.Item(1).Cell(25, f).Select()
+                WordApp.Selection.Tables.Item(1).Cell(25, f).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
                 WordApp.Selection.Font.Name = "Rupee Foradian"
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.Font.Size = 8
