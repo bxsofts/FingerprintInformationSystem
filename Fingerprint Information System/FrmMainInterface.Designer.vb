@@ -186,6 +186,8 @@ Partial Class frmMainInterface
         Me.btnListOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGistOfIdentifiedCases = New DevComponents.DotNetBar.ButtonItem()
         Me.btnShowIdentifiedDocket = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateIdentificationCoB2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateIdentificationLetter2 = New DevComponents.DotNetBar.ButtonItem()
         Me.ButtonItem7 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCDRegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCurrentCD = New DevComponents.DotNetBar.ButtonItem()
@@ -564,6 +566,8 @@ Partial Class frmMainInterface
         Me.btnSOCShowInIDRRegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIdentifiedTemplateContextMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFPAGenerateSlipFormContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateIdentificationCoB = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateIdentificationLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.LabelX73 = New DevComponents.DotNetBar.LabelX()
         Me.txtSOCGist = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.cmbSOCPhotoReceived = New DevComponents.DotNetBar.Controls.ComboBoxEx()
@@ -1106,10 +1110,8 @@ Partial Class frmMainInterface
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
-        Me.btnGenerateIdentificationCoB = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGenerateIdentificationLetter = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGenerateIdentificationCoB2 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGenerateIdentificationLetter2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateIdentificationReportDirector = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateIdentificationReportDirector2 = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1974,7 +1976,7 @@ Partial Class frmMainInterface
         'btnIdentificationRegister
         '
         Me.btnIdentificationRegister.Name = "btnIdentificationRegister"
-        Me.btnIdentificationRegister.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIdentificationStatement, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnShowIdentifiedDocket, Me.btnGenerateIdentificationCoB2, Me.btnGenerateIdentificationLetter2})
+        Me.btnIdentificationRegister.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIdentificationStatement, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnShowIdentifiedDocket, Me.btnGenerateIdentificationCoB2, Me.btnGenerateIdentificationLetter2, Me.btnGenerateIdentificationReportDirector2})
         Me.btnIdentificationRegister.Text = "Identification Register"
         '
         'btnIdentificationStatement
@@ -2000,6 +2002,17 @@ Partial Class frmMainInterface
         Me.btnShowIdentifiedDocket.ForeColor = System.Drawing.Color.Red
         Me.btnShowIdentifiedDocket.Name = "btnShowIdentifiedDocket"
         Me.btnShowIdentifiedDocket.Text = "Show 'Identified File' Docket"
+        '
+        'btnGenerateIdentificationCoB2
+        '
+        Me.btnGenerateIdentificationCoB2.BeginGroup = true
+        Me.btnGenerateIdentificationCoB2.Name = "btnGenerateIdentificationCoB2"
+        Me.btnGenerateIdentificationCoB2.Text = "Generate Identification Report - CoB"
+        '
+        'btnGenerateIdentificationLetter2
+        '
+        Me.btnGenerateIdentificationLetter2.Name = "btnGenerateIdentificationLetter2"
+        Me.btnGenerateIdentificationLetter2.Text = "Generate Identification Report - SHO"
         '
         'ButtonItem7
         '
@@ -5926,7 +5939,7 @@ Partial Class frmMainInterface
         '
         Me.btnDatagridContextMenu.AutoExpandOnClick = true
         Me.btnDatagridContextMenu.Name = "btnDatagridContextMenu"
-        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewIDSlipContext, Me.btnViewACSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnViewCP, Me.btnLocateCP, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnFPAGenerateSlipFormContext, Me.btnGenerateIdentificationCoB, Me.btnGenerateIdentificationLetter})
+        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewIDSlipContext, Me.btnViewACSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnViewCP, Me.btnLocateCP, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnFPAGenerateSlipFormContext, Me.btnGenerateIdentificationCoB, Me.btnGenerateIdentificationLetter, Me.btnGenerateIdentificationReportDirector})
         Me.btnDatagridContextMenu.Text = "Datagrid Context Menu"
         '
         'btnOpenContext
@@ -6055,7 +6068,7 @@ Partial Class frmMainInterface
         '
         'btnSOCShowInIDRRegister
         '
-        Me.btnSOCShowInIDRRegister.BeginGroup = True
+        Me.btnSOCShowInIDRRegister.BeginGroup = true
         Me.btnSOCShowInIDRRegister.Name = "btnSOCShowInIDRRegister"
         Me.btnSOCShowInIDRRegister.Text = "Show in Identification Register"
         '
@@ -6072,6 +6085,17 @@ Partial Class frmMainInterface
         Me.btnFPAGenerateSlipFormContext.ForeColor = System.Drawing.Color.Red
         Me.btnFPAGenerateSlipFormContext.Name = "btnFPAGenerateSlipFormContext"
         Me.btnFPAGenerateSlipFormContext.Text = "Generate Fingerprint Slip Form"
+        '
+        'btnGenerateIdentificationCoB
+        '
+        Me.btnGenerateIdentificationCoB.BeginGroup = true
+        Me.btnGenerateIdentificationCoB.Name = "btnGenerateIdentificationCoB"
+        Me.btnGenerateIdentificationCoB.Text = "Generate Identification Report - CoB"
+        '
+        'btnGenerateIdentificationLetter
+        '
+        Me.btnGenerateIdentificationLetter.Name = "btnGenerateIdentificationLetter"
+        Me.btnGenerateIdentificationLetter.Text = "Generate Identification Report - SHO"
         '
         'LabelX73
         '
@@ -14330,27 +14354,15 @@ Partial Class frmMainInterface
         '
         Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
         '
-        'btnGenerateIdentificationCoB
+        'btnGenerateIdentificationReportDirector
         '
-        Me.btnGenerateIdentificationCoB.BeginGroup = true
-        Me.btnGenerateIdentificationCoB.Name = "btnGenerateIdentificationCoB"
-        Me.btnGenerateIdentificationCoB.Text = "Generate Identification CoB"
+        Me.btnGenerateIdentificationReportDirector.Name = "btnGenerateIdentificationReportDirector"
+        Me.btnGenerateIdentificationReportDirector.Text = "Generate Identification Report - Director"
         '
-        'btnGenerateIdentificationLetter
+        'btnGenerateIdentificationReportDirector2
         '
-        Me.btnGenerateIdentificationLetter.Name = "btnGenerateIdentificationLetter"
-        Me.btnGenerateIdentificationLetter.Text = "Generate Identification Letter"
-        '
-        'btnGenerateIdentificationCoB2
-        '
-        Me.btnGenerateIdentificationCoB2.BeginGroup = true
-        Me.btnGenerateIdentificationCoB2.Name = "btnGenerateIdentificationCoB2"
-        Me.btnGenerateIdentificationCoB2.Text = "Generate Identification CoB"
-        '
-        'btnGenerateIdentificationLetter2
-        '
-        Me.btnGenerateIdentificationLetter2.Name = "btnGenerateIdentificationLetter2"
-        Me.btnGenerateIdentificationLetter2.Text = "Generate Identification Letter"
+        Me.btnGenerateIdentificationReportDirector2.Name = "btnGenerateIdentificationReportDirector2"
+        Me.btnGenerateIdentificationReportDirector2.Text = "Generate Identification Report - Director"
         '
         'frmMainInterface
         '
@@ -15489,5 +15501,7 @@ End Sub
     Friend WithEvents btnGenerateIdentificationLetter As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnGenerateIdentificationCoB2 As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnGenerateIdentificationLetter2 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnGenerateIdentificationReportDirector As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnGenerateIdentificationReportDirector2 As DevComponents.DotNetBar.ButtonItem
 
 End Class
