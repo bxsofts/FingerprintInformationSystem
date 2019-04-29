@@ -6566,7 +6566,7 @@ errhandler:
                     Dim oldcpsidentified As Integer = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentifiedBySOCNumber(SOCNo)
 
                     Dim oldRow As FingerPrintDataSet.JoinedIDRRow
-                    oldRow = Me.FingerPrintDataSet.JoinedIDR.FindBySlNumber(Me.JoinedIDRDataGrid.SelectedCells(20).Value.ToString())
+                    oldRow = Me.FingerPrintDataSet.JoinedIDR.FindBySlNumber(Me.JoinedIDRDataGrid.SelectedCells(21).Value.ToString())
                     oldRow.Delete()
 
                     Me.IdentificationRegisterTableAdapter1.DeleteSelectedRecord(IdentificationNumber)
@@ -14281,7 +14281,7 @@ errhandler:
 
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
+                    WordApp.Selection.TypeText(" He is accused in " & fds.CulpritsRegister(i).PreviousCaseDetails & ". His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
                 Else
                     WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
                     WordApp.Selection.Font.Bold = 1
@@ -14290,7 +14290,7 @@ errhandler:
 
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
+                    WordApp.Selection.TypeText(" He is accused in " & fds.CulpritsRegister(i).PreviousCaseDetails & ". His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
                 End If
             Next
 
@@ -14541,7 +14541,7 @@ errhandler:
 
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" He is accused in Cr.No..... u/s .... of ...... P.S.")
+                    WordApp.Selection.TypeText(" He is accused in " & fds.CulpritsRegister(i).PreviousCaseDetails & ".")
                     WordApp.Selection.TypeText(vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & "DA Slip Number - " & fds.CulpritsRegister(i).DANumber)
 
@@ -14556,7 +14556,7 @@ errhandler:
 
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" He is accused in Cr.No..... u/s .... of ...... P.S.")
+                    WordApp.Selection.TypeText(" He is accused in " & fds.CulpritsRegister(i).PreviousCaseDetails & ".")
 
                     WordApp.Selection.TypeText(vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & "DA Slip Number - " & fds.CulpritsRegister(i).DANumber)
@@ -14687,7 +14687,7 @@ errhandler:
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.TypeText(("REFER CR.NO. " & fds.SOCRegister(0).CrimeNumber & " U/S " & fds.SOCRegister(0).SectionOfLaw & " OF " & fds.SOCRegister(0).PoliceStation & ". ").ToUpper)
+            WordApp.Selection.TypeText(("REFER CR.NO. " & fds.SOCRegister(0).CrimeNumber & " U/S " & fds.SOCRegister(0).SectionOfLaw & " OF " & ps & ". ").ToUpper)
 
             Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
             Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
@@ -14695,11 +14695,11 @@ errhandler:
             For i = 0 To fds.CulpritsRegister.Count - 1
                 Dim cpid = fds.CulpritsRegister(i).CPsIdentified
                 If cpid = "1" Then
-                    WordApp.Selection.TypeText(("one chance print developed from the scene of crime has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ". He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
+                    WordApp.Selection.TypeText(("one chance print developed from the scene of crime has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ". He is accused in " & fds.CulpritsRegister(i).PreviousCaseDetails & ". His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
 
                 Else
 
-                    WordApp.Selection.TypeText((ConvertNumberToWord(Val(cpid)) & " chance prints developed from the scene of crime have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ". He is accused in Cr.No..... u/s .... of ...... P.S. His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
+                    WordApp.Selection.TypeText((ConvertNumberToWord(Val(cpid)) & " chance prints developed from the scene of crime have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ",") & ". He is accused in " & fds.CulpritsRegister(i).PreviousCaseDetails & ". His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
 
                 End If
             Next
