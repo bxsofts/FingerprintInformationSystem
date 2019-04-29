@@ -76,7 +76,7 @@ Public Class FrmIdentificationRegisterDE
             End With
             lblSOCNumberWarning.Text = "No. of CPs remaining: " & CPR
             lblSOCNumberWarning.Visible = True
-            CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, Me.txtIdentificationNumber.Text)
+            CulpritsRegisterTableAdapter1.FillByIdentificationNumber(Me.FingerPrintDataSet1.CulpritsRegister, Me.txtIdentificationNumber.Text)
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -112,7 +112,7 @@ Public Class FrmIdentificationRegisterDE
         Next
         Me.dtIdentificationDate.IsEmpty = True
         Me.lblSOCNumberWarning.Visible = False
-        CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, "")
+        CulpritsRegisterTableAdapter1.FillByIdentificationNumber(Me.FingerPrintDataSet1.CulpritsRegister, "")
         Me.txtIdentificationNumber.Text = GenerateNewIDRNumber()
     End Sub
 
@@ -482,12 +482,13 @@ Public Class FrmIdentificationRegisterDE
             Dim FingersIdentified As String = ""
             Dim Classification As String = ""
             Dim DANumber As String = ""
+            Dim PreviousCaseDetails As String = ""
             Dim IdentifiedFrom As String = ""
             Dim Remarks As String = ""
 
             Me.IdentificationRegisterTableAdapter1.FillBySOCNumber(Me.FingerPrintDataSet1.IdentificationRegister, SOCNumber)
             Dim soccount As Integer = Me.FingerPrintDataSet1.IdentificationRegister.Count
-           
+
             Dim PrevCPsIdentified As Integer = 0
             Dim TotalCPsIdentified As Integer = 0
 
@@ -506,8 +507,9 @@ Public Class FrmIdentificationRegisterDE
                 FingersIdentified = FingersIdentified & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(5).Value, dgv.Rows(i).Cells(5).Value)
                 Classification = Classification & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(6).Value, dgv.Rows(i).Cells(6).Value)
                 DANumber = DANumber & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(7).Value, dgv.Rows(i).Cells(7).Value)
-                IdentifiedFrom = IdentifiedFrom & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(8).Value, dgv.Rows(i).Cells(8).Value)
-                Remarks = Remarks & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(9).Value, dgv.Rows(i).Cells(9).Value)
+                PreviousCaseDetails = PreviousCaseDetails & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(8).Value, dgv.Rows(i).Cells(8).Value)
+                IdentifiedFrom = IdentifiedFrom & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(9).Value, dgv.Rows(i).Cells(9).Value)
+                Remarks = Remarks & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(10).Value, dgv.Rows(i).Cells(10).Value)
             Next
 
             Me.CulpritsRegisterTableAdapter1.Update(Me.FingerPrintDataSet1.CulpritsRegister)
@@ -516,7 +518,7 @@ Public Class FrmIdentificationRegisterDE
 
                 TotalCPsIdentified = PrevCPsIdentified + CPsIdentified
 
-                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN)
+                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails)
 
                 Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegister, SOCNumber)
 
@@ -548,7 +550,7 @@ Public Class FrmIdentificationRegisterDE
 
                 ShowDesktopAlert("New Identification Record entered successfully.")
             Else ' Edit mode
-                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, IDRSerialNumber)
+                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails, IDRSerialNumber)
 
                 With frmMainInterface.JoinedIDRDataGrid
                     .SelectedCells(0).Value = Me.txtIdentificationNumber.Text.Trim
@@ -620,7 +622,7 @@ Public Class FrmIdentificationRegisterDE
 
         Using b As SolidBrush = New SolidBrush(Me.ForeColor)
             If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
-                e.Graphics.DrawString("Sl.No", f, b, e.CellBounds, sf)
+                e.Graphics.DrawString("Sl No.", f, b, e.CellBounds, sf)
                 e.Handled = True
             End If
 

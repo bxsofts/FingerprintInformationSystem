@@ -11926,8 +11926,6 @@ Partial Public Class FingerPrintDataSet
         
         Private columnIDRNumber As Global.System.Data.DataColumn
         
-        Private columnPreviousCaseDetails As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -12084,14 +12082,6 @@ Partial Public Class FingerPrintDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property PreviousCaseDetailsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPreviousCaseDetails
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -12128,9 +12118,9 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddIdentificationRegisterRow(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Date, ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Integer, ByVal PreviousCaseDetails As String) As IdentificationRegisterRow
+        Public Overloads Function AddIdentificationRegisterRow(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Date, ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Integer) As IdentificationRegisterRow
             Dim rowIdentificationRegisterRow As IdentificationRegisterRow = CType(Me.NewRow,IdentificationRegisterRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, IdentificationNumber, SOCNumber, IdentificationDate, IdentifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber, PreviousCaseDetails}
+            Dim columnValuesArray() As Object = New Object() {Nothing, IdentificationNumber, SOCNumber, IdentificationDate, IdentifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber}
             rowIdentificationRegisterRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowIdentificationRegisterRow)
             Return rowIdentificationRegisterRow
@@ -12174,7 +12164,6 @@ Partial Public Class FingerPrintDataSet
             Me.columnIdentifiedFrom = MyBase.Columns("IdentifiedFrom")
             Me.columnIdentificationDetails = MyBase.Columns("IdentificationDetails")
             Me.columnIDRNumber = MyBase.Columns("IDRNumber")
-            Me.columnPreviousCaseDetails = MyBase.Columns("PreviousCaseDetails")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12210,8 +12199,6 @@ Partial Public Class FingerPrintDataSet
             MyBase.Columns.Add(Me.columnIdentificationDetails)
             Me.columnIDRNumber = New Global.System.Data.DataColumn("IDRNumber", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnIDRNumber)
-            Me.columnPreviousCaseDetails = New Global.System.Data.DataColumn("PreviousCaseDetails", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPreviousCaseDetails)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSlNumber}, true))
             Me.columnSlNumber.AutoIncrement = true
             Me.columnSlNumber.AutoIncrementSeed = -1
@@ -12230,7 +12217,6 @@ Partial Public Class FingerPrintDataSet
             Me.columnDANumber.MaxLength = 255
             Me.columnIdentifiedFrom.MaxLength = 255
             Me.columnIdentificationDetails.MaxLength = 536870910
-            Me.columnPreviousCaseDetails.MaxLength = 255
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12443,10 +12429,6 @@ Partial Public Class FingerPrintDataSet
         Private columnGraveCrime As Global.System.Data.DataColumn
         
         Private columnFileStatus As Global.System.Data.DataColumn
-        
-        Private columnChancePrintsRemaining1 As Global.System.Data.DataColumn
-        
-        Private columnPreviousCaseDetails As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -12788,22 +12770,6 @@ Partial Public Class FingerPrintDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property ChancePrintsRemaining1Column() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnChancePrintsRemaining1
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property PreviousCaseDetailsColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnPreviousCaseDetails
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -12877,11 +12843,9 @@ Partial Public Class FingerPrintDataSet
                     ByVal Gist As String,  _
                     ByVal ComparisonDetails As String,  _
                     ByVal GraveCrime As Boolean,  _
-                    ByVal FileStatus As String,  _
-                    ByVal ChancePrintsRemaining1() As Byte,  _
-                    ByVal PreviousCaseDetails As String) As JoinedIDRRow
+                    ByVal FileStatus As String) As JoinedIDRRow
             Dim rowJoinedIDRRow As JoinedIDRRow = CType(Me.NewRow,JoinedIDRRow)
-            Dim columnValuesArray() As Object = New Object() {IdentificationNumber, SOCNumber, IdentificationDate, DateOfInspection, PoliceStation, CrimeNumber, SectionOfLaw, InvestigatingOfficer, IdentifiedBy, ChancePrintsDeveloped, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber, Nothing, DateOfReport, DateOfOccurrence, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, Gist, ComparisonDetails, GraveCrime, FileStatus, ChancePrintsRemaining1, PreviousCaseDetails}
+            Dim columnValuesArray() As Object = New Object() {IdentificationNumber, SOCNumber, IdentificationDate, DateOfInspection, PoliceStation, CrimeNumber, SectionOfLaw, InvestigatingOfficer, IdentifiedBy, ChancePrintsDeveloped, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber, Nothing, DateOfReport, DateOfOccurrence, PlaceOfOccurrence, Complainant, ModusOperandi, PropertyLost, ChancePrintsUnfit, ChancePrintsEliminated, ChancePrintsRemaining, ChancePrintDetails, Photographer, PhotoReceived, DateOfReceptionOfPhoto, Gist, ComparisonDetails, GraveCrime, FileStatus}
             rowJoinedIDRRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowJoinedIDRRow)
             Return rowJoinedIDRRow
@@ -12948,8 +12912,6 @@ Partial Public Class FingerPrintDataSet
             Me.columnComparisonDetails = MyBase.Columns("ComparisonDetails")
             Me.columnGraveCrime = MyBase.Columns("GraveCrime")
             Me.columnFileStatus = MyBase.Columns("FileStatus")
-            Me.columnChancePrintsRemaining1 = MyBase.Columns("ChancePrintsRemaining1")
-            Me.columnPreviousCaseDetails = MyBase.Columns("PreviousCaseDetails")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -13031,10 +12993,6 @@ Partial Public Class FingerPrintDataSet
             MyBase.Columns.Add(Me.columnGraveCrime)
             Me.columnFileStatus = New Global.System.Data.DataColumn("FileStatus", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFileStatus)
-            Me.columnChancePrintsRemaining1 = New Global.System.Data.DataColumn("ChancePrintsRemaining1", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnChancePrintsRemaining1)
-            Me.columnPreviousCaseDetails = New Global.System.Data.DataColumn("PreviousCaseDetails", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPreviousCaseDetails)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSlNumber}, true))
             Me.columnIdentificationNumber.MaxLength = 10
             Me.columnSOCNumber.MaxLength = 50
@@ -13073,9 +13031,6 @@ Partial Public Class FingerPrintDataSet
             Me.columnGist.MaxLength = 536870910
             Me.columnComparisonDetails.MaxLength = 536870910
             Me.columnFileStatus.MaxLength = 25
-            Me.columnChancePrintsRemaining1.ReadOnly = true
-            Me.columnChancePrintsRemaining1.Caption = "ChancePrintsRemaining"
-            Me.columnPreviousCaseDetails.MaxLength = 255
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -20815,22 +20770,6 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property PreviousCaseDetails() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableIdentificationRegister.PreviousCaseDetailsColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PreviousCaseDetails' in table 'IdentificationRegister' is D"& _ 
-                            "BNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableIdentificationRegister.PreviousCaseDetailsColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsIdentificationNumberNull() As Boolean
             Return Me.IsNull(Me.tableIdentificationRegister.IdentificationNumberColumn)
         End Function
@@ -20995,18 +20934,6 @@ Partial Public Class FingerPrintDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetIDRNumberNull()
             Me(Me.tableIdentificationRegister.IDRNumberColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsPreviousCaseDetailsNull() As Boolean
-            Return Me.IsNull(Me.tableIdentificationRegister.PreviousCaseDetailsColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetPreviousCaseDetailsNull()
-            Me(Me.tableIdentificationRegister.PreviousCaseDetailsColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -21593,36 +21520,6 @@ Partial Public Class FingerPrintDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ChancePrintsRemaining1() As Byte()
-            Get
-                Try 
-                    Return CType(Me(Me.tableJoinedIDR.ChancePrintsRemaining1Column),Byte())
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChancePrintsRemaining1' in table 'JoinedIDR' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableJoinedIDR.ChancePrintsRemaining1Column) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property PreviousCaseDetails() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableJoinedIDR.PreviousCaseDetailsColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PreviousCaseDetails' in table 'JoinedIDR' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableJoinedIDR.PreviousCaseDetailsColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsIdentificationNumberNull() As Boolean
             Return Me.IsNull(Me.tableJoinedIDR.IdentificationNumberColumn)
         End Function
@@ -22063,30 +21960,6 @@ Partial Public Class FingerPrintDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetFileStatusNull()
             Me(Me.tableJoinedIDR.FileStatusColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsChancePrintsRemaining1Null() As Boolean
-            Return Me.IsNull(Me.tableJoinedIDR.ChancePrintsRemaining1Column)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetChancePrintsRemaining1Null()
-            Me(Me.tableJoinedIDR.ChancePrintsRemaining1Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsPreviousCaseDetailsNull() As Boolean
-            Return Me.IsNull(Me.tableJoinedIDR.PreviousCaseDetailsColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetPreviousCaseDetailsNull()
-            Me(Me.tableJoinedIDR.PreviousCaseDetailsColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -52438,7 +52311,6 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("IdentifiedFrom", "IdentifiedFrom")
             tableMapping.ColumnMappings.Add("IdentificationDetails", "IdentificationDetails")
             tableMapping.ColumnMappings.Add("IDRNumber", "IDRNumber")
-            tableMapping.ColumnMappings.Add("PreviousCaseDetails", "PreviousCaseDetails")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -52453,8 +52325,7 @@ Namespace FingerPrintDataSetTableAdapters
                 "= 1 AND `HenryClassification` IS NULL) OR (`HenryClassification` = ?)) AND ((? ="& _ 
                 " 1 AND `DANumber` IS NULL) OR (`DANumber` = ?)) AND ((? = 1 AND `IdentifiedFrom`"& _ 
                 " IS NULL) OR (`IdentifiedFrom` = ?)) AND ((? = 1 AND `IDRNumber` IS NULL) OR (`I"& _ 
-                "DRNumber` = ?)) AND ((? = 1 AND `PreviousCaseDetails` IS NULL) OR (`PreviousCase"& _ 
-                "Details` = ?)))"
+                "DRNumber` = ?)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_IdentificationNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
@@ -52481,15 +52352,13 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_IdentifiedFrom", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `IdentificationRegister` (`IdentificationNumber`, `SOCNumber`, `Ident"& _ 
                 "ificationDate`, `IdentifiedBy`, `CPsIdentified`, `NoOfCulpritsIdentified`, `Culp"& _ 
                 "ritName`, `Address`, `FingersIdentified`, `HenryClassification`, `DANumber`, `Id"& _ 
-                "entifiedFrom`, `IdentificationDetails`, `IDRNumber`, `PreviousCaseDetails`) VALU"& _ 
-                "ES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "entifiedFrom`, `IdentificationDetails`, `IDRNumber`) VALUES (?, ?, ?, ?, ?, ?, ?"& _ 
+                ", ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -52505,26 +52374,24 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE `IdentificationRegister` SET `IdentificationNumber` = ?, `SOCNumber` = ?, "& _ 
                 "`IdentificationDate` = ?, `IdentifiedBy` = ?, `CPsIdentified` = ?, `NoOfCulprits"& _ 
                 "Identified` = ?, `CulpritName` = ?, `Address` = ?, `FingersIdentified` = ?, `Hen"& _ 
                 "ryClassification` = ?, `DANumber` = ?, `IdentifiedFrom` = ?, `IdentificationDeta"& _ 
-                "ils` = ?, `IDRNumber` = ?, `PreviousCaseDetails` = ? WHERE ((`SlNumber` = ?) AND"& _ 
-                " ((? = 1 AND `IdentificationNumber` IS NULL) OR (`IdentificationNumber` = ?)) AN"& _ 
-                "D ((? = 1 AND `SOCNumber` IS NULL) OR (`SOCNumber` = ?)) AND ((? = 1 AND `Identi"& _ 
-                "ficationDate` IS NULL) OR (`IdentificationDate` = ?)) AND ((? = 1 AND `Identifie"& _ 
-                "dBy` IS NULL) OR (`IdentifiedBy` = ?)) AND ((? = 1 AND `CPsIdentified` IS NULL) "& _ 
-                "OR (`CPsIdentified` = ?)) AND ((? = 1 AND `NoOfCulpritsIdentified` IS NULL) OR ("& _ 
-                "`NoOfCulpritsIdentified` = ?)) AND ((? = 1 AND `CulpritName` IS NULL) OR (`Culpr"& _ 
-                "itName` = ?)) AND ((? = 1 AND `FingersIdentified` IS NULL) OR (`FingersIdentifie"& _ 
-                "d` = ?)) AND ((? = 1 AND `HenryClassification` IS NULL) OR (`HenryClassification"& _ 
-                "` = ?)) AND ((? = 1 AND `DANumber` IS NULL) OR (`DANumber` = ?)) AND ((? = 1 AND"& _ 
-                " `IdentifiedFrom` IS NULL) OR (`IdentifiedFrom` = ?)) AND ((? = 1 AND `IDRNumber"& _ 
-                "` IS NULL) OR (`IDRNumber` = ?)) AND ((? = 1 AND `PreviousCaseDetails` IS NULL) "& _ 
-                "OR (`PreviousCaseDetails` = ?)))"
+                "ils` = ?, `IDRNumber` = ? WHERE ((`SlNumber` = ?) AND ((? = 1 AND `Identificatio"& _ 
+                "nNumber` IS NULL) OR (`IdentificationNumber` = ?)) AND ((? = 1 AND `SOCNumber` I"& _ 
+                "S NULL) OR (`SOCNumber` = ?)) AND ((? = 1 AND `IdentificationDate` IS NULL) OR ("& _ 
+                "`IdentificationDate` = ?)) AND ((? = 1 AND `IdentifiedBy` IS NULL) OR (`Identifi"& _ 
+                "edBy` = ?)) AND ((? = 1 AND `CPsIdentified` IS NULL) OR (`CPsIdentified` = ?)) A"& _ 
+                "ND ((? = 1 AND `NoOfCulpritsIdentified` IS NULL) OR (`NoOfCulpritsIdentified` = "& _ 
+                "?)) AND ((? = 1 AND `CulpritName` IS NULL) OR (`CulpritName` = ?)) AND ((? = 1 A"& _ 
+                "ND `FingersIdentified` IS NULL) OR (`FingersIdentified` = ?)) AND ((? = 1 AND `H"& _ 
+                "enryClassification` IS NULL) OR (`HenryClassification` = ?)) AND ((? = 1 AND `DA"& _ 
+                "Number` IS NULL) OR (`DANumber` = ?)) AND ((? = 1 AND `IdentifiedFrom` IS NULL) "& _ 
+                "OR (`IdentifiedFrom` = ?)) AND ((? = 1 AND `IDRNumber` IS NULL) OR (`IDRNumber` "& _ 
+                "= ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -52540,7 +52407,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.LongVarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_IdentificationNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_IdentificationNumber", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
@@ -52566,8 +52432,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_IdentifiedFrom", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -52580,14 +52444,14 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(22) {}
+            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(21) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        SlNumber, IdentificationNumber, SOCNumber, IdentificationDate, Iden"& _ 
                 "tifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersId"& _ 
-                "entified, HenryClassification, DANumber, IdentifiedFrom, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "    IdentificationDetails, IDRNumber, PreviousCaseDetails"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Ident"& _ 
-                "ificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationDate, IDRNumber"
+                "entified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         HenryClassification, DANumber, IdentifiedFr"& _ 
+                "om, IdentificationDetails, IDRNumber"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OR"& _ 
+                "DER BY IdentificationDate, IDRNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -52612,29 +52476,29 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._commandCollection(5) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT Address, CPsIdentified, CulpritName, DANumber, FingersIdentified, HenryCla"& _ 
-                "ssification, IDRNumber, IdentificationDate, IdentificationDetails, Identificatio"& _ 
-                "nNumber, IdentifiedBy, IdentifiedFrom, NoOfCulpritsIdentified, PreviousCaseDetai"& _ 
-                "ls, SOCNumber, SlNumber FROM IdentificationRegister WHERE (IdentificationNumber "& _ 
-                "= ?) ORDER BY IdentificationDate, IDRNumber"
+            Me._commandCollection(5).CommandText = "SELECT        SlNumber, IdentificationNumber, SOCNumber, IdentificationDate, Iden"& _ 
+                "tifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersId"& _ 
+                "entified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         HenryClassification, DANumber, IdentifiedFr"& _ 
+                "om, IdentificationDetails, IDRNumber"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WH"& _ 
+                "ERE        (IdentificationNumber = ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationDate, IDRNumber"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(6) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT Address, CPsIdentified, CulpritName, DANumber, FingersIdentified, HenryCla"& _ 
-                "ssification, IDRNumber, IdentificationDate, IdentificationDetails, Identificatio"& _ 
-                "nNumber, IdentifiedBy, IdentifiedFrom, NoOfCulpritsIdentified, PreviousCaseDetai"& _ 
-                "ls, SOCNumber, SlNumber FROM IdentificationRegister WHERE (SOCNumber = ?) ORDER "& _ 
-                "BY IdentificationDate, IDRNumber"
+            Me._commandCollection(6).CommandText = "SELECT        SlNumber, IdentificationNumber, SOCNumber, IdentificationDate, Iden"& _ 
+                "tifiedBy, CPsIdentified, NoOfCulpritsIdentified, CulpritName, Address, FingersId"& _ 
+                "entified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         HenryClassification, DANumber, IdentifiedFr"& _ 
+                "om, IdentificationDetails, IDRNumber"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WH"& _ 
+                "ERE        (SOCNumber = ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationDate, IDRNumber"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(7) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(7).Connection = Me.Connection
             Me._commandCollection(7).CommandText = "INSERT INTO IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         (IdentificationNumbe"& _ 
                 "r, SOCNumber, IdentificationDate, IdentifiedBy, CPsIdentified, NoOfCulpritsIdent"& _ 
-                "ified, CulpritName, Address, FingersIdentified, HenryClassification, DANumber, I"& _ 
-                "dentifiedFrom, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationDetails, IDRNumber, Prev"& _ 
-                "iousCaseDetails)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "ified, CulpritName, Address, FingersIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Henry"& _ 
+                "Classification, DANumber, IdentifiedFrom, IdentificationDetails, IDRNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VAL"& _ 
+                "UES        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -52650,7 +52514,6 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(8) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(8).Connection = Me.Connection
             Me._commandCollection(8).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                Address = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE       "& _ 
@@ -52689,85 +52552,77 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(14) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(14).Connection = Me.Connection
-            Me._commandCollection(14).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                PreviousCaseDetails = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "WHERE        (PreviousCaseDetails IS NULL)"
+            Me._commandCollection(14).CommandText = "SELECT        SUM(CPsIdentified) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"& _ 
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(14).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(15) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(15).Connection = Me.Connection
             Me._commandCollection(15).CommandText = "SELECT        SUM(CPsIdentified) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationDate BETWEEN ? AND ?)"
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(15).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(15).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(16) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(16).Connection = Me.Connection
             Me._commandCollection(16).CommandText = "SELECT        SUM(CPsIdentified) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)"
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SOCNumber = ?)"
             Me._commandCollection(16).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(17) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(17).Connection = Me.Connection
-            Me._commandCollection(17).CommandText = "SELECT        SUM(CPsIdentified) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SOCNumber = ?)"
+            Me._commandCollection(17).CommandText = "SELECT        SUM(Val(NoOfCulpritsIdentified)) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Identifi"& _ 
+                "cationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(17).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(17).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(18) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(18).Connection = Me.Connection
-            Me._commandCollection(18).CommandText = "SELECT        SUM(Val(NoOfCulpritsIdentified)) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Identifi"& _ 
-                "cationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(18).CommandText = "SELECT        MAX(IDRNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WH"& _ 
+                "ERE        (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(18).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(18).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(18).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(19) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(19).Connection = Me.Connection
-            Me._commandCollection(19).CommandText = "SELECT        MAX(IDRNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WH"& _ 
-                "ERE        (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(19).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
+                "WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)"
             Me._commandCollection(19).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(19).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(19).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(20) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(20).Connection = Me.Connection
-            Me._commandCollection(20).CommandText = "SELECT        COUNT(SOCNumber) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)"
+            Me._commandCollection(20).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                IdentificationNumber = ?,"& _ 
+                " SOCNumber = ?, IdentificationDate = ?, IdentifiedBy = ?, CPsIdentified = ?, NoO"& _ 
+                "fCulpritsIdentified = ?, CulpritName = ?, Address = ?, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                       "& _ 
+                "  FingersIdentified = ?, HenryClassification = ?, DANumber = ?, IdentifiedFrom ="& _ 
+                " ?, IdentificationDetails = ?, IDRNumber = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (SlNumber = ?)"
             Me._commandCollection(20).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CulpritName", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CulpritName", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DANumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._commandCollection(21) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(21).Connection = Me.Connection
-            Me._commandCollection(21).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                IdentificationNumber = ?,"& _ 
-                " SOCNumber = ?, IdentificationDate = ?, IdentifiedBy = ?, CPsIdentified = ?, NoO"& _ 
-                "fCulpritsIdentified = ?, CulpritName = ?, Address = ?, FingersIdentified = ?, He"& _ 
-                "nryClassification = ?, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         DANumber = ?, IdentifiedFrom ="& _ 
-                " ?, IdentificationDetails = ?, IDRNumber = ?, PreviousCaseDetails = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE    "& _ 
-                "    (SlNumber = ?)"
-            Me._commandCollection(21).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedBy", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("CulpritName", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CulpritName", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Address", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Address", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FingersIdentified", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "FingersIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("HenryClassification", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "HenryClassification", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("DANumber", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "DANumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentifiedFrom", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentifiedFrom", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDetails", Global.System.Data.OleDb.OleDbType.WChar, 1024, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IDRNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IDRNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_SlNumber", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SlNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._commandCollection(22) = New Global.System.Data.OleDb.OleDbCommand()
-            Me._commandCollection(22).Connection = Me.Connection
-            Me._commandCollection(22).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                NoOfCulpritsIdentified = "& _ 
+            Me._commandCollection(21).CommandText = "UPDATE       IdentificationRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                NoOfCulpritsIdentified = "& _ 
                 "?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (CPsIdentified = ?)"
-            Me._commandCollection(22).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._commandCollection(21).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NoOfCulpritsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NoOfCulpritsIdentified", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_CPsIdentified", Global.System.Data.OleDb.OleDbType.WChar, 3, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "CPsIdentified", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -52894,7 +52749,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_SlNumber As Integer, ByVal Original_IdentificationNumber As String, ByVal Original_SOCNumber As String, ByVal Original_IdentificationDate As Global.System.Nullable(Of Date), ByVal Original_IdentifiedBy As String, ByVal Original_CPsIdentified As String, ByVal Original_NoOfCulpritsIdentified As String, ByVal Original_CulpritName As String, ByVal Original_FingersIdentified As String, ByVal Original_HenryClassification As String, ByVal Original_DANumber As String, ByVal Original_IdentifiedFrom As String, ByVal Original_IDRNumber As Global.System.Nullable(Of Integer), ByVal Original_PreviousCaseDetails As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_SlNumber As Integer, ByVal Original_IdentificationNumber As String, ByVal Original_SOCNumber As String, ByVal Original_IdentificationDate As Global.System.Nullable(Of Date), ByVal Original_IdentifiedBy As String, ByVal Original_CPsIdentified As String, ByVal Original_NoOfCulpritsIdentified As String, ByVal Original_CulpritName As String, ByVal Original_FingersIdentified As String, ByVal Original_HenryClassification As String, ByVal Original_DANumber As String, ByVal Original_IdentifiedFrom As String, ByVal Original_IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_SlNumber,Integer)
             If (Original_IdentificationNumber Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -52980,13 +52835,6 @@ Namespace FingerPrintDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
-            If (Original_PreviousCaseDetails Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_PreviousCaseDetails,String)
-            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -53006,7 +52854,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer), ByVal PreviousCaseDetails As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             If (IdentificationNumber Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -53077,11 +52925,6 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (PreviousCaseDetails Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(PreviousCaseDetails,String)
-            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -53116,7 +52959,6 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal IdentifiedFrom As String,  _
                     ByVal IdentificationDetails As String,  _
                     ByVal IDRNumber As Global.System.Nullable(Of Integer),  _
-                    ByVal PreviousCaseDetails As String,  _
                     ByVal Original_SlNumber As Integer,  _
                     ByVal Original_IdentificationNumber As String,  _
                     ByVal Original_SOCNumber As String,  _
@@ -53129,8 +52971,7 @@ Namespace FingerPrintDataSetTableAdapters
                     ByVal Original_HenryClassification As String,  _
                     ByVal Original_DANumber As String,  _
                     ByVal Original_IdentifiedFrom As String,  _
-                    ByVal Original_IDRNumber As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_PreviousCaseDetails As String) As Integer
+                    ByVal Original_IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             If (IdentificationNumber Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -53201,102 +53042,90 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (PreviousCaseDetails Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(PreviousCaseDetails,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_SlNumber,Integer)
+            Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_SlNumber,Integer)
             If (Original_IdentificationNumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_IdentificationNumber,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_IdentificationNumber,String)
             End If
             If (Original_SOCNumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_SOCNumber,String)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_SOCNumber,String)
             End If
             If (Original_IdentificationDate.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_IdentificationDate.Value,Date)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_IdentificationDate.Value,Date)
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
             If (Original_IdentifiedBy Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_IdentifiedBy,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_IdentifiedBy,String)
             End If
             If (Original_CPsIdentified Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_CPsIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_CPsIdentified,String)
             End If
             If (Original_NoOfCulpritsIdentified Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_NoOfCulpritsIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_NoOfCulpritsIdentified,String)
             End If
             If (Original_CulpritName Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_CulpritName,String)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_CulpritName,String)
             End If
             If (Original_FingersIdentified Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(30).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_FingersIdentified,String)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_FingersIdentified,String)
             End If
             If (Original_HenryClassification Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_HenryClassification,String)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_HenryClassification,String)
             End If
             If (Original_DANumber Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_DANumber,String)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_DANumber,String)
             End If
             If (Original_IdentifiedFrom Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(36).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_IdentifiedFrom,String)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Original_IdentifiedFrom,String)
             End If
             If (Original_IDRNumber.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_IDRNumber.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Original_IDRNumber.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
-            End If
-            If (Original_PreviousCaseDetails Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_PreviousCaseDetails,String)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(38).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -53428,7 +53257,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
-        Public Overloads Overridable Function InsertQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer), ByVal PreviousCaseDetails As String) As Integer
+        Public Overloads Overridable Function InsertQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer)) As Integer
             Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(7)
             If (IdentificationNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
@@ -53499,11 +53328,6 @@ Namespace FingerPrintDataSetTableAdapters
                 command.Parameters(13).Value = CType(IDRNumber.Value,Integer)
             Else
                 command.Parameters(13).Value = Global.System.DBNull.Value
-            End If
-            If (PreviousCaseDetails Is Nothing) Then
-                command.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(14).Value = CType(PreviousCaseDetails,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -53685,36 +53509,9 @@ Namespace FingerPrintDataSetTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function RemoveNullFromPreviousCase(ByVal PreviousCaseDetails As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(14)
-            If (PreviousCaseDetails Is Nothing) Then
-                command.Parameters(0).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(0).Value = CType(PreviousCaseDetails,String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
-            End If
-            Dim returnValue As Integer
-            Try 
-                returnValue = command.ExecuteNonQuery
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
-                End If
-            End Try
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function ScalarQueryCPsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(15)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(14)
             If (IdentificationDate.HasValue = true) Then
                 command.Parameters(0).Value = CType(IdentificationDate.Value,Date)
             Else
@@ -53750,7 +53547,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function ScalarQueryCPsIdentifiedBy(ByVal IdentifiedBy As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(16)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(15)
             If (IdentifiedBy Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -53791,7 +53588,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function ScalarQueryCPsIdentifiedBySOCNumber(ByVal SOCNumber As String) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(17)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(16)
             If (SOCNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -53822,7 +53619,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function ScalarQueryCulpritCount(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(18)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(17)
             If (IdentificationDate.HasValue = true) Then
                 command.Parameters(0).Value = CType(IdentificationDate.Value,Date)
             Else
@@ -53858,7 +53655,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function ScalarQuerySOCsIdentified(ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Object
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(19)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(18)
             If (IdentificationDate.HasValue = true) Then
                 command.Parameters(0).Value = CType(IdentificationDate.Value,Date)
             Else
@@ -53894,7 +53691,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function ScalarQuerySOCsIdentifiedBy(ByVal IdentifiedBy As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentificationDate1 As Global.System.Nullable(Of Date)) As Global.System.Nullable(Of Integer)
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(20)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(19)
             If (IdentifiedBy Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -53935,24 +53732,8 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function UpdateQuery( _
-                    ByVal IdentificationNumber As String,  _
-                    ByVal SOCNumber As String,  _
-                    ByVal IdentificationDate As Global.System.Nullable(Of Date),  _
-                    ByVal IdentifiedBy As String,  _
-                    ByVal CPsIdentified As String,  _
-                    ByVal NoOfCulpritsIdentified As String,  _
-                    ByVal CulpritName As String,  _
-                    ByVal Address As String,  _
-                    ByVal FingersIdentified As String,  _
-                    ByVal HenryClassification As String,  _
-                    ByVal DANumber As String,  _
-                    ByVal IdentifiedFrom As String,  _
-                    ByVal IdentificationDetails As String,  _
-                    ByVal IDRNumber As Global.System.Nullable(Of Integer),  _
-                    ByVal PreviousCaseDetails As String,  _
-                    ByVal Original_SlNumber As Integer) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(21)
+        Public Overloads Overridable Function UpdateQuery(ByVal IdentificationNumber As String, ByVal SOCNumber As String, ByVal IdentificationDate As Global.System.Nullable(Of Date), ByVal IdentifiedBy As String, ByVal CPsIdentified As String, ByVal NoOfCulpritsIdentified As String, ByVal CulpritName As String, ByVal Address As String, ByVal FingersIdentified As String, ByVal HenryClassification As String, ByVal DANumber As String, ByVal IdentifiedFrom As String, ByVal IdentificationDetails As String, ByVal IDRNumber As Global.System.Nullable(Of Integer), ByVal Original_SlNumber As Integer) As Integer
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(20)
             If (IdentificationNumber Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -54023,12 +53804,7 @@ Namespace FingerPrintDataSetTableAdapters
             Else
                 command.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (PreviousCaseDetails Is Nothing) Then
-                command.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(14).Value = CType(PreviousCaseDetails,String)
-            End If
-            command.Parameters(15).Value = CType(Original_SlNumber,Integer)
+            command.Parameters(14).Value = CType(Original_SlNumber,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -54050,7 +53826,7 @@ Namespace FingerPrintDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
         Public Overloads Overridable Function UpdateQuerySetCulpritCount(ByVal NoOfCulpritsIdentified As String, ByVal Original_CPsIdentified As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(22)
+            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(21)
             If (NoOfCulpritsIdentified Is Nothing) Then
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -54234,6 +54010,7 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("PropertyLost", "PropertyLost")
             tableMapping.ColumnMappings.Add("ChancePrintsUnfit", "ChancePrintsUnfit")
             tableMapping.ColumnMappings.Add("ChancePrintsEliminated", "ChancePrintsEliminated")
+            tableMapping.ColumnMappings.Add("ChancePrintsRemaining", "ChancePrintsRemaining")
             tableMapping.ColumnMappings.Add("ChancePrintDetails", "ChancePrintDetails")
             tableMapping.ColumnMappings.Add("Photographer", "Photographer")
             tableMapping.ColumnMappings.Add("PhotoReceived", "PhotoReceived")
@@ -54242,8 +54019,6 @@ Namespace FingerPrintDataSetTableAdapters
             tableMapping.ColumnMappings.Add("ComparisonDetails", "ComparisonDetails")
             tableMapping.ColumnMappings.Add("GraveCrime", "GraveCrime")
             tableMapping.ColumnMappings.Add("FileStatus", "FileStatus")
-            tableMapping.ColumnMappings.Add("ChancePrintsRemaining", "ChancePrintsRemaining1")
-            tableMapping.ColumnMappings.Add("PreviousCaseDetails", "PreviousCaseDetails")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -54262,52 +54037,52 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister"& _ 
                 ".SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspect"& _ 
-                "ion, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "    SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
-                "gister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.C"& _ 
-                "PsIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.NoOfCulpritsIden"& _ 
-                "tified, IdentificationRegister.CulpritName, IdentificationRegister.Address, Iden"& _ 
-                "tificationRegister.FingersIdentified, IdentificationRegister.HenryClassification"& _ 
-                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.DANumber, IdentificationRegi"& _ 
-                "ster.IdentifiedFrom, IdentificationRegister.IdentificationDetails, Identificatio"& _ 
-                "nRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, "& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccu"& _ 
-                "rrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.Property"& _ 
-                "Lost, SOCRegister.ChancePrintsUnfit, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Chan"& _ 
-                "cePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDe"& _ 
-                "tails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfRe"& _ 
-                "ceptionOfPhoto, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Gist, SOCRegister.Compari"& _ 
-                "sonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegist"& _ 
-                "er.PreviousCaseDetails"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    "& _ 
-                "                     SOCRegister ON IdentificationRegister.SOCNumber = SOCRegist"& _ 
-                "er.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationRegister.IdentificationDate, Identificatio"& _ 
-                "nRegister.IDRNumber"
+                "ion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PoliceStation, SOCRegister.CrimeNumb"& _ 
+                "er, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
+                "gister.IdentifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintsDevelope"& _ 
+                "d, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIden"& _ 
+                "tified, IdentificationRegister.CulpritName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Identific"& _ 
+                "ationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationR"& _ 
+                "egister.HenryClassification, IdentificationRegister.DANumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
+                "         IdentificationRegister.IdentifiedFrom, IdentificationRegister.Identific"& _ 
+                "ationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber,"& _ 
+                " "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfReport, SOCRegister.DateOfOccurren"& _ 
+                "ce, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOpe"& _ 
+                "randi, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PropertyLost, SOCRegister.ChancePr"& _ 
+                "intsUnfit, SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining"& _ 
+                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintDetails, SOCRegister.Photogr"& _ 
+                "apher, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegiste"& _ 
+                "r.Gist, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ComparisonDetails, SOCRegister.Gr"& _ 
+                "aveCrime, SOCRegister.FileStatus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER "& _ 
+                "JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister ON IdentificationRegister.SOCNumber ="& _ 
+                " SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationRegister.IdentificationDate, Ide"& _ 
+                "ntificationRegister.IDRNumber"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister"& _ 
                 ".SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspect"& _ 
-                "ion, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "    SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
-                "gister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.C"& _ 
-                "PsIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.NoOfCulpritsIden"& _ 
-                "tified, IdentificationRegister.CulpritName, IdentificationRegister.Address, Iden"& _ 
-                "tificationRegister.FingersIdentified, IdentificationRegister.HenryClassification"& _ 
-                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.DANumber, IdentificationRegi"& _ 
-                "ster.IdentifiedFrom, IdentificationRegister.IdentificationDetails, Identificatio"& _ 
-                "nRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, "& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccu"& _ 
-                "rrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.Property"& _ 
-                "Lost, SOCRegister.ChancePrintsUnfit, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Chan"& _ 
-                "cePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDe"& _ 
-                "tails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfRe"& _ 
-                "ceptionOfPhoto, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Gist, SOCRegister.Compari"& _ 
-                "sonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegist"& _ 
-                "er.PreviousCaseDetails"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    "& _ 
-                "                     SOCRegister ON IdentificationRegister.SOCNumber = SOCRegist"& _ 
-                "er.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationRegister.IdentificationDate BETWEEN ?"& _ 
-                " AND ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegis"& _ 
-                "ter.IDRNumber"
+                "ion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PoliceStation, SOCRegister.CrimeNumb"& _ 
+                "er, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
+                "gister.IdentifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintsDevelope"& _ 
+                "d, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIden"& _ 
+                "tified, IdentificationRegister.CulpritName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Identific"& _ 
+                "ationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationR"& _ 
+                "egister.HenryClassification, IdentificationRegister.DANumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
+                "         IdentificationRegister.IdentifiedFrom, IdentificationRegister.Identific"& _ 
+                "ationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber,"& _ 
+                " "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfReport, SOCRegister.DateOfOccurren"& _ 
+                "ce, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOpe"& _ 
+                "randi, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PropertyLost, SOCRegister.ChancePr"& _ 
+                "intsUnfit, SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining"& _ 
+                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintDetails, SOCRegister.Photogr"& _ 
+                "apher, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegiste"& _ 
+                "r.Gist, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ComparisonDetails, SOCRegister.Gr"& _ 
+                "aveCrime, SOCRegister.FileStatus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER "& _ 
+                "JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister ON IdentificationRegister.SOCNumber ="& _ 
+                " SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationRegister.IdentificationDate"& _ 
+                " BETWEEN ? AND ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY IdentificationRegister.IdentificationDate, Identific"& _ 
+                "ationRegister.IDRNumber"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -54315,26 +54090,27 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(2).Connection = Me.Connection
             Me._commandCollection(2).CommandText = "SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister"& _ 
                 ".SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspect"& _ 
-                "ion, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "    SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
-                "gister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.C"& _ 
-                "PsIdentified, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.NoOfCulpritsIden"& _ 
-                "tified, IdentificationRegister.CulpritName, IdentificationRegister.Address, Iden"& _ 
-                "tificationRegister.FingersIdentified, IdentificationRegister.HenryClassification"& _ 
-                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         IdentificationRegister.DANumber, IdentificationRegi"& _ 
-                "ster.IdentifiedFrom, IdentificationRegister.IdentificationDetails, Identificatio"& _ 
-                "nRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, "& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccu"& _ 
-                "rrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.Property"& _ 
-                "Lost, SOCRegister.ChancePrintsUnfit, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Chan"& _ 
-                "cePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDe"& _ 
-                "tails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfRe"& _ 
-                "ceptionOfPhoto, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.Gist, SOCRegister.Compari"& _ 
-                "sonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegist"& _ 
-                "er.PreviousCaseDetails"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"    "& _ 
-                "                     SOCRegister ON IdentificationRegister.SOCNumber = SOCRegist"& _ 
-                "er.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationRegister.SOCNumber = ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY Ide"& _ 
-                "ntificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
+                "ion, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PoliceStation, SOCRegister.CrimeNumb"& _ 
+                "er, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRe"& _ 
+                "gister.IdentifiedBy, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintsDevelope"& _ 
+                "d, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIden"& _ 
+                "tified, IdentificationRegister.CulpritName, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Identific"& _ 
+                "ationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationR"& _ 
+                "egister.HenryClassification, IdentificationRegister.DANumber, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
+                "         IdentificationRegister.IdentifiedFrom, IdentificationRegister.Identific"& _ 
+                "ationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber,"& _ 
+                " "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.DateOfReport, SOCRegister.DateOfOccurren"& _ 
+                "ce, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOpe"& _ 
+                "randi, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.PropertyLost, SOCRegister.ChancePr"& _ 
+                "intsUnfit, SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining"& _ 
+                ", "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ChancePrintDetails, SOCRegister.Photogr"& _ 
+                "apher, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegiste"& _ 
+                "r.Gist, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister.ComparisonDetails, SOCRegister.Gr"& _ 
+                "aveCrime, SOCRegister.FileStatus"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            (IdentificationRegister INNER "& _ 
+                "JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         SOCRegister ON IdentificationRegister.SOCNumber ="& _ 
+                " SOCRegister.SOCNumber)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (IdentificationRegister.SOCNumber = ?)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OR"& _ 
+                "DER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumb"& _ 
+                "er"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("SOCNumber", Global.System.Data.OleDb.OleDbType.WChar, 50, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "SOCNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._commandCollection(3) = New Global.System.Data.OleDb.OleDbCommand()
@@ -54722,7 +54498,7 @@ Namespace FingerPrintDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(3) {}
+            Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(2) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        SlNumber, IdentificationNumber, CulpritName, Address, CPsIdentified"& _ 
@@ -54736,18 +54512,11 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._commandCollection(2) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        SlNumber, IdentificationNumber, CulpritName, Address, CPsIdentified"& _ 
-                ", FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, Identificati"& _ 
-                "onDetails, PreviousCaseDetails"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            CulpritsRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        ("& _ 
-                "IdentificationNumber = ?)"
+            Me._commandCollection(2).CommandText = "SELECT Address, CPsIdentified, CulpritName, DANumber, FingersIdentified, HenryCla"& _ 
+                "ssification, IdentificationDetails, IdentificationNumber, IdentifiedFrom, Previo"& _ 
+                "usCaseDetails, SlNumber FROM CulpritsRegister WHERE (IdentificationNumber = ?)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IdentificationNumber", Global.System.Data.OleDb.OleDbType.WChar, 10, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "IdentificationNumber", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._commandCollection(3) = New Global.System.Data.OleDb.OleDbCommand()
-            Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "UPDATE       CulpritsRegister"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET                PreviousCaseDetails = ?"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE "& _ 
-                "       (PreviousCaseDetails IS NULL)"
-            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PreviousCaseDetails", Global.System.Data.OleDb.OleDbType.WChar, 255, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PreviousCaseDetails", Global.System.Data.DataRowVersion.Current, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -55139,33 +54908,6 @@ Namespace FingerPrintDataSetTableAdapters
                 command.Parameters(0).Value = Global.System.DBNull.Value
             Else
                 command.Parameters(0).Value = CType(IdentificationNumber,String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
-            End If
-            Dim returnValue As Integer
-            Try 
-                returnValue = command.ExecuteNonQuery
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
-                End If
-            End Try
-            Return returnValue
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
-        Public Overloads Overridable Function UpdateQueryRemoveNullFromPreviousCase(ByVal PreviousCaseDetails As String) As Integer
-            Dim command As Global.System.Data.OleDb.OleDbCommand = Me.CommandCollection(3)
-            If (PreviousCaseDetails Is Nothing) Then
-                command.Parameters(0).Value = Global.System.DBNull.Value
-            Else
-                command.Parameters(0).Value = CType(PreviousCaseDetails,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
             If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _

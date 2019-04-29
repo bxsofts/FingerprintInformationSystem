@@ -895,7 +895,7 @@ Public Class frmAnnualStatistics
                     WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
-                    Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
+                    Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
 
                     Dim c As Integer = Me.FingerPrintDataSet.CulpritsRegister.Rows.Count
 
@@ -1122,7 +1122,7 @@ Public Class frmAnnualStatistics
                 Dim identifiedas = Me.FingerPrintDataSet.JoinedIDR(i).CulpritName.Trim
 
                 Dim idnum As String = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationNumber.Trim
-                Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(FingerPrintDataSet.CulpritsRegister, idnum)
+                Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(FingerPrintDataSet.CulpritsRegister, idnum)
                 Dim cnt = FingerPrintDataSet.CulpritsRegister.Rows.Count
 
                 Dim iddetails As String = ""

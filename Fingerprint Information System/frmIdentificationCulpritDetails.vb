@@ -42,6 +42,12 @@ Public Class frmIdentificationCulpritDetails
         If Me.txtCPsIdentified.Text = "" Then Me.txtCPsIdentified.Value = 1
     End Sub
 
+    Private Sub txtPreviousCaseDetails_GotFocus(sender As Object, e As EventArgs) Handles txtPreviousCaseDetails.GotFocus
+        If txtPreviousCaseDetails.Text = "" Then
+            txtPreviousCaseDetails.Text = "Cr. No...... u/s...... of P.S."
+        End If
+    End Sub
+
     Private Sub LoadDataFromDGV()
         Try
             With FrmIdentificationRegisterDE.dgv.SelectedRows(0)
@@ -51,8 +57,9 @@ Public Class frmIdentificationCulpritDetails
                 Me.txtFingersIdentified.Text = .Cells(5).Value
                 Me.txtClassification.Text = .Cells(6).Value
                 Me.txtDANumber.Text = .Cells(7).Value
-                Me.cmbIdentifiedFrom.Text = .Cells(8).Value
-                Me.txtRemarks.Text = .Cells(9).Value
+                Me.txtPreviousCaseDetails.Text = .Cells(8).Value
+                Me.cmbIdentifiedFrom.Text = .Cells(9).Value
+                Me.txtRemarks.Text = .Cells(10).Value
             End With
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -163,6 +170,7 @@ Public Class frmIdentificationCulpritDetails
                 .FingersIdentified = Me.txtFingersIdentified.Text.Trim
                 .HenryClassification = Me.txtClassification.Text.Trim
                 .DANumber = Me.txtDANumber.Text.Trim
+                .PreviousCaseDetails = Me.txtPreviousCaseDetails.Text.Trim
                 .IdentifiedFrom = Me.cmbIdentifiedFrom.Text.Trim
                 .IdentificationDetails = Me.txtRemarks.Text.Trim
             End With
@@ -194,6 +202,7 @@ Public Class frmIdentificationCulpritDetails
                     .FingersIdentified = Me.txtFingersIdentified.Text.Trim
                     .HenryClassification = Me.txtClassification.Text.Trim
                     .DANumber = Me.txtDANumber.Text.Trim
+                    .PreviousCaseDetails = Me.txtPreviousCaseDetails.Text.Trim
                     .IdentifiedFrom = Me.cmbIdentifiedFrom.Text.Trim
                     .IdentificationDetails = Me.txtRemarks.Text.Trim
                 End With
@@ -218,4 +227,6 @@ Public Class frmIdentificationCulpritDetails
         ClearFields()
         Me.Close()
     End Sub
+
+   
 End Class

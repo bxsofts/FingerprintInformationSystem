@@ -369,7 +369,7 @@ Public Class frmIdentificationStatement
                     WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
-                    Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
+                    Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(Me.FingerPrintDataSet.CulpritsRegister, Me.FingerPrintDataSet.JoinedIDR(j).IdentificationNumber)
 
                     Dim c As Integer = Me.FingerPrintDataSet.CulpritsRegister.Rows.Count
 

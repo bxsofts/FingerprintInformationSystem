@@ -25,10 +25,11 @@ Partial Class FrmIdentificationRegisterDE
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmIdentificationRegisterDE))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtIdentificationNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.lblcrt3 = New DevComponents.DotNetBar.LabelX()
         Me.lblIdentificationDate = New DevComponents.DotNetBar.LabelX()
@@ -40,7 +41,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.btnSaveRecord = New DevComponents.DotNetBar.ButtonX()
         Me.dgv = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.IdentificationNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CulpritsRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.btnEditCulprit = New DevComponents.DotNetBar.ButtonX()
         Me.btnRemoveCulprit = New DevComponents.DotNetBar.ButtonX()
@@ -59,21 +60,22 @@ Partial Class FrmIdentificationRegisterDE
         Me.SocRegisterAutoTextTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterAutoTextTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.SlNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentificationNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CulpritNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AddressDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CPsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FingersIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HenryClassificationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DANumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PreviousCaseDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentificationDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CulpritsRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CulpritsRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtIdentificationNumber
@@ -331,16 +333,16 @@ Partial Class FrmIdentificationRegisterDE
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNumberDataGridViewTextBoxColumn, Me.IdentificationNumber, Me.CulpritNameDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.CPsIdentifiedDataGridViewTextBoxColumn, Me.FingersIdentifiedDataGridViewTextBoxColumn, Me.HenryClassificationDataGridViewTextBoxColumn, Me.DANumberDataGridViewTextBoxColumn, Me.IdentifiedFromDataGridViewTextBoxColumn, Me.IdentificationDetailsDataGridViewTextBoxColumn})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNumberDataGridViewTextBoxColumn, Me.IdentificationNumber, Me.CulpritNameDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.CPsIdentifiedDataGridViewTextBoxColumn, Me.FingersIdentifiedDataGridViewTextBoxColumn, Me.HenryClassificationDataGridViewTextBoxColumn, Me.DANumberDataGridViewTextBoxColumn, Me.PreviousCaseDetails, Me.IdentifiedFromDataGridViewTextBoxColumn, Me.IdentificationDetailsDataGridViewTextBoxColumn})
         Me.dgv.DataSource = Me.CulpritsRegisterBindingSource
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgv.EnableHeadersVisualStyles = False
         Me.dgv.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
@@ -348,17 +350,17 @@ Partial Class FrmIdentificationRegisterDE
         Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"
         Me.dgv.ReadOnly = True
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
-        Me.dgv.RowHeadersWidth = 50
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.RowsDefaultCellStyle = DataGridViewCellStyle5
+        Me.dgv.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        Me.dgv.RowHeadersWidth = 30
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.dgv.RowTemplate.Height = 70
         Me.dgv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv.SelectAllSignVisible = False
@@ -367,13 +369,10 @@ Partial Class FrmIdentificationRegisterDE
         Me.dgv.TabIndex = 203
         Me.dgv.TabStop = False
         '
-        'IdentificationNumber
+        'CulpritsRegisterBindingSource
         '
-        Me.IdentificationNumber.DataPropertyName = "IdentificationNumber"
-        Me.IdentificationNumber.HeaderText = "IdentificationNumber"
-        Me.IdentificationNumber.Name = "IdentificationNumber"
-        Me.IdentificationNumber.ReadOnly = True
-        Me.IdentificationNumber.Visible = False
+        Me.CulpritsRegisterBindingSource.DataMember = "CulpritsRegister"
+        Me.CulpritsRegisterBindingSource.DataSource = Me.FingerPrintDataSet1
         '
         'FingerPrintDataSet1
         '
@@ -569,6 +568,14 @@ Partial Class FrmIdentificationRegisterDE
         Me.SlNumberDataGridViewTextBoxColumn.ReadOnly = True
         Me.SlNumberDataGridViewTextBoxColumn.Visible = False
         '
+        'IdentificationNumber
+        '
+        Me.IdentificationNumber.DataPropertyName = "IdentificationNumber"
+        Me.IdentificationNumber.HeaderText = "IdentificationNumber"
+        Me.IdentificationNumber.Name = "IdentificationNumber"
+        Me.IdentificationNumber.ReadOnly = True
+        Me.IdentificationNumber.Visible = False
+        '
         'CulpritNameDataGridViewTextBoxColumn
         '
         Me.CulpritNameDataGridViewTextBoxColumn.DataPropertyName = "CulpritName"
@@ -617,9 +624,18 @@ Partial Class FrmIdentificationRegisterDE
         Me.DANumberDataGridViewTextBoxColumn.Name = "DANumberDataGridViewTextBoxColumn"
         Me.DANumberDataGridViewTextBoxColumn.ReadOnly = True
         '
+        'PreviousCaseDetails
+        '
+        Me.PreviousCaseDetails.DataPropertyName = "PreviousCaseDetails"
+        Me.PreviousCaseDetails.HeaderText = "Previous Case Details"
+        Me.PreviousCaseDetails.Name = "PreviousCaseDetails"
+        Me.PreviousCaseDetails.ReadOnly = True
+        '
         'IdentifiedFromDataGridViewTextBoxColumn
         '
         Me.IdentifiedFromDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedFrom"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.IdentifiedFromDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
         Me.IdentifiedFromDataGridViewTextBoxColumn.HeaderText = "Identified From"
         Me.IdentifiedFromDataGridViewTextBoxColumn.Name = "IdentifiedFromDataGridViewTextBoxColumn"
         Me.IdentifiedFromDataGridViewTextBoxColumn.ReadOnly = True
@@ -632,11 +648,6 @@ Partial Class FrmIdentificationRegisterDE
         Me.IdentificationDetailsDataGridViewTextBoxColumn.Name = "IdentificationDetailsDataGridViewTextBoxColumn"
         Me.IdentificationDetailsDataGridViewTextBoxColumn.ReadOnly = True
         Me.IdentificationDetailsDataGridViewTextBoxColumn.Width = 170
-        '
-        'CulpritsRegisterBindingSource
-        '
-        Me.CulpritsRegisterBindingSource.DataMember = "CulpritsRegister"
-        Me.CulpritsRegisterBindingSource.DataSource = Me.FingerPrintDataSet1
         '
         'FrmIdentificationRegisterDE
         '
@@ -658,8 +669,8 @@ Partial Class FrmIdentificationRegisterDE
         Me.PanelEx1.PerformLayout()
         Me.GroupPanel1.ResumeLayout(False)
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CulpritsRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -700,6 +711,7 @@ Partial Class FrmIdentificationRegisterDE
     Friend WithEvents FingersIdentifiedDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents HenryClassificationDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DANumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PreviousCaseDetails As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IdentifiedFromDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IdentificationDetailsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

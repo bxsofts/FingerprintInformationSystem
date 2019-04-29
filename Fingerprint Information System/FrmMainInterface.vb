@@ -14269,7 +14269,7 @@ errhandler:
             WordApp.Selection.TypeText(IdentificationText.Replace("..", "."))
 
             Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
-            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(fds.CulpritsRegister, IDRNumber)
+            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
 
             For i = 0 To fds.CulpritsRegister.Count - 1
                 Dim cpid = fds.CulpritsRegister(i).CPsIdentified
@@ -14529,7 +14529,7 @@ errhandler:
             WordApp.Selection.TypeText(IdentificationText.Replace("..", "."))
 
             Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
-            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(fds.CulpritsRegister, IDRNumber)
+            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
 
             For i = 0 To fds.CulpritsRegister.Count - 1
                 Dim cpid = fds.CulpritsRegister(i).CPsIdentified
@@ -14690,7 +14690,7 @@ errhandler:
             WordApp.Selection.TypeText(("REFER CR.NO. " & fds.SOCRegister(0).CrimeNumber & " U/S " & fds.SOCRegister(0).SectionOfLaw & " OF " & fds.SOCRegister(0).PoliceStation & ". ").ToUpper)
 
             Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
-            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(fds.CulpritsRegister, IDRNumber)
+            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
 
             For i = 0 To fds.CulpritsRegister.Count - 1
                 Dim cpid = fds.CulpritsRegister(i).CPsIdentified
@@ -14813,7 +14813,7 @@ errhandler:
             wdBooks("DIns").Range.Text = dtins
             wdBooks("Did").Range.Text = sdtid
 
-            Me.CulpritsRegisterTableAdapter1.FillByIDRNumber(Me.FingerPrintDataSet1.CulpritsRegister, idno)
+            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(Me.FingerPrintDataSet1.CulpritsRegister, idno)
             Dim c As Integer = Me.FingerPrintDataSet1.CulpritsRegister.Rows.Count
 
             Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
@@ -15897,7 +15897,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer)", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer, PreviousCaseDetails VARCHAR(255) WITH COMPRESSION)", con)
 
             cmd.ExecuteNonQuery()
 
@@ -15938,7 +15938,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE CulpritsRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION,  FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION)", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE CulpritsRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION,  FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, PreviousCaseDetails VARCHAR(255) WITH COMPRESSION)", con)
 
             cmd.ExecuteNonQuery()
 
@@ -15956,10 +15956,13 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("INSERT INTO CulpritsRegister (IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails) SELECT IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails FROM IdentificationRegister", con)
+            Dim cmd = New OleDb.OleDbCommand("INSERT INTO CulpritsRegister (IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, PreviousCaseDetails) SELECT IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, PreviousCaseDetails FROM IdentificationRegister", con)
 
             cmd.ExecuteNonQuery()
-           
+
+            Thread.Sleep(1000)
+            RemoveNullFromCulpritRegister()
+
             InsertOrUpdateLastModificationDate(Now)
 
 
@@ -15968,7 +15971,22 @@ errhandler:
 
         End Try
     End Sub
-    
+
+    Private Sub RemoveNullFromCulpritRegister()
+        Try
+            If Not DoesTableExist("CulpritsRegister", sConString) Then
+                Exit Sub
+            End If
+
+            If Me.CulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CulpritsRegisterTableAdapter1.Connection.Close()
+            Me.CulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.CulpritsRegisterTableAdapter1.Connection.Open()
+
+            Me.CulpritsRegisterTableAdapter1.UpdateQueryRemoveNullFromPreviousCase("")
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Private Sub RemoveNullFromIdentificationRegister()
         Try
@@ -15994,9 +16012,10 @@ errhandler:
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentifiedFrom("")
 
             Me.IdentificationRegisterTableAdapter1.UpdateQuerySetCulpritCount("1", "1")
-
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromPreviousCase("")
             blIdentificationRegisterUpdateFailed = False
 
+            LoadJoinedIDRRecords()
         Catch ex As Exception
             blIdentificationRegisterUpdateFailed = True
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
@@ -17409,4 +17428,7 @@ errhandler:
 
 
    
+    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
+
+    End Sub
 End Class
