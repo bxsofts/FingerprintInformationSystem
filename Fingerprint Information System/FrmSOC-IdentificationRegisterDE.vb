@@ -69,7 +69,7 @@ Public Class FrmIdentificationRegisterDE
                 Me.txtSOCNumber.Text = .SelectedCells(1).Value.ToString
                 Me.dtIdentificationDate.ValueObject = .SelectedCells(2).Value
                 Me.cmbIdentifyingOfficer.Text = .SelectedCells(8).Value.ToString
-                IDRSerialNumber = .SelectedCells(20).Value.ToString
+                IDRSerialNumber = .SelectedCells(21).Value.ToString
                 OriginalIDRNumber = .SelectedCells(0).Value.ToString
                 OriginalSOCNumber = .SelectedCells(1).Value.ToString
                 OriginalCPIdentified = Val(.SelectedCells(10).Value)
@@ -518,7 +518,7 @@ Public Class FrmIdentificationRegisterDE
 
                 TotalCPsIdentified = PrevCPsIdentified + CPsIdentified
 
-                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails)
+                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim)
 
                 Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegister, SOCNumber)
 
@@ -541,6 +541,7 @@ Public Class FrmIdentificationRegisterDE
                     .FingersIdentified = FingersIdentified.Trim
                     .HenryClassification = Classification.Trim
                     .DANumber = DANumber.Trim
+                    .PreviousCaseDetails = PreviousCaseDetails.Trim
                     .IdentifiedFrom = IdentifiedFrom.Trim
                     .IdentificationDetails = Remarks.Trim
                 End With
@@ -550,7 +551,7 @@ Public Class FrmIdentificationRegisterDE
 
                 ShowDesktopAlert("New Identification Record entered successfully.")
             Else ' Edit mode
-                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails, IDRSerialNumber)
+                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim, IDRSerialNumber)
 
                 With frmMainInterface.JoinedIDRDataGrid
                     .SelectedCells(0).Value = Me.txtIdentificationNumber.Text.Trim
@@ -564,8 +565,9 @@ Public Class FrmIdentificationRegisterDE
                     .SelectedCells(14).Value = FingersIdentified.Trim
                     .SelectedCells(15).Value = Classification.Trim
                     .SelectedCells(16).Value = DANumber.Trim
-                    .SelectedCells(17).Value = IdentifiedFrom.Trim
-                    .SelectedCells(18).Value = Remarks.Trim
+                    .SelectedCells(17).Value = PreviousCaseDetails.Trim
+                    .SelectedCells(18).Value = IdentifiedFrom.Trim
+                    .SelectedCells(19).Value = Remarks.Trim
                 End With
                 TotalCPsIdentified = PrevCPsIdentified - OriginalCPIdentified + CPsIdentified
 

@@ -5668,7 +5668,7 @@ WHERE        (NoOfCulpritsIdentified IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromPreviousCase" Modifier="Public" Name="RemoveNullFromPreviousCase" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="RemoveNullFromPreviousCase">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="RemoveNullFromPreviousCase" Modifier="Public" Name="RemoveNullFromPreviousCase" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="RemoveNullFromPreviousCase">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5680,7 +5680,7 @@ WHERE        (PreviousCaseDetails IS NULL)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy11" UserSourceName="ScalarQueryCPsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentified" Modifier="Public" Name="ScalarQueryCPsIdentified" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="ScalarQueryCPsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -5693,7 +5693,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentifiedBy" Modifier="Public" Name="ScalarQueryCPsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy12" UserSourceName="ScalarQueryCPsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentifiedBy" Modifier="Public" Name="ScalarQueryCPsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="ScalarQueryCPsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -5707,7 +5707,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</Com
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentifiedBySOCNumber" Modifier="Public" Name="ScalarQueryCPsIdentifiedBySOCNumber" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy13" UserSourceName="ScalarQueryCPsIdentifiedBySOCNumber">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCPsIdentifiedBySOCNumber" Modifier="Public" Name="ScalarQueryCPsIdentifiedBySOCNumber" QueryType="Scalar" ScalarCallRetval="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="ScalarQueryCPsIdentifiedBySOCNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(CPsIdentified) AS Expr1
@@ -5719,7 +5719,7 @@ WHERE        (SOCNumber = ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCulpritCount" Modifier="Public" Name="ScalarQueryCulpritCount" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy14" UserSourceName="ScalarQueryCulpritCount">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCulpritCount" Modifier="Public" Name="ScalarQueryCulpritCount" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy15" UserSourceName="ScalarQueryCulpritCount">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        SUM(Val(NoOfCulpritsIdentified)) AS Expr1
@@ -5732,7 +5732,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy15" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        MAX(IDRNumber) AS Expr1
@@ -5745,7 +5745,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQuerySOCsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -5759,7 +5759,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</Com
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5787,7 +5787,7 @@ WHERE        (SlNumber = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuerySetCulpritCount" Modifier="Public" Name="UpdateQuerySetCulpritCount" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="UpdateQuerySetCulpritCount">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuerySetCulpritCount" Modifier="Public" Name="UpdateQuerySetCulpritCount" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="UpdateQuerySetCulpritCount">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5807,13 +5807,13 @@ WHERE        (CPsIdentified = ?)</CommandText>
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, 
-                         SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, 
+                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, IdentificationRegister.IdentifiedBy, IdentificationRegister.CPsIdentified, 
                          IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, 
-                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, 
-                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsUnfit, 
-                         SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, 
-                         SOCRegister.Gist, SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegister.PreviousCaseDetails
+                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.PreviousCaseDetails, 
+                         SOCRegister.DateOfInspection, SOCRegister.DateOfReport, SOCRegister.DateOfOccurrence, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.PlaceOfOccurrence, 
+                         SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsDeveloped, SOCRegister.ChancePrintsUnfit, SOCRegister.ChancePrintsEliminated, 
+                         SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegister.InvestigatingOfficer, SOCRegister.Gist, 
+                         SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegister.SlNumber
 FROM            (IdentificationRegister INNER JOIN
                          SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)
 ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber</CommandText>
@@ -5843,7 +5843,6 @@ ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNu
               <Mapping SourceColumn="IdentifiedFrom" DataSetColumn="IdentifiedFrom" />
               <Mapping SourceColumn="IdentificationDetails" DataSetColumn="IdentificationDetails" />
               <Mapping SourceColumn="IDRNumber" DataSetColumn="IDRNumber" />
-              <Mapping SourceColumn="SlNumber" DataSetColumn="SlNumber" />
               <Mapping SourceColumn="DateOfReport" DataSetColumn="DateOfReport" />
               <Mapping SourceColumn="DateOfOccurrence" DataSetColumn="DateOfOccurrence" />
               <Mapping SourceColumn="PlaceOfOccurrence" DataSetColumn="PlaceOfOccurrence" />
@@ -5860,20 +5859,20 @@ ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNu
               <Mapping SourceColumn="ComparisonDetails" DataSetColumn="ComparisonDetails" />
               <Mapping SourceColumn="GraveCrime" DataSetColumn="GraveCrime" />
               <Mapping SourceColumn="FileStatus" DataSetColumn="FileStatus" />
-              <Mapping SourceColumn="ChancePrintsRemaining" DataSetColumn="ChancePrintsRemaining1" />
               <Mapping SourceColumn="PreviousCaseDetails" DataSetColumn="PreviousCaseDetails" />
+              <Mapping SourceColumn="SlNumber" DataSetColumn="SlNumber" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillByIdentifiedCases" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByIdentifiedCases" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByIdentifiedCases">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, 
-                         SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, 
+                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, IdentificationRegister.IdentifiedBy, IdentificationRegister.CPsIdentified, 
                          IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, 
-                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, 
-                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsUnfit, 
-                         SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, 
-                         SOCRegister.Gist, SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegister.PreviousCaseDetails
+                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.PreviousCaseDetails, 
+                         SOCRegister.DateOfInspection, SOCRegister.DateOfReport, SOCRegister.DateOfOccurrence, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.PlaceOfOccurrence, 
+                         SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsDeveloped, SOCRegister.ChancePrintsUnfit, SOCRegister.ChancePrintsEliminated, 
+                         SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegister.InvestigatingOfficer, SOCRegister.Gist, 
+                         SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegister.SlNumber
 FROM            (IdentificationRegister INNER JOIN
                          SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)
 WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)
@@ -5888,13 +5887,13 @@ ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNu
               <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBySOCNumber" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy2" GeneratorSourceName="FillBySOCNumber" GetMethodModifier="Public" GetMethodName="GetDataBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillBySOCNumber">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, 
-                         SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, 
+                    <CommandText>SELECT        IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, IdentificationRegister.IdentifiedBy, IdentificationRegister.CPsIdentified, 
                          IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, 
-                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber, SOCRegister.DateOfReport, 
-                         SOCRegister.DateOfOccurrence, SOCRegister.PlaceOfOccurrence, SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsUnfit, 
-                         SOCRegister.ChancePrintsEliminated, SOCRegister.ChancePrintsRemaining, SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, 
-                         SOCRegister.Gist, SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegister.PreviousCaseDetails
+                         IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.PreviousCaseDetails, 
+                         SOCRegister.DateOfInspection, SOCRegister.DateOfReport, SOCRegister.DateOfOccurrence, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.PlaceOfOccurrence, 
+                         SOCRegister.Complainant, SOCRegister.ModusOperandi, SOCRegister.PropertyLost, SOCRegister.ChancePrintsDeveloped, SOCRegister.ChancePrintsUnfit, SOCRegister.ChancePrintsEliminated, 
+                         SOCRegister.ChancePrintDetails, SOCRegister.Photographer, SOCRegister.PhotoReceived, SOCRegister.DateOfReceptionOfPhoto, SOCRegister.InvestigatingOfficer, SOCRegister.Gist, 
+                         SOCRegister.ComparisonDetails, SOCRegister.GraveCrime, SOCRegister.FileStatus, IdentificationRegister.SlNumber
 FROM            (IdentificationRegister INNER JOIN
                          SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)
 WHERE        (IdentificationRegister.SOCNumber = ?)
@@ -7420,7 +7419,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_UserTableName="OfficerTable" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_RowClassName="OfficerTableRow">
+        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_UserTableName="OfficerTable" msprop:Generator_RowClassName="OfficerTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OfficerID" msprop:Generator_ColumnVarNameInTable="columnOfficerID" msprop:Generator_ColumnPropNameInRow="OfficerID" msprop:Generator_ColumnPropNameInTable="OfficerIDColumn" msprop:Generator_UserColumnName="OfficerID" type="xs:int" />
@@ -7469,7 +7468,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_UserTableName="Settings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowClassName="SettingsRow">
+        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowClassName="SettingsRow" msprop:Generator_UserTableName="Settings" msprop:Generator_RowEvArgName="SettingsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsID" msprop:Generator_ColumnVarNameInTable="columnSettingsID" msprop:Generator_ColumnPropNameInRow="SettingsID" msprop:Generator_ColumnPropNameInTable="SettingsIDColumn" msprop:Generator_UserColumnName="SettingsID" type="xs:int" />
@@ -7581,7 +7580,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent" msprop:Generator_RowClassName="LastModificationRow">
+        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_RowClassName="LastModificationRow" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -7589,7 +7588,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_RowClassName="CommonSettingsRow" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent">
+        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent" msprop:Generator_RowClassName="CommonSettingsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsName" msprop:Generator_ColumnVarNameInTable="columnSettingsName" msprop:Generator_ColumnPropNameInRow="SettingsName" msprop:Generator_ColumnPropNameInTable="SettingsNameColumn" msprop:Generator_UserColumnName="SettingsName">
@@ -7616,7 +7615,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent" msprop:Generator_RowClassName="IdentificationRegisterRow">
+        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_RowClassName="IdentificationRegisterRow" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
@@ -7716,7 +7715,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_RowClassName="JoinedIDRRow" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent">
+        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent" msprop:Generator_RowClassName="JoinedIDRRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
@@ -7841,7 +7840,6 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
                 </xs:simpleType>
               </xs:element>
               <xs:element name="IDRNumber" msprop:Generator_ColumnVarNameInTable="columnIDRNumber" msprop:Generator_ColumnPropNameInRow="IDRNumber" msprop:Generator_ColumnPropNameInTable="IDRNumberColumn" msprop:Generator_UserColumnName="IDRNumber" type="xs:int" minOccurs="0" />
-              <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" minOccurs="0" />
               <xs:element name="DateOfReport" msprop:Generator_ColumnVarNameInTable="columnDateOfReport" msprop:Generator_ColumnPropNameInRow="DateOfReport" msprop:Generator_ColumnPropNameInTable="DateOfReportColumn" msprop:Generator_UserColumnName="DateOfReport" type="xs:dateTime" minOccurs="0" />
               <xs:element name="DateOfOccurrence" msprop:Generator_ColumnVarNameInTable="columnDateOfOccurrence" msprop:Generator_ColumnPropNameInRow="DateOfOccurrence" msprop:Generator_ColumnPropNameInTable="DateOfOccurrenceColumn" msprop:Generator_UserColumnName="DateOfOccurrence" minOccurs="0">
                 <xs:simpleType>
@@ -7949,7 +7947,6 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ChancePrintsRemaining1" msdata:ReadOnly="true" msdata:Caption="ChancePrintsRemaining" msprop:Generator_ColumnVarNameInTable="columnChancePrintsRemaining1" msprop:Generator_ColumnPropNameInRow="ChancePrintsRemaining1" msprop:Generator_ColumnPropNameInTable="ChancePrintsRemaining1Column" msprop:Generator_UserColumnName="ChancePrintsRemaining1" type="xs:base64Binary" minOccurs="0" />
               <xs:element name="PreviousCaseDetails" msprop:Generator_ColumnVarNameInTable="columnPreviousCaseDetails" msprop:Generator_ColumnPropNameInRow="PreviousCaseDetails" msprop:Generator_ColumnPropNameInTable="PreviousCaseDetailsColumn" msprop:Generator_UserColumnName="PreviousCaseDetails" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -7957,10 +7954,11 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CulpritsRegister" msprop:Generator_TableClassName="CulpritsRegisterDataTable" msprop:Generator_TableVarName="tableCulpritsRegister" msprop:Generator_TablePropName="CulpritsRegister" msprop:Generator_RowDeletingName="CulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="CulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="CulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="CulpritsRegisterRowDeleted" msprop:Generator_UserTableName="CulpritsRegister" msprop:Generator_RowChangedName="CulpritsRegisterRowChanged" msprop:Generator_RowEvArgName="CulpritsRegisterRowChangeEvent" msprop:Generator_RowClassName="CulpritsRegisterRow">
+        <xs:element name="CulpritsRegister" msprop:Generator_TableClassName="CulpritsRegisterDataTable" msprop:Generator_TableVarName="tableCulpritsRegister" msprop:Generator_RowChangedName="CulpritsRegisterRowChanged" msprop:Generator_TablePropName="CulpritsRegister" msprop:Generator_RowDeletingName="CulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="CulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="CulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="CulpritsRegisterRowDeleted" msprop:Generator_RowClassName="CulpritsRegisterRow" msprop:Generator_UserTableName="CulpritsRegister" msprop:Generator_RowEvArgName="CulpritsRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
@@ -8037,7 +8035,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="JoinedCulpritsRegister" msprop:Generator_TableClassName="JoinedCulpritsRegisterDataTable" msprop:Generator_TableVarName="tableJoinedCulpritsRegister" msprop:Generator_TablePropName="JoinedCulpritsRegister" msprop:Generator_RowDeletingName="JoinedCulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="JoinedCulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="JoinedCulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedCulpritsRegisterRowDeleted" msprop:Generator_UserTableName="JoinedCulpritsRegister" msprop:Generator_RowChangedName="JoinedCulpritsRegisterRowChanged" msprop:Generator_RowEvArgName="JoinedCulpritsRegisterRowChangeEvent" msprop:Generator_RowClassName="JoinedCulpritsRegisterRow">
+        <xs:element name="JoinedCulpritsRegister" msprop:Generator_TableClassName="JoinedCulpritsRegisterDataTable" msprop:Generator_TableVarName="tableJoinedCulpritsRegister" msprop:Generator_RowChangedName="JoinedCulpritsRegisterRowChanged" msprop:Generator_TablePropName="JoinedCulpritsRegister" msprop:Generator_RowDeletingName="JoinedCulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="JoinedCulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="JoinedCulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedCulpritsRegisterRowDeleted" msprop:Generator_RowClassName="JoinedCulpritsRegisterRow" msprop:Generator_UserTableName="JoinedCulpritsRegister" msprop:Generator_RowEvArgName="JoinedCulpritsRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
