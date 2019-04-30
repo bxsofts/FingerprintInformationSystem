@@ -116,7 +116,7 @@ Partial Class frmMonthlyPerformance
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(959, 45)
         Me.lblHeader.TabIndex = 34
-        Me.lblHeader.Text = "STATEMENT OF PERFORMANCE"
+        Me.lblHeader.Text = "WORK DONE STATEMENT"
         Me.lblHeader.TextAlignment = System.Drawing.StringAlignment.Center
         '
         'btnClearAllFields

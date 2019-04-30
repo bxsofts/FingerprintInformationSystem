@@ -437,7 +437,7 @@ Partial Class frmQuarterlyPerformance
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(959, 45)
         Me.lblPeriod.TabIndex = 34
-        Me.lblPeriod.Text = "STATEMENT OF PERFORMANCE"
+        Me.lblPeriod.Text = "WORK DONE STATEMENT"
         Me.lblPeriod.TextAlignment = System.Drawing.StringAlignment.Center
         '
         'DataGridViewX1

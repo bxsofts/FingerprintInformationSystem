@@ -145,15 +145,7 @@ Public Class frmMonthlyPerformance
                 Me.FingerPrintDataSet.Performance.Rows.Add(r(i))
             Next
 
-            For i = 0 To 21
-                Me.DataGridViewX1.Rows(i).Cells(1).Value = ""
-                Me.DataGridViewX1.Rows(i).Cells(2).Value = ""
-                Me.DataGridViewX1.Rows(i).Cells(3).Value = ""
-                Me.DataGridViewX1.Rows(i).Cells(4).Value = ""
-                Me.DataGridViewX1.Rows(i).Cells(5).Value = ""
-                Me.DataGridViewX1.Rows(i).Cells(6).Value = ""
-                Me.DataGridViewX1.Rows(i).Cells(7).Value = ""
-            Next
+           
 
             With Me.DataGridViewX1
 
@@ -219,7 +211,7 @@ Public Class frmMonthlyPerformance
         Dim y = Me.txtYear.Value
 
         ClearAllFields()
-        Me.lblHeader.Text = UCase("statement of performance for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
+        Me.lblHeader.Text = UCase("work done statement for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text)
         Me.DataGridViewX1.Columns(3).HeaderText = MonthName(m, True) & " " & y ' current month
         PerfFileName = SaveFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
@@ -395,6 +387,7 @@ Public Class frmMonthlyPerformance
             If culpritcount Is Nothing Then
                 culpritcount = "0"
             End If
+
             Me.DataGridViewX1.Rows(8).Cells(Column).Value = culpritcount
             Me.DataGridViewX1.Rows(9).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
             Me.DataGridViewX1.Rows(10).Cells(Column).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
@@ -443,7 +436,7 @@ Public Class frmMonthlyPerformance
         ShowPleaseWaitForm()
         Me.Cursor = Cursors.WaitCursor
         ClearAllFields()
-        Me.lblHeader.Text = UCase("statement of performance for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text)
+        Me.lblHeader.Text = UCase("work done statement for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text)
 
         Me.DataGridViewX1.Columns(2).HeaderText = ""
         Me.DataGridViewX1.Columns(3).HeaderText = Me.dtFrom.Text & " to " & Me.dtTo.Text
@@ -544,9 +537,8 @@ Public Class frmMonthlyPerformance
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Size = 12
-            WordApp.Selection.TypeText(FullOfficeName.ToUpper & vbNewLine)
+            WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine)
             WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-            WordApp.Selection.TypeText(FullDistrictName.ToUpper & vbNewLine)
             WordApp.Selection.TypeText(Me.lblHeader.Text.ToUpper)
 
             WordApp.Selection.Font.Bold = 0
