@@ -218,6 +218,20 @@ Public Class frmIdentificationCulpritDetails
     End Sub
 #End Region
 
+    Private Sub HandleCtrlAinMultilineTextBox(sender As Object, e As KeyEventArgs) Handles txtAddress.KeyDown, txtRemarks.KeyDown, txtClassification.KeyDown, txtPreviousCaseDetails.KeyDown
+        Try
+            Dim x As TextBox = DirectCast(sender, Control)
+            If e.Control And e.KeyCode = Keys.A Then
+                x.SelectAll()
+                e.Handled = True
+                e.SuppressKeyPress = True
+            End If
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 
     Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
         ClearFields()
