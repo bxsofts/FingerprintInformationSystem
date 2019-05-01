@@ -17086,8 +17086,10 @@ errhandler:
 
     Private Sub ShowNewVersionInstalledInfo()
         Try
+
             Dim ShowNewVersionInfo As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0")
             If ShowNewVersionInfo = "1" And My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionFeatures.rtf") Then
+                Thread.Sleep(2000)
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0", Microsoft.Win32.RegistryValueKind.String)
                 blNewVersionFound = False
                 frmUpdateAlert.ShowDialog()
@@ -17474,7 +17476,4 @@ errhandler:
 
 
    
-    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
-
-    End Sub
 End Class
