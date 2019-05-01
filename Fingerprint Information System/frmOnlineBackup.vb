@@ -404,7 +404,7 @@ Public Class frmOnlineBackup
 
             Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
 
-            My.Computer.FileSystem.CopyFile(sDatabaseFile, tmpFileName, True)
+            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
 
             Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
             Dim Stream As New System.IO.MemoryStream(ByteArray)
@@ -709,7 +709,7 @@ Public Class frmOnlineBackup
                 DownloadRestore = False
 
                 If My.Computer.FileSystem.FileExists(strBackupFile) Then
-                    My.Computer.FileSystem.CopyFile(strBackupFile, sDatabaseFile, True)
+                    My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                     boolRestored = True
                     Me.Close()
                     Exit Sub

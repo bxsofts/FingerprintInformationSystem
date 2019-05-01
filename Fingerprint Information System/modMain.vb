@@ -22,7 +22,7 @@ Module modMain
     Public strGeneralSettingsPath As String = strRegistrySettingsPath & "\General Settings"
     Public strAppUserPath As String = FileIO.SpecialDirectories.MyDocuments & "\BXSofts\Fingerprint Information System"
     Public strAppPath As String = My.Application.Info.DirectoryPath
-    Public sDatabaseFile As String = vbNullString
+    Public strDatabaseFile As String = vbNullString
     Public sConString As String = vbNullString
     Public strBackupFile As String = ""
     Public boolRestored As Boolean = False

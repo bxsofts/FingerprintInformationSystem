@@ -23,7 +23,6 @@ Partial Class frmMainInterface
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainInterface))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -78,6 +77,12 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -105,12 +110,7 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle85 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle86 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle87 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainInterface))
         Me.RibbonTabItem6 = New DevComponents.DotNetBar.RibbonTabItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar12 = New DevComponents.DotNetBar.RibbonBar()
@@ -466,6 +466,28 @@ Partial Class frmMainInterface
         Me.RemarksDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RSOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.JoinedIDRDataGrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.IdentificationNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SOCNumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentificationDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfInspectionDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SectionOfLawDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentifiedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CPsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CulpritNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FingersIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryClassificationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DANumberDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PreviousCaseDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IDRNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SlNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JoinedIDRBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnDummySave = New DevComponents.DotNetBar.ButtonX()
         Me.btnDummyClear = New DevComponents.DotNetBar.ButtonX()
@@ -501,6 +523,67 @@ Partial Class frmMainInterface
         Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
         Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
         Me.IDRTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel6 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelID = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX144 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIDModusOperandi = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.chkIDLoadOtherDetails = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.txtIDNumber = New DevComponents.Editors.IntegerInput()
+        Me.txtIDRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX107 = New DevComponents.DotNetBar.LabelX()
+        Me.lblIDAddress = New DevComponents.DotNetBar.LabelX()
+        Me.lblIDName = New DevComponents.DotNetBar.LabelX()
+        Me.lblIDFather = New DevComponents.DotNetBar.LabelX()
+        Me.lblIDAlias = New DevComponents.DotNetBar.LabelX()
+        Me.btnIDViewFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX106 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX108 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX112 = New DevComponents.DotNetBar.LabelX()
+        Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.IDSlipContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
+        Me.btnIDSlipContextMenu = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDViewDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDSelectDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDScanDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDClearDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDExploreDisplayContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.picIDSlip = New iViewCore.PictureBox()
+        Me.btnIDClearFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnIDScanFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnIDSelectFPSlip = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSearchID = New DevComponents.DotNetBar.ButtonX()
+        Me.btnIDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnIDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnClearIDFields = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveID = New DevComponents.DotNetBar.ButtonX()
+        Me.txtIDSection = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIDCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIDHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIDDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.cmbIDSex = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.ComboItem9 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem10 = New DevComponents.Editors.ComboItem()
+        Me.LabelX113 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX114 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIDFathersName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIDAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIDHenryNumerator = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX115 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX116 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX117 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX118 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX119 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIDAliasName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIDName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX120 = New DevComponents.DotNetBar.LabelX()
+        Me.cmbIDPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.LabelX121 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIDDANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX123 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX124 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX125 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX126 = New DevComponents.DotNetBar.LabelX()
+        Me.IDTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel1 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -833,67 +916,6 @@ Partial Class frmMainInterface
         Me.LabelX142 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX143 = New DevComponents.DotNetBar.LabelX()
         Me.ACTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel6 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelID = New DevComponents.DotNetBar.PanelEx()
-        Me.LabelX144 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIDModusOperandi = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.chkIDLoadOtherDetails = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.txtIDNumber = New DevComponents.Editors.IntegerInput()
-        Me.txtIDRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX107 = New DevComponents.DotNetBar.LabelX()
-        Me.lblIDAddress = New DevComponents.DotNetBar.LabelX()
-        Me.lblIDName = New DevComponents.DotNetBar.LabelX()
-        Me.lblIDFather = New DevComponents.DotNetBar.LabelX()
-        Me.lblIDAlias = New DevComponents.DotNetBar.LabelX()
-        Me.btnIDViewFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX106 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX108 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX112 = New DevComponents.DotNetBar.LabelX()
-        Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.IDSlipContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
-        Me.btnIDSlipContextMenu = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDViewDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDSelectDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDScanDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDClearDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDExploreDisplayContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.picIDSlip = New iViewCore.PictureBox()
-        Me.btnIDClearFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnIDScanFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnIDSelectFPSlip = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSearchID = New DevComponents.DotNetBar.ButtonX()
-        Me.btnIDFindByNumber = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnIDAdvancedSearch = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnClearIDFields = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSaveID = New DevComponents.DotNetBar.ButtonX()
-        Me.txtIDSection = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIDCrimeNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIDHenryDenominator = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIDDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.cmbIDSex = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.ComboItem9 = New DevComponents.Editors.ComboItem()
-        Me.ComboItem10 = New DevComponents.Editors.ComboItem()
-        Me.LabelX113 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX114 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIDFathersName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIDAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIDHenryNumerator = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX115 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX116 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX117 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX118 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX119 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIDAliasName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIDName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX120 = New DevComponents.DotNetBar.LabelX()
-        Me.cmbIDPoliceStation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.LabelX121 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIDDANumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX123 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX124 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX125 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX126 = New DevComponents.DotNetBar.LabelX()
-        Me.IDTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel7 = New DevComponents.DotNetBar.TabControlPanel()
         Me.lblCDGridInfo = New DevComponents.DotNetBar.LabelX()
         Me.PanelCD = New DevComponents.DotNetBar.PanelEx()
@@ -1092,28 +1114,8 @@ Partial Class frmMainInterface
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
-        Me.IdentificationNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SOCNumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentificationDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfInspectionDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SectionOfLawDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentifiedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CPsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CulpritNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FingersIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryClassificationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DANumberDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PreviousCaseDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IDRNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SlNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RibbonBar18 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnCompactDatabase = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1150,6 +1152,11 @@ Partial Class frmMainInterface
         Me.TabControl.SuspendLayout
         Me.TabControlPanel11.SuspendLayout
         Me.PanelIDR.SuspendLayout
+        Me.TabControlPanel6.SuspendLayout
+        Me.PanelID.SuspendLayout
+        CType(Me.txtIDNumber,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupPanel2.SuspendLayout
+        CType(Me.IDSlipContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel1.SuspendLayout
         Me.PanelEx1.SuspendLayout
         Me.PanelEx4.SuspendLayout
@@ -1190,11 +1197,6 @@ Partial Class frmMainInterface
         CType(Me.txtACNumber,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupPanel3.SuspendLayout
         CType(Me.ACSlipContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabControlPanel6.SuspendLayout
-        Me.PanelID.SuspendLayout
-        CType(Me.txtIDNumber,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupPanel2.SuspendLayout
-        CType(Me.IDSlipContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel7.SuspendLayout
         Me.PanelCD.SuspendLayout
         CType(Me.txtCDYear,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1504,13 +1506,13 @@ Partial Class frmMainInterface
         Me.RibbonControl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonControl1.CaptionFont = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RibbonControl1.CaptionVisible = true
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel7)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel3)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel6)
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel7)
         Me.RibbonControl1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonControl1.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RibbonControl1.ForeColor = System.Drawing.Color.Black
@@ -1569,6 +1571,7 @@ Partial Class frmMainInterface
         '
         Me.RibbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel1.TabIndex = 3
+        Me.RibbonPanel1.Visible = false
         '
         'RibbonBar17
         '
@@ -3184,13 +3187,14 @@ Partial Class frmMainInterface
         'RibbonPanel7
         '
         Me.RibbonPanel7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel7.Controls.Add(Me.RibbonBar18)
         Me.RibbonPanel7.Controls.Add(Me.RibbonBar15)
         Me.RibbonPanel7.Controls.Add(Me.RibbonBar14)
         Me.RibbonPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel7.Location = New System.Drawing.Point(0, 0)
+        Me.RibbonPanel7.Location = New System.Drawing.Point(0, 55)
         Me.RibbonPanel7.Name = "RibbonPanel7"
         Me.RibbonPanel7.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel7.Size = New System.Drawing.Size(1360, 150)
+        Me.RibbonPanel7.Size = New System.Drawing.Size(1360, 95)
         '
         '
         '
@@ -3204,7 +3208,6 @@ Partial Class frmMainInterface
         '
         Me.RibbonPanel7.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel7.TabIndex = 8
-        Me.RibbonPanel7.Visible = false
         '
         'RibbonBar15
         '
@@ -3224,7 +3227,7 @@ Partial Class frmMainInterface
         Me.RibbonBar15.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar15.Location = New System.Drawing.Point(181, 0)
         Me.RibbonBar15.Name = "RibbonBar15"
-        Me.RibbonBar15.Size = New System.Drawing.Size(646, 148)
+        Me.RibbonBar15.Size = New System.Drawing.Size(319, 93)
         Me.RibbonBar15.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar15.TabIndex = 1
         Me.RibbonBar15.Text = "DATABASE BACKUP"
@@ -3320,10 +3323,10 @@ Partial Class frmMainInterface
         Me.RibbonBar14.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar14.Location = New System.Drawing.Point(3, 0)
         Me.RibbonBar14.Name = "RibbonBar14"
-        Me.RibbonBar14.Size = New System.Drawing.Size(178, 148)
+        Me.RibbonBar14.Size = New System.Drawing.Size(178, 93)
         Me.RibbonBar14.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar14.TabIndex = 0
-        Me.RibbonBar14.Text = "DATABASE"
+        Me.RibbonBar14.Text = "DATABASE LOCATION"
         '
         '
         '
@@ -3369,7 +3372,6 @@ Partial Class frmMainInterface
         '
         'tabHome
         '
-        Me.tabHome.Checked = true
         Me.tabHome.Name = "tabHome"
         Me.tabHome.Panel = Me.RibbonPanel1
         Me.tabHome.Text = "Home"
@@ -3382,6 +3384,7 @@ Partial Class frmMainInterface
         '
         'RibbonTabItem5
         '
+        Me.RibbonTabItem5.Checked = true
         Me.RibbonTabItem5.Name = "RibbonTabItem5"
         Me.RibbonTabItem5.Panel = Me.RibbonPanel7
         Me.RibbonTabItem5.Text = "Database Settings"
@@ -4967,6 +4970,193 @@ Partial Class frmMainInterface
         Me.JoinedIDRDataGrid.TabIndex = 3
         Me.JoinedIDRDataGrid.TabStop = false
         '
+        'IdentificationNumberDataGridViewTextBoxColumn1
+        '
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationNumber"
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.HeaderText = "ID Number"
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.Name = "IdentificationNumberDataGridViewTextBoxColumn1"
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.Width = 70
+        '
+        'SOCNumberDataGridViewTextBoxColumn2
+        '
+        Me.SOCNumberDataGridViewTextBoxColumn2.DataPropertyName = "SOCNumber"
+        Me.SOCNumberDataGridViewTextBoxColumn2.HeaderText = "SOC Number"
+        Me.SOCNumberDataGridViewTextBoxColumn2.Name = "SOCNumberDataGridViewTextBoxColumn2"
+        Me.SOCNumberDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.SOCNumberDataGridViewTextBoxColumn2.Width = 80
+        '
+        'IdentificationDateDataGridViewTextBoxColumn
+        '
+        Me.IdentificationDateDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDate"
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle52.Format = "dd/MM/yyyy"
+        Me.IdentificationDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle52
+        Me.IdentificationDateDataGridViewTextBoxColumn.HeaderText = "Identification Date"
+        Me.IdentificationDateDataGridViewTextBoxColumn.Name = "IdentificationDateDataGridViewTextBoxColumn"
+        Me.IdentificationDateDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentificationDateDataGridViewTextBoxColumn.Width = 80
+        '
+        'DateOfInspectionDataGridViewTextBoxColumn2
+        '
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.DataPropertyName = "DateOfInspection"
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle53.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle53
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.HeaderText = "Inspection Date"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.Name = "DateOfInspectionDataGridViewTextBoxColumn2"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.Width = 80
+        '
+        'PoliceStationDataGridViewTextBoxColumn7
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn7.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn7.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn7.Name = "PoliceStationDataGridViewTextBoxColumn7"
+        Me.PoliceStationDataGridViewTextBoxColumn7.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn7.Width = 140
+        '
+        'CrimeNumberDataGridViewTextBoxColumn5
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn5.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn5.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn5.Name = "CrimeNumberDataGridViewTextBoxColumn5"
+        Me.CrimeNumberDataGridViewTextBoxColumn5.ReadOnly = true
+        Me.CrimeNumberDataGridViewTextBoxColumn5.Width = 80
+        '
+        'SectionOfLawDataGridViewTextBoxColumn4
+        '
+        Me.SectionOfLawDataGridViewTextBoxColumn4.DataPropertyName = "SectionOfLaw"
+        Me.SectionOfLawDataGridViewTextBoxColumn4.HeaderText = "Section of Law"
+        Me.SectionOfLawDataGridViewTextBoxColumn4.Name = "SectionOfLawDataGridViewTextBoxColumn4"
+        Me.SectionOfLawDataGridViewTextBoxColumn4.ReadOnly = true
+        '
+        'InvestigatingOfficerDataGridViewTextBoxColumn1
+        '
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.DataPropertyName = "InvestigatingOfficer"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.HeaderText = "Inspecting Officer"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Name = "InvestigatingOfficerDataGridViewTextBoxColumn1"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Width = 140
+        '
+        'IdentifiedByDataGridViewTextBoxColumn
+        '
+        Me.IdentifiedByDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedBy"
+        Me.IdentifiedByDataGridViewTextBoxColumn.HeaderText = "Identified By"
+        Me.IdentifiedByDataGridViewTextBoxColumn.Name = "IdentifiedByDataGridViewTextBoxColumn"
+        Me.IdentifiedByDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentifiedByDataGridViewTextBoxColumn.Width = 140
+        '
+        'ChancePrintsDevelopedDataGridViewTextBoxColumn
+        '
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DataPropertyName = "ChancePrintsDeveloped"
+        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle54
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Developed"
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn"
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Width = 70
+        '
+        'CPsIdentifiedDataGridViewTextBoxColumn
+        '
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "CPsIdentified"
+        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle55
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Identified"
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.Name = "CPsIdentifiedDataGridViewTextBoxColumn"
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.Width = 70
+        '
+        'NoOfCulpritsIdentifiedDataGridViewTextBoxColumn
+        '
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "NoOfCulpritsIdentified"
+        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle56
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of Culprits Identified"
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Name = "NoOfCulpritsIdentifiedDataGridViewTextBoxColumn"
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Width = 70
+        '
+        'CulpritNameDataGridViewTextBoxColumn
+        '
+        Me.CulpritNameDataGridViewTextBoxColumn.DataPropertyName = "CulpritName"
+        Me.CulpritNameDataGridViewTextBoxColumn.HeaderText = "Culprit Name"
+        Me.CulpritNameDataGridViewTextBoxColumn.Name = "CulpritNameDataGridViewTextBoxColumn"
+        Me.CulpritNameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CulpritNameDataGridViewTextBoxColumn.Width = 150
+        '
+        'AddressDataGridViewTextBoxColumn4
+        '
+        Me.AddressDataGridViewTextBoxColumn4.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn4.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn4.Name = "AddressDataGridViewTextBoxColumn4"
+        Me.AddressDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn4.Width = 200
+        '
+        'FingersIdentifiedDataGridViewTextBoxColumn
+        '
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "FingersIdentified"
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.HeaderText = "Fingers Identified"
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.Name = "FingersIdentifiedDataGridViewTextBoxColumn"
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'HenryClassificationDataGridViewTextBoxColumn
+        '
+        Me.HenryClassificationDataGridViewTextBoxColumn.DataPropertyName = "HenryClassification"
+        Me.HenryClassificationDataGridViewTextBoxColumn.HeaderText = "Henry Classification"
+        Me.HenryClassificationDataGridViewTextBoxColumn.Name = "HenryClassificationDataGridViewTextBoxColumn"
+        Me.HenryClassificationDataGridViewTextBoxColumn.ReadOnly = true
+        Me.HenryClassificationDataGridViewTextBoxColumn.Width = 150
+        '
+        'DANumberDataGridViewTextBoxColumn3
+        '
+        Me.DANumberDataGridViewTextBoxColumn3.DataPropertyName = "DANumber"
+        Me.DANumberDataGridViewTextBoxColumn3.HeaderText = "DA Number"
+        Me.DANumberDataGridViewTextBoxColumn3.Name = "DANumberDataGridViewTextBoxColumn3"
+        Me.DANumberDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.DANumberDataGridViewTextBoxColumn3.Width = 150
+        '
+        'PreviousCaseDetails
+        '
+        Me.PreviousCaseDetails.DataPropertyName = "PreviousCaseDetails"
+        Me.PreviousCaseDetails.HeaderText = "Previous Case Details"
+        Me.PreviousCaseDetails.Name = "PreviousCaseDetails"
+        Me.PreviousCaseDetails.ReadOnly = true
+        '
+        'IdentifiedFromDataGridViewTextBoxColumn
+        '
+        Me.IdentifiedFromDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedFrom"
+        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.IdentifiedFromDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle57
+        Me.IdentifiedFromDataGridViewTextBoxColumn.HeaderText = "Identified From"
+        Me.IdentifiedFromDataGridViewTextBoxColumn.Name = "IdentifiedFromDataGridViewTextBoxColumn"
+        Me.IdentifiedFromDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentifiedFromDataGridViewTextBoxColumn.Width = 80
+        '
+        'IdentificationDetailsDataGridViewTextBoxColumn1
+        '
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationDetails"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.HeaderText = "Remarks"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Name = "IdentificationDetailsDataGridViewTextBoxColumn1"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Width = 250
+        '
+        'IDRNumberDataGridViewTextBoxColumn
+        '
+        Me.IDRNumberDataGridViewTextBoxColumn.DataPropertyName = "IDRNumber"
+        Me.IDRNumberDataGridViewTextBoxColumn.HeaderText = "IDRNumber"
+        Me.IDRNumberDataGridViewTextBoxColumn.Name = "IDRNumberDataGridViewTextBoxColumn"
+        Me.IDRNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IDRNumberDataGridViewTextBoxColumn.Visible = false
+        '
+        'SlNumber
+        '
+        Me.SlNumber.DataPropertyName = "SlNumber"
+        Me.SlNumber.HeaderText = "SlNumber"
+        Me.SlNumber.Name = "SlNumber"
+        Me.SlNumber.ReadOnly = true
+        Me.SlNumber.Visible = false
+        '
         'JoinedIDRBindingSource
         '
         Me.JoinedIDRBindingSource.DataMember = "JoinedIDR"
@@ -5235,9 +5425,9 @@ Partial Class frmMainInterface
         '
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
+        Me.TabControl.Controls.Add(Me.TabControlPanel1)
         Me.TabControl.Controls.Add(Me.TabControlPanel11)
         Me.TabControl.Controls.Add(Me.TabControlPanel6)
-        Me.TabControl.Controls.Add(Me.TabControlPanel1)
         Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel10)
         Me.TabControl.Controls.Add(Me.TabControlPanel5)
@@ -5329,6 +5519,985 @@ Partial Class frmMainInterface
         Me.IDRTabItem.AttachedControl = Me.TabControlPanel11
         Me.IDRTabItem.Name = "IDRTabItem"
         Me.IDRTabItem.Text = "Identification Register"
+        '
+        'TabControlPanel6
+        '
+        Me.TabControlPanel6.Controls.Add(Me.IDDatagrid)
+        Me.TabControlPanel6.Controls.Add(Me.PanelID)
+        Me.TabControlPanel6.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel6.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel6.Name = "TabControlPanel6"
+        Me.TabControlPanel6.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel6.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel6.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel6.Style.GradientAngle = 90
+        Me.TabControlPanel6.TabIndex = 6
+        Me.TabControlPanel6.TabItem = Me.IDTabItem
+        '
+        'PanelID
+        '
+        Me.PanelID.AutoScroll = true
+        Me.PanelID.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelID.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelID.Controls.Add(Me.LabelX144)
+        Me.PanelID.Controls.Add(Me.txtIDModusOperandi)
+        Me.PanelID.Controls.Add(Me.chkIDLoadOtherDetails)
+        Me.PanelID.Controls.Add(Me.txtIDNumber)
+        Me.PanelID.Controls.Add(Me.txtIDRemarks)
+        Me.PanelID.Controls.Add(Me.LabelX107)
+        Me.PanelID.Controls.Add(Me.lblIDAddress)
+        Me.PanelID.Controls.Add(Me.lblIDName)
+        Me.PanelID.Controls.Add(Me.lblIDFather)
+        Me.PanelID.Controls.Add(Me.lblIDAlias)
+        Me.PanelID.Controls.Add(Me.btnIDViewFPSlip)
+        Me.PanelID.Controls.Add(Me.LabelX106)
+        Me.PanelID.Controls.Add(Me.LabelX108)
+        Me.PanelID.Controls.Add(Me.LabelX112)
+        Me.PanelID.Controls.Add(Me.GroupPanel2)
+        Me.PanelID.Controls.Add(Me.btnSearchID)
+        Me.PanelID.Controls.Add(Me.btnClearIDFields)
+        Me.PanelID.Controls.Add(Me.btnSaveID)
+        Me.PanelID.Controls.Add(Me.txtIDSection)
+        Me.PanelID.Controls.Add(Me.txtIDCrimeNumber)
+        Me.PanelID.Controls.Add(Me.txtIDHenryDenominator)
+        Me.PanelID.Controls.Add(Me.txtIDDetails)
+        Me.PanelID.Controls.Add(Me.cmbIDSex)
+        Me.PanelID.Controls.Add(Me.LabelX113)
+        Me.PanelID.Controls.Add(Me.LabelX114)
+        Me.PanelID.Controls.Add(Me.txtIDFathersName)
+        Me.PanelID.Controls.Add(Me.txtIDAddress)
+        Me.PanelID.Controls.Add(Me.txtIDHenryNumerator)
+        Me.PanelID.Controls.Add(Me.LabelX115)
+        Me.PanelID.Controls.Add(Me.LabelX116)
+        Me.PanelID.Controls.Add(Me.LabelX117)
+        Me.PanelID.Controls.Add(Me.LabelX118)
+        Me.PanelID.Controls.Add(Me.LabelX119)
+        Me.PanelID.Controls.Add(Me.txtIDAliasName)
+        Me.PanelID.Controls.Add(Me.txtIDName)
+        Me.PanelID.Controls.Add(Me.LabelX120)
+        Me.PanelID.Controls.Add(Me.cmbIDPoliceStation)
+        Me.PanelID.Controls.Add(Me.LabelX121)
+        Me.PanelID.Controls.Add(Me.txtIDDANumber)
+        Me.PanelID.Controls.Add(Me.LabelX123)
+        Me.PanelID.Controls.Add(Me.LabelX124)
+        Me.PanelID.Controls.Add(Me.LabelX125)
+        Me.PanelID.Controls.Add(Me.LabelX126)
+        Me.PanelID.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelID.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelID.Location = New System.Drawing.Point(1, 1)
+        Me.PanelID.Name = "PanelID"
+        Me.PanelID.Size = New System.Drawing.Size(1358, 351)
+        Me.PanelID.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelID.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelID.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelID.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelID.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelID.Style.GradientAngle = 90
+        Me.PanelID.TabIndex = 3
+        '
+        'LabelX144
+        '
+        Me.LabelX144.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX144.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX144.Location = New System.Drawing.Point(421, 160)
+        Me.LabelX144.Name = "LabelX144"
+        Me.LabelX144.Size = New System.Drawing.Size(97, 18)
+        Me.LabelX144.TabIndex = 145
+        Me.LabelX144.Text = "Modus Operandi"
+        '
+        'txtIDModusOperandi
+        '
+        Me.txtIDModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDModusOperandi.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDModusOperandi.Border.Class = "TextBoxBorder"
+        Me.txtIDModusOperandi.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDModusOperandi.ButtonCustom.Image = CType(resources.GetObject("txtIDModusOperandi.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDModusOperandi.ButtonCustom.Visible = true
+        Me.txtIDModusOperandi.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDModusOperandi.FocusHighlightEnabled = true
+        Me.txtIDModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDModusOperandi.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDModusOperandi, true)
+        Me.txtIDModusOperandi.Location = New System.Drawing.Point(545, 153)
+        Me.txtIDModusOperandi.MaxLength = 255
+        Me.txtIDModusOperandi.Name = "txtIDModusOperandi"
+        Me.txtIDModusOperandi.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDModusOperandi.TabIndex = 13
+        Me.txtIDModusOperandi.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDModusOperandi.WatermarkText = "Modus Operandi"
+        '
+        'chkIDLoadOtherDetails
+        '
+        Me.chkIDLoadOtherDetails.AutoSize = true
+        '
+        '
+        '
+        Me.chkIDLoadOtherDetails.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkIDLoadOtherDetails.Location = New System.Drawing.Point(352, 52)
+        Me.chkIDLoadOtherDetails.Name = "chkIDLoadOtherDetails"
+        Me.chkIDLoadOtherDetails.Size = New System.Drawing.Size(88, 18)
+        Me.chkIDLoadOtherDetails.TabIndex = 143
+        Me.chkIDLoadOtherDetails.TabStop = false
+        Me.chkIDLoadOtherDetails.Text = "load details"
+        '
+        'txtIDNumber
+        '
+        '
+        '
+        '
+        Me.txtIDNumber.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtIDNumber.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDNumber.ButtonCustom.Image = CType(resources.GetObject("txtIDNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDNumber.FocusHighlightEnabled = true
+        Me.txtIDNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDNumber, true)
+        Me.txtIDNumber.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtIDNumber.Location = New System.Drawing.Point(122, 9)
+        Me.txtIDNumber.MaxValue = 1000000
+        Me.txtIDNumber.MinValue = 1
+        Me.txtIDNumber.Name = "txtIDNumber"
+        Me.txtIDNumber.ShowUpDown = true
+        Me.txtIDNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDNumber.TabIndex = 1
+        Me.txtIDNumber.Value = 1
+        Me.txtIDNumber.WatermarkText = "Number"
+        '
+        'txtIDRemarks
+        '
+        Me.txtIDRemarks.AcceptsReturn = true
+        Me.txtIDRemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDRemarks.Border.Class = "TextBoxBorder"
+        Me.txtIDRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDRemarks.ButtonCustom.Image = CType(resources.GetObject("txtIDRemarks.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDRemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDRemarks.FocusHighlightEnabled = true
+        Me.txtIDRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDRemarks.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDRemarks, true)
+        Me.txtIDRemarks.Location = New System.Drawing.Point(545, 270)
+        Me.txtIDRemarks.MaxLength = 255
+        Me.txtIDRemarks.Multiline = true
+        Me.txtIDRemarks.Name = "txtIDRemarks"
+        Me.txtIDRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtIDRemarks.Size = New System.Drawing.Size(227, 78)
+        Me.txtIDRemarks.TabIndex = 15
+        Me.txtIDRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDRemarks.WatermarkText = "Remarks"
+        '
+        'LabelX107
+        '
+        Me.LabelX107.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX107.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX107.Location = New System.Drawing.Point(421, 280)
+        Me.LabelX107.Name = "LabelX107"
+        Me.LabelX107.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX107.TabIndex = 142
+        Me.LabelX107.Text = "Remarks"
+        '
+        'lblIDAddress
+        '
+        Me.lblIDAddress.AutoSize = true
+        '
+        '
+        '
+        Me.lblIDAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblIDAddress.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblIDAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblIDAddress.Location = New System.Drawing.Point(775, 33)
+        Me.lblIDAddress.Name = "lblIDAddress"
+        Me.lblIDAddress.Size = New System.Drawing.Size(11, 22)
+        Me.lblIDAddress.TabIndex = 139
+        Me.lblIDAddress.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblIDName
+        '
+        Me.lblIDName.AutoSize = true
+        '
+        '
+        '
+        Me.lblIDName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblIDName.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblIDName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblIDName.Location = New System.Drawing.Point(359, 206)
+        Me.lblIDName.Name = "lblIDName"
+        Me.lblIDName.Size = New System.Drawing.Size(11, 22)
+        Me.lblIDName.TabIndex = 138
+        Me.lblIDName.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblIDFather
+        '
+        Me.lblIDFather.AutoSize = true
+        '
+        '
+        '
+        Me.lblIDFather.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblIDFather.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblIDFather.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblIDFather.Location = New System.Drawing.Point(351, 285)
+        Me.lblIDFather.Name = "lblIDFather"
+        Me.lblIDFather.Size = New System.Drawing.Size(11, 22)
+        Me.lblIDFather.TabIndex = 137
+        Me.lblIDFather.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'lblIDAlias
+        '
+        Me.lblIDAlias.AutoSize = true
+        '
+        '
+        '
+        Me.lblIDAlias.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblIDAlias.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblIDAlias.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblIDAlias.Location = New System.Drawing.Point(351, 246)
+        Me.lblIDAlias.Name = "lblIDAlias"
+        Me.lblIDAlias.Size = New System.Drawing.Size(11, 22)
+        Me.lblIDAlias.TabIndex = 136
+        Me.lblIDAlias.Text = "<font color=""#ED1C24"">^</font><b></b>"
+        '
+        'btnIDViewFPSlip
+        '
+        Me.btnIDViewFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnIDViewFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnIDViewFPSlip.Image = CType(resources.GetObject("btnIDViewFPSlip.Image"),System.Drawing.Image)
+        Me.btnIDViewFPSlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnIDViewFPSlip.Location = New System.Drawing.Point(1163, 266)
+        Me.btnIDViewFPSlip.Name = "btnIDViewFPSlip"
+        Me.btnIDViewFPSlip.Size = New System.Drawing.Size(110, 73)
+        Me.btnIDViewFPSlip.TabIndex = 19
+        Me.btnIDViewFPSlip.Text = "View FP Slip"
+        '
+        'LabelX106
+        '
+        Me.LabelX106.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX106.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX106.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX106.Location = New System.Drawing.Point(776, 88)
+        Me.LabelX106.Name = "LabelX106"
+        Me.LabelX106.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX106.TabIndex = 109
+        Me.LabelX106.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX108
+        '
+        Me.LabelX108.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX108.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX108.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX108.Location = New System.Drawing.Point(352, 207)
+        Me.LabelX108.Name = "LabelX108"
+        Me.LabelX108.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX108.TabIndex = 107
+        Me.LabelX108.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX112
+        '
+        Me.LabelX112.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX112.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX112.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LabelX112.Location = New System.Drawing.Point(352, 13)
+        Me.LabelX112.Name = "LabelX112"
+        Me.LabelX112.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX112.TabIndex = 103
+        Me.LabelX112.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'GroupPanel2
+        '
+        Me.GroupPanel2.BackColor = System.Drawing.Color.White
+        Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.GroupPanel2.Controls.Add(Me.IDSlipContextMenuBar)
+        Me.GroupPanel2.Controls.Add(Me.btnIDClearFPSlip)
+        Me.GroupPanel2.Controls.Add(Me.picIDSlip)
+        Me.GroupPanel2.Controls.Add(Me.btnIDScanFPSlip)
+        Me.GroupPanel2.Controls.Add(Me.btnIDSelectFPSlip)
+        Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GroupPanel2.Location = New System.Drawing.Point(846, 9)
+        Me.GroupPanel2.Name = "GroupPanel2"
+        Me.GroupPanel2.Size = New System.Drawing.Size(267, 328)
+        '
+        '
+        '
+        Me.GroupPanel2.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GroupPanel2.Style.BackColorGradientAngle = 90
+        Me.GroupPanel2.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GroupPanel2.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderBottomWidth = 1
+        Me.GroupPanel2.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GroupPanel2.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderLeftWidth = 1
+        Me.GroupPanel2.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderRightWidth = 1
+        Me.GroupPanel2.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderTopWidth = 1
+        Me.GroupPanel2.Style.CornerDiameter = 4
+        Me.GroupPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GroupPanel2.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
+        Me.GroupPanel2.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GroupPanel2.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GroupPanel2.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanel2.TabIndex = 101
+        Me.GroupPanel2.Text = "FP Slip"
+        '
+        'IDSlipContextMenuBar
+        '
+        Me.IDSlipContextMenuBar.SetContextMenuEx(Me.IDSlipContextMenuBar, Me.btnIDSlipContextMenu)
+        Me.IDSlipContextMenuBar.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.IDSlipContextMenuBar.IsMaximized = false
+        Me.IDSlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDSlipContextMenu})
+        Me.IDSlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
+        Me.IDSlipContextMenuBar.Name = "IDSlipContextMenuBar"
+        Me.IDSlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
+        Me.IDSlipContextMenuBar.Stretch = true
+        Me.IDSlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.IDSlipContextMenuBar.TabIndex = 57
+        Me.IDSlipContextMenuBar.TabStop = false
+        Me.IDSlipContextMenuBar.Text = "ContextMenuBar2"
+        '
+        'btnIDSlipContextMenu
+        '
+        Me.btnIDSlipContextMenu.AutoExpandOnClick = true
+        Me.btnIDSlipContextMenu.Name = "btnIDSlipContextMenu"
+        Me.btnIDSlipContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDViewDisplayContext, Me.btnIDSelectDisplayContext, Me.btnIDScanDisplayContext, Me.btnIDClearDisplayContext, Me.btnIDExploreDisplayContext})
+        Me.btnIDSlipContextMenu.Text = "Context Menu"
+        '
+        'btnIDViewDisplayContext
+        '
+        Me.btnIDViewDisplayContext.Icon = CType(resources.GetObject("btnIDViewDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnIDViewDisplayContext.Name = "btnIDViewDisplayContext"
+        Me.btnIDViewDisplayContext.Text = "View"
+        '
+        'btnIDSelectDisplayContext
+        '
+        Me.btnIDSelectDisplayContext.BeginGroup = true
+        Me.btnIDSelectDisplayContext.Icon = CType(resources.GetObject("btnIDSelectDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnIDSelectDisplayContext.Name = "btnIDSelectDisplayContext"
+        Me.btnIDSelectDisplayContext.Text = "Select"
+        '
+        'btnIDScanDisplayContext
+        '
+        Me.btnIDScanDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnIDScanDisplayContext.Icon = CType(resources.GetObject("btnIDScanDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnIDScanDisplayContext.Name = "btnIDScanDisplayContext"
+        Me.btnIDScanDisplayContext.Text = "Scan"
+        '
+        'btnIDClearDisplayContext
+        '
+        Me.btnIDClearDisplayContext.BeginGroup = true
+        Me.btnIDClearDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnIDClearDisplayContext.Icon = CType(resources.GetObject("btnIDClearDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnIDClearDisplayContext.Name = "btnIDClearDisplayContext"
+        Me.btnIDClearDisplayContext.Text = "Clear"
+        '
+        'btnIDExploreDisplayContext
+        '
+        Me.btnIDExploreDisplayContext.BeginGroup = true
+        Me.btnIDExploreDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnIDExploreDisplayContext.Icon = CType(resources.GetObject("btnIDExploreDisplayContext.Icon"),System.Drawing.Icon)
+        Me.btnIDExploreDisplayContext.Name = "btnIDExploreDisplayContext"
+        Me.btnIDExploreDisplayContext.Text = "Locate"
+        '
+        'picIDSlip
+        '
+        Me.picIDSlip.BackColor = System.Drawing.Color.Gray
+        Me.IDSlipContextMenuBar.SetContextMenuEx(Me.picIDSlip, Me.btnIDSlipContextMenu)
+        Me.picIDSlip.Image = Nothing
+        Me.picIDSlip.Location = New System.Drawing.Point(8, 3)
+        Me.picIDSlip.Name = "picIDSlip"
+        Me.picIDSlip.Size = New System.Drawing.Size(245, 253)
+        Me.picIDSlip.TabIndex = 20
+        Me.picIDSlip.TabStop = false
+        Me.picIDSlip.ViewMode = iViewCore.PictureBox.EViewMode.FitImage
+        '
+        'btnIDClearFPSlip
+        '
+        Me.btnIDClearFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnIDClearFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnIDClearFPSlip.Location = New System.Drawing.Point(98, 268)
+        Me.btnIDClearFPSlip.Name = "btnIDClearFPSlip"
+        Me.btnIDClearFPSlip.Size = New System.Drawing.Size(65, 33)
+        Me.btnIDClearFPSlip.TabIndex = 21
+        Me.btnIDClearFPSlip.TabStop = false
+        Me.btnIDClearFPSlip.Text = "Clear"
+        '
+        'btnIDScanFPSlip
+        '
+        Me.btnIDScanFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnIDScanFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnIDScanFPSlip.Location = New System.Drawing.Point(186, 268)
+        Me.btnIDScanFPSlip.Name = "btnIDScanFPSlip"
+        Me.btnIDScanFPSlip.Size = New System.Drawing.Size(65, 33)
+        Me.btnIDScanFPSlip.TabIndex = 16
+        Me.btnIDScanFPSlip.TabStop = false
+        Me.btnIDScanFPSlip.Text = "Scan"
+        '
+        'btnIDSelectFPSlip
+        '
+        Me.btnIDSelectFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnIDSelectFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnIDSelectFPSlip.Location = New System.Drawing.Point(10, 268)
+        Me.btnIDSelectFPSlip.Name = "btnIDSelectFPSlip"
+        Me.btnIDSelectFPSlip.Size = New System.Drawing.Size(65, 33)
+        Me.btnIDSelectFPSlip.TabIndex = 15
+        Me.btnIDSelectFPSlip.TabStop = false
+        Me.btnIDSelectFPSlip.Text = "Select"
+        '
+        'btnSearchID
+        '
+        Me.btnSearchID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSearchID.Image = CType(resources.GetObject("btnSearchID.Image"),System.Drawing.Image)
+        Me.btnSearchID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSearchID.Location = New System.Drawing.Point(1163, 96)
+        Me.btnSearchID.Name = "btnSearchID"
+        Me.btnSearchID.Size = New System.Drawing.Size(110, 73)
+        Me.btnSearchID.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDFindByNumber, Me.btnIDAdvancedSearch})
+        Me.btnSearchID.TabIndex = 17
+        Me.btnSearchID.Text = "Search"
+        '
+        'btnIDFindByNumber
+        '
+        Me.btnIDFindByNumber.GlobalItem = false
+        Me.btnIDFindByNumber.Name = "btnIDFindByNumber"
+        Me.btnIDFindByNumber.Text = "Find by Number"
+        '
+        'btnIDAdvancedSearch
+        '
+        Me.btnIDAdvancedSearch.BeginGroup = true
+        Me.btnIDAdvancedSearch.GlobalItem = false
+        Me.btnIDAdvancedSearch.Name = "btnIDAdvancedSearch"
+        Me.btnIDAdvancedSearch.Text = "Advanced Search"
+        '
+        'btnClearIDFields
+        '
+        Me.btnClearIDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClearIDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClearIDFields.Image = CType(resources.GetObject("btnClearIDFields.Image"),System.Drawing.Image)
+        Me.btnClearIDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnClearIDFields.Location = New System.Drawing.Point(1163, 181)
+        Me.btnClearIDFields.Name = "btnClearIDFields"
+        Me.btnClearIDFields.Size = New System.Drawing.Size(110, 73)
+        Me.btnClearIDFields.TabIndex = 18
+        Me.btnClearIDFields.Text = "Clear All Fields"
+        '
+        'btnSaveID
+        '
+        Me.btnSaveID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveID.Image = CType(resources.GetObject("btnSaveID.Image"),System.Drawing.Image)
+        Me.btnSaveID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveID.Location = New System.Drawing.Point(1163, 11)
+        Me.btnSaveID.Name = "btnSaveID"
+        Me.btnSaveID.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveID.TabIndex = 16
+        Me.btnSaveID.Text = "Save"
+        '
+        'txtIDSection
+        '
+        Me.txtIDSection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDSection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDSection.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDSection.Border.Class = "TextBoxBorder"
+        Me.txtIDSection.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDSection.ButtonCustom.Image = CType(resources.GetObject("txtIDSection.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDSection.ButtonCustom.Visible = true
+        Me.txtIDSection.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDSection.FocusHighlightEnabled = true
+        Me.txtIDSection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDSection.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDSection, true)
+        Me.txtIDSection.Location = New System.Drawing.Point(122, 161)
+        Me.txtIDSection.MaxLength = 255
+        Me.txtIDSection.Name = "txtIDSection"
+        Me.txtIDSection.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDSection.TabIndex = 5
+        Me.txtIDSection.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDSection.WatermarkText = "Section of Law"
+        '
+        'txtIDCrimeNumber
+        '
+        Me.txtIDCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtIDCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDCrimeNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDCrimeNumber.Border.Class = "TextBoxBorder"
+        Me.txtIDCrimeNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDCrimeNumber.ButtonCustom.Image = CType(resources.GetObject("txtIDCrimeNumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDCrimeNumber.ButtonCustom.Visible = true
+        Me.txtIDCrimeNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDCrimeNumber.FocusHighlightEnabled = true
+        Me.txtIDCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDCrimeNumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDCrimeNumber, true)
+        Me.txtIDCrimeNumber.Location = New System.Drawing.Point(122, 122)
+        Me.txtIDCrimeNumber.MaxLength = 45
+        Me.txtIDCrimeNumber.Name = "txtIDCrimeNumber"
+        Me.txtIDCrimeNumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDCrimeNumber.TabIndex = 4
+        Me.txtIDCrimeNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDCrimeNumber.WatermarkText = "Crime Number"
+        '
+        'txtIDHenryDenominator
+        '
+        Me.txtIDHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDHenryDenominator.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDHenryDenominator.Border.Class = "TextBoxBorder"
+        Me.txtIDHenryDenominator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDHenryDenominator.ButtonCustom.Image = CType(resources.GetObject("txtIDHenryDenominator.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDHenryDenominator.ButtonCustom.Visible = true
+        Me.txtIDHenryDenominator.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDHenryDenominator.FocusHighlightEnabled = true
+        Me.txtIDHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDHenryDenominator.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDHenryDenominator, true)
+        Me.txtIDHenryDenominator.Location = New System.Drawing.Point(545, 119)
+        Me.txtIDHenryDenominator.MaxLength = 15
+        Me.txtIDHenryDenominator.Name = "txtIDHenryDenominator"
+        Me.txtIDHenryDenominator.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDHenryDenominator.TabIndex = 12
+        Me.txtIDHenryDenominator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDHenryDenominator.WatermarkText = "Classification Denominator"
+        '
+        'txtIDDetails
+        '
+        Me.txtIDDetails.AcceptsReturn = true
+        Me.txtIDDetails.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDDetails.Border.Class = "TextBoxBorder"
+        Me.txtIDDetails.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDDetails.ButtonCustom.Image = CType(resources.GetObject("txtIDDetails.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDDetails.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDDetails.FocusHighlightEnabled = true
+        Me.txtIDDetails.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDDetails.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDDetails, true)
+        Me.txtIDDetails.Location = New System.Drawing.Point(545, 186)
+        Me.txtIDDetails.MaxLength = 1000
+        Me.txtIDDetails.Multiline = true
+        Me.txtIDDetails.Name = "txtIDDetails"
+        Me.txtIDDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtIDDetails.Size = New System.Drawing.Size(227, 80)
+        Me.txtIDDetails.TabIndex = 14
+        Me.txtIDDetails.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDDetails.WatermarkText = "Identification Details"
+        '
+        'cmbIDSex
+        '
+        Me.cmbIDSex.AutoCompleteCustomSource.AddRange(New String() {"Male", "Female"})
+        Me.cmbIDSex.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbIDSex.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbIDSex.DisplayMember = "Text"
+        Me.cmbIDSex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbIDSex.FocusHighlightEnabled = true
+        Me.cmbIDSex.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbIDSex.ForeColor = System.Drawing.Color.Black
+        Me.cmbIDSex.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbIDSex, true)
+        Me.cmbIDSex.ItemHeight = 23
+        Me.cmbIDSex.Items.AddRange(New Object() {Me.ComboItem9, Me.ComboItem10})
+        Me.cmbIDSex.Location = New System.Drawing.Point(122, 319)
+        Me.cmbIDSex.MaxLength = 6
+        Me.cmbIDSex.Name = "cmbIDSex"
+        Me.cmbIDSex.Size = New System.Drawing.Size(122, 29)
+        Me.cmbIDSex.Sorted = true
+        Me.cmbIDSex.TabIndex = 9
+        Me.cmbIDSex.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbIDSex.WatermarkText = "Sex"
+        '
+        'ComboItem9
+        '
+        Me.ComboItem9.Text = "Female"
+        '
+        'ComboItem10
+        '
+        Me.ComboItem10.Text = "Male"
+        '
+        'LabelX113
+        '
+        Me.LabelX113.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX113.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX113.Location = New System.Drawing.Point(421, 196)
+        Me.LabelX113.Name = "LabelX113"
+        Me.LabelX113.Size = New System.Drawing.Size(120, 18)
+        Me.LabelX113.TabIndex = 92
+        Me.LabelX113.Text = "Identification Details"
+        '
+        'LabelX114
+        '
+        Me.LabelX114.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX114.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX114.Location = New System.Drawing.Point(421, 125)
+        Me.LabelX114.Name = "LabelX114"
+        Me.LabelX114.Size = New System.Drawing.Size(115, 18)
+        Me.LabelX114.TabIndex = 91
+        Me.LabelX114.Text = "Henry Denominator"
+        '
+        'txtIDFathersName
+        '
+        Me.txtIDFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDFathersName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDFathersName.Border.Class = "TextBoxBorder"
+        Me.txtIDFathersName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDFathersName.ButtonCustom.Image = CType(resources.GetObject("txtIDFathersName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDFathersName.ButtonCustom.Visible = true
+        Me.txtIDFathersName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDFathersName.FocusHighlightEnabled = true
+        Me.txtIDFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDFathersName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDFathersName, true)
+        Me.txtIDFathersName.Location = New System.Drawing.Point(122, 280)
+        Me.txtIDFathersName.MaxLength = 255
+        Me.txtIDFathersName.Name = "txtIDFathersName"
+        Me.txtIDFathersName.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDFathersName.TabIndex = 8
+        Me.txtIDFathersName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDFathersName.WatermarkText = "Father's Name"
+        '
+        'txtIDAddress
+        '
+        Me.txtIDAddress.AcceptsReturn = true
+        Me.txtIDAddress.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDAddress.Border.Class = "TextBoxBorder"
+        Me.txtIDAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDAddress.ButtonCustom.Image = CType(resources.GetObject("txtIDAddress.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDAddress.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDAddress.FocusHighlightEnabled = true
+        Me.txtIDAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDAddress.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDAddress, true)
+        Me.txtIDAddress.Location = New System.Drawing.Point(545, 8)
+        Me.txtIDAddress.MaxLength = 255
+        Me.txtIDAddress.Multiline = true
+        Me.txtIDAddress.Name = "txtIDAddress"
+        Me.txtIDAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtIDAddress.Size = New System.Drawing.Size(227, 72)
+        Me.txtIDAddress.TabIndex = 10
+        Me.txtIDAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDAddress.WatermarkText = "Address"
+        '
+        'txtIDHenryNumerator
+        '
+        Me.txtIDHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDHenryNumerator.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDHenryNumerator.Border.Class = "TextBoxBorder"
+        Me.txtIDHenryNumerator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDHenryNumerator.ButtonCustom.Image = CType(resources.GetObject("txtIDHenryNumerator.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDHenryNumerator.ButtonCustom.Visible = true
+        Me.txtIDHenryNumerator.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDHenryNumerator.FocusHighlightEnabled = true
+        Me.txtIDHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDHenryNumerator.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDHenryNumerator, true)
+        Me.txtIDHenryNumerator.Location = New System.Drawing.Point(545, 84)
+        Me.txtIDHenryNumerator.MaxLength = 15
+        Me.txtIDHenryNumerator.Name = "txtIDHenryNumerator"
+        Me.txtIDHenryNumerator.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDHenryNumerator.TabIndex = 11
+        Me.txtIDHenryNumerator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDHenryNumerator.WatermarkText = "Classification Numerator"
+        '
+        'LabelX115
+        '
+        Me.LabelX115.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX115.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX115.Location = New System.Drawing.Point(11, 285)
+        Me.LabelX115.Name = "LabelX115"
+        Me.LabelX115.Size = New System.Drawing.Size(84, 18)
+        Me.LabelX115.TabIndex = 85
+        Me.LabelX115.Text = "Father's Name"
+        '
+        'LabelX116
+        '
+        Me.LabelX116.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX116.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX116.Location = New System.Drawing.Point(421, 89)
+        Me.LabelX116.Name = "LabelX116"
+        Me.LabelX116.Size = New System.Drawing.Size(102, 18)
+        Me.LabelX116.TabIndex = 84
+        Me.LabelX116.Text = "Henry Numerator"
+        '
+        'LabelX117
+        '
+        Me.LabelX117.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX117.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX117.Location = New System.Drawing.Point(421, 13)
+        Me.LabelX117.Name = "LabelX117"
+        Me.LabelX117.Size = New System.Drawing.Size(48, 18)
+        Me.LabelX117.TabIndex = 83
+        Me.LabelX117.Text = "Address"
+        '
+        'LabelX118
+        '
+        Me.LabelX118.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX118.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX118.Location = New System.Drawing.Point(11, 325)
+        Me.LabelX118.Name = "LabelX118"
+        Me.LabelX118.Size = New System.Drawing.Size(22, 18)
+        Me.LabelX118.TabIndex = 82
+        Me.LabelX118.Text = "Sex"
+        '
+        'LabelX119
+        '
+        Me.LabelX119.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX119.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX119.Location = New System.Drawing.Point(11, 246)
+        Me.LabelX119.Name = "LabelX119"
+        Me.LabelX119.Size = New System.Drawing.Size(66, 18)
+        Me.LabelX119.TabIndex = 81
+        Me.LabelX119.Text = "Alias Name"
+        '
+        'txtIDAliasName
+        '
+        Me.txtIDAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDAliasName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDAliasName.Border.Class = "TextBoxBorder"
+        Me.txtIDAliasName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDAliasName.ButtonCustom.Image = CType(resources.GetObject("txtIDAliasName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDAliasName.ButtonCustom.Visible = true
+        Me.txtIDAliasName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDAliasName.FocusHighlightEnabled = true
+        Me.txtIDAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDAliasName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDAliasName, true)
+        Me.txtIDAliasName.Location = New System.Drawing.Point(122, 240)
+        Me.txtIDAliasName.MaxLength = 255
+        Me.txtIDAliasName.Name = "txtIDAliasName"
+        Me.txtIDAliasName.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDAliasName.TabIndex = 7
+        Me.txtIDAliasName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDAliasName.WatermarkText = "Alias Name"
+        '
+        'txtIDName
+        '
+        Me.txtIDName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtIDName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIDName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDName.Border.Class = "TextBoxBorder"
+        Me.txtIDName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDName.ButtonCustom.Image = CType(resources.GetObject("txtIDName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDName.ButtonCustom.Visible = true
+        Me.txtIDName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDName.FocusHighlightEnabled = true
+        Me.txtIDName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDName, true)
+        Me.txtIDName.Location = New System.Drawing.Point(122, 200)
+        Me.txtIDName.MaxLength = 255
+        Me.txtIDName.Name = "txtIDName"
+        Me.txtIDName.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDName.TabIndex = 6
+        Me.txtIDName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDName.WatermarkText = "Name"
+        '
+        'LabelX120
+        '
+        Me.LabelX120.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX120.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX120.Location = New System.Drawing.Point(11, 166)
+        Me.LabelX120.Name = "LabelX120"
+        Me.LabelX120.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX120.TabIndex = 74
+        Me.LabelX120.Text = "Section of Law"
+        '
+        'cmbIDPoliceStation
+        '
+        Me.cmbIDPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbIDPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbIDPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbIDPoliceStation.FocusHighlightEnabled = true
+        Me.cmbIDPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbIDPoliceStation.ForeColor = System.Drawing.Color.Black
+        Me.cmbIDPoliceStation.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbIDPoliceStation, true)
+        Me.cmbIDPoliceStation.ItemHeight = 23
+        Me.cmbIDPoliceStation.Location = New System.Drawing.Point(122, 84)
+        Me.cmbIDPoliceStation.MaxDropDownItems = 35
+        Me.cmbIDPoliceStation.MaxLength = 255
+        Me.cmbIDPoliceStation.Name = "cmbIDPoliceStation"
+        Me.cmbIDPoliceStation.Size = New System.Drawing.Size(227, 29)
+        Me.cmbIDPoliceStation.Sorted = true
+        Me.cmbIDPoliceStation.TabIndex = 3
+        Me.cmbIDPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbIDPoliceStation.WatermarkText = "Police Station"
+        '
+        'LabelX121
+        '
+        Me.LabelX121.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX121.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX121.Location = New System.Drawing.Point(11, 127)
+        Me.LabelX121.Name = "LabelX121"
+        Me.LabelX121.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX121.TabIndex = 70
+        Me.LabelX121.Text = "Crime Number"
+        '
+        'txtIDDANumber
+        '
+        Me.txtIDDANumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIDDANumber.Border.Class = "TextBoxBorder"
+        Me.txtIDDANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIDDANumber.ButtonCustom.Image = CType(resources.GetObject("txtIDDANumber.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIDDANumber.ButtonCustom.Visible = true
+        Me.txtIDDANumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIDDANumber.FocusHighlightEnabled = true
+        Me.txtIDDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIDDANumber.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDDANumber, true)
+        Me.txtIDDANumber.Location = New System.Drawing.Point(122, 45)
+        Me.txtIDDANumber.MaxLength = 10
+        Me.txtIDDANumber.Name = "txtIDDANumber"
+        Me.txtIDDANumber.Size = New System.Drawing.Size(227, 29)
+        Me.txtIDDANumber.TabIndex = 2
+        Me.txtIDDANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIDDANumber.WatermarkText = "DA Number (if any)"
+        '
+        'LabelX123
+        '
+        Me.LabelX123.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX123.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX123.Location = New System.Drawing.Point(11, 90)
+        Me.LabelX123.Name = "LabelX123"
+        Me.LabelX123.Size = New System.Drawing.Size(80, 18)
+        Me.LabelX123.TabIndex = 68
+        Me.LabelX123.Text = "Police Station"
+        '
+        'LabelX124
+        '
+        Me.LabelX124.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX124.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX124.Location = New System.Drawing.Point(11, 206)
+        Me.LabelX124.Name = "LabelX124"
+        Me.LabelX124.Size = New System.Drawing.Size(36, 18)
+        Me.LabelX124.TabIndex = 67
+        Me.LabelX124.Text = "Name"
+        '
+        'LabelX125
+        '
+        Me.LabelX125.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX125.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX125.Location = New System.Drawing.Point(11, 13)
+        Me.LabelX125.Name = "LabelX125"
+        Me.LabelX125.Size = New System.Drawing.Size(49, 18)
+        Me.LabelX125.TabIndex = 65
+        Me.LabelX125.Text = "Number"
+        '
+        'LabelX126
+        '
+        Me.LabelX126.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX126.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX126.Location = New System.Drawing.Point(11, 50)
+        Me.LabelX126.Name = "LabelX126"
+        Me.LabelX126.Size = New System.Drawing.Size(70, 18)
+        Me.LabelX126.TabIndex = 64
+        Me.LabelX126.Text = "DA Number"
+        '
+        'IDTabItem
+        '
+        Me.IDTabItem.AttachedControl = Me.TabControlPanel6
+        Me.IDTabItem.Name = "IDTabItem"
+        Me.IDTabItem.Text = "Identified Slips Register"
         '
         'TabControlPanel1
         '
@@ -10778,985 +11947,6 @@ Partial Class frmMainInterface
         Me.ACTabItem.Name = "ACTabItem"
         Me.ACTabItem.Text = "Active Criminals Register"
         '
-        'TabControlPanel6
-        '
-        Me.TabControlPanel6.Controls.Add(Me.IDDatagrid)
-        Me.TabControlPanel6.Controls.Add(Me.PanelID)
-        Me.TabControlPanel6.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel6.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel6.Name = "TabControlPanel6"
-        Me.TabControlPanel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel6.Size = New System.Drawing.Size(1360, 528)
-        Me.TabControlPanel6.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel6.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel6.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel6.Style.GradientAngle = 90
-        Me.TabControlPanel6.TabIndex = 6
-        Me.TabControlPanel6.TabItem = Me.IDTabItem
-        '
-        'PanelID
-        '
-        Me.PanelID.AutoScroll = true
-        Me.PanelID.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelID.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelID.Controls.Add(Me.LabelX144)
-        Me.PanelID.Controls.Add(Me.txtIDModusOperandi)
-        Me.PanelID.Controls.Add(Me.chkIDLoadOtherDetails)
-        Me.PanelID.Controls.Add(Me.txtIDNumber)
-        Me.PanelID.Controls.Add(Me.txtIDRemarks)
-        Me.PanelID.Controls.Add(Me.LabelX107)
-        Me.PanelID.Controls.Add(Me.lblIDAddress)
-        Me.PanelID.Controls.Add(Me.lblIDName)
-        Me.PanelID.Controls.Add(Me.lblIDFather)
-        Me.PanelID.Controls.Add(Me.lblIDAlias)
-        Me.PanelID.Controls.Add(Me.btnIDViewFPSlip)
-        Me.PanelID.Controls.Add(Me.LabelX106)
-        Me.PanelID.Controls.Add(Me.LabelX108)
-        Me.PanelID.Controls.Add(Me.LabelX112)
-        Me.PanelID.Controls.Add(Me.GroupPanel2)
-        Me.PanelID.Controls.Add(Me.btnSearchID)
-        Me.PanelID.Controls.Add(Me.btnClearIDFields)
-        Me.PanelID.Controls.Add(Me.btnSaveID)
-        Me.PanelID.Controls.Add(Me.txtIDSection)
-        Me.PanelID.Controls.Add(Me.txtIDCrimeNumber)
-        Me.PanelID.Controls.Add(Me.txtIDHenryDenominator)
-        Me.PanelID.Controls.Add(Me.txtIDDetails)
-        Me.PanelID.Controls.Add(Me.cmbIDSex)
-        Me.PanelID.Controls.Add(Me.LabelX113)
-        Me.PanelID.Controls.Add(Me.LabelX114)
-        Me.PanelID.Controls.Add(Me.txtIDFathersName)
-        Me.PanelID.Controls.Add(Me.txtIDAddress)
-        Me.PanelID.Controls.Add(Me.txtIDHenryNumerator)
-        Me.PanelID.Controls.Add(Me.LabelX115)
-        Me.PanelID.Controls.Add(Me.LabelX116)
-        Me.PanelID.Controls.Add(Me.LabelX117)
-        Me.PanelID.Controls.Add(Me.LabelX118)
-        Me.PanelID.Controls.Add(Me.LabelX119)
-        Me.PanelID.Controls.Add(Me.txtIDAliasName)
-        Me.PanelID.Controls.Add(Me.txtIDName)
-        Me.PanelID.Controls.Add(Me.LabelX120)
-        Me.PanelID.Controls.Add(Me.cmbIDPoliceStation)
-        Me.PanelID.Controls.Add(Me.LabelX121)
-        Me.PanelID.Controls.Add(Me.txtIDDANumber)
-        Me.PanelID.Controls.Add(Me.LabelX123)
-        Me.PanelID.Controls.Add(Me.LabelX124)
-        Me.PanelID.Controls.Add(Me.LabelX125)
-        Me.PanelID.Controls.Add(Me.LabelX126)
-        Me.PanelID.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelID.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelID.Location = New System.Drawing.Point(1, 1)
-        Me.PanelID.Name = "PanelID"
-        Me.PanelID.Size = New System.Drawing.Size(1358, 351)
-        Me.PanelID.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelID.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelID.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelID.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelID.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelID.Style.GradientAngle = 90
-        Me.PanelID.TabIndex = 3
-        '
-        'LabelX144
-        '
-        Me.LabelX144.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX144.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX144.Location = New System.Drawing.Point(421, 160)
-        Me.LabelX144.Name = "LabelX144"
-        Me.LabelX144.Size = New System.Drawing.Size(97, 18)
-        Me.LabelX144.TabIndex = 145
-        Me.LabelX144.Text = "Modus Operandi"
-        '
-        'txtIDModusOperandi
-        '
-        Me.txtIDModusOperandi.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDModusOperandi.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDModusOperandi.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDModusOperandi.Border.Class = "TextBoxBorder"
-        Me.txtIDModusOperandi.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDModusOperandi.ButtonCustom.Image = CType(resources.GetObject("txtIDModusOperandi.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDModusOperandi.ButtonCustom.Visible = true
-        Me.txtIDModusOperandi.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDModusOperandi.FocusHighlightEnabled = true
-        Me.txtIDModusOperandi.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDModusOperandi.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDModusOperandi, true)
-        Me.txtIDModusOperandi.Location = New System.Drawing.Point(545, 153)
-        Me.txtIDModusOperandi.MaxLength = 255
-        Me.txtIDModusOperandi.Name = "txtIDModusOperandi"
-        Me.txtIDModusOperandi.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDModusOperandi.TabIndex = 13
-        Me.txtIDModusOperandi.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDModusOperandi.WatermarkText = "Modus Operandi"
-        '
-        'chkIDLoadOtherDetails
-        '
-        Me.chkIDLoadOtherDetails.AutoSize = true
-        '
-        '
-        '
-        Me.chkIDLoadOtherDetails.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkIDLoadOtherDetails.Location = New System.Drawing.Point(352, 52)
-        Me.chkIDLoadOtherDetails.Name = "chkIDLoadOtherDetails"
-        Me.chkIDLoadOtherDetails.Size = New System.Drawing.Size(88, 18)
-        Me.chkIDLoadOtherDetails.TabIndex = 143
-        Me.chkIDLoadOtherDetails.TabStop = false
-        Me.chkIDLoadOtherDetails.Text = "load details"
-        '
-        'txtIDNumber
-        '
-        '
-        '
-        '
-        Me.txtIDNumber.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtIDNumber.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDNumber.ButtonCustom.Image = CType(resources.GetObject("txtIDNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDNumber.FocusHighlightEnabled = true
-        Me.txtIDNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDNumber, true)
-        Me.txtIDNumber.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtIDNumber.Location = New System.Drawing.Point(122, 9)
-        Me.txtIDNumber.MaxValue = 1000000
-        Me.txtIDNumber.MinValue = 1
-        Me.txtIDNumber.Name = "txtIDNumber"
-        Me.txtIDNumber.ShowUpDown = true
-        Me.txtIDNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDNumber.TabIndex = 1
-        Me.txtIDNumber.Value = 1
-        Me.txtIDNumber.WatermarkText = "Number"
-        '
-        'txtIDRemarks
-        '
-        Me.txtIDRemarks.AcceptsReturn = true
-        Me.txtIDRemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDRemarks.Border.Class = "TextBoxBorder"
-        Me.txtIDRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDRemarks.ButtonCustom.Image = CType(resources.GetObject("txtIDRemarks.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDRemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDRemarks.FocusHighlightEnabled = true
-        Me.txtIDRemarks.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDRemarks.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDRemarks, true)
-        Me.txtIDRemarks.Location = New System.Drawing.Point(545, 270)
-        Me.txtIDRemarks.MaxLength = 255
-        Me.txtIDRemarks.Multiline = true
-        Me.txtIDRemarks.Name = "txtIDRemarks"
-        Me.txtIDRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtIDRemarks.Size = New System.Drawing.Size(227, 78)
-        Me.txtIDRemarks.TabIndex = 15
-        Me.txtIDRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDRemarks.WatermarkText = "Remarks"
-        '
-        'LabelX107
-        '
-        Me.LabelX107.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX107.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX107.Location = New System.Drawing.Point(421, 280)
-        Me.LabelX107.Name = "LabelX107"
-        Me.LabelX107.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX107.TabIndex = 142
-        Me.LabelX107.Text = "Remarks"
-        '
-        'lblIDAddress
-        '
-        Me.lblIDAddress.AutoSize = true
-        '
-        '
-        '
-        Me.lblIDAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIDAddress.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblIDAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblIDAddress.Location = New System.Drawing.Point(775, 33)
-        Me.lblIDAddress.Name = "lblIDAddress"
-        Me.lblIDAddress.Size = New System.Drawing.Size(11, 22)
-        Me.lblIDAddress.TabIndex = 139
-        Me.lblIDAddress.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblIDName
-        '
-        Me.lblIDName.AutoSize = true
-        '
-        '
-        '
-        Me.lblIDName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIDName.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblIDName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblIDName.Location = New System.Drawing.Point(359, 206)
-        Me.lblIDName.Name = "lblIDName"
-        Me.lblIDName.Size = New System.Drawing.Size(11, 22)
-        Me.lblIDName.TabIndex = 138
-        Me.lblIDName.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblIDFather
-        '
-        Me.lblIDFather.AutoSize = true
-        '
-        '
-        '
-        Me.lblIDFather.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIDFather.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblIDFather.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblIDFather.Location = New System.Drawing.Point(351, 285)
-        Me.lblIDFather.Name = "lblIDFather"
-        Me.lblIDFather.Size = New System.Drawing.Size(11, 22)
-        Me.lblIDFather.TabIndex = 137
-        Me.lblIDFather.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'lblIDAlias
-        '
-        Me.lblIDAlias.AutoSize = true
-        '
-        '
-        '
-        Me.lblIDAlias.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIDAlias.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.lblIDAlias.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblIDAlias.Location = New System.Drawing.Point(351, 246)
-        Me.lblIDAlias.Name = "lblIDAlias"
-        Me.lblIDAlias.Size = New System.Drawing.Size(11, 22)
-        Me.lblIDAlias.TabIndex = 136
-        Me.lblIDAlias.Text = "<font color=""#ED1C24"">^</font><b></b>"
-        '
-        'btnIDViewFPSlip
-        '
-        Me.btnIDViewFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnIDViewFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnIDViewFPSlip.Image = CType(resources.GetObject("btnIDViewFPSlip.Image"),System.Drawing.Image)
-        Me.btnIDViewFPSlip.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnIDViewFPSlip.Location = New System.Drawing.Point(1163, 266)
-        Me.btnIDViewFPSlip.Name = "btnIDViewFPSlip"
-        Me.btnIDViewFPSlip.Size = New System.Drawing.Size(110, 73)
-        Me.btnIDViewFPSlip.TabIndex = 19
-        Me.btnIDViewFPSlip.Text = "View FP Slip"
-        '
-        'LabelX106
-        '
-        Me.LabelX106.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX106.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX106.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX106.Location = New System.Drawing.Point(776, 88)
-        Me.LabelX106.Name = "LabelX106"
-        Me.LabelX106.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX106.TabIndex = 109
-        Me.LabelX106.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX108
-        '
-        Me.LabelX108.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX108.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX108.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX108.Location = New System.Drawing.Point(352, 207)
-        Me.LabelX108.Name = "LabelX108"
-        Me.LabelX108.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX108.TabIndex = 107
-        Me.LabelX108.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'LabelX112
-        '
-        Me.LabelX112.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX112.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX112.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelX112.Location = New System.Drawing.Point(352, 13)
-        Me.LabelX112.Name = "LabelX112"
-        Me.LabelX112.Size = New System.Drawing.Size(7, 22)
-        Me.LabelX112.TabIndex = 103
-        Me.LabelX112.Text = "<font color=""#ED1C24"">*</font><b></b>"
-        '
-        'GroupPanel2
-        '
-        Me.GroupPanel2.BackColor = System.Drawing.Color.White
-        Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
-        Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.GroupPanel2.Controls.Add(Me.IDSlipContextMenuBar)
-        Me.GroupPanel2.Controls.Add(Me.btnIDClearFPSlip)
-        Me.GroupPanel2.Controls.Add(Me.picIDSlip)
-        Me.GroupPanel2.Controls.Add(Me.btnIDScanFPSlip)
-        Me.GroupPanel2.Controls.Add(Me.btnIDSelectFPSlip)
-        Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel2.Location = New System.Drawing.Point(846, 9)
-        Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(267, 328)
-        '
-        '
-        '
-        Me.GroupPanel2.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.GroupPanel2.Style.BackColorGradientAngle = 90
-        Me.GroupPanel2.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.GroupPanel2.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel2.Style.BorderBottomWidth = 1
-        Me.GroupPanel2.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.GroupPanel2.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel2.Style.BorderLeftWidth = 1
-        Me.GroupPanel2.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel2.Style.BorderRightWidth = 1
-        Me.GroupPanel2.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel2.Style.BorderTopWidth = 1
-        Me.GroupPanel2.Style.CornerDiameter = 4
-        Me.GroupPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
-        Me.GroupPanel2.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
-        Me.GroupPanel2.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.GroupPanel2.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
-        '
-        '
-        '
-        Me.GroupPanel2.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel2.TabIndex = 101
-        Me.GroupPanel2.Text = "FP Slip"
-        '
-        'IDSlipContextMenuBar
-        '
-        Me.IDSlipContextMenuBar.SetContextMenuEx(Me.IDSlipContextMenuBar, Me.btnIDSlipContextMenu)
-        Me.IDSlipContextMenuBar.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.IDSlipContextMenuBar.IsMaximized = false
-        Me.IDSlipContextMenuBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDSlipContextMenu})
-        Me.IDSlipContextMenuBar.Location = New System.Drawing.Point(76, 140)
-        Me.IDSlipContextMenuBar.Name = "IDSlipContextMenuBar"
-        Me.IDSlipContextMenuBar.Size = New System.Drawing.Size(108, 27)
-        Me.IDSlipContextMenuBar.Stretch = true
-        Me.IDSlipContextMenuBar.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.IDSlipContextMenuBar.TabIndex = 57
-        Me.IDSlipContextMenuBar.TabStop = false
-        Me.IDSlipContextMenuBar.Text = "ContextMenuBar2"
-        '
-        'btnIDSlipContextMenu
-        '
-        Me.btnIDSlipContextMenu.AutoExpandOnClick = true
-        Me.btnIDSlipContextMenu.Name = "btnIDSlipContextMenu"
-        Me.btnIDSlipContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDViewDisplayContext, Me.btnIDSelectDisplayContext, Me.btnIDScanDisplayContext, Me.btnIDClearDisplayContext, Me.btnIDExploreDisplayContext})
-        Me.btnIDSlipContextMenu.Text = "Context Menu"
-        '
-        'btnIDViewDisplayContext
-        '
-        Me.btnIDViewDisplayContext.Icon = CType(resources.GetObject("btnIDViewDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnIDViewDisplayContext.Name = "btnIDViewDisplayContext"
-        Me.btnIDViewDisplayContext.Text = "View"
-        '
-        'btnIDSelectDisplayContext
-        '
-        Me.btnIDSelectDisplayContext.BeginGroup = true
-        Me.btnIDSelectDisplayContext.Icon = CType(resources.GetObject("btnIDSelectDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnIDSelectDisplayContext.Name = "btnIDSelectDisplayContext"
-        Me.btnIDSelectDisplayContext.Text = "Select"
-        '
-        'btnIDScanDisplayContext
-        '
-        Me.btnIDScanDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnIDScanDisplayContext.Icon = CType(resources.GetObject("btnIDScanDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnIDScanDisplayContext.Name = "btnIDScanDisplayContext"
-        Me.btnIDScanDisplayContext.Text = "Scan"
-        '
-        'btnIDClearDisplayContext
-        '
-        Me.btnIDClearDisplayContext.BeginGroup = true
-        Me.btnIDClearDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnIDClearDisplayContext.Icon = CType(resources.GetObject("btnIDClearDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnIDClearDisplayContext.Name = "btnIDClearDisplayContext"
-        Me.btnIDClearDisplayContext.Text = "Clear"
-        '
-        'btnIDExploreDisplayContext
-        '
-        Me.btnIDExploreDisplayContext.BeginGroup = true
-        Me.btnIDExploreDisplayContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnIDExploreDisplayContext.Icon = CType(resources.GetObject("btnIDExploreDisplayContext.Icon"),System.Drawing.Icon)
-        Me.btnIDExploreDisplayContext.Name = "btnIDExploreDisplayContext"
-        Me.btnIDExploreDisplayContext.Text = "Locate"
-        '
-        'picIDSlip
-        '
-        Me.picIDSlip.BackColor = System.Drawing.Color.Gray
-        Me.IDSlipContextMenuBar.SetContextMenuEx(Me.picIDSlip, Me.btnIDSlipContextMenu)
-        Me.picIDSlip.Image = Nothing
-        Me.picIDSlip.Location = New System.Drawing.Point(8, 3)
-        Me.picIDSlip.Name = "picIDSlip"
-        Me.picIDSlip.Size = New System.Drawing.Size(245, 253)
-        Me.picIDSlip.TabIndex = 20
-        Me.picIDSlip.TabStop = false
-        Me.picIDSlip.ViewMode = iViewCore.PictureBox.EViewMode.FitImage
-        '
-        'btnIDClearFPSlip
-        '
-        Me.btnIDClearFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnIDClearFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnIDClearFPSlip.Location = New System.Drawing.Point(98, 268)
-        Me.btnIDClearFPSlip.Name = "btnIDClearFPSlip"
-        Me.btnIDClearFPSlip.Size = New System.Drawing.Size(65, 33)
-        Me.btnIDClearFPSlip.TabIndex = 21
-        Me.btnIDClearFPSlip.TabStop = false
-        Me.btnIDClearFPSlip.Text = "Clear"
-        '
-        'btnIDScanFPSlip
-        '
-        Me.btnIDScanFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnIDScanFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnIDScanFPSlip.Location = New System.Drawing.Point(186, 268)
-        Me.btnIDScanFPSlip.Name = "btnIDScanFPSlip"
-        Me.btnIDScanFPSlip.Size = New System.Drawing.Size(65, 33)
-        Me.btnIDScanFPSlip.TabIndex = 16
-        Me.btnIDScanFPSlip.TabStop = false
-        Me.btnIDScanFPSlip.Text = "Scan"
-        '
-        'btnIDSelectFPSlip
-        '
-        Me.btnIDSelectFPSlip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnIDSelectFPSlip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnIDSelectFPSlip.Location = New System.Drawing.Point(10, 268)
-        Me.btnIDSelectFPSlip.Name = "btnIDSelectFPSlip"
-        Me.btnIDSelectFPSlip.Size = New System.Drawing.Size(65, 33)
-        Me.btnIDSelectFPSlip.TabIndex = 15
-        Me.btnIDSelectFPSlip.TabStop = false
-        Me.btnIDSelectFPSlip.Text = "Select"
-        '
-        'btnSearchID
-        '
-        Me.btnSearchID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSearchID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSearchID.Image = CType(resources.GetObject("btnSearchID.Image"),System.Drawing.Image)
-        Me.btnSearchID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSearchID.Location = New System.Drawing.Point(1163, 96)
-        Me.btnSearchID.Name = "btnSearchID"
-        Me.btnSearchID.Size = New System.Drawing.Size(110, 73)
-        Me.btnSearchID.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIDFindByNumber, Me.btnIDAdvancedSearch})
-        Me.btnSearchID.TabIndex = 17
-        Me.btnSearchID.Text = "Search"
-        '
-        'btnIDFindByNumber
-        '
-        Me.btnIDFindByNumber.GlobalItem = false
-        Me.btnIDFindByNumber.Name = "btnIDFindByNumber"
-        Me.btnIDFindByNumber.Text = "Find by Number"
-        '
-        'btnIDAdvancedSearch
-        '
-        Me.btnIDAdvancedSearch.BeginGroup = true
-        Me.btnIDAdvancedSearch.GlobalItem = false
-        Me.btnIDAdvancedSearch.Name = "btnIDAdvancedSearch"
-        Me.btnIDAdvancedSearch.Text = "Advanced Search"
-        '
-        'btnClearIDFields
-        '
-        Me.btnClearIDFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnClearIDFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnClearIDFields.Image = CType(resources.GetObject("btnClearIDFields.Image"),System.Drawing.Image)
-        Me.btnClearIDFields.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnClearIDFields.Location = New System.Drawing.Point(1163, 181)
-        Me.btnClearIDFields.Name = "btnClearIDFields"
-        Me.btnClearIDFields.Size = New System.Drawing.Size(110, 73)
-        Me.btnClearIDFields.TabIndex = 18
-        Me.btnClearIDFields.Text = "Clear All Fields"
-        '
-        'btnSaveID
-        '
-        Me.btnSaveID.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveID.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveID.Image = CType(resources.GetObject("btnSaveID.Image"),System.Drawing.Image)
-        Me.btnSaveID.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveID.Location = New System.Drawing.Point(1163, 11)
-        Me.btnSaveID.Name = "btnSaveID"
-        Me.btnSaveID.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveID.TabIndex = 16
-        Me.btnSaveID.Text = "Save"
-        '
-        'txtIDSection
-        '
-        Me.txtIDSection.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDSection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDSection.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDSection.Border.Class = "TextBoxBorder"
-        Me.txtIDSection.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDSection.ButtonCustom.Image = CType(resources.GetObject("txtIDSection.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDSection.ButtonCustom.Visible = true
-        Me.txtIDSection.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDSection.FocusHighlightEnabled = true
-        Me.txtIDSection.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDSection.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDSection, true)
-        Me.txtIDSection.Location = New System.Drawing.Point(122, 161)
-        Me.txtIDSection.MaxLength = 255
-        Me.txtIDSection.Name = "txtIDSection"
-        Me.txtIDSection.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDSection.TabIndex = 5
-        Me.txtIDSection.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDSection.WatermarkText = "Section of Law"
-        '
-        'txtIDCrimeNumber
-        '
-        Me.txtIDCrimeNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtIDCrimeNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDCrimeNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDCrimeNumber.Border.Class = "TextBoxBorder"
-        Me.txtIDCrimeNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDCrimeNumber.ButtonCustom.Image = CType(resources.GetObject("txtIDCrimeNumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDCrimeNumber.ButtonCustom.Visible = true
-        Me.txtIDCrimeNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDCrimeNumber.FocusHighlightEnabled = true
-        Me.txtIDCrimeNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDCrimeNumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDCrimeNumber, true)
-        Me.txtIDCrimeNumber.Location = New System.Drawing.Point(122, 122)
-        Me.txtIDCrimeNumber.MaxLength = 45
-        Me.txtIDCrimeNumber.Name = "txtIDCrimeNumber"
-        Me.txtIDCrimeNumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDCrimeNumber.TabIndex = 4
-        Me.txtIDCrimeNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDCrimeNumber.WatermarkText = "Crime Number"
-        '
-        'txtIDHenryDenominator
-        '
-        Me.txtIDHenryDenominator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDHenryDenominator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDHenryDenominator.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDHenryDenominator.Border.Class = "TextBoxBorder"
-        Me.txtIDHenryDenominator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDHenryDenominator.ButtonCustom.Image = CType(resources.GetObject("txtIDHenryDenominator.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDHenryDenominator.ButtonCustom.Visible = true
-        Me.txtIDHenryDenominator.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDHenryDenominator.FocusHighlightEnabled = true
-        Me.txtIDHenryDenominator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDHenryDenominator.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDHenryDenominator, true)
-        Me.txtIDHenryDenominator.Location = New System.Drawing.Point(545, 119)
-        Me.txtIDHenryDenominator.MaxLength = 15
-        Me.txtIDHenryDenominator.Name = "txtIDHenryDenominator"
-        Me.txtIDHenryDenominator.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDHenryDenominator.TabIndex = 12
-        Me.txtIDHenryDenominator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDHenryDenominator.WatermarkText = "Classification Denominator"
-        '
-        'txtIDDetails
-        '
-        Me.txtIDDetails.AcceptsReturn = true
-        Me.txtIDDetails.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDDetails.Border.Class = "TextBoxBorder"
-        Me.txtIDDetails.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDDetails.ButtonCustom.Image = CType(resources.GetObject("txtIDDetails.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDDetails.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDDetails.FocusHighlightEnabled = true
-        Me.txtIDDetails.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDDetails.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDDetails, true)
-        Me.txtIDDetails.Location = New System.Drawing.Point(545, 186)
-        Me.txtIDDetails.MaxLength = 1000
-        Me.txtIDDetails.Multiline = true
-        Me.txtIDDetails.Name = "txtIDDetails"
-        Me.txtIDDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtIDDetails.Size = New System.Drawing.Size(227, 80)
-        Me.txtIDDetails.TabIndex = 14
-        Me.txtIDDetails.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDDetails.WatermarkText = "Identification Details"
-        '
-        'cmbIDSex
-        '
-        Me.cmbIDSex.AutoCompleteCustomSource.AddRange(New String() {"Male", "Female"})
-        Me.cmbIDSex.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbIDSex.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbIDSex.DisplayMember = "Text"
-        Me.cmbIDSex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbIDSex.FocusHighlightEnabled = true
-        Me.cmbIDSex.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbIDSex.ForeColor = System.Drawing.Color.Black
-        Me.cmbIDSex.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbIDSex, true)
-        Me.cmbIDSex.ItemHeight = 23
-        Me.cmbIDSex.Items.AddRange(New Object() {Me.ComboItem9, Me.ComboItem10})
-        Me.cmbIDSex.Location = New System.Drawing.Point(122, 319)
-        Me.cmbIDSex.MaxLength = 6
-        Me.cmbIDSex.Name = "cmbIDSex"
-        Me.cmbIDSex.Size = New System.Drawing.Size(122, 29)
-        Me.cmbIDSex.Sorted = true
-        Me.cmbIDSex.TabIndex = 9
-        Me.cmbIDSex.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbIDSex.WatermarkText = "Sex"
-        '
-        'ComboItem9
-        '
-        Me.ComboItem9.Text = "Female"
-        '
-        'ComboItem10
-        '
-        Me.ComboItem10.Text = "Male"
-        '
-        'LabelX113
-        '
-        Me.LabelX113.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX113.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX113.Location = New System.Drawing.Point(421, 196)
-        Me.LabelX113.Name = "LabelX113"
-        Me.LabelX113.Size = New System.Drawing.Size(120, 18)
-        Me.LabelX113.TabIndex = 92
-        Me.LabelX113.Text = "Identification Details"
-        '
-        'LabelX114
-        '
-        Me.LabelX114.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX114.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX114.Location = New System.Drawing.Point(421, 125)
-        Me.LabelX114.Name = "LabelX114"
-        Me.LabelX114.Size = New System.Drawing.Size(115, 18)
-        Me.LabelX114.TabIndex = 91
-        Me.LabelX114.Text = "Henry Denominator"
-        '
-        'txtIDFathersName
-        '
-        Me.txtIDFathersName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDFathersName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDFathersName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDFathersName.Border.Class = "TextBoxBorder"
-        Me.txtIDFathersName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDFathersName.ButtonCustom.Image = CType(resources.GetObject("txtIDFathersName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDFathersName.ButtonCustom.Visible = true
-        Me.txtIDFathersName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDFathersName.FocusHighlightEnabled = true
-        Me.txtIDFathersName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDFathersName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDFathersName, true)
-        Me.txtIDFathersName.Location = New System.Drawing.Point(122, 280)
-        Me.txtIDFathersName.MaxLength = 255
-        Me.txtIDFathersName.Name = "txtIDFathersName"
-        Me.txtIDFathersName.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDFathersName.TabIndex = 8
-        Me.txtIDFathersName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDFathersName.WatermarkText = "Father's Name"
-        '
-        'txtIDAddress
-        '
-        Me.txtIDAddress.AcceptsReturn = true
-        Me.txtIDAddress.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDAddress.Border.Class = "TextBoxBorder"
-        Me.txtIDAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDAddress.ButtonCustom.Image = CType(resources.GetObject("txtIDAddress.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDAddress.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDAddress.FocusHighlightEnabled = true
-        Me.txtIDAddress.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDAddress.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDAddress, true)
-        Me.txtIDAddress.Location = New System.Drawing.Point(545, 8)
-        Me.txtIDAddress.MaxLength = 255
-        Me.txtIDAddress.Multiline = true
-        Me.txtIDAddress.Name = "txtIDAddress"
-        Me.txtIDAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtIDAddress.Size = New System.Drawing.Size(227, 72)
-        Me.txtIDAddress.TabIndex = 10
-        Me.txtIDAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDAddress.WatermarkText = "Address"
-        '
-        'txtIDHenryNumerator
-        '
-        Me.txtIDHenryNumerator.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDHenryNumerator.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDHenryNumerator.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDHenryNumerator.Border.Class = "TextBoxBorder"
-        Me.txtIDHenryNumerator.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDHenryNumerator.ButtonCustom.Image = CType(resources.GetObject("txtIDHenryNumerator.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDHenryNumerator.ButtonCustom.Visible = true
-        Me.txtIDHenryNumerator.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDHenryNumerator.FocusHighlightEnabled = true
-        Me.txtIDHenryNumerator.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDHenryNumerator.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDHenryNumerator, true)
-        Me.txtIDHenryNumerator.Location = New System.Drawing.Point(545, 84)
-        Me.txtIDHenryNumerator.MaxLength = 15
-        Me.txtIDHenryNumerator.Name = "txtIDHenryNumerator"
-        Me.txtIDHenryNumerator.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDHenryNumerator.TabIndex = 11
-        Me.txtIDHenryNumerator.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDHenryNumerator.WatermarkText = "Classification Numerator"
-        '
-        'LabelX115
-        '
-        Me.LabelX115.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX115.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX115.Location = New System.Drawing.Point(11, 285)
-        Me.LabelX115.Name = "LabelX115"
-        Me.LabelX115.Size = New System.Drawing.Size(84, 18)
-        Me.LabelX115.TabIndex = 85
-        Me.LabelX115.Text = "Father's Name"
-        '
-        'LabelX116
-        '
-        Me.LabelX116.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX116.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX116.Location = New System.Drawing.Point(421, 89)
-        Me.LabelX116.Name = "LabelX116"
-        Me.LabelX116.Size = New System.Drawing.Size(102, 18)
-        Me.LabelX116.TabIndex = 84
-        Me.LabelX116.Text = "Henry Numerator"
-        '
-        'LabelX117
-        '
-        Me.LabelX117.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX117.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX117.Location = New System.Drawing.Point(421, 13)
-        Me.LabelX117.Name = "LabelX117"
-        Me.LabelX117.Size = New System.Drawing.Size(48, 18)
-        Me.LabelX117.TabIndex = 83
-        Me.LabelX117.Text = "Address"
-        '
-        'LabelX118
-        '
-        Me.LabelX118.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX118.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX118.Location = New System.Drawing.Point(11, 325)
-        Me.LabelX118.Name = "LabelX118"
-        Me.LabelX118.Size = New System.Drawing.Size(22, 18)
-        Me.LabelX118.TabIndex = 82
-        Me.LabelX118.Text = "Sex"
-        '
-        'LabelX119
-        '
-        Me.LabelX119.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX119.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX119.Location = New System.Drawing.Point(11, 246)
-        Me.LabelX119.Name = "LabelX119"
-        Me.LabelX119.Size = New System.Drawing.Size(66, 18)
-        Me.LabelX119.TabIndex = 81
-        Me.LabelX119.Text = "Alias Name"
-        '
-        'txtIDAliasName
-        '
-        Me.txtIDAliasName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDAliasName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDAliasName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDAliasName.Border.Class = "TextBoxBorder"
-        Me.txtIDAliasName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDAliasName.ButtonCustom.Image = CType(resources.GetObject("txtIDAliasName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDAliasName.ButtonCustom.Visible = true
-        Me.txtIDAliasName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDAliasName.FocusHighlightEnabled = true
-        Me.txtIDAliasName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDAliasName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDAliasName, true)
-        Me.txtIDAliasName.Location = New System.Drawing.Point(122, 240)
-        Me.txtIDAliasName.MaxLength = 255
-        Me.txtIDAliasName.Name = "txtIDAliasName"
-        Me.txtIDAliasName.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDAliasName.TabIndex = 7
-        Me.txtIDAliasName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDAliasName.WatermarkText = "Alias Name"
-        '
-        'txtIDName
-        '
-        Me.txtIDName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtIDName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIDName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDName.Border.Class = "TextBoxBorder"
-        Me.txtIDName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDName.ButtonCustom.Image = CType(resources.GetObject("txtIDName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDName.ButtonCustom.Visible = true
-        Me.txtIDName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDName.FocusHighlightEnabled = true
-        Me.txtIDName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDName, true)
-        Me.txtIDName.Location = New System.Drawing.Point(122, 200)
-        Me.txtIDName.MaxLength = 255
-        Me.txtIDName.Name = "txtIDName"
-        Me.txtIDName.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDName.TabIndex = 6
-        Me.txtIDName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDName.WatermarkText = "Name"
-        '
-        'LabelX120
-        '
-        Me.LabelX120.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX120.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX120.Location = New System.Drawing.Point(11, 166)
-        Me.LabelX120.Name = "LabelX120"
-        Me.LabelX120.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX120.TabIndex = 74
-        Me.LabelX120.Text = "Section of Law"
-        '
-        'cmbIDPoliceStation
-        '
-        Me.cmbIDPoliceStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbIDPoliceStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbIDPoliceStation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbIDPoliceStation.FocusHighlightEnabled = true
-        Me.cmbIDPoliceStation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbIDPoliceStation.ForeColor = System.Drawing.Color.Black
-        Me.cmbIDPoliceStation.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbIDPoliceStation, true)
-        Me.cmbIDPoliceStation.ItemHeight = 23
-        Me.cmbIDPoliceStation.Location = New System.Drawing.Point(122, 84)
-        Me.cmbIDPoliceStation.MaxDropDownItems = 35
-        Me.cmbIDPoliceStation.MaxLength = 255
-        Me.cmbIDPoliceStation.Name = "cmbIDPoliceStation"
-        Me.cmbIDPoliceStation.Size = New System.Drawing.Size(227, 29)
-        Me.cmbIDPoliceStation.Sorted = true
-        Me.cmbIDPoliceStation.TabIndex = 3
-        Me.cmbIDPoliceStation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbIDPoliceStation.WatermarkText = "Police Station"
-        '
-        'LabelX121
-        '
-        Me.LabelX121.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX121.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX121.Location = New System.Drawing.Point(11, 127)
-        Me.LabelX121.Name = "LabelX121"
-        Me.LabelX121.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX121.TabIndex = 70
-        Me.LabelX121.Text = "Crime Number"
-        '
-        'txtIDDANumber
-        '
-        Me.txtIDDANumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIDDANumber.Border.Class = "TextBoxBorder"
-        Me.txtIDDANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIDDANumber.ButtonCustom.Image = CType(resources.GetObject("txtIDDANumber.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIDDANumber.ButtonCustom.Visible = true
-        Me.txtIDDANumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIDDANumber.FocusHighlightEnabled = true
-        Me.txtIDDANumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIDDANumber.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIDDANumber, true)
-        Me.txtIDDANumber.Location = New System.Drawing.Point(122, 45)
-        Me.txtIDDANumber.MaxLength = 10
-        Me.txtIDDANumber.Name = "txtIDDANumber"
-        Me.txtIDDANumber.Size = New System.Drawing.Size(227, 29)
-        Me.txtIDDANumber.TabIndex = 2
-        Me.txtIDDANumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIDDANumber.WatermarkText = "DA Number (if any)"
-        '
-        'LabelX123
-        '
-        Me.LabelX123.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX123.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX123.Location = New System.Drawing.Point(11, 90)
-        Me.LabelX123.Name = "LabelX123"
-        Me.LabelX123.Size = New System.Drawing.Size(80, 18)
-        Me.LabelX123.TabIndex = 68
-        Me.LabelX123.Text = "Police Station"
-        '
-        'LabelX124
-        '
-        Me.LabelX124.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX124.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX124.Location = New System.Drawing.Point(11, 206)
-        Me.LabelX124.Name = "LabelX124"
-        Me.LabelX124.Size = New System.Drawing.Size(36, 18)
-        Me.LabelX124.TabIndex = 67
-        Me.LabelX124.Text = "Name"
-        '
-        'LabelX125
-        '
-        Me.LabelX125.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX125.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX125.Location = New System.Drawing.Point(11, 13)
-        Me.LabelX125.Name = "LabelX125"
-        Me.LabelX125.Size = New System.Drawing.Size(49, 18)
-        Me.LabelX125.TabIndex = 65
-        Me.LabelX125.Text = "Number"
-        '
-        'LabelX126
-        '
-        Me.LabelX126.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX126.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX126.Location = New System.Drawing.Point(11, 50)
-        Me.LabelX126.Name = "LabelX126"
-        Me.LabelX126.Size = New System.Drawing.Size(70, 18)
-        Me.LabelX126.TabIndex = 64
-        Me.LabelX126.Text = "DA Number"
-        '
-        'IDTabItem
-        '
-        Me.IDTabItem.AttachedControl = Me.TabControlPanel6
-        Me.IDTabItem.Name = "IDTabItem"
-        Me.IDTabItem.Text = "Identified Slips Register"
-        '
         'TabControlPanel7
         '
         Me.TabControlPanel7.Controls.Add(Me.lblCDGridInfo)
@@ -14188,192 +14378,44 @@ Partial Class frmMainInterface
         '
         Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
         '
-        'IdentificationNumberDataGridViewTextBoxColumn1
+        'RibbonBar18
         '
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationNumber"
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.HeaderText = "ID Number"
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.Name = "IdentificationNumberDataGridViewTextBoxColumn1"
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.Width = 70
+        Me.RibbonBar18.AutoOverflowEnabled = true
         '
-        'SOCNumberDataGridViewTextBoxColumn2
         '
-        Me.SOCNumberDataGridViewTextBoxColumn2.DataPropertyName = "SOCNumber"
-        Me.SOCNumberDataGridViewTextBoxColumn2.HeaderText = "SOC Number"
-        Me.SOCNumberDataGridViewTextBoxColumn2.Name = "SOCNumberDataGridViewTextBoxColumn2"
-        Me.SOCNumberDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.SOCNumberDataGridViewTextBoxColumn2.Width = 80
         '
-        'IdentificationDateDataGridViewTextBoxColumn
+        Me.RibbonBar18.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        Me.IdentificationDateDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDate"
-        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle52.Format = "dd/MM/yyyy"
-        Me.IdentificationDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle52
-        Me.IdentificationDateDataGridViewTextBoxColumn.HeaderText = "Identification Date"
-        Me.IdentificationDateDataGridViewTextBoxColumn.Name = "IdentificationDateDataGridViewTextBoxColumn"
-        Me.IdentificationDateDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentificationDateDataGridViewTextBoxColumn.Width = 80
         '
-        'DateOfInspectionDataGridViewTextBoxColumn2
         '
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle53.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle53
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.HeaderText = "Inspection Date"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.Name = "DateOfInspectionDataGridViewTextBoxColumn2"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.Width = 80
+        Me.RibbonBar18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar18.ContainerControlProcessDialogKey = true
+        Me.RibbonBar18.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar18.DragDropSupport = true
+        Me.RibbonBar18.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCompactDatabase})
+        Me.RibbonBar18.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar18.Location = New System.Drawing.Point(500, 0)
+        Me.RibbonBar18.Name = "RibbonBar18"
+        Me.RibbonBar18.Size = New System.Drawing.Size(168, 93)
+        Me.RibbonBar18.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar18.TabIndex = 2
+        Me.RibbonBar18.Text = "COMPACT DATABASE"
         '
-        'PoliceStationDataGridViewTextBoxColumn7
         '
-        Me.PoliceStationDataGridViewTextBoxColumn7.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn7.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn7.Name = "PoliceStationDataGridViewTextBoxColumn7"
-        Me.PoliceStationDataGridViewTextBoxColumn7.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn7.Width = 140
         '
-        'CrimeNumberDataGridViewTextBoxColumn5
+        Me.RibbonBar18.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        Me.CrimeNumberDataGridViewTextBoxColumn5.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn5.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn5.Name = "CrimeNumberDataGridViewTextBoxColumn5"
-        Me.CrimeNumberDataGridViewTextBoxColumn5.ReadOnly = true
-        Me.CrimeNumberDataGridViewTextBoxColumn5.Width = 80
         '
-        'SectionOfLawDataGridViewTextBoxColumn4
         '
-        Me.SectionOfLawDataGridViewTextBoxColumn4.DataPropertyName = "SectionOfLaw"
-        Me.SectionOfLawDataGridViewTextBoxColumn4.HeaderText = "Section of Law"
-        Me.SectionOfLawDataGridViewTextBoxColumn4.Name = "SectionOfLawDataGridViewTextBoxColumn4"
-        Me.SectionOfLawDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.RibbonBar18.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'InvestigatingOfficerDataGridViewTextBoxColumn1
+        'btnCompactDatabase
         '
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.DataPropertyName = "InvestigatingOfficer"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.HeaderText = "Inspecting Officer"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Name = "InvestigatingOfficerDataGridViewTextBoxColumn1"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Width = 140
-        '
-        'IdentifiedByDataGridViewTextBoxColumn
-        '
-        Me.IdentifiedByDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedBy"
-        Me.IdentifiedByDataGridViewTextBoxColumn.HeaderText = "Identified By"
-        Me.IdentifiedByDataGridViewTextBoxColumn.Name = "IdentifiedByDataGridViewTextBoxColumn"
-        Me.IdentifiedByDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentifiedByDataGridViewTextBoxColumn.Width = 140
-        '
-        'ChancePrintsDevelopedDataGridViewTextBoxColumn
-        '
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DataPropertyName = "ChancePrintsDeveloped"
-        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle54
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Developed"
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn"
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Width = 70
-        '
-        'CPsIdentifiedDataGridViewTextBoxColumn
-        '
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "CPsIdentified"
-        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle55
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Identified"
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.Name = "CPsIdentifiedDataGridViewTextBoxColumn"
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.Width = 70
-        '
-        'NoOfCulpritsIdentifiedDataGridViewTextBoxColumn
-        '
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "NoOfCulpritsIdentified"
-        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle56
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of Culprits Identified"
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Name = "NoOfCulpritsIdentifiedDataGridViewTextBoxColumn"
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Width = 70
-        '
-        'CulpritNameDataGridViewTextBoxColumn
-        '
-        Me.CulpritNameDataGridViewTextBoxColumn.DataPropertyName = "CulpritName"
-        Me.CulpritNameDataGridViewTextBoxColumn.HeaderText = "Culprit Name"
-        Me.CulpritNameDataGridViewTextBoxColumn.Name = "CulpritNameDataGridViewTextBoxColumn"
-        Me.CulpritNameDataGridViewTextBoxColumn.ReadOnly = true
-        Me.CulpritNameDataGridViewTextBoxColumn.Width = 150
-        '
-        'AddressDataGridViewTextBoxColumn4
-        '
-        Me.AddressDataGridViewTextBoxColumn4.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn4.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn4.Name = "AddressDataGridViewTextBoxColumn4"
-        Me.AddressDataGridViewTextBoxColumn4.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn4.Width = 200
-        '
-        'FingersIdentifiedDataGridViewTextBoxColumn
-        '
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "FingersIdentified"
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.HeaderText = "Fingers Identified"
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.Name = "FingersIdentifiedDataGridViewTextBoxColumn"
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'HenryClassificationDataGridViewTextBoxColumn
-        '
-        Me.HenryClassificationDataGridViewTextBoxColumn.DataPropertyName = "HenryClassification"
-        Me.HenryClassificationDataGridViewTextBoxColumn.HeaderText = "Henry Classification"
-        Me.HenryClassificationDataGridViewTextBoxColumn.Name = "HenryClassificationDataGridViewTextBoxColumn"
-        Me.HenryClassificationDataGridViewTextBoxColumn.ReadOnly = true
-        Me.HenryClassificationDataGridViewTextBoxColumn.Width = 150
-        '
-        'DANumberDataGridViewTextBoxColumn3
-        '
-        Me.DANumberDataGridViewTextBoxColumn3.DataPropertyName = "DANumber"
-        Me.DANumberDataGridViewTextBoxColumn3.HeaderText = "DA Number"
-        Me.DANumberDataGridViewTextBoxColumn3.Name = "DANumberDataGridViewTextBoxColumn3"
-        Me.DANumberDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.DANumberDataGridViewTextBoxColumn3.Width = 150
-        '
-        'PreviousCaseDetails
-        '
-        Me.PreviousCaseDetails.DataPropertyName = "PreviousCaseDetails"
-        Me.PreviousCaseDetails.HeaderText = "Previous Case Details"
-        Me.PreviousCaseDetails.Name = "PreviousCaseDetails"
-        Me.PreviousCaseDetails.ReadOnly = true
-        '
-        'IdentifiedFromDataGridViewTextBoxColumn
-        '
-        Me.IdentifiedFromDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedFrom"
-        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.IdentifiedFromDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle57
-        Me.IdentifiedFromDataGridViewTextBoxColumn.HeaderText = "Identified From"
-        Me.IdentifiedFromDataGridViewTextBoxColumn.Name = "IdentifiedFromDataGridViewTextBoxColumn"
-        Me.IdentifiedFromDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentifiedFromDataGridViewTextBoxColumn.Width = 80
-        '
-        'IdentificationDetailsDataGridViewTextBoxColumn1
-        '
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationDetails"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.HeaderText = "Remarks"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Name = "IdentificationDetailsDataGridViewTextBoxColumn1"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Width = 250
-        '
-        'IDRNumberDataGridViewTextBoxColumn
-        '
-        Me.IDRNumberDataGridViewTextBoxColumn.DataPropertyName = "IDRNumber"
-        Me.IDRNumberDataGridViewTextBoxColumn.HeaderText = "IDRNumber"
-        Me.IDRNumberDataGridViewTextBoxColumn.Name = "IDRNumberDataGridViewTextBoxColumn"
-        Me.IDRNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IDRNumberDataGridViewTextBoxColumn.Visible = false
-        '
-        'SlNumber
-        '
-        Me.SlNumber.DataPropertyName = "SlNumber"
-        Me.SlNumber.HeaderText = "SlNumber"
-        Me.SlNumber.Name = "SlNumber"
-        Me.SlNumber.ReadOnly = true
-        Me.SlNumber.Visible = false
+        Me.btnCompactDatabase.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnCompactDatabase.Image = CType(resources.GetObject("btnCompactDatabase.Image"),System.Drawing.Image)
+        Me.btnCompactDatabase.Name = "btnCompactDatabase"
+        Me.btnCompactDatabase.SubItemsExpandWidth = 14
+        Me.btnCompactDatabase.Text = "Compact Database"
         '
         'frmMainInterface
         '
@@ -14428,6 +14470,12 @@ Partial Class frmMainInterface
         Me.TabControlPanel11.ResumeLayout(false)
         Me.PanelIDR.ResumeLayout(false)
         Me.PanelIDR.PerformLayout
+        Me.TabControlPanel6.ResumeLayout(false)
+        Me.PanelID.ResumeLayout(false)
+        Me.PanelID.PerformLayout
+        CType(Me.txtIDNumber,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupPanel2.ResumeLayout(false)
+        CType(Me.IDSlipContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControlPanel1.ResumeLayout(false)
         Me.PanelEx1.ResumeLayout(false)
         Me.PanelEx4.ResumeLayout(false)
@@ -14479,12 +14527,6 @@ Partial Class frmMainInterface
         CType(Me.txtACNumber,System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupPanel3.ResumeLayout(false)
         CType(Me.ACSlipContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabControlPanel6.ResumeLayout(false)
-        Me.PanelID.ResumeLayout(false)
-        Me.PanelID.PerformLayout
-        CType(Me.txtIDNumber,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupPanel2.ResumeLayout(false)
-        CType(Me.IDSlipContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControlPanel7.ResumeLayout(false)
         Me.TabControlPanel7.PerformLayout
         Me.PanelCD.ResumeLayout(false)
@@ -15515,5 +15557,7 @@ End Sub
     Friend WithEvents IdentificationDetailsDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IDRNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SlNumber As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RibbonBar18 As DevComponents.DotNetBar.RibbonBar
+    Friend WithEvents btnCompactDatabase As DevComponents.DotNetBar.ButtonItem
 
 End Class

@@ -21,18 +21,18 @@ Public Class FrmSettingsWizard
                 Exit Sub
             End If
 
-            sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-            If ValidPath(sDatabaseFile) Then
-                Me.lblDatabaseLocation.Text = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
+            If ValidPath(strDatabaseFile) Then
+                Me.lblDatabaseLocation.Text = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
             Else
                 Me.lblDatabaseLocation.Text = SuggestedLocation & "\Database"
             End If
 
             OldDBFile = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
 
-            If FileIO.FileSystem.FileExists(sDatabaseFile) = False Then
-                sDatabaseFile = OldDBFile
+            If FileIO.FileSystem.FileExists(strDatabaseFile) = False Then
+                strDatabaseFile = OldDBFile
             End If
 
             BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
@@ -51,7 +51,7 @@ Public Class FrmSettingsWizard
 
             Me.txtBackupInterval.Text = IIf(autobackuptime = "", "30", autobackuptime)
 
-            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
+            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
 
             If Me.OfficerTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficerTableTableAdapter1.Connection.Close()
             Me.OfficerTableTableAdapter1.Connection.ConnectionString = sConString
@@ -245,16 +245,16 @@ Public Class FrmSettingsWizard
 
 
         Dim newdbfolder = Me.lblDatabaseLocation.Text
-        Dim olddbfolder = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
+        Dim olddbfolder = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
         If olddbfolder <> newdbfolder Then
             My.Computer.FileSystem.CreateDirectory(newdbfolder)
-            My.Computer.FileSystem.CopyFile(sDatabaseFile, newdbfolder & "\Fingerprint.mdb", False)
-            sDatabaseFile = newdbfolder & "\Fingerprint.mdb"
+            My.Computer.FileSystem.CopyFile(strDatabaseFile, newdbfolder & "\Fingerprint.mdb", False)
+            strDatabaseFile = newdbfolder & "\Fingerprint.mdb"
             Application.DoEvents()
         End If
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", strDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
 
-       
+
         Dim newbackupfolder = Me.lblBackupLocation.Text
         My.Computer.FileSystem.CreateDirectory(newbackupfolder)
 
@@ -281,7 +281,7 @@ Public Class FrmSettingsWizard
 
         Application.DoEvents()
 
-        sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
+        sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
 
         If Me.OfficerTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficerTableTableAdapter1.Connection.Close()
         Me.OfficerTableTableAdapter1.Connection.ConnectionString = sConString

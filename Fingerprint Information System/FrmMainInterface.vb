@@ -142,9 +142,9 @@ Public Class frmMainInterface
 
         IncrementCircularProgress(1)
 
-        sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+        strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-        sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
+        sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
 
         If Me.SettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.SettingsTableAdapter1.Connection.Close()
         Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
@@ -326,7 +326,7 @@ Public Class frmMainInterface
         '------------ Connecting To Database ---------------
 
 
-        Dim DBExists As Boolean = FileIO.FileSystem.FileExists(sDatabaseFile)
+        Dim DBExists As Boolean = FileIO.FileSystem.FileExists(strDatabaseFile)
 
         If DBExists Then
             ConnectToDatabase()
@@ -1834,8 +1834,8 @@ Public Class frmMainInterface
 
             System.Threading.Thread.Sleep(1000)
 
-            sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
-            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & sDatabaseFile
+            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
             ConnectToDatabase()
 
 
@@ -13439,18 +13439,18 @@ errhandler:
     Private Sub ChangeDatabaseLocation(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeDBFolder.Click
         Try
             Dim StartFolder As String
-            sDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-            If ValidPath(sDatabaseFile) Then
-                StartFolder = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
+            If ValidPath(strDatabaseFile) Then
+                StartFolder = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
             Else
                 StartFolder = SuggestedLocation & "\Database"
             End If
 
             Dim OldDBFile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
 
-            If FileIO.FileSystem.FileExists(sDatabaseFile) = False Then
-                sDatabaseFile = OldDBFile
+            If FileIO.FileSystem.FileExists(strDatabaseFile) = False Then
+                strDatabaseFile = OldDBFile
             End If
 
             Me.FolderBrowserDialog1.ShowNewFolderButton = True
@@ -13471,7 +13471,7 @@ errhandler:
                 SelectedPath = SelectedPath.Replace("\\", "\")
 
 
-                Dim olddbfolder = My.Computer.FileSystem.GetParentPath(sDatabaseFile)
+                Dim olddbfolder = My.Computer.FileSystem.GetParentPath(strDatabaseFile)
                 If olddbfolder <> SelectedPath Then
                     If FileIO.FileSystem.FileExists(SelectedPath & "\Fingerprint.mdb") Then
                         Dim reply As DialogResult = MessageBoxEx.Show("Database already exists in selected folder. Click 'Yes' to overwrite or 'No' to exit without change.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
@@ -13482,11 +13482,11 @@ errhandler:
                     End If
 
                     My.Computer.FileSystem.CreateDirectory(SelectedPath)
-                    My.Computer.FileSystem.CopyFile(sDatabaseFile, SelectedPath & "\Fingerprint.mdb", True)
-                    sDatabaseFile = SelectedPath & "\Fingerprint.mdb"
+                    My.Computer.FileSystem.CopyFile(strDatabaseFile, SelectedPath & "\Fingerprint.mdb", True)
+                    strDatabaseFile = SelectedPath & "\Fingerprint.mdb"
                     Application.DoEvents()
                     ShowDesktopAlert("Database Folder changed")
-                    My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", sDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", strDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
                     ReloadDataAfterSettingsWizardClose()
 
                 End If
@@ -16377,7 +16377,7 @@ errhandler:
 
         If Now >= dt Or blTakeBackup Then
 
-            Dim Source As String = sDatabaseFile
+            Dim Source As String = strDatabaseFile
 
             Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
 
@@ -16619,7 +16619,7 @@ errhandler:
             body.Parents = parentlist
 
             Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-            My.Computer.FileSystem.CopyFile(sDatabaseFile, tmpFileName, True)
+            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
 
             dFileSize = FileLen(tmpFileName)
             dFormatedFileSize = CalculateFileSize(dFileSize)
@@ -16882,8 +16882,8 @@ errhandler:
     Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
         On Error Resume Next
 
-        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
-            Call Shell("explorer.exe /select," & sDatabaseFile, AppWinStyle.NormalFocus)
+        If FileIO.FileSystem.FileExists(strDatabaseFile) Then
+            Call Shell("explorer.exe /select," & strDatabaseFile, AppWinStyle.NormalFocus)
         Else
             MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
@@ -16895,8 +16895,8 @@ errhandler:
     Private Sub OpenDBInAccess() Handles btnOpenDBInMSAccess.Click
         On Error Resume Next
 
-        If FileIO.FileSystem.FileExists(sDatabaseFile) Then
-            Shell("explorer.exe " & sDatabaseFile, AppWinStyle.MaximizedFocus)
+        If FileIO.FileSystem.FileExists(strDatabaseFile) Then
+            Shell("explorer.exe " & strDatabaseFile, AppWinStyle.MaximizedFocus)
 
         Else
             MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -17476,4 +17476,42 @@ errhandler:
 
 
 
+    Private Sub btnCompactDatabase_Click(sender As Object, e As EventArgs) Handles btnCompactDatabase.Click
+        Try
+            Dim olddbsize As String = CalculateFileSize(My.Computer.FileSystem.GetFileInfo(strDatabaseFile).Length)
+            Dim r = MessageBoxEx.Show("Current Database file size is " & olddbsize & ". Do you want to compact the Database?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+            If r = Windows.Forms.DialogResult.No Then Exit Sub
+
+            Me.Cursor = Cursors.WaitCursor
+            Dim db As New dao.DBEngine
+
+            Dim BackupPath As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
+
+            Dim BackupTime As Date = Now
+            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
+            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+            Dim BackupFile As String = BackupPath & "\" & BackupFileName
+            My.Computer.FileSystem.CopyFile(strDatabaseFile, BackupFile, True)
+
+            If My.Computer.FileSystem.FileExists(BackupFile) Then
+                Dim tmpfile As String = My.Computer.FileSystem.GetTempFileName & ".mdb"
+                db.CompactDatabase(BackupFile, tmpfile)
+                If My.Computer.FileSystem.FileExists(tmpfile) Then
+                    My.Computer.FileSystem.CopyFile(tmpfile, strDatabaseFile, True)
+                    Dim newdbsize As String = CalculateFileSize(My.Computer.FileSystem.GetFileInfo(strDatabaseFile).Length)
+                    MessageBoxEx.Show("Database file compressed successfully." & vbNewLine & "File size before compression - " & olddbsize & vbNewLine & "File size after compression - " & newdbsize & vbNewLine & "A backup file has been created before compression." & vbNewLine & vbNewLine & "The application will now restart automatically.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    blRestartApplication = True
+                    EndApplication()
+                Else
+                    MessageBoxEx.Show("Database compression failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 End Class
