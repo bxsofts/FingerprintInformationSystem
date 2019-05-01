@@ -24,7 +24,7 @@ Partial Class frmUpdateAlert
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdateAlert))
         Me.btnRemindLater = New DevComponents.DotNetBar.ButtonX()
-        Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
+        Me.btnDownloadUpdate = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.RichTextBoxEx1 = New DevComponents.DotNetBar.Controls.RichTextBoxEx()
         Me.PanelEx1.SuspendLayout()
@@ -42,17 +42,17 @@ Partial Class frmUpdateAlert
         Me.btnRemindLater.TabStop = False
         Me.btnRemindLater.Text = "Remind Me Later"
         '
-        'ButtonX1
+        'btnDownloadUpdate
         '
-        Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.ButtonX1.Location = New System.Drawing.Point(360, 307)
-        Me.ButtonX1.Name = "ButtonX1"
-        Me.ButtonX1.Size = New System.Drawing.Size(111, 36)
-        Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.ButtonX1.TabIndex = 2
-        Me.ButtonX1.TabStop = False
-        Me.ButtonX1.Text = "Download Now"
+        Me.btnDownloadUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDownloadUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDownloadUpdate.Location = New System.Drawing.Point(360, 307)
+        Me.btnDownloadUpdate.Name = "btnDownloadUpdate"
+        Me.btnDownloadUpdate.Size = New System.Drawing.Size(111, 36)
+        Me.btnDownloadUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnDownloadUpdate.TabIndex = 2
+        Me.btnDownloadUpdate.TabStop = False
+        Me.btnDownloadUpdate.Text = "Download Now"
         '
         'PanelEx1
         '
@@ -60,7 +60,7 @@ Partial Class frmUpdateAlert
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx1.Controls.Add(Me.RichTextBoxEx1)
         Me.PanelEx1.Controls.Add(Me.btnRemindLater)
-        Me.PanelEx1.Controls.Add(Me.ButtonX1)
+        Me.PanelEx1.Controls.Add(Me.btnDownloadUpdate)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
@@ -68,7 +68,6 @@ Partial Class frmUpdateAlert
         Me.PanelEx1.Size = New System.Drawing.Size(619, 351)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
@@ -109,15 +108,15 @@ Partial Class frmUpdateAlert
         Me.MinimizeBox = False
         Me.Name = "frmUpdateAlert"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Update Available"
-        Me.TitleText = "<b>Update Available</b>"
+        Me.Text = "New Update Available"
+        Me.TitleText = "<b>New Update Available</b>"
         Me.TopMost = True
         Me.PanelEx1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents btnRemindLater As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnDownloadUpdate As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents RichTextBoxEx1 As DevComponents.DotNetBar.Controls.RichTextBoxEx
 End Class

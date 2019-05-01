@@ -332,7 +332,7 @@ Public Class frmMainInterface
             ConnectToDatabase()
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
 
-            If CreateTable = 1 Then
+            If CreateTable = "1" Then
                 CreateLastModificationTable()
                 CreateIdentificationRegisterTable()
                 CreateSOCReportRegisterTable()
@@ -464,6 +464,7 @@ Public Class frmMainInterface
             TakeAutoOnlineBackup()
         End If
 
+        ShowNewVersionInstalledInfo()
         CheckForUpdatesAtStartup()
         UploadVersionInfoToDrive()
         AlertLocalBackupCount()
@@ -17083,6 +17084,18 @@ errhandler:
 
 #Region "CHECK FOR UPDATE"
 
+    Private Sub ShowNewVersionInstalledInfo()
+        Try
+            Dim ShowNewVersionInfo As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0")
+            If ShowNewVersionInfo = "1" And My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionFeatures.rtf") Then
+                My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0", Microsoft.Win32.RegistryValueKind.String)
+                blNewVersionFound = False
+                frmUpdateAlert.ShowDialog()
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub CheckForUpdatesAtStartup()
 
         bgwUpdateChecker.RunWorkerAsync()
@@ -17105,7 +17118,8 @@ errhandler:
             Application.DoEvents()
             blDownloadUpdate = False
 
-            If My.Computer.FileSystem.FileExists(strAppUserPath & "\VersionHistory.rtf") Then
+            If My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionAvailable.rtf") Then
+                blNewVersionFound = True
                 frmUpdateAlert.ShowDialog()
             Else
                 Dim d = MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
@@ -17171,7 +17185,7 @@ errhandler:
 
                 If InstallerFileVersion > LocalVersion Then
 
-                    List.Q = "name = 'VersionHistory.rtf' and trashed = false"
+                    List.Q = "name = 'NewVersionAvailable.rtf' and trashed = false"
                     List.Fields = "files(name, id)"
 
                     Results = List.Execute
@@ -17180,7 +17194,7 @@ errhandler:
                         Dim fileid = Results.Files(0).Id
                         Dim request = FISService.Files.Get(fileid)
 
-                        Dim fStream = New System.IO.FileStream(strAppUserPath & "\VersionHistory.rtf", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                        Dim fStream = New System.IO.FileStream(strAppUserPath & "\NewVersionAvailable.rtf", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
                         Dim mStream = New System.IO.MemoryStream
 
                         request.DownloadWithStatus(mStream)
@@ -17190,6 +17204,27 @@ errhandler:
                         fStream.Close()
                         mStream.Close()
                     End If
+
+                    List.Q = "name = 'NewVersionFeatures.rtf' and trashed = false"
+                    List.Fields = "files(name, id)"
+
+                    Results = List.Execute
+
+                    If Results.Files.Count > 0 Then
+                        Dim fileid = Results.Files(0).Id
+                        Dim request = FISService.Files.Get(fileid)
+
+                        Dim fStream = New System.IO.FileStream(strAppUserPath & "\NewVersionFeatures.rtf", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                        Dim mStream = New System.IO.MemoryStream
+
+                        request.DownloadWithStatus(mStream)
+
+                        mStream.WriteTo(fStream)
+
+                        fStream.Close()
+                        mStream.Close()
+                    End If
+
                     Return True
                 End If
             End If
@@ -17214,7 +17249,8 @@ errhandler:
 
             blDownloadUpdate = False
 
-            If My.Computer.FileSystem.FileExists(strAppUserPath & "\VersionHistory.rtf") Then
+            If My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionAvailable.rtf") Then
+                blNewVersionFound = True
                 frmUpdateAlert.ShowDialog()
             Else
                 Dim d = MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)

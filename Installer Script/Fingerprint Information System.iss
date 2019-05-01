@@ -120,7 +120,7 @@ Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Info
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
 Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\Scripts\PinToTaskbar.exe; DestDir: {app}\; Flags: ignoreversion
-; Source: .\Scripts\syspin.exe; DestDir: {app}\; Flags: ignoreversion
+Source: .\VersionHistory\NewVersionFeatures.rtf; DestDir: {userdocs}\BXSofts\Fingerprint Information System; Flags: ignoreversion
 
 
 [Registry]
@@ -185,7 +185,7 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoBackupTime; ValueData: 30; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: RenameOldBackupFiles; ValueData: 1; Flags: noerror uninsdeletekey
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\TabColorSettings; ValueType: string; ValueName: TabStyle; ValueData: 9; Flags: noerror uninsdeletekey createvalueifdoesntexist
-
+Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: ShowNewVersionInfo; ValueData: 1; Flags: noerror uninsdeletekey
 [Run]
 ; Filename: {app}\syspin.exe; Tasks: Pintotaskbar;  Parameters: """{app}\Fingerprint Information System.exe"" c:""Pin To Taskbar""" ; Flags: runhidden
 Filename: {app}\PinToTaskbar.exe; Tasks: Pintotaskbar  ; Flags: runhidden
