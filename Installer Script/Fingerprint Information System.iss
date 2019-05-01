@@ -120,6 +120,7 @@ Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Info
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
 Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\Scripts\PinToTaskbar.exe; DestDir: {app}\; Flags: ignoreversion
+Source: .\Scripts\RestartFIS.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\VersionHistory\NewVersionFeatures.rtf; DestDir: {userdocs}\BXSofts\Fingerprint Information System; Flags: ignoreversion
 
 
