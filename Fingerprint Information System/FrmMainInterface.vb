@@ -842,6 +842,12 @@ Public Class frmMainInterface
         Me.btnRandomColor.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseRandomColor", 1)
 
         Me.txtLoadSelectedYearRecords.Text = Year(Today)
+
+        Me.cmbSalutation.Items.Add("Sri.")
+        Me.cmbSalutation.Items.Add("Smt.")
+        Me.cmbSalutation.DropDownStyle = ComboBoxStyle.DropDown
+        Me.cmbSalutation.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+
     End Sub
 
 
@@ -2816,6 +2822,7 @@ Public Class frmMainInterface
         Me.IODatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.IODatagrid.Columns(0).DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
 
+        Me.IODatagrid.Columns(6).DisplayIndex = 1
         Me.JoinedIDRDataGrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.JoinedIDRDataGrid.Columns(0).CellTemplate.Style.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.JoinedIDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
@@ -5809,6 +5816,7 @@ errhandler:
                 Me.txtIOBAsicPay.Text = .Cells(3).Value.ToString
                 Me.txtIOScaleOfPay.Text = .Cells(4).Value.ToString
                 Me.txtIODARate.Text = .Cells(5).Value.ToString
+                Me.cmbSalutation.Text = .Cells(6).Value.ToString
             End With
         End If
 
@@ -6192,6 +6200,7 @@ errhandler:
                 Me.txtIOBAsicPay.Text = .Cells(3).Value.ToString
                 Me.txtIOScaleOfPay.Text = .Cells(4).Value.ToString
                 Me.txtIODARate.Text = .Cells(5).Value.ToString
+                Me.cmbSalutation.Text = .Cells(6).Value.ToString
             End With
         End If
 
@@ -7096,7 +7105,7 @@ errhandler:
         End If
 
         For iocnt = 0 To 5
-            For i = 1 To 5
+            For i = 1 To 6
                 Me.IODatagrid.Rows(iocnt).Cells(i).Value = ""
             Next
         Next
@@ -7171,6 +7180,14 @@ errhandler:
             Me.IODatagrid.Rows(5).Cells(5).Value = Me.FingerPrintDataSet.OfficerTable(4).Photographer
         End If
 
+        If cnt > 5 Then
+            Me.IODatagrid.Rows(0).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).TI
+            Me.IODatagrid.Rows(1).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).FPE1
+            Me.IODatagrid.Rows(2).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).FPE2
+            Me.IODatagrid.Rows(3).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).FPE3
+            Me.IODatagrid.Rows(4).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).FPS
+            Me.IODatagrid.Rows(5).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).Photographer
+        End If
     End Sub
 
     Public Sub LoadOfficerListToDropDownMenu()
@@ -7315,6 +7332,7 @@ errhandler:
 
         Me.txtIOOfficerName.Focus()
         Me.txtIOOfficerName.Clear()
+        Me.cmbSalutation.Text = ""
         Me.txtIOPENNo.Clear()
         Me.txtIOBAsicPay.Clear()
         Me.txtIOScaleOfPay.Clear()
@@ -7347,6 +7365,7 @@ errhandler:
                 .Cells(3).Value = Me.txtIOBAsicPay.Text
                 .Cells(4).Value = Me.txtIOScaleOfPay.Text
                 .Cells(5).Value = Me.txtIODARate.Text
+                .Cells(6).Value = Me.cmbSalutation.Text
             End With
 
             ClearIOFields()
@@ -7451,8 +7470,30 @@ errhandler:
                 Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(5).Value, Me.IODatagrid.Rows(1).Cells(5).Value, Me.IODatagrid.Rows(2).Cells(5).Value, Me.IODatagrid.Rows(3).Cells(5).Value, Me.IODatagrid.Rows(4).Cells(5).Value, Me.IODatagrid.Rows(5).Cells(5).Value, oid)
             End If
 
+            If cnt = 6 Then
+                Dim oid = 1
+
+                Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(1).Value, Me.IODatagrid.Rows(1).Cells(1).Value, Me.IODatagrid.Rows(2).Cells(1).Value, Me.IODatagrid.Rows(3).Cells(1).Value, Me.IODatagrid.Rows(4).Cells(1).Value, Me.IODatagrid.Rows(5).Cells(1).Value, oid)
+
+                oid = 2
+                Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(2).Value, Me.IODatagrid.Rows(1).Cells(2).Value, Me.IODatagrid.Rows(2).Cells(2).Value, Me.IODatagrid.Rows(3).Cells(2).Value, Me.IODatagrid.Rows(4).Cells(2).Value, Me.IODatagrid.Rows(5).Cells(2).Value, oid)
+
+                oid = 3
+                Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(3).Value, Me.IODatagrid.Rows(1).Cells(3).Value, Me.IODatagrid.Rows(2).Cells(3).Value, Me.IODatagrid.Rows(3).Cells(3).Value, Me.IODatagrid.Rows(4).Cells(3).Value, Me.IODatagrid.Rows(5).Cells(3).Value, oid)
+
+                oid = 4
+                Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(4).Value, Me.IODatagrid.Rows(1).Cells(4).Value, Me.IODatagrid.Rows(2).Cells(4).Value, Me.IODatagrid.Rows(3).Cells(4).Value, Me.IODatagrid.Rows(4).Cells(4).Value, Me.IODatagrid.Rows(5).Cells(4).Value, oid)
+
+                oid = 5
+                Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(5).Value, Me.IODatagrid.Rows(1).Cells(5).Value, Me.IODatagrid.Rows(2).Cells(5).Value, Me.IODatagrid.Rows(3).Cells(5).Value, Me.IODatagrid.Rows(4).Cells(5).Value, Me.IODatagrid.Rows(5).Cells(5).Value, oid)
+
+                oid = 6
+                Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(6).Value, Me.IODatagrid.Rows(1).Cells(6).Value, Me.IODatagrid.Rows(2).Cells(6).Value, Me.IODatagrid.Rows(3).Cells(6).Value, Me.IODatagrid.Rows(4).Cells(6).Value, Me.IODatagrid.Rows(5).Cells(6).Value, oid)
+            End If
+
+
             For i = 0 To 5
-                For j = 1 To 5
+                For j = 1 To 6
                     Me.IODatagrid.Rows(i).Cells(j).Style.BackColor = Me.IODatagrid.Rows(0).Cells(0).Style.BackColor
                 Next
             Next
@@ -13710,16 +13751,16 @@ errhandler:
             Dim u = splitname.GetUpperBound(0)
             For j = 0 To u
                 If u = 0 Then
-                    InspectingOfficer = splitname(0)
+                    InspectingOfficer = GetSalutation(splitname(0))
                     Exit For
                 End If
 
                 If j = u - 1 Then
-                    InspectingOfficer += splitname(j) + " and "
+                    InspectingOfficer += GetSalutation(splitname(j)) + " and "
                 ElseIf j = u Then
-                    InspectingOfficer += splitname(j)
+                    InspectingOfficer += GetSalutation(splitname(j))
                 Else
-                    InspectingOfficer += splitname(j) + ", "
+                    InspectingOfficer += GetSalutation(splitname(j)) + ", "
                 End If
 
             Next
@@ -13773,7 +13814,7 @@ errhandler:
 
 
             Dim TextToBold As String = ""
-            BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti
+            BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dti
 
             '--------------------------NIL PRINT---------------------
 
@@ -13851,7 +13892,7 @@ errhandler:
             If CPD = 1 Then
                 Select Case ReportNature.ToLower
                     Case "awaiting photographs"
-                        BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti & " and developed one chance print. " & Photographer
+                        BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dti & " and developed one chance print. " & Photographer
                         BodyText = BodyText & vbNewLine & vbTab & "The comparison work of the chance print will be initiated on receipt of photographs of chance print from the Police Photographer and result of comparison will be intimated to you. This is for information."
 
                     Case "interim"
@@ -13862,7 +13903,7 @@ errhandler:
             Else
                 Select Case ReportNature.ToLower
                     Case "awaiting photographs"
-                        BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dti & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
+                        BodyText = vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dti & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer
                         BodyText = BodyText & vbNewLine & vbTab & "The comparison work of chance prints will be initiated on receipt of photographs of chance prints from the Police Photographer and result of comparison will be intimated to you. This is for information."
 
                     Case "interim"
@@ -14042,6 +14083,28 @@ errhandler:
         End Try
     End Sub
 
+
+    Private Function GetSalutation(OfficerName As String) As String
+        Try
+            Dim OfficerNameOnly As String = ""
+            OfficerNameOnly = OfficerName.Replace(", FPS", "")
+            OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
+            OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
+            Dim n As Integer = 0
+            For i = 0 To 5
+                If Me.IODatagrid.Rows(i).Cells(1).Value = OfficerNameOnly Then
+                    Dim salutation As String = Me.IODatagrid.Rows(i).Cells(6).Value
+                    If salutation Is Nothing Then
+                        salutation = ""
+                    End If
+                    Return IIf(salutation = "", "Sri./Smt. ", salutation & " ") & OfficerName
+                End If
+            Next
+            Return "Sri./Smt. " & OfficerName
+        Catch ex As Exception
+            Return "Sri./Smt. " & OfficerName
+        End Try
+    End Function
     Private Sub GenerateIdentificationLetter() Handles btnGenerateIdentificationLetter.Click, btnGenerateIdentificationLetter2.Click
 
         Try
@@ -14149,7 +14212,7 @@ errhandler:
 
             Dim IdentificationText As String = ""
 
-            IdentificationText = vbTab & "Please refer to the above. The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dtins
+            IdentificationText = vbTab & "Please refer to the above. The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dtins
 
             If CPD = 1 Then 'one print
                 IdentificationText += " and developed one chance print. " & Photographer
@@ -14412,7 +14475,7 @@ errhandler:
 
             Dim IdentificationText As String = ""
 
-            IdentificationText = vbTab & vbTab & "Kind attention is invited to the subject and reference cited above." & vbNewLine & vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by Sri./Smt. " & InspectingOfficer & " of this unit on " & dtins
+            IdentificationText = vbTab & vbTab & "Kind attention is invited to the subject and reference cited above." & vbNewLine & vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dtins
 
             If CPD = 1 Then 'one print
                 IdentificationText += " and developed one chance print."
@@ -14573,7 +14636,7 @@ errhandler:
             Next
 
             WordApp.Selection.TypeText(vbNewLine)
-            WordApp.Selection.TypeText(vbTab & "The identification was made by Sri./Smt. " & IdentifyingOfficer & " on " & dtid & ".")
+            WordApp.Selection.TypeText(vbTab & "The identification was made by " & IdentifyingOfficer & " on " & dtid & ".")
 
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbNewLine)
@@ -17513,5 +17576,9 @@ errhandler:
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
+    End Sub
+
+    Private Sub ValidatePhotoReceived(sender As Object, e As EventArgs) Handles cmbSOCPhotoReceived.Validated
+
     End Sub
 End Class
