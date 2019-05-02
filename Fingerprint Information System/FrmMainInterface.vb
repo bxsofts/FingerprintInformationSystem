@@ -14130,18 +14130,19 @@ errhandler:
             Dim splitname() = Strings.Split(InspectingOfficer, "; ")
             InspectingOfficer = ""
             Dim u = splitname.GetUpperBound(0)
+
             For j = 0 To u
                 If u = 0 Then
-                    InspectingOfficer = splitname(0)
+                    InspectingOfficer = GetSalutation(splitname(0))
                     Exit For
                 End If
 
                 If j = u - 1 Then
-                    InspectingOfficer += splitname(j) + " and "
+                    InspectingOfficer += GetSalutation(splitname(j)) + " and "
                 ElseIf j = u Then
-                    InspectingOfficer += splitname(j)
+                    InspectingOfficer += GetSalutation(splitname(j))
                 Else
-                    InspectingOfficer += splitname(j) + ", "
+                    InspectingOfficer += GetSalutation(splitname(j)) + ", "
                 End If
 
             Next
@@ -14423,21 +14424,23 @@ errhandler:
             Dim InspectingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
             Dim IdentifyingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(8).Value.ToString().Replace(vbNewLine, "; ")
 
+            IdentifyingOfficer = GetSalutation(IdentifyingOfficer)
+
             Dim splitname() = Strings.Split(InspectingOfficer, "; ")
             InspectingOfficer = ""
             Dim u = splitname.GetUpperBound(0)
             For j = 0 To u
                 If u = 0 Then
-                    InspectingOfficer = splitname(0)
+                    InspectingOfficer = GetSalutation(splitname(0))
                     Exit For
                 End If
 
                 If j = u - 1 Then
-                    InspectingOfficer += splitname(j) + " and "
+                    InspectingOfficer += GetSalutation(splitname(j)) + " and "
                 ElseIf j = u Then
-                    InspectingOfficer += splitname(j)
+                    InspectingOfficer += GetSalutation(splitname(j))
                 Else
-                    InspectingOfficer += splitname(j) + ", "
+                    InspectingOfficer += GetSalutation(splitname(j)) + ", "
                 End If
 
             Next
