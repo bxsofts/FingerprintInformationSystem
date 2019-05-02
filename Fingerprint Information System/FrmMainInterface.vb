@@ -85,6 +85,7 @@ Public Class frmMainInterface
     Dim SelectedRowIndex As Long = -1
     Dim SelectedColumnIndex As Integer
     Dim ColumnHeaderClicked As Boolean = False
+    Dim CPIdentified As Integer = 0
     Dim CPValidated As Boolean = False
     Dim TemporarilyStopCapitalize As Boolean
     Dim ShowAllFields As Boolean = True
@@ -5513,6 +5514,7 @@ errhandler:
                 Me.txtSOCCPsUnfit.Text = .SelectedCells(11).Value.ToString
                 Me.txtSOCCPsEliminated.Text = .SelectedCells(12).Value.ToString
 
+                CPIdentified = Val(.SelectedCells(13).Value)
 
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
@@ -5900,6 +5902,7 @@ errhandler:
                 Me.txtSOCCPsUnfit.Text = .SelectedCells(11).Value.ToString
                 Me.txtSOCCPsEliminated.Text = .SelectedCells(12).Value.ToString
 
+                CPIdentified = Val(.SelectedCells(13).Value)
 
                 Me.txtSOCCPDetails.Text = .SelectedCells(14).Value.ToString
                 Me.txtSOCComplainant.Text = .SelectedCells(15).Value.ToString()
@@ -6223,6 +6226,7 @@ errhandler:
             DevComponents.DotNetBar.MessageBoxEx.Show("This option is not available.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 #End Region
 
 
@@ -7665,6 +7669,16 @@ errhandler:
             Exit Sub
         End If
 
+        If SOCEditMode Then
+
+            If (Me.txtSOCCPsEliminated.Value + Me.txtSOCCPsUnfit.Value + CPIdentified) > txtSOCCPsDeveloped.Value Then
+                MessageBoxEx.Show("Sum of  CPs eliminated, CPs unfit and CPs identified cannot be greater than the no. of developed CPs", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtSOCCPsUnfit.Focus()
+                CPValidated = False
+                Exit Sub
+            End If
+
+        End If
         CPValidated = True
 
 
@@ -7859,7 +7873,7 @@ errhandler:
             Dim comparisondetails = Trim(Me.txtSOCComparisonDetails.Text)
             Dim gravecrime As Boolean = Me.chkGraveCrime.Checked
             Dim filestatus As String = Trim(Me.cmbFileStatus.Text)
-            Dim cpsidentified As String = ""
+            Dim cpsidentified As String = "0"
 
             If filestatus.ToLower = "otherwise detected" Then
                 If comparisondetails.ToLower.StartsWith("otherwise detected") = False Then
@@ -7912,7 +7926,7 @@ errhandler:
                 .ComparisonDetails = comparisondetails
                 .GraveCrime = gravecrime
                 .FileStatus = filestatus
-                .CPsIdentified = ""
+                .CPsIdentified = "0"
             End With
 
             Me.FingerPrintDataSet.SOCRegister.Rows.Add(newRow) ' add the row to the table
