@@ -23,7 +23,7 @@
         Catch ex As Exception
             Me.RichTextBoxEx1.Text = "New Version " & InstallerFileVersion & " Available"
         End Try
-      
+
     End Sub
 
     Private Sub btnRemindLater_Click(sender As Object, e As EventArgs) Handles btnRemindLater.Click
