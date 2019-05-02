@@ -286,6 +286,8 @@ Public Class frmMainInterface
         Invalidate()
         IncrementCircularProgress(1)
 
+        FreezeNumberColumns()
+
         '------------ initialize fields ---------------
 
 
@@ -2828,6 +2830,17 @@ Public Class frmMainInterface
         Me.JoinedIDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
     End Sub
 
+    Private Sub FreezeNumberColumns()
+        On Error Resume Next
+        Me.SOCDatagrid.Columns(0).Frozen = True
+        Me.RSOCDatagrid.Columns(1).Frozen = True
+        Me.DADatagrid.Columns(0).Frozen = True
+        Me.IDDatagrid.Columns(1).Frozen = True
+        Me.ACDatagrid.Columns(1).Frozen = True
+        Me.FPADataGrid.Columns(0).Frozen = True
+        Me.CDDataGrid.Columns(0).Frozen = True
+        Me.JoinedIDRDataGrid.Columns(1).Frozen = True
+    End Sub
     Private Sub ShowAllDataEntryFields(ByVal Show As Boolean)
         On Error Resume Next
 
@@ -3889,7 +3902,7 @@ Public Class frmMainInterface
     Private Sub ColumnHeaderContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles ColumnHeaderContextMenuBar.PopupOpen
         On Error Resume Next
 
-        If CurrentTab = "IO" Then
+        If CurrentTab = "IO" Or CurrentTab = "PS" Then
             btnResetColumnOrderMenu.Visible = False
             btnFreezeColumn.Visible = False
         Else
@@ -3916,9 +3929,6 @@ Public Class frmMainInterface
             End If
             If CurrentTab = "CD" Then
                 Me.btnFreezeColumn.Checked = Me.CDDataGrid.Columns(SelectedColumnIndex).Frozen
-            End If
-            If CurrentTab = "PS" Then
-                Me.btnFreezeColumn.Checked = Me.PSDataGrid.Columns(SelectedColumnIndex).Frozen
             End If
             If CurrentTab = "IDR" Then
                 Me.btnFreezeColumn.Checked = Me.JoinedIDRDataGrid.Columns(SelectedColumnIndex).Frozen
