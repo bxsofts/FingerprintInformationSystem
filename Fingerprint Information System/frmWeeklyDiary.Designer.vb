@@ -139,7 +139,7 @@ Partial Class frmWeeklyDiary
         '
         '
         Me.lblBackup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblBackup.Location = New System.Drawing.Point(31, 172)
+        Me.lblBackup.Location = New System.Drawing.Point(66, 172)
         Me.lblBackup.Name = "lblBackup"
         Me.lblBackup.Size = New System.Drawing.Size(244, 18)
         Me.lblBackup.TabIndex = 46

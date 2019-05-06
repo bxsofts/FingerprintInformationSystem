@@ -409,7 +409,7 @@ Public Class frmIdentificationStatement
                         WordApp.Selection.TypeText(classification.Trim)
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 10).Select()
-                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                        WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                         WordApp.Selection.TypeText(identifiedfrom.Trim)
 
                         If k < c - 1 Then x = x + 1 'x= 4, x= 5
