@@ -183,7 +183,7 @@ Module modMain
 
     End Sub
 
-    Public Function ConvertNumberToWord(ByVal Number As Integer)
+    Public Function ConvertNumberToWord(ByVal Number As Integer) As String
         Try
             Dim t As String = Number.ToString
             Select Case Number
