@@ -3967,6 +3967,7 @@ Public Class frmMainInterface
         Me.btnGenerateIdentificationCoB.Visible = False
         Me.btnGenerateIdentificationLetter.Visible = False
         Me.btnGenerateIdentificationReportDirector.Visible = False
+        Me.btnGenerateExpertOpinion2.Visible = False
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
                 e.Cancel = True
@@ -4153,6 +4154,7 @@ Public Class frmMainInterface
             Me.btnGenerateIdentificationCoB.Visible = True
             Me.btnGenerateIdentificationLetter.Visible = True
             Me.btnGenerateIdentificationReportDirector.Visible = True
+            Me.btnGenerateExpertOpinion2.Visible=True
         End If
 
         ' DisplayDatabaseInformation()
@@ -15009,13 +15011,13 @@ errhandler:
     End Sub
 
 
-    Private Sub btnGenerateExpertOpinion_Click(sender As Object, e As EventArgs) Handles btnGenerateExpertOpinion.Click
+    Private Sub btnGenerateExpertOpinion_Click(sender As Object, e As EventArgs) Handles btnGenerateExpertOpinion.Click, btnGenerateExpertOpinion2.Click
         Try
             ShowPleaseWaitForm()
             Me.Cursor = Cursors.WaitCursor
 
 
-            
+
 
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
 
@@ -15193,11 +15195,11 @@ errhandler:
                 End If
 
                 If CPE = 1 Then
-                    PrintComparisonDetails = "The chance prints were compared with the finger impressions of the inmates and the chance print marked as ....... was eliminated as the finger impression of inmate."
+                    PrintComparisonDetails = "On detailed examination of the chance prints at the Bureau, the chance print marked as ....... was eliminated as the finger impression of inmate."
                 End If
 
                 If CPE > 1 Then
-                    PrintComparisonDetails = "The chance prints were compared with the finger impressions of the inmates and the chance prints marked as ....... were eliminated as the finger impressions of inmates."
+                    PrintComparisonDetails = "On detailed examination of the chance prints at the Bureau, the chance prints marked as ....... were eliminated as the finger impressions of inmates."
                 End If
             End If
 
@@ -15220,7 +15222,8 @@ errhandler:
             If CPD = 1 Then
                 If identifiedfrom = "accused" Then
                     PrintComparisonDetails += " On " & DTID & " the daily arrest fingerprint slip of the accused "
-                    IDDetails = " was received from your office. On comparison, the chance print marked as " & PrintMarkings & " was found IDENTICAL with his " & fingeridentified & " finger impression."
+                    IDDetails = " was received from your office. On comparison, the chance print marked as " & PrintMarkings & " was found IDENTICAL with his " & fingeridentified & " finger impression. His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
+
                 ElseIf identifiedfrom = "suspects" Then
                     PrintComparisonDetails += " On " & DTID & " the fingerprint slip of one "
                     IDDetails = " was received from your office as suspect print. On comparison, the chance print marked as " & PrintMarkings & " was found IDENTICAL with his " & fingeridentified & " finger impression."
@@ -15231,10 +15234,25 @@ errhandler:
                 IDDetails += " The details of identification were intimated to you vide reference cited second."
             End If
 
+            If CPD > 1 And cpid = 1 Then
+                If identifiedfrom = "accused" Then
+                    PrintComparisonDetails += " On " & DTID & " the daily arrest fingerprint slip of the accused "
+                    IDDetails = " was received from your office. On comparison, the chance print marked as ..... was found IDENTICAL with his " & fingeridentified & " finger impression. His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
+
+                ElseIf identifiedfrom = "suspects" Then
+                    PrintComparisonDetails += " On " & DTID & " the fingerprint slip of one "
+                    IDDetails = " was received from your office as suspect print. On comparison, the chance print marked as .... was found IDENTICAL with his " & fingeridentified & " finger impression."
+                Else
+                    PrintComparisonDetails += " On comparing the chance print with the daily arrest fingerprint slips recorded in this Bureau, the chance print marked as ..... was found IDENTICAL with the " & fingeridentified & " finger impression of one "
+                    IDDetails = ". He is previously involved in " & previouscasedetails & ". His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
+                End If
+                IDDetails += " The details of identification were intimated to you vide reference cited second."
+            End If
+
             If cpid > 1 Then
                 If identifiedfrom = "accused" Then
                     PrintComparisonDetails += " On " & DTID & " the daily arrest fingerprint slip of the accused "
-                    IDDetails = " was received from your office. On comparison, the chance prints marked as ...... were found IDENTICAL with his " & fingeridentified & " finger impressions respectively."
+                    IDDetails = " was received from your office. On comparison, the chance prints marked as ...... were found IDENTICAL with his " & fingeridentified & " finger impressions respectively. His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
                 ElseIf identifiedfrom = "suspects" Then
                     PrintComparisonDetails += " On " & DTID & " the fingerprint slip of one "
                     IDDetails = " was received from your office as suspect print. On comparison, the chance print marked as ...... were found IDENTICAL with his " & fingeridentified & " finger impressions respectively."
@@ -15242,12 +15260,32 @@ errhandler:
                     PrintComparisonDetails += " On comparing the chance prints with the daily arrest fingerprint slips recorded in this Bureau, the chance prints marked as  ...... were found IDENTICAL with the " & fingeridentified & " finger impressions respectively of one "
                     IDDetails = ". He is previously involved in " & previouscasedetails & ". His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
                 End If
-                IDDetails += ". The details of identification were intimated to you vide reference cited second."
+                IDDetails += " The details of identification were intimated to you vide reference cited second."
             End If
 
             wdBooks("PrintComparisonDetails").Range.Text = PrintComparisonDetails
             wdBooks("CulpritDetails").Range.Text = CulpritDetails
-            wdBooks("IDDetails").Range.Text = IDDetails
+            wdBooks("IDDetails").Range.Text = IDDetails.Replace("..", ".")
+            Dim specimentext As String = "For furnishing the Expert Opinion in this regard, I have taken the chance print marked as …… and the specimen …….. finger impression in the Daily Arrest slip No…….. The specimen ………. finger impression is marked as ‘S’ by me."
+            If CPD = 1 Then
+                specimentext = "For furnishing the Expert Opinion in this regard, I have taken the chance print marked as " & PrintMarkings & " and the specimen " & fingeridentified & " finger impression in the Daily Arrest slip No. " & daslipnumber & ". The specimen " & fingeridentified & " finger impression is marked as ‘S’ by me."
+            End If
+
+            wdBooks("Specimen").Range.Text = specimentext
+            If CPD = 1 Then
+                wdBooks("RidgeCP").Range.Text = PrintMarkings
+                wdBooks("PhotographCP").Range.Text = PrintMarkings
+                wdBooks("CharacteresticsCP").Range.Text = PrintMarkings
+            End If
+
+            Dim conclusion As String = "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print …… and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen …… finger impression in the finger print slip of ……, and as it is identical with the chance print marked as ..... developed from the referred scene of crime, I am of the opinion that the chance print marked as ..... is made by the ...... finger of " & CulpritDetails & ". Attested photographic enlargements of the chance print ..... and the specimen Left Middle finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt."
+
+            If CPD = 1 Then
+                conclusion = "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print " & PrintMarkings & " and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen " & fingeridentified & " finger impression in the finger print slip of " & culpritname & ", and as it is identical with the chance print marked as " & PrintMarkings & " developed from the referred scene of crime, I am of the opinion that the chance print marked as " & PrintMarkings & " is made by the " & fingeridentified & " finger of " & CulpritDetails & ". Attested photographic enlargements of the chance print " & PrintMarkings & " and the specimen Left Middle finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt."
+            End If
+
+            wdBooks("Conclusion").Range.Text = conclusion
+
             ClosePleaseWaitForm()
 
             wdApp.Visible = True
