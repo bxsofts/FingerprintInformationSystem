@@ -15017,7 +15017,7 @@ errhandler:
     Private Sub btnGenerateExpertOpinion_Click(sender As Object, e As EventArgs) Handles btnGenerateExpertOpinion.Click, btnGenerateExpertOpinion2.Click
         Try
             
-
+            Me.Cursor = Cursors.WaitCursor
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
 
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
@@ -15027,6 +15027,24 @@ errhandler:
                 ClosePleaseWaitForm()
                 Me.Cursor = Cursors.Default
                 MessageBoxEx.Show("The selected SOC Number " & SOCNumber & " does not exist. Please add details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim PS As String = fds.SOCRegister(0).PoliceStation
+
+            If Strings.Right(PS, 3) <> "P.S" Then
+                PS = PS & " P.S"
+            End If
+
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion"
+            System.IO.Directory.CreateDirectory(SaveFolder)
+            Dim sfilename As String = SaveFolder & "\Expert opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+                Me.Cursor = Cursors.Default
                 Exit Sub
             End If
 
@@ -15098,7 +15116,6 @@ errhandler:
                 Photographer += dtphotographed
             End If
 
-            Dim PS As String = fds.SOCRegister(0).PoliceStation
 
             Dim SHO As String = Me.PSRegisterTableAdapter.FindSHO(PS)
 
@@ -15106,19 +15123,13 @@ errhandler:
                 SHO = "Sub Inspector of Police"
             End If
 
-            If Strings.Right(PS, 3) <> "P.S" Then
-                PS = PS & " P.S"
-            End If
-
-
-
             If SHO.ToUpper = "IP" Then
                 SHO = "The Inspector of Police"
             Else
                 SHO = "The Sub Inspector of Police"
             End If
 
-            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
             Dim Section = fds.SOCRegister(0).SectionOfLaw
 
             Dim identifiedfrom As String = Me.JoinedIDRDataGrid.SelectedCells(18).Value.ToString.ToLower
@@ -15140,13 +15151,13 @@ errhandler:
 
             Dim culpritname As String = fds.CulpritsRegister(0).CulpritName
             Dim address As String = fds.CulpritsRegister(0).Address
-            Dim fingeridentified As String = fds.CulpritsRegister(0).FingersIdentified
+            Dim FingersIdentified As String = fds.CulpritsRegister(0).FingersIdentified
             Dim previouscasedetails As String = fds.CulpritsRegister(0).PreviousCaseDetails
             Dim daslipnumber As String = fds.CulpritsRegister(0).DANumber
             Dim CPI As Integer = fds.CulpritsRegister(0).CPsIdentified
 
             Dim CPDMarkings As String = ""
-            
+
 
             For i = 1 To CPD
                 CPDMarkings = CPDMarkings & "'" & PS.Substring(0, 1) & i & "'" & IIf(i = CPD - 1, " and ", " ")
@@ -15158,28 +15169,29 @@ errhandler:
 
 
             frmExpertOpinion.txtCPD.Text = CPDMarkings
-            frmExpertOpinion.txtCPE.Text = ""
-            frmExpertOpinion.txtCPU.Text = ""
+            frmExpertOpinion.txtCPE.Text = IIf(CPE = 0, "Nil", CPDMarkings)
+            frmExpertOpinion.txtCPU.Text = IIf(CPU = 0, "Nil", CPDMarkings)
             frmExpertOpinion.txtCPI.Text = CPDMarkings
+            frmExpertOpinion.txtFingerOrder.Text = FingersIdentified
             frmExpertOpinion.txtOpinionCP.Text = CPDMarkings
-            frmExpertOpinion.txtOpinionFinger.Text = fingeridentified
-            frmExpertOpinion.txtRidgeColor.Text = "White"
-            frmExpertOpinion.lblCPD.Text = CPD
-            frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", CPE)
-            frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", CPU)
-            frmExpertOpinion.lblCPI.Text = IIf(CPI = 0, "Nil", CPI)
+            frmExpertOpinion.txtOpinionFinger.Text = FingersIdentified
+            frmExpertOpinion.txtRidgeColor.Text = "white"
+            frmExpertOpinion.lblCPD.Text = IIf(CPD = 1, "1 CP", CPD & " CPs")
+            frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", IIf(CPE = 1, "1 CP", CPE & " CPs"))
+            frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", IIf(CPU = 1, "1 CP", CPU & " CPs"))
+            frmExpertOpinion.lblCPI.Text = IIf(CPI = 1, "1 CP", CPI & " CPs")
 
             frmExpertOpinion.ShowDialog()
             frmExpertOpinion.BringToFront()
 
-            CPDMarkings = frmExpertOpinion.txtCPD.Text
-            Dim CPUMarkings As String = frmExpertOpinion.txtCPU.Text
-            Dim CPEMarkings As String = frmExpertOpinion.txtCPE.Text
-            Dim CPIMarkings As String = frmExpertOpinion.txtCPI.Text
-            Dim OpinionCP As String = frmExpertOpinion.txtOpinionCP.Text
-            Dim OpinionFinger As String = frmExpertOpinion.txtOpinionFinger.Text
-            Dim RidgeColor As String = frmExpertOpinion.txtRidgeColor.Text
-
+            CPDMarkings = frmExpertOpinion.txtCPD.Text.Trim
+            Dim CPUMarkings As String = frmExpertOpinion.txtCPU.Text.Trim
+            Dim CPEMarkings As String = frmExpertOpinion.txtCPE.Text.Trim
+            Dim CPIMarkings As String = frmExpertOpinion.txtCPI.Text.Trim
+            Dim FingerOrder As String = frmExpertOpinion.txtFingerOrder.Text.Trim
+            Dim OpinionCP As String = frmExpertOpinion.txtOpinionCP.Text.Trim
+            Dim OpinionFinger As String = frmExpertOpinion.txtOpinionFinger.Text.Trim
+            Dim RidgeColor As String = frmExpertOpinion.txtRidgeColor.Text.Trim.ToLower
 
 
             ShowPleaseWaitForm()
@@ -15252,7 +15264,7 @@ errhandler:
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.TypeText(vbTab & "1. " & "Cr.No. " & CrNo & " u/s " & Section & " of " & PS)
             WordApp.Selection.TypeText(vbNewLine & vbTab & vbTab & "2. Identification report of even number dated ...... ")
-            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & "Please refer to the above." & vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & vbTab & "Please refer to the above." & vbNewLine)
 
             'WordApp.Selection.ParagraphFormat.Space15()
 
@@ -15320,7 +15332,7 @@ errhandler:
                     WordApp.Selection.TypeText(" with his ")
 
                     WordApp.Selection.Font.Bold = 1
-                    WordApp.Selection.TypeText(fingeridentified)
+                    WordApp.Selection.TypeText(FingersIdentified)
                     WordApp.Selection.Font.Bold = 0
 
                     WordApp.Selection.TypeText(" finger impression. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
@@ -15348,7 +15360,7 @@ errhandler:
                     WordApp.Selection.TypeText(" with his ")
 
                     WordApp.Selection.Font.Bold = 1
-                    WordApp.Selection.TypeText(fingeridentified)
+                    WordApp.Selection.TypeText(FingersIdentified)
                     WordApp.Selection.Font.Bold = 0
                     WordApp.Selection.TypeText(" finger impression.")
 
@@ -15366,7 +15378,7 @@ errhandler:
                     WordApp.Selection.TypeText(" with the ")
 
                     WordApp.Selection.Font.Bold = 1
-                    WordApp.Selection.TypeText(fingeridentified)
+                    WordApp.Selection.TypeText(FingersIdentified)
                     WordApp.Selection.Font.Bold = 0
 
                     WordApp.Selection.TypeText(" finger impression of one ")
@@ -15405,7 +15417,7 @@ errhandler:
                     WordApp.Selection.TypeText(" with his ")
 
                     WordApp.Selection.Font.Bold = 1
-                    WordApp.Selection.TypeText(fingeridentified)
+                    WordApp.Selection.TypeText(FingerOrder)
                     WordApp.Selection.Font.Bold = 0
 
                     WordApp.Selection.TypeText(" finger impressions respectively. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
@@ -15433,12 +15445,12 @@ errhandler:
                     WordApp.Selection.TypeText(" with his ")
 
                     WordApp.Selection.Font.Bold = 1
-                    WordApp.Selection.TypeText(fingeridentified)
+                    WordApp.Selection.TypeText(FingerOrder)
                     WordApp.Selection.Font.Bold = 0
                     WordApp.Selection.TypeText(" finger impressions respectively.")
 
                 Else
-                    WordApp.Selection.TypeText(" On comparing the chance print with the daily arrest fingerprint slips recorded in this Bureau, the chance print marked as ")
+                    WordApp.Selection.TypeText(" On comparing the chance prints with the daily arrest fingerprint slips recorded in this Bureau, the chance prints marked as ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(CPIMarkings)
@@ -15451,7 +15463,7 @@ errhandler:
                     WordApp.Selection.TypeText(" with the ")
 
                     WordApp.Selection.Font.Bold = 1
-                    WordApp.Selection.TypeText(fingeridentified)
+                    WordApp.Selection.TypeText(FingerOrder)
                     WordApp.Selection.Font.Bold = 0
 
                     WordApp.Selection.TypeText(" finger impressions respectively of one ")
@@ -15497,15 +15509,142 @@ errhandler:
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("'S’")
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.TypeText("by me.")
+            WordApp.Selection.TypeText(" by me.")
 
-            WordApp.Selection.TypeText(vbNewLine & vbTab & "The ridges in chance print marked as " & OpinionCP & " are " & RidgeColor & " in colour since the chance print was developed using " & RidgeColor & " colored fingerprint developing chemical powder, and the ridges in specimen impression ‘S’ are black in colour since it was taken by means of black printers ink in finger print slip. ")
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "The ridges in chance print marked as ")
 
-            WordApp.Selection.TypeText("Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print " & OpinionCP & " and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen " & OpinionFinger & " finger impression in the finger print slip of " & culpritname & ", and as it is identical with the chance print marked as " & OpinionCP & " developed from the referred scene of crime, I am of the opinion that the chance print marked as " & OpinionCP & " is made by the " & OpinionFinger & " finger of " & AccusedDetails & vbNewLine & vbTab & ". Attested photographic enlargements of the chance print " & OpinionCP & " and the specimen " & OpinionFinger & " finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt.")
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionCP)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" are " & RidgeColor & " in colour since the chance print was developed using " & RidgeColor & " colored fingerprint developing chemical powder and the ridges in specimen impression ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("'S’")
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(" are black in colour since it was taken by means of black printers ink in finger print slip. ")
+
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "In order to establish the identity, I have marked the following eight identical ridge characteristics present in their nature and relative positions in the respective enlarged photographs of ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionCP)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" and ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("'S’")
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(". The photographs are duly attested by me on the rear side.")
+
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine)
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = 1
+            WordApp.Selection.TypeText("Eight Identical Ridge Characteristics present in both the finger impressions " & OpinionCP & " and ‘S’")
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.Font.Underline = 0
+
+            WordApp.Selection.TypeText("Point No. 1: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 2: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 3: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 4: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 5: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 6: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 7: is a ")
+            WordApp.Selection.TypeText(vbNewLine & "Point No. 8: is a ")
+
+
+            WordApp.Selection.Font.Bold = 0
+
+
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionCP)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" and specimen impression ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("'S’")
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(", they are ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("IDENTICAL")
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(". That is, they are made by the same finger of the same person.  Since ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("'S’")
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" is the specimen ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionFinger)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" finger impression in the fingerprint slip of ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(culpritname)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(", and as it is identical with the chance print marked as ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionCP)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" developed from the referred scene of crime, I am of the opinion that the chance print marked as ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionCP)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" is made by the ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionFinger)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" finger of ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(AccusedDetails)
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(".")
+
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "Attested photographic enlargements of the chance print ")
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText(OpinionCP)
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" and the specimen finger impression ")
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("‘S’")
+            WordApp.Selection.Font.Bold = 0
+
+            WordApp.Selection.TypeText(" with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt.")
 
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
+
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
+
+
+
+            If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                aDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
 
             ClosePleaseWaitForm()
 
@@ -15523,331 +15662,7 @@ errhandler:
 
         End Try
     End Sub
-    Private Sub btnGenerateExpertOpinion_bkClick(sender As Object, e As EventArgs) ' Handles btnGenerateExpertOpinion.Click, btnGenerateExpertOpinion2.Click
-        Try
-
-
-            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
-
-            Dim fds As FingerPrintDataSet = New FingerPrintDataSet
-            Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
-
-            If fds.SOCRegister.Count = 0 Then
-                ClosePleaseWaitForm()
-                Me.Cursor = Cursors.Default
-                MessageBoxEx.Show("The selected SOC Number " & SOCNumber & " does not exist. Please add details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            Dim FileNo As String = SOCNumber
-            Dim line() = Strings.Split(FileNo, "/")
-            FileNo = line(0) & "/SOC/" & line(1)
-
-            Dim InspectingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
-            Dim IdentifyingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(8).Value
-
-            Dim splitname() = Strings.Split(InspectingOfficer, "; ")
-            InspectingOfficer = ""
-            Dim u = splitname.GetUpperBound(0)
-
-            For j = 0 To u
-                If u = 0 Then
-                    InspectingOfficer = GetSalutation(splitname(0))
-                    Exit For
-                End If
-
-                If j = u - 1 Then
-                    InspectingOfficer += GetSalutation(splitname(j)) + " and "
-                ElseIf j = u Then
-                    InspectingOfficer += GetSalutation(splitname(j))
-                Else
-                    InspectingOfficer += GetSalutation(splitname(j)) + ", "
-                End If
-
-            Next
-
-            InspectingOfficer = Replace(Replace(Replace(Replace(InspectingOfficer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
-
-
-            Dim DTID As String = Me.JoinedIDRDataGrid.SelectedCells(2).FormattedValue.ToString
-            Dim dtins As String = Me.JoinedIDRDataGrid.SelectedCells(3).FormattedValue.ToString()
-            Dim CPD As Integer = Val(fds.SOCRegister(0).ChancePrintsDeveloped)
-            Dim CPU As Integer = Val(fds.SOCRegister(0).ChancePrintsUnfit)
-            Dim CPE As Integer = Val(fds.SOCRegister(0).ChancePrintsEliminated)
-            Dim CPR As Integer = CPD - CPU - CPE
-
-            Dim PO As String = Trim(fds.SOCRegister(0).PlaceOfOccurrence)
-
-            If PO <> "" Then
-                PO = "(" & PO.Replace(vbNewLine, ", ") & ") "
-                PO = PO.Replace(",, ", ", ")
-            End If
-
-            Dim Photographer As String = fds.SOCRegister(0).Photographer
-
-            If Trim(Photographer) = "" Or Trim(Photographer).ToLower = "no photographer" Then
-                Photographer = ""
-            Else
-                If CPD = 1 Then
-                    Photographer = "The chance print was photographed by Sri. " & Photographer & ", Police Photographer"
-                Else
-                    Photographer = "The chance prints were photographed by Sri. " & Photographer & ", Police Photographer"
-                End If
-                Dim dtphotographed = fds.SOCRegister(0).DateOfReceptionOfPhoto
-                If dtphotographed <> vbNullString Then
-                    If dtins = dtphotographed Then
-                        dtphotographed = " on the same day."
-                    Else
-                        dtphotographed = " on " & dtphotographed & "."
-                    End If
-                Else
-                    dtphotographed = "."
-                End If
-
-                Photographer += dtphotographed
-            End If
-
-            Dim PS As String = fds.SOCRegister(0).PoliceStation
-
-            Dim SHO As String = Me.PSRegisterTableAdapter.FindSHO(PS)
-
-            If SHO Is Nothing Then
-                SHO = "Sub Inspector of Police"
-            End If
-
-            If Strings.Right(PS, 3) <> "P.S" Then
-                PS = PS & " P.S"
-            End If
-
-
-
-            If SHO.ToUpper = "IP" Then
-                SHO = "Inspector of Police"
-            Else
-                SHO = "Sub Inspector of Police"
-            End If
-
-            Dim CrNo = fds.SOCRegister(0).CrimeNumber
-            Dim Section = fds.SOCRegister(0).SectionOfLaw
-
-            Dim identifiedfrom As String = Me.JoinedIDRDataGrid.SelectedCells(18).Value.ToString.ToLower
-
-            Dim Designation As String = ""
-            If IdentifyingOfficer.EndsWith(", FPE") Then
-                Designation = "Fingerprint Expert"
-            End If
-
-            If IdentifyingOfficer.EndsWith(", TI") Then
-                Designation = "Tester Inspector"
-            End If
-
-            Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
-            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
-
-            Dim culpritname As String = fds.CulpritsRegister(0).CulpritName
-            Dim address As String = fds.CulpritsRegister(0).Address
-            Dim fingeridentified As String = fds.CulpritsRegister(0).FingersIdentified
-            Dim previouscasedetails As String = fds.CulpritsRegister(0).PreviousCaseDetails
-            Dim daslipnumber As String = fds.CulpritsRegister(0).DANumber
-            Dim CPI As Integer = fds.CulpritsRegister(0).CPsIdentified
-
-            Dim CPDMarkings As String = ""
-            Dim CPUMarkings As String = ""
-            Dim CPEMarkings As String = ""
-            Dim CPIMarkings As String = ""
-
-            For i = 1 To CPD
-                CPDMarkings = CPDMarkings & "'" & PS.Substring(0, 1) & i & "'" & IIf(i = CPD - 1, " and ", " ")
-            Next
-            CPDMarkings = Trim(CPDMarkings)
-            CPDMarkings = CPDMarkings.Replace(" ", ", ")
-            CPDMarkings = CPDMarkings.Replace(", and, ", " and ")
-
-            If CPD = CPI Then
-                CPIMarkings = CPDMarkings
-            End If
-
-            If Not CPD = CPI Then
-                frmExpertOpinion.txtCPD.Text = CPDMarkings
-                frmExpertOpinion.txtCPE.Text = ""
-                frmExpertOpinion.txtCPU.Text = ""
-
-                frmExpertOpinion.lblCPD.Text = CPD
-                frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", CPE)
-                frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", CPU)
-                frmExpertOpinion.lblCPI.Text = IIf(CPI = 0, "Nil", CPI)
-
-                frmExpertOpinion.ShowDialog()
-                frmExpertOpinion.BringToFront()
-
-                CPDMarkings = frmExpertOpinion.txtCPD.Text
-                CPUMarkings = frmExpertOpinion.txtCPU.Text
-                CPEMarkings = frmExpertOpinion.txtCPE.Text
-                CPIMarkings = frmExpertOpinion.txtCPI.Text
-            End If
-
-
-
-            ShowPleaseWaitForm()
-            Me.Cursor = Cursors.WaitCursor
-
-
-            Dim wdApp As Word.Application
-            Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(strAppUserPath & "\WordTemplates\ExpertOpinion.docx")
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
-            wdDoc.Range.NoProofing = 1
-
-            wdBooks("FileNumber").Range.Text = "No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
-            wdBooks("Unit1").Range.Text = FullDistrictName
-            wdBooks("Date").Range.Text = Today.ToString("dd/MM/yyyy", culture)
-
-            IdentifyingOfficer = IdentifyingOfficer.Replace(", FPE", "")
-            IdentifyingOfficer.Replace(", TI", "")
-
-            wdBooks("FPE1").Range.Text = IdentifyingOfficer
-            wdBooks("Designation").Range.Text = Designation
-            wdBooks("Unit2").Range.Text = FullDistrictName
-            wdBooks("SHO").Range.Text = SHO & vbNewLine & PS
-            wdBooks("Ref1").Range.Text = "Cr.No. " & CrNo & " u/s " & Section
-            wdBooks("SHO2").Range.Text = SHO & ", " & PS
-            wdBooks("PO").Range.Text = PO
-            wdBooks("CrNo").Range.Text = CrNo & " u/s " & Section & " of " & PS
-            wdBooks("DTID").Range.Text = DTID
-            wdBooks("CPD").Range.Text = ConvertNumberToWord(CPD) & IIf(CPD = 1, " chance print", " chance prints")
-
-
-
-            wdBooks("CPmarking").Range.Text = IIf(CPD = 1, "chance print was marked as ", "chance prints were marked as ") & CPDMarkings
-            wdBooks("Photographer").Range.Text = Photographer
-
-            Dim PrintComparisonDetails As String = ""
-            Dim CulpritDetails As String = culpritname & ", " & address
-            Dim IDDetails As String = ""
-
-            If CPD = 1 Then
-                PrintComparisonDetails = "The chance print was compared with the finger impressions of the inmates and found not identical."
-            End If
-
-            If CPU = 0 And CPD > 1 Then
-
-                If CPE = 0 Then
-                    PrintComparisonDetails = "The chance prints were compared with the finger impressions of the inmates and found not identical."
-                End If
-
-                If CPE = 1 Then
-                    PrintComparisonDetails = "On detailed examination of the chance prints at the Bureau, the chance print marked as ....... was eliminated as the finger impression of inmate."
-                End If
-
-                If CPE > 1 Then
-                    PrintComparisonDetails = "On detailed examination of the chance prints at the Bureau, the chance prints marked as ....... were eliminated as the finger impressions of inmates."
-                End If
-            End If
-
-            If CPU > 0 And CPD > 1 Then
-                PrintComparisonDetails = "On detailed examination of the chance prints at the Bureau, the chance " & IIf(CPU = 1, "print marked as ....... was", "prints marked as ....... were") & " found unfit for comparison due to the lack of sufficient number of ridge characteristics"
-                Dim cprem As Integer = CPD - CPU
-                If CPE = 0 Then
-                    PrintComparisonDetails += ". The remaining " & ConvertNumberToWord(cprem) & IIf(cprem = 1, " chance print marked as ....... was", " chance prints marked as ....... were") & " compared with the finger impressions of the inmates and found not identical."
-                End If
-
-                If CPE = 1 Then
-                    PrintComparisonDetails += " and the chance print marked as ....... was eliminated as the finger impression of inmate."
-                End If
-
-                If CPE > 1 Then
-                    PrintComparisonDetails += " and the chance prints marked as ....... were eliminated as the finger impressions of inmates."
-                End If
-            End If
-
-            If CPD = 1 Then
-                If identifiedfrom = "accused" Then
-                    PrintComparisonDetails += " On " & DTID & " the daily arrest fingerprint slip of the accused "
-                    IDDetails = " was received from your office. On comparison, the chance print marked as " & CPDMarkings & " was found IDENTICAL with his " & fingeridentified & " finger impression. His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
-
-                ElseIf identifiedfrom = "suspects" Then
-                    PrintComparisonDetails += " On " & DTID & " the fingerprint slip of one "
-                    IDDetails = " was received from your office as suspect print. On comparison, the chance print marked as " & CPDMarkings & " was found IDENTICAL with his " & fingeridentified & " finger impression."
-                Else
-                    PrintComparisonDetails += " On comparing the chance print with the daily arrest fingerprint slips recorded in this Bureau, the chance print marked as " & CPDMarkings & " was found IDENTICAL with the " & fingeridentified & " finger impression of one "
-                    IDDetails = ". He is previously involved in " & previouscasedetails & ". His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
-                End If
-                IDDetails += " The details of identification were intimated to you vide reference cited second."
-            End If
-
-            If CPD > 1 And CPI = 1 Then
-                If identifiedfrom = "accused" Then
-                    PrintComparisonDetails += " On " & DTID & " the daily arrest fingerprint slip of the accused "
-                    IDDetails = " was received from your office. On comparison, the chance print marked as ..... was found IDENTICAL with his " & fingeridentified & " finger impression. His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
-
-                ElseIf identifiedfrom = "suspects" Then
-                    PrintComparisonDetails += " On " & DTID & " the fingerprint slip of one "
-                    IDDetails = " was received from your office as suspect print. On comparison, the chance print marked as .... was found IDENTICAL with his " & fingeridentified & " finger impression."
-                Else
-                    PrintComparisonDetails += " On comparing the chance print with the daily arrest fingerprint slips recorded in this Bureau, the chance print marked as ..... was found IDENTICAL with the " & fingeridentified & " finger impression of one "
-                    IDDetails = ". He is previously involved in " & previouscasedetails & ". His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
-                End If
-                IDDetails += " The details of identification were intimated to you vide reference cited second."
-            End If
-
-            If CPI > 1 Then
-                If identifiedfrom = "accused" Then
-                    PrintComparisonDetails += " On " & DTID & " the daily arrest fingerprint slip of the accused "
-                    IDDetails = " was received from your office. On comparison, the chance prints marked as ...... were found IDENTICAL with his " & fingeridentified & " finger impressions respectively. His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
-                ElseIf identifiedfrom = "suspects" Then
-                    PrintComparisonDetails += " On " & DTID & " the fingerprint slip of one "
-                    IDDetails = " was received from your office as suspect print. On comparison, the chance print marked as ...... were found IDENTICAL with his " & fingeridentified & " finger impressions respectively."
-                Else
-                    PrintComparisonDetails += " On comparing the chance prints with the daily arrest fingerprint slips recorded in this Bureau, the chance prints marked as  ...... were found IDENTICAL with the " & fingeridentified & " finger impressions respectively of one "
-                    IDDetails = ". He is previously involved in " & previouscasedetails & ". His fingerprint slip is recorded in this Bureau as daily arrest slip number " & daslipnumber & "."
-                End If
-                IDDetails += " The details of identification were intimated to you vide reference cited second."
-            End If
-
-            wdBooks("PrintComparisonDetails").Range.Text = PrintComparisonDetails
-            wdBooks("CulpritDetails").Range.Text = CulpritDetails
-            wdBooks("IDDetails").Range.Text = IDDetails.Replace("..", ".")
-            Dim specimentext As String = "For furnishing the Expert Opinion in this regard, I have taken the chance print marked as …… and the specimen …….. finger impression in the Daily Arrest slip No…….. The specimen ………. finger impression is marked as ‘S’ by me."
-            If CPD = 1 Then
-                specimentext = "For furnishing the Expert Opinion in this regard, I have taken the chance print marked as " & CPDMarkings & " and the specimen " & fingeridentified & " finger impression in the Daily Arrest slip No. " & daslipnumber & ". The specimen " & fingeridentified & " finger impression is marked as ‘S’ by me."
-            End If
-
-            wdBooks("Specimen").Range.Text = specimentext
-            If CPD = 1 Then
-                wdBooks("RidgeCP").Range.Text = CPDMarkings
-                wdBooks("PhotographCP").Range.Text = CPDMarkings
-                wdBooks("CharacteresticsCP").Range.Text = CPDMarkings
-            End If
-
-            Dim conclusion As String = "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print …… and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen …… finger impression in the finger print slip of ……, and as it is identical with the chance print marked as ..... developed from the referred scene of crime, I am of the opinion that the chance print marked as ..... is made by the ...... finger of " & CulpritDetails & ". Attested photographic enlargements of the chance print ..... and the specimen Left Middle finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt."
-
-            If CPD = 1 Then
-                conclusion = "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print " & CPDMarkings & " and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen " & fingeridentified & " finger impression in the finger print slip of " & culpritname & ", and as it is identical with the chance print marked as " & CPDMarkings & " developed from the referred scene of crime, I am of the opinion that the chance print marked as " & CPDMarkings & " is made by the " & fingeridentified & " finger of " & CulpritDetails & ". Attested photographic enlargements of the chance print " & CPDMarkings & " and the specimen Left Middle finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt."
-            End If
-
-            wdBooks("Conclusion").Range.Text = conclusion
-
-            ClosePleaseWaitForm()
-
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
-
-            ReleaseObject(wdBooks)
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp.Visible = True
-            wdApp = Nothing
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-
-        End Try
-    End Sub
+    
 
     Private Sub btnShowIdentifiedDocket_Click(sender As Object, e As EventArgs) Handles btnShowIdentifiedDocket.Click
         If Me.JoinedIDRDataGrid.RowCount = 0 Then
