@@ -15146,11 +15146,7 @@ errhandler:
             Dim CPI As Integer = fds.CulpritsRegister(0).CPsIdentified
 
             Dim CPDMarkings As String = ""
-            Dim CPUMarkings As String = ""
-            Dim CPEMarkings As String = ""
-            Dim CPIMarkings As String = ""
-            Dim OpinionCP As String = ""
-            Dim OpinionFinger As String = ""
+            
 
             For i = 1 To CPD
                 CPDMarkings = CPDMarkings & "'" & PS.Substring(0, 1) & i & "'" & IIf(i = CPD - 1, " and ", " ")
@@ -15160,39 +15156,30 @@ errhandler:
             CPDMarkings = CPDMarkings.Replace(" ", ", ")
             CPDMarkings = CPDMarkings.Replace(", and, ", " and ")
 
-            If CPD = CPI Then
-                CPIMarkings = CPDMarkings
-            End If
 
-            If CPD = 1 Then
-                OpinionCP = CPDMarkings
-                OpinionFinger = fingeridentified
-            End If
+            frmExpertOpinion.txtCPD.Text = CPDMarkings
+            frmExpertOpinion.txtCPE.Text = ""
+            frmExpertOpinion.txtCPU.Text = ""
+            frmExpertOpinion.txtCPI.Text = CPDMarkings
+            frmExpertOpinion.txtOpinionCP.Text = CPDMarkings
+            frmExpertOpinion.txtOpinionFinger.Text = fingeridentified
+            frmExpertOpinion.txtRidgeColor.Text = "White"
+            frmExpertOpinion.lblCPD.Text = CPD
+            frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", CPE)
+            frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", CPU)
+            frmExpertOpinion.lblCPI.Text = IIf(CPI = 0, "Nil", CPI)
 
-            If Not CPD = CPI Then
-                frmExpertOpinion.txtCPD.Text = CPDMarkings
-                frmExpertOpinion.txtCPE.Text = ""
-                frmExpertOpinion.txtCPU.Text = ""
-                frmExpertOpinion.txtCPI.Text = ""
-                frmExpertOpinion.txtOpinionCP.Text = ""
-                frmExpertOpinion.txtOpinionFinger.Text = ""
+            frmExpertOpinion.ShowDialog()
+            frmExpertOpinion.BringToFront()
 
-                frmExpertOpinion.lblCPD.Text = CPD
-                frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", CPE)
-                frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", CPU)
-                frmExpertOpinion.lblCPI.Text = IIf(CPI = 0, "Nil", CPI)
+            CPDMarkings = frmExpertOpinion.txtCPD.Text
+            Dim CPUMarkings As String = frmExpertOpinion.txtCPU.Text
+            Dim CPEMarkings As String = frmExpertOpinion.txtCPE.Text
+            Dim CPIMarkings As String = frmExpertOpinion.txtCPI.Text
+            Dim OpinionCP As String = frmExpertOpinion.txtOpinionCP.Text
+            Dim OpinionFinger As String = frmExpertOpinion.txtOpinionFinger.Text
+            Dim RidgeColor As String = frmExpertOpinion.txtRidgeColor.Text
 
-                frmExpertOpinion.ShowDialog()
-                frmExpertOpinion.BringToFront()
-
-                CPDMarkings = frmExpertOpinion.txtCPD.Text
-                CPUMarkings = frmExpertOpinion.txtCPU.Text
-                CPEMarkings = frmExpertOpinion.txtCPE.Text
-                CPIMarkings = frmExpertOpinion.txtCPI.Text
-                OpinionCP = frmExpertOpinion.txtOpinionCP.Text
-                OpinionFinger = frmExpertOpinion.txtOpinionFinger.Text
-            End If
-           
 
 
             ShowPleaseWaitForm()
@@ -15210,7 +15197,7 @@ errhandler:
 
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
-           
+
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Size = 12
@@ -15270,7 +15257,7 @@ errhandler:
             'WordApp.Selection.ParagraphFormat.Space15()
 
             WordApp.Selection.TypeText(vbTab & "As requested by " & SHO & ", " & PS & ", I had inspected the scene of crime " & PO & " concerned in Crime No. " & CrNo & " u/s " & Section & " of " & PS & " on " & dtins & " and developed " & ConvertNumberToWord(CPD) & IIf(CPD = 1, " chance print. The chance print was marked as ", " chance prints. The chance prints were marked as ") & CPDMarkings)
-           
+
             WordApp.Selection.TypeText(IIf(CPD = 1, ". The chance print was ", ". The chance prints were ") & "developed from ........ ")
 
             WordApp.Selection.TypeText(Photographer & vbNewLine & vbTab)
@@ -15512,13 +15499,13 @@ errhandler:
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.TypeText("by me.")
 
-            WordApp.Selection.TypeText(vbNewLine & vbTab & "The ridges in chance print marked as " & OpinionCP & " are white in colour since the chance print was developed using white colored fingerprint developing chemical powder, and the ridges in specimen impression ‘S’ are black in colour since it was taken by means of black printers ink in finger print slip. ")
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "The ridges in chance print marked as " & OpinionCP & " are " & RidgeColor & " in colour since the chance print was developed using " & RidgeColor & " colored fingerprint developing chemical powder, and the ridges in specimen impression ‘S’ are black in colour since it was taken by means of black printers ink in finger print slip. ")
 
-            Dim conclusion As String = "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print …… and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen …… finger impression in the finger print slip of ……, and as it is identical with the chance print marked as ..... developed from the referred scene of crime, I am of the opinion that the chance print marked as ..... is made by the ...... finger of " & AccusedDetails & ". Attested photographic enlargements of the chance print ..... and the specimen Left Middle finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt."
+            WordApp.Selection.TypeText("Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print " & OpinionCP & " and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen " & OpinionFinger & " finger impression in the finger print slip of " & culpritname & ", and as it is identical with the chance print marked as " & OpinionCP & " developed from the referred scene of crime, I am of the opinion that the chance print marked as " & OpinionCP & " is made by the " & OpinionFinger & " finger of " & AccusedDetails & vbNewLine & vbTab & ". Attested photographic enlargements of the chance print " & OpinionCP & " and the specimen " & OpinionFinger & " finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt.")
 
-            If CPD = 1 Then
-                conclusion = "Since the above mentioned eight Identical Ridge Characteristics are repeatedly present in their nature and relative positions in both the chance print " & CPDMarkings & " and specimen impression ‘S’, they are IDENTICAL.  That is, they are made by the same finger of the same person.  Since ‘S’ is the Specimen " & fingeridentified & " finger impression in the finger print slip of " & culpritname & ", and as it is identical with the chance print marked as " & CPDMarkings & " developed from the referred scene of crime, I am of the opinion that the chance print marked as " & CPDMarkings & " is made by the " & fingeridentified & " finger of " & AccusedDetails & ". Attested photographic enlargements of the chance print " & CPDMarkings & " and the specimen Left Middle finger impression ‘S’ with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt."
-            End If
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
             ClosePleaseWaitForm()
 
