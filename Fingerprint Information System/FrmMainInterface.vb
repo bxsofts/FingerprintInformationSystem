@@ -14133,8 +14133,17 @@ errhandler:
     Private Sub GenerateIdentificationLetter() Handles btnGenerateIdentificationLetter.Click, btnGenerateIdentificationLetter2.Click
 
         Try
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
 
-            ShowPleaseWaitForm()
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records selected in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+
             Me.Cursor = Cursors.WaitCursor
 
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
@@ -14148,7 +14157,27 @@ errhandler:
                 MessageBoxEx.Show("The selected SOC Number " & SOCNumber & " does not exist. Please add details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
-           
+
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
+            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            System.IO.Directory.CreateDirectory(IDRFolder)
+
+            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            ShowPleaseWaitForm()
+
 
             Dim InspectingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
 
@@ -14212,18 +14241,13 @@ errhandler:
                 Photographer += dtphotographed
             End If
 
-            Dim ps As String = fds.SOCRegister(0).PoliceStation
+
 
             Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
 
             If sho Is Nothing Then
                 sho = "Sub Inspector of Police"
             End If
-
-            If Strings.Right(ps, 3) <> "P.S" Then
-                ps = ps & " P.S"
-            End If
-
 
 
             If sho.ToUpper = "IP" Then
@@ -14232,7 +14256,6 @@ errhandler:
                 sho = "The Sub Inspector of Police" & vbNewLine & vbTab & ps
             End If
 
-            Dim cr = fds.SOCRegister(0).CrimeNumber
             Dim us = fds.SOCRegister(0).SectionOfLaw
 
             Dim identifiedfrom As String = Me.JoinedIDRDataGrid.SelectedCells(18).Value.ToString.ToLower
@@ -14316,77 +14339,77 @@ errhandler:
             End If
 
 
-                Dim missing As Object = System.Reflection.Missing.Value
-                Dim fileName As Object = "normal.dotm"
-                Dim newTemplate As Object = False
-                Dim docType As Object = 0
-                Dim isVisible As Object = True
-                Dim WordApp As New Word.Application()
+            Dim missing As Object = System.Reflection.Missing.Value
+            Dim fileName As Object = "normal.dotm"
+            Dim newTemplate As Object = False
+            Dim docType As Object = 0
+            Dim isVisible As Object = True
+            Dim WordApp As New Word.Application()
 
-                Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+            Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
 
-                WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
-                If WordApp.Version < 12 Then
-                    WordApp.Selection.Document.PageSetup.LeftMargin = 72
-                    WordApp.Selection.Document.PageSetup.RightMargin = 72
-                    WordApp.Selection.Document.PageSetup.TopMargin = 72
-                    WordApp.Selection.Document.PageSetup.BottomMargin = 72
-                    WordApp.Selection.ParagraphFormat.Space15()
+            WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+            If WordApp.Version < 12 Then
+                WordApp.Selection.Document.PageSetup.LeftMargin = 72
+                WordApp.Selection.Document.PageSetup.RightMargin = 72
+                WordApp.Selection.Document.PageSetup.TopMargin = 72
+                WordApp.Selection.Document.PageSetup.BottomMargin = 72
+                WordApp.Selection.ParagraphFormat.Space15()
             End If
 
             WordApp.Selection.NoProofing = 1
 
-                WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-                WordApp.Selection.Paragraphs.DecreaseSpacing()
-                WordApp.Selection.Font.Size = 12
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.ParagraphFormat.Space1()
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab)
-                WordApp.Selection.Font.Underline = 1
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab)
+            WordApp.Selection.Font.Underline = 1
 
-                Dim FileNo As String = SOCNumber
+            Dim FileNo As String = SOCNumber
 
-                Dim line() = Strings.Split(FileNo, "/")
-                FileNo = line(0) & "/SOC/" & line(1)
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
 
-                WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
+            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
 
-                WordApp.Selection.Font.Underline = 0
-                WordApp.Selection.TypeParagraph()
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeParagraph()
 
-                If WordApp.Version < 12 Then WordApp.Selection.ParagraphFormat.Space15()
-                WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName)
+            If WordApp.Version < 12 Then WordApp.Selection.ParagraphFormat.Space15()
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName)
 
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
 
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Date: " & GenerateDate(True))
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText("From")
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & "Tester Inspector" & vbNewLine & vbTab & FullOfficeName & vbNewLine & vbTab & FullDistrictName)
-                WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Date: " & GenerateDate(True))
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText("From")
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & "Tester Inspector" & vbNewLine & vbTab & FullOfficeName & vbNewLine & vbTab & FullDistrictName)
+            WordApp.Selection.TypeText(vbNewLine)
 
-                WordApp.Selection.TypeText("To")
-                WordApp.Selection.TypeText(vbNewLine)
-
-
-                WordApp.Selection.TypeText(vbTab & sho)
-                WordApp.Selection.TypeText(vbNewLine)
-
-                WordApp.Selection.TypeText("Sir,")
-                WordApp.Selection.TypeText(vbNewLine)
-
-                WordApp.Selection.TypeText(vbTab & "Sub: Identification of criminal through chance prints – report - reg.")
+            WordApp.Selection.TypeText("To")
+            WordApp.Selection.TypeText(vbNewLine)
 
 
+            WordApp.Selection.TypeText(vbTab & sho)
+            WordApp.Selection.TypeText(vbNewLine)
 
-                WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText("Sir,")
+            WordApp.Selection.TypeText(vbNewLine)
 
-                WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & cr & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbTab & "Sub: Identification of criminal through chance prints – report - reg.")
+
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
 
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -14484,6 +14507,10 @@ errhandler:
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
                 End If
 
+            If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                aDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
+
                 ClosePleaseWaitForm()
 
                 WordApp.Visible = True
@@ -14506,8 +14533,17 @@ errhandler:
     Private Sub GenerateIdentificationLetterDirector() Handles btnGenerateIdentificationReportDirector.Click, btnGenerateIdentificationReportDirector2.Click
 
         Try
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
 
-            ShowPleaseWaitForm()
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records selected in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+
             Me.Cursor = Cursors.WaitCursor
 
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
@@ -14522,6 +14558,27 @@ errhandler:
                 Exit Sub
             End If
 
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
+            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            System.IO.Directory.CreateDirectory(IDRFolder)
+
+            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            ShowPleaseWaitForm()
 
             Dim InspectingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(7).Value.ToString().Replace(vbNewLine, "; ")
             Dim IdentifyingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(8).Value.ToString().Replace(vbNewLine, "; ")
@@ -14567,14 +14624,8 @@ errhandler:
             End If
 
 
-            Dim ps As String = fds.SOCRegister(0).PoliceStation
+            
 
-            If Strings.Right(ps, 3) <> "P.S" Then
-                ps = ps & " P.S"
-            End If
-
-
-            Dim cr = fds.SOCRegister(0).CrimeNumber
             Dim us = fds.SOCRegister(0).SectionOfLaw
 
             Dim identifiedfrom As String = Me.JoinedIDRDataGrid.SelectedCells(18).Value.ToString.ToLower
@@ -14727,7 +14778,7 @@ errhandler:
 
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & cr & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
 
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
@@ -14854,6 +14905,10 @@ errhandler:
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
+            If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                aDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
+
             ClosePleaseWaitForm()
 
             WordApp.Visible = True
@@ -14875,7 +14930,19 @@ errhandler:
 
     Private Sub GenerateIdentificationCoB() Handles btnGenerateIdentificationCoB.Click, btnGenerateIdentificationCoB2.Click
         Try
-            ShowPleaseWaitForm()
+
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records selected in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+
+
             Me.Cursor = Cursors.WaitCursor
 
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
@@ -14902,7 +14969,20 @@ errhandler:
                 ps = ps & " P.S"
             End If
 
+            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            System.IO.Directory.CreateDirectory(IDRFolder)
 
+            Dim CrNo As String = fds.SOCRegister(0).CrimeNumber
+
+            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - CoB.docx"
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            ShowPleaseWaitForm()
 
             If sho.ToUpper = "IP" Then
                 sho = "The Inspector of Police, " & ps
@@ -14956,7 +15036,7 @@ errhandler:
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.TypeText((vbTab & "REFER CR.NO. " & fds.SOCRegister(0).CrimeNumber & " U/S " & fds.SOCRegister(0).SectionOfLaw & " OF " & ps & ". ").ToUpper)
+            WordApp.Selection.TypeText((vbTab & "REFER CR.NO. " & CrNo & " U/S " & fds.SOCRegister(0).SectionOfLaw & " OF " & ps & ". ").ToUpper)
 
             Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
             Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
@@ -14996,6 +15076,10 @@ errhandler:
 
             WordApp.Selection.TypeText(vbNewLine)
 
+            If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                aDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
+
             ClosePleaseWaitForm()
             Me.Cursor = Cursors.Default
             WordApp.Visible = True
@@ -15014,10 +15098,58 @@ errhandler:
     End Sub
 
 
+    Private Sub btnOpenIdentificationReportFolder_Click(sender As Object, e As EventArgs) Handles btnOpenIdentificationReportFolder.Click
+
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            System.IO.Directory.CreateDirectory(IDRFolder)
+
+            If Me.JoinedIDRDataGrid.RowCount = 0 Or Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                Call Shell("explorer.exe " & IDRFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim PS As String = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
+
+            If Strings.Right(PS, 3) <> "P.S" Then
+                PS = PS & " P.S"
+            End If
+
+            Dim CrNo As String = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString
+
+            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & " - SHO.docx"
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
+            Else
+                Call Shell("explorer.exe " & IDRFolder, AppWinStyle.NormalFocus)
+            End If
+
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
     Private Sub btnGenerateExpertOpinion_Click(sender As Object, e As EventArgs) Handles btnGenerateExpertOpinion.Click, btnGenerateExpertOpinion2.Click
         Try
-            
+
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records selected in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             Me.Cursor = Cursors.WaitCursor
+
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
 
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
@@ -15040,7 +15172,7 @@ errhandler:
 
             Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion"
             System.IO.Directory.CreateDirectory(SaveFolder)
-            Dim sfilename As String = SaveFolder & "\Expert opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
+            Dim sfilename As String = SaveFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
@@ -15662,7 +15794,43 @@ errhandler:
 
         End Try
     End Sub
-    
+
+    Private Sub btnOpenExpertOpinionFolder_Click(sender As Object, e As EventArgs) Handles btnOpenExpertOpinionFolder.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim OpinionFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion"
+            System.IO.Directory.CreateDirectory(OpinionFolder)
+
+            If Me.JoinedIDRDataGrid.RowCount = 0 Or Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                Call Shell("explorer.exe " & OpinionFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim PS As String = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
+
+            If Strings.Right(PS, 3) <> "P.S" Then
+                PS = PS & " P.S"
+            End If
+
+            Dim CrNo As String = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString
+
+            Dim sfilename As String = OpinionFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
+            Else
+                Call Shell("explorer.exe " & OpinionFolder, AppWinStyle.NormalFocus)
+            End If
+
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 
     Private Sub btnShowIdentifiedDocket_Click(sender As Object, e As EventArgs) Handles btnShowIdentifiedDocket.Click
         If Me.JoinedIDRDataGrid.RowCount = 0 Then
@@ -15701,7 +15869,7 @@ errhandler:
             Dim PS As String = ""
             Dim Cr As String = ""
             Dim dtins As String = ""
-           
+
 
             idno = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString()
             SoCNumber = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString()
@@ -18446,5 +18614,7 @@ errhandler:
 
 #End Region
 
-   
+
+
+
 End Class

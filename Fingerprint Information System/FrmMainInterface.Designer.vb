@@ -576,6 +576,7 @@ Partial Class frmMainInterface
         Me.btnGenerateIdentificationCoB = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationReportDirector = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateExpertOpinion2 = New DevComponents.DotNetBar.ButtonItem()
         Me.LabelX73 = New DevComponents.DotNetBar.LabelX()
         Me.txtSOCGist = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.cmbSOCPhotoReceived = New DevComponents.DotNetBar.Controls.ComboBoxEx()
@@ -1121,7 +1122,8 @@ Partial Class frmMainInterface
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
-        Me.btnGenerateExpertOpinion2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenExpertOpinionFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenIdentificationReportFolder = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1986,7 +1988,7 @@ Partial Class frmMainInterface
         'btnIdentificationRegister
         '
         Me.btnIdentificationRegister.Name = "btnIdentificationRegister"
-        Me.btnIdentificationRegister.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIdentificationStatement, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnShowIdentifiedDocket, Me.btnGenerateIdentificationCoB2, Me.btnGenerateIdentificationLetter2, Me.btnGenerateIdentificationReportDirector2, Me.btnGenerateExpertOpinion})
+        Me.btnIdentificationRegister.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnIdentificationStatement, Me.btnListOfIdentifiedCases, Me.btnGistOfIdentifiedCases, Me.btnShowIdentifiedDocket, Me.btnGenerateIdentificationCoB2, Me.btnGenerateIdentificationLetter2, Me.btnGenerateIdentificationReportDirector2, Me.btnOpenIdentificationReportFolder, Me.btnGenerateExpertOpinion, Me.btnOpenExpertOpinionFolder})
         Me.btnIdentificationRegister.Text = "Identification Register"
         '
         'btnIdentificationStatement
@@ -5482,10 +5484,10 @@ Partial Class frmMainInterface
         '
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
+        Me.TabControl.Controls.Add(Me.TabControlPanel11)
         Me.TabControl.Controls.Add(Me.TabControlPanel1)
         Me.TabControl.Controls.Add(Me.TabControlPanel5)
         Me.TabControl.Controls.Add(Me.TabControlPanel2)
-        Me.TabControl.Controls.Add(Me.TabControlPanel11)
         Me.TabControl.Controls.Add(Me.TabControlPanel6)
         Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel10)
@@ -6177,6 +6179,12 @@ Partial Class frmMainInterface
         '
         Me.btnGenerateIdentificationReportDirector.Name = "btnGenerateIdentificationReportDirector"
         Me.btnGenerateIdentificationReportDirector.Text = "Generate Identification Report - Director"
+        '
+        'btnGenerateExpertOpinion2
+        '
+        Me.btnGenerateExpertOpinion2.BeginGroup = true
+        Me.btnGenerateExpertOpinion2.Name = "btnGenerateExpertOpinion2"
+        Me.btnGenerateExpertOpinion2.Text = "Generate Expert Opinion"
         '
         'LabelX73
         '
@@ -14479,11 +14487,15 @@ Partial Class frmMainInterface
         '
         Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
         '
-        'btnGenerateExpertOpinion2
+        'btnOpenExpertOpinionFolder
         '
-        Me.btnGenerateExpertOpinion2.BeginGroup = true
-        Me.btnGenerateExpertOpinion2.Name = "btnGenerateExpertOpinion2"
-        Me.btnGenerateExpertOpinion2.Text = "Generate Expert Opinion"
+        Me.btnOpenExpertOpinionFolder.Name = "btnOpenExpertOpinionFolder"
+        Me.btnOpenExpertOpinionFolder.Text = "Open Expert Opinion Folder"
+        '
+        'btnOpenIdentificationReportFolder
+        '
+        Me.btnOpenIdentificationReportFolder.Name = "btnOpenIdentificationReportFolder"
+        Me.btnOpenIdentificationReportFolder.Text = "Open Identification Report Folder"
         '
         'frmMainInterface
         '
@@ -15632,5 +15644,7 @@ End Sub
     Friend WithEvents cmbSalutation As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnGenerateExpertOpinion As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnGenerateExpertOpinion2 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenExpertOpinionFolder As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenIdentificationReportFolder As DevComponents.DotNetBar.ButtonItem
 
 End Class
