@@ -18581,7 +18581,7 @@ errhandler:
             If r = Windows.Forms.DialogResult.No Then Exit Sub
 
             Me.Cursor = Cursors.WaitCursor
-            Dim db As New dao.DBEngine
+            Dim db As New Microsoft.Office.Interop.Access.Dao.DBEngine
 
             Dim BackupPath As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
 

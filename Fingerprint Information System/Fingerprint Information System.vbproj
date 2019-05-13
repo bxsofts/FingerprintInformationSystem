@@ -126,6 +126,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\iViewCore.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Access.Dao, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Access.Dao.15.0.4420.1017\lib\net20\Microsoft.Office.Interop.Access.Dao.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
@@ -768,15 +773,6 @@
     <None Include="PNG 48x48\Arrioch-Senary-Office-access-mdb.ico" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="DAO">
-      <Guid>{00025E01-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="WIA">
       <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
       <VersionMajor>1</VersionMajor>
