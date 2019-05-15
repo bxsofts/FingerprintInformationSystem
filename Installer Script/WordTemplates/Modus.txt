@@ -1,20 +1,20 @@
+ATM theft - ATM
+Automobile theft - AMT
+Bank theft - BNK
+Church theft - CHT
 House Breaking theft by Day - HBD
 House Breaking theft by Night - HBN
-Lock Breaking - LBT
-Window bar bending/breaking/cutting - WBT
-Roof tiles removing - RTR
-Temple theft - TMT
-Church theft - CHT
-Mosque theft - MST
-Mobile phone theft - MBT
-Robbery - RBT
-Murder for gain - MRG
-Shop theft - SHT
-School theft - SCT
-Snatching - SNT
 Jewellery theft - JLT
-Automobile theft - AMT
-ATM theft - ATM
-Bank theft - BNK
-Murder
-Unnatural death
+Lock Breaking - LBT
+Mobile phone theft - MBT
+Mosque theft - MST
+Murder - MDR
+Murder for gain - MRG
+Robbery - RBT
+Roof tiles removing - RTR
+School theft - SCT
+Shop theft - SHT
+Snatching - SNT
+Temple theft - TMT
+Unnatural death - UND
+Window bar bending/breaking/cutting - WBT
