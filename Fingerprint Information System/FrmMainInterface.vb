@@ -1640,7 +1640,14 @@ Public Class frmMainInterface
     Private Sub LoadModusOperandi()
         Try
             Me.cmbSOCModus.Items.Clear()
-            For Each line As String In System.IO.File.ReadLines(strAppUserPath & "\WordTemplates\Modus.txt")
+            For Each line As String In System.IO.File.ReadLines(strAppUserPath & "\WordTemplates\ModusOperandi-PreDefined.txt")
+                If line.Trim <> "" Then
+                    Me.cmbSOCModus.Items.Add(line)
+                    ChangeDropdownWidth(line, cmbSOCModus)
+                End If
+            Next
+
+            For Each line As String In System.IO.File.ReadLines(strAppUserPath & "\WordTemplates\ModusOperandi-UserDefined.txt")
                 If line.Trim <> "" Then
                     Me.cmbSOCModus.Items.Add(line)
                     ChangeDropdownWidth(line, cmbSOCModus)
@@ -1654,6 +1661,21 @@ Public Class frmMainInterface
 
         End Try
     End Sub
+
+    Private Sub btnUserDefinedModusOperandi_Click(sender As Object, e As EventArgs) Handles btnUserDefinedModusOperandi.Click
+        Try
+            Dim MOFile As String = strAppUserPath & "\WordTemplates\ModusOperandi-UserDefined.txt"
+            If Not FileIO.FileSystem.FileExists(MOFile) Then
+                System.IO.File.Create(MOFile).Dispose()
+            End If
+
+            Shell("explorer.exe " & MOFile, AppWinStyle.MaximizedFocus)
+           
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
 #End Region
 
 
@@ -18613,8 +18635,6 @@ errhandler:
     End Sub
 
 #End Region
-
-
 
 
 End Class

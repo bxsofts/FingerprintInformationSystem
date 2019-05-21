@@ -145,6 +145,9 @@ Public Class FrmSettingsWizard
 
             End If
 
+            If Me.txtFullOffice.Text = "" Then Me.txtFullOffice.Text = "Single Digit Fingerprint Bureau"
+            If Me.txtShortOffice.Text = "" Then Me.txtShortOffice.Text = "SDFPB"
+
             If frmMainInterface.DoesTableExist("OfficerTable", sConString) = False Then
                 frmMainInterface.CreateOfficerTable()
                 Application.DoEvents()

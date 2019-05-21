@@ -9,7 +9,7 @@ VersionInfoProductVersion=14.0.0.0
 VersionInfoDescription=Manage SDFPB Registers. C@P Baiju Xavior, Fingerprint Expert.
 VersionInfoTextVersion=14.0.0.0
 VersionInfoCopyright=C@P BXSofts
-MinVersion=0,5
+MinVersion=0,6
 AppComments=Manage SDFPB Registers. C@P Baiju Xavior, Fingerprint Expert.
 AppCopyright=Copyright © 2007-2019 BXSofts, Inc
 AppPublisher=BXSofts, Inc.
@@ -116,7 +116,8 @@ Source: ..\Fingerprint Information System\bin\Release\*; DestDir: {app}\; Flags:
 
 
 Source: .\WordTemplates\*.docx; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
-Source: .\WordTemplates\Modus.txt; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
+Source: .\WordTemplates\ModusOperandi-PreDefined.txt; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
+Source: .\WordTemplates\ModusOperandi-UserDefined.txt; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: onlyifdoesntexist
 Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist uninsneveruninstall
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
 Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
