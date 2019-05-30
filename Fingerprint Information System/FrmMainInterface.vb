@@ -7506,6 +7506,8 @@ errhandler:
 
                 oid = 5
                 Me.OfficerTableAdapter.UpdateQuery(Me.IODatagrid.Rows(0).Cells(5).Value, Me.IODatagrid.Rows(1).Cells(5).Value, Me.IODatagrid.Rows(2).Cells(5).Value, Me.IODatagrid.Rows(3).Cells(5).Value, Me.IODatagrid.Rows(4).Cells(5).Value, Me.IODatagrid.Rows(5).Cells(5).Value, oid)
+
+                Me.OfficerTableAdapter.Insert(cnt + 1, Me.IODatagrid.Rows(0).Cells(6).Value, Me.IODatagrid.Rows(1).Cells(6).Value, Me.IODatagrid.Rows(2).Cells(6).Value, Me.IODatagrid.Rows(3).Cells(6).Value, Me.IODatagrid.Rows(4).Cells(6).Value, Me.IODatagrid.Rows(5).Cells(6).Value)
             End If
 
             If cnt = 6 Then
