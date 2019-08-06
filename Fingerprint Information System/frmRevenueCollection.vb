@@ -69,13 +69,13 @@ Public Class frmRevenueCollection
             Dim d1 = New Date(y, m, 1)
             Dim d2 = New Date(y, m, d)
 
-            Dim amount1 As Integer = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+            Dim amount1 As Integer = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) 'current month
             wdBooks("Amount1").Range.Text = amount1 & "/-"
 
             Dim amount2 As Integer = 0
 
-            If m = 3 Then ' if march then previous amount is zero
-                amount2 = 0
+            If m = 4 Then ' if april then previous amount is zero
+                amount2 = 0 'previous amount
             Else
                 m = m - 1 'previous month
                 If m = 0 Then
@@ -86,51 +86,51 @@ Public Class frmRevenueCollection
                 d = Date.DaysInMonth(y, m)
                 d2 = New Date(y, m, d) 'previous month
 
-                If m < 2 Then
+                If m < 3 Then
                     y = y - 1
                 End If
 
-                d1 = New Date(y, 3, 1) 'march 1
+                d1 = New Date(y, 4, 1) 'april 1
 
                 amount2 = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
-            End If
+                End If
 
-            wdBooks("Amount2").Range.Text = amount2 & "/-"
+                wdBooks("Amount2").Range.Text = amount2 & "/-"
 
-            Dim amount3 As Integer = amount1 + amount2
-            wdBooks("Amount3").Range.Text = amount3 & "/-"
+                Dim amount3 As Integer = amount1 + amount2
+                wdBooks("Amount3").Range.Text = amount3 & "/-"
 
 
-            m = Me.cmbMonth.SelectedIndex + 1 ' selected month
-            y = Me.txtYear.Value - 1 'previous year
-            d = Date.DaysInMonth(y, m)
+                m = Me.cmbMonth.SelectedIndex + 1 ' selected month
+                y = Me.txtYear.Value - 1 'previous year
+                d = Date.DaysInMonth(y, m)
 
-            d2 = New Date(y, m, d) ' selected month of last year
+                d2 = New Date(y, m, d) ' selected month of last year
 
-            Dim amount4 As Integer = 0
+                Dim amount4 As Integer = 0
 
-            If m < 3 Then
+            If m < 4 Then
                 y = y - 1
             End If
 
-            d1 = New Date(y, 3, 1) 'march 1
+                d1 = New Date(y, 4, 1) 'april 1
 
-            amount4 = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+                amount4 = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
 
 
-            wdBooks("Amount4").Range.Text = amount4 & "/-"
+                wdBooks("Amount4").Range.Text = amount4 & "/-"
 
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
+                wdApp.Visible = True
+                wdApp.Activate()
+                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+                wdDoc.Activate()
 
-            ReleaseObject(wdBooks)
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp = Nothing
-            Me.Cursor = Cursors.Default
-            Me.Close()
+                ReleaseObject(wdBooks)
+                ReleaseObject(wdDoc)
+                ReleaseObject(wdDocs)
+                wdApp = Nothing
+                Me.Cursor = Cursors.Default
+                Me.Close()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
