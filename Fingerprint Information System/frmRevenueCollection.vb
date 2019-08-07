@@ -6,7 +6,6 @@ Imports Microsoft.Office.Interop.Excel
 
 Public Class frmRevenueCollection
 
-    Dim TemplateFile As String
     Private Sub frmRevenueIncome_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.txtHeadofAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
@@ -77,7 +76,7 @@ Public Class frmRevenueCollection
             xlSheet.Range("A7:F7").Borders.LineStyle = 1
             xlSheet.Range("A7").HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
             xlSheet.Range("A7").Font.Bold = True
-            xlSheet.Range("A7").Value = "No. " & PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & "Date:       /" & GenerateDateWithoutDay()
+            xlSheet.Range("A7").Value = "No. " & PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName & "                    Date: " & Strings.Format(Now, "dd/MM/yyyy")
             xlSheet.Range("A7", "F7").Merge()
 
             xlSheet.Range("A9").Font.Bold = True
@@ -239,14 +238,76 @@ Public Class frmRevenueCollection
             xlSheet2.Range("C1").Value = "Month"
             xlSheet2.Range("D1").Value = "Amount"
 
+            m = Me.cmbMonth.SelectedIndex + 1 ' selected month
+            y = Me.txtYear.Value
 
+            If m >= 4 Then
+                i = 4
+                For i = 4 To m
+                    d = Date.DaysInMonth(y, i)
+                    d1 = New Date(y, i, 1)
+                    d2 = New Date(y, i, d)
+                    xlSheet2.Cells(i - 2, 1).value = i & "/" & y
+                    xlSheet2.Cells(i - 2, 2).value = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+
+                    d = Date.DaysInMonth(y - 1, i)
+                    d1 = New Date(y - 1, i, 1)
+                    d2 = New Date(y - 1, i, d)
+                    xlSheet2.Cells(i - 2, 3).value = i & "/" & y - 1
+                    xlSheet2.Cells(i - 2, 4).value = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+                Next
+                xlSheet2.Cells(i - 2, 1).value = "Total Rs."
+                xlSheet2.Cells(i - 2, 2).value = xlApp.WorksheetFunction.Sum(xlSheet2.Range("B2:B" & i - 2))
+                xlSheet2.Cells(i - 2, 4).value = xlApp.WorksheetFunction.Sum(xlSheet2.Range("D2:D" & i - 2))
+
+                xlSheet2.Range("A" & i - 2, "D" & i - 2).Font.Bold = True
+            End If
+
+            If m < 4 Then
+                i = 4
+                For i = 4 To 12
+                    d = Date.DaysInMonth(y - 1, i)
+                    d1 = New Date(y - 1, i, 1)
+                    d2 = New Date(y - 1, i, d)
+                    xlSheet2.Cells(i - 2, 1).value = i & "/" & y - 1
+                    xlSheet2.Cells(i - 2, 2).value = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+
+                    d = Date.DaysInMonth(y - 2, i)
+                    d1 = New Date(y - 2, i, 1)
+                    d2 = New Date(y - 2, i, d)
+                    xlSheet2.Cells(i - 2, 3).value = i & "/" & y - 2
+                    xlSheet2.Cells(i - 2, 4).value = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+                Next
+
+                Dim j = 1
+
+                For j = 1 To m
+                    d = Date.DaysInMonth(y, j)
+                    d1 = New Date(y, j, 1)
+                    d2 = New Date(y, j, d)
+                    xlSheet2.Cells(i + j - 3, 1).value = j & "/" & y
+                    xlSheet2.Cells(i + j - 3, 2).value = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+
+                    d = Date.DaysInMonth(y - 1, j)
+                    d1 = New Date(y - 1, j, 1)
+                    d2 = New Date(y - 1, j, d)
+                    xlSheet2.Cells(i + j - 3, 3).value = j & "/" & y - 1
+                    xlSheet2.Cells(i + j - 3, 4).value = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
+                Next
+
+                xlSheet2.Cells(i + j - 3, 1).value = "Total Rs."
+                xlSheet2.Cells(i + j - 3, 2).value = xlApp.WorksheetFunction.Sum(xlSheet2.Range("B2:B" & i + j - 3))
+                xlSheet2.Cells(i + j - 3, 4).value = xlApp.WorksheetFunction.Sum(xlSheet2.Range("D2:D" & i + j - 3))
+
+                xlSheet2.Range("A" & i + j - 3, "D" & i + j - 3).Font.Bold = True
+            End If
 
             xlSheets("Sheet1").activate()
 
             ' xlSheets("Sheet1").name = sMonth
             xlSheet.Name = sMonth
-
-            ' If Not FileInUse(sFileName) Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+            xlSheet2.Name = "Month vise Revenue"
+            If Not FileInUse(sFileName) Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
 
             ClosePleaseWaitForm()
 

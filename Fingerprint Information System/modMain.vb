@@ -391,7 +391,7 @@ Module modMain
         Return cBaseColor
     End Function
 
-    Public Function GenerateDateWithoutDay()
+    Public Function GenerateDateWithoutDay() As String
         On Error Resume Next
 
         Dim dt = Today
