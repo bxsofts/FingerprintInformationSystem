@@ -199,7 +199,7 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeText("Sir,")
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Sub: Monthly Revenue Income details - submitting of - reg:- ")
+            WordApp.Selection.TypeText(vbTab & "Sub: Monthly Fingerprint Attestation details - submitting of - reg:- ")
 
             For delay = 21 To 30
                 bgwLetter.ReportProgress(delay)
@@ -217,9 +217,9 @@ Public Class frmFPAStatement
             If RowCount = 2 Then ' No records
                 datevalue = datevalue.Replace("for the month of ", "in the month of ")
                 datevalue = datevalue.Replace("for the period from ", "during the period from ")
-                bodytext = "The Monthly Revenue Income " & datevalue & " is NIL. This is for favour of information and necessary action."
+                bodytext = "The Monthly Revenue Income from Fingerprint Attestation " & datevalue & " is NIL. This is for favour of information and necessary action."
             Else
-                bodytext = "Monthly Revenue Income details " & datevalue & " are furnished below for favour of information and necessary action."
+                bodytext = "Monthly Fingerprint Attestation details " & datevalue & " are furnished below for favour of information and necessary action."
             End If
 
             WordApp.Selection.TypeText(vbTab & bodytext)
@@ -496,14 +496,14 @@ Public Class frmFPAStatement
             If RowCount = 2 Then ' No records
                 datevalue = datevalue.Replace("for the month of ", "in the month of ")
                 datevalue = datevalue.Replace("for the period from ", "during the period from ")
-                bodytext = "Monthly Revenue Income " & datevalue & " - NIL"
+                bodytext = "Monthly Revenue Income from Fingerprint Attestation " & datevalue & " - NIL"
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeText(vbTab & bodytext.ToUpper)
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------")
             Else
-                bodytext = "Monthly Revenue Income details " & datevalue & " are furnished below:"
+                bodytext = "Monthly Fingerprint Attestation details " & datevalue & " are furnished below:"
             End If
             For delay = 31 To 40
                 bgwCoB.ReportProgress(delay)

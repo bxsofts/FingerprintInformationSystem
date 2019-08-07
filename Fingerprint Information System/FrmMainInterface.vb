@@ -16578,7 +16578,7 @@ errhandler:
     End Sub
 
 
-    Private Sub ShowFPAStstistics() Handles btnFPAStatement.Click, btnMonthlyFPA.Click
+    Private Sub ShowFPAStstistics() Handles btnFPAStatement.Click
 
         On Error Resume Next
         frmFPAStatement.ShowDialog()

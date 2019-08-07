@@ -35,116 +35,13 @@ Public Class frmRevenueCollection
 
     End Sub
 
-    Private Sub btnGenerate_Click(sender As Object, e As EventArgs)
-        TemplateFile = strAppUserPath & "\WordTemplates\RevenueCollection.docx"
-        If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-            MessageBoxEx.Show("File missing. Please re-install the Application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
 
-        Try
-            Me.Cursor = Cursors.WaitCursor
-            Dim wdApp As Word.Application
-            Dim wdDocs As Word.Documents
-            wdApp = New Word.Application
-            wdDocs = wdApp.Documents
-            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
-
-            wdDoc.Range.NoProofing = 1
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
-
-            wdBooks("Unit").Range.Text = FullDistrictName
-            wdBooks("FileNo").Range.Text = PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
-            wdBooks("Date").Range.Text = "   /" & GenerateDateWithoutDay()
-
-            wdBooks("District").Range.Text = FullDistrictName.ToUpper
-            wdBooks("Month").Range.Text = Me.cmbMonth.Text & " " & Me.txtYear.Text
-
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "HeadOfAccount", Me.txtHeadofAccount.Text, Microsoft.Win32.RegistryValueKind.String)
-
-            wdBooks("Head").Range.Text = Me.txtHeadofAccount.Text
-
-            Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
-            Dim y = Me.txtYear.Value
-            Dim d As Integer = Date.DaysInMonth(y, m)
-            Dim d1 = New Date(y, m, 1)
-            Dim d2 = New Date(y, m, d)
-
-            Dim amount1 As Integer = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) 'current month
-            wdBooks("Amount1").Range.Text = amount1 & "/-"
-
-            Dim amount2 As Integer = 0
-
-            If m = 4 Then ' if april then previous amount is zero
-                amount2 = 0 'previous amount
-            Else
-                m = m - 1 'previous month
-                If m = 0 Then
-                    m = 12
-                    y = y - 1
-                End If
-
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d) 'previous month
-
-                If m < 3 Then
-                    y = y - 1
-                End If
-
-                d1 = New Date(y, 4, 1) 'april 1
-
-                amount2 = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
-            End If
-
-            wdBooks("Amount2").Range.Text = amount2 & "/-"
-
-            Dim amount3 As Integer = amount1 + amount2
-            wdBooks("Amount3").Range.Text = amount3 & "/-"
-
-
-            m = Me.cmbMonth.SelectedIndex + 1 ' selected month
-            y = Me.txtYear.Value - 1 'previous year
-            d = Date.DaysInMonth(y, m)
-
-            d2 = New Date(y, m, d) ' selected month of last year
-
-            Dim amount4 As Integer = 0
-
-            If m < 4 Then
-                y = y - 1
-            End If
-
-            d1 = New Date(y, 4, 1) 'april 1
-
-            amount4 = Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2))
-
-
-            wdBooks("Amount4").Range.Text = amount4 & "/-"
-
-            wdApp.Visible = True
-            wdApp.Activate()
-            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-            wdDoc.Activate()
-
-            ReleaseObject(wdBooks)
-            ReleaseObject(wdDoc)
-            ReleaseObject(wdDocs)
-            wdApp = Nothing
-            Me.Cursor = Cursors.Default
-            Me.Close()
-        Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            ShowErrorMessage(ex)
-        End Try
-    End Sub
-
-  
-    
     Private Sub btnGenerateExcel_Click(sender As Object, e As EventArgs) Handles btnGenerateExcel.Click
         Try
             Me.Cursor = Cursors.WaitCursor
+            Dim sMonth As String = Me.cmbMonth.Text & " " & Me.txtYear.Text
 
-            Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\Revenue Collection Statement - SDFPB " & ShortDistrictName & " - " & Me.cmbMonth.Text.ToUpper & " " & Me.txtYear.Text & ".xlsx"
+            Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\Revenue Collection Statement - SDFPB " & ShortDistrictName & " - " & sMonth.ToUpper & ".xlsx"
 
             If My.Computer.FileSystem.FileExists(sFileName) Then
                 Shell("explorer.exe " & sFileName, AppWinStyle.MaximizedFocus)
@@ -159,6 +56,7 @@ Public Class frmRevenueCollection
             Dim xlBook As Excel._Workbook = xlBooks.Add
             Dim xlSheets As Excel.Sheets = xlBook.Worksheets
             Dim xlSheet As Excel.Worksheet = xlBook.ActiveSheet
+
 
             xlSheet.PageSetup.LeftMargin = 40
             xlSheet.PageSetup.RightMargin = 25
@@ -183,7 +81,7 @@ Public Class frmRevenueCollection
             xlSheet.Range("A7", "F7").Merge()
 
             xlSheet.Range("A9").Font.Bold = True
-            xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS FOR THE MONTH OF " & Me.cmbMonth.Text.ToUpper & " " & Me.txtYear.Text
+            xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS FOR THE MONTH OF " & sMonth.ToUpper
             xlSheet.Range("A9", "F9").Merge()
 
             With xlSheet.Range("A11", "F11")
@@ -218,6 +116,7 @@ Public Class frmRevenueCollection
 
             If RowCount = 0 Then
                 xlSheet.Cells(i, 6).value = "Rs. 0/-"
+                xlSheet.Range("A11:F12").Borders.LineStyle = 1
             Else
                 For i = 12 To RowCount + i - 1
                     Dim j = i - 12
@@ -325,8 +224,29 @@ Public Class frmRevenueCollection
 
             xlSheet.Range("A" & i, "B" & i).Merge()
 
+            xlSheets("Sheet2").activate()
 
-            If Not FileInUse(sFileName) Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+            Dim xlSheet2 As Excel.Worksheet = xlBook.ActiveSheet
+
+            With xlSheet2.Range("A1", "D1")
+                .Font.Bold = True
+                .HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
+            End With
+
+            xlSheet2.Range("A1").Value = "Month"
+            xlSheet2.Range("B1").Value = "Amount"
+
+            xlSheet2.Range("C1").Value = "Month"
+            xlSheet2.Range("D1").Value = "Amount"
+
+
+
+            xlSheets("Sheet1").activate()
+
+            ' xlSheets("Sheet1").name = sMonth
+            xlSheet.Name = sMonth
+
+            ' If Not FileInUse(sFileName) Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
 
             ClosePleaseWaitForm()
 
