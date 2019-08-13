@@ -223,6 +223,10 @@ Public Class frmRevenueCollection
 
             xlSheet.Range("A" & i, "B" & i).Merge()
 
+            If xlSheets.Count < 2 Then
+                xlSheets.Add()
+            End If
+
             xlSheets("Sheet2").activate()
 
             Dim xlSheet2 As Excel.Worksheet = xlBook.ActiveSheet
