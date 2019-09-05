@@ -145,7 +145,7 @@ Public Class frmRevenueCollection
 
             xlSheet.Range("A" & i).Value = "Head of Account"
             xlSheet.Range("C" & i).Value = "Amount collected during the month"
-            xlSheet.Range("D" & i).Value = "Amount collected upto the month in current financial year"
+            xlSheet.Range("D" & i).Value = "Amount collected upto the previous month in current financial year"
             xlSheet.Range("E" & i).Value = "Progressive Total"
             xlSheet.Range("F" & i).Value = "Collection from April upto the month during the last financial year"
 

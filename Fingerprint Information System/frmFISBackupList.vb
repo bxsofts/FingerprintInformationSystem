@@ -1216,7 +1216,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        OpenFileDialog1.Filter = "Exe File|*.exe"
         OpenFileDialog1.Filter = "All Files|*.*"
         OpenFileDialog1.FileName = ""
         OpenFileDialog1.Title = "Select File to Upload"
@@ -1283,13 +1282,14 @@ Public Class frmFISBackupList
 
             UpdateRequest.Fields = "id, name, size, modifiedTime, mimeType, description"
             UpdateRequest.Upload()
-            Stream.Close()
 
             If uUploadStatus = UploadStatus.Completed Then
                 Dim file As Google.Apis.Drive.v3.Data.File = UpdateRequest.ResponseBody
                 bgwUpdateFileContent.ReportProgress(100, file)
                 GetDriveUsageDetails()
             End If
+
+            Stream.Close()
         Catch ex As Exception
             ShowErrorMessage(ex)
             blUploadIsProgressing = False
@@ -1330,7 +1330,7 @@ Public Class frmFISBackupList
             MessageBoxEx.Show("File updated successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
-        If dDownloadStatus = DownloadStatus.Failed Then
+        If uUploadStatus = UploadStatus.Failed Then
             MessageBoxEx.Show("File update failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
