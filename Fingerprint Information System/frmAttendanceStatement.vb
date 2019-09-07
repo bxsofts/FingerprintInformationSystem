@@ -9,6 +9,7 @@ Public Class frmAttendanceStmt
     Dim d1 As Date
     Dim d2 As Date
     Dim OfficerList(4) As String
+    Dim PENList(4) As String
     Dim ArrayLength As Integer = 0
     Dim SaveFileName As String
     Private Sub LoadDate() Handles MyBase.Load
@@ -44,39 +45,43 @@ Public Class frmAttendanceStmt
         RenameAndMoveOldFiles()
     End Sub
 
-    Private Function GetArrayLength()
+    Private Sub GetArrayLength()
         ArrayLength = 0
         If chkTI.Checked Then
             If TI <> ", TI" Then
                 OfficerList(ArrayLength) = TI
-                ArrayLength = ArrayLength + 1
-                Return ArrayLength
+                PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(0).Cells(2).Value
+                ArrayLength = 1
+                Exit Sub
             End If
         End If
 
 
         If FPE1 <> ", FPE" Then
             OfficerList(ArrayLength) = FPE1
+            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(1).Cells(2).Value
             ArrayLength = ArrayLength + 1
         End If
 
         If FPE2 <> ", FPE" Then
             OfficerList(ArrayLength) = FPE2
+            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(2).Cells(2).Value
             ArrayLength = ArrayLength + 1
         End If
 
         If FPE3 <> ", FPE" Then
             OfficerList(ArrayLength) = FPE3
+            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(3).Cells(2).Value
             ArrayLength = ArrayLength + 1
         End If
 
         If FPS <> ", FPS" Then
             OfficerList(ArrayLength) = FPS
+            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(4).Cells(2).Value
             ArrayLength = ArrayLength + 1
         End If
 
-        Return ArrayLength
-    End Function
+    End Sub
 
     Private Function GenerateLetterDate(ByVal ShowDate As Boolean) As String
         On Error Resume Next
@@ -159,6 +164,8 @@ Public Class frmAttendanceStmt
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
+
+        GetArrayLength()
 
         Dim args As Attendance = New Attendance
         args.d1 = d1
@@ -265,19 +272,20 @@ Public Class frmAttendanceStmt
                     System.Threading.Thread.Sleep(10)
                 Next
 
+                WordApp.Selection.ParagraphFormat.SpaceAfter = 1
 
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
 
                 Dim columncount As Integer = (d2 - d1).Days + 4
-                Dim rowcount As Integer = GetArrayLength() * 2 + 1
+                Dim rowcount As Integer = ArrayLength * 2 + 1
 
                 WordApp.Selection.Font.Bold = 0
                 WordApp.Selection.Font.Size = 11
                 WordApp.Selection.Tables.Add(WordApp.Selection.Range, rowcount, columncount)
                 WordApp.Selection.Tables.Item(1).Borders.Enable = True
                 WordApp.Selection.Tables.Item(1).AllowAutoFit = True
-
+                WordApp.Selection.Tables.Item(1).Rows.SetHeight(25, Word.WdRowHeightRule.wdRowHeightAtLeast)
 
                 WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(20, Word.WdRulerStyle.wdAdjustSameWidth)
                 WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
@@ -322,9 +330,12 @@ Public Class frmAttendanceStmt
                     WordApp.Selection.Tables.Item(1).Cell(i + 1, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                     Dim io As String = OfficerList(j)
-                    io = io.Replace("FPE", vbNewLine & "Fingerprint Expert")
-                    io = io.Replace("FPS", vbNewLine & "Fingerprint Searcher")
+                    io = io.Replace(", TI", vbNewLine & "Tester Inspector")
+                    io = io.Replace(", FPE", vbNewLine & "Fingerprint Expert")
+                    io = io.Replace(", FPS", vbNewLine & "Fingerprint Searcher")
                     WordApp.Selection.TypeText(io)
+                    Dim PEN As String = PENList(j)
+                    WordApp.Selection.TypeText(vbCrLf & "PEN: " & PEN)
                     i = i + 1
                     r = r - 2
                     j = j + 1
@@ -397,7 +408,7 @@ Public Class frmAttendanceStmt
                                 txt = "X"
                             End If
                         End If
-                        ' WordApp.Selection.Tables.Item(1).Cell(j, i).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+                        WordApp.Selection.Tables.Item(1).Cell(j, i).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                         WordApp.Selection.Font.Bold = 1
                         WordApp.Selection.Font.Size = 10
