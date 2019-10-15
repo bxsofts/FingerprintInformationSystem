@@ -345,7 +345,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.dgv.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgv.EnableHeadersVisualStyles = False
-        Me.dgv.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.dgv.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.dgv.Location = New System.Drawing.Point(8, 3)
         Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"

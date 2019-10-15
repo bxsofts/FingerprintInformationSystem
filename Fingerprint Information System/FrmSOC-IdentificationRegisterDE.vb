@@ -512,6 +512,18 @@ Public Class FrmIdentificationRegisterDE
                 Remarks = Remarks & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(10).Value, dgv.Rows(i).Cells(10).Value)
             Next
 
+            If blUpdate Then
+                For i = 0 To dgv.RowCount - 1
+                    Dim oldRow As FingerPrintDataSet.CulpritsRegisterRow = Me.FingerPrintDataSet1.CulpritsRegister.Rows(Me.dgv.Rows(i).Index)
+
+                    If oldRow IsNot Nothing Then
+                        With oldRow
+                            .IdentificationNumber = Me.txtIdentificationNumber.Text.Trim
+                        End With
+                    End If
+                Next
+            End If
+
             Me.CulpritsRegisterTableAdapter1.Update(Me.FingerPrintDataSet1.CulpritsRegister)
 
             If Not blUpdate Then
@@ -570,6 +582,19 @@ Public Class FrmIdentificationRegisterDE
                     .SelectedCells(19).Value = Remarks.Trim
                 End With
                 TotalCPsIdentified = PrevCPsIdentified - OriginalCPIdentified + CPsIdentified
+
+                If SOCNumber <> OriginalSOCNumber Then
+                    Me.SocRegisterTableAdapter1.UpdateQuerySetIdentificationDetails("", "", "0", OriginalSOCNumber)
+
+                    Dim indx = frmMainInterface.SOCRegisterBindingSource.Find("SOCNumber", OriginalSOCNumber)
+                    If indx > -1 Then
+                        frmMainInterface.SOCRegisterBindingSource.Position = indx
+                        frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(22).Value = ""
+                        frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(24).Value = ""
+                        frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(13).Value = "0"
+                    End If
+                End If
+               
 
                 ShowDesktopAlert("Selected Identification Record updated successfully.")
             End If
