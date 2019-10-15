@@ -330,6 +330,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtDANumber.Border.Class = "TextBoxBorder"
         Me.txtDANumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.txtDANumber.ButtonCustom.Image = CType(resources.GetObject("txtDANumber.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtDANumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDANumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtDANumber.FocusHighlightEnabled = True
         Me.txtDANumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

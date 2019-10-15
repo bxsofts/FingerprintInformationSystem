@@ -233,6 +233,81 @@ Public Class frmIdentificationCulpritDetails
 
     End Sub
 
+    Public Function ConvertToProperCase(ByVal InputText) As String
+        On Error Resume Next
+
+        Dim line() = Strings.Split(InputText, vbNewLine)
+        Dim ln As String = ""
+        Dim u = line.GetUpperBound(0)
+
+        For j = 0 To u
+            Dim c = line(j)
+            ln = ln & JoinTexts(c)
+            If j <> u Then ln = ln & vbNewLine
+        Next
+
+
+
+        Return ln
+    End Function
+
+
+    Private Function JoinTexts(ByVal InputText As String) As String
+
+        On Error Resume Next
+
+        Dim s() = Strings.Split(InputText, " ")
+        Dim t As String = ""
+        Dim n = s.GetUpperBound(0)
+        For i = 0 To n
+            Dim c = s(i)
+            If AllCaps(c) Then
+                t = t & c
+            Else
+                t = t & Strings.StrConv(c, VbStrConv.ProperCase)
+            End If
+            If i <> n Then t = t & " "
+        Next
+
+        Return t
+    End Function
+
+
+    Private Sub ConvertToProperCase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCulpritName.Validated, txtAddress.Validated
+        On Error Resume Next
+
+        Dim x As Control = DirectCast(sender, Control)
+        Dim t As String = ConvertToProperCase(x.Text)
+        t = t.Replace("S/O", "s/o")
+        t = t.Replace("W/O", "w/o")
+        t = t.Replace("D/O", "d/o")
+
+        x.Text = t
+    End Sub
+
+
+    
+
+    Private Function AllCaps(ByVal InputWord As String) As Boolean
+        On Error Resume Next
+        Dim aChar As Char = ""
+        AllCaps = False
+        For i = 1 To InputWord.Length
+            aChar = Strings.Mid(InputWord, i, 1)
+            If (Not IsNumeric(aChar)) Then 'And (aChar <> Space(1)) Then
+                If (Asc(aChar) >= 65 And Asc(aChar) <= 90) Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Else
+                Return True
+            End If
+        Next
+
+    End Function
+
+
     Private Sub btnClearFields_Click(sender As Object, e As EventArgs) Handles btnClearFields.Click
         ClearFields()
     End Sub

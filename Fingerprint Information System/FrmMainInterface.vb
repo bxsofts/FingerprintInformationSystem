@@ -793,7 +793,7 @@ Public Class frmMainInterface
 
         Me.chkAutoCapitalize.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoCapitalize", 1)
         TemporarilyStopCapitalize = Not Me.chkAutoCapitalize.Checked
-        DisplayAllCapsStatus(Me.chkAutoCapitalize.Checked)
+        DisplayAutoCapsStatus(Me.chkAutoCapitalize.Checked)
         Me.lblAutoCapsStatus.Visible = True
 
         Me.chkIgnoreAllCaps.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "IgnoreAllCaps", 1)
@@ -1289,7 +1289,7 @@ Public Class frmMainInterface
             If p >= 0 Then Me.JoinedIDRBindingSource.Position = p
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-           
+
         Catch ex As Exception
 
         End Try
@@ -1670,7 +1670,7 @@ Public Class frmMainInterface
             End If
 
             Shell("explorer.exe " & MOFile, AppWinStyle.MaximizedFocus)
-           
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -1744,7 +1744,7 @@ Public Class frmMainInterface
 
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoCapitalize", v, Microsoft.Win32.RegistryValueKind.String)
         TemporarilyStopCapitalize = Not Me.chkAutoCapitalize.Checked
-        DisplayAllCapsStatus(s)
+        DisplayAutoCapsStatus(s)
     End Sub
 
 
@@ -4176,7 +4176,7 @@ Public Class frmMainInterface
             Me.btnGenerateIdentificationCoB.Visible = True
             Me.btnGenerateIdentificationLetter.Visible = True
             Me.btnGenerateIdentificationReportDirector.Visible = True
-            Me.btnGenerateExpertOpinion2.Visible=True
+            Me.btnGenerateExpertOpinion2.Visible = True
         End If
 
         ' DisplayDatabaseInformation()
@@ -4618,7 +4618,7 @@ Public Class frmMainInterface
         On Error Resume Next
         If e.KeyCode = Keys.Escape Then
             TemporarilyStopCapitalize = Not TemporarilyStopCapitalize
-            DisplayAllCapsStatus(Not TemporarilyStopCapitalize)
+            DisplayAutoCapsStatus(Not TemporarilyStopCapitalize)
         End If
 
     End Sub
@@ -4649,7 +4649,7 @@ Public Class frmMainInterface
     Private Sub StopCapiltalize(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblACAddress.Click, lblACAlias.Click, lblACFather.Click, lblACName.Click, lblDAAdress.Click, lblDAAlias.Click, lblDAFather.Click, lblIDAddress.Click, lblIDAlias.Click, lblIDFather.Click, lblIDName.Click, lblFPAAddress.Click, lblFPAPassport.Click, lblSOCPhoto.Click, lblSOCPO.Click, lblSOCComplainant.Click, lblAutoCapsStatus.Click
         On Error Resume Next
         TemporarilyStopCapitalize = Not TemporarilyStopCapitalize
-        DisplayAllCapsStatus(Not TemporarilyStopCapitalize)
+        DisplayAutoCapsStatus(Not TemporarilyStopCapitalize)
     End Sub
 
 
@@ -4673,7 +4673,7 @@ Public Class frmMainInterface
     End Function
 
 
-    Private Sub DisplayAllCapsStatus(ByVal Status As Boolean)
+    Private Sub DisplayAutoCapsStatus(ByVal Status As Boolean)
         On Error Resume Next
         If Status = True Then
             Me.lblAutoCapsStatus.Text = "Auto CAPS: ON"
