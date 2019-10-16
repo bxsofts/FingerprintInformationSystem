@@ -3990,6 +3990,8 @@ Public Class frmMainInterface
         Me.btnGenerateIdentificationLetter.Visible = False
         Me.btnGenerateIdentificationReportDirector.Visible = False
         Me.btnGenerateExpertOpinion2.Visible = False
+        Me.btnEnterIDRDetailsContextMenu.Visible = False
+
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
                 e.Cancel = True
@@ -4032,9 +4034,22 @@ Public Class frmMainInterface
                 Me.btnPhotoReceivedContext.Checked = False
             End If
 
-            If UCase(Me.SOCDatagrid.SelectedCells(24).Value.ToString) = "IDENTIFIED" Then
+            Dim cpd As Integer = Val(Me.SOCDatagrid.SelectedCells(10).Value)
+            Dim cpu As Integer = Val(Me.SOCDatagrid.SelectedCells(11).Value)
+            Dim cpe As Integer = Val(Me.SOCDatagrid.SelectedCells(12).Value)
+            Dim cpid As Integer = Val(Me.SOCDatagrid.SelectedCells(13).Value)
+            Dim cpr As Integer = cpd - cpu - cpe - cpid
+
+            If cpid > 0 Then
                 Me.btnSOCShowInIDRRegister.Visible = True
+                Me.btnEnterIDRDetailsContextMenu.Visible = False
+            Else
+                If cpr > 0 Then
+                    Me.btnEnterIDRDetailsContextMenu.Visible = True
+                End If
             End If
+
+
         End If
 
 
@@ -7981,6 +7996,19 @@ errhandler:
         End If
 
     End Function
+
+    Private Sub btnEnterIDRDetailsContextMenu_Click(sender As Object, e As EventArgs) Handles btnEnterIDRDetailsContextMenu.Click
+        Me.Cursor = Cursors.WaitCursor
+        blIDRNewDataMode = True
+        blIDREditMode = False
+        Me.TabControl.SelectedTab = IDRTabItem
+        FrmIdentificationRegisterDE.Show()
+        FrmIdentificationRegisterDE.BringToFront()
+        FrmIdentificationRegisterDE.txtSOCNumber.Text = Me.SOCDatagrid.SelectedRows(0).Cells(0).Value
+        FrmIdentificationRegisterDE.txtSOCNumber.Focus()
+        FrmIdentificationRegisterDE.txtSOCNumber_LostFocus()
+        Cursor = Cursors.Default
+    End Sub
 #End Region
 
 
@@ -18642,4 +18670,5 @@ errhandler:
 #End Region
 
 
+    
 End Class

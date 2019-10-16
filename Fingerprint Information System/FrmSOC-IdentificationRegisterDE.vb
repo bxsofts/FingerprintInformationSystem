@@ -116,7 +116,7 @@ Public Class FrmIdentificationRegisterDE
         Me.txtIdentificationNumber.Text = GenerateNewIDRNumber()
     End Sub
 
-    Private Sub txtSOCNumber_LostFocus(sender As Object, e As EventArgs) Handles txtSOCNumber.LostFocus
+    Public Sub txtSOCNumber_LostFocus() Handles txtSOCNumber.LostFocus
         Try
             lblSOCNumberWarning.Visible = False
 
@@ -124,7 +124,7 @@ Public Class FrmIdentificationRegisterDE
             If SOCNumber = "" Then Exit Sub
 
             Me.lblSOCNumberWarning.Visible = True
-           
+
             If Not SOCNumberExists(SOCNumber) Then
                 lblSOCNumberWarning.Text = "Error: SOC No. not found"
                 Exit Sub
