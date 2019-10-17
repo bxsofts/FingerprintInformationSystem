@@ -15273,6 +15273,72 @@ errhandler:
             Dim CPE As Integer = Val(fds.SOCRegister(0).ChancePrintsEliminated)
             Dim CPR As Integer = CPD - CPU - CPE
 
+           
+
+            Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
+            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
+
+            Dim culpritname As String = fds.CulpritsRegister(0).CulpritName
+            Dim address As String = fds.CulpritsRegister(0).Address
+            address = address.Replace(vbCrLf, ", ")
+            address = address.Replace(",,", ",")
+
+            Dim FingersIdentified As String = fds.CulpritsRegister(0).FingersIdentified
+            Dim previouscasedetails As String = fds.CulpritsRegister(0).PreviousCaseDetails
+            Dim daslipnumber As String = fds.CulpritsRegister(0).DANumber
+            Dim CPI As Integer = fds.CulpritsRegister(0).CPsIdentified
+
+            Dim CPDMarkings As String = ""
+
+
+            For i = 1 To CPD
+                CPDMarkings = CPDMarkings & "'" & PS.Substring(0, 1) & i & "'" & IIf(i = CPD - 1, " and ", " ")
+            Next
+
+            CPDMarkings = Trim(CPDMarkings)
+            CPDMarkings = CPDMarkings.Replace(" ", ", ")
+            CPDMarkings = CPDMarkings.Replace(", and, ", " and ")
+
+
+            frmExpertOpinion.txtCPD.Text = CPDMarkings
+            frmExpertOpinion.txtCPE.Text = IIf(CPE = 0, "Nil", CPDMarkings)
+            frmExpertOpinion.txtCPU.Text = IIf(CPU = 0, "Nil", CPDMarkings)
+            frmExpertOpinion.txtCPI.Text = CPDMarkings
+            frmExpertOpinion.txtFingerOrder.Text = FingersIdentified
+            frmExpertOpinion.txtOpinionCP.Text = CPDMarkings
+            frmExpertOpinion.txtOpinionFinger.Text = FingersIdentified
+            frmExpertOpinion.txtRidgeColor.Text = "white"
+            frmExpertOpinion.lblCPD.Text = IIf(CPD = 1, "1 CP", CPD & " CPs")
+            frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", IIf(CPE = 1, "1 CP", CPE & " CPs"))
+            frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", IIf(CPU = 1, "1 CP", CPU & " CPs"))
+            frmExpertOpinion.lblCPI.Text = IIf(CPI = 1, "1 CP", CPI & " CPs")
+
+            blGenerateOpinion = False
+
+            frmExpertOpinion.ShowDialog()
+            frmExpertOpinion.BringToFront()
+
+
+            If Not blGenerateOpinion Then
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+
+            CPDMarkings = frmExpertOpinion.txtCPD.Text.Trim
+            Dim CPUMarkings As String = frmExpertOpinion.txtCPU.Text.Trim
+            Dim CPEMarkings As String = frmExpertOpinion.txtCPE.Text.Trim
+            Dim CPIMarkings As String = frmExpertOpinion.txtCPI.Text.Trim
+            Dim FingerOrder As String = frmExpertOpinion.txtFingerOrder.Text.Trim
+            Dim OpinionCP As String = frmExpertOpinion.txtOpinionCP.Text.Trim
+            Dim OpinionFinger As String = frmExpertOpinion.txtOpinionFinger.Text.Trim
+            Dim RidgeColor As String = frmExpertOpinion.txtRidgeColor.Text.Trim.ToLower
+
+
+            ShowPleaseWaitForm()
+            Me.Cursor = Cursors.WaitCursor
+
+
             Dim PO As String = Trim(fds.SOCRegister(0).PlaceOfOccurrence)
 
             If PO <> "" Then
@@ -15334,59 +15400,7 @@ errhandler:
             IdentifyingOfficer = IdentifyingOfficer.Replace(", FPE", "")
             IdentifyingOfficer.Replace(", TI", "")
 
-            Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
-            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
 
-            Dim culpritname As String = fds.CulpritsRegister(0).CulpritName
-            Dim address As String = fds.CulpritsRegister(0).Address
-            address = address.Replace(vbCrLf, ", ")
-            address = address.Replace(",,", ",")
-
-            Dim FingersIdentified As String = fds.CulpritsRegister(0).FingersIdentified
-            Dim previouscasedetails As String = fds.CulpritsRegister(0).PreviousCaseDetails
-            Dim daslipnumber As String = fds.CulpritsRegister(0).DANumber
-            Dim CPI As Integer = fds.CulpritsRegister(0).CPsIdentified
-
-            Dim CPDMarkings As String = ""
-
-
-            For i = 1 To CPD
-                CPDMarkings = CPDMarkings & "'" & PS.Substring(0, 1) & i & "'" & IIf(i = CPD - 1, " and ", " ")
-            Next
-
-            CPDMarkings = Trim(CPDMarkings)
-            CPDMarkings = CPDMarkings.Replace(" ", ", ")
-            CPDMarkings = CPDMarkings.Replace(", and, ", " and ")
-
-
-            frmExpertOpinion.txtCPD.Text = CPDMarkings
-            frmExpertOpinion.txtCPE.Text = IIf(CPE = 0, "Nil", CPDMarkings)
-            frmExpertOpinion.txtCPU.Text = IIf(CPU = 0, "Nil", CPDMarkings)
-            frmExpertOpinion.txtCPI.Text = CPDMarkings
-            frmExpertOpinion.txtFingerOrder.Text = FingersIdentified
-            frmExpertOpinion.txtOpinionCP.Text = CPDMarkings
-            frmExpertOpinion.txtOpinionFinger.Text = FingersIdentified
-            frmExpertOpinion.txtRidgeColor.Text = "white"
-            frmExpertOpinion.lblCPD.Text = IIf(CPD = 1, "1 CP", CPD & " CPs")
-            frmExpertOpinion.lblCPE.Text = IIf(CPE = 0, "Nil", IIf(CPE = 1, "1 CP", CPE & " CPs"))
-            frmExpertOpinion.lblCPU.Text = IIf(CPU = 0, "Nil", IIf(CPU = 1, "1 CP", CPU & " CPs"))
-            frmExpertOpinion.lblCPI.Text = IIf(CPI = 1, "1 CP", CPI & " CPs")
-
-            frmExpertOpinion.ShowDialog()
-            frmExpertOpinion.BringToFront()
-
-            CPDMarkings = frmExpertOpinion.txtCPD.Text.Trim
-            Dim CPUMarkings As String = frmExpertOpinion.txtCPU.Text.Trim
-            Dim CPEMarkings As String = frmExpertOpinion.txtCPE.Text.Trim
-            Dim CPIMarkings As String = frmExpertOpinion.txtCPI.Text.Trim
-            Dim FingerOrder As String = frmExpertOpinion.txtFingerOrder.Text.Trim
-            Dim OpinionCP As String = frmExpertOpinion.txtOpinionCP.Text.Trim
-            Dim OpinionFinger As String = frmExpertOpinion.txtOpinionFinger.Text.Trim
-            Dim RidgeColor As String = frmExpertOpinion.txtRidgeColor.Text.Trim.ToLower
-
-
-            ShowPleaseWaitForm()
-            Me.Cursor = Cursors.WaitCursor
 
 
             Dim missing As Object = System.Reflection.Missing.Value
@@ -15458,6 +15472,8 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & vbTab & "Please refer to the above." & vbNewLine & vbNewLine)
 
             'WordApp.Selection.ParagraphFormat.Space15()
+
+            SHO = SHO.Replace("The", "the")
 
             WordApp.Selection.TypeText(vbTab & "As requested by " & SHO & ", " & PS & ", I had inspected the scene of crime " & PO & " concerned in Crime No. " & CrNo & " u/s " & Section & " of " & PS & " on " & dtins & " and developed " & ConvertNumberToWord(CPD) & IIf(CPD = 1, " chance print. The chance print was marked as ", " chance prints. The chance prints were marked as ") & CPDMarkings)
 

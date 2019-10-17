@@ -44,6 +44,7 @@ Partial Class frmExpertOpinion
         Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
         Me.txtFingerOrder = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
+        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
         Me.SuspendLayout()
         '
         'LabelX1
@@ -182,7 +183,7 @@ Partial Class frmExpertOpinion
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 31)
         Me.btnOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnOK.TabIndex = 9
+        Me.btnOK.TabIndex = 10
         Me.btnOK.Text = "OK"
         '
         'lblCPD
@@ -369,11 +370,23 @@ Partial Class frmExpertOpinion
         Me.LabelX8.TabIndex = 19
         Me.LabelX8.Text = "Fingers Identified in Order"
         '
+        'btnCancel
+        '
+        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancel.Location = New System.Drawing.Point(312, 246)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 31)
+        Me.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnCancel.TabIndex = 9
+        Me.btnCancel.Text = "Cancel"
+        '
         'frmExpertOpinion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(519, 280)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.txtFingerOrder)
         Me.Controls.Add(Me.LabelX8)
         Me.Controls.Add(Me.txtRidgeColor)
@@ -430,4 +443,5 @@ Partial Class frmExpertOpinion
     Friend WithEvents LabelX7 As DevComponents.DotNetBar.LabelX
     Friend WithEvents txtFingerOrder As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX8 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnCancel As DevComponents.DotNetBar.ButtonX
 End Class
