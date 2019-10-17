@@ -570,6 +570,7 @@ Partial Class frmMainInterface
         Me.btnSelcetCPs = New DevComponents.DotNetBar.ButtonItem()
         Me.btnViewCP = New DevComponents.DotNetBar.ButtonItem()
         Me.btnLocateCP = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnEnterIDRDetailsContextMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSOCReportContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFacingSheetContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIDRShowInSoCRegister = New DevComponents.DotNetBar.ButtonItem()
@@ -579,7 +580,9 @@ Partial Class frmMainInterface
         Me.btnGenerateIdentificationCoB = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationReportDirector = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnGenerateExpertOpinion2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenIdentificationReportFolderContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnGenerateExpertOpinionContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenExpertOpinionFolderContext = New DevComponents.DotNetBar.ButtonItem()
         Me.LabelX73 = New DevComponents.DotNetBar.LabelX()
         Me.txtSOCGist = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.cmbSOCPhotoReceived = New DevComponents.DotNetBar.Controls.ComboBoxEx()
@@ -1125,7 +1128,6 @@ Partial Class frmMainInterface
         Me.LastModificationTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.LastModificationTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
-        Me.btnEnterIDRDetailsContextMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -6062,7 +6064,7 @@ Partial Class frmMainInterface
         '
         Me.btnDatagridContextMenu.AutoExpandOnClick = true
         Me.btnDatagridContextMenu.Name = "btnDatagridContextMenu"
-        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewIDSlipContext, Me.btnViewACSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnViewCP, Me.btnLocateCP, Me.btnEnterIDRDetailsContextMenu, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnFPAGenerateSlipFormContext, Me.btnGenerateIdentificationCoB, Me.btnGenerateIdentificationLetter, Me.btnGenerateIdentificationReportDirector, Me.btnGenerateExpertOpinion2})
+        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewIDSlipContext, Me.btnViewACSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnViewCP, Me.btnLocateCP, Me.btnEnterIDRDetailsContextMenu, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnFPAGenerateSlipFormContext, Me.btnGenerateIdentificationCoB, Me.btnGenerateIdentificationLetter, Me.btnGenerateIdentificationReportDirector, Me.btnOpenIdentificationReportFolderContext, Me.btnGenerateExpertOpinionContext, Me.btnOpenExpertOpinionFolderContext})
         Me.btnDatagridContextMenu.Text = "Datagrid Context Menu"
         '
         'btnOpenContext
@@ -6164,6 +6166,12 @@ Partial Class frmMainInterface
         Me.btnLocateCP.Name = "btnLocateCP"
         Me.btnLocateCP.Text = "Locate Chance Prints"
         '
+        'btnEnterIDRDetailsContextMenu
+        '
+        Me.btnEnterIDRDetailsContextMenu.BeginGroup = true
+        Me.btnEnterIDRDetailsContextMenu.Name = "btnEnterIDRDetailsContextMenu"
+        Me.btnEnterIDRDetailsContextMenu.Text = "Enter Identification Details"
+        '
         'btnSOCReportContext
         '
         Me.btnSOCReportContext.BeginGroup = true
@@ -6217,6 +6225,7 @@ Partial Class frmMainInterface
         '
         'btnGenerateIdentificationLetter
         '
+        Me.btnGenerateIdentificationLetter.Icon = CType(resources.GetObject("btnGenerateIdentificationLetter.Icon"), System.Drawing.Icon)
         Me.btnGenerateIdentificationLetter.Name = "btnGenerateIdentificationLetter"
         Me.btnGenerateIdentificationLetter.Text = "Generate Identification Report - SHO"
         '
@@ -6225,11 +6234,24 @@ Partial Class frmMainInterface
         Me.btnGenerateIdentificationReportDirector.Name = "btnGenerateIdentificationReportDirector"
         Me.btnGenerateIdentificationReportDirector.Text = "Generate Identification Report - Director"
         '
-        'btnGenerateExpertOpinion2
+        'btnOpenIdentificationReportFolderContext
         '
-        Me.btnGenerateExpertOpinion2.BeginGroup = true
-        Me.btnGenerateExpertOpinion2.Name = "btnGenerateExpertOpinion2"
-        Me.btnGenerateExpertOpinion2.Text = "Generate Expert Opinion"
+        Me.btnOpenIdentificationReportFolderContext.Icon = CType(resources.GetObject("btnOpenIdentificationReportFolderContext.Icon"), System.Drawing.Icon)
+        Me.btnOpenIdentificationReportFolderContext.Name = "btnOpenIdentificationReportFolderContext"
+        Me.btnOpenIdentificationReportFolderContext.Text = "Open Identification Report Folder"
+        '
+        'btnGenerateExpertOpinionContext
+        '
+        Me.btnGenerateExpertOpinionContext.BeginGroup = True
+        Me.btnGenerateExpertOpinionContext.Icon = CType(resources.GetObject("btnGenerateExpertOpinionContext.Icon"), System.Drawing.Icon)
+        Me.btnGenerateExpertOpinionContext.Name = "btnGenerateExpertOpinionContext"
+        Me.btnGenerateExpertOpinionContext.Text = "Generate Expert Opinion"
+        '
+        'btnOpenExpertOpinionFolderContext
+        '
+        Me.btnOpenExpertOpinionFolderContext.Icon = CType(resources.GetObject("btnOpenExpertOpinionFolderContext.Icon"), System.Drawing.Icon)
+        Me.btnOpenExpertOpinionFolderContext.Name = "btnOpenExpertOpinionFolderContext"
+        Me.btnOpenExpertOpinionFolderContext.Text = "Open Expert Opinion Folder"
         '
         'LabelX73
         '
@@ -14532,12 +14554,6 @@ Partial Class frmMainInterface
         '
         Me.CulpritsRegisterTableAdapter1.ClearBeforeFill = true
         '
-        'btnEnterIDRDetailsContextMenu
-        '
-        Me.btnEnterIDRDetailsContextMenu.BeginGroup = true
-        Me.btnEnterIDRDetailsContextMenu.Name = "btnEnterIDRDetailsContextMenu"
-        Me.btnEnterIDRDetailsContextMenu.Text = "Enter Identification Details"
-        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -15683,11 +15699,13 @@ End Sub
     Friend WithEvents LabelX53 As DevComponents.DotNetBar.LabelX
     Friend WithEvents cmbSalutation As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnGenerateExpertOpinion As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents btnGenerateExpertOpinion2 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnGenerateExpertOpinionContext As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenExpertOpinionFolder As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenIdentificationReportFolder As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents RibbonBar19 As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents btnUserDefinedModusOperandi As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnEnterIDRDetailsContextMenu As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenIdentificationReportFolderContext As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenExpertOpinionFolderContext As DevComponents.DotNetBar.ButtonItem
 
 End Class

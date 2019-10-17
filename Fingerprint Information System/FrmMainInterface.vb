@@ -3989,8 +3989,10 @@ Public Class frmMainInterface
         Me.btnGenerateIdentificationCoB.Visible = False
         Me.btnGenerateIdentificationLetter.Visible = False
         Me.btnGenerateIdentificationReportDirector.Visible = False
-        Me.btnGenerateExpertOpinion2.Visible = False
+        Me.btnGenerateExpertOpinionContext.Visible = False
         Me.btnEnterIDRDetailsContextMenu.Visible = False
+        Me.btnOpenExpertOpinionFolderContext.Visible = False
+        Me.btnOpenIdentificationReportFolderContext.Visible = False
 
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
@@ -4191,7 +4193,9 @@ Public Class frmMainInterface
             Me.btnGenerateIdentificationCoB.Visible = True
             Me.btnGenerateIdentificationLetter.Visible = True
             Me.btnGenerateIdentificationReportDirector.Visible = True
-            Me.btnGenerateExpertOpinion2.Visible = True
+            Me.btnGenerateExpertOpinionContext.Visible = True
+            Me.btnOpenExpertOpinionFolderContext.Visible = True
+            Me.btnOpenIdentificationReportFolderContext.Visible = True
         End If
 
         ' DisplayDatabaseInformation()
@@ -15150,7 +15154,7 @@ errhandler:
     End Sub
 
 
-    Private Sub btnOpenIdentificationReportFolder_Click(sender As Object, e As EventArgs) Handles btnOpenIdentificationReportFolder.Click
+    Private Sub btnOpenIdentificationReportFolder_Click(sender As Object, e As EventArgs) Handles btnOpenIdentificationReportFolder.Click, btnOpenIdentificationReportFolderContext.Click
 
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -15187,7 +15191,7 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
     End Sub
-    Private Sub btnGenerateExpertOpinion_Click(sender As Object, e As EventArgs) Handles btnGenerateExpertOpinion.Click, btnGenerateExpertOpinion2.Click
+    Private Sub btnGenerateExpertOpinion_Click(sender As Object, e As EventArgs) Handles btnGenerateExpertOpinion.Click, btnGenerateExpertOpinionContext.Click
         Try
 
             If Me.JoinedIDRDataGrid.RowCount = 0 Then
@@ -15451,7 +15455,7 @@ errhandler:
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.TypeText(vbTab & "1. " & "Cr.No. " & CrNo & " u/s " & Section & " of " & PS)
             WordApp.Selection.TypeText(vbNewLine & vbTab & vbTab & "2. Identification report of even number dated ...... ")
-            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & vbTab & "Please refer to the above." & vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine & vbNewLine & vbTab & vbTab & "Please refer to the above." & vbNewLine & vbNewLine)
 
             'WordApp.Selection.ParagraphFormat.Space15()
 
@@ -15522,7 +15526,7 @@ errhandler:
                     WordApp.Selection.TypeText(FingersIdentified)
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" finger impression. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(" finger impression, since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -15549,7 +15553,7 @@ errhandler:
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(FingersIdentified)
                     WordApp.Selection.Font.Bold = 0
-                    WordApp.Selection.TypeText(" finger impression.")
+                    WordApp.Selection.TypeText(" finger impression, since the impressions possess identical ridge characterics in their nature and relative positions.")
 
                 Else
                     WordApp.Selection.TypeText(" On comparing the chance print with the daily arrest fingerprint slips recorded in this Bureau, the chance print marked as ")
@@ -15573,7 +15577,7 @@ errhandler:
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(AccusedDetails)
                     WordApp.Selection.Font.Bold = 0
-                    WordApp.Selection.TypeText(". His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(", , since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -15607,7 +15611,7 @@ errhandler:
                     WordApp.Selection.TypeText(FingerOrder)
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" finger impressions respectively. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(" finger impressions respectively, since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -15634,7 +15638,7 @@ errhandler:
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(FingerOrder)
                     WordApp.Selection.Font.Bold = 0
-                    WordApp.Selection.TypeText(" finger impressions respectively.")
+                    WordApp.Selection.TypeText(" finger impressions respectively, since the impressions possess identical ridge characterics in their nature and relative positions.")
 
                 Else
                     WordApp.Selection.TypeText(" On comparing the chance prints with the daily arrest fingerprint slips recorded in this Bureau, the chance prints marked as ")
@@ -15658,7 +15662,7 @@ errhandler:
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(AccusedDetails)
                     WordApp.Selection.Font.Bold = 0
-                    WordApp.Selection.TypeText(". His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(", since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -15850,7 +15854,7 @@ errhandler:
         End Try
     End Sub
 
-    Private Sub btnOpenExpertOpinionFolder_Click(sender As Object, e As EventArgs) Handles btnOpenExpertOpinionFolder.Click
+    Private Sub btnOpenExpertOpinionFolder_Click(sender As Object, e As EventArgs) Handles btnOpenExpertOpinionFolder.Click, btnOpenExpertOpinionFolderContext.Click
         Try
             Me.Cursor = Cursors.WaitCursor
             Dim OpinionFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion"
