@@ -493,6 +493,13 @@ Public Class frmMonthlyPerformance
 
     Private Sub OpenInWord() Handles btnOpenInWord.Click
         Me.Cursor = Cursors.WaitCursor
+
+        If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            Shell("explorer.exe " & PerfFileName, AppWinStyle.MaximizedFocus)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         Me.CircularProgress1.Show()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = True

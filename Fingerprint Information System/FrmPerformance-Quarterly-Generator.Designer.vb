@@ -307,11 +307,11 @@ Partial Class frmQuarterlyPerformance
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(117, 5)
+        Me.CircularProgress1.Location = New System.Drawing.Point(124, 7)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(140, 67)
+        Me.CircularProgress1.Size = New System.Drawing.Size(127, 66)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 56
         Me.CircularProgress1.TabStop = False
@@ -323,7 +323,7 @@ Partial Class frmQuarterlyPerformance
         Me.btnClearAllFields.Image = CType(resources.GetObject("btnClearAllFields.Image"), System.Drawing.Image)
         Me.btnClearAllFields.Location = New System.Drawing.Point(6, 9)
         Me.btnClearAllFields.Name = "btnClearAllFields"
-        Me.btnClearAllFields.Size = New System.Drawing.Size(107, 56)
+        Me.btnClearAllFields.Size = New System.Drawing.Size(112, 56)
         Me.btnClearAllFields.TabIndex = 6
         Me.btnClearAllFields.Text = "CLEAR"
         '
@@ -332,10 +332,10 @@ Partial Class frmQuarterlyPerformance
         Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
-        Me.btnOpenFolder.Location = New System.Drawing.Point(262, 9)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(257, 9)
         Me.btnOpenFolder.Name = "btnOpenFolder"
         Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
-        Me.btnOpenFolder.Size = New System.Drawing.Size(107, 56)
+        Me.btnOpenFolder.Size = New System.Drawing.Size(112, 56)
         Me.btnOpenFolder.TabIndex = 8
         Me.btnOpenFolder.Text = "Open Folder"
         '
@@ -344,12 +344,12 @@ Partial Class frmQuarterlyPerformance
         Me.btnStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnStatement.Image = CType(resources.GetObject("btnStatement.Image"), System.Drawing.Image)
-        Me.btnStatement.Location = New System.Drawing.Point(134, 9)
+        Me.btnStatement.Location = New System.Drawing.Point(132, 9)
         Me.btnStatement.Name = "btnStatement"
         Me.btnStatement.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
-        Me.btnStatement.Size = New System.Drawing.Size(107, 56)
+        Me.btnStatement.Size = New System.Drawing.Size(112, 56)
         Me.btnStatement.TabIndex = 7
-        Me.btnStatement.Text = "PRINT"
+        Me.btnStatement.Text = "OPEN IN WORD"
         '
         'GroupPanel1
         '
@@ -467,7 +467,7 @@ Partial Class frmQuarterlyPerformance
         Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.DataGridViewX1.Location = New System.Drawing.Point(395, 45)
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
