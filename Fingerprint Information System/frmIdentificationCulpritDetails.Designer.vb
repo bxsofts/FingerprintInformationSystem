@@ -115,7 +115,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtPreviousCaseDetails.FocusHighlightEnabled = True
         Me.txtPreviousCaseDetails.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPreviousCaseDetails.ForeColor = System.Drawing.Color.Black
-        Me.txtPreviousCaseDetails.Location = New System.Drawing.Point(132, 282)
+        Me.txtPreviousCaseDetails.Location = New System.Drawing.Point(132, 303)
         Me.txtPreviousCaseDetails.MaxLength = 255
         Me.txtPreviousCaseDetails.Multiline = True
         Me.txtPreviousCaseDetails.Name = "txtPreviousCaseDetails"
@@ -132,7 +132,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(9, 287)
+        Me.LabelX1.Location = New System.Drawing.Point(9, 308)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(122, 18)
         Me.LabelX1.TabIndex = 233
@@ -193,7 +193,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX13.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX13.Location = New System.Drawing.Point(216, 148)
+        Me.LabelX13.Location = New System.Drawing.Point(216, 135)
         Me.LabelX13.Name = "LabelX13"
         Me.LabelX13.Size = New System.Drawing.Size(7, 22)
         Me.LabelX13.TabIndex = 224
@@ -217,7 +217,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(9, 370)
+        Me.LabelX4.Location = New System.Drawing.Point(9, 391)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(51, 18)
         Me.LabelX4.TabIndex = 205
@@ -246,16 +246,16 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtFingersIdentified.Border.Class = "TextBoxBorder"
         Me.txtFingersIdentified.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.txtFingersIdentified.ButtonCustom.Image = CType(resources.GetObject("txtFingersIdentified.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFingersIdentified.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtFingersIdentified.DisabledBackColor = System.Drawing.Color.White
         Me.txtFingersIdentified.FocusHighlightEnabled = True
         Me.txtFingersIdentified.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFingersIdentified.ForeColor = System.Drawing.Color.Black
-        Me.txtFingersIdentified.Location = New System.Drawing.Point(132, 174)
+        Me.txtFingersIdentified.Location = New System.Drawing.Point(132, 161)
         Me.txtFingersIdentified.MaxLength = 255
+        Me.txtFingersIdentified.Multiline = True
         Me.txtFingersIdentified.Name = "txtFingersIdentified"
         Me.txtFingersIdentified.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFingersIdentified.Size = New System.Drawing.Size(324, 25)
+        Me.txtFingersIdentified.Size = New System.Drawing.Size(324, 58)
         Me.txtFingersIdentified.TabIndex = 3
         Me.txtFingersIdentified.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
         Me.txtFingersIdentified.WatermarkText = "Fingers Identified (RIGHT THUMB, LEFT INDEX etc.)"
@@ -279,7 +279,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         Me.LabelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX21.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX21.Location = New System.Drawing.Point(462, 208)
+        Me.LabelX21.Location = New System.Drawing.Point(462, 229)
         Me.LabelX21.Name = "LabelX21"
         Me.LabelX21.Size = New System.Drawing.Size(7, 22)
         Me.LabelX21.TabIndex = 231
@@ -296,7 +296,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.cmbIdentifiedFrom.ForeColor = System.Drawing.Color.Black
         Me.cmbIdentifiedFrom.FormattingEnabled = True
         Me.cmbIdentifiedFrom.ItemHeight = 20
-        Me.cmbIdentifiedFrom.Location = New System.Drawing.Point(132, 330)
+        Me.cmbIdentifiedFrom.Location = New System.Drawing.Point(132, 351)
         Me.cmbIdentifiedFrom.MaxDropDownItems = 15
         Me.cmbIdentifiedFrom.MaxLength = 255
         Me.cmbIdentifiedFrom.Name = "cmbIdentifiedFrom"
@@ -314,7 +314,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX14.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX14.Location = New System.Drawing.Point(462, 177)
+        Me.LabelX14.Location = New System.Drawing.Point(462, 164)
         Me.LabelX14.Name = "LabelX14"
         Me.LabelX14.Size = New System.Drawing.Size(7, 22)
         Me.LabelX14.TabIndex = 230
@@ -335,7 +335,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtDANumber.FocusHighlightEnabled = True
         Me.txtDANumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDANumber.ForeColor = System.Drawing.Color.Black
-        Me.txtDANumber.Location = New System.Drawing.Point(132, 251)
+        Me.txtDANumber.Location = New System.Drawing.Point(132, 272)
         Me.txtDANumber.MaxLength = 255
         Me.txtDANumber.Name = "txtDANumber"
         Me.txtDANumber.ScrollBars = System.Windows.Forms.ScrollBars.Both
@@ -366,7 +366,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         Me.LabelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX17.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX17.Location = New System.Drawing.Point(317, 335)
+        Me.LabelX17.Location = New System.Drawing.Point(317, 356)
         Me.LabelX17.Name = "LabelX17"
         Me.LabelX17.Size = New System.Drawing.Size(7, 22)
         Me.LabelX17.TabIndex = 225
@@ -386,12 +386,12 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtRemarks.FocusHighlightEnabled = True
         Me.txtRemarks.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRemarks.ForeColor = System.Drawing.Color.Black
-        Me.txtRemarks.Location = New System.Drawing.Point(132, 362)
+        Me.txtRemarks.Location = New System.Drawing.Point(132, 383)
         Me.txtRemarks.MaxLength = 0
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
         Me.txtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtRemarks.Size = New System.Drawing.Size(324, 113)
+        Me.txtRemarks.Size = New System.Drawing.Size(324, 89)
         Me.txtRemarks.TabIndex = 8
         Me.txtRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
         Me.txtRemarks.WatermarkText = "Remarks"
@@ -410,7 +410,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtClassification.FocusHighlightEnabled = True
         Me.txtClassification.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtClassification.ForeColor = System.Drawing.Color.Black
-        Me.txtClassification.Location = New System.Drawing.Point(132, 204)
+        Me.txtClassification.Location = New System.Drawing.Point(132, 225)
         Me.txtClassification.MaxLength = 255
         Me.txtClassification.Multiline = True
         Me.txtClassification.Name = "txtClassification"
@@ -439,7 +439,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtAddress.Size = New System.Drawing.Size(324, 98)
+        Me.txtAddress.Size = New System.Drawing.Size(324, 85)
         Me.txtAddress.TabIndex = 1
         Me.txtAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
         Me.txtAddress.WatermarkText = "Address of the identified criminal"
@@ -451,7 +451,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.LabelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX11.Location = New System.Drawing.Point(9, 334)
+        Me.LabelX11.Location = New System.Drawing.Point(9, 355)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.Size = New System.Drawing.Size(90, 18)
         Me.LabelX11.TabIndex = 223
@@ -467,7 +467,7 @@ Partial Class frmIdentificationCulpritDetails
         Me.txtCPsIdentified.FocusHighlightEnabled = True
         Me.txtCPsIdentified.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCPsIdentified.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtCPsIdentified.Location = New System.Drawing.Point(132, 144)
+        Me.txtCPsIdentified.Location = New System.Drawing.Point(132, 131)
         Me.txtCPsIdentified.MaxValue = 999
         Me.txtCPsIdentified.MinValue = 1
         Me.txtCPsIdentified.Name = "txtCPsIdentified"
@@ -484,7 +484,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.LabelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX10.Location = New System.Drawing.Point(9, 177)
+        Me.LabelX10.Location = New System.Drawing.Point(9, 164)
         Me.LabelX10.Name = "LabelX10"
         Me.LabelX10.Size = New System.Drawing.Size(102, 18)
         Me.LabelX10.TabIndex = 222
@@ -497,7 +497,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.lblCPsIdentified.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblCPsIdentified.Location = New System.Drawing.Point(9, 147)
+        Me.lblCPsIdentified.Location = New System.Drawing.Point(9, 134)
         Me.lblCPsIdentified.Name = "lblCPsIdentified"
         Me.lblCPsIdentified.Size = New System.Drawing.Size(120, 18)
         Me.lblCPsIdentified.TabIndex = 218
@@ -510,7 +510,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX9.Location = New System.Drawing.Point(9, 207)
+        Me.LabelX9.Location = New System.Drawing.Point(9, 228)
         Me.LabelX9.Name = "LabelX9"
         Me.LabelX9.Size = New System.Drawing.Size(77, 18)
         Me.LabelX9.TabIndex = 221
@@ -523,7 +523,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         '
         Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX8.Location = New System.Drawing.Point(9, 254)
+        Me.LabelX8.Location = New System.Drawing.Point(9, 275)
         Me.LabelX8.Name = "LabelX8"
         Me.LabelX8.Size = New System.Drawing.Size(70, 18)
         Me.LabelX8.TabIndex = 220
