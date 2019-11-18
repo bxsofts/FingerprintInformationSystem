@@ -7417,12 +7417,12 @@ errhandler:
     Private Sub UpdateOfficerList()
         Try
             With Me.IODatagrid.Rows(IOSelectedRow)
-                .Cells(1).Value = Me.txtIOOfficerName.Text
-                .Cells(2).Value = Me.txtIOPENNo.Text
-                .Cells(3).Value = Me.txtIOBAsicPay.Text
-                .Cells(4).Value = Me.txtIOScaleOfPay.Text
-                .Cells(5).Value = Me.txtIODARate.Text
-                .Cells(6).Value = Me.cmbSalutation.Text
+                .Cells(1).Value = Me.txtIOOfficerName.Text.Trim
+                .Cells(2).Value = Me.txtIOPENNo.Text.Trim
+                .Cells(3).Value = Me.txtIOBAsicPay.Text.Trim
+                .Cells(4).Value = Me.txtIOScaleOfPay.Text.Trim
+                .Cells(5).Value = Me.txtIODARate.Text.Trim
+                .Cells(6).Value = Me.cmbSalutation.Text.Trim
             End With
 
             ClearIOFields()
@@ -13513,20 +13513,20 @@ errhandler:
                 Exit Sub
             End If
 
-            FullDistrictName = Me.txtFullDistrict.Text
-            FullOfficeName = Me.txtFullOffice.Text
-            ShortDistrictName = Me.txtShortDistrict.Text
-            ShortOfficeName = Me.txtShortOffice.Text
-            PdlAttendance = IIf(Me.txtAttendance.Text = "", "   ", Me.txtAttendance.Text)
-            PdlIndividualPerformance = IIf(Me.txtIndividualPerformance.Text = "", "   ", Me.txtIndividualPerformance.Text)
-            PdlRBWarrant = IIf(Me.txtRBWarrant.Text = "", "   ", Me.txtRBWarrant.Text)
-            PdlSOCDAStatement = IIf(Me.txtSOCDAStatement.Text = "", "   ", Me.txtSOCDAStatement.Text)
-            PdlTABill = IIf(Me.txtTABill.Text = "", "   ", Me.txtTABill.Text)
-            PdlFPAttestation = IIf(Me.txtFPAttestation.Text = "", "   ", Me.txtFPAttestation.Text)
-            PdlGraveCrime = IIf(Me.txtGraveCrime.Text = "", "   ", Me.txtGraveCrime.Text)
-            PdlVigilanceCase = IIf(Me.txtVigilanceCase.Text = "", "   ", Me.txtVigilanceCase.Text)
-            PdlWeeklyDiary = IIf(Me.txtWeeklyDiary.Text = "", "   ", Me.txtWeeklyDiary.Text)
-            PdlIdentificationStatement = IIf(Me.txtIdentificationPdlNumber.Text = "", "   ", Me.txtIdentificationPdlNumber.Text)
+            FullDistrictName = Me.txtFullDistrict.Text.Trim
+            FullOfficeName = Me.txtFullOffice.Text.Trim
+            ShortDistrictName = Me.txtShortDistrict.Text.Trim
+            ShortOfficeName = Me.txtShortOffice.Text.Trim
+            PdlAttendance = IIf(Me.txtAttendance.Text.Trim = "", "   ", Me.txtAttendance.Text.Trim)
+            PdlIndividualPerformance = IIf(Me.txtIndividualPerformance.Text.Trim = "", "   ", Me.txtIndividualPerformance.Text.Trim)
+            PdlRBWarrant = IIf(Me.txtRBWarrant.Text.Trim = "", "   ", Me.txtRBWarrant.Text.Trim)
+            PdlSOCDAStatement = IIf(Me.txtSOCDAStatement.Text.Trim = "", "   ", Me.txtSOCDAStatement.Text.Trim)
+            PdlTABill = IIf(Me.txtTABill.Text.Trim = "", "   ", Me.txtTABill.Text.Trim)
+            PdlFPAttestation = IIf(Me.txtFPAttestation.Text.Trim = "", "   ", Me.txtFPAttestation.Text.Trim)
+            PdlGraveCrime = IIf(Me.txtGraveCrime.Text.Trim = "", "   ", Me.txtGraveCrime.Text.Trim)
+            PdlVigilanceCase = IIf(Me.txtVigilanceCase.Text.Trim = "", "   ", Me.txtVigilanceCase.Text.Trim)
+            PdlWeeklyDiary = IIf(Me.txtWeeklyDiary.Text.Trim = "", "   ", Me.txtWeeklyDiary.Text.Trim)
+            PdlIdentificationStatement = IIf(Me.txtIdentificationPdlNumber.Text.Trim = "", "   ", Me.txtIdentificationPdlNumber.Text.Trim)
 
             Me.SettingsTableAdapter1.Fill(Me.FingerPrintDataSet1.Settings)
             Dim count = Me.FingerPrintDataSet1.Settings.Count
@@ -13545,6 +13545,18 @@ errhandler:
                 Me.CommonSettingsTableAdapter1.UpdateQuery(PdlIdentificationStatement, "", "PdlIdentificationStatement")
             End If
 
+            For Each ctrl As Control In Me.GroupPanel4.Controls 'clear all textboxes
+                If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.DotNetBar.Controls.ComboBoxEx Then
+                    ctrl.Text = ctrl.Text.Trim
+                End If
+            Next
+
+            For Each ctrl As Control In Me.GroupPanel5.Controls 'clear all textboxes
+                If TypeOf (ctrl) Is TextBox Or TypeOf (ctrl) Is DevComponents.DotNetBar.Controls.ComboBoxEx Then
+                    ctrl.Text = ctrl.Text.Trim
+                End If
+            Next
+
             SetWindowTitle()
 
             ShowDesktopAlert("Office Settings updated!")
@@ -13552,7 +13564,7 @@ errhandler:
             InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
-             If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
     End Sub
 #End Region
