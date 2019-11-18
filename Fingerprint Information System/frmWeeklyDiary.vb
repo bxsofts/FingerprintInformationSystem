@@ -205,12 +205,30 @@ Public Class frmWeeklyDiary
                             .Cell(i, 2).Range.Text = msg
                         End If
 
+                        Dim officer As String = ""
+                        Dim inspected As String = ""
+
                         If cnt = 1 Then
-                            .Cell(i, 2).Range.Text = "Inspected SOC in Cr.No. " & Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation & " P.S"
+                            officer = Me.FingerPrintDataSet1.SOCRegister(0).InvestigatingOfficer
+                            If officer.Contains(vbCrLf) Then
+                                inspected = "Supervised the inspection of SOC in Cr.No. "
+                            Else
+                                inspected = "Inspected SOC in Cr.No. "
+                            End If
+                            .Cell(i, 2).Range.Text = inspected & Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation & " P.S"
                         End If
 
                         If cnt > 1 Then
+
+                            officer = Me.FingerPrintDataSet1.SOCRegister(0).InvestigatingOfficer
+                            If officer.Contains(vbCrLf) Then
+                                inspected = "Supervised the inspection of SOC in "
+                            Else
+                                inspected = "Inspected SOC in "
+                            End If
+
                             Dim details As String = ""
+
                             For j = 0 To cnt - 1
                                 If j <> cnt - 1 Then
                                     details = details & "Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S; "
@@ -220,7 +238,7 @@ Public Class frmWeeklyDiary
                                 End If
 
                             Next
-                            .Cell(i, 2).Range.Text = "Inspected SOC in " & details
+                            .Cell(i, 2).Range.Text = inspected & details
                         End If
 
                     End With
