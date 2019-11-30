@@ -80,6 +80,12 @@ Public Class frmWeeklyDiaryAuthentication
             Me.Cursor = Cursors.WaitCursor
             My.Computer.FileSystem.CopyFile(sourcefile, destfile, False) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
             Application.DoEvents()
+            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & destfile
+
+            If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
+            Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
+            Me.AuthenticationTableAdapter1.Connection.Open()
+            Me.AuthenticationTableAdapter1.InsertQuery(Me.txtPassword1.Text.Trim)
 
             Me.Cursor = Cursors.Default
             InitializeComponents()

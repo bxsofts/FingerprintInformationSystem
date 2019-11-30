@@ -31,9 +31,9 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.lblPassword2 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
-        Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
-        Me.bgwSetPassword = New System.ComponentModel.BackgroundWorker()
         Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
+        Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
+        Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
         Me.SuspendLayout()
         '
         'btnLogin
@@ -163,16 +163,6 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.LabelX1.TabIndex = 8
         Me.LabelX1.Text = "PEN"
         '
-        'bgwGetPassword
-        '
-        Me.bgwGetPassword.WorkerReportsProgress = True
-        Me.bgwGetPassword.WorkerSupportsCancellation = True
-        '
-        'bgwSetPassword
-        '
-        Me.bgwSetPassword.WorkerReportsProgress = True
-        Me.bgwSetPassword.WorkerSupportsCancellation = True
-        '
         'btnCancel
         '
         Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
@@ -183,6 +173,14 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnCancel.TabIndex = 15
         Me.btnCancel.Text = "Cancel"
+        '
+        'WeeklyDiaryTableAdapter1
+        '
+        Me.WeeklyDiaryTableAdapter1.ClearBeforeFill = True
+        '
+        'AuthenticationTableAdapter1
+        '
+        Me.AuthenticationTableAdapter1.ClearBeforeFill = True
         '
         'frmWeeklyDiaryAuthentication
         '
@@ -222,7 +220,7 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents lblPassword2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents bgwGetPassword As System.ComponentModel.BackgroundWorker
-    Friend WithEvents bgwSetPassword As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnCancel As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents WeeklyDiaryTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter
+    Friend WithEvents AuthenticationTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter
 End Class

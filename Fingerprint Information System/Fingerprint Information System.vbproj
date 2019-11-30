@@ -523,6 +523,11 @@
     <Compile Include="frmPleaseWait.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="WeeklyDiaryDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeeklyDiaryDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
@@ -775,6 +780,17 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="WeeklyDiaryDataSet.xsc">
+      <DependentUpon>WeeklyDiaryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="WeeklyDiaryDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WeeklyDiaryDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WeeklyDiaryDataSet.xss">
+      <DependentUpon>WeeklyDiaryDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FingerPrint.mdb" />
