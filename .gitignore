@@ -24,3 +24,4 @@ Fingerprint Information System.v12.suo
 *.db
 *.db
 Installer Script/Scripts/RestartFIS.exe
+*.ldb
