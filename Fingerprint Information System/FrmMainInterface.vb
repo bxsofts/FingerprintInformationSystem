@@ -18705,6 +18705,6 @@ errhandler:
    
 
     Private Sub btnWeeklyDiaryDB_Click(sender As Object, e As EventArgs) Handles btnWeeklyDiaryDB.Click
-        frmWeeklyDiaryAuthentication.Show()
+        frmWeeklyDiaryAuthentication.ShowDialog()
     End Sub
 End Class

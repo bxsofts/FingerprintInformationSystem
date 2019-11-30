@@ -27,24 +27,28 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.lblNewUser = New DevComponents.DotNetBar.LabelX()
         Me.txtPassword2 = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtPassword1 = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtUserID = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtPEN = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.lblPassword2 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
+        Me.lblPassword1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
-        Me.btnCancel = New DevComponents.DotNetBar.ButtonX()
+        Me.txtName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.lblName = New DevComponents.DotNetBar.LabelX()
+        Me.txtPassword = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.lblPassword = New DevComponents.DotNetBar.LabelX()
         Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
+        Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
         Me.SuspendLayout()
         '
         'btnLogin
         '
         Me.btnLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnLogin.Location = New System.Drawing.Point(288, 9)
+        Me.btnLogin.Location = New System.Drawing.Point(288, 12)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(119, 62)
+        Me.btnLogin.Size = New System.Drawing.Size(119, 53)
         Me.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnLogin.TabIndex = 14
+        Me.btnLogin.TabIndex = 5
         Me.btnLogin.Text = "Login"
         '
         'lblNewUser
@@ -54,7 +58,7 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         '
         Me.lblNewUser.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblNewUser.Location = New System.Drawing.Point(63, 87)
+        Me.lblNewUser.Location = New System.Drawing.Point(132, 74)
         Me.lblNewUser.Name = "lblNewUser"
         Me.lblNewUser.Size = New System.Drawing.Size(149, 18)
         Me.lblNewUser.TabIndex = 16
@@ -74,11 +78,11 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.txtPassword2.FocusHighlightEnabled = True
         Me.txtPassword2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword2.ForeColor = System.Drawing.Color.Black
-        Me.txtPassword2.Location = New System.Drawing.Point(63, 83)
+        Me.txtPassword2.Location = New System.Drawing.Point(63, 100)
         Me.txtPassword2.Name = "txtPassword2"
         Me.txtPassword2.PreventEnterBeep = True
         Me.txtPassword2.Size = New System.Drawing.Size(218, 25)
-        Me.txtPassword2.TabIndex = 12
+        Me.txtPassword2.TabIndex = 4
         Me.txtPassword2.WatermarkText = "Confirm Password"
         '
         'txtPassword1
@@ -95,34 +99,34 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.txtPassword1.FocusHighlightEnabled = True
         Me.txtPassword1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword1.ForeColor = System.Drawing.Color.Black
-        Me.txtPassword1.Location = New System.Drawing.Point(63, 46)
+        Me.txtPassword1.Location = New System.Drawing.Point(63, 70)
         Me.txtPassword1.Name = "txtPassword1"
         Me.txtPassword1.PreventEnterBeep = True
         Me.txtPassword1.Size = New System.Drawing.Size(218, 25)
-        Me.txtPassword1.TabIndex = 10
+        Me.txtPassword1.TabIndex = 3
         Me.txtPassword1.WatermarkText = "Password"
         '
-        'txtUserID
+        'txtPEN
         '
-        Me.txtUserID.BackColor = System.Drawing.Color.White
+        Me.txtPEN.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.txtUserID.Border.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.Zoom
-        Me.txtUserID.Border.Class = "TextBoxBorder"
-        Me.txtUserID.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtUserID.ButtonCustom.Symbol = ""
-        Me.txtUserID.ButtonCustom.Visible = True
-        Me.txtUserID.DisabledBackColor = System.Drawing.Color.White
-        Me.txtUserID.FocusHighlightEnabled = True
-        Me.txtUserID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUserID.ForeColor = System.Drawing.Color.Black
-        Me.txtUserID.Location = New System.Drawing.Point(63, 9)
-        Me.txtUserID.Name = "txtUserID"
-        Me.txtUserID.PreventEnterBeep = True
-        Me.txtUserID.Size = New System.Drawing.Size(218, 25)
-        Me.txtUserID.TabIndex = 7
-        Me.txtUserID.WatermarkText = "PEN"
+        Me.txtPEN.Border.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.Zoom
+        Me.txtPEN.Border.Class = "TextBoxBorder"
+        Me.txtPEN.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPEN.ButtonCustom.Symbol = ""
+        Me.txtPEN.ButtonCustom.Visible = True
+        Me.txtPEN.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPEN.FocusHighlightEnabled = True
+        Me.txtPEN.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPEN.ForeColor = System.Drawing.Color.Black
+        Me.txtPEN.Location = New System.Drawing.Point(63, 10)
+        Me.txtPEN.Name = "txtPEN"
+        Me.txtPEN.PreventEnterBeep = True
+        Me.txtPEN.Size = New System.Drawing.Size(218, 25)
+        Me.txtPEN.TabIndex = 0
+        Me.txtPEN.WatermarkText = "PEN"
         '
         'lblPassword2
         '
@@ -131,24 +135,24 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         '
         Me.lblPassword2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword2.Location = New System.Drawing.Point(2, 87)
+        Me.lblPassword2.Location = New System.Drawing.Point(2, 104)
         Me.lblPassword2.Name = "lblPassword2"
         Me.lblPassword2.Size = New System.Drawing.Size(48, 18)
         Me.lblPassword2.TabIndex = 13
         Me.lblPassword2.Text = "Confirm"
         '
-        'LabelX2
+        'lblPassword1
         '
-        Me.LabelX2.AutoSize = True
+        Me.lblPassword1.AutoSize = True
         '
         '
         '
-        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(2, 50)
-        Me.LabelX2.Name = "LabelX2"
-        Me.LabelX2.Size = New System.Drawing.Size(56, 18)
-        Me.LabelX2.TabIndex = 11
-        Me.LabelX2.Text = "Password"
+        Me.lblPassword1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPassword1.Location = New System.Drawing.Point(2, 74)
+        Me.lblPassword1.Name = "lblPassword1"
+        Me.lblPassword1.Size = New System.Drawing.Size(56, 18)
+        Me.lblPassword1.TabIndex = 11
+        Me.lblPassword1.Text = "Password"
         '
         'LabelX1
         '
@@ -163,16 +167,74 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.LabelX1.TabIndex = 8
         Me.LabelX1.Text = "PEN"
         '
-        'btnCancel
+        'txtName
         '
-        Me.btnCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancel.Location = New System.Drawing.Point(288, 83)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(119, 25)
-        Me.btnCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnCancel.TabIndex = 15
-        Me.btnCancel.Text = "Cancel"
+        Me.txtName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtName.Border.BackgroundImagePosition = DevComponents.DotNetBar.eStyleBackgroundImage.Zoom
+        Me.txtName.Border.Class = "TextBoxBorder"
+        Me.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtName.ButtonCustom.Symbol = ""
+        Me.txtName.ButtonCustom.Visible = True
+        Me.txtName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtName.FocusHighlightEnabled = True
+        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.ForeColor = System.Drawing.Color.Black
+        Me.txtName.Location = New System.Drawing.Point(63, 40)
+        Me.txtName.Name = "txtName"
+        Me.txtName.PreventEnterBeep = True
+        Me.txtName.Size = New System.Drawing.Size(218, 25)
+        Me.txtName.TabIndex = 1
+        Me.txtName.WatermarkText = "Name"
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        '
+        '
+        '
+        Me.lblName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblName.Location = New System.Drawing.Point(2, 43)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(36, 18)
+        Me.lblName.TabIndex = 18
+        Me.lblName.Text = "Name"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtPassword.Border.Class = "TextBoxBorder"
+        Me.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPassword.ButtonCustom.Symbol = ""
+        Me.txtPassword.ButtonCustom.Visible = True
+        Me.txtPassword.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPassword.FocusHighlightEnabled = True
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.ForeColor = System.Drawing.Color.Black
+        Me.txtPassword.Location = New System.Drawing.Point(63, 40)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PreventEnterBeep = True
+        Me.txtPassword.Size = New System.Drawing.Size(218, 25)
+        Me.txtPassword.TabIndex = 2
+        Me.txtPassword.WatermarkText = "Password"
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = True
+        '
+        '
+        '
+        Me.lblPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPassword.Location = New System.Drawing.Point(2, 43)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(56, 18)
+        Me.lblPassword.TabIndex = 20
+        Me.lblPassword.Text = "Password"
         '
         'WeeklyDiaryTableAdapter1
         '
@@ -182,20 +244,28 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         Me.AuthenticationTableAdapter1.ClearBeforeFill = True
         '
+        'PersonalDetailsTableAdapter1
+        '
+        Me.PersonalDetailsTableAdapter1.ClearBeforeFill = True
+        '
         'frmWeeklyDiaryAuthentication
         '
+        Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 109)
+        Me.ClientSize = New System.Drawing.Size(410, 125)
+        Me.Controls.Add(Me.lblPassword)
+        Me.Controls.Add(Me.txtPassword)
+        Me.Controls.Add(Me.lblName)
+        Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.lblNewUser)
         Me.Controls.Add(Me.txtPassword2)
         Me.Controls.Add(Me.txtPassword1)
-        Me.Controls.Add(Me.txtUserID)
+        Me.Controls.Add(Me.txtPEN)
         Me.Controls.Add(Me.lblPassword2)
-        Me.Controls.Add(Me.LabelX2)
+        Me.Controls.Add(Me.lblPassword1)
         Me.Controls.Add(Me.LabelX1)
-        Me.Controls.Add(Me.btnCancel)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
@@ -206,8 +276,8 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.Name = "frmWeeklyDiaryAuthentication"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Login"
-        Me.TitleText = "<b>Login</b>"
+        Me.Text = "Weekly Diary - Login"
+        Me.TitleText = "<b>Weekly Diary - Login</b>"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -216,11 +286,15 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents lblNewUser As DevComponents.DotNetBar.LabelX
     Friend WithEvents txtPassword2 As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents txtPassword1 As DevComponents.DotNetBar.Controls.TextBoxX
-    Friend WithEvents txtUserID As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtPEN As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents lblPassword2 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblPassword1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents btnCancel As DevComponents.DotNetBar.ButtonX
     Friend WithEvents WeeklyDiaryTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter
     Friend WithEvents AuthenticationTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter
+    Friend WithEvents txtName As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents lblName As DevComponents.DotNetBar.LabelX
+    Friend WithEvents txtPassword As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents lblPassword As DevComponents.DotNetBar.LabelX
+    Friend WithEvents PersonalDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter
 End Class

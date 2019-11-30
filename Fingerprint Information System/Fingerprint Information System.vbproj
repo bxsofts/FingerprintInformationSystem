@@ -500,6 +500,12 @@
     <Compile Include="frmWeeklyDiaryAuthentication.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmWeeklyDiaryDE.Designer.vb">
+      <DependentUpon>frmWeeklyDiaryDE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWeeklyDiaryDE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="modMain.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -728,6 +734,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmWeeklyDiaryAuthentication.resx">
       <DependentUpon>frmWeeklyDiaryAuthentication.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWeeklyDiaryDE.resx">
+      <DependentUpon>frmWeeklyDiaryDE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Identified Slips Register.rdlc" />
     <EmbeddedResource Include="List of Police Stations.rdlc" />
