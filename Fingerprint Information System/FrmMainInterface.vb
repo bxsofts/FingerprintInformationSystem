@@ -18705,6 +18705,11 @@ errhandler:
    
 
     Private Sub btnWeeklyDiaryDB_Click(sender As Object, e As EventArgs) Handles btnWeeklyDiaryDB.Click
+        blPENVerified = False
         frmWeeklyDiaryAuthentication.ShowDialog()
+        If blPENVerified Then
+            frmWeeklyDiaryDE.Show()
+            frmWeeklyDiaryDE.BringToFront()
+        End If
     End Sub
 End Class

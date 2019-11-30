@@ -163,8 +163,8 @@ Public Class frmWeeklyDiaryAuthentication
             End If
 
             Me.Cursor = Cursors.Default
-            InitializeComponents()
-
+            blPENVerified = True
+            Me.Close()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
