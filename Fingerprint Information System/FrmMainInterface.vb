@@ -18702,5 +18702,9 @@ errhandler:
 #End Region
 
 
-    
+   
+
+    Private Sub btnWeeklyDiaryDB_Click(sender As Object, e As EventArgs) Handles btnWeeklyDiaryDB.Click
+        frmWeeklyDiaryAuthentication.Show()
+    End Sub
 End Class
