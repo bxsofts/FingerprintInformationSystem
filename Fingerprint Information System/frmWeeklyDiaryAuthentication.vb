@@ -11,7 +11,6 @@ Public Class frmWeeklyDiaryAuthentication
     End Sub
 
     Private Sub InitializeComponents()
-        Me.Size = New Size(Me.Width, 136)
 
         Me.txtPEN.Text = ""
         Me.txtName.Text = ""
@@ -30,11 +29,11 @@ Public Class frmWeeklyDiaryAuthentication
         Me.txtPassword2.Visible = False
        
         Me.lblNewUser.Visible = True
+        Me.lblDownloadDatabase.Visible = True
         Me.txtPEN.Focus()
     End Sub
 
     Private Sub lblNewUser_Click(sender As Object, e As EventArgs) Handles lblNewUser.Click
-        Me.Size = New Size(Me.Width, 166)
 
         Me.txtPEN.Text = ""
         Me.txtPassword.Text = ""
@@ -52,6 +51,8 @@ Public Class frmWeeklyDiaryAuthentication
         Me.txtPassword2.Visible = True
 
         Me.lblNewUser.Visible = False
+        Me.lblDownloadDatabase.Visible = False
+
         Me.btnLogin.Text = "Save"
         txtPEN.Focus()
     End Sub
@@ -101,11 +102,11 @@ Public Class frmWeeklyDiaryAuthentication
             Dim sourcefile As String = strAppUserPath & "\Database\WeeklyDiary.mdb"
 
             Me.Cursor = Cursors.WaitCursor
-            My.Computer.FileSystem.CopyFile(sourcefile, destfile, False) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
+            My.Computer.FileSystem.CopyFile(sourcefile, destfile, False)
             Application.DoEvents()
 
             If Not My.Computer.FileSystem.FileExists(destfile) Then
-                MessageBoxEx.Show("Error creating new user. Please try again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBoxEx.Show("Error creating new user and database. Please try again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -125,7 +126,7 @@ Public Class frmWeeklyDiaryAuthentication
 
             Me.Cursor = Cursors.Default
             InitializeComponents()
-            MessageBoxEx.Show("New user created.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("New user and database created.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -145,7 +146,7 @@ Public Class frmWeeklyDiaryAuthentication
             Dim destfile As String = SuggestedLocation & "\WeeklyDiary\" & pen & ".mdb"
 
             If Not My.Computer.FileSystem.FileExists(destfile) Then
-                MessageBoxEx.Show("User with PEN " & pen & " not found.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBoxEx.Show("User with PEN " & pen & " not found. Please create a new database or download existing database and login again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
@@ -173,4 +174,18 @@ Public Class frmWeeklyDiaryAuthentication
     End Sub
 
   
+    Private Sub lblDownloadDatabase_Click(sender As Object, e As EventArgs) Handles lblDownloadDatabase.Click
+        If Me.txtPEN.Text.Trim = "" Then
+            MessageBoxEx.Show("Enter PEN Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txtPEN.Focus()
+            Exit Sub
+        End If
+
+        If Not InternetAvailable() Then
+            MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txtPEN.Focus()
+            Exit Sub
+        End If
+
+    End Sub
 End Class

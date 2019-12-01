@@ -38,6 +38,7 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
         Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
+        Me.lblDownloadDatabase = New DevComponents.DotNetBar.LabelX()
         Me.SuspendLayout()
         '
         'btnLogin
@@ -58,11 +59,11 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         '
         Me.lblNewUser.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblNewUser.Location = New System.Drawing.Point(132, 74)
+        Me.lblNewUser.Location = New System.Drawing.Point(122, 74)
         Me.lblNewUser.Name = "lblNewUser"
-        Me.lblNewUser.Size = New System.Drawing.Size(149, 18)
+        Me.lblNewUser.Size = New System.Drawing.Size(159, 18)
         Me.lblNewUser.TabIndex = 16
-        Me.lblNewUser.Text = "<a>New User? Create User ID</a>"
+        Me.lblNewUser.Text = "<a>New User? Create Database</a>"
         '
         'txtPassword2
         '
@@ -248,12 +249,26 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         Me.PersonalDetailsTableAdapter1.ClearBeforeFill = True
         '
+        'lblDownloadDatabase
+        '
+        Me.lblDownloadDatabase.AutoSize = True
+        '
+        '
+        '
+        Me.lblDownloadDatabase.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDownloadDatabase.Location = New System.Drawing.Point(82, 104)
+        Me.lblDownloadDatabase.Name = "lblDownloadDatabase"
+        Me.lblDownloadDatabase.Size = New System.Drawing.Size(199, 18)
+        Me.lblDownloadDatabase.TabIndex = 21
+        Me.lblDownloadDatabase.Text = "<a>Existing User? Download Database</a>"
+        '
         'frmWeeklyDiaryAuthentication
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 125)
+        Me.Controls.Add(Me.lblDownloadDatabase)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.lblName)
@@ -297,4 +312,5 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents txtPassword As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents lblPassword As DevComponents.DotNetBar.LabelX
     Friend WithEvents PersonalDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter
+    Friend WithEvents lblDownloadDatabase As DevComponents.DotNetBar.LabelX
 End Class
