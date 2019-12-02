@@ -1,7 +1,24 @@
 ﻿Imports DevComponents.DotNetBar
 
+Imports System.Threading
+Imports System.Threading.Tasks
+
+Imports Google
+Imports Google.Apis.Auth.OAuth2
+Imports Google.Apis.Drive.v3
+Imports Google.Apis.Drive.v3.Data
+Imports Google.Apis.Services
+Imports Google.Apis.Download
+Imports Google.Apis.Util.Store
+Imports Google.Apis.Requests
 
 Public Class frmWeeklyDiaryAuthentication
+
+    Public dBytesDownloaded As Long
+    Public dDownloadStatus As DownloadStatus
+    Public dFileSize As Long
+    Dim dFormatedFileSize As String = ""
+
 
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitializeComponents()
@@ -92,7 +109,7 @@ Public Class frmWeeklyDiaryAuthentication
             End If
 
             Dim pen As String = Me.txtPEN.Text.Trim
-            Dim destfile As String = SuggestedLocation & "\WeeklyDiary\" & pen & ".mdb"
+            Dim destfile As String = SuggestedLocation & "\Weekly Diary\" & pen & ".mdb"
 
             If My.Computer.FileSystem.FileExists(destfile) Then
                 MessageBoxEx.Show("User with PEN " & pen & " already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -143,14 +160,14 @@ Public Class frmWeeklyDiaryAuthentication
 
         Try
             Dim pen As String = Me.txtPEN.Text.Trim
-            Dim destfile As String = SuggestedLocation & "\WeeklyDiary\" & pen & ".mdb"
+            Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & pen & ".mdb"
 
-            If Not My.Computer.FileSystem.FileExists(destfile) Then
+            If Not My.Computer.FileSystem.FileExists(wdFile) Then
                 MessageBoxEx.Show("User with PEN " & pen & " not found. Please create a new database or download existing database and login again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
-            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & destfile
+            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
 
             If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
             Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
@@ -185,6 +202,118 @@ Public Class frmWeeklyDiaryAuthentication
             MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtPEN.Focus()
             Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        Me.bgwDownload.RunWorkerAsync(Me.txtPEN.Text.Trim & ".mdb")
+
+    End Sub
+
+    Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownload.DoWork
+        Try
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim wdFileName As String = e.Argument.ToString
+            Dim wdFileID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+
+            Dim parentid As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwDownload.ReportProgress(100, "Weekly Diary folder not found")
+                Exit Sub
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+
+            List.Q = "name = '" & wdFileName & "' and trashed = false and '" & parentid & "' in parents"
+            List.Fields = "files(name, id)"
+
+            Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                wdFileID = Results.Files(0).Id
+                Dim request = FISService.Files.Get(wdFileID)
+                request.Fields = "size"
+                Dim file = request.Execute
+
+                dFileSize = file.Size
+                dFormatedFileSize = CalculateFileSize(dFileSize)
+                Dim tempfile As String = My.Computer.FileSystem.GetTempFileName & ".mdb"
+
+                Dim fStream = New System.IO.FileStream(tempfile, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+                m.ChunkSize = 256 * 1024
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+
+                My.Computer.FileSystem.CopyFile(tempfile, SuggestedLocation & "\Weekly Diary\" & wdFileName, True)
+            Else
+                bgwDownload.ReportProgress(100, "File not found")
+
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub Download_ProgressChanged(Progress As IDownloadProgress)
+
+        Control.CheckForIllegalCrossThreadCalls = False
+        dBytesDownloaded = Progress.BytesDownloaded
+        dDownloadStatus = Progress.Status
+        Dim percent = CInt((dBytesDownloaded / dFileSize) * 100)
+        bgwDownload.ReportProgress(percent)
+    End Sub
+
+    Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownload.ProgressChanged
+        ' cpgrDownload.ProgressText = e.ProgressPercentage
+       
+
+        If e.UserState = "Weekly Diary folder not found" Then
+            MessageBoxEx.Show("Weekly Diary folder not found in remote server. Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+        If e.UserState = "File not found" Then
+            MessageBoxEx.Show("Weekly Diary file for the selected PEN not found in remote server.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
+
+    Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
+
+        Me.Cursor = Cursors.Default
+
+        ' cpgrDownload.Visible = False
+
+        If dDownloadStatus = DownloadStatus.Completed Then
+            MessageBoxEx.Show("Weekly Diary file downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        If dDownloadStatus = DownloadStatus.Failed Then
+            MessageBoxEx.Show("Weekly Diary file download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub

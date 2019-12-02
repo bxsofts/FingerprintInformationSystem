@@ -39,6 +39,7 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
         Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
         Me.lblDownloadDatabase = New DevComponents.DotNetBar.LabelX()
+        Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.SuspendLayout()
         '
         'btnLogin
@@ -262,6 +263,11 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.lblDownloadDatabase.TabIndex = 21
         Me.lblDownloadDatabase.Text = "<a>Existing User? Download Database</a>"
         '
+        'bgwDownload
+        '
+        Me.bgwDownload.WorkerReportsProgress = True
+        Me.bgwDownload.WorkerSupportsCancellation = True
+        '
         'frmWeeklyDiaryAuthentication
         '
         Me.AcceptButton = Me.btnLogin
@@ -313,4 +319,5 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents lblPassword As DevComponents.DotNetBar.LabelX
     Friend WithEvents PersonalDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter
     Friend WithEvents lblDownloadDatabase As DevComponents.DotNetBar.LabelX
+    Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
 End Class
