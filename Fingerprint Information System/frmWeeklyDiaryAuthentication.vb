@@ -19,7 +19,6 @@ Public Class frmWeeklyDiaryAuthentication
     Public dFileSize As Long
     Dim dFormatedFileSize As String = ""
 
-
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitializeComponents()
         Me.txtPassword.UseSystemPasswordChar = True
@@ -88,19 +87,21 @@ Public Class frmWeeklyDiaryAuthentication
     End Sub
     Private Sub SaveUser()
         Try
-            If Me.txtName.Text = "" Then
+            If Me.txtName.Text.Trim = "" Then
                 MessageBoxEx.Show("Enter Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.txtName.Focus()
                 Exit Sub
             End If
-            If Me.txtPassword1.Text = "" Then
+
+            If Me.txtPassword1.Text.Trim = "" Then
                 MessageBoxEx.Show("Enter valid password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.txtPassword1.Text = ""
                 Me.txtPassword2.Text = ""
                 Me.txtPassword1.Focus()
                 Exit Sub
             End If
-            If Me.txtPassword1.Text <> Me.txtPassword2.Text Then
+
+            If Me.txtPassword1.Text.Trim <> Me.txtPassword2.Text.Trim Then
                 MessageBoxEx.Show("Passwords do not match.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.txtPassword1.Text = ""
                 Me.txtPassword2.Text = ""
@@ -152,7 +153,7 @@ Public Class frmWeeklyDiaryAuthentication
 
     Private Sub LoginUser()
 
-        If Me.txtPassword.Text = "" Then
+        If Me.txtPassword.Text.Trim = "" Then
             MessageBoxEx.Show("Enter Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtPassword.Focus()
             Exit Sub
@@ -182,6 +183,8 @@ Public Class frmWeeklyDiaryAuthentication
 
             Me.Cursor = Cursors.Default
             blPENVerified = True
+            wdDatabase = wdFile
+            strLoggedPEN = pen
             Me.Close()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -192,16 +195,50 @@ Public Class frmWeeklyDiaryAuthentication
 
   
     Private Sub lblDownloadDatabase_Click(sender As Object, e As EventArgs) Handles lblDownloadDatabase.Click
-        If Me.txtPEN.Text.Trim = "" Then
-            MessageBoxEx.Show("Enter PEN Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            txtPEN.Focus()
-            Exit Sub
-        End If
+        Dim Pen As String = Me.txtPEN.Text.Trim
 
         If Not InternetAvailable() Then
             MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtPEN.Focus()
             Exit Sub
+        End If
+
+
+        If pen = "" Then
+            MessageBoxEx.Show("Enter PEN Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            txtPEN.Focus()
+            Exit Sub
+        End If
+
+
+        Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & Pen & ".mdb"
+
+        If My.Computer.FileSystem.FileExists(wdFile) Then
+            Dim r = MessageBoxEx.Show("Database for PEN " & Pen & " already exists. Do you want to overwrite it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+            If r <> Windows.Forms.DialogResult.Yes Then
+                Exit Sub
+            Else
+
+                If Me.txtPassword.Text.Trim = "" Then
+                    MessageBoxEx.Show("Enter Password to authenticate overwriting of database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    txtPassword.Focus()
+                    Exit Sub
+                End If
+
+                Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
+
+                If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
+                Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
+                Me.AuthenticationTableAdapter1.Connection.Open()
+
+                Dim pwd As String = Me.AuthenticationTableAdapter1.GetPasswordQuery()
+
+                If pwd <> Me.txtPassword.Text.Trim Then
+                    MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+            End If
         End If
 
         Me.Cursor = Cursors.WaitCursor

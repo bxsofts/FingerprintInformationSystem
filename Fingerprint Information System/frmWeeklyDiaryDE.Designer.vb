@@ -27,6 +27,12 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
         Me.SuperTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnCancelPassword = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSavePassword = New DevComponents.DotNetBar.ButtonX()
+        Me.btnCancelName = New DevComponents.DotNetBar.ButtonX()
+        Me.btnSaveName = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
+        Me.txtName = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtPassword2 = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtPassword1 = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.lblPassword2 = New DevComponents.DotNetBar.LabelX()
@@ -35,27 +41,24 @@ Partial Class frmWeeklyDiaryDE
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.SuperTabItem2 = New DevComponents.DotNetBar.SuperTabItem()
-        Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
-        Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
-        Me.SuperTabItem3 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
         Me.SuperTabItem1 = New DevComponents.DotNetBar.SuperTabItem()
+        Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.SuperTabItem3 = New DevComponents.DotNetBar.SuperTabItem()
         Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.txtPEN = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSaveName = New DevComponents.DotNetBar.ButtonX()
-        Me.btnCancelName = New DevComponents.DotNetBar.ButtonX()
-        Me.btnSavePassword = New DevComponents.DotNetBar.ButtonX()
-        Me.btnCancelPassword = New DevComponents.DotNetBar.ButtonX()
+        Me.lblPEN = New DevComponents.DotNetBar.LabelX()
+        Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
+        Me.txtOldPassword = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.lblOldPassword = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx1.SuspendLayout()
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl1.SuspendLayout()
         Me.SuperTabControlPanel2.SuspendLayout()
         Me.PanelEx2.SuspendLayout()
-        Me.SuperTabControlPanel3.SuspendLayout()
         Me.SuperTabControlPanel1.SuspendLayout()
+        Me.SuperTabControlPanel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelEx1
@@ -123,13 +126,15 @@ Partial Class frmWeeklyDiaryDE
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx2.Controls.Add(Me.txtOldPassword)
+        Me.PanelEx2.Controls.Add(Me.lblOldPassword)
+        Me.PanelEx2.Controls.Add(Me.lblPEN)
         Me.PanelEx2.Controls.Add(Me.btnCancelPassword)
         Me.PanelEx2.Controls.Add(Me.btnSavePassword)
         Me.PanelEx2.Controls.Add(Me.btnCancelName)
         Me.PanelEx2.Controls.Add(Me.btnSaveName)
         Me.PanelEx2.Controls.Add(Me.LabelX3)
         Me.PanelEx2.Controls.Add(Me.txtName)
-        Me.PanelEx2.Controls.Add(Me.txtPEN)
         Me.PanelEx2.Controls.Add(Me.txtPassword2)
         Me.PanelEx2.Controls.Add(Me.txtPassword1)
         Me.PanelEx2.Controls.Add(Me.lblPassword2)
@@ -150,6 +155,82 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 0
         '
+        'btnCancelPassword
+        '
+        Me.btnCancelPassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancelPassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancelPassword.Location = New System.Drawing.Point(318, 193)
+        Me.btnCancelPassword.Name = "btnCancelPassword"
+        Me.btnCancelPassword.Size = New System.Drawing.Size(97, 23)
+        Me.btnCancelPassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnCancelPassword.TabIndex = 8
+        Me.btnCancelPassword.Text = "Cancel"
+        '
+        'btnSavePassword
+        '
+        Me.btnSavePassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSavePassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSavePassword.Location = New System.Drawing.Point(318, 162)
+        Me.btnSavePassword.Name = "btnSavePassword"
+        Me.btnSavePassword.Size = New System.Drawing.Size(97, 23)
+        Me.btnSavePassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnSavePassword.TabIndex = 7
+        Me.btnSavePassword.Text = "Save"
+        '
+        'btnCancelName
+        '
+        Me.btnCancelName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancelName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancelName.Location = New System.Drawing.Point(425, 64)
+        Me.btnCancelName.Name = "btnCancelName"
+        Me.btnCancelName.Size = New System.Drawing.Size(97, 23)
+        Me.btnCancelName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnCancelName.TabIndex = 3
+        Me.btnCancelName.Text = "Cancel"
+        '
+        'btnSaveName
+        '
+        Me.btnSaveName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveName.Location = New System.Drawing.Point(318, 64)
+        Me.btnSaveName.Name = "btnSaveName"
+        Me.btnSaveName.Size = New System.Drawing.Size(97, 23)
+        Me.btnSaveName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnSaveName.TabIndex = 2
+        Me.btnSaveName.Text = "Save"
+        '
+        'LabelX3
+        '
+        Me.LabelX3.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX3.Location = New System.Drawing.Point(212, 41)
+        Me.LabelX3.Name = "LabelX3"
+        Me.LabelX3.Size = New System.Drawing.Size(85, 18)
+        Me.LabelX3.TabIndex = 11
+        Me.LabelX3.Text = "<a>Change Name </a>"
+        '
+        'txtName
+        '
+        Me.txtName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtName.Border.Class = "TextBoxBorder"
+        Me.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtName.FocusHighlightEnabled = True
+        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.ForeColor = System.Drawing.Color.Black
+        Me.txtName.Location = New System.Drawing.Point(125, 64)
+        Me.txtName.Name = "txtName"
+        Me.txtName.PreventEnterBeep = True
+        Me.txtName.Size = New System.Drawing.Size(172, 23)
+        Me.txtName.TabIndex = 1
+        Me.txtName.WatermarkText = "Name"
+        '
         'txtPassword2
         '
         Me.txtPassword2.BackColor = System.Drawing.Color.White
@@ -159,13 +240,14 @@ Partial Class frmWeeklyDiaryDE
         Me.txtPassword2.Border.Class = "TextBoxBorder"
         Me.txtPassword2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.txtPassword2.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPassword2.FocusHighlightEnabled = True
         Me.txtPassword2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword2.ForeColor = System.Drawing.Color.Black
-        Me.txtPassword2.Location = New System.Drawing.Point(125, 164)
+        Me.txtPassword2.Location = New System.Drawing.Point(128, 193)
         Me.txtPassword2.Name = "txtPassword2"
         Me.txtPassword2.PreventEnterBeep = True
         Me.txtPassword2.Size = New System.Drawing.Size(172, 23)
-        Me.txtPassword2.TabIndex = 5
+        Me.txtPassword2.TabIndex = 6
         Me.txtPassword2.WatermarkText = "Confirm Password"
         '
         'txtPassword1
@@ -177,14 +259,15 @@ Partial Class frmWeeklyDiaryDE
         Me.txtPassword1.Border.Class = "TextBoxBorder"
         Me.txtPassword1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.txtPassword1.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPassword1.FocusHighlightEnabled = True
         Me.txtPassword1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword1.ForeColor = System.Drawing.Color.Black
-        Me.txtPassword1.Location = New System.Drawing.Point(125, 133)
+        Me.txtPassword1.Location = New System.Drawing.Point(128, 163)
         Me.txtPassword1.Name = "txtPassword1"
         Me.txtPassword1.PreventEnterBeep = True
         Me.txtPassword1.Size = New System.Drawing.Size(172, 23)
-        Me.txtPassword1.TabIndex = 4
-        Me.txtPassword1.WatermarkText = "Password"
+        Me.txtPassword1.TabIndex = 5
+        Me.txtPassword1.WatermarkText = "New Password"
         '
         'lblPassword2
         '
@@ -193,7 +276,7 @@ Partial Class frmWeeklyDiaryDE
         '
         '
         Me.lblPassword2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword2.Location = New System.Drawing.Point(65, 166)
+        Me.lblPassword2.Location = New System.Drawing.Point(20, 193)
         Me.lblPassword2.Name = "lblPassword2"
         Me.lblPassword2.Size = New System.Drawing.Size(48, 18)
         Me.lblPassword2.TabIndex = 6
@@ -206,11 +289,11 @@ Partial Class frmWeeklyDiaryDE
         '
         '
         Me.lblPassword1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword1.Location = New System.Drawing.Point(65, 135)
+        Me.lblPassword1.Location = New System.Drawing.Point(20, 163)
         Me.lblPassword1.Name = "lblPassword1"
-        Me.lblPassword1.Size = New System.Drawing.Size(56, 18)
+        Me.lblPassword1.Size = New System.Drawing.Size(85, 18)
         Me.lblPassword1.TabIndex = 5
-        Me.lblPassword1.Text = "Password"
+        Me.lblPassword1.Text = "New Password"
         '
         'lblChangePassword
         '
@@ -218,8 +301,8 @@ Partial Class frmWeeklyDiaryDE
         '
         '
         '
-        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblChangePassword.Location = New System.Drawing.Point(125, 109)
+        Me.lblChangePassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblChangePassword.Location = New System.Drawing.Point(199, 109)
         Me.lblChangePassword.Name = "lblChangePassword"
         Me.lblChangePassword.Size = New System.Drawing.Size(101, 18)
         Me.lblChangePassword.TabIndex = 2
@@ -245,7 +328,7 @@ Partial Class frmWeeklyDiaryDE
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(65, 35)
+        Me.LabelX1.Location = New System.Drawing.Point(65, 22)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(26, 18)
         Me.LabelX1.TabIndex = 0
@@ -257,40 +340,6 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabItem2.GlobalItem = False
         Me.SuperTabItem2.Name = "SuperTabItem2"
         Me.SuperTabItem2.Text = "Personal Details and Password"
-        '
-        'SuperTabControlPanel3
-        '
-        Me.SuperTabControlPanel3.Controls.Add(Me.PanelEx3)
-        Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 28)
-        Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
-        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(988, 390)
-        Me.SuperTabControlPanel3.TabIndex = 0
-        Me.SuperTabControlPanel3.TabItem = Me.SuperTabItem3
-        '
-        'PanelEx3
-        '
-        Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
-        Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(988, 390)
-        Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx3.Style.GradientAngle = 90
-        Me.PanelEx3.TabIndex = 4
-        '
-        'SuperTabItem3
-        '
-        Me.SuperTabItem3.AttachedControl = Me.SuperTabControlPanel3
-        Me.SuperTabItem3.GlobalItem = False
-        Me.SuperTabItem3.Name = "SuperTabItem3"
-        Me.SuperTabItem3.Text = "Office Details"
         '
         'SuperTabControlPanel1
         '
@@ -326,6 +375,40 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabItem1.Name = "SuperTabItem1"
         Me.SuperTabItem1.Text = "Weekly Diary"
         '
+        'SuperTabControlPanel3
+        '
+        Me.SuperTabControlPanel3.Controls.Add(Me.PanelEx3)
+        Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 28)
+        Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
+        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(988, 390)
+        Me.SuperTabControlPanel3.TabIndex = 0
+        Me.SuperTabControlPanel3.TabItem = Me.SuperTabItem3
+        '
+        'PanelEx3
+        '
+        Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
+        Me.PanelEx3.Name = "PanelEx3"
+        Me.PanelEx3.Size = New System.Drawing.Size(988, 390)
+        Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx3.Style.GradientAngle = 90
+        Me.PanelEx3.TabIndex = 4
+        '
+        'SuperTabItem3
+        '
+        Me.SuperTabItem3.AttachedControl = Me.SuperTabControlPanel3
+        Me.SuperTabItem3.GlobalItem = False
+        Me.SuperTabItem3.Name = "SuperTabItem3"
+        Me.SuperTabItem3.Text = "Office Details"
+        '
         'RibbonBar1
         '
         Me.RibbonBar1.AutoOverflowEnabled = True
@@ -356,98 +439,56 @@ Partial Class frmWeeklyDiaryDE
         '
         Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'txtPEN
+        'lblPEN
         '
-        Me.txtPEN.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtPEN.Border.Class = "TextBoxBorder"
-        Me.txtPEN.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtPEN.DisabledBackColor = System.Drawing.Color.White
-        Me.txtPEN.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPEN.ForeColor = System.Drawing.Color.Black
-        Me.txtPEN.Location = New System.Drawing.Point(125, 33)
-        Me.txtPEN.Name = "txtPEN"
-        Me.txtPEN.PreventEnterBeep = True
-        Me.txtPEN.Size = New System.Drawing.Size(172, 23)
-        Me.txtPEN.TabIndex = 0
-        Me.txtPEN.WatermarkText = "PEN"
-        '
-        'txtName
-        '
-        Me.txtName.BackColor = System.Drawing.Color.White
+        Me.lblPEN.AutoSize = True
         '
         '
         '
-        Me.txtName.Border.Class = "TextBoxBorder"
-        Me.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.ForeColor = System.Drawing.Color.Black
-        Me.txtName.Location = New System.Drawing.Point(125, 64)
-        Me.txtName.Name = "txtName"
-        Me.txtName.PreventEnterBeep = True
-        Me.txtName.Size = New System.Drawing.Size(172, 23)
-        Me.txtName.TabIndex = 1
-        Me.txtName.WatermarkText = "Name"
+        Me.lblPEN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPEN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPEN.ForeColor = System.Drawing.Color.Red
+        Me.lblPEN.Location = New System.Drawing.Point(125, 19)
+        Me.lblPEN.Name = "lblPEN"
+        Me.lblPEN.Size = New System.Drawing.Size(33, 24)
+        Me.lblPEN.TabIndex = 12
+        Me.lblPEN.Text = "PEN"
         '
-        'LabelX3
+        'AuthenticationTableAdapter1
         '
-        Me.LabelX3.AutoSize = True
+        Me.AuthenticationTableAdapter1.ClearBeforeFill = True
+        '
+        'txtOldPassword
+        '
+        Me.txtOldPassword.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(125, 9)
-        Me.LabelX3.Name = "LabelX3"
-        Me.LabelX3.Size = New System.Drawing.Size(139, 18)
-        Me.LabelX3.TabIndex = 11
-        Me.LabelX3.Text = "<a>Change PEN and Name </a>"
+        Me.txtOldPassword.Border.Class = "TextBoxBorder"
+        Me.txtOldPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtOldPassword.DisabledBackColor = System.Drawing.Color.White
+        Me.txtOldPassword.FocusHighlightEnabled = True
+        Me.txtOldPassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOldPassword.ForeColor = System.Drawing.Color.Black
+        Me.txtOldPassword.Location = New System.Drawing.Point(128, 133)
+        Me.txtOldPassword.Name = "txtOldPassword"
+        Me.txtOldPassword.PreventEnterBeep = True
+        Me.txtOldPassword.Size = New System.Drawing.Size(172, 23)
+        Me.txtOldPassword.TabIndex = 4
+        Me.txtOldPassword.WatermarkText = "Current Password"
         '
-        'btnSaveName
+        'lblOldPassword
         '
-        Me.btnSaveName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveName.Location = New System.Drawing.Point(318, 33)
-        Me.btnSaveName.Name = "btnSaveName"
-        Me.btnSaveName.Size = New System.Drawing.Size(97, 23)
-        Me.btnSaveName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSaveName.TabIndex = 2
-        Me.btnSaveName.Text = "Save"
+        Me.lblOldPassword.AutoSize = True
         '
-        'btnCancelName
         '
-        Me.btnCancelName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancelName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancelName.Location = New System.Drawing.Point(318, 64)
-        Me.btnCancelName.Name = "btnCancelName"
-        Me.btnCancelName.Size = New System.Drawing.Size(97, 23)
-        Me.btnCancelName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnCancelName.TabIndex = 3
-        Me.btnCancelName.Text = "Cancel"
         '
-        'btnSavePassword
-        '
-        Me.btnSavePassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSavePassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSavePassword.Location = New System.Drawing.Point(318, 133)
-        Me.btnSavePassword.Name = "btnSavePassword"
-        Me.btnSavePassword.Size = New System.Drawing.Size(97, 23)
-        Me.btnSavePassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSavePassword.TabIndex = 6
-        Me.btnSavePassword.Text = "Save"
-        '
-        'btnCancelPassword
-        '
-        Me.btnCancelPassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancelPassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancelPassword.Location = New System.Drawing.Point(318, 164)
-        Me.btnCancelPassword.Name = "btnCancelPassword"
-        Me.btnCancelPassword.Size = New System.Drawing.Size(97, 23)
-        Me.btnCancelPassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnCancelPassword.TabIndex = 7
-        Me.btnCancelPassword.Text = "Cancel"
+        Me.lblOldPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblOldPassword.Location = New System.Drawing.Point(20, 133)
+        Me.lblOldPassword.Name = "lblOldPassword"
+        Me.lblOldPassword.Size = New System.Drawing.Size(102, 18)
+        Me.lblOldPassword.TabIndex = 14
+        Me.lblOldPassword.Text = "Current Password"
         '
         'frmWeeklyDiaryDE
         '
@@ -470,8 +511,8 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControlPanel2.ResumeLayout(False)
         Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx2.PerformLayout()
-        Me.SuperTabControlPanel3.ResumeLayout(False)
         Me.SuperTabControlPanel1.ResumeLayout(False)
+        Me.SuperTabControlPanel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -495,10 +536,13 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents lblPassword2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblPassword1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents txtName As DevComponents.DotNetBar.Controls.TextBoxX
-    Friend WithEvents txtPEN As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnCancelPassword As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnSavePassword As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnCancelName As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnSaveName As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents lblPEN As DevComponents.DotNetBar.LabelX
+    Friend WithEvents AuthenticationTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter
+    Friend WithEvents txtOldPassword As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents lblOldPassword As DevComponents.DotNetBar.LabelX
 End Class
