@@ -5,6 +5,7 @@ Public Class frmWeeklyDiaryDE
     Dim wdConString As String = ""
     Dim wdOfficerName As String = ""
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Try
             Me.BringToFront()
             Me.CenterToScreen()
@@ -28,6 +29,13 @@ Public Class frmWeeklyDiaryDE
             wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
+
+            Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+
+            If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
+            Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
+            Me.OfficeDetailsTableAdapter1.Connection.Open()
+            Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -143,5 +151,26 @@ Public Class frmWeeklyDiaryDE
         Me.btnSaveName.Visible = False
         Me.btnCancelName.Visible = False
         Me.txtName.Enabled = False
+    End Sub
+
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvOfficeDetails.CellPainting
+        On Error Resume Next
+        Dim sf As New StringFormat
+        sf.Alignment = StringAlignment.Center
+
+        Dim f As Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        sf.LineAlignment = StringAlignment.Center
+        Using b As SolidBrush = New SolidBrush(Me.ForeColor)
+            If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
+                e.Graphics.DrawString("Sl.No", f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+
+            If e.ColumnIndex < 0 AndAlso e.RowIndex >= 0 Then
+                e.Graphics.DrawString((e.RowIndex + 1).ToString, f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+        End Using
+
     End Sub
 End Class

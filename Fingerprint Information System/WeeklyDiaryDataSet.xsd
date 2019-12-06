@@ -151,7 +151,18 @@ FROM            Authentication</CommandText>
               <Mapping SourceColumn="Designation" DataSetColumn="Designation" />
               <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="WeeklyDiaryConnectionString (MySettings)" DbObjectName="OfficeDetails" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByDate" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillByDate" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByDate">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ID, Unit, FromDate, ToDate, Designation, Remarks
+FROM            OfficeDetails
+ORDER BY FromDate</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PersonalDetailsTableAdapter" GeneratorDataComponentClassName="PersonalDetailsTableAdapter" Name="PersonalDetails" UserDataComponentName="PersonalDetailsTableAdapter">
             <MainSource>
