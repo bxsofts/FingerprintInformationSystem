@@ -2,21 +2,36 @@
 
 
 Public Class frmWeeklyDiaryDE
-
+    Dim wdConString As String = ""
+    Dim wdOfficerName As String = ""
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.BringToFront()
-        Me.CenterToScreen()
-        Me.txtName.Text = ""
-        Me.txtOldPassword.Text = ""
-        Me.txtPassword1.Text = ""
-        Me.txtPassword2.Text = ""
-        Me.lblPEN.Text = strLoggedPEN
-        ShowPasswordFields(False)
-        Me.btnSaveName.Visible = False
-        Me.btnCancelName.Visible = False
-        Me.txtOldPassword.UseSystemPasswordChar = True
-        Me.txtPassword1.UseSystemPasswordChar = True
-        Me.txtPassword2.UseSystemPasswordChar = True
+        Try
+            Me.BringToFront()
+            Me.CenterToScreen()
+            Me.txtName.Text = ""
+            Me.txtOldPassword.Text = ""
+            Me.txtPassword1.Text = ""
+            Me.txtPassword2.Text = ""
+            Me.lblPEN.Text = wdPEN
+            ShowPasswordFields(False)
+            Me.btnSaveName.Visible = False
+            Me.btnCancelName.Visible = False
+            Me.txtOldPassword.UseSystemPasswordChar = True
+            Me.txtPassword1.UseSystemPasswordChar = True
+            Me.txtPassword2.UseSystemPasswordChar = True
+            wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdDatabase
+            If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
+            Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
+            Me.PersonalDetailsTableAdapter1.Connection.Open()
+            ' Me.PersonalDetailsTableAdapter1.Fill(Me.WeeklyDiaryDataSet1.PersonalDetails)
+            ' wdOfficerName = Me.WeeklyDiaryDataSet1.PersonalDetails(0).OfficerName
+            wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
+            Me.txtName.Text = wdOfficerName
+            Me.txtName.Enabled = False
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+        
     End Sub
 
     Private Sub ShowPasswordFields(Show As Boolean)
@@ -66,7 +81,7 @@ Public Class frmWeeklyDiaryDE
         End If
 
         Try
-            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdDatabase
+
 
             If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
             Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
@@ -92,5 +107,41 @@ Public Class frmWeeklyDiaryDE
 
     Private Sub btnCancelPassword_Click(sender As Object, e As EventArgs) Handles btnCancelPassword.Click
         ShowPasswordFields(False)
+    End Sub
+
+    Private Sub lblChangeName_Click(sender As Object, e As EventArgs) Handles lblChangeName.Click
+        Me.btnSaveName.Visible = True
+        Me.btnCancelName.Visible = True
+        Me.txtName.Enabled = True
+
+    End Sub
+
+    Private Sub btnSaveName_Click(sender As Object, e As EventArgs) Handles btnSaveName.Click
+        Dim newname = Me.txtName.Text.Trim
+
+        If newname = "" Then
+            MessageBoxEx.Show("Enter Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtName.Focus()
+            Exit Sub
+        End If
+
+
+        Try
+            Me.PersonalDetailsTableAdapter1.UpdateOfficerName(newname, wdPEN)
+            wdOfficerName = newname
+
+            Me.btnSaveName.Visible = False
+            Me.btnCancelName.Visible = False
+            Me.txtName.Enabled = False
+            MessageBoxEx.Show("Name updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub btnCancelName_Click(sender As Object, e As EventArgs) Handles btnCancelName.Click
+        Me.btnSaveName.Visible = False
+        Me.btnCancelName.Visible = False
+        Me.txtName.Enabled = False
     End Sub
 End Class

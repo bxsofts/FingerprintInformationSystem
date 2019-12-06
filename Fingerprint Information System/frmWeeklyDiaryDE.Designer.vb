@@ -27,11 +27,14 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
         Me.SuperTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.txtOldPassword = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.lblOldPassword = New DevComponents.DotNetBar.LabelX()
+        Me.lblPEN = New DevComponents.DotNetBar.LabelX()
         Me.btnCancelPassword = New DevComponents.DotNetBar.ButtonX()
         Me.btnSavePassword = New DevComponents.DotNetBar.ButtonX()
         Me.btnCancelName = New DevComponents.DotNetBar.ButtonX()
         Me.btnSaveName = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
+        Me.lblChangeName = New DevComponents.DotNetBar.LabelX()
         Me.txtName = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtPassword2 = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtPassword1 = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -48,10 +51,10 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.SuperTabItem3 = New DevComponents.DotNetBar.SuperTabItem()
         Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.lblPEN = New DevComponents.DotNetBar.LabelX()
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
-        Me.txtOldPassword = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.lblOldPassword = New DevComponents.DotNetBar.LabelX()
+        Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
+        Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
+        Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
         Me.PanelEx1.SuspendLayout()
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl1.SuspendLayout()
@@ -59,6 +62,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx2.SuspendLayout()
         Me.SuperTabControlPanel1.SuspendLayout()
         Me.SuperTabControlPanel3.SuspendLayout()
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelEx1
@@ -109,7 +113,7 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1.Size = New System.Drawing.Size(988, 418)
         Me.SuperTabControl1.TabFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SuperTabControl1.TabIndex = 1
-        Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem1, Me.SuperTabItem2, Me.SuperTabItem3})
+        Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem1, Me.SuperTabItem3, Me.SuperTabItem2})
         Me.SuperTabControl1.Text = "SuperTabControl1"
         '
         'SuperTabControlPanel2
@@ -133,7 +137,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx2.Controls.Add(Me.btnSavePassword)
         Me.PanelEx2.Controls.Add(Me.btnCancelName)
         Me.PanelEx2.Controls.Add(Me.btnSaveName)
-        Me.PanelEx2.Controls.Add(Me.LabelX3)
+        Me.PanelEx2.Controls.Add(Me.lblChangeName)
         Me.PanelEx2.Controls.Add(Me.txtName)
         Me.PanelEx2.Controls.Add(Me.txtPassword2)
         Me.PanelEx2.Controls.Add(Me.txtPassword1)
@@ -154,6 +158,53 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 0
+        '
+        'txtOldPassword
+        '
+        Me.txtOldPassword.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtOldPassword.Border.Class = "TextBoxBorder"
+        Me.txtOldPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtOldPassword.DisabledBackColor = System.Drawing.Color.White
+        Me.txtOldPassword.FocusHighlightEnabled = True
+        Me.txtOldPassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOldPassword.ForeColor = System.Drawing.Color.Black
+        Me.txtOldPassword.Location = New System.Drawing.Point(128, 133)
+        Me.txtOldPassword.Name = "txtOldPassword"
+        Me.txtOldPassword.PreventEnterBeep = True
+        Me.txtOldPassword.Size = New System.Drawing.Size(172, 23)
+        Me.txtOldPassword.TabIndex = 4
+        Me.txtOldPassword.WatermarkText = "Current Password"
+        '
+        'lblOldPassword
+        '
+        Me.lblOldPassword.AutoSize = True
+        '
+        '
+        '
+        Me.lblOldPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblOldPassword.Location = New System.Drawing.Point(20, 133)
+        Me.lblOldPassword.Name = "lblOldPassword"
+        Me.lblOldPassword.Size = New System.Drawing.Size(102, 18)
+        Me.lblOldPassword.TabIndex = 14
+        Me.lblOldPassword.Text = "Current Password"
+        '
+        'lblPEN
+        '
+        Me.lblPEN.AutoSize = True
+        '
+        '
+        '
+        Me.lblPEN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPEN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPEN.ForeColor = System.Drawing.Color.Red
+        Me.lblPEN.Location = New System.Drawing.Point(125, 19)
+        Me.lblPEN.Name = "lblPEN"
+        Me.lblPEN.Size = New System.Drawing.Size(33, 24)
+        Me.lblPEN.TabIndex = 12
+        Me.lblPEN.Text = "PEN"
         '
         'btnCancelPassword
         '
@@ -199,18 +250,18 @@ Partial Class frmWeeklyDiaryDE
         Me.btnSaveName.TabIndex = 2
         Me.btnSaveName.Text = "Save"
         '
-        'LabelX3
+        'lblChangeName
         '
-        Me.LabelX3.AutoSize = True
+        Me.lblChangeName.AutoSize = True
         '
         '
         '
-        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(212, 41)
-        Me.LabelX3.Name = "LabelX3"
-        Me.LabelX3.Size = New System.Drawing.Size(85, 18)
-        Me.LabelX3.TabIndex = 11
-        Me.LabelX3.Text = "<a>Change Name </a>"
+        Me.lblChangeName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblChangeName.Location = New System.Drawing.Point(212, 41)
+        Me.lblChangeName.Name = "lblChangeName"
+        Me.lblChangeName.Size = New System.Drawing.Size(85, 18)
+        Me.lblChangeName.TabIndex = 11
+        Me.lblChangeName.Text = "<a>Change Name </a>"
         '
         'txtName
         '
@@ -339,7 +390,7 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabItem2.AttachedControl = Me.SuperTabControlPanel2
         Me.SuperTabItem2.GlobalItem = False
         Me.SuperTabItem2.Name = "SuperTabItem2"
-        Me.SuperTabItem2.Text = "Personal Details and Password"
+        Me.SuperTabItem2.Text = "Change Name and Password"
         '
         'SuperTabControlPanel1
         '
@@ -439,56 +490,22 @@ Partial Class frmWeeklyDiaryDE
         '
         Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'lblPEN
-        '
-        Me.lblPEN.AutoSize = True
-        '
-        '
-        '
-        Me.lblPEN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPEN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPEN.ForeColor = System.Drawing.Color.Red
-        Me.lblPEN.Location = New System.Drawing.Point(125, 19)
-        Me.lblPEN.Name = "lblPEN"
-        Me.lblPEN.Size = New System.Drawing.Size(33, 24)
-        Me.lblPEN.TabIndex = 12
-        Me.lblPEN.Text = "PEN"
-        '
         'AuthenticationTableAdapter1
         '
         Me.AuthenticationTableAdapter1.ClearBeforeFill = True
         '
-        'txtOldPassword
+        'WeeklyDiaryTableAdapter1
         '
-        Me.txtOldPassword.BackColor = System.Drawing.Color.White
+        Me.WeeklyDiaryTableAdapter1.ClearBeforeFill = True
         '
+        'PersonalDetailsTableAdapter1
         '
+        Me.PersonalDetailsTableAdapter1.ClearBeforeFill = True
         '
-        Me.txtOldPassword.Border.Class = "TextBoxBorder"
-        Me.txtOldPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtOldPassword.DisabledBackColor = System.Drawing.Color.White
-        Me.txtOldPassword.FocusHighlightEnabled = True
-        Me.txtOldPassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOldPassword.ForeColor = System.Drawing.Color.Black
-        Me.txtOldPassword.Location = New System.Drawing.Point(128, 133)
-        Me.txtOldPassword.Name = "txtOldPassword"
-        Me.txtOldPassword.PreventEnterBeep = True
-        Me.txtOldPassword.Size = New System.Drawing.Size(172, 23)
-        Me.txtOldPassword.TabIndex = 4
-        Me.txtOldPassword.WatermarkText = "Current Password"
+        'WeeklyDiaryDataSet1
         '
-        'lblOldPassword
-        '
-        Me.lblOldPassword.AutoSize = True
-        '
-        '
-        '
-        Me.lblOldPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblOldPassword.Location = New System.Drawing.Point(20, 133)
-        Me.lblOldPassword.Name = "lblOldPassword"
-        Me.lblOldPassword.Size = New System.Drawing.Size(102, 18)
-        Me.lblOldPassword.TabIndex = 14
-        Me.lblOldPassword.Text = "Current Password"
+        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
+        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'frmWeeklyDiaryDE
         '
@@ -513,6 +530,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx2.PerformLayout()
         Me.SuperTabControlPanel1.ResumeLayout(False)
         Me.SuperTabControlPanel3.ResumeLayout(False)
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -536,7 +554,7 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents lblPassword2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblPassword1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents txtName As DevComponents.DotNetBar.Controls.TextBoxX
-    Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblChangeName As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnCancelPassword As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnSavePassword As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnCancelName As DevComponents.DotNetBar.ButtonX
@@ -545,4 +563,7 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents AuthenticationTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter
     Friend WithEvents txtOldPassword As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents lblOldPassword As DevComponents.DotNetBar.LabelX
+    Friend WithEvents WeeklyDiaryTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter
+    Friend WithEvents PersonalDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter
+    Friend WithEvents WeeklyDiaryDataSet1 As FingerprintInformationSystem.WeeklyDiaryDataSet
 End Class

@@ -184,7 +184,7 @@ Public Class frmWeeklyDiaryAuthentication
             Me.Cursor = Cursors.Default
             blPENVerified = True
             wdDatabase = wdFile
-            strLoggedPEN = pen
+            wdPEN = pen
             Me.Close()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
