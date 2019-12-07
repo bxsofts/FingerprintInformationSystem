@@ -23,6 +23,7 @@ Public Class frmWeeklyDiaryDE
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
+            Me.Cursor = Cursors.WaitCursor
             Me.BringToFront()
             Me.CenterToScreen()
             CircularProgress1.Visible = False
@@ -38,33 +39,41 @@ Public Class frmWeeklyDiaryDE
             Me.txtPassword1.UseSystemPasswordChar = True
             Me.txtPassword2.UseSystemPasswordChar = True
 
+            Me.dgvWeeklyDiary.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+
             wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdDatabase
+            Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
 
             If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
             Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
             Me.WeeklyDiaryTableAdapter1.Connection.Open()
 
+            Me.WeeklyDiaryTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.WeeklyDiary)
+            Me.WeeklyDiaryBindingSource.MoveLast()
+
             If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
             Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
             Me.PersonalDetailsTableAdapter1.Connection.Open()
-           
+
             wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
 
-            Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+
 
             If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
             Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
             Me.OfficeDetailsTableAdapter1.Connection.Open()
+
             Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
             Me.OfficeDetailsBindingSource.MoveLast()
 
             Me.txtUnit.Text = "SDFPB, "
             Me.btnSaveOfficeDetails.Text = "Save"
 
-
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
         
@@ -536,7 +545,7 @@ Public Class frmWeeklyDiaryDE
         End If
     End Sub
 
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvOfficeDetails.CellPainting
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvOfficeDetails.CellPainting, dgvWeeklyDiary.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
