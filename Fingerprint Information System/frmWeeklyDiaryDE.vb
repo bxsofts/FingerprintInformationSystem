@@ -24,8 +24,7 @@ Public Class frmWeeklyDiaryDE
             If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
             Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
             Me.PersonalDetailsTableAdapter1.Connection.Open()
-            ' Me.PersonalDetailsTableAdapter1.Fill(Me.WeeklyDiaryDataSet1.PersonalDetails)
-            ' wdOfficerName = Me.WeeklyDiaryDataSet1.PersonalDetails(0).OfficerName
+           
             wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
@@ -38,12 +37,15 @@ Public Class frmWeeklyDiaryDE
             Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
             Me.OfficeDetailsBindingSource.MoveLast()
 
-            Me.txtUnit.Text = "Single Digit Fingerprint Bureau, "
+            Me.txtUnit.Text = "SDFPB, "
+            Me.btnSaveOfficeDetails.Text = "Save"
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
         
     End Sub
+
+#Region "CHANGE PASSWORD"
 
     Private Sub ShowPasswordFields(Show As Boolean)
         Me.txtOldPassword.Visible = Show
@@ -112,7 +114,7 @@ Public Class frmWeeklyDiaryDE
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
-       
+
 
     End Sub
 
@@ -120,6 +122,10 @@ Public Class frmWeeklyDiaryDE
         ShowPasswordFields(False)
     End Sub
 
+#End Region
+
+
+#Region "CHANGE NAME"
     Private Sub lblChangeName_Click(sender As Object, e As EventArgs) Handles lblChangeName.Click
         Me.btnSaveName.Visible = True
         Me.btnCancelName.Visible = True
@@ -156,41 +162,62 @@ Public Class frmWeeklyDiaryDE
         Me.txtName.Enabled = False
     End Sub
 
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvOfficeDetails.CellPainting
-        On Error Resume Next
-        Dim sf As New StringFormat
-        sf.Alignment = StringAlignment.Center
+#End Region
 
-        Dim f As Font = New Font("Segoe UI", 10, FontStyle.Bold)
-        sf.LineAlignment = StringAlignment.Center
-        Using b As SolidBrush = New SolidBrush(Me.ForeColor)
-            If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
-                e.Graphics.DrawString("Sl.No", f, b, e.CellBounds, sf)
-                e.Handled = True
-            End If
 
-            If e.ColumnIndex < 0 AndAlso e.RowIndex >= 0 Then
-                e.Graphics.DrawString((e.RowIndex + 1).ToString, f, b, e.CellBounds, sf)
-                e.Handled = True
-            End If
-        End Using
-
-    End Sub
-
-   
+#Region "NEW DATA"
     Private Sub btnNewEntry_Click(sender As Object, e As EventArgs) Handles btnNewEntry.Click
 
         If Me.SuperTabControl1.SelectedTab Is tabOD Then
-            Me.txtUnit.Text = "Single Digit Fingerprint Bureau, "
-            Me.dtFrom.Text = vbNullString
-            Me.dtTo.Text = vbNullString
-            Me.txtDesignation.Text = ""
-            Me.txtODRemarks.Text = ""
-            Me.txtUnit.Focus()
+            InitializeODFields()
         End If
 
     End Sub
 
+#End Region
+
+
+#Region "EDIT DATA"
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        Try
+            If Me.SuperTabControl1.SelectedTab Is tabOD Then
+                If Me.dgvOfficeDetails.RowCount = 0 Then
+                    MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                If Me.dgvOfficeDetails.SelectedRows.Count = 0 Then
+                    MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Me.txtUnit.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(1).Value
+                Me.dtFrom.ValueObject = Me.dgvOfficeDetails.SelectedRows(0).Cells(2).Value
+                Me.dtTo.ValueObject = Me.dgvOfficeDetails.SelectedRows(0).Cells(3).Value
+                Me.txtDesignation.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(4).Value
+                Me.txtODRemarks.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(5).Value
+                Me.txtUnit.Focus()
+                Me.btnSaveOfficeDetails.Text = "Update"
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+
+    End Sub
+#End Region
+
+
+#Region "SAVE OFFICE DETAILS"
+
+    Private Sub InitializeODFields()
+        Me.txtUnit.Text = "SDFPB, "
+        Me.dtFrom.Text = vbNullString
+        Me.dtTo.Text = vbNullString
+        Me.txtDesignation.Text = ""
+        Me.txtODRemarks.Text = ""
+        Me.btnSaveOfficeDetails.Text = "Save"
+        Me.txtUnit.Focus()
+    End Sub
     Private Sub btnSaveOfficeDetails_Click(sender As Object, e As EventArgs) Handles btnSaveOfficeDetails.Click
 
         If Me.txtUnit.Text.Trim = "" Then
@@ -200,7 +227,7 @@ Public Class frmWeeklyDiaryDE
         End If
 
         If Me.dtFrom.Text.Trim = "" Then
-            MessageBoxEx.Show("Please enter 'Date From'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please enter 'From Date'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.dtFrom.Focus()
             Exit Sub
         End If
@@ -222,23 +249,112 @@ Public Class frmWeeklyDiaryDE
                     .Remarks = Me.txtODRemarks.Text.Trim
                 End With
                 Me.WeeklyDiaryDataSet1.OfficeDetails.AddOfficeDetailsRow(dgvr)
-                Me.OfficeDetailsTableAdapter1.Update(Me.WeeklyDiaryDataSet1.OfficeDetails)
+                Me.OfficeDetailsTableAdapter1.InsertQuery(Me.txtUnit.Text.Trim, Me.dtFrom.ValueObject, Me.dtTo.ValueObject, Me.txtDesignation.Text.Trim, Me.txtODRemarks.Text.Trim)
+
+                '  Me.OfficeDetailsTableAdapter1.Update(Me.WeeklyDiaryDataSet1.OfficeDetails)
                 Me.OfficeDetailsBindingSource.MoveLast()
 
-                Me.txtUnit.Text = "Single Digit Fingerprint Bureau, "
-                Me.dtFrom.Text = vbNullString
-                Me.dtTo.Text = vbNullString
-                Me.txtDesignation.Text = ""
-                Me.txtODRemarks.Text = ""
-                Me.txtUnit.Focus()
+                InitializeODFields()
+                ShowDesktopAlert("New Record entered.")
             End If
+
+            If Me.btnSaveOfficeDetails.Text = "Update" Then
+                Dim dgvr As WeeklyDiaryDataSet.OfficeDetailsRow = Me.WeeklyDiaryDataSet1.OfficeDetails.Rows(Me.dgvOfficeDetails.SelectedRows(0).Index)
+                With dgvr
+                    .Unit = Me.txtUnit.Text.Trim
+                    .FromDate = Me.dtFrom.ValueObject
+                    .ToDate = Me.dtTo.ValueObject
+                    .Designation = Me.txtDesignation.Text.Trim
+                    .Remarks = Me.txtODRemarks.Text.Trim
+                End With
+                '   Me.OfficeDetailsTableAdapter1.Update(Me.WeeklyDiaryDataSet1.OfficeDetails)
+                Me.OfficeDetailsTableAdapter1.UpdateQuery(Me.txtUnit.Text.Trim, Me.dtFrom.ValueObject, Me.dtTo.ValueObject, Me.txtDesignation.Text.Trim, Me.txtODRemarks.Text.Trim, Me.dgvOfficeDetails.SelectedRows(0).Cells(0).Value)
+
+                InitializeODFields()
+                ShowDesktopAlert("Selected Record updated.")
+            End If
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
     End Sub
 
 
-    Private Sub tabOD_Click(sender As Object, e As EventArgs) Handles tabOD.Click
-        Me.txtUnit.Focus()
+#End Region
+
+#Region "DELETE DATA"
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Try
+
+       
+        If Me.SuperTabControl1.SelectedTab Is tabOD Then
+            If Me.dgvOfficeDetails.RowCount = 0 Then
+                MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.dgvOfficeDetails.SelectedRows.Count = 0 Then
+                MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Dim dgvr As WeeklyDiaryDataSet.OfficeDetailsRow = Me.WeeklyDiaryDataSet1.OfficeDetails.Rows(Me.dgvOfficeDetails.SelectedRows(0).Index)
+                    Me.OfficeDetailsTableAdapter1.DeleteQuery(Me.dgvOfficeDetails.SelectedRows(0).Cells(0).Value)
+                    dgvr.Delete()
+                    If Me.dgvOfficeDetails.SelectedRows.Count = 0 And Me.dgvOfficeDetails.RowCount <> 0 Then
+                        Me.dgvOfficeDetails.Rows(Me.dgvOfficeDetails.RowCount - 1).Selected = True
+                    End If
+
+                    ShowDesktopAlert("Selected record deleted.")
+                End If
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
     End Sub
+
+#End Region
+
+
+    Private Sub SuperTabControl1_SelectedTabChanged(sender As Object, e As SuperTabStripSelectedTabChangedEventArgs) Handles SuperTabControl1.SelectedTabChanged
+        If SuperTabControl1.SelectedTabIndex = 1 Then
+            Me.txtUnit.Focus()
+        End If
+    End Sub
+
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvOfficeDetails.CellPainting
+        On Error Resume Next
+        Dim sf As New StringFormat
+        sf.Alignment = StringAlignment.Center
+
+        Dim f As Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        sf.LineAlignment = StringAlignment.Center
+        Using b As SolidBrush = New SolidBrush(Me.ForeColor)
+            If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
+                e.Graphics.DrawString("Sl.No", f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+
+            If e.ColumnIndex < 0 AndAlso e.RowIndex >= 0 Then
+                e.Graphics.DrawString((e.RowIndex + 1).ToString, f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+        End Using
+
+    End Sub
+
+    Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+        If Me.SuperTabControl1.SelectedTab Is tabOD Then
+            Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
+            Me.OfficeDetailsBindingSource.MoveLast()
+            ShowDesktopAlert("Data reloaded.")
+        End If
+    End Sub
+
+   
 End Class

@@ -48,14 +48,6 @@ Partial Class frmWeeklyDiaryDE
         Me.txtDesignation = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.txtUnit = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.dgvOfficeDetails = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FromDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DesignationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OfficeDetailsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
         Me.tabOD = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -83,6 +75,15 @@ Partial Class frmWeeklyDiaryDE
         Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
         Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnReload = New DevComponents.DotNetBar.ButtonItem()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FromDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DesignationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OfficeDetailsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
         Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
         Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
@@ -95,11 +96,11 @@ Partial Class frmWeeklyDiaryDE
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvOfficeDetails, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControlPanel1.SuspendLayout()
         Me.SuperTabControlPanel2.SuspendLayout()
         Me.PanelEx2.SuspendLayout()
+        CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelEx1
@@ -137,17 +138,17 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1.ControlBox.MenuBox.Name = ""
         Me.SuperTabControl1.ControlBox.Name = ""
         Me.SuperTabControl1.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl1.ControlBox.MenuBox, Me.SuperTabControl1.ControlBox.CloseBox})
-        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel1)
+        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel2)
         Me.SuperTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl1.ForeColor = System.Drawing.Color.Black
-        Me.SuperTabControl1.Location = New System.Drawing.Point(0, 83)
+        Me.SuperTabControl1.Location = New System.Drawing.Point(0, 65)
         Me.SuperTabControl1.Name = "SuperTabControl1"
         Me.SuperTabControl1.ReorderTabsEnabled = True
         Me.SuperTabControl1.SelectedTabFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.SuperTabControl1.SelectedTabIndex = 1
-        Me.SuperTabControl1.Size = New System.Drawing.Size(988, 416)
+        Me.SuperTabControl1.Size = New System.Drawing.Size(988, 434)
         Me.SuperTabControl1.TabFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SuperTabControl1.TabIndex = 1
         Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.tabWD, Me.tabOD, Me.tabPass})
@@ -452,6 +453,9 @@ Partial Class frmWeeklyDiaryDE
         '
         'txtDesignation
         '
+        Me.txtDesignation.AutoCompleteCustomSource.AddRange(New String() {"Tester Inspector", "Fingerprint Expert", "Fingerprint Searcher"})
+        Me.txtDesignation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtDesignation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txtDesignation.BackColor = System.Drawing.Color.White
         '
         '
@@ -536,62 +540,6 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.TabIndex = 0
         Me.dgvOfficeDetails.TabStop = False
         '
-        'IDDataGridViewTextBoxColumn
-        '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        Me.IDDataGridViewTextBoxColumn.Visible = False
-        '
-        'UnitDataGridViewTextBoxColumn
-        '
-        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
-        Me.UnitDataGridViewTextBoxColumn.Width = 200
-        '
-        'FromDateDataGridViewTextBoxColumn
-        '
-        Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
-        Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
-        Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
-        '
-        'ToDateDataGridViewTextBoxColumn
-        '
-        Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
-        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
-        Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
-        Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
-        '
-        'DesignationDataGridViewTextBoxColumn
-        '
-        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
-        Me.DesignationDataGridViewTextBoxColumn.Width = 150
-        '
-        'RemarksDataGridViewTextBoxColumn
-        '
-        Me.RemarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
-        Me.RemarksDataGridViewTextBoxColumn.Width = 250
-        '
-        'OfficeDetailsBindingSource
-        '
-        Me.OfficeDetailsBindingSource.DataMember = "OfficeDetails"
-        Me.OfficeDetailsBindingSource.DataSource = Me.WeeklyDiaryDataSet1
-        '
-        'WeeklyDiaryDataSet1
-        '
-        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
-        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'tabOD
         '
         Me.tabOD.AttachedControl = Me.SuperTabControlPanel3
@@ -605,7 +553,7 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
-        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(988, 388)
+        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(988, 406)
         Me.SuperTabControlPanel1.TabIndex = 1
         Me.SuperTabControlPanel1.TabItem = Me.tabWD
         '
@@ -617,7 +565,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx4.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(988, 388)
+        Me.PanelEx4.Size = New System.Drawing.Size(988, 406)
         Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -923,14 +871,13 @@ Partial Class frmWeeklyDiaryDE
         Me.RibbonBar1.ContainerControlProcessDialogKey = True
         Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonBar1.DragDropSupport = True
-        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnNewEntry, Me.btnEdit, Me.btnDelete})
+        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnNewEntry, Me.btnEdit, Me.btnDelete, Me.btnReload})
         Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar1.Location = New System.Drawing.Point(0, 0)
         Me.RibbonBar1.Name = "RibbonBar1"
-        Me.RibbonBar1.Size = New System.Drawing.Size(988, 83)
+        Me.RibbonBar1.Size = New System.Drawing.Size(988, 65)
         Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar1.TabIndex = 0
-        Me.RibbonBar1.Text = "RibbonBar1"
         '
         '
         '
@@ -953,6 +900,7 @@ Partial Class frmWeeklyDiaryDE
         '
         'btnEdit
         '
+        Me.btnEdit.BeginGroup = True
         Me.btnEdit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
         Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
         Me.btnEdit.ImageSmall = CType(resources.GetObject("btnEdit.ImageSmall"), System.Drawing.Image)
@@ -962,12 +910,80 @@ Partial Class frmWeeklyDiaryDE
         '
         'btnDelete
         '
+        Me.btnDelete.BeginGroup = True
         Me.btnDelete.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
         Me.btnDelete.ImageSmall = CType(resources.GetObject("btnDelete.ImageSmall"), System.Drawing.Image)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.SubItemsExpandWidth = 14
         Me.btnDelete.Text = "Delete"
+        '
+        'btnReload
+        '
+        Me.btnReload.BeginGroup = True
+        Me.btnReload.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnReload.Image = CType(resources.GetObject("btnReload.Image"), System.Drawing.Image)
+        Me.btnReload.ImageSmall = CType(resources.GetObject("btnReload.ImageSmall"), System.Drawing.Image)
+        Me.btnReload.Name = "btnReload"
+        Me.btnReload.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5)
+        Me.btnReload.SubItemsExpandWidth = 14
+        Me.btnReload.Text = "Reload"
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.Visible = False
+        '
+        'UnitDataGridViewTextBoxColumn
+        '
+        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
+        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
+        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
+        Me.UnitDataGridViewTextBoxColumn.Width = 200
+        '
+        'FromDateDataGridViewTextBoxColumn
+        '
+        Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
+        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
+        Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
+        '
+        'ToDateDataGridViewTextBoxColumn
+        '
+        Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
+        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
+        Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
+        '
+        'DesignationDataGridViewTextBoxColumn
+        '
+        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
+        Me.DesignationDataGridViewTextBoxColumn.Width = 150
+        '
+        'RemarksDataGridViewTextBoxColumn
+        '
+        Me.RemarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
+        Me.RemarksDataGridViewTextBoxColumn.Width = 250
+        '
+        'OfficeDetailsBindingSource
+        '
+        Me.OfficeDetailsBindingSource.DataMember = "OfficeDetails"
+        Me.OfficeDetailsBindingSource.DataSource = Me.WeeklyDiaryDataSet1
+        '
+        'WeeklyDiaryDataSet1
+        '
+        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
+        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'AuthenticationTableAdapter1
         '
@@ -1009,12 +1025,12 @@ Partial Class frmWeeklyDiaryDE
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvOfficeDetails, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControlPanel1.ResumeLayout(False)
         Me.SuperTabControlPanel2.ResumeLayout(False)
         Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx2.PerformLayout()
+        CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1053,12 +1069,6 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents dgvOfficeDetails As DevComponents.DotNetBar.Controls.DataGridViewX
     Friend WithEvents OfficeDetailsBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents OfficeDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.OfficeDetailsTableAdapter
-    Friend WithEvents IDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UnitDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FromDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DesignationDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RemarksDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtDesignation As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents txtUnit As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
@@ -1076,4 +1086,11 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents LabelX8 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX37 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents IDDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UnitDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FromDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DesignationDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RemarksDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnReload As DevComponents.DotNetBar.ButtonItem
 End Class
