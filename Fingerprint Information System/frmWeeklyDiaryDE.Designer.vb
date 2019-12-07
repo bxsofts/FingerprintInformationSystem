@@ -23,18 +23,43 @@ Partial Class frmWeeklyDiaryDE
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWeeklyDiaryDE))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWeeklyDiaryDE))
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.SuperTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
         Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX37 = New DevComponents.DotNetBar.LabelX()
+        Me.btnSaveOfficeDetails = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
+        Me.txtODRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.txtDesignation = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtUnit = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.dgvOfficeDetails = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.SuperTabItem3 = New DevComponents.DotNetBar.SuperTabItem()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UnitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FromDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DesignationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OfficeDetailsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
+        Me.tabOD = New DevComponents.DotNetBar.SuperTabItem()
+        Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
+        Me.tabWD = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.txtOldPassword = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -53,46 +78,28 @@ Partial Class frmWeeklyDiaryDE
         Me.lblChangePassword = New DevComponents.DotNetBar.LabelX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
-        Me.SuperTabItem2 = New DevComponents.DotNetBar.SuperTabItem()
-        Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
-        Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
-        Me.SuperTabItem1 = New DevComponents.DotNetBar.SuperTabItem()
+        Me.tabPass = New DevComponents.DotNetBar.SuperTabItem()
         Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UnitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FromDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DesignationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OfficeDetailsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
+        Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
         Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
         Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
         Me.OfficeDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.OfficeDetailsTableAdapter()
-        Me.txtUnit = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtDesignation = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.txtRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx1.SuspendLayout()
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl1.SuspendLayout()
         Me.SuperTabControlPanel3.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
+        CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvOfficeDetails, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuperTabControlPanel2.SuspendLayout()
-        Me.PanelEx2.SuspendLayout()
-        Me.SuperTabControlPanel1.SuspendLayout()
         CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuperTabControlPanel1.SuspendLayout()
+        Me.SuperTabControlPanel2.SuspendLayout()
+        Me.PanelEx2.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelEx1
@@ -131,19 +138,19 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1.ControlBox.Name = ""
         Me.SuperTabControl1.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl1.ControlBox.MenuBox, Me.SuperTabControl1.ControlBox.CloseBox})
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel3)
-        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel2)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel1)
+        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel2)
         Me.SuperTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl1.ForeColor = System.Drawing.Color.Black
-        Me.SuperTabControl1.Location = New System.Drawing.Point(0, 61)
+        Me.SuperTabControl1.Location = New System.Drawing.Point(0, 83)
         Me.SuperTabControl1.Name = "SuperTabControl1"
         Me.SuperTabControl1.ReorderTabsEnabled = True
         Me.SuperTabControl1.SelectedTabFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.SuperTabControl1.SelectedTabIndex = 1
-        Me.SuperTabControl1.Size = New System.Drawing.Size(988, 438)
+        Me.SuperTabControl1.Size = New System.Drawing.Size(988, 416)
         Me.SuperTabControl1.TabFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SuperTabControl1.TabIndex = 1
-        Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem1, Me.SuperTabItem3, Me.SuperTabItem2})
+        Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.tabWD, Me.tabOD, Me.tabPass})
         Me.SuperTabControl1.Text = "SuperTabControl1"
         '
         'SuperTabControlPanel3
@@ -152,20 +159,24 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
-        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(988, 410)
+        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(988, 388)
         Me.SuperTabControlPanel3.TabIndex = 0
-        Me.SuperTabControlPanel3.TabItem = Me.SuperTabItem3
+        Me.SuperTabControlPanel3.TabItem = Me.tabOD
         '
         'PanelEx3
         '
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx3.Controls.Add(Me.LabelX9)
+        Me.PanelEx3.Controls.Add(Me.LabelX8)
+        Me.PanelEx3.Controls.Add(Me.LabelX37)
+        Me.PanelEx3.Controls.Add(Me.btnSaveOfficeDetails)
         Me.PanelEx3.Controls.Add(Me.LabelX7)
         Me.PanelEx3.Controls.Add(Me.LabelX6)
         Me.PanelEx3.Controls.Add(Me.LabelX5)
         Me.PanelEx3.Controls.Add(Me.LabelX4)
         Me.PanelEx3.Controls.Add(Me.LabelX3)
-        Me.PanelEx3.Controls.Add(Me.txtRemarks)
+        Me.PanelEx3.Controls.Add(Me.txtODRemarks)
         Me.PanelEx3.Controls.Add(Me.dtTo)
         Me.PanelEx3.Controls.Add(Me.dtFrom)
         Me.PanelEx3.Controls.Add(Me.txtDesignation)
@@ -175,7 +186,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(988, 410)
+        Me.PanelEx3.Size = New System.Drawing.Size(988, 388)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -183,6 +194,299 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx3.Style.GradientAngle = 90
         Me.PanelEx3.TabIndex = 4
+        '
+        'LabelX9
+        '
+        Me.LabelX9.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX9.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX9.Location = New System.Drawing.Point(285, 104)
+        Me.LabelX9.Name = "LabelX9"
+        Me.LabelX9.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX9.TabIndex = 62
+        Me.LabelX9.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX8
+        '
+        Me.LabelX8.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX8.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX8.Location = New System.Drawing.Point(285, 46)
+        Me.LabelX8.Name = "LabelX8"
+        Me.LabelX8.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX8.TabIndex = 61
+        Me.LabelX8.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'LabelX37
+        '
+        Me.LabelX37.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX37.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX37.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX37.Location = New System.Drawing.Point(414, 17)
+        Me.LabelX37.Name = "LabelX37"
+        Me.LabelX37.Size = New System.Drawing.Size(7, 22)
+        Me.LabelX37.TabIndex = 60
+        Me.LabelX37.Text = "<font color=""#ED1C24"">*</font><b></b>"
+        '
+        'btnSaveOfficeDetails
+        '
+        Me.btnSaveOfficeDetails.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveOfficeDetails.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveOfficeDetails.Image = CType(resources.GetObject("btnSaveOfficeDetails.Image"), System.Drawing.Image)
+        Me.btnSaveOfficeDetails.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveOfficeDetails.Location = New System.Drawing.Point(814, 33)
+        Me.btnSaveOfficeDetails.Name = "btnSaveOfficeDetails"
+        Me.btnSaveOfficeDetails.Size = New System.Drawing.Size(123, 73)
+        Me.btnSaveOfficeDetails.TabIndex = 6
+        Me.btnSaveOfficeDetails.Text = "Save"
+        '
+        'LabelX7
+        '
+        Me.LabelX7.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX7.Location = New System.Drawing.Point(438, 17)
+        Me.LabelX7.Name = "LabelX7"
+        Me.LabelX7.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX7.TabIndex = 16
+        Me.LabelX7.Text = "Remarks"
+        '
+        'LabelX6
+        '
+        Me.LabelX6.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX6.Location = New System.Drawing.Point(32, 104)
+        Me.LabelX6.Name = "LabelX6"
+        Me.LabelX6.Size = New System.Drawing.Size(70, 18)
+        Me.LabelX6.TabIndex = 15
+        Me.LabelX6.Text = "Designation"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(32, 75)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(47, 18)
+        Me.LabelX5.TabIndex = 14
+        Me.LabelX5.Text = "To Date"
+        '
+        'LabelX4
+        '
+        Me.LabelX4.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX4.Location = New System.Drawing.Point(32, 46)
+        Me.LabelX4.Name = "LabelX4"
+        Me.LabelX4.Size = New System.Drawing.Size(62, 18)
+        Me.LabelX4.TabIndex = 13
+        Me.LabelX4.Text = "From Date"
+        '
+        'LabelX3
+        '
+        Me.LabelX3.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX3.Location = New System.Drawing.Point(32, 17)
+        Me.LabelX3.Name = "LabelX3"
+        Me.LabelX3.Size = New System.Drawing.Size(27, 18)
+        Me.LabelX3.TabIndex = 12
+        Me.LabelX3.Text = "Unit"
+        '
+        'txtODRemarks
+        '
+        Me.txtODRemarks.AcceptsReturn = True
+        Me.txtODRemarks.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtODRemarks.Border.Class = "TextBoxBorder"
+        Me.txtODRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtODRemarks.ButtonCustom.Image = CType(resources.GetObject("txtODRemarks.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtODRemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtODRemarks.FocusHighlightEnabled = True
+        Me.txtODRemarks.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtODRemarks.ForeColor = System.Drawing.Color.Black
+        Me.txtODRemarks.Location = New System.Drawing.Point(495, 14)
+        Me.txtODRemarks.MaxLength = 255
+        Me.txtODRemarks.Multiline = True
+        Me.txtODRemarks.Name = "txtODRemarks"
+        Me.txtODRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtODRemarks.Size = New System.Drawing.Size(280, 112)
+        Me.txtODRemarks.TabIndex = 5
+        Me.txtODRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtODRemarks.WatermarkText = "Remarks"
+        '
+        'dtTo
+        '
+        Me.dtTo.AutoAdvance = True
+        Me.dtTo.AutoSelectDate = True
+        Me.dtTo.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtTo.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtTo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.ButtonClear.Image = CType(resources.GetObject("dtTo.ButtonClear.Image"), System.Drawing.Image)
+        Me.dtTo.ButtonClear.Visible = True
+        Me.dtTo.ButtonDropDown.Visible = True
+        Me.dtTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtTo.FocusHighlightEnabled = True
+        Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.dtTo.IsPopupCalendarOpen = False
+        Me.dtTo.Location = New System.Drawing.Point(107, 72)
+        Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtTo.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtTo.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtTo.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtTo.MonthCalendar.TodayButtonVisible = True
+        Me.dtTo.Name = "dtTo"
+        Me.dtTo.Size = New System.Drawing.Size(172, 25)
+        Me.dtTo.TabIndex = 3
+        Me.dtTo.WatermarkText = "To Date"
+        '
+        'dtFrom
+        '
+        Me.dtFrom.AutoAdvance = True
+        Me.dtFrom.AutoSelectDate = True
+        Me.dtFrom.BackColor = System.Drawing.SystemColors.Window
+        '
+        '
+        '
+        Me.dtFrom.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.dtFrom.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.ButtonClear.Image = CType(resources.GetObject("dtFrom.ButtonClear.Image"), System.Drawing.Image)
+        Me.dtFrom.ButtonClear.Visible = True
+        Me.dtFrom.ButtonDropDown.Visible = True
+        Me.dtFrom.CustomFormat = "dd/MM/yyyy"
+        Me.dtFrom.FocusHighlightEnabled = True
+        Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
+        Me.dtFrom.IsPopupCalendarOpen = False
+        Me.dtFrom.Location = New System.Drawing.Point(107, 43)
+        Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
+        Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.dtFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
+        Me.dtFrom.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
+        Me.dtFrom.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
+        Me.dtFrom.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.dtFrom.MonthCalendar.TodayButtonVisible = True
+        Me.dtFrom.Name = "dtFrom"
+        Me.dtFrom.Size = New System.Drawing.Size(172, 25)
+        Me.dtFrom.TabIndex = 2
+        Me.dtFrom.WatermarkText = "From Date"
+        '
+        'txtDesignation
+        '
+        Me.txtDesignation.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtDesignation.Border.Class = "TextBoxBorder"
+        Me.txtDesignation.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtDesignation.DisabledBackColor = System.Drawing.Color.White
+        Me.txtDesignation.FocusHighlightEnabled = True
+        Me.txtDesignation.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDesignation.ForeColor = System.Drawing.Color.Black
+        Me.txtDesignation.Location = New System.Drawing.Point(107, 101)
+        Me.txtDesignation.Name = "txtDesignation"
+        Me.txtDesignation.PreventEnterBeep = True
+        Me.txtDesignation.Size = New System.Drawing.Size(172, 25)
+        Me.txtDesignation.TabIndex = 4
+        Me.txtDesignation.WatermarkText = "Designation"
+        '
+        'txtUnit
+        '
+        Me.txtUnit.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtUnit.Border.Class = "TextBoxBorder"
+        Me.txtUnit.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtUnit.DisabledBackColor = System.Drawing.Color.White
+        Me.txtUnit.FocusHighlightEnabled = True
+        Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnit.ForeColor = System.Drawing.Color.Black
+        Me.txtUnit.Location = New System.Drawing.Point(107, 14)
+        Me.txtUnit.Name = "txtUnit"
+        Me.txtUnit.PreventEnterBeep = True
+        Me.txtUnit.Size = New System.Drawing.Size(301, 25)
+        Me.txtUnit.TabIndex = 1
+        Me.txtUnit.WatermarkText = "Unit"
         '
         'dgvOfficeDetails
         '
@@ -214,7 +518,7 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvOfficeDetails.EnableHeadersVisualStyles = False
         Me.dgvOfficeDetails.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
-        Me.dgvOfficeDetails.Location = New System.Drawing.Point(0, 134)
+        Me.dgvOfficeDetails.Location = New System.Drawing.Point(0, 140)
         Me.dgvOfficeDetails.MultiSelect = False
         Me.dgvOfficeDetails.Name = "dgvOfficeDetails"
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -228,16 +532,106 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.RowTemplate.Height = 30
         Me.dgvOfficeDetails.SelectAllSignVisible = False
         Me.dgvOfficeDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvOfficeDetails.Size = New System.Drawing.Size(988, 276)
+        Me.dgvOfficeDetails.Size = New System.Drawing.Size(988, 248)
         Me.dgvOfficeDetails.TabIndex = 0
         Me.dgvOfficeDetails.TabStop = False
         '
-        'SuperTabItem3
+        'IDDataGridViewTextBoxColumn
         '
-        Me.SuperTabItem3.AttachedControl = Me.SuperTabControlPanel3
-        Me.SuperTabItem3.GlobalItem = False
-        Me.SuperTabItem3.Name = "SuperTabItem3"
-        Me.SuperTabItem3.Text = "Office Details"
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.Visible = False
+        '
+        'UnitDataGridViewTextBoxColumn
+        '
+        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
+        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
+        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
+        Me.UnitDataGridViewTextBoxColumn.Width = 200
+        '
+        'FromDateDataGridViewTextBoxColumn
+        '
+        Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
+        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
+        Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
+        '
+        'ToDateDataGridViewTextBoxColumn
+        '
+        Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
+        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
+        Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
+        '
+        'DesignationDataGridViewTextBoxColumn
+        '
+        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
+        Me.DesignationDataGridViewTextBoxColumn.Width = 150
+        '
+        'RemarksDataGridViewTextBoxColumn
+        '
+        Me.RemarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
+        Me.RemarksDataGridViewTextBoxColumn.Width = 250
+        '
+        'OfficeDetailsBindingSource
+        '
+        Me.OfficeDetailsBindingSource.DataMember = "OfficeDetails"
+        Me.OfficeDetailsBindingSource.DataSource = Me.WeeklyDiaryDataSet1
+        '
+        'WeeklyDiaryDataSet1
+        '
+        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
+        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'tabOD
+        '
+        Me.tabOD.AttachedControl = Me.SuperTabControlPanel3
+        Me.tabOD.GlobalItem = False
+        Me.tabOD.Name = "tabOD"
+        Me.tabOD.Text = "Office Details"
+        '
+        'SuperTabControlPanel1
+        '
+        Me.SuperTabControlPanel1.Controls.Add(Me.PanelEx4)
+        Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 28)
+        Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
+        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(988, 388)
+        Me.SuperTabControlPanel1.TabIndex = 1
+        Me.SuperTabControlPanel1.TabItem = Me.tabWD
+        '
+        'PanelEx4
+        '
+        Me.PanelEx4.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx4.Location = New System.Drawing.Point(0, 0)
+        Me.PanelEx4.Name = "PanelEx4"
+        Me.PanelEx4.Size = New System.Drawing.Size(988, 388)
+        Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx4.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx4.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx4.Style.GradientAngle = 90
+        Me.PanelEx4.TabIndex = 4
+        '
+        'tabWD
+        '
+        Me.tabWD.AttachedControl = Me.SuperTabControlPanel1
+        Me.tabWD.GlobalItem = False
+        Me.tabWD.Name = "tabWD"
+        Me.tabWD.Text = "Weekly Diary"
         '
         'SuperTabControlPanel2
         '
@@ -245,9 +639,9 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
-        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(988, 410)
+        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(988, 388)
         Me.SuperTabControlPanel2.TabIndex = 0
-        Me.SuperTabControlPanel2.TabItem = Me.SuperTabItem2
+        Me.SuperTabControlPanel2.TabItem = Me.tabPass
         '
         'PanelEx2
         '
@@ -273,7 +667,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(988, 410)
+        Me.PanelEx2.Size = New System.Drawing.Size(988, 388)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -508,46 +902,12 @@ Partial Class frmWeeklyDiaryDE
         Me.LabelX1.TabIndex = 0
         Me.LabelX1.Text = "PEN"
         '
-        'SuperTabItem2
+        'tabPass
         '
-        Me.SuperTabItem2.AttachedControl = Me.SuperTabControlPanel2
-        Me.SuperTabItem2.GlobalItem = False
-        Me.SuperTabItem2.Name = "SuperTabItem2"
-        Me.SuperTabItem2.Text = "Change Name and Password"
-        '
-        'SuperTabControlPanel1
-        '
-        Me.SuperTabControlPanel1.Controls.Add(Me.PanelEx4)
-        Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 28)
-        Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
-        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(988, 410)
-        Me.SuperTabControlPanel1.TabIndex = 1
-        Me.SuperTabControlPanel1.TabItem = Me.SuperTabItem1
-        '
-        'PanelEx4
-        '
-        Me.PanelEx4.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx4.Location = New System.Drawing.Point(0, 0)
-        Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(988, 410)
-        Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx4.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx4.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx4.Style.GradientAngle = 90
-        Me.PanelEx4.TabIndex = 4
-        '
-        'SuperTabItem1
-        '
-        Me.SuperTabItem1.AttachedControl = Me.SuperTabControlPanel1
-        Me.SuperTabItem1.GlobalItem = False
-        Me.SuperTabItem1.Name = "SuperTabItem1"
-        Me.SuperTabItem1.Text = "Weekly Diary"
+        Me.tabPass.AttachedControl = Me.SuperTabControlPanel2
+        Me.tabPass.GlobalItem = False
+        Me.tabPass.Name = "tabPass"
+        Me.tabPass.Text = "Change Name and Password"
         '
         'RibbonBar1
         '
@@ -563,10 +923,11 @@ Partial Class frmWeeklyDiaryDE
         Me.RibbonBar1.ContainerControlProcessDialogKey = True
         Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonBar1.DragDropSupport = True
+        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnNewEntry, Me.btnEdit, Me.btnDelete})
         Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar1.Location = New System.Drawing.Point(0, 0)
         Me.RibbonBar1.Name = "RibbonBar1"
-        Me.RibbonBar1.Size = New System.Drawing.Size(988, 61)
+        Me.RibbonBar1.Size = New System.Drawing.Size(988, 83)
         Me.RibbonBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.RibbonBar1.TabIndex = 0
         Me.RibbonBar1.Text = "RibbonBar1"
@@ -579,61 +940,34 @@ Partial Class frmWeeklyDiaryDE
         '
         Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         '
-        'IDDataGridViewTextBoxColumn
+        'btnNewEntry
         '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        Me.IDDataGridViewTextBoxColumn.Visible = False
+        Me.btnNewEntry.BeginGroup = True
+        Me.btnNewEntry.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnNewEntry.Image = CType(resources.GetObject("btnNewEntry.Image"), System.Drawing.Image)
+        Me.btnNewEntry.ImageSmall = CType(resources.GetObject("btnNewEntry.ImageSmall"), System.Drawing.Image)
+        Me.btnNewEntry.Name = "btnNewEntry"
+        Me.btnNewEntry.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlN)
+        Me.btnNewEntry.SubItemsExpandWidth = 14
+        Me.btnNewEntry.Text = "New"
         '
-        'UnitDataGridViewTextBoxColumn
+        'btnEdit
         '
-        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
-        Me.UnitDataGridViewTextBoxColumn.Width = 200
+        Me.btnEdit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
+        Me.btnEdit.ImageSmall = CType(resources.GetObject("btnEdit.ImageSmall"), System.Drawing.Image)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.SubItemsExpandWidth = 14
+        Me.btnEdit.Text = "Edit"
         '
-        'FromDateDataGridViewTextBoxColumn
+        'btnDelete
         '
-        Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
-        Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
-        Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
-        '
-        'ToDateDataGridViewTextBoxColumn
-        '
-        Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
-        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
-        Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
-        Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
-        '
-        'DesignationDataGridViewTextBoxColumn
-        '
-        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
-        Me.DesignationDataGridViewTextBoxColumn.Width = 150
-        '
-        'RemarksDataGridViewTextBoxColumn
-        '
-        Me.RemarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
-        Me.RemarksDataGridViewTextBoxColumn.Width = 250
-        '
-        'OfficeDetailsBindingSource
-        '
-        Me.OfficeDetailsBindingSource.DataMember = "OfficeDetails"
-        Me.OfficeDetailsBindingSource.DataSource = Me.WeeklyDiaryDataSet1
-        '
-        'WeeklyDiaryDataSet1
-        '
-        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
-        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.btnDelete.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.ImageSmall = CType(resources.GetObject("btnDelete.ImageSmall"), System.Drawing.Image)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.SubItemsExpandWidth = 14
+        Me.btnDelete.Text = "Delete"
         '
         'AuthenticationTableAdapter1
         '
@@ -650,245 +984,6 @@ Partial Class frmWeeklyDiaryDE
         'OfficeDetailsTableAdapter1
         '
         Me.OfficeDetailsTableAdapter1.ClearBeforeFill = True
-        '
-        'txtUnit
-        '
-        Me.txtUnit.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtUnit.Border.Class = "TextBoxBorder"
-        Me.txtUnit.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtUnit.DisabledBackColor = System.Drawing.Color.White
-        Me.txtUnit.FocusHighlightEnabled = True
-        Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnit.ForeColor = System.Drawing.Color.Black
-        Me.txtUnit.Location = New System.Drawing.Point(107, 9)
-        Me.txtUnit.Name = "txtUnit"
-        Me.txtUnit.PreventEnterBeep = True
-        Me.txtUnit.Size = New System.Drawing.Size(301, 25)
-        Me.txtUnit.TabIndex = 2
-        Me.txtUnit.WatermarkText = "Unit"
-        '
-        'txtDesignation
-        '
-        Me.txtDesignation.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtDesignation.Border.Class = "TextBoxBorder"
-        Me.txtDesignation.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtDesignation.DisabledBackColor = System.Drawing.Color.White
-        Me.txtDesignation.FocusHighlightEnabled = True
-        Me.txtDesignation.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesignation.ForeColor = System.Drawing.Color.Black
-        Me.txtDesignation.Location = New System.Drawing.Point(107, 96)
-        Me.txtDesignation.Name = "txtDesignation"
-        Me.txtDesignation.PreventEnterBeep = True
-        Me.txtDesignation.Size = New System.Drawing.Size(172, 25)
-        Me.txtDesignation.TabIndex = 3
-        Me.txtDesignation.WatermarkText = "Designation"
-        '
-        'dtFrom
-        '
-        Me.dtFrom.AutoAdvance = True
-        Me.dtFrom.AutoSelectDate = True
-        Me.dtFrom.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtFrom.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtFrom.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFrom.ButtonClear.Image = CType(resources.GetObject("dtSOCInspection.ButtonClear.Image"), System.Drawing.Image)
-        Me.dtFrom.ButtonClear.Visible = True
-        Me.dtFrom.ButtonDropDown.Visible = True
-        Me.dtFrom.CustomFormat = "dd/MM/yyyy"
-        Me.dtFrom.FocusHighlightEnabled = True
-        Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(107, 38)
-        Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtFrom.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtFrom.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFrom.MonthCalendar.ClearButtonVisible = True
-        '
-        '
-        '
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtFrom.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFrom.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtFrom.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtFrom.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtFrom.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtFrom.MonthCalendar.TodayButtonVisible = True
-        Me.dtFrom.Name = "dtFrom"
-        Me.dtFrom.Size = New System.Drawing.Size(172, 25)
-        Me.dtFrom.TabIndex = 5
-        Me.dtFrom.WatermarkText = "From Date"
-        '
-        'dtTo
-        '
-        Me.dtTo.AutoAdvance = True
-        Me.dtTo.AutoSelectDate = True
-        Me.dtTo.BackColor = System.Drawing.SystemColors.Window
-        '
-        '
-        '
-        Me.dtTo.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.dtTo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtTo.ButtonClear.Image = CType(resources.GetObject("DateTimeInput1.ButtonClear.Image"), System.Drawing.Image)
-        Me.dtTo.ButtonClear.Visible = True
-        Me.dtTo.ButtonDropDown.Visible = True
-        Me.dtTo.CustomFormat = "dd/MM/yyyy"
-        Me.dtTo.FocusHighlightEnabled = True
-        Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
-        Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(107, 67)
-        Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
-        Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.dtTo.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window
-        Me.dtTo.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtTo.MonthCalendar.ClearButtonVisible = True
-        '
-        '
-        '
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
-        Me.dtTo.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtTo.MonthCalendar.DaySize = New System.Drawing.Size(30, 15)
-        Me.dtTo.MonthCalendar.DisplayMonth = New Date(2008, 7, 1, 0, 0, 0, 0)
-        Me.dtTo.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
-        '
-        '
-        '
-        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
-        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.dtTo.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.dtTo.MonthCalendar.TodayButtonVisible = True
-        Me.dtTo.Name = "dtTo"
-        Me.dtTo.Size = New System.Drawing.Size(172, 25)
-        Me.dtTo.TabIndex = 6
-        Me.dtTo.WatermarkText = "To Date"
-        '
-        'txtRemarks
-        '
-        Me.txtRemarks.AcceptsReturn = True
-        Me.txtRemarks.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRemarks.Border.Class = "TextBoxBorder"
-        Me.txtRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRemarks.ButtonCustom.Image = CType(resources.GetObject("txtSOCComplainant.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtRemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRemarks.FocusHighlightEnabled = True
-        Me.txtRemarks.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRemarks.ForeColor = System.Drawing.Color.Black
-        Me.txtRemarks.Location = New System.Drawing.Point(495, 9)
-        Me.txtRemarks.MaxLength = 255
-        Me.txtRemarks.Multiline = True
-        Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtRemarks.Size = New System.Drawing.Size(280, 112)
-        Me.txtRemarks.TabIndex = 11
-        Me.txtRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRemarks.WatermarkText = "Remarks"
-        '
-        'LabelX3
-        '
-        Me.LabelX3.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(32, 12)
-        Me.LabelX3.Name = "LabelX3"
-        Me.LabelX3.Size = New System.Drawing.Size(27, 18)
-        Me.LabelX3.TabIndex = 12
-        Me.LabelX3.Text = "Unit"
-        '
-        'LabelX4
-        '
-        Me.LabelX4.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(32, 41)
-        Me.LabelX4.Name = "LabelX4"
-        Me.LabelX4.Size = New System.Drawing.Size(62, 18)
-        Me.LabelX4.TabIndex = 13
-        Me.LabelX4.Text = "From Date"
-        '
-        'LabelX5
-        '
-        Me.LabelX5.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(32, 70)
-        Me.LabelX5.Name = "LabelX5"
-        Me.LabelX5.Size = New System.Drawing.Size(47, 18)
-        Me.LabelX5.TabIndex = 14
-        Me.LabelX5.Text = "To Date"
-        '
-        'LabelX6
-        '
-        Me.LabelX6.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(32, 99)
-        Me.LabelX6.Name = "LabelX6"
-        Me.LabelX6.Size = New System.Drawing.Size(70, 18)
-        Me.LabelX6.TabIndex = 15
-        Me.LabelX6.Text = "Designation"
-        '
-        'LabelX7
-        '
-        Me.LabelX7.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX7.Location = New System.Drawing.Point(438, 12)
-        Me.LabelX7.Name = "LabelX7"
-        Me.LabelX7.Size = New System.Drawing.Size(51, 18)
-        Me.LabelX7.TabIndex = 16
-        Me.LabelX7.Text = "Remarks"
         '
         'frmWeeklyDiaryDE
         '
@@ -911,15 +1006,15 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControlPanel3.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.PanelEx3.PerformLayout()
+        CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvOfficeDetails, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SuperTabControlPanel1.ResumeLayout(False)
         Me.SuperTabControlPanel2.ResumeLayout(False)
         Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx2.PerformLayout()
-        Me.SuperTabControlPanel1.ResumeLayout(False)
-        CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -927,11 +1022,11 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents RibbonBar1 As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents SuperTabControl1 As DevComponents.DotNetBar.SuperTabControl
     Friend WithEvents SuperTabControlPanel1 As DevComponents.DotNetBar.SuperTabControlPanel
-    Friend WithEvents SuperTabItem1 As DevComponents.DotNetBar.SuperTabItem
+    Friend WithEvents tabWD As DevComponents.DotNetBar.SuperTabItem
     Friend WithEvents SuperTabControlPanel3 As DevComponents.DotNetBar.SuperTabControlPanel
-    Friend WithEvents SuperTabItem3 As DevComponents.DotNetBar.SuperTabItem
+    Friend WithEvents tabOD As DevComponents.DotNetBar.SuperTabItem
     Friend WithEvents SuperTabControlPanel2 As DevComponents.DotNetBar.SuperTabControlPanel
-    Friend WithEvents SuperTabItem2 As DevComponents.DotNetBar.SuperTabItem
+    Friend WithEvents tabPass As DevComponents.DotNetBar.SuperTabItem
     Friend WithEvents PanelEx3 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents PanelEx4 As DevComponents.DotNetBar.PanelEx
@@ -968,10 +1063,17 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents txtUnit As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents dtFrom As DevComponents.Editors.DateTimeAdv.DateTimeInput
-    Friend WithEvents txtRemarks As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtODRemarks As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX7 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnSaveOfficeDetails As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnNewEntry As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnEdit As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnDelete As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents LabelX8 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX37 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
 End Class

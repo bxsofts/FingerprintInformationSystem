@@ -36,6 +36,9 @@ Public Class frmWeeklyDiaryDE
             Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
             Me.OfficeDetailsTableAdapter1.Connection.Open()
             Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
+            Me.OfficeDetailsBindingSource.MoveLast()
+
+            Me.txtUnit.Text = "Single Digit Fingerprint Bureau, "
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -172,5 +175,70 @@ Public Class frmWeeklyDiaryDE
             End If
         End Using
 
+    End Sub
+
+   
+    Private Sub btnNewEntry_Click(sender As Object, e As EventArgs) Handles btnNewEntry.Click
+
+        If Me.SuperTabControl1.SelectedTab Is tabOD Then
+            Me.txtUnit.Text = "Single Digit Fingerprint Bureau, "
+            Me.dtFrom.Text = vbNullString
+            Me.dtTo.Text = vbNullString
+            Me.txtDesignation.Text = ""
+            Me.txtODRemarks.Text = ""
+            Me.txtUnit.Focus()
+        End If
+
+    End Sub
+
+    Private Sub btnSaveOfficeDetails_Click(sender As Object, e As EventArgs) Handles btnSaveOfficeDetails.Click
+
+        If Me.txtUnit.Text.Trim = "" Then
+            MessageBoxEx.Show("Please enter 'Unit'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtUnit.Focus()
+            Exit Sub
+        End If
+
+        If Me.dtFrom.Text.Trim = "" Then
+            MessageBoxEx.Show("Please enter 'Date From'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.dtFrom.Focus()
+            Exit Sub
+        End If
+
+        If Me.txtDesignation.Text.Trim = "" Then
+            MessageBoxEx.Show("Please enter 'Designation'", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtDesignation.Focus()
+            Exit Sub
+        End If
+
+        Try
+            If Me.btnSaveOfficeDetails.Text = "Save" Then
+                Dim dgvr As WeeklyDiaryDataSet.OfficeDetailsRow = Me.WeeklyDiaryDataSet1.OfficeDetails.NewRow
+                With dgvr
+                    .Unit = Me.txtUnit.Text.Trim
+                    .FromDate = Me.dtFrom.ValueObject
+                    .ToDate = Me.dtTo.ValueObject
+                    .Designation = Me.txtDesignation.Text.Trim
+                    .Remarks = Me.txtODRemarks.Text.Trim
+                End With
+                Me.WeeklyDiaryDataSet1.OfficeDetails.AddOfficeDetailsRow(dgvr)
+                Me.OfficeDetailsTableAdapter1.Update(Me.WeeklyDiaryDataSet1.OfficeDetails)
+                Me.OfficeDetailsBindingSource.MoveLast()
+
+                Me.txtUnit.Text = "Single Digit Fingerprint Bureau, "
+                Me.dtFrom.Text = vbNullString
+                Me.dtTo.Text = vbNullString
+                Me.txtDesignation.Text = ""
+                Me.txtODRemarks.Text = ""
+                Me.txtUnit.Focus()
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+
+    Private Sub tabOD_Click(sender As Object, e As EventArgs) Handles tabOD.Click
+        Me.txtUnit.Focus()
     End Sub
 End Class
