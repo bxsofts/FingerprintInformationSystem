@@ -17815,7 +17815,7 @@ errhandler:
 
             UploadRequest.Fields = "id"
             UploadRequest.Upload()
-
+            Stream.Close()
         Catch ex As Exception
             blAutoBackupInProgress = False
             blCheckAutoBackup = False

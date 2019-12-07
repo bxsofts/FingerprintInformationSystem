@@ -20,6 +20,7 @@ Public Class frmWeeklyDiaryAuthentication
     Dim dFormatedFileSize As String = ""
 
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.CircularProgress1.Visible = False
         InitializeComponents()
         Me.txtPassword.UseSystemPasswordChar = True
         Me.txtPassword1.UseSystemPasswordChar = True
@@ -43,7 +44,7 @@ Public Class frmWeeklyDiaryAuthentication
         Me.txtPassword1.Visible = False
         Me.lblPassword2.Visible = False
         Me.txtPassword2.Visible = False
-       
+
         Me.lblNewUser.Visible = True
         Me.lblDownloadDatabase.Visible = True
         Me.txtPEN.Focus()
@@ -193,7 +194,7 @@ Public Class frmWeeklyDiaryAuthentication
 
     End Sub
 
-  
+
     Private Sub lblDownloadDatabase_Click(sender As Object, e As EventArgs) Handles lblDownloadDatabase.Click
         Dim Pen As String = Me.txtPEN.Text.Trim
 
@@ -242,6 +243,11 @@ Public Class frmWeeklyDiaryAuthentication
         End If
 
         Me.Cursor = Cursors.WaitCursor
+
+        CircularProgress1.IsRunning = True
+        CircularProgress1.ProgressColor = GetProgressColor()
+        CircularProgress1.ProgressText = "0"
+        CircularProgress1.Show()
         Me.bgwDownload.RunWorkerAsync(Me.txtPEN.Text.Trim & ".mdb")
 
     End Sub
@@ -327,7 +333,7 @@ Public Class frmWeeklyDiaryAuthentication
     End Sub
 
     Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownload.ProgressChanged
-        ' cpgrDownload.ProgressText = e.ProgressPercentage
+        CircularProgress1.ProgressText = e.ProgressPercentage
        
 
         If e.UserState = "Weekly Diary folder not found" Then
@@ -343,7 +349,7 @@ Public Class frmWeeklyDiaryAuthentication
 
         Me.Cursor = Cursors.Default
 
-        ' cpgrDownload.Visible = False
+        CircularProgress1.Visible = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
             MessageBoxEx.Show("Weekly Diary file downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)

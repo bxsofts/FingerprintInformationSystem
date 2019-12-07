@@ -360,7 +360,17 @@ WHERE        (PEN = ?)</CommandText>
               <Mapping SourceColumn="WorkDone" DataSetColumn="WorkDone" />
               <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="WeeklyDiaryConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryCount" Modifier="Public" Name="ScalarQueryCount" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ScalarQueryCount">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        COUNT(*) AS Expr1
+FROM            WeeklyDiary</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
         </Tables>
         <Sources />

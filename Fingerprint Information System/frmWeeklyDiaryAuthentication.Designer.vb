@@ -40,6 +40,7 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
         Me.lblDownloadDatabase = New DevComponents.DotNetBar.LabelX()
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.SuspendLayout()
         '
         'btnLogin
@@ -268,12 +269,29 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.bgwDownload.WorkerReportsProgress = True
         Me.bgwDownload.WorkerSupportsCancellation = True
         '
+        'cpgrDownload
+        '
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(288, 67)
+        Me.CircularProgress1.Name = "cpgrDownload"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(119, 58)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 38
+        Me.CircularProgress1.TabStop = False
+        '
         'frmWeeklyDiaryAuthentication
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 125)
+        Me.Controls.Add(Me.CircularProgress1)
         Me.Controls.Add(Me.lblDownloadDatabase)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.txtPassword)
@@ -320,4 +338,5 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents PersonalDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter
     Friend WithEvents lblDownloadDatabase As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
 End Class

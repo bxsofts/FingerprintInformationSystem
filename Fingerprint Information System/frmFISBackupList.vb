@@ -699,7 +699,7 @@ Public Class frmFISBackupList
             MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
-        If dDownloadStatus = DownloadStatus.Failed Then
+        If uUploadStatus = UploadStatus.Failed Then
             MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 

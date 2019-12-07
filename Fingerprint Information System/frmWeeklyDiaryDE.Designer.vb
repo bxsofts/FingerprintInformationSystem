@@ -24,31 +24,13 @@ Partial Class frmWeeklyDiaryDE
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWeeklyDiaryDE))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.SuperTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
-        Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
-        Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
-        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX37 = New DevComponents.DotNetBar.LabelX()
-        Me.btnSaveOfficeDetails = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
-        Me.txtODRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.txtDesignation = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtUnit = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.dgvOfficeDetails = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.tabOD = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
         Me.tabWD = New DevComponents.DotNetBar.SuperTabItem()
@@ -71,11 +53,23 @@ Partial Class frmWeeklyDiaryDE
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.tabPass = New DevComponents.DotNetBar.SuperTabItem()
-        Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnReload = New DevComponents.DotNetBar.ButtonItem()
+        Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX37 = New DevComponents.DotNetBar.LabelX()
+        Me.btnSaveOfficeDetails = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
+        Me.txtODRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.txtDesignation = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtUnit = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.dgvOfficeDetails = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UnitDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FromDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -84,21 +78,31 @@ Partial Class frmWeeklyDiaryDE
         Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OfficeDetailsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
+        Me.tabOD = New DevComponents.DotNetBar.SuperTabItem()
+        Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnReload = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnReport = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOnlineBackup = New DevComponents.DotNetBar.ButtonItem()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.CircularProgressItem()
         Me.AuthenticationTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.AuthenticationTableAdapter()
         Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
         Me.PersonalDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.PersonalDetailsTableAdapter()
         Me.OfficeDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.OfficeDetailsTableAdapter()
+        Me.bgwUpload = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl1.SuspendLayout()
+        Me.SuperTabControlPanel1.SuspendLayout()
+        Me.SuperTabControlPanel2.SuspendLayout()
+        Me.PanelEx2.SuspendLayout()
         Me.SuperTabControlPanel3.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvOfficeDetails, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuperTabControlPanel1.SuspendLayout()
-        Me.SuperTabControlPanel2.SuspendLayout()
-        Me.PanelEx2.SuspendLayout()
         CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -139,8 +143,8 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1.ControlBox.Name = ""
         Me.SuperTabControl1.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl1.ControlBox.MenuBox, Me.SuperTabControl1.ControlBox.CloseBox})
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel1)
-        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel2)
+        Me.SuperTabControl1.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl1.ForeColor = System.Drawing.Color.Black
         Me.SuperTabControl1.Location = New System.Drawing.Point(0, 65)
@@ -154,13 +158,323 @@ Partial Class frmWeeklyDiaryDE
         Me.SuperTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.tabWD, Me.tabOD, Me.tabPass})
         Me.SuperTabControl1.Text = "SuperTabControl1"
         '
+        'SuperTabControlPanel1
+        '
+        Me.SuperTabControlPanel1.Controls.Add(Me.PanelEx4)
+        Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 28)
+        Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
+        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(988, 406)
+        Me.SuperTabControlPanel1.TabIndex = 1
+        Me.SuperTabControlPanel1.TabItem = Me.tabWD
+        '
+        'PanelEx4
+        '
+        Me.PanelEx4.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx4.Location = New System.Drawing.Point(0, 0)
+        Me.PanelEx4.Name = "PanelEx4"
+        Me.PanelEx4.Size = New System.Drawing.Size(988, 406)
+        Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx4.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx4.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx4.Style.GradientAngle = 90
+        Me.PanelEx4.TabIndex = 4
+        '
+        'tabWD
+        '
+        Me.tabWD.AttachedControl = Me.SuperTabControlPanel1
+        Me.tabWD.GlobalItem = False
+        Me.tabWD.Name = "tabWD"
+        Me.tabWD.Text = "Weekly Diary"
+        '
+        'SuperTabControlPanel2
+        '
+        Me.SuperTabControlPanel2.Controls.Add(Me.PanelEx2)
+        Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 28)
+        Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
+        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(988, 406)
+        Me.SuperTabControlPanel2.TabIndex = 0
+        Me.SuperTabControlPanel2.TabItem = Me.tabPass
+        '
+        'PanelEx2
+        '
+        Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx2.Controls.Add(Me.txtOldPassword)
+        Me.PanelEx2.Controls.Add(Me.lblOldPassword)
+        Me.PanelEx2.Controls.Add(Me.lblPEN)
+        Me.PanelEx2.Controls.Add(Me.btnCancelPassword)
+        Me.PanelEx2.Controls.Add(Me.btnSavePassword)
+        Me.PanelEx2.Controls.Add(Me.btnCancelName)
+        Me.PanelEx2.Controls.Add(Me.btnSaveName)
+        Me.PanelEx2.Controls.Add(Me.lblChangeName)
+        Me.PanelEx2.Controls.Add(Me.txtName)
+        Me.PanelEx2.Controls.Add(Me.txtPassword2)
+        Me.PanelEx2.Controls.Add(Me.txtPassword1)
+        Me.PanelEx2.Controls.Add(Me.lblPassword2)
+        Me.PanelEx2.Controls.Add(Me.lblPassword1)
+        Me.PanelEx2.Controls.Add(Me.lblChangePassword)
+        Me.PanelEx2.Controls.Add(Me.LabelX2)
+        Me.PanelEx2.Controls.Add(Me.LabelX1)
+        Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
+        Me.PanelEx2.Name = "PanelEx2"
+        Me.PanelEx2.Size = New System.Drawing.Size(988, 406)
+        Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx2.Style.GradientAngle = 90
+        Me.PanelEx2.TabIndex = 0
+        '
+        'txtOldPassword
+        '
+        Me.txtOldPassword.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtOldPassword.Border.Class = "TextBoxBorder"
+        Me.txtOldPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtOldPassword.DisabledBackColor = System.Drawing.Color.White
+        Me.txtOldPassword.FocusHighlightEnabled = True
+        Me.txtOldPassword.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOldPassword.ForeColor = System.Drawing.Color.Black
+        Me.txtOldPassword.Location = New System.Drawing.Point(128, 133)
+        Me.txtOldPassword.Name = "txtOldPassword"
+        Me.txtOldPassword.PreventEnterBeep = True
+        Me.txtOldPassword.Size = New System.Drawing.Size(172, 25)
+        Me.txtOldPassword.TabIndex = 4
+        Me.txtOldPassword.WatermarkText = "Current Password"
+        '
+        'lblOldPassword
+        '
+        Me.lblOldPassword.AutoSize = True
+        '
+        '
+        '
+        Me.lblOldPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblOldPassword.Location = New System.Drawing.Point(20, 136)
+        Me.lblOldPassword.Name = "lblOldPassword"
+        Me.lblOldPassword.Size = New System.Drawing.Size(102, 18)
+        Me.lblOldPassword.TabIndex = 14
+        Me.lblOldPassword.Text = "Current Password"
+        '
+        'lblPEN
+        '
+        Me.lblPEN.AutoSize = True
+        '
+        '
+        '
+        Me.lblPEN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPEN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPEN.ForeColor = System.Drawing.Color.Red
+        Me.lblPEN.Location = New System.Drawing.Point(125, 19)
+        Me.lblPEN.Name = "lblPEN"
+        Me.lblPEN.Size = New System.Drawing.Size(33, 24)
+        Me.lblPEN.TabIndex = 12
+        Me.lblPEN.Text = "PEN"
+        '
+        'btnCancelPassword
+        '
+        Me.btnCancelPassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancelPassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancelPassword.Location = New System.Drawing.Point(318, 193)
+        Me.btnCancelPassword.Name = "btnCancelPassword"
+        Me.btnCancelPassword.Size = New System.Drawing.Size(97, 23)
+        Me.btnCancelPassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnCancelPassword.TabIndex = 8
+        Me.btnCancelPassword.Text = "Cancel"
+        '
+        'btnSavePassword
+        '
+        Me.btnSavePassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSavePassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSavePassword.Location = New System.Drawing.Point(318, 162)
+        Me.btnSavePassword.Name = "btnSavePassword"
+        Me.btnSavePassword.Size = New System.Drawing.Size(97, 23)
+        Me.btnSavePassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnSavePassword.TabIndex = 7
+        Me.btnSavePassword.Text = "Save"
+        '
+        'btnCancelName
+        '
+        Me.btnCancelName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCancelName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnCancelName.Location = New System.Drawing.Point(425, 64)
+        Me.btnCancelName.Name = "btnCancelName"
+        Me.btnCancelName.Size = New System.Drawing.Size(97, 23)
+        Me.btnCancelName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnCancelName.TabIndex = 3
+        Me.btnCancelName.Text = "Cancel"
+        '
+        'btnSaveName
+        '
+        Me.btnSaveName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveName.Location = New System.Drawing.Point(318, 64)
+        Me.btnSaveName.Name = "btnSaveName"
+        Me.btnSaveName.Size = New System.Drawing.Size(97, 23)
+        Me.btnSaveName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnSaveName.TabIndex = 2
+        Me.btnSaveName.Text = "Save"
+        '
+        'lblChangeName
+        '
+        Me.lblChangeName.AutoSize = True
+        '
+        '
+        '
+        Me.lblChangeName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblChangeName.Location = New System.Drawing.Point(212, 41)
+        Me.lblChangeName.Name = "lblChangeName"
+        Me.lblChangeName.Size = New System.Drawing.Size(85, 18)
+        Me.lblChangeName.TabIndex = 11
+        Me.lblChangeName.Text = "<a>Change Name </a>"
+        '
+        'txtName
+        '
+        Me.txtName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtName.Border.Class = "TextBoxBorder"
+        Me.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtName.FocusHighlightEnabled = True
+        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.ForeColor = System.Drawing.Color.Black
+        Me.txtName.Location = New System.Drawing.Point(125, 64)
+        Me.txtName.Name = "txtName"
+        Me.txtName.PreventEnterBeep = True
+        Me.txtName.Size = New System.Drawing.Size(172, 25)
+        Me.txtName.TabIndex = 1
+        Me.txtName.WatermarkText = "Name"
+        '
+        'txtPassword2
+        '
+        Me.txtPassword2.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtPassword2.Border.Class = "TextBoxBorder"
+        Me.txtPassword2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPassword2.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPassword2.FocusHighlightEnabled = True
+        Me.txtPassword2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword2.ForeColor = System.Drawing.Color.Black
+        Me.txtPassword2.Location = New System.Drawing.Point(128, 193)
+        Me.txtPassword2.Name = "txtPassword2"
+        Me.txtPassword2.PreventEnterBeep = True
+        Me.txtPassword2.Size = New System.Drawing.Size(172, 25)
+        Me.txtPassword2.TabIndex = 6
+        Me.txtPassword2.WatermarkText = "Confirm Password"
+        '
+        'txtPassword1
+        '
+        Me.txtPassword1.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtPassword1.Border.Class = "TextBoxBorder"
+        Me.txtPassword1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPassword1.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPassword1.FocusHighlightEnabled = True
+        Me.txtPassword1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword1.ForeColor = System.Drawing.Color.Black
+        Me.txtPassword1.Location = New System.Drawing.Point(128, 163)
+        Me.txtPassword1.Name = "txtPassword1"
+        Me.txtPassword1.PreventEnterBeep = True
+        Me.txtPassword1.Size = New System.Drawing.Size(172, 25)
+        Me.txtPassword1.TabIndex = 5
+        Me.txtPassword1.WatermarkText = "New Password"
+        '
+        'lblPassword2
+        '
+        Me.lblPassword2.AutoSize = True
+        '
+        '
+        '
+        Me.lblPassword2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPassword2.Location = New System.Drawing.Point(20, 196)
+        Me.lblPassword2.Name = "lblPassword2"
+        Me.lblPassword2.Size = New System.Drawing.Size(48, 18)
+        Me.lblPassword2.TabIndex = 6
+        Me.lblPassword2.Text = "Confirm"
+        '
+        'lblPassword1
+        '
+        Me.lblPassword1.AutoSize = True
+        '
+        '
+        '
+        Me.lblPassword1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblPassword1.Location = New System.Drawing.Point(20, 166)
+        Me.lblPassword1.Name = "lblPassword1"
+        Me.lblPassword1.Size = New System.Drawing.Size(85, 18)
+        Me.lblPassword1.TabIndex = 5
+        Me.lblPassword1.Text = "New Password"
+        '
+        'lblChangePassword
+        '
+        Me.lblChangePassword.AutoSize = True
+        '
+        '
+        '
+        Me.lblChangePassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblChangePassword.Location = New System.Drawing.Point(199, 109)
+        Me.lblChangePassword.Name = "lblChangePassword"
+        Me.lblChangePassword.Size = New System.Drawing.Size(101, 18)
+        Me.lblChangePassword.TabIndex = 2
+        Me.lblChangePassword.Text = "<a>Change Password</a>"
+        '
+        'LabelX2
+        '
+        Me.LabelX2.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX2.Location = New System.Drawing.Point(65, 66)
+        Me.LabelX2.Name = "LabelX2"
+        Me.LabelX2.Size = New System.Drawing.Size(36, 18)
+        Me.LabelX2.TabIndex = 1
+        Me.LabelX2.Text = "Name"
+        '
+        'LabelX1
+        '
+        Me.LabelX1.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(65, 22)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(26, 18)
+        Me.LabelX1.TabIndex = 0
+        Me.LabelX1.Text = "PEN"
+        '
+        'tabPass
+        '
+        Me.tabPass.AttachedControl = Me.SuperTabControlPanel2
+        Me.tabPass.GlobalItem = False
+        Me.tabPass.Name = "tabPass"
+        Me.tabPass.Text = "Change Name and Password"
+        '
         'SuperTabControlPanel3
         '
         Me.SuperTabControlPanel3.Controls.Add(Me.PanelEx3)
         Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 28)
         Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
-        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(988, 388)
+        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(988, 406)
         Me.SuperTabControlPanel3.TabIndex = 0
         Me.SuperTabControlPanel3.TabItem = Me.tabOD
         '
@@ -187,7 +501,7 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(988, 388)
+        Me.PanelEx3.Size = New System.Drawing.Size(988, 406)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -499,40 +813,40 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.AllowUserToOrderColumns = True
         Me.dgvOfficeDetails.AutoGenerateColumns = False
         Me.dgvOfficeDetails.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvOfficeDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvOfficeDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgvOfficeDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvOfficeDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.UnitDataGridViewTextBoxColumn, Me.FromDateDataGridViewTextBoxColumn, Me.ToDateDataGridViewTextBoxColumn, Me.DesignationDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn})
         Me.dgvOfficeDetails.DataSource = Me.OfficeDetailsBindingSource
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvOfficeDetails.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvOfficeDetails.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvOfficeDetails.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvOfficeDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvOfficeDetails.EnableHeadersVisualStyles = False
         Me.dgvOfficeDetails.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
-        Me.dgvOfficeDetails.Location = New System.Drawing.Point(0, 140)
+        Me.dgvOfficeDetails.Location = New System.Drawing.Point(0, 158)
         Me.dgvOfficeDetails.MultiSelect = False
         Me.dgvOfficeDetails.Name = "dgvOfficeDetails"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvOfficeDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvOfficeDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.dgvOfficeDetails.RowTemplate.Height = 30
         Me.dgvOfficeDetails.SelectAllSignVisible = False
         Me.dgvOfficeDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -540,322 +854,68 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.TabIndex = 0
         Me.dgvOfficeDetails.TabStop = False
         '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.Visible = False
+        '
+        'UnitDataGridViewTextBoxColumn
+        '
+        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
+        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
+        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
+        Me.UnitDataGridViewTextBoxColumn.Width = 200
+        '
+        'FromDateDataGridViewTextBoxColumn
+        '
+        Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.Format = "dd/MM/yyyy"
+        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
+        Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
+        Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
+        '
+        'ToDateDataGridViewTextBoxColumn
+        '
+        Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Format = "dd/MM/yyyy"
+        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle8
+        Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
+        Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
+        '
+        'DesignationDataGridViewTextBoxColumn
+        '
+        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
+        Me.DesignationDataGridViewTextBoxColumn.Width = 150
+        '
+        'RemarksDataGridViewTextBoxColumn
+        '
+        Me.RemarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
+        Me.RemarksDataGridViewTextBoxColumn.Width = 250
+        '
+        'OfficeDetailsBindingSource
+        '
+        Me.OfficeDetailsBindingSource.DataMember = "OfficeDetails"
+        Me.OfficeDetailsBindingSource.DataSource = Me.WeeklyDiaryDataSet1
+        '
+        'WeeklyDiaryDataSet1
+        '
+        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
+        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'tabOD
         '
         Me.tabOD.AttachedControl = Me.SuperTabControlPanel3
         Me.tabOD.GlobalItem = False
         Me.tabOD.Name = "tabOD"
         Me.tabOD.Text = "Office Details"
-        '
-        'SuperTabControlPanel1
-        '
-        Me.SuperTabControlPanel1.Controls.Add(Me.PanelEx4)
-        Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 28)
-        Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
-        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(988, 406)
-        Me.SuperTabControlPanel1.TabIndex = 1
-        Me.SuperTabControlPanel1.TabItem = Me.tabWD
-        '
-        'PanelEx4
-        '
-        Me.PanelEx4.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx4.Location = New System.Drawing.Point(0, 0)
-        Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(988, 406)
-        Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx4.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx4.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx4.Style.GradientAngle = 90
-        Me.PanelEx4.TabIndex = 4
-        '
-        'tabWD
-        '
-        Me.tabWD.AttachedControl = Me.SuperTabControlPanel1
-        Me.tabWD.GlobalItem = False
-        Me.tabWD.Name = "tabWD"
-        Me.tabWD.Text = "Weekly Diary"
-        '
-        'SuperTabControlPanel2
-        '
-        Me.SuperTabControlPanel2.Controls.Add(Me.PanelEx2)
-        Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 28)
-        Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
-        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(988, 388)
-        Me.SuperTabControlPanel2.TabIndex = 0
-        Me.SuperTabControlPanel2.TabItem = Me.tabPass
-        '
-        'PanelEx2
-        '
-        Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx2.Controls.Add(Me.txtOldPassword)
-        Me.PanelEx2.Controls.Add(Me.lblOldPassword)
-        Me.PanelEx2.Controls.Add(Me.lblPEN)
-        Me.PanelEx2.Controls.Add(Me.btnCancelPassword)
-        Me.PanelEx2.Controls.Add(Me.btnSavePassword)
-        Me.PanelEx2.Controls.Add(Me.btnCancelName)
-        Me.PanelEx2.Controls.Add(Me.btnSaveName)
-        Me.PanelEx2.Controls.Add(Me.lblChangeName)
-        Me.PanelEx2.Controls.Add(Me.txtName)
-        Me.PanelEx2.Controls.Add(Me.txtPassword2)
-        Me.PanelEx2.Controls.Add(Me.txtPassword1)
-        Me.PanelEx2.Controls.Add(Me.lblPassword2)
-        Me.PanelEx2.Controls.Add(Me.lblPassword1)
-        Me.PanelEx2.Controls.Add(Me.lblChangePassword)
-        Me.PanelEx2.Controls.Add(Me.LabelX2)
-        Me.PanelEx2.Controls.Add(Me.LabelX1)
-        Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
-        Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(988, 388)
-        Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx2.Style.GradientAngle = 90
-        Me.PanelEx2.TabIndex = 0
-        '
-        'txtOldPassword
-        '
-        Me.txtOldPassword.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtOldPassword.Border.Class = "TextBoxBorder"
-        Me.txtOldPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtOldPassword.DisabledBackColor = System.Drawing.Color.White
-        Me.txtOldPassword.FocusHighlightEnabled = True
-        Me.txtOldPassword.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOldPassword.ForeColor = System.Drawing.Color.Black
-        Me.txtOldPassword.Location = New System.Drawing.Point(128, 133)
-        Me.txtOldPassword.Name = "txtOldPassword"
-        Me.txtOldPassword.PreventEnterBeep = True
-        Me.txtOldPassword.Size = New System.Drawing.Size(172, 25)
-        Me.txtOldPassword.TabIndex = 4
-        Me.txtOldPassword.WatermarkText = "Current Password"
-        '
-        'lblOldPassword
-        '
-        Me.lblOldPassword.AutoSize = True
-        '
-        '
-        '
-        Me.lblOldPassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblOldPassword.Location = New System.Drawing.Point(20, 136)
-        Me.lblOldPassword.Name = "lblOldPassword"
-        Me.lblOldPassword.Size = New System.Drawing.Size(102, 18)
-        Me.lblOldPassword.TabIndex = 14
-        Me.lblOldPassword.Text = "Current Password"
-        '
-        'lblPEN
-        '
-        Me.lblPEN.AutoSize = True
-        '
-        '
-        '
-        Me.lblPEN.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPEN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPEN.ForeColor = System.Drawing.Color.Red
-        Me.lblPEN.Location = New System.Drawing.Point(125, 19)
-        Me.lblPEN.Name = "lblPEN"
-        Me.lblPEN.Size = New System.Drawing.Size(33, 24)
-        Me.lblPEN.TabIndex = 12
-        Me.lblPEN.Text = "PEN"
-        '
-        'btnCancelPassword
-        '
-        Me.btnCancelPassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancelPassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancelPassword.Location = New System.Drawing.Point(318, 193)
-        Me.btnCancelPassword.Name = "btnCancelPassword"
-        Me.btnCancelPassword.Size = New System.Drawing.Size(97, 23)
-        Me.btnCancelPassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnCancelPassword.TabIndex = 8
-        Me.btnCancelPassword.Text = "Cancel"
-        '
-        'btnSavePassword
-        '
-        Me.btnSavePassword.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSavePassword.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSavePassword.Location = New System.Drawing.Point(318, 162)
-        Me.btnSavePassword.Name = "btnSavePassword"
-        Me.btnSavePassword.Size = New System.Drawing.Size(97, 23)
-        Me.btnSavePassword.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSavePassword.TabIndex = 7
-        Me.btnSavePassword.Text = "Save"
-        '
-        'btnCancelName
-        '
-        Me.btnCancelName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnCancelName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnCancelName.Location = New System.Drawing.Point(425, 64)
-        Me.btnCancelName.Name = "btnCancelName"
-        Me.btnCancelName.Size = New System.Drawing.Size(97, 23)
-        Me.btnCancelName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnCancelName.TabIndex = 3
-        Me.btnCancelName.Text = "Cancel"
-        '
-        'btnSaveName
-        '
-        Me.btnSaveName.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveName.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveName.Location = New System.Drawing.Point(318, 64)
-        Me.btnSaveName.Name = "btnSaveName"
-        Me.btnSaveName.Size = New System.Drawing.Size(97, 23)
-        Me.btnSaveName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSaveName.TabIndex = 2
-        Me.btnSaveName.Text = "Save"
-        '
-        'lblChangeName
-        '
-        Me.lblChangeName.AutoSize = True
-        '
-        '
-        '
-        Me.lblChangeName.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblChangeName.Location = New System.Drawing.Point(212, 41)
-        Me.lblChangeName.Name = "lblChangeName"
-        Me.lblChangeName.Size = New System.Drawing.Size(85, 18)
-        Me.lblChangeName.TabIndex = 11
-        Me.lblChangeName.Text = "<a>Change Name </a>"
-        '
-        'txtName
-        '
-        Me.txtName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtName.Border.Class = "TextBoxBorder"
-        Me.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtName.FocusHighlightEnabled = True
-        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.ForeColor = System.Drawing.Color.Black
-        Me.txtName.Location = New System.Drawing.Point(125, 64)
-        Me.txtName.Name = "txtName"
-        Me.txtName.PreventEnterBeep = True
-        Me.txtName.Size = New System.Drawing.Size(172, 25)
-        Me.txtName.TabIndex = 1
-        Me.txtName.WatermarkText = "Name"
-        '
-        'txtPassword2
-        '
-        Me.txtPassword2.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtPassword2.Border.Class = "TextBoxBorder"
-        Me.txtPassword2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtPassword2.DisabledBackColor = System.Drawing.Color.White
-        Me.txtPassword2.FocusHighlightEnabled = True
-        Me.txtPassword2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword2.ForeColor = System.Drawing.Color.Black
-        Me.txtPassword2.Location = New System.Drawing.Point(128, 193)
-        Me.txtPassword2.Name = "txtPassword2"
-        Me.txtPassword2.PreventEnterBeep = True
-        Me.txtPassword2.Size = New System.Drawing.Size(172, 25)
-        Me.txtPassword2.TabIndex = 6
-        Me.txtPassword2.WatermarkText = "Confirm Password"
-        '
-        'txtPassword1
-        '
-        Me.txtPassword1.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtPassword1.Border.Class = "TextBoxBorder"
-        Me.txtPassword1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtPassword1.DisabledBackColor = System.Drawing.Color.White
-        Me.txtPassword1.FocusHighlightEnabled = True
-        Me.txtPassword1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword1.ForeColor = System.Drawing.Color.Black
-        Me.txtPassword1.Location = New System.Drawing.Point(128, 163)
-        Me.txtPassword1.Name = "txtPassword1"
-        Me.txtPassword1.PreventEnterBeep = True
-        Me.txtPassword1.Size = New System.Drawing.Size(172, 25)
-        Me.txtPassword1.TabIndex = 5
-        Me.txtPassword1.WatermarkText = "New Password"
-        '
-        'lblPassword2
-        '
-        Me.lblPassword2.AutoSize = True
-        '
-        '
-        '
-        Me.lblPassword2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword2.Location = New System.Drawing.Point(20, 196)
-        Me.lblPassword2.Name = "lblPassword2"
-        Me.lblPassword2.Size = New System.Drawing.Size(48, 18)
-        Me.lblPassword2.TabIndex = 6
-        Me.lblPassword2.Text = "Confirm"
-        '
-        'lblPassword1
-        '
-        Me.lblPassword1.AutoSize = True
-        '
-        '
-        '
-        Me.lblPassword1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword1.Location = New System.Drawing.Point(20, 166)
-        Me.lblPassword1.Name = "lblPassword1"
-        Me.lblPassword1.Size = New System.Drawing.Size(85, 18)
-        Me.lblPassword1.TabIndex = 5
-        Me.lblPassword1.Text = "New Password"
-        '
-        'lblChangePassword
-        '
-        Me.lblChangePassword.AutoSize = True
-        '
-        '
-        '
-        Me.lblChangePassword.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblChangePassword.Location = New System.Drawing.Point(199, 109)
-        Me.lblChangePassword.Name = "lblChangePassword"
-        Me.lblChangePassword.Size = New System.Drawing.Size(101, 18)
-        Me.lblChangePassword.TabIndex = 2
-        Me.lblChangePassword.Text = "<a>Change Password</a>"
-        '
-        'LabelX2
-        '
-        Me.LabelX2.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(65, 66)
-        Me.LabelX2.Name = "LabelX2"
-        Me.LabelX2.Size = New System.Drawing.Size(36, 18)
-        Me.LabelX2.TabIndex = 1
-        Me.LabelX2.Text = "Name"
-        '
-        'LabelX1
-        '
-        Me.LabelX1.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(65, 22)
-        Me.LabelX1.Name = "LabelX1"
-        Me.LabelX1.Size = New System.Drawing.Size(26, 18)
-        Me.LabelX1.TabIndex = 0
-        Me.LabelX1.Text = "PEN"
-        '
-        'tabPass
-        '
-        Me.tabPass.AttachedControl = Me.SuperTabControlPanel2
-        Me.tabPass.GlobalItem = False
-        Me.tabPass.Name = "tabPass"
-        Me.tabPass.Text = "Change Name and Password"
         '
         'RibbonBar1
         '
@@ -871,7 +931,7 @@ Partial Class frmWeeklyDiaryDE
         Me.RibbonBar1.ContainerControlProcessDialogKey = True
         Me.RibbonBar1.Dock = System.Windows.Forms.DockStyle.Top
         Me.RibbonBar1.DragDropSupport = True
-        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnNewEntry, Me.btnEdit, Me.btnDelete, Me.btnReload})
+        Me.RibbonBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnNewEntry, Me.btnEdit, Me.btnDelete, Me.btnReload, Me.btnReport, Me.btnOnlineBackup, Me.CircularProgress1})
         Me.RibbonBar1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         Me.RibbonBar1.Location = New System.Drawing.Point(0, 0)
         Me.RibbonBar1.Name = "RibbonBar1"
@@ -900,7 +960,6 @@ Partial Class frmWeeklyDiaryDE
         '
         'btnEdit
         '
-        Me.btnEdit.BeginGroup = True
         Me.btnEdit.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
         Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
         Me.btnEdit.ImageSmall = CType(resources.GetObject("btnEdit.ImageSmall"), System.Drawing.Image)
@@ -929,61 +988,30 @@ Partial Class frmWeeklyDiaryDE
         Me.btnReload.SubItemsExpandWidth = 14
         Me.btnReload.Text = "Reload"
         '
-        'IDDataGridViewTextBoxColumn
+        'btnReport
         '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        Me.IDDataGridViewTextBoxColumn.Visible = False
+        Me.btnReport.BeginGroup = True
+        Me.btnReport.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnReport.Image = CType(resources.GetObject("btnReport.Image"), System.Drawing.Image)
+        Me.btnReport.Name = "btnReport"
+        Me.btnReport.SubItemsExpandWidth = 14
+        Me.btnReport.Text = "Statement"
         '
-        'UnitDataGridViewTextBoxColumn
+        'btnOnlineBackup
         '
-        Me.UnitDataGridViewTextBoxColumn.DataPropertyName = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.HeaderText = "Unit"
-        Me.UnitDataGridViewTextBoxColumn.Name = "UnitDataGridViewTextBoxColumn"
-        Me.UnitDataGridViewTextBoxColumn.Width = 200
+        Me.btnOnlineBackup.BeginGroup = True
+        Me.btnOnlineBackup.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnOnlineBackup.Image = CType(resources.GetObject("btnOnlineBackup.Image"), System.Drawing.Image)
+        Me.btnOnlineBackup.Name = "btnOnlineBackup"
+        Me.btnOnlineBackup.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlB)
+        Me.btnOnlineBackup.SubItemsExpandWidth = 14
+        Me.btnOnlineBackup.Text = "Backup"
         '
-        'FromDateDataGridViewTextBoxColumn
+        'CircularProgress1
         '
-        Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
-        Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
-        Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
-        '
-        'ToDateDataGridViewTextBoxColumn
-        '
-        Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
-        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
-        Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
-        Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
-        '
-        'DesignationDataGridViewTextBoxColumn
-        '
-        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
-        Me.DesignationDataGridViewTextBoxColumn.Width = 150
-        '
-        'RemarksDataGridViewTextBoxColumn
-        '
-        Me.RemarksDataGridViewTextBoxColumn.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn.Name = "RemarksDataGridViewTextBoxColumn"
-        Me.RemarksDataGridViewTextBoxColumn.Width = 250
-        '
-        'OfficeDetailsBindingSource
-        '
-        Me.OfficeDetailsBindingSource.DataMember = "OfficeDetails"
-        Me.OfficeDetailsBindingSource.DataSource = Me.WeeklyDiaryDataSet1
-        '
-        'WeeklyDiaryDataSet1
-        '
-        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
-        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.CircularProgress1.Diameter = 60
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressTextVisible = True
         '
         'AuthenticationTableAdapter1
         '
@@ -1000,6 +1028,11 @@ Partial Class frmWeeklyDiaryDE
         'OfficeDetailsTableAdapter1
         '
         Me.OfficeDetailsTableAdapter1.ClearBeforeFill = True
+        '
+        'bgwUpload
+        '
+        Me.bgwUpload.WorkerReportsProgress = True
+        Me.bgwUpload.WorkerSupportsCancellation = True
         '
         'frmWeeklyDiaryDE
         '
@@ -1019,16 +1052,16 @@ Partial Class frmWeeklyDiaryDE
         Me.PanelEx1.ResumeLayout(False)
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControl1.ResumeLayout(False)
+        Me.SuperTabControlPanel1.ResumeLayout(False)
+        Me.SuperTabControlPanel2.ResumeLayout(False)
+        Me.PanelEx2.ResumeLayout(False)
+        Me.PanelEx2.PerformLayout()
         Me.SuperTabControlPanel3.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.PanelEx3.PerformLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvOfficeDetails, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SuperTabControlPanel1.ResumeLayout(False)
-        Me.SuperTabControlPanel2.ResumeLayout(False)
-        Me.PanelEx2.ResumeLayout(False)
-        Me.PanelEx2.PerformLayout()
         CType(Me.OfficeDetailsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1093,4 +1126,8 @@ Partial Class frmWeeklyDiaryDE
     Friend WithEvents DesignationDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RemarksDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnReload As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOnlineBackup As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnReport As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.CircularProgressItem
+    Friend WithEvents bgwUpload As System.ComponentModel.BackgroundWorker
 End Class

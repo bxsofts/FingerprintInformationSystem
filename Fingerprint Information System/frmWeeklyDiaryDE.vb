@@ -1,14 +1,31 @@
 ﻿Imports DevComponents.DotNetBar
+Imports System.Threading
+Imports System.Threading.Tasks
+Imports System.IO
+
+Imports Google
+Imports Google.Apis.Auth.OAuth2
+Imports Google.Apis.Drive.v3
+Imports Google.Apis.Drive.v3.Data
+Imports Google.Apis.Services
+Imports Google.Apis.Download
+Imports Google.Apis.Upload
+Imports Google.Apis.Util.Store
+Imports Google.Apis.Requests
 
 
 Public Class frmWeeklyDiaryDE
     Dim wdConString As String = ""
     Dim wdOfficerName As String = ""
+    Public uBytesUploaded As Long
+    Public uUploadStatus As UploadStatus
+    Public dFileSize As Long
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
             Me.BringToFront()
             Me.CenterToScreen()
+            CircularProgress1.Visible = False
             Me.txtName.Text = ""
             Me.txtOldPassword.Text = ""
             Me.txtPassword1.Text = ""
@@ -20,7 +37,13 @@ Public Class frmWeeklyDiaryDE
             Me.txtOldPassword.UseSystemPasswordChar = True
             Me.txtPassword1.UseSystemPasswordChar = True
             Me.txtPassword2.UseSystemPasswordChar = True
+
             wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdDatabase
+
+            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+            Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
+            Me.WeeklyDiaryTableAdapter1.Connection.Open()
+
             If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
             Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
             Me.PersonalDetailsTableAdapter1.Connection.Open()
@@ -39,6 +62,8 @@ Public Class frmWeeklyDiaryDE
 
             Me.txtUnit.Text = "SDFPB, "
             Me.btnSaveOfficeDetails.Text = "Save"
+
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -282,6 +307,7 @@ Public Class frmWeeklyDiaryDE
 
 #End Region
 
+
 #Region "DELETE DATA"
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -321,6 +347,189 @@ Public Class frmWeeklyDiaryDE
 #End Region
 
 
+  
+
+#Region "BACKUP"
+
+    Private Sub btnOnlineBackup_Click(sender As Object, e As EventArgs) Handles btnOnlineBackup.Click
+        Try
+
+            If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+                ShowFileTransferInProgressMessage()
+                Exit Sub
+            End If
+
+            If Not InternetAvailable() Then
+                MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim r = MessageBoxEx.Show("Remote database will be replaced with local database. Do you want to take backup?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+            If r <> Windows.Forms.DialogResult.Yes Then Exit Sub
+
+            Me.Cursor = Cursors.WaitCursor
+
+            
+            Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim wdFolderID As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                wdFolderID = ""
+            Else
+                wdFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & wdPEN & ".mdb'"
+            List.Fields = "files(id, description)"
+            Results = List.Execute
+            Dim remotecount As Integer = Val(Results.Files(0).Description)
+
+            If remotecount > localcount Then
+                MessageBoxEx.Show("Remote database file has more records (" & remotecount & ") than local database (" & localcount & "). Cannot upload database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            CircularProgress1.IsRunning = True
+            CircularProgress1.ProgressColor = GetProgressColor()
+            CircularProgress1.Visible = True
+            CircularProgress1.ProgressText = "0"
+
+            Me.bgwUpload.RunWorkerAsync(localcount)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub bgwUpload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpload.DoWork
+        Try
+            blUploadIsProgressing = True
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim wdFolderID As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                wdFolderID = ""
+            Else
+                wdFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & wdPEN & ".mdb'"
+            List.Fields = "files(id)"
+            Results = List.Execute
+
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+            body.Name = My.Computer.FileSystem.GetFileInfo(wdDatabase).Name
+            body.MimeType = "database/mdb"
+            body.Description = e.Argument
+
+            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
+            My.Computer.FileSystem.CopyFile(wdDatabase, tmpFileName, True)
+
+            dFileSize = FileLen(tmpFileName)
+
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+            Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+            If Results.Files.Count = 0 Then
+                Dim parentlist As New List(Of String)
+                parentlist.Add(wdFolderID)
+                body.Parents = parentlist
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+
+                AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+                UploadRequest.Fields = "id, name, mimeType, size, description"
+                UploadRequest.Upload()
+            Else
+                Dim RemoteFileID As String = Results.Files(0).Id
+                Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
+                UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+
+                AddHandler UpdateRequest.ProgressChanged, AddressOf Update_ProgressChanged
+
+                UpdateRequest.Fields = "id, name, mimeType, description"
+                UpdateRequest.Upload()
+            End If
+
+            If uUploadStatus = UploadStatus.Completed Then
+                bgwUpload.ReportProgress(100)
+            End If
+
+            Stream.Close()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
+
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwUpload.ReportProgress(percent, uBytesUploaded)
+    End Sub
+
+    Private Sub Update_ProgressChanged(Progress As IUploadProgress)
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwUpload.ReportProgress(percent)
+    End Sub
+    Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpload.ProgressChanged
+        CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpload.RunWorkerCompleted
+
+        CircularProgress1.Visible = False
+        blUploadIsProgressing = False
+
+        If uUploadStatus = UploadStatus.Completed Then
+            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        If uUploadStatus = UploadStatus.Failed Then
+            MessageBoxEx.Show("File upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+#End Region
+   
     Private Sub SuperTabControl1_SelectedTabChanged(sender As Object, e As SuperTabStripSelectedTabChangedEventArgs) Handles SuperTabControl1.SelectedTabChanged
         If SuperTabControl1.SelectedTabIndex = 1 Then
             Me.txtUnit.Focus()
@@ -356,5 +565,4 @@ Public Class frmWeeklyDiaryDE
         End If
     End Sub
 
-   
 End Class
