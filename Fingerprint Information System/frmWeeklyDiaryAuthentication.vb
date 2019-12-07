@@ -213,6 +213,7 @@ Public Class frmWeeklyDiaryAuthentication
 
 
         Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & Pen & ".mdb"
+        Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
 
         If My.Computer.FileSystem.FileExists(wdFile) Then
             Dim r = MessageBoxEx.Show("Database for PEN " & Pen & " already exists. Do you want to overwrite it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -227,7 +228,7 @@ Public Class frmWeeklyDiaryAuthentication
                     Exit Sub
                 End If
 
-                Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
+
 
                 If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
                 Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
@@ -243,6 +244,44 @@ Public Class frmWeeklyDiaryAuthentication
         End If
 
         Me.Cursor = Cursors.WaitCursor
+
+        If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+        Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
+        Me.WeeklyDiaryTableAdapter1.Connection.Open()
+
+        Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+
+        Dim FISService As DriveService = New DriveService
+        Dim Scopes As String() = {DriveService.Scope.Drive}
+
+        Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+        FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+        Dim wdFolderID As String = ""
+        Dim List = FISService.Files.List()
+
+        List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+        List.Fields = "files(id)"
+
+        Dim Results = List.Execute
+
+        Dim cnt = Results.Files.Count
+        If cnt = 0 Then
+            wdFolderID = ""
+        Else
+            wdFolderID = Results.Files(0).Id
+        End If
+
+        List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & Me.txtPEN.Text.Trim & ".mdb'"
+        List.Fields = "files(id, description)"
+        Results = List.Execute
+        Dim remotecount As Integer = Val(Results.Files(0).Description)
+
+        If remotecount < localcount Then
+            MessageBoxEx.Show("Local database file has more records (" & localcount & ") than remote database (" & remotecount & "). Cannot replace database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
         CircularProgress1.IsRunning = True
         CircularProgress1.ProgressColor = GetProgressColor()
