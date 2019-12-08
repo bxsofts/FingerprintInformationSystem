@@ -16735,20 +16735,6 @@ errhandler:
 
     End Sub
 
-    Private Sub GenerateWeeklyDiary() Handles btnWeeklyDiary.Click
-        Try
-            frmWeeklyDiary.StartPosition = FormStartPosition.CenterParent
-            frmWeeklyDiary.ShowDialog()
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-
-        End Try
-    End Sub
-
-
-
 #End Region
 
 
@@ -16784,31 +16770,31 @@ errhandler:
 
                 Case btnAttendance.Name
                     subject = "Abstract of Attendance Register - submitting of - reg:- "
-                    bodytext = "I am submitting here with the abstract of the Attendance Register of this office for the period from 11/" & IIf(m2.Length = 1, "0" & m2, m2) & "/" & y2 & " to 10/" & IIf(m1.Length = 1, "0" & m1, m1) & "/" & y1 & " for favour of further necessary action."
+                    bodytext = "I am submitting herewith the abstract of the Attendance Register of this office for the period from 11/" & IIf(m2.Length = 1, "0" & m2, m2) & "/" & y2 & " to 10/" & IIf(m1.Length = 1, "0" & m1, m1) & "/" & y1 & " for favour of further necessary action."
                     PdlNumber = PdlAttendance
                     sFileName = "CL - Attendance Statement.docx"
                 Case btnSOCCL.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "SOC and DA Slip Statements - " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am submitting here with the SOC and DA Slip statements for the month of " & m2 & " for favour of necessary action."
+                    bodytext = "I am submitting herewith the SOC and DA Slip statements for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlSOCDAStatement
                     sFileName = "CL - SoC Statement.docx"
                 Case btnTABill.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "TA Bills of staff - " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am forwarding here with the TA Bills of the staff of this unit for the month of " & m2 & " for favour of further necessary action."
+                    bodytext = "I am forwarding herewith the TA Bills of the staff of this unit for the month of " & m2 & " for favour of further necessary action."
                     PdlNumber = PdlTABill
                     sFileName = "CL - TA Bill.docx"
                 Case btnRBWarrant.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Bus and Railway Warrants Statement - " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am submitting here with the Bus and Railway Warrant statements for the month of " & m2 & " for favour of necessary action."
+                    bodytext = "I am submitting herewith the Bus and Railway Warrant statements for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlRBWarrant
                     sFileName = "CL - Rail Bus Warrant Statement.docx"
                 Case btnIndividualPerformanceCL.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Individual performance statement - " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am submitting here with the Individual performance statement of the staff of this unit for the month of " & m2 & " for favour of necessary action."
+                    bodytext = "I am submitting herewith the Individual performance statement of the staff of this unit for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIndividualPerformance
                     sFileName = "CL - Individual Performance Statement.docx"
                 Case btnRBNilReport.Name
@@ -16826,13 +16812,13 @@ errhandler:
                 Case btnGraveCrimeCL.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Grave Crime Details – " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am submitting here with the Grave Crime statement for the month of " & m2 & " for favour of necessary action."
+                    bodytext = "I am submitting herewith the Grave Crime statement for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlGraveCrime
                     sFileName = "CL - Grave Crime Statement.docx"
                 Case btnIdentificationStmtCL.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Identification Statement – " & m2 & " - submitting of - reg:- "
-                    bodytext = "I am submitting here with the Identification statement for the month of " & m2 & " for favour of necessary action."
+                    bodytext = "I am submitting herewith the Identification statement for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIdentificationStatement
                     sFileName = "CL - Identification Statement.docx"
             End Select

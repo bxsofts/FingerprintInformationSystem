@@ -13,6 +13,7 @@ Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
+Imports Microsoft.Office.Interop
 
 Public Class frmWeeklyDiaryDE
     Dim wdConString As String = ""
@@ -20,6 +21,16 @@ Public Class frmWeeklyDiaryDE
     Public uBytesUploaded As Long
     Public uUploadStatus As UploadStatus
     Public dFileSize As Long
+
+    Dim dtWeeklyDiaryFrom As Date
+    Dim dtWeeklyDiaryTo As Date
+    Dim TemplateFile As String
+
+    Dim WeeklyDiaryFolder As String
+    Dim sFileName As String
+
+    Dim blDGVChanged As Boolean
+
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
@@ -39,17 +50,26 @@ Public Class frmWeeklyDiaryDE
             Me.txtPassword1.UseSystemPasswordChar = True
             Me.txtPassword2.UseSystemPasswordChar = True
 
-            Me.dgvWeeklyDiary.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+            Me.MonthCalendarAdv1.FirstDayOfWeek = System.DayOfWeek.Sunday
+            Me.MonthCalendarAdv1.DisplayMonth = Today
+            Dim lastweekdate As Date = Date.Today.AddDays(-7) 'gets day of last week
+            Dim dayOfWeek = CInt(lastweekdate.DayOfWeek)
+            dtWeeklyDiaryFrom = lastweekdate.AddDays(-1 * dayOfWeek)
+            dtWeeklyDiaryTo = lastweekdate.AddDays(6 - dayOfWeek)
+
+            Me.MonthCalendarAdv1.SelectedDate = dtWeeklyDiaryFrom
+            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+
+            Me.dgvWeeklyDiary.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
 
             wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdDatabase
-            Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+            Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
 
             If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
             Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
             Me.WeeklyDiaryTableAdapter1.Connection.Open()
 
-            Me.WeeklyDiaryTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.WeeklyDiary)
-            Me.WeeklyDiaryBindingSource.MoveLast()
+            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
 
             If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
             Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
@@ -59,7 +79,8 @@ Public Class frmWeeklyDiaryDE
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
 
-
+            Me.Text = "Weekly Diary - " & wdOfficerName
+            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
 
             If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
             Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
@@ -71,12 +92,19 @@ Public Class frmWeeklyDiaryDE
             Me.txtUnit.Text = "SDFPB, "
             Me.btnSaveOfficeDetails.Text = "Save"
 
+
+            If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
+            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.SocRegisterTableAdapter1.Connection.Open()
+            Control.CheckForIllegalCrossThreadCalls = False
+
+            blDGVChanged = False
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
-        
+
     End Sub
 
 #Region "CHANGE PASSWORD"
@@ -206,6 +234,9 @@ Public Class frmWeeklyDiaryDE
             InitializeODFields()
         End If
 
+        If Me.SuperTabControl1.SelectedTab Is tabWD Then
+            MessageBoxEx.Show("Select Weekly Diary start date and press 'Generate' button.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
 
 #End Region
@@ -237,6 +268,19 @@ Public Class frmWeeklyDiaryDE
             ShowErrorMessage(ex)
         End Try
 
+        If Me.SuperTabControl1.SelectedTab Is tabWD Then
+            If Me.dgvWeeklyDiary.RowCount = 0 Then
+                MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.dgvWeeklyDiary.SelectedRows.Count = 0 Then
+                MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+            dgvWeeklyDiary.CurrentCell = dgvWeeklyDiary.SelectedRows(0).Cells(2)
+            dgvWeeklyDiary.BeginEdit(True)
+        End If
     End Sub
 #End Region
 
@@ -348,6 +392,9 @@ Public Class frmWeeklyDiaryDE
                 End If
             End If
 
+            If Me.SuperTabControl1.SelectedTab Is tabWD Then
+                MessageBoxEx.Show("Deletion of Weekly Diary data is not supported.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -355,8 +402,6 @@ Public Class frmWeeklyDiaryDE
 
 #End Region
 
-
-  
 
 #Region "BACKUP"
 
@@ -379,7 +424,7 @@ Public Class frmWeeklyDiaryDE
 
             Me.Cursor = Cursors.WaitCursor
 
-            
+
             Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
 
             Dim FISService As DriveService = New DriveService
@@ -406,7 +451,13 @@ Public Class frmWeeklyDiaryDE
             List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & wdPEN & ".mdb'"
             List.Fields = "files(id, description)"
             Results = List.Execute
-            Dim remotecount As Integer = Val(Results.Files(0).Description)
+
+            Dim remotecount As Integer = 0
+
+            If Results.Files.Count > 1 Then
+                remotecount = Val(Results.Files(0).Description)
+            End If
+
 
             If remotecount > localcount Then
                 MessageBoxEx.Show("Remote database file has more records (" & remotecount & ") than local database (" & localcount & "). Cannot upload database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -418,7 +469,7 @@ Public Class frmWeeklyDiaryDE
             CircularProgress1.ProgressColor = GetProgressColor()
             CircularProgress1.Visible = True
             CircularProgress1.ProgressText = "0"
-
+            Me.RibbonBar1.RecalcLayout()
             Me.bgwUpload.RunWorkerAsync(localcount)
 
         Catch ex As Exception
@@ -538,7 +589,292 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
 #End Region
-   
+
+
+#Region "GENERATE WEEKLY DIARY"
+
+    Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
+        Me.lblSelectedDate.Text = Me.MonthCalendarAdv1.SelectedDate.ToString("dd/MM/yyyy", culture)
+    End Sub
+
+    Private Sub btnGenerateWD_Click(sender As Object, e As EventArgs) Handles btnGenerateWD.Click
+        Try
+            If Me.MonthCalendarAdv1.SelectedDate.DayOfWeek <> DayOfWeek.Sunday Then
+                If MessageBoxEx.Show("Selected date is not Sunday. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+                    Exit Sub
+                End If
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
+            dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
+
+            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
+
+            If Me.WeeklyDiaryDataSet1.WeeklyDiary.Count > 0 Then
+                ShowDesktopAlert("Weekly Diary loaded from Database.")
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            For i = 1 To 7
+                Dim dtWD = dtWeeklyDiaryFrom.AddDays(i - 1)
+                Me.SocRegisterTableAdapter1.FillByInspectingOfficer(Me.FingerPrintDataSet1.SOCRegister, "%" & wdOfficerName & "%", dtWD)
+
+                Dim cnt As Integer = Me.FingerPrintDataSet1.SOCRegister.Count
+                Dim WorkDone As String = ""
+
+                If cnt = 0 Then
+                    If IsHoliday(dtWD) Then
+                        WorkDone = "Availed Holiday"
+                    Else
+                        WorkDone = "Attended office duty"
+                    End If
+                End If
+
+                Dim officer As String = ""
+                Dim inspected As String = ""
+
+                If cnt = 1 Then
+                    officer = Me.FingerPrintDataSet1.SOCRegister(0).InvestigatingOfficer
+                    If officer.Contains(vbCrLf) Then
+                        inspected = "Supervised the inspection of SOC in Cr.No. "
+                    Else
+                        inspected = "Inspected SOC in Cr.No. "
+                    End If
+                    WorkDone = inspected & Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation & " P.S"
+                End If
+
+                If cnt > 1 Then
+
+                    officer = Me.FingerPrintDataSet1.SOCRegister(0).InvestigatingOfficer
+                    If officer.Contains(vbCrLf) Then
+                        inspected = "Supervised the inspection of SOC in "
+                    Else
+                        inspected = "Inspected SOC in "
+                    End If
+
+                    Dim details As String = ""
+
+                    For j = 0 To cnt - 1
+                        If j <> cnt - 1 Then
+                            details = details & "Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S; "
+                        Else
+                            details = details.Remove(details.Length - 2)
+                            details = details & " and Cr.No " & Me.FingerPrintDataSet1.SOCRegister(j).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(j).PoliceStation & " P.S"
+                        End If
+
+                    Next
+                    WorkDone = inspected & details
+                End If
+
+                Dim dgvr As WeeklyDiaryDataSet.WeeklyDiaryRow = Me.WeeklyDiaryDataSet1.WeeklyDiary.NewRow
+                With dgvr
+                    .DiaryDate = dtWD
+                    .WorkDone = WorkDone
+                    .Remarks = ""
+                End With
+                Me.WeeklyDiaryDataSet1.WeeklyDiary.AddWeeklyDiaryRow(dgvr)
+            Next
+            Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+            Me.WeeklyDiaryBindingSource.MoveFirst()
+            ShowDesktopAlert("Weekly Diary generated.")
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub btnSaveWD_Click(sender As Object, e As EventArgs) Handles btnSaveWD.Click
+        Try
+            Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+            blDGVChanged = False
+            ShowDesktopAlert("Weekly Diary Records saved.")
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub dgvWeeklyDiary_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWeeklyDiary.CellValueChanged
+        blDGVChanged = True
+    End Sub
+
+    Private Sub frmWeeklyDiaryDE_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        Try
+            If blDGVChanged Then
+                Dim reply As DialogResult = MessageBoxEx.Show("Data in Weekly Diary table has changed. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+                If reply = Windows.Forms.DialogResult.Cancel Then e.Cancel = True
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+                    blDGVChanged = False
+                End If
+            End If
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+
+    End Sub
+
+    Private Sub btnPrintWD_Click(sender As Object, e As EventArgs) Handles btnPrintWD.Click
+        Try
+            If Me.dgvWeeklyDiary.RowCount = 0 Then
+                MessageBoxEx.Show("No records in the list. Please generate Weekly Diary first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            TemplateFile = strAppUserPath & "\WordTemplates\WeeklyDiary.docx"
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            ShowPleaseWaitForm()
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+
+            wdDoc.Range.NoProofing = 1
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+
+            wdBooks("district1").Range.Text = FullDistrictName.ToUpper
+            wdBooks("name").Range.Text = wdOfficerName & ", Tester Inspector"
+            wdBooks("office").Range.Text = ShortOfficeName
+            wdBooks("district2").Range.Text = FullDistrictName
+
+            dtWeeklyDiaryFrom = Me.dgvWeeklyDiary.Rows(0).Cells(1).Value
+            dtWeeklyDiaryTo = Me.dgvWeeklyDiary.Rows(6).Cells(1).Value
+
+            wdBooks("fromdt").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+            wdBooks("todt").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
+
+
+            If boolUseTIinLetter Then
+                wdBooks("tiname").Range.Text = wdOfficerName
+                wdBooks("ti").Range.Text = "Tester Inspector"
+                wdBooks("sdfpb").Range.Text = FullOfficeName
+                wdBooks("district3").Range.Text = FullDistrictName
+            Else
+                wdBooks("tiname").Range.Text = ""
+                wdBooks("ti").Range.Text = ""
+                wdBooks("sdfpb").Range.Text = ""
+                wdBooks("district3").Range.Text = ""
+            End If
+
+            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
+            For i = 2 To 8
+                Dim dt As Date = Me.dgvWeeklyDiary.Rows(i - 2).Cells(1).Value
+                wdTbl.Cell(i, 1).Range.Text = dt.ToString("dd/MM/yyyy", culture) & vbNewLine & Format(dt, "dddd")
+                wdTbl.Cell(i, 2).Range.Text = Me.dgvWeeklyDiary.Rows(i - 2).Cells(2).Value
+                wdTbl.Cell(i, 3).Range.Text = Me.dgvWeeklyDiary.Rows(i - 2).Cells(3).Value
+            Next
+
+            ClosePleaseWaitForm()
+            Me.Cursor = Cursors.Default
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            '  If My.Computer.FileSystem.FileExists(sFileName) = False Then
+            '    wdDoc.SaveAs(sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            ' End If
+
+            ReleaseObject(wdTbl)
+            ReleaseObject(wdBooks)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp = Nothing
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub btnCL_Click(sender As Object, e As EventArgs) Handles btnCL.Click
+        Try
+            TemplateFile = strAppUserPath & "\WordTemplates\WeeklyDiaryCL.docx"
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            ShowPleaseWaitForm()
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+            wdDoc.Range.NoProofing = 1
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
+            dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
+
+            wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
+            wdBooks("OfficeName1").Range.Text = FullOfficeName
+            wdBooks("District1").Range.Text = FullDistrictName
+            wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy", culture)
+
+            wdBooks("Name1").Range.Text = wdOfficerName
+            wdBooks("OfficeName2").Range.Text = FullOfficeName
+            wdBooks("District2").Range.Text = FullDistrictName
+
+            If Me.dgvWeeklyDiary.Rows.Count = 7 Then
+                dtWeeklyDiaryFrom = Me.dgvWeeklyDiary.Rows(0).Cells(1).Value
+                dtWeeklyDiaryTo = Me.dgvWeeklyDiary.Rows(6).Cells(1).Value
+            End If
+
+
+            wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+            wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
+
+
+            If boolUseTIinLetter Then
+                wdBooks("Name2").Range.Text = wdOfficerName
+                wdBooks("Designation").Range.Text = "Tester Inspector"
+                wdBooks("OfficeName3").Range.Text = FullOfficeName
+                wdBooks("District3").Range.Text = FullDistrictName
+            Else
+                wdBooks("Name2").Range.Text = ""
+                wdBooks("Designation").Range.Text = ""
+                wdBooks("OfficeName3").Range.Text = ""
+                wdBooks("District3").Range.Text = ""
+            End If
+
+            ClosePleaseWaitForm()
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            ReleaseObject(wdBooks)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp = Nothing
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+#End Region
+
+
     Private Sub SuperTabControl1_SelectedTabChanged(sender As Object, e As SuperTabStripSelectedTabChangedEventArgs) Handles SuperTabControl1.SelectedTabChanged
         If SuperTabControl1.SelectedTabIndex = 1 Then
             Me.txtUnit.Focus()
@@ -567,11 +903,45 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
     Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
-        If Me.SuperTabControl1.SelectedTab Is tabOD Then
-            Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
-            Me.OfficeDetailsBindingSource.MoveLast()
-            ShowDesktopAlert("Data reloaded.")
-        End If
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            If Me.SuperTabControl1.SelectedTab Is tabOD Then
+                Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
+                Me.OfficeDetailsBindingSource.MoveLast()
+                ShowDesktopAlert("Data reloaded in Office Details table.")
+            End If
+
+            If Me.SuperTabControl1.SelectedTab Is tabWD Then
+                Me.WeeklyDiaryTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.WeeklyDiary)
+                Me.WeeklyDiaryBindingSource.MoveLast()
+                ShowDesktopAlert("Data reloaded in Weekly Diary table.")
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+       
+        Me.Cursor = Cursors.Default
+    End Sub
+    
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+            WeeklyDiaryFolder = My.Computer.FileSystem.GetFileInfo(wdDatabase).DirectoryName
+
+            If FileIO.FileSystem.FileExists(wdDatabase) Then
+                Call Shell("explorer.exe /select," & wdDatabase, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
+
+            If Not FileIO.FileSystem.DirectoryExists(WeeklyDiaryFolder) Then
+                FileIO.FileSystem.CreateDirectory(WeeklyDiaryFolder)
+            End If
+
+            Call Shell("explorer.exe " & WeeklyDiaryFolder, AppWinStyle.NormalFocus)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
+    
 End Class

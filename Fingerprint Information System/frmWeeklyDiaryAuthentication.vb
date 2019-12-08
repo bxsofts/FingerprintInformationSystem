@@ -19,6 +19,7 @@ Public Class frmWeeklyDiaryAuthentication
     Public dFileSize As Long
     Dim dFormatedFileSize As String = ""
 
+
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CircularProgress1.Visible = False
         InitializeComponents()
@@ -196,99 +197,112 @@ Public Class frmWeeklyDiaryAuthentication
 
 
     Private Sub lblDownloadDatabase_Click(sender As Object, e As EventArgs) Handles lblDownloadDatabase.Click
-        Dim Pen As String = Me.txtPEN.Text.Trim
+        Try
+            Dim Pen As String = Me.txtPEN.Text.Trim
 
-        If Not InternetAvailable() Then
-            MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            txtPEN.Focus()
-            Exit Sub
-        End If
-
-
-        If pen = "" Then
-            MessageBoxEx.Show("Enter PEN Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            txtPEN.Focus()
-            Exit Sub
-        End If
-
-
-        Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & Pen & ".mdb"
-        Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
-
-        If My.Computer.FileSystem.FileExists(wdFile) Then
-            Dim r = MessageBoxEx.Show("Database for PEN " & Pen & " already exists. Do you want to overwrite it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
-
-            If r <> Windows.Forms.DialogResult.Yes Then
+            If Not InternetAvailable() Then
+                MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtPEN.Focus()
                 Exit Sub
-            Else
+            End If
 
-                If Me.txtPassword.Text.Trim = "" Then
-                    MessageBoxEx.Show("Enter Password to authenticate overwriting of database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    txtPassword.Focus()
+
+            If Pen = "" Then
+                MessageBoxEx.Show("Enter PEN Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtPEN.Focus()
+                Exit Sub
+            End If
+
+
+            Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & Pen & ".mdb"
+            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
+
+            Dim localcount As Integer = 0
+
+            If My.Computer.FileSystem.FileExists(wdFile) Then
+                Dim r = MessageBoxEx.Show("Database for PEN " & Pen & " already exists. Do you want to overwrite it?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If r <> Windows.Forms.DialogResult.Yes Then
                     Exit Sub
-                End If
+                Else
+
+                    If Me.txtPassword.Text.Trim = "" Then
+                        MessageBoxEx.Show("Enter Password to authenticate overwriting of database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        txtPassword.Focus()
+                        Exit Sub
+                    End If
 
 
 
-                If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
-                Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
-                Me.AuthenticationTableAdapter1.Connection.Open()
+                    If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
+                    Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
+                    Me.AuthenticationTableAdapter1.Connection.Open()
 
-                Dim pwd As String = Me.AuthenticationTableAdapter1.GetPasswordQuery()
+                    Dim pwd As String = Me.AuthenticationTableAdapter1.GetPasswordQuery()
 
-                If pwd <> Me.txtPassword.Text.Trim Then
-                    MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Exit Sub
+                    If pwd <> Me.txtPassword.Text.Trim Then
+                        MessageBoxEx.Show("Incorrect Password.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+
+                    If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+                    Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
+                    Me.WeeklyDiaryTableAdapter1.Connection.Open()
+
+                    localcount = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
                 End If
             End If
-        End If
 
-        Me.Cursor = Cursors.WaitCursor
+            Me.Cursor = Cursors.WaitCursor
 
-        If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
-        Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
-        Me.WeeklyDiaryTableAdapter1.Connection.Open()
+           
 
-        Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
 
-        Dim FISService As DriveService = New DriveService
-        Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-        Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-        FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+            Dim wdFolderID As String = ""
+            Dim List = FISService.Files.List()
 
-        Dim wdFolderID As String = ""
-        Dim List = FISService.Files.List()
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
 
-        List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
-        List.Fields = "files(id)"
+            Dim Results = List.Execute
 
-        Dim Results = List.Execute
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                wdFolderID = ""
+            Else
+                wdFolderID = Results.Files(0).Id
+            End If
 
-        Dim cnt = Results.Files.Count
-        If cnt = 0 Then
-            wdFolderID = ""
-        Else
-            wdFolderID = Results.Files(0).Id
-        End If
+            List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & Me.txtPEN.Text.Trim & ".mdb'"
+            List.Fields = "files(id, description)"
+            Results = List.Execute
 
-        List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & Me.txtPEN.Text.Trim & ".mdb'"
-        List.Fields = "files(id, description)"
-        Results = List.Execute
-        Dim remotecount As Integer = Val(Results.Files(0).Description)
+            Dim remotecount As Integer = 0
 
-        If remotecount < localcount Then
-            MessageBoxEx.Show("Local database file has more records (" & localcount & ") than remote database (" & remotecount & "). Cannot replace database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Results.Files.Count > 1 Then
+                remotecount = Val(Results.Files(0).Description)
+            End If
+
+            If remotecount < localcount Then
+                MessageBoxEx.Show("Local database file has more records (" & localcount & ") than remote database (" & remotecount & "). Cannot replace database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            CircularProgress1.IsRunning = True
+            CircularProgress1.ProgressColor = GetProgressColor()
+            CircularProgress1.ProgressText = "0"
+            CircularProgress1.Show()
+            Me.bgwDownload.RunWorkerAsync(Me.txtPEN.Text.Trim & ".mdb")
+        Catch ex As Exception
             Me.Cursor = Cursors.Default
-            Exit Sub
-        End If
-
-        CircularProgress1.IsRunning = True
-        CircularProgress1.ProgressColor = GetProgressColor()
-        CircularProgress1.ProgressText = "0"
-        CircularProgress1.Show()
-        Me.bgwDownload.RunWorkerAsync(Me.txtPEN.Text.Trim & ".mdb")
-
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
     Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownload.DoWork
