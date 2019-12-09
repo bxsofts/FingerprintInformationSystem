@@ -18,6 +18,10 @@ Imports Microsoft.Office.Interop
 Public Class frmWeeklyDiaryDE
     Dim wdConString As String = ""
     Dim wdOfficerName As String = ""
+
+    Public dBytesDownloaded As Long
+    Public dDownloadStatus As DownloadStatus
+
     Public uBytesUploaded As Long
     Public uUploadStatus As UploadStatus
     Public dFileSize As Long
@@ -65,15 +69,9 @@ Public Class frmWeeklyDiaryDE
             wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdDatabase
             Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
 
-            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
-            Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
-            Me.WeeklyDiaryTableAdapter1.Connection.Open()
+            ConnectToDatabase()
 
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
-
-            If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
-            Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
-            Me.PersonalDetailsTableAdapter1.Connection.Open()
 
             wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
             Me.txtName.Text = wdOfficerName
@@ -82,20 +80,12 @@ Public Class frmWeeklyDiaryDE
             Me.Text = "Weekly Diary - " & wdOfficerName
             Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
 
-            If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
-            Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
-            Me.OfficeDetailsTableAdapter1.Connection.Open()
-
             Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
             Me.OfficeDetailsBindingSource.MoveLast()
 
             Me.txtUnit.Text = "SDFPB, "
             Me.btnSaveOfficeDetails.Text = "Save"
 
-
-            If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
-            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
-            Me.SocRegisterTableAdapter1.Connection.Open()
             Control.CheckForIllegalCrossThreadCalls = False
 
             blDGVChanged = False
@@ -106,6 +96,30 @@ Public Class frmWeeklyDiaryDE
         End Try
 
     End Sub
+
+    Private Sub ConnectToDatabase()
+        Try
+            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+            Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
+            Me.WeeklyDiaryTableAdapter1.Connection.Open()
+
+            If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
+            Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
+            Me.PersonalDetailsTableAdapter1.Connection.Open()
+
+            If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
+            Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
+            Me.OfficeDetailsTableAdapter1.Connection.Open()
+
+            If Me.SocRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.SocRegisterTableAdapter1.Connection.Close()
+            Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
+            Me.SocRegisterTableAdapter1.Connection.Open()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 
 #Region "CHANGE PASSWORD"
 
@@ -212,6 +226,10 @@ Public Class frmWeeklyDiaryDE
             Me.btnSaveName.Visible = False
             Me.btnCancelName.Visible = False
             Me.txtName.Enabled = False
+
+            Me.Text = "Weekly Diary - " & wdOfficerName
+            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
+
             MessageBoxEx.Show("Name updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -366,17 +384,17 @@ Public Class frmWeeklyDiaryDE
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
 
-       
-        If Me.SuperTabControl1.SelectedTab Is tabOD Then
-            If Me.dgvOfficeDetails.RowCount = 0 Then
-                MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
 
-            If Me.dgvOfficeDetails.SelectedRows.Count = 0 Then
-                MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
+            If Me.SuperTabControl1.SelectedTab Is tabOD Then
+                If Me.dgvOfficeDetails.RowCount = 0 Then
+                    MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                If Me.dgvOfficeDetails.SelectedRows.Count = 0 Then
+                    MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
 
                 Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected record?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
@@ -454,7 +472,7 @@ Public Class frmWeeklyDiaryDE
 
             Dim remotecount As Integer = 0
 
-            If Results.Files.Count > 1 Then
+            If Results.Files.Count > 0 Then
                 remotecount = Val(Results.Files(0).Description)
             End If
 
@@ -591,6 +609,203 @@ Public Class frmWeeklyDiaryDE
 #End Region
 
 
+#Region "DOWNLOAD"
+
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        Try
+
+            If Not InternetAvailable() Then
+                MessageBoxEx.Show("Cannot connect to server. Please check your Internet connection.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim r = MessageBoxEx.Show("This will overwrite the existing database. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+            If r <> Windows.Forms.DialogResult.Yes Then
+                Exit Sub
+            End If
+
+            Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim wdFolderID As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                wdFolderID = ""
+            Else
+                wdFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & wdPEN & ".mdb'"
+            List.Fields = "files(id, description)"
+            Results = List.Execute
+
+            Dim remotecount As Integer = 0
+
+            If Results.Files.Count > 0 Then
+                remotecount = Val(Results.Files(0).Description)
+            End If
+
+            If remotecount < localcount Then
+                MessageBoxEx.Show("Local database has more records (" & localcount & ") than remote database (" & remotecount & "). Cannot replace database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            CircularProgress1.IsRunning = True
+            CircularProgress1.ProgressColor = GetProgressColor()
+            CircularProgress1.ProgressText = "0"
+            CircularProgress1.Visible = True
+            Me.RibbonBar1.RecalcLayout()
+            Me.bgwDownload.RunWorkerAsync()
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownload.DoWork
+        Try
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim wdFileID As String = ""
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+
+            Dim parentid As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwDownload.ReportProgress(100, "Weekly Diary folder not found")
+                Exit Sub
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+
+            List.Q = "name = '" & wdPEN & ".mdb' and trashed = false and '" & parentid & "' in parents"
+            List.Fields = "files(name, id)"
+
+            Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                wdFileID = Results.Files(0).Id
+                Dim request = FISService.Files.Get(wdFileID)
+                request.Fields = "size"
+                Dim file = request.Execute
+
+                dFileSize = file.Size
+
+                Dim tempfile As String = My.Computer.FileSystem.GetTempFileName & ".mdb"
+
+                Dim fStream = New System.IO.FileStream(tempfile, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+                m.ChunkSize = 256 * 1024
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+
+                My.Computer.FileSystem.CopyFile(tempfile, SuggestedLocation & "\Weekly Diary\" & wdPEN & ".mdb", True)
+
+            Else
+                bgwDownload.ReportProgress(100, "File not found")
+
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub Download_ProgressChanged(Progress As IDownloadProgress)
+
+        Control.CheckForIllegalCrossThreadCalls = False
+        dBytesDownloaded = Progress.BytesDownloaded
+        dDownloadStatus = Progress.Status
+        Dim percent = CInt((dBytesDownloaded / dFileSize) * 100)
+        bgwDownload.ReportProgress(percent)
+    End Sub
+
+    Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownload.ProgressChanged
+        CircularProgress1.ProgressText = e.ProgressPercentage
+
+
+        If e.UserState = "Weekly Diary folder not found" Then
+            MessageBoxEx.Show("Weekly Diary folder not found in remote server. Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+        If e.UserState = "File not found" Then
+            MessageBoxEx.Show("Weekly Diary file not found in remote server.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+       
+    End Sub
+
+    Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
+        On Error Resume Next
+        Me.Cursor = Cursors.Default
+
+        CircularProgress1.Visible = False
+
+        If dDownloadStatus = DownloadStatus.Completed Then
+            ConnectToDatabase()
+
+            Me.WeeklyDiaryTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.WeeklyDiary)
+            Me.WeeklyDiaryBindingSource.MoveLast()
+
+            Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
+            Me.OfficeDetailsBindingSource.MoveLast()
+
+            Me.txtName.Enabled = True
+            wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
+            Me.txtName.Text = wdOfficerName
+            Me.txtName.Enabled = False
+
+            Me.Text = "Weekly Diary - " & wdOfficerName
+            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
+
+            MessageBoxEx.Show("Weekly Diary file restored successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        If dDownloadStatus = DownloadStatus.Failed Then
+            MessageBoxEx.Show("Weekly Diary file download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
+    End Sub
+#End Region
+
 #Region "GENERATE WEEKLY DIARY"
 
     Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
@@ -701,7 +916,7 @@ Public Class frmWeeklyDiaryDE
         blDGVChanged = True
     End Sub
 
-    Private Sub frmWeeklyDiaryDE_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub frmWeeklyDiaryDE_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
 
         Try
             If blDGVChanged Then
@@ -919,10 +1134,10 @@ Public Class frmWeeklyDiaryDE
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
-       
+
         Me.Cursor = Cursors.Default
     End Sub
-    
+
 
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
@@ -943,5 +1158,6 @@ Public Class frmWeeklyDiaryDE
         End Try
     End Sub
 
-    
+
+   
 End Class

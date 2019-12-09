@@ -17,7 +17,7 @@ Public Class frmWeeklyDiaryAuthentication
     Public dBytesDownloaded As Long
     Public dDownloadStatus As DownloadStatus
     Public dFileSize As Long
-    Dim dFormatedFileSize As String = ""
+
 
 
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -284,12 +284,12 @@ Public Class frmWeeklyDiaryAuthentication
 
             Dim remotecount As Integer = 0
 
-            If Results.Files.Count > 1 Then
+            If Results.Files.Count > 0 Then
                 remotecount = Val(Results.Files(0).Description)
             End If
 
             If remotecount < localcount Then
-                MessageBoxEx.Show("Local database file has more records (" & localcount & ") than remote database (" & remotecount & "). Cannot replace database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBoxEx.Show("Local database has more records (" & localcount & ") than remote database (" & remotecount & "). Cannot replace database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -346,7 +346,7 @@ Public Class frmWeeklyDiaryAuthentication
                 Dim file = request.Execute
 
                 dFileSize = file.Size
-                dFormatedFileSize = CalculateFileSize(dFileSize)
+
                 Dim tempfile As String = My.Computer.FileSystem.GetTempFileName & ".mdb"
 
                 Dim fStream = New System.IO.FileStream(tempfile, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
