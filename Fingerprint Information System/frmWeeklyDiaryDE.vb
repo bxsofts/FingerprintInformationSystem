@@ -54,6 +54,9 @@ Public Class frmWeeklyDiaryDE
             Me.txtPassword1.UseSystemPasswordChar = True
             Me.txtPassword2.UseSystemPasswordChar = True
 
+            Me.dtFrom.MonthCalendar.DisplayMonth = Today
+            Me.dtTo.MonthCalendar.DisplayMonth = Today
+
             Me.MonthCalendarAdv1.FirstDayOfWeek = System.DayOfWeek.Sunday
             Me.MonthCalendarAdv1.DisplayMonth = Today
             Dim lastweekdate As Date = Date.Today.AddDays(-7) 'gets day of last week

@@ -196,6 +196,12 @@
     <Compile Include="frmFISBackupList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmFPADE.Designer.vb">
+      <DependentUpon>frmFPADE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFPADE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmIdentificationCulpritDetails.Designer.vb">
       <DependentUpon>frmIdentificationCulpritDetails.vb</DependentUpon>
     </Compile>
@@ -536,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFISBackupList.resx">
       <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFPADE.resx">
+      <DependentUpon>frmFPADE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmIdentificationCulpritDetails.resx">
       <DependentUpon>frmIdentificationCulpritDetails.vb</DependentUpon>

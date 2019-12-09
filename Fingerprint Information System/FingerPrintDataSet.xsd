@@ -5732,7 +5732,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryNoOfSOCsIdentified" Modifier="Public" Name="ScalarQueryNoOfSOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy22" UserSourceName="ScalarQueryNoOfSOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQueryNoOfSOCsIdentified" Modifier="Public" Name="ScalarQueryNoOfSOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQueryNoOfSOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(*) AS Expr1
@@ -5745,7 +5745,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy16" UserSourceName="ScalarQuerySOCsIdentified">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentified" Modifier="Public" Name="ScalarQuerySOCsIdentified" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQuerySOCsIdentified">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        MAX(IDRNumber) AS Expr1
@@ -5758,7 +5758,7 @@ WHERE        (IdentificationDate BETWEEN ? AND ?)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy17" UserSourceName="ScalarQuerySOCsIdentifiedBy">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ScalarQuerySOCsIdentifiedBy" Modifier="Public" Name="ScalarQuerySOCsIdentifiedBy" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="ScalarQuerySOCsIdentifiedBy">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        COUNT(SOCNumber) AS Expr1
@@ -5772,7 +5772,7 @@ WHERE        (IdentifiedBy LIKE ?) AND (IdentificationDate BETWEEN ? AND ?)</Com
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy18" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -5800,7 +5800,7 @@ WHERE        (SlNumber = ?)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuerySetCulpritCount" Modifier="Public" Name="UpdateQuerySetCulpritCount" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy21" UserSourceName="UpdateQuerySetCulpritCount">
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuerySetCulpritCount" Modifier="Public" Name="UpdateQuerySetCulpritCount" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy22" UserSourceName="UpdateQuerySetCulpritCount">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       IdentificationRegister
@@ -6146,6 +6146,95 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
                 </SelectCommand>
               </DbSource>
             </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ChalanTableTableAdapter" GeneratorDataComponentClassName="ChalanTableTableAdapter" Name="ChalanTable" UserDataComponentName="ChalanTableTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FingerPrintConnectionString (MySettings)" DbObjectName="ChalanTable" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM `ChalanTable` WHERE ((`SerialNumber` = ?) AND ((? = 1 AND `FPNumber` IS NULL) OR (`FPNumber` = ?)) AND ((? = 1 AND `FPDate` IS NULL) OR (`FPDate` = ?)) AND ((? = 1 AND `ChalanNumber` IS NULL) OR (`ChalanNumber` = ?)) AND ((? = 1 AND `ChalanDate` IS NULL) OR (`ChalanDate` = ?)) AND ((? = 1 AND `HeadOfAccount` IS NULL) OR (`HeadOfAccount` = ?)) AND ((? = 1 AND `Treasury` IS NULL) OR (`Treasury` = ?)) AND ((? = 1 AND `AmountRemitted` IS NULL) OR (`AmountRemitted` = ?)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_SerialNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SerialNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FPNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="FPNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FPNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FPNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FPDate" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="FPDate" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_FPDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FPDate" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChalanNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChalanNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChalanNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChalanNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChalanDate" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChalanDate" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_ChalanDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="ChalanDate" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_HeadOfAccount" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="HeadOfAccount" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_HeadOfAccount" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="HeadOfAccount" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Treasury" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="Treasury" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_Treasury" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Treasury" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_AmountRemitted" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="AmountRemitted" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_AmountRemitted" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="AmountRemitted" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO `ChalanTable` (`FPNumber`, `FPDate`, `ChalanNumber`, `ChalanDate`, `HeadOfAccount`, `Treasury`, `AmountRemitted`) VALUES (?, ?, ?, ?, ?, ?, ?)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FPNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FPNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="FPDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FPDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChalanNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChalanNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="ChalanDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="ChalanDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="HeadOfAccount" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="HeadOfAccount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Treasury" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Treasury" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="AmountRemitted" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="AmountRemitted" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        SerialNumber, FPNumber, FPDate, ChalanNumber, ChalanDate, HeadOfAccount, Treasury, AmountRemitted
+FROM            ChalanTable</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE `ChalanTable` SET `FPNumber` = ?, `FPDate` = ?, `ChalanNumber` = ?, `ChalanDate` = ?, `HeadOfAccount` = ?, `Treasury` = ?, `AmountRemitted` = ? WHERE ((`SerialNumber` = ?) AND ((? = 1 AND `FPNumber` IS NULL) OR (`FPNumber` = ?)) AND ((? = 1 AND `FPDate` IS NULL) OR (`FPDate` = ?)) AND ((? = 1 AND `ChalanNumber` IS NULL) OR (`ChalanNumber` = ?)) AND ((? = 1 AND `ChalanDate` IS NULL) OR (`ChalanDate` = ?)) AND ((? = 1 AND `HeadOfAccount` IS NULL) OR (`HeadOfAccount` = ?)) AND ((? = 1 AND `Treasury` IS NULL) OR (`Treasury` = ?)) AND ((? = 1 AND `AmountRemitted` IS NULL) OR (`AmountRemitted` = ?)))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="FPNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FPNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="FPDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FPDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="ChalanNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChalanNumber" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="ChalanDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="ChalanDate" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="HeadOfAccount" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="HeadOfAccount" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Treasury" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Treasury" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="AmountRemitted" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="AmountRemitted" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_SerialNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="SerialNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FPNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="FPNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_FPNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="FPNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_FPDate" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="FPDate" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_FPDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="FPDate" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChalanNumber" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChalanNumber" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_ChalanNumber" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="ChalanNumber" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_ChalanDate" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ChalanDate" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_ChalanDate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="ChalanDate" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_HeadOfAccount" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="HeadOfAccount" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_HeadOfAccount" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="HeadOfAccount" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Treasury" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="Treasury" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_Treasury" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="Treasury" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_AmountRemitted" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="AmountRemitted" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_AmountRemitted" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="AmountRemitted" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SerialNumber" DataSetColumn="SerialNumber" />
+              <Mapping SourceColumn="FPNumber" DataSetColumn="FPNumber" />
+              <Mapping SourceColumn="FPDate" DataSetColumn="FPDate" />
+              <Mapping SourceColumn="ChalanNumber" DataSetColumn="ChalanNumber" />
+              <Mapping SourceColumn="ChalanDate" DataSetColumn="ChalanDate" />
+              <Mapping SourceColumn="HeadOfAccount" DataSetColumn="HeadOfAccount" />
+              <Mapping SourceColumn="Treasury" DataSetColumn="Treasury" />
+              <Mapping SourceColumn="AmountRemitted" DataSetColumn="AmountRemitted" />
+            </Mappings>
+            <Sources />
           </TableAdapter>
         </Tables>
         <Sources />
@@ -7432,7 +7521,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowClassName="OfficerTableRow" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_UserTableName="OfficerTable">
+        <xs:element name="OfficerTable" msprop:Generator_TableClassName="OfficerTableDataTable" msprop:Generator_RowEvArgName="OfficerTableRowChangeEvent" msprop:Generator_TableVarName="tableOfficerTable" msprop:Generator_TablePropName="OfficerTable" msprop:Generator_RowDeletingName="OfficerTableRowDeleting" msprop:Generator_RowChangingName="OfficerTableRowChanging" msprop:Generator_RowDeletedName="OfficerTableRowDeleted" msprop:Generator_RowEvHandlerName="OfficerTableRowChangeEventHandler" msprop:Generator_UserTableName="OfficerTable" msprop:Generator_RowChangedName="OfficerTableRowChanged" msprop:Generator_RowClassName="OfficerTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OfficerID" msprop:Generator_ColumnVarNameInTable="columnOfficerID" msprop:Generator_ColumnPropNameInRow="OfficerID" msprop:Generator_ColumnPropNameInTable="OfficerIDColumn" msprop:Generator_UserColumnName="OfficerID" type="xs:int" />
@@ -7481,7 +7570,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_UserTableName="Settings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_RowEvArgName="SettingsRowChangeEvent" msprop:Generator_RowClassName="SettingsRow">
+        <xs:element name="Settings" msprop:Generator_TableClassName="SettingsDataTable" msprop:Generator_TableVarName="tableSettings" msprop:Generator_RowChangedName="SettingsRowChanged" msprop:Generator_TablePropName="Settings" msprop:Generator_RowDeletingName="SettingsRowDeleting" msprop:Generator_RowChangingName="SettingsRowChanging" msprop:Generator_RowEvHandlerName="SettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="SettingsRowDeleted" msprop:Generator_RowClassName="SettingsRow" msprop:Generator_UserTableName="Settings" msprop:Generator_RowEvArgName="SettingsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsID" msprop:Generator_ColumnVarNameInTable="columnSettingsID" msprop:Generator_ColumnPropNameInRow="SettingsID" msprop:Generator_ColumnPropNameInTable="SettingsIDColumn" msprop:Generator_UserColumnName="SettingsID" type="xs:int" />
@@ -7593,7 +7682,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent" msprop:Generator_RowClassName="LastModificationRow">
+        <xs:element name="LastModification" msprop:Generator_TableClassName="LastModificationDataTable" msprop:Generator_TableVarName="tableLastModification" msprop:Generator_RowChangedName="LastModificationRowChanged" msprop:Generator_TablePropName="LastModification" msprop:Generator_RowDeletingName="LastModificationRowDeleting" msprop:Generator_RowChangingName="LastModificationRowChanging" msprop:Generator_RowEvHandlerName="LastModificationRowChangeEventHandler" msprop:Generator_RowDeletedName="LastModificationRowDeleted" msprop:Generator_RowClassName="LastModificationRow" msprop:Generator_UserTableName="LastModification" msprop:Generator_RowEvArgName="LastModificationRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -7601,7 +7690,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_RowClassName="CommonSettingsRow" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent">
+        <xs:element name="CommonSettings" msprop:Generator_TableClassName="CommonSettingsDataTable" msprop:Generator_TableVarName="tableCommonSettings" msprop:Generator_TablePropName="CommonSettings" msprop:Generator_RowDeletingName="CommonSettingsRowDeleting" msprop:Generator_RowChangingName="CommonSettingsRowChanging" msprop:Generator_RowEvHandlerName="CommonSettingsRowChangeEventHandler" msprop:Generator_RowDeletedName="CommonSettingsRowDeleted" msprop:Generator_UserTableName="CommonSettings" msprop:Generator_RowChangedName="CommonSettingsRowChanged" msprop:Generator_RowEvArgName="CommonSettingsRowChangeEvent" msprop:Generator_RowClassName="CommonSettingsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SettingsName" msprop:Generator_ColumnVarNameInTable="columnSettingsName" msprop:Generator_ColumnPropNameInRow="SettingsName" msprop:Generator_ColumnPropNameInTable="SettingsNameColumn" msprop:Generator_UserColumnName="SettingsName">
@@ -7628,7 +7717,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent" msprop:Generator_RowClassName="IdentificationRegisterRow">
+        <xs:element name="IdentificationRegister" msprop:Generator_TableClassName="IdentificationRegisterDataTable" msprop:Generator_TableVarName="tableIdentificationRegister" msprop:Generator_RowChangedName="IdentificationRegisterRowChanged" msprop:Generator_TablePropName="IdentificationRegister" msprop:Generator_RowDeletingName="IdentificationRegisterRowDeleting" msprop:Generator_RowChangingName="IdentificationRegisterRowChanging" msprop:Generator_RowEvHandlerName="IdentificationRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="IdentificationRegisterRowDeleted" msprop:Generator_RowClassName="IdentificationRegisterRow" msprop:Generator_UserTableName="IdentificationRegister" msprop:Generator_RowEvArgName="IdentificationRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
@@ -7728,7 +7817,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_RowClassName="JoinedIDRRow" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent">
+        <xs:element name="JoinedIDR" msprop:Generator_TableClassName="JoinedIDRDataTable" msprop:Generator_TableVarName="tableJoinedIDR" msprop:Generator_TablePropName="JoinedIDR" msprop:Generator_RowDeletingName="JoinedIDRRowDeleting" msprop:Generator_RowChangingName="JoinedIDRRowChanging" msprop:Generator_RowEvHandlerName="JoinedIDRRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedIDRRowDeleted" msprop:Generator_UserTableName="JoinedIDR" msprop:Generator_RowChangedName="JoinedIDRRowChanged" msprop:Generator_RowEvArgName="JoinedIDRRowChangeEvent" msprop:Generator_RowClassName="JoinedIDRRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
@@ -7971,7 +8060,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CulpritsRegister" msprop:Generator_TableClassName="CulpritsRegisterDataTable" msprop:Generator_TableVarName="tableCulpritsRegister" msprop:Generator_TablePropName="CulpritsRegister" msprop:Generator_RowDeletingName="CulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="CulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="CulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="CulpritsRegisterRowDeleted" msprop:Generator_UserTableName="CulpritsRegister" msprop:Generator_RowChangedName="CulpritsRegisterRowChanged" msprop:Generator_RowEvArgName="CulpritsRegisterRowChangeEvent" msprop:Generator_RowClassName="CulpritsRegisterRow">
+        <xs:element name="CulpritsRegister" msprop:Generator_TableClassName="CulpritsRegisterDataTable" msprop:Generator_TableVarName="tableCulpritsRegister" msprop:Generator_RowChangedName="CulpritsRegisterRowChanged" msprop:Generator_TablePropName="CulpritsRegister" msprop:Generator_RowDeletingName="CulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="CulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="CulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="CulpritsRegisterRowDeleted" msprop:Generator_RowClassName="CulpritsRegisterRow" msprop:Generator_UserTableName="CulpritsRegister" msprop:Generator_RowEvArgName="CulpritsRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SlNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSlNumber" msprop:Generator_ColumnPropNameInRow="SlNumber" msprop:Generator_ColumnPropNameInTable="SlNumberColumn" msprop:Generator_UserColumnName="SlNumber" type="xs:int" />
@@ -8048,7 +8137,7 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="JoinedCulpritsRegister" msprop:Generator_TableClassName="JoinedCulpritsRegisterDataTable" msprop:Generator_TableVarName="tableJoinedCulpritsRegister" msprop:Generator_TablePropName="JoinedCulpritsRegister" msprop:Generator_RowDeletingName="JoinedCulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="JoinedCulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="JoinedCulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedCulpritsRegisterRowDeleted" msprop:Generator_UserTableName="JoinedCulpritsRegister" msprop:Generator_RowChangedName="JoinedCulpritsRegisterRowChanged" msprop:Generator_RowEvArgName="JoinedCulpritsRegisterRowChangeEvent" msprop:Generator_RowClassName="JoinedCulpritsRegisterRow">
+        <xs:element name="JoinedCulpritsRegister" msprop:Generator_TableClassName="JoinedCulpritsRegisterDataTable" msprop:Generator_TableVarName="tableJoinedCulpritsRegister" msprop:Generator_RowChangedName="JoinedCulpritsRegisterRowChanged" msprop:Generator_TablePropName="JoinedCulpritsRegister" msprop:Generator_RowDeletingName="JoinedCulpritsRegisterRowDeleting" msprop:Generator_RowChangingName="JoinedCulpritsRegisterRowChanging" msprop:Generator_RowEvHandlerName="JoinedCulpritsRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="JoinedCulpritsRegisterRowDeleted" msprop:Generator_RowClassName="JoinedCulpritsRegisterRow" msprop:Generator_UserTableName="JoinedCulpritsRegister" msprop:Generator_RowEvArgName="JoinedCulpritsRegisterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IdentificationNumber" msprop:Generator_ColumnVarNameInTable="columnIdentificationNumber" msprop:Generator_ColumnPropNameInRow="IdentificationNumber" msprop:Generator_ColumnPropNameInTable="IdentificationNumberColumn" msprop:Generator_UserColumnName="IdentificationNumber" minOccurs="0">
@@ -8127,6 +8216,50 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ChalanTable" msprop:Generator_TableClassName="ChalanTableDataTable" msprop:Generator_TableVarName="tableChalanTable" msprop:Generator_TablePropName="ChalanTable" msprop:Generator_RowDeletingName="ChalanTableRowDeleting" msprop:Generator_RowChangingName="ChalanTableRowChanging" msprop:Generator_RowEvHandlerName="ChalanTableRowChangeEventHandler" msprop:Generator_RowDeletedName="ChalanTableRowDeleted" msprop:Generator_UserTableName="ChalanTable" msprop:Generator_RowChangedName="ChalanTableRowChanged" msprop:Generator_RowEvArgName="ChalanTableRowChangeEvent" msprop:Generator_RowClassName="ChalanTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SerialNumber" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnSerialNumber" msprop:Generator_ColumnPropNameInRow="SerialNumber" msprop:Generator_ColumnPropNameInTable="SerialNumberColumn" msprop:Generator_UserColumnName="SerialNumber" type="xs:int" />
+              <xs:element name="FPNumber" msprop:Generator_ColumnVarNameInTable="columnFPNumber" msprop:Generator_ColumnPropNameInRow="FPNumber" msprop:Generator_ColumnPropNameInTable="FPNumberColumn" msprop:Generator_UserColumnName="FPNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FPDate" msprop:Generator_ColumnVarNameInTable="columnFPDate" msprop:Generator_ColumnPropNameInRow="FPDate" msprop:Generator_ColumnPropNameInTable="FPDateColumn" msprop:Generator_UserColumnName="FPDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ChalanNumber" msprop:Generator_ColumnVarNameInTable="columnChalanNumber" msprop:Generator_ColumnPropNameInRow="ChalanNumber" msprop:Generator_ColumnPropNameInTable="ChalanNumberColumn" msprop:Generator_UserColumnName="ChalanNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChalanDate" msprop:Generator_ColumnVarNameInTable="columnChalanDate" msprop:Generator_ColumnPropNameInRow="ChalanDate" msprop:Generator_ColumnPropNameInTable="ChalanDateColumn" msprop:Generator_UserColumnName="ChalanDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="HeadOfAccount" msprop:Generator_ColumnVarNameInTable="columnHeadOfAccount" msprop:Generator_ColumnPropNameInRow="HeadOfAccount" msprop:Generator_ColumnPropNameInTable="HeadOfAccountColumn" msprop:Generator_UserColumnName="HeadOfAccount" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Treasury" msprop:Generator_ColumnVarNameInTable="columnTreasury" msprop:Generator_ColumnPropNameInRow="Treasury" msprop:Generator_ColumnPropNameInTable="TreasuryColumn" msprop:Generator_UserColumnName="Treasury" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AmountRemitted" msprop:Generator_ColumnVarNameInTable="columnAmountRemitted" msprop:Generator_ColumnPropNameInRow="AmountRemitted" msprop:Generator_ColumnPropNameInTable="AmountRemittedColumn" msprop:Generator_UserColumnName="AmountRemitted" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -8242,6 +8375,10 @@ WHERE        (IdentificationRegister.IdentificationDate BETWEEN ? AND ?)</Comman
     <xs:unique name="JoinedCulpritsRegister_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:JoinedCulpritsRegister" />
       <xs:field xpath="mstns:SlNumber" />
+    </xs:unique>
+    <xs:unique name="ChalanTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ChalanTable" />
+      <xs:field xpath="mstns:SerialNumber" />
     </xs:unique>
   </xs:element>
 </xs:schema>

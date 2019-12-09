@@ -121,6 +121,8 @@ Module modMain
     Public blPENVerified As Boolean = False
     Public wdDatabase As String = ""
     Public wdPEN As String = ""
+
+    Public blFPAEditMode As Boolean = False
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
