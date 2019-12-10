@@ -92,7 +92,7 @@ Partial Class frmChalanDetails
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX4.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX4.Location = New System.Drawing.Point(308, 105)
+        Me.LabelX4.Location = New System.Drawing.Point(308, 106)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(7, 22)
         Me.LabelX4.TabIndex = 246
@@ -120,7 +120,7 @@ Partial Class frmChalanDetails
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX2.Location = New System.Drawing.Point(308, 43)
+        Me.LabelX2.Location = New System.Drawing.Point(308, 45)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(7, 22)
         Me.LabelX2.TabIndex = 244
@@ -134,7 +134,7 @@ Partial Class frmChalanDetails
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX3.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX3.Location = New System.Drawing.Point(308, 12)
+        Me.LabelX3.Location = New System.Drawing.Point(308, 14)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(7, 22)
         Me.LabelX3.TabIndex = 243
@@ -156,7 +156,7 @@ Partial Class frmChalanDetails
         Me.txtTreasury.FocusHighlightEnabled = True
         Me.txtTreasury.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTreasury.ForeColor = System.Drawing.Color.Black
-        Me.txtTreasury.Location = New System.Drawing.Point(75, 104)
+        Me.txtTreasury.Location = New System.Drawing.Point(75, 102)
         Me.txtTreasury.MaxLength = 255
         Me.txtTreasury.Name = "txtTreasury"
         Me.txtTreasury.Size = New System.Drawing.Size(227, 25)
@@ -174,7 +174,7 @@ Partial Class frmChalanDetails
         Me.txtAmount.FocusHighlightEnabled = True
         Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtAmount.Location = New System.Drawing.Point(75, 135)
+        Me.txtAmount.Location = New System.Drawing.Point(75, 133)
         Me.txtAmount.MaxValue = 9999
         Me.txtAmount.MinValue = 0
         Me.txtAmount.Name = "txtAmount"
@@ -199,7 +199,7 @@ Partial Class frmChalanDetails
         Me.txtHeadOfAccount.FocusHighlightEnabled = True
         Me.txtHeadOfAccount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHeadOfAccount.ForeColor = System.Drawing.Color.Black
-        Me.txtHeadOfAccount.Location = New System.Drawing.Point(75, 74)
+        Me.txtHeadOfAccount.Location = New System.Drawing.Point(75, 71)
         Me.txtHeadOfAccount.MaxLength = 255
         Me.txtHeadOfAccount.Name = "txtHeadOfAccount"
         Me.txtHeadOfAccount.Size = New System.Drawing.Size(227, 25)
@@ -283,7 +283,7 @@ Partial Class frmChalanDetails
         '
         '
         Me.LabelX66.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX66.Location = New System.Drawing.Point(-1, 107)
+        Me.LabelX66.Location = New System.Drawing.Point(-1, 105)
         Me.LabelX66.Name = "LabelX66"
         Me.LabelX66.Size = New System.Drawing.Size(51, 18)
         Me.LabelX66.TabIndex = 238
@@ -296,7 +296,7 @@ Partial Class frmChalanDetails
         '
         '
         Me.LabelX67.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX67.Location = New System.Drawing.Point(-1, 138)
+        Me.LabelX67.Location = New System.Drawing.Point(-1, 136)
         Me.LabelX67.Name = "LabelX67"
         Me.LabelX67.Size = New System.Drawing.Size(48, 18)
         Me.LabelX67.TabIndex = 239
@@ -310,7 +310,7 @@ Partial Class frmChalanDetails
         '
         Me.LabelX94.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX94.Font = New System.Drawing.Font("Rupee Foradian", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX94.Location = New System.Drawing.Point(51, 140)
+        Me.LabelX94.Location = New System.Drawing.Point(51, 137)
         Me.LabelX94.Name = "LabelX94"
         Me.LabelX94.Size = New System.Drawing.Size(9, 16)
         Me.LabelX94.TabIndex = 240
@@ -336,7 +336,7 @@ Partial Class frmChalanDetails
         '
         '
         Me.LabelX162.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX162.Location = New System.Drawing.Point(-1, 77)
+        Me.LabelX162.Location = New System.Drawing.Point(-1, 74)
         Me.LabelX162.Name = "LabelX162"
         Me.LabelX162.Size = New System.Drawing.Size(32, 18)
         Me.LabelX162.TabIndex = 242
@@ -379,7 +379,7 @@ Partial Class frmChalanDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(465, 164)
+        Me.ClientSize = New System.Drawing.Size(465, 158)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnClearFields)
         Me.Controls.Add(Me.btnAddToList)

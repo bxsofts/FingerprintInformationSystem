@@ -117,46 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="dtChalanDate.ButtonClear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr2AAAK9gHCr3ADAAABE0lE
-        QVQoUwEIAff+AOCdlHvrjH6jk0xIK28qKwDZWVUA7nBrGONvaXRgIh5CAHVEP2TUeGvq52BM950xKk7c
-        UEhIwkU5uE0aF1IRAAAGAEksLABaIiEQqjAli+AkCf+mGw3THAAAHjIHBwAaBAQAAK9eXgDSZmYA2kk7
-        laMiEdmvIxHMZhsWLUsWFwBCExIAANVeXgDcVEaZuCUQ8hIEBRlgGBM6qygYricLDAgjCw0AAN5AOlDZ
-        PCP/RwwIWQMAAgApCw0AcRgSYWESDlonBwkAAMVMQY3PQy/1IAEEChwEBgAvEREAOBQUBWMVE1FMCwoC
-        AFkVEyZXFxRQGwMEACAEBAAyERAAOxgWACkMCwATAgIB9phD6e8nOLwAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="txtHeadOfAccount.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr2AAAK9gHCr3ADAAABE0lE
-        QVQoUwEIAff+AOCdlHvrjH6jk0xIK28qKwDZWVUA7nBrGONvaXRgIh5CAHVEP2TUeGvq52BM950xKk7c
-        UEhIwkU5uE0aF1IRAAAGAEksLABaIiEQqjAli+AkCf+mGw3THAAAHjIHBwAaBAQAAK9eXgDSZmYA2kk7
-        laMiEdmvIxHMZhsWLUsWFwBCExIAANVeXgDcVEaZuCUQ8hIEBRlgGBM6qygYricLDAgjCw0AAN5AOlDZ
-        PCP/RwwIWQMAAgApCw0AcRgSYWESDlonBwkAAMVMQY3PQy/1IAEEChwEBgAvEREAOBQUBWMVE1FMCwoC
-        AFkVEyZXFxRQGwMEACAEBAAyERAAOxgWACkMCwATAgIB9phD6e8nOLwAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="txtFPATreasury.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr2AAAK9gHCr3ADAAABE0lE
-        QVQoUwEIAff+AOCdlHvrjH6jk0xIK28qKwDZWVUA7nBrGONvaXRgIh5CAHVEP2TUeGvq52BM950xKk7c
-        UEhIwkU5uE0aF1IRAAAGAEksLABaIiEQqjAli+AkCf+mGw3THAAAHjIHBwAaBAQAAK9eXgDSZmYA2kk7
-        laMiEdmvIxHMZhsWLUsWFwBCExIAANVeXgDcVEaZuCUQ8hIEBRlgGBM6qygYricLDAgjCw0AAN5AOlDZ
-        PCP/RwwIWQMAAgApCw0AcRgSYWESDlonBwkAAMVMQY3PQy/1IAEEChwEBgAvEREAOBQUBWMVE1FMCwoC
-        AFkVEyZXFxRQGwMEACAEBAAyERAAOxgWACkMCwATAgIB9phD6e8nOLwAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="ChalanTableBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>607, 17</value>
   </metadata>
   <metadata name="FingerPrintDataSet1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="FingerPrintDataSet1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="txtFPANumberOnly.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -236,7 +206,7 @@
         lBVwAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="txtFPARemarks.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="txtRemarks.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAEIElEQVRIS9XUfUwTZxwH8IO2QLHXlkJf
@@ -260,7 +230,7 @@
         OL7Ll+YSi0b/Bxj2F6WUkRV2KL1hAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="txtFPAAddress.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="txtAddress.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAEIElEQVRIS9XUfUwTZxwH8IO2QLHXlkJf
@@ -284,7 +254,7 @@
         OL7Ll+YSi0b/Bxj2F6WUkRV2KL1hAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="txtFPAPassportNumber.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="txtPassportNumber.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr2AAAK9gHCr3ADAAABE0lE
@@ -295,7 +265,7 @@
         AFkVEyZXFxRQGwMEACAEBAAyERAAOxgWACkMCwATAgIB9phD6e8nOLwAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="txtFPAName.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="txtName.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr2AAAK9gHCr3ADAAABE0lE
@@ -345,17 +315,6 @@
   <metadata name="FPARegisterTableAdapter1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>410, 17</value>
   </metadata>
-  <data name="txtFPAChalanNumber.ButtonCustom.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr2AAAK9gHCr3ADAAABE0lE
-        QVQoUwEIAff+AOCdlHvrjH6jk0xIK28qKwDZWVUA7nBrGONvaXRgIh5CAHVEP2TUeGvq52BM950xKk7c
-        UEhIwkU5uE0aF1IRAAAGAEksLABaIiEQqjAli+AkCf+mGw3THAAAHjIHBwAaBAQAAK9eXgDSZmYA2kk7
-        laMiEdmvIxHMZhsWLUsWFwBCExIAANVeXgDcVEaZuCUQ8hIEBRlgGBM6qygYricLDAgjCw0AAN5AOlDZ
-        PCP/RwwIWQMAAgApCw0AcRgSYWESDlonBwkAAMVMQY3PQy/1IAEEChwEBgAvEREAOBQUBWMVE1FMCwoC
-        AFkVEyZXFxRQGwMEACAEBAAyERAAOxgWACkMCwATAgIB9phD6e8nOLwAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="ChalanTableTableAdapter1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>804, 17</value>
   </metadata>
