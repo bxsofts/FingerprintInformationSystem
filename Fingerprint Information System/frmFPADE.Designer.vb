@@ -22,21 +22,24 @@ Partial Class frmFPADE
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFPADE))
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LabelX162 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX161 = New DevComponents.DotNetBar.LabelX()
         Me.dtChalanDate = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.txtHeadOfAccount = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX94 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAAmount = New DevComponents.Editors.IntegerInput()
+        Me.txtAmount = New DevComponents.Editors.IntegerInput()
         Me.LabelX67 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPATreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtTreasury = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX66 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAChalanNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX62 = New DevComponents.DotNetBar.LabelX()
         Me.btnAddChalan = New DevComponents.DotNetBar.ButtonX()
         Me.GroupPanel6 = New DevComponents.DotNetBar.Controls.GroupPanel()
@@ -45,13 +48,13 @@ Partial Class frmFPADE
         Me.txtFPANumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.btnSaveFPA = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX60 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPARemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtRemarks = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX61 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFPAPassportNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtAddress = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtPassportNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX63 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX64 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtName = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX65 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX54 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX55 = New DevComponents.DotNetBar.LabelX()
@@ -64,21 +67,33 @@ Partial Class frmFPADE
         Me.LabelX59 = New DevComponents.DotNetBar.LabelX()
         Me.btnEditChalan = New DevComponents.DotNetBar.ButtonX()
         Me.btnRemoveChalan = New DevComponents.DotNetBar.ButtonX()
-        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.FPARegisterAutoTextTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPRegisterAutoTextTableAdapter()
-        Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
+        Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
+        Me.FPARegisterAutoTextTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPRegisterAutoTextTableAdapter()
+        Me.FPARegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.txtChalanNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.ChalanTableBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
+        Me.SerialNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HeadOfAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dtChalanDate, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtFPAAmount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtAmount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel6.SuspendLayout()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtFPAYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFPADate, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChalanTableBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelX162
@@ -201,24 +216,24 @@ Partial Class frmFPADE
         Me.LabelX94.TabIndex = 152
         Me.LabelX94.Text = "`"
         '
-        'txtFPAAmount
+        'txtAmount
         '
         '
         '
         '
-        Me.txtFPAAmount.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtFPAAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAAmount.FocusHighlightEnabled = True
-        Me.txtFPAAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPAAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtFPAAmount.Location = New System.Drawing.Point(756, 131)
-        Me.txtFPAAmount.MaxValue = 9999
-        Me.txtFPAAmount.MinValue = 0
-        Me.txtFPAAmount.Name = "txtFPAAmount"
-        Me.txtFPAAmount.ShowUpDown = True
-        Me.txtFPAAmount.Size = New System.Drawing.Size(91, 25)
-        Me.txtFPAAmount.TabIndex = 12
-        Me.txtFPAAmount.WatermarkText = "Amount"
+        Me.txtAmount.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtAmount.FocusHighlightEnabled = True
+        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtAmount.Location = New System.Drawing.Point(756, 131)
+        Me.txtAmount.MaxValue = 9999
+        Me.txtAmount.MinValue = 0
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.ShowUpDown = True
+        Me.txtAmount.Size = New System.Drawing.Size(91, 25)
+        Me.txtAmount.TabIndex = 12
+        Me.txtAmount.WatermarkText = "Amount"
         '
         'LabelX67
         '
@@ -233,29 +248,29 @@ Partial Class frmFPADE
         Me.LabelX67.TabIndex = 150
         Me.LabelX67.Text = "Amount"
         '
-        'txtFPATreasury
+        'txtTreasury
         '
-        Me.txtFPATreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtFPATreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPATreasury.BackColor = System.Drawing.Color.White
+        Me.txtTreasury.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtTreasury.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtTreasury.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.txtFPATreasury.Border.Class = "TextBoxBorder"
-        Me.txtFPATreasury.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPATreasury.ButtonCustom.Image = CType(resources.GetObject("txtFPATreasury.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFPATreasury.ButtonCustom.Visible = True
-        Me.txtFPATreasury.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPATreasury.FocusHighlightEnabled = True
-        Me.txtFPATreasury.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPATreasury.ForeColor = System.Drawing.Color.Black
-        Me.txtFPATreasury.Location = New System.Drawing.Point(756, 100)
-        Me.txtFPATreasury.MaxLength = 255
-        Me.txtFPATreasury.Name = "txtFPATreasury"
-        Me.txtFPATreasury.Size = New System.Drawing.Size(227, 25)
-        Me.txtFPATreasury.TabIndex = 11
-        Me.txtFPATreasury.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPATreasury.WatermarkText = "Treasury"
+        Me.txtTreasury.Border.Class = "TextBoxBorder"
+        Me.txtTreasury.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtTreasury.ButtonCustom.Image = CType(resources.GetObject("txtFPATreasury.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtTreasury.ButtonCustom.Visible = True
+        Me.txtTreasury.DisabledBackColor = System.Drawing.Color.White
+        Me.txtTreasury.FocusHighlightEnabled = True
+        Me.txtTreasury.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTreasury.ForeColor = System.Drawing.Color.Black
+        Me.txtTreasury.Location = New System.Drawing.Point(756, 100)
+        Me.txtTreasury.MaxLength = 255
+        Me.txtTreasury.Name = "txtTreasury"
+        Me.txtTreasury.Size = New System.Drawing.Size(227, 25)
+        Me.txtTreasury.TabIndex = 11
+        Me.txtTreasury.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtTreasury.WatermarkText = "Treasury"
         '
         'LabelX66
         '
@@ -269,29 +284,6 @@ Partial Class frmFPADE
         Me.LabelX66.Size = New System.Drawing.Size(51, 18)
         Me.LabelX66.TabIndex = 149
         Me.LabelX66.Text = "Treasury"
-        '
-        'txtFPAChalanNumber
-        '
-        Me.txtFPAChalanNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAChalanNumber.Border.Class = "TextBoxBorder"
-        Me.txtFPAChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAChalanNumber.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFPAChalanNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtFPAChalanNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAChalanNumber.FocusHighlightEnabled = True
-        Me.txtFPAChalanNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPAChalanNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtFPAChalanNumber.Location = New System.Drawing.Point(756, 5)
-        Me.txtFPAChalanNumber.MaxLength = 50
-        Me.txtFPAChalanNumber.Name = "txtFPAChalanNumber"
-        Me.txtFPAChalanNumber.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPAChalanNumber.Size = New System.Drawing.Size(227, 25)
-        Me.txtFPAChalanNumber.TabIndex = 8
-        Me.txtFPAChalanNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAChalanNumber.WatermarkText = "Chalan Number"
         '
         'LabelX62
         '
@@ -361,25 +353,28 @@ Partial Class frmFPADE
         'dgv
         '
         Me.dgv.AllowUserToAddRows = False
+        Me.dgv.AutoGenerateColumns = False
         Me.dgv.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.DefaultCellStyle = DataGridViewCellStyle10
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SerialNumberDataGridViewTextBoxColumn, Me.FPNumberDataGridViewTextBoxColumn, Me.FPDateDataGridViewTextBoxColumn, Me.ChalanNumberDataGridViewTextBoxColumn, Me.ChalanDateDataGridViewTextBoxColumn, Me.HeadOfAccountDataGridViewTextBoxColumn, Me.TreasuryDataGridViewTextBoxColumn, Me.AmountRemittedDataGridViewTextBoxColumn})
+        Me.dgv.DataSource = Me.ChalanTableBindingSource1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgv.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgv.EnableHeadersVisualStyles = False
@@ -388,18 +383,19 @@ Partial Class frmFPADE
         Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"
         Me.dgv.ReadOnly = True
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgv.RowHeadersWidth = 30
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv.RowsDefaultCellStyle = DataGridViewCellStyle12
-        Me.dgv.RowTemplate.Height = 70
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.RowsDefaultCellStyle = DataGridViewCellStyle7
+        Me.dgv.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dgv.RowTemplate.Height = 30
         Me.dgv.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv.SelectAllSignVisible = False
         Me.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -468,31 +464,31 @@ Partial Class frmFPADE
         Me.LabelX60.TabIndex = 221
         Me.LabelX60.Text = "<font color=""#ED1C24"">*</font><b></b>"
         '
-        'txtFPARemarks
+        'txtRemarks
         '
-        Me.txtFPARemarks.AcceptsReturn = True
-        Me.txtFPARemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtFPARemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPARemarks.BackColor = System.Drawing.Color.White
+        Me.txtRemarks.AcceptsReturn = True
+        Me.txtRemarks.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtRemarks.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtRemarks.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.txtFPARemarks.Border.Class = "TextBoxBorder"
-        Me.txtFPARemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPARemarks.ButtonCustom.Image = CType(resources.GetObject("txtFPARemarks.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFPARemarks.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPARemarks.FocusHighlightEnabled = True
-        Me.txtFPARemarks.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPARemarks.ForeColor = System.Drawing.Color.Black
-        Me.txtFPARemarks.Location = New System.Drawing.Point(424, 36)
-        Me.txtFPARemarks.MaxLength = 255
-        Me.txtFPARemarks.Multiline = True
-        Me.txtFPARemarks.Name = "txtFPARemarks"
-        Me.txtFPARemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPARemarks.Size = New System.Drawing.Size(227, 85)
-        Me.txtFPARemarks.TabIndex = 7
-        Me.txtFPARemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPARemarks.WatermarkText = "Remarks"
+        Me.txtRemarks.Border.Class = "TextBoxBorder"
+        Me.txtRemarks.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRemarks.ButtonCustom.Image = CType(resources.GetObject("txtFPARemarks.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtRemarks.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRemarks.FocusHighlightEnabled = True
+        Me.txtRemarks.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRemarks.ForeColor = System.Drawing.Color.Black
+        Me.txtRemarks.Location = New System.Drawing.Point(424, 36)
+        Me.txtRemarks.MaxLength = 255
+        Me.txtRemarks.Multiline = True
+        Me.txtRemarks.Name = "txtRemarks"
+        Me.txtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtRemarks.Size = New System.Drawing.Size(227, 85)
+        Me.txtRemarks.TabIndex = 7
+        Me.txtRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtRemarks.WatermarkText = "Remarks"
         '
         'LabelX61
         '
@@ -507,52 +503,52 @@ Partial Class frmFPADE
         Me.LabelX61.TabIndex = 220
         Me.LabelX61.Text = "Remarks"
         '
-        'txtFPAAddress
+        'txtAddress
         '
-        Me.txtFPAAddress.AcceptsReturn = True
-        Me.txtFPAAddress.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAAddress.Border.Class = "TextBoxBorder"
-        Me.txtFPAAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAAddress.ButtonCustom.Image = CType(resources.GetObject("txtFPAAddress.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFPAAddress.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAAddress.FocusHighlightEnabled = True
-        Me.txtFPAAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPAAddress.ForeColor = System.Drawing.Color.Black
-        Me.txtFPAAddress.Location = New System.Drawing.Point(81, 131)
-        Me.txtFPAAddress.MaxLength = 255
-        Me.txtFPAAddress.Multiline = True
-        Me.txtFPAAddress.Name = "txtFPAAddress"
-        Me.txtFPAAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtFPAAddress.Size = New System.Drawing.Size(227, 75)
-        Me.txtFPAAddress.TabIndex = 5
-        Me.txtFPAAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAAddress.WatermarkText = "Address"
-        '
-        'txtFPAPassportNumber
-        '
-        Me.txtFPAPassportNumber.BackColor = System.Drawing.Color.White
+        Me.txtAddress.AcceptsReturn = True
+        Me.txtAddress.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.txtFPAPassportNumber.Border.Class = "TextBoxBorder"
-        Me.txtFPAPassportNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAPassportNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAPassportNumber.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFPAPassportNumber.ButtonCustom.Visible = True
-        Me.txtFPAPassportNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtFPAPassportNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAPassportNumber.FocusHighlightEnabled = True
-        Me.txtFPAPassportNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPAPassportNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtFPAPassportNumber.Location = New System.Drawing.Point(424, 5)
-        Me.txtFPAPassportNumber.MaxLength = 50
-        Me.txtFPAPassportNumber.Name = "txtFPAPassportNumber"
-        Me.txtFPAPassportNumber.Size = New System.Drawing.Size(227, 25)
-        Me.txtFPAPassportNumber.TabIndex = 6
-        Me.txtFPAPassportNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAPassportNumber.WatermarkText = "Passport Number"
+        Me.txtAddress.Border.Class = "TextBoxBorder"
+        Me.txtAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtAddress.ButtonCustom.Image = CType(resources.GetObject("txtFPAAddress.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtAddress.DisabledBackColor = System.Drawing.Color.White
+        Me.txtAddress.FocusHighlightEnabled = True
+        Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddress.ForeColor = System.Drawing.Color.Black
+        Me.txtAddress.Location = New System.Drawing.Point(81, 131)
+        Me.txtAddress.MaxLength = 255
+        Me.txtAddress.Multiline = True
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtAddress.Size = New System.Drawing.Size(227, 75)
+        Me.txtAddress.TabIndex = 5
+        Me.txtAddress.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtAddress.WatermarkText = "Address"
+        '
+        'txtPassportNumber
+        '
+        Me.txtPassportNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtPassportNumber.Border.Class = "TextBoxBorder"
+        Me.txtPassportNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPassportNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAPassportNumber.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtPassportNumber.ButtonCustom.Visible = True
+        Me.txtPassportNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPassportNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPassportNumber.FocusHighlightEnabled = True
+        Me.txtPassportNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassportNumber.ForeColor = System.Drawing.Color.Black
+        Me.txtPassportNumber.Location = New System.Drawing.Point(424, 5)
+        Me.txtPassportNumber.MaxLength = 50
+        Me.txtPassportNumber.Name = "txtPassportNumber"
+        Me.txtPassportNumber.Size = New System.Drawing.Size(227, 25)
+        Me.txtPassportNumber.TabIndex = 6
+        Me.txtPassportNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtPassportNumber.WatermarkText = "Passport Number"
         '
         'LabelX63
         '
@@ -580,29 +576,29 @@ Partial Class frmFPADE
         Me.LabelX64.TabIndex = 218
         Me.LabelX64.Text = "Address"
         '
-        'txtFPAName
+        'txtName
         '
-        Me.txtFPAName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtFPAName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtFPAName.BackColor = System.Drawing.Color.White
+        Me.txtName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtName.BackColor = System.Drawing.Color.White
         '
         '
         '
-        Me.txtFPAName.Border.Class = "TextBoxBorder"
-        Me.txtFPAName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAName.ButtonCustom.Image = CType(resources.GetObject("txtFPAName.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtFPAName.ButtonCustom.Visible = True
-        Me.txtFPAName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAName.FocusHighlightEnabled = True
-        Me.txtFPAName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFPAName.ForeColor = System.Drawing.Color.Black
-        Me.txtFPAName.Location = New System.Drawing.Point(81, 100)
-        Me.txtFPAName.MaxLength = 255
-        Me.txtFPAName.Name = "txtFPAName"
-        Me.txtFPAName.Size = New System.Drawing.Size(227, 25)
-        Me.txtFPAName.TabIndex = 4
-        Me.txtFPAName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFPAName.WatermarkText = "Name"
+        Me.txtName.Border.Class = "TextBoxBorder"
+        Me.txtName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtName.ButtonCustom.Image = CType(resources.GetObject("txtFPAName.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtName.ButtonCustom.Visible = True
+        Me.txtName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtName.FocusHighlightEnabled = True
+        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.ForeColor = System.Drawing.Color.Black
+        Me.txtName.Location = New System.Drawing.Point(81, 100)
+        Me.txtName.MaxLength = 255
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(227, 25)
+        Me.txtName.TabIndex = 4
+        Me.txtName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtName.WatermarkText = "Name"
         '
         'LabelX65
         '
@@ -819,18 +815,18 @@ Partial Class frmFPADE
         Me.btnRemoveChalan.TabIndex = 15
         Me.btnRemoveChalan.Text = "Remove Chalan"
         '
-        'FingerPrintDataSet
+        'FingerPrintDataSet1
         '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'FPARegisterAutoTextTableAdapter
+        'FPARegisterAutoTextTableAdapter1
         '
-        Me.FPARegisterAutoTextTableAdapter.ClearBeforeFill = True
+        Me.FPARegisterAutoTextTableAdapter1.ClearBeforeFill = True
         '
-        'FPARegisterTableAdapter
+        'FPARegisterTableAdapter1
         '
-        Me.FPARegisterTableAdapter.ClearBeforeFill = True
+        Me.FPARegisterTableAdapter1.ClearBeforeFill = True
         '
         'LabelX1
         '
@@ -902,11 +898,111 @@ Partial Class frmFPADE
         Me.LabelX5.TabIndex = 231
         Me.LabelX5.Text = "<font color=""#ED1C24"">*</font><b></b>"
         '
+        'txtChalanNumber
+        '
+        Me.txtChalanNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtChalanNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtChalanNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtChalanNumber.Border.Class = "TextBoxBorder"
+        Me.txtChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtFPAChalanNumber.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtChalanNumber.ButtonCustom.Visible = True
+        Me.txtChalanNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtChalanNumber.FocusHighlightEnabled = True
+        Me.txtChalanNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtChalanNumber.ForeColor = System.Drawing.Color.Black
+        Me.txtChalanNumber.Location = New System.Drawing.Point(756, 5)
+        Me.txtChalanNumber.MaxLength = 255
+        Me.txtChalanNumber.Name = "txtChalanNumber"
+        Me.txtChalanNumber.Size = New System.Drawing.Size(227, 25)
+        Me.txtChalanNumber.TabIndex = 8
+        Me.txtChalanNumber.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtChalanNumber.WatermarkText = "Chalan Number"
+        '
+        'ChalanTableBindingSource1
+        '
+        Me.ChalanTableBindingSource1.DataMember = "ChalanTable"
+        Me.ChalanTableBindingSource1.DataSource = Me.FingerPrintDataSet1
+        '
+        'ChalanTableTableAdapter1
+        '
+        Me.ChalanTableTableAdapter1.ClearBeforeFill = True
+        '
+        'SerialNumberDataGridViewTextBoxColumn
+        '
+        Me.SerialNumberDataGridViewTextBoxColumn.DataPropertyName = "SerialNumber"
+        Me.SerialNumberDataGridViewTextBoxColumn.HeaderText = "SerialNumber"
+        Me.SerialNumberDataGridViewTextBoxColumn.Name = "SerialNumberDataGridViewTextBoxColumn"
+        Me.SerialNumberDataGridViewTextBoxColumn.ReadOnly = True
+        Me.SerialNumberDataGridViewTextBoxColumn.Visible = False
+        '
+        'FPNumberDataGridViewTextBoxColumn
+        '
+        Me.FPNumberDataGridViewTextBoxColumn.DataPropertyName = "FPNumber"
+        Me.FPNumberDataGridViewTextBoxColumn.HeaderText = "FPA Number"
+        Me.FPNumberDataGridViewTextBoxColumn.Name = "FPNumberDataGridViewTextBoxColumn"
+        Me.FPNumberDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'FPDateDataGridViewTextBoxColumn
+        '
+        Me.FPDateDataGridViewTextBoxColumn.DataPropertyName = "FPDate"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        Me.FPDateDataGridViewTextBoxColumn.HeaderText = "FPA Date"
+        Me.FPDateDataGridViewTextBoxColumn.Name = "FPDateDataGridViewTextBoxColumn"
+        Me.FPDateDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ChalanNumberDataGridViewTextBoxColumn
+        '
+        Me.ChalanNumberDataGridViewTextBoxColumn.DataPropertyName = "ChalanNumber"
+        Me.ChalanNumberDataGridViewTextBoxColumn.HeaderText = "Chalan Number"
+        Me.ChalanNumberDataGridViewTextBoxColumn.Name = "ChalanNumberDataGridViewTextBoxColumn"
+        Me.ChalanNumberDataGridViewTextBoxColumn.ReadOnly = True
+        Me.ChalanNumberDataGridViewTextBoxColumn.Width = 150
+        '
+        'ChalanDateDataGridViewTextBoxColumn
+        '
+        Me.ChalanDateDataGridViewTextBoxColumn.DataPropertyName = "ChalanDate"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
+        Me.ChalanDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        Me.ChalanDateDataGridViewTextBoxColumn.HeaderText = "Chalan Date"
+        Me.ChalanDateDataGridViewTextBoxColumn.Name = "ChalanDateDataGridViewTextBoxColumn"
+        Me.ChalanDateDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'HeadOfAccountDataGridViewTextBoxColumn
+        '
+        Me.HeadOfAccountDataGridViewTextBoxColumn.DataPropertyName = "HeadOfAccount"
+        Me.HeadOfAccountDataGridViewTextBoxColumn.HeaderText = "Head of Account"
+        Me.HeadOfAccountDataGridViewTextBoxColumn.Name = "HeadOfAccountDataGridViewTextBoxColumn"
+        Me.HeadOfAccountDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TreasuryDataGridViewTextBoxColumn
+        '
+        Me.TreasuryDataGridViewTextBoxColumn.DataPropertyName = "Treasury"
+        Me.TreasuryDataGridViewTextBoxColumn.HeaderText = "Treasury"
+        Me.TreasuryDataGridViewTextBoxColumn.Name = "TreasuryDataGridViewTextBoxColumn"
+        Me.TreasuryDataGridViewTextBoxColumn.ReadOnly = True
+        Me.TreasuryDataGridViewTextBoxColumn.Width = 150
+        '
+        'AmountRemittedDataGridViewTextBoxColumn
+        '
+        Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount Remitted"
+        Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
+        Me.AmountRemittedDataGridViewTextBoxColumn.ReadOnly = True
+        '
         'frmFPADE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1125, 412)
+        Me.Controls.Add(Me.txtChalanNumber)
         Me.Controls.Add(Me.LabelX5)
         Me.Controls.Add(Me.LabelX4)
         Me.Controls.Add(Me.LabelX1)
@@ -918,18 +1014,17 @@ Partial Class frmFPADE
         Me.Controls.Add(Me.chkFPATwodigits)
         Me.Controls.Add(Me.txtFPANumberOnly)
         Me.Controls.Add(Me.LabelX60)
-        Me.Controls.Add(Me.txtFPARemarks)
+        Me.Controls.Add(Me.txtRemarks)
         Me.Controls.Add(Me.btnSaveFPA)
         Me.Controls.Add(Me.LabelX61)
-        Me.Controls.Add(Me.txtFPAAddress)
-        Me.Controls.Add(Me.txtFPAChalanNumber)
-        Me.Controls.Add(Me.txtFPAPassportNumber)
-        Me.Controls.Add(Me.txtFPATreasury)
+        Me.Controls.Add(Me.txtAddress)
+        Me.Controls.Add(Me.txtPassportNumber)
+        Me.Controls.Add(Me.txtTreasury)
         Me.Controls.Add(Me.LabelX63)
-        Me.Controls.Add(Me.txtFPAAmount)
+        Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.LabelX64)
         Me.Controls.Add(Me.txtHeadOfAccount)
-        Me.Controls.Add(Me.txtFPAName)
+        Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.dtChalanDate)
         Me.Controls.Add(Me.LabelX65)
         Me.Controls.Add(Me.btnAddChalan)
@@ -958,12 +1053,13 @@ Partial Class frmFPADE
         Me.Text = "FP Attestation Details"
         Me.TitleText = "<b>FP Attestation Details</b>"
         CType(Me.dtChalanDate, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtFPAAmount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtAmount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel6.ResumeLayout(False)
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtFPAYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFPADate, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChalanTableBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -973,11 +1069,10 @@ Partial Class frmFPADE
     Friend WithEvents dtChalanDate As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents txtHeadOfAccount As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX94 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtFPAAmount As DevComponents.Editors.IntegerInput
+    Friend WithEvents txtAmount As DevComponents.Editors.IntegerInput
     Friend WithEvents LabelX67 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtFPATreasury As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtTreasury As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX66 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtFPAChalanNumber As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX62 As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnAddChalan As DevComponents.DotNetBar.ButtonX
     Friend WithEvents GroupPanel6 As DevComponents.DotNetBar.Controls.GroupPanel
@@ -986,13 +1081,13 @@ Partial Class frmFPADE
     Friend WithEvents txtFPANumberOnly As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents btnSaveFPA As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX60 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtFPARemarks As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtRemarks As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX61 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtFPAAddress As DevComponents.DotNetBar.Controls.TextBoxX
-    Friend WithEvents txtFPAPassportNumber As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtAddress As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtPassportNumber As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX63 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX64 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtFPAName As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtName As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX65 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX54 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX55 As DevComponents.DotNetBar.LabelX
@@ -1005,12 +1100,23 @@ Partial Class frmFPADE
     Friend WithEvents LabelX59 As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnEditChalan As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnRemoveChalan As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
-    Friend WithEvents FPARegisterAutoTextTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPRegisterAutoTextTableAdapter
-    Friend WithEvents FPARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
+    Friend WithEvents FingerPrintDataSet1 As FingerprintInformationSystem.FingerPrintDataSet
+    Friend WithEvents FPARegisterAutoTextTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPRegisterAutoTextTableAdapter
+    Friend WithEvents FPARegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents txtChalanNumber As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents ChalanTableBindingSource1 As System.Windows.Forms.BindingSource
+    Friend WithEvents ChalanTableTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter
+    Friend WithEvents SerialNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FPNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FPDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChalanNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChalanDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents HeadOfAccountDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TreasuryDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AmountRemittedDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
