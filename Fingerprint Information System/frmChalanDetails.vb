@@ -2,12 +2,20 @@
 Public Class frmChalanDetails
 
     Private Sub frmChalanDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ClearFields()
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
         If Me.btnAddToList.Text = "Add to List" Then
-            Me.txtHeadOfAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+            ClearFields()
         End If
-        Me.txtChalanNumber.Focus()
 
+        Dim mode As Integer = frmMainInterface.cmbAutoCompletionMode.SelectedIndex
+        Me.txtTreasury.AutoCompleteMode = mode
+        Me.txtHeadOfAccount.AutoCompleteMode = mode
+        Me.txtTreasury.AutoCompleteSource = AutoCompleteSource.CustomSource
+        Me.txtHeadOfAccount.AutoCompleteSource = AutoCompleteSource.CustomSource
+
+        Me.txtChalanNumber.Focus()
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub ClearFields() Handles btnClearFields.Click
@@ -110,7 +118,17 @@ Public Class frmChalanDetails
                 frmFPADE.FingerPrintDataSet1.ChalanTable.Rows.Add(dgvr)
                 frmFPADE.ChalanTableBindingSource1.MoveLast()
             Else
-
+                Dim oldrow As FingerPrintDataSet.ChalanTableRow = frmFPADE.FingerPrintDataSet1.ChalanTable.Rows(frmFPADE.dgv.SelectedRows(0).Index)
+                If oldrow IsNot Nothing Then
+                    With oldrow
+                        .ChalanNumber = Me.txtChalanNumber.Text.Trim
+                        .ChalanDate = Me.dtChalanDate.ValueObject
+                        .HeadOfAccount = Me.txtHeadOfAccount.Text.Trim
+                        .Treasury = Me.txtTreasury.Text.Trim
+                        .AmountRemitted = Me.txtAmount.Value
+                    End With
+                End If
+                Me.Close()
             End If
 
             ClearFields()

@@ -48,7 +48,7 @@ Public Class frmWeeklyDiaryAuthentication
 
         Me.lblNewUser.Visible = True
         Me.lblDownloadDatabase.Visible = True
-        Me.txtPEN.Focus()
+        Me.ActiveControl = Me.txtPEN
     End Sub
 
     Private Sub lblNewUser_Click(sender As Object, e As EventArgs) Handles lblNewUser.Click

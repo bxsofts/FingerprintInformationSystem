@@ -2,6 +2,12 @@
 
 Public Class frmFPADE
     Dim OriginalFPANumber As String = ""
+    Dim fpaha As New AutoCompleteStringCollection
+    Dim fpatreasury As New AutoCompleteStringCollection
+
+#Region "FORM LOAD EVENTS"
+
+
     Private Sub frmFPADE_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Try
@@ -34,7 +40,9 @@ Public Class frmFPADE
                 GenerateNewFPANumber()
             End If
 
-            Me.txtFPANumber.Focus()
+            Me.ActiveControl = Me.txtFPANumber
+            Me.txtFPANumber.Select(Me.txtFPANumber.Text.Length, 0)
+            ' Me.txtFPANumber.Focus()
         Catch ex As Exception
 
         End Try
@@ -57,12 +65,16 @@ Public Class frmFPADE
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "TwoDigitFPAYear", v, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
+#End Region
+
+#Region "AUTO COMPLETION LIST"
+
+
     Private Sub LoadAutoCompletionSettings()
         On Error Resume Next
 
         Dim mode As Integer = frmMainInterface.cmbAutoCompletionMode.SelectedIndex
         Me.txtName.AutoCompleteMode = mode
-        frmChalanDetails.txtTreasury.AutoCompleteMode = mode
 
         Me.FPARegisterAutoTextTableAdapter1.FillByName(FingerPrintDataSet1.FPRegisterAutoText)
         Dim fpaname As New AutoCompleteStringCollection
@@ -74,27 +86,22 @@ Public Class frmFPADE
         Me.txtName.AutoCompleteCustomSource = fpaname
 
         Me.FPARegisterAutoTextTableAdapter1.FillByTreausury(FingerPrintDataSet1.FPRegisterAutoText)
-        Dim fpatreasury As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet1.FPRegisterAutoText.Count - 1
             fpatreasury.Add(FingerPrintDataSet1.FPRegisterAutoText(i).Treasury)
         Next (i)
-        frmChalanDetails.txtTreasury.AutoCompleteSource = AutoCompleteSource.CustomSource
-        frmChalanDetails.txtTreasury.AutoCompleteCustomSource = fpatreasury
-
 
         Me.FPARegisterAutoTextTableAdapter1.FillByHeadOfAccount(FingerPrintDataSet1.FPRegisterAutoText)
-
-        Dim fpaha As New AutoCompleteStringCollection
         For i As Long = 0 To FingerPrintDataSet1.FPRegisterAutoText.Count - 1
             fpaha.Add(FingerPrintDataSet1.FPRegisterAutoText(i).HeadOfAccount)
         Next (i)
-        frmChalanDetails.txtHeadOfAccount.AutoCompleteSource = AutoCompleteSource.CustomSource
-        frmChalanDetails.txtHeadOfAccount.AutoCompleteCustomSource = fpaha
+
     End Sub
 
     Private Sub AddTextsToAutoCompletionList()
         If Trim(Me.txtName.Text) <> vbNullString Then Me.txtName.AutoCompleteCustomSource.Add(Trim(Me.txtName.Text))
     End Sub
+
+#End Region
 
     Private Sub LoadFPADataFromDataGrid()
         With frmMainInterface.FPADataGrid
@@ -106,6 +113,7 @@ Public Class frmFPADE
             Me.txtPassportNumber.Text = .SelectedCells(5).Value.ToString
             Me.txtRemarks.Text = .SelectedCells(12).Value.ToString
         End With
+        Me.ChalanTableTableAdapter1.FillByFPNumber(FingerPrintDataSet1.ChalanTable, Me.txtFPANumber.Text)
         OriginalFPANumber = Me.txtFPANumber.Text
         Me.txtFPANumber.Focus()
         Me.txtFPAYear.Text = Year(Me.dtFPADate.Value)
@@ -142,6 +150,7 @@ Public Class frmFPADE
                 If (ctrl.Name <> txtFPAYear.Name) Then ctrl.Text = vbNullString
             End If
         Next
+        Me.ChalanTableTableAdapter1.FillByClearDatagrid(Me.FingerPrintDataSet1.ChalanTable)
     End Sub
 
     Private Sub ClearSelectedFPAFields(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtFPANumber.ButtonCustomClick, txtName.ButtonCustomClick
@@ -259,10 +268,22 @@ Public Class frmFPADE
 
 #End Region
 
+
 #Region "FPA SAVE BUTTON ACTION"
 
     Private Sub FPASaveButtonAction() Handles btnSaveFPA.Click
         On Error Resume Next
+        Dim oldrow As FingerPrintDataSet.ChalanTableRow
+        For i = 0 To Me.dgv.RowCount - 1
+            oldrow = Me.FingerPrintDataSet1.ChalanTable.Rows(i)
+            If oldrow IsNot Nothing Then
+                With oldrow
+                    .FPNumber = Me.txtFPANumber.Text.Trim
+                    .FPDate = Me.dtFPADate.Value
+                End With
+            End If
+        Next
+
         AddTextsToAutoCompletionList()
 
         If blFPAEditMode Then
@@ -273,6 +294,7 @@ Public Class frmFPADE
 
     End Sub
 #End Region
+
 
 #Region "FPA NEW DATA ENTRY"
 
@@ -292,23 +314,27 @@ Public Class frmFPADE
             End If
 
             OriginalFPANumber = Trim(Me.txtFPANumber.Text)
-            GenerateFPANumberWithoutYear(OriginalFPANumber)
-            Dim fpYear = Me.txtFPANumberOnly.Text
-            Dim name = Trim(Me.txtName.Text)
-            Dim address = Trim(Me.txtAddress.Text)
-            Dim passport = Trim(Me.txtPassportNumber.Text)
-            Dim chalan = ""
-            Dim treaury = ""
-            Dim amount = ""
-            Dim remarks = Trim(Me.txtRemarks.Text)
-            Dim HeadofAccount = ""
 
             If FPANumberExists(OriginalFPANumber) Then
                 MessageBoxEx.Show("A record for the FP Attestation Number " & OriginalFPANumber & " already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
+            GenerateFPANumberWithoutYear(OriginalFPANumber)
+            Dim fpYear = Me.txtFPANumberOnly.Text
+            Dim name = Trim(Me.txtName.Text)
+            Dim address = Trim(Me.txtAddress.Text)
+            Dim passport = Trim(Me.txtPassportNumber.Text)
+            Dim remarks = Trim(Me.txtRemarks.Text)
+            Dim HeadofAccount = Me.dgv.Rows(0).Cells(5).Value
+            Dim treasury = Me.dgv.Rows(0).Cells(6).Value
+            Dim chalanno = ""
+            Dim amount As Integer = 0
 
+            For i = 0 To Me.dgv.RowCount - 1
+                chalanno = chalanno & vbCrLf & Me.dgv.Rows(i).Cells(3).Value
+                amount = amount + Val(Me.dgv.Rows(i).Cells(7).Value)
+            Next
 
             Dim newRow As FingerPrintDataSet.FPAttestationRegisterRow 'add a new row to insert values
             newRow = frmMainInterface.FingerPrintDataSet.FPAttestationRegister.NewFPAttestationRegisterRow()
@@ -319,24 +345,27 @@ Public Class frmFPADE
                 .Name = name
                 .Address = address
                 .PassportNumber = passport
-                .ChalanNumber = chalan
-                .Treasury = treaury
+                .ChalanNumber = chalanno.Trim
+                .Treasury = treasury
                 .AmountRemitted = amount
                 .AttestedFPNumber = ""
                 .Remarks = remarks
                 .HeadOfAccount = HeadofAccount
-                .ChalanDate = Today '//////////////////////////////////
+                .ChalanDate = Me.dgv.Rows(0).Cells(4).Value
             End With
+
+            frmMainInterface.FPARegisterTableAdapter.Insert(OriginalFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalanno.Trim, treasury.Trim, "", remarks, HeadofAccount.Trim, amount, Me.dgv.Rows(0).Cells(4).Value)
 
             frmMainInterface.FingerPrintDataSet.FPAttestationRegister.Rows.Add(newRow) ' add the row to the table
             frmMainInterface.FPARegisterBindingSource.Position = frmMainInterface.FPARegisterBindingSource.Find("FPNumber", OriginalFPANumber)
 
+            Me.ChalanTableTableAdapter1.Update(Me.FingerPrintDataSet1.ChalanTable)
 
-            Me.FPARegisterTableAdapter1.Insert(OriginalFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalan, treaury, "", remarks, HeadofAccount, amount, Today) '//////////////////////////////////
             ShowDesktopAlert("New Record entered successfully!")
 
             InitializeFPAFields()
             IncrementFPANumber(OriginalFPANumber)
+
             frmMainInterface.InsertOrUpdateLastModificationDate(Now)
             frmMainInterface.DisplayDatabaseInformation()
         Catch ex As Exception
@@ -380,11 +409,19 @@ Public Class frmFPADE
             Dim name = Trim(Me.txtName.Text)
             Dim address = Trim(Me.txtAddress.Text)
             Dim passport = Trim(Me.txtPassportNumber.Text)
-            Dim chalan = ""
-            Dim treaury = ""
-            Dim amount = ""
+
+            Dim chalanno As String = ""
+            Dim amount As Integer = 0
+
+            For i = 0 To Me.dgv.RowCount - 1
+                chalanno = chalanno & vbCrLf & Me.dgv.Rows(i).Cells(3).Value
+                amount = amount + Val(Me.dgv.Rows(i).Cells(7).Value)
+            Next
+
+            Dim treaury As String = Me.dgv.Rows(0).Cells(6).Value
+
             Dim remarks = Trim(Me.txtRemarks.Text)
-            Dim HeadofAccount = ""
+            Dim HeadofAccount As String = Me.dgv.Rows(0).Cells(5).Value
 
             If LCase(NewFPANumber) <> LCase(OriginalFPANumber) Then
                 If FPANumberExists(NewFPANumber) Then
@@ -397,7 +434,7 @@ Public Class frmFPADE
 
 
             Dim oldRow As FingerPrintDataSet.FPAttestationRegisterRow 'add a new row to insert values
-            oldRow = Me.FingerPrintDataSet1.FPAttestationRegister.FindByFPNumber(OriginalFPANumber)
+            oldRow = frmMainInterface.FingerPrintDataSet.FPAttestationRegister.FindByFPNumber(OriginalFPANumber)
 
             If oldRow IsNot Nothing Then
                 With oldRow
@@ -407,19 +444,23 @@ Public Class frmFPADE
                     .Name = name
                     .Address = address
                     .PassportNumber = passport
-                    .ChalanNumber = chalan
+                    .ChalanNumber = chalanno.Trim
                     .Treasury = treaury
                     .AmountRemitted = amount
                     .AttestedFPNumber = ""
                     .Remarks = remarks
-                    .HeadOfAccount = HeadofAccount
-                    .ChalanDate = Today
+                    .HeadOfAccount = HeadofAccount.Trim
+                    .ChalanDate = Me.dgv.Rows(0).Cells(4).Value
                 End With
             End If
+
+
+            frmMainInterface.FPARegisterTableAdapter.UpdateQuery(NewFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalanno.Trim, treaury.Trim, amount, "", remarks, Me.dgv.Rows(0).Cells(4).Value, HeadofAccount.Trim, OriginalFPANumber)
+
             frmMainInterface.FPARegisterBindingSource.Position = frmMainInterface.FPARegisterBindingSource.Find("FPNumber", NewFPANumber)
 
+            Me.ChalanTableTableAdapter1.Update(Me.FingerPrintDataSet1.ChalanTable)
 
-            Me.FPARegisterTableAdapter1.UpdateQuery(NewFPANumber, fpYear, dtFPADate.ValueObject, name, address, passport, chalan, treaury, amount, "", remarks, Today, HeadofAccount, OriginalFPANumber)
             ShowDesktopAlert("Selected Record updated successfully!")
 
             InitializeFPAFields()
@@ -430,6 +471,7 @@ Public Class frmFPADE
             blFPAEditMode = False
             frmMainInterface.DisplayDatabaseInformation()
             frmMainInterface.InsertOrUpdateLastModificationDate(Now)
+            Me.Close()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -447,9 +489,14 @@ Public Class frmFPADE
             Exit Sub
         End If
 
+        Me.Cursor = Cursors.WaitCursor
+
+        frmChalanDetails.txtTreasury.AutoCompleteCustomSource = fpatreasury
+        frmChalanDetails.txtHeadOfAccount.AutoCompleteCustomSource = fpaha
         frmChalanDetails.btnAddToList.Text = "Add to List"
         frmChalanDetails.Show()
         frmChalanDetails.BringToFront()
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub btnEditChalan_Click(sender As Object, e As EventArgs) Handles btnEditChalan.Click
@@ -464,8 +511,46 @@ Public Class frmFPADE
             Exit Sub
         End If
 
+        Me.Cursor = Cursors.WaitCursor
+
         frmChalanDetails.btnAddToList.Text = "Update List"
+        frmChalanDetails.txtChalanNumber.Text = Me.dgv.SelectedRows(0).Cells(3).Value
+        frmChalanDetails.dtChalanDate.Value = Me.dgv.SelectedRows(0).Cells(4).Value
+        frmChalanDetails.txtHeadOfAccount.Text = Me.dgv.SelectedRows(0).Cells(5).Value
+        frmChalanDetails.txtTreasury.Text = Me.dgv.SelectedRows(0).Cells(6).Value
+        frmChalanDetails.txtAmount.Value = Me.dgv.SelectedRows(0).Cells(7).Value
+
+        frmChalanDetails.txtTreasury.AutoCompleteCustomSource = fpatreasury
+        frmChalanDetails.txtHeadOfAccount.AutoCompleteCustomSource = fpaha
+
         frmChalanDetails.Show()
         frmChalanDetails.BringToFront()
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub btnRemoveChalan_Click(sender As Object, e As EventArgs) Handles btnRemoveChalan.Click
+        Try
+            If Me.dgv.RowCount = 0 Then
+                MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+            If Me.dgv.SelectedRows.Count = 0 Then
+                MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you want to remove the selected chalan details?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+            If reply = Windows.Forms.DialogResult.No Then Exit Sub
+
+            Me.ChalanTableBindingSource1.RemoveCurrent()
+            If Me.dgv.SelectedRows.Count = 0 And Me.dgv.RowCount <> 0 Then
+                Me.dgv.Rows(Me.dgv.RowCount - 1).Selected = True
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 End Class

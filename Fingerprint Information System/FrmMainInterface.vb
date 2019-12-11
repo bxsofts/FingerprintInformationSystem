@@ -971,6 +971,9 @@ Public Class frmMainInterface
         Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
+        If Me.ChalanTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableTableAdapter1.Connection.Close()
+        Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
+        Me.ChalanTableTableAdapter1.Connection.Open()
 
         If Me.CDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CDRegisterTableAdapter.Connection.Close()
         Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
@@ -5538,7 +5541,6 @@ errhandler:
             frmFPADE.BringToFront()
             Me.Cursor = Cursors.Default
 
-
         End If
 
         If CurrentTab = "DA" Then
@@ -6418,6 +6420,7 @@ errhandler:
                     oldRow.Delete()
 
                     Me.FPARegisterTableAdapter.DeleteSelectedRecord(OriginalFPANumber)
+                    Me.ChalanTableTableAdapter1.DeleteQueryFPNumber(OriginalFPANumber)
                     ShowDesktopAlert("Selected record deleted!")
                     If Me.FPADataGrid.SelectedRows.Count = 0 And Me.FPADataGrid.RowCount <> 0 Then
                         Me.FPADataGrid.Rows(Me.FPADataGrid.RowCount - 1).Selected = True

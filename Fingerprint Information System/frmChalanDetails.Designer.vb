@@ -42,8 +42,11 @@ Partial Class frmChalanDetails
         Me.btnClose = New DevComponents.DotNetBar.ButtonX()
         Me.btnClearFields = New DevComponents.DotNetBar.ButtonX()
         Me.btnAddToList = New DevComponents.DotNetBar.ButtonX()
+        Me.FPARegisterAutoTextTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPRegisterAutoTextTableAdapter()
+        Me.FingerPrintDataSet1 = New FingerprintInformationSystem.FingerPrintDataSet()
         CType(Me.txtAmount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtChalanDate, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtChalanNumber
@@ -58,6 +61,7 @@ Partial Class frmChalanDetails
         Me.txtChalanNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.txtChalanNumber.ButtonCustom.Image = CType(resources.GetObject("txtChalanNumber.ButtonCustom.Image"), System.Drawing.Image)
         Me.txtChalanNumber.ButtonCustom.Visible = True
+        Me.txtChalanNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtChalanNumber.DisabledBackColor = System.Drawing.Color.White
         Me.txtChalanNumber.FocusHighlightEnabled = True
         Me.txtChalanNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -375,8 +379,18 @@ Partial Class frmChalanDetails
         Me.btnAddToList.TabIndex = 248
         Me.btnAddToList.Text = "Add to List"
         '
+        'FPARegisterAutoTextTableAdapter1
+        '
+        Me.FPARegisterAutoTextTableAdapter1.ClearBeforeFill = True
+        '
+        'FingerPrintDataSet1
+        '
+        Me.FingerPrintDataSet1.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'frmChalanDetails
         '
+        Me.AcceptButton = Me.btnAddToList
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(465, 158)
@@ -412,6 +426,7 @@ Partial Class frmChalanDetails
         Me.TitleText = "<b>Chalan Details</b>"
         CType(Me.txtAmount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtChalanDate, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -435,4 +450,6 @@ Partial Class frmChalanDetails
     Friend WithEvents btnClose As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnClearFields As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnAddToList As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents FPARegisterAutoTextTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPRegisterAutoTextTableAdapter
+    Friend WithEvents FingerPrintDataSet1 As FingerprintInformationSystem.FingerPrintDataSet
 End Class
