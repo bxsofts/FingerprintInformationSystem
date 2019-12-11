@@ -809,6 +809,7 @@ Public Class frmWeeklyDiaryDE
     End Sub
 #End Region
 
+
 #Region "GENERATE WEEKLY DIARY"
 
     Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
@@ -817,6 +818,20 @@ Public Class frmWeeklyDiaryDE
 
     Private Sub btnGenerateWD_Click(sender As Object, e As EventArgs) Handles btnGenerateWD.Click
         Try
+
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
+            dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
+
+            If dtWeeklyDiaryFrom > Today Then
+                MessageBoxEx.Show("You have selected a future date. Cannot generate data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If dtWeeklyDiaryTo > Today Then
+                MessageBoxEx.Show("The week you selected has not completed. Cannot generate data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             If Me.MonthCalendarAdv1.SelectedDate.DayOfWeek <> DayOfWeek.Sunday Then
                 If MessageBoxEx.Show("Selected date is not Sunday. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
                     Exit Sub
@@ -824,8 +839,6 @@ Public Class frmWeeklyDiaryDE
             End If
 
             Me.Cursor = Cursors.WaitCursor
-            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
-            dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
 
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
 

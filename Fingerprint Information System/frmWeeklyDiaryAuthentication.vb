@@ -142,7 +142,17 @@ Public Class frmWeeklyDiaryAuthentication
             Me.PersonalDetailsTableAdapter1.Connection.Open()
 
             Me.AuthenticationTableAdapter1.Insert(Me.txtPassword1.Text.Trim)
-            Me.PersonalDetailsTableAdapter1.InsertQuery(pen, Me.txtName.Text.Trim, "")
+            Dim dgvr As WeeklyDiaryDataSet.PersonalDetailsRow = Me.WeeklyDiaryDataSet1.PersonalDetails.NewPersonalDetailsRow
+
+            With dgvr
+                .PEN = pen
+                .OfficerName = Me.txtName.Text.Trim
+                .Remarks = ""
+            End With
+
+            WeeklyDiaryDataSet1.PersonalDetails.Rows.Add(dgvr)
+            PersonalDetailsTableAdapter1.Update(WeeklyDiaryDataSet1.PersonalDetails)
+            ' Me.PersonalDetailsTableAdapter1.InsertQuery(pen, Me.txtName.Text.Trim, "")
 
             Me.Cursor = Cursors.Default
             InitializeComponents()
@@ -175,6 +185,10 @@ Public Class frmWeeklyDiaryAuthentication
             If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
             Me.AuthenticationTableAdapter1.Connection.ConnectionString = wdConString
             Me.AuthenticationTableAdapter1.Connection.Open()
+
+            If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
+            Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
+            Me.PersonalDetailsTableAdapter1.Connection.Open()
 
             Dim pwd As String = Me.AuthenticationTableAdapter1.GetPasswordQuery()
 

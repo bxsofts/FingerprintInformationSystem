@@ -41,6 +41,8 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.lblDownloadDatabase = New DevComponents.DotNetBar.LabelX()
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnLogin
@@ -269,7 +271,7 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.bgwDownload.WorkerReportsProgress = True
         Me.bgwDownload.WorkerSupportsCancellation = True
         '
-        'cpgrDownload
+        'CircularProgress1
         '
         '
         '
@@ -277,13 +279,18 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
         Me.CircularProgress1.Location = New System.Drawing.Point(288, 67)
-        Me.CircularProgress1.Name = "cpgrDownload"
+        Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
         Me.CircularProgress1.Size = New System.Drawing.Size(119, 58)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 38
         Me.CircularProgress1.TabStop = False
+        '
+        'WeeklyDiaryDataSet1
+        '
+        Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
+        Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'frmWeeklyDiaryAuthentication
         '
@@ -317,6 +324,7 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Weekly Diary - Login"
         Me.TitleText = "<b>Weekly Diary - Login</b>"
+        CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -339,4 +347,5 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents lblDownloadDatabase As DevComponents.DotNetBar.LabelX
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
+    Friend WithEvents WeeklyDiaryDataSet1 As FingerprintInformationSystem.WeeklyDiaryDataSet
 End Class
