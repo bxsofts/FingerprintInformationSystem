@@ -10,12 +10,13 @@ Public Class frmChalanDetails
 
     End Sub
 
-    Private Sub ClearFields() Handles btnClearFields.TextChanged
+    Private Sub ClearFields() Handles btnClearFields.Click
         Me.txtChalanNumber.Text = ""
-        Me.txtHeadOfAccount.Text = ""
+        Me.txtHeadOfAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
         Me.txtTreasury.Text = ""
         Me.txtAmount.Text = ""
         Me.dtChalanDate.Text = ""
+        Me.txtChalanNumber.Focus()
     End Sub
 
     Private Sub GenerateChalanDate() Handles dtChalanDate.GotFocus
