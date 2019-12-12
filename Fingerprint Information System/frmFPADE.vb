@@ -104,6 +104,7 @@ Public Class frmFPADE
 #End Region
 
     Private Sub LoadFPADataFromDataGrid()
+        On Error Resume Next
         With frmMainInterface.FPADataGrid
             Me.txtFPANumber.Text = .SelectedCells(0).Value.ToString
             Me.txtFPANumberOnly.Text = .SelectedCells(1).Value.ToString
@@ -113,10 +114,11 @@ Public Class frmFPADE
             Me.txtPassportNumber.Text = .SelectedCells(5).Value.ToString
             Me.txtRemarks.Text = .SelectedCells(12).Value.ToString
         End With
-        Me.ChalanTableTableAdapter1.FillByFPNumber(FingerPrintDataSet1.ChalanTable, Me.txtFPANumber.Text)
+
         OriginalFPANumber = Me.txtFPANumber.Text
         Me.txtFPANumber.Focus()
         Me.txtFPAYear.Text = Year(Me.dtFPADate.Value)
+        Me.ChalanTableTableAdapter1.FillByFPNumber(FingerPrintDataSet1.ChalanTable, OriginalFPANumber)
     End Sub
 
     Private Sub IncrementFPANumber(ByVal LastFPANumber As String)
@@ -386,6 +388,93 @@ Public Class frmFPADE
 #End Region
 
 
+#Region "AUTO CAPITALIZE"
+
+
+    Public Function ConvertToProperCase(ByVal InputText) As String
+        On Error Resume Next
+
+        Dim line() = Strings.Split(InputText, vbNewLine)
+        Dim ln As String = ""
+        Dim u = line.GetUpperBound(0)
+
+        For j = 0 To u
+            Dim c = line(j)
+            ln = ln & JoinTexts(c)
+            If j <> u Then ln = ln & vbNewLine
+        Next
+
+        Return ln
+    End Function
+
+
+    Private Function JoinTexts(ByVal InputText As String) As String
+
+        On Error Resume Next
+
+        Dim s() = Strings.Split(InputText, " ")
+        Dim t As String = ""
+        Dim n = s.GetUpperBound(0)
+        For i = 0 To n
+            Dim c = s(i)
+            If AllCaps(c) Then
+                t = t & c
+            Else
+                t = t & Strings.StrConv(c, VbStrConv.ProperCase)
+            End If
+            If i <> n Then t = t & " "
+        Next
+
+        Return t
+    End Function
+
+    Private Sub ConvertToProperCase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtName.Validated, txtAddress.Validated, txtRemarks.Validated
+        On Error Resume Next
+       
+        Dim x As Control = DirectCast(sender, Control)
+        Dim t As String = ConvertToProperCase(x.Text)
+        x.Text = t
+
+    End Sub
+
+    Private Sub HandleCtrlAinMultilineTextBox(sender As Object, e As KeyEventArgs) Handles txtAddress.KeyDown, txtRemarks.KeyDown
+        Try
+            Dim x As TextBox = DirectCast(sender, Control)
+            If e.Control And e.KeyCode = Keys.A Then
+                x.SelectAll()
+                e.Handled = True
+                e.SuppressKeyPress = True
+            End If
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+
+    Private Function AllCaps(ByVal InputWord As String) As Boolean
+        On Error Resume Next
+        Dim aChar As Char = ""
+        AllCaps = False
+        For i = 1 To InputWord.Length
+            aChar = Strings.Mid(InputWord, i, 1)
+            If (Not IsNumeric(aChar)) Then 'And (aChar <> Space(1)) Then
+                If (Asc(aChar) >= 65 And Asc(aChar) <= 90) Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Else
+                Return True
+            End If
+        Next
+
+    End Function
+
+
+    
+#End Region '
 #Region "FPA EDIT RECORD"
 
     Private Sub UpdateFPAData()
@@ -515,7 +604,7 @@ Public Class frmFPADE
 
         frmChalanDetails.btnAddToList.Text = "Update List"
         frmChalanDetails.txtChalanNumber.Text = Me.dgv.SelectedRows(0).Cells(3).Value
-        frmChalanDetails.dtChalanDate.Value = Me.dgv.SelectedRows(0).Cells(4).Value
+        frmChalanDetails.dtChalanDate.ValueObject = Me.dgv.SelectedRows(0).Cells(4).Value
         frmChalanDetails.txtHeadOfAccount.Text = Me.dgv.SelectedRows(0).Cells(5).Value
         frmChalanDetails.txtTreasury.Text = Me.dgv.SelectedRows(0).Cells(6).Value
         frmChalanDetails.txtAmount.Value = Me.dgv.SelectedRows(0).Cells(7).Value
