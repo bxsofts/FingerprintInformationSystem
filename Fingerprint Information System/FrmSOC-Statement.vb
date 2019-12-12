@@ -5,9 +5,9 @@ Public Class frmSOCStatement
     Dim d1 As Date
     Dim d2 As Date
     Dim headertext As String = vbNullString
-    Dim blsavefile As Boolean = False
+    Dim IsMonthStatement As Boolean = False
     Dim SaveFileName As String
-
+    Dim blMonthCompleted As Boolean = False
     Sub SetDays() Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
         Me.CircularProgress1.Hide()
@@ -67,7 +67,7 @@ Public Class frmSOCStatement
                         Exit Sub
                     End If
                     headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-                    blsavefile = False
+                    IsMonthStatement = False
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
                     Dim y = Me.txtYear.Value
@@ -76,7 +76,14 @@ Public Class frmSOCStatement
                     d2 = New Date(y, m, d)
                     headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
 
-                    blsavefile = True
+                    IsMonthStatement = True
+
+                    If Today > d2 Then
+                        blMonthCompleted = True
+                    Else
+                        blMonthCompleted = False
+                    End If
+
                     Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement\" & y
                     System.IO.Directory.CreateDirectory(SaveFolder)
                     SaveFileName = SaveFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
@@ -288,7 +295,7 @@ Public Class frmSOCStatement
                     WordApp.Selection.Font.Name = "Rupee Foradian"
                     WordApp.Selection.Font.Size = 8
                 End If
-               
+
                 WordApp.Selection.TypeText(pl)
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
@@ -356,7 +363,7 @@ Public Class frmSOCStatement
 
             WordApp.Selection.TypeParagraph()
 
-           
+
 
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
@@ -374,7 +381,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-           
+
 
             '  aDoc.Sections(1).Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).PageNumbers.Add(Word.WdPageNumberAlignment.wdAlignPageNumberRight)
 
@@ -399,13 +406,13 @@ Public Class frmSOCStatement
 
                 aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
             End If
-            
+
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
             bgwWord.ReportProgress(100)
             System.Threading.Thread.Sleep(10)
 
-            If Not FileInUse(SaveFileName) And blsavefile Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And IsMonthStatement And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
             WordApp.Visible = True
 

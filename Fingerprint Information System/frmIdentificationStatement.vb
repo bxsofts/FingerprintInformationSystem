@@ -9,7 +9,8 @@ Public Class frmIdentificationStatement
 
     Dim strStatementPeriod As String = ""
 
-    Dim blsavefile As Boolean = False
+    Dim IsMonthStmt As Boolean = False
+    Dim blMonthCompleted As Boolean = False
     Dim SaveFileName As String
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
@@ -89,7 +90,13 @@ Public Class frmIdentificationStatement
                         d2 = New Date(y, m, d)
                         strStatementPeriod = " FOR THE MONTH OF  " & Me.cmbMonth.Text.ToUpper & " " & Me.txtYear.Text
 
-                        blsavefile = True
+                        IsMonthStmt = True
+                        If Today > d2 Then
+                            blMonthCompleted = True
+                        Else
+                            blMonthCompleted = False
+                        End If
+
                         Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement\" & y
                         System.IO.Directory.CreateDirectory(SaveFolder)
                         SaveFileName = SaveFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
@@ -115,7 +122,7 @@ Public Class frmIdentificationStatement
                         Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
-                    blsavefile = False
+                    IsMonthStmt = False
                     strStatementPeriod = " FOR THE PERIOD FROM " & Me.dtFrom.Text & " TO " & Me.dtTo.Text
             End Select
 
@@ -335,7 +342,7 @@ Public Class frmIdentificationStatement
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                   
+
                     Dim mo = Me.FingerPrintDataSet.JoinedIDR(j).ModusOperandi
 
                     Dim SplitText() = Strings.Split(mo, " - ")
@@ -481,7 +488,7 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            If Not FileInUse(SaveFileName) And blsavefile And idcount > 0 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And IsMonthStmt And idcount > 0 And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
             WordApp.Visible = True
             WordApp.Activate()

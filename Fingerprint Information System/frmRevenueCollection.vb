@@ -6,6 +6,8 @@ Imports Microsoft.Office.Interop.Excel
 
 Public Class frmRevenueCollection
 
+    Dim blMonthCompleted As Boolean = False
+
     Private Sub frmRevenueIncome_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.txtHeadofAccount.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
@@ -108,6 +110,12 @@ Public Class frmRevenueCollection
             Dim d As Integer = Date.DaysInMonth(y, m)
             Dim d1 As Date = New Date(y, m, 1)
             Dim d2 As Date = New Date(y, m, d)
+
+            If Today > d2 Then
+                blMonthCompleted = True
+            Else
+                blMonthCompleted = False
+            End If
 
             Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
             Dim RowCount = Me.FingerPrintDataSet.FPAttestationRegister.Count
@@ -311,7 +319,7 @@ Public Class frmRevenueCollection
             ' xlSheets("Sheet1").name = sMonth
             xlSheet.Name = sMonth
             xlSheet2.Name = "Month vise Revenue"
-            If Not FileInUse(sFileName) Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+            If Not FileInUse(sFileName) And blMonthCompleted Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
 
             ClosePleaseWaitForm()
 

@@ -9,7 +9,6 @@ Public Class frmDAStatement
     Dim datevalue As String = vbNullString
     Dim TotalDACount As Integer
 
-
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next

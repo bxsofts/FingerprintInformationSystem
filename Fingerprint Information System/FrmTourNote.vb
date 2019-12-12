@@ -71,6 +71,8 @@ Public Class FrmTourNote
 
     Dim TotalFileCount As String = "0"
 
+    Dim blMonthCompleted As Boolean = False
+
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
     Private Sub FrmTourNote_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -311,6 +313,12 @@ Public Class FrmTourNote
         Dim d As Integer = Date.DaysInMonth(y, m)
         d1 = New DateTime(y, m, 1)
         d2 = New DateTime(y, m, d)
+
+        If Today > d2 Then
+            blMonthCompleted = True
+        Else
+            blMonthCompleted = False
+        End If
 
         Me.PanelSOC.Text = "SOCs inspected in " & MonthName(m) & " " & y
         TourStartLocation = Me.txtStartingLocation.Text
@@ -699,7 +707,7 @@ errhandler:
 
 
 
-            If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
+            If My.Computer.FileSystem.FileExists(args.sFileName) = False And blMonthCompleted Then
                 aDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
@@ -994,7 +1002,7 @@ errhandler:
 
             Next
 
-            If My.Computer.FileSystem.FileExists(args.sFileName) = False Then
+            If My.Computer.FileSystem.FileExists(args.sFileName) = False And blMonthCompleted Then
                 aDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
@@ -1367,7 +1375,7 @@ errhandler:
                 wdTbl.Cell(j + 2, 16).Formula(Formula:="=(Sum(Above) - 12)/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
                 For delay = 91 To 100
@@ -1551,7 +1559,7 @@ errhandler:
                 wdTblTA.Cell(j + 2, 16).Formula(Formula:="=(Sum(Above) - 12)/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -1855,7 +1863,7 @@ errhandler:
                 wdTbl.Cell(j + 2, 16).Formula(Formula:="=(Sum(Above) - 12)/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -2046,7 +2054,7 @@ errhandler:
                 wdTblTA.Cell(j + 2, 16).Formula(Formula:="=(Sum(Above) - 12)/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -2306,7 +2314,7 @@ errhandler:
                 wdTbl.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -2469,7 +2477,7 @@ errhandler:
                 wdTblTA.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -2763,7 +2771,7 @@ errhandler:
                 wdTbl.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -2939,7 +2947,7 @@ errhandler:
                 wdTblTA.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
 
                 Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False Then
+                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                     wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 
@@ -3001,7 +3009,7 @@ errhandler:
             End If
 
 
-            If My.Computer.FileSystem.FileExists(sfilename) = False Then
+            If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
                 wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 

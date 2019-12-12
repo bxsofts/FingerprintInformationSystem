@@ -8,6 +8,8 @@ Public Class frmAnnualStatistics
     Dim d2 As Date
     Dim SaveFileName As String
     Dim strStatementPeriod As String = ""
+    Dim blYearHasCompleted As Boolean = False
+
     Private Sub frmAnnualStatistics_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -83,6 +85,11 @@ Public Class frmAnnualStatistics
                     If Me.txtYear.Text <> "" Then
                         d1 = New Date(Me.txtYear.Text, 1, 1)
                         d2 = New Date(Me.txtYear.Text, 12, 31)
+                        If Today > d2 Then
+                            blYearHasCompleted = True
+                        Else
+                            blYearHasCompleted = False
+                        End If
                         strStatementPeriod = " FOR THE YEAR " & Me.txtYear.Text
                         SaveFileName = Me.txtYear.Text
                     Else
@@ -102,7 +109,8 @@ Public Class frmAnnualStatistics
                         Exit Sub
                     End If
 
-                    SaveFileName = (Me.dtFrom.Text & " to " & Me.dtTo.Text).Replace("/", "-")
+                    blYearHasCompleted = False
+                    ' SaveFileName = (Me.dtFrom.Text & " to " & Me.dtTo.Text).Replace("/", "-")
                     strStatementPeriod = " FOR THE PERIOD FROM " & Me.dtFrom.Text & " TO " & Me.dtTo.Text
             End Select
 
@@ -651,7 +659,7 @@ Public Class frmAnnualStatistics
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
-            If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
+            If My.Computer.FileSystem.FileExists(SaveFileName) = False And blYearHasCompleted Then
                 aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 

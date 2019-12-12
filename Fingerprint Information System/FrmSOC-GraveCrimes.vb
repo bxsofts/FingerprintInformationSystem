@@ -5,11 +5,13 @@ Public Class FrmSOCGraveCrimes
     Dim headertext As String = vbNullString
     Dim SaveFileName As String
     Dim blCoBFormat As Boolean = True
-    Dim blsavefile As Boolean = False
+    Dim IsMonthStmt As Boolean = False
+    Dim blMonthCompleted As Boolean = False
+
 
     Sub SetDays() Handles MyBase.Load
         On Error Resume Next
-        
+
         Me.Cursor = Cursors.WaitCursor
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
@@ -69,7 +71,7 @@ Public Class FrmSOCGraveCrimes
                         Exit Sub
                     End If
                     headertext = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-                    blsavefile = False
+                    IsMonthStmt = False
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
                     Dim y = Me.txtYear.Value
@@ -78,7 +80,14 @@ Public Class FrmSOCGraveCrimes
                     d2 = New Date(y, m, d)
                     headertext = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
 
-                    blsavefile = True
+                    IsMonthStmt = True
+
+                    If Today > d2 Then
+                        blMonthCompleted = True
+                    Else
+                        blMonthCompleted = False
+                    End If
+
                     Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement\" & y
                     System.IO.Directory.CreateDirectory(SaveFolder)
                     SaveFileName = SaveFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
@@ -133,7 +142,7 @@ Public Class FrmSOCGraveCrimes
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
-          
+
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
 
 
@@ -141,7 +150,7 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.Document.PageSetup.BottomMargin = 40
             WordApp.Selection.Document.PageSetup.LeftMargin = 25
             WordApp.Selection.Document.PageSetup.RightMargin = 25
-           
+
             For delay = 11 To 20
                 bgwLetter.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -149,10 +158,10 @@ Public Class FrmSOCGraveCrimes
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Size = 11
-            
+
 
             If blCoBFormat Then
-               
+
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.Font.Underline = 1
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -528,8 +537,8 @@ Public Class FrmSOCGraveCrimes
             End If
 
 
-            If Not FileInUse(SaveFileName) And blsavefile And RowCount > 3 Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
-         
+            If Not FileInUse(SaveFileName) And IsMonthStmt And RowCount > 3 And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+
             For delay = 96 To 100
                 bgwLetter.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
