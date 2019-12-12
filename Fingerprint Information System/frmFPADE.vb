@@ -570,6 +570,7 @@ Public Class frmFPADE
     End Sub
 #End Region
 
+#Region "CHALAN DETAILS"
 
     Private Sub AddChalanDetails() Handles btnAddChalan.Click
 
@@ -642,4 +643,6 @@ Public Class frmFPADE
             ShowErrorMessage(ex)
         End Try
     End Sub
+
+#End Region
 End Class
