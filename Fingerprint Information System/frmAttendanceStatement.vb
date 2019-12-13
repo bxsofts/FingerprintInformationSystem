@@ -449,7 +449,7 @@ Public Class frmAttendanceStmt
                 WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
                 aDoc.Activate()
 
-                If My.Computer.FileSystem.FileExists(SaveFileName) = False Then
+                If My.Computer.FileSystem.FileExists(SaveFileName) = False And Today > d2 Then
                     aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
                 End If
 

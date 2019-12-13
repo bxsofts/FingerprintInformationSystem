@@ -36,6 +36,7 @@ Partial Class frmRevenueCollection
         Me.txtHeadofAccount = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.btnGenerateExcel = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
+        Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FPAttestationRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,7 +142,7 @@ Partial Class frmRevenueCollection
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX1.Location = New System.Drawing.Point(6, 54)
+        Me.LabelX1.Location = New System.Drawing.Point(6, 50)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(105, 20)
         Me.LabelX1.TabIndex = 31
@@ -158,7 +159,7 @@ Partial Class frmRevenueCollection
         Me.txtHeadofAccount.DisabledBackColor = System.Drawing.Color.White
         Me.txtHeadofAccount.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHeadofAccount.ForeColor = System.Drawing.Color.Black
-        Me.txtHeadofAccount.Location = New System.Drawing.Point(135, 50)
+        Me.txtHeadofAccount.Location = New System.Drawing.Point(135, 46)
         Me.txtHeadofAccount.Name = "txtHeadofAccount"
         Me.txtHeadofAccount.PreventEnterBeep = True
         Me.txtHeadofAccount.Size = New System.Drawing.Size(251, 29)
@@ -188,6 +189,10 @@ Partial Class frmRevenueCollection
         Me.LabelX2.Size = New System.Drawing.Size(125, 20)
         Me.LabelX2.TabIndex = 34
         Me.LabelX2.Text = "Generate Statement"
+        '
+        'ChalanTableTableAdapter1
+        '
+        Me.ChalanTableTableAdapter1.ClearBeforeFill = True
         '
         'frmRevenueCollection
         '
@@ -234,4 +239,5 @@ Partial Class frmRevenueCollection
     Friend WithEvents txtHeadofAccount As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents btnGenerateExcel As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents ChalanTableTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter
 End Class

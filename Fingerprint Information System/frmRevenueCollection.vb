@@ -34,6 +34,10 @@ Public Class frmRevenueCollection
         Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
         Me.FPARegisterTableAdapter.Connection.Open()
 
+        If Me.ChalanTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableTableAdapter1.Connection.Close()
+        Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
+        Me.ChalanTableTableAdapter1.Connection.Open()
+
     End Sub
 
 
@@ -118,27 +122,31 @@ Public Class frmRevenueCollection
             End If
 
             Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-            Dim RowCount = Me.FingerPrintDataSet.FPAttestationRegister.Count
+            Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
+
+            Dim ChalanRowCount As Integer = Me.FingerPrintDataSet.ChalanTable.Count
+            Dim FPARowCount = Me.FingerPrintDataSet.FPAttestationRegister.Count
+
             Dim i = 12
 
-            If RowCount = 0 Then
+            If ChalanRowCount = 0 Then
                 xlSheet.Cells(i, 6).value = "Rs. 0/-"
                 xlSheet.Range("A11:F12").Borders.LineStyle = 1
             Else
-                For i = 12 To RowCount + i - 1
+                For i = 12 To ChalanRowCount + i - 1
                     Dim j = i - 12
                     xlSheet.Cells(i, 1).value = j + 1
-                    xlSheet.Cells(i, 2).value = Me.FingerPrintDataSet.FPAttestationRegister(j).HeadOfAccount
-                    xlSheet.Cells(i, 3).value = Me.FingerPrintDataSet.FPAttestationRegister(j).Treasury
-                    xlSheet.Cells(i, 4).value = Me.FingerPrintDataSet.FPAttestationRegister(j).ChalanNumber
-                    xlSheet.Cells(i, 5).value = Me.FingerPrintDataSet.FPAttestationRegister(j).ChalanDate
-                    xlSheet.Cells(i, 6).value = Me.FingerPrintDataSet.FPAttestationRegister(j).AmountRemitted
+                    xlSheet.Cells(i, 2).value = Me.FingerPrintDataSet.ChalanTable(j).HeadOfAccount
+                    xlSheet.Cells(i, 3).value = Me.FingerPrintDataSet.ChalanTable(j).Treasury
+                    xlSheet.Cells(i, 4).value = Me.FingerPrintDataSet.ChalanTable(j).ChalanNumber
+                    xlSheet.Cells(i, 5).value = Me.FingerPrintDataSet.ChalanTable(j).ChalanDate
+                    xlSheet.Cells(i, 6).value = Me.FingerPrintDataSet.ChalanTable(j).AmountRemitted
                 Next
 
                 xlSheet.Cells(i, 5).font.bold = True
                 xlSheet.Cells(i, 5).value = "Total Rs."
                 xlSheet.Cells(i, 6).font.bold = True
-                xlSheet.Cells(i, 6).value = Me.FPARegisterTableAdapter.AmountRemitted(d1, d2).ToString
+                xlSheet.Cells(i, 6).value = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)).ToString
 
                 xlSheet.Range("A11:F" & i).Borders.LineStyle = 1
             End If
