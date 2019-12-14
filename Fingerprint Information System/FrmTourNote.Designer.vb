@@ -23,15 +23,24 @@ Partial Class FrmTourNote
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTourNote))
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.StatusBar = New DevComponents.DotNetBar.Bar()
+        Me.lblTickedRecords = New DevComponents.DotNetBar.LabelItem()
+        Me.btnSelectAll = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDeselectAll = New DevComponents.DotNetBar.ButtonItem()
+        Me.lblOfficerName = New DevComponents.DotNetBar.LabelItem()
+        Me.lblPEN = New DevComponents.DotNetBar.LabelItem()
+        Me.lblBasicPay = New DevComponents.DotNetBar.LabelItem()
+        Me.lblDA = New DevComponents.DotNetBar.LabelItem()
         Me.SOCDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.SOCNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SelectRow = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -42,14 +51,6 @@ Partial Class FrmTourNote
         Me.InvestigatingOfficer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.StatusBar = New DevComponents.DotNetBar.Bar()
-        Me.lblTickedRecords = New DevComponents.DotNetBar.LabelItem()
-        Me.btnSelectAll = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDeselectAll = New DevComponents.DotNetBar.ButtonItem()
-        Me.lblOfficerName = New DevComponents.DotNetBar.LabelItem()
-        Me.lblPEN = New DevComponents.DotNetBar.LabelItem()
-        Me.lblBasicPay = New DevComponents.DotNetBar.LabelItem()
-        Me.lblDA = New DevComponents.DotNetBar.LabelItem()
         Me.PanelSOC = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.pnlBackup = New DevComponents.DotNetBar.PanelEx()
@@ -104,10 +105,10 @@ Partial Class FrmTourNote
         Me.bgwUploadAllFiles = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
+        CType(Me.StatusBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SOCDatagrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.StatusBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
         Me.pnlBackup.SuspendLayout()
         Me.GroupPanel3.SuspendLayout()
@@ -129,7 +130,7 @@ Partial Class FrmTourNote
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1292, 733)
+        Me.PanelEx1.Size = New System.Drawing.Size(1292, 699)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -142,14 +143,14 @@ Partial Class FrmTourNote
         '
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.PanelEx3.Controls.Add(Me.SOCDatagrid)
         Me.PanelEx3.Controls.Add(Me.StatusBar)
+        Me.PanelEx3.Controls.Add(Me.SOCDatagrid)
         Me.PanelEx3.Controls.Add(Me.PanelSOC)
         Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(430, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(862, 733)
+        Me.PanelEx3.Size = New System.Drawing.Size(862, 699)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -157,119 +158,6 @@ Partial Class FrmTourNote
         Me.PanelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx3.Style.GradientAngle = 90
         Me.PanelEx3.TabIndex = 44
-        '
-        'SOCDatagrid
-        '
-        Me.SOCDatagrid.AllowUserToAddRows = False
-        Me.SOCDatagrid.AllowUserToDeleteRows = False
-        Me.SOCDatagrid.AutoGenerateColumns = False
-        Me.SOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.SOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.SOCDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SOCNumberDataGridViewTextBoxColumn, Me.SelectRow, Me.DateOfInspectionDataGridViewTextBoxColumn, Me.PoliceStationDataGridViewTextBoxColumn, Me.CrimeNumberDataGridViewTextBoxColumn, Me.PlaceOfOccurrenceDataGridViewTextBoxColumn, Me.InvestigatingOfficer})
-        Me.SOCDatagrid.DataSource = Me.SOCRegisterBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle5
-        Me.SOCDatagrid.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
-        Me.SOCDatagrid.Location = New System.Drawing.Point(0, 44)
-        Me.SOCDatagrid.MultiSelect = False
-        Me.SOCDatagrid.Name = "SOCDatagrid"
-        Me.SOCDatagrid.RowHeadersWidth = 50
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
-        Me.SOCDatagrid.RowTemplate.Height = 40
-        Me.SOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SOCDatagrid.SelectAllSignVisible = False
-        Me.SOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.SOCDatagrid.ShowCellErrors = False
-        Me.SOCDatagrid.Size = New System.Drawing.Size(862, 659)
-        Me.SOCDatagrid.TabIndex = 43
-        Me.SOCDatagrid.TabStop = False
-        '
-        'SOCNumberDataGridViewTextBoxColumn
-        '
-        Me.SOCNumberDataGridViewTextBoxColumn.DataPropertyName = "SOCNumber"
-        Me.SOCNumberDataGridViewTextBoxColumn.HeaderText = "SOC No."
-        Me.SOCNumberDataGridViewTextBoxColumn.Name = "SOCNumberDataGridViewTextBoxColumn"
-        Me.SOCNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.SOCNumberDataGridViewTextBoxColumn.Width = 80
-        '
-        'SelectRow
-        '
-        Me.SelectRow.HeaderText = "Select"
-        Me.SelectRow.Name = "SelectRow"
-        Me.SelectRow.Width = 70
-        '
-        'DateOfInspectionDataGridViewTextBoxColumn
-        '
-        Me.DateOfInspectionDataGridViewTextBoxColumn.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DateOfInspectionDataGridViewTextBoxColumn.HeaderText = "DI"
-        Me.DateOfInspectionDataGridViewTextBoxColumn.Name = "DateOfInspectionDataGridViewTextBoxColumn"
-        Me.DateOfInspectionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.DateOfInspectionDataGridViewTextBoxColumn.Width = 90
-        '
-        'PoliceStationDataGridViewTextBoxColumn
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn.DataPropertyName = "PoliceStation"
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PoliceStationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
-        Me.PoliceStationDataGridViewTextBoxColumn.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn.Name = "PoliceStationDataGridViewTextBoxColumn"
-        Me.PoliceStationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.PoliceStationDataGridViewTextBoxColumn.Width = 150
-        '
-        'CrimeNumberDataGridViewTextBoxColumn
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn.HeaderText = "Cr.No."
-        Me.CrimeNumberDataGridViewTextBoxColumn.Name = "CrimeNumberDataGridViewTextBoxColumn"
-        Me.CrimeNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.CrimeNumberDataGridViewTextBoxColumn.Width = 90
-        '
-        'PlaceOfOccurrenceDataGridViewTextBoxColumn
-        '
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DataPropertyName = "PlaceOfOccurrence"
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.HeaderText = "Place of Occurrence"
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.Name = "PlaceOfOccurrenceDataGridViewTextBoxColumn"
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.Width = 200
-        '
-        'InvestigatingOfficer
-        '
-        Me.InvestigatingOfficer.DataPropertyName = "InvestigatingOfficer"
-        Me.InvestigatingOfficer.HeaderText = "Inspecting Officer"
-        Me.InvestigatingOfficer.Name = "InvestigatingOfficer"
-        Me.InvestigatingOfficer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
-        Me.InvestigatingOfficer.Width = 200
-        '
-        'SOCRegisterBindingSource
-        '
-        Me.SOCRegisterBindingSource.DataMember = "SOCRegister"
-        Me.SOCRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'FingerPrintDataSet
-        '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'StatusBar
         '
@@ -285,7 +173,7 @@ Partial Class FrmTourNote
         Me.StatusBar.IsMaximized = False
         Me.StatusBar.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblTickedRecords, Me.btnSelectAll, Me.btnDeselectAll, Me.lblOfficerName, Me.lblPEN, Me.lblBasicPay, Me.lblDA})
         Me.StatusBar.ItemSpacing = 5
-        Me.StatusBar.Location = New System.Drawing.Point(0, 703)
+        Me.StatusBar.Location = New System.Drawing.Point(0, 669)
         Me.StatusBar.MaximumSize = New System.Drawing.Size(0, 30)
         Me.StatusBar.Name = "StatusBar"
         Me.StatusBar.Size = New System.Drawing.Size(862, 30)
@@ -345,6 +233,129 @@ Partial Class FrmTourNote
         Me.lblDA.Text = "DA:"
         Me.lblDA.Width = 100
         '
+        'SOCDatagrid
+        '
+        Me.SOCDatagrid.AllowUserToAddRows = False
+        Me.SOCDatagrid.AllowUserToDeleteRows = False
+        Me.SOCDatagrid.AutoGenerateColumns = False
+        Me.SOCDatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.SOCDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
+        Me.SOCDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.SOCDatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SOCNumberDataGridViewTextBoxColumn, Me.SelectRow, Me.DateOfInspectionDataGridViewTextBoxColumn, Me.PoliceStationDataGridViewTextBoxColumn, Me.CrimeNumberDataGridViewTextBoxColumn, Me.PlaceOfOccurrenceDataGridViewTextBoxColumn, Me.InvestigatingOfficer})
+        Me.SOCDatagrid.DataSource = Me.SOCRegisterBindingSource
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.DefaultCellStyle = DataGridViewCellStyle19
+        Me.SOCDatagrid.Dock = System.Windows.Forms.DockStyle.Top
+        Me.SOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.SOCDatagrid.EnableHeadersVisualStyles = False
+        Me.SOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.SOCDatagrid.Location = New System.Drawing.Point(0, 44)
+        Me.SOCDatagrid.MultiSelect = False
+        Me.SOCDatagrid.Name = "SOCDatagrid"
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle20
+        Me.SOCDatagrid.RowHeadersWidth = 50
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.RowsDefaultCellStyle = DataGridViewCellStyle21
+        Me.SOCDatagrid.RowTemplate.Height = 40
+        Me.SOCDatagrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SOCDatagrid.SelectAllSignVisible = False
+        Me.SOCDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.SOCDatagrid.ShowCellErrors = False
+        Me.SOCDatagrid.Size = New System.Drawing.Size(862, 659)
+        Me.SOCDatagrid.TabIndex = 43
+        Me.SOCDatagrid.TabStop = False
+        '
+        'SOCNumberDataGridViewTextBoxColumn
+        '
+        Me.SOCNumberDataGridViewTextBoxColumn.DataPropertyName = "SOCNumber"
+        Me.SOCNumberDataGridViewTextBoxColumn.HeaderText = "SOC No."
+        Me.SOCNumberDataGridViewTextBoxColumn.Name = "SOCNumberDataGridViewTextBoxColumn"
+        Me.SOCNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.SOCNumberDataGridViewTextBoxColumn.Width = 80
+        '
+        'SelectRow
+        '
+        Me.SelectRow.HeaderText = "Select"
+        Me.SelectRow.Name = "SelectRow"
+        Me.SelectRow.Width = 70
+        '
+        'DateOfInspectionDataGridViewTextBoxColumn
+        '
+        Me.DateOfInspectionDataGridViewTextBoxColumn.DataPropertyName = "DateOfInspection"
+        DataGridViewCellStyle16.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle16
+        Me.DateOfInspectionDataGridViewTextBoxColumn.HeaderText = "DI"
+        Me.DateOfInspectionDataGridViewTextBoxColumn.Name = "DateOfInspectionDataGridViewTextBoxColumn"
+        Me.DateOfInspectionDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.DateOfInspectionDataGridViewTextBoxColumn.Width = 90
+        '
+        'PoliceStationDataGridViewTextBoxColumn
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn.DataPropertyName = "PoliceStation"
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PoliceStationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle17
+        Me.PoliceStationDataGridViewTextBoxColumn.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn.Name = "PoliceStationDataGridViewTextBoxColumn"
+        Me.PoliceStationDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.PoliceStationDataGridViewTextBoxColumn.Width = 150
+        '
+        'CrimeNumberDataGridViewTextBoxColumn
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn.HeaderText = "Cr.No."
+        Me.CrimeNumberDataGridViewTextBoxColumn.Name = "CrimeNumberDataGridViewTextBoxColumn"
+        Me.CrimeNumberDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.CrimeNumberDataGridViewTextBoxColumn.Width = 90
+        '
+        'PlaceOfOccurrenceDataGridViewTextBoxColumn
+        '
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DataPropertyName = "PlaceOfOccurrence"
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle18
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.HeaderText = "Place of Occurrence"
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.Name = "PlaceOfOccurrenceDataGridViewTextBoxColumn"
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn.Width = 200
+        '
+        'InvestigatingOfficer
+        '
+        Me.InvestigatingOfficer.DataPropertyName = "InvestigatingOfficer"
+        Me.InvestigatingOfficer.HeaderText = "Inspecting Officer"
+        Me.InvestigatingOfficer.Name = "InvestigatingOfficer"
+        Me.InvestigatingOfficer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic
+        Me.InvestigatingOfficer.Width = 200
+        '
+        'SOCRegisterBindingSource
+        '
+        Me.SOCRegisterBindingSource.DataMember = "SOCRegister"
+        Me.SOCRegisterBindingSource.DataSource = Me.FingerPrintDataSet
+        '
+        'FingerPrintDataSet
+        '
+        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'PanelSOC
         '
         Me.PanelSOC.CanvasColor = System.Drawing.SystemColors.Control
@@ -377,7 +388,7 @@ Partial Class FrmTourNote
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(430, 733)
+        Me.PanelEx2.Size = New System.Drawing.Size(430, 699)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -871,7 +882,7 @@ Partial Class FrmTourNote
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(5, 53)
+        Me.LabelX1.Location = New System.Drawing.Point(5, 51)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(41, 18)
         Me.LabelX1.TabIndex = 0
@@ -1102,27 +1113,25 @@ Partial Class FrmTourNote
         '
         'FrmTourNote
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1292, 733)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(1292, 699)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "FrmTourNote"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tour Note/TA Bill Generator"
         Me.TitleText = "<b>Tour Note/TA Bill Generator</b>"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
+        CType(Me.StatusBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SOCDatagrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.StatusBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
         Me.pnlBackup.ResumeLayout(False)
         Me.pnlBackup.PerformLayout()

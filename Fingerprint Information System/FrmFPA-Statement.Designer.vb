@@ -22,7 +22,6 @@ Partial Class frmFPAStatement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFPAStatement))
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
@@ -34,9 +33,7 @@ Partial Class frmFPAStatement
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.FPAttestationRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
@@ -44,10 +41,10 @@ Partial Class frmFPAStatement
         Me.chkLetter = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
         Me.bgwCoB = New System.ComponentModel.BackgroundWorker()
+        Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FPAttestationRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx3.SuspendLayout()
         Me.SuspendLayout()
@@ -281,19 +278,10 @@ Partial Class frmFPAStatement
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'FPAttestationRegisterBindingSource
-        '
-        Me.FPAttestationRegisterBindingSource.DataMember = "FPAttestationRegister"
-        Me.FPAttestationRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
         'FingerPrintDataSet
         '
         Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
         Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'FPARegisterTableAdapter
-        '
-        Me.FPARegisterTableAdapter.ClearBeforeFill = True
         '
         'PanelEx3
         '
@@ -398,6 +386,10 @@ Partial Class frmFPAStatement
         Me.bgwCoB.WorkerReportsProgress = True
         Me.bgwCoB.WorkerSupportsCancellation = True
         '
+        'ChalanTableTableAdapter1
+        '
+        Me.ChalanTableTableAdapter1.ClearBeforeFill = True
+        '
         'frmFPAStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -419,7 +411,6 @@ Partial Class frmFPAStatement
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FPAttestationRegisterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx3.ResumeLayout(False)
         Me.PanelEx3.PerformLayout()
@@ -427,8 +418,6 @@ Partial Class frmFPAStatement
 
     End Sub
     Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
-    Friend WithEvents FPAttestationRegisterBindingSource As System.Windows.Forms.BindingSource
-    Friend WithEvents FPARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
     Friend WithEvents btnGenerateByMonth As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
@@ -446,4 +435,5 @@ Partial Class frmFPAStatement
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwCoB As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ChalanTableTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter
 End Class

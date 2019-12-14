@@ -19,10 +19,9 @@ Public Class frmFPAStatement
         Me.chkLetter.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "FPALetterFormat", 1)
         Me.chkCoB.Checked = Not Me.chkLetter.Checked
 
-        If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
-        Me.FPARegisterTableAdapter.Connection.Open()
-
+        If Me.ChalanTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableTableAdapter1.Connection.Close()
+        Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
+        Me.ChalanTableTableAdapter1.Connection.Open()
 
 
         Dim m As Integer = DateAndTime.Month(Today)
@@ -51,7 +50,7 @@ Public Class frmFPAStatement
 
         d1 = Me.dtFrom.Value
         d2 = Today
-        datevalue = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+        datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
 
 
         Me.cmbMonth.Focus()
@@ -75,7 +74,7 @@ Public Class frmFPAStatement
                         Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
-                    datevalue = "for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+                    datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
 
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
@@ -83,12 +82,14 @@ Public Class frmFPAStatement
                     Dim d As Integer = Date.DaysInMonth(y, m)
                     d1 = New Date(y, m, 1)
                     d2 = New Date(y, m, d)
-                    datevalue = "for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+                    datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
             End Select
 
 
-            Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
-            RowCount = Me.FingerPrintDataSet.FPAttestationRegister.Count + 2
+            Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
+
+            RowCount = Me.FingerPrintDataSet.ChalanTable.Count + 2
+
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
@@ -199,7 +200,7 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeText("Sir,")
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Sub: Monthly Fingerprint Attestation details - submitting of - reg:- ")
+            WordApp.Selection.TypeText(vbTab & "Sub: Revenue Income from Fingerprint Attestation - details - submitting of - reg:- ")
 
             For delay = 21 To 30
                 bgwLetter.ReportProgress(delay)
@@ -214,13 +215,7 @@ Public Class frmFPAStatement
             WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
             WordApp.Selection.ParagraphFormat.LineSpacing = 14
 
-            If RowCount = 2 Then ' No records
-                datevalue = datevalue.Replace("for the month of ", "in the month of ")
-                datevalue = datevalue.Replace("for the period from ", "during the period from ")
-                bodytext = "The Monthly Revenue Income from Fingerprint Attestation " & datevalue & " is NIL. This is for favour of information and necessary action."
-            Else
-                bodytext = "Monthly Fingerprint Attestation details " & datevalue & " are furnished below for favour of information and necessary action."
-            End If
+            bodytext = "Details of Revenue Income from Fingerprint Attestation " & datevalue & " are furnished below for favour of information and necessary action."
 
             WordApp.Selection.TypeText(vbTab & bodytext)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
@@ -233,118 +228,118 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
 
-            If RowCount > 2 Then
-                WordApp.Selection.Paragraphs.DecreaseSpacing()
-                WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 11
-                WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
+            '  If RowCount > 2 Then
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
 
-                WordApp.Selection.Tables.Item(1).Borders.Enable = True
-                WordApp.Selection.Tables.Item(1).AllowAutoFit = True
-                WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(150, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Borders.Enable = True
+            WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(150, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
 
-                WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
-                WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Sl.No.")
+
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Head of Account")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Treasury")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Chalan No.")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Date")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Amount")
+
+            For delay = 41 To 50
+                bgwLetter.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            Dim iteration As Integer = CInt(40 / RowCount)
+
+            For i = 2 To RowCount - 1
+                WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
+                WordApp.Selection.TypeText(i - 1)
+                WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                Dim j = i - 2
+
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).HeadOfAccount)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).Treasury)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).ChalanNumber)
+
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Sl.No.")
+                WordApp.Selection.TypeText(CheckChalanDate(j))
 
 
-                WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
-                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Head of Account")
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).AmountRemitted)
 
-                WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Treasury")
-
-                WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Chalan No.")
-
-                WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Date")
-
-                WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Amount")
-
-                For delay = 41 To 50
-                    bgwLetter.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(10)
+                For delay = delay To delay + iteration
+                    If delay < 90 Then
+                        bgwLetter.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(10)
+                    End If
                 Next
 
-                Dim iteration As Integer = CInt(40 / RowCount)
+            Next
 
-                For i = 2 To RowCount - 1
-                    WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
-                    WordApp.Selection.TypeText(i - 1)
-                    WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    Dim j = i - 2
+            Dim oldfont = WordApp.Selection.Font.Name
 
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).HeadOfAccount)
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 5))
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).Treasury)
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight
+            WordApp.Selection.TypeText("Total")
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
+            WordApp.Selection.Font.Name = "Rupee Foradian"
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Size = 10
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).ChalanNumber)
+            Dim p2 = "` " & Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)).ToString & "/-"
+            WordApp.Selection.TypeText(p2)
+            WordApp.Selection.Font.Name = oldfont
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
 
+            WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
-                    WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(CheckChalanDate(j))
-
-
-                    WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).AmountRemitted)
-
-                    For delay = delay To delay + iteration
-                        If delay < 90 Then
-                            bgwLetter.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(10)
-                        End If
-                    Next
-
-                Next
-
-                Dim oldfont = WordApp.Selection.Font.Name
-
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 5))
-
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Font.Size = 12
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight
-                WordApp.Selection.TypeText("Total")
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
-                WordApp.Selection.Font.Name = "Rupee Foradian"
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Font.Size = 10
-
-                Dim p2 = "` " & Me.FPARegisterTableAdapter.AmountRemitted(d1, d2).ToString & "/-"
-                WordApp.Selection.TypeText(p2)
-                WordApp.Selection.Font.Name = oldfont
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
-
-                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
-
-            End If
+            '   End If
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.TypeParagraph()
@@ -493,18 +488,8 @@ Public Class frmFPAStatement
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Font.Bold = 0
 
-            If RowCount = 2 Then ' No records
-                datevalue = datevalue.Replace("for the month of ", "in the month of ")
-                datevalue = datevalue.Replace("for the period from ", "during the period from ")
-                bodytext = "Monthly Revenue Income from Fingerprint Attestation " & datevalue & " - NIL"
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeText(vbTab & bodytext.ToUpper)
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------")
-            Else
-                bodytext = "Monthly Fingerprint Attestation details " & datevalue & " are furnished below:"
-            End If
+            bodytext = "Details of Revenue Income from Fingerprint Attestation " & datevalue & " are furnished below:"
+
             For delay = 31 To 40
                 bgwCoB.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -513,115 +498,114 @@ Public Class frmFPAStatement
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
-            If RowCount > 2 Then
-                WordApp.Selection.TypeText(vbTab & bodytext.ToUpper)
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 11
-                WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
 
-                WordApp.Selection.Tables.Item(1).Borders.Enable = True
-                WordApp.Selection.Tables.Item(1).AllowAutoFit = True
-                WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(150, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
-                WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.TypeText(vbTab & bodytext.ToUpper)
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
 
-                WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
-                WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Tables.Item(1).Borders.Enable = True
+            WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(150, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Sl.No.")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Head of Account")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Treasury")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Chalan No.")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Date")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.TypeText("Amount")
+
+            For delay = 41 To 50
+                bgwCoB.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            Dim iteration As Integer = CInt(40 / RowCount)
+
+            For i = 2 To RowCount - 1
+                WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
+                WordApp.Selection.TypeText(i - 1)
+                WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Sl.No.")
+                Dim j = i - 2
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).HeadOfAccount)
 
-                WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
-                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).Treasury)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).ChalanNumber)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Head of Account")
+                WordApp.Selection.TypeText(CheckChalanDate(j))
 
-                WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
-                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Treasury")
-
-                WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Chalan No.")
-
-                WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Date")
-
-                WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText("Amount")
-
-                For delay = 41 To 50
-                    bgwCoB.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(10)
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).AmountRemitted)
+                For delay = delay To delay + iteration
+                    If delay < 90 Then
+                        bgwCoB.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(10)
+                    End If
                 Next
-
-                Dim iteration As Integer = CInt(40 / RowCount)
-
-                For i = 2 To RowCount - 1
-                    WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
-                    WordApp.Selection.TypeText(i - 1)
-                    WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    Dim j = i - 2
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).HeadOfAccount)
-
-                    WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).Treasury)
-
-                    WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).ChalanNumber)
-
-                    WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(CheckChalanDate(j))
-
-                    WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
-                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.FPAttestationRegister(j).AmountRemitted)
-                    For delay = delay To delay + iteration
-                        If delay < 90 Then
-                            bgwCoB.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(10)
-                        End If
-                    Next
-                Next
+            Next
 
 
-                Dim oldfont = WordApp.Selection.Font.Name
+            Dim oldfont = WordApp.Selection.Font.Name
 
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 5))
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 5))
 
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Select()
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Font.Size = 12
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight
-                WordApp.Selection.TypeText("Total")
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
-                WordApp.Selection.Font.Name = "Rupee Foradian"
-                WordApp.Selection.Font.Bold = 1
-                WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 1).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight
+            WordApp.Selection.TypeText("Total")
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
+            WordApp.Selection.Font.Name = "Rupee Foradian"
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Size = 10
 
-                Dim p2 = "` " & Me.FPARegisterTableAdapter.AmountRemitted(d1, d2).ToString & "/-"
-                WordApp.Selection.TypeText(p2)
-                WordApp.Selection.Font.Name = oldfont
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
-                WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
-                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+            Dim p2 = "` " & Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)).ToString & "/-"
+            WordApp.Selection.TypeText(p2)
+            WordApp.Selection.Font.Name = oldfont
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+            WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
-                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-            End If
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             If boolUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
@@ -709,7 +693,7 @@ Public Class frmFPAStatement
     Private Function CheckChalanDate(index As Integer) As String
         Try
 
-            Dim dt As String = Me.FingerPrintDataSet.FPAttestationRegister(index).ChalanDate.ToString("dd/MM/yyyy", culture)
+            Dim dt As String = Me.FingerPrintDataSet.ChalanTable(index).ChalanDate.ToString("dd/MM/yyyy", culture)
             CheckChalanDate = dt
         Catch ex As Exception
             CheckChalanDate = ""

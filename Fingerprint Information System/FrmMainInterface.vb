@@ -16204,7 +16204,7 @@ errhandler:
         On Error Resume Next
 
         FrmTourNote.WindowState = FormWindowState.Maximized
-        FrmTourNote.ShowDialog()
+        FrmTourNote.Show()
     End Sub
 #End Region
 

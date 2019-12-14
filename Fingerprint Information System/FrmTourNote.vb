@@ -112,7 +112,7 @@ Public Class FrmTourNote
         Me.lblSavedTABill.Text = ""
         Me.lblTickedRecords.Text = "Selected Records : 0"
         Me.lblOfficerName.Text = "Officer Name not selected"
-        Me.SOCDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 11, FontStyle.Regular)
+        Me.SOCDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.SOCDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
 
         TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", "")
@@ -229,7 +229,7 @@ Public Class FrmTourNote
 
         boolGenerateRecords = True
         GenerateRecords()
-
+        '  Me.StatusBar.RecalcLayout()
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -1224,6 +1224,8 @@ errhandler:
     End Sub
 
     Private Sub bgwTR56_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwTR56.DoWork
+
+
         Try
 
 
@@ -1518,6 +1520,7 @@ errhandler:
 
 
                     wdTblTA.Cell(j, 5).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
+
                     wdTblTA.Cell(j, 6).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' TourTo
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
                     distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
@@ -1532,6 +1535,7 @@ errhandler:
                     wdTblTA.Cell(j, 16).Range.Text = DA / 2
 
                     wdTblTA.Cell(j, 17).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim()
+
                     j = j + 1
 
                     For delay = delay To delay + iteration
