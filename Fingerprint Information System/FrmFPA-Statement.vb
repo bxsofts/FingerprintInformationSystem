@@ -63,6 +63,7 @@ Public Class frmFPAStatement
 
             Me.Cursor = Cursors.WaitCursor
 
+            Dim IsMonthStmt As Boolean = True
 
             Select Case DirectCast(sender, Control).Name
                 Case btnGenerateByDate.Name
@@ -75,7 +76,7 @@ Public Class frmFPAStatement
                         Exit Sub
                     End If
                     datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-
+                    IsMonthStmt = False
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
                     Dim y = Me.txtYear.Value
@@ -83,6 +84,7 @@ Public Class frmFPAStatement
                     d1 = New Date(y, m, 1)
                     d2 = New Date(y, m, d)
                     datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+                    IsMonthStmt = True
             End Select
 
 
@@ -96,9 +98,9 @@ Public Class frmFPAStatement
             Me.Cursor = Cursors.WaitCursor
 
             If Me.chkLetter.Checked Then
-                bgwLetter.RunWorkerAsync()
+                bgwLetter.RunWorkerAsync(IsMonthStmt)
             Else
-                bgwCoB.RunWorkerAsync()
+                bgwCoB.RunWorkerAsync(IsMonthStmt)
             End If
 
         Catch ex As Exception
@@ -117,20 +119,9 @@ Public Class frmFPAStatement
             bgwLetter.ReportProgress(0)
             System.Threading.Thread.Sleep(10)
 
+            Dim d11 As Date = d1
+
             Dim bodytext As String = vbNullString
-
-            Dim m1 As String = Month(Today)
-            Dim m2 As String = m1 - 1
-
-            Dim y1 As String = Year(Today)
-            Dim y2 As String = y1
-
-            If m2 = 0 Then
-                m2 = 12
-                y2 = y1 - 1
-            End If
-
-            m2 = MonthName(m2) & " " & y2
 
             For delay = 1 To 10
                 bgwLetter.ReportProgress(delay)
@@ -145,6 +136,7 @@ Public Class frmFPAStatement
             Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+            aDoc.Range.NoProofing = 1
 
             For delay = 11 To 20
                 bgwLetter.ReportProgress(delay)
@@ -228,7 +220,6 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
 
-            '  If RowCount > 2 Then
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 11
@@ -339,11 +330,127 @@ Public Class frmFPAStatement
 
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
-            '   End If
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+
+            '//////////// Current and Previous Financial year 
+
+            If e.Argument = True Then
+
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+
+                WordApp.Selection.Tables.Add(WordApp.Selection.Range, 2, 5)
+
+                WordApp.Selection.Tables.Item(1).Borders.Enable = True
+                WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+                WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Head of Account")
+
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Amount collected during the month")
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Amount collected upto the previous month in current financial year")
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Progressive Total")
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Collection from April upto the month during the last financial year")
+
+                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+
+                Dim amount1 As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)) 'current month
+
+                Dim amount2 As Integer = 0
+
+                Dim m = Month(d11)
+                Dim y = Year(d11)
+                Dim d = Date.DaysInMonth(y, m)
+
+                If m = 4 Then ' if april then previous amount is zero
+                    amount2 = 0 'previous amount
+                Else
+                    m = m - 1 'previous month
+                    If m = 0 Then
+                        m = 12
+                        y = y - 1
+                    End If
+                    d = Date.DaysInMonth(y, m)
+                    d2 = New Date(y, m, d) 'previous month
+
+                    If m < 3 Then
+                        y = y - 1
+                    End If
+
+                    d1 = New Date(y, 4, 1) 'april 1
+
+                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                End If
+
+
+                m = Month(d11) ' selected month
+                y = Year(d11) - 1 'previous year
+                d = Date.DaysInMonth(y, m)
+
+                d2 = New Date(y, m, d) ' selected month of last year
+
+                Dim amount4 As Integer = 0
+
+                If m < 4 Then
+                    y = y - 1
+                End If
+
+                d1 = New Date(y, 4, 1) 'april 1
+
+                amount4 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 1).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(headofac)
+
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount1)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount2)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount1 + amount2)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount4)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+
+            End If
 
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
+
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
             If boolUseTIinLetter Then
@@ -378,6 +485,7 @@ Public Class frmFPAStatement
                 aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
             End If
 
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             For delay = 91 To 100
                 bgwLetter.ReportProgress(delay)
@@ -420,19 +528,8 @@ Public Class frmFPAStatement
             System.Threading.Thread.Sleep(10)
 
             Dim bodytext As String = vbNullString
+            Dim d11 As Date = d1
 
-            Dim m1 As String = Month(Today)
-            Dim m2 As String = m1 - 1
-
-            Dim y1 As String = Year(Today)
-            Dim y2 As String = y1
-
-            If m2 = 0 Then
-                m2 = 12
-                y2 = y1 - 1
-            End If
-
-            m2 = MonthName(m2) & " " & y2
             For delay = 1 To 10
                 bgwCoB.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -445,6 +542,8 @@ Public Class frmFPAStatement
             Dim WordApp As New Word.Application()
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+            aDoc.Range.NoProofing = 1
+
             For delay = 11 To 20
                 bgwCoB.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -607,6 +706,122 @@ Public Class frmFPAStatement
 
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
+            '//////////// Current and Previous Financial year 
+
+            If e.Argument = True Then
+
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+
+                WordApp.Selection.Tables.Add(WordApp.Selection.Range, 2, 5)
+
+                WordApp.Selection.Tables.Item(1).Borders.Enable = True
+                WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+                WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+                WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Head of Account")
+
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Amount collected during the month")
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Amount collected upto the previous month in current financial year")
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Progressive Total")
+
+                WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText("Collection from April upto the month during the last financial year")
+
+                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+
+                Dim amount1 As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)) 'current month
+
+                Dim amount2 As Integer = 0
+
+                Dim m = Month(d11)
+                Dim y = Year(d11)
+                Dim d = Date.DaysInMonth(y, m)
+
+                If m = 4 Then ' if april then previous amount is zero
+                    amount2 = 0 'previous amount
+                Else
+                    m = m - 1 'previous month
+                    If m = 0 Then
+                        m = 12
+                        y = y - 1
+                    End If
+                    d = Date.DaysInMonth(y, m)
+                    d2 = New Date(y, m, d) 'previous month
+
+                    If m < 3 Then
+                        y = y - 1
+                    End If
+
+                    d1 = New Date(y, 4, 1) 'april 1
+
+                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                End If
+
+
+                m = Month(d11) ' selected month
+                y = Year(d11) - 1 'previous year
+                d = Date.DaysInMonth(y, m)
+
+                d2 = New Date(y, m, d) ' selected month of last year
+
+                Dim amount4 As Integer = 0
+
+                If m < 4 Then
+                    y = y - 1
+                End If
+
+                d1 = New Date(y, 4, 1) 'april 1
+
+                amount4 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 1).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(headofac)
+
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount1)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount2)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount1 + amount2)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText(amount4)
+
+                WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+
+            End If
+
             If boolUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -644,6 +859,8 @@ Public Class frmFPAStatement
                 bgwCoB.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
+
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             WordApp.Visible = True
             WordApp.Activate()
