@@ -23,6 +23,11 @@ Public Class frmFPAStatement
         Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
         Me.ChalanTableTableAdapter1.Connection.Open()
 
+        If Me.ChalanTableMonthViseSumAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableMonthViseSumAdapter1.Connection.Close()
+        Me.ChalanTableMonthViseSumAdapter1.Connection.ConnectionString = sConString
+        Me.ChalanTableMonthViseSumAdapter1.Connection.Open()
+
+
 
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
@@ -39,6 +44,13 @@ Public Class frmFPAStatement
 
         dtFrom.Value = New Date(y, m, 1)
         dtTo.Value = New Date(y, m, d)
+
+        Me.ChalanTableMonthViseSumAdapter1.FillByMonthViseValue(Me.FingerPrintDataSet.ChalanTableMonthViseSum, New Date(y, 4, 1), dtTo.Value)
+
+        For c = 4 To m
+
+        Next
+
         Me.cmbMonth.Items.Clear()
         For i = 0 To 11
             Me.cmbMonth.Items.Add(MonthName(i + 1))
@@ -517,7 +529,6 @@ Public Class frmFPAStatement
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
-        Me.Close()
     End Sub
 
     Private Sub bgwCoB_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCoB.DoWork
@@ -888,23 +899,7 @@ Public Class frmFPAStatement
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
-        Me.Close()
     End Sub
-
-
-    Public Sub New()
-
-        ' This call is required by the Windows Form Designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-
-    End Sub
-
-    Protected Overrides Sub Finalize()
-        MyBase.Finalize()
-    End Sub
-
 
 
     Private Function CheckChalanDate(index As Integer) As String
@@ -929,4 +924,13 @@ Public Class frmFPAStatement
     End Sub
 
 
+    Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
 End Class

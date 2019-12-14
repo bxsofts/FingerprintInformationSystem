@@ -22,7 +22,11 @@ Partial Class frmFPAStatement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFPAStatement))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -33,20 +37,30 @@ Partial Class frmFPAStatement
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnGenerateMonthlyData = New DevComponents.DotNetBar.ButtonX()
+        Me.dgv = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.chkCoB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkLetter = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.ChalanTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
         Me.bgwCoB = New System.ComponentModel.BackgroundWorker()
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
+        Me.ChalanTableMonthViseSumBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ChalanTableMonthViseSumAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableMonthViseSumAdapter()
+        Me.FPMonthDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx3.SuspendLayout()
+        CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChalanTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChalanTableMonthViseSumBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LabelX2
@@ -57,7 +71,7 @@ Partial Class frmFPAStatement
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX2.Location = New System.Drawing.Point(245, 103)
+        Me.LabelX2.Location = New System.Drawing.Point(245, 80)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(18, 20)
         Me.LabelX2.TabIndex = 8
@@ -68,7 +82,7 @@ Partial Class frmFPAStatement
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnGenerateByMonth.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(424, 52)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(424, 38)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
         Me.btnGenerateByMonth.Size = New System.Drawing.Size(118, 29)
         Me.btnGenerateByMonth.TabIndex = 3
@@ -82,7 +96,7 @@ Partial Class frmFPAStatement
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX1.Location = New System.Drawing.Point(15, 103)
+        Me.LabelX1.Location = New System.Drawing.Point(15, 80)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(78, 20)
         Me.LabelX1.TabIndex = 7
@@ -96,7 +110,7 @@ Partial Class frmFPAStatement
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX4.Location = New System.Drawing.Point(245, 57)
+        Me.LabelX4.Location = New System.Drawing.Point(245, 42)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(30, 20)
         Me.LabelX4.TabIndex = 25
@@ -107,7 +121,7 @@ Partial Class frmFPAStatement
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnGenerateByDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(424, 96)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(424, 76)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(118, 29)
         Me.btnGenerateByDate.TabIndex = 6
@@ -121,7 +135,7 @@ Partial Class frmFPAStatement
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX3.Location = New System.Drawing.Point(15, 57)
+        Me.LabelX3.Location = New System.Drawing.Point(15, 42)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(44, 20)
         Me.LabelX3.TabIndex = 24
@@ -138,7 +152,7 @@ Partial Class frmFPAStatement
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(286, 53)
+        Me.txtYear.Location = New System.Drawing.Point(286, 38)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 0
         Me.txtYear.Name = "txtYear"
@@ -166,7 +180,7 @@ Partial Class frmFPAStatement
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(106, 97)
+        Me.dtFrom.Location = New System.Drawing.Point(106, 76)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -214,7 +228,7 @@ Partial Class frmFPAStatement
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(106, 53)
+        Me.cmbMonth.Location = New System.Drawing.Point(106, 38)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
@@ -240,7 +254,7 @@ Partial Class frmFPAStatement
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(286, 97)
+        Me.dtTo.Location = New System.Drawing.Point(286, 76)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -278,15 +292,12 @@ Partial Class frmFPAStatement
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'FingerPrintDataSet
-        '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'PanelEx3
         '
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx3.Controls.Add(Me.btnGenerateMonthlyData)
+        Me.PanelEx3.Controls.Add(Me.dgv)
         Me.PanelEx3.Controls.Add(Me.CircularProgress1)
         Me.PanelEx3.Controls.Add(Me.LabelX5)
         Me.PanelEx3.Controls.Add(Me.chkCoB)
@@ -305,7 +316,7 @@ Partial Class frmFPAStatement
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(552, 134)
+        Me.PanelEx3.Size = New System.Drawing.Size(724, 444)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -314,19 +325,74 @@ Partial Class frmFPAStatement
         Me.PanelEx3.Style.GradientAngle = 90
         Me.PanelEx3.TabIndex = 26
         '
+        'btnGenerateMonthlyData
+        '
+        Me.btnGenerateMonthlyData.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnGenerateMonthlyData.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnGenerateMonthlyData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerateMonthlyData.Location = New System.Drawing.Point(561, 38)
+        Me.btnGenerateMonthlyData.Name = "btnGenerateMonthlyData"
+        Me.btnGenerateMonthlyData.Size = New System.Drawing.Size(118, 29)
+        Me.btnGenerateMonthlyData.TabIndex = 52
+        Me.btnGenerateMonthlyData.Text = "Generate"
+        '
+        'dgv
+        '
+        Me.dgv.AllowUserToAddRows = False
+        Me.dgv.AllowUserToDeleteRows = False
+        Me.dgv.AutoGenerateColumns = False
+        Me.dgv.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FPMonthDataGridViewTextBoxColumn, Me.FPAmountDataGridViewTextBoxColumn})
+        Me.dgv.DataSource = Me.ChalanTableMonthViseSumBindingSource
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgv.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.dgv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dgv.EnableHeadersVisualStyles = False
+        Me.dgv.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.dgv.Location = New System.Drawing.Point(0, 121)
+        Me.dgv.MultiSelect = False
+        Me.dgv.Name = "dgv"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        Me.dgv.RowHeadersVisible = False
+        Me.dgv.SelectAllSignVisible = False
+        Me.dgv.Size = New System.Drawing.Size(724, 323)
+        Me.dgv.TabIndex = 51
+        '
         'CircularProgress1
         '
         '
         '
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(424, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(421, 3)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(128, 134)
+        Me.CircularProgress1.Size = New System.Drawing.Size(128, 35)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 50
         Me.CircularProgress1.TabStop = False
@@ -339,7 +405,7 @@ Partial Class frmFPAStatement
         '
         Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX5.Location = New System.Drawing.Point(15, 15)
+        Me.LabelX5.Location = New System.Drawing.Point(15, 11)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.Size = New System.Drawing.Size(46, 20)
         Me.LabelX5.TabIndex = 28
@@ -352,7 +418,7 @@ Partial Class frmFPAStatement
         '
         Me.chkCoB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkCoB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkCoB.Location = New System.Drawing.Point(286, 12)
+        Me.chkCoB.Location = New System.Drawing.Point(286, 10)
         Me.chkCoB.Name = "chkCoB"
         Me.chkCoB.Size = New System.Drawing.Size(100, 23)
         Me.chkCoB.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -369,12 +435,22 @@ Partial Class frmFPAStatement
         Me.chkLetter.Checked = True
         Me.chkLetter.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkLetter.CheckValue = "Y"
-        Me.chkLetter.Location = New System.Drawing.Point(106, 12)
+        Me.chkLetter.Location = New System.Drawing.Point(106, 10)
         Me.chkLetter.Name = "chkLetter"
         Me.chkLetter.Size = New System.Drawing.Size(100, 23)
         Me.chkLetter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.chkLetter.TabIndex = 26
         Me.chkLetter.Text = "Letter"
+        '
+        'ChalanTableBindingSource
+        '
+        Me.ChalanTableBindingSource.DataMember = "ChalanTable"
+        Me.ChalanTableBindingSource.DataSource = Me.FingerPrintDataSet
+        '
+        'FingerPrintDataSet
+        '
+        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'bgwLetter
         '
@@ -390,11 +466,34 @@ Partial Class frmFPAStatement
         '
         Me.ChalanTableTableAdapter1.ClearBeforeFill = True
         '
+        'ChalanTableMonthViseSumBindingSource
+        '
+        Me.ChalanTableMonthViseSumBindingSource.DataMember = "ChalanTableMonthViseSum"
+        Me.ChalanTableMonthViseSumBindingSource.DataSource = Me.FingerPrintDataSet
+        '
+        'ChalanTableMonthViseSumAdapter1
+        '
+        Me.ChalanTableMonthViseSumAdapter1.ClearBeforeFill = True
+        '
+        'FPMonthDataGridViewTextBoxColumn
+        '
+        Me.FPMonthDataGridViewTextBoxColumn.DataPropertyName = "FPMonth"
+        Me.FPMonthDataGridViewTextBoxColumn.HeaderText = "Month"
+        Me.FPMonthDataGridViewTextBoxColumn.Name = "FPMonthDataGridViewTextBoxColumn"
+        Me.FPMonthDataGridViewTextBoxColumn.Width = 150
+        '
+        'FPAmountDataGridViewTextBoxColumn
+        '
+        Me.FPAmountDataGridViewTextBoxColumn.DataPropertyName = "FPAmount"
+        Me.FPAmountDataGridViewTextBoxColumn.HeaderText = "Amount"
+        Me.FPAmountDataGridViewTextBoxColumn.Name = "FPAmountDataGridViewTextBoxColumn"
+        Me.FPAmountDataGridViewTextBoxColumn.Width = 150
+        '
         'frmFPAStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(552, 134)
+        Me.ClientSize = New System.Drawing.Size(724, 444)
         Me.Controls.Add(Me.PanelEx3)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -411,13 +510,15 @@ Partial Class frmFPAStatement
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx3.ResumeLayout(False)
         Me.PanelEx3.PerformLayout()
+        CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChalanTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChalanTableMonthViseSumBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents btnGenerateByMonth As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
@@ -436,4 +537,14 @@ Partial Class frmFPAStatement
     Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwCoB As System.ComponentModel.BackgroundWorker
     Friend WithEvents ChalanTableTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter
+    Friend WithEvents dgv As DevComponents.DotNetBar.Controls.DataGridViewX
+    Friend WithEvents btnGenerateMonthlyData As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
+    Friend WithEvents ChalanTableBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents DateValueDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Expr2DataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChalanTableMonthViseSumBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents ChalanTableMonthViseSumAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableMonthViseSumAdapter
+    Friend WithEvents FPMonthDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FPAmountDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
