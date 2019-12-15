@@ -526,9 +526,6 @@ Partial Class frmMainInterface
         Me.lblAutoCapsStatus = New DevComponents.DotNetBar.LabelItem()
         Me.lblTime = New DevComponents.DotNetBar.LabelItem()
         Me.TabControl = New DevComponents.DotNetBar.TabControl()
-        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.lblFPAGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel1 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -643,6 +640,9 @@ Partial Class frmMainInterface
         Me.txtSOCNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.TabStyleContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
         Me.SOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.lblFPAGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel2 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx5 = New DevComponents.DotNetBar.PanelEx()
@@ -1121,7 +1121,6 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControl.SuspendLayout
-        Me.TabControlPanel4.SuspendLayout
         Me.TabControlPanel1.SuspendLayout
         Me.PanelEx1.SuspendLayout
         Me.PanelEx4.SuspendLayout
@@ -1135,6 +1134,7 @@ Partial Class frmMainInterface
         CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControlPanel4.SuspendLayout
         Me.TabControlPanel2.SuspendLayout
         Me.PanelEx2.SuspendLayout
         Me.PanelEx5.SuspendLayout
@@ -5485,12 +5485,12 @@ Partial Class frmMainInterface
         '
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
+        Me.TabControl.Controls.Add(Me.TabControlPanel5)
+        Me.TabControl.Controls.Add(Me.TabControlPanel10)
         Me.TabControl.Controls.Add(Me.TabControlPanel1)
         Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel2)
         Me.TabControl.Controls.Add(Me.TabControlPanel11)
-        Me.TabControl.Controls.Add(Me.TabControlPanel5)
-        Me.TabControl.Controls.Add(Me.TabControlPanel10)
         Me.TabControl.Controls.Add(Me.TabControlPanel6)
         Me.TabControl.Controls.Add(Me.TabControlPanel3)
         Me.TabControl.Controls.Add(Me.TabControlPanel9)
@@ -5519,48 +5519,6 @@ Partial Class frmMainInterface
         Me.TabControl.Tabs.Add(Me.IOTabItem)
         Me.TabControl.Tabs.Add(Me.OSTabItem)
         Me.TabControl.TabStop = false
-        '
-        'TabControlPanel4
-        '
-        Me.TabControlPanel4.Controls.Add(Me.lblFPAGridInfo)
-        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
-        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel4.Name = "TabControlPanel4"
-        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 528)
-        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel4.Style.GradientAngle = 90
-        Me.TabControlPanel4.TabIndex = 4
-        Me.TabControlPanel4.TabItem = Me.FPATabItem
-        '
-        'lblFPAGridInfo
-        '
-        Me.lblFPAGridInfo.AutoSize = true
-        Me.lblFPAGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblFPAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblFPAGridInfo.Location = New System.Drawing.Point(22, 261)
-        Me.lblFPAGridInfo.Name = "lblFPAGridInfo"
-        Me.lblFPAGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblFPAGridInfo.TabIndex = 165
-        Me.lblFPAGridInfo.Text = "Grid"
-        Me.lblFPAGridInfo.Visible = false
-        '
-        'FPATabItem
-        '
-        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
-        Me.FPATabItem.Name = "FPATabItem"
-        Me.FPATabItem.Text = "FP Attestation Register"
         '
         'TabControlPanel1
         '
@@ -7216,6 +7174,48 @@ Partial Class frmMainInterface
         Me.SOCTabItem.Name = "SOCTabItem"
         Me.SOCTabItem.Text = "SOC Register"
         '
+        'TabControlPanel4
+        '
+        Me.TabControlPanel4.Controls.Add(Me.lblFPAGridInfo)
+        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
+        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel4.Name = "TabControlPanel4"
+        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel4.Style.GradientAngle = 90
+        Me.TabControlPanel4.TabIndex = 4
+        Me.TabControlPanel4.TabItem = Me.FPATabItem
+        '
+        'lblFPAGridInfo
+        '
+        Me.lblFPAGridInfo.AutoSize = true
+        Me.lblFPAGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblFPAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblFPAGridInfo.Location = New System.Drawing.Point(22, 261)
+        Me.lblFPAGridInfo.Name = "lblFPAGridInfo"
+        Me.lblFPAGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblFPAGridInfo.TabIndex = 165
+        Me.lblFPAGridInfo.Text = "Grid"
+        Me.lblFPAGridInfo.Visible = false
+        '
+        'FPATabItem
+        '
+        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
+        Me.FPATabItem.Name = "FPATabItem"
+        Me.FPATabItem.Text = "FP Attestation Register"
+        '
         'TabControlPanel2
         '
         Me.TabControlPanel2.Controls.Add(Me.PanelEx2)
@@ -8740,6 +8740,7 @@ Partial Class frmMainInterface
         '
         'IODatagrid
         '
+        Me.IODatagrid.AllowUserToAddRows = false
         Me.IODatagrid.AllowUserToDeleteRows = false
         Me.IODatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -13778,8 +13779,6 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControl.ResumeLayout(false)
-        Me.TabControlPanel4.ResumeLayout(false)
-        Me.TabControlPanel4.PerformLayout
         Me.TabControlPanel1.ResumeLayout(false)
         Me.PanelEx1.ResumeLayout(false)
         Me.PanelEx4.ResumeLayout(false)
@@ -13795,6 +13794,8 @@ Partial Class frmMainInterface
         CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControlPanel4.ResumeLayout(false)
+        Me.TabControlPanel4.PerformLayout
         Me.TabControlPanel2.ResumeLayout(false)
         Me.PanelEx2.ResumeLayout(false)
         Me.PanelEx5.ResumeLayout(false)
