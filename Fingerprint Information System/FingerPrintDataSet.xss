@@ -40,7 +40,7 @@
     <Shape ID="DesignTable:CulpritsRegister" ZOrder="5" X="964" Y="-103" Height="400" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
     <Shape ID="DesignTable:JoinedCulpritsRegister" ZOrder="6" X="637" Y="-159" Height="419" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="294" />
     <Shape ID="DesignTable:ChalanTable" ZOrder="2" X="583" Y="357" Height="324" Width="299" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
-    <Shape ID="DesignTable:ChalanTableMonthViseSum" ZOrder="1" X="461" Y="778" Height="115" Width="283" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
+    <Shape ID="DesignTable:ChalanTableMonthViseSum" ZOrder="1" X="311" Y="696" Height="115" Width="283" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

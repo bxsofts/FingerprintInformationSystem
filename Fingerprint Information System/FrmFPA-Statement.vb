@@ -23,11 +23,6 @@ Public Class frmFPAStatement
         Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
         Me.ChalanTableTableAdapter1.Connection.Open()
 
-        If Me.ChalanTableMonthViseSumAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableMonthViseSumAdapter1.Connection.Close()
-        Me.ChalanTableMonthViseSumAdapter1.Connection.ConnectionString = sConString
-        Me.ChalanTableMonthViseSumAdapter1.Connection.Open()
-
-
 
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
@@ -45,11 +40,15 @@ Public Class frmFPAStatement
         dtFrom.Value = New Date(y, m, 1)
         dtTo.Value = New Date(y, m, d)
 
-        Me.ChalanTableMonthViseSumAdapter1.FillByMonthViseValue(Me.FingerPrintDataSet.ChalanTableMonthViseSum, New Date(y, 4, 1), dtTo.Value)
+        Me.dgvSum.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
+        Me.dgvChalan.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
 
-        For c = 4 To m
-
-        Next
+        If Me.dgvSum.RowCount <> 13 Then
+            For c = 1 To 13
+                Me.dgvSum.Rows.Add()
+            Next
+        End If
+        dgvSum.Rows(12).DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
 
         Me.cmbMonth.Items.Clear()
         For i = 0 To 11
@@ -63,14 +62,270 @@ Public Class frmFPAStatement
         d1 = Me.dtFrom.Value
         d2 = Today
         datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-
-
         Me.cmbMonth.Focus()
+
+        GenerateMonthViseAmount()
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs)
+        On Error Resume Next
+        Dim sf As New StringFormat
+        sf.Alignment = StringAlignment.Center
 
-    Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
+        Dim f As Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        sf.LineAlignment = StringAlignment.Center
+        Using b As SolidBrush = New SolidBrush(Me.ForeColor)
+            If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
+                e.Graphics.DrawString("Sl.No", f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+
+            If e.ColumnIndex < 0 AndAlso e.RowIndex >= 0 Then
+                e.Graphics.DrawString((e.RowIndex + 1).ToString, f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+        End Using
+
+    End Sub
+
+    Private Sub ClearDatagridSumCells()
+        For c = 0 To 12
+            dgvSum.Rows(c).Cells(0).Value = ""
+            dgvSum.Rows(c).Cells(1).Value = ""
+            dgvSum.Rows(c).Cells(2).Value = ""
+            dgvSum.Rows(c).Cells(3).Value = ""
+        Next
+        Me.lblAmount1.Text = ""
+        Me.lblAmount2.Text = ""
+        Me.lblAmount3.Text = ""
+        Me.lblAmount4.Text = ""
+    End Sub
+
+
+#Region "GENERATE STATEMENT"
+
+    Private Sub GenerateMonthViseAmount()
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
+            Dim y = Me.txtYear.Value
+
+            d1 = New Date(y, m, 1)
+            Dim d = Date.DaysInMonth(y, m)
+            d2 = New Date(y, m, d)
+
+            ClearDatagridSumCells()
+
+            Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
+            Me.lblAmount1.Text = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+
+            Dim dgvr As FingerPrintDataSet.ChalanTableRow = Me.FingerPrintDataSet.ChalanTable.NewChalanTableRow
+            dgvr.AmountRemitted = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+            Me.FingerPrintDataSet.ChalanTable.Rows.Add(dgvr)
+            Me.ChalanTableBindingSource.MoveLast()
+            Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+
+            Dim TAmount1 As Integer = 0
+            Dim TAmount2 As Integer = 0
+
+            If m >= 4 Then
+                Dim amount1 As Integer = 0
+                Dim amount2 As Integer = 0
+
+                Dim i = 4
+                For i = 4 To m
+                    d = Date.DaysInMonth(y, i)
+                    d1 = New Date(y, i, 1)
+                    d2 = New Date(y, i, d)
+                    amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    TAmount1 = TAmount1 + amount1
+
+                    dgvSum.Rows(i - 4).Cells(0).Value = MonthName(i, True) & " - " & y
+                    dgvSum.Rows(i - 4).Cells(1).Value = amount1
+
+
+                    d = Date.DaysInMonth(y - 1, i)
+                    d1 = New Date(y - 1, i, 1)
+                    d2 = New Date(y - 1, i, d)
+                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    TAmount2 = TAmount2 + amount2
+
+                    dgvSum.Rows(i - 4).Cells(2).Value = MonthName(i, True) & " - " & y - 1
+                    dgvSum.Rows(i - 4).Cells(3).Value = amount2
+                Next
+            End If
+
+            If m < 4 Then
+
+                Dim amount1 As Integer = 0
+                Dim amount2 As Integer = 0
+
+                Dim i = 4
+                For i = 4 To 12
+                    d = Date.DaysInMonth(y - 1, i)
+                    d1 = New Date(y - 1, i, 1)
+                    d2 = New Date(y - 1, i, d)
+
+                    amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    TAmount1 = TAmount1 + amount1
+
+                    dgvSum.Rows(i - 4).Cells(0).Value = MonthName(i, True) & " - " & y - 1
+                    dgvSum.Rows(i - 4).Cells(1).Value = amount1
+
+                    d = Date.DaysInMonth(y - 2, i)
+                    d1 = New Date(y - 2, i, 1)
+                    d2 = New Date(y - 2, i, d)
+                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    TAmount2 = TAmount2 + amount2
+
+                    dgvSum.Rows(i - 4).Cells(2).Value = MonthName(i, True) & " - " & y - 2
+                    dgvSum.Rows(i - 4).Cells(3).Value = amount2
+                Next
+
+                For j = 1 To m
+                    d = Date.DaysInMonth(y, j)
+                    d1 = New Date(y, j, 1)
+                    d2 = New Date(y, j, d)
+                    amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    TAmount1 = TAmount1 + amount1
+
+                    dgvSum.Rows(i + j - 5).Cells(0).Value = MonthName(j, True) & " - " & y
+                    dgvSum.Rows(i + j - 5).Cells(1).Value = amount1
+
+                    d = Date.DaysInMonth(y - 1, j)
+                    d1 = New Date(y - 1, j, 1)
+                    d2 = New Date(y - 1, j, d)
+                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    TAmount2 = TAmount2 + amount2
+
+                    dgvSum.Rows(i + j - 5).Cells(2).Value = MonthName(j, True) & " - " & y - 1
+                    dgvSum.Rows(i + j - 5).Cells(3).Value = amount2
+                Next
+            End If
+
+            dgvSum.Rows(12).Cells(0).Value = "Total"
+            dgvSum.Rows(12).Cells(1).Value = TAmount1
+            dgvSum.Rows(12).Cells(2).Value = "Total"
+            dgvSum.Rows(12).Cells(3).Value = TAmount2
+
+            GenerateLabelValue()
+
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub GenerateLabelValue()
+        Dim amount1 As Integer = Val(Me.lblAmount1.Text)
+        Dim amount2 As Integer = 0
+        Dim amount3 As Integer = Val(Me.dgvSum.Rows(12).Cells(1).Value)
+        amount2 = amount3 - amount1
+        Dim amount4 As Integer = Val(Me.dgvSum.Rows(12).Cells(3).Value)
+
+        Me.lblAmount1.Text = amount1
+        Me.lblAmount2.Text = amount2
+        Me.lblAmount3.Text = amount3
+        Me.lblAmount4.Text = amount4
+    End Sub
+    Private Sub GenerateLabelValues()
+        Try
+            Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
+            Dim y = Me.txtYear.Value
+            Dim d11 = New Date(y, m, 1)
+
+            d1 = d11
+            Dim d = Date.DaysInMonth(y, m)
+            d2 = New Date(y, m, d)
+
+            Dim amount1 As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)) 'current month
+
+            Dim amount2 As Integer = 0 'upto previous month
+
+            If m = 4 Then ' if april then previous amount is zero
+                amount2 = 0 'previous amount
+            Else
+                m = m - 1 'previous month
+                If m = 0 Then
+                    m = 12
+                    y = y - 1
+                End If
+                d = Date.DaysInMonth(y, m)
+                d2 = New Date(y, m, d) 'previous month
+
+                If m < 3 Then
+                    y = y - 1
+                End If
+
+                d1 = New Date(y, 4, 1) 'april 1
+
+                amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+            End If
+
+
+            m = Month(d11) ' selected month
+            y = Year(d11) - 1 'previous year
+            d = Date.DaysInMonth(y, m)
+
+            d2 = New Date(y, m, d) ' selected month of last year
+
+            Dim amount4 As Integer = 0
+
+            If m < 4 Then
+                y = y - 1
+            End If
+
+            d1 = New Date(y, 4, 1) 'april 1
+
+            amount4 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+            Me.lblAmount1.Text = amount1
+            Me.lblAmount2.Text = amount2
+            Me.lblAmount3.Text = amount1 + amount2
+            Me.lblAmount4.Text = amount4
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
+        GenerateMonthViseAmount()
+        ShowDesktopAlert("Data generated")
+    End Sub
+
+    Private Sub btnGenerateByDate_Click(sender As Object, e As EventArgs) Handles btnGenerateByDate.Click
+        Try
+
+            d1 = Me.dtFrom.Value
+            d2 = Me.dtTo.Value
+            If d1 > d2 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.dtFrom.Focus()
+                Exit Sub
+            End If
+            Me.Cursor = Cursors.WaitCursor
+
+            ClearDatagridSumCells()
+            Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
+            Dim dgvr As FingerPrintDataSet.ChalanTableRow = Me.FingerPrintDataSet.ChalanTable.NewChalanTableRow
+            dgvr.AmountRemitted = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+            Me.FingerPrintDataSet.ChalanTable.Rows.Add(dgvr)
+            Me.ChalanTableBindingSource.MoveLast()
+            Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+            ShowDesktopAlert("Data generated")
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+
+#End Region
+
+    Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         Try
 
             Me.Cursor = Cursors.WaitCursor
@@ -89,7 +344,7 @@ Public Class frmFPAStatement
                     End If
                     datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
                     IsMonthStmt = False
-                Case btnGenerateByMonth.Name
+                Case btnPrint.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
                     Dim y = Me.txtYear.Value
                     Dim d As Integer = Date.DaysInMonth(y, m)
@@ -924,13 +1179,6 @@ Public Class frmFPAStatement
     End Sub
 
 
-    Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
-        Try
-            Me.Cursor = Cursors.WaitCursor
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-    End Sub
+    
+   
 End Class

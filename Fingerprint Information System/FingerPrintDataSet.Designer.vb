@@ -57421,9 +57421,10 @@ Namespace FingerPrintDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.OleDb.OleDbCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT        format(FPDate, 'mmm yyyy') AS FPMonth, SUM(AmountRemitted) AS FPAmo" & _
-                "unt" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            ChalanTable" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (FPDate BETWEEN ? AND ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GROUP B" & _
-                "Y format(FPDate, 'mmm yyyy')" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateValue(format(FPDate, 'mmm yyyy'))"
+            Me._commandCollection(0).CommandText = "SELECT        format(FPDate, 'yyyy mm mmm') AS FPMonth, SUM(AmountRemitted) AS FP" & _
+                "Amount" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            ChalanTable" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WHERE        (FPDate BETWEEN ? AND ?)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GROU" & _
+                "P BY format(FPDate, 'yyyy mm mmm')" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ORDER BY DateValue(format(FPDate, 'yyyy mm m" & _
+                "mm'))"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FPDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FPDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("FPDate1", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "FPDate", Global.System.Data.DataRowVersion.Current, False, Nothing))
