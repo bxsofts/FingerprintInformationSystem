@@ -238,12 +238,6 @@
     <Compile Include="frmOnlineBackup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRevenueCollection.Designer.vb">
-      <DependentUpon>frmRevenueCollection.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmRevenueCollection.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FrmSOC-IdentificationRegisterDE.Designer.vb">
       <DependentUpon>FrmSOC-IdentificationRegisterDE.vb</DependentUpon>
     </Compile>
@@ -612,9 +606,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOnlineBackup.resx">
       <DependentUpon>frmOnlineBackup.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmRevenueCollection.resx">
-      <DependentUpon>frmRevenueCollection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSOC-IdentificationRegisterDE.resx">
       <DependentUpon>FrmSOC-IdentificationRegisterDE.vb</DependentUpon>

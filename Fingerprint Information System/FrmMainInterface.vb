@@ -15919,7 +15919,7 @@ errhandler:
 
 
     Private Sub GenerateRevenueIncomeStatement() Handles btnRevenueCollectionStatement.Click
-        frmRevenueCollection.ShowDialog()
+        frmFPAStatement.ShowDialog()
     End Sub
 
     Private Sub ShowMonthlyPerformance() Handles btnMonthlyPerformance.Click

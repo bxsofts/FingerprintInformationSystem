@@ -5,19 +5,13 @@ Public Class frmFPAStatement
     Dim d2 As Date
     Dim datevalue As String = vbNullString
     Dim RowCount As Integer = 0
+    Dim IsMonthStmt As Boolean = True
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next
 
         Me.Cursor = Cursors.WaitCursor
-        Me.CircularProgress1.Hide()
-        Me.CircularProgress1.ProgressColor = GetProgressColor()
-        Me.CircularProgress1.ProgressText = ""
-        Me.CircularProgress1.IsRunning = False
-        Control.CheckForIllegalCrossThreadCalls = False
-
-        Me.chkLetter.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "FPALetterFormat", 1)
-        Me.chkCoB.Checked = Not Me.chkLetter.Checked
+        Me.chkLetter.Checked = True
 
         If Me.ChalanTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableTableAdapter1.Connection.Close()
         Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
@@ -68,7 +62,7 @@ Public Class frmFPAStatement
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs)
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvChalan.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
@@ -114,6 +108,21 @@ Public Class frmFPAStatement
             d1 = New Date(y, m, 1)
             Dim d = Date.DaysInMonth(y, m)
             d2 = New Date(y, m, d)
+
+            Dim curfinyear As String = ""
+            Dim prevfinyear As String = ""
+
+            If m > 3 Then
+                curfinyear = d1.ToString("yy") & "-" & (d1.AddYears(1)).ToString("yy")
+            Else
+                curfinyear = d1.AddYears(-1).ToString("yy") & "-" & d1.ToString("yy")
+            End If
+
+            If m > 3 Then
+                prevfinyear = d1.AddYears(-1).ToString("yy") & "-" & d1.ToString("yy")
+            Else
+                prevfinyear = d1.AddYears(-2).ToString("yy") & "-" & d1.AddYears(-1).ToString("yy")
+            End If
 
             ClearDatagridSumCells()
 
@@ -205,12 +214,12 @@ Public Class frmFPAStatement
                 Next
             End If
 
-            dgvSum.Rows(12).Cells(0).Value = "Total"
+            dgvSum.Rows(12).Cells(0).Value = "Total (FY " & curfinyear & ")"
             dgvSum.Rows(12).Cells(1).Value = TAmount1
-            dgvSum.Rows(12).Cells(2).Value = "Total"
+            dgvSum.Rows(12).Cells(2).Value = "Total (FY " & prevfinyear & ")"
             dgvSum.Rows(12).Cells(3).Value = TAmount2
 
-            GenerateLabelValue()
+            GenerateLabelValues()
 
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -219,7 +228,7 @@ Public Class frmFPAStatement
         End Try
     End Sub
 
-    Private Sub GenerateLabelValue()
+    Private Sub GenerateLabelValues()
         Dim amount1 As Integer = Val(Me.lblAmount1.Text)
         Dim amount2 As Integer = 0
         Dim amount3 As Integer = Val(Me.dgvSum.Rows(12).Cells(1).Value)
@@ -231,67 +240,11 @@ Public Class frmFPAStatement
         Me.lblAmount3.Text = amount3
         Me.lblAmount4.Text = amount4
     End Sub
-    Private Sub GenerateLabelValues()
-        Try
-            Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
-            Dim y = Me.txtYear.Value
-            Dim d11 = New Date(y, m, 1)
-
-            d1 = d11
-            Dim d = Date.DaysInMonth(y, m)
-            d2 = New Date(y, m, d)
-
-            Dim amount1 As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)) 'current month
-
-            Dim amount2 As Integer = 0 'upto previous month
-
-            If m = 4 Then ' if april then previous amount is zero
-                amount2 = 0 'previous amount
-            Else
-                m = m - 1 'previous month
-                If m = 0 Then
-                    m = 12
-                    y = y - 1
-                End If
-                d = Date.DaysInMonth(y, m)
-                d2 = New Date(y, m, d) 'previous month
-
-                If m < 3 Then
-                    y = y - 1
-                End If
-
-                d1 = New Date(y, 4, 1) 'april 1
-
-                amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-            End If
-
-
-            m = Month(d11) ' selected month
-            y = Year(d11) - 1 'previous year
-            d = Date.DaysInMonth(y, m)
-
-            d2 = New Date(y, m, d) ' selected month of last year
-
-            Dim amount4 As Integer = 0
-
-            If m < 4 Then
-                y = y - 1
-            End If
-
-            d1 = New Date(y, 4, 1) 'april 1
-
-            amount4 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-
-            Me.lblAmount1.Text = amount1
-            Me.lblAmount2.Text = amount2
-            Me.lblAmount3.Text = amount1 + amount2
-            Me.lblAmount4.Text = amount4
-        Catch ex As Exception
-
-        End Try
-    End Sub
+    
     Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
         GenerateMonthViseAmount()
+        datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+        IsMonthStmt = True
         ShowDesktopAlert("Data generated")
     End Sub
 
@@ -307,13 +260,18 @@ Public Class frmFPAStatement
             End If
             Me.Cursor = Cursors.WaitCursor
 
+            datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+            IsMonthStmt = False
+
             ClearDatagridSumCells()
             Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
+
             Dim dgvr As FingerPrintDataSet.ChalanTableRow = Me.FingerPrintDataSet.ChalanTable.NewChalanTableRow
             dgvr.AmountRemitted = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
             Me.FingerPrintDataSet.ChalanTable.Rows.Add(dgvr)
             Me.ChalanTableBindingSource.MoveLast()
             Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+
             ShowDesktopAlert("Data generated")
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -325,49 +283,25 @@ Public Class frmFPAStatement
 
 #End Region
 
-    Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
+#Region "PRINT REPORTS"
+
+    Private Sub PrintReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         Try
 
             Me.Cursor = Cursors.WaitCursor
 
-            Dim IsMonthStmt As Boolean = True
-
-            Select Case DirectCast(sender, Control).Name
-                Case btnGenerateByDate.Name
-                    d1 = Me.dtFrom.Value
-                    d2 = Me.dtTo.Value
-                    If d1 > d2 Then
-                        DevComponents.DotNetBar.MessageBoxEx.Show("'From' date should be less than the 'To' date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Me.dtFrom.Focus()
-                        Me.Cursor = Cursors.Default
-                        Exit Sub
-                    End If
-                    datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-                    IsMonthStmt = False
-                Case btnPrint.Name
-                    Dim m = Me.cmbMonth.SelectedIndex + 1
-                    Dim y = Me.txtYear.Value
-                    Dim d As Integer = Date.DaysInMonth(y, m)
-                    d1 = New Date(y, m, 1)
-                    d2 = New Date(y, m, d)
-                    datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-                    IsMonthStmt = True
-            End Select
-
-
-            Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
-
-            RowCount = Me.FingerPrintDataSet.ChalanTable.Count + 2
-
-            Me.CircularProgress1.Show()
-            Me.CircularProgress1.ProgressText = ""
-            Me.CircularProgress1.IsRunning = True
-            Me.Cursor = Cursors.WaitCursor
+            RowCount = Me.FingerPrintDataSet.ChalanTable.Count
 
             If Me.chkLetter.Checked Then
-                bgwLetter.RunWorkerAsync(IsMonthStmt)
-            Else
-                bgwCoB.RunWorkerAsync(IsMonthStmt)
+                GenerateLetter()
+            End If
+
+            If Me.chkCoB.Checked Then
+                GenerateCoB()
+            End If
+
+            If Me.chkExcel.Checked Then
+                GenerateExcel()
             End If
 
         Catch ex As Exception
@@ -378,22 +312,11 @@ Public Class frmFPAStatement
     End Sub
 
 
-    Private Sub bgwLetter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwLetter.DoWork
+    Private Sub GenerateLetter()
         Try
-
-            Dim delay As Integer = 0
-
-            bgwLetter.ReportProgress(0)
-            System.Threading.Thread.Sleep(10)
-
-            Dim d11 As Date = d1
+            ShowPleaseWaitForm()
 
             Dim bodytext As String = vbNullString
-
-            For delay = 1 To 10
-                bgwLetter.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
 
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
@@ -404,11 +327,6 @@ Public Class frmFPAStatement
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
             aDoc.Range.NoProofing = 1
-
-            For delay = 11 To 20
-                bgwLetter.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             If WordApp.Version < 12 Then
@@ -461,11 +379,6 @@ Public Class frmFPAStatement
 
             WordApp.Selection.TypeText(vbTab & "Sub: Revenue Income from Fingerprint Attestation - details - submitting of - reg:- ")
 
-            For delay = 21 To 30
-                bgwLetter.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
-
             WordApp.Selection.Font.Bold = 0
 
             WordApp.Selection.TypeParagraph()
@@ -479,18 +392,13 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeText(vbTab & bodytext)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
-            For delay = 31 To 40
-                bgwLetter.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
-
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 11
-            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 1, 6)
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Tables.Item(1).AllowAutoFit = True
@@ -532,14 +440,8 @@ Public Class frmFPAStatement
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Amount")
 
-            For delay = 41 To 50
-                bgwLetter.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
 
-            Dim iteration As Integer = CInt(40 / RowCount)
-
-            For i = 2 To RowCount - 1
+            For i = 2 To RowCount
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                 WordApp.Selection.TypeText(i - 1)
                 WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
@@ -566,13 +468,6 @@ Public Class frmFPAStatement
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).AmountRemitted)
 
-                For delay = delay To delay + iteration
-                    If delay < 90 Then
-                        bgwLetter.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(10)
-                    End If
-                Next
-
             Next
 
             Dim oldfont = WordApp.Selection.Font.Name
@@ -589,7 +484,9 @@ Public Class frmFPAStatement
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
 
-            Dim p2 = "` " & Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)).ToString & "/-"
+            Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
+            Dim p2 = "` " & totalamount & "/-"
+
             WordApp.Selection.TypeText(p2)
             WordApp.Selection.Font.Name = oldfont
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
@@ -601,7 +498,7 @@ Public Class frmFPAStatement
 
             '//////////// Current and Previous Financial year 
 
-            If e.Argument = True Then
+            If IsMonthStmt Then
 
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -644,51 +541,6 @@ Public Class frmFPAStatement
 
                 Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
 
-                Dim amount1 As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)) 'current month
-
-                Dim amount2 As Integer = 0
-
-                Dim m = Month(d11)
-                Dim y = Year(d11)
-                Dim d = Date.DaysInMonth(y, m)
-
-                If m = 4 Then ' if april then previous amount is zero
-                    amount2 = 0 'previous amount
-                Else
-                    m = m - 1 'previous month
-                    If m = 0 Then
-                        m = 12
-                        y = y - 1
-                    End If
-                    d = Date.DaysInMonth(y, m)
-                    d2 = New Date(y, m, d) 'previous month
-
-                    If m < 3 Then
-                        y = y - 1
-                    End If
-
-                    d1 = New Date(y, 4, 1) 'april 1
-
-                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                End If
-
-
-                m = Month(d11) ' selected month
-                y = Year(d11) - 1 'previous year
-                d = Date.DaysInMonth(y, m)
-
-                d2 = New Date(y, m, d) ' selected month of last year
-
-                Dim amount4 As Integer = 0
-
-                If m < 4 Then
-                    y = y - 1
-                End If
-
-                d1 = New Date(y, 4, 1) 'april 1
-
-                amount4 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-
                 WordApp.Selection.Tables.Item(1).Cell(2, 1).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText(headofac)
@@ -696,19 +548,19 @@ Public Class frmFPAStatement
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount1)
+                WordApp.Selection.TypeText(Me.lblAmount1.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount2)
+                WordApp.Selection.TypeText(Me.lblAmount2.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount1 + amount2)
+                WordApp.Selection.TypeText(Me.lblAmount3.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount4)
+                WordApp.Selection.TypeText(Me.lblAmount4.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
                 WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
@@ -754,11 +606,6 @@ Public Class frmFPAStatement
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
-            For delay = 91 To 100
-                bgwLetter.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
-
             WordApp.Visible = True
             WordApp.Activate()
             WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
@@ -768,38 +615,20 @@ Public Class frmFPAStatement
             WordApp = Nothing
 
             Me.Cursor = Cursors.Default
-
+            ClosePleaseWaitForm()
         Catch ex As Exception
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
+
+        ClosePleaseWaitForm()
     End Sub
 
-    Private Sub bgwLetter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwLetter.ProgressChanged
-        Me.CircularProgress1.ProgressText = e.ProgressPercentage
-    End Sub
-
-    Private Sub bgwLetter_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwLetter.RunWorkerCompleted
-        Me.CircularProgress1.Hide()
-        Me.CircularProgress1.ProgressText = ""
-        Me.CircularProgress1.IsRunning = False
-        Me.Cursor = Cursors.Default
-    End Sub
-
-    Private Sub bgwCoB_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCoB.DoWork
+    Private Sub GenerateCoB()
         Try
-            Dim delay As Integer = 0
+            ShowPleaseWaitForm()
 
-            bgwCoB.ReportProgress(0)
-            System.Threading.Thread.Sleep(10)
-
-            Dim bodytext As String = vbNullString
-            Dim d11 As Date = d1
-
-            For delay = 1 To 10
-                bgwCoB.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
             Dim missing As Object = System.Reflection.Missing.Value
             Dim fileName As Object = "normal.dotm"
             Dim newTemplate As Object = False
@@ -810,10 +639,7 @@ Public Class frmFPAStatement
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
             aDoc.Range.NoProofing = 1
 
-            For delay = 11 To 20
-                bgwCoB.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
+           
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             If WordApp.Version < 12 Then
                 WordApp.Selection.Document.PageSetup.LeftMargin = 72
@@ -839,11 +665,6 @@ Public Class frmFPAStatement
             WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeText("TO:" & vbTab & " THE DIRECTOR, FPB, TVPM" & vbNewLine)
 
-            For delay = 21 To 30
-                bgwCoB.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
-
             WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.Font.Bold = 1
@@ -853,12 +674,8 @@ Public Class frmFPAStatement
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             WordApp.Selection.Font.Bold = 0
 
-            bodytext = "Details of Revenue Income from Fingerprint Attestation " & datevalue & " are furnished below:"
+            Dim bodytext = "Details of Revenue Income from Fingerprint Attestation " & datevalue & " are furnished below:"
 
-            For delay = 31 To 40
-                bgwCoB.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
 
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
@@ -869,7 +686,7 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 11
-            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 6)
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 1, 6)
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Tables.Item(1).AllowAutoFit = True
@@ -910,14 +727,8 @@ Public Class frmFPAStatement
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Amount")
 
-            For delay = 41 To 50
-                bgwCoB.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
 
-            Dim iteration As Integer = CInt(40 / RowCount)
-
-            For i = 2 To RowCount - 1
+            For i = 2 To RowCount
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                 WordApp.Selection.TypeText(i - 1)
                 WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
@@ -940,12 +751,6 @@ Public Class frmFPAStatement
                 WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText(Me.FingerPrintDataSet.ChalanTable(j).AmountRemitted)
-                For delay = delay To delay + iteration
-                    If delay < 90 Then
-                        bgwCoB.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(10)
-                    End If
-                Next
             Next
 
 
@@ -963,7 +768,9 @@ Public Class frmFPAStatement
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
 
-            Dim p2 = "` " & Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)).ToString & "/-"
+            Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
+
+            Dim p2 = "` " & totalamount & "/-"
             WordApp.Selection.TypeText(p2)
             WordApp.Selection.Font.Name = oldfont
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
@@ -974,7 +781,7 @@ Public Class frmFPAStatement
 
             '//////////// Current and Previous Financial year 
 
-            If e.Argument = True Then
+            If IsMonthStmt Then
 
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -1017,71 +824,27 @@ Public Class frmFPAStatement
 
                 Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
 
-                Dim amount1 As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2)) 'current month
-
-                Dim amount2 As Integer = 0
-
-                Dim m = Month(d11)
-                Dim y = Year(d11)
-                Dim d = Date.DaysInMonth(y, m)
-
-                If m = 4 Then ' if april then previous amount is zero
-                    amount2 = 0 'previous amount
-                Else
-                    m = m - 1 'previous month
-                    If m = 0 Then
-                        m = 12
-                        y = y - 1
-                    End If
-                    d = Date.DaysInMonth(y, m)
-                    d2 = New Date(y, m, d) 'previous month
-
-                    If m < 3 Then
-                        y = y - 1
-                    End If
-
-                    d1 = New Date(y, 4, 1) 'april 1
-
-                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                End If
-
-
-                m = Month(d11) ' selected month
-                y = Year(d11) - 1 'previous year
-                d = Date.DaysInMonth(y, m)
-
-                d2 = New Date(y, m, d) ' selected month of last year
-
-                Dim amount4 As Integer = 0
-
-                If m < 4 Then
-                    y = y - 1
-                End If
-
-                d1 = New Date(y, 4, 1) 'april 1
-
-                amount4 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+               
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 1).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText(headofac)
 
-
                 WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount1)
+                WordApp.Selection.TypeText(Me.lblAmount1.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount2)
+                WordApp.Selection.TypeText(Me.lblAmount2.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount1 + amount2)
+                WordApp.Selection.TypeText(Me.lblAmount3.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(amount4)
+                WordApp.Selection.TypeText(Me.lblAmount4.Text)
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
                 WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
@@ -1121,11 +884,6 @@ Public Class frmFPAStatement
             End If
 
 
-            For delay = 91 To 100
-                bgwCoB.ReportProgress(delay)
-                System.Threading.Thread.Sleep(10)
-            Next
-
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             WordApp.Visible = True
@@ -1137,26 +895,178 @@ Public Class frmFPAStatement
             WordApp = Nothing
 
             Me.Cursor = Cursors.Default
-
+            ClosePleaseWaitForm()
         Catch ex As Exception
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
 
+
     End Sub
 
-    Private Sub bgwCoB_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwCoB.ProgressChanged
-        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    Private Sub GenerateExcel()
+        Try
+            Dim sMonth As String = Me.cmbMonth.Text & " " & Me.txtYear.Text
+            Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\Revenue Collection Statement - SDFPB " & ShortDistrictName & " - " & sMonth.ToUpper & ".xlsx"
+
+            If IsMonthStmt Then
+                If My.Computer.FileSystem.FileExists(sFileName) Then
+                    Shell("explorer.exe " & sFileName, AppWinStyle.MaximizedFocus)
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
+            End If
+
+            ShowPleaseWaitForm()
+
+            Dim xlApp As Excel.Application = New Excel.Application()
+            Dim xlBooks As Excel.Workbooks = xlApp.Workbooks
+            Dim xlBook As Excel._Workbook = xlBooks.Add
+            Dim xlSheets As Excel.Sheets = xlBook.Worksheets
+            Dim xlSheet As Excel.Worksheet = xlBook.ActiveSheet
+
+
+            xlSheet.PageSetup.LeftMargin = 40
+            xlSheet.PageSetup.RightMargin = 25
+
+            '  xlSheet.Range("A1").HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
+            '   xlSheet.Range("A1").Font.Bold = True
+            ' xlSheet.Range("A1").Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle
+
+            ' xlSheet.Range("A1").Value = "CoB Message"
+            ' xlSheet.Range("A1", "F1").Merge()
+
+            xlSheet.Range("A3").Value = "FROM: TESTER INSPECTOR, " & ShortOfficeName.ToUpper & ", " & FullDistrictName.ToUpper
+            xlSheet.Range("A3", "F3").Merge()
+
+            xlSheet.Range("A5").Value = "TO: THE DIRECTOR, FINGERPRINT BUREAU, THIRUVANANTHAPURAM"
+            xlSheet.Range("A5", "F5").Merge()
+
+            xlSheet.Range("A7:F7").Borders.LineStyle = 1
+            xlSheet.Range("A7").HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
+            xlSheet.Range("A7").Font.Bold = True
+            xlSheet.Range("A7").Value = "No. " & PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName & "                    Date: " & Strings.Format(Now, "dd/MM/yyyy")
+            xlSheet.Range("A7", "F7").Merge()
+
+            xlSheet.Range("A9").Font.Bold = True
+
+            If IsMonthStmt Then
+                xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS FOR THE MONTH OF " & sMonth.ToUpper
+            Else
+                xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS FOR THE PERIOD FROM " & Me.dtFrom.Text & " TO " & Me.dtTo.Text
+            End If
+
+            xlSheet.Range("A9", "F9").Merge()
+
+            With xlSheet.Range("A11", "F11")
+                .Font.Bold = True
+                .HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
+            End With
+
+            xlSheet.Columns("A").ColumnWidth = 5
+            xlSheet.Columns("B").ColumnWidth = 15
+            xlSheet.Columns("C").ColumnWidth = 23
+            xlSheet.Columns("D").ColumnWidth = 19
+            xlSheet.Columns("E").ColumnWidth = 13
+            xlSheet.Columns("F").ColumnWidth = 14
+
+
+            xlSheet.Range("A11").Value = "Sl.No."
+            xlSheet.Range("B11").Value = "Head of Account"
+            xlSheet.Range("C11").Value = "Treasury"
+            xlSheet.Range("D11").Value = "Chalan No."
+            xlSheet.Range("E11").Value = "Date"
+            xlSheet.Range("F11").Value = "Amount"
+
+
+            Dim FPARowCount = Me.FingerPrintDataSet.FPAttestationRegister.Count
+
+            Dim i = 12
+
+            If RowCount = 1 Then
+                xlSheet.Cells(i, 6).value = "Rs. 0/-"
+                xlSheet.Cells(i, 6).font.bold = True
+                xlSheet.Range("A11:F12").Borders.LineStyle = 1
+            Else
+                For i = 12 To RowCount + i - 2
+                    Dim j = i - 12
+                    xlSheet.Cells(i, 1).value = j + 1
+                    xlSheet.Cells(i, 2).value = Me.FingerPrintDataSet.ChalanTable(j).HeadOfAccount
+                    xlSheet.Cells(i, 3).value = Me.FingerPrintDataSet.ChalanTable(j).Treasury
+                    xlSheet.Cells(i, 4).value = Me.FingerPrintDataSet.ChalanTable(j).ChalanNumber
+                    xlSheet.Cells(i, 5).value = Me.FingerPrintDataSet.ChalanTable(j).ChalanDate
+                    xlSheet.Cells(i, 6).value = Me.FingerPrintDataSet.ChalanTable(j).AmountRemitted
+                Next
+
+                xlSheet.Cells(i, 5).font.bold = True
+                xlSheet.Cells(i, 5).value = "Total Rs."
+                xlSheet.Cells(i, 6).font.bold = True
+                xlSheet.Cells(i, 6).value = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
+
+                xlSheet.Range("A11:F" & i).Borders.LineStyle = 1
+            End If
+
+            If IsMonthStmt Then
+                i = i + 4
+
+                With xlSheet.Range("A" & i, "F" & i)
+                    .Font.Bold = True
+                    .HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
+                    .VerticalAlignment = Excel.XlVAlign.xlVAlignTop
+                End With
+
+                xlSheet.Range("A" & i).Value = "Head of Account"
+                xlSheet.Range("C" & i).Value = "Amount collected during the month"
+                xlSheet.Range("D" & i).Value = "Amount collected upto the previous month in current financial year"
+                xlSheet.Range("E" & i).Value = "Progressive Total"
+                xlSheet.Range("F" & i).Value = "Collection from April upto the month during the last financial year"
+
+                xlSheet.Range("A" & i).WrapText = True
+                xlSheet.Range("C" & i).WrapText = True
+                xlSheet.Range("D" & i).WrapText = True
+                xlSheet.Range("E" & i).WrapText = True
+                xlSheet.Range("F" & i).WrapText = True
+
+                xlSheet.Range("A" & i, "B" & i).Merge()
+
+                i = i + 1
+                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+
+                xlSheet.Range("A" & i).Value = headofac
+                xlSheet.Range("C" & i).Value = Me.lblAmount1.Text
+                xlSheet.Range("D" & i).Value = Me.lblAmount2.Text
+                xlSheet.Range("E" & i).Value = Me.lblAmount3.Text
+                xlSheet.Range("F" & i).Value = Me.lblAmount4.Text
+
+                xlSheet.Range("A" & i - 1 & ":F" & i).Borders.LineStyle = 1
+
+                xlSheet.Range("A" & i, "B" & i).Merge()
+
+
+                xlSheet.Name = sMonth
+
+                If Not FileInUse(sFileName) And Today > d2 Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+            End If
+            
+
+            ClosePleaseWaitForm()
+
+            Me.Cursor = Cursors.Default
+            xlApp.Visible = True
+            xlApp.UserControl = True
+
+
+            xlSheet = Nothing
+            xlSheets = Nothing
+            xlBooks = Nothing
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
+        End Try
     End Sub
-
-    Private Sub bgwCoB_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwCoB.RunWorkerCompleted
-        Me.CircularProgress1.Hide()
-        Me.CircularProgress1.ProgressText = ""
-        Me.CircularProgress1.IsRunning = False
-        Me.Cursor = Cursors.Default
-    End Sub
-
-
     Private Function CheckChalanDate(index As Integer) As String
         Try
 
@@ -1167,18 +1077,6 @@ Public Class frmFPAStatement
         End Try
     End Function
 
+#End Region
 
-    Private Sub LetterFormat() Handles chkCoB.Click, chkLetter.Click
-        On Error Resume Next
-        Dim s As Boolean = chkLetter.Checked
-        Dim v As Integer
-        If s Then v = 0 Else v = 1
-
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "FPALetterFormat", v, Microsoft.Win32.RegistryValueKind.String)
-
-    End Sub
-
-
-    
-   
 End Class
