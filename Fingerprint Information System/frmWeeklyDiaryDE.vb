@@ -818,6 +818,16 @@ Public Class frmWeeklyDiaryDE
 
     Private Sub btnGenerateWD_Click(sender As Object, e As EventArgs) Handles btnGenerateWD.Click
         Try
+            If blDGVChanged Then
+                Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+                If reply = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+                End If
+            End If
+
+            blDGVChanged = False
 
             dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
             dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
@@ -908,7 +918,9 @@ Public Class frmWeeklyDiaryDE
                 Me.WeeklyDiaryDataSet1.WeeklyDiary.AddWeeklyDiaryRow(dgvr)
             Next
             Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
             Me.WeeklyDiaryBindingSource.MoveFirst()
+            blDGVChanged = False
             ShowDesktopAlert("Weekly Diary generated.")
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -928,15 +940,24 @@ Public Class frmWeeklyDiaryDE
         End Try
     End Sub
 
+    Private Sub dgvWeeklyDiary_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvWeeklyDiary.CellFormatting
+        On Error Resume Next
+        If Not blDGVChanged Then
+            e.CellStyle.BackColor = Color.White
+        End If
+    End Sub
+
     Private Sub dgvWeeklyDiary_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWeeklyDiary.CellValueChanged
+        On Error Resume Next
         blDGVChanged = True
+        Me.dgvWeeklyDiary.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Color.YellowGreen
     End Sub
 
     Private Sub frmWeeklyDiaryDE_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
 
         Try
             If blDGVChanged Then
-                Dim reply As DialogResult = MessageBoxEx.Show("Data in Weekly Diary table has changed. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+                Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 
                 If reply = Windows.Forms.DialogResult.Cancel Then e.Cancel = True
                 If reply = Windows.Forms.DialogResult.Yes Then
@@ -1134,7 +1155,19 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
     Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
+
         Try
+            If blDGVChanged Then
+                Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+                If reply = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+                End If
+            End If
+
+            blDGVChanged = False
+
             Me.Cursor = Cursors.WaitCursor
             If Me.SuperTabControl1.SelectedTab Is tabOD Then
                 Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
@@ -1147,6 +1180,7 @@ Public Class frmWeeklyDiaryDE
                 Me.WeeklyDiaryBindingSource.MoveLast()
                 ShowDesktopAlert("Data reloaded in Weekly Diary table.")
             End If
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
