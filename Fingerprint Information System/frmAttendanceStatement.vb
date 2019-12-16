@@ -262,9 +262,9 @@ Public Class frmAttendanceStmt
 
 
                 If args.UseTI Then
-                    WordApp.Selection.TypeText("ABSTRACT OF ATTENDANCE OF TESTER INSPECTOR, " & FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & " FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
+                    WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF TESTER INSPECTOR FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 Else
-                    WordApp.Selection.TypeText("ABSTRACT OF ATTENDANCE OF STAFF OF " & FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & " FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
+                    WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF STAFF FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 End If
 
                 For delay = 21 To 30
@@ -474,7 +474,7 @@ Public Class frmAttendanceStmt
                     bodytext = "I am submitting herewith the abstract of my attendance for the period from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy") & " for favour of further necessary action."
                 Else
                     subject = "Abstract of Attendance of Staff - submitting of - reg:- "
-                    bodytext = "I am submitting herewith the abstract of attendance of Staff of this unit for the period from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy") & " for favour of further necessary action."
+                    bodytext = "I am submitting herewith the abstract of attendance of the Staff of this unit for the period from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy") & " for favour of further necessary action."
                 End If
 
                 Dim missing As Object = System.Reflection.Missing.Value
