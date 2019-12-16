@@ -3742,6 +3742,10 @@ Public Class frmMainInterface
             Dim fs As String = SOCDatagrid.Rows(e.RowIndex).Cells(24).Value.ToString.ToLower
             If fs = "identified" Then
                 SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Red
+                SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.SelectionForeColor = Color.Red
+            Else
+                SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Black
+                SOCDatagrid.Rows(e.RowIndex).DefaultCellStyle.SelectionForeColor = Color.Black
             End If
         Catch ex As Exception
         End Try

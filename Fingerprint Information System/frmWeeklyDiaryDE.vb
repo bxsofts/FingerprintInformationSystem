@@ -77,7 +77,8 @@ Public Class frmWeeklyDiaryDE
             Me.PersonalDetailsTableAdapter1.Fill(Me.WeeklyDiaryDataSet1.PersonalDetails)
 
             If Me.WeeklyDiaryDataSet1.PersonalDetails.Rows.Count = 1 Then
-                Me.lblPEN.Text = WeeklyDiaryDataSet1.PersonalDetails(0).PEN.ToString
+                wdPEN = WeeklyDiaryDataSet1.PersonalDetails(0).PEN.ToString
+                Me.lblPEN.Text = wdPEN
                 wdOfficerName = WeeklyDiaryDataSet1.PersonalDetails(0).OfficerName.ToString
             End If
 
@@ -303,8 +304,7 @@ Public Class frmWeeklyDiaryDE
                 MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
-            dgvWeeklyDiary.CurrentCell = dgvWeeklyDiary.SelectedRows(0).Cells(2)
-            dgvWeeklyDiary.BeginEdit(True)
+            MessageBoxEx.Show("To edit data, double click required cell and modify the content.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 #End Region
@@ -953,13 +953,17 @@ Public Class frmWeeklyDiaryDE
         On Error Resume Next
         If Not blDGVChanged Then
             e.CellStyle.BackColor = Color.White
+            e.CellStyle.ForeColor = Color.Black
+            e.CellStyle.SelectionForeColor = Color.Black
         End If
     End Sub
 
     Private Sub dgvWeeklyDiary_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvWeeklyDiary.CellValueChanged
         On Error Resume Next
         blDGVChanged = True
-        Me.dgvWeeklyDiary.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Color.YellowGreen
+        Me.dgvWeeklyDiary.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Color.Yellow
+        Me.dgvWeeklyDiary.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.ForeColor = Color.Red
+        Me.dgvWeeklyDiary.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.SelectionForeColor = Color.Red
     End Sub
 
     Private Sub frmWeeklyDiaryDE_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
