@@ -31,7 +31,6 @@ Public Class frmWeeklyDiaryDE
     Dim TemplateFile As String
 
     Dim WeeklyDiaryFolder As String
-    Dim sFileName As String
 
     Dim blDGVChanged As Boolean
 
@@ -46,7 +45,7 @@ Public Class frmWeeklyDiaryDE
             Me.txtOldPassword.Text = ""
             Me.txtPassword1.Text = ""
             Me.txtPassword2.Text = ""
-            Me.lblPEN.Text = wdPEN
+
             ShowPasswordFields(False)
             Me.btnSaveName.Visible = False
             Me.btnCancelName.Visible = False
@@ -75,8 +74,13 @@ Public Class frmWeeklyDiaryDE
             ConnectToDatabase()
 
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
+            Me.PersonalDetailsTableAdapter1.Fill(Me.WeeklyDiaryDataSet1.PersonalDetails)
 
-            wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
+            If Me.WeeklyDiaryDataSet1.PersonalDetails.Rows.Count = 1 Then
+                Me.lblPEN.Text = WeeklyDiaryDataSet1.PersonalDetails(0).PEN.ToString
+                wdOfficerName = WeeklyDiaryDataSet1.PersonalDetails(0).OfficerName.ToString
+            End If
+
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
 
@@ -223,7 +227,7 @@ Public Class frmWeeklyDiaryDE
 
 
         Try
-            Me.PersonalDetailsTableAdapter1.UpdateOfficerName(newname, wdPEN)
+            Me.PersonalDetailsTableAdapter1.UpdateOfficerName(newname, Me.lblPEN.Text)
             wdOfficerName = newname
 
             Me.btnSaveName.Visible = False
@@ -792,7 +796,12 @@ Public Class frmWeeklyDiaryDE
             Me.OfficeDetailsBindingSource.MoveLast()
 
             Me.txtName.Enabled = True
-            wdOfficerName = Me.PersonalDetailsTableAdapter1.GetOfficerName(wdPEN)
+            Me.PersonalDetailsTableAdapter1.Fill(Me.WeeklyDiaryDataSet1.PersonalDetails)
+
+            If Me.WeeklyDiaryDataSet1.PersonalDetails.Rows.Count = 1 Then
+                wdOfficerName = WeeklyDiaryDataSet1.PersonalDetails(0).OfficerName.ToString
+            End If
+
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
 
