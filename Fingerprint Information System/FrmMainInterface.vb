@@ -2767,10 +2767,10 @@ Public Class frmMainInterface
         Me.ACDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
 
         Me.IODatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-        Me.IODatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Me.IODatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
         Me.IODatagrid.Columns(0).DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
-
         Me.IODatagrid.Columns(6).DisplayIndex = 1
+
         Me.JoinedIDRDataGrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.JoinedIDRDataGrid.Columns(0).CellTemplate.Style.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.JoinedIDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)

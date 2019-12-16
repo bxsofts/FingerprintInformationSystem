@@ -87,13 +87,6 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -112,6 +105,13 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle86 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle87 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle88 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.RibbonTabItem6 = New DevComponents.DotNetBar.RibbonTabItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar12 = New DevComponents.DotNetBar.RibbonBar()
@@ -526,6 +526,60 @@ Partial Class frmMainInterface
         Me.lblAutoCapsStatus = New DevComponents.DotNetBar.LabelItem()
         Me.lblTime = New DevComponents.DotNetBar.LabelItem()
         Me.TabControl = New DevComponents.DotNetBar.TabControl()
+        Me.TabControlPanel5 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelEx6 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX53 = New DevComponents.DotNetBar.LabelX()
+        Me.cmbSalutation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.LabelX16 = New DevComponents.DotNetBar.LabelX()
+        Me.lblDesignation = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX146 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIODARate = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX127 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIOScaleOfPay = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX110 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIOBAsicPay = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX96 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIOPENNo = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX17 = New DevComponents.DotNetBar.LabelX()
+        Me.txtIOOfficerName = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.IODatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.btnSaveIO = New DevComponents.DotNetBar.ButtonX()
+        Me.IOTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel10 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelEx7 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnSaveOfficeSettings = New DevComponents.DotNetBar.ButtonX()
+        Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.txtIdentificationPdlNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX168 = New DevComponents.DotNetBar.LabelX()
+        Me.txtWeeklyDiary = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX154 = New DevComponents.DotNetBar.LabelX()
+        Me.txtVigilanceCase = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX155 = New DevComponents.DotNetBar.LabelX()
+        Me.txtGraveCrime = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX156 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFPAttestation = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX158 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX159 = New DevComponents.DotNetBar.LabelX()
+        Me.txtTABill = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtRBWarrant = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtSOCDAStatement = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtIndividualPerformance = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtAttendance = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX160 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX163 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX164 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX165 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX166 = New DevComponents.DotNetBar.LabelX()
+        Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.LabelX150 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX148 = New DevComponents.DotNetBar.LabelX()
+        Me.txtFullDistrict = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtShortOffice = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX149 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX147 = New DevComponents.DotNetBar.LabelX()
+        Me.txtShortDistrict = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.txtFullOffice = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.OSTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel1 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -717,67 +771,6 @@ Partial Class frmMainInterface
         Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
         Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
         Me.IDRTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel5 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelEx6 = New DevComponents.DotNetBar.PanelEx()
-        Me.LabelX53 = New DevComponents.DotNetBar.LabelX()
-        Me.cmbSalutation = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.LabelX16 = New DevComponents.DotNetBar.LabelX()
-        Me.lblDesignation = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX146 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIODARate = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX127 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIOScaleOfPay = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX110 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIOBAsicPay = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX96 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIOPENNo = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX17 = New DevComponents.DotNetBar.LabelX()
-        Me.txtIOOfficerName = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.IODatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.Designation = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OfficerName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PEN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BasicPay = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ScaleOfPay = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DARate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Salutation = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnSaveIO = New DevComponents.DotNetBar.ButtonX()
-        Me.IOTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel10 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelEx7 = New DevComponents.DotNetBar.PanelEx()
-        Me.btnSaveOfficeSettings = New DevComponents.DotNetBar.ButtonX()
-        Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.txtIdentificationPdlNumber = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX168 = New DevComponents.DotNetBar.LabelX()
-        Me.txtWeeklyDiary = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX154 = New DevComponents.DotNetBar.LabelX()
-        Me.txtVigilanceCase = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX155 = New DevComponents.DotNetBar.LabelX()
-        Me.txtGraveCrime = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX156 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFPAttestation = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX158 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX159 = New DevComponents.DotNetBar.LabelX()
-        Me.txtTABill = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtRBWarrant = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtSOCDAStatement = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtIndividualPerformance = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtAttendance = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX160 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX163 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX164 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX165 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX166 = New DevComponents.DotNetBar.LabelX()
-        Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.LabelX150 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX148 = New DevComponents.DotNetBar.LabelX()
-        Me.txtFullDistrict = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtShortOffice = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX149 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX147 = New DevComponents.DotNetBar.LabelX()
-        Me.txtShortDistrict = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.txtFullOffice = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.OSTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel6 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelID = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX144 = New DevComponents.DotNetBar.LabelX()
@@ -1087,6 +1080,16 @@ Partial Class frmMainInterface
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
+        Me.Designation = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OfficerName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PEN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BasicPay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ScaleOfPay = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DARate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Salutation = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SSTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel12 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelEx8 = New DevComponents.DotNetBar.PanelEx()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -1121,6 +1124,13 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControl.SuspendLayout
+        Me.TabControlPanel5.SuspendLayout
+        Me.PanelEx6.SuspendLayout
+        CType(Me.IODatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControlPanel10.SuspendLayout
+        Me.PanelEx7.SuspendLayout
+        Me.GroupPanel5.SuspendLayout
+        Me.GroupPanel4.SuspendLayout
         Me.TabControlPanel1.SuspendLayout
         Me.PanelEx1.SuspendLayout
         Me.PanelEx4.SuspendLayout
@@ -1145,13 +1155,6 @@ Partial Class frmMainInterface
         CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControlPanel11.SuspendLayout
         Me.PanelIDR.SuspendLayout
-        Me.TabControlPanel5.SuspendLayout
-        Me.PanelEx6.SuspendLayout
-        CType(Me.IODatagrid,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabControlPanel10.SuspendLayout
-        Me.PanelEx7.SuspendLayout
-        Me.GroupPanel5.SuspendLayout
-        Me.GroupPanel4.SuspendLayout
         Me.TabControlPanel6.SuspendLayout
         Me.PanelID.SuspendLayout
         CType(Me.txtIDNumber,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1177,6 +1180,7 @@ Partial Class frmMainInterface
         CType(Me.dtCDExamination,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.FingerPrintDataSet1,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.OfficerTableBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControlPanel12.SuspendLayout
         Me.SuspendLayout
         '
         'RibbonTabItem6
@@ -5485,6 +5489,9 @@ Partial Class frmMainInterface
         '
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
+        Me.TabControl.Controls.Add(Me.TabControlPanel12)
+        Me.TabControl.Controls.Add(Me.TabControlPanel9)
+        Me.TabControl.Controls.Add(Me.TabControlPanel3)
         Me.TabControl.Controls.Add(Me.TabControlPanel5)
         Me.TabControl.Controls.Add(Me.TabControlPanel10)
         Me.TabControl.Controls.Add(Me.TabControlPanel1)
@@ -5492,8 +5499,6 @@ Partial Class frmMainInterface
         Me.TabControl.Controls.Add(Me.TabControlPanel2)
         Me.TabControl.Controls.Add(Me.TabControlPanel11)
         Me.TabControl.Controls.Add(Me.TabControlPanel6)
-        Me.TabControl.Controls.Add(Me.TabControlPanel3)
-        Me.TabControl.Controls.Add(Me.TabControlPanel9)
         Me.TabControl.Controls.Add(Me.TabControlPanel8)
         Me.TabControl.Controls.Add(Me.TabControlPanel7)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
@@ -5517,8 +5522,995 @@ Partial Class frmMainInterface
         Me.TabControl.Tabs.Add(Me.RSOCTabItem)
         Me.TabControl.Tabs.Add(Me.PSTabItem)
         Me.TabControl.Tabs.Add(Me.IOTabItem)
+        Me.TabControl.Tabs.Add(Me.SSTabItem)
         Me.TabControl.Tabs.Add(Me.OSTabItem)
         Me.TabControl.TabStop = false
+        '
+        'TabControlPanel5
+        '
+        Me.TabControlPanel5.Controls.Add(Me.PanelEx6)
+        Me.TabControlPanel5.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel5.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel5.Name = "TabControlPanel5"
+        Me.TabControlPanel5.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel5.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel5.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel5.Style.GradientAngle = 90
+        Me.TabControlPanel5.TabIndex = 10
+        Me.TabControlPanel5.TabItem = Me.IOTabItem
+        '
+        'PanelEx6
+        '
+        Me.PanelEx6.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx6.Controls.Add(Me.LabelX53)
+        Me.PanelEx6.Controls.Add(Me.cmbSalutation)
+        Me.PanelEx6.Controls.Add(Me.LabelX16)
+        Me.PanelEx6.Controls.Add(Me.lblDesignation)
+        Me.PanelEx6.Controls.Add(Me.LabelX146)
+        Me.PanelEx6.Controls.Add(Me.txtIODARate)
+        Me.PanelEx6.Controls.Add(Me.LabelX127)
+        Me.PanelEx6.Controls.Add(Me.txtIOScaleOfPay)
+        Me.PanelEx6.Controls.Add(Me.LabelX110)
+        Me.PanelEx6.Controls.Add(Me.txtIOBAsicPay)
+        Me.PanelEx6.Controls.Add(Me.LabelX96)
+        Me.PanelEx6.Controls.Add(Me.txtIOPENNo)
+        Me.PanelEx6.Controls.Add(Me.LabelX17)
+        Me.PanelEx6.Controls.Add(Me.txtIOOfficerName)
+        Me.PanelEx6.Controls.Add(Me.IODatagrid)
+        Me.PanelEx6.Controls.Add(Me.btnSaveIO)
+        Me.PanelEx6.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Highlighter1.SetHighlightOnFocus(Me.PanelEx6, true)
+        Me.PanelEx6.Location = New System.Drawing.Point(1, 1)
+        Me.PanelEx6.Name = "PanelEx6"
+        Me.PanelEx6.Size = New System.Drawing.Size(1358, 526)
+        Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx6.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx6.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx6.Style.GradientAngle = 90
+        Me.PanelEx6.TabIndex = 0
+        '
+        'LabelX53
+        '
+        Me.LabelX53.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX53.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX53.Location = New System.Drawing.Point(7, 279)
+        Me.LabelX53.Name = "LabelX53"
+        Me.LabelX53.Size = New System.Drawing.Size(60, 18)
+        Me.LabelX53.TabIndex = 661
+        Me.LabelX53.Text = "Salutation"
+        '
+        'cmbSalutation
+        '
+        Me.cmbSalutation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbSalutation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbSalutation.DisplayMember = "Text"
+        Me.cmbSalutation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSalutation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSalutation.FocusHighlightEnabled = true
+        Me.cmbSalutation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cmbSalutation.ForeColor = System.Drawing.Color.Black
+        Me.cmbSalutation.FormattingEnabled = true
+        Me.Highlighter1.SetHighlightOnFocus(Me.cmbSalutation, true)
+        Me.cmbSalutation.ItemHeight = 24
+        Me.cmbSalutation.Location = New System.Drawing.Point(89, 273)
+        Me.cmbSalutation.Name = "cmbSalutation"
+        Me.cmbSalutation.Size = New System.Drawing.Size(155, 30)
+        Me.cmbSalutation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.cmbSalutation.TabIndex = 2
+        Me.cmbSalutation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.cmbSalutation.WatermarkText = "Sri./Smt."
+        '
+        'LabelX16
+        '
+        Me.LabelX16.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX16.Location = New System.Drawing.Point(7, 208)
+        Me.LabelX16.Name = "LabelX16"
+        Me.LabelX16.Size = New System.Drawing.Size(70, 18)
+        Me.LabelX16.TabIndex = 659
+        Me.LabelX16.Text = "Designation"
+        '
+        'lblDesignation
+        '
+        Me.lblDesignation.AutoSize = true
+        '
+        '
+        '
+        Me.lblDesignation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblDesignation.Font = New System.Drawing.Font("Segoe UI", 14!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblDesignation.ForeColor = System.Drawing.Color.Red
+        Me.lblDesignation.Location = New System.Drawing.Point(89, 203)
+        Me.lblDesignation.Name = "lblDesignation"
+        Me.lblDesignation.Size = New System.Drawing.Size(108, 29)
+        Me.lblDesignation.TabIndex = 658
+        Me.lblDesignation.Text = "Designation"
+        '
+        'LabelX146
+        '
+        Me.LabelX146.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX146.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX146.Location = New System.Drawing.Point(7, 415)
+        Me.LabelX146.Name = "LabelX146"
+        Me.LabelX146.Size = New System.Drawing.Size(80, 18)
+        Me.LabelX146.TabIndex = 656
+        Me.LabelX146.Text = "DA for TA Bill"
+        '
+        'txtIODARate
+        '
+        Me.txtIODARate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtIODARate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIODARate.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIODARate.Border.Class = "TextBoxBorder"
+        Me.txtIODARate.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIODARate.ButtonCustom.Image = CType(resources.GetObject("txtIODARate.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIODARate.ButtonCustom.Visible = true
+        Me.txtIODARate.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIODARate.FocusHighlightEnabled = true
+        Me.txtIODARate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIODARate.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIODARate, true)
+        Me.txtIODARate.Location = New System.Drawing.Point(89, 410)
+        Me.txtIODARate.MaxLength = 255
+        Me.txtIODARate.Name = "txtIODARate"
+        Me.txtIODARate.Size = New System.Drawing.Size(155, 29)
+        Me.txtIODARate.TabIndex = 6
+        Me.txtIODARate.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIODARate.WatermarkText = "DA for TA Bill"
+        '
+        'LabelX127
+        '
+        Me.LabelX127.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX127.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX127.Location = New System.Drawing.Point(7, 381)
+        Me.LabelX127.Name = "LabelX127"
+        Me.LabelX127.Size = New System.Drawing.Size(70, 18)
+        Me.LabelX127.TabIndex = 654
+        Me.LabelX127.Text = "Scale of Pay"
+        '
+        'txtIOScaleOfPay
+        '
+        Me.txtIOScaleOfPay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtIOScaleOfPay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOScaleOfPay.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIOScaleOfPay.Border.Class = "TextBoxBorder"
+        Me.txtIOScaleOfPay.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIOScaleOfPay.ButtonCustom.Image = CType(resources.GetObject("txtIOScaleOfPay.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIOScaleOfPay.ButtonCustom.Visible = true
+        Me.txtIOScaleOfPay.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIOScaleOfPay.FocusHighlightEnabled = true
+        Me.txtIOScaleOfPay.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOScaleOfPay.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOScaleOfPay, true)
+        Me.txtIOScaleOfPay.Location = New System.Drawing.Point(89, 376)
+        Me.txtIOScaleOfPay.MaxLength = 255
+        Me.txtIOScaleOfPay.Name = "txtIOScaleOfPay"
+        Me.txtIOScaleOfPay.Size = New System.Drawing.Size(155, 29)
+        Me.txtIOScaleOfPay.TabIndex = 5
+        Me.txtIOScaleOfPay.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIOScaleOfPay.WatermarkText = "Scale of Pay"
+        '
+        'LabelX110
+        '
+        Me.LabelX110.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX110.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX110.Location = New System.Drawing.Point(7, 347)
+        Me.LabelX110.Name = "LabelX110"
+        Me.LabelX110.Size = New System.Drawing.Size(55, 18)
+        Me.LabelX110.TabIndex = 652
+        Me.LabelX110.Text = "Basic Pay"
+        '
+        'txtIOBAsicPay
+        '
+        Me.txtIOBAsicPay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtIOBAsicPay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOBAsicPay.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIOBAsicPay.Border.Class = "TextBoxBorder"
+        Me.txtIOBAsicPay.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIOBAsicPay.ButtonCustom.Image = CType(resources.GetObject("txtIOBAsicPay.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIOBAsicPay.ButtonCustom.Visible = true
+        Me.txtIOBAsicPay.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIOBAsicPay.FocusHighlightEnabled = true
+        Me.txtIOBAsicPay.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOBAsicPay.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOBAsicPay, true)
+        Me.txtIOBAsicPay.Location = New System.Drawing.Point(89, 342)
+        Me.txtIOBAsicPay.MaxLength = 255
+        Me.txtIOBAsicPay.Name = "txtIOBAsicPay"
+        Me.txtIOBAsicPay.Size = New System.Drawing.Size(155, 29)
+        Me.txtIOBAsicPay.TabIndex = 4
+        Me.txtIOBAsicPay.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIOBAsicPay.WatermarkText = "Basic Pay"
+        '
+        'LabelX96
+        '
+        Me.LabelX96.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX96.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX96.Location = New System.Drawing.Point(7, 313)
+        Me.LabelX96.Name = "LabelX96"
+        Me.LabelX96.Size = New System.Drawing.Size(49, 18)
+        Me.LabelX96.TabIndex = 650
+        Me.LabelX96.Text = "PEN No."
+        '
+        'txtIOPENNo
+        '
+        Me.txtIOPENNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtIOPENNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOPENNo.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIOPENNo.Border.Class = "TextBoxBorder"
+        Me.txtIOPENNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIOPENNo.ButtonCustom.Image = CType(resources.GetObject("txtIOPENNo.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIOPENNo.ButtonCustom.Visible = true
+        Me.txtIOPENNo.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIOPENNo.FocusHighlightEnabled = true
+        Me.txtIOPENNo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOPENNo.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOPENNo, true)
+        Me.txtIOPENNo.Location = New System.Drawing.Point(89, 308)
+        Me.txtIOPENNo.MaxLength = 255
+        Me.txtIOPENNo.Name = "txtIOPENNo"
+        Me.txtIOPENNo.Size = New System.Drawing.Size(155, 29)
+        Me.txtIOPENNo.TabIndex = 3
+        Me.txtIOPENNo.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIOPENNo.WatermarkText = "PEN No."
+        '
+        'LabelX17
+        '
+        Me.LabelX17.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX17.Location = New System.Drawing.Point(7, 244)
+        Me.LabelX17.Name = "LabelX17"
+        Me.LabelX17.Size = New System.Drawing.Size(36, 18)
+        Me.LabelX17.TabIndex = 648
+        Me.LabelX17.Text = "Name"
+        '
+        'txtIOOfficerName
+        '
+        Me.txtIOOfficerName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtIOOfficerName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtIOOfficerName.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIOOfficerName.Border.Class = "TextBoxBorder"
+        Me.txtIOOfficerName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIOOfficerName.ButtonCustom.Image = CType(resources.GetObject("txtIOOfficerName.ButtonCustom.Image"),System.Drawing.Image)
+        Me.txtIOOfficerName.ButtonCustom.Visible = true
+        Me.txtIOOfficerName.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIOOfficerName.FocusHighlightEnabled = true
+        Me.txtIOOfficerName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIOOfficerName.ForeColor = System.Drawing.Color.Black
+        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOOfficerName, true)
+        Me.txtIOOfficerName.Location = New System.Drawing.Point(89, 239)
+        Me.txtIOOfficerName.MaxLength = 255
+        Me.txtIOOfficerName.Name = "txtIOOfficerName"
+        Me.txtIOOfficerName.Size = New System.Drawing.Size(223, 29)
+        Me.txtIOOfficerName.TabIndex = 1
+        Me.txtIOOfficerName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtIOOfficerName.WatermarkText = "Officer Name"
+        '
+        'IODatagrid
+        '
+        Me.IODatagrid.AllowUserToAddRows = false
+        Me.IODatagrid.AllowUserToDeleteRows = false
+        Me.IODatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle61.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle61.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle61.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle61.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle61.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle61.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IODatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle61
+        Me.IODatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.IODatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Designation, Me.OfficerName, Me.PEN, Me.BasicPay, Me.ScaleOfPay, Me.DARate, Me.Salutation})
+        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle69.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        DataGridViewCellStyle69.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle69.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle69.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle69.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.IODatagrid.DefaultCellStyle = DataGridViewCellStyle69
+        Me.IODatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.IODatagrid.EnableHeadersVisualStyles = false
+        Me.IODatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
+        Me.IODatagrid.Location = New System.Drawing.Point(0, 1)
+        Me.IODatagrid.MultiSelect = false
+        Me.IODatagrid.Name = "IODatagrid"
+        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle70.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle70.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle70.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle70.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IODatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle70
+        Me.IODatagrid.SelectAllSignVisible = false
+        Me.IODatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.IODatagrid.Size = New System.Drawing.Size(814, 178)
+        Me.IODatagrid.TabIndex = 646
+        Me.IODatagrid.TabStop = false
+        '
+        'btnSaveIO
+        '
+        Me.btnSaveIO.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveIO.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveIO.Image = CType(resources.GetObject("btnSaveIO.Image"),System.Drawing.Image)
+        Me.btnSaveIO.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveIO.Location = New System.Drawing.Point(310, 325)
+        Me.btnSaveIO.Name = "btnSaveIO"
+        Me.btnSaveIO.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveIO.TabIndex = 7
+        Me.btnSaveIO.Text = "Save"
+        '
+        'IOTabItem
+        '
+        Me.IOTabItem.AttachedControl = Me.TabControlPanel5
+        Me.IOTabItem.Name = "IOTabItem"
+        Me.IOTabItem.Text = "Officers List"
+        '
+        'TabControlPanel10
+        '
+        Me.TabControlPanel10.Controls.Add(Me.PanelEx7)
+        Me.TabControlPanel10.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel10.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel10.Name = "TabControlPanel10"
+        Me.TabControlPanel10.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel10.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel10.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel10.Style.GradientAngle = 90
+        Me.TabControlPanel10.TabIndex = 31
+        Me.TabControlPanel10.TabItem = Me.OSTabItem
+        '
+        'PanelEx7
+        '
+        Me.PanelEx7.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx7.Controls.Add(Me.btnSaveOfficeSettings)
+        Me.PanelEx7.Controls.Add(Me.GroupPanel5)
+        Me.PanelEx7.Controls.Add(Me.GroupPanel4)
+        Me.PanelEx7.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx7.Location = New System.Drawing.Point(1, 1)
+        Me.PanelEx7.Name = "PanelEx7"
+        Me.PanelEx7.Size = New System.Drawing.Size(1358, 526)
+        Me.PanelEx7.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx7.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx7.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx7.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx7.Style.GradientAngle = 90
+        Me.PanelEx7.TabIndex = 22
+        '
+        'btnSaveOfficeSettings
+        '
+        Me.btnSaveOfficeSettings.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSaveOfficeSettings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnSaveOfficeSettings.Image = CType(resources.GetObject("btnSaveOfficeSettings.Image"),System.Drawing.Image)
+        Me.btnSaveOfficeSettings.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnSaveOfficeSettings.Location = New System.Drawing.Point(1034, 96)
+        Me.btnSaveOfficeSettings.Name = "btnSaveOfficeSettings"
+        Me.btnSaveOfficeSettings.Size = New System.Drawing.Size(110, 73)
+        Me.btnSaveOfficeSettings.TabIndex = 15
+        Me.btnSaveOfficeSettings.Text = "Save"
+        '
+        'GroupPanel5
+        '
+        Me.GroupPanel5.BackColor = System.Drawing.Color.Transparent
+        Me.GroupPanel5.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GroupPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel5.Controls.Add(Me.txtIdentificationPdlNumber)
+        Me.GroupPanel5.Controls.Add(Me.LabelX168)
+        Me.GroupPanel5.Controls.Add(Me.txtWeeklyDiary)
+        Me.GroupPanel5.Controls.Add(Me.LabelX154)
+        Me.GroupPanel5.Controls.Add(Me.txtVigilanceCase)
+        Me.GroupPanel5.Controls.Add(Me.LabelX155)
+        Me.GroupPanel5.Controls.Add(Me.txtGraveCrime)
+        Me.GroupPanel5.Controls.Add(Me.LabelX156)
+        Me.GroupPanel5.Controls.Add(Me.txtFPAttestation)
+        Me.GroupPanel5.Controls.Add(Me.LabelX158)
+        Me.GroupPanel5.Controls.Add(Me.LabelX159)
+        Me.GroupPanel5.Controls.Add(Me.txtTABill)
+        Me.GroupPanel5.Controls.Add(Me.txtRBWarrant)
+        Me.GroupPanel5.Controls.Add(Me.txtSOCDAStatement)
+        Me.GroupPanel5.Controls.Add(Me.txtIndividualPerformance)
+        Me.GroupPanel5.Controls.Add(Me.txtAttendance)
+        Me.GroupPanel5.Controls.Add(Me.LabelX160)
+        Me.GroupPanel5.Controls.Add(Me.LabelX163)
+        Me.GroupPanel5.Controls.Add(Me.LabelX164)
+        Me.GroupPanel5.Controls.Add(Me.LabelX165)
+        Me.GroupPanel5.Controls.Add(Me.LabelX166)
+        Me.GroupPanel5.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GroupPanel5.Location = New System.Drawing.Point(488, 19)
+        Me.GroupPanel5.Name = "GroupPanel5"
+        Me.GroupPanel5.Size = New System.Drawing.Size(512, 226)
+        '
+        '
+        '
+        Me.GroupPanel5.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GroupPanel5.Style.BackColorGradientAngle = 90
+        Me.GroupPanel5.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GroupPanel5.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderBottomWidth = 1
+        Me.GroupPanel5.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GroupPanel5.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderLeftWidth = 1
+        Me.GroupPanel5.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderRightWidth = 1
+        Me.GroupPanel5.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderTopWidth = 1
+        Me.GroupPanel5.Style.CornerDiameter = 4
+        Me.GroupPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GroupPanel5.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
+        Me.GroupPanel5.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GroupPanel5.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GroupPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GroupPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanel5.TabIndex = 23
+        Me.GroupPanel5.Text = "File Numbers"
+        '
+        'txtIdentificationPdlNumber
+        '
+        Me.txtIdentificationPdlNumber.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIdentificationPdlNumber.Border.Class = "TextBoxBorder"
+        Me.txtIdentificationPdlNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIdentificationPdlNumber.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIdentificationPdlNumber.FocusHighlightEnabled = true
+        Me.txtIdentificationPdlNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIdentificationPdlNumber.ForeColor = System.Drawing.Color.Black
+        Me.txtIdentificationPdlNumber.Location = New System.Drawing.Point(150, 124)
+        Me.txtIdentificationPdlNumber.MaxLength = 2
+        Me.txtIdentificationPdlNumber.Name = "txtIdentificationPdlNumber"
+        Me.txtIdentificationPdlNumber.Size = New System.Drawing.Size(90, 29)
+        Me.txtIdentificationPdlNumber.TabIndex = 8
+        '
+        'LabelX168
+        '
+        Me.LabelX168.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX168.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX168.Location = New System.Drawing.Point(4, 164)
+        Me.LabelX168.Name = "LabelX168"
+        Me.LabelX168.Size = New System.Drawing.Size(134, 18)
+        Me.LabelX168.TabIndex = 51
+        Me.LabelX168.Text = "Individual Performance"
+        '
+        'txtWeeklyDiary
+        '
+        Me.txtWeeklyDiary.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtWeeklyDiary.Border.Class = "TextBoxBorder"
+        Me.txtWeeklyDiary.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtWeeklyDiary.DisabledBackColor = System.Drawing.Color.White
+        Me.txtWeeklyDiary.FocusHighlightEnabled = true
+        Me.txtWeeklyDiary.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtWeeklyDiary.ForeColor = System.Drawing.Color.Black
+        Me.txtWeeklyDiary.Location = New System.Drawing.Point(403, 159)
+        Me.txtWeeklyDiary.MaxLength = 2
+        Me.txtWeeklyDiary.Name = "txtWeeklyDiary"
+        Me.txtWeeklyDiary.Size = New System.Drawing.Size(90, 29)
+        Me.txtWeeklyDiary.TabIndex = 14
+        '
+        'LabelX154
+        '
+        Me.LabelX154.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX154.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX154.Location = New System.Drawing.Point(258, 164)
+        Me.LabelX154.Name = "LabelX154"
+        Me.LabelX154.Size = New System.Drawing.Size(77, 18)
+        Me.LabelX154.TabIndex = 49
+        Me.LabelX154.Text = "Weekly Diary"
+        '
+        'txtVigilanceCase
+        '
+        Me.txtVigilanceCase.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtVigilanceCase.Border.Class = "TextBoxBorder"
+        Me.txtVigilanceCase.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtVigilanceCase.DisabledBackColor = System.Drawing.Color.White
+        Me.txtVigilanceCase.FocusHighlightEnabled = true
+        Me.txtVigilanceCase.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtVigilanceCase.ForeColor = System.Drawing.Color.Black
+        Me.txtVigilanceCase.Location = New System.Drawing.Point(403, 124)
+        Me.txtVigilanceCase.MaxLength = 2
+        Me.txtVigilanceCase.Name = "txtVigilanceCase"
+        Me.txtVigilanceCase.Size = New System.Drawing.Size(90, 29)
+        Me.txtVigilanceCase.TabIndex = 13
+        '
+        'LabelX155
+        '
+        Me.LabelX155.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX155.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX155.Location = New System.Drawing.Point(258, 129)
+        Me.LabelX155.Name = "LabelX155"
+        Me.LabelX155.Size = New System.Drawing.Size(83, 18)
+        Me.LabelX155.TabIndex = 48
+        Me.LabelX155.Text = "Vigilance Case"
+        '
+        'txtGraveCrime
+        '
+        Me.txtGraveCrime.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtGraveCrime.Border.Class = "TextBoxBorder"
+        Me.txtGraveCrime.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtGraveCrime.DisabledBackColor = System.Drawing.Color.White
+        Me.txtGraveCrime.FocusHighlightEnabled = true
+        Me.txtGraveCrime.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtGraveCrime.ForeColor = System.Drawing.Color.Black
+        Me.txtGraveCrime.Location = New System.Drawing.Point(149, 89)
+        Me.txtGraveCrime.MaxLength = 2
+        Me.txtGraveCrime.Name = "txtGraveCrime"
+        Me.txtGraveCrime.Size = New System.Drawing.Size(90, 29)
+        Me.txtGraveCrime.TabIndex = 7
+        '
+        'LabelX156
+        '
+        Me.LabelX156.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX156.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX156.Location = New System.Drawing.Point(4, 94)
+        Me.LabelX156.Name = "LabelX156"
+        Me.LabelX156.Size = New System.Drawing.Size(72, 18)
+        Me.LabelX156.TabIndex = 45
+        Me.LabelX156.Text = "Grave Crime"
+        '
+        'txtFPAttestation
+        '
+        Me.txtFPAttestation.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFPAttestation.Border.Class = "TextBoxBorder"
+        Me.txtFPAttestation.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFPAttestation.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFPAttestation.FocusHighlightEnabled = true
+        Me.txtFPAttestation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFPAttestation.ForeColor = System.Drawing.Color.Black
+        Me.txtFPAttestation.Location = New System.Drawing.Point(149, 54)
+        Me.txtFPAttestation.MaxLength = 2
+        Me.txtFPAttestation.Name = "txtFPAttestation"
+        Me.txtFPAttestation.Size = New System.Drawing.Size(90, 29)
+        Me.txtFPAttestation.TabIndex = 6
+        '
+        'LabelX158
+        '
+        Me.LabelX158.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX158.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX158.Location = New System.Drawing.Point(4, 59)
+        Me.LabelX158.Name = "LabelX158"
+        Me.LabelX158.Size = New System.Drawing.Size(86, 18)
+        Me.LabelX158.TabIndex = 43
+        Me.LabelX158.Text = "F.P Attestation"
+        '
+        'LabelX159
+        '
+        Me.LabelX159.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX159.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX159.Location = New System.Drawing.Point(4, -4)
+        Me.LabelX159.Name = "LabelX159"
+        Me.LabelX159.Size = New System.Drawing.Size(120, 34)
+        Me.LabelX159.TabIndex = 31
+        Me.LabelX159.Text = "<font color=""#ED1C24""><font color=""#ED1C24""><font color=""#BA1419"">(Only the numbe"& _ 
+    "r is needed)</font></font></font>"
+        '
+        'txtTABill
+        '
+        Me.txtTABill.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtTABill.Border.Class = "TextBoxBorder"
+        Me.txtTABill.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtTABill.DisabledBackColor = System.Drawing.Color.White
+        Me.txtTABill.FocusHighlightEnabled = true
+        Me.txtTABill.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtTABill.ForeColor = System.Drawing.Color.Black
+        Me.txtTABill.Location = New System.Drawing.Point(403, 89)
+        Me.txtTABill.MaxLength = 2
+        Me.txtTABill.Name = "txtTABill"
+        Me.txtTABill.Size = New System.Drawing.Size(90, 29)
+        Me.txtTABill.TabIndex = 12
+        '
+        'txtRBWarrant
+        '
+        Me.txtRBWarrant.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtRBWarrant.Border.Class = "TextBoxBorder"
+        Me.txtRBWarrant.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtRBWarrant.DisabledBackColor = System.Drawing.Color.White
+        Me.txtRBWarrant.FocusHighlightEnabled = true
+        Me.txtRBWarrant.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtRBWarrant.ForeColor = System.Drawing.Color.Black
+        Me.txtRBWarrant.Location = New System.Drawing.Point(403, 19)
+        Me.txtRBWarrant.MaxLength = 2
+        Me.txtRBWarrant.Name = "txtRBWarrant"
+        Me.txtRBWarrant.Size = New System.Drawing.Size(90, 29)
+        Me.txtRBWarrant.TabIndex = 10
+        '
+        'txtSOCDAStatement
+        '
+        Me.txtSOCDAStatement.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtSOCDAStatement.Border.Class = "TextBoxBorder"
+        Me.txtSOCDAStatement.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtSOCDAStatement.DisabledBackColor = System.Drawing.Color.White
+        Me.txtSOCDAStatement.FocusHighlightEnabled = true
+        Me.txtSOCDAStatement.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtSOCDAStatement.ForeColor = System.Drawing.Color.Black
+        Me.txtSOCDAStatement.Location = New System.Drawing.Point(403, 54)
+        Me.txtSOCDAStatement.MaxLength = 2
+        Me.txtSOCDAStatement.Name = "txtSOCDAStatement"
+        Me.txtSOCDAStatement.Size = New System.Drawing.Size(90, 29)
+        Me.txtSOCDAStatement.TabIndex = 11
+        '
+        'txtIndividualPerformance
+        '
+        Me.txtIndividualPerformance.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtIndividualPerformance.Border.Class = "TextBoxBorder"
+        Me.txtIndividualPerformance.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtIndividualPerformance.DisabledBackColor = System.Drawing.Color.White
+        Me.txtIndividualPerformance.FocusHighlightEnabled = true
+        Me.txtIndividualPerformance.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtIndividualPerformance.ForeColor = System.Drawing.Color.Black
+        Me.txtIndividualPerformance.Location = New System.Drawing.Point(150, 159)
+        Me.txtIndividualPerformance.MaxLength = 2
+        Me.txtIndividualPerformance.Name = "txtIndividualPerformance"
+        Me.txtIndividualPerformance.Size = New System.Drawing.Size(90, 29)
+        Me.txtIndividualPerformance.TabIndex = 9
+        '
+        'txtAttendance
+        '
+        Me.txtAttendance.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtAttendance.Border.Class = "TextBoxBorder"
+        Me.txtAttendance.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtAttendance.DisabledBackColor = System.Drawing.Color.White
+        Me.txtAttendance.FocusHighlightEnabled = true
+        Me.txtAttendance.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtAttendance.ForeColor = System.Drawing.Color.Black
+        Me.txtAttendance.Location = New System.Drawing.Point(149, 19)
+        Me.txtAttendance.MaxLength = 2
+        Me.txtAttendance.Name = "txtAttendance"
+        Me.txtAttendance.Size = New System.Drawing.Size(90, 29)
+        Me.txtAttendance.TabIndex = 5
+        '
+        'LabelX160
+        '
+        Me.LabelX160.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX160.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX160.Location = New System.Drawing.Point(258, 94)
+        Me.LabelX160.Name = "LabelX160"
+        Me.LabelX160.Size = New System.Drawing.Size(39, 18)
+        Me.LabelX160.TabIndex = 36
+        Me.LabelX160.Text = "TA Bill"
+        '
+        'LabelX163
+        '
+        Me.LabelX163.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX163.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX163.Location = New System.Drawing.Point(258, 59)
+        Me.LabelX163.Name = "LabelX163"
+        Me.LabelX163.Size = New System.Drawing.Size(133, 18)
+        Me.LabelX163.TabIndex = 35
+        Me.LabelX163.Text = "SOC and DA Statement"
+        '
+        'LabelX164
+        '
+        Me.LabelX164.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX164.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX164.Location = New System.Drawing.Point(258, 24)
+        Me.LabelX164.Name = "LabelX164"
+        Me.LabelX164.Size = New System.Drawing.Size(99, 18)
+        Me.LabelX164.TabIndex = 34
+        Me.LabelX164.Text = "Rail/Bus Warrant"
+        '
+        'LabelX165
+        '
+        Me.LabelX165.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX165.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX165.Location = New System.Drawing.Point(4, 129)
+        Me.LabelX165.Name = "LabelX165"
+        Me.LabelX165.Size = New System.Drawing.Size(140, 18)
+        Me.LabelX165.TabIndex = 33
+        Me.LabelX165.Text = "Identification Statement"
+        '
+        'LabelX166
+        '
+        Me.LabelX166.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX166.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX166.Location = New System.Drawing.Point(4, 24)
+        Me.LabelX166.Name = "LabelX166"
+        Me.LabelX166.Size = New System.Drawing.Size(67, 18)
+        Me.LabelX166.TabIndex = 32
+        Me.LabelX166.Text = "Attendance"
+        '
+        'GroupPanel4
+        '
+        Me.GroupPanel4.BackColor = System.Drawing.Color.Transparent
+        Me.GroupPanel4.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GroupPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel4.Controls.Add(Me.LabelX150)
+        Me.GroupPanel4.Controls.Add(Me.LabelX148)
+        Me.GroupPanel4.Controls.Add(Me.txtFullDistrict)
+        Me.GroupPanel4.Controls.Add(Me.txtShortOffice)
+        Me.GroupPanel4.Controls.Add(Me.LabelX149)
+        Me.GroupPanel4.Controls.Add(Me.LabelX147)
+        Me.GroupPanel4.Controls.Add(Me.txtShortDistrict)
+        Me.GroupPanel4.Controls.Add(Me.txtFullOffice)
+        Me.GroupPanel4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GroupPanel4.Location = New System.Drawing.Point(7, 19)
+        Me.GroupPanel4.Name = "GroupPanel4"
+        Me.GroupPanel4.Size = New System.Drawing.Size(460, 226)
+        '
+        '
+        '
+        Me.GroupPanel4.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GroupPanel4.Style.BackColorGradientAngle = 90
+        Me.GroupPanel4.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GroupPanel4.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel4.Style.BorderBottomWidth = 1
+        Me.GroupPanel4.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GroupPanel4.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel4.Style.BorderLeftWidth = 1
+        Me.GroupPanel4.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel4.Style.BorderRightWidth = 1
+        Me.GroupPanel4.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel4.Style.BorderTopWidth = 1
+        Me.GroupPanel4.Style.CornerDiameter = 4
+        Me.GroupPanel4.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GroupPanel4.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
+        Me.GroupPanel4.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GroupPanel4.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GroupPanel4.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GroupPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanel4.TabIndex = 22
+        Me.GroupPanel4.Text = "Office Name and District"
+        '
+        'LabelX150
+        '
+        Me.LabelX150.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX150.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX150.Location = New System.Drawing.Point(9, 23)
+        Me.LabelX150.Name = "LabelX150"
+        Me.LabelX150.Size = New System.Drawing.Size(97, 18)
+        Me.LabelX150.TabIndex = 14
+        Me.LabelX150.Text = "Full Office Name"
+        '
+        'LabelX148
+        '
+        Me.LabelX148.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX148.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX148.Location = New System.Drawing.Point(9, 119)
+        Me.LabelX148.Name = "LabelX148"
+        Me.LabelX148.Size = New System.Drawing.Size(104, 18)
+        Me.LabelX148.TabIndex = 20
+        Me.LabelX148.Text = "Full District Name"
+        '
+        'txtFullDistrict
+        '
+        Me.txtFullDistrict.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFullDistrict.Border.Class = "TextBoxBorder"
+        Me.txtFullDistrict.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFullDistrict.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFullDistrict.FocusHighlightEnabled = true
+        Me.txtFullDistrict.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFullDistrict.ForeColor = System.Drawing.Color.Black
+        Me.txtFullDistrict.Location = New System.Drawing.Point(130, 115)
+        Me.txtFullDistrict.MaxLength = 255
+        Me.txtFullDistrict.Name = "txtFullDistrict"
+        Me.txtFullDistrict.Size = New System.Drawing.Size(309, 29)
+        Me.txtFullDistrict.TabIndex = 3
+        Me.txtFullDistrict.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFullDistrict.WatermarkText = "Full District Name"
+        '
+        'txtShortOffice
+        '
+        Me.txtShortOffice.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtShortOffice.Border.Class = "TextBoxBorder"
+        Me.txtShortOffice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtShortOffice.DisabledBackColor = System.Drawing.Color.White
+        Me.txtShortOffice.FocusHighlightEnabled = true
+        Me.txtShortOffice.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtShortOffice.ForeColor = System.Drawing.Color.Black
+        Me.txtShortOffice.Location = New System.Drawing.Point(130, 67)
+        Me.txtShortOffice.MaxLength = 255
+        Me.txtShortOffice.Name = "txtShortOffice"
+        Me.txtShortOffice.Size = New System.Drawing.Size(309, 29)
+        Me.txtShortOffice.TabIndex = 2
+        Me.txtShortOffice.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtShortOffice.WatermarkText = "Short Office Name"
+        '
+        'LabelX149
+        '
+        Me.LabelX149.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX149.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX149.Location = New System.Drawing.Point(9, 71)
+        Me.LabelX149.Name = "LabelX149"
+        Me.LabelX149.Size = New System.Drawing.Size(107, 18)
+        Me.LabelX149.TabIndex = 16
+        Me.LabelX149.Text = "Short Office Name"
+        '
+        'LabelX147
+        '
+        Me.LabelX147.AutoSize = true
+        '
+        '
+        '
+        Me.LabelX147.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX147.Location = New System.Drawing.Point(9, 167)
+        Me.LabelX147.Name = "LabelX147"
+        Me.LabelX147.Size = New System.Drawing.Size(114, 18)
+        Me.LabelX147.TabIndex = 21
+        Me.LabelX147.Text = "Short District Name"
+        '
+        'txtShortDistrict
+        '
+        Me.txtShortDistrict.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtShortDistrict.Border.Class = "TextBoxBorder"
+        Me.txtShortDistrict.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtShortDistrict.DisabledBackColor = System.Drawing.Color.White
+        Me.txtShortDistrict.FocusHighlightEnabled = true
+        Me.txtShortDistrict.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtShortDistrict.ForeColor = System.Drawing.Color.Black
+        Me.txtShortDistrict.Location = New System.Drawing.Point(130, 163)
+        Me.txtShortDistrict.MaxLength = 255
+        Me.txtShortDistrict.Name = "txtShortDistrict"
+        Me.txtShortDistrict.Size = New System.Drawing.Size(309, 29)
+        Me.txtShortDistrict.TabIndex = 4
+        Me.txtShortDistrict.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtShortDistrict.WatermarkText = "Short District Name"
+        '
+        'txtFullOffice
+        '
+        Me.txtFullOffice.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtFullOffice.Border.Class = "TextBoxBorder"
+        Me.txtFullOffice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtFullOffice.DisabledBackColor = System.Drawing.Color.White
+        Me.txtFullOffice.FocusHighlightEnabled = true
+        Me.txtFullOffice.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.txtFullOffice.ForeColor = System.Drawing.Color.Black
+        Me.txtFullOffice.Location = New System.Drawing.Point(130, 19)
+        Me.txtFullOffice.MaxLength = 255
+        Me.txtFullOffice.Name = "txtFullOffice"
+        Me.txtFullOffice.Size = New System.Drawing.Size(309, 29)
+        Me.txtFullOffice.TabIndex = 1
+        Me.txtFullOffice.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtFullOffice.WatermarkText = "Full Office Name"
+        '
+        'OSTabItem
+        '
+        Me.OSTabItem.AttachedControl = Me.TabControlPanel10
+        Me.OSTabItem.Name = "OSTabItem"
+        Me.OSTabItem.Text = "Office Settings"
         '
         'TabControlPanel1
         '
@@ -8434,1047 +9426,6 @@ Partial Class frmMainInterface
         Me.IDRTabItem.Name = "IDRTabItem"
         Me.IDRTabItem.Text = "Identification Register"
         '
-        'TabControlPanel5
-        '
-        Me.TabControlPanel5.Controls.Add(Me.PanelEx6)
-        Me.TabControlPanel5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel5.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel5.Name = "TabControlPanel5"
-        Me.TabControlPanel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel5.Size = New System.Drawing.Size(1360, 528)
-        Me.TabControlPanel5.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel5.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel5.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel5.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel5.Style.GradientAngle = 90
-        Me.TabControlPanel5.TabIndex = 10
-        Me.TabControlPanel5.TabItem = Me.IOTabItem
-        '
-        'PanelEx6
-        '
-        Me.PanelEx6.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx6.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx6.Controls.Add(Me.LabelX53)
-        Me.PanelEx6.Controls.Add(Me.cmbSalutation)
-        Me.PanelEx6.Controls.Add(Me.LabelX16)
-        Me.PanelEx6.Controls.Add(Me.lblDesignation)
-        Me.PanelEx6.Controls.Add(Me.LabelX146)
-        Me.PanelEx6.Controls.Add(Me.txtIODARate)
-        Me.PanelEx6.Controls.Add(Me.LabelX127)
-        Me.PanelEx6.Controls.Add(Me.txtIOScaleOfPay)
-        Me.PanelEx6.Controls.Add(Me.LabelX110)
-        Me.PanelEx6.Controls.Add(Me.txtIOBAsicPay)
-        Me.PanelEx6.Controls.Add(Me.LabelX96)
-        Me.PanelEx6.Controls.Add(Me.txtIOPENNo)
-        Me.PanelEx6.Controls.Add(Me.LabelX17)
-        Me.PanelEx6.Controls.Add(Me.txtIOOfficerName)
-        Me.PanelEx6.Controls.Add(Me.IODatagrid)
-        Me.PanelEx6.Controls.Add(Me.btnSaveIO)
-        Me.PanelEx6.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Highlighter1.SetHighlightOnFocus(Me.PanelEx6, true)
-        Me.PanelEx6.Location = New System.Drawing.Point(1, 1)
-        Me.PanelEx6.Name = "PanelEx6"
-        Me.PanelEx6.Size = New System.Drawing.Size(1358, 526)
-        Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx6.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx6.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx6.Style.GradientAngle = 90
-        Me.PanelEx6.TabIndex = 0
-        '
-        'LabelX53
-        '
-        Me.LabelX53.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX53.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX53.Location = New System.Drawing.Point(7, 279)
-        Me.LabelX53.Name = "LabelX53"
-        Me.LabelX53.Size = New System.Drawing.Size(60, 18)
-        Me.LabelX53.TabIndex = 661
-        Me.LabelX53.Text = "Salutation"
-        '
-        'cmbSalutation
-        '
-        Me.cmbSalutation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbSalutation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbSalutation.DisplayMember = "Text"
-        Me.cmbSalutation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSalutation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbSalutation.FocusHighlightEnabled = true
-        Me.cmbSalutation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cmbSalutation.ForeColor = System.Drawing.Color.Black
-        Me.cmbSalutation.FormattingEnabled = true
-        Me.Highlighter1.SetHighlightOnFocus(Me.cmbSalutation, true)
-        Me.cmbSalutation.ItemHeight = 24
-        Me.cmbSalutation.Location = New System.Drawing.Point(89, 273)
-        Me.cmbSalutation.Name = "cmbSalutation"
-        Me.cmbSalutation.Size = New System.Drawing.Size(155, 30)
-        Me.cmbSalutation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.cmbSalutation.TabIndex = 2
-        Me.cmbSalutation.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.cmbSalutation.WatermarkText = "Sri./Smt."
-        '
-        'LabelX16
-        '
-        Me.LabelX16.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX16.Location = New System.Drawing.Point(7, 208)
-        Me.LabelX16.Name = "LabelX16"
-        Me.LabelX16.Size = New System.Drawing.Size(70, 18)
-        Me.LabelX16.TabIndex = 659
-        Me.LabelX16.Text = "Designation"
-        '
-        'lblDesignation
-        '
-        Me.lblDesignation.AutoSize = true
-        '
-        '
-        '
-        Me.lblDesignation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDesignation.Font = New System.Drawing.Font("Segoe UI", 14!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDesignation.ForeColor = System.Drawing.Color.Red
-        Me.lblDesignation.Location = New System.Drawing.Point(89, 203)
-        Me.lblDesignation.Name = "lblDesignation"
-        Me.lblDesignation.Size = New System.Drawing.Size(108, 29)
-        Me.lblDesignation.TabIndex = 658
-        Me.lblDesignation.Text = "Designation"
-        '
-        'LabelX146
-        '
-        Me.LabelX146.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX146.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX146.Location = New System.Drawing.Point(7, 415)
-        Me.LabelX146.Name = "LabelX146"
-        Me.LabelX146.Size = New System.Drawing.Size(80, 18)
-        Me.LabelX146.TabIndex = 656
-        Me.LabelX146.Text = "DA for TA Bill"
-        '
-        'txtIODARate
-        '
-        Me.txtIODARate.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtIODARate.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIODARate.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIODARate.Border.Class = "TextBoxBorder"
-        Me.txtIODARate.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIODARate.ButtonCustom.Image = CType(resources.GetObject("txtIODARate.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIODARate.ButtonCustom.Visible = true
-        Me.txtIODARate.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIODARate.FocusHighlightEnabled = true
-        Me.txtIODARate.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIODARate.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIODARate, true)
-        Me.txtIODARate.Location = New System.Drawing.Point(89, 410)
-        Me.txtIODARate.MaxLength = 255
-        Me.txtIODARate.Name = "txtIODARate"
-        Me.txtIODARate.Size = New System.Drawing.Size(155, 29)
-        Me.txtIODARate.TabIndex = 6
-        Me.txtIODARate.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIODARate.WatermarkText = "DA for TA Bill"
-        '
-        'LabelX127
-        '
-        Me.LabelX127.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX127.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX127.Location = New System.Drawing.Point(7, 381)
-        Me.LabelX127.Name = "LabelX127"
-        Me.LabelX127.Size = New System.Drawing.Size(70, 18)
-        Me.LabelX127.TabIndex = 654
-        Me.LabelX127.Text = "Scale of Pay"
-        '
-        'txtIOScaleOfPay
-        '
-        Me.txtIOScaleOfPay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtIOScaleOfPay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIOScaleOfPay.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIOScaleOfPay.Border.Class = "TextBoxBorder"
-        Me.txtIOScaleOfPay.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIOScaleOfPay.ButtonCustom.Image = CType(resources.GetObject("txtIOScaleOfPay.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIOScaleOfPay.ButtonCustom.Visible = true
-        Me.txtIOScaleOfPay.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIOScaleOfPay.FocusHighlightEnabled = true
-        Me.txtIOScaleOfPay.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIOScaleOfPay.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOScaleOfPay, true)
-        Me.txtIOScaleOfPay.Location = New System.Drawing.Point(89, 376)
-        Me.txtIOScaleOfPay.MaxLength = 255
-        Me.txtIOScaleOfPay.Name = "txtIOScaleOfPay"
-        Me.txtIOScaleOfPay.Size = New System.Drawing.Size(155, 29)
-        Me.txtIOScaleOfPay.TabIndex = 5
-        Me.txtIOScaleOfPay.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIOScaleOfPay.WatermarkText = "Scale of Pay"
-        '
-        'LabelX110
-        '
-        Me.LabelX110.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX110.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX110.Location = New System.Drawing.Point(7, 347)
-        Me.LabelX110.Name = "LabelX110"
-        Me.LabelX110.Size = New System.Drawing.Size(55, 18)
-        Me.LabelX110.TabIndex = 652
-        Me.LabelX110.Text = "Basic Pay"
-        '
-        'txtIOBAsicPay
-        '
-        Me.txtIOBAsicPay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtIOBAsicPay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIOBAsicPay.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIOBAsicPay.Border.Class = "TextBoxBorder"
-        Me.txtIOBAsicPay.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIOBAsicPay.ButtonCustom.Image = CType(resources.GetObject("txtIOBAsicPay.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIOBAsicPay.ButtonCustom.Visible = true
-        Me.txtIOBAsicPay.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIOBAsicPay.FocusHighlightEnabled = true
-        Me.txtIOBAsicPay.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIOBAsicPay.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOBAsicPay, true)
-        Me.txtIOBAsicPay.Location = New System.Drawing.Point(89, 342)
-        Me.txtIOBAsicPay.MaxLength = 255
-        Me.txtIOBAsicPay.Name = "txtIOBAsicPay"
-        Me.txtIOBAsicPay.Size = New System.Drawing.Size(155, 29)
-        Me.txtIOBAsicPay.TabIndex = 4
-        Me.txtIOBAsicPay.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIOBAsicPay.WatermarkText = "Basic Pay"
-        '
-        'LabelX96
-        '
-        Me.LabelX96.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX96.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX96.Location = New System.Drawing.Point(7, 313)
-        Me.LabelX96.Name = "LabelX96"
-        Me.LabelX96.Size = New System.Drawing.Size(49, 18)
-        Me.LabelX96.TabIndex = 650
-        Me.LabelX96.Text = "PEN No."
-        '
-        'txtIOPENNo
-        '
-        Me.txtIOPENNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtIOPENNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIOPENNo.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIOPENNo.Border.Class = "TextBoxBorder"
-        Me.txtIOPENNo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIOPENNo.ButtonCustom.Image = CType(resources.GetObject("txtIOPENNo.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIOPENNo.ButtonCustom.Visible = true
-        Me.txtIOPENNo.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIOPENNo.FocusHighlightEnabled = true
-        Me.txtIOPENNo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIOPENNo.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOPENNo, true)
-        Me.txtIOPENNo.Location = New System.Drawing.Point(89, 308)
-        Me.txtIOPENNo.MaxLength = 255
-        Me.txtIOPENNo.Name = "txtIOPENNo"
-        Me.txtIOPENNo.Size = New System.Drawing.Size(155, 29)
-        Me.txtIOPENNo.TabIndex = 3
-        Me.txtIOPENNo.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIOPENNo.WatermarkText = "PEN No."
-        '
-        'LabelX17
-        '
-        Me.LabelX17.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX17.Location = New System.Drawing.Point(7, 244)
-        Me.LabelX17.Name = "LabelX17"
-        Me.LabelX17.Size = New System.Drawing.Size(36, 18)
-        Me.LabelX17.TabIndex = 648
-        Me.LabelX17.Text = "Name"
-        '
-        'txtIOOfficerName
-        '
-        Me.txtIOOfficerName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtIOOfficerName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtIOOfficerName.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIOOfficerName.Border.Class = "TextBoxBorder"
-        Me.txtIOOfficerName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIOOfficerName.ButtonCustom.Image = CType(resources.GetObject("txtIOOfficerName.ButtonCustom.Image"),System.Drawing.Image)
-        Me.txtIOOfficerName.ButtonCustom.Visible = true
-        Me.txtIOOfficerName.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIOOfficerName.FocusHighlightEnabled = true
-        Me.txtIOOfficerName.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIOOfficerName.ForeColor = System.Drawing.Color.Black
-        Me.Highlighter1.SetHighlightOnFocus(Me.txtIOOfficerName, true)
-        Me.txtIOOfficerName.Location = New System.Drawing.Point(89, 239)
-        Me.txtIOOfficerName.MaxLength = 255
-        Me.txtIOOfficerName.Name = "txtIOOfficerName"
-        Me.txtIOOfficerName.Size = New System.Drawing.Size(223, 29)
-        Me.txtIOOfficerName.TabIndex = 1
-        Me.txtIOOfficerName.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtIOOfficerName.WatermarkText = "Officer Name"
-        '
-        'IODatagrid
-        '
-        Me.IODatagrid.AllowUserToAddRows = false
-        Me.IODatagrid.AllowUserToDeleteRows = false
-        Me.IODatagrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle61.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle61.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle61.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle61.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle61.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle61.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IODatagrid.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle61
-        Me.IODatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.IODatagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Designation, Me.OfficerName, Me.PEN, Me.BasicPay, Me.ScaleOfPay, Me.DARate, Me.Salutation})
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle69.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        DataGridViewCellStyle69.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle69.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle69.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle69.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.IODatagrid.DefaultCellStyle = DataGridViewCellStyle69
-        Me.IODatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.IODatagrid.EnableHeadersVisualStyles = false
-        Me.IODatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer), CType(CType(200,Byte),Integer))
-        Me.IODatagrid.Location = New System.Drawing.Point(0, 1)
-        Me.IODatagrid.MultiSelect = false
-        Me.IODatagrid.Name = "IODatagrid"
-        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle70.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle70.Font = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle70.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle70.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IODatagrid.RowHeadersDefaultCellStyle = DataGridViewCellStyle70
-        Me.IODatagrid.SelectAllSignVisible = false
-        Me.IODatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.IODatagrid.Size = New System.Drawing.Size(924, 178)
-        Me.IODatagrid.TabIndex = 646
-        Me.IODatagrid.TabStop = false
-        '
-        'Designation
-        '
-        DataGridViewCellStyle62.NullValue = "''"
-        Me.Designation.DefaultCellStyle = DataGridViewCellStyle62
-        Me.Designation.HeaderText = "Designation"
-        Me.Designation.Name = "Designation"
-        Me.Designation.ReadOnly = true
-        Me.Designation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Designation.Width = 150
-        '
-        'OfficerName
-        '
-        DataGridViewCellStyle63.NullValue = "''"
-        Me.OfficerName.DefaultCellStyle = DataGridViewCellStyle63
-        Me.OfficerName.HeaderText = "Officer Name"
-        Me.OfficerName.Name = "OfficerName"
-        Me.OfficerName.Width = 190
-        '
-        'PEN
-        '
-        DataGridViewCellStyle64.NullValue = "''"
-        Me.PEN.DefaultCellStyle = DataGridViewCellStyle64
-        Me.PEN.HeaderText = "PEN No."
-        Me.PEN.Name = "PEN"
-        '
-        'BasicPay
-        '
-        DataGridViewCellStyle65.NullValue = "''"
-        Me.BasicPay.DefaultCellStyle = DataGridViewCellStyle65
-        Me.BasicPay.HeaderText = "Basic Pay"
-        Me.BasicPay.Name = "BasicPay"
-        '
-        'ScaleOfPay
-        '
-        DataGridViewCellStyle66.NullValue = "''"
-        Me.ScaleOfPay.DefaultCellStyle = DataGridViewCellStyle66
-        Me.ScaleOfPay.HeaderText = "Scale of Pay"
-        Me.ScaleOfPay.Name = "ScaleOfPay"
-        Me.ScaleOfPay.Width = 150
-        '
-        'DARate
-        '
-        DataGridViewCellStyle67.NullValue = "''"
-        Me.DARate.DefaultCellStyle = DataGridViewCellStyle67
-        Me.DARate.HeaderText = "DA Rate"
-        Me.DARate.Name = "DARate"
-        '
-        'Salutation
-        '
-        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
-        Me.Salutation.DefaultCellStyle = DataGridViewCellStyle68
-        Me.Salutation.HeaderText = "Salutation"
-        Me.Salutation.Name = "Salutation"
-        Me.Salutation.Width = 80
-        '
-        'btnSaveIO
-        '
-        Me.btnSaveIO.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveIO.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveIO.Image = CType(resources.GetObject("btnSaveIO.Image"),System.Drawing.Image)
-        Me.btnSaveIO.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveIO.Location = New System.Drawing.Point(310, 325)
-        Me.btnSaveIO.Name = "btnSaveIO"
-        Me.btnSaveIO.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveIO.TabIndex = 7
-        Me.btnSaveIO.Text = "Save"
-        '
-        'IOTabItem
-        '
-        Me.IOTabItem.AttachedControl = Me.TabControlPanel5
-        Me.IOTabItem.Name = "IOTabItem"
-        Me.IOTabItem.Text = "List of Officers"
-        '
-        'TabControlPanel10
-        '
-        Me.TabControlPanel10.Controls.Add(Me.PanelEx7)
-        Me.TabControlPanel10.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel10.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel10.Name = "TabControlPanel10"
-        Me.TabControlPanel10.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel10.Size = New System.Drawing.Size(1360, 528)
-        Me.TabControlPanel10.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel10.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel10.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel10.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel10.Style.GradientAngle = 90
-        Me.TabControlPanel10.TabIndex = 31
-        Me.TabControlPanel10.TabItem = Me.OSTabItem
-        '
-        'PanelEx7
-        '
-        Me.PanelEx7.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelEx7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx7.Controls.Add(Me.btnSaveOfficeSettings)
-        Me.PanelEx7.Controls.Add(Me.GroupPanel5)
-        Me.PanelEx7.Controls.Add(Me.GroupPanel4)
-        Me.PanelEx7.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelEx7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelEx7.Location = New System.Drawing.Point(1, 1)
-        Me.PanelEx7.Name = "PanelEx7"
-        Me.PanelEx7.Size = New System.Drawing.Size(1358, 526)
-        Me.PanelEx7.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx7.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx7.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelEx7.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelEx7.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelEx7.Style.GradientAngle = 90
-        Me.PanelEx7.TabIndex = 22
-        '
-        'btnSaveOfficeSettings
-        '
-        Me.btnSaveOfficeSettings.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnSaveOfficeSettings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSaveOfficeSettings.Image = CType(resources.GetObject("btnSaveOfficeSettings.Image"),System.Drawing.Image)
-        Me.btnSaveOfficeSettings.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
-        Me.btnSaveOfficeSettings.Location = New System.Drawing.Point(1034, 96)
-        Me.btnSaveOfficeSettings.Name = "btnSaveOfficeSettings"
-        Me.btnSaveOfficeSettings.Size = New System.Drawing.Size(110, 73)
-        Me.btnSaveOfficeSettings.TabIndex = 15
-        Me.btnSaveOfficeSettings.Text = "Save"
-        '
-        'GroupPanel5
-        '
-        Me.GroupPanel5.BackColor = System.Drawing.Color.Transparent
-        Me.GroupPanel5.CanvasColor = System.Drawing.SystemColors.Control
-        Me.GroupPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel5.Controls.Add(Me.txtIdentificationPdlNumber)
-        Me.GroupPanel5.Controls.Add(Me.LabelX168)
-        Me.GroupPanel5.Controls.Add(Me.txtWeeklyDiary)
-        Me.GroupPanel5.Controls.Add(Me.LabelX154)
-        Me.GroupPanel5.Controls.Add(Me.txtVigilanceCase)
-        Me.GroupPanel5.Controls.Add(Me.LabelX155)
-        Me.GroupPanel5.Controls.Add(Me.txtGraveCrime)
-        Me.GroupPanel5.Controls.Add(Me.LabelX156)
-        Me.GroupPanel5.Controls.Add(Me.txtFPAttestation)
-        Me.GroupPanel5.Controls.Add(Me.LabelX158)
-        Me.GroupPanel5.Controls.Add(Me.LabelX159)
-        Me.GroupPanel5.Controls.Add(Me.txtTABill)
-        Me.GroupPanel5.Controls.Add(Me.txtRBWarrant)
-        Me.GroupPanel5.Controls.Add(Me.txtSOCDAStatement)
-        Me.GroupPanel5.Controls.Add(Me.txtIndividualPerformance)
-        Me.GroupPanel5.Controls.Add(Me.txtAttendance)
-        Me.GroupPanel5.Controls.Add(Me.LabelX160)
-        Me.GroupPanel5.Controls.Add(Me.LabelX163)
-        Me.GroupPanel5.Controls.Add(Me.LabelX164)
-        Me.GroupPanel5.Controls.Add(Me.LabelX165)
-        Me.GroupPanel5.Controls.Add(Me.LabelX166)
-        Me.GroupPanel5.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel5.Location = New System.Drawing.Point(488, 19)
-        Me.GroupPanel5.Name = "GroupPanel5"
-        Me.GroupPanel5.Size = New System.Drawing.Size(512, 226)
-        '
-        '
-        '
-        Me.GroupPanel5.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.GroupPanel5.Style.BackColorGradientAngle = 90
-        Me.GroupPanel5.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.GroupPanel5.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel5.Style.BorderBottomWidth = 1
-        Me.GroupPanel5.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.GroupPanel5.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel5.Style.BorderLeftWidth = 1
-        Me.GroupPanel5.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel5.Style.BorderRightWidth = 1
-        Me.GroupPanel5.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel5.Style.BorderTopWidth = 1
-        Me.GroupPanel5.Style.CornerDiameter = 4
-        Me.GroupPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
-        Me.GroupPanel5.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
-        Me.GroupPanel5.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.GroupPanel5.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
-        '
-        '
-        '
-        Me.GroupPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.GroupPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel5.TabIndex = 23
-        Me.GroupPanel5.Text = "File Numbers"
-        '
-        'txtIdentificationPdlNumber
-        '
-        Me.txtIdentificationPdlNumber.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIdentificationPdlNumber.Border.Class = "TextBoxBorder"
-        Me.txtIdentificationPdlNumber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIdentificationPdlNumber.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIdentificationPdlNumber.FocusHighlightEnabled = true
-        Me.txtIdentificationPdlNumber.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIdentificationPdlNumber.ForeColor = System.Drawing.Color.Black
-        Me.txtIdentificationPdlNumber.Location = New System.Drawing.Point(150, 124)
-        Me.txtIdentificationPdlNumber.MaxLength = 2
-        Me.txtIdentificationPdlNumber.Name = "txtIdentificationPdlNumber"
-        Me.txtIdentificationPdlNumber.Size = New System.Drawing.Size(90, 29)
-        Me.txtIdentificationPdlNumber.TabIndex = 8
-        '
-        'LabelX168
-        '
-        Me.LabelX168.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX168.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX168.Location = New System.Drawing.Point(4, 164)
-        Me.LabelX168.Name = "LabelX168"
-        Me.LabelX168.Size = New System.Drawing.Size(134, 18)
-        Me.LabelX168.TabIndex = 51
-        Me.LabelX168.Text = "Individual Performance"
-        '
-        'txtWeeklyDiary
-        '
-        Me.txtWeeklyDiary.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtWeeklyDiary.Border.Class = "TextBoxBorder"
-        Me.txtWeeklyDiary.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtWeeklyDiary.DisabledBackColor = System.Drawing.Color.White
-        Me.txtWeeklyDiary.FocusHighlightEnabled = true
-        Me.txtWeeklyDiary.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtWeeklyDiary.ForeColor = System.Drawing.Color.Black
-        Me.txtWeeklyDiary.Location = New System.Drawing.Point(403, 159)
-        Me.txtWeeklyDiary.MaxLength = 2
-        Me.txtWeeklyDiary.Name = "txtWeeklyDiary"
-        Me.txtWeeklyDiary.Size = New System.Drawing.Size(90, 29)
-        Me.txtWeeklyDiary.TabIndex = 14
-        '
-        'LabelX154
-        '
-        Me.LabelX154.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX154.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX154.Location = New System.Drawing.Point(258, 164)
-        Me.LabelX154.Name = "LabelX154"
-        Me.LabelX154.Size = New System.Drawing.Size(77, 18)
-        Me.LabelX154.TabIndex = 49
-        Me.LabelX154.Text = "Weekly Diary"
-        '
-        'txtVigilanceCase
-        '
-        Me.txtVigilanceCase.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtVigilanceCase.Border.Class = "TextBoxBorder"
-        Me.txtVigilanceCase.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtVigilanceCase.DisabledBackColor = System.Drawing.Color.White
-        Me.txtVigilanceCase.FocusHighlightEnabled = true
-        Me.txtVigilanceCase.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtVigilanceCase.ForeColor = System.Drawing.Color.Black
-        Me.txtVigilanceCase.Location = New System.Drawing.Point(403, 124)
-        Me.txtVigilanceCase.MaxLength = 2
-        Me.txtVigilanceCase.Name = "txtVigilanceCase"
-        Me.txtVigilanceCase.Size = New System.Drawing.Size(90, 29)
-        Me.txtVigilanceCase.TabIndex = 13
-        '
-        'LabelX155
-        '
-        Me.LabelX155.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX155.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX155.Location = New System.Drawing.Point(258, 129)
-        Me.LabelX155.Name = "LabelX155"
-        Me.LabelX155.Size = New System.Drawing.Size(83, 18)
-        Me.LabelX155.TabIndex = 48
-        Me.LabelX155.Text = "Vigilance Case"
-        '
-        'txtGraveCrime
-        '
-        Me.txtGraveCrime.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtGraveCrime.Border.Class = "TextBoxBorder"
-        Me.txtGraveCrime.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtGraveCrime.DisabledBackColor = System.Drawing.Color.White
-        Me.txtGraveCrime.FocusHighlightEnabled = true
-        Me.txtGraveCrime.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtGraveCrime.ForeColor = System.Drawing.Color.Black
-        Me.txtGraveCrime.Location = New System.Drawing.Point(149, 89)
-        Me.txtGraveCrime.MaxLength = 2
-        Me.txtGraveCrime.Name = "txtGraveCrime"
-        Me.txtGraveCrime.Size = New System.Drawing.Size(90, 29)
-        Me.txtGraveCrime.TabIndex = 7
-        '
-        'LabelX156
-        '
-        Me.LabelX156.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX156.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX156.Location = New System.Drawing.Point(4, 94)
-        Me.LabelX156.Name = "LabelX156"
-        Me.LabelX156.Size = New System.Drawing.Size(72, 18)
-        Me.LabelX156.TabIndex = 45
-        Me.LabelX156.Text = "Grave Crime"
-        '
-        'txtFPAttestation
-        '
-        Me.txtFPAttestation.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFPAttestation.Border.Class = "TextBoxBorder"
-        Me.txtFPAttestation.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFPAttestation.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFPAttestation.FocusHighlightEnabled = true
-        Me.txtFPAttestation.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFPAttestation.ForeColor = System.Drawing.Color.Black
-        Me.txtFPAttestation.Location = New System.Drawing.Point(149, 54)
-        Me.txtFPAttestation.MaxLength = 2
-        Me.txtFPAttestation.Name = "txtFPAttestation"
-        Me.txtFPAttestation.Size = New System.Drawing.Size(90, 29)
-        Me.txtFPAttestation.TabIndex = 6
-        '
-        'LabelX158
-        '
-        Me.LabelX158.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX158.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX158.Location = New System.Drawing.Point(4, 59)
-        Me.LabelX158.Name = "LabelX158"
-        Me.LabelX158.Size = New System.Drawing.Size(86, 18)
-        Me.LabelX158.TabIndex = 43
-        Me.LabelX158.Text = "F.P Attestation"
-        '
-        'LabelX159
-        '
-        Me.LabelX159.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX159.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX159.Location = New System.Drawing.Point(4, -4)
-        Me.LabelX159.Name = "LabelX159"
-        Me.LabelX159.Size = New System.Drawing.Size(120, 34)
-        Me.LabelX159.TabIndex = 31
-        Me.LabelX159.Text = "<font color=""#ED1C24""><font color=""#ED1C24""><font color=""#BA1419"">(Only the numbe"& _ 
-    "r is needed)</font></font></font>"
-        '
-        'txtTABill
-        '
-        Me.txtTABill.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtTABill.Border.Class = "TextBoxBorder"
-        Me.txtTABill.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtTABill.DisabledBackColor = System.Drawing.Color.White
-        Me.txtTABill.FocusHighlightEnabled = true
-        Me.txtTABill.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtTABill.ForeColor = System.Drawing.Color.Black
-        Me.txtTABill.Location = New System.Drawing.Point(403, 89)
-        Me.txtTABill.MaxLength = 2
-        Me.txtTABill.Name = "txtTABill"
-        Me.txtTABill.Size = New System.Drawing.Size(90, 29)
-        Me.txtTABill.TabIndex = 12
-        '
-        'txtRBWarrant
-        '
-        Me.txtRBWarrant.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtRBWarrant.Border.Class = "TextBoxBorder"
-        Me.txtRBWarrant.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtRBWarrant.DisabledBackColor = System.Drawing.Color.White
-        Me.txtRBWarrant.FocusHighlightEnabled = true
-        Me.txtRBWarrant.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtRBWarrant.ForeColor = System.Drawing.Color.Black
-        Me.txtRBWarrant.Location = New System.Drawing.Point(403, 19)
-        Me.txtRBWarrant.MaxLength = 2
-        Me.txtRBWarrant.Name = "txtRBWarrant"
-        Me.txtRBWarrant.Size = New System.Drawing.Size(90, 29)
-        Me.txtRBWarrant.TabIndex = 10
-        '
-        'txtSOCDAStatement
-        '
-        Me.txtSOCDAStatement.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtSOCDAStatement.Border.Class = "TextBoxBorder"
-        Me.txtSOCDAStatement.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtSOCDAStatement.DisabledBackColor = System.Drawing.Color.White
-        Me.txtSOCDAStatement.FocusHighlightEnabled = true
-        Me.txtSOCDAStatement.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtSOCDAStatement.ForeColor = System.Drawing.Color.Black
-        Me.txtSOCDAStatement.Location = New System.Drawing.Point(403, 54)
-        Me.txtSOCDAStatement.MaxLength = 2
-        Me.txtSOCDAStatement.Name = "txtSOCDAStatement"
-        Me.txtSOCDAStatement.Size = New System.Drawing.Size(90, 29)
-        Me.txtSOCDAStatement.TabIndex = 11
-        '
-        'txtIndividualPerformance
-        '
-        Me.txtIndividualPerformance.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtIndividualPerformance.Border.Class = "TextBoxBorder"
-        Me.txtIndividualPerformance.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtIndividualPerformance.DisabledBackColor = System.Drawing.Color.White
-        Me.txtIndividualPerformance.FocusHighlightEnabled = true
-        Me.txtIndividualPerformance.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtIndividualPerformance.ForeColor = System.Drawing.Color.Black
-        Me.txtIndividualPerformance.Location = New System.Drawing.Point(150, 159)
-        Me.txtIndividualPerformance.MaxLength = 2
-        Me.txtIndividualPerformance.Name = "txtIndividualPerformance"
-        Me.txtIndividualPerformance.Size = New System.Drawing.Size(90, 29)
-        Me.txtIndividualPerformance.TabIndex = 9
-        '
-        'txtAttendance
-        '
-        Me.txtAttendance.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtAttendance.Border.Class = "TextBoxBorder"
-        Me.txtAttendance.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtAttendance.DisabledBackColor = System.Drawing.Color.White
-        Me.txtAttendance.FocusHighlightEnabled = true
-        Me.txtAttendance.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtAttendance.ForeColor = System.Drawing.Color.Black
-        Me.txtAttendance.Location = New System.Drawing.Point(149, 19)
-        Me.txtAttendance.MaxLength = 2
-        Me.txtAttendance.Name = "txtAttendance"
-        Me.txtAttendance.Size = New System.Drawing.Size(90, 29)
-        Me.txtAttendance.TabIndex = 5
-        '
-        'LabelX160
-        '
-        Me.LabelX160.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX160.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX160.Location = New System.Drawing.Point(258, 94)
-        Me.LabelX160.Name = "LabelX160"
-        Me.LabelX160.Size = New System.Drawing.Size(39, 18)
-        Me.LabelX160.TabIndex = 36
-        Me.LabelX160.Text = "TA Bill"
-        '
-        'LabelX163
-        '
-        Me.LabelX163.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX163.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX163.Location = New System.Drawing.Point(258, 59)
-        Me.LabelX163.Name = "LabelX163"
-        Me.LabelX163.Size = New System.Drawing.Size(133, 18)
-        Me.LabelX163.TabIndex = 35
-        Me.LabelX163.Text = "SOC and DA Statement"
-        '
-        'LabelX164
-        '
-        Me.LabelX164.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX164.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX164.Location = New System.Drawing.Point(258, 24)
-        Me.LabelX164.Name = "LabelX164"
-        Me.LabelX164.Size = New System.Drawing.Size(99, 18)
-        Me.LabelX164.TabIndex = 34
-        Me.LabelX164.Text = "Rail/Bus Warrant"
-        '
-        'LabelX165
-        '
-        Me.LabelX165.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX165.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX165.Location = New System.Drawing.Point(4, 129)
-        Me.LabelX165.Name = "LabelX165"
-        Me.LabelX165.Size = New System.Drawing.Size(140, 18)
-        Me.LabelX165.TabIndex = 33
-        Me.LabelX165.Text = "Identification Statement"
-        '
-        'LabelX166
-        '
-        Me.LabelX166.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX166.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX166.Location = New System.Drawing.Point(4, 24)
-        Me.LabelX166.Name = "LabelX166"
-        Me.LabelX166.Size = New System.Drawing.Size(67, 18)
-        Me.LabelX166.TabIndex = 32
-        Me.LabelX166.Text = "Attendance"
-        '
-        'GroupPanel4
-        '
-        Me.GroupPanel4.BackColor = System.Drawing.Color.Transparent
-        Me.GroupPanel4.CanvasColor = System.Drawing.SystemColors.Control
-        Me.GroupPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel4.Controls.Add(Me.LabelX150)
-        Me.GroupPanel4.Controls.Add(Me.LabelX148)
-        Me.GroupPanel4.Controls.Add(Me.txtFullDistrict)
-        Me.GroupPanel4.Controls.Add(Me.txtShortOffice)
-        Me.GroupPanel4.Controls.Add(Me.LabelX149)
-        Me.GroupPanel4.Controls.Add(Me.LabelX147)
-        Me.GroupPanel4.Controls.Add(Me.txtShortDistrict)
-        Me.GroupPanel4.Controls.Add(Me.txtFullOffice)
-        Me.GroupPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel4.Location = New System.Drawing.Point(7, 19)
-        Me.GroupPanel4.Name = "GroupPanel4"
-        Me.GroupPanel4.Size = New System.Drawing.Size(460, 226)
-        '
-        '
-        '
-        Me.GroupPanel4.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.GroupPanel4.Style.BackColorGradientAngle = 90
-        Me.GroupPanel4.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.GroupPanel4.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel4.Style.BorderBottomWidth = 1
-        Me.GroupPanel4.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.GroupPanel4.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel4.Style.BorderLeftWidth = 1
-        Me.GroupPanel4.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel4.Style.BorderRightWidth = 1
-        Me.GroupPanel4.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GroupPanel4.Style.BorderTopWidth = 1
-        Me.GroupPanel4.Style.CornerDiameter = 4
-        Me.GroupPanel4.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
-        Me.GroupPanel4.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
-        Me.GroupPanel4.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.GroupPanel4.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
-        '
-        '
-        '
-        Me.GroupPanel4.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.GroupPanel4.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GroupPanel4.TabIndex = 22
-        Me.GroupPanel4.Text = "Office Name and District"
-        '
-        'LabelX150
-        '
-        Me.LabelX150.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX150.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX150.Location = New System.Drawing.Point(9, 23)
-        Me.LabelX150.Name = "LabelX150"
-        Me.LabelX150.Size = New System.Drawing.Size(97, 18)
-        Me.LabelX150.TabIndex = 14
-        Me.LabelX150.Text = "Full Office Name"
-        '
-        'LabelX148
-        '
-        Me.LabelX148.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX148.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX148.Location = New System.Drawing.Point(9, 119)
-        Me.LabelX148.Name = "LabelX148"
-        Me.LabelX148.Size = New System.Drawing.Size(104, 18)
-        Me.LabelX148.TabIndex = 20
-        Me.LabelX148.Text = "Full District Name"
-        '
-        'txtFullDistrict
-        '
-        Me.txtFullDistrict.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFullDistrict.Border.Class = "TextBoxBorder"
-        Me.txtFullDistrict.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFullDistrict.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFullDistrict.FocusHighlightEnabled = true
-        Me.txtFullDistrict.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFullDistrict.ForeColor = System.Drawing.Color.Black
-        Me.txtFullDistrict.Location = New System.Drawing.Point(130, 115)
-        Me.txtFullDistrict.MaxLength = 255
-        Me.txtFullDistrict.Name = "txtFullDistrict"
-        Me.txtFullDistrict.Size = New System.Drawing.Size(309, 29)
-        Me.txtFullDistrict.TabIndex = 3
-        Me.txtFullDistrict.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFullDistrict.WatermarkText = "Full District Name"
-        '
-        'txtShortOffice
-        '
-        Me.txtShortOffice.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtShortOffice.Border.Class = "TextBoxBorder"
-        Me.txtShortOffice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtShortOffice.DisabledBackColor = System.Drawing.Color.White
-        Me.txtShortOffice.FocusHighlightEnabled = true
-        Me.txtShortOffice.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtShortOffice.ForeColor = System.Drawing.Color.Black
-        Me.txtShortOffice.Location = New System.Drawing.Point(130, 67)
-        Me.txtShortOffice.MaxLength = 255
-        Me.txtShortOffice.Name = "txtShortOffice"
-        Me.txtShortOffice.Size = New System.Drawing.Size(309, 29)
-        Me.txtShortOffice.TabIndex = 2
-        Me.txtShortOffice.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtShortOffice.WatermarkText = "Short Office Name"
-        '
-        'LabelX149
-        '
-        Me.LabelX149.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX149.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX149.Location = New System.Drawing.Point(9, 71)
-        Me.LabelX149.Name = "LabelX149"
-        Me.LabelX149.Size = New System.Drawing.Size(107, 18)
-        Me.LabelX149.TabIndex = 16
-        Me.LabelX149.Text = "Short Office Name"
-        '
-        'LabelX147
-        '
-        Me.LabelX147.AutoSize = true
-        '
-        '
-        '
-        Me.LabelX147.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX147.Location = New System.Drawing.Point(9, 167)
-        Me.LabelX147.Name = "LabelX147"
-        Me.LabelX147.Size = New System.Drawing.Size(114, 18)
-        Me.LabelX147.TabIndex = 21
-        Me.LabelX147.Text = "Short District Name"
-        '
-        'txtShortDistrict
-        '
-        Me.txtShortDistrict.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtShortDistrict.Border.Class = "TextBoxBorder"
-        Me.txtShortDistrict.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtShortDistrict.DisabledBackColor = System.Drawing.Color.White
-        Me.txtShortDistrict.FocusHighlightEnabled = true
-        Me.txtShortDistrict.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtShortDistrict.ForeColor = System.Drawing.Color.Black
-        Me.txtShortDistrict.Location = New System.Drawing.Point(130, 163)
-        Me.txtShortDistrict.MaxLength = 255
-        Me.txtShortDistrict.Name = "txtShortDistrict"
-        Me.txtShortDistrict.Size = New System.Drawing.Size(309, 29)
-        Me.txtShortDistrict.TabIndex = 4
-        Me.txtShortDistrict.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtShortDistrict.WatermarkText = "Short District Name"
-        '
-        'txtFullOffice
-        '
-        Me.txtFullOffice.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtFullOffice.Border.Class = "TextBoxBorder"
-        Me.txtFullOffice.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtFullOffice.DisabledBackColor = System.Drawing.Color.White
-        Me.txtFullOffice.FocusHighlightEnabled = true
-        Me.txtFullOffice.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtFullOffice.ForeColor = System.Drawing.Color.Black
-        Me.txtFullOffice.Location = New System.Drawing.Point(130, 19)
-        Me.txtFullOffice.MaxLength = 255
-        Me.txtFullOffice.Name = "txtFullOffice"
-        Me.txtFullOffice.Size = New System.Drawing.Size(309, 29)
-        Me.txtFullOffice.TabIndex = 1
-        Me.txtFullOffice.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtFullOffice.WatermarkText = "Full Office Name"
-        '
-        'OSTabItem
-        '
-        Me.OSTabItem.AttachedControl = Me.TabControlPanel10
-        Me.OSTabItem.Name = "OSTabItem"
-        Me.OSTabItem.Text = "Office Settings"
-        '
         'TabControlPanel6
         '
         Me.TabControlPanel6.Controls.Add(Me.IDDatagrid)
@@ -10752,7 +10703,7 @@ Partial Class frmMainInterface
         '
         Me.PSTabItem.AttachedControl = Me.TabControlPanel3
         Me.PSTabItem.Name = "PSTabItem"
-        Me.PSTabItem.Text = "List of Police Stations"
+        Me.PSTabItem.Text = "Police Station List"
         '
         'TabControlPanel9
         '
@@ -11511,7 +11462,8 @@ Partial Class frmMainInterface
         '
         Me.RSOCTabItem.AttachedControl = Me.TabControlPanel9
         Me.RSOCTabItem.Name = "RSOCTabItem"
-        Me.RSOCTabItem.Text = "SOC Reports Register"
+        Me.RSOCTabItem.Text = "SOCRR"
+        Me.RSOCTabItem.Visible = false
         '
         'TabControlPanel8
         '
@@ -13729,6 +13681,105 @@ Partial Class frmMainInterface
         '
         Me.ChalanTableTableAdapter1.ClearBeforeFill = true
         '
+        'Designation
+        '
+        DataGridViewCellStyle62.NullValue = "''"
+        Me.Designation.DefaultCellStyle = DataGridViewCellStyle62
+        Me.Designation.HeaderText = "Designation"
+        Me.Designation.Name = "Designation"
+        Me.Designation.ReadOnly = true
+        Me.Designation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Designation.Width = 130
+        '
+        'OfficerName
+        '
+        DataGridViewCellStyle63.NullValue = "''"
+        Me.OfficerName.DefaultCellStyle = DataGridViewCellStyle63
+        Me.OfficerName.HeaderText = "Officer Name"
+        Me.OfficerName.Name = "OfficerName"
+        Me.OfficerName.Width = 190
+        '
+        'PEN
+        '
+        DataGridViewCellStyle64.NullValue = "''"
+        Me.PEN.DefaultCellStyle = DataGridViewCellStyle64
+        Me.PEN.HeaderText = "PEN No."
+        Me.PEN.Name = "PEN"
+        Me.PEN.Width = 80
+        '
+        'BasicPay
+        '
+        DataGridViewCellStyle65.NullValue = "''"
+        Me.BasicPay.DefaultCellStyle = DataGridViewCellStyle65
+        Me.BasicPay.HeaderText = "Basic Pay"
+        Me.BasicPay.Name = "BasicPay"
+        Me.BasicPay.Width = 90
+        '
+        'ScaleOfPay
+        '
+        DataGridViewCellStyle66.NullValue = "''"
+        Me.ScaleOfPay.DefaultCellStyle = DataGridViewCellStyle66
+        Me.ScaleOfPay.HeaderText = "Scale of Pay"
+        Me.ScaleOfPay.Name = "ScaleOfPay"
+        Me.ScaleOfPay.Width = 120
+        '
+        'DARate
+        '
+        DataGridViewCellStyle67.NullValue = "''"
+        Me.DARate.DefaultCellStyle = DataGridViewCellStyle67
+        Me.DARate.HeaderText = "DA (TA)"
+        Me.DARate.Name = "DARate"
+        Me.DARate.Width = 80
+        '
+        'Salutation
+        '
+        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight
+        Me.Salutation.DefaultCellStyle = DataGridViewCellStyle68
+        Me.Salutation.HeaderText = "Salutation"
+        Me.Salutation.Name = "Salutation"
+        Me.Salutation.Width = 70
+        '
+        'SSTabItem
+        '
+        Me.SSTabItem.AttachedControl = Me.TabControlPanel12
+        Me.SSTabItem.Name = "SSTabItem"
+        Me.SSTabItem.Text = "Supporting Staff"
+        '
+        'TabControlPanel12
+        '
+        Me.TabControlPanel12.Controls.Add(Me.PanelEx8)
+        Me.TabControlPanel12.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel12.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel12.Name = "TabControlPanel12"
+        Me.TabControlPanel12.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel12.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel12.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel12.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel12.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel12.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel12.Style.GradientAngle = 90
+        Me.TabControlPanel12.TabIndex = 75
+        Me.TabControlPanel12.TabItem = Me.SSTabItem
+        '
+        'PanelEx8
+        '
+        Me.PanelEx8.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelEx8.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx8.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelEx8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelEx8.Location = New System.Drawing.Point(1, 1)
+        Me.PanelEx8.Name = "PanelEx8"
+        Me.PanelEx8.Size = New System.Drawing.Size(1358, 526)
+        Me.PanelEx8.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelEx8.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelEx8.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelEx8.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelEx8.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelEx8.Style.GradientAngle = 90
+        Me.PanelEx8.TabIndex = 0
+        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -13779,6 +13830,16 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControl.ResumeLayout(false)
+        Me.TabControlPanel5.ResumeLayout(false)
+        Me.PanelEx6.ResumeLayout(false)
+        Me.PanelEx6.PerformLayout
+        CType(Me.IODatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControlPanel10.ResumeLayout(false)
+        Me.PanelEx7.ResumeLayout(false)
+        Me.GroupPanel5.ResumeLayout(false)
+        Me.GroupPanel5.PerformLayout
+        Me.GroupPanel4.ResumeLayout(false)
+        Me.GroupPanel4.PerformLayout
         Me.TabControlPanel1.ResumeLayout(false)
         Me.PanelEx1.ResumeLayout(false)
         Me.PanelEx4.ResumeLayout(false)
@@ -13809,16 +13870,6 @@ Partial Class frmMainInterface
         Me.TabControlPanel11.ResumeLayout(false)
         Me.PanelIDR.ResumeLayout(false)
         Me.PanelIDR.PerformLayout
-        Me.TabControlPanel5.ResumeLayout(false)
-        Me.PanelEx6.ResumeLayout(false)
-        Me.PanelEx6.PerformLayout
-        CType(Me.IODatagrid,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabControlPanel10.ResumeLayout(false)
-        Me.PanelEx7.ResumeLayout(false)
-        Me.GroupPanel5.ResumeLayout(false)
-        Me.GroupPanel5.PerformLayout
-        Me.GroupPanel4.ResumeLayout(false)
-        Me.GroupPanel4.PerformLayout
         Me.TabControlPanel6.ResumeLayout(false)
         Me.PanelID.ResumeLayout(false)
         Me.PanelID.PerformLayout
@@ -13851,6 +13902,7 @@ Partial Class frmMainInterface
         CType(Me.dtCDExamination,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.FingerPrintDataSet1,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.OfficerTableBindingSource,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControlPanel12.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -14815,13 +14867,6 @@ End Sub
     Friend WithEvents RibbonBar18 As DevComponents.DotNetBar.RibbonBar
     Friend WithEvents btnCompactDatabase As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents ItemContainer4 As DevComponents.DotNetBar.ItemContainer
-    Friend WithEvents Designation As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OfficerName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PEN As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents BasicPay As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ScaleOfPay As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DARate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Salutation As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LabelX53 As DevComponents.DotNetBar.LabelX
     Friend WithEvents cmbSalutation As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnGenerateExpertOpinion As DevComponents.DotNetBar.ButtonItem
@@ -14835,5 +14880,15 @@ End Sub
     Friend WithEvents btnOpenExpertOpinionFolderContext As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnWeeklyDiaryDB As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents ChalanTableTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter
+    Friend WithEvents Designation As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents OfficerName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PEN As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents BasicPay As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ScaleOfPay As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DARate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Salutation As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabControlPanel12 As DevComponents.DotNetBar.TabControlPanel
+    Friend WithEvents SSTabItem As DevComponents.DotNetBar.TabItem
+    Friend WithEvents PanelEx8 As DevComponents.DotNetBar.PanelEx
 
 End Class
