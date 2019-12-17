@@ -43,7 +43,7 @@ Public Class frmMainInterface
 
     Dim CDEditMode As Boolean = False
     Dim PSEditMode As Boolean = False
-
+    Dim SSEditMode As Boolean = False
 
 
 
@@ -334,6 +334,7 @@ Public Class frmMainInterface
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
 
             If CreateTable = "1" Then
+                CreateSupportingStaffTable()
                 CreateChalanRegisterTable()
                 CreateLastModificationTable()
                 CreateIdentificationRegisterTable()
@@ -1019,6 +1020,10 @@ Public Class frmMainInterface
         If Me.CulpritsRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.CulpritsRegisterTableAdapter1.Connection.Close()
         Me.CulpritsRegisterTableAdapter1.Connection.ConnectionString = sConString
         Me.CulpritsRegisterTableAdapter1.Connection.Open()
+
+        If Me.SSTableAdapter1.Connection.State = ConnectionState.Open Then Me.SSTableAdapter1.Connection.Close()
+        Me.SSTableAdapter1.Connection.ConnectionString = sConString
+        Me.SSTableAdapter1.Connection.Open()
     End Sub
 #End Region
 
@@ -1293,6 +1298,13 @@ Public Class frmMainInterface
 
     End Sub
 
+    Private Sub LoadSSRecords()
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        Me.SSTableAdapter1.Fill(Me.FingerPrintDataSet.SupportingStaff)
+        Me.SSBindingSource.MoveFirst()
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+    End Sub
 
     Sub LoadRecordsToAllTablesDependingOnCurrentYearSettings() 'loads data to the datagrid
         On Error Resume Next
@@ -1308,7 +1320,7 @@ Public Class frmMainInterface
         End If
         LoadJoinedIDRRecords()
         LoadIDRecords()
-
+        LoadSSRecords()
         If blApplicationIsRestoring Then
             For i = 91 To 95
                 frmProgressBar.SetProgressText(i)
@@ -1347,6 +1359,7 @@ Public Class frmMainInterface
         LoadIDRecords()
         LoadACRecords()
         LoadPSRecords()
+        LoadSSRecords()
         LoadOfficerListToTable()
         LoadOfficerListToDropDownMenu()
         LoadOfficeSettingsToMemory()
@@ -1391,6 +1404,10 @@ Public Class frmMainInterface
             Case "IO"
                 LoadOfficerListToTable()
                 ShowDesktopAlert("Records reloaded in Officer List!")
+
+            Case "SS"
+                LoadSSRecords()
+                ShowDesktopAlert("Records reloaded in Supporting Staff List!")
 
             Case "OS"
                 LoadOfficeSettingsToMemory()
@@ -2508,6 +2525,16 @@ Public Class frmMainInterface
                 Me.IODatagrid.Cursor = Cursors.Default
                 Me.AcceptButton = btnSaveIO
 
+            Case Me.SSTabItem.Name
+                Me.pnlRegisterName.Text = "List of Supporting Staff"
+                CurrentTab = "SS"
+                Me.lblNumberOfRecords.Visible = False
+                Me.lblCurrentYear.Visible = False
+                Me.lblCurrentMonth.Visible = False
+                Me.txtSSName.Focus()
+                Me.SSDatagrid.Cursor = Cursors.Default
+                Me.AcceptButton = btnSaveSS
+
             Case Me.OSTabItem.Name
                 Me.pnlRegisterName.Text = "Office Settings"
                 CurrentTab = "OS"
@@ -2774,6 +2801,10 @@ Public Class frmMainInterface
         Me.JoinedIDRDataGrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.JoinedIDRDataGrid.Columns(0).CellTemplate.Style.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.JoinedIDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+
+        Me.SSDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        Me.SSDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+        Me.SSDatagrid.Columns(0).Visible = False
     End Sub
 
     Private Sub FreezeNumberColumns()
@@ -2787,6 +2818,7 @@ Public Class frmMainInterface
         Me.CDDataGrid.Columns(0).Frozen = True
         Me.JoinedIDRDataGrid.Columns(1).Frozen = True
     End Sub
+
     Private Sub ShowAllDataEntryFields(ByVal Show As Boolean)
         On Error Resume Next
 
@@ -2905,7 +2937,7 @@ Public Class frmMainInterface
 
 
     End Sub
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting, IODatagrid.CellPainting, JoinedIDRDataGrid.CellPainting
+    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting, RSOCDatagrid.CellPainting, DADatagrid.CellPainting, FPADataGrid.CellPainting, PSDataGrid.CellPainting, CDDataGrid.CellPainting, IDDatagrid.CellPainting, ACDatagrid.CellPainting, IODatagrid.CellPainting, JoinedIDRDataGrid.CellPainting, SSDatagrid.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
@@ -4104,7 +4136,7 @@ Public Class frmMainInterface
             Me.CDRegisterBindingSource.Position = SelectedRowIndex
         End If
 
-        If CurrentTab = "IDR" Then 'No Context menu for IDR
+        If CurrentTab = "IDR" Then
 
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.JoinedIDRDataGrid.Rows.Count - 1 Then
                 e.Cancel = True
@@ -4582,7 +4614,7 @@ Public Class frmMainInterface
         c = Strings.Replace(c, "twrs ", "TW `", , , CompareMethod.Text)
         c = Strings.Replace(c, "wrs ", "W `", , , CompareMethod.Text)
         x.Text = c
-       
+
     End Sub
 
 
@@ -5238,7 +5270,7 @@ errhandler:
             btnSaveDA.Focus()
             Call DASaveButtonAction()
         End If
-       
+
         If CurrentTab = "PS" Then
             btnSavePS.Focus()
             Call PSSaveButtonAction()
@@ -5306,7 +5338,7 @@ errhandler:
         If CurrentTab = "RSOC" Then
             Call ClearRSOCFields()
         End If
-       
+
         If CurrentTab = "DA" Then
             Call ClearDAFields()
         End If
@@ -5408,6 +5440,12 @@ errhandler:
 
         If CurrentTab = "IO" Then
             ClearIOFields()
+        End If
+
+        If CurrentTab = "SS" Then
+            SSEditMode = False
+            ClearSSFields()
+            Me.btnSaveSS.Text = "Save"
         End If
 
         If CurrentTab = "OS" Then
@@ -5769,6 +5807,24 @@ errhandler:
             End With
         End If
 
+        If CurrentTab = "SS" Then
+            If Me.SSDatagrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data to edit!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.SSDatagrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            SSEditMode = True
+            Me.btnSaveSS.Text = "Update"
+            Me.txtSSName.Text = Me.SSDatagrid.SelectedRows(0).Cells(1).Value.ToString
+            Me.txtSSDesignation.Text = Me.SSDatagrid.SelectedRows(0).Cells(2).Value.ToString
+            Me.txtSSPen.Text = Me.SSDatagrid.SelectedRows(0).Cells(3).Value.ToString
+            Me.txtSSName.Focus()
+        End If
 
         If CurrentTab = "OS" Then
             OfficeSettingsEditMode(True)
@@ -6128,9 +6184,11 @@ errhandler:
             Me.txtFullOffice.Focus()
         End If
 
-        If CurrentTab = "IDR" Then
+        If CurrentTab = "IDR" Or CurrentTab = "SS" Then
             DevComponents.DotNetBar.MessageBoxEx.Show("This option is not available.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
+
+
     End Sub
 
 #End Region
@@ -6537,6 +6595,35 @@ errhandler:
                 End If
             End If
 
+            If CurrentTab = "SS" Then
+                If Me.SSDatagrid.RowCount = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data to remove!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                If Me.SSDatagrid.SelectedRows.Count = 0 Then
+                    DevComponents.DotNetBar.MessageBoxEx.Show("No data selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Staff  '" & Me.PSDataGrid.SelectedCells(1).Value.ToString() & "' ?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+
+                    SSEditMode = False
+                    Me.btnSavePS.Text = "Save"
+
+
+                    Dim oldRow As FingerPrintDataSet.SupportingStaffRow
+                    oldRow = Me.FingerPrintDataSet.SupportingStaff.Rows(Me.SSDatagrid.SelectedRows(0).Index)
+                    oldRow.Delete()
+                    ShowDesktopAlert("Selected Staff deleted!")
+                    If Me.SSDatagrid.SelectedRows.Count = 0 And Me.SSDatagrid.RowCount <> 0 Then
+                        Me.SSDatagrid.Rows(Me.SSDatagrid.RowCount - 1).Selected = True
+                    End If
+                End If
+            End If
+
             InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
         Catch ex As Exception
@@ -6547,7 +6634,7 @@ errhandler:
     End Sub
 
 
-    Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles SOCDatagrid.UserDeletingRow, RSOCDatagrid.UserDeletingRow, PSDataGrid.UserDeletingRow, DADatagrid.UserDeletingRow, IDDatagrid.UserDeletingRow, ACDatagrid.UserDeletingRow, CDDataGrid.UserDeletingRow, FPADataGrid.UserDeletingRow, JoinedIDRDataGrid.UserDeletingRow
+    Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowCancelEventArgs) Handles SOCDatagrid.UserDeletingRow, RSOCDatagrid.UserDeletingRow, PSDataGrid.UserDeletingRow, DADatagrid.UserDeletingRow, IDDatagrid.UserDeletingRow, ACDatagrid.UserDeletingRow, CDDataGrid.UserDeletingRow, FPADataGrid.UserDeletingRow, JoinedIDRDataGrid.UserDeletingRow, SSDatagrid.UserDeletingRow
         On Error Resume Next
         e.Cancel = True
         Call DeleteSelectedItem()
@@ -6730,6 +6817,19 @@ errhandler:
                     ShowDesktopAlert("All records deleted from Identification Register!")
                 End If
             End If
+
+            If CurrentTab = "SS" Then
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("WARNING:Delete all records. Do you really want to delete all the records from Supporting Staff List?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    PSEditMode = False
+                    Me.btnSavePS.Text = "Save"
+                    Me.SSTableAdapter1.DeleteAllQuery()
+                    Me.SSTableAdapter1.Fill(Me.FingerPrintDataSet.SupportingStaff)
+                    ShowDesktopAlert("All records deleted from Supporting Staff List!")
+                End If
+            End If
+
             InsertOrUpdateLastModificationDate(Now)
             DisplayDatabaseInformation()
         Catch ex As Exception
@@ -6972,9 +7072,9 @@ errhandler:
 
     End Sub
 
-  
 
-   
+
+
 
 
 #End Region
@@ -7405,6 +7505,74 @@ errhandler:
 
 #End Region
 
+
+#Region "SUPPORTING STAFF"
+
+    Private Sub ClearSSFields()
+        Me.txtSSName.Text = ""
+        Me.txtSSDesignation.Text = ""
+        Me.txtSSPen.Text = ""
+        Me.txtSSName.Focus()
+    End Sub
+
+    Private Sub ClearSelectedSSFields(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSSName.ButtonCustomClick, txtSSDesignation.ButtonCustomClick, txtSSPen.ButtonCustomClick
+        On Error Resume Next
+        DirectCast(sender, Control).Text = vbNullString
+    End Sub
+    Private Sub SaveSSData() Handles btnSaveSS.Click
+
+        If Me.txtSSName.Text = "" Then
+            MessageBoxEx.Show("Please enter Name of the Staff", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtSSName.Focus()
+            Exit Sub
+        End If
+
+        If Me.txtSSDesignation.Text = "" Then
+            MessageBoxEx.Show("Please enter Designation of the Staff", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtSSDesignation.Focus()
+            Exit Sub
+        End If
+
+        If Me.txtSSPen.Text = "" Then
+            MessageBoxEx.Show("Please enter PEN of the Staff", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtSSPen.Focus()
+            Exit Sub
+        End If
+
+        Try
+            If Not SSEditMode Then
+                Dim dgvr As FingerPrintDataSet.SupportingStaffRow = Me.FingerPrintDataSet.SupportingStaff.NewRow
+                With dgvr
+                    .StaffName = Me.txtSSName.Text.Trim
+                    .Designation = Me.txtSSDesignation.Text.Trim
+                    .PEN = Me.txtSSPen.Text.Trim
+                End With
+                Me.FingerPrintDataSet.SupportingStaff.AddSupportingStaffRow(dgvr)
+                Me.SSTableAdapter1.Update(Me.FingerPrintDataSet.SupportingStaff)
+                Me.SSBindingSource.MoveLast()
+                ShowDesktopAlert("New Supporting Staff added sucessfully!")
+            Else
+                Dim dgvr As FingerPrintDataSet.SupportingStaffRow = Me.FingerPrintDataSet.SupportingStaff.Rows(Me.SSDatagrid.SelectedRows(0).Index)
+                With dgvr
+                    .StaffName = Me.txtSSName.Text.Trim
+                    .Designation = Me.txtSSDesignation.Text.Trim
+                    .PEN = Me.txtSSPen.Text.Trim
+                End With
+                Me.SSTableAdapter1.Update(Me.FingerPrintDataSet.SupportingStaff)
+                ShowDesktopAlert("Selected record updated.")
+                SSEditMode = False
+                Me.btnSaveSS.Text = "Save"
+            End If
+
+            ClearSSFields()
+            DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now)
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+#End Region
 
     '-------------------------------------------SOC DATA MANIPULATION-----------------------------------------
 #Region "SOC DATA ENTRY FIELDS SETTINGS"
@@ -16535,6 +16703,26 @@ errhandler:
 
         End Try
     End Sub
+
+    Private Sub CreateSupportingStaffTable()
+        Try
+            If DoesTableExist("SupportingStaff", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE SupportingStaff (SlNo COUNTER PRIMARY KEY, StaffName VARCHAR(255) WITH COMPRESSION, Designation VARCHAR(255) WITH COMPRESSION,  PEN VARCHAR(255) WITH COMPRESSION)", con)
+
+            cmd.ExecuteNonQuery()
+            CopyValuesToChalanTable()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+
+        End Try
+    End Sub
     Public Sub ModifyTables()
         On Error Resume Next
         Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
@@ -17264,6 +17452,7 @@ errhandler:
             CreateCommonSettingsTable()
             CreateIdentificationRegisterTable()
             CreateChalanRegisterTable()
+            CreateSupportingStaffTable()
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
@@ -18009,6 +18198,5 @@ errhandler:
             frmWeeklyDiaryDE.BringToFront()
         End If
     End Sub
-
 
 End Class
