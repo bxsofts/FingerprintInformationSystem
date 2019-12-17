@@ -1302,7 +1302,7 @@ Public Class frmMainInterface
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
         Me.SSTableAdapter1.Fill(Me.FingerPrintDataSet.SupportingStaff)
-        Me.SSBindingSource.MoveFirst()
+        Me.SSBindingSource.MoveLast()
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -2561,7 +2561,7 @@ Public Class frmMainInterface
 
 
 #Region "STATUSBAR TEXTS"
-    Sub DisplayDatabaseInformation() Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged
+    Sub DisplayDatabaseInformation() Handles SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, SSBindingSource.PositionChanged
         On Error Resume Next
         If ShowStatusTexts = False Then Exit Sub
         Me.lblHasFPSlip.Visible = False
@@ -2694,6 +2694,13 @@ Public Class frmMainInterface
             Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.PSRegisterBindingSource.Count
         End If
 
+        If CurrentTab = "SS" Then
+            lblCurrentMonth.Visible = False
+            lblCurrentYear.Visible = False
+            Me.lblNumberOfRecords.Visible = True
+            Me.lblRegisterNameStatusBar.Text = "List of Supporting Staff"
+            Me.lblNumberOfRecords.Text = "No. of Records found: " & Me.SSBindingSource.Count
+        End If
 
         If CurrentTab = "CD" Then
             lblCurrentMonth.Visible = True
@@ -2804,7 +2811,6 @@ Public Class frmMainInterface
 
         Me.SSDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.SSDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
-        Me.SSDatagrid.Columns(0).Visible = False
     End Sub
 
     Private Sub FreezeNumberColumns()
@@ -2831,8 +2837,6 @@ Public Class frmMainInterface
         Me.PanelCD.Visible = Show
 
         ShowAllFields = Not Show
-
-
 
         If Show = True Then
             btnHideAllDataEntryFields.Text = "Hide All Data Entry Fields"
@@ -3875,7 +3879,7 @@ Public Class frmMainInterface
 
 #Region "CONTEXT MENU SETTINGS"
 
-    Private Sub MouseOverDatagridAction(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles SOCDatagrid.CellMouseClick, RSOCDatagrid.CellMouseClick, DADatagrid.CellMouseClick, FPADataGrid.CellMouseClick, PSDataGrid.CellMouseClick, CDDataGrid.CellMouseClick, IDDatagrid.CellMouseClick, ACDatagrid.CellMouseClick, JoinedIDRDataGrid.CellMouseClick
+    Private Sub MouseOverDatagridAction(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles SOCDatagrid.CellMouseClick, RSOCDatagrid.CellMouseClick, DADatagrid.CellMouseClick, FPADataGrid.CellMouseClick, PSDataGrid.CellMouseClick, CDDataGrid.CellMouseClick, IDDatagrid.CellMouseClick, ACDatagrid.CellMouseClick, JoinedIDRDataGrid.CellMouseClick, SSDatagrid.CellMouseClick, IODatagrid.CellMouseClick
         On Error Resume Next
         SelectedRowIndex = e.RowIndex
         SelectedColumnIndex = e.ColumnIndex
@@ -3926,7 +3930,7 @@ Public Class frmMainInterface
     Private Sub DataGridContextMenuBarPopupOpen(ByVal sender As Object, ByVal e As DevComponents.DotNetBar.PopupOpenEventArgs) Handles DataGridContextMenuBar.PopupOpen
 
         On Error Resume Next
-
+        Me.btnOpenContext.Visible = True
         Me.btnFacingSheetContext.Visible = False
         Me.btnSOCReportContext.Visible = False
         Me.btnPhotoReceivedContext.Visible = False
@@ -4114,7 +4118,6 @@ Public Class frmMainInterface
 
 
         If CurrentTab = "PS" Then
-
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.PSDataGrid.Rows.Count - 1 Then
                 e.Cancel = True
                 Exit Sub
@@ -4125,6 +4128,26 @@ Public Class frmMainInterface
 
         End If
 
+        If CurrentTab = "SS" Then
+            If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SSDatagrid.Rows.Count - 1 Then
+                e.Cancel = True
+                Exit Sub
+            End If
+            Me.SSDatagrid.Rows(SelectedRowIndex).Selected = True
+            If SelectedColumnIndex <> -1 Then Me.SSDatagrid.SelectedCells(SelectedColumnIndex).Selected = True
+            Me.SSBindingSource.Position = SelectedRowIndex
+            Me.btnOpenContext.Visible = False
+        End If
+
+        If CurrentTab = "IO" Then
+            If SelectedRowIndex < 0 Or SelectedRowIndex > Me.IODatagrid.Rows.Count - 1 Then
+                e.Cancel = True
+                Exit Sub
+            End If
+            Me.IODatagrid.Rows(SelectedRowIndex).Selected = True
+            If SelectedColumnIndex <> -1 Then Me.IODatagrid.SelectedCells(SelectedColumnIndex).Selected = True
+            Me.btnOpenContext.Visible = False
+        End If
 
         If CurrentTab = "CD" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.CDDataGrid.Rows.Count - 1 Then
@@ -5820,9 +5843,9 @@ errhandler:
 
             SSEditMode = True
             Me.btnSaveSS.Text = "Update"
-            Me.txtSSName.Text = Me.SSDatagrid.SelectedRows(0).Cells(1).Value.ToString
-            Me.txtSSDesignation.Text = Me.SSDatagrid.SelectedRows(0).Cells(2).Value.ToString
-            Me.txtSSPen.Text = Me.SSDatagrid.SelectedRows(0).Cells(3).Value.ToString
+            Me.txtSSName.Text = Me.SSDatagrid.SelectedRows(0).Cells(0).Value.ToString
+            Me.txtSSDesignation.Text = Me.SSDatagrid.SelectedRows(0).Cells(1).Value.ToString
+            Me.txtSSPen.Text = Me.SSDatagrid.SelectedRows(0).Cells(2).Value.ToString
             Me.txtSSName.Focus()
         End If
 
@@ -6606,17 +6629,17 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Staff  '" & Me.PSDataGrid.SelectedCells(1).Value.ToString() & "' ?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Staff  '" & Me.SSDatagrid.SelectedCells(0).Value.ToString() & "' ?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
 
                     SSEditMode = False
                     Me.btnSavePS.Text = "Save"
 
-
                     Dim oldRow As FingerPrintDataSet.SupportingStaffRow
                     oldRow = Me.FingerPrintDataSet.SupportingStaff.Rows(Me.SSDatagrid.SelectedRows(0).Index)
                     oldRow.Delete()
+                    Me.SSTableAdapter1.Update(Me.FingerPrintDataSet.SupportingStaff)
                     ShowDesktopAlert("Selected Staff deleted!")
                     If Me.SSDatagrid.SelectedRows.Count = 0 And Me.SSDatagrid.RowCount <> 0 Then
                         Me.SSDatagrid.Rows(Me.SSDatagrid.RowCount - 1).Selected = True
@@ -7549,6 +7572,7 @@ errhandler:
                 End With
                 Me.FingerPrintDataSet.SupportingStaff.AddSupportingStaffRow(dgvr)
                 Me.SSTableAdapter1.Update(Me.FingerPrintDataSet.SupportingStaff)
+                Me.SSTableAdapter1.Fill(Me.FingerPrintDataSet.SupportingStaff)
                 Me.SSBindingSource.MoveLast()
                 ShowDesktopAlert("New Supporting Staff added sucessfully!")
             Else

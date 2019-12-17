@@ -40,6 +40,7 @@ Partial Class frmAttendanceStmt
         Me.chkStaff = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwAttendance = New System.ComponentModel.BackgroundWorker()
+        Me.chkSS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.PanelEx2.SuspendLayout()
         Me.GroupPanel6.SuspendLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,11 +125,11 @@ Partial Class frmAttendanceStmt
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(343, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(342, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(143, 139)
+        Me.CircularProgress1.Size = New System.Drawing.Size(144, 139)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 26
         Me.CircularProgress1.TabStop = False
@@ -382,6 +383,7 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel4.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel4.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel4.Controls.Add(Me.chkSS)
         Me.GroupPanel4.Controls.Add(Me.chkStaff)
         Me.GroupPanel4.Controls.Add(Me.chkTI)
         Me.GroupPanel4.DisabledBackColor = System.Drawing.Color.Empty
@@ -457,6 +459,21 @@ Partial Class frmAttendanceStmt
         Me.bgwAttendance.WorkerReportsProgress = True
         Me.bgwAttendance.WorkerSupportsCancellation = True
         '
+        'chkSS
+        '
+        Me.chkSS.AutoSize = True
+        '
+        '
+        '
+        Me.chkSS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkSS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkSS.Location = New System.Drawing.Point(354, 18)
+        Me.chkSS.Name = "chkSS"
+        Me.chkSS.Size = New System.Drawing.Size(117, 18)
+        Me.chkSS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkSS.TabIndex = 3
+        Me.chkSS.Text = "Supporting Staff"
+        '
         'frmAttendanceStmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -504,4 +521,5 @@ Partial Class frmAttendanceStmt
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents btnGenerateCL As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents chkSS As DevComponents.DotNetBar.Controls.CheckBoxX
 End Class

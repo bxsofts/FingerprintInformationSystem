@@ -47,6 +47,8 @@ Public Class frmAttendanceStmt
 
     Private Sub GetArrayLength()
         ArrayLength = 0
+
+
         If chkTI.Checked Then
             If TI <> ", TI" Then
                 OfficerList(ArrayLength) = TI
@@ -56,6 +58,10 @@ Public Class frmAttendanceStmt
             End If
         End If
 
+        If chkSS.Checked Then
+            ArrayLength = frmMainInterface.SSDatagrid.RowCount
+            Exit Sub
+        End If
 
         If FPE1 <> ", FPE" Then
             OfficerList(ArrayLength) = FPE1
@@ -110,7 +116,19 @@ Public Class frmAttendanceStmt
             args.d1 = d1
             args.d2 = d2
             args.CoBFormat = Me.chkCoB.Checked
-            args.UseTI = Me.chkTI.Checked
+
+            If Me.chkTI.Checked Then
+                args.StaffType = "TI"
+            End If
+
+            If Me.chkStaff.Checked Then
+                args.StaffType = "Staff"
+            End If
+
+            If Me.chkSS.Checked Then
+                args.StaffType = "SS"
+            End If
+
             args.TIName = TIName()
             args.CL = True
 
@@ -149,10 +167,30 @@ Public Class frmAttendanceStmt
 
         Dim y As String = d2.Year.ToString
 
+        Dim args As Attendance = New Attendance
+        args.d1 = d1
+        args.d2 = d2
+        args.CoBFormat = Me.chkCoB.Checked
+        If chkSS.Checked Then
+            args.CoBFormat = False
+        End If
+        args.TIName = TIName()
+        args.CL = False
+
         If Me.chkTI.Checked Then
             SaveFileName = m & " - Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
-        Else
+            args.StaffType = "TI"
+        End If
+
+        If chkStaff.Checked Then
             SaveFileName = m & " - Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            args.StaffType = "Staff"
+        End If
+
+        If chkSS.Checked Then
+            SaveFileName = m & " - Attendance - Police Personnel - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            args.StaffType = "SS"
+            args.FDS = frmMainInterface.FingerPrintDataSet
         End If
 
         Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
@@ -167,13 +205,7 @@ Public Class frmAttendanceStmt
 
         GetArrayLength()
 
-        Dim args As Attendance = New Attendance
-        args.d1 = d1
-        args.d2 = d2
-        args.CoBFormat = Me.chkCoB.Checked
-        args.UseTI = Me.chkTI.Checked
-        args.TIName = TIName()
-        args.CL = False
+
 
         CircularProgress1.ProgressText = "0"
         CircularProgress1.IsRunning = True
@@ -188,7 +220,7 @@ Public Class frmAttendanceStmt
         Dim d2 = args.d2
 
         Try
-            If args.CL = False Then
+            If Not args.CL Then
 
                 For delay = 1 To 5
                     bgwAttendance.ReportProgress(delay)
@@ -261,8 +293,10 @@ Public Class frmAttendanceStmt
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
 
 
-                If args.UseTI Then
+                If args.StaffType = "TI" Then
                     WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF TESTER INSPECTOR FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
+                ElseIf args.StaffType = "SS" Then
+                    WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF POLICE PERSONNEL FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 Else
                     WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF STAFF FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 End If
@@ -307,6 +341,7 @@ Public Class frmAttendanceStmt
                 Dim i = 1
                 Dim n = 1
                 Dim r = rowcount
+
                 For i = 1 To r - 1
                     WordApp.Selection.Tables.Item(1).Cell(i + 1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(i + 2, 1))
                     WordApp.Selection.Tables.Item(1).Cell(i + 1, 1).Select()
@@ -324,18 +359,29 @@ Public Class frmAttendanceStmt
 
                 r = rowcount
                 Dim j = 0
-
+                Dim officer As String = ""
+                Dim PEN As String = ""
+                Dim designation As String = ""
                 For i = 1 To r - 1
                     WordApp.Selection.Tables.Item(1).Cell(i + 1, 2).Merge(WordApp.Selection.Tables.Item(1).Cell(i + 2, 2))
                     WordApp.Selection.Tables.Item(1).Cell(i + 1, 2).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                    Dim io As String = OfficerList(j)
-                    io = io.Replace(", TI", vbNewLine & "Tester Inspector")
-                    io = io.Replace(", FPE", vbNewLine & "Fingerprint Expert")
-                    io = io.Replace(", FPS", vbNewLine & "Fingerprint Searcher")
-                    WordApp.Selection.TypeText(io)
-                    Dim PEN As String = PENList(j)
-                    WordApp.Selection.TypeText(vbCrLf & "PEN: " & PEN)
+
+                    If args.StaffType = "SS" Then
+                        officer = args.FDS.SupportingStaff(j).StaffName
+                        designation = args.FDS.SupportingStaff(j).Designation
+                        PEN = args.FDS.SupportingStaff(j).PEN
+                        WordApp.Selection.TypeText(officer & vbCrLf & designation & vbCrLf & "PEN: " & PEN)
+                    Else
+                        officer = OfficerList(j)
+                        officer = officer.Replace(", TI", vbNewLine & "Tester Inspector")
+                        officer = officer.Replace(", FPE", vbNewLine & "Fingerprint Expert")
+                        officer = officer.Replace(", FPS", vbNewLine & "Fingerprint Searcher")
+                        WordApp.Selection.TypeText(officer)
+                        PEN = PENList(j)
+                        WordApp.Selection.TypeText(vbCrLf & "PEN: " & PEN)
+                    End If
+                   
                     i = i + 1
                     r = r - 2
                     j = j + 1
@@ -424,7 +470,7 @@ Public Class frmAttendanceStmt
                 WordApp.Selection.TypeText(vbNewLine)
 
 
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+                If args.StaffType <> "SS" Then WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
                 If boolUseTIinLetter Then
                     WordApp.Selection.ParagraphFormat.SpaceAfter = 1
@@ -469,12 +515,15 @@ Public Class frmAttendanceStmt
                 Dim bodytext As String = vbNullString
                 Dim subject As String = vbNullString
 
-                If args.UseTI Then
+                If args.StaffType = "TI" Then
                     subject = "Abstract of Attendance of Tester Inspector - submitting of - reg:- "
                     bodytext = "I am submitting herewith the abstract of my attendance for the period from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy") & " for favour of further necessary action."
-                Else
+                ElseIf args.StaffType = "Staff" Then
                     subject = "Abstract of Attendance of Staff - submitting of - reg:- "
                     bodytext = "I am submitting herewith the abstract of attendance of the Staff of this unit for the period from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy") & " for favour of further necessary action."
+                Else
+                    subject = "Abstract of Attendance of Police Personnel - forwarding of - reg:- "
+                    bodytext = "I am forwarding herewith the abstract of attendance of the Police Personnel of this unit for the period from " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy") & " for necessary action."
                 End If
 
                 Dim missing As Object = System.Reflection.Missing.Value
@@ -505,7 +554,7 @@ Public Class frmAttendanceStmt
                     bgwAttendance.ReportProgress(delay)
                     System.Threading.Thread.Sleep(10)
                 Next
-
+                WordApp.Selection.Paragraphs.DecreaseSpacing()
                 WordApp.Selection.Font.Size = 12 ' WordApp.Selection.Paragraphs.DecreaseSpacing()
                 WordApp.Selection.Font.Bold = 1
 
@@ -544,8 +593,14 @@ Public Class frmAttendanceStmt
                     System.Threading.Thread.Sleep(10)
                 Next
 
-                WordApp.Selection.TypeText(vbTab & "The Director" & vbNewLine & vbTab & "Fingerprint Bureau" & vbNewLine & vbTab & "Thiruvananthapuram")
-                WordApp.Selection.TypeText(vbNewLine)
+                If args.StaffType = "SS" Then
+                    WordApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(vbNewLine)
+                    WordApp.Selection.TypeText(vbNewLine)
+                Else
+                    WordApp.Selection.TypeText(vbTab & "The Director" & vbNewLine & vbTab & "Fingerprint Bureau" & vbNewLine & vbTab & "Thiruvananthapuram")
+                    WordApp.Selection.TypeText(vbNewLine)
+                End If
 
                 WordApp.Selection.TypeText("Sir,")
                 WordApp.Selection.TypeText(vbNewLine)
@@ -627,9 +682,10 @@ Public Class frmAttendanceStmt
         Public d1 As Date
         Public d2 As Date
         Public CoBFormat As Boolean
-        Public UseTI As Boolean
+        Public StaffType As String
         Public TIName As String
         Public CL As Boolean
+        Public FDS As FingerPrintDataSet
     End Class
 
    
@@ -647,8 +703,10 @@ Public Class frmAttendanceStmt
 
             If Me.chkTI.Checked Then
                 SaveFileName = m & " - Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
-            Else
+            ElseIf chkStaff.Checked Then
                 SaveFileName = m & " - Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            Else
+                SaveFileName = m & " - Attendance - Police Personnel - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
             End If
 
             Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
