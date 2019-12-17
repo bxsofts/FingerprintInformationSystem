@@ -205,8 +205,6 @@ Public Class frmAttendanceStmt
 
         GetArrayLength()
 
-
-
         CircularProgress1.ProgressText = "0"
         CircularProgress1.IsRunning = True
         CircularProgress1.Show()
