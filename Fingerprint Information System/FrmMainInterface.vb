@@ -16739,7 +16739,6 @@ errhandler:
             Dim cmd = New OleDb.OleDbCommand("Create TABLE SupportingStaff (SlNo COUNTER PRIMARY KEY, StaffName VARCHAR(255) WITH COMPRESSION, Designation VARCHAR(255) WITH COMPRESSION,  PEN VARCHAR(255) WITH COMPRESSION)", con)
 
             cmd.ExecuteNonQuery()
-            CopyValuesToChalanTable()
 
         Catch ex As Exception
             ShowErrorMessage(ex)

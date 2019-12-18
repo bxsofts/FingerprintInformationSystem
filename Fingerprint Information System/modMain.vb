@@ -373,7 +373,7 @@ Module modMain
             colorList(19) = Color.Magenta.ToArgb.ToString
             colorList(20) = Color.Maroon.ToArgb.ToString
             colorList(21) = Color.IndianRed.ToArgb.ToString
-            colorList(22) = Color.Yellow.ToArgb.ToString
+            colorList(22) = Color.Tomato.ToArgb.ToString
 
             Randomize()
             Dim rnd = New Random()
