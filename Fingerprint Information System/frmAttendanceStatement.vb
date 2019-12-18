@@ -63,29 +63,32 @@ Public Class frmAttendanceStmt
             Exit Sub
         End If
 
-        If FPE1 <> ", FPE" Then
-            OfficerList(ArrayLength) = FPE1
-            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(1).Cells(2).Value
-            ArrayLength = ArrayLength + 1
-        End If
+        If chkStaff.Checked Then
+            If FPE1 <> ", FPE" Then
+                OfficerList(ArrayLength) = FPE1
+                PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(1).Cells(2).Value
+                ArrayLength = ArrayLength + 1
+            End If
 
-        If FPE2 <> ", FPE" Then
-            OfficerList(ArrayLength) = FPE2
-            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(2).Cells(2).Value
-            ArrayLength = ArrayLength + 1
-        End If
+            If FPE2 <> ", FPE" Then
+                OfficerList(ArrayLength) = FPE2
+                PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(2).Cells(2).Value
+                ArrayLength = ArrayLength + 1
+            End If
 
-        If FPE3 <> ", FPE" Then
-            OfficerList(ArrayLength) = FPE3
-            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(3).Cells(2).Value
-            ArrayLength = ArrayLength + 1
-        End If
+            If FPE3 <> ", FPE" Then
+                OfficerList(ArrayLength) = FPE3
+                PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(3).Cells(2).Value
+                ArrayLength = ArrayLength + 1
+            End If
 
-        If FPS <> ", FPS" Then
-            OfficerList(ArrayLength) = FPS
-            PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(4).Cells(2).Value
-            ArrayLength = ArrayLength + 1
+            If FPS <> ", FPS" Then
+                OfficerList(ArrayLength) = FPS
+                PENList(ArrayLength) = frmMainInterface.IODatagrid.Rows(4).Cells(2).Value
+                ArrayLength = ArrayLength + 1
+            End If
         End If
+       
 
     End Sub
 
@@ -145,6 +148,26 @@ Public Class frmAttendanceStmt
 
 
     Private Sub GenerateAttendance() Handles btnGenerateAttendance.Click
+
+        GetArrayLength()
+        If ArrayLength = 0 Then
+            Dim smessage As String = ""
+            If chkTI.Checked Then
+                smessage = "TI Name is empty. Please add details in Officer List Table."
+            End If
+
+            If chkStaff.Checked Then
+                smessage = "Staff List is empty. Please add details in Officer List Table."
+            End If
+
+            If chkSS.Checked Then
+                smessage = "Supporting Staff List is empty. Please add details in Supporting Staff Table."
+            End If
+
+            DevComponents.DotNetBar.MessageBoxEx.Show(smessage, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         Me.Cursor = Cursors.WaitCursor
         d1 = Me.dtFrom.Value
         d2 = Me.dtTo.Value
@@ -202,8 +225,6 @@ Public Class frmAttendanceStmt
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
-
-        GetArrayLength()
 
         CircularProgress1.ProgressText = "0"
         CircularProgress1.IsRunning = True
