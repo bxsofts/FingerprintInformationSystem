@@ -334,12 +334,12 @@ Public Class frmMainInterface
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
 
             If CreateTable = "1" Then
-                CreateSupportingStaffTable()
-                CreateChalanRegisterTable()
                 CreateLastModificationTable()
                 CreateIdentificationRegisterTable()
                 CreateSOCReportRegisterTable()
                 CreateCommonSettingsTable()
+                CreateSupportingStaffTable()
+                CreateChalanRegisterTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
@@ -453,6 +453,7 @@ Public Class frmMainInterface
             System.Threading.Thread.Sleep(3000)
             MessageBoxEx.Show("The application will now close to complete the updation and restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             blRestartApplication = True
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "1", Microsoft.Win32.RegistryValueKind.String)
             EndApplication()
         End If
 
@@ -16706,7 +16707,7 @@ errhandler:
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-
+            ' blCreateTableFailed = True
         End Try
     End Sub
 
@@ -16741,8 +16742,8 @@ errhandler:
             cmd.ExecuteNonQuery()
 
         Catch ex As Exception
-            ShowErrorMessage(ex)
-
+            '  blCreateTableFailed = True
+            '   ShowErrorMessage(ex)
 
         End Try
     End Sub
@@ -17463,8 +17464,11 @@ errhandler:
                 System.Threading.Thread.Sleep(50)
             Next
 
-            CreateOfficerTable()
+            CreateSupportingStaffTable()
+            CreateChalanRegisterTable()
 
+            CreateOfficerTable()
+            CreateSupportingStaffTable()
             For i = 6 To 10
                 frmProgressBar.SetProgressText(i)
                 System.Threading.Thread.Sleep(50)
@@ -17474,15 +17478,15 @@ errhandler:
             CreateLastModificationTable()
             CreateCommonSettingsTable()
             CreateIdentificationRegisterTable()
-            CreateChalanRegisterTable()
-            CreateSupportingStaffTable()
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
                 System.Threading.Thread.Sleep(50)
             Next
 
+
             CreateSettingsTable()
+           
 
             For i = 16 To 20
                 frmProgressBar.SetProgressText(i)
@@ -17545,6 +17549,7 @@ errhandler:
                 System.Threading.Thread.Sleep(3000)
                 MessageBoxEx.Show("The application will now close to complete the restore and restart again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 blRestartApplication = True
+                My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "1", Microsoft.Win32.RegistryValueKind.String)
                 EndApplication()
             End If
 
