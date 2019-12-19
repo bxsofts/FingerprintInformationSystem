@@ -511,6 +511,11 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             If Me.listViewEx1.SelectedItems(0).ImageIndex = 3 Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("Selected item is a folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
@@ -557,6 +562,11 @@ Public Class frmOnlineBackup
 
             If Me.listViewEx1.SelectedItems.Count = 0 Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("No file selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
@@ -753,6 +763,11 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             If Me.listViewEx1.SelectedItems(0).ImageIndex = 3 Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("Selected item is a folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
@@ -797,7 +812,7 @@ Public Class frmOnlineBackup
     Private Sub RemoveBackupFileFromDrive() Handles btnRemoveBackupFile.Click
         Try
 
-
+            Dim selectedcount As Integer = Me.listViewEx1.SelectedItems.Count
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
                 ShowFileTransferInProgressMessage()
                 Exit Sub
@@ -808,8 +823,8 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
-            If Me.listViewEx1.SelectedItems.Count = 0 Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No file selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If selectedcount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
@@ -827,7 +842,11 @@ Public Class frmOnlineBackup
             If Me.listViewEx1.SelectedItems(0).ImageIndex = 3 Then
                 ftype = "folder"
             Else
-                ftype = "file"
+                If selectedcount = 1 Then
+                    ftype = "file"
+                Else
+                    ftype = "files"
+                End If
             End If
 
             Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to remove the selected " & ftype & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -836,11 +855,6 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
             Me.Cursor = Cursors.WaitCursor
-            Dim SelectedFileName As String = Me.listViewEx1.SelectedItems(0).Text
-            Dim SelectedFile = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
-            Dim id As String = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
-            Dim SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
-
 
             If InternetAvailable() = False Then
                 MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -848,29 +862,41 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
-            Dim request = FISService.Files.Get(id)
-            request.Fields = "size"
-            Dim file = request.Execute
-
-            Dim DeleteRequest = FISService.Files.Delete(id)
-            DeleteRequest.Execute()
-            If Not file.Size Is Nothing Then
-                TotalFileSize -= file.Size
+            If selectedcount > 1 Then
+                ShowPleaseWaitForm()
             End If
 
-            Me.listViewEx1.SelectedItems(0).Remove()
-            Application.DoEvents()
-            ShowDesktopAlert("Selected " & ftype & " deleted from Google Drive.")
+            Dim SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+            Dim i = 0
+            For i = 0 To selectedcount - 1
+                ' Dim SelectedFileName As String = Me.listViewEx1.SelectedItems(0).Text
+                '  Dim SelectedFile = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
+                Dim id As String = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
 
+                SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
 
-            Me.Cursor = Cursors.Default
+                Dim request = FISService.Files.Get(id)
+                request.Fields = "size"
+                Dim file = request.Execute
 
+                Dim DeleteRequest = FISService.Files.Delete(id)
+                DeleteRequest.Execute()
+                If Not file.Size Is Nothing Then
+                    TotalFileSize -= file.Size
+                End If
+
+                Me.listViewEx1.SelectedItems(0).Remove()
+                Application.DoEvents()
+            Next
             SelectNextItem(SelectedFileIndex)
-
+            ClosePleaseWaitForm()
+            ShowDesktopAlert("Selected " & ftype & " deleted from Google Drive.")
+            Me.Cursor = Cursors.Default
             DisplayInformation()
             ' GetDriveStorageDetails()
         Catch ex As Exception
             ShowErrorMessage(ex)
+            ClosePleaseWaitForm()
             Me.Cursor = Cursors.Default
         End Try
 
