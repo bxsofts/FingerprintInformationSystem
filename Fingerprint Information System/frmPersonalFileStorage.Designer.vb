@@ -260,7 +260,6 @@ Partial Class frmPersonalFileStorage
         Me.listViewEx1.GridLines = True
         Me.listViewEx1.HideSelection = False
         Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
-        Me.listViewEx1.MultiSelect = False
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
         Me.listViewEx1.Size = New System.Drawing.Size(802, 459)

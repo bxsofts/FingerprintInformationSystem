@@ -127,6 +127,11 @@ Public Class FrmLocalBackup
                 Exit Sub
             End If
 
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Restoring the database will overwrite the existing database." & vbNewLine & "Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
             If result = Windows.Forms.DialogResult.Yes Then
@@ -205,6 +210,7 @@ Public Class FrmLocalBackup
             Exit Sub
         End If
 
+
         Dim result As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to remove the selected backup file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
         If result = Windows.Forms.DialogResult.No Then
@@ -213,13 +219,16 @@ Public Class FrmLocalBackup
 
         If result = Windows.Forms.DialogResult.Yes Then
             Dim selectedfileindex = Me.listViewEx1.SelectedItems(0).Index
-            Dim fsize As Long = My.Computer.FileSystem.GetFileInfo(Me.listViewEx1.SelectedItems(0).SubItems(2).Text).Length
-            TotalFileSize -= fsize
-            My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
-            Me.listViewEx1.SelectedItems(0).Remove()
-            Application.DoEvents()
-            ShowDesktopAlert("Selected backup file deleted to the Recycle Bin.")
-            SelectNextItem(SelectedFileIndex)
+            For i = 0 To Me.listViewEx1.SelectedItems.Count - 1
+                Dim fsize As Long = My.Computer.FileSystem.GetFileInfo(Me.listViewEx1.SelectedItems(0).SubItems(2).Text).Length
+                TotalFileSize -= fsize
+                My.Computer.FileSystem.DeleteFile(Me.listViewEx1.SelectedItems(0).SubItems(2).Text, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.SendToRecycleBin)
+                Me.listViewEx1.SelectedItems(0).Remove()
+                Application.DoEvents()
+            Next
+            
+            ShowDesktopAlert("Selected backup files deleted to the Recycle Bin.")
+            SelectNextItem(selectedfileindex)
             DisplayInformation()
             Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
         End If
@@ -275,6 +284,12 @@ Public Class FrmLocalBackup
                 DevComponents.DotNetBar.MessageBoxEx.Show("Please select a file", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
+
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             Shell("explorer.exe " & Me.listViewEx1.SelectedItems(0).SubItems(2).Text, AppWinStyle.MaximizedFocus)
         Catch ex As Exception
             ShowErrorMessage(ex)

@@ -813,10 +813,12 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+
         If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
+
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
             MessageBoxEx.Show("Cannot download Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -825,6 +827,11 @@ Public Class frmFISBackupList
 
         If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Or Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "0B" Then
             MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -937,12 +944,14 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        Dim selectedcount As Integer = Me.listViewEx1.SelectedItems.Count
+
         If Me.listViewEx1.Items.Count = 0 Then
             MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems.Count = 0 Then
+        If selectedcount = 0 Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -976,7 +985,11 @@ Public Class frmFISBackupList
         If blSelectedItemIsFolder Then
             msg = "Do you really want to remove the selected folder?"
         Else
-            msg = "Do you really want to remove the selected file?"
+            If selectedcount = 1 Then
+                msg = "Do you really want to remove the selected file?"
+            Else
+                msg = "Do you really want to remove the selected files?"
+            End If
         End If
 
         Dim result As DialogResult = MessageBoxEx.Show(msg, strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -992,24 +1005,32 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        If selectedcount > 1 Then
+            ShowPleaseWaitForm()
+        End If
         Try
+            For i = 0 To selectedcount - 1
+                SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+                RemoveFile(listViewEx1.SelectedItems(0).SubItems(3).Text, False)
+                Me.listViewEx1.SelectedItems(0).Remove()
+            Next
 
-            RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, False)
-            Me.listViewEx1.Items(SelectedFileIndex).Remove()
+            ClosePleaseWaitForm()
             lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
             GetDriveUsageDetails()
-
-            If blSelectedItemIsFolder Then
-                msg = "Selected folder deleted from Google Drive."
-            Else
-                msg = "Selected file deleted from Google Drive."
-            End If
-            ShowDesktopAlert(msg)
 
             Me.Cursor = Cursors.Default
             SelectNextItem(SelectedFileIndex)
 
+            If blSelectedItemIsFolder Then
+                msg = "Selected folder deleted from Google Drive."
+            Else
+                msg = "Selected file(s) deleted from Google Drive."
+            End If
+            ShowDesktopAlert(msg)
+
         Catch ex As Exception
+            ClosePleaseWaitForm()
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
         End Try
@@ -1075,6 +1096,11 @@ Public Class frmFISBackupList
 
         If Me.listViewEx1.SelectedItems.Count = 0 Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 

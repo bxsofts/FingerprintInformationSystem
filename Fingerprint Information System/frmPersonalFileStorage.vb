@@ -878,6 +878,11 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -1122,6 +1127,8 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
+        Dim selectedcount As Integer = Me.listViewEx1.SelectedItems.Count
+
         If blShowSharedWithMe Then
             MessageBoxEx.Show("Deletion is not allowed in 'Shared with Me' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -1132,7 +1139,7 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems.Count = 0 Then
+        If selectedcount = 0 Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
@@ -1155,7 +1162,11 @@ Public Class frmPersonalFileStorage
         If blSelectedItemIsFolder Then
             msg = "Do you really want to remove the selected folder?"
         Else
-            msg = "Do you really want to remove the selected file?"
+            If selectedcount = 1 Then
+                msg = "Do you really want to remove the selected file?"
+            Else
+                msg = "Do you really want to remove the selected files?"
+            End If
         End If
 
         Dim result As DialogResult = MessageBoxEx.Show(msg, strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
@@ -1173,9 +1184,18 @@ Public Class frmPersonalFileStorage
 
         Try
 
-            Dim removed As Boolean = RemoveFile(listViewEx1.Items(SelectedFileIndex).SubItems(3).Text, True)
-            If Not removed Then Exit Sub
-            Me.listViewEx1.Items(SelectedFileIndex).Remove()
+            If selectedcount > 1 Then
+                ShowPleaseWaitForm()
+            End If
+
+            For i = 0 To selectedcount - 1
+                SelectedFileIndex = Me.listViewEx1.SelectedItems(0).Index
+                RemoveFile(listViewEx1.SelectedItems(0).SubItems(3).Text, False)
+                Me.listViewEx1.SelectedItems(0).Remove()
+            Next
+
+            ClosePleaseWaitForm()
+
             lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
 
             If blSelectedItemIsFolder Then
@@ -1191,6 +1211,7 @@ Public Class frmPersonalFileStorage
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
+            ClosePleaseWaitForm()
             ShowErrorMessage(ex)
         End Try
     End Sub
@@ -1286,6 +1307,11 @@ Public Class frmPersonalFileStorage
 
         If Me.listViewEx1.SelectedItems.Count = 0 Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -1391,6 +1417,11 @@ Public Class frmPersonalFileStorage
 
         If Me.listViewEx1.SelectedItems.Count = 0 Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 

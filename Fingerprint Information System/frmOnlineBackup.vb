@@ -813,6 +813,7 @@ Public Class frmOnlineBackup
         Try
 
             Dim selectedcount As Integer = Me.listViewEx1.SelectedItems.Count
+
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
                 ShowFileTransferInProgressMessage()
                 Exit Sub
@@ -895,8 +896,8 @@ Public Class frmOnlineBackup
             DisplayInformation()
             ' GetDriveStorageDetails()
         Catch ex As Exception
-            ShowErrorMessage(ex)
             ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
 
