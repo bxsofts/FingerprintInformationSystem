@@ -17272,16 +17272,19 @@ errhandler:
             End If
 
 
-            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and fullText contains '" & ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup'"
+            '  List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and fullText contains '" & ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup'"
+
+            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and name contains 'FingerprintBackup'"
+
             List.Fields = "files(id, modifiedTime)"
-            List.OrderBy = "createdTime"
+            List.OrderBy = "createdTime desc"
             Results = List.Execute
             Dim blTakeBackup As Boolean = False
 
             If Results.Files.Count = 0 Then blTakeBackup = True
             Dim lastbackupdate As Date = Now
             If Results.Files.Count > 0 Then
-                lastbackupdate = Results.Files(0).CreatedTime
+                lastbackupdate = Results.Files(0).ModifiedTime
             End If
 
             Dim backupperiod As Integer = e.Argument
