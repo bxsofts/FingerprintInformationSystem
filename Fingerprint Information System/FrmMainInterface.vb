@@ -1434,6 +1434,9 @@ Public Class frmMainInterface
         Dim d2 As Date = New Date(y, 12, 31)
 
         Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+        If Me.FingerPrintDataSet.SOCRegister.Count = 0 And Today.Month = 1 Then
+            Me.SOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1.AddYears(-1), d2)
+        End If
         Me.SOCRegisterBindingSource.MoveLast()
 
         If blApplicationIsLoading Then
@@ -1451,6 +1454,10 @@ Public Class frmMainInterface
 
         Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1, d2)
 
+        If Me.FingerPrintDataSet.DARegister.Count = 0 And Today.Month = 1 Then
+            Me.DARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.DARegister, d1.AddYears(-1), d2)
+        End If
+
         If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         End If
@@ -1463,6 +1470,10 @@ Public Class frmMainInterface
         End If
 
         Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1, d2)
+
+        If Me.FingerPrintDataSet.FPAttestationRegister.Count = 0 And Today.Month = 1 Then
+            Me.FPARegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.FPAttestationRegister, d1.AddYears(-1), d2)
+        End If
 
         If blApplicationIsLoading Then
             IncrementCircularProgress(5)
@@ -1477,6 +1488,10 @@ Public Class frmMainInterface
 
         Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1, d2)
 
+        If Me.FingerPrintDataSet.SOCReportRegister.Count = 0 And Today.Month = 1 Then
+            Me.RSOCRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.SOCReportRegister, d1.AddYears(-1), d2)
+        End If
+
         If blApplicationIsLoading Then
             IncrementCircularProgress(5)
         End If
@@ -1489,7 +1504,16 @@ Public Class frmMainInterface
         End If
 
         Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1, d2)
+
+        If Me.FingerPrintDataSet.JoinedIDR.Count = 0 And Today.Month = 1 Then
+            Me.JoinedIDRTableAdapter.FillByIdentifiedCases(Me.FingerPrintDataSet.JoinedIDR, d1.AddYears(-1), d2)
+        End If
+
         Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1, d2)
+
+        If Me.FingerPrintDataSet.CDRegister.Count = 0 And Today.Month = 1 Then
+            Me.CDRegisterTableAdapter.FillByDateBetween(Me.FingerPrintDataSet.CDRegister, d1.AddYears(-1), d2)
+        End If
 
         If blApplicationIsLoading Then
             IncrementCircularProgress(5)
@@ -1502,7 +1526,6 @@ Public Class frmMainInterface
             Next
         End If
 
-        '  Me.SOCRegisterBindingSource.MoveLast()
         Me.RSOCRegisterBindingSource.MoveLast()
         Me.DARegisterBindingSource.MoveLast()
         Me.FPARegisterBindingSource.MoveLast()
