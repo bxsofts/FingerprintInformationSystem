@@ -57,13 +57,14 @@ Public Class frmWeeklyDiaryDE
             Me.dtTo.MonthCalendar.DisplayMonth = Today
 
             Me.MonthCalendarAdv1.FirstDayOfWeek = System.DayOfWeek.Sunday
-            Me.MonthCalendarAdv1.DisplayMonth = Today
             Dim lastweekdate As Date = Date.Today.AddDays(-7) 'gets day of last week
             Dim dayOfWeek = CInt(lastweekdate.DayOfWeek)
             dtWeeklyDiaryFrom = lastweekdate.AddDays(-1 * dayOfWeek)
             dtWeeklyDiaryTo = lastweekdate.AddDays(6 - dayOfWeek)
 
             Me.MonthCalendarAdv1.SelectedDate = dtWeeklyDiaryFrom
+            Me.MonthCalendarAdv1.DisplayMonth = dtWeeklyDiaryFrom
+
             Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
 
             Me.dgvWeeklyDiary.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
@@ -822,7 +823,23 @@ Public Class frmWeeklyDiaryDE
 #Region "GENERATE WEEKLY DIARY"
 
     Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
-        Me.lblSelectedDate.Text = Me.MonthCalendarAdv1.SelectedDate.ToString("dd/MM/yyyy", culture)
+        Try
+
+            Me.Cursor = Cursors.WaitCursor
+
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)
+            dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
+
+            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+
+            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+
     End Sub
 
     Private Sub btnGenerateWD_Click(sender As Object, e As EventArgs) Handles btnGenerateWD.Click
