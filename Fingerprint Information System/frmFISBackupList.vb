@@ -251,7 +251,7 @@ Public Class frmFISBackupList
                     Case "Admin_" & ShortOfficeName & "_" & ShortDistrictName
                         If Not Result.Name.StartsWith("..") Then bgwListFiles.ReportProgress(2, item)
                     Case ShortOfficeName & "_" & ShortDistrictName
-                        If Not Result.Name.StartsWith(".") Then 'if not hidden item
+                        If Not Result.Name.StartsWith(".") And Result.Name <> "FIS Backup" Then 'if not hidden item
                             If CurrentFolderPath.Contains(FileOwner) Then 'if path name contains fileowner
                                 bgwListFiles.ReportProgress(2, item)
                             ElseIf item.SubItems(4).Text = FileOwner Then 'if file owner

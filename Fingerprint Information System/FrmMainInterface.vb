@@ -17239,6 +17239,52 @@ errhandler:
         End Try
     End Function
 
+
+    Private Sub CreateInternalFileTransferFolder(FISService As DriveService)
+        Try
+
+            Dim masterid As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Internal File Transfer'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Exit Sub
+            Else
+                masterid = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FullDistrictName & "' and '" & masterid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+
+            cnt = Results.Files.Count
+            If cnt > 0 Then
+                Exit Sub ' do not create folder.
+            End If
+
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(masterid)
+
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+            NewDirectory.Name = FullDistrictName
+            NewDirectory.Parents = parentlist
+            NewDirectory.MimeType = "application/vnd.google-apps.folder"
+            NewDirectory.Description = ShortOfficeName & "_" & ShortDistrictName
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
+            NewDirectory = request.Execute()
+
+        Catch ex As Exception
+            ' ShowErrorMessage(ex)
+
+        End Try
+    End Sub
     Private Sub TakeAutoOnlineBackup()
 
         Try
@@ -17275,6 +17321,8 @@ errhandler:
 
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            CreateInternalFileTransferFolder(FISService)
 
             Dim List = FISService.Files.List()
 
