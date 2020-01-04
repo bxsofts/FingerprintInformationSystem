@@ -283,11 +283,11 @@ Public Class frmWeeklyDiaryDE
                     Exit Sub
                 End If
 
-                Me.txtUnit.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(1).Value
-                Me.dtFrom.ValueObject = Me.dgvOfficeDetails.SelectedRows(0).Cells(2).Value
-                Me.dtTo.ValueObject = Me.dgvOfficeDetails.SelectedRows(0).Cells(3).Value
-                Me.txtDesignation.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(4).Value
-                Me.txtODRemarks.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(5).Value
+                Me.txtUnit.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(0).Value
+                Me.dtFrom.ValueObject = Me.dgvOfficeDetails.SelectedRows(0).Cells(1).Value
+                Me.dtTo.ValueObject = Me.dgvOfficeDetails.SelectedRows(0).Cells(2).Value
+                Me.txtDesignation.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(3).Value
+                Me.txtODRemarks.Text = Me.dgvOfficeDetails.SelectedRows(0).Cells(4).Value
                 Me.txtUnit.Focus()
                 Me.btnSaveOfficeDetails.Text = "Update"
             End If
@@ -305,7 +305,7 @@ Public Class frmWeeklyDiaryDE
                 MessageBoxEx.Show("No records selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
-            MessageBoxEx.Show("To edit data, double click required cell and modify the content.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("To edit data, double click required cell, modify the content and save the changes.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 #End Region
@@ -372,7 +372,7 @@ Public Class frmWeeklyDiaryDE
                     .Remarks = Me.txtODRemarks.Text.Trim
                 End With
                 '   Me.OfficeDetailsTableAdapter1.Update(Me.WeeklyDiaryDataSet1.OfficeDetails)
-                Me.OfficeDetailsTableAdapter1.UpdateQuery(Me.txtUnit.Text.Trim, Me.dtFrom.ValueObject, Me.dtTo.ValueObject, Me.txtDesignation.Text.Trim, Me.txtODRemarks.Text.Trim, Me.dgvOfficeDetails.SelectedRows(0).Cells(0).Value)
+                Me.OfficeDetailsTableAdapter1.UpdateQuery(Me.txtUnit.Text.Trim, Me.dtFrom.ValueObject, Me.dtTo.ValueObject, Me.txtDesignation.Text.Trim, Me.txtODRemarks.Text.Trim, Me.dgvOfficeDetails.SelectedRows(0).Cells(5).Value)
 
                 InitializeODFields()
                 ShowDesktopAlert("Selected Record updated.")
@@ -408,7 +408,7 @@ Public Class frmWeeklyDiaryDE
 
                 If reply = Windows.Forms.DialogResult.Yes Then
                     Dim dgvr As WeeklyDiaryDataSet.OfficeDetailsRow = Me.WeeklyDiaryDataSet1.OfficeDetails.Rows(Me.dgvOfficeDetails.SelectedRows(0).Index)
-                    Me.OfficeDetailsTableAdapter1.DeleteQuery(Me.dgvOfficeDetails.SelectedRows(0).Cells(0).Value)
+                    Me.OfficeDetailsTableAdapter1.DeleteQuery(Me.dgvOfficeDetails.SelectedRows(0).Cells(5).Value)
                     dgvr.Delete()
                     If Me.dgvOfficeDetails.SelectedRows.Count = 0 And Me.dgvOfficeDetails.RowCount <> 0 Then
                         Me.dgvOfficeDetails.Rows(Me.dgvOfficeDetails.RowCount - 1).Selected = True
@@ -855,11 +855,11 @@ Public Class frmWeeklyDiaryDE
 
             blDGVChanged = False
 
-            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)
             dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
 
             If dtWeeklyDiaryFrom > Today Then
-                MessageBoxEx.Show("You have selected a future date. Cannot generate data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("The week you selected has not started. Cannot generate data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
@@ -868,11 +868,6 @@ Public Class frmWeeklyDiaryDE
                 Exit Sub
             End If
 
-            If Me.MonthCalendarAdv1.SelectedDate.DayOfWeek <> DayOfWeek.Sunday Then
-                If MessageBoxEx.Show("Selected date is not Sunday. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
-                    Exit Sub
-                End If
-            End If
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -1006,7 +1001,7 @@ Public Class frmWeeklyDiaryDE
     Private Sub btnPrintWD_Click(sender As Object, e As EventArgs) Handles btnPrintWD.Click
         Try
             If Me.dgvWeeklyDiary.RowCount = 0 Then
-                MessageBoxEx.Show("No records in the list. Please generate Weekly Diary first.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("Weekly Diary not generated for the selected week.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
@@ -1026,31 +1021,29 @@ Public Class frmWeeklyDiaryDE
             Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
 
             wdDoc.Range.NoProofing = 1
-            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
-            wdBooks("district1").Range.Text = FullDistrictName.ToUpper
-            wdBooks("name").Range.Text = wdOfficerName & ", Tester Inspector"
-            wdBooks("office").Range.Text = ShortOfficeName
-            wdBooks("district2").Range.Text = FullDistrictName
+            Dim designation As String = "Tester Inspector"
+            Dim unit As String = ShortOfficeName & ", " & FullDistrictName
 
-            dtWeeklyDiaryFrom = Me.dgvWeeklyDiary.Rows(0).Cells(1).Value
+            Dim rowcount As Integer = Me.dgvOfficeDetails.Rows.Count
+
+            If rowcount > 0 Then
+                designation = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(3).Value
+                unit = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(0).Value
+            End If
+
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)
             dtWeeklyDiaryTo = Me.dgvWeeklyDiary.Rows(6).Cells(1).Value
 
-            wdBooks("fromdt").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
-            wdBooks("todt").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
+            Dim header As String = "Weekly Diary of " & wdOfficerName & ", " & designation & ", " & unit & " for the period from " & dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture) & " to " & dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
 
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
-            If boolUseTIinLetter Then
-                wdBooks("tiname").Range.Text = wdOfficerName
-                wdBooks("ti").Range.Text = "Tester Inspector"
-                wdBooks("sdfpb").Range.Text = FullOfficeName
-                wdBooks("district3").Range.Text = FullDistrictName
-            Else
-                wdBooks("tiname").Range.Text = ""
-                wdBooks("ti").Range.Text = ""
-                wdBooks("sdfpb").Range.Text = ""
-                wdBooks("district3").Range.Text = ""
-            End If
+            wdBooks("unit1").Range.Text = unit
+            wdBooks("header").Range.Text = header
+            wdBooks("officername").Range.Text = wdOfficerName
+            wdBooks("designation").Range.Text = designation
+            wdBooks("unit2").Range.Text = unit
 
             Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
 
@@ -1104,7 +1097,7 @@ Public Class frmWeeklyDiaryDE
             wdDoc.Range.NoProofing = 1
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
-            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate
+            dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)
             dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
 
             wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
