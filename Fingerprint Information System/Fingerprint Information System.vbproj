@@ -506,6 +506,11 @@
     <Compile Include="frmWeeklyDiaryDE.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HolidayListDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HolidayListDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="modMain.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -777,6 +782,17 @@
     </None>
     <None Include="FISServiceAccount.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="HolidayListDataSet.xsc">
+      <DependentUpon>HolidayListDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HolidayListDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HolidayListDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HolidayListDataSet.xss">
+      <DependentUpon>HolidayListDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">

@@ -118,6 +118,7 @@ Source: ..\Fingerprint Information System\bin\Release\*; DestDir: {app}\; Flags:
 Source: .\WordTemplates\*.docx; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
 Source: .\WordTemplates\ModusOperandi-PreDefined.txt; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
 Source: .\WordTemplates\ModusOperandi-UserDefined.txt; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: onlyifdoesntexist
+Source: .\Database\HolidayList.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: onlyifdoesntexist
 Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist uninsneveruninstall
 Source: .\Database\WeeklyDiary.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror

@@ -123,6 +123,7 @@ Module modMain
     Public wdPEN As String = ""
 
     Public blFPAEditMode As Boolean = False
+    Public strHoliday As String = ""
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
@@ -183,10 +184,10 @@ Module modMain
 
         DevComponents.DotNetBar.MessageBoxEx.Show(message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-            Dim file As System.IO.StreamWriter
-            file = My.Computer.FileSystem.OpenTextFileWriter(strAppUserPath & "\ErrorLog.txt", False)
+        Dim file As System.IO.StreamWriter
+        file = My.Computer.FileSystem.OpenTextFileWriter(strAppUserPath & "\ErrorLog.txt", False)
         file.WriteLine(message.Trim)
-            file.Close()
+        file.Close()
 
     End Sub
 
@@ -321,42 +322,77 @@ Module modMain
 
     Public Function IsHoliday(dt As Date) As Boolean
 
-        Dim d = dt.Day
-        Dim y = dt.Year
+        Try
+            Dim d = dt.Day
+            Dim y = dt.Year
+            strHoliday = ""
 
-        If (dt.DayOfWeek = DayOfWeek.Sunday) Then
-            Return True
-        End If
+            If (dt.DayOfWeek = DayOfWeek.Sunday) Then
+                Return True
+            End If
 
-        If dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday Then '2nd saturday
-            Return True
-        End If
+            If dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday Then '2nd saturday
+                strHoliday = "2nd Saturday"
+                Return True
+            End If
 
-        If dt = New Date(y, 1, 2) Then 'mannam
-            Return True
-        End If
+            If dt = New Date(y, 1, 2) Then 'mannam
+                strHoliday = "Mannam Jayanthi"
+                Return True
+            End If
 
-        If dt = New Date(y, 1, 26) Then ' republic
-            Return True
-        End If
+            If dt = New Date(y, 1, 26) Then ' republic
+                strHoliday = "Republic Day"
+                Return True
+            End If
 
-        If dt = New Date(y, 5, 1) Then ' may day
-            Return True
-        End If
+            If dt = New Date(y, 5, 1) Then ' may day
+                strHoliday = "May Day"
+                Return True
+            End If
 
-        If dt = New Date(y, 8, 15) Then ' Independence
-            Return True
-        End If
+            If dt = New Date(y, 8, 15) Then ' Independence
+                strHoliday = "Independence Day"
+                Return True
+            End If
 
-        If dt = New Date(y, 10, 2) Then 'Gandhi Jayanthi
-            Return True
-        End If
+            If dt = New Date(y, 10, 2) Then 'Gandhi Jayanthi
+                strHoliday = "Gandhi Jayanthi"
+                Return True
+            End If
 
-        If dt = New Date(y, 12, 25) Then ' Xmas
-            Return True
-        End If
+            If dt = New Date(y, 12, 25) Then ' Xmas
+                strHoliday = "Christmas"
+                Return True
+            End If
 
-        Return False
+            Dim hdDatabase As String = strAppUserPath & "\WordTemplates\HolidayList.mdb"
+            If My.Computer.FileSystem.FileExists(hdDatabase) = False Then
+                Return False
+            End If
+
+            Dim hdConnectionString As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & hdDatabase
+            Dim hdTblAdptr As HolidayListDataSetTableAdapters.HolidayListTableAdapter = New HolidayListDataSetTableAdapters.HolidayListTableAdapter
+
+            If hdTblAdptr.Connection.State = ConnectionState.Open Then hdTblAdptr.Connection.Close()
+            hdTblAdptr.Connection.ConnectionString = hdConnectionString
+            hdTblAdptr.Connection.Open()
+
+            Dim hddataset As HolidayListDataSet = New HolidayListDataSet
+            hdTblAdptr.FillByHoliday(hddataset.HolidayList, dt)
+
+            If hddataset.HolidayList.Count = 1 Then
+                strHoliday = hddataset.HolidayList(0).Holiday
+                Return True
+            End If
+
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+        
+
 
     End Function
 

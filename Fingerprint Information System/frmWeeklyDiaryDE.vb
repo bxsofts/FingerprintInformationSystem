@@ -64,7 +64,7 @@ Public Class frmWeeklyDiaryDE
 
             Me.MonthCalendarAdv1.SelectedDate = dtWeeklyDiaryFrom
             Me.MonthCalendarAdv1.DisplayMonth = dtWeeklyDiaryFrom
-
+            MarkHolidays()
             Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
 
             Me.dgvWeeklyDiary.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
@@ -129,6 +129,60 @@ Public Class frmWeeklyDiaryDE
         End Try
     End Sub
 
+    Private Sub MarkHolidays()
+        Try
+            Dim hdDatabase As String = strAppUserPath & "\WordTemplates\HolidayList.mdb"
+            If My.Computer.FileSystem.FileExists(hdDatabase) = False Then
+                Exit Sub
+            End If
+
+            Me.MonthCalendarAdv1.Colors.DayMarker.TextColor = Color.Red
+
+            Dim hdConnectionString As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & hdDatabase
+            Dim hdTblAdptr As HolidayListDataSetTableAdapters.HolidayListTableAdapter = New HolidayListDataSetTableAdapters.HolidayListTableAdapter
+
+            If hdTblAdptr.Connection.State = ConnectionState.Open Then hdTblAdptr.Connection.Close()
+            hdTblAdptr.Connection.ConnectionString = hdConnectionString
+            hdTblAdptr.Connection.Open()
+
+            Dim hddataset As HolidayListDataSet = New HolidayListDataSet
+            hdTblAdptr.Fill(hddataset.HolidayList)
+
+
+            Dim hdt(hddataset.HolidayList.Count) As Date
+
+            For i = 0 To hddataset.HolidayList.Count - 1
+                hdt(i) = hddataset.HolidayList(i).DateOfHoliday
+            Next
+
+            Me.MonthCalendarAdv1.MarkedDates = hdt
+            Me.MonthCalendarAdv1.UpdateMarkedDates()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+    Private Sub MonthCalendarAdv1_MonthChanged(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.MonthChanged
+
+        Try
+            Dim dt As Date = Today
+            Dim m As Integer = Me.MonthCalendarAdv1.DisplayMonth.Month
+            Dim y As Integer = Me.MonthCalendarAdv1.DisplayMonth.Year
+
+
+            For i = 8 To 14
+                dt = New Date(y, m, i)
+                If dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday Then '2nd saturday
+                    Exit For
+                End If
+            Next
+            Me.MonthCalendarAdv1.GetDay(dt).TextColor = Color.Red
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 
 #Region "CHANGE PASSWORD"
 
@@ -848,6 +902,7 @@ Public Class frmWeeklyDiaryDE
 
     Private Sub LoadSelectedWeekDiary() Handles MonthCalendarAdv1.ItemClick
         Try
+
             If blDGVChanged Then
                 Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 
@@ -922,7 +977,7 @@ Public Class frmWeeklyDiaryDE
 
                 If cnt = 0 Then
                     If IsHoliday(dtWD) Then
-                        WorkDone = "Availed Holiday"
+                        WorkDone = "Availed Holiday" & IIf(strHoliday <> "", " (" & strHoliday.Trim & ")", "")
                     Else
                         WorkDone = "Attended office duty"
                     End If
@@ -1280,6 +1335,5 @@ Public Class frmWeeklyDiaryDE
         End Try
     End Sub
 
-
-   
+  
 End Class
