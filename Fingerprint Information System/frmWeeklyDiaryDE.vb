@@ -430,6 +430,17 @@ Public Class frmWeeklyDiaryDE
                 If reply = Windows.Forms.DialogResult.Yes Then
                     blDGVChanged = False
                     LoadSelectedWeekDiary()
+
+                    If Me.dgvWeeklyDiary.RowCount = 0 Then
+                        MessageBoxEx.Show("No records found for the selected week.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Exit Sub
+                    End If
+
+                    For i = 0 To 6
+                        dgvWeeklyDiary.Rows.RemoveAt(0)
+                    Next
+                    Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+                    LoadSelectedWeekDiary()
                     ShowDesktopAlert("Weekly Diary for the selected week deleted.")
                 End If
             End If
