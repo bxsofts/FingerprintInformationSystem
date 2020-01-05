@@ -17192,6 +17192,7 @@ errhandler:
 
         End Try
     End Sub
+
     Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
         Try
             Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
@@ -17325,6 +17326,7 @@ errhandler:
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
             CreateInternalFileTransferFolder(FISService)
+            DownloadHolidayList()
 
             Dim List = FISService.Files.List()
             Dim fisid As String = GetMasterBackupFolderID(FISService)
@@ -17417,7 +17419,6 @@ errhandler:
         Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
         bgwOnlineAutoBackup.ReportProgress(percent, uBytesUploaded)
     End Sub
-
 
     Private Sub bgwOnlineAutoBackup_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwOnlineAutoBackup.ProgressChanged
 
@@ -17684,7 +17685,7 @@ errhandler:
 #End Region
 
 
-#Region "DOWNLOAD INSTALLER"
+#Region "DOWNLOAD INSTALLER AND HOLIDAY LIST"
 
     Private Sub btnDownloadInstallerInBrowser_Click(sender As Object, e As EventArgs) Handles btnDownloadInstallerInBrowser.Click
         Me.Cursor = Cursors.WaitCursor
@@ -17751,8 +17752,6 @@ errhandler:
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
-            Dim VersionFolder As String = "Version"
-            Dim VersionFolderID As String = ""
 
 
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
@@ -17854,6 +17853,72 @@ errhandler:
 
     End Sub
 
+    Private Sub DownloadHolidayList()
+        Try
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+
+            Dim parentid As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..HolidayList'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Exit Sub
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+            List.Q = "name = 'HolidayList.mdb' and trashed = false and '" & parentid & "' in parents"
+            List.Fields = "files(name, id, modifiedTime)"
+
+            Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                Dim hdFileName = Results.Files(0).Name
+                Dim hdFileID = Results.Files(0).Id
+                Dim modifiedtime As Date = Results.Files(0).ModifiedTime
+                Dim hdDatabase As String = strAppUserPath & "\WordTemplates\HolidayList.mdb"
+                Dim createdtime As Date
+                If My.Computer.FileSystem.FileExists(hdDatabase) Then
+                    createdtime = My.Computer.FileSystem.GetFileInfo(hdDatabase).LastWriteTime
+                    If createdtime > modifiedtime Then
+                        Exit Sub
+                    End If
+                End If
+
+                Dim request = FISService.Files.Get(hdFileID)
+
+                Dim tempfile As String = My.Computer.FileSystem.GetTempFileName & ".mdb"
+                Dim fStream = New System.IO.FileStream(tempfile, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+                m.ChunkSize = 256 * 1024
+
+                request.DownloadWithStatus(mStream)
+                mStream.WriteTo(fStream)
+                fStream.Close()
+                mStream.Close()
+                My.Computer.FileSystem.CopyFile(tempfile, hdDatabase, True)
+
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 #End Region
 
 
@@ -18012,6 +18077,7 @@ errhandler:
         End Try
     End Function
 
+   
 
     Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
         If InternetAvailable() = False Then
