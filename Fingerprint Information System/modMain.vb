@@ -320,13 +320,44 @@ Module modMain
 
 
     Public Function IsHoliday(dt As Date) As Boolean
-        IsHoliday = False
+
         Dim d = dt.Day
         Dim y = dt.Year
 
-        If (dt.DayOfWeek = DayOfWeek.Sunday) Or (dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday) Or (dt = New Date(y, 1, 26)) Or (dt = New Date(y, 5, 1)) Or (dt = New Date(y, 8, 15)) Or (dt = New Date(y, 10, 2)) Or (dt = New Date(y, 12, 25)) Then
-            IsHoliday = True
+        If (dt.DayOfWeek = DayOfWeek.Sunday) Then
+            Return True
         End If
+
+        If dt.Day > 7 And dt.Day < 15 And dt.DayOfWeek = DayOfWeek.Saturday Then '2nd saturday
+            Return True
+        End If
+
+        If dt = New Date(y, 1, 2) Then 'mannam
+            Return True
+        End If
+
+        If dt = New Date(y, 1, 26) Then ' republic
+            Return True
+        End If
+
+        If dt = New Date(y, 5, 1) Then ' may day
+            Return True
+        End If
+
+        If dt = New Date(y, 8, 15) Then ' Independence
+            Return True
+        End If
+
+        If dt = New Date(y, 10, 2) Then 'Gandhi Jayanthi
+            Return True
+        End If
+
+        If dt = New Date(y, 12, 25) Then ' Xmas
+            Return True
+        End If
+
+        Return False
+
     End Function
 
     Public Function TIName() As String

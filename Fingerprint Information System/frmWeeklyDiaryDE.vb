@@ -419,8 +419,21 @@ Public Class frmWeeklyDiaryDE
             End If
 
             If Me.SuperTabControl1.SelectedTab Is tabWD Then
-                MessageBoxEx.Show("Deletion of Weekly Diary data is not supported.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                If Me.dgvWeeklyDiary.RowCount = 0 Then
+                    MessageBoxEx.Show("No records in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the weekly diary for the selected week starting from " & Me.lblSelectedDate.Text & " ?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    blDGVChanged = False
+                    LoadSelectedWeekDiary()
+                    ShowDesktopAlert("Weekly Diary for the selected week deleted.")
+                End If
             End If
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -822,8 +835,18 @@ Public Class frmWeeklyDiaryDE
 
 #Region "GENERATE WEEKLY DIARY"
 
-    Private Sub MonthCalendarAdv1_ItemClick(sender As Object, e As EventArgs) Handles MonthCalendarAdv1.ItemClick
+    Private Sub LoadSelectedWeekDiary() Handles MonthCalendarAdv1.ItemClick
         Try
+            If blDGVChanged Then
+                Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+                If reply = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+                End If
+            End If
+
+            blDGVChanged = False
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -1000,10 +1023,25 @@ Public Class frmWeeklyDiaryDE
 
     Private Sub btnPrintWD_Click(sender As Object, e As EventArgs) Handles btnPrintWD.Click
         Try
+            If Me.dgvWeeklyDiary.RowCount > 7 Then
+                LoadSelectedWeekDiary()
+            End If
+
             If Me.dgvWeeklyDiary.RowCount = 0 Then
-                MessageBoxEx.Show("Weekly Diary not generated for the selected week.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("Weekly Diary not yet generated for the selected week.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
+
+            If blDGVChanged Then
+                Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes before printing?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+                If reply = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                If reply = Windows.Forms.DialogResult.Yes Then
+                    Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
+                End If
+            End If
+
+            blDGVChanged = False
 
             TemplateFile = strAppUserPath & "\WordTemplates\WeeklyDiary.docx"
             If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
