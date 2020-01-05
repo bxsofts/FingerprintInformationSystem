@@ -17285,6 +17285,7 @@ errhandler:
 
         End Try
     End Sub
+
     Private Sub TakeAutoOnlineBackup()
 
         Try
@@ -17302,6 +17303,7 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
     End Sub
+
     Private Sub bgwOnlineAutoBackup_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwOnlineAutoBackup.DoWork
 
         Try
@@ -17325,8 +17327,9 @@ errhandler:
             CreateInternalFileTransferFolder(FISService)
 
             Dim List = FISService.Files.List()
+            Dim fisid As String = GetMasterBackupFolderID(FISService)
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "' and '" & fisid & "' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute

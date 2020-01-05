@@ -252,13 +252,13 @@ Public Class frmFISBackupList
                         If Not Result.Name.StartsWith("..") Then bgwListFiles.ReportProgress(2, item)
                     Case ShortOfficeName & "_" & ShortDistrictName
                         If Not Result.Name.StartsWith(".") And Result.Name <> "FIS Backup" Then 'if not hidden item
-                            If CurrentFolderPath.Contains(FileOwner) Then 'if path name contains fileowner
+                            If CurrentFolderPath.Contains(FileOwner) Or CurrentFolderPath.Contains(FullDistrictName) Then 'if path name contains fileowner
                                 bgwListFiles.ReportProgress(2, item)
                             ElseIf item.SubItems(4).Text = FileOwner Then 'if file owner
                                 bgwListFiles.ReportProgress(2, item)
                             ElseIf ResultIsFolder Then 'if folder
                                 bgwListFiles.ReportProgress(2, item)
-                            ElseIf Not CurrentFolderPath.StartsWith("\My Drive\FIS Backup\") Then 'if not folder
+                            ElseIf Not CurrentFolderPath.StartsWith("\My Drive\FIS Backup\") And Not CurrentFolderPath.StartsWith("\My Drive\Internal File Transfer\") Then 'if not folder
                                 bgwListFiles.ReportProgress(2, item)
                             End If
                         End If
