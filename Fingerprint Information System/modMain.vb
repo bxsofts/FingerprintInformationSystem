@@ -51,6 +51,8 @@ Module modMain
     Public PdlVigilanceCase As String = ""
     Public PdlWeeklyDiary As String = ""
     Public PdlIdentificationStatement As String = ""
+    Public PdlBuildingProject As String = ""
+    Public PdlMonthlyStatements As String = ""
 
     Public SuggestedLocation = SuggestLocation()
     Public CPImageImportLocation As String = SuggestedLocation & "\Chance Prints"

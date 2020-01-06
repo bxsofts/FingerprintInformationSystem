@@ -881,6 +881,18 @@ Public Class frmMainInterface
             PdlIdentificationStatement = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
         End If
 
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "PdlBuildingProject")
+        count = Me.FingerPrintDataSet.CommonSettings.Count
+        If count = 1 Then
+            PdlBuildingProject = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
+        End If
+
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "PdlMonthlyStatements")
+        count = Me.FingerPrintDataSet.CommonSettings.Count
+        If count = 1 Then
+            PdlMonthlyStatements = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
+        End If
+
     End Sub
 
     Public Sub LoadOfficeSettingsToTextBoxes()
@@ -898,7 +910,9 @@ Public Class frmMainInterface
         Me.txtGraveCrime.Text = PdlGraveCrime
         Me.txtVigilanceCase.Text = PdlVigilanceCase
         Me.txtWeeklyDiary.Text = PdlWeeklyDiary
-        Me.txtIdentificationPdlNumber.Text = PdlIdentificationStatement.Trim
+        Me.txtIdentificationPdlNumber.Text = PdlIdentificationStatement
+        Me.txtBuildingsProject.Text = PdlBuildingProject
+        Me.txtMonthlyStatements.Text = PdlMonthlyStatements
         OfficeSettingsEditMode(False)
     End Sub
 
@@ -12995,6 +13009,8 @@ errhandler:
         Me.txtVigilanceCase.Enabled = allow
         Me.txtWeeklyDiary.Enabled = allow
         Me.txtIdentificationPdlNumber.Enabled = allow
+        Me.txtMonthlyStatements.Enabled = allow
+        Me.txtBuildingsProject.Enabled = allow
     End Sub
     Private Sub SaveOfficeSettings() Handles btnSaveOfficeSettings.Click
         Try
@@ -13017,6 +13033,8 @@ errhandler:
             PdlVigilanceCase = IIf(Me.txtVigilanceCase.Text.Trim = "", "   ", Me.txtVigilanceCase.Text.Trim)
             PdlWeeklyDiary = IIf(Me.txtWeeklyDiary.Text.Trim = "", "   ", Me.txtWeeklyDiary.Text.Trim)
             PdlIdentificationStatement = IIf(Me.txtIdentificationPdlNumber.Text.Trim = "", "   ", Me.txtIdentificationPdlNumber.Text.Trim)
+            PdlMonthlyStatements = IIf(Me.txtMonthlyStatements.Text.Trim = "", "   ", Me.txtMonthlyStatements.Text.Trim)
+            PdlBuildingProject = IIf(Me.txtBuildingsProject.Text.Trim = "", "   ", Me.txtBuildingsProject.Text.Trim)
 
             Me.SettingsTableAdapter1.Fill(Me.FingerPrintDataSet1.Settings)
             Dim count = Me.FingerPrintDataSet1.Settings.Count
@@ -13033,6 +13051,20 @@ errhandler:
                 Me.CommonSettingsTableAdapter1.Insert("PdlIdentificationStatement", PdlIdentificationStatement, "")
             Else
                 Me.CommonSettingsTableAdapter1.UpdateQuery(PdlIdentificationStatement, "", "PdlIdentificationStatement")
+            End If
+
+            Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet1.CommonSettings, "PdlMonthlyStatements")
+            If Me.FingerPrintDataSet1.CommonSettings.Count = 0 Then
+                Me.CommonSettingsTableAdapter1.Insert("PdlMonthlyStatements", PdlMonthlyStatements, "")
+            Else
+                Me.CommonSettingsTableAdapter1.UpdateQuery(PdlMonthlyStatements, "", "PdlMonthlyStatements")
+            End If
+
+            Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet1.CommonSettings, "PdlBuildingProject")
+            If Me.FingerPrintDataSet1.CommonSettings.Count = 0 Then
+                Me.CommonSettingsTableAdapter1.Insert("PdlBuildingProject", PdlBuildingProject, "")
+            Else
+                Me.CommonSettingsTableAdapter1.UpdateQuery(PdlBuildingProject, "", "PdlBuildingProject")
             End If
 
             For Each ctrl As Control In Me.GroupPanel4.Controls 'clear all textboxes
@@ -16229,7 +16261,7 @@ errhandler:
 
 
 #Region "COVERING LETTERS"
-    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click, btnGraveCrimeCL.Click, btnIdentificationStmtCL.Click
+    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click, btnGraveCrimeCL.Click, btnIdentificationStmtCL.Click, btnProjectsBuildingsReport.Click, btnMonthlyStatementCL.Click
 
         Try
 
@@ -16311,6 +16343,18 @@ errhandler:
                     bodytext = "I am submitting herewith the Identification statement for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIdentificationStatement
                     sFileName = "CL - Identification Statement.docx"
+                Case btnProjectsBuildingsReport.Name
+                    m2 = MonthName(m2) & " " & y2
+                    subject = "Details of Projects/Buildings ready for inauguration – submitting of - reg:- "
+                    bodytext = "Kind attention is invited to the subject. I am submitting a NIL report in this regard. This is for favour of information and necessary action."
+                    PdlNumber = PdlBuildingProject
+                    sFileName = "CL - Projects Buildings.docx"
+                Case btnMonthlyStatementCL.Name
+                    m2 = MonthName(m2) & " " & y2
+                    subject = "Monthly statements – submitting of - reg:- "
+                    bodytext = "I am submitting herewith the monthly statements for the month of " & m2 & " for favour of information and necessary action."
+                    PdlNumber = PdlMonthlyStatements
+                    sFileName = "CL - Monthly Statements.docx"
             End Select
 
 
