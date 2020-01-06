@@ -397,6 +397,10 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeParagraph()
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.TypeText("A.")
+            WordApp.Selection.TypeParagraph()
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 1, 6)
@@ -503,6 +507,13 @@ Public Class frmFPAStatement
 
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
+
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Font.Size = 11
+                WordApp.Selection.TypeText("B.")
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.Font.Size = 11
 
                 WordApp.Selection.Tables.Add(WordApp.Selection.Range, 2, 5)
 
@@ -685,6 +696,12 @@ Public Class frmFPAStatement
             WordApp.Selection.TypeText(vbTab & bodytext.ToUpper)
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
+
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Size = 11
+            WordApp.Selection.TypeText("A.")
+            WordApp.Selection.TypeParagraph()
+
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 1, 6)
@@ -786,6 +803,13 @@ Public Class frmFPAStatement
 
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
+
+                WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Font.Size = 11
+                WordApp.Selection.TypeText("B.")
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.Font.Size = 11
 
                 WordApp.Selection.Tables.Add(WordApp.Selection.Range, 2, 5)
 
@@ -960,7 +984,10 @@ Public Class frmFPAStatement
 
             xlSheet.Range("A9", "F9").Merge()
 
-            With xlSheet.Range("A11", "F11")
+            xlSheet.Range("A11").Font.Bold = True
+            xlSheet.Range("A11").Value = "A."
+
+            With xlSheet.Range("A12", "F12")
                 .Font.Bold = True
                 .HorizontalAlignment = Excel.XlVAlign.xlVAlignCenter
             End With
@@ -973,25 +1000,25 @@ Public Class frmFPAStatement
             xlSheet.Columns("F").ColumnWidth = 14
 
 
-            xlSheet.Range("A11").Value = "Sl.No."
-            xlSheet.Range("B11").Value = "Head of Account"
-            xlSheet.Range("C11").Value = "Treasury"
-            xlSheet.Range("D11").Value = "Chalan No."
-            xlSheet.Range("E11").Value = "Date"
-            xlSheet.Range("F11").Value = "Amount"
+            xlSheet.Range("A12").Value = "Sl.No."
+            xlSheet.Range("B12").Value = "Head of Account"
+            xlSheet.Range("C12").Value = "Treasury"
+            xlSheet.Range("D12").Value = "Chalan No."
+            xlSheet.Range("E12").Value = "Date"
+            xlSheet.Range("F12").Value = "Amount"
 
 
             Dim FPARowCount = Me.FingerPrintDataSet.FPAttestationRegister.Count
 
-            Dim i = 12
+            Dim i = 13
 
             If RowCount = 1 Then
                 xlSheet.Cells(i, 6).value = "Rs. 0/-"
                 xlSheet.Cells(i, 6).font.bold = True
-                xlSheet.Range("A11:F12").Borders.LineStyle = 1
+                xlSheet.Range("A12:F13").Borders.LineStyle = 1
             Else
-                For i = 12 To RowCount + i - 2
-                    Dim j = i - 12
+                For i = 13 To RowCount + i - 2
+                    Dim j = i - 13
                     xlSheet.Cells(i, 1).value = j + 1
                     xlSheet.Cells(i, 2).value = Me.FingerPrintDataSet.ChalanTable(j).HeadOfAccount
                     xlSheet.Cells(i, 3).value = Me.FingerPrintDataSet.ChalanTable(j).Treasury
@@ -1005,10 +1032,14 @@ Public Class frmFPAStatement
                 xlSheet.Cells(i, 6).font.bold = True
                 xlSheet.Cells(i, 6).value = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
 
-                xlSheet.Range("A11:F" & i).Borders.LineStyle = 1
+                xlSheet.Range("A12:F" & i).Borders.LineStyle = 1
             End If
 
             If IsMonthStmt Then
+
+                xlSheet.Range("A" & i + 3).Font.Bold = True
+                xlSheet.Range("A" & i + 3).Value = "B."
+
                 i = i + 4
 
                 With xlSheet.Range("A" & i, "F" & i)
