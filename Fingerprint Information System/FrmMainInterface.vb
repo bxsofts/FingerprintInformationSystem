@@ -1877,22 +1877,6 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub ShowSettingsWizard() Handles btnSettingsWizard.Click
-        On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
-        boolShowWizard = True
-        FrmSettingsWizard.ShowDialog()
-
-        If boolSettingsWizardCancelled = False Then
-            ShowPleaseWaitForm()
-            ReloadDataAfterSettingsWizardClose()
-            ClosePleaseWaitForm()
-        End If
-
-        boolSettingsWizardCancelled = False
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
-    End Sub
-
     Private Sub ReloadDataAfterSettingsWizardClose()
         Try
 

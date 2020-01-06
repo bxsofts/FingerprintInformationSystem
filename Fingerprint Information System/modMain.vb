@@ -32,8 +32,8 @@ Module modMain
     Public objMutex As Mutex 'mutex object
     Public FullOfficeName As String = "Single Digit Fingerprint Bureau"
     Public ShortOfficeName As String = "SDFPB"
-    Public FullDistrictName As String = "Idukki"
-    Public ShortDistrictName As String = "IDK"
+    Public FullDistrictName As String = ""
+    Public ShortDistrictName As String = ""
     Public TI As String = ""
     Public FPE1 As String = ""
     Public FPE2 As String = ""
