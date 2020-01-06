@@ -1111,4 +1111,21 @@ Public Class frmFPAStatement
 
 #End Region
 
+    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim sMonth As String = Me.cmbMonth.Text & " " & Me.txtYear.Text
+            Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\Revenue Collection Statement - SDFPB " & ShortDistrictName & " - " & sMonth.ToUpper & ".xlsx"
+
+            If FileIO.FileSystem.FileExists(sFileName) Then
+                Call Shell("explorer.exe /select," & sFileName, AppWinStyle.NormalFocus)
+            Else
+                Call Shell("explorer.exe " & FileIO.SpecialDirectories.MyDocuments, AppWinStyle.NormalFocus)
+            End If
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 End Class
