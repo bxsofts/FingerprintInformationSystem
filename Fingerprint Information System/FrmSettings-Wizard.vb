@@ -37,7 +37,7 @@ Public Class FrmSettingsWizard
             Me.SettingsTableAdapter1.Connection.Open()
 
 
-            If frmMainInterface.DoesTableExist("Settings", sConString) Then 
+            If frmMainInterface.DoesTableExist("Settings", sConString) Then
 
 
                 Me.SettingsTableAdapter1.Fill(Me.FingerPrintDataSet1.Settings)
@@ -168,7 +168,7 @@ Public Class FrmSettingsWizard
         If count = 0 Then
             Me.SettingsTableAdapter1.Insert(id, FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, FPImageImportLocation, CPImageImportLocation, PdlAttendance, PdlIndividualPerformance, PdlRBWarrant, PdlSOCDAStatement, PdlTABill, PdlFPAttestation, PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary)
         Else
-            Me.SettingsTableAdapter1.UpdateQuery(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, FPImageImportLocation, CPImageImportLocation, PdlAttendance, PdlIndividualPerformance, PdlRBWarrant, PdlSOCDAStatement, PdlTABill, PdlFPAttestation, PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
+            Me.SettingsTableAdapter1.UpdateOfficeSettings(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, id)
         End If
 
         boolSettingsWizardCancelled = False

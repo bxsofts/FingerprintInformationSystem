@@ -1,4 +1,12 @@
 ﻿Partial Class FingerPrintDataSet
+    Partial Class SettingsDataTable
+
+        Private Sub SettingsDataTable_SettingsRowChanging(sender As Object, e As SettingsRowChangeEvent) Handles Me.SettingsRowChanging
+
+        End Sub
+
+    End Class
+
 End Class
 
 Namespace FingerPrintDataSetTableAdapters
