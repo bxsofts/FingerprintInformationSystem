@@ -1,6 +1,6 @@
 ﻿Imports DevComponents.DotNetBar
 Public Class FrmSettingsWizard
-    Dim OldDBFile = ""
+
     Dim BackupPath = ""
     Dim firstrun As Boolean
 
@@ -13,7 +13,6 @@ Public Class FrmSettingsWizard
 
             frmMainInterface.SetColorTheme()
             ShowDotNetWarning()
-            boolSettingsWizardCancelled = False
 
             If (firstrun = False And boolShowWizard = False) Then
                 frmMainInterface.Show()
@@ -23,11 +22,23 @@ Public Class FrmSettingsWizard
 
             strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
-            OldDBFile = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\BXSofts\" & strAppName & "\Database\Fingerprint.mdb"
+            If Not FileIO.FileSystem.FileExists(strDatabaseFile) Then
+                If Not ValidPath(strDatabaseFile) Then
+                    strDatabaseFile = SuggestedLocation & "\Database\Fingerprint.mdb"
+                End If
 
-            If FileIO.FileSystem.FileExists(strDatabaseFile) = False Then
-                strDatabaseFile = OldDBFile
+                My.Computer.FileSystem.CopyFile(strAppUserPath & "\Database\Fingerprint.mdb", strDatabaseFile, False)
+                Application.DoEvents()
             End If
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "DatabaseFile", strDatabaseFile, Microsoft.Win32.RegistryValueKind.String)
+
+            BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
+
+            If BackupPath = strAppUserPath & "\Backups" Then
+                BackupPath = SuggestedLocation & "\Backups"
+            End If
+
 
 
             sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
@@ -36,9 +47,9 @@ Public Class FrmSettingsWizard
             Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
             Me.SettingsTableAdapter1.Connection.Open()
 
+           
 
             If frmMainInterface.DoesTableExist("Settings", sConString) Then
-
 
                 Me.SettingsTableAdapter1.Fill(Me.FingerPrintDataSet1.Settings)
                 Dim count = Me.FingerPrintDataSet1.Settings.Count
@@ -46,8 +57,32 @@ Public Class FrmSettingsWizard
                 If count = 1 Then
                     Me.txtFullDistrict.Text = Me.FingerPrintDataSet1.Settings(0).FullDistrictName
                     Me.txtShortDistrict.Text = Me.FingerPrintDataSet1.Settings(0).ShortDistrictName
+                    If Me.txtFullDistrict.Text = "FullDistrict" Then Me.txtFullDistrict.Text = ""
+                    If Me.txtShortDistrict.Text = "ShortDistrict" Then Me.txtShortDistrict.Text = ""
                     Me.txtFullOffice.Text = Me.FingerPrintDataSet1.Settings(0).FullOfficeName
                     Me.txtShortOffice.Text = Me.FingerPrintDataSet1.Settings(0).ShortOfficeName
+
+                    PdlAttendance = Me.FingerPrintDataSet1.Settings(0).PdlAttendance.Trim
+                    PdlIndividualPerformance = Me.FingerPrintDataSet1.Settings(0).PdlIndividualPerformance.Trim
+                    PdlRBWarrant = Me.FingerPrintDataSet1.Settings(0).PdlRBWarrant.Trim
+                    PdlSOCDAStatement = Me.FingerPrintDataSet1.Settings(0).PdlSOCDAStatement.Trim
+                    PdlTABill = Me.FingerPrintDataSet1.Settings(0).PdlTABill.Trim
+                    PdlFPAttestation = Me.FingerPrintDataSet1.Settings(0).PdlFPAttestation.Trim
+                    PdlGraveCrime = Me.FingerPrintDataSet1.Settings(0).PdlGraveCrime.Trim
+                    PdlVigilanceCase = Me.FingerPrintDataSet1.Settings(0).PdlVigilanceCase.Trim
+                    PdlWeeklyDiary = Me.FingerPrintDataSet1.Settings(0).PdlWeeklyDiary.Trim
+
+                    FPImageImportLocation = Me.FingerPrintDataSet1.Settings(0).FPImageImportLocation
+                    CPImageImportLocation = Me.FingerPrintDataSet1.Settings(0).CPImageImportLocation
+
+                    If FPImageImportLocation = "Location" Then
+                        FPImageImportLocation = SuggestedLocation & "\Scanned FP Slips"
+                    End If
+
+                    If CPImageImportLocation = "Location" Then
+                        CPImageImportLocation = SuggestedLocation & "\Chance Prints"
+                    End If
+
                 Else
                     Me.txtFullDistrict.Text = FullDistrictName
                     Me.txtShortDistrict.Text = ShortDistrictName
@@ -59,12 +94,13 @@ Public Class FrmSettingsWizard
 
             If Me.txtFullOffice.Text = "" Then Me.txtFullOffice.Text = "Single Digit Fingerprint Bureau"
             If Me.txtShortOffice.Text = "" Then Me.txtShortOffice.Text = "SDFPB"
+
+            Me.ActiveControl = Me.txtFullDistrict
+            Me.txtFullDistrict.Focus()
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
     End Sub
-
-
 
     Public Sub SetColorTheme() 'set the color scheme
         On Error Resume Next
@@ -101,22 +137,6 @@ Public Class FrmSettingsWizard
             StyleManager.ColorTint = m_BaseColor
         End If
     End Sub
-    Private Sub Wizard1_CancelButtonClick(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
-        On Error Resume Next
-        boolSettingsWizardCancelled = True
-        If firstrun = "1" Then
-            If DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to close the Wizard? You will need to run this wizard again if you want to use the " & strAppName, strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-
-                Me.Close()
-
-            End If
-        Else
-            Me.Close()
-
-        End If
-    End Sub
-
-
 
     Private Sub SaveSettings() Handles btnSave.Click
         On Error Resume Next
@@ -168,10 +188,38 @@ Public Class FrmSettingsWizard
         If count = 0 Then
             Me.SettingsTableAdapter1.Insert(id, FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, FPImageImportLocation, CPImageImportLocation, PdlAttendance, PdlIndividualPerformance, PdlRBWarrant, PdlSOCDAStatement, PdlTABill, PdlFPAttestation, PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary)
         Else
-            Me.SettingsTableAdapter1.UpdateOfficeSettings(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, id)
+            '   Me.SettingsTableAdapter1.UpdateOfficeSettings(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, id)
+
+            Me.SettingsTableAdapter1.UpdateQuery(FullDistrictName, ShortDistrictName, FullOfficeName, ShortOfficeName, FPImageImportLocation, CPImageImportLocation, PdlAttendance, PdlIndividualPerformance, PdlRBWarrant, PdlSOCDAStatement, PdlTABill, PdlFPAttestation, PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
         End If
 
-        boolSettingsWizardCancelled = False
+        If Me.OfficerTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficerTableTableAdapter1.Connection.Close()
+        Me.OfficerTableTableAdapter1.Connection.ConnectionString = sConString
+        Me.OfficerTableTableAdapter1.Connection.Open()
+
+        Me.OfficerTableTableAdapter1.Fill(Me.FingerPrintDataSet1.OfficerTable)
+        Dim cnt = Me.FingerPrintDataSet1.OfficerTable.Count
+        If cnt = 0 Then
+            Me.OfficerTableTableAdapter1.Insert(cnt + 1, "", "", "", "", "", "")
+        Else
+            Dim TI = IIf(Me.FingerPrintDataSet1.OfficerTable(0).TI = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).TI)
+            Dim FPE1 = IIf(Me.FingerPrintDataSet1.OfficerTable(0).FPE1 = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).FPE1)
+            Dim FPE2 = IIf(Me.FingerPrintDataSet1.OfficerTable(0).FPE2 = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).FPE2)
+            Dim FPE3 = IIf(Me.FingerPrintDataSet1.OfficerTable(0).FPE3 = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).FPE3)
+            Dim FPS = IIf(Me.FingerPrintDataSet1.OfficerTable(0).FPS = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).FPS)
+            Dim Photographer = IIf(Me.FingerPrintDataSet1.OfficerTable(0).Photographer = "Name", "", Me.FingerPrintDataSet1.OfficerTable(0).Photographer)
+            Dim oid = 1
+            Me.OfficerTableTableAdapter1.UpdateQuery(TI, FPE1, FPE2, FPE3, FPS, Photographer, oid)
+        End If
+
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", BackupPath, Microsoft.Win32.RegistryValueKind.String)
+
+        My.Computer.FileSystem.CreateDirectory(FPImageImportLocation)
+        My.Computer.FileSystem.CreateDirectory(FPImageImportLocation & "\DA Slips\")
+        My.Computer.FileSystem.CreateDirectory(FPImageImportLocation & "\Identified Slips\")
+        My.Computer.FileSystem.CreateDirectory(FPImageImportLocation & "\Active Criminal Slips\")
+        My.Computer.FileSystem.CreateDirectory(CPImageImportLocation)
+        My.Computer.FileSystem.CreateDirectory(BackupPath)
 
         frmMainInterface.Show()
         Me.Hide()
@@ -191,5 +239,15 @@ Public Class FrmSettingsWizard
         End If
     End Sub
 
+    Private Function ValidPath(ByVal Path As String) As Boolean
+        Try
+            If My.Computer.FileSystem.FileExists(Path) Then
+                Return True
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
 
 End Class

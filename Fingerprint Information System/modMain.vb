@@ -58,9 +58,6 @@ Module modMain
     Public CPImageImportLocation As String = SuggestedLocation & "\Chance Prints"
     Public FPImageImportLocation As String = SuggestedLocation & "\Scanned FP Slips"
 
-    Public boolSettingsWizardCancelled As Boolean = False
-
-
     Public boolCurrentSOC As Boolean = False
     Public boolCurrentDA As Boolean = False
     Public boolCurrentFPA As Boolean = False
