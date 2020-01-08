@@ -529,11 +529,11 @@ errhandler:
             Next
 
             If SelectedRecordsCount = 0 Then
-                MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
-                Exit Sub
+                If MessageBoxEx.Show("No records selected. Would you like to generate a blank tour note?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
             End If
-
 
             Dim TemplateFile As String
             TemplateFile = strAppUserPath & "\WordTemplates\TourNote.docx"
@@ -778,9 +778,10 @@ errhandler:
             Next
 
             If SelectedRecordsCount = 0 Then
-                MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
-                Exit Sub
+                If MessageBoxEx.Show("No records selected. Would you like to generate a blank tour note?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
             End If
 
 

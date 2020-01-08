@@ -1055,9 +1055,14 @@ Public Class frmMainInterface
             Me.FPARegisterTableAdapter.RemoveNullFromHeadOfAccount("")
             Me.PSRegisterTableAdapter.RemoveNullFromSHO("")
             Me.SOCRegisterTableAdapter.UpdateQuerySetBlankCPsIdentifiedToZero("0", "")
+
+            RemoveNullFromIdentificationRegister()
+            RemoveNullFromOfficerTable()
+            RemoveNullFromCulpritRegister()
+
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "0", Microsoft.Win32.RegistryValueKind.String)
-            ' RemoveNullFromIdentificationRegister()
         End If
+
     End Sub
 
     Private Sub RemoveNullFromOfficerTable()
@@ -1071,7 +1076,29 @@ Public Class frmMainInterface
 
     End Sub
 
+    Private Sub btnFixDBTables_Click(sender As Object, e As EventArgs) Handles btnFixDBTables.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "1", Microsoft.Win32.RegistryValueKind.String)
 
+            CreateLastModificationTable()
+            CreateIdentificationRegisterTable()
+            CreateSOCReportRegisterTable()
+            CreateCommonSettingsTable()
+            CreateSupportingStaffTable()
+            CreateChalanRegisterTable()
+            ModifyTables()
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
+
+            UpdateNullFields()
+            MessageBoxEx.Show("Fixed Database Tables.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 #End Region
 
 
@@ -16586,7 +16613,6 @@ errhandler:
         End Try
     End Sub
 
-
     Public Sub CreateIdentificationRegisterTable()
         Try
             If DoesTableExist("IdentificationRegister", sConString) Then
@@ -16712,6 +16738,7 @@ errhandler:
 
             Me.IdentificationRegisterTableAdapter1.UpdateQuerySetCulpritCount("1", "1")
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromPreviousCase("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentificationDetails("")
             blIdentificationRegisterUpdateFailed = False
 
             LoadJoinedIDRRecords()
@@ -18397,4 +18424,5 @@ errhandler:
         End If
     End Sub
 
+    
 End Class
