@@ -28,20 +28,32 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle100 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle101 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle102 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle93 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle94 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle95 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle96 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle97 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle98 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle99 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle103 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle104 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle105 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle108 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle109 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle110 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle106 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle107 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -54,14 +66,24 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle111 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle112 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle113 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle114 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle118 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle119 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle120 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle115 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle116 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle117 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -93,28 +115,6 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle139 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle140 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle141 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle93 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle94 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle95 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle96 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle97 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle99 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle106 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle107 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle115 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle116 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle117 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.RibbonTabItem6 = New DevComponents.DotNetBar.RibbonTabItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar12 = New DevComponents.DotNetBar.RibbonBar()
@@ -143,6 +143,23 @@ Partial Class frmMainInterface
         Me.btnCustomBaseColor = New DevComponents.DotNetBar.ColorPickerDropDown()
         Me.btnRandomColor = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonControl1 = New DevComponents.DotNetBar.RibbonControl()
+        Me.RibbonPanel7 = New DevComponents.DotNetBar.RibbonPanel()
+        Me.RibbonBar18 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnCompactDatabase = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFixDBTables = New DevComponents.DotNetBar.ButtonItem()
+        Me.RibbonBar15 = New DevComponents.DotNetBar.RibbonBar()
+        Me.ItemContainer12 = New DevComponents.DotNetBar.ItemContainer()
+        Me.btnOpenBackupFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnChangeBackupFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.ItemContainer14 = New DevComponents.DotNetBar.ItemContainer()
+        Me.chkTakeAutoBackup = New DevComponents.DotNetBar.CheckBoxItem()
+        Me.LabelItem4 = New DevComponents.DotNetBar.LabelItem()
+        Me.txtAutoBackupPeriod = New DevComponents.DotNetBar.TextBoxItem()
+        Me.RibbonBar14 = New DevComponents.DotNetBar.RibbonBar()
+        Me.btnOpenDBInMSAccess = New DevComponents.DotNetBar.ButtonItem()
+        Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
+        Me.btnOpenDBFolder = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnChangeDBFolder = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel1 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar17 = New DevComponents.DotNetBar.RibbonBar()
         Me.btnExit = New DevComponents.DotNetBar.ButtonItem()
@@ -295,22 +312,6 @@ Partial Class frmMainInterface
         Me.ComboItem15 = New DevComponents.Editors.ComboItem()
         Me.ComboItem16 = New DevComponents.Editors.ComboItem()
         Me.ComboItem13 = New DevComponents.Editors.ComboItem()
-        Me.RibbonPanel7 = New DevComponents.DotNetBar.RibbonPanel()
-        Me.RibbonBar18 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnCompactDatabase = New DevComponents.DotNetBar.ButtonItem()
-        Me.RibbonBar15 = New DevComponents.DotNetBar.RibbonBar()
-        Me.ItemContainer12 = New DevComponents.DotNetBar.ItemContainer()
-        Me.btnOpenBackupFolder = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnChangeBackupFolder = New DevComponents.DotNetBar.ButtonItem()
-        Me.ItemContainer14 = New DevComponents.DotNetBar.ItemContainer()
-        Me.chkTakeAutoBackup = New DevComponents.DotNetBar.CheckBoxItem()
-        Me.LabelItem4 = New DevComponents.DotNetBar.LabelItem()
-        Me.txtAutoBackupPeriod = New DevComponents.DotNetBar.TextBoxItem()
-        Me.RibbonBar14 = New DevComponents.DotNetBar.RibbonBar()
-        Me.btnOpenDBInMSAccess = New DevComponents.DotNetBar.ButtonItem()
-        Me.ItemContainer4 = New DevComponents.DotNetBar.ItemContainer()
-        Me.btnOpenDBFolder = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnChangeDBFolder = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel4 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar3 = New DevComponents.DotNetBar.RibbonBar()
         Me.ItemContainer5 = New DevComponents.DotNetBar.ItemContainer()
@@ -349,25 +350,158 @@ Partial Class frmMainInterface
         Me.btnResetColumnOrderMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFreezeColumn = New DevComponents.DotNetBar.ButtonItem()
         Me.SOCDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.SOCNumberDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SOCYearDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfInspectionDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfReportDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SectionOfLawDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CPsIdentified = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChancePrintDetailsDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ComplainantDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModusOperandiDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PropertyLostDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PhotographerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PhotoReceivedDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GistDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ComparisonDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GraveCrimeDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.FileStatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PSDataGrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.PoliceStationDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SHO = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PhoneNumber1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PhoneNumber2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DistanceKM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PSRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CDDataGrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.CDNumberWithYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfExaminationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameOfOfficerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CourtDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CCNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CDRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FPADataGrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.FPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PassportNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChalanDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.HeadOfAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AttestedFPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPARegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ACDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.ACNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DANumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SectionOfLawDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AliasNameDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FathersNameDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SexDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryNumeratorDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryDenominatorDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModusOperandiDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SlipFileDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ACRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.IDDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.IDNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DANumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SectionOfLawDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AliasNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FathersNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SexDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryNumeratorDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryDenominatorDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ModusOperandi = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentificationDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SlipFileDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IDRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DADatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.DANumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DAYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfEntryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SectionOfLawDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AliasNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FathersNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SexDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryNumeratorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryDenominatorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SlipFileDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DARegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.RSOCDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.SerialNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SOCNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfInspectionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InspectingOfficerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReportSentToDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfReportSentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NatureOfReportsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DespatchNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RSOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.JoinedIDRDataGrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.IdentificationNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SOCNumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentificationDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateOfInspectionDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PoliceStationDataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CrimeNumberDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SectionOfLawDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentifiedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CPsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CulpritNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FingersIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HenryClassificationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DANumberDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PreviousCaseDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IDRNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SlNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JoinedIDRBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnDummySave = New DevComponents.DotNetBar.ButtonX()
         Me.btnDummyClear = New DevComponents.DotNetBar.ButtonX()
         Me.btnDummySearch = New DevComponents.DotNetBar.ButtonX()
@@ -456,6 +590,11 @@ Partial Class frmMainInterface
         Me.btnGenerateExpertOpinionContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenExpertOpinionFolderContext = New DevComponents.DotNetBar.ButtonItem()
         Me.SSDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.StaffNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DesignationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PENDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SlNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.IODatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.Designation = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OfficerName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -521,6 +660,10 @@ Partial Class frmMainInterface
         Me.txtSOCNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.TabStyleContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
         Me.SOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel11 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
+        Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.IDRTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel10 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx7 = New DevComponents.DotNetBar.PanelEx()
         Me.btnSaveOfficeSettings = New DevComponents.DotNetBar.ButtonX()
@@ -721,10 +864,6 @@ Partial Class frmMainInterface
         Me.LabelX26 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX27 = New DevComponents.DotNetBar.LabelX()
         Me.DATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
-        Me.TabControlPanel11 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
-        Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.IDRTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel6 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelID = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX144 = New DevComponents.DotNetBar.LabelX()
@@ -950,144 +1089,6 @@ Partial Class frmMainInterface
         Me.bgwDownloadInstaller = New System.ComponentModel.BackgroundWorker()
         Me.bgwUpdateChecker = New System.ComponentModel.BackgroundWorker()
         Me.bgwVersionUploader = New System.ComponentModel.BackgroundWorker()
-        Me.SOCNumberDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SOCYearDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfInspectionDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfReportDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SectionOfLawDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChancePrintDetailsDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ComplainantDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ModusOperandiDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PropertyLostDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PhotographerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PhotoReceivedDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GistDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ComparisonDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GraveCrimeDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.FileStatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
-        Me.PoliceStationDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PSRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CDNumberWithYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfExaminationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameOfOfficerDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CourtDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CCNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CDRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.FPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FPYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FPDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PassportNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AttestedFPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FPARegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ACNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DANumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SectionOfLawDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AliasNameDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FathersNameDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SexDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryNumeratorDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryDenominatorDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ModusOperandiDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SlipFileDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ACRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.IDNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DANumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SectionOfLawDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AliasNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FathersNameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SexDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryNumeratorDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryDenominatorDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentificationDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SlipFileDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IDRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DANumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DAYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfEntryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SectionOfLawDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AliasNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FathersNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SexDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryNumeratorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryDenominatorDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SlipFileDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DARegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SerialNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SOCNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfInspectionDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InspectingOfficerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReportSentToDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfReportSentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NatureOfReportsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DespatchNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RSOCRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.IdentificationNumberDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SOCNumberDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentificationDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateOfInspectionDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PoliceStationDataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CrimeNumberDataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SectionOfLawDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentifiedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CPsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CulpritNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FingersIdentifiedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HenryClassificationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DANumberDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IDRNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JoinedIDRBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.StaffNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DesignationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PENDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SlNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.DARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
         Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
@@ -1113,13 +1114,13 @@ Partial Class frmMainInterface
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         Me.SSTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SupportingStaffTableAdapter()
-        Me.btnFixDBTables = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenErrorLog = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
+        Me.RibbonPanel7.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
         Me.RibbonPanel5.SuspendLayout
         Me.RibbonPanel3.SuspendLayout
-        Me.RibbonPanel7.SuspendLayout
         Me.RibbonPanel4.SuspendLayout
         Me.RibbonPanel6.SuspendLayout
         Me.TableLayoutPanel1.SuspendLayout
@@ -1127,14 +1128,24 @@ Partial Class frmMainInterface
         Me.pnlRegisterName.SuspendLayout
         CType(Me.ColumnHeaderContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.SOCDatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.SOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.FingerPrintDataSet,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PSDataGrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PSRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.CDDataGrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.CDRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.FPADataGrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.FPARegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.ACDatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.ACRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.IDDatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.IDRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DADatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.DARegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.RSOCDatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.RSOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.JoinedIDRDataGrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.JoinedIDRBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControl.SuspendLayout
@@ -1145,6 +1156,7 @@ Partial Class frmMainInterface
         CType(Me.TabColorContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.SSDatagrid,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.SSBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.IODatagrid,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.txtSOCCPsEliminated,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.txtSOCCPsUnfit,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1153,6 +1165,8 @@ Partial Class frmMainInterface
         CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControlPanel11.SuspendLayout
+        Me.PanelIDR.SuspendLayout
         Me.TabControlPanel10.SuspendLayout
         Me.PanelEx7.SuspendLayout
         Me.GroupPanel5.SuspendLayout
@@ -1179,8 +1193,6 @@ Partial Class frmMainInterface
         CType(Me.DASlipContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.txtDAYear,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabControlPanel11.SuspendLayout
-        Me.PanelIDR.SuspendLayout
         Me.TabControlPanel6.SuspendLayout
         Me.PanelID.SuspendLayout
         CType(Me.txtIDNumber,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1195,17 +1207,6 @@ Partial Class frmMainInterface
         Me.PanelCD.SuspendLayout
         CType(Me.txtCDYear,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dtCDExamination,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.SOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.FingerPrintDataSet,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PSRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.CDRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.FPARegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.ACRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.IDRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DARegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.RSOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.JoinedIDRBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.SSBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.FingerPrintDataSet1,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.OfficerTableBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
@@ -1503,9 +1504,9 @@ Partial Class frmMainInterface
         Me.RibbonControl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonControl1.CaptionFont = New System.Drawing.Font("Segoe UI", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RibbonControl1.CaptionVisible = true
-        Me.RibbonControl1.Controls.Add(Me.RibbonPanel7)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel1)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel5)
+        Me.RibbonControl1.Controls.Add(Me.RibbonPanel7)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel3)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel2)
         Me.RibbonControl1.Controls.Add(Me.RibbonPanel4)
@@ -1540,6 +1541,247 @@ Partial Class frmMainInterface
         Me.RibbonControl1.Text = "FINGERPRINT INFORMATION SYSTEM"
         Me.RibbonControl1.TitleText = "<b>FINGERPRINT INFORMATION SYSTEM</b>"
         '
+        'RibbonPanel7
+        '
+        Me.RibbonPanel7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonPanel7.Controls.Add(Me.RibbonBar18)
+        Me.RibbonPanel7.Controls.Add(Me.RibbonBar15)
+        Me.RibbonPanel7.Controls.Add(Me.RibbonBar14)
+        Me.RibbonPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.RibbonPanel7.Location = New System.Drawing.Point(0, 55)
+        Me.RibbonPanel7.Name = "RibbonPanel7"
+        Me.RibbonPanel7.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
+        Me.RibbonPanel7.Size = New System.Drawing.Size(1360, 95)
+        '
+        '
+        '
+        Me.RibbonPanel7.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel7.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonPanel7.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonPanel7.TabIndex = 8
+        Me.RibbonPanel7.Visible = false
+        '
+        'RibbonBar18
+        '
+        Me.RibbonBar18.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar18.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar18.ContainerControlProcessDialogKey = true
+        Me.RibbonBar18.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar18.DragDropSupport = true
+        Me.RibbonBar18.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCompactDatabase, Me.btnFixDBTables})
+        Me.RibbonBar18.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar18.Location = New System.Drawing.Point(626, 0)
+        Me.RibbonBar18.Name = "RibbonBar18"
+        Me.RibbonBar18.Size = New System.Drawing.Size(319, 93)
+        Me.RibbonBar18.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar18.TabIndex = 2
+        Me.RibbonBar18.Text = "DATABASE MAINTENANCE"
+        '
+        '
+        '
+        Me.RibbonBar18.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar18.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnCompactDatabase
+        '
+        Me.btnCompactDatabase.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnCompactDatabase.Image = CType(resources.GetObject("btnCompactDatabase.Image"),System.Drawing.Image)
+        Me.btnCompactDatabase.Name = "btnCompactDatabase"
+        Me.btnCompactDatabase.SubItemsExpandWidth = 14
+        Me.btnCompactDatabase.Text = "Compact Database"
+        '
+        'btnFixDBTables
+        '
+        Me.btnFixDBTables.BeginGroup = true
+        Me.btnFixDBTables.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnFixDBTables.Image = CType(resources.GetObject("btnFixDBTables.Image"),System.Drawing.Image)
+        Me.btnFixDBTables.Name = "btnFixDBTables"
+        Me.btnFixDBTables.SubItemsExpandWidth = 14
+        Me.btnFixDBTables.Text = "Fix Tables"
+        '
+        'RibbonBar15
+        '
+        Me.RibbonBar15.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar15.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar15.ContainerControlProcessDialogKey = true
+        Me.RibbonBar15.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar15.DragDropSupport = true
+        Me.RibbonBar15.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer12, Me.ItemContainer14})
+        Me.RibbonBar15.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar15.Location = New System.Drawing.Point(307, 0)
+        Me.RibbonBar15.Name = "RibbonBar15"
+        Me.RibbonBar15.Size = New System.Drawing.Size(319, 93)
+        Me.RibbonBar15.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar15.TabIndex = 1
+        Me.RibbonBar15.Text = "DATABASE BACKUP"
+        '
+        '
+        '
+        Me.RibbonBar15.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar15.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'ItemContainer12
+        '
+        '
+        '
+        '
+        Me.ItemContainer12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer12.BeginGroup = true
+        Me.ItemContainer12.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer12.Name = "ItemContainer12"
+        Me.ItemContainer12.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenBackupFolder, Me.btnChangeBackupFolder})
+        '
+        '
+        '
+        Me.ItemContainer12.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer12.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnOpenBackupFolder
+        '
+        Me.btnOpenBackupFolder.Name = "btnOpenBackupFolder"
+        Me.btnOpenBackupFolder.Text = "Open Backup Folder"
+        '
+        'btnChangeBackupFolder
+        '
+        Me.btnChangeBackupFolder.BeginGroup = true
+        Me.btnChangeBackupFolder.Name = "btnChangeBackupFolder"
+        Me.btnChangeBackupFolder.Text = "Change Backup Folder"
+        '
+        'ItemContainer14
+        '
+        '
+        '
+        '
+        Me.ItemContainer14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer14.BeginGroup = true
+        Me.ItemContainer14.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer14.Name = "ItemContainer14"
+        Me.ItemContainer14.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkTakeAutoBackup, Me.LabelItem4, Me.txtAutoBackupPeriod})
+        '
+        '
+        '
+        Me.ItemContainer14.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer14.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'chkTakeAutoBackup
+        '
+        Me.chkTakeAutoBackup.Checked = true
+        Me.chkTakeAutoBackup.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkTakeAutoBackup.Name = "chkTakeAutoBackup"
+        Me.chkTakeAutoBackup.Text = "Take Backup Automatically"
+        '
+        'LabelItem4
+        '
+        Me.LabelItem4.Name = "LabelItem4"
+        Me.LabelItem4.Text = "Enter Backup Interval (Days)"
+        '
+        'txtAutoBackupPeriod
+        '
+        Me.txtAutoBackupPeriod.Name = "txtAutoBackupPeriod"
+        Me.txtAutoBackupPeriod.WatermarkColor = System.Drawing.SystemColors.GrayText
+        '
+        'RibbonBar14
+        '
+        Me.RibbonBar14.AutoOverflowEnabled = true
+        '
+        '
+        '
+        Me.RibbonBar14.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RibbonBar14.ContainerControlProcessDialogKey = true
+        Me.RibbonBar14.Dock = System.Windows.Forms.DockStyle.Left
+        Me.RibbonBar14.DragDropSupport = true
+        Me.RibbonBar14.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenDBInMSAccess, Me.ItemContainer4})
+        Me.RibbonBar14.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
+        Me.RibbonBar14.Location = New System.Drawing.Point(3, 0)
+        Me.RibbonBar14.Name = "RibbonBar14"
+        Me.RibbonBar14.Size = New System.Drawing.Size(304, 93)
+        Me.RibbonBar14.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.RibbonBar14.TabIndex = 0
+        Me.RibbonBar14.Text = "DATABASE LOCATION"
+        '
+        '
+        '
+        Me.RibbonBar14.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.RibbonBar14.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnOpenDBInMSAccess
+        '
+        Me.btnOpenDBInMSAccess.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnOpenDBInMSAccess.Image = CType(resources.GetObject("btnOpenDBInMSAccess.Image"),System.Drawing.Image)
+        Me.btnOpenDBInMSAccess.Name = "btnOpenDBInMSAccess"
+        Me.btnOpenDBInMSAccess.Text = "Open Database"
+        '
+        'ItemContainer4
+        '
+        '
+        '
+        '
+        Me.ItemContainer4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.ItemContainer4.BeginGroup = true
+        Me.ItemContainer4.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
+        Me.ItemContainer4.Name = "ItemContainer4"
+        Me.ItemContainer4.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenDBFolder, Me.btnChangeDBFolder})
+        '
+        '
+        '
+        Me.ItemContainer4.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.ItemContainer4.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'btnOpenDBFolder
+        '
+        Me.btnOpenDBFolder.BeginGroup = true
+        Me.btnOpenDBFolder.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
+        Me.btnOpenDBFolder.Name = "btnOpenDBFolder"
+        Me.btnOpenDBFolder.Text = "Open Database Folder"
+        '
+        'btnChangeDBFolder
+        '
+        Me.btnChangeDBFolder.BeginGroup = true
+        Me.btnChangeDBFolder.Name = "btnChangeDBFolder"
+        Me.btnChangeDBFolder.Text = "Change Database Folder"
+        '
         'RibbonPanel1
         '
         Me.RibbonPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1568,7 +1810,6 @@ Partial Class frmMainInterface
         '
         Me.RibbonPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.RibbonPanel1.TabIndex = 3
-        Me.RibbonPanel1.Visible = false
         '
         'RibbonBar17
         '
@@ -2577,7 +2818,7 @@ Partial Class frmMainInterface
         Me.btnSettingsWizard.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
         Me.btnSettingsWizard.Image = CType(resources.GetObject("btnSettingsWizard.Image"),System.Drawing.Image)
         Me.btnSettingsWizard.Name = "btnSettingsWizard"
-        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder})
+        Me.btnSettingsWizard.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenRegedit, Me.btnOpenTemplatesFolder, Me.btnOpenErrorLog})
         Me.btnSettingsWizard.SubItemsExpandWidth = 14
         Me.btnSettingsWizard.Text = "Other Settings"
         '
@@ -2966,237 +3207,6 @@ Partial Class frmMainInterface
         Me.ComboItem13.FontStyle = System.Drawing.FontStyle.Bold
         Me.ComboItem13.Text = "None"
         '
-        'RibbonPanel7
-        '
-        Me.RibbonPanel7.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonPanel7.Controls.Add(Me.RibbonBar18)
-        Me.RibbonPanel7.Controls.Add(Me.RibbonBar15)
-        Me.RibbonPanel7.Controls.Add(Me.RibbonBar14)
-        Me.RibbonPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RibbonPanel7.Location = New System.Drawing.Point(0, 55)
-        Me.RibbonPanel7.Name = "RibbonPanel7"
-        Me.RibbonPanel7.Padding = New System.Windows.Forms.Padding(3, 0, 3, 2)
-        Me.RibbonPanel7.Size = New System.Drawing.Size(1360, 95)
-        '
-        '
-        '
-        Me.RibbonPanel7.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel7.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonPanel7.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonPanel7.TabIndex = 8
-        '
-        'RibbonBar18
-        '
-        Me.RibbonBar18.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar18.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar18.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar18.ContainerControlProcessDialogKey = true
-        Me.RibbonBar18.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar18.DragDropSupport = true
-        Me.RibbonBar18.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnCompactDatabase, Me.btnFixDBTables})
-        Me.RibbonBar18.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar18.Location = New System.Drawing.Point(626, 0)
-        Me.RibbonBar18.Name = "RibbonBar18"
-        Me.RibbonBar18.Size = New System.Drawing.Size(319, 93)
-        Me.RibbonBar18.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar18.TabIndex = 2
-        Me.RibbonBar18.Text = "DATABASE MAINTENANCE"
-        '
-        '
-        '
-        Me.RibbonBar18.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar18.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnCompactDatabase
-        '
-        Me.btnCompactDatabase.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnCompactDatabase.Image = CType(resources.GetObject("btnCompactDatabase.Image"),System.Drawing.Image)
-        Me.btnCompactDatabase.Name = "btnCompactDatabase"
-        Me.btnCompactDatabase.SubItemsExpandWidth = 14
-        Me.btnCompactDatabase.Text = "Compact Database"
-        '
-        'RibbonBar15
-        '
-        Me.RibbonBar15.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar15.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar15.ContainerControlProcessDialogKey = true
-        Me.RibbonBar15.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar15.DragDropSupport = true
-        Me.RibbonBar15.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ItemContainer12, Me.ItemContainer14})
-        Me.RibbonBar15.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar15.Location = New System.Drawing.Point(307, 0)
-        Me.RibbonBar15.Name = "RibbonBar15"
-        Me.RibbonBar15.Size = New System.Drawing.Size(319, 93)
-        Me.RibbonBar15.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar15.TabIndex = 1
-        Me.RibbonBar15.Text = "DATABASE BACKUP"
-        '
-        '
-        '
-        Me.RibbonBar15.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar15.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'ItemContainer12
-        '
-        '
-        '
-        '
-        Me.ItemContainer12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer12.BeginGroup = true
-        Me.ItemContainer12.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer12.Name = "ItemContainer12"
-        Me.ItemContainer12.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenBackupFolder, Me.btnChangeBackupFolder})
-        '
-        '
-        '
-        Me.ItemContainer12.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer12.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnOpenBackupFolder
-        '
-        Me.btnOpenBackupFolder.Name = "btnOpenBackupFolder"
-        Me.btnOpenBackupFolder.Text = "Open Backup Folder"
-        '
-        'btnChangeBackupFolder
-        '
-        Me.btnChangeBackupFolder.BeginGroup = true
-        Me.btnChangeBackupFolder.Name = "btnChangeBackupFolder"
-        Me.btnChangeBackupFolder.Text = "Change Backup Folder"
-        '
-        'ItemContainer14
-        '
-        '
-        '
-        '
-        Me.ItemContainer14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer14.BeginGroup = true
-        Me.ItemContainer14.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer14.Name = "ItemContainer14"
-        Me.ItemContainer14.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.chkTakeAutoBackup, Me.LabelItem4, Me.txtAutoBackupPeriod})
-        '
-        '
-        '
-        Me.ItemContainer14.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer14.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'chkTakeAutoBackup
-        '
-        Me.chkTakeAutoBackup.Checked = true
-        Me.chkTakeAutoBackup.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkTakeAutoBackup.Name = "chkTakeAutoBackup"
-        Me.chkTakeAutoBackup.Text = "Take Backup Automatically"
-        '
-        'LabelItem4
-        '
-        Me.LabelItem4.Name = "LabelItem4"
-        Me.LabelItem4.Text = "Enter Backup Interval (Days)"
-        '
-        'txtAutoBackupPeriod
-        '
-        Me.txtAutoBackupPeriod.Name = "txtAutoBackupPeriod"
-        Me.txtAutoBackupPeriod.WatermarkColor = System.Drawing.SystemColors.GrayText
-        '
-        'RibbonBar14
-        '
-        Me.RibbonBar14.AutoOverflowEnabled = true
-        '
-        '
-        '
-        Me.RibbonBar14.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.RibbonBar14.ContainerControlProcessDialogKey = true
-        Me.RibbonBar14.Dock = System.Windows.Forms.DockStyle.Left
-        Me.RibbonBar14.DragDropSupport = true
-        Me.RibbonBar14.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenDBInMSAccess, Me.ItemContainer4})
-        Me.RibbonBar14.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
-        Me.RibbonBar14.Location = New System.Drawing.Point(3, 0)
-        Me.RibbonBar14.Name = "RibbonBar14"
-        Me.RibbonBar14.Size = New System.Drawing.Size(304, 93)
-        Me.RibbonBar14.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.RibbonBar14.TabIndex = 0
-        Me.RibbonBar14.Text = "DATABASE LOCATION"
-        '
-        '
-        '
-        Me.RibbonBar14.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.RibbonBar14.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnOpenDBInMSAccess
-        '
-        Me.btnOpenDBInMSAccess.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnOpenDBInMSAccess.Image = CType(resources.GetObject("btnOpenDBInMSAccess.Image"),System.Drawing.Image)
-        Me.btnOpenDBInMSAccess.Name = "btnOpenDBInMSAccess"
-        Me.btnOpenDBInMSAccess.Text = "Open Database"
-        '
-        'ItemContainer4
-        '
-        '
-        '
-        '
-        Me.ItemContainer4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ItemContainer4.BeginGroup = true
-        Me.ItemContainer4.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical
-        Me.ItemContainer4.Name = "ItemContainer4"
-        Me.ItemContainer4.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenDBFolder, Me.btnChangeDBFolder})
-        '
-        '
-        '
-        Me.ItemContainer4.TitleMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.ItemContainer4.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        'btnOpenDBFolder
-        '
-        Me.btnOpenDBFolder.BeginGroup = true
-        Me.btnOpenDBFolder.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnOpenDBFolder.Name = "btnOpenDBFolder"
-        Me.btnOpenDBFolder.Text = "Open Database Folder"
-        '
-        'btnChangeDBFolder
-        '
-        Me.btnChangeDBFolder.BeginGroup = true
-        Me.btnChangeDBFolder.Name = "btnChangeDBFolder"
-        Me.btnChangeDBFolder.Text = "Change Database Folder"
-        '
         'RibbonPanel4
         '
         Me.RibbonPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -3475,6 +3485,7 @@ Partial Class frmMainInterface
         '
         'tabHome
         '
+        Me.tabHome.Checked = true
         Me.tabHome.Name = "tabHome"
         Me.tabHome.Panel = Me.RibbonPanel1
         Me.tabHome.Text = "Home"
@@ -3487,7 +3498,6 @@ Partial Class frmMainInterface
         '
         'RibbonTabItem5
         '
-        Me.RibbonTabItem5.Checked = true
         Me.RibbonTabItem5.Name = "RibbonTabItem5"
         Me.RibbonTabItem5.Panel = Me.RibbonPanel7
         Me.RibbonTabItem5.Text = "Database Settings"
@@ -3669,6 +3679,120 @@ Partial Class frmMainInterface
         Me.SOCDatagrid.TabIndex = 2
         Me.SOCDatagrid.TabStop = false
         '
+        'SOCNumberDataGridViewTextBoxColumn4
+        '
+        Me.SOCNumberDataGridViewTextBoxColumn4.DataPropertyName = "SOCNumber"
+        Me.SOCNumberDataGridViewTextBoxColumn4.HeaderText = "SOC Number"
+        Me.SOCNumberDataGridViewTextBoxColumn4.Name = "SOCNumberDataGridViewTextBoxColumn4"
+        Me.SOCNumberDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.SOCNumberDataGridViewTextBoxColumn4.Width = 70
+        '
+        'SOCYearDataGridViewTextBoxColumn2
+        '
+        Me.SOCYearDataGridViewTextBoxColumn2.DataPropertyName = "SOCYear"
+        Me.SOCYearDataGridViewTextBoxColumn2.HeaderText = "SOC Year"
+        Me.SOCYearDataGridViewTextBoxColumn2.Name = "SOCYearDataGridViewTextBoxColumn2"
+        Me.SOCYearDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.SOCYearDataGridViewTextBoxColumn2.Visible = false
+        Me.SOCYearDataGridViewTextBoxColumn2.Width = 70
+        '
+        'DateOfInspectionDataGridViewTextBoxColumn4
+        '
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.DataPropertyName = "DateOfInspection"
+        DataGridViewCellStyle93.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle93
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.HeaderText = "Date of Inspection"
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.Name = "DateOfInspectionDataGridViewTextBoxColumn4"
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.DateOfInspectionDataGridViewTextBoxColumn4.Width = 85
+        '
+        'DateOfReportDataGridViewTextBoxColumn2
+        '
+        Me.DateOfReportDataGridViewTextBoxColumn2.DataPropertyName = "DateOfReport"
+        DataGridViewCellStyle94.Format = "dd/MM/yyyy"
+        Me.DateOfReportDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle94
+        Me.DateOfReportDataGridViewTextBoxColumn2.HeaderText = "Date of Report"
+        Me.DateOfReportDataGridViewTextBoxColumn2.Name = "DateOfReportDataGridViewTextBoxColumn2"
+        Me.DateOfReportDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.DateOfReportDataGridViewTextBoxColumn2.Width = 85
+        '
+        'DateOfOccurrenceDataGridViewTextBoxColumn2
+        '
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.DataPropertyName = "DateOfOccurrence"
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.HeaderText = "Date of Occurrence"
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.Name = "DateOfOccurrenceDataGridViewTextBoxColumn2"
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.Width = 105
+        '
+        'PoliceStationDataGridViewTextBoxColumn9
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn9.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn9.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn9.Name = "PoliceStationDataGridViewTextBoxColumn9"
+        Me.PoliceStationDataGridViewTextBoxColumn9.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn9.Width = 150
+        '
+        'CrimeNumberDataGridViewTextBoxColumn7
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn7.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn7.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn7.Name = "CrimeNumberDataGridViewTextBoxColumn7"
+        Me.CrimeNumberDataGridViewTextBoxColumn7.ReadOnly = true
+        Me.CrimeNumberDataGridViewTextBoxColumn7.Width = 70
+        '
+        'SectionOfLawDataGridViewTextBoxColumn6
+        '
+        Me.SectionOfLawDataGridViewTextBoxColumn6.DataPropertyName = "SectionOfLaw"
+        Me.SectionOfLawDataGridViewTextBoxColumn6.HeaderText = "Section of Law"
+        Me.SectionOfLawDataGridViewTextBoxColumn6.Name = "SectionOfLawDataGridViewTextBoxColumn6"
+        Me.SectionOfLawDataGridViewTextBoxColumn6.ReadOnly = true
+        '
+        'PlaceOfOccurrenceDataGridViewTextBoxColumn2
+        '
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.DataPropertyName = "PlaceOfOccurrence"
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.HeaderText = "Place of Occurrence"
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.Name = "PlaceOfOccurrenceDataGridViewTextBoxColumn2"
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.Width = 120
+        '
+        'InvestigatingOfficerDataGridViewTextBoxColumn3
+        '
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.DataPropertyName = "InvestigatingOfficer"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.HeaderText = "Inspecting Officer"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.Name = "InvestigatingOfficerDataGridViewTextBoxColumn3"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.Width = 160
+        '
+        'ChancePrintsDevelopedDataGridViewTextBoxColumn2
+        '
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DataPropertyName = "ChancePrintsDeveloped"
+        DataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle95
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.HeaderText = "No. of CPs Developed"
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn2"
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.Width = 90
+        '
+        'ChancePrintsUnfitDataGridViewTextBoxColumn1
+        '
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsUnfit"
+        DataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle96
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Unfit"
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.Name = "ChancePrintsUnfitDataGridViewTextBoxColumn1"
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.Width = 90
+        '
+        'ChancePrintsEliminatedDataGridViewTextBoxColumn1
+        '
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsEliminated"
+        DataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle97
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Eliminated"
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.Name = "ChancePrintsEliminatedDataGridViewTextBoxColumn1"
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.Width = 90
+        '
         'CPsIdentified
         '
         Me.CPsIdentified.DataPropertyName = "CPsIdentified"
@@ -3678,6 +3802,104 @@ Partial Class frmMainInterface
         Me.CPsIdentified.Name = "CPsIdentified"
         Me.CPsIdentified.ReadOnly = true
         Me.CPsIdentified.Width = 90
+        '
+        'ChancePrintDetailsDataGridViewTextBoxColumn2
+        '
+        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.DataPropertyName = "ChancePrintDetails"
+        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.HeaderText = "Chance Print Details"
+        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.Name = "ChancePrintDetailsDataGridViewTextBoxColumn2"
+        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.ReadOnly = true
+        '
+        'ComplainantDataGridViewTextBoxColumn2
+        '
+        Me.ComplainantDataGridViewTextBoxColumn2.DataPropertyName = "Complainant"
+        Me.ComplainantDataGridViewTextBoxColumn2.HeaderText = "Complainant"
+        Me.ComplainantDataGridViewTextBoxColumn2.Name = "ComplainantDataGridViewTextBoxColumn2"
+        Me.ComplainantDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.ComplainantDataGridViewTextBoxColumn2.Width = 140
+        '
+        'ModusOperandiDataGridViewTextBoxColumn3
+        '
+        Me.ModusOperandiDataGridViewTextBoxColumn3.DataPropertyName = "ModusOperandi"
+        Me.ModusOperandiDataGridViewTextBoxColumn3.HeaderText = "Modus Operandi"
+        Me.ModusOperandiDataGridViewTextBoxColumn3.Name = "ModusOperandiDataGridViewTextBoxColumn3"
+        Me.ModusOperandiDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.ModusOperandiDataGridViewTextBoxColumn3.Width = 170
+        '
+        'PropertyLostDataGridViewTextBoxColumn2
+        '
+        Me.PropertyLostDataGridViewTextBoxColumn2.DataPropertyName = "PropertyLost"
+        Me.PropertyLostDataGridViewTextBoxColumn2.HeaderText = "Property Lost"
+        Me.PropertyLostDataGridViewTextBoxColumn2.Name = "PropertyLostDataGridViewTextBoxColumn2"
+        Me.PropertyLostDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.PropertyLostDataGridViewTextBoxColumn2.Width = 150
+        '
+        'PhotographerDataGridViewTextBoxColumn1
+        '
+        Me.PhotographerDataGridViewTextBoxColumn1.DataPropertyName = "Photographer"
+        Me.PhotographerDataGridViewTextBoxColumn1.HeaderText = "Photographer"
+        Me.PhotographerDataGridViewTextBoxColumn1.Name = "PhotographerDataGridViewTextBoxColumn1"
+        Me.PhotographerDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.PhotographerDataGridViewTextBoxColumn1.Width = 130
+        '
+        'PhotoReceivedDataGridViewTextBoxColumn1
+        '
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.DataPropertyName = "PhotoReceived"
+        DataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle99
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.HeaderText = "Photo Received"
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.Name = "PhotoReceivedDataGridViewTextBoxColumn1"
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.PhotoReceivedDataGridViewTextBoxColumn1.Width = 90
+        '
+        'DateOfReceptionOfPhotoDataGridViewTextBoxColumn1
+        '
+        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.DataPropertyName = "DateOfReceptionOfPhoto"
+        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.HeaderText = "Photo Received Date"
+        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.Name = "DateOfReceptionOfPhotoDataGridViewTextBoxColumn1"
+        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.Width = 90
+        '
+        'GistDataGridViewTextBoxColumn1
+        '
+        Me.GistDataGridViewTextBoxColumn1.DataPropertyName = "Gist"
+        Me.GistDataGridViewTextBoxColumn1.HeaderText = "Gist of the Case"
+        Me.GistDataGridViewTextBoxColumn1.Name = "GistDataGridViewTextBoxColumn1"
+        Me.GistDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.GistDataGridViewTextBoxColumn1.Width = 200
+        '
+        'ComparisonDetailsDataGridViewTextBoxColumn
+        '
+        Me.ComparisonDetailsDataGridViewTextBoxColumn.DataPropertyName = "ComparisonDetails"
+        Me.ComparisonDetailsDataGridViewTextBoxColumn.HeaderText = "Comparison Details"
+        Me.ComparisonDetailsDataGridViewTextBoxColumn.Name = "ComparisonDetailsDataGridViewTextBoxColumn"
+        Me.ComparisonDetailsDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ComparisonDetailsDataGridViewTextBoxColumn.Width = 110
+        '
+        'GraveCrimeDataGridViewCheckBoxColumn
+        '
+        Me.GraveCrimeDataGridViewCheckBoxColumn.DataPropertyName = "GraveCrime"
+        Me.GraveCrimeDataGridViewCheckBoxColumn.HeaderText = "Grave Crime"
+        Me.GraveCrimeDataGridViewCheckBoxColumn.Name = "GraveCrimeDataGridViewCheckBoxColumn"
+        Me.GraveCrimeDataGridViewCheckBoxColumn.ReadOnly = true
+        Me.GraveCrimeDataGridViewCheckBoxColumn.Width = 80
+        '
+        'FileStatusDataGridViewTextBoxColumn
+        '
+        Me.FileStatusDataGridViewTextBoxColumn.DataPropertyName = "FileStatus"
+        Me.FileStatusDataGridViewTextBoxColumn.HeaderText = "File Status"
+        Me.FileStatusDataGridViewTextBoxColumn.Name = "FileStatusDataGridViewTextBoxColumn"
+        Me.FileStatusDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'SOCRegisterBindingSource
+        '
+        Me.SOCRegisterBindingSource.DataMember = "SOCRegister"
+        Me.SOCRegisterBindingSource.DataSource = Me.FingerPrintDataSet
+        '
+        'FingerPrintDataSet
+        '
+        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'PSDataGrid
         '
@@ -3730,6 +3952,18 @@ Partial Class frmMainInterface
         Me.PSDataGrid.TabIndex = 605
         Me.PSDataGrid.TabStop = false
         '
+        'PoliceStationDataGridViewTextBoxColumn2
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn2.DataPropertyName = "PoliceStation"
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PoliceStationDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle9
+        Me.PoliceStationDataGridViewTextBoxColumn2.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn2.Name = "PoliceStationDataGridViewTextBoxColumn2"
+        Me.PoliceStationDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn2.Width = 250
+        '
         'SHO
         '
         Me.SHO.DataPropertyName = "SHO"
@@ -3762,6 +3996,11 @@ Partial Class frmMainInterface
         Me.DistanceKM.HeaderText = "Distance"
         Me.DistanceKM.Name = "DistanceKM"
         Me.DistanceKM.ReadOnly = true
+        '
+        'PSRegisterBindingSource
+        '
+        Me.PSRegisterBindingSource.DataMember = "PoliceStationList"
+        Me.PSRegisterBindingSource.DataSource = Me.FingerPrintDataSet
         '
         'CDDataGrid
         '
@@ -3818,6 +4057,90 @@ Partial Class frmMainInterface
         Me.CDDataGrid.TabIndex = 3
         Me.CDDataGrid.TabStop = false
         '
+        'CDNumberWithYearDataGridViewTextBoxColumn
+        '
+        Me.CDNumberWithYearDataGridViewTextBoxColumn.DataPropertyName = "CDNumberWithYear"
+        Me.CDNumberWithYearDataGridViewTextBoxColumn.HeaderText = "CD Number"
+        Me.CDNumberWithYearDataGridViewTextBoxColumn.Name = "CDNumberWithYearDataGridViewTextBoxColumn"
+        Me.CDNumberWithYearDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'CDNumberWithoutYearDataGridViewTextBoxColumn
+        '
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.DataPropertyName = "CDNumberWithoutYear"
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.HeaderText = "CDNumberWithoutYear"
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.Name = "CDNumberWithoutYearDataGridViewTextBoxColumn"
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.Visible = false
+        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.Width = 70
+        '
+        'DateOfExaminationDataGridViewTextBoxColumn
+        '
+        Me.DateOfExaminationDataGridViewTextBoxColumn.DataPropertyName = "DateOfExamination"
+        DataGridViewCellStyle15.Format = "dd/MM/yyyy"
+        Me.DateOfExaminationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
+        Me.DateOfExaminationDataGridViewTextBoxColumn.HeaderText = "Date Examined"
+        Me.DateOfExaminationDataGridViewTextBoxColumn.Name = "DateOfExaminationDataGridViewTextBoxColumn"
+        Me.DateOfExaminationDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'NameOfOfficerDataGridViewTextBoxColumn
+        '
+        Me.NameOfOfficerDataGridViewTextBoxColumn.DataPropertyName = "NameOfOfficer"
+        Me.NameOfOfficerDataGridViewTextBoxColumn.HeaderText = "Officer"
+        Me.NameOfOfficerDataGridViewTextBoxColumn.Name = "NameOfOfficerDataGridViewTextBoxColumn"
+        Me.NameOfOfficerDataGridViewTextBoxColumn.ReadOnly = true
+        Me.NameOfOfficerDataGridViewTextBoxColumn.Width = 350
+        '
+        'CourtDataGridViewTextBoxColumn
+        '
+        Me.CourtDataGridViewTextBoxColumn.DataPropertyName = "Court"
+        Me.CourtDataGridViewTextBoxColumn.HeaderText = "Court"
+        Me.CourtDataGridViewTextBoxColumn.Name = "CourtDataGridViewTextBoxColumn"
+        Me.CourtDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CourtDataGridViewTextBoxColumn.Width = 300
+        '
+        'CCNumberDataGridViewTextBoxColumn
+        '
+        Me.CCNumberDataGridViewTextBoxColumn.DataPropertyName = "CCNumber"
+        Me.CCNumberDataGridViewTextBoxColumn.HeaderText = "CC Number"
+        Me.CCNumberDataGridViewTextBoxColumn.Name = "CCNumberDataGridViewTextBoxColumn"
+        Me.CCNumberDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'PoliceStationDataGridViewTextBoxColumn3
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn3.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn3.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn3.Name = "PoliceStationDataGridViewTextBoxColumn3"
+        Me.PoliceStationDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn3.Width = 200
+        '
+        'CrNumberDataGridViewTextBoxColumn
+        '
+        Me.CrNumberDataGridViewTextBoxColumn.DataPropertyName = "CrNumber"
+        Me.CrNumberDataGridViewTextBoxColumn.HeaderText = "Crime Number"
+        Me.CrNumberDataGridViewTextBoxColumn.Name = "CrNumberDataGridViewTextBoxColumn"
+        Me.CrNumberDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'DetailsDataGridViewTextBoxColumn
+        '
+        Me.DetailsDataGridViewTextBoxColumn.DataPropertyName = "Details"
+        Me.DetailsDataGridViewTextBoxColumn.HeaderText = "Details of Examination"
+        Me.DetailsDataGridViewTextBoxColumn.Name = "DetailsDataGridViewTextBoxColumn"
+        Me.DetailsDataGridViewTextBoxColumn.ReadOnly = true
+        Me.DetailsDataGridViewTextBoxColumn.Width = 250
+        '
+        'RemarksDataGridViewTextBoxColumn3
+        '
+        Me.RemarksDataGridViewTextBoxColumn3.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn3.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn3.Name = "RemarksDataGridViewTextBoxColumn3"
+        Me.RemarksDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn3.Width = 250
+        '
+        'CDRegisterBindingSource
+        '
+        Me.CDRegisterBindingSource.DataMember = "CDRegister"
+        Me.CDRegisterBindingSource.DataSource = Me.FingerPrintDataSet
+        '
         'FPADataGrid
         '
         Me.FPADataGrid.AllowUserToAddRows = false
@@ -3872,6 +4195,66 @@ Partial Class frmMainInterface
         Me.FPADataGrid.TabIndex = 5
         Me.FPADataGrid.TabStop = false
         '
+        'FPNumberDataGridViewTextBoxColumn
+        '
+        Me.FPNumberDataGridViewTextBoxColumn.DataPropertyName = "FPNumber"
+        Me.FPNumberDataGridViewTextBoxColumn.HeaderText = "FP Number"
+        Me.FPNumberDataGridViewTextBoxColumn.Name = "FPNumberDataGridViewTextBoxColumn"
+        Me.FPNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FPNumberDataGridViewTextBoxColumn.Width = 80
+        '
+        'FPYearDataGridViewTextBoxColumn
+        '
+        Me.FPYearDataGridViewTextBoxColumn.DataPropertyName = "FPYear"
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.FPYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle19
+        Me.FPYearDataGridViewTextBoxColumn.HeaderText = "Year"
+        Me.FPYearDataGridViewTextBoxColumn.Name = "FPYearDataGridViewTextBoxColumn"
+        Me.FPYearDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FPYearDataGridViewTextBoxColumn.Visible = false
+        Me.FPYearDataGridViewTextBoxColumn.Width = 80
+        '
+        'FPDateDataGridViewTextBoxColumn
+        '
+        Me.FPDateDataGridViewTextBoxColumn.DataPropertyName = "FPDate"
+        DataGridViewCellStyle20.Format = "dd/MM/yyyy"
+        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle20
+        Me.FPDateDataGridViewTextBoxColumn.HeaderText = "Date of Attestation"
+        Me.FPDateDataGridViewTextBoxColumn.Name = "FPDateDataGridViewTextBoxColumn"
+        Me.FPDateDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FPDateDataGridViewTextBoxColumn.Width = 80
+        '
+        'NameDataGridViewTextBoxColumn1
+        '
+        Me.NameDataGridViewTextBoxColumn1.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn1.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn1.Name = "NameDataGridViewTextBoxColumn1"
+        Me.NameDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.NameDataGridViewTextBoxColumn1.Width = 150
+        '
+        'AddressDataGridViewTextBoxColumn1
+        '
+        Me.AddressDataGridViewTextBoxColumn1.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn1.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn1.Name = "AddressDataGridViewTextBoxColumn1"
+        Me.AddressDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn1.Width = 170
+        '
+        'PassportNumberDataGridViewTextBoxColumn
+        '
+        Me.PassportNumberDataGridViewTextBoxColumn.DataPropertyName = "PassportNumber"
+        Me.PassportNumberDataGridViewTextBoxColumn.HeaderText = "Passport Number"
+        Me.PassportNumberDataGridViewTextBoxColumn.Name = "PassportNumberDataGridViewTextBoxColumn"
+        Me.PassportNumberDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'ChalanNumberDataGridViewTextBoxColumn
+        '
+        Me.ChalanNumberDataGridViewTextBoxColumn.DataPropertyName = "ChalanNumber"
+        Me.ChalanNumberDataGridViewTextBoxColumn.HeaderText = "Chalan Number"
+        Me.ChalanNumberDataGridViewTextBoxColumn.Name = "ChalanNumberDataGridViewTextBoxColumn"
+        Me.ChalanNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ChalanNumberDataGridViewTextBoxColumn.Width = 160
+        '
         'ChalanDate
         '
         Me.ChalanDate.DataPropertyName = "ChalanDate"
@@ -3888,6 +4271,49 @@ Partial Class frmMainInterface
         Me.HeadOfAccount.HeaderText = "Head of Account"
         Me.HeadOfAccount.Name = "HeadOfAccount"
         Me.HeadOfAccount.ReadOnly = true
+        '
+        'TreasuryDataGridViewTextBoxColumn
+        '
+        Me.TreasuryDataGridViewTextBoxColumn.DataPropertyName = "Treasury"
+        Me.TreasuryDataGridViewTextBoxColumn.HeaderText = "Treasury"
+        Me.TreasuryDataGridViewTextBoxColumn.Name = "TreasuryDataGridViewTextBoxColumn"
+        Me.TreasuryDataGridViewTextBoxColumn.ReadOnly = true
+        Me.TreasuryDataGridViewTextBoxColumn.Width = 150
+        '
+        'AmountRemittedDataGridViewTextBoxColumn
+        '
+        Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
+        DataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle106.Format = "` #/-"
+        DataGridViewCellStyle106.NullValue = Nothing
+        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle106
+        Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount Remitted"
+        Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
+        Me.AmountRemittedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AmountRemittedDataGridViewTextBoxColumn.Width = 80
+        '
+        'AttestedFPNumberDataGridViewTextBoxColumn
+        '
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.DataPropertyName = "AttestedFPNumber"
+        DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle107
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.HeaderText = "No. of Slips Attested"
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.Name = "AttestedFPNumberDataGridViewTextBoxColumn"
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.Visible = false
+        '
+        'RemarksDataGridViewTextBoxColumn2
+        '
+        Me.RemarksDataGridViewTextBoxColumn2.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn2.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn2.Name = "RemarksDataGridViewTextBoxColumn2"
+        Me.RemarksDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn2.Width = 200
+        '
+        'FPARegisterBindingSource
+        '
+        Me.FPARegisterBindingSource.DataMember = "FPAttestationRegister"
+        Me.FPARegisterBindingSource.DataSource = Me.FingerPrintDataSet
         '
         'ACDatagrid
         '
@@ -3943,6 +4369,131 @@ Partial Class frmMainInterface
         Me.ACDatagrid.TabIndex = 7
         Me.ACDatagrid.TabStop = false
         '
+        'ACNumberDataGridViewTextBoxColumn
+        '
+        Me.ACNumberDataGridViewTextBoxColumn.DataPropertyName = "ACNumber"
+        Me.ACNumberDataGridViewTextBoxColumn.HeaderText = "AC Number"
+        Me.ACNumberDataGridViewTextBoxColumn.Name = "ACNumberDataGridViewTextBoxColumn"
+        Me.ACNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ACNumberDataGridViewTextBoxColumn.Width = 80
+        '
+        'DANumberDataGridViewTextBoxColumn2
+        '
+        Me.DANumberDataGridViewTextBoxColumn2.DataPropertyName = "DANumber"
+        Me.DANumberDataGridViewTextBoxColumn2.HeaderText = "DA Number"
+        Me.DANumberDataGridViewTextBoxColumn2.Name = "DANumberDataGridViewTextBoxColumn2"
+        Me.DANumberDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.DANumberDataGridViewTextBoxColumn2.Width = 80
+        '
+        'PoliceStationDataGridViewTextBoxColumn5
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn5.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn5.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn5.Name = "PoliceStationDataGridViewTextBoxColumn5"
+        Me.PoliceStationDataGridViewTextBoxColumn5.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn5.Width = 200
+        '
+        'CrimeNumberDataGridViewTextBoxColumn3
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn3.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn3.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn3.Name = "CrimeNumberDataGridViewTextBoxColumn3"
+        Me.CrimeNumberDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.CrimeNumberDataGridViewTextBoxColumn3.Width = 80
+        '
+        'SectionOfLawDataGridViewTextBoxColumn3
+        '
+        Me.SectionOfLawDataGridViewTextBoxColumn3.DataPropertyName = "SectionOfLaw"
+        Me.SectionOfLawDataGridViewTextBoxColumn3.HeaderText = "Section Of Law"
+        Me.SectionOfLawDataGridViewTextBoxColumn3.Name = "SectionOfLawDataGridViewTextBoxColumn3"
+        Me.SectionOfLawDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.SectionOfLawDataGridViewTextBoxColumn3.Width = 250
+        '
+        'NameDataGridViewTextBoxColumn3
+        '
+        Me.NameDataGridViewTextBoxColumn3.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn3.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn3.Name = "NameDataGridViewTextBoxColumn3"
+        Me.NameDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.NameDataGridViewTextBoxColumn3.Width = 200
+        '
+        'AliasNameDataGridViewTextBoxColumn2
+        '
+        Me.AliasNameDataGridViewTextBoxColumn2.DataPropertyName = "AliasName"
+        Me.AliasNameDataGridViewTextBoxColumn2.HeaderText = "Alias Name"
+        Me.AliasNameDataGridViewTextBoxColumn2.Name = "AliasNameDataGridViewTextBoxColumn2"
+        Me.AliasNameDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.AliasNameDataGridViewTextBoxColumn2.Width = 200
+        '
+        'FathersNameDataGridViewTextBoxColumn2
+        '
+        Me.FathersNameDataGridViewTextBoxColumn2.DataPropertyName = "FathersName"
+        Me.FathersNameDataGridViewTextBoxColumn2.HeaderText = "Father's Name"
+        Me.FathersNameDataGridViewTextBoxColumn2.Name = "FathersNameDataGridViewTextBoxColumn2"
+        Me.FathersNameDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.FathersNameDataGridViewTextBoxColumn2.Width = 200
+        '
+        'SexDataGridViewTextBoxColumn2
+        '
+        Me.SexDataGridViewTextBoxColumn2.DataPropertyName = "Sex"
+        Me.SexDataGridViewTextBoxColumn2.HeaderText = "Sex"
+        Me.SexDataGridViewTextBoxColumn2.Name = "SexDataGridViewTextBoxColumn2"
+        Me.SexDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.SexDataGridViewTextBoxColumn2.Width = 80
+        '
+        'AddressDataGridViewTextBoxColumn3
+        '
+        Me.AddressDataGridViewTextBoxColumn3.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn3.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn3.Name = "AddressDataGridViewTextBoxColumn3"
+        Me.AddressDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn3.Width = 200
+        '
+        'HenryNumeratorDataGridViewTextBoxColumn2
+        '
+        Me.HenryNumeratorDataGridViewTextBoxColumn2.DataPropertyName = "HenryNumerator"
+        Me.HenryNumeratorDataGridViewTextBoxColumn2.HeaderText = "Henry Numerator"
+        Me.HenryNumeratorDataGridViewTextBoxColumn2.Name = "HenryNumeratorDataGridViewTextBoxColumn2"
+        Me.HenryNumeratorDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.HenryNumeratorDataGridViewTextBoxColumn2.Width = 150
+        '
+        'HenryDenominatorDataGridViewTextBoxColumn2
+        '
+        Me.HenryDenominatorDataGridViewTextBoxColumn2.DataPropertyName = "HenryDenominator"
+        Me.HenryDenominatorDataGridViewTextBoxColumn2.HeaderText = "Henry Denominator"
+        Me.HenryDenominatorDataGridViewTextBoxColumn2.Name = "HenryDenominatorDataGridViewTextBoxColumn2"
+        Me.HenryDenominatorDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.HenryDenominatorDataGridViewTextBoxColumn2.Width = 150
+        '
+        'ModusOperandiDataGridViewTextBoxColumn1
+        '
+        Me.ModusOperandiDataGridViewTextBoxColumn1.DataPropertyName = "ModusOperandi"
+        Me.ModusOperandiDataGridViewTextBoxColumn1.HeaderText = "Modus Operandi"
+        Me.ModusOperandiDataGridViewTextBoxColumn1.Name = "ModusOperandiDataGridViewTextBoxColumn1"
+        Me.ModusOperandiDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.ModusOperandiDataGridViewTextBoxColumn1.Width = 150
+        '
+        'RemarksDataGridViewTextBoxColumn5
+        '
+        Me.RemarksDataGridViewTextBoxColumn5.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn5.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn5.Name = "RemarksDataGridViewTextBoxColumn5"
+        Me.RemarksDataGridViewTextBoxColumn5.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn5.Width = 300
+        '
+        'SlipFileDataGridViewTextBoxColumn2
+        '
+        Me.SlipFileDataGridViewTextBoxColumn2.DataPropertyName = "SlipFile"
+        Me.SlipFileDataGridViewTextBoxColumn2.HeaderText = "Slip File"
+        Me.SlipFileDataGridViewTextBoxColumn2.Name = "SlipFileDataGridViewTextBoxColumn2"
+        Me.SlipFileDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.SlipFileDataGridViewTextBoxColumn2.Width = 1000
+        '
+        'ACRegisterBindingSource
+        '
+        Me.ACRegisterBindingSource.DataMember = "ActiveCriminalsRegister"
+        Me.ACRegisterBindingSource.DataSource = Me.FingerPrintDataSet
+        '
         'IDDatagrid
         '
         Me.IDDatagrid.AllowUserToAddRows = false
@@ -3997,6 +4548,102 @@ Partial Class frmMainInterface
         Me.IDDatagrid.TabIndex = 6
         Me.IDDatagrid.TabStop = false
         '
+        'IDNumberDataGridViewTextBoxColumn
+        '
+        Me.IDNumberDataGridViewTextBoxColumn.DataPropertyName = "IDNumber"
+        Me.IDNumberDataGridViewTextBoxColumn.HeaderText = "ID Number"
+        Me.IDNumberDataGridViewTextBoxColumn.Name = "IDNumberDataGridViewTextBoxColumn"
+        Me.IDNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IDNumberDataGridViewTextBoxColumn.Width = 80
+        '
+        'DANumberDataGridViewTextBoxColumn1
+        '
+        Me.DANumberDataGridViewTextBoxColumn1.DataPropertyName = "DANumber"
+        Me.DANumberDataGridViewTextBoxColumn1.HeaderText = "DA Number"
+        Me.DANumberDataGridViewTextBoxColumn1.Name = "DANumberDataGridViewTextBoxColumn1"
+        Me.DANumberDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.DANumberDataGridViewTextBoxColumn1.Width = 80
+        '
+        'PoliceStationDataGridViewTextBoxColumn4
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn4.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn4.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn4.Name = "PoliceStationDataGridViewTextBoxColumn4"
+        Me.PoliceStationDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn4.Width = 200
+        '
+        'CrimeNumberDataGridViewTextBoxColumn2
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn2.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn2.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn2.Name = "CrimeNumberDataGridViewTextBoxColumn2"
+        Me.CrimeNumberDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.CrimeNumberDataGridViewTextBoxColumn2.Width = 80
+        '
+        'SectionOfLawDataGridViewTextBoxColumn2
+        '
+        Me.SectionOfLawDataGridViewTextBoxColumn2.DataPropertyName = "SectionOfLaw"
+        Me.SectionOfLawDataGridViewTextBoxColumn2.HeaderText = "Section Of Law"
+        Me.SectionOfLawDataGridViewTextBoxColumn2.Name = "SectionOfLawDataGridViewTextBoxColumn2"
+        Me.SectionOfLawDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.SectionOfLawDataGridViewTextBoxColumn2.Width = 250
+        '
+        'NameDataGridViewTextBoxColumn2
+        '
+        Me.NameDataGridViewTextBoxColumn2.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn2.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn2.Name = "NameDataGridViewTextBoxColumn2"
+        Me.NameDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.NameDataGridViewTextBoxColumn2.Width = 200
+        '
+        'AliasNameDataGridViewTextBoxColumn1
+        '
+        Me.AliasNameDataGridViewTextBoxColumn1.DataPropertyName = "AliasName"
+        Me.AliasNameDataGridViewTextBoxColumn1.HeaderText = "Alias Name"
+        Me.AliasNameDataGridViewTextBoxColumn1.Name = "AliasNameDataGridViewTextBoxColumn1"
+        Me.AliasNameDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.AliasNameDataGridViewTextBoxColumn1.Width = 200
+        '
+        'FathersNameDataGridViewTextBoxColumn1
+        '
+        Me.FathersNameDataGridViewTextBoxColumn1.DataPropertyName = "FathersName"
+        Me.FathersNameDataGridViewTextBoxColumn1.HeaderText = "Father's Name"
+        Me.FathersNameDataGridViewTextBoxColumn1.Name = "FathersNameDataGridViewTextBoxColumn1"
+        Me.FathersNameDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.FathersNameDataGridViewTextBoxColumn1.Width = 200
+        '
+        'SexDataGridViewTextBoxColumn1
+        '
+        Me.SexDataGridViewTextBoxColumn1.DataPropertyName = "Sex"
+        Me.SexDataGridViewTextBoxColumn1.HeaderText = "Sex"
+        Me.SexDataGridViewTextBoxColumn1.Name = "SexDataGridViewTextBoxColumn1"
+        Me.SexDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.SexDataGridViewTextBoxColumn1.Width = 80
+        '
+        'AddressDataGridViewTextBoxColumn2
+        '
+        Me.AddressDataGridViewTextBoxColumn2.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn2.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn2.Name = "AddressDataGridViewTextBoxColumn2"
+        Me.AddressDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn2.Width = 200
+        '
+        'HenryNumeratorDataGridViewTextBoxColumn1
+        '
+        Me.HenryNumeratorDataGridViewTextBoxColumn1.DataPropertyName = "HenryNumerator"
+        Me.HenryNumeratorDataGridViewTextBoxColumn1.HeaderText = "Henry Numerator"
+        Me.HenryNumeratorDataGridViewTextBoxColumn1.Name = "HenryNumeratorDataGridViewTextBoxColumn1"
+        Me.HenryNumeratorDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.HenryNumeratorDataGridViewTextBoxColumn1.Width = 150
+        '
+        'HenryDenominatorDataGridViewTextBoxColumn1
+        '
+        Me.HenryDenominatorDataGridViewTextBoxColumn1.DataPropertyName = "HenryDenominator"
+        Me.HenryDenominatorDataGridViewTextBoxColumn1.HeaderText = "Henry Denominator"
+        Me.HenryDenominatorDataGridViewTextBoxColumn1.Name = "HenryDenominatorDataGridViewTextBoxColumn1"
+        Me.HenryDenominatorDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.HenryDenominatorDataGridViewTextBoxColumn1.Width = 150
+        '
         'ModusOperandi
         '
         Me.ModusOperandi.DataPropertyName = "ModusOperandi"
@@ -4004,6 +4651,35 @@ Partial Class frmMainInterface
         Me.ModusOperandi.Name = "ModusOperandi"
         Me.ModusOperandi.ReadOnly = true
         Me.ModusOperandi.Width = 150
+        '
+        'IdentificationDetailsDataGridViewTextBoxColumn
+        '
+        Me.IdentificationDetailsDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDetails"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn.HeaderText = "Identification Details"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn.Name = "IdentificationDetailsDataGridViewTextBoxColumn"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentificationDetailsDataGridViewTextBoxColumn.Width = 300
+        '
+        'RemarksDataGridViewTextBoxColumn4
+        '
+        Me.RemarksDataGridViewTextBoxColumn4.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn4.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn4.Name = "RemarksDataGridViewTextBoxColumn4"
+        Me.RemarksDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn4.Width = 150
+        '
+        'SlipFileDataGridViewTextBoxColumn1
+        '
+        Me.SlipFileDataGridViewTextBoxColumn1.DataPropertyName = "SlipFile"
+        Me.SlipFileDataGridViewTextBoxColumn1.HeaderText = "Slip File"
+        Me.SlipFileDataGridViewTextBoxColumn1.Name = "SlipFileDataGridViewTextBoxColumn1"
+        Me.SlipFileDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.SlipFileDataGridViewTextBoxColumn1.Width = 1000
+        '
+        'IDRegisterBindingSource
+        '
+        Me.IDRegisterBindingSource.DataMember = "IdentifiedSlipsRegister"
+        Me.IDRegisterBindingSource.DataSource = Me.FingerPrintDataSet
         '
         'DADatagrid
         '
@@ -4059,6 +4735,114 @@ Partial Class frmMainInterface
         Me.DADatagrid.TabIndex = 3
         Me.DADatagrid.TabStop = false
         '
+        'DANumberDataGridViewTextBoxColumn
+        '
+        Me.DANumberDataGridViewTextBoxColumn.DataPropertyName = "DANumber"
+        Me.DANumberDataGridViewTextBoxColumn.HeaderText = "DA Number"
+        Me.DANumberDataGridViewTextBoxColumn.Name = "DANumberDataGridViewTextBoxColumn"
+        Me.DANumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.DANumberDataGridViewTextBoxColumn.Width = 80
+        '
+        'DAYearDataGridViewTextBoxColumn
+        '
+        Me.DAYearDataGridViewTextBoxColumn.DataPropertyName = "DAYear"
+        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.DAYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle36
+        Me.DAYearDataGridViewTextBoxColumn.HeaderText = "Year"
+        Me.DAYearDataGridViewTextBoxColumn.Name = "DAYearDataGridViewTextBoxColumn"
+        Me.DAYearDataGridViewTextBoxColumn.ReadOnly = true
+        Me.DAYearDataGridViewTextBoxColumn.Visible = false
+        Me.DAYearDataGridViewTextBoxColumn.Width = 70
+        '
+        'DateOfEntryDataGridViewTextBoxColumn
+        '
+        Me.DateOfEntryDataGridViewTextBoxColumn.DataPropertyName = "DateOfEntry"
+        DataGridViewCellStyle37.Format = "dd/MM/yyyy"
+        Me.DateOfEntryDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle37
+        Me.DateOfEntryDataGridViewTextBoxColumn.HeaderText = "Date of Entry"
+        Me.DateOfEntryDataGridViewTextBoxColumn.Name = "DateOfEntryDataGridViewTextBoxColumn"
+        Me.DateOfEntryDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'PoliceStationDataGridViewTextBoxColumn1
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn1.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn1.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn1.Name = "PoliceStationDataGridViewTextBoxColumn1"
+        Me.PoliceStationDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn1.Width = 200
+        '
+        'CrimeNumberDataGridViewTextBoxColumn1
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn1.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn1.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn1.Name = "CrimeNumberDataGridViewTextBoxColumn1"
+        Me.CrimeNumberDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.CrimeNumberDataGridViewTextBoxColumn1.Width = 80
+        '
+        'SectionOfLawDataGridViewTextBoxColumn1
+        '
+        Me.SectionOfLawDataGridViewTextBoxColumn1.DataPropertyName = "SectionOfLaw"
+        Me.SectionOfLawDataGridViewTextBoxColumn1.HeaderText = "Section of Law"
+        Me.SectionOfLawDataGridViewTextBoxColumn1.Name = "SectionOfLawDataGridViewTextBoxColumn1"
+        Me.SectionOfLawDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.SectionOfLawDataGridViewTextBoxColumn1.Width = 250
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        Me.NameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.NameDataGridViewTextBoxColumn.Width = 200
+        '
+        'AliasNameDataGridViewTextBoxColumn
+        '
+        Me.AliasNameDataGridViewTextBoxColumn.DataPropertyName = "AliasName"
+        Me.AliasNameDataGridViewTextBoxColumn.HeaderText = "Alias Name"
+        Me.AliasNameDataGridViewTextBoxColumn.Name = "AliasNameDataGridViewTextBoxColumn"
+        Me.AliasNameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AliasNameDataGridViewTextBoxColumn.Width = 200
+        '
+        'FathersNameDataGridViewTextBoxColumn
+        '
+        Me.FathersNameDataGridViewTextBoxColumn.DataPropertyName = "FathersName"
+        Me.FathersNameDataGridViewTextBoxColumn.HeaderText = "Father's Name"
+        Me.FathersNameDataGridViewTextBoxColumn.Name = "FathersNameDataGridViewTextBoxColumn"
+        Me.FathersNameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FathersNameDataGridViewTextBoxColumn.Width = 200
+        '
+        'SexDataGridViewTextBoxColumn
+        '
+        Me.SexDataGridViewTextBoxColumn.DataPropertyName = "Sex"
+        Me.SexDataGridViewTextBoxColumn.HeaderText = "Sex"
+        Me.SexDataGridViewTextBoxColumn.Name = "SexDataGridViewTextBoxColumn"
+        Me.SexDataGridViewTextBoxColumn.ReadOnly = true
+        Me.SexDataGridViewTextBoxColumn.Width = 80
+        '
+        'AddressDataGridViewTextBoxColumn
+        '
+        Me.AddressDataGridViewTextBoxColumn.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn.Name = "AddressDataGridViewTextBoxColumn"
+        Me.AddressDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn.Width = 200
+        '
+        'HenryNumeratorDataGridViewTextBoxColumn
+        '
+        Me.HenryNumeratorDataGridViewTextBoxColumn.DataPropertyName = "HenryNumerator"
+        Me.HenryNumeratorDataGridViewTextBoxColumn.HeaderText = "Henry Numerator"
+        Me.HenryNumeratorDataGridViewTextBoxColumn.Name = "HenryNumeratorDataGridViewTextBoxColumn"
+        Me.HenryNumeratorDataGridViewTextBoxColumn.ReadOnly = true
+        Me.HenryNumeratorDataGridViewTextBoxColumn.Width = 150
+        '
+        'HenryDenominatorDataGridViewTextBoxColumn
+        '
+        Me.HenryDenominatorDataGridViewTextBoxColumn.DataPropertyName = "HenryDenominator"
+        Me.HenryDenominatorDataGridViewTextBoxColumn.HeaderText = "Henry Denominator"
+        Me.HenryDenominatorDataGridViewTextBoxColumn.Name = "HenryDenominatorDataGridViewTextBoxColumn"
+        Me.HenryDenominatorDataGridViewTextBoxColumn.ReadOnly = true
+        Me.HenryDenominatorDataGridViewTextBoxColumn.Width = 150
+        '
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "ModusOperandi"
@@ -4066,6 +4850,27 @@ Partial Class frmMainInterface
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = true
         Me.DataGridViewTextBoxColumn1.Width = 150
+        '
+        'RemarksDataGridViewTextBoxColumn1
+        '
+        Me.RemarksDataGridViewTextBoxColumn1.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn1.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn1.Name = "RemarksDataGridViewTextBoxColumn1"
+        Me.RemarksDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn1.Width = 150
+        '
+        'SlipFileDataGridViewTextBoxColumn
+        '
+        Me.SlipFileDataGridViewTextBoxColumn.DataPropertyName = "SlipFile"
+        Me.SlipFileDataGridViewTextBoxColumn.HeaderText = "Slip File"
+        Me.SlipFileDataGridViewTextBoxColumn.Name = "SlipFileDataGridViewTextBoxColumn"
+        Me.SlipFileDataGridViewTextBoxColumn.ReadOnly = true
+        Me.SlipFileDataGridViewTextBoxColumn.Width = 1000
+        '
+        'DARegisterBindingSource
+        '
+        Me.DARegisterBindingSource.DataMember = "DARegister"
+        Me.DARegisterBindingSource.DataSource = Me.FingerPrintDataSet
         '
         'RSOCDatagrid
         '
@@ -4122,6 +4927,108 @@ Partial Class frmMainInterface
         Me.RSOCDatagrid.TabIndex = 3
         Me.RSOCDatagrid.TabStop = false
         '
+        'SerialNoDataGridViewTextBoxColumn
+        '
+        Me.SerialNoDataGridViewTextBoxColumn.DataPropertyName = "SerialNo"
+        Me.SerialNoDataGridViewTextBoxColumn.HeaderText = "Report Number"
+        Me.SerialNoDataGridViewTextBoxColumn.Name = "SerialNoDataGridViewTextBoxColumn"
+        Me.SerialNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.SerialNoDataGridViewTextBoxColumn.Width = 80
+        '
+        'SOCNumberDataGridViewTextBoxColumn1
+        '
+        Me.SOCNumberDataGridViewTextBoxColumn1.DataPropertyName = "SOCNumber"
+        Me.SOCNumberDataGridViewTextBoxColumn1.HeaderText = "SOC Number"
+        Me.SOCNumberDataGridViewTextBoxColumn1.Name = "SOCNumberDataGridViewTextBoxColumn1"
+        Me.SOCNumberDataGridViewTextBoxColumn1.ReadOnly = true
+        '
+        'SOCNumberWithoutYearDataGridViewTextBoxColumn
+        '
+        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.DataPropertyName = "SOCNumberWithoutYear"
+        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.HeaderText = "SOCNumberWithoutYear"
+        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.Name = "SOCNumberWithoutYearDataGridViewTextBoxColumn"
+        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.ReadOnly = true
+        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.Visible = false
+        '
+        'DateOfInspectionDataGridViewTextBoxColumn1
+        '
+        Me.DateOfInspectionDataGridViewTextBoxColumn1.DataPropertyName = "DateOfInspection"
+        DataGridViewCellStyle42.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle42
+        Me.DateOfInspectionDataGridViewTextBoxColumn1.HeaderText = "Date Of Inspection"
+        Me.DateOfInspectionDataGridViewTextBoxColumn1.Name = "DateOfInspectionDataGridViewTextBoxColumn1"
+        Me.DateOfInspectionDataGridViewTextBoxColumn1.ReadOnly = true
+        '
+        'PoliceStationDataGridViewTextBoxColumn6
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn6.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn6.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn6.Name = "PoliceStationDataGridViewTextBoxColumn6"
+        Me.PoliceStationDataGridViewTextBoxColumn6.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn6.Width = 200
+        '
+        'CrimeNumberDataGridViewTextBoxColumn4
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn4.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn4.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn4.Name = "CrimeNumberDataGridViewTextBoxColumn4"
+        Me.CrimeNumberDataGridViewTextBoxColumn4.ReadOnly = true
+        '
+        'InspectingOfficerDataGridViewTextBoxColumn1
+        '
+        Me.InspectingOfficerDataGridViewTextBoxColumn1.DataPropertyName = "InspectingOfficer"
+        Me.InspectingOfficerDataGridViewTextBoxColumn1.HeaderText = "Inspecting Officer"
+        Me.InspectingOfficerDataGridViewTextBoxColumn1.Name = "InspectingOfficerDataGridViewTextBoxColumn1"
+        Me.InspectingOfficerDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.InspectingOfficerDataGridViewTextBoxColumn1.Width = 250
+        '
+        'ReportSentToDataGridViewTextBoxColumn
+        '
+        Me.ReportSentToDataGridViewTextBoxColumn.DataPropertyName = "ReportSentTo"
+        Me.ReportSentToDataGridViewTextBoxColumn.HeaderText = "Report Sent To"
+        Me.ReportSentToDataGridViewTextBoxColumn.Name = "ReportSentToDataGridViewTextBoxColumn"
+        Me.ReportSentToDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ReportSentToDataGridViewTextBoxColumn.Width = 200
+        '
+        'DateOfReportSentDataGridViewTextBoxColumn
+        '
+        Me.DateOfReportSentDataGridViewTextBoxColumn.DataPropertyName = "DateOfReportSent"
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle43.Format = "dd/MM/yyyy"
+        Me.DateOfReportSentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle43
+        Me.DateOfReportSentDataGridViewTextBoxColumn.HeaderText = "Date Of Sending Report"
+        Me.DateOfReportSentDataGridViewTextBoxColumn.Name = "DateOfReportSentDataGridViewTextBoxColumn"
+        Me.DateOfReportSentDataGridViewTextBoxColumn.ReadOnly = true
+        Me.DateOfReportSentDataGridViewTextBoxColumn.Width = 150
+        '
+        'NatureOfReportsDataGridViewTextBoxColumn
+        '
+        Me.NatureOfReportsDataGridViewTextBoxColumn.DataPropertyName = "NatureOfReports"
+        Me.NatureOfReportsDataGridViewTextBoxColumn.HeaderText = "Nature Of Reports"
+        Me.NatureOfReportsDataGridViewTextBoxColumn.Name = "NatureOfReportsDataGridViewTextBoxColumn"
+        Me.NatureOfReportsDataGridViewTextBoxColumn.ReadOnly = true
+        Me.NatureOfReportsDataGridViewTextBoxColumn.Width = 120
+        '
+        'DespatchNumberDataGridViewTextBoxColumn
+        '
+        Me.DespatchNumberDataGridViewTextBoxColumn.DataPropertyName = "DespatchNumber"
+        Me.DespatchNumberDataGridViewTextBoxColumn.HeaderText = "Despatch Number"
+        Me.DespatchNumberDataGridViewTextBoxColumn.Name = "DespatchNumberDataGridViewTextBoxColumn"
+        Me.DespatchNumberDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'RemarksDataGridViewTextBoxColumn6
+        '
+        Me.RemarksDataGridViewTextBoxColumn6.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn6.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn6.Name = "RemarksDataGridViewTextBoxColumn6"
+        Me.RemarksDataGridViewTextBoxColumn6.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn6.Width = 200
+        '
+        'RSOCRegisterBindingSource
+        '
+        Me.RSOCRegisterBindingSource.DataMember = "SOCReportRegister"
+        Me.RSOCRegisterBindingSource.DataSource = Me.FingerPrintDataSet
+        '
         'JoinedIDRDataGrid
         '
         Me.JoinedIDRDataGrid.AllowUserToAddRows = false
@@ -4176,12 +5083,184 @@ Partial Class frmMainInterface
         Me.JoinedIDRDataGrid.TabIndex = 3
         Me.JoinedIDRDataGrid.TabStop = false
         '
+        'IdentificationNumberDataGridViewTextBoxColumn1
+        '
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationNumber"
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.HeaderText = "ID Number"
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.Name = "IdentificationNumberDataGridViewTextBoxColumn1"
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.IdentificationNumberDataGridViewTextBoxColumn1.Width = 70
+        '
+        'SOCNumberDataGridViewTextBoxColumn2
+        '
+        Me.SOCNumberDataGridViewTextBoxColumn2.DataPropertyName = "SOCNumber"
+        Me.SOCNumberDataGridViewTextBoxColumn2.HeaderText = "SOC Number"
+        Me.SOCNumberDataGridViewTextBoxColumn2.Name = "SOCNumberDataGridViewTextBoxColumn2"
+        Me.SOCNumberDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.SOCNumberDataGridViewTextBoxColumn2.Width = 80
+        '
+        'IdentificationDateDataGridViewTextBoxColumn
+        '
+        Me.IdentificationDateDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDate"
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle48.Format = "dd/MM/yyyy"
+        Me.IdentificationDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle48
+        Me.IdentificationDateDataGridViewTextBoxColumn.HeaderText = "Identification Date"
+        Me.IdentificationDateDataGridViewTextBoxColumn.Name = "IdentificationDateDataGridViewTextBoxColumn"
+        Me.IdentificationDateDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentificationDateDataGridViewTextBoxColumn.Width = 80
+        '
+        'DateOfInspectionDataGridViewTextBoxColumn2
+        '
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.DataPropertyName = "DateOfInspection"
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle49.Format = "dd/MM/yyyy"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle49
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.HeaderText = "Inspection Date"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.Name = "DateOfInspectionDataGridViewTextBoxColumn2"
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.DateOfInspectionDataGridViewTextBoxColumn2.Width = 80
+        '
+        'PoliceStationDataGridViewTextBoxColumn7
+        '
+        Me.PoliceStationDataGridViewTextBoxColumn7.DataPropertyName = "PoliceStation"
+        Me.PoliceStationDataGridViewTextBoxColumn7.HeaderText = "Police Station"
+        Me.PoliceStationDataGridViewTextBoxColumn7.Name = "PoliceStationDataGridViewTextBoxColumn7"
+        Me.PoliceStationDataGridViewTextBoxColumn7.ReadOnly = true
+        Me.PoliceStationDataGridViewTextBoxColumn7.Width = 140
+        '
+        'CrimeNumberDataGridViewTextBoxColumn5
+        '
+        Me.CrimeNumberDataGridViewTextBoxColumn5.DataPropertyName = "CrimeNumber"
+        Me.CrimeNumberDataGridViewTextBoxColumn5.HeaderText = "Crime Number"
+        Me.CrimeNumberDataGridViewTextBoxColumn5.Name = "CrimeNumberDataGridViewTextBoxColumn5"
+        Me.CrimeNumberDataGridViewTextBoxColumn5.ReadOnly = true
+        Me.CrimeNumberDataGridViewTextBoxColumn5.Width = 80
+        '
+        'SectionOfLawDataGridViewTextBoxColumn4
+        '
+        Me.SectionOfLawDataGridViewTextBoxColumn4.DataPropertyName = "SectionOfLaw"
+        Me.SectionOfLawDataGridViewTextBoxColumn4.HeaderText = "Section of Law"
+        Me.SectionOfLawDataGridViewTextBoxColumn4.Name = "SectionOfLawDataGridViewTextBoxColumn4"
+        Me.SectionOfLawDataGridViewTextBoxColumn4.ReadOnly = true
+        '
+        'InvestigatingOfficerDataGridViewTextBoxColumn1
+        '
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.DataPropertyName = "InvestigatingOfficer"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.HeaderText = "Inspecting Officer"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Name = "InvestigatingOfficerDataGridViewTextBoxColumn1"
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Width = 140
+        '
+        'IdentifiedByDataGridViewTextBoxColumn
+        '
+        Me.IdentifiedByDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedBy"
+        Me.IdentifiedByDataGridViewTextBoxColumn.HeaderText = "Identified By"
+        Me.IdentifiedByDataGridViewTextBoxColumn.Name = "IdentifiedByDataGridViewTextBoxColumn"
+        Me.IdentifiedByDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentifiedByDataGridViewTextBoxColumn.Width = 140
+        '
+        'ChancePrintsDevelopedDataGridViewTextBoxColumn
+        '
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DataPropertyName = "ChancePrintsDeveloped"
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle50
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Developed"
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn"
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Width = 70
+        '
+        'CPsIdentifiedDataGridViewTextBoxColumn
+        '
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "CPsIdentified"
+        DataGridViewCellStyle115.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle115
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Identified"
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.Name = "CPsIdentifiedDataGridViewTextBoxColumn"
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CPsIdentifiedDataGridViewTextBoxColumn.Width = 70
+        '
+        'NoOfCulpritsIdentifiedDataGridViewTextBoxColumn
+        '
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "NoOfCulpritsIdentified"
+        DataGridViewCellStyle116.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle116
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of Culprits Identified"
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Name = "NoOfCulpritsIdentifiedDataGridViewTextBoxColumn"
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Width = 70
+        '
+        'CulpritNameDataGridViewTextBoxColumn
+        '
+        Me.CulpritNameDataGridViewTextBoxColumn.DataPropertyName = "CulpritName"
+        Me.CulpritNameDataGridViewTextBoxColumn.HeaderText = "Culprit Name"
+        Me.CulpritNameDataGridViewTextBoxColumn.Name = "CulpritNameDataGridViewTextBoxColumn"
+        Me.CulpritNameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.CulpritNameDataGridViewTextBoxColumn.Width = 150
+        '
+        'AddressDataGridViewTextBoxColumn4
+        '
+        Me.AddressDataGridViewTextBoxColumn4.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn4.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn4.Name = "AddressDataGridViewTextBoxColumn4"
+        Me.AddressDataGridViewTextBoxColumn4.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn4.Width = 200
+        '
+        'FingersIdentifiedDataGridViewTextBoxColumn
+        '
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "FingersIdentified"
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.HeaderText = "Fingers Identified"
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.Name = "FingersIdentifiedDataGridViewTextBoxColumn"
+        Me.FingersIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'HenryClassificationDataGridViewTextBoxColumn
+        '
+        Me.HenryClassificationDataGridViewTextBoxColumn.DataPropertyName = "HenryClassification"
+        Me.HenryClassificationDataGridViewTextBoxColumn.HeaderText = "Henry Classification"
+        Me.HenryClassificationDataGridViewTextBoxColumn.Name = "HenryClassificationDataGridViewTextBoxColumn"
+        Me.HenryClassificationDataGridViewTextBoxColumn.ReadOnly = true
+        Me.HenryClassificationDataGridViewTextBoxColumn.Width = 150
+        '
+        'DANumberDataGridViewTextBoxColumn3
+        '
+        Me.DANumberDataGridViewTextBoxColumn3.DataPropertyName = "DANumber"
+        Me.DANumberDataGridViewTextBoxColumn3.HeaderText = "DA Number"
+        Me.DANumberDataGridViewTextBoxColumn3.Name = "DANumberDataGridViewTextBoxColumn3"
+        Me.DANumberDataGridViewTextBoxColumn3.ReadOnly = true
+        Me.DANumberDataGridViewTextBoxColumn3.Width = 150
+        '
         'PreviousCaseDetails
         '
         Me.PreviousCaseDetails.DataPropertyName = "PreviousCaseDetails"
         Me.PreviousCaseDetails.HeaderText = "Previous Case Details"
         Me.PreviousCaseDetails.Name = "PreviousCaseDetails"
         Me.PreviousCaseDetails.ReadOnly = true
+        '
+        'IdentifiedFromDataGridViewTextBoxColumn
+        '
+        Me.IdentifiedFromDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedFrom"
+        DataGridViewCellStyle117.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.IdentifiedFromDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle117
+        Me.IdentifiedFromDataGridViewTextBoxColumn.HeaderText = "Identified From"
+        Me.IdentifiedFromDataGridViewTextBoxColumn.Name = "IdentifiedFromDataGridViewTextBoxColumn"
+        Me.IdentifiedFromDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdentifiedFromDataGridViewTextBoxColumn.Width = 80
+        '
+        'IdentificationDetailsDataGridViewTextBoxColumn1
+        '
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationDetails"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.HeaderText = "Remarks"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Name = "IdentificationDetailsDataGridViewTextBoxColumn1"
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Width = 250
+        '
+        'IDRNumberDataGridViewTextBoxColumn
+        '
+        Me.IDRNumberDataGridViewTextBoxColumn.DataPropertyName = "IDRNumber"
+        Me.IDRNumberDataGridViewTextBoxColumn.HeaderText = "IDRNumber"
+        Me.IDRNumberDataGridViewTextBoxColumn.Name = "IDRNumberDataGridViewTextBoxColumn"
+        Me.IDRNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IDRNumberDataGridViewTextBoxColumn.Visible = false
         '
         'SlNumber
         '
@@ -4190,6 +5269,11 @@ Partial Class frmMainInterface
         Me.SlNumber.Name = "SlNumber"
         Me.SlNumber.ReadOnly = true
         Me.SlNumber.Visible = false
+        '
+        'JoinedIDRBindingSource
+        '
+        Me.JoinedIDRBindingSource.DataMember = "JoinedIDR"
+        Me.JoinedIDRBindingSource.DataSource = Me.FingerPrintDataSet
         '
         'btnDummySave
         '
@@ -5222,6 +6306,38 @@ Partial Class frmMainInterface
         Me.SSDatagrid.Size = New System.Drawing.Size(475, 178)
         Me.SSDatagrid.TabIndex = 647
         Me.SSDatagrid.TabStop = false
+        '
+        'StaffNameDataGridViewTextBoxColumn
+        '
+        Me.StaffNameDataGridViewTextBoxColumn.DataPropertyName = "StaffName"
+        Me.StaffNameDataGridViewTextBoxColumn.HeaderText = "Staff Name"
+        Me.StaffNameDataGridViewTextBoxColumn.Name = "StaffNameDataGridViewTextBoxColumn"
+        Me.StaffNameDataGridViewTextBoxColumn.Width = 150
+        '
+        'DesignationDataGridViewTextBoxColumn
+        '
+        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
+        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
+        Me.DesignationDataGridViewTextBoxColumn.Width = 150
+        '
+        'PENDataGridViewTextBoxColumn
+        '
+        Me.PENDataGridViewTextBoxColumn.DataPropertyName = "PEN"
+        Me.PENDataGridViewTextBoxColumn.HeaderText = "PEN"
+        Me.PENDataGridViewTextBoxColumn.Name = "PENDataGridViewTextBoxColumn"
+        '
+        'SlNoDataGridViewTextBoxColumn
+        '
+        Me.SlNoDataGridViewTextBoxColumn.DataPropertyName = "SlNo"
+        Me.SlNoDataGridViewTextBoxColumn.HeaderText = "SlNo"
+        Me.SlNoDataGridViewTextBoxColumn.Name = "SlNoDataGridViewTextBoxColumn"
+        Me.SlNoDataGridViewTextBoxColumn.Visible = false
+        '
+        'SSBindingSource
+        '
+        Me.SSBindingSource.DataMember = "SupportingStaff"
+        Me.SSBindingSource.DataSource = Me.FingerPrintDataSet
         '
         'IODatagrid
         '
@@ -6291,6 +7407,66 @@ Partial Class frmMainInterface
         Me.SOCTabItem.AttachedControl = Me.TabControlPanel1
         Me.SOCTabItem.Name = "SOCTabItem"
         Me.SOCTabItem.Text = "SOC Register"
+        '
+        'TabControlPanel11
+        '
+        Me.TabControlPanel11.Controls.Add(Me.PanelIDR)
+        Me.TabControlPanel11.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel11.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel11.Name = "TabControlPanel11"
+        Me.TabControlPanel11.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel11.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel11.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel11.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel11.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel11.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel11.Style.GradientAngle = 90
+        Me.TabControlPanel11.TabIndex = 56
+        Me.TabControlPanel11.TabItem = Me.IDRTabItem
+        '
+        'PanelIDR
+        '
+        Me.PanelIDR.CanvasColor = System.Drawing.SystemColors.Control
+        Me.PanelIDR.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelIDR.Controls.Add(Me.lblIDRGridInfo)
+        Me.PanelIDR.Controls.Add(Me.JoinedIDRDataGrid)
+        Me.PanelIDR.DisabledBackColor = System.Drawing.Color.Empty
+        Me.PanelIDR.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelIDR.Location = New System.Drawing.Point(1, 1)
+        Me.PanelIDR.Name = "PanelIDR"
+        Me.PanelIDR.Size = New System.Drawing.Size(1358, 526)
+        Me.PanelIDR.Style.Alignment = System.Drawing.StringAlignment.Center
+        Me.PanelIDR.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.PanelIDR.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.PanelIDR.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.PanelIDR.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.PanelIDR.Style.GradientAngle = 90
+        Me.PanelIDR.TabIndex = 0
+        '
+        'lblIDRGridInfo
+        '
+        Me.lblIDRGridInfo.AutoSize = true
+        Me.lblIDRGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblIDRGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblIDRGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblIDRGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblIDRGridInfo.Location = New System.Drawing.Point(5, 90)
+        Me.lblIDRGridInfo.Name = "lblIDRGridInfo"
+        Me.lblIDRGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblIDRGridInfo.TabIndex = 165
+        Me.lblIDRGridInfo.Text = "Grid"
+        Me.lblIDRGridInfo.Visible = false
+        '
+        'IDRTabItem
+        '
+        Me.IDRTabItem.AttachedControl = Me.TabControlPanel11
+        Me.IDRTabItem.Name = "IDRTabItem"
+        Me.IDRTabItem.Text = "Identification Register"
         '
         'TabControlPanel10
         '
@@ -9735,66 +10911,6 @@ Partial Class frmMainInterface
         Me.DATabItem.Name = "DATabItem"
         Me.DATabItem.Text = "DA Register"
         '
-        'TabControlPanel11
-        '
-        Me.TabControlPanel11.Controls.Add(Me.PanelIDR)
-        Me.TabControlPanel11.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel11.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel11.Name = "TabControlPanel11"
-        Me.TabControlPanel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel11.Size = New System.Drawing.Size(1360, 528)
-        Me.TabControlPanel11.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel11.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel11.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel11.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel11.Style.GradientAngle = 90
-        Me.TabControlPanel11.TabIndex = 56
-        Me.TabControlPanel11.TabItem = Me.IDRTabItem
-        '
-        'PanelIDR
-        '
-        Me.PanelIDR.CanvasColor = System.Drawing.SystemColors.Control
-        Me.PanelIDR.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelIDR.Controls.Add(Me.lblIDRGridInfo)
-        Me.PanelIDR.Controls.Add(Me.JoinedIDRDataGrid)
-        Me.PanelIDR.DisabledBackColor = System.Drawing.Color.Empty
-        Me.PanelIDR.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelIDR.Location = New System.Drawing.Point(1, 1)
-        Me.PanelIDR.Name = "PanelIDR"
-        Me.PanelIDR.Size = New System.Drawing.Size(1358, 526)
-        Me.PanelIDR.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelIDR.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelIDR.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.PanelIDR.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.PanelIDR.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.PanelIDR.Style.GradientAngle = 90
-        Me.PanelIDR.TabIndex = 0
-        '
-        'lblIDRGridInfo
-        '
-        Me.lblIDRGridInfo.AutoSize = true
-        Me.lblIDRGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblIDRGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblIDRGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblIDRGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblIDRGridInfo.Location = New System.Drawing.Point(5, 90)
-        Me.lblIDRGridInfo.Name = "lblIDRGridInfo"
-        Me.lblIDRGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblIDRGridInfo.TabIndex = 165
-        Me.lblIDRGridInfo.Text = "Grid"
-        Me.lblIDRGridInfo.Visible = false
-        '
-        'IDRTabItem
-        '
-        Me.IDRTabItem.AttachedControl = Me.TabControlPanel11
-        Me.IDRTabItem.Name = "IDRTabItem"
-        Me.IDRTabItem.Text = "Identification Register"
-        '
         'TabControlPanel6
         '
         Me.TabControlPanel6.Controls.Add(Me.IDDatagrid)
@@ -12892,1112 +14008,6 @@ Partial Class frmMainInterface
         Me.bgwVersionUploader.WorkerReportsProgress = true
         Me.bgwVersionUploader.WorkerSupportsCancellation = true
         '
-        'SOCNumberDataGridViewTextBoxColumn4
-        '
-        Me.SOCNumberDataGridViewTextBoxColumn4.DataPropertyName = "SOCNumber"
-        Me.SOCNumberDataGridViewTextBoxColumn4.HeaderText = "SOC Number"
-        Me.SOCNumberDataGridViewTextBoxColumn4.Name = "SOCNumberDataGridViewTextBoxColumn4"
-        Me.SOCNumberDataGridViewTextBoxColumn4.ReadOnly = true
-        Me.SOCNumberDataGridViewTextBoxColumn4.Width = 70
-        '
-        'SOCYearDataGridViewTextBoxColumn2
-        '
-        Me.SOCYearDataGridViewTextBoxColumn2.DataPropertyName = "SOCYear"
-        Me.SOCYearDataGridViewTextBoxColumn2.HeaderText = "SOC Year"
-        Me.SOCYearDataGridViewTextBoxColumn2.Name = "SOCYearDataGridViewTextBoxColumn2"
-        Me.SOCYearDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.SOCYearDataGridViewTextBoxColumn2.Visible = false
-        Me.SOCYearDataGridViewTextBoxColumn2.Width = 70
-        '
-        'DateOfInspectionDataGridViewTextBoxColumn4
-        '
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle93.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle93
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.HeaderText = "Date of Inspection"
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.Name = "DateOfInspectionDataGridViewTextBoxColumn4"
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.ReadOnly = true
-        Me.DateOfInspectionDataGridViewTextBoxColumn4.Width = 85
-        '
-        'DateOfReportDataGridViewTextBoxColumn2
-        '
-        Me.DateOfReportDataGridViewTextBoxColumn2.DataPropertyName = "DateOfReport"
-        DataGridViewCellStyle94.Format = "dd/MM/yyyy"
-        Me.DateOfReportDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle94
-        Me.DateOfReportDataGridViewTextBoxColumn2.HeaderText = "Date of Report"
-        Me.DateOfReportDataGridViewTextBoxColumn2.Name = "DateOfReportDataGridViewTextBoxColumn2"
-        Me.DateOfReportDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.DateOfReportDataGridViewTextBoxColumn2.Width = 85
-        '
-        'DateOfOccurrenceDataGridViewTextBoxColumn2
-        '
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.DataPropertyName = "DateOfOccurrence"
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.HeaderText = "Date of Occurrence"
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.Name = "DateOfOccurrenceDataGridViewTextBoxColumn2"
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.DateOfOccurrenceDataGridViewTextBoxColumn2.Width = 105
-        '
-        'PoliceStationDataGridViewTextBoxColumn9
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn9.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn9.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn9.Name = "PoliceStationDataGridViewTextBoxColumn9"
-        Me.PoliceStationDataGridViewTextBoxColumn9.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn9.Width = 150
-        '
-        'CrimeNumberDataGridViewTextBoxColumn7
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn7.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn7.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn7.Name = "CrimeNumberDataGridViewTextBoxColumn7"
-        Me.CrimeNumberDataGridViewTextBoxColumn7.ReadOnly = true
-        Me.CrimeNumberDataGridViewTextBoxColumn7.Width = 70
-        '
-        'SectionOfLawDataGridViewTextBoxColumn6
-        '
-        Me.SectionOfLawDataGridViewTextBoxColumn6.DataPropertyName = "SectionOfLaw"
-        Me.SectionOfLawDataGridViewTextBoxColumn6.HeaderText = "Section of Law"
-        Me.SectionOfLawDataGridViewTextBoxColumn6.Name = "SectionOfLawDataGridViewTextBoxColumn6"
-        Me.SectionOfLawDataGridViewTextBoxColumn6.ReadOnly = true
-        '
-        'PlaceOfOccurrenceDataGridViewTextBoxColumn2
-        '
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.DataPropertyName = "PlaceOfOccurrence"
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.HeaderText = "Place of Occurrence"
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.Name = "PlaceOfOccurrenceDataGridViewTextBoxColumn2"
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.PlaceOfOccurrenceDataGridViewTextBoxColumn2.Width = 120
-        '
-        'InvestigatingOfficerDataGridViewTextBoxColumn3
-        '
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.DataPropertyName = "InvestigatingOfficer"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.HeaderText = "Inspecting Officer"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.Name = "InvestigatingOfficerDataGridViewTextBoxColumn3"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn3.Width = 160
-        '
-        'ChancePrintsDevelopedDataGridViewTextBoxColumn2
-        '
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DataPropertyName = "ChancePrintsDeveloped"
-        DataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle95
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.HeaderText = "No. of CPs Developed"
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn2"
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn2.Width = 90
-        '
-        'ChancePrintsUnfitDataGridViewTextBoxColumn1
-        '
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsUnfit"
-        DataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle96
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Unfit"
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.Name = "ChancePrintsUnfitDataGridViewTextBoxColumn1"
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.ChancePrintsUnfitDataGridViewTextBoxColumn1.Width = 90
-        '
-        'ChancePrintsEliminatedDataGridViewTextBoxColumn1
-        '
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DataPropertyName = "ChancePrintsEliminated"
-        DataGridViewCellStyle97.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle97
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.HeaderText = "No. of CPs Eliminated"
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.Name = "ChancePrintsEliminatedDataGridViewTextBoxColumn1"
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.ChancePrintsEliminatedDataGridViewTextBoxColumn1.Width = 90
-        '
-        'ChancePrintDetailsDataGridViewTextBoxColumn2
-        '
-        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.DataPropertyName = "ChancePrintDetails"
-        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.HeaderText = "Chance Print Details"
-        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.Name = "ChancePrintDetailsDataGridViewTextBoxColumn2"
-        Me.ChancePrintDetailsDataGridViewTextBoxColumn2.ReadOnly = true
-        '
-        'ComplainantDataGridViewTextBoxColumn2
-        '
-        Me.ComplainantDataGridViewTextBoxColumn2.DataPropertyName = "Complainant"
-        Me.ComplainantDataGridViewTextBoxColumn2.HeaderText = "Complainant"
-        Me.ComplainantDataGridViewTextBoxColumn2.Name = "ComplainantDataGridViewTextBoxColumn2"
-        Me.ComplainantDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.ComplainantDataGridViewTextBoxColumn2.Width = 140
-        '
-        'ModusOperandiDataGridViewTextBoxColumn3
-        '
-        Me.ModusOperandiDataGridViewTextBoxColumn3.DataPropertyName = "ModusOperandi"
-        Me.ModusOperandiDataGridViewTextBoxColumn3.HeaderText = "Modus Operandi"
-        Me.ModusOperandiDataGridViewTextBoxColumn3.Name = "ModusOperandiDataGridViewTextBoxColumn3"
-        Me.ModusOperandiDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.ModusOperandiDataGridViewTextBoxColumn3.Width = 170
-        '
-        'PropertyLostDataGridViewTextBoxColumn2
-        '
-        Me.PropertyLostDataGridViewTextBoxColumn2.DataPropertyName = "PropertyLost"
-        Me.PropertyLostDataGridViewTextBoxColumn2.HeaderText = "Property Lost"
-        Me.PropertyLostDataGridViewTextBoxColumn2.Name = "PropertyLostDataGridViewTextBoxColumn2"
-        Me.PropertyLostDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.PropertyLostDataGridViewTextBoxColumn2.Width = 150
-        '
-        'PhotographerDataGridViewTextBoxColumn1
-        '
-        Me.PhotographerDataGridViewTextBoxColumn1.DataPropertyName = "Photographer"
-        Me.PhotographerDataGridViewTextBoxColumn1.HeaderText = "Photographer"
-        Me.PhotographerDataGridViewTextBoxColumn1.Name = "PhotographerDataGridViewTextBoxColumn1"
-        Me.PhotographerDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.PhotographerDataGridViewTextBoxColumn1.Width = 130
-        '
-        'PhotoReceivedDataGridViewTextBoxColumn1
-        '
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.DataPropertyName = "PhotoReceived"
-        DataGridViewCellStyle99.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle99
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.HeaderText = "Photo Received"
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.Name = "PhotoReceivedDataGridViewTextBoxColumn1"
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.PhotoReceivedDataGridViewTextBoxColumn1.Width = 90
-        '
-        'DateOfReceptionOfPhotoDataGridViewTextBoxColumn1
-        '
-        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.DataPropertyName = "DateOfReceptionOfPhoto"
-        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.HeaderText = "Photo Received Date"
-        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.Name = "DateOfReceptionOfPhotoDataGridViewTextBoxColumn1"
-        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.DateOfReceptionOfPhotoDataGridViewTextBoxColumn1.Width = 90
-        '
-        'GistDataGridViewTextBoxColumn1
-        '
-        Me.GistDataGridViewTextBoxColumn1.DataPropertyName = "Gist"
-        Me.GistDataGridViewTextBoxColumn1.HeaderText = "Gist of the Case"
-        Me.GistDataGridViewTextBoxColumn1.Name = "GistDataGridViewTextBoxColumn1"
-        Me.GistDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.GistDataGridViewTextBoxColumn1.Width = 200
-        '
-        'ComparisonDetailsDataGridViewTextBoxColumn
-        '
-        Me.ComparisonDetailsDataGridViewTextBoxColumn.DataPropertyName = "ComparisonDetails"
-        Me.ComparisonDetailsDataGridViewTextBoxColumn.HeaderText = "Comparison Details"
-        Me.ComparisonDetailsDataGridViewTextBoxColumn.Name = "ComparisonDetailsDataGridViewTextBoxColumn"
-        Me.ComparisonDetailsDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ComparisonDetailsDataGridViewTextBoxColumn.Width = 110
-        '
-        'GraveCrimeDataGridViewCheckBoxColumn
-        '
-        Me.GraveCrimeDataGridViewCheckBoxColumn.DataPropertyName = "GraveCrime"
-        Me.GraveCrimeDataGridViewCheckBoxColumn.HeaderText = "Grave Crime"
-        Me.GraveCrimeDataGridViewCheckBoxColumn.Name = "GraveCrimeDataGridViewCheckBoxColumn"
-        Me.GraveCrimeDataGridViewCheckBoxColumn.ReadOnly = true
-        Me.GraveCrimeDataGridViewCheckBoxColumn.Width = 80
-        '
-        'FileStatusDataGridViewTextBoxColumn
-        '
-        Me.FileStatusDataGridViewTextBoxColumn.DataPropertyName = "FileStatus"
-        Me.FileStatusDataGridViewTextBoxColumn.HeaderText = "File Status"
-        Me.FileStatusDataGridViewTextBoxColumn.Name = "FileStatusDataGridViewTextBoxColumn"
-        Me.FileStatusDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'SOCRegisterBindingSource
-        '
-        Me.SOCRegisterBindingSource.DataMember = "SOCRegister"
-        Me.SOCRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'FingerPrintDataSet
-        '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PoliceStationDataGridViewTextBoxColumn2
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn2.DataPropertyName = "PoliceStation"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PoliceStationDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle9
-        Me.PoliceStationDataGridViewTextBoxColumn2.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn2.Name = "PoliceStationDataGridViewTextBoxColumn2"
-        Me.PoliceStationDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn2.Width = 250
-        '
-        'PSRegisterBindingSource
-        '
-        Me.PSRegisterBindingSource.DataMember = "PoliceStationList"
-        Me.PSRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'CDNumberWithYearDataGridViewTextBoxColumn
-        '
-        Me.CDNumberWithYearDataGridViewTextBoxColumn.DataPropertyName = "CDNumberWithYear"
-        Me.CDNumberWithYearDataGridViewTextBoxColumn.HeaderText = "CD Number"
-        Me.CDNumberWithYearDataGridViewTextBoxColumn.Name = "CDNumberWithYearDataGridViewTextBoxColumn"
-        Me.CDNumberWithYearDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'CDNumberWithoutYearDataGridViewTextBoxColumn
-        '
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.DataPropertyName = "CDNumberWithoutYear"
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.HeaderText = "CDNumberWithoutYear"
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.Name = "CDNumberWithoutYearDataGridViewTextBoxColumn"
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.ReadOnly = true
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.Visible = false
-        Me.CDNumberWithoutYearDataGridViewTextBoxColumn.Width = 70
-        '
-        'DateOfExaminationDataGridViewTextBoxColumn
-        '
-        Me.DateOfExaminationDataGridViewTextBoxColumn.DataPropertyName = "DateOfExamination"
-        DataGridViewCellStyle15.Format = "dd/MM/yyyy"
-        Me.DateOfExaminationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
-        Me.DateOfExaminationDataGridViewTextBoxColumn.HeaderText = "Date Examined"
-        Me.DateOfExaminationDataGridViewTextBoxColumn.Name = "DateOfExaminationDataGridViewTextBoxColumn"
-        Me.DateOfExaminationDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'NameOfOfficerDataGridViewTextBoxColumn
-        '
-        Me.NameOfOfficerDataGridViewTextBoxColumn.DataPropertyName = "NameOfOfficer"
-        Me.NameOfOfficerDataGridViewTextBoxColumn.HeaderText = "Officer"
-        Me.NameOfOfficerDataGridViewTextBoxColumn.Name = "NameOfOfficerDataGridViewTextBoxColumn"
-        Me.NameOfOfficerDataGridViewTextBoxColumn.ReadOnly = true
-        Me.NameOfOfficerDataGridViewTextBoxColumn.Width = 350
-        '
-        'CourtDataGridViewTextBoxColumn
-        '
-        Me.CourtDataGridViewTextBoxColumn.DataPropertyName = "Court"
-        Me.CourtDataGridViewTextBoxColumn.HeaderText = "Court"
-        Me.CourtDataGridViewTextBoxColumn.Name = "CourtDataGridViewTextBoxColumn"
-        Me.CourtDataGridViewTextBoxColumn.ReadOnly = true
-        Me.CourtDataGridViewTextBoxColumn.Width = 300
-        '
-        'CCNumberDataGridViewTextBoxColumn
-        '
-        Me.CCNumberDataGridViewTextBoxColumn.DataPropertyName = "CCNumber"
-        Me.CCNumberDataGridViewTextBoxColumn.HeaderText = "CC Number"
-        Me.CCNumberDataGridViewTextBoxColumn.Name = "CCNumberDataGridViewTextBoxColumn"
-        Me.CCNumberDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PoliceStationDataGridViewTextBoxColumn3
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn3.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn3.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn3.Name = "PoliceStationDataGridViewTextBoxColumn3"
-        Me.PoliceStationDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn3.Width = 200
-        '
-        'CrNumberDataGridViewTextBoxColumn
-        '
-        Me.CrNumberDataGridViewTextBoxColumn.DataPropertyName = "CrNumber"
-        Me.CrNumberDataGridViewTextBoxColumn.HeaderText = "Crime Number"
-        Me.CrNumberDataGridViewTextBoxColumn.Name = "CrNumberDataGridViewTextBoxColumn"
-        Me.CrNumberDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'DetailsDataGridViewTextBoxColumn
-        '
-        Me.DetailsDataGridViewTextBoxColumn.DataPropertyName = "Details"
-        Me.DetailsDataGridViewTextBoxColumn.HeaderText = "Details of Examination"
-        Me.DetailsDataGridViewTextBoxColumn.Name = "DetailsDataGridViewTextBoxColumn"
-        Me.DetailsDataGridViewTextBoxColumn.ReadOnly = true
-        Me.DetailsDataGridViewTextBoxColumn.Width = 250
-        '
-        'RemarksDataGridViewTextBoxColumn3
-        '
-        Me.RemarksDataGridViewTextBoxColumn3.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn3.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn3.Name = "RemarksDataGridViewTextBoxColumn3"
-        Me.RemarksDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn3.Width = 250
-        '
-        'CDRegisterBindingSource
-        '
-        Me.CDRegisterBindingSource.DataMember = "CDRegister"
-        Me.CDRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'FPNumberDataGridViewTextBoxColumn
-        '
-        Me.FPNumberDataGridViewTextBoxColumn.DataPropertyName = "FPNumber"
-        Me.FPNumberDataGridViewTextBoxColumn.HeaderText = "FP Number"
-        Me.FPNumberDataGridViewTextBoxColumn.Name = "FPNumberDataGridViewTextBoxColumn"
-        Me.FPNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FPNumberDataGridViewTextBoxColumn.Width = 80
-        '
-        'FPYearDataGridViewTextBoxColumn
-        '
-        Me.FPYearDataGridViewTextBoxColumn.DataPropertyName = "FPYear"
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.FPYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle19
-        Me.FPYearDataGridViewTextBoxColumn.HeaderText = "Year"
-        Me.FPYearDataGridViewTextBoxColumn.Name = "FPYearDataGridViewTextBoxColumn"
-        Me.FPYearDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FPYearDataGridViewTextBoxColumn.Visible = false
-        Me.FPYearDataGridViewTextBoxColumn.Width = 80
-        '
-        'FPDateDataGridViewTextBoxColumn
-        '
-        Me.FPDateDataGridViewTextBoxColumn.DataPropertyName = "FPDate"
-        DataGridViewCellStyle20.Format = "dd/MM/yyyy"
-        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle20
-        Me.FPDateDataGridViewTextBoxColumn.HeaderText = "Date of Attestation"
-        Me.FPDateDataGridViewTextBoxColumn.Name = "FPDateDataGridViewTextBoxColumn"
-        Me.FPDateDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FPDateDataGridViewTextBoxColumn.Width = 80
-        '
-        'NameDataGridViewTextBoxColumn1
-        '
-        Me.NameDataGridViewTextBoxColumn1.DataPropertyName = "Name"
-        Me.NameDataGridViewTextBoxColumn1.HeaderText = "Name"
-        Me.NameDataGridViewTextBoxColumn1.Name = "NameDataGridViewTextBoxColumn1"
-        Me.NameDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.NameDataGridViewTextBoxColumn1.Width = 150
-        '
-        'AddressDataGridViewTextBoxColumn1
-        '
-        Me.AddressDataGridViewTextBoxColumn1.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn1.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn1.Name = "AddressDataGridViewTextBoxColumn1"
-        Me.AddressDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn1.Width = 170
-        '
-        'PassportNumberDataGridViewTextBoxColumn
-        '
-        Me.PassportNumberDataGridViewTextBoxColumn.DataPropertyName = "PassportNumber"
-        Me.PassportNumberDataGridViewTextBoxColumn.HeaderText = "Passport Number"
-        Me.PassportNumberDataGridViewTextBoxColumn.Name = "PassportNumberDataGridViewTextBoxColumn"
-        Me.PassportNumberDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'ChalanNumberDataGridViewTextBoxColumn
-        '
-        Me.ChalanNumberDataGridViewTextBoxColumn.DataPropertyName = "ChalanNumber"
-        Me.ChalanNumberDataGridViewTextBoxColumn.HeaderText = "Chalan Number"
-        Me.ChalanNumberDataGridViewTextBoxColumn.Name = "ChalanNumberDataGridViewTextBoxColumn"
-        Me.ChalanNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ChalanNumberDataGridViewTextBoxColumn.Width = 160
-        '
-        'TreasuryDataGridViewTextBoxColumn
-        '
-        Me.TreasuryDataGridViewTextBoxColumn.DataPropertyName = "Treasury"
-        Me.TreasuryDataGridViewTextBoxColumn.HeaderText = "Treasury"
-        Me.TreasuryDataGridViewTextBoxColumn.Name = "TreasuryDataGridViewTextBoxColumn"
-        Me.TreasuryDataGridViewTextBoxColumn.ReadOnly = true
-        Me.TreasuryDataGridViewTextBoxColumn.Width = 150
-        '
-        'AmountRemittedDataGridViewTextBoxColumn
-        '
-        Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
-        DataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle106.Format = "` #/-"
-        DataGridViewCellStyle106.NullValue = Nothing
-        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle106
-        Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount Remitted"
-        Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
-        Me.AmountRemittedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AmountRemittedDataGridViewTextBoxColumn.Width = 80
-        '
-        'AttestedFPNumberDataGridViewTextBoxColumn
-        '
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.DataPropertyName = "AttestedFPNumber"
-        DataGridViewCellStyle107.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle107
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.HeaderText = "No. of Slips Attested"
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.Name = "AttestedFPNumberDataGridViewTextBoxColumn"
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.Visible = false
-        '
-        'RemarksDataGridViewTextBoxColumn2
-        '
-        Me.RemarksDataGridViewTextBoxColumn2.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn2.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn2.Name = "RemarksDataGridViewTextBoxColumn2"
-        Me.RemarksDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn2.Width = 200
-        '
-        'FPARegisterBindingSource
-        '
-        Me.FPARegisterBindingSource.DataMember = "FPAttestationRegister"
-        Me.FPARegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'ACNumberDataGridViewTextBoxColumn
-        '
-        Me.ACNumberDataGridViewTextBoxColumn.DataPropertyName = "ACNumber"
-        Me.ACNumberDataGridViewTextBoxColumn.HeaderText = "AC Number"
-        Me.ACNumberDataGridViewTextBoxColumn.Name = "ACNumberDataGridViewTextBoxColumn"
-        Me.ACNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ACNumberDataGridViewTextBoxColumn.Width = 80
-        '
-        'DANumberDataGridViewTextBoxColumn2
-        '
-        Me.DANumberDataGridViewTextBoxColumn2.DataPropertyName = "DANumber"
-        Me.DANumberDataGridViewTextBoxColumn2.HeaderText = "DA Number"
-        Me.DANumberDataGridViewTextBoxColumn2.Name = "DANumberDataGridViewTextBoxColumn2"
-        Me.DANumberDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.DANumberDataGridViewTextBoxColumn2.Width = 80
-        '
-        'PoliceStationDataGridViewTextBoxColumn5
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn5.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn5.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn5.Name = "PoliceStationDataGridViewTextBoxColumn5"
-        Me.PoliceStationDataGridViewTextBoxColumn5.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn5.Width = 200
-        '
-        'CrimeNumberDataGridViewTextBoxColumn3
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn3.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn3.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn3.Name = "CrimeNumberDataGridViewTextBoxColumn3"
-        Me.CrimeNumberDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.CrimeNumberDataGridViewTextBoxColumn3.Width = 80
-        '
-        'SectionOfLawDataGridViewTextBoxColumn3
-        '
-        Me.SectionOfLawDataGridViewTextBoxColumn3.DataPropertyName = "SectionOfLaw"
-        Me.SectionOfLawDataGridViewTextBoxColumn3.HeaderText = "Section Of Law"
-        Me.SectionOfLawDataGridViewTextBoxColumn3.Name = "SectionOfLawDataGridViewTextBoxColumn3"
-        Me.SectionOfLawDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.SectionOfLawDataGridViewTextBoxColumn3.Width = 250
-        '
-        'NameDataGridViewTextBoxColumn3
-        '
-        Me.NameDataGridViewTextBoxColumn3.DataPropertyName = "Name"
-        Me.NameDataGridViewTextBoxColumn3.HeaderText = "Name"
-        Me.NameDataGridViewTextBoxColumn3.Name = "NameDataGridViewTextBoxColumn3"
-        Me.NameDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.NameDataGridViewTextBoxColumn3.Width = 200
-        '
-        'AliasNameDataGridViewTextBoxColumn2
-        '
-        Me.AliasNameDataGridViewTextBoxColumn2.DataPropertyName = "AliasName"
-        Me.AliasNameDataGridViewTextBoxColumn2.HeaderText = "Alias Name"
-        Me.AliasNameDataGridViewTextBoxColumn2.Name = "AliasNameDataGridViewTextBoxColumn2"
-        Me.AliasNameDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.AliasNameDataGridViewTextBoxColumn2.Width = 200
-        '
-        'FathersNameDataGridViewTextBoxColumn2
-        '
-        Me.FathersNameDataGridViewTextBoxColumn2.DataPropertyName = "FathersName"
-        Me.FathersNameDataGridViewTextBoxColumn2.HeaderText = "Father's Name"
-        Me.FathersNameDataGridViewTextBoxColumn2.Name = "FathersNameDataGridViewTextBoxColumn2"
-        Me.FathersNameDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.FathersNameDataGridViewTextBoxColumn2.Width = 200
-        '
-        'SexDataGridViewTextBoxColumn2
-        '
-        Me.SexDataGridViewTextBoxColumn2.DataPropertyName = "Sex"
-        Me.SexDataGridViewTextBoxColumn2.HeaderText = "Sex"
-        Me.SexDataGridViewTextBoxColumn2.Name = "SexDataGridViewTextBoxColumn2"
-        Me.SexDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.SexDataGridViewTextBoxColumn2.Width = 80
-        '
-        'AddressDataGridViewTextBoxColumn3
-        '
-        Me.AddressDataGridViewTextBoxColumn3.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn3.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn3.Name = "AddressDataGridViewTextBoxColumn3"
-        Me.AddressDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn3.Width = 200
-        '
-        'HenryNumeratorDataGridViewTextBoxColumn2
-        '
-        Me.HenryNumeratorDataGridViewTextBoxColumn2.DataPropertyName = "HenryNumerator"
-        Me.HenryNumeratorDataGridViewTextBoxColumn2.HeaderText = "Henry Numerator"
-        Me.HenryNumeratorDataGridViewTextBoxColumn2.Name = "HenryNumeratorDataGridViewTextBoxColumn2"
-        Me.HenryNumeratorDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.HenryNumeratorDataGridViewTextBoxColumn2.Width = 150
-        '
-        'HenryDenominatorDataGridViewTextBoxColumn2
-        '
-        Me.HenryDenominatorDataGridViewTextBoxColumn2.DataPropertyName = "HenryDenominator"
-        Me.HenryDenominatorDataGridViewTextBoxColumn2.HeaderText = "Henry Denominator"
-        Me.HenryDenominatorDataGridViewTextBoxColumn2.Name = "HenryDenominatorDataGridViewTextBoxColumn2"
-        Me.HenryDenominatorDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.HenryDenominatorDataGridViewTextBoxColumn2.Width = 150
-        '
-        'ModusOperandiDataGridViewTextBoxColumn1
-        '
-        Me.ModusOperandiDataGridViewTextBoxColumn1.DataPropertyName = "ModusOperandi"
-        Me.ModusOperandiDataGridViewTextBoxColumn1.HeaderText = "Modus Operandi"
-        Me.ModusOperandiDataGridViewTextBoxColumn1.Name = "ModusOperandiDataGridViewTextBoxColumn1"
-        Me.ModusOperandiDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.ModusOperandiDataGridViewTextBoxColumn1.Width = 150
-        '
-        'RemarksDataGridViewTextBoxColumn5
-        '
-        Me.RemarksDataGridViewTextBoxColumn5.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn5.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn5.Name = "RemarksDataGridViewTextBoxColumn5"
-        Me.RemarksDataGridViewTextBoxColumn5.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn5.Width = 300
-        '
-        'SlipFileDataGridViewTextBoxColumn2
-        '
-        Me.SlipFileDataGridViewTextBoxColumn2.DataPropertyName = "SlipFile"
-        Me.SlipFileDataGridViewTextBoxColumn2.HeaderText = "Slip File"
-        Me.SlipFileDataGridViewTextBoxColumn2.Name = "SlipFileDataGridViewTextBoxColumn2"
-        Me.SlipFileDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.SlipFileDataGridViewTextBoxColumn2.Width = 1000
-        '
-        'ACRegisterBindingSource
-        '
-        Me.ACRegisterBindingSource.DataMember = "ActiveCriminalsRegister"
-        Me.ACRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'IDNumberDataGridViewTextBoxColumn
-        '
-        Me.IDNumberDataGridViewTextBoxColumn.DataPropertyName = "IDNumber"
-        Me.IDNumberDataGridViewTextBoxColumn.HeaderText = "ID Number"
-        Me.IDNumberDataGridViewTextBoxColumn.Name = "IDNumberDataGridViewTextBoxColumn"
-        Me.IDNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IDNumberDataGridViewTextBoxColumn.Width = 80
-        '
-        'DANumberDataGridViewTextBoxColumn1
-        '
-        Me.DANumberDataGridViewTextBoxColumn1.DataPropertyName = "DANumber"
-        Me.DANumberDataGridViewTextBoxColumn1.HeaderText = "DA Number"
-        Me.DANumberDataGridViewTextBoxColumn1.Name = "DANumberDataGridViewTextBoxColumn1"
-        Me.DANumberDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.DANumberDataGridViewTextBoxColumn1.Width = 80
-        '
-        'PoliceStationDataGridViewTextBoxColumn4
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn4.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn4.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn4.Name = "PoliceStationDataGridViewTextBoxColumn4"
-        Me.PoliceStationDataGridViewTextBoxColumn4.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn4.Width = 200
-        '
-        'CrimeNumberDataGridViewTextBoxColumn2
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn2.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn2.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn2.Name = "CrimeNumberDataGridViewTextBoxColumn2"
-        Me.CrimeNumberDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.CrimeNumberDataGridViewTextBoxColumn2.Width = 80
-        '
-        'SectionOfLawDataGridViewTextBoxColumn2
-        '
-        Me.SectionOfLawDataGridViewTextBoxColumn2.DataPropertyName = "SectionOfLaw"
-        Me.SectionOfLawDataGridViewTextBoxColumn2.HeaderText = "Section Of Law"
-        Me.SectionOfLawDataGridViewTextBoxColumn2.Name = "SectionOfLawDataGridViewTextBoxColumn2"
-        Me.SectionOfLawDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.SectionOfLawDataGridViewTextBoxColumn2.Width = 250
-        '
-        'NameDataGridViewTextBoxColumn2
-        '
-        Me.NameDataGridViewTextBoxColumn2.DataPropertyName = "Name"
-        Me.NameDataGridViewTextBoxColumn2.HeaderText = "Name"
-        Me.NameDataGridViewTextBoxColumn2.Name = "NameDataGridViewTextBoxColumn2"
-        Me.NameDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.NameDataGridViewTextBoxColumn2.Width = 200
-        '
-        'AliasNameDataGridViewTextBoxColumn1
-        '
-        Me.AliasNameDataGridViewTextBoxColumn1.DataPropertyName = "AliasName"
-        Me.AliasNameDataGridViewTextBoxColumn1.HeaderText = "Alias Name"
-        Me.AliasNameDataGridViewTextBoxColumn1.Name = "AliasNameDataGridViewTextBoxColumn1"
-        Me.AliasNameDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.AliasNameDataGridViewTextBoxColumn1.Width = 200
-        '
-        'FathersNameDataGridViewTextBoxColumn1
-        '
-        Me.FathersNameDataGridViewTextBoxColumn1.DataPropertyName = "FathersName"
-        Me.FathersNameDataGridViewTextBoxColumn1.HeaderText = "Father's Name"
-        Me.FathersNameDataGridViewTextBoxColumn1.Name = "FathersNameDataGridViewTextBoxColumn1"
-        Me.FathersNameDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.FathersNameDataGridViewTextBoxColumn1.Width = 200
-        '
-        'SexDataGridViewTextBoxColumn1
-        '
-        Me.SexDataGridViewTextBoxColumn1.DataPropertyName = "Sex"
-        Me.SexDataGridViewTextBoxColumn1.HeaderText = "Sex"
-        Me.SexDataGridViewTextBoxColumn1.Name = "SexDataGridViewTextBoxColumn1"
-        Me.SexDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.SexDataGridViewTextBoxColumn1.Width = 80
-        '
-        'AddressDataGridViewTextBoxColumn2
-        '
-        Me.AddressDataGridViewTextBoxColumn2.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn2.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn2.Name = "AddressDataGridViewTextBoxColumn2"
-        Me.AddressDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn2.Width = 200
-        '
-        'HenryNumeratorDataGridViewTextBoxColumn1
-        '
-        Me.HenryNumeratorDataGridViewTextBoxColumn1.DataPropertyName = "HenryNumerator"
-        Me.HenryNumeratorDataGridViewTextBoxColumn1.HeaderText = "Henry Numerator"
-        Me.HenryNumeratorDataGridViewTextBoxColumn1.Name = "HenryNumeratorDataGridViewTextBoxColumn1"
-        Me.HenryNumeratorDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.HenryNumeratorDataGridViewTextBoxColumn1.Width = 150
-        '
-        'HenryDenominatorDataGridViewTextBoxColumn1
-        '
-        Me.HenryDenominatorDataGridViewTextBoxColumn1.DataPropertyName = "HenryDenominator"
-        Me.HenryDenominatorDataGridViewTextBoxColumn1.HeaderText = "Henry Denominator"
-        Me.HenryDenominatorDataGridViewTextBoxColumn1.Name = "HenryDenominatorDataGridViewTextBoxColumn1"
-        Me.HenryDenominatorDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.HenryDenominatorDataGridViewTextBoxColumn1.Width = 150
-        '
-        'IdentificationDetailsDataGridViewTextBoxColumn
-        '
-        Me.IdentificationDetailsDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDetails"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn.HeaderText = "Identification Details"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn.Name = "IdentificationDetailsDataGridViewTextBoxColumn"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentificationDetailsDataGridViewTextBoxColumn.Width = 300
-        '
-        'RemarksDataGridViewTextBoxColumn4
-        '
-        Me.RemarksDataGridViewTextBoxColumn4.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn4.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn4.Name = "RemarksDataGridViewTextBoxColumn4"
-        Me.RemarksDataGridViewTextBoxColumn4.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn4.Width = 150
-        '
-        'SlipFileDataGridViewTextBoxColumn1
-        '
-        Me.SlipFileDataGridViewTextBoxColumn1.DataPropertyName = "SlipFile"
-        Me.SlipFileDataGridViewTextBoxColumn1.HeaderText = "Slip File"
-        Me.SlipFileDataGridViewTextBoxColumn1.Name = "SlipFileDataGridViewTextBoxColumn1"
-        Me.SlipFileDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.SlipFileDataGridViewTextBoxColumn1.Width = 1000
-        '
-        'IDRegisterBindingSource
-        '
-        Me.IDRegisterBindingSource.DataMember = "IdentifiedSlipsRegister"
-        Me.IDRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'DANumberDataGridViewTextBoxColumn
-        '
-        Me.DANumberDataGridViewTextBoxColumn.DataPropertyName = "DANumber"
-        Me.DANumberDataGridViewTextBoxColumn.HeaderText = "DA Number"
-        Me.DANumberDataGridViewTextBoxColumn.Name = "DANumberDataGridViewTextBoxColumn"
-        Me.DANumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.DANumberDataGridViewTextBoxColumn.Width = 80
-        '
-        'DAYearDataGridViewTextBoxColumn
-        '
-        Me.DAYearDataGridViewTextBoxColumn.DataPropertyName = "DAYear"
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.DAYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle36
-        Me.DAYearDataGridViewTextBoxColumn.HeaderText = "Year"
-        Me.DAYearDataGridViewTextBoxColumn.Name = "DAYearDataGridViewTextBoxColumn"
-        Me.DAYearDataGridViewTextBoxColumn.ReadOnly = true
-        Me.DAYearDataGridViewTextBoxColumn.Visible = false
-        Me.DAYearDataGridViewTextBoxColumn.Width = 70
-        '
-        'DateOfEntryDataGridViewTextBoxColumn
-        '
-        Me.DateOfEntryDataGridViewTextBoxColumn.DataPropertyName = "DateOfEntry"
-        DataGridViewCellStyle37.Format = "dd/MM/yyyy"
-        Me.DateOfEntryDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle37
-        Me.DateOfEntryDataGridViewTextBoxColumn.HeaderText = "Date of Entry"
-        Me.DateOfEntryDataGridViewTextBoxColumn.Name = "DateOfEntryDataGridViewTextBoxColumn"
-        Me.DateOfEntryDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'PoliceStationDataGridViewTextBoxColumn1
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn1.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn1.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn1.Name = "PoliceStationDataGridViewTextBoxColumn1"
-        Me.PoliceStationDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn1.Width = 200
-        '
-        'CrimeNumberDataGridViewTextBoxColumn1
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn1.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn1.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn1.Name = "CrimeNumberDataGridViewTextBoxColumn1"
-        Me.CrimeNumberDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.CrimeNumberDataGridViewTextBoxColumn1.Width = 80
-        '
-        'SectionOfLawDataGridViewTextBoxColumn1
-        '
-        Me.SectionOfLawDataGridViewTextBoxColumn1.DataPropertyName = "SectionOfLaw"
-        Me.SectionOfLawDataGridViewTextBoxColumn1.HeaderText = "Section of Law"
-        Me.SectionOfLawDataGridViewTextBoxColumn1.Name = "SectionOfLawDataGridViewTextBoxColumn1"
-        Me.SectionOfLawDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.SectionOfLawDataGridViewTextBoxColumn1.Width = 250
-        '
-        'NameDataGridViewTextBoxColumn
-        '
-        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "Name"
-        Me.NameDataGridViewTextBoxColumn.HeaderText = "Name"
-        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-        Me.NameDataGridViewTextBoxColumn.ReadOnly = true
-        Me.NameDataGridViewTextBoxColumn.Width = 200
-        '
-        'AliasNameDataGridViewTextBoxColumn
-        '
-        Me.AliasNameDataGridViewTextBoxColumn.DataPropertyName = "AliasName"
-        Me.AliasNameDataGridViewTextBoxColumn.HeaderText = "Alias Name"
-        Me.AliasNameDataGridViewTextBoxColumn.Name = "AliasNameDataGridViewTextBoxColumn"
-        Me.AliasNameDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AliasNameDataGridViewTextBoxColumn.Width = 200
-        '
-        'FathersNameDataGridViewTextBoxColumn
-        '
-        Me.FathersNameDataGridViewTextBoxColumn.DataPropertyName = "FathersName"
-        Me.FathersNameDataGridViewTextBoxColumn.HeaderText = "Father's Name"
-        Me.FathersNameDataGridViewTextBoxColumn.Name = "FathersNameDataGridViewTextBoxColumn"
-        Me.FathersNameDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FathersNameDataGridViewTextBoxColumn.Width = 200
-        '
-        'SexDataGridViewTextBoxColumn
-        '
-        Me.SexDataGridViewTextBoxColumn.DataPropertyName = "Sex"
-        Me.SexDataGridViewTextBoxColumn.HeaderText = "Sex"
-        Me.SexDataGridViewTextBoxColumn.Name = "SexDataGridViewTextBoxColumn"
-        Me.SexDataGridViewTextBoxColumn.ReadOnly = true
-        Me.SexDataGridViewTextBoxColumn.Width = 80
-        '
-        'AddressDataGridViewTextBoxColumn
-        '
-        Me.AddressDataGridViewTextBoxColumn.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn.Name = "AddressDataGridViewTextBoxColumn"
-        Me.AddressDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn.Width = 200
-        '
-        'HenryNumeratorDataGridViewTextBoxColumn
-        '
-        Me.HenryNumeratorDataGridViewTextBoxColumn.DataPropertyName = "HenryNumerator"
-        Me.HenryNumeratorDataGridViewTextBoxColumn.HeaderText = "Henry Numerator"
-        Me.HenryNumeratorDataGridViewTextBoxColumn.Name = "HenryNumeratorDataGridViewTextBoxColumn"
-        Me.HenryNumeratorDataGridViewTextBoxColumn.ReadOnly = true
-        Me.HenryNumeratorDataGridViewTextBoxColumn.Width = 150
-        '
-        'HenryDenominatorDataGridViewTextBoxColumn
-        '
-        Me.HenryDenominatorDataGridViewTextBoxColumn.DataPropertyName = "HenryDenominator"
-        Me.HenryDenominatorDataGridViewTextBoxColumn.HeaderText = "Henry Denominator"
-        Me.HenryDenominatorDataGridViewTextBoxColumn.Name = "HenryDenominatorDataGridViewTextBoxColumn"
-        Me.HenryDenominatorDataGridViewTextBoxColumn.ReadOnly = true
-        Me.HenryDenominatorDataGridViewTextBoxColumn.Width = 150
-        '
-        'RemarksDataGridViewTextBoxColumn1
-        '
-        Me.RemarksDataGridViewTextBoxColumn1.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn1.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn1.Name = "RemarksDataGridViewTextBoxColumn1"
-        Me.RemarksDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn1.Width = 150
-        '
-        'SlipFileDataGridViewTextBoxColumn
-        '
-        Me.SlipFileDataGridViewTextBoxColumn.DataPropertyName = "SlipFile"
-        Me.SlipFileDataGridViewTextBoxColumn.HeaderText = "Slip File"
-        Me.SlipFileDataGridViewTextBoxColumn.Name = "SlipFileDataGridViewTextBoxColumn"
-        Me.SlipFileDataGridViewTextBoxColumn.ReadOnly = true
-        Me.SlipFileDataGridViewTextBoxColumn.Width = 1000
-        '
-        'DARegisterBindingSource
-        '
-        Me.DARegisterBindingSource.DataMember = "DARegister"
-        Me.DARegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'SerialNoDataGridViewTextBoxColumn
-        '
-        Me.SerialNoDataGridViewTextBoxColumn.DataPropertyName = "SerialNo"
-        Me.SerialNoDataGridViewTextBoxColumn.HeaderText = "Report Number"
-        Me.SerialNoDataGridViewTextBoxColumn.Name = "SerialNoDataGridViewTextBoxColumn"
-        Me.SerialNoDataGridViewTextBoxColumn.ReadOnly = true
-        Me.SerialNoDataGridViewTextBoxColumn.Width = 80
-        '
-        'SOCNumberDataGridViewTextBoxColumn1
-        '
-        Me.SOCNumberDataGridViewTextBoxColumn1.DataPropertyName = "SOCNumber"
-        Me.SOCNumberDataGridViewTextBoxColumn1.HeaderText = "SOC Number"
-        Me.SOCNumberDataGridViewTextBoxColumn1.Name = "SOCNumberDataGridViewTextBoxColumn1"
-        Me.SOCNumberDataGridViewTextBoxColumn1.ReadOnly = true
-        '
-        'SOCNumberWithoutYearDataGridViewTextBoxColumn
-        '
-        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.DataPropertyName = "SOCNumberWithoutYear"
-        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.HeaderText = "SOCNumberWithoutYear"
-        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.Name = "SOCNumberWithoutYearDataGridViewTextBoxColumn"
-        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.ReadOnly = true
-        Me.SOCNumberWithoutYearDataGridViewTextBoxColumn.Visible = false
-        '
-        'DateOfInspectionDataGridViewTextBoxColumn1
-        '
-        Me.DateOfInspectionDataGridViewTextBoxColumn1.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle42.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle42
-        Me.DateOfInspectionDataGridViewTextBoxColumn1.HeaderText = "Date Of Inspection"
-        Me.DateOfInspectionDataGridViewTextBoxColumn1.Name = "DateOfInspectionDataGridViewTextBoxColumn1"
-        Me.DateOfInspectionDataGridViewTextBoxColumn1.ReadOnly = true
-        '
-        'PoliceStationDataGridViewTextBoxColumn6
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn6.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn6.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn6.Name = "PoliceStationDataGridViewTextBoxColumn6"
-        Me.PoliceStationDataGridViewTextBoxColumn6.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn6.Width = 200
-        '
-        'CrimeNumberDataGridViewTextBoxColumn4
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn4.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn4.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn4.Name = "CrimeNumberDataGridViewTextBoxColumn4"
-        Me.CrimeNumberDataGridViewTextBoxColumn4.ReadOnly = true
-        '
-        'InspectingOfficerDataGridViewTextBoxColumn1
-        '
-        Me.InspectingOfficerDataGridViewTextBoxColumn1.DataPropertyName = "InspectingOfficer"
-        Me.InspectingOfficerDataGridViewTextBoxColumn1.HeaderText = "Inspecting Officer"
-        Me.InspectingOfficerDataGridViewTextBoxColumn1.Name = "InspectingOfficerDataGridViewTextBoxColumn1"
-        Me.InspectingOfficerDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.InspectingOfficerDataGridViewTextBoxColumn1.Width = 250
-        '
-        'ReportSentToDataGridViewTextBoxColumn
-        '
-        Me.ReportSentToDataGridViewTextBoxColumn.DataPropertyName = "ReportSentTo"
-        Me.ReportSentToDataGridViewTextBoxColumn.HeaderText = "Report Sent To"
-        Me.ReportSentToDataGridViewTextBoxColumn.Name = "ReportSentToDataGridViewTextBoxColumn"
-        Me.ReportSentToDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ReportSentToDataGridViewTextBoxColumn.Width = 200
-        '
-        'DateOfReportSentDataGridViewTextBoxColumn
-        '
-        Me.DateOfReportSentDataGridViewTextBoxColumn.DataPropertyName = "DateOfReportSent"
-        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle43.Format = "dd/MM/yyyy"
-        Me.DateOfReportSentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle43
-        Me.DateOfReportSentDataGridViewTextBoxColumn.HeaderText = "Date Of Sending Report"
-        Me.DateOfReportSentDataGridViewTextBoxColumn.Name = "DateOfReportSentDataGridViewTextBoxColumn"
-        Me.DateOfReportSentDataGridViewTextBoxColumn.ReadOnly = true
-        Me.DateOfReportSentDataGridViewTextBoxColumn.Width = 150
-        '
-        'NatureOfReportsDataGridViewTextBoxColumn
-        '
-        Me.NatureOfReportsDataGridViewTextBoxColumn.DataPropertyName = "NatureOfReports"
-        Me.NatureOfReportsDataGridViewTextBoxColumn.HeaderText = "Nature Of Reports"
-        Me.NatureOfReportsDataGridViewTextBoxColumn.Name = "NatureOfReportsDataGridViewTextBoxColumn"
-        Me.NatureOfReportsDataGridViewTextBoxColumn.ReadOnly = true
-        Me.NatureOfReportsDataGridViewTextBoxColumn.Width = 120
-        '
-        'DespatchNumberDataGridViewTextBoxColumn
-        '
-        Me.DespatchNumberDataGridViewTextBoxColumn.DataPropertyName = "DespatchNumber"
-        Me.DespatchNumberDataGridViewTextBoxColumn.HeaderText = "Despatch Number"
-        Me.DespatchNumberDataGridViewTextBoxColumn.Name = "DespatchNumberDataGridViewTextBoxColumn"
-        Me.DespatchNumberDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'RemarksDataGridViewTextBoxColumn6
-        '
-        Me.RemarksDataGridViewTextBoxColumn6.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn6.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn6.Name = "RemarksDataGridViewTextBoxColumn6"
-        Me.RemarksDataGridViewTextBoxColumn6.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn6.Width = 200
-        '
-        'RSOCRegisterBindingSource
-        '
-        Me.RSOCRegisterBindingSource.DataMember = "SOCReportRegister"
-        Me.RSOCRegisterBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'IdentificationNumberDataGridViewTextBoxColumn1
-        '
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationNumber"
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.HeaderText = "ID Number"
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.Name = "IdentificationNumberDataGridViewTextBoxColumn1"
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.IdentificationNumberDataGridViewTextBoxColumn1.Width = 70
-        '
-        'SOCNumberDataGridViewTextBoxColumn2
-        '
-        Me.SOCNumberDataGridViewTextBoxColumn2.DataPropertyName = "SOCNumber"
-        Me.SOCNumberDataGridViewTextBoxColumn2.HeaderText = "SOC Number"
-        Me.SOCNumberDataGridViewTextBoxColumn2.Name = "SOCNumberDataGridViewTextBoxColumn2"
-        Me.SOCNumberDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.SOCNumberDataGridViewTextBoxColumn2.Width = 80
-        '
-        'IdentificationDateDataGridViewTextBoxColumn
-        '
-        Me.IdentificationDateDataGridViewTextBoxColumn.DataPropertyName = "IdentificationDate"
-        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle48.Format = "dd/MM/yyyy"
-        Me.IdentificationDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle48
-        Me.IdentificationDateDataGridViewTextBoxColumn.HeaderText = "Identification Date"
-        Me.IdentificationDateDataGridViewTextBoxColumn.Name = "IdentificationDateDataGridViewTextBoxColumn"
-        Me.IdentificationDateDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentificationDateDataGridViewTextBoxColumn.Width = 80
-        '
-        'DateOfInspectionDataGridViewTextBoxColumn2
-        '
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.DataPropertyName = "DateOfInspection"
-        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle49.Format = "dd/MM/yyyy"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle49
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.HeaderText = "Inspection Date"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.Name = "DateOfInspectionDataGridViewTextBoxColumn2"
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.DateOfInspectionDataGridViewTextBoxColumn2.Width = 80
-        '
-        'PoliceStationDataGridViewTextBoxColumn7
-        '
-        Me.PoliceStationDataGridViewTextBoxColumn7.DataPropertyName = "PoliceStation"
-        Me.PoliceStationDataGridViewTextBoxColumn7.HeaderText = "Police Station"
-        Me.PoliceStationDataGridViewTextBoxColumn7.Name = "PoliceStationDataGridViewTextBoxColumn7"
-        Me.PoliceStationDataGridViewTextBoxColumn7.ReadOnly = true
-        Me.PoliceStationDataGridViewTextBoxColumn7.Width = 140
-        '
-        'CrimeNumberDataGridViewTextBoxColumn5
-        '
-        Me.CrimeNumberDataGridViewTextBoxColumn5.DataPropertyName = "CrimeNumber"
-        Me.CrimeNumberDataGridViewTextBoxColumn5.HeaderText = "Crime Number"
-        Me.CrimeNumberDataGridViewTextBoxColumn5.Name = "CrimeNumberDataGridViewTextBoxColumn5"
-        Me.CrimeNumberDataGridViewTextBoxColumn5.ReadOnly = true
-        Me.CrimeNumberDataGridViewTextBoxColumn5.Width = 80
-        '
-        'SectionOfLawDataGridViewTextBoxColumn4
-        '
-        Me.SectionOfLawDataGridViewTextBoxColumn4.DataPropertyName = "SectionOfLaw"
-        Me.SectionOfLawDataGridViewTextBoxColumn4.HeaderText = "Section of Law"
-        Me.SectionOfLawDataGridViewTextBoxColumn4.Name = "SectionOfLawDataGridViewTextBoxColumn4"
-        Me.SectionOfLawDataGridViewTextBoxColumn4.ReadOnly = true
-        '
-        'InvestigatingOfficerDataGridViewTextBoxColumn1
-        '
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.DataPropertyName = "InvestigatingOfficer"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.HeaderText = "Inspecting Officer"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Name = "InvestigatingOfficerDataGridViewTextBoxColumn1"
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.InvestigatingOfficerDataGridViewTextBoxColumn1.Width = 140
-        '
-        'IdentifiedByDataGridViewTextBoxColumn
-        '
-        Me.IdentifiedByDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedBy"
-        Me.IdentifiedByDataGridViewTextBoxColumn.HeaderText = "Identified By"
-        Me.IdentifiedByDataGridViewTextBoxColumn.Name = "IdentifiedByDataGridViewTextBoxColumn"
-        Me.IdentifiedByDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentifiedByDataGridViewTextBoxColumn.Width = 140
-        '
-        'ChancePrintsDevelopedDataGridViewTextBoxColumn
-        '
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DataPropertyName = "ChancePrintsDeveloped"
-        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle50
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Developed"
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Name = "ChancePrintsDevelopedDataGridViewTextBoxColumn"
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ChancePrintsDevelopedDataGridViewTextBoxColumn.Width = 70
-        '
-        'CPsIdentifiedDataGridViewTextBoxColumn
-        '
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "CPsIdentified"
-        DataGridViewCellStyle115.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle115
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of CPs Identified"
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.Name = "CPsIdentifiedDataGridViewTextBoxColumn"
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.CPsIdentifiedDataGridViewTextBoxColumn.Width = 70
-        '
-        'NoOfCulpritsIdentifiedDataGridViewTextBoxColumn
-        '
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "NoOfCulpritsIdentified"
-        DataGridViewCellStyle116.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle116
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.HeaderText = "No. of Culprits Identified"
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Name = "NoOfCulpritsIdentifiedDataGridViewTextBoxColumn"
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.NoOfCulpritsIdentifiedDataGridViewTextBoxColumn.Width = 70
-        '
-        'CulpritNameDataGridViewTextBoxColumn
-        '
-        Me.CulpritNameDataGridViewTextBoxColumn.DataPropertyName = "CulpritName"
-        Me.CulpritNameDataGridViewTextBoxColumn.HeaderText = "Culprit Name"
-        Me.CulpritNameDataGridViewTextBoxColumn.Name = "CulpritNameDataGridViewTextBoxColumn"
-        Me.CulpritNameDataGridViewTextBoxColumn.ReadOnly = true
-        Me.CulpritNameDataGridViewTextBoxColumn.Width = 150
-        '
-        'AddressDataGridViewTextBoxColumn4
-        '
-        Me.AddressDataGridViewTextBoxColumn4.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn4.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn4.Name = "AddressDataGridViewTextBoxColumn4"
-        Me.AddressDataGridViewTextBoxColumn4.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn4.Width = 200
-        '
-        'FingersIdentifiedDataGridViewTextBoxColumn
-        '
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.DataPropertyName = "FingersIdentified"
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.HeaderText = "Fingers Identified"
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.Name = "FingersIdentifiedDataGridViewTextBoxColumn"
-        Me.FingersIdentifiedDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'HenryClassificationDataGridViewTextBoxColumn
-        '
-        Me.HenryClassificationDataGridViewTextBoxColumn.DataPropertyName = "HenryClassification"
-        Me.HenryClassificationDataGridViewTextBoxColumn.HeaderText = "Henry Classification"
-        Me.HenryClassificationDataGridViewTextBoxColumn.Name = "HenryClassificationDataGridViewTextBoxColumn"
-        Me.HenryClassificationDataGridViewTextBoxColumn.ReadOnly = true
-        Me.HenryClassificationDataGridViewTextBoxColumn.Width = 150
-        '
-        'DANumberDataGridViewTextBoxColumn3
-        '
-        Me.DANumberDataGridViewTextBoxColumn3.DataPropertyName = "DANumber"
-        Me.DANumberDataGridViewTextBoxColumn3.HeaderText = "DA Number"
-        Me.DANumberDataGridViewTextBoxColumn3.Name = "DANumberDataGridViewTextBoxColumn3"
-        Me.DANumberDataGridViewTextBoxColumn3.ReadOnly = true
-        Me.DANumberDataGridViewTextBoxColumn3.Width = 150
-        '
-        'IdentifiedFromDataGridViewTextBoxColumn
-        '
-        Me.IdentifiedFromDataGridViewTextBoxColumn.DataPropertyName = "IdentifiedFrom"
-        DataGridViewCellStyle117.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.IdentifiedFromDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle117
-        Me.IdentifiedFromDataGridViewTextBoxColumn.HeaderText = "Identified From"
-        Me.IdentifiedFromDataGridViewTextBoxColumn.Name = "IdentifiedFromDataGridViewTextBoxColumn"
-        Me.IdentifiedFromDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdentifiedFromDataGridViewTextBoxColumn.Width = 80
-        '
-        'IdentificationDetailsDataGridViewTextBoxColumn1
-        '
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.DataPropertyName = "IdentificationDetails"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.HeaderText = "Remarks"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Name = "IdentificationDetailsDataGridViewTextBoxColumn1"
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.IdentificationDetailsDataGridViewTextBoxColumn1.Width = 250
-        '
-        'IDRNumberDataGridViewTextBoxColumn
-        '
-        Me.IDRNumberDataGridViewTextBoxColumn.DataPropertyName = "IDRNumber"
-        Me.IDRNumberDataGridViewTextBoxColumn.HeaderText = "IDRNumber"
-        Me.IDRNumberDataGridViewTextBoxColumn.Name = "IDRNumberDataGridViewTextBoxColumn"
-        Me.IDRNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IDRNumberDataGridViewTextBoxColumn.Visible = false
-        '
-        'JoinedIDRBindingSource
-        '
-        Me.JoinedIDRBindingSource.DataMember = "JoinedIDR"
-        Me.JoinedIDRBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'StaffNameDataGridViewTextBoxColumn
-        '
-        Me.StaffNameDataGridViewTextBoxColumn.DataPropertyName = "StaffName"
-        Me.StaffNameDataGridViewTextBoxColumn.HeaderText = "Staff Name"
-        Me.StaffNameDataGridViewTextBoxColumn.Name = "StaffNameDataGridViewTextBoxColumn"
-        Me.StaffNameDataGridViewTextBoxColumn.Width = 150
-        '
-        'DesignationDataGridViewTextBoxColumn
-        '
-        Me.DesignationDataGridViewTextBoxColumn.DataPropertyName = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.HeaderText = "Designation"
-        Me.DesignationDataGridViewTextBoxColumn.Name = "DesignationDataGridViewTextBoxColumn"
-        Me.DesignationDataGridViewTextBoxColumn.Width = 150
-        '
-        'PENDataGridViewTextBoxColumn
-        '
-        Me.PENDataGridViewTextBoxColumn.DataPropertyName = "PEN"
-        Me.PENDataGridViewTextBoxColumn.HeaderText = "PEN"
-        Me.PENDataGridViewTextBoxColumn.Name = "PENDataGridViewTextBoxColumn"
-        '
-        'SlNoDataGridViewTextBoxColumn
-        '
-        Me.SlNoDataGridViewTextBoxColumn.DataPropertyName = "SlNo"
-        Me.SlNoDataGridViewTextBoxColumn.HeaderText = "SlNo"
-        Me.SlNoDataGridViewTextBoxColumn.Name = "SlNoDataGridViewTextBoxColumn"
-        Me.SlNoDataGridViewTextBoxColumn.Visible = false
-        '
-        'SSBindingSource
-        '
-        Me.SSBindingSource.DataMember = "SupportingStaff"
-        Me.SSBindingSource.DataSource = Me.FingerPrintDataSet
-        '
         'SOCRegisterTableAdapter
         '
         Me.SOCRegisterTableAdapter.ClearBeforeFill = true
@@ -14100,14 +14110,10 @@ Partial Class frmMainInterface
         '
         Me.SSTableAdapter1.ClearBeforeFill = true
         '
-        'btnFixDBTables
+        'btnOpenErrorLog
         '
-        Me.btnFixDBTables.BeginGroup = true
-        Me.btnFixDBTables.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnFixDBTables.Image = CType(resources.GetObject("btnFixDBTables.Image"),System.Drawing.Image)
-        Me.btnFixDBTables.Name = "btnFixDBTables"
-        Me.btnFixDBTables.SubItemsExpandWidth = 14
-        Me.btnFixDBTables.Text = "Fix Tables"
+        Me.btnOpenErrorLog.Name = "btnOpenErrorLog"
+        Me.btnOpenErrorLog.Text = "Open Error Log"
         '
         'frmMainInterface
         '
@@ -14127,10 +14133,10 @@ Partial Class frmMainInterface
         Me.RibbonPanel2.ResumeLayout(false)
         Me.RibbonControl1.ResumeLayout(false)
         Me.RibbonControl1.PerformLayout
+        Me.RibbonPanel7.ResumeLayout(false)
         Me.RibbonPanel1.ResumeLayout(false)
         Me.RibbonPanel5.ResumeLayout(false)
         Me.RibbonPanel3.ResumeLayout(false)
-        Me.RibbonPanel7.ResumeLayout(false)
         Me.RibbonPanel4.ResumeLayout(false)
         Me.RibbonPanel6.ResumeLayout(false)
         Me.TableLayoutPanel1.ResumeLayout(false)
@@ -14138,14 +14144,24 @@ Partial Class frmMainInterface
         Me.pnlRegisterName.ResumeLayout(false)
         CType(Me.ColumnHeaderContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.SOCDatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.SOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.FingerPrintDataSet,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PSDataGrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PSRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.CDDataGrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.CDRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.FPADataGrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.FPARegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.ACDatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.ACRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.IDDatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.IDRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DADatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.DARegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.RSOCDatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.RSOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.JoinedIDRDataGrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.JoinedIDRBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControl.ResumeLayout(false)
@@ -14158,6 +14174,7 @@ Partial Class frmMainInterface
         CType(Me.TabColorContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.DataGridContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.SSDatagrid,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.SSBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.IODatagrid,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.txtSOCCPsEliminated,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.txtSOCCPsUnfit,System.ComponentModel.ISupportInitialize).EndInit
@@ -14166,6 +14183,9 @@ Partial Class frmMainInterface
         CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControlPanel11.ResumeLayout(false)
+        Me.PanelIDR.ResumeLayout(false)
+        Me.PanelIDR.PerformLayout
         Me.TabControlPanel10.ResumeLayout(false)
         Me.PanelEx7.ResumeLayout(false)
         Me.GroupPanel5.ResumeLayout(false)
@@ -14202,9 +14222,6 @@ Partial Class frmMainInterface
         CType(Me.DASlipContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.txtDAYear,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dtDAEntry,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabControlPanel11.ResumeLayout(false)
-        Me.PanelIDR.ResumeLayout(false)
-        Me.PanelIDR.PerformLayout
         Me.TabControlPanel6.ResumeLayout(false)
         Me.PanelID.ResumeLayout(false)
         Me.PanelID.PerformLayout
@@ -14223,17 +14240,6 @@ Partial Class frmMainInterface
         Me.PanelCD.PerformLayout
         CType(Me.txtCDYear,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dtCDExamination,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.FingerPrintDataSet,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PSRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.CDRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.FPARegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.ACRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.IDRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.DARegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.RSOCRegisterBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.JoinedIDRBindingSource,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SSBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.FingerPrintDataSet1,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.OfficerTableBindingSource,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
@@ -15244,5 +15250,6 @@ End Sub
     Friend WithEvents LabelX59 As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnMonthlyStatementCL As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnFixDBTables As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenErrorLog As DevComponents.DotNetBar.ButtonItem
 
 End Class

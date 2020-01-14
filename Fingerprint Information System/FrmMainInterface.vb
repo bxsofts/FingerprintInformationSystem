@@ -18425,4 +18425,18 @@ errhandler:
     End Sub
 
     
+    Private Sub btnOpenErrorLog_Click(sender As Object, e As EventArgs) Handles btnOpenErrorLog.Click
+        Try
+            Dim errfile As String = strAppUserPath & "\ErrorLog.txt"
+            If My.Computer.FileSystem.FileExists(errfile) Then
+                Me.Cursor = Cursors.WaitCursor
+                Shell("explorer.exe " & errfile, AppWinStyle.NormalFocus)
+            Else
+                MessageBoxEx.Show("Error Log File not found")
+            End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class
