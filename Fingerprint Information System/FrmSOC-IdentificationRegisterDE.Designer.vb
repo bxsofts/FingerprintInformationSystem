@@ -70,6 +70,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.PreviousCaseDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentifiedFromDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentificationDetailsDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.COID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dtIdentificationDate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -333,7 +334,7 @@ Partial Class FrmIdentificationRegisterDE
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNumberDataGridViewTextBoxColumn, Me.IdentificationNumber, Me.CulpritNameDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.CPsIdentifiedDataGridViewTextBoxColumn, Me.FingersIdentifiedDataGridViewTextBoxColumn, Me.HenryClassificationDataGridViewTextBoxColumn, Me.DANumberDataGridViewTextBoxColumn, Me.PreviousCaseDetails, Me.IdentifiedFromDataGridViewTextBoxColumn, Me.IdentificationDetailsDataGridViewTextBoxColumn})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNumberDataGridViewTextBoxColumn, Me.IdentificationNumber, Me.CulpritNameDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.CPsIdentifiedDataGridViewTextBoxColumn, Me.FingersIdentifiedDataGridViewTextBoxColumn, Me.HenryClassificationDataGridViewTextBoxColumn, Me.DANumberDataGridViewTextBoxColumn, Me.PreviousCaseDetails, Me.IdentifiedFromDataGridViewTextBoxColumn, Me.IdentificationDetailsDataGridViewTextBoxColumn, Me.COID})
         Me.dgv.DataSource = Me.CulpritsRegisterBindingSource
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -345,7 +346,7 @@ Partial Class FrmIdentificationRegisterDE
         Me.dgv.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgv.EnableHeadersVisualStyles = False
-        Me.dgv.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.dgv.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.dgv.Location = New System.Drawing.Point(8, 3)
         Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"
@@ -649,6 +650,14 @@ Partial Class FrmIdentificationRegisterDE
         Me.IdentificationDetailsDataGridViewTextBoxColumn.ReadOnly = True
         Me.IdentificationDetailsDataGridViewTextBoxColumn.Width = 170
         '
+        'COID
+        '
+        Me.COID.DataPropertyName = "COID"
+        Me.COID.HeaderText = "COID"
+        Me.COID.Name = "COID"
+        Me.COID.ReadOnly = True
+        Me.COID.Width = 150
+        '
         'FrmIdentificationRegisterDE
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -714,4 +723,5 @@ Partial Class FrmIdentificationRegisterDE
     Friend WithEvents PreviousCaseDetails As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IdentifiedFromDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents IdentificationDetailsDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents COID As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

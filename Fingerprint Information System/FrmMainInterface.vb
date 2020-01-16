@@ -16621,7 +16621,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer, PreviousCaseDetails VARCHAR(255) WITH COMPRESSION)", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE IdentificationRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION , SOCNumber VARCHAR(50) WITH COMPRESSION, IdentificationDate Date, IdentifiedBy VARCHAR(255) WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION, NoOfCulpritsIdentified VARCHAR(3) WITH COMPRESSION,  CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, IDRNumber Integer, PreviousCaseDetails VARCHAR(255) WITH COMPRESSION, COID VARCHAR(255) WITH COMPRESSION)", con)
 
             cmd.ExecuteNonQuery()
 
@@ -16663,7 +16663,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE CulpritsRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION,  FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, PreviousCaseDetails VARCHAR(255) WITH COMPRESSION)", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE CulpritsRegister (SlNumber COUNTER PRIMARY KEY, IdentificationNumber VARCHAR(10) WITH COMPRESSION, CulpritName VARCHAR(255)  WITH COMPRESSION, Address MEMO WITH COMPRESSION, CPsIdentified VARCHAR(3) WITH COMPRESSION,  FingersIdentified VARCHAR(255) WITH COMPRESSION, HenryClassification VARCHAR(255) WITH COMPRESSION, DANumber VARCHAR(255) WITH COMPRESSION, IdentifiedFrom VARCHAR(255) WITH COMPRESSION, IdentificationDetails MEMO WITH COMPRESSION, PreviousCaseDetails VARCHAR(255) WITH COMPRESSION, COID VARCHAR(255) WITH COMPRESSION)", con)
 
             cmd.ExecuteNonQuery()
 
@@ -16681,7 +16681,7 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("INSERT INTO CulpritsRegister (IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, PreviousCaseDetails) SELECT IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, PreviousCaseDetails FROM IdentificationRegister", con)
+            Dim cmd = New OleDb.OleDbCommand("INSERT INTO CulpritsRegister (IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, PreviousCaseDetails) SELECT IdentificationNumber, CulpritName, Address, CPsIdentified, FingersIdentified, HenryClassification, DANumber, IdentifiedFrom, IdentificationDetails, PreviousCaseDetails, COID FROM IdentificationRegister", con)
 
             cmd.ExecuteNonQuery()
 
@@ -16708,6 +16708,7 @@ errhandler:
             Me.CulpritsRegisterTableAdapter1.Connection.Open()
 
             Me.CulpritsRegisterTableAdapter1.UpdateQueryRemoveNullFromPreviousCase("")
+            Me.CulpritsRegisterTableAdapter1.RemoveNullFromCOID("")
         Catch ex As Exception
 
         End Try
@@ -16739,6 +16740,7 @@ errhandler:
             Me.IdentificationRegisterTableAdapter1.UpdateQuerySetCulpritCount("1", "1")
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromPreviousCase("")
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromIdentificationDetails("")
+            Me.IdentificationRegisterTableAdapter1.RemoveNullFromCOID("")
             blIdentificationRegisterUpdateFailed = False
 
             LoadJoinedIDRRecords()
@@ -16866,7 +16868,7 @@ errhandler:
             cmd.ExecuteNonQuery()
         End If
 
-        If DoesFieldExist("IdentificationNumber", "IdentificationNumber", sConString) = False Then
+        If DoesFieldExist("SOCRegister", "IdentificationNumber", sConString) = False Then
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE SOCRegister ADD COLUMN IdentificationNumber VARCHAR(10) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
@@ -16903,6 +16905,17 @@ errhandler:
             Dim cmd = New OleDb.OleDbCommand("ALTER TABLE Settings ADD COLUMN PdlWeeklyDiary VARCHAR(2) WITH COMPRESSION", con)
             cmd.ExecuteNonQuery()
         End If
+
+        If DoesFieldExist("IdentificationRegister", "COID", sConString) = False Then
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE IdentificationRegister ADD COLUMN COID VARCHAR(255) WITH COMPRESSION", con)
+            cmd.ExecuteNonQuery()
+        End If
+
+        If DoesFieldExist("CulpritsRegister", "COID", sConString) = False Then
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE CulpritsRegister ADD COLUMN COID VARCHAR(255) WITH COMPRESSION", con)
+            cmd.ExecuteNonQuery()
+        End If
+
         If UpdateSettingsTable Then
             Dim id = 1
             Me.SettingsTableAdapter1.UpdateNullFields(PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
@@ -18438,5 +18451,9 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SSBindingSource.PositionChanged, SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
+
     End Sub
 End Class

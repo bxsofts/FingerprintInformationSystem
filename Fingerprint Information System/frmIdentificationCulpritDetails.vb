@@ -59,6 +59,7 @@ Public Class frmIdentificationCulpritDetails
                 Me.txtDANumber.Text = .Cells(7).Value
                 Me.txtPreviousCaseDetails.Text = .Cells(8).Value
                 Me.cmbIdentifiedFrom.Text = .Cells(9).Value
+                Me.txtCOID.Text = .Cells(11).Value
                 Me.txtRemarks.Text = .Cells(10).Value
             End With
         Catch ex As Exception
@@ -173,6 +174,7 @@ Public Class frmIdentificationCulpritDetails
                 .PreviousCaseDetails = Me.txtPreviousCaseDetails.Text.Trim
                 .IdentifiedFrom = Me.cmbIdentifiedFrom.Text.Trim
                 .IdentificationDetails = Me.txtRemarks.Text.Trim
+                .COID = Me.txtCOID.Text.Trim
             End With
 
             FrmIdentificationRegisterDE.FingerPrintDataSet1.CulpritsRegister.Rows.Add(dgvr)
@@ -205,6 +207,7 @@ Public Class frmIdentificationCulpritDetails
                     .PreviousCaseDetails = Me.txtPreviousCaseDetails.Text.Trim
                     .IdentifiedFrom = Me.cmbIdentifiedFrom.Text.Trim
                     .IdentificationDetails = Me.txtRemarks.Text.Trim
+                    .COID = Me.txtCOID.Text.Trim
                 End With
             End If
 
