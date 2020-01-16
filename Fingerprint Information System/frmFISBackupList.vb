@@ -462,21 +462,26 @@ Public Class frmFISBackupList
         End If
 
         If CurrentFolderPath = "\My Drive" And Not SuperAdmin Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'My Drive' folder.  Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Creation of new folder is not allowed in 'My Drive' folder.  Use 'General Files' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
         If CurrentFolderPath = "\My Drive\FIS Backup" And Not SuperAdmin Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Creation of new folder is not allowed in 'FIS Backup' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
         If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
-            MessageBoxEx.Show("Creation of new Folder is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Creation of new folder is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False, "New Folder")
+        If CurrentFolderPath = "\My Drive\Internal File Transfer" And Not SuperAdmin Then
+            MessageBoxEx.Show("Creation of new folder is not allowed in 'Internal File Transfer' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False, "")
         frmInputBox.ShowDialog()
         Dim FolderName As String = frmInputBox.txtInputBox.Text
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
@@ -576,6 +581,11 @@ Public Class frmFISBackupList
 
         If CurrentFolderPath = "\My Drive\Installer File" And Not SuperAdmin Then
             MessageBoxEx.Show("Uploading of files is not allowed in 'Installer File' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If CurrentFolderPath = "\My Drive\Internal File Transfer" And Not SuperAdmin Then
+            MessageBoxEx.Show("Uploading of files is not allowed in 'Internal File Transfer' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
