@@ -167,8 +167,6 @@ Public Class frmAnnualStatistics
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
 
-
-
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             If WordApp.Version < 12 Then
                 WordApp.Selection.Document.PageSetup.LeftMargin = 72
@@ -239,7 +237,7 @@ Public Class frmAnnualStatistics
             Next
 
             WordApp.Selection.Tables.Item(1).Cell(7, 3).Select()
-            WordApp.Selection.TypeText(Me.DaRegisterTableAdapter1.CountDASlip(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.DaRegisterTableAdapter1.CountDASlip(d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(8, 2).Select()
             WordApp.Selection.TypeText("No. of court duties attended by the staff")
@@ -255,7 +253,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(9, 3).Select()
             WordApp.Selection.TypeText("b) Criminal")
             WordApp.Selection.Tables.Item(1).Cell(9, 4).Select()
-            WordApp.Selection.TypeText(Me.CdRegisterTableAdapter1.CountCD(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.CdRegisterTableAdapter1.CountCD(d1, d2)))
             WordApp.Selection.Tables.Item(1).Cell(8, 2).Merge(WordApp.Selection.Tables.Item(1).Cell(9, 2))
             WordApp.Selection.Tables.Item(1).Cell(8, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(9, 1))
             WordApp.Selection.Tables.Item(1).Cell(10, 1).Select()
@@ -270,7 +268,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(11, 3).Select()
             WordApp.Selection.Font.Name = "Rupee Foradian"
             WordApp.Selection.Font.Size = 9
-            WordApp.Selection.TypeText("` " & Me.FPARegisterTableAdapter1.AmountRemitted(d1, d2) & "/-")
+            WordApp.Selection.TypeText("` " & Val(Me.FPARegisterTableAdapter1.AmountRemitted(d1, d2)) & "/-")
 
             WordApp.Selection.Tables.Item(1).Cell(11, 3).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
@@ -302,27 +300,27 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
             WordApp.Selection.TypeText("No. of SOC cases visited during the year")
             WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
-            WordApp.Selection.TypeText(Me.SocRegisterTableAdapter1.ScalarQuerySOCInspected(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.SocRegisterTableAdapter1.ScalarQuerySOCInspected(d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
             WordApp.Selection.TypeText("No. of cases in which chance prints developed")
             WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
-            WordApp.Selection.TypeText(Me.SocRegisterTableAdapter1.ScalarQueryCPDevelopedSOC("0", d1, d2))
+            WordApp.Selection.TypeText(Val(Me.SocRegisterTableAdapter1.ScalarQueryCPDevelopedSOC("0", d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(3, 2).Select()
             WordApp.Selection.TypeText("No. of chance prints examined during the year")
             WordApp.Selection.Tables.Item(1).Cell(3, 3).Select()
-            WordApp.Selection.TypeText(Me.SocRegisterTableAdapter1.ScalarQueryCPDeveloped(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.SocRegisterTableAdapter1.ScalarQueryCPDeveloped(d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(4, 2).Select()
             WordApp.Selection.TypeText("No. of chance prints unfit for comparison")
             WordApp.Selection.Tables.Item(1).Cell(4, 3).Select()
-            WordApp.Selection.TypeText(Me.SocRegisterTableAdapter1.ScalarQueryCPUnfit(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.SocRegisterTableAdapter1.ScalarQueryCPUnfit(d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(5, 2).Select()
             WordApp.Selection.TypeText("No. of chance prints identical with inmates")
             WordApp.Selection.Tables.Item(1).Cell(5, 3).Select()
-            WordApp.Selection.TypeText(Me.SocRegisterTableAdapter1.ScalarQueryCPEliminated(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.SocRegisterTableAdapter1.ScalarQueryCPEliminated(d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(6, 2).Select()
             WordApp.Selection.TypeText("No. of chance prints identified as culprits during the year")
@@ -333,7 +331,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(7, 2).Select()
             WordApp.Selection.TypeText("No. of  cases identified during the year")
             WordApp.Selection.Tables.Item(1).Cell(7, 3).Select()
-            WordApp.Selection.TypeText(Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentified(d1, d2))
+            WordApp.Selection.TypeText(Val(Me.IdentificationRegisterTableAdapter1.ScalarQuerySOCsIdentified(d1, d2)))
 
             WordApp.Selection.Tables.Item(1).Cell(8, 2).Select()
             WordApp.Selection.TypeText("No. of  cases pending at the beginning of the year")
