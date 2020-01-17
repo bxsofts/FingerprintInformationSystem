@@ -14059,7 +14059,7 @@ errhandler:
                     End If
                 Else
                     If identifiedfrom = "accused" Then
-                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the accused ")
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of the accused ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14069,14 +14069,14 @@ errhandler:
                         WordApp.Selection.TypeText(" His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
 
                     ElseIf identifiedfrom = "suspects" Then
-                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the suspect ")
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of the suspect ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
 
                         WordApp.Selection.Font.Bold = 0
                     Else
-                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14242,6 +14242,8 @@ errhandler:
                     IdentificationText += vbNewLine & vbTab & "On comparing the chance print with the fingerprint slip of the accused received from " & ps & ", "
                 ElseIf identifiedfrom = "suspects" Then
                     IdentificationText += vbNewLine & vbTab & "On comparing the chance print with the fingerprint slip of the suspect received from " & ps & ", "
+                ElseIf identifiedfrom = "afis" Then
+                    IdentificationText += vbNewLine & vbTab & "On comparing the chance print with AFIS, "
                 Else
                     IdentificationText += vbNewLine & vbTab & "On comparing the chance print with Bureau records, "
                 End If
@@ -14259,6 +14261,8 @@ errhandler:
                     IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with the fingerprint slip of the accused received from " & ps & ", "
                 ElseIf identifiedfrom = "suspects" Then
                     IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with the fingerprint slip of the suspect received from " & ps & ", "
+                ElseIf identifiedfrom = "afis" Then
+                    IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with AFIS, "
                 Else
                     IdentificationText += vbNewLine & vbTab & "On comparing the chance prints with Bureau records, "
                 End If
@@ -14274,6 +14278,8 @@ errhandler:
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with the fingerprint slip of the accused received from " & ps & ", "
                 ElseIf identifiedfrom = "suspects" Then
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with the fingerprint slip of the suspect received from " & ps & ", "
+                ElseIf identifiedfrom = "afis" Then
+                    IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with AFIS, "
                 Else
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with Bureau records, "
                 End If
@@ -14289,6 +14295,8 @@ errhandler:
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with the fingerprint slip of the accused received from " & ps & ", "
                 ElseIf identifiedfrom = "suspects" Then
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with the fingerprint slip of the suspect received from " & ps & ", "
+                ElseIf identifiedfrom = "afis" Then
+                    IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with AFIS, "
                 Else
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with Bureau records, "
                 End If
@@ -14303,6 +14311,8 @@ errhandler:
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with the fingerprint slip of the accused received from " & ps & ", "
                 ElseIf identifiedfrom = "suspects" Then
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with the fingerprint slip of the suspect received from " & ps & ", "
+                ElseIf identifiedfrom = "afis" Then
+                    IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with AFIS, "
                 Else
                     IdentificationText += vbNewLine & vbTab & "On comparing the remaining " & IIf(CPR = 1, "chance print ", "chance prints ") & "with Bureau records, "
                 End If
@@ -14424,6 +14434,16 @@ errhandler:
 
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
+                    ElseIf identifiedfrom = "afis" Then
+                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                        WordApp.Selection.Font.Bold = 1
+
+                        WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
+
+                        WordApp.Selection.Font.Bold = 0
+
+                        WordApp.Selection.TypeText(vbNewLine)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "COID - " & fds.CulpritsRegister(i).COID)
                     Else
                         WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
                         WordApp.Selection.Font.Bold = 1
@@ -14442,7 +14462,7 @@ errhandler:
                     End If
                 Else
                     If identifiedfrom = "accused" Then
-                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the accused ")
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of the accused ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14456,7 +14476,7 @@ errhandler:
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
 
                     ElseIf identifiedfrom = "suspects" Then
-                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the suspect ")
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of the suspect ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14465,8 +14485,18 @@ errhandler:
 
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
+                    ElseIf identifiedfrom = "afis" Then
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
+                        WordApp.Selection.Font.Bold = 1
+
+                        WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
+
+                        WordApp.Selection.Font.Bold = 0
+
+                        WordApp.Selection.TypeText(vbNewLine)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "COID - " & fds.CulpritsRegister(i).COID)
                     Else
-                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                        WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14654,18 +14684,22 @@ errhandler:
                         WordApp.Selection.TypeText(("the accused " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ". His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
                     ElseIf identifiedfrom = "suspects" Then
                         WordApp.Selection.TypeText(("the suspect " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".").ToUpper)
+                    ElseIf identifiedfrom = "afis" Then
+                        WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & " from AFIS. COID - " & fds.CulpritsRegister(i).COID & ".").ToUpper)
                     Else
                         WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ". He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails & " ", previousdetails & ". ") & "His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
                     End If
 
                 Else
 
-                    WordApp.Selection.TypeText((ConvertNumberToWord(Val(cpid)) & " chance prints developed from the scene of crime have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of ").ToUpper)
+                    WordApp.Selection.TypeText((ConvertNumberToWord(Val(cpid)) & " chance prints developed from the scene of crime have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of ").ToUpper)
 
                     If identifiedfrom = "accused" Then
                         WordApp.Selection.TypeText(("the accused " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ". His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
                     ElseIf identifiedfrom = "suspects" Then
                         WordApp.Selection.TypeText(("the suspect " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".").ToUpper)
+                    ElseIf identifiedfrom = "afis" Then
+                        WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & " from AFIS. COID - " & fds.CulpritsRegister(i).COID & ".").ToUpper)
                     Else
                         WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ". He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails & " ", previousdetails & ". ") & "His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
                     End If
@@ -15562,8 +15596,9 @@ errhandler:
                 Dim da = Me.FingerPrintDataSet1.CulpritsRegister(i).DANumber.Trim
                 Dim hc = Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim
                 Dim address = Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim
+                Dim coid = Me.FingerPrintDataSet1.CulpritsRegister(i).COID.Trim
 
-                Dim iddetails As String = address & vbCrLf & IIf(da = "", "", vbCrLf & "DA Number: " & da) & vbCrLf & IIf(hc = "", "", "Classification: " & hc) & vbCrLf
+                Dim iddetails As String = address & vbCrLf & IIf(da = "", "", vbCrLf & "DA Number: " & da) & vbCrLf & IIf(hc = "", "", "Classification: " & hc) & vbCrLf & IIf(coid = "", "", "COID: " & coid) & vbCrLf
                 wdApp.Selection.TypeText(iddetails)
                 k = k + 1
             Next

@@ -327,7 +327,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.Tables.Item(1).Cell(6, 2).Select()
             WordApp.Selection.TypeText("No. of chance prints identified as culprits during the year")
             WordApp.Selection.Tables.Item(1).Cell(6, 3).Select()
-            Dim x As Integer = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2)
+            Dim x As Integer = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2))
             WordApp.Selection.TypeText(x)
 
             WordApp.Selection.Tables.Item(1).Cell(7, 2).Select()
@@ -697,6 +697,7 @@ Public Class frmAnnualStatistics
 
 #End Region
 
+
 #Region "LIST OF IDENTIFIED CASES"
 
     Private Sub bgwIDList_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwIDList.DoWork
@@ -913,7 +914,9 @@ Public Class frmAnnualStatistics
                     Dim classification As String = ""
                     Dim identifiedfrom As String = ""
                     Dim danumber As String = ""
+                    Dim coid As String = ""
                     Dim finger As String = ""
+
                     If c > 1 Then
                         WordApp.Selection.Tables.Item(1).Cell(i, 8).Split(c) ' name & address
                         WordApp.Selection.Tables.Item(1).Cell(i, 9).Split(c) ' fingers
@@ -933,6 +936,7 @@ Public Class frmAnnualStatistics
                         danumber = Me.FingerPrintDataSet.CulpritsRegister(k).DANumber
                         classification = Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification
                         identifiedfrom = Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom
+                        coid = Me.FingerPrintDataSet.CulpritsRegister(k).COID
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 8).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -944,7 +948,7 @@ Public Class frmAnnualStatistics
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 10).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                        WordApp.Selection.TypeText("DA No. - " & danumber.Trim & vbCrLf & vbCrLf & "H/C - " & classification.Trim)
+                        WordApp.Selection.TypeText("DA No. - " & danumber.Trim & vbCrLf & vbCrLf & "H/C - " & classification.Trim & (IIf(coid = "", "", vbCrLf & "COID - " & coid)))
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 11).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -1140,8 +1144,9 @@ Public Class frmAnnualStatistics
                     Dim culprit As String = FingerPrintDataSet.CulpritsRegister(j).CulpritName
                     Dim da As String = FingerPrintDataSet.CulpritsRegister(j).DANumber
                     Dim classification As String = FingerPrintDataSet.CulpritsRegister(j).HenryClassification
+                    Dim coid As String = FingerPrintDataSet.CulpritsRegister(j).COID
 
-                    iddetails = iddetails & vbCrLf & vbTab & vbTab & Strings.StrConv(ConvertNumberToWord(cpid), VbStrConv.ProperCase) & IIf(cpid = 1, " chance print is identified as the " & finger & " finger impression", " chance prints are identified as the " & finger & " finger impressions") & " of " & culprit & ". DA No. " & da & ", Classification - " & classification
+                    iddetails = iddetails & vbCrLf & vbTab & vbTab & Strings.StrConv(ConvertNumberToWord(cpid), VbStrConv.ProperCase) & IIf(cpid = 1, " chance print is identified as the " & finger & " finger impression", " chance prints are identified as the " & finger & " finger impressions") & " of " & culprit & ". DA No. " & da & ", Classification - " & classification & (IIf(coid = "", "", ", COID - " & coid))
                 Next
 
 
