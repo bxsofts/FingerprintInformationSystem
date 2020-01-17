@@ -195,10 +195,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="frmWeeklyDiaryView.Designer.vb">
+      <DependentUpon>frmWeeklyDiaryView.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
+    <Compile Include="frmWeeklyDiaryView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmChalanDetails.Designer.vb">
@@ -559,8 +559,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="frmWeeklyDiaryView.resx">
+      <DependentUpon>frmWeeklyDiaryView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChalanDetails.resx">
       <DependentUpon>frmChalanDetails.vb</DependentUpon>

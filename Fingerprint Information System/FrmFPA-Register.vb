@@ -29,7 +29,6 @@ Public Class frmFPARegister
         GenerateOnLoad()
         Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
         Me.ReportViewer1.ZoomMode = ZoomMode.Percent
-        Me.ReportViewer1.ZoomPercent = 25
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -41,7 +40,7 @@ Public Class frmFPARegister
         Dim y = Me.txtYear.Text
         d1 = New Date(y, 1, 1)
         d2 = New Date(y, 12, 31)
-        headertext = "DP Attestation Register " & y
+        headertext = "FP Attestation Register " & y
         GenerateOnLoad()
         Me.ReportViewer1.RefreshReport()
         Application.DoEvents()

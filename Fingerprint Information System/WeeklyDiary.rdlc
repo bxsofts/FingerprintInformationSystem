@@ -6,13 +6,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.96333cm</Width>
+              <Width>2.41652cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.50333cm</Width>
+              <Width>10.06298cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.50333cm</Width>
+              <Width>4.95652cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -29,10 +29,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Diary Date</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox2</rd:DefaultName>
@@ -59,10 +63,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Work Done</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox3</rd:DefaultName>
@@ -89,10 +97,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Remarks</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox5</rd:DefaultName>
@@ -123,7 +135,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!DiaryDate.Value</Value>
+                              <Value>=format(Fields!DiaryDate.Value, "dd-MM-yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -227,9 +239,9 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.60854cm</Top>
-        <Left>3.5179cm</Left>
+        <Left>0.21061cm</Left>
         <Height>1.2cm</Height>
-        <Width>13.97cm</Width>
+        <Width>17.43602cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -237,15 +249,56 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>11.69cm</Height>
+    <Height>3.01167cm</Height>
     <Style />
   </Body>
-  <Width>8.27in</Width>
+  <Width>6.97833in</Width>
   <Page>
+    <PageFooter>
+      <Height>1.05833cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.17639cm</Top>
+          <Left>14.28433cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.5cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
+    <LeftMargin>1.5cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
     <TopMargin>2cm</TopMargin>
     <BottomMargin>2cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>

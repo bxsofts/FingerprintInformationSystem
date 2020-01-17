@@ -1336,4 +1336,9 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
   
+    Private Sub btnPrintAll_Click(sender As Object, e As EventArgs) Handles btnPrintAll.Click
+        Me.Cursor = Cursors.WaitCursor
+        frmWeeklyDiaryView.Show()
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class

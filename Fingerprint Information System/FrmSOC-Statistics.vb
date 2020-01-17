@@ -54,7 +54,7 @@ Public Class frmSOCStatistics
         GenerateOnLoad()
         Me.ReportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout)
         Me.ReportViewer1.ZoomMode = ZoomMode.Percent
-        Me.ReportViewer1.ZoomPercent = 25
+       
         Me.cmbMonth.Focus()
         Me.Cursor = Cursors.Default
     End Sub
