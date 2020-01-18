@@ -1360,7 +1360,6 @@ Public Class frmMainInterface
             LoadFPARecords()
             LoadCDRecords()
         End If
-        LoadJoinedIDRRecords()
         LoadIDRecords()
         LoadSSRecords()
         If blApplicationIsRestoring Then
@@ -8937,6 +8936,7 @@ errhandler:
         Try
             Me.Cursor = Cursors.WaitCursor
             Me.SOCRegisterTableAdapter.FillByFileStatus(Me.FingerPrintDataSet.SOCRegister, "Identified")
+            Me.TabControl.SelectedTab = SOCTabItem
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
