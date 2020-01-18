@@ -843,10 +843,6 @@
     <Content Include="icon.ico" />
     <None Include="NoDAImage.png" />
     <None Include="NoDAImage 1.png" />
-    <None Include="PNG 48x48\Logout yellow.png" />
-    <None Include="PNG 48x48\Logout.png" />
-    <None Include="PNG 48x48\Login.png" />
-    <None Include="PNG 48x48\Arrioch-Senary-Office-access-mdb.ico" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">
