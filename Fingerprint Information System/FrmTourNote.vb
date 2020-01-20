@@ -205,7 +205,7 @@ Public Class FrmTourNote
 
         If FPS <> ", FPS" Then
             Me.cmbSOCOfficer.Items.Add(FPS)
-            PENFPS = frmMainInterface.IODatagrid.Rows(43).Cells(2).Value
+            PENFPS = frmMainInterface.IODatagrid.Rows(4).Cells(2).Value
             BasicPayFPS = frmMainInterface.IODatagrid.Rows(4).Cells(3).Value
             ScaleFPS = frmMainInterface.IODatagrid.Rows(4).Cells(4).Value
             DAFPS = frmMainInterface.IODatagrid.Rows(4).Cells(5).Value
@@ -1077,7 +1077,7 @@ errhandler:
                 Exit Sub
             End If
 
-            If SelectedOfficerName.Contains(", TI") Then
+            If Not SelectedOfficerName.Contains(", FPS") Then
                 If chkSingleRow.Checked Then
                     If Me.chkUseSavedTourNote.Checked Then
                         If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
@@ -1238,23 +1238,15 @@ errhandler:
 
             Dim args As TourNoteArgs = e.Argument
 
+            Dim Designation As String = ""
+            If SelectedOfficerName.Contains(", FPS") Then
+                Designation = "Fingerprint Searcher"
+            End If
+
+            Dim OfficerNameOnly As String = ""
+            OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
+
             If args.TAFromRecord Then
-                Dim Designation As String = ""
-                If SelectedOfficerName.Contains(", TI") Then
-                    Designation = "Tester Inspector"
-                End If
-
-                If SelectedOfficerName.Contains(", FPE") Then
-                    Designation = "Fingerprint Expert"
-                End If
-
-                If SelectedOfficerName.Contains(", FPS") Then
-                    Designation = "Fingerprint Searcher"
-                End If
-                Dim OfficerNameOnly As String = ""
-                OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
 
                 Dim sx As Integer = args.SelectedIndex
 
@@ -1412,24 +1404,6 @@ errhandler:
 
                 Dim TNRowCount = wdTblTN.Rows.Count
                 Dim TNRecordCount As Integer = TNRowCount - 2
-
-                Dim Designation As String = ""
-                If SelectedOfficerName.Contains(", TI") Then
-                    Designation = "Tester Inspector"
-                End If
-
-                If SelectedOfficerName.Contains(", FPE") Then
-                    Designation = "Fingerprint Expert"
-                End If
-
-                If SelectedOfficerName.Contains(", FPS") Then
-                    Designation = "Fingerprint Searcher"
-                End If
-
-                Dim OfficerNameOnly As String = ""
-                OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
 
                 Dim sx As Integer = args.SelectedIndex
 
@@ -1677,25 +1651,16 @@ errhandler:
 
             Dim args As TourNoteArgs = e.Argument
 
+            Dim Designation As String = ""
+            If SelectedOfficerName.Contains(", FPS") Then
+                Designation = "Fingerprint Searcher"
+            End If
+
+            Dim OfficerNameOnly As String = ""
+            OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
+
             If args.TAFromRecord Then
-                Dim Designation As String = ""
-                If SelectedOfficerName.Contains(", TI") Then
-                    Designation = "Tester Inspector"
-                End If
-
-                If SelectedOfficerName.Contains(", FPE") Then
-                    Designation = "Fingerprint Expert"
-                End If
-
-                If SelectedOfficerName.Contains(", FPS") Then
-                    Designation = "Fingerprint Searcher"
-                End If
-
-                Dim OfficerNameOnly As String = ""
-                OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
-
+               
                 Dim sx As Integer = args.SelectedIndex
 
                 For delay = 11 To 20
@@ -1910,24 +1875,6 @@ errhandler:
 
                 Dim TNRowCount = wdTblTN.Rows.Count
                 Dim TNRecordCount As Integer = TNRowCount - 2
-
-                Dim Designation As String = ""
-                If SelectedOfficerName.Contains(", TI") Then
-                    Designation = "Tester Inspector"
-                End If
-
-                If SelectedOfficerName.Contains(", FPE") Then
-                    Designation = "Fingerprint Expert"
-                End If
-
-                If SelectedOfficerName.Contains(", FPS") Then
-                    Designation = "Fingerprint Searcher"
-                End If
-
-                Dim OfficerNameOnly As String = ""
-                OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
-                OfficerNameOnly = OfficerNameOnly.Replace(", TI", "")
 
                 Dim sx As Integer = args.SelectedIndex
                 For delay = 21 To 30
@@ -2187,7 +2134,15 @@ errhandler:
     Private Sub bgwTR47_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwTR47.DoWork
         Try
             Dim Designation As String = "Tester Inspector"
+
+            If SelectedOfficerName.Contains("FPE") Then
+                Designation = "Fingerprint Expert"
+            End If
+
             Dim OfficerNameOnly As String = ""
+
+            OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
+            OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
 
             Dim delay As Integer = 0
             For delay = 0 To 10
@@ -2198,8 +2153,7 @@ errhandler:
             Dim args As TourNoteArgs = e.Argument
 
             If args.TAFromRecord Then
-                OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
-
+             
                 Dim sx As Integer = args.SelectedIndex
 
                 For delay = 11 To 20
@@ -2359,8 +2313,6 @@ errhandler:
 
                 Dim TNRowCount = wdTblTN.Rows.Count
                 Dim TNRecordCount As Integer = TNRowCount - 2
-
-                OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
 
                 Dim sx As Integer = args.SelectedIndex
 
@@ -2592,7 +2544,15 @@ errhandler:
     Private Sub bgwTR47ThreeLine_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwTR47ThreeLine.DoWork
         Try
             Dim Designation As String = "Tester Inspector"
+
+            If SelectedOfficerName.Contains("FPE") Then
+                Designation = "Fingerprint Expert"
+            End If
+
             Dim OfficerNameOnly As String = ""
+
+            OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
+            OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
 
             Dim delay As Integer = 0
             For delay = 0 To 10
@@ -2603,8 +2563,6 @@ errhandler:
             Dim args As TourNoteArgs = e.Argument
 
             If args.TAFromRecord Then
-
-                OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
 
                 Dim sx As Integer = args.SelectedIndex
 
@@ -2821,8 +2779,6 @@ errhandler:
                 Dim TNRecordCount As Integer = TNRowCount - 2
 
 
-                OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
-
                 Dim sx As Integer = args.SelectedIndex
 
                 wdDocTA.Range.NoProofing = 1
@@ -3035,10 +2991,10 @@ errhandler:
     End Sub
 
     Private Sub btnShowTABillOuter_Click(sender As Object, e As EventArgs) Handles btnGenerateTABillOuter.Click
-        If SelectedOfficerName.Contains(", TI") Then
+        If Not SelectedOfficerName.Contains(", FPS") Then
             GenerateTR47Outer(SelectedOfficerName.Replace(", TI", ""), "Tester Inspector")
         Else
-            MessageBoxEx.Show("Please select Tester Inspector Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please select Tester Inspector/Fingerprint Expert Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.cmbSOCOfficer.Focus()
         End If
     End Sub
