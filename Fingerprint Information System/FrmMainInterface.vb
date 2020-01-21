@@ -17428,9 +17428,6 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-            CreateInternalFileTransferFolder(FISService)
-            DownloadHolidayList()
-
             Dim List = FISService.Files.List()
             Dim fisid As String = GetMasterBackupFolderID(FISService)
 
@@ -18100,6 +18097,9 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
+            CreateInternalFileTransferFolder(FISService)
+            DownloadHolidayList()
+
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
 
@@ -18488,7 +18488,5 @@ errhandler:
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub DisplayDatabaseInformation(sender As Object, e As EventArgs) Handles SSBindingSource.PositionChanged, SOCRegisterBindingSource.PositionChanged, RSOCRegisterBindingSource.PositionChanged, PSRegisterBindingSource.PositionChanged, JoinedIDRBindingSource.PositionChanged, IDRegisterBindingSource.PositionChanged, FPARegisterBindingSource.PositionChanged, DARegisterBindingSource.PositionChanged, CDRegisterBindingSource.PositionChanged, ACRegisterBindingSource.PositionChanged
-
-    End Sub
+ 
 End Class
