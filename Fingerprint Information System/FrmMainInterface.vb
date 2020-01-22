@@ -14434,6 +14434,7 @@ errhandler:
 
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
+
                     ElseIf identifiedfrom = "afis" Then
                         WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
                         WordApp.Selection.Font.Bold = 1
@@ -14442,8 +14443,16 @@ errhandler:
 
                         WordApp.Selection.Font.Bold = 0
 
+                        WordApp.Selection.TypeText(" He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails, previousdetails & ". "))
+                        WordApp.Selection.TypeText(vbNewLine)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "DA Slip Number - " & fds.CulpritsRegister(i).DANumber)
+
+                        WordApp.Selection.TypeText(vbNewLine)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
+
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "COID - " & fds.CulpritsRegister(i).COID)
+
                     Else
                         WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
                         WordApp.Selection.Font.Bold = 1
@@ -14485,6 +14494,7 @@ errhandler:
 
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
+
                     ElseIf identifiedfrom = "afis" Then
                         WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
                         WordApp.Selection.Font.Bold = 1
@@ -14492,9 +14502,16 @@ errhandler:
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
 
                         WordApp.Selection.Font.Bold = 0
+                        WordApp.Selection.TypeText(" He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails, previousdetails & ". "))
+                        WordApp.Selection.TypeText(vbNewLine)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "DA Slip Number - " & fds.CulpritsRegister(i).DANumber)
+
+                        WordApp.Selection.TypeText(vbNewLine)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
 
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "COID - " & fds.CulpritsRegister(i).COID)
+
                     Else
                         WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
                         WordApp.Selection.Font.Bold = 1
@@ -14503,6 +14520,7 @@ errhandler:
 
                         WordApp.Selection.Font.Bold = 0
 
+                        WordApp.Selection.TypeText(" He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails, previousdetails & ". "))
                         WordApp.Selection.TypeText(vbNewLine)
                         WordApp.Selection.TypeText(vbTab & vbTab & "DA Slip Number - " & fds.CulpritsRegister(i).DANumber)
 
