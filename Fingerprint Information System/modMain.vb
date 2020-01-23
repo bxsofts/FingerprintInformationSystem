@@ -39,6 +39,7 @@ Module modMain
     Public FPE2 As String = ""
     Public FPE3 As String = ""
     Public FPS As String = ""
+    Public TIPen As String = ""
     Public strPhotographer As String = ""
 
     Public PdlAttendance As String = ""
@@ -77,7 +78,7 @@ Module modMain
     Public dtAnnualStatisticsFrom As Date
     Public dtAnnualStatisticsTo As Date
     Public boolShowWizard As Boolean = False
-    Public boolUseTIinLetter As Boolean = True
+    Public blUseTIinLetter As Boolean = True
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 

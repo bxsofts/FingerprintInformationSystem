@@ -199,8 +199,8 @@ Public Class frmMainInterface
 
         IncrementCircularProgress(1)
 
-        boolUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
-        Me.chkUseTIAtBottomOfLetter.Checked = boolUseTIinLetter
+        blUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
+        Me.chkUseTIAtBottomOfLetter.Checked = blUseTIinLetter
 
         IncrementCircularProgress(1)
         SetDatagridFont()
@@ -1773,9 +1773,9 @@ Public Class frmMainInterface
 
     Private Sub UseTIinLetter(sender As Object, e As EventArgs) Handles chkUseTIAtBottomOfLetter.Click
         On Error Resume Next
-        boolUseTIinLetter = chkUseTIAtBottomOfLetter.Checked
+        blUseTIinLetter = chkUseTIAtBottomOfLetter.Checked
         Dim v As Integer
-        If boolUseTIinLetter Then v = 1 Else v = 0
+        If blUseTIinLetter Then v = 1 Else v = 0
 
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "UseTIinLetter", v, Microsoft.Win32.RegistryValueKind.String)
 
@@ -7190,6 +7190,9 @@ errhandler:
             Me.txtSOCPhotographer.AutoCompleteCustomSource.Add("No Photographer")
             LoadOfficerListToDropDownMenu()
         End If
+        If cnt >= 2 Then
+            TIPen = Me.FingerPrintDataSet.OfficerTable(1).TI
+        End If
     End Sub
 
     Public Sub LoadOfficerListToTable()
@@ -7253,6 +7256,8 @@ errhandler:
             Me.IODatagrid.Rows(4).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).FPS
             Me.IODatagrid.Rows(5).Cells(6).Value = Me.FingerPrintDataSet.OfficerTable(5).Photographer
         End If
+
+
     End Sub
 
     Public Sub LoadOfficerListToDropDownMenu()
@@ -13680,12 +13685,13 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
-            If boolUseTIinLetter Then
+            If blUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.Space1()
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
@@ -14097,12 +14103,13 @@ errhandler:
                 WordApp.Selection.TypeText(vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
-                If boolUseTIinLetter Then
+                If blUseTIinLetter Then
                     WordApp.Selection.TypeParagraph()
                     WordApp.Selection.TypeParagraph()
                     WordApp.Selection.TypeParagraph()
                     WordApp.Selection.ParagraphFormat.Space1()
-                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
@@ -14543,12 +14550,13 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
-            If boolUseTIinLetter Then
+            If blUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.Space1()
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
@@ -15795,13 +15803,15 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
-            If boolUseTIinLetter Then
+            If blUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.Space1()
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+               
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
@@ -15927,12 +15937,13 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
-            If boolUseTIinLetter Then
+            If blUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.Space1()
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
@@ -16489,15 +16500,14 @@ errhandler:
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
-            If boolUseTIinLetter Then
+            If blUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.Space1()
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-            'ClosePleaseWaitForm()
             ClosePleaseWaitForm()
 
             Dim sFullFileName As String = FileIO.SpecialDirectories.MyDocuments & "\" & sFileName

@@ -1223,7 +1223,7 @@ Public Class frmWeeklyDiaryDE
             wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
 
 
-            If boolUseTIinLetter Then
+            If blUseTIinLetter Then
                 wdBooks("Name2").Range.Text = wdOfficerName
                 wdBooks("Designation").Range.Text = "Tester Inspector"
                 wdBooks("OfficeName3").Range.Text = FullOfficeName
