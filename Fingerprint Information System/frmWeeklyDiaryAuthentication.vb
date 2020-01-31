@@ -298,8 +298,19 @@ Public Class frmWeeklyDiaryAuthentication
 
             Dim remotecount As Integer = 0
 
+            Dim description As String = ""
             If Results.Files.Count > 0 Then
-                remotecount = Val(Results.Files(0).Description)
+                description = Results.Files(0).Description
+                Dim SplitText() = Strings.Split(description, " - ")
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u = 0 Then
+                    remotecount = Val(SplitText(0))
+                End If
+
+                If u = 1 Then
+                    remotecount = Val(SplitText(1))
+                End If
             End If
 
             If remotecount < localcount Then
