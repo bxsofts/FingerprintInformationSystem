@@ -16264,7 +16264,12 @@ errhandler:
         frmQuarterlyPerformance.BringToFront()
     End Sub
 
-
+    Private Sub ShowAnnualPerformance() Handles btnAnnualPerformance.Click
+        On Error Resume Next
+        frmAnnualPerformance.Show()
+        frmAnnualPerformance.WindowState = FormWindowState.Maximized
+        frmAnnualPerformance.BringToFront()
+    End Sub
     Private Sub ShowIndividualPerformance() Handles btnIndividualPerformance.Click, btnMonthlyIndividual.Click
 
         On Error Resume Next
