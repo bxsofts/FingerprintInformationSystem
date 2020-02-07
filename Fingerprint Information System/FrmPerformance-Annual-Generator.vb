@@ -320,4 +320,34 @@ Public Class frmAnnualPerformance
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+
+            Dim sPerfFileName = SaveFolder & "\Annual Performance Statement - " & Me.txtYear.Text & ".docx"
+
+            If FileIO.FileSystem.FileExists(sPerfFileName) Then
+                Call Shell("explorer.exe /select," & sPerfFileName, AppWinStyle.NormalFocus)
+                Exit Sub
+            End If
+
+
+            If Not FileIO.FileSystem.DirectoryExists(SaveFolder) Then
+                FileIO.FileSystem.CreateDirectory(SaveFolder)
+            End If
+
+            Call Shell("explorer.exe " & SaveFolder, AppWinStyle.NormalFocus)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub PreventMouseScrolling(sender As Object, e As MouseEventArgs) Handles txtYear.MouseWheel
+        Dim mwe As HandledMouseEventArgs = DirectCast(e, HandledMouseEventArgs)
+        mwe.Handled = True
+    End Sub
+
+
 End Class
