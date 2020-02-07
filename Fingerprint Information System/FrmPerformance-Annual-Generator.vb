@@ -33,7 +33,7 @@ Public Class frmAnnualPerformance
 
         Application.DoEvents()
 
-        ' GeneratePerformanceStatement()
+        GeneratePerformanceStatement()
         Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.Default
         Me.DataGridViewX1.Cursor = Cursors.Default
@@ -218,11 +218,11 @@ Public Class frmAnnualPerformance
         Dim y = Me.txtYear.Value
 
         ClearAllFields()
-        Me.lblHeader.Text = UCase("work done statement for the year of " & Me.txtYear.Text)
+        Me.lblHeader.Text = UCase("work done statement for the year " & Me.txtYear.Text)
         PerfFileName = SaveFolder & "\Annual Performance Statement - " & Me.txtYear.Text & ".docx"
 
         If My.Computer.FileSystem.FileExists(PerfFileName) Then
-            LoadPerformanceFromSavedFile(PerfFileName, 0) 'generate from saved file
+            LoadPerformanceFromSavedFile(PerfFileName) 'generate from saved file
             Me.lblQuarter1.Text = "Statement generated from Saved File"
         Else
 
@@ -241,7 +241,7 @@ Public Class frmAnnualPerformance
         Me.DataGridViewX1.Cursor = Cursors.Default
     End Sub
 
-    Private Sub LoadPerformanceFromSavedFile(SavedFileName As String, Column As Integer)
+    Private Sub LoadPerformanceFromSavedFile(SavedFileName As String)
         Try
             Dim wdApp As Word.Application
             Dim wdDocs As Word.Documents
@@ -253,62 +253,13 @@ Public Class frmAnnualPerformance
 
             Dim rc As Integer = wdTbl.Rows.Count
 
-            If rc = 23 Then 'old statements
-                If Column = 0 Then
-                    For i = 0 To 7
-                        For j = 2 To 7
-                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
-                        Next
-                    Next
-                    For i = 9 To 10
-                        For j = 2 To 7
-                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
-                        Next
-                    Next
 
-                    For j = 2 To 7
-                        Me.DataGridViewX1.Rows(15).Cells(j).Value = wdTbl.Cell(17, j + 1).Range.Text.Trim(ChrW(7)).Trim()
-                    Next
-
-                    For i = 17 To 21
-                        For j = 2 To 7
-                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 2, j + 1).Range.Text.Trim(ChrW(7)).Trim()
-                        Next
-                    Next
-                End If
-
-                If Column = 2 Then
-                    For i = 0 To 7
-                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
-                    Next
-
-                    For i = 9 To 10
-                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
-                    Next
-
-                    Me.DataGridViewX1.Rows(15).Cells(2).Value = wdTbl.Cell(17, 4).Range.Text.Trim(ChrW(7)).Trim()
-
-                    For i = 17 To 21
-                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 2, 4).Range.Text.Trim(ChrW(7)).Trim()
-                    Next
-
-                End If
-            Else
-                If Column = 0 Then
-                    For i = 0 To 21
-                        For j = 2 To 7
-                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
-                        Next
-                    Next
-                End If
-
-                If Column = 2 Then
-                    For i = 0 To 21
-                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
-                    Next
-                End If
-            End If
-
+            For i = 2 To 23
+                For j = 3 To 8
+                    Me.DataGridViewX1.Rows(i - 2).Cells(j - 1).Value = wdTbl.Cell(i, j).Range.Text.Trim(ChrW(7)).Trim()
+                Next
+            Next
+            
 
             wdDoc.Close()
             ReleaseObject(wdTbl)
@@ -321,7 +272,248 @@ Public Class frmAnnualPerformance
         End Try
     End Sub
 
+#Region "OPEN IN WORD"
 
+    Private Sub OpenInWord() Handles btnOpenInWord.Click
+        Me.Cursor = Cursors.WaitCursor
+
+        If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            Shell("explorer.exe " & PerfFileName, AppWinStyle.MaximizedFocus)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Me.CircularProgress1.Show()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = True
+        Me.bgwStatement.RunWorkerAsync()
+    End Sub
+
+
+    Private Sub bgwStatement_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwStatement.DoWork
+
+        Try
+            Dim delay As Integer = 0
+
+            For delay = 1 To 10
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            Dim missing As Object = System.Reflection.Missing.Value
+            Dim fileName As Object = "normal.dotm"
+            Dim newTemplate As Object = False
+            Dim docType As Object = 0
+            Dim isVisible As Object = True
+            Dim WordApp As New Word.Application()
+            Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+
+            For delay = 11 To 20
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+            WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientPortrait
+            WordApp.Selection.Document.PageSetup.TopMargin = 40
+            WordApp.Selection.Document.PageSetup.BottomMargin = 20
+            WordApp.Selection.Document.PageSetup.LeftMargin = 40
+            WordApp.Selection.Document.PageSetup.RightMargin = 30
+
+            WordApp.Selection.NoProofing = 1
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine)
+            WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+            WordApp.Selection.TypeText(Me.lblHeader.Text.ToUpper)
+
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.TypeParagraph()
+
+            Dim RowCount = 23
+
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 8)
+
+            WordApp.Selection.Tables.Item(1).Borders.Enable = True
+            WordApp.Selection.Tables.Item(1).AllowAutoFit = True
+            WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(20, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(180, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(57, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(57, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(57, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(57, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(57, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(50, Word.WdRulerStyle.wdAdjustFirstColumn)
+
+            For delay = 21 To 30
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Sl. No.")
+
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Details of Work")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Quarter 1")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Quarter 2")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Quarter 3")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Quarter 4")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Total")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Remarks")
+
+            For delay = 31 To 50
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(10)
+            Next
+
+            For i = 2 To 23
+                Dim j = i - 2
+                WordApp.Selection.Tables.Item(1).Rows(i).Height = 20
+                WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).SlNo)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 2).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).DetailsOfWork)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Previous)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Month1)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Month2)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Month3)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Present)
+
+                WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.Performance(j).Remarks)
+
+                bgwStatement.ReportProgress(delay + j)
+                System.Threading.Thread.Sleep(5)
+            Next
+
+            For f = 3 To 7
+                WordApp.Selection.Tables.Item(1).Cell(23, f).Select()
+                WordApp.Selection.Tables.Item(1).Cell(23, f).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
+                WordApp.Selection.Font.Name = "Rupee Foradian"
+                WordApp.Selection.Font.Bold = 0
+                WordApp.Selection.Font.Size = 8
+            Next
+
+
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
+            WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.Font.Size = 10
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+
+            For delay = 71 To 80
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(5)
+            Next
+
+            If blUseTIinLetter Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.ParagraphFormat.SpaceAfter = 1
+                WordApp.Selection.ParagraphFormat.Space1()
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & TIName() & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
+            For delay = 81 To 100
+                bgwStatement.ReportProgress(delay)
+                System.Threading.Thread.Sleep(5)
+            Next
+
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
+
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            aDoc.Activate()
+
+            If My.Computer.FileSystem.FileExists(PerfFileName) = False And blAllowSave Then
+                aDoc.SaveAs(PerfFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
+
+            aDoc = Nothing
+            WordApp = Nothing
+
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub bgwStatement_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwStatement.ProgressChanged
+        Me.CircularProgress1.ProgressText = e.ProgressPercentage
+    End Sub
+
+    Private Sub bgwStatement_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwStatement.RunWorkerCompleted
+        Me.CircularProgress1.Hide()
+        Me.CircularProgress1.ProgressText = ""
+        Me.CircularProgress1.IsRunning = False
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
+#End Region
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
 
