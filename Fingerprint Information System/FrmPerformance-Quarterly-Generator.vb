@@ -354,9 +354,9 @@ Public Class frmQuarterlyPerformance
 
         Dim q = Me.txtQuarter.Value
         Dim y As String = Me.txtQuarterYear.Text
-        Dim m1 As Integer = vbNullString
-        Dim m2 As Integer = vbNullString
-        Dim m3 As Integer = vbNullString
+        Dim m1 As Integer = 0
+        Dim m2 As Integer = 0
+        Dim m3 As Integer = 0
 
         Select Case q
             Case 1
@@ -608,9 +608,6 @@ Public Class frmQuarterlyPerformance
         Me.DataGridViewX1.Columns(4).HeaderText = MonthName(Month(d3), True) & " " & y
         Me.DataGridViewX1.Columns(5).HeaderText = MonthName(Month(d5), True) & " " & y
     End Sub
-
-
-
 
 
     Private Sub CalculateCurrentQuarterTotalValues() Handles DataGridViewX1.CellEndEdit

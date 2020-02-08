@@ -198,6 +198,9 @@ Public Class frmAnnualPerformance
 
 #End Region
 
+
+#Region "GENERATE STATEMENT"
+
     Private Sub btnGeneratePerformanceStatement_Click(sender As Object, e As EventArgs) Handles btnGeneratePerformanceStatement.Click
         ShowPleaseWaitForm()
         Me.lblQuarter1.Text = ""
@@ -226,13 +229,13 @@ Public Class frmAnnualPerformance
             Me.lblQuarter1.Text = "Statement generated from Saved File"
         Else
 
-            If Year(Today) > Me.txtYear.Value Then
+            If Me.txtYear.Value < Year(Today) Then
                 blAllowSave = True
             Else
                 blAllowSave = False
             End If
-
-            ' GenerateMonthValuesFromDB(d1, d2, 3) 'generate month 1 from db
+            GenerateQuarterValuesFromDBorFile()
+            CalculateTotalValues()
         End If
 
         InsertBlankValues()
@@ -259,7 +262,7 @@ Public Class frmAnnualPerformance
                     Me.DataGridViewX1.Rows(i - 2).Cells(j - 1).Value = wdTbl.Cell(i, j).Range.Text.Trim(ChrW(7)).Trim()
                 Next
             Next
-            
+
 
             wdDoc.Close()
             ReleaseObject(wdTbl)
@@ -271,6 +274,170 @@ Public Class frmAnnualPerformance
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
+
+    Private Sub GenerateQuarterValuesFromDBorFile()
+        On Error Resume Next
+        Dim y As String = Me.txtYear.Value
+
+        Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q1.docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
+            GenerateQuarterValuesFromFile(SavedFileName, 4, 2)
+            lblQuarter1.Text = "Q1 " & y & "  - Generated from Saved File"
+        Else
+            GenerateQuarterValuesFromDB(New Date(y, 1, 1), New Date(y, 3, 31), 2)
+            lblQuarter1.Text = "Q1 " & y & " - Generated from Database"
+        End If
+
+        SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q2.docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
+            GenerateQuarterValuesFromFile(SavedFileName, 4, 3)
+            lblQuarter2.Text = "Q2 " & y & "  - Generated from Saved File"
+        Else
+            GenerateQuarterValuesFromDB(New Date(y, 4, 1), New Date(y, 6, 30), 3)
+            lblQuarter2.Text = "Q2 " & y & " - Generated from Database"
+        End If
+
+        SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q3.docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
+            GenerateQuarterValuesFromFile(SavedFileName, 4, 4)
+            lblQuarter3.Text = "Q3 " & y & "  - Generated from Saved File"
+        Else
+            GenerateQuarterValuesFromDB(New Date(y, 7, 1), New Date(y, 9, 30), 4)
+            lblQuarter3.Text = "Q3 " & y & " - Generated from Database"
+        End If
+
+        SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q4.docx"
+
+        If My.Computer.FileSystem.FileExists(SavedFileName) Then
+            GenerateQuarterValuesFromFile(SavedFileName, 4, 5)
+            lblQuarter4.Text = "Q4 " & y & "  - Generated from Saved File"
+        Else
+            GenerateQuarterValuesFromDB(New Date(y, 10, 1), New Date(y, 12, 31), 5)
+            lblQuarter4.Text = "Q4 " & y & " - Generated from Database"
+        End If
+
+    End Sub
+
+    Private Sub GenerateQuarterValuesFromDB(ByVal d1 As Date, ByVal d2 As Date, Column As Integer)
+        Try
+
+            Me.DataGridViewX1.Rows(0).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQuerySOCInspected(d1, d2))
+            Me.DataGridViewX1.Rows(1).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDevelopedSOC("0", d1, d2))
+
+            Dim cpd As Integer = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPDeveloped(d1, d2))
+            Dim cpu As Integer = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPUnfit(d1, d2))
+            Dim cpe As Integer = Val(Me.SOCRegisterTableAdapter.ScalarQueryCPEliminated(d1, d2))
+
+            Me.DataGridViewX1.Rows(2).Cells(Column).Value = cpd
+            Me.DataGridViewX1.Rows(3).Cells(Column).Value = cpu
+            Me.DataGridViewX1.Rows(4).Cells(Column).Value = cpe
+            Me.DataGridViewX1.Rows(5).Cells(Column).Value = cpd - cpu - cpe
+            Me.DataGridViewX1.Rows(6).Cells(Column).Value = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentified(d1, d2))
+            Me.DataGridViewX1.Rows(7).Cells(Column).Value = Val(Me.IdentificationRegisterTableAdapter1.ScalarQueryNoOfSOCsIdentified(d1, d2))
+
+            Dim culpritcount As String = Me.IdentificationRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2)
+            If culpritcount Is Nothing Then
+                culpritcount = "0"
+            End If
+
+            Me.DataGridViewX1.Rows(8).Cells(Column).Value = culpritcount
+            Me.DataGridViewX1.Rows(9).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+            Me.DataGridViewX1.Rows(10).Cells(Column).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
+            Me.DataGridViewX1.Rows(15).Cells(Column).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
+            Me.DataGridViewX1.Rows(17).Cells(Column).Value = "" ' CalculateCasesPendingInPreviousMonth(d1)
+            Me.DataGridViewX1.Rows(18).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
+            Me.DataGridViewX1.Rows(20).Cells(Column).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
+            Me.DataGridViewX1.Rows(21).Cells(Column).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+            Me.DataGridViewX1.Cursor = Cursors.Default
+        End Try
+
+    End Sub
+
+    Private Sub GenerateQuarterValuesFromFile(FileName As String, wdColumn As Integer, dgColumn As Integer)
+        Try
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(FileName)
+            Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
+
+            Dim rc As Integer = wdTbl.Rows.Count
+
+            If rc = 23 Then 'old statements
+
+                For i = 0 To 7
+                    Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 4, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
+                Next
+
+                For i = 9 To 10
+                    Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 4, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
+                Next
+
+
+                Me.DataGridViewX1.Rows(15).Cells(dgColumn).Value = wdTbl.Cell(17, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
+
+
+                For i = 17 To 21
+                    If i = 18 Then
+                        Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = ""
+                    Else
+                        Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 2, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
+                    End If
+                Next
+
+            Else
+                For i = 0 To 21
+                    If i = 18 Then
+                        Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = ""
+                    Else
+                        Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 4, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
+                    End If
+                Next
+            End If
+
+
+
+
+            wdDoc.Close()
+            ReleaseObject(wdTbl)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp.Quit()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+
+    Private Sub CalculateTotalValues() Handles DataGridViewX1.CellEndEdit
+        On Error Resume Next
+        For i = 0 To 20
+            Me.DataGridViewX1.Rows(i).Cells(6).Value = Val(Me.DataGridViewX1.Rows(i).Cells(2).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(3).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(4).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(5).Value.ToString)
+        Next
+
+        Dim v1 = Me.DataGridViewX1.Rows(21).Cells(2).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Dim v2 = Me.DataGridViewX1.Rows(21).Cells(3).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Dim v3 = Me.DataGridViewX1.Rows(21).Cells(4).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Dim v4 = Me.DataGridViewX1.Rows(21).Cells(5).Value.ToString.Replace("` ", "").Replace("/-", "")
+        Me.DataGridViewX1.Rows(21).Cells(6).Value = "` " & Val(v1) + Val(v2) + Val(v3) + Val(v4) & "/-"
+
+        InsertBlankValues()
+    End Sub
+
+#End Region
+
 
 #Region "OPEN IN WORD"
 
