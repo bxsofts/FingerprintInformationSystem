@@ -283,7 +283,7 @@ Public Class frmAnnualPerformance
         Dim SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q1.docx"
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            GenerateQuarterValuesFromFile(SavedFileName, 4, 2)
+            GenerateQuarterValuesFromFile(SavedFileName, 7, 2)
             lblQuarter1.Text = "Q1 " & y & "  - Generated from Saved File"
         Else
             GenerateQuarterValuesFromDB(New Date(y, 1, 1), New Date(y, 3, 31), 2)
@@ -293,7 +293,7 @@ Public Class frmAnnualPerformance
         SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q2.docx"
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            GenerateQuarterValuesFromFile(SavedFileName, 4, 3)
+            GenerateQuarterValuesFromFile(SavedFileName, 7, 3)
             lblQuarter2.Text = "Q2 " & y & "  - Generated from Saved File"
         Else
             GenerateQuarterValuesFromDB(New Date(y, 4, 1), New Date(y, 6, 30), 3)
@@ -303,7 +303,7 @@ Public Class frmAnnualPerformance
         SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q3.docx"
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            GenerateQuarterValuesFromFile(SavedFileName, 4, 4)
+            GenerateQuarterValuesFromFile(SavedFileName, 7, 4)
             lblQuarter3.Text = "Q3 " & y & "  - Generated from Saved File"
         Else
             GenerateQuarterValuesFromDB(New Date(y, 7, 1), New Date(y, 9, 30), 4)
@@ -313,7 +313,7 @@ Public Class frmAnnualPerformance
         SavedFileName = SaveFolder & "\Quarterly Performance Statement - " & y & " - Q4.docx"
 
         If My.Computer.FileSystem.FileExists(SavedFileName) Then
-            GenerateQuarterValuesFromFile(SavedFileName, 4, 5)
+            GenerateQuarterValuesFromFile(SavedFileName, 7, 5)
             lblQuarter4.Text = "Q4 " & y & "  - Generated from Saved File"
         Else
             GenerateQuarterValuesFromDB(New Date(y, 10, 1), New Date(y, 12, 31), 5)
@@ -397,7 +397,7 @@ Public Class frmAnnualPerformance
 
             Else
                 For i = 0 To 21
-                    If i = 18 Then
+                    If i = 17 Then
                         Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = ""
                     Else
                         Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 4, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
