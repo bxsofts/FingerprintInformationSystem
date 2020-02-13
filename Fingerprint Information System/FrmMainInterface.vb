@@ -199,7 +199,7 @@ Public Class frmMainInterface
 
         IncrementCircularProgress(1)
 
-        blUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 1)
+        blUseTIinLetter = My.Computer.Registry.GetValue(strGeneralSettingsPath, "UseTIinLetter", 0)
         Me.chkUseTIAtBottomOfLetter.Checked = blUseTIinLetter
 
         IncrementCircularProgress(1)

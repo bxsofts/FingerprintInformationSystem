@@ -78,7 +78,7 @@ Module modMain
     Public dtAnnualStatisticsFrom As Date
     Public dtAnnualStatisticsTo As Date
     Public boolShowWizard As Boolean = False
-    Public blUseTIinLetter As Boolean = True
+    Public blUseTIinLetter As Boolean = False
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
     Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
