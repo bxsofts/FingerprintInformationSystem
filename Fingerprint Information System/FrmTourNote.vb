@@ -72,6 +72,7 @@ Public Class FrmTourNote
     Dim TotalFileCount As String = "0"
 
     Dim blMonthCompleted As Boolean = False
+    Dim DVNumber As String = ""
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
@@ -121,6 +122,10 @@ Public Class FrmTourNote
         Else
             TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", FullDistrictName)
         End If
+
+        DVNumber = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DVNumber", "")
+
+        txtDVNumber.Text = DVNumber
 
         Me.txtStartingLocation.Text = TourStartLocation
 
@@ -233,9 +238,10 @@ Public Class FrmTourNote
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub SaveTourStartLocation() Handles txtStartingLocation.Validated
+    Private Sub SaveTourStartLocation() Handles txtStartingLocation.Validated, txtDVNumber.Validated
         On Error Resume Next
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "TourStartingLocation", Me.txtStartingLocation.Text, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "TourStartingLocation", Me.txtStartingLocation.Text.Trim, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "DVNumber", Me.txtDVNumber.Text.Trim, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 #End Region
@@ -494,8 +500,9 @@ Public Class FrmTourNote
             Me.cmbSOCOfficer.Focus()
             Exit Sub
         End If
-        TourStartLocation = Me.txtStartingLocation.Text
+        TourStartLocation = Me.txtStartingLocation.Text.Trim
         SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+        DVNumber = Me.txtDVNumber.Text.Trim
         DisplayFileStatus()
 
         If chkSingleRow.Checked Then
@@ -551,6 +558,7 @@ errhandler:
             args.Month = Me.cmbMonth.SelectedItem.ToString
             args.Year = Me.txtYear.Text
             args.UsePS = chkUsePS.Checked
+            args.DVNumber = DVNumber
 
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generating from selected records..."
             Me.cprgGenerateFiles.Show()
@@ -652,6 +660,7 @@ errhandler:
             Dim n = 0
 
             Dim iteration As Integer = CInt(50 / args.RowCount)
+            Dim dvn As String = args.DVNumber
 
             For i = 0 To args.RowCount - 1
 
@@ -681,7 +690,7 @@ errhandler:
                         wdTbl.Cell(j, 5).Range.Text = (PS1 & " and back")
                     End If
 
-                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
+                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
 
                     If args.UsePS Then
                         Dim distance As String = FindDistance(PS)
@@ -800,6 +809,7 @@ errhandler:
             args.Month = Me.cmbMonth.SelectedItem.ToString
             args.Year = Me.txtYear.Text
             args.UsePS = chkUsePS.Checked
+            args.DVNumber = DVNumber
 
             Me.cprgGenerateFiles.Show()
             Me.cprgGenerateFiles.ProgressText = ""
@@ -901,6 +911,7 @@ errhandler:
             Dim j = 3
             Dim n = 0
             Dim iteration As Integer = CInt(50 / args.RowCount)
+            Dim dvn As String = args.DVNumber
 
             For i = 0 To args.RowCount - 1
 
@@ -931,7 +942,7 @@ errhandler:
                         wdTbl.Cell(j, 5).Range.Text = PS1
                     End If
 
-                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
+                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
 
                     If args.UsePS Then
                         Dim distance As String = FindDistance(PS)
@@ -1077,7 +1088,8 @@ errhandler:
                 Exit Sub
             End If
 
-            If Not SelectedOfficerName.Contains(", FPS") Then
+            '  If Not SelectedOfficerName.Contains(", FPS") Then
+            If SelectedOfficerName.Contains(", TI") Then
                 If chkSingleRow.Checked Then
                     If Me.chkUseSavedTourNote.Checked Then
                         If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
@@ -1239,12 +1251,17 @@ errhandler:
             Dim args As TourNoteArgs = e.Argument
 
             Dim Designation As String = ""
+            Dim OfficerNameOnly As String = ""
+
             If SelectedOfficerName.Contains(", FPS") Then
                 Designation = "Fingerprint Searcher"
+                OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
             End If
 
-            Dim OfficerNameOnly As String = ""
-            OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
+            If SelectedOfficerName.Contains(", FPE") Then
+                Designation = "Fingerprint Expert"
+                OfficerNameOnly = SelectedOfficerName.Replace(", FPE", "")
+            End If
 
             If args.TAFromRecord Then
 
@@ -1498,6 +1515,7 @@ errhandler:
 
                     wdTblTA.Cell(j, 6).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' TourTo
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
+                    If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                     distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                     distance = distance.Replace("km", "").Trim()
 
@@ -1652,12 +1670,17 @@ errhandler:
             Dim args As TourNoteArgs = e.Argument
 
             Dim Designation As String = ""
+            Dim OfficerNameOnly As String = ""
+
             If SelectedOfficerName.Contains(", FPS") Then
                 Designation = "Fingerprint Searcher"
+                OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
             End If
 
-            Dim OfficerNameOnly As String = ""
-            OfficerNameOnly = SelectedOfficerName.Replace(", FPS", "")
+            If SelectedOfficerName.Contains(", FPE") Then
+                Designation = "Fingerprint Expert"
+                OfficerNameOnly = SelectedOfficerName.Replace(", FPE", "")
+            End If
 
             If args.TAFromRecord Then
                
@@ -1962,6 +1985,7 @@ errhandler:
                     wdTblTA.Cell(j, 5).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                     wdTblTA.Cell(j, 6).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' TourTo
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
+                    If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                     distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                     distance = distance.Replace("km", "").Trim()
                     Dim details As String = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim() 'details
@@ -2133,16 +2157,20 @@ errhandler:
 
     Private Sub bgwTR47_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwTR47.DoWork
         Try
-            Dim Designation As String = "Tester Inspector"
-
-            If SelectedOfficerName.Contains("FPE") Then
-                Designation = "Fingerprint Expert"
-            End If
+            Dim Designation As String = ""
 
             Dim OfficerNameOnly As String = ""
 
-            OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
-            OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
+            If SelectedOfficerName.Contains(", TI") Then
+                Designation = "Tester Inspector"
+                OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
+            End If
+
+            If SelectedOfficerName.Contains(", FPE") Then
+                Designation = "Fingerprint Expert"
+                OfficerNameOnly = SelectedOfficerName.Replace(", FPE", "")
+            End If
+
 
             Dim delay As Integer = 0
             For delay = 0 To 10
@@ -2401,6 +2429,7 @@ errhandler:
                     wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                     wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim()
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
+                    If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                     distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                     distance = distance.Replace("km", "").Trim()
                     wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
@@ -2543,16 +2572,19 @@ errhandler:
 
     Private Sub bgwTR47ThreeLine_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwTR47ThreeLine.DoWork
         Try
-            Dim Designation As String = "Tester Inspector"
-
-            If SelectedOfficerName.Contains("FPE") Then
-                Designation = "Fingerprint Expert"
-            End If
+            Dim Designation As String = ""
 
             Dim OfficerNameOnly As String = ""
 
-            OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
-            OfficerNameOnly = OfficerNameOnly.Replace(", FPE", "")
+            If SelectedOfficerName.Contains(", TI") Then
+                Designation = "Tester Inspector"
+                OfficerNameOnly = SelectedOfficerName.Replace(", TI", "")
+            End If
+
+            If SelectedOfficerName.Contains(", FPE") Then
+                Designation = "Fingerprint Expert"
+                OfficerNameOnly = SelectedOfficerName.Replace(", FPE", "")
+            End If
 
             Dim delay As Integer = 0
             For delay = 0 To 10
@@ -2867,6 +2899,7 @@ errhandler:
                     wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                     wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' tour to
                     mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
+                    If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                     distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                     distance = distance.Replace("km", "").Trim()
                     wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
@@ -2991,10 +3024,11 @@ errhandler:
     End Sub
 
     Private Sub btnShowTABillOuter_Click(sender As Object, e As EventArgs) Handles btnGenerateTABillOuter.Click
-        If Not SelectedOfficerName.Contains(", FPS") Then
+        ' If Not SelectedOfficerName.Contains(", FPS") Then
+        If SelectedOfficerName.Contains(", TI") Then
             GenerateTR47Outer(SelectedOfficerName.Replace(", TI", ""), "Tester Inspector")
         Else
-            MessageBoxEx.Show("Please select Tester Inspector/Fingerprint Expert Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please select Tester Inspector Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.cmbSOCOfficer.Focus()
         End If
     End Sub
@@ -3653,7 +3687,6 @@ errhandler:
     End Sub
 
 
-  
 End Class
 
 
@@ -3668,4 +3701,5 @@ Public Class TourNoteArgs
     Public Year As String
     Public UsePS As Boolean = False
     Public TAFromRecord As Boolean
+    Public DVNumber As String
 End Class
