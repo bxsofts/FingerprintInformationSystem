@@ -983,7 +983,7 @@ Public Class frmFISBackupList
             Dim msg1 As String = "file."
             If blSelectedItemIsFolder Then msg1 = "folder."
 
-            If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FileOwner) Then
+            If SelectedItemOwner = "Admin" Or (LocalUser And SelectedItemOwner <> FileOwner And CurrentFolderName <> FullDistrictName) Then
                 MessageBoxEx.Show("You are not authorized to delete the selected " & msg1, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
