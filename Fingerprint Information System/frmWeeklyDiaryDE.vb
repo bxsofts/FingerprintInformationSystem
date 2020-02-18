@@ -568,7 +568,7 @@ Public Class frmWeeklyDiaryDE
                     remotecount = Val(SplitText(0))
                 End If
 
-                If u = 1 Then
+                If u > 0 Then
                     remotecount = Val(SplitText(1))
                 End If
 
@@ -581,12 +581,26 @@ Public Class frmWeeklyDiaryDE
                 Exit Sub
             End If
 
+            Dim WDDS = New WeeklyDiaryDataSet
+
+            Me.WeeklyDiaryTableAdapter1.FillByLastDate(WDDS.WeeklyDiary)
+            Dim lastdate As String = ""
+            If WDDS.WeeklyDiary.Count > 0 Then
+                lastdate = WDDS.WeeklyDiary(0).DiaryDate.ToString("dd/MM/yyyy")
+            End If
+
+            Dim fDescription As String = wdOfficerName & " - " & localcount
+            If lastdate <> "" Then
+                fDescription = wdOfficerName & " - " & localcount & " - " & lastdate
+            End If
+
             CircularProgress1.IsRunning = True
             CircularProgress1.ProgressColor = GetProgressColor()
             CircularProgress1.Visible = True
             CircularProgress1.ProgressText = "0"
             Me.RibbonBar1.RecalcLayout()
-            Me.bgwUpload.RunWorkerAsync(wdOfficerName & " - " & localcount)
+           
+            Me.bgwUpload.RunWorkerAsync(fDescription)
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -763,7 +777,7 @@ Public Class frmWeeklyDiaryDE
                     remotecount = Val(SplitText(0))
                 End If
 
-                If u = 1 Then
+                If u > 0 Then
                     remotecount = Val(SplitText(1))
                 End If
             End If

@@ -308,7 +308,7 @@ Public Class frmWeeklyDiaryAuthentication
                     remotecount = Val(SplitText(0))
                 End If
 
-                If u = 1 Then
+                If u > 0 Then
                     remotecount = Val(SplitText(1))
                 End If
             End If
