@@ -6,6 +6,8 @@ Public Class frmFPAStatement
     Dim datevalue As String = vbNullString
     Dim RowCount As Integer = 0
     Dim IsMonthStmt As Boolean = True
+    Dim blDGVChanged As Boolean
+
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next
@@ -59,7 +61,53 @@ Public Class frmFPAStatement
         Me.cmbMonth.Focus()
 
         GenerateMonthViseAmount()
+        blDGVChanged = False
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub dgvSum_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSum.CellEndEdit
+        On Error Resume Next
+        Dim sum1 As Integer = 0
+        Dim sum2 As Integer = 0
+
+        For i = 0 To 11
+            sum1 = sum1 + Val(Me.dgvSum.Rows(i).Cells(1).Value)
+            sum2 = sum2 + Val(Me.dgvSum.Rows(i).Cells(3).Value)
+        Next
+
+        Dim currentmonthrow As Integer = 0
+
+        For j = 0 To 11
+            currentmonthrow = j
+            If Me.dgvSum.Rows(j).Cells(0).Value = "" Then
+                currentmonthrow = j - 1
+                Exit For
+            End If
+        Next
+
+        Me.dgvSum.Rows(12).Cells(1).Value = sum1
+        Me.dgvSum.Rows(12).Cells(3).Value = sum2
+        lblAmount1.Text = Val(Me.dgvSum.Rows(currentmonthrow).Cells(1).Value)
+        lblAmount3.Text = sum1
+        lblAmount2.Text = Val(lblAmount3.Text) - Val(lblAmount1.Text)
+        lblAmount4.Text = sum2
+    End Sub
+
+    Private Sub dgvSum_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvSum.CellFormatting
+        On Error Resume Next
+        If Not blDGVChanged Then
+            e.CellStyle.BackColor = Color.White
+            e.CellStyle.ForeColor = Color.Black
+            e.CellStyle.SelectionForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub dgvsum_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSum.CellValueChanged
+        On Error Resume Next
+        blDGVChanged = True
+        Me.dgvSum.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Color.Yellow
+        Me.dgvSum.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.ForeColor = Color.Red
+        Me.dgvSum.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.SelectionForeColor = Color.Red
     End Sub
 
     Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvChalan.CellPainting
@@ -96,12 +144,30 @@ Public Class frmFPAStatement
         Me.lblAmount4.Text = ""
     End Sub
 
+    Private Sub ClearSelectionColors()
+        On Error Resume Next
+        For c = 0 To 12
+            dgvSum.Rows(c).Cells(0).Style.BackColor = Color.White
+            dgvSum.Rows(c).Cells(0).Style.ForeColor = Color.Black
+            dgvSum.Rows(c).Cells(0).Style.SelectionForeColor = Color.Black
+            dgvSum.Rows(c).Cells(1).Style.BackColor = Color.White
+            dgvSum.Rows(c).Cells(1).Style.ForeColor = Color.Black
+            dgvSum.Rows(c).Cells(1).Style.SelectionForeColor = Color.Black
+            dgvSum.Rows(c).Cells(2).Style.BackColor = Color.White
+            dgvSum.Rows(c).Cells(2).Style.ForeColor = Color.Black
+            dgvSum.Rows(c).Cells(2).Style.SelectionForeColor = Color.Black
+            dgvSum.Rows(c).Cells(3).Style.BackColor = Color.White
+            dgvSum.Rows(c).Cells(3).Style.ForeColor = Color.Black
+            dgvSum.Rows(c).Cells(3).Style.SelectionForeColor = Color.Black
+        Next
+    End Sub
 
 #Region "GENERATE STATEMENT"
 
     Private Sub GenerateMonthViseAmount()
         Try
             Me.Cursor = Cursors.WaitCursor
+            Me.dgvSum.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2
             Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
             Dim y = Me.txtYear.Value
 
@@ -165,6 +231,7 @@ Public Class frmFPAStatement
                     dgvSum.Rows(i - 4).Cells(2).Value = MonthName(i, True) & " - " & y - 1
                     dgvSum.Rows(i - 4).Cells(3).Value = amount2
                 Next
+                '  currentmonthrow = i - 5
             End If
 
             If m < 4 Then
@@ -194,6 +261,7 @@ Public Class frmFPAStatement
                     dgvSum.Rows(i - 4).Cells(3).Value = amount2
                 Next
 
+                Dim j = 1
                 For j = 1 To m
                     d = Date.DaysInMonth(y, j)
                     d1 = New Date(y, j, 1)
@@ -213,6 +281,8 @@ Public Class frmFPAStatement
                     dgvSum.Rows(i + j - 5).Cells(2).Value = MonthName(j, True) & " - " & y - 1
                     dgvSum.Rows(i + j - 5).Cells(3).Value = amount2
                 Next
+
+                ' currentmonthrow = i + j - 6
             End If
 
             dgvSum.Rows(12).Cells(0).Value = "Total (FY " & curfinyear & ")"
@@ -221,7 +291,8 @@ Public Class frmFPAStatement
             dgvSum.Rows(12).Cells(3).Value = TAmount2
 
             GenerateLabelValues()
-
+            blDGVChanged = False
+            ClearSelectionColors()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -241,7 +312,7 @@ Public Class frmFPAStatement
         Me.lblAmount3.Text = amount3
         Me.lblAmount4.Text = amount4
     End Sub
-    
+
     Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
         GenerateMonthViseAmount()
         datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
@@ -251,7 +322,7 @@ Public Class frmFPAStatement
 
     Private Sub btnGenerateByDate_Click(sender As Object, e As EventArgs) Handles btnGenerateByDate.Click
         Try
-
+            Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
             d1 = Me.dtFrom.Value
             d2 = Me.dtTo.Value
             If d1 > d2 Then
@@ -274,6 +345,8 @@ Public Class frmFPAStatement
             Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
 
             ShowDesktopAlert("Data generated")
+            blDGVChanged = False
+            ClearSelectionColors()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -1130,4 +1203,7 @@ Public Class frmFPAStatement
             ShowErrorMessage(ex)
         End Try
     End Sub
+
+
+   
 End Class
