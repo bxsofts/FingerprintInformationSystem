@@ -33,6 +33,7 @@ Public Class frmWeeklyDiaryDE
     Dim WeeklyDiaryFolder As String
 
     Dim blDGVChanged As Boolean
+    Dim blShowUploadStatus As Boolean = True
 
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -599,7 +600,7 @@ Public Class frmWeeklyDiaryDE
             CircularProgress1.Visible = True
             CircularProgress1.ProgressText = "0"
             Me.RibbonBar1.RecalcLayout()
-           
+            blShowUploadStatus = True
             Me.bgwUpload.RunWorkerAsync(fDescription)
 
         Catch ex As Exception
@@ -707,17 +708,103 @@ Public Class frmWeeklyDiaryDE
         CircularProgress1.Visible = False
         blUploadIsProgressing = False
 
-        If uUploadStatus = UploadStatus.Completed Then
+        If uUploadStatus = UploadStatus.Completed And blShowUploadStatus Then
             MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
-        If uUploadStatus = UploadStatus.Failed Then
+        If uUploadStatus = UploadStatus.Failed And blShowUploadStatus Then
             MessageBoxEx.Show("File upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
         Me.Cursor = Cursors.Default
     End Sub
+    Private Sub TakeAutoBackup() Handles Me.FormClosed
+        bgwAutoUpload.RunWorkerAsync()
+    End Sub
 
+    Private Sub bgwAutoUpload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAutoUpload.DoWork
+        Try
+
+            If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+                Exit Sub
+            End If
+
+            If Not InternetAvailable() Then
+                Exit Sub
+            End If
+
+            Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim wdFolderID As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                wdFolderID = ""
+            Else
+                wdFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & wdPEN & ".mdb'"
+            List.Fields = "files(id, description)"
+            Results = List.Execute
+
+            Dim remotecount As Integer = 0
+            Dim description As String = ""
+
+            If Results.Files.Count > 0 Then
+                description = Results.Files(0).Description
+                Dim SplitText() = Strings.Split(description, " - ")
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u = 0 Then
+                    remotecount = Val(SplitText(0))
+                End If
+
+                If u > 0 Then
+                    remotecount = Val(SplitText(1))
+                End If
+
+            End If
+
+
+            If remotecount >= localcount Then
+                Exit Sub
+            End If
+
+            Dim WDDS = New WeeklyDiaryDataSet
+
+            Me.WeeklyDiaryTableAdapter1.FillByLastDate(WDDS.WeeklyDiary)
+            Dim lastdate As String = ""
+            If WDDS.WeeklyDiary.Count > 0 Then
+                lastdate = WDDS.WeeklyDiary(0).DiaryDate.ToString("dd/MM/yyyy")
+            End If
+
+            Dim fDescription As String = wdOfficerName & " - " & localcount
+            If lastdate <> "" Then
+                fDescription = wdOfficerName & " - " & localcount & " - " & lastdate
+            End If
+
+            blShowUploadStatus = False
+            Me.bgwUpload.RunWorkerAsync(fDescription)
+
+        Catch ex As Exception
+            '  ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+   
 #End Region
 
 
@@ -1377,4 +1464,6 @@ Public Class frmWeeklyDiaryDE
         frmWeeklyDiaryView.Show()
         Me.Cursor = Cursors.Default
     End Sub
+
+   
 End Class
