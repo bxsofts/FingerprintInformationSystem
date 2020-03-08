@@ -117,6 +117,7 @@ Public Class frmMainInterface
 
     Dim blIdentificationRegisterUpdateFailed As Boolean = False
     Dim blRestartApplication As Boolean = False
+
 #End Region
 
 
@@ -17481,8 +17482,6 @@ errhandler:
             End If
 
 
-            '  List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and fullText contains '" & ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup'"
-
             List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and name contains 'FingerprintBackup'"
 
             List.Fields = "files(id, modifiedTime)"
@@ -17504,6 +17503,7 @@ errhandler:
                 bgwOnlineAutoBackup.ReportProgress(0, True)
                 blAutoBackupInProgress = True
             Else
+                bgwOnlineAutoBackup.ReportProgress(0, False)
                 blCheckAutoBackup = False
                 Exit Sub
             End If
@@ -17553,32 +17553,171 @@ errhandler:
         bgwOnlineAutoBackup.ReportProgress(percent, uBytesUploaded)
     End Sub
 
+
     Private Sub bgwOnlineAutoBackup_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwOnlineAutoBackup.ProgressChanged
 
-        If TypeOf e.UserState Is Boolean Then
+        If TypeOf e.UserState Is Boolean And e.UserState = True Then
             pgrDownloadInstaller.Visible = True
             pgrDownloadInstaller.Value = 0
             pgrDownloadInstaller.Text = "Uploading Backup 0%"
             Me.StatusBar.RecalcLayout()
+        ElseIf TypeOf e.UserState Is Boolean And e.UserState = False Then
+            bgwUpdateOnlineDatabase.RunWorkerAsync(Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount)
         Else
             Me.pgrDownloadInstaller.Value = e.ProgressPercentage
             Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
         End If
-
-
-        '  Me.pgrDownloadInstaller.Text = "Uploading Backup: " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
     End Sub
 
-    Private Sub bgwOnlineAutoBackup_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwOnlineAutoBackup.RunWorkerCompleted
+    Private Sub bgwOnlineAutoBackup_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwOnlineAutoBackup.RunWorkerCompleted ', bgwUpdateOnlineDatabase.RunWorkerCompleted
         pgrDownloadInstaller.Visible = False
         pgrDownloadInstaller.Value = 0
         pgrDownloadInstaller.Text = ""
+
         blAutoBackupInProgress = False
+
         blCheckAutoBackup = False
         If uUploadStatus = UploadStatus.Completed Then
             ShowDesktopAlert("Database backed up to Google Drive.")
         End If
 
+    End Sub
+
+    Private Sub bgwUpdateOnlineDatabase_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateOnlineDatabase.DoWork
+        Try
+            If Not InternetAvailable() Then
+                Exit Sub
+            End If
+
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+                Exit Sub
+            End If
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim BackupFolder As String = ShortOfficeName & "_" & ShortDistrictName
+            Dim BackupFolderID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+            Dim fisid As String = GetMasterBackupFolderID(FISService)
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "' and '" & fisid & "' in parents"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                BackupFolderID = ""
+            Else
+                BackupFolderID = Results.Files(0).Id
+            End If
+
+            If BackupFolderID = "" Then
+                BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and name = 'FingerPrintDB.mdb'"
+
+            List.Fields = "files(id, description)"
+            Results = List.Execute
+            Dim blTakeBackup As Boolean = False
+
+            Dim remotesoccount As Integer = 0
+            Dim description As String = ""
+
+            If Results.Files.Count > 0 Then
+                description = Results.Files(0).Description
+                Dim SplitText() = Strings.Split(description, "; ")
+                Dim u = SplitText.GetUpperBound(0)
+                remotesoccount = Val(SplitText(u))
+            End If
+
+            Dim localsoccount As Integer = e.Argument
+
+            If localsoccount <= remotesoccount Then
+                Exit Sub
+            End If
+
+            ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
+
+            Dim BackupTime As Date = Now
+            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
+            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+            Dim BackupFileName As String = "FingerPrintDB.mdb"
+
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+            body.Name = BackupFileName
+            Dim dtlastbackup As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
+            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & dtlastbackup & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & localsoccount
+            body.MimeType = "database/mdb"
+
+            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
+            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
+
+            dFileSize = FileLen(tmpFileName)
+            dFormatedFileSize = CalculateFileSize(dFileSize)
+
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+            Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+            If Results.Files.Count = 0 Then
+                Dim parentlist As New List(Of String)
+                parentlist.Add(BackupFolderID)
+                body.Parents = parentlist
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
+                UploadRequest.Fields = "id"
+                UploadRequest.Upload()
+            Else
+                Dim RemoteFileID As String = Results.Files(0).Id
+                Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
+                UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
+                UpdateRequest.Fields = "id"
+                UpdateRequest.Upload()
+            End If
+
+
+            Stream.Close()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub bgwOnlineUpdateDatabase_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) ' Handles bgwUpdateOnlineDatabase.ProgressChanged
+
+        If TypeOf e.UserState Is Boolean Then
+            pgrDownloadInstaller.Visible = True
+            pgrDownloadInstaller.Value = 0
+            pgrDownloadInstaller.Text = "Uploading Database 0%"
+            Me.StatusBar.RecalcLayout()
+        Else
+            Me.pgrDownloadInstaller.Value = e.ProgressPercentage
+            Me.pgrDownloadInstaller.Text = "Uploading Database " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
+        End If
+    End Sub
+    Private Sub DBUpload_ProgressChanged(Progress As IUploadProgress)
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+
+        bgwUpdateOnlineDatabase.ReportProgress(percent, uBytesUploaded)
+
+    End Sub
+
+    Private Sub DBUpdate_ProgressChanged(Progress As IUploadProgress)
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwUpdateOnlineDatabase.ReportProgress(percent)
     End Sub
 #End Region
 
@@ -18418,6 +18557,7 @@ errhandler:
         End If
 
         On Error Resume Next
+
         SaveSOCDatagridColumnWidth()
         SaveRSOCDatagridColumnWidth()
         SaveDADatagridColumnWidth()

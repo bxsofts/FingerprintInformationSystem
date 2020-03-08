@@ -161,7 +161,7 @@ Public Class frmOnlineBackup
                         item.SubItems.Add("") 'remarks
                     End If
 
-                    If u = 3 Then
+                    If u >= 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
                         item.SubItems.Add(SplitText(1)) 'last modified date
                         item.SubItems.Add("Last SOC No: " & SplitText(2) & ", DI: " & SplitText(3)) 'remarks
