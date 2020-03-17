@@ -41,7 +41,8 @@ Public Class frmWeeklyDiaryDE
             Me.Cursor = Cursors.WaitCursor
             Me.BringToFront()
             Me.CenterToScreen()
-            CircularProgress1.Visible = False
+            Me.CircularProgress1.Visible = False
+            Me.lblLastWeek.Visible = False
             Me.txtName.Text = ""
             Me.txtOldPassword.Text = ""
             Me.txtPassword1.Text = ""
@@ -97,6 +98,8 @@ Public Class frmWeeklyDiaryDE
             Me.btnSaveOfficeDetails.Text = "Save"
 
             Control.CheckForIllegalCrossThreadCalls = False
+
+            FindLastDate()
 
             blDGVChanged = False
             Me.Cursor = Cursors.Default
@@ -183,6 +186,22 @@ Public Class frmWeeklyDiaryDE
 
         End Try
 
+    End Sub
+
+    Private Sub FindLastDate()
+        Try
+            Me.lblLastWeek.Visible = False
+            Dim cnt As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount
+            If cnt > 0 Then
+                Dim lastdate As Date = Me.WeeklyDiaryTableAdapter1.ScalarQueryLastDate
+                lastdate = lastdate.AddDays(-6)
+                Me.lblLastWeek.Text = "Last generated week: " & lastdate.ToString("dd/MM/yyyy")
+                Me.lblLastWeek.Visible = True
+            End If
+        Catch ex As Exception
+            Me.lblLastWeek.Text = "Last generated week "
+            Me.lblLastWeek.Visible = False
+        End Try
     End Sub
 
 #Region "CHANGE PASSWORD"
@@ -496,6 +515,7 @@ Public Class frmWeeklyDiaryDE
                     Next
                     Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
                     LoadSelectedWeekDiary()
+                    FindLastDate()
                     ShowDesktopAlert("Weekly Diary for the selected week deleted.")
                 End If
             End If
@@ -587,7 +607,9 @@ Public Class frmWeeklyDiaryDE
             Me.WeeklyDiaryTableAdapter1.FillByLastDate(WDDS.WeeklyDiary)
             Dim lastdate As String = ""
             If WDDS.WeeklyDiary.Count > 0 Then
-                lastdate = WDDS.WeeklyDiary(0).DiaryDate.ToString("dd/MM/yyyy")
+                Dim dtlast As Date = WDDS.WeeklyDiary(0).DiaryDate
+                dtlast = dtlast.AddDays(-6)
+                lastdate = dtlast.ToString("dd/MM/yyyy")
             End If
 
             Dim fDescription As String = wdOfficerName & " - " & localcount
@@ -788,7 +810,9 @@ Public Class frmWeeklyDiaryDE
             Me.WeeklyDiaryTableAdapter1.FillByLastDate(WDDS.WeeklyDiary)
             Dim lastdate As String = ""
             If WDDS.WeeklyDiary.Count > 0 Then
-                lastdate = WDDS.WeeklyDiary(0).DiaryDate.ToString("dd/MM/yyyy")
+                Dim dtlast As Date = WDDS.WeeklyDiary(0).DiaryDate
+                dtlast = dtlast.AddDays(-6)
+                lastdate = dtlast.ToString("dd/MM/yyyy")
             End If
 
             Dim fDescription As String = wdOfficerName & " - " & localcount
@@ -1154,6 +1178,7 @@ Public Class frmWeeklyDiaryDE
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
             Me.WeeklyDiaryBindingSource.MoveFirst()
             blDGVChanged = False
+            FindLastDate()
             ShowDesktopAlert("Weekly Diary generated.")
             Me.Cursor = Cursors.Default
         Catch ex As Exception

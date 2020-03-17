@@ -562,6 +562,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WeeklyDiaryDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="WeeklyDiaryDataSet.vb">
+      <DependentUpon>WeeklyDiaryDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
