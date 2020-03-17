@@ -832,7 +832,7 @@ Public Class frmWeeklyDiaryDE
 #End Region
 
 
-#Region "DOWNLOAD"
+#Region "RESTORE"
 
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
         Try
@@ -1003,7 +1003,7 @@ Public Class frmWeeklyDiaryDE
             MessageBoxEx.Show("Weekly Diary file not found in remote server.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
-       
+
     End Sub
 
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
@@ -1033,7 +1033,7 @@ Public Class frmWeeklyDiaryDE
 
             Me.Text = "Weekly Diary - " & wdOfficerName
             Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
-
+            FindLastDate()
             MessageBoxEx.Show("Weekly Diary file restored successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
