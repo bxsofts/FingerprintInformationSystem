@@ -46,6 +46,7 @@ Partial Class FrmSOCGraveCrimes
         Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -148,6 +149,7 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx1.AutoSize = True
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx1.Controls.Add(Me.chkiAPS)
         Me.PanelEx1.Controls.Add(Me.LabelX6)
         Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.LabelX5)
@@ -223,17 +225,15 @@ Partial Class FrmSOCGraveCrimes
         '
         'chkStatement
         '
+        Me.chkStatement.AutoSize = True
         '
         '
         '
         Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkStatement.Checked = True
-        Me.chkStatement.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkStatement.CheckValue = "Y"
-        Me.chkStatement.Location = New System.Drawing.Point(87, 5)
+        Me.chkStatement.Location = New System.Drawing.Point(256, 7)
         Me.chkStatement.Name = "chkStatement"
-        Me.chkStatement.Size = New System.Drawing.Size(117, 23)
+        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
         Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.chkStatement.TabIndex = 54
         Me.chkStatement.TabStop = False
@@ -241,14 +241,15 @@ Partial Class FrmSOCGraveCrimes
         '
         'chkCoB
         '
+        Me.chkCoB.AutoSize = True
         '
         '
         '
         Me.chkCoB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkCoB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkCoB.Location = New System.Drawing.Point(256, 5)
+        Me.chkCoB.Location = New System.Drawing.Point(171, 7)
         Me.chkCoB.Name = "chkCoB"
-        Me.chkCoB.Size = New System.Drawing.Size(100, 23)
+        Me.chkCoB.Size = New System.Drawing.Size(45, 18)
         Me.chkCoB.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.chkCoB.TabIndex = 53
         Me.chkCoB.TabStop = False
@@ -439,6 +440,25 @@ Partial Class FrmSOCGraveCrimes
         Me.bgwLetter.WorkerReportsProgress = True
         Me.bgwLetter.WorkerSupportsCancellation = True
         '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(87, 7)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 58
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
         'FrmSOCGraveCrimes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -491,4 +511,5 @@ Partial Class FrmSOCGraveCrimes
     Friend WithEvents chkCoB As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents chkiAPS As DevComponents.DotNetBar.Controls.CheckBoxX
 End Class

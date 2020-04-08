@@ -7,12 +7,13 @@ Public Class FrmSOCGraveCrimes
     Dim blCoBFormat As Boolean = True
     Dim IsMonthStmt As Boolean = False
     Dim blMonthCompleted As Boolean = False
-
+    Dim blModifyButtonName As Boolean = False
 
     Sub SetDays() Handles MyBase.Load
         On Error Resume Next
 
         Me.Cursor = Cursors.WaitCursor
+        blModifyButtonName = False
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
@@ -52,10 +53,28 @@ Public Class FrmSOCGraveCrimes
 
         Me.SOCRegisterTableAdapter.FillByGraveCrimeAndDate(Me.FingerPrintDataSet.SOCRegister, d1, d2, True)
         Me.cmbMonth.Focus()
+        blModifyButtonName = True
+        ModifyButtonName()
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
+        Try
+            If Not blModifyButtonName Then Exit Sub
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement\" & Me.txtYear.Text
+            Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
+            SaveFileName = SaveFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Me.btnGenerateByMonth.Text = "Show"
+            Else
+                Me.btnGenerateByMonth.Text = "Generate"
+            End If
+        Catch ex As Exception
+
+        End Try
+       
+    End Sub
     Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -452,7 +471,7 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
 
-                If pl.Contains("`") And blCoBFormat Then
+                If pl.Contains("`") And Not chkiAPS.Checked Then
                     WordApp.Selection.Font.Name = "Rupee Foradian"
                     WordApp.Selection.Font.Size = 8
                 Else
@@ -521,7 +540,17 @@ Public Class FrmSOCGraveCrimes
             End If
 
             WordApp.Selection.TypeParagraph()
-            If Not blCoBFormat Then WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+            If Not blCoBFormat Then
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+            End If
+
+            If chkiAPS.Checked Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
+            End If
 
             For delay = 86 To 96
                 bgwLetter.ReportProgress(delay)

@@ -8927,6 +8927,19 @@ errhandler:
     End Sub
 #End Region
 
+#Region "SHOW GRAVE CRIME CASES"
+    Private Sub ShowGraveCrimes() Handles btnShowGraveCrimes.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Me.SOCRegisterTableAdapter.FillByGraveCrime(Me.FingerPrintDataSet.SOCRegister, True)
+            Me.TabControl.SelectedTab = SOCTabItem
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+#End Region
 
     '-------------------------------------------IDENTIFICATION REGISTER-----------------------------------------
 
