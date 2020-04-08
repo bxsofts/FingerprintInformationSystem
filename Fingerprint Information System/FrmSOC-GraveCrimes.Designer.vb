@@ -33,6 +33,7 @@ Partial Class FrmSOCGraveCrimes
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
@@ -42,10 +43,9 @@ Partial Class FrmSOCGraveCrimes
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
-        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
-        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -178,6 +178,19 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
         '
+        'LabelX6
+        '
+        Me.LabelX6.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX6.Location = New System.Drawing.Point(167, 117)
+        Me.LabelX6.Name = "LabelX6"
+        Me.LabelX6.Size = New System.Drawing.Size(206, 18)
+        Me.LabelX6.TabIndex = 57
+        Me.LabelX6.Text = "Open Grave Crime Statement Folder"
+        '
         'CircularProgress1
         '
         '
@@ -215,7 +228,10 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkStatement.Location = New System.Drawing.Point(256, 7)
+        Me.chkStatement.Checked = True
+        Me.chkStatement.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkStatement.CheckValue = "Y"
+        Me.chkStatement.Location = New System.Drawing.Point(87, 5)
         Me.chkStatement.Name = "chkStatement"
         Me.chkStatement.Size = New System.Drawing.Size(117, 23)
         Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -230,10 +246,7 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.chkCoB.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkCoB.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkCoB.Checked = True
-        Me.chkCoB.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkCoB.CheckValue = "Y"
-        Me.chkCoB.Location = New System.Drawing.Point(87, 7)
+        Me.chkCoB.Location = New System.Drawing.Point(256, 5)
         Me.chkCoB.Name = "chkCoB"
         Me.chkCoB.Size = New System.Drawing.Size(100, 23)
         Me.chkCoB.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -407,15 +420,6 @@ Partial Class FrmSOCGraveCrimes
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'SOCRegisterTableAdapter
-        '
-        Me.SOCRegisterTableAdapter.ClearBeforeFill = True
-        '
-        'bgwLetter
-        '
-        Me.bgwLetter.WorkerReportsProgress = True
-        Me.bgwLetter.WorkerSupportsCancellation = True
-        '
         'btnOpenFolder
         '
         Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
@@ -426,18 +430,14 @@ Partial Class FrmSOCGraveCrimes
         Me.btnOpenFolder.TabIndex = 56
         Me.btnOpenFolder.Text = "Open Folder"
         '
-        'LabelX6
+        'SOCRegisterTableAdapter
         '
-        Me.LabelX6.AutoSize = True
+        Me.SOCRegisterTableAdapter.ClearBeforeFill = True
         '
+        'bgwLetter
         '
-        '
-        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(167, 117)
-        Me.LabelX6.Name = "LabelX6"
-        Me.LabelX6.Size = New System.Drawing.Size(206, 18)
-        Me.LabelX6.TabIndex = 57
-        Me.LabelX6.Text = "Open Grave Crime Statement Folder"
+        Me.bgwLetter.WorkerReportsProgress = True
+        Me.bgwLetter.WorkerSupportsCancellation = True
         '
         'FrmSOCGraveCrimes
         '

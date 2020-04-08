@@ -132,7 +132,7 @@ Public Class FrmSOCGraveCrimes
             Dim docType As Object = 0
             Dim isVisible As Object = True
             Dim WordApp As New Word.Application()
-            Dim RowCount = Me.SOCRegisterBindingSource.Count + 3
+            Dim RowCount = Me.SOCRegisterBindingSource.Count + 2
 
             For delay = 1 To 10
                 bgwLetter.ReportProgress(delay)
@@ -184,7 +184,7 @@ Public Class FrmSOCGraveCrimes
 
                 WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
 
-                If RowCount = 3 Then
+                If RowCount = 2 Then
                     WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientPortrait
                     WordApp.Selection.Document.PageSetup.TopMargin = 75
                     WordApp.Selection.Document.PageSetup.LeftMargin = 75
@@ -223,13 +223,11 @@ Public Class FrmSOCGraveCrimes
                     WordApp.Selection.TypeText(FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
                     WordApp.Selection.Font.Bold = 0
                     WordApp.Selection.TypeText("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
+                    WordApp.Selection.TypeParagraph()
                 End If
 
             End If
 
-
-            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-            WordApp.Selection.Font.Bold = 0
 
             For delay = 31 To 40
                 bgwLetter.ReportProgress(delay)
@@ -237,15 +235,30 @@ Public Class FrmSOCGraveCrimes
             Next
 
 
-            WordApp.Selection.TypeParagraph()
+
             WordApp.Selection.Paragraphs.DecreaseSpacing()
 
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = 1
 
+            WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
 
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.Font.Underline = 0
 
-            bodytext = "GRAVE CRIME DETAILS " & headertext
+            bodytext = "GRAVE CRIME DETAILS " & headertext.ToUpper
+            WordApp.Selection.TypeText(bodytext)
+
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.Font.Underline = 0
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount, 14)
 
@@ -267,102 +280,96 @@ Public Class FrmSOCGraveCrimes
             '   WordApp.Selection.Tables.Item(1).Columns(14).SetWidth(100, Word.WdRulerStyle.wdAdjustFirstColumn)
 
 
-            WordApp.Selection.Tables.Item(1).Cell(1, 1).Merge(WordApp.Selection.Tables.Item(1).Cell(1, 14))
-
-            WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("SDFPB, " & FullDistrictName.ToUpper & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & bodytext.ToUpper)
-
             For delay = 41 To 50
                 bgwLetter.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 1).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Sl.No")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 2).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 2).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("SOC No.")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 3).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 3).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("Police Station, " & vbNewLine & "Cr.No. & " & vbNewLine & "Section of Law")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 4).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("D/I")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 5).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("D/O")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 6).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("P/O")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 7).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             WordApp.Selection.TypeText("MO")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 8).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             ' WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
             WordApp.Selection.TypeText("P/L")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 9).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             ' WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
             WordApp.Selection.TypeText("CHP")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 10).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             '  WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
             WordApp.Selection.TypeText("Details of CHP - UNF/ INM")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 11).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 11).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             '  WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
             WordApp.Selection.TypeText("CHP Remains")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 12).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 12).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             ' WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
             WordApp.Selection.TypeText("Work done")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 13).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 13).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
             ' WordApp.Selection.Orientation = Word.WdTextOrientation.wdTextOrientationUpward
             WordApp.Selection.TypeText("FP Expert who inspected the SOC")
 
-            WordApp.Selection.Tables.Item(1).Cell(2, 14).Select()
+            WordApp.Selection.Tables.Item(1).Cell(1, 14).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -372,7 +379,7 @@ Public Class FrmSOCGraveCrimes
 
 
             For i = 1 To 14
-                WordApp.Selection.Tables.Item(1).Cell(3, i).Select()
+                WordApp.Selection.Tables.Item(1).Cell(2, i).Select()
                 WordApp.Selection.Font.Bold = 1
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -387,8 +394,8 @@ Public Class FrmSOCGraveCrimes
             Next
 
 
-            For i = 4 To RowCount
-                Dim j = i - 4
+            For i = 3 To RowCount
+                Dim j = i - 3
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -444,9 +451,12 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
-                If pl.Contains("`") Then
+
+                If pl.Contains("`") And blCoBFormat Then
                     WordApp.Selection.Font.Name = "Rupee Foradian"
                     WordApp.Selection.Font.Size = 8
+                Else
+                    pl = pl.Replace("`", "Rs.")
                 End If
 
                 WordApp.Selection.TypeText(pl)
@@ -502,13 +512,16 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
 
-            If RowCount = 3 And Not blCoBFormat Then
+            If RowCount = 2 And Not blCoBFormat Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeText("----------  NIL  ----------")
             End If
+
+            WordApp.Selection.TypeParagraph()
+            If Not blCoBFormat Then WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
             For delay = 86 To 96
                 bgwLetter.ReportProgress(delay)
@@ -536,6 +549,7 @@ Public Class FrmSOCGraveCrimes
                 aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
             End If
 
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             If Not FileInUse(SaveFileName) And IsMonthStmt And RowCount > 3 And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
 
