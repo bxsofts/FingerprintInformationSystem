@@ -4,7 +4,8 @@ Public Class FrmSOCGraveCrimes
     Dim d2 As Date
     Dim headertext As String = vbNullString
     Dim SaveFileName As String
-    Dim blCoBFormat As Boolean = True
+    Dim blCoBFormat As Boolean = False
+    Dim bliAPSFormat As Boolean = True
     Dim IsMonthStmt As Boolean = False
     Dim blMonthCompleted As Boolean = False
     Dim blModifyButtonName As Boolean = False
@@ -14,6 +15,12 @@ Public Class FrmSOCGraveCrimes
 
         Me.Cursor = Cursors.WaitCursor
         blModifyButtonName = False
+
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkGraveCrime", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+        If chkbox = "3" Then Me.chkCoB.Checked = True
+
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
@@ -127,6 +134,7 @@ Public Class FrmSOCGraveCrimes
             Me.CircularProgress1.IsRunning = True
 
             blCoBFormat = Me.chkCoB.Checked
+            bliAPSFormat = Me.chkiAPS.Checked
 
             bgwLetter.RunWorkerAsync()
         Catch ex As Exception
@@ -262,8 +270,6 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.Font.Underline = 1
 
             WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper)
-
-            WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Underline = 0
@@ -272,7 +278,7 @@ Public Class FrmSOCGraveCrimes
             WordApp.Selection.TypeText(bodytext)
 
             WordApp.Selection.TypeParagraph()
-            WordApp.Selection.TypeParagraph()
+
 
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
@@ -471,11 +477,11 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
 
-                If pl.Contains("`") And Not chkiAPS.Checked Then
+                If pl.Contains("`") And bliAPSFormat Then
+                    pl = pl.Replace("`", "Rs.")
+                Else
                     WordApp.Selection.Font.Name = "Rupee Foradian"
                     WordApp.Selection.Font.Size = 8
-                Else
-                    pl = pl.Replace("`", "Rs.")
                 End If
 
                 WordApp.Selection.TypeText(pl)
@@ -540,11 +546,12 @@ Public Class FrmSOCGraveCrimes
             End If
 
             WordApp.Selection.TypeParagraph()
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
             If Not blCoBFormat Then
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
             End If
 
-            If chkiAPS.Checked Then
+            If bliAPSFormat Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -635,5 +642,25 @@ Public Class FrmSOCGraveCrimes
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
+    End Sub
+
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click, chkCoB.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+                Case chkCoB.Name
+                    x = "3"
+            End Select
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkGraveCrime", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkGraveCrime", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+
+
     End Sub
 End Class

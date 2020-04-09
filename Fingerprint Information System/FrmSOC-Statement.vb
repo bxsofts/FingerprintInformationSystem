@@ -8,8 +8,18 @@ Public Class frmSOCStatement
     Dim IsMonthStatement As Boolean = False
     Dim SaveFileName As String
     Dim blMonthCompleted As Boolean = False
+    Dim bliAPSFormat As Boolean = True
+    Dim blModifyButtonName As Boolean = False
+
     Sub SetDays() Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
+
+        blModifyButtonName = False
+
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkSOCStatement", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.ProgressText = ""
@@ -48,10 +58,44 @@ Public Class frmSOCStatement
         d1 = New Date(y, m, 1)
         d2 = New Date(y, m, d)
         headertext = "for the month of " & MonthName(m) & " " & y
+
+        blModifyButtonName = True
+        ModifyButtonName()
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
 
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+            End Select
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkSOCStatement", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkSOCStatement", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+    End Sub
+
+    Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
+        Try
+            If Not blModifyButtonName Then Exit Sub
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement\" & Me.txtYear.Text
+            Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
+            SaveFileName = SaveFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Me.btnGenerateByMonth.Text = "Show"
+            Else
+                Me.btnGenerateByMonth.Text = "Generate"
+            End If
+        Catch ex As Exception
+        End Try
+
+    End Sub
     Private Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -99,6 +143,9 @@ Public Class frmSOCStatement
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
+
+            bliAPSFormat = chkiAPS.Checked
+
             Me.Cursor = Cursors.WaitCursor
             Me.bgwWord.RunWorkerAsync()
         Catch ex As Exception
@@ -291,7 +338,10 @@ Public Class frmSOCStatement
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                 Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
-                If pl.Contains("`") Then
+
+                If pl.Contains("`") And bliAPSFormat Then
+                    pl = pl.Replace("`", "Rs.")
+                Else
                     WordApp.Selection.Font.Name = "Rupee Foradian"
                     WordApp.Selection.Font.Size = 8
                 End If
@@ -382,7 +432,13 @@ Public Class frmSOCStatement
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
 
-
+            If bliAPSFormat Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
+            End If
 
             '  aDoc.Sections(1).Footers(Word.WdHeaderFooterIndex.wdHeaderFooterPrimary).PageNumbers.Add(Word.WdPageNumberAlignment.wdAlignPageNumberRight)
 

@@ -12,9 +12,16 @@ Public Class frmIdentificationStatement
     Dim IsMonthStmt As Boolean = False
     Dim blMonthCompleted As Boolean = False
     Dim SaveFileName As String
+    Dim bliAPSFormat As Boolean = True
+    Dim blModifyButtonName As Boolean = False
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
             Me.Cursor = Cursors.WaitCursor
+            blModifyButtonName = False
+
+            Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkIDStatement", 1)
+            If chkbox = "1" Then Me.chkiAPS.Checked = True
+            If chkbox = "2" Then Me.chkStatement.Checked = True
 
             Me.CircularProgress1.Hide()
             Me.CircularProgress1.ProgressColor = GetProgressColor()
@@ -69,12 +76,49 @@ Public Class frmIdentificationStatement
             Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.IdentificationRegisterTableAdapter1.Connection.Open()
 
+            blModifyButtonName = True
+            ModifyButtonName()
+
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
+    End Sub
+
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+            End Select
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkIDStatement", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkIDStatement", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+    End Sub
+
+
+    Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
+        Try
+            If Not blModifyButtonName Then Exit Sub
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement\" & Me.txtYear.Text
+            Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
+            SaveFileName = SaveFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Me.btnGenerateByMonth.Text = "Show"
+            Else
+                Me.btnGenerateByMonth.Text = "Generate"
+            End If
+        Catch ex As Exception
+        End Try
+
     End Sub
 
     Private Sub GenerateStatement(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByMonth.Click, btnGeneratebyPeriod.Click
@@ -132,6 +176,7 @@ Public Class frmIdentificationStatement
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = True
 
+            bliAPSFormat = chkiAPS.Checked
 
             bgwIDList.RunWorkerAsync()
 
@@ -360,8 +405,11 @@ Public Class frmIdentificationStatement
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
+
                     Dim pl = Me.FingerPrintDataSet.JoinedIDR(j).PropertyLost
-                    If pl.Contains("`") Then
+                    If pl.Contains("`") And bliAPSFormat Then
+                        pl = pl.Replace("`", "Rs.")
+                    Else
                         WordApp.Selection.Font.Name = "Rupee Foradian"
                         WordApp.Selection.Font.Size = 8
                     End If
@@ -449,15 +497,28 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
+            WordApp.Selection.Tables.Item(1).Cell(rcount, 12).Select()
+            WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
+
             If idcount = 0 Then
-                WordApp.Selection.Tables.Item(1).Cell(rcount, 12).Select()
-                WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText("----------  NIL  ----------")
             End If
 
+
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+
+            If bliAPSFormat Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
+            End If
 
             If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
                 aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
