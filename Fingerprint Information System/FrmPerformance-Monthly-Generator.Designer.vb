@@ -72,6 +72,9 @@ Partial Class frmMonthlyPerformance
         Me.PresentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RemarksDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.PanelEx1.SuspendLayout()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -124,7 +127,7 @@ Partial Class frmMonthlyPerformance
         Me.btnClearAllFields.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnClearAllFields.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnClearAllFields.Image = CType(resources.GetObject("btnClearAllFields.Image"), System.Drawing.Image)
-        Me.btnClearAllFields.Location = New System.Drawing.Point(5, 14)
+        Me.btnClearAllFields.Location = New System.Drawing.Point(5, 38)
         Me.btnClearAllFields.Name = "btnClearAllFields"
         Me.btnClearAllFields.Size = New System.Drawing.Size(112, 56)
         Me.btnClearAllFields.TabIndex = 7
@@ -249,6 +252,9 @@ Partial Class frmMonthlyPerformance
         Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel2.Controls.Add(Me.chkiAPS)
+        Me.GroupPanel2.Controls.Add(Me.LabelX5)
+        Me.GroupPanel2.Controls.Add(Me.chkStatement)
         Me.GroupPanel2.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel2.Controls.Add(Me.btnClearAllFields)
         Me.GroupPanel2.Controls.Add(Me.btnOpenInWord)
@@ -256,7 +262,7 @@ Partial Class frmMonthlyPerformance
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel2.Location = New System.Drawing.Point(7, 301)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(380, 109)
+        Me.GroupPanel2.Size = New System.Drawing.Size(380, 130)
         '
         '
         '
@@ -295,7 +301,7 @@ Partial Class frmMonthlyPerformance
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(119, 14)
+        Me.CircularProgress1.Location = New System.Drawing.Point(119, 38)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -309,7 +315,7 @@ Partial Class frmMonthlyPerformance
         Me.btnOpenInWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenInWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnOpenInWord.Image = CType(resources.GetObject("btnOpenInWord.Image"), System.Drawing.Image)
-        Me.btnOpenInWord.Location = New System.Drawing.Point(131, 14)
+        Me.btnOpenInWord.Location = New System.Drawing.Point(131, 38)
         Me.btnOpenInWord.Name = "btnOpenInWord"
         Me.btnOpenInWord.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
         Me.btnOpenInWord.Size = New System.Drawing.Size(112, 56)
@@ -321,7 +327,7 @@ Partial Class frmMonthlyPerformance
         Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnOpenFolder.Image = CType(resources.GetObject("btnOpenFolder.Image"), System.Drawing.Image)
-        Me.btnOpenFolder.Location = New System.Drawing.Point(257, 14)
+        Me.btnOpenFolder.Location = New System.Drawing.Point(257, 38)
         Me.btnOpenFolder.Name = "btnOpenFolder"
         Me.btnOpenFolder.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
         Me.btnOpenFolder.Size = New System.Drawing.Size(112, 56)
@@ -643,7 +649,7 @@ Partial Class frmMonthlyPerformance
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
         Me.DataGridViewX1.RowHeadersVisible = False
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Rupee Foradian", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle18
         Me.DataGridViewX1.RowTemplate.Height = 25
         Me.DataGridViewX1.SelectAllSignVisible = False
@@ -730,6 +736,54 @@ Partial Class frmMonthlyPerformance
         '
         Me.IdentificationRegisterTableAdapter1.ClearBeforeFill = True
         '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(131, 12)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 65
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(5, 12)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(43, 18)
+        Me.LabelX5.TabIndex = 64
+        Me.LabelX5.Text = "Format"
+        '
+        'chkStatement
+        '
+        Me.chkStatement.AutoSize = True
+        '
+        '
+        '
+        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkStatement.Location = New System.Drawing.Point(257, 12)
+        Me.chkStatement.Name = "chkStatement"
+        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
+        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkStatement.TabIndex = 63
+        Me.chkStatement.TabStop = False
+        Me.chkStatement.Text = "Statement Only"
+        '
         'frmMonthlyPerformance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
@@ -752,6 +806,7 @@ Partial Class frmMonthlyPerformance
         Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx2.PerformLayout()
         Me.GroupPanel2.ResumeLayout(False)
+        Me.GroupPanel2.PerformLayout()
         Me.GroupPanel8.ResumeLayout(False)
         Me.GroupPanel8.PerformLayout()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
@@ -804,4 +859,7 @@ Partial Class frmMonthlyPerformance
     Friend WithEvents lblCurrentMonth As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblPreviousMonth As DevComponents.DotNetBar.LabelX
     Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
+    Friend WithEvents chkiAPS As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents chkStatement As DevComponents.DotNetBar.Controls.CheckBoxX
 End Class

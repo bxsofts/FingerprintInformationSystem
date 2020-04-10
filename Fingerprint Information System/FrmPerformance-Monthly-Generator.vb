@@ -6,12 +6,18 @@ Public Class frmMonthlyPerformance
     Dim PerfFileName As String
     Dim IsMonthStatement As Boolean = False
     Dim blAllowSave As Boolean = False
+    Dim bliAPSFormat As Boolean = True
 
 #Region "FORM LOAD EVENTS"
 
     Private Sub LoadForm() Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
+
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkMPStatement", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+
         Me.lblCurrentMonth.Text = ""
         Me.lblPreviousMonth.Text = ""
         ShowPleaseWaitForm()
@@ -38,6 +44,23 @@ Public Class frmMonthlyPerformance
         Me.DataGridViewX1.Cursor = Cursors.Default
         ClosePleaseWaitForm()
         ShowDesktopAlert("Performance Statement generated.")
+    End Sub
+
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+            End Select
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkMPStatement", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkMPStatement", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
     End Sub
 
     Private Sub ConnectToDatabase()
@@ -197,6 +220,7 @@ Public Class frmMonthlyPerformance
         lblCurrentMonth.Text = ""
         lblPreviousMonth.Text = ""
         Application.DoEvents()
+        bliAPSFormat = Me.chkiAPS.Checked
         GeneratePerformanceStatement()
         ClosePleaseWaitForm()
         ShowDesktopAlert("Performance Statement generated.")
@@ -312,14 +336,14 @@ Public Class frmMonthlyPerformance
                 If Column = 0 Then
                     For i = 0 To 21
                         For j = 2 To 7
-                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                            Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim().Replace("`", "Rs.")
                         Next
                     Next
                 End If
 
                 If Column = 2 Then
                     For i = 0 To 21
-                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim()
+                        Me.DataGridViewX1.Rows(i).Cells(2).Value = wdTbl.Cell(i + 4, 4).Range.Text.Trim(ChrW(7)).Trim().Replace("`", "Rs.")
                     Next
                 End If
             End If
@@ -395,13 +419,14 @@ Public Class frmMonthlyPerformance
             Me.DataGridViewX1.Rows(17).Cells(Column).Value = CalculateCasesPendingInPreviousMonth(d1)
             Me.DataGridViewX1.Rows(18).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
             Me.DataGridViewX1.Rows(20).Cells(Column).Value = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
-            Me.DataGridViewX1.Rows(21).Cells(Column).Value = "` " & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+            Me.DataGridViewX1.Rows(21).Cells(Column).Value = "Rs." & Val(Me.FPARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
             Me.DataGridViewX1.Cursor = Cursors.Default
         End Try
     End Sub
+
     Private Function CalculateCasesPendingInPreviousMonth(ByVal dt As Date)
         On Error Resume Next
         Dim m = Month(dt)
@@ -417,8 +442,6 @@ Public Class frmMonthlyPerformance
         Dim dt2 As Date = New Date(y, m, d)
         Return SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(dt1, dt2, "").ToString
     End Function
-
-
     Private Sub GenerateForPeriod(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateSelectedPeriodValues.Click
         On Error Resume Next
         Me.lblPreviousMonth.Text = ""
@@ -623,9 +646,7 @@ Public Class frmMonthlyPerformance
             For f = 3 To 7
                 WordApp.Selection.Tables.Item(1).Cell(25, f).Select()
                 WordApp.Selection.Tables.Item(1).Cell(25, f).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
-                WordApp.Selection.Font.Name = "Rupee Foradian"
                 WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 8
             Next
 
 
@@ -712,6 +733,14 @@ Public Class frmMonthlyPerformance
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
+
+            If bliAPSFormat Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
+            End If
+
             For delay = 81 To 100
                 bgwStatement.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -752,6 +781,14 @@ Public Class frmMonthlyPerformance
 
 #End Region
 
+    Private Sub CalculateCPRemaining() Handles DataGridViewX1.CellEndEdit
+        On Error Resume Next
+
+        Me.DataGridViewX1.Rows(5).Cells(2).Value = Val(Me.DataGridViewX1.Rows(2).Cells(2).Value.ToString) - Val(Me.DataGridViewX1.Rows(3).Cells(2).Value.ToString) - Val(Me.DataGridViewX1.Rows(4).Cells(2).Value.ToString)
+
+        Me.DataGridViewX1.Rows(5).Cells(3).Value = Val(Me.DataGridViewX1.Rows(2).Cells(3).Value.ToString) - Val(Me.DataGridViewX1.Rows(3).Cells(3).Value.ToString) - Val(Me.DataGridViewX1.Rows(4).Cells(3).Value.ToString)
+
+    End Sub
 
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
