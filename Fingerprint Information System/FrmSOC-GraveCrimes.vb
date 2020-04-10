@@ -65,6 +65,24 @@ Public Class FrmSOCGraveCrimes
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click, chkCoB.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+                Case chkCoB.Name
+                    x = "3"
+            End Select
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkGraveCrime", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkGraveCrime", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+    End Sub
+
     Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
         Try
             If Not blModifyButtonName Then Exit Sub
@@ -644,23 +662,5 @@ Public Class FrmSOCGraveCrimes
         End Try
     End Sub
 
-    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click, chkCoB.Click
-        Try
-            Dim x As String = "1"
-            Select Case DirectCast(sender, Control).Name
-
-                Case chkiAPS.Name
-                    x = "1"
-                Case chkStatement.Name
-                    x = "2"
-                Case chkCoB.Name
-                    x = "3"
-            End Select
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkGraveCrime", x, Microsoft.Win32.RegistryValueKind.String)
-        Catch ex As Exception
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkGraveCrime", "1", Microsoft.Win32.RegistryValueKind.String)
-        End Try
-
-
-    End Sub
+   
 End Class

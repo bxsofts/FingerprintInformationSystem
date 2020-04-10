@@ -12,8 +12,17 @@ Public Class frmAttendanceStmt
     Dim PENList(4) As String
     Dim ArrayLength As Integer = 0
     Dim SaveFileName As String
+    Dim bliAPSFormat As Boolean = True
+    Dim blModifyButtonName As Boolean = False
+
     Private Sub LoadDate() Handles MyBase.Load
         On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        blModifyButtonName = False
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkAttendance", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+        If chkbox = "3" Then Me.chkCoB.Checked = True
 
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressColor = GetProgressColor()
@@ -42,7 +51,67 @@ Public Class frmAttendanceStmt
         dtTo.Value = New DateTime(y, m + 1, 10)
         Control.CheckForIllegalCrossThreadCalls = False
 
-        RenameAndMoveOldFiles()
+        blModifyButtonName = True
+        ModifyButtonName()
+
+        '  RenameAndMoveOldFiles()
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click, chkCoB.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+                Case chkCoB.Name
+                    x = "3"
+            End Select
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkAttendance", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkAttendance", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+    End Sub
+
+    Private Sub ModifyButtonName() Handles dtFrom.ValueChanged, dtTo.ValueChanged, chkTI.CheckedChanged, chkStaff.CheckedChanged, chkSS.CheckedChanged
+        Try
+            If Not blModifyButtonName Then Exit Sub
+
+            d1 = Me.dtFrom.Value
+            d2 = Me.dtTo.Value
+
+            Dim m As String = d2.Month.ToString("D2")
+            Dim y As String = d2.Year.ToString
+
+            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
+
+            If Me.chkTI.Checked Then
+                SaveFileName = m & " - Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            End If
+
+            If chkStaff.Checked Then
+                SaveFileName = m & " - Attendance - Staff - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            End If
+
+            If chkSS.Checked Then
+                SaveFileName = m & " - Attendance - Police Personnel - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
+            End If
+
+            SaveFileName = SaveFolder & "\" & SaveFileName & ".docx"
+
+
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Me.btnGenerateAttendance.Text = "Show"
+            Else
+                Me.btnGenerateAttendance.Text = "Generate"
+            End If
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Private Sub GetArrayLength()
@@ -226,6 +295,8 @@ Public Class frmAttendanceStmt
             Exit Sub
         End If
 
+        bliAPSFormat = Me.chkiAPS.Checked
+
         CircularProgress1.ProgressText = "0"
         CircularProgress1.IsRunning = True
         CircularProgress1.Show()
@@ -309,15 +380,18 @@ Public Class frmAttendanceStmt
 
                 WordApp.Selection.Font.Size = 12
                 WordApp.Selection.Font.Bold = 1
+                WordApp.Selection.Font.Underline = 1
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                WordApp.Selection.TypeText((FullOfficeName & ", " & FullDistrictName).ToUpper & vbCrLf)
 
+                WordApp.Selection.Font.Underline = 0
 
                 If args.StaffType = "TI" Then
-                    WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF TESTER INSPECTOR FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
+                    WordApp.Selection.TypeText("ABSTRACT OF ATTENDANCE OF TESTER INSPECTOR FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 ElseIf args.StaffType = "SS" Then
-                    WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF POLICE PERSONNEL FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
+                    WordApp.Selection.TypeText("ABSTRACT OF ATTENDANCE OF POLICE PERSONNEL FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 Else
-                    WordApp.Selection.TypeText(FullOfficeName.ToUpper & ", " & FullDistrictName.ToUpper & vbNewLine & "ABSTRACT OF ATTENDANCE OF STAFF FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
+                    WordApp.Selection.TypeText("ABSTRACT OF ATTENDANCE OF STAFF FOR THE PERIOD FROM " & d1.ToString("dd-MM-yyyy") & " TO " & d2.ToString("dd-MM-yyyy"))
                 End If
 
                 For delay = 21 To 30
@@ -388,6 +462,7 @@ Public Class frmAttendanceStmt
 
                     If args.StaffType = "SS" Then
                         officer = args.FDS.SupportingStaff(j).StaffName
+                        officer = Strings.StrConv(officer, VbStrConv.ProperCase)
                         designation = args.FDS.SupportingStaff(j).Designation
                         PEN = args.FDS.SupportingStaff(j).PEN
                         WordApp.Selection.TypeText(officer & vbCrLf & designation & vbCrLf & "PEN: " & PEN)
@@ -396,6 +471,7 @@ Public Class frmAttendanceStmt
                         officer = officer.Replace(", TI", vbNewLine & "Tester Inspector")
                         officer = officer.Replace(", FPE", vbNewLine & "Fingerprint Expert")
                         officer = officer.Replace(", FPS", vbNewLine & "Fingerprint Searcher")
+                        officer = Strings.StrConv(officer, VbStrConv.ProperCase)
                         WordApp.Selection.TypeText(officer)
                         PEN = PENList(j)
                         WordApp.Selection.TypeText(vbCrLf & "PEN: " & PEN)
@@ -458,7 +534,7 @@ Public Class frmAttendanceStmt
                             dt = New DateTime(d1.Year, d1.Month, dti)
                             If IsHoliday(dt) Then
                                 WordApp.Selection.Tables.Item(1).Cell(j, i).Shading.BackgroundPatternColor = Word.WdColor.wdColorGray10
-                                txt = ""
+                                txt = "HD"
                             Else
                                 txt = "X"
                             End If
@@ -468,7 +544,7 @@ Public Class frmAttendanceStmt
                             dt = New DateTime(d2.Year, d2.Month, dti - d)
                             If IsHoliday(dt) Then
                                 WordApp.Selection.Tables.Item(1).Cell(j, i).Shading.BackgroundPatternColor = Word.WdColor.wdColorGray10
-                                txt = ""
+                                txt = "HD"
                             Else
                                 txt = "X"
                             End If
@@ -488,6 +564,10 @@ Public Class frmAttendanceStmt
 
                 WordApp.Selection.TypeText(vbNewLine)
 
+                WordApp.Selection.TypeText("* HD - Holiday, CL - Casual Leave")
+
+                WordApp.Selection.TypeText(vbNewLine)
+
 
                 If args.StaffType <> "SS" Then WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
@@ -503,6 +583,14 @@ Public Class frmAttendanceStmt
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                     WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+                End If
+
+                If bliAPSFormat And args.StaffType <> "SS" Then
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.TypeParagraph()
+                    WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
                 End If
 
                 For delay = 96 To 100
@@ -689,6 +777,8 @@ Public Class frmAttendanceStmt
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Me.Cursor = Cursors.Default
+
+        ModifyButtonName()
 
         If e.Error IsNot Nothing Then
             DevComponents.DotNetBar.MessageBoxEx.Show(e.Error.Message, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
