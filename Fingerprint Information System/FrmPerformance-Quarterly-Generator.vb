@@ -12,10 +12,16 @@ Public Class frmQuarterlyPerformance
     Dim d5 As Date
     Dim d6 As Date
 
+    Dim bliAPSFormat As Boolean = True
+
 #Region "FORM LOAD EVENTS"
 
     Private Sub FormLoadEvents() Handles MyBase.Load
         On Error Resume Next
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkQPStatement", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+
         lblMonth1.Visible = False
         lblMonth2.Visible = False
         lblMonth3.Visible = False
@@ -52,6 +58,23 @@ Public Class frmQuarterlyPerformance
         lblPreviousQuarter.Visible = True
         ClosePleaseWaitForm()
         ShowDesktopAlert("Performance Statement generated.")
+    End Sub
+
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+            End Select
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkQPStatement", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkQPStatement", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
     End Sub
 
     Sub SetDays()
@@ -275,12 +298,10 @@ Public Class frmQuarterlyPerformance
             Else
                 For i = 0 To 21
                     For j = 2 To 7
-                        Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim()
+                        Me.DataGridViewX1.Rows(i).Cells(j).Value = wdTbl.Cell(i + 4, j + 1).Range.Text.Trim(ChrW(7)).Trim().Replace("` ", "Rs.").Replace("`", "Rs.")
                     Next
                 Next
             End If
-
-
 
 
             wdDoc.Close()
@@ -439,7 +460,7 @@ Public Class frmQuarterlyPerformance
             Me.DataGridViewX1.Rows(17).Cells(Column).Value = CalculateCasesPendingInPreviousMonth(d1)
             Me.DataGridViewX1.Rows(18).Cells(Column).Value = Val(SOCRegisterTableAdapter.ScalarQuerySearchContinuingSOCs(d1, d2, ""))
             Me.DataGridViewX1.Rows(20).Cells(Column).Value = Val(Me.FpARegisterTableAdapter.AttestedPersonCount(d1, d2))
-            Me.DataGridViewX1.Rows(21).Cells(Column).Value = "` " & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
+            Me.DataGridViewX1.Rows(21).Cells(Column).Value = "Rs." & Val(Me.FpARegisterTableAdapter.AmountRemitted(d1, d2)) & "/-"
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -481,7 +502,7 @@ Public Class frmQuarterlyPerformance
 
             Else
                For i = 0 To 21
-                    Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 4, wdColumn).Range.Text.Trim(ChrW(7)).Trim()
+                    Me.DataGridViewX1.Rows(i).Cells(dgColumn).Value = wdTbl.Cell(i + 4, wdColumn).Range.Text.Trim(ChrW(7)).Trim().Replace("` ", "Rs.").Replace("`", "Rs.")
                 Next
             End If
 
@@ -612,14 +633,33 @@ Public Class frmQuarterlyPerformance
 
     Private Sub CalculateCurrentQuarterTotalValues() Handles DataGridViewX1.CellEndEdit
         On Error Resume Next
+
+        Me.DataGridViewX1.Rows(5).Cells(2).Value = Val(Me.DataGridViewX1.Rows(2).Cells(2).Value.ToString) - Val(Me.DataGridViewX1.Rows(3).Cells(2).Value.ToString) - Val(Me.DataGridViewX1.Rows(4).Cells(2).Value.ToString)
+
+        Me.DataGridViewX1.Rows(5).Cells(3).Value = Val(Me.DataGridViewX1.Rows(2).Cells(3).Value.ToString) - Val(Me.DataGridViewX1.Rows(3).Cells(3).Value.ToString) - Val(Me.DataGridViewX1.Rows(4).Cells(3).Value.ToString)
+
+        Me.DataGridViewX1.Rows(5).Cells(4).Value = Val(Me.DataGridViewX1.Rows(2).Cells(4).Value.ToString) - Val(Me.DataGridViewX1.Rows(3).Cells(4).Value.ToString) - Val(Me.DataGridViewX1.Rows(4).Cells(4).Value.ToString)
+
+        Me.DataGridViewX1.Rows(5).Cells(5).Value = Val(Me.DataGridViewX1.Rows(2).Cells(5).Value.ToString) - Val(Me.DataGridViewX1.Rows(3).Cells(5).Value.ToString) - Val(Me.DataGridViewX1.Rows(4).Cells(5).Value.ToString)
+
+        Dim sum = 0
+
         For i = 0 To 20
-            Me.DataGridViewX1.Rows(i).Cells(6).Value = Val(Me.DataGridViewX1.Rows(i).Cells(3).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(4).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(5).Value.ToString)
+
+            sum = Val(Me.DataGridViewX1.Rows(i).Cells(3).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(4).Value.ToString) + Val(Me.DataGridViewX1.Rows(i).Cells(5).Value.ToString)
+
+            If sum = 0 Then
+                Me.DataGridViewX1.Rows(i).Cells(6).Value = "-"
+            Else
+                Me.DataGridViewX1.Rows(i).Cells(6).Value = sum
+            End If
+
         Next
 
-        Dim v1 = Me.DataGridViewX1.Rows(21).Cells(3).Value.ToString.Replace("` ", "").Replace("/-", "")
-        Dim v2 = Me.DataGridViewX1.Rows(21).Cells(4).Value.ToString.Replace("` ", "").Replace("/-", "")
-        Dim v3 = Me.DataGridViewX1.Rows(21).Cells(5).Value.ToString.Replace("` ", "").Replace("/-", "")
-        Me.DataGridViewX1.Rows(21).Cells(6).Value = "` " & Val(v1) + Val(v2) + Val(v3) & "/-"
+        Dim v1 = Me.DataGridViewX1.Rows(21).Cells(3).Value.ToString.Replace("Rs.", "").Replace("/-", "")
+        Dim v2 = Me.DataGridViewX1.Rows(21).Cells(4).Value.ToString.Replace("Rs.", "").Replace("/-", "")
+        Dim v3 = Me.DataGridViewX1.Rows(21).Cells(5).Value.ToString.Replace("Rs.", "").Replace("/-", "")
+        Me.DataGridViewX1.Rows(21).Cells(6).Value = "Rs." & Val(v1) + Val(v2) + Val(v3) & "/-"
     End Sub
 
 
@@ -683,6 +723,7 @@ Public Class frmQuarterlyPerformance
         Me.CircularProgress1.Show()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = True
+        bliAPSFormat = Me.chkiAPS.Checked
         Me.bgwSaveStatement.RunWorkerAsync()
     End Sub
 
@@ -806,9 +847,7 @@ Public Class frmQuarterlyPerformance
             For f = 3 To 7
                 WordApp.Selection.Tables.Item(1).Cell(25, f).Select()
                 WordApp.Selection.Tables.Item(1).Cell(25, f).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter
-                WordApp.Selection.Font.Name = "Rupee Foradian"
                 WordApp.Selection.Font.Bold = 0
-                WordApp.Selection.Font.Size = 8
             Next
 
 
@@ -906,6 +945,14 @@ Public Class frmQuarterlyPerformance
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
+
+            If bliAPSFormat Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
+            End If
+
             For delay = 81 To 100
                 bgwSaveStatement.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
