@@ -43,6 +43,9 @@ Partial Class frmDAStatement
         Me.DASTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DAStatementTableAdapter()
         Me.PsWiseDACountTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PSWiseDACountTableAdapter()
         Me.bgwWord = New System.ComponentModel.BackgroundWorker()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         CType(Me.DAStatementBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -65,6 +68,9 @@ Partial Class frmDAStatement
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx1.Controls.Add(Me.chkiAPS)
+        Me.PanelEx1.Controls.Add(Me.LabelX5)
+        Me.PanelEx1.Controls.Add(Me.chkStatement)
         Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.LabelX2)
         Me.PanelEx1.Controls.Add(Me.btnGenerateByMonth)
@@ -81,7 +87,7 @@ Partial Class frmDAStatement
         Me.PanelEx1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(526, 99)
+        Me.PanelEx1.Size = New System.Drawing.Size(526, 125)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -98,11 +104,11 @@ Partial Class frmDAStatement
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(400, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(385, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(126, 99)
+        Me.CircularProgress1.Size = New System.Drawing.Size(141, 125)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 49
         Me.CircularProgress1.TabStop = False
@@ -114,7 +120,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(233, 62)
+        Me.LabelX2.Location = New System.Drawing.Point(233, 90)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 8
@@ -124,7 +130,7 @@ Partial Class frmDAStatement
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(400, 11)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(400, 39)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
         Me.btnGenerateByMonth.Size = New System.Drawing.Size(114, 29)
         Me.btnGenerateByMonth.TabIndex = 3
@@ -137,7 +143,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(8, 62)
+        Me.LabelX1.Location = New System.Drawing.Point(8, 90)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(72, 18)
         Me.LabelX1.TabIndex = 7
@@ -150,7 +156,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(231, 17)
+        Me.LabelX4.Location = New System.Drawing.Point(231, 45)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 25
@@ -160,7 +166,7 @@ Partial Class frmDAStatement
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(400, 57)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(400, 85)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(114, 29)
         Me.btnGenerateByDate.TabIndex = 6
@@ -173,7 +179,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(8, 19)
+        Me.LabelX3.Location = New System.Drawing.Point(8, 47)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 24
@@ -190,7 +196,7 @@ Partial Class frmDAStatement
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(265, 11)
+        Me.txtYear.Location = New System.Drawing.Point(265, 39)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 0
         Me.txtYear.Name = "txtYear"
@@ -218,7 +224,7 @@ Partial Class frmDAStatement
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(86, 57)
+        Me.dtFrom.Location = New System.Drawing.Point(86, 85)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -266,7 +272,7 @@ Partial Class frmDAStatement
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(86, 11)
+        Me.cmbMonth.Location = New System.Drawing.Point(86, 39)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
@@ -292,7 +298,7 @@ Partial Class frmDAStatement
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(265, 57)
+        Me.dtTo.Location = New System.Drawing.Point(265, 85)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -351,11 +357,59 @@ Partial Class frmDAStatement
         Me.bgwWord.WorkerReportsProgress = True
         Me.bgwWord.WorkerSupportsCancellation = True
         '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(86, 10)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 65
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(8, 10)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(43, 18)
+        Me.LabelX5.TabIndex = 64
+        Me.LabelX5.Text = "Format"
+        '
+        'chkStatement
+        '
+        Me.chkStatement.AutoSize = True
+        '
+        '
+        '
+        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkStatement.Location = New System.Drawing.Point(265, 10)
+        Me.chkStatement.Name = "chkStatement"
+        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
+        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkStatement.TabIndex = 63
+        Me.chkStatement.TabStop = False
+        Me.chkStatement.Text = "Statement Only"
+        '
         'frmDAStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(526, 99)
+        Me.ClientSize = New System.Drawing.Size(526, 125)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -397,4 +451,7 @@ Partial Class frmDAStatement
     Friend WithEvents PsWiseDACountTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PSWiseDACountTableAdapter
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwWord As System.ComponentModel.BackgroundWorker
+    Friend WithEvents chkiAPS As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents chkStatement As DevComponents.DotNetBar.Controls.CheckBoxX
 End Class

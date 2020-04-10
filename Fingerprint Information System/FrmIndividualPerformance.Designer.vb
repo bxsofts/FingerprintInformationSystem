@@ -25,8 +25,10 @@ Partial Class FrmIndividualPerformance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmIndividualPerformance))
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
-        Me.chkIncludeTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
@@ -55,8 +57,10 @@ Partial Class FrmIndividualPerformance
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.PanelEx2.Controls.Add(Me.chkiAPS)
+        Me.PanelEx2.Controls.Add(Me.LabelX5)
+        Me.PanelEx2.Controls.Add(Me.chkStatement)
         Me.PanelEx2.Controls.Add(Me.CircularProgress1)
-        Me.PanelEx2.Controls.Add(Me.chkIncludeTI)
         Me.PanelEx2.Controls.Add(Me.btnGenerateByMonth)
         Me.PanelEx2.Controls.Add(Me.LabelX4)
         Me.PanelEx2.Controls.Add(Me.LabelX3)
@@ -71,7 +75,7 @@ Partial Class FrmIndividualPerformance
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx2.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(495, 134)
+        Me.PanelEx2.Size = New System.Drawing.Size(495, 110)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -79,6 +83,54 @@ Partial Class FrmIndividualPerformance
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 26
+        '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(95, 7)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 65
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(12, 7)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(43, 18)
+        Me.LabelX5.TabIndex = 64
+        Me.LabelX5.Text = "Format"
+        '
+        'chkStatement
+        '
+        Me.chkStatement.AutoSize = True
+        '
+        '
+        '
+        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkStatement.Location = New System.Drawing.Point(261, 7)
+        Me.chkStatement.Name = "chkStatement"
+        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
+        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkStatement.TabIndex = 63
+        Me.chkStatement.TabStop = False
+        Me.chkStatement.Text = "Statement Only"
         '
         'CircularProgress1
         '
@@ -92,30 +144,16 @@ Partial Class FrmIndividualPerformance
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(115, 134)
+        Me.CircularProgress1.Size = New System.Drawing.Size(115, 110)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 51
         Me.CircularProgress1.TabStop = False
-        '
-        'chkIncludeTI
-        '
-        Me.chkIncludeTI.AutoSize = True
-        '
-        '
-        '
-        Me.chkIncludeTI.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkIncludeTI.Location = New System.Drawing.Point(12, 12)
-        Me.chkIncludeTI.Name = "chkIncludeTI"
-        Me.chkIncludeTI.Size = New System.Drawing.Size(158, 18)
-        Me.chkIncludeTI.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkIncludeTI.TabIndex = 31
-        Me.chkIncludeTI.Text = "Include Tester Inspector"
         '
         'btnGenerateByMonth
         '
         Me.btnGenerateByMonth.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByMonth.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByMonth.Location = New System.Drawing.Point(396, 46)
+        Me.btnGenerateByMonth.Location = New System.Drawing.Point(396, 34)
         Me.btnGenerateByMonth.Name = "btnGenerateByMonth"
         Me.btnGenerateByMonth.Size = New System.Drawing.Size(84, 29)
         Me.btnGenerateByMonth.TabIndex = 3
@@ -128,7 +166,7 @@ Partial Class FrmIndividualPerformance
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(229, 52)
+        Me.LabelX4.Location = New System.Drawing.Point(229, 40)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 30
@@ -141,7 +179,7 @@ Partial Class FrmIndividualPerformance
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(12, 52)
+        Me.LabelX3.Location = New System.Drawing.Point(12, 40)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 29
@@ -158,7 +196,7 @@ Partial Class FrmIndividualPerformance
         Me.txtYear.FocusHighlightEnabled = True
         Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(261, 46)
+        Me.txtYear.Location = New System.Drawing.Point(261, 34)
         Me.txtYear.MaxValue = 2099
         Me.txtYear.MinValue = 0
         Me.txtYear.Name = "txtYear"
@@ -178,7 +216,7 @@ Partial Class FrmIndividualPerformance
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(95, 44)
+        Me.cmbMonth.Location = New System.Drawing.Point(95, 32)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
@@ -193,7 +231,7 @@ Partial Class FrmIndividualPerformance
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(229, 100)
+        Me.LabelX2.Location = New System.Drawing.Point(229, 75)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 13
@@ -206,7 +244,7 @@ Partial Class FrmIndividualPerformance
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(12, 98)
+        Me.LabelX1.Location = New System.Drawing.Point(12, 73)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(72, 18)
         Me.LabelX1.TabIndex = 12
@@ -216,7 +254,7 @@ Partial Class FrmIndividualPerformance
         '
         Me.btnGenerateByDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateByDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateByDate.Location = New System.Drawing.Point(396, 95)
+        Me.btnGenerateByDate.Location = New System.Drawing.Point(396, 70)
         Me.btnGenerateByDate.Name = "btnGenerateByDate"
         Me.btnGenerateByDate.Size = New System.Drawing.Size(84, 29)
         Me.btnGenerateByDate.TabIndex = 6
@@ -240,7 +278,7 @@ Partial Class FrmIndividualPerformance
         Me.dtFrom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtFrom.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtFrom.IsPopupCalendarOpen = False
-        Me.dtFrom.Location = New System.Drawing.Point(95, 93)
+        Me.dtFrom.Location = New System.Drawing.Point(95, 68)
         Me.dtFrom.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtFrom.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -296,7 +334,7 @@ Partial Class FrmIndividualPerformance
         Me.dtTo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtTo.Format = DevComponents.Editors.eDateTimePickerFormat.Custom
         Me.dtTo.IsPopupCalendarOpen = False
-        Me.dtTo.Location = New System.Drawing.Point(261, 95)
+        Me.dtTo.Location = New System.Drawing.Point(261, 70)
         Me.dtTo.MaxDate = New Date(2100, 12, 31, 0, 0, 0, 0)
         Me.dtTo.MinDate = New Date(1900, 1, 1, 0, 0, 0, 0)
         '
@@ -368,7 +406,7 @@ Partial Class FrmIndividualPerformance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(495, 134)
+        Me.ClientSize = New System.Drawing.Size(495, 110)
         Me.Controls.Add(Me.PanelEx2)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -407,8 +445,10 @@ Partial Class FrmIndividualPerformance
     Friend WithEvents DARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter
     Friend WithEvents FPARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
     Friend WithEvents CDRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter
-    Friend WithEvents chkIncludeTI As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
     Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter
+    Friend WithEvents chkiAPS As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents chkStatement As DevComponents.DotNetBar.Controls.CheckBoxX
 End Class

@@ -13,7 +13,7 @@ Public Class frmFPAStatement
         On Error Resume Next
 
         Me.Cursor = Cursors.WaitCursor
-        Me.chkLetter.Checked = True
+        Me.chkiAPS.Checked = True
 
         If Me.ChalanTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableTableAdapter1.Connection.Close()
         Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
@@ -359,7 +359,7 @@ Public Class frmFPAStatement
 
 #Region "PRINT REPORTS"
 
-    Private Sub PrintReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
+    Private Sub PrintReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateReport.Click
         Try
 
             Me.Cursor = Cursors.WaitCursor
@@ -370,8 +370,8 @@ Public Class frmFPAStatement
                 GenerateLetter()
             End If
 
-            If Me.chkCoB.Checked Then
-                GenerateCoB()
+            If Me.chkiAPS.Checked Then
+                GenerateiAPS()
             End If
 
             If Me.chkExcel.Checked Then
@@ -711,7 +711,7 @@ Public Class frmFPAStatement
         ClosePleaseWaitForm()
     End Sub
 
-    Private Sub GenerateCoB()
+    Private Sub GenerateiAPS()
         Try
             ShowPleaseWaitForm()
 
@@ -727,49 +727,29 @@ Public Class frmFPAStatement
 
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
-            If WordApp.Version < 12 Then
-                WordApp.Selection.Document.PageSetup.LeftMargin = 72
-                WordApp.Selection.Document.PageSetup.RightMargin = 72
-                WordApp.Selection.Document.PageSetup.TopMargin = 72
-                WordApp.Selection.Document.PageSetup.BottomMargin = 72
-                WordApp.Selection.ParagraphFormat.Space15()
-            Else
-                WordApp.Selection.Document.PageSetup.TopMargin = 45
-                WordApp.Selection.Document.PageSetup.BottomMargin = 40
-            End If
-
+           
+            WordApp.Selection.Document.PageSetup.TopMargin = 45
+            WordApp.Selection.Document.PageSetup.BottomMargin = 40
+            WordApp.Selection.Document.PageSetup.LeftMargin = 60
+       
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Underline = 1
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-            WordApp.Selection.TypeText("CoB MESSAGE" & vbNewLine & vbNewLine)
-            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-            WordApp.Selection.Font.Size = 11
-            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText((FullOfficeName & ", " & FullDistrictName).ToUpper)
+
+            WordApp.Selection.TypeParagraph()
             WordApp.Selection.Font.Underline = 0
-            WordApp.Selection.TypeText("TO:" & vbTab & " THE DIRECTOR, FPB, TVPM" & vbNewLine)
 
-            WordApp.Selection.TypeText(("FROM:" & vbTab & "Tester Inspector, " & ShortOfficeName & ", " & ShortDistrictName).ToUpper & vbNewLine)
-            WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. " & PdlFPAttestation & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE:    /" & GenerateDateWithoutDay() & vbNewLine)
-            WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
-            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-            WordApp.Selection.Font.Bold = 0
+            Dim bodytext = "Details of Revenue Income " & datevalue
+            WordApp.Selection.TypeText(bodytext.ToUpper)
 
-            Dim bodytext = "Details of Revenue Income from Fingerprint Attestation " & datevalue & " are furnished below:"
-
-
-            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
-
-            WordApp.Selection.Paragraphs.DecreaseSpacing()
-
-            WordApp.Selection.TypeText(vbTab & bodytext.ToUpper)
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
+
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 11
@@ -856,13 +836,11 @@ Public Class frmFPAStatement
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight
             WordApp.Selection.TypeText("Total")
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
-            WordApp.Selection.Font.Name = "Rupee Foradian"
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.Font.Size = 10
+           
 
             Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
 
-            Dim p2 = "` " & totalamount & "/-"
+            Dim p2 = "Rs." & totalamount & "/-"
             WordApp.Selection.TypeText(p2)
             WordApp.Selection.Font.Name = oldfont
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
@@ -950,6 +928,10 @@ Public Class frmFPAStatement
 
             End If
 
+            WordApp.Selection.TypeParagraph()
+
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
+
             If blUseTIinLetter Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
@@ -961,6 +943,12 @@ Public Class frmFPAStatement
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
+
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
 
 
             If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then

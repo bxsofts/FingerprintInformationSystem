@@ -8,12 +8,18 @@ Public Class frmDAStatement
 
     Dim datevalue As String = vbNullString
     Dim TotalDACount As Integer
+    Dim bliAPSFormat As Boolean = True
 
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next
 
         Me.Cursor = Cursors.WaitCursor
+
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkDAStatement", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.ProgressText = ""
@@ -68,6 +74,22 @@ Public Class frmDAStatement
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
+
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+            End Select
+
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkDAStatement", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkDAStatement", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
+    End Sub
 
     Public Sub GenerateReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateByDate.Click, btnGenerateByMonth.Click
         Try
@@ -96,6 +118,7 @@ Public Class frmDAStatement
             End Select
 
             
+            bliAPSFormat = Me.chkiAPS.Checked
 
             Me.CircularProgress1.Show()
             Me.CircularProgress1.ProgressText = ""
@@ -163,7 +186,7 @@ Public Class frmDAStatement
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientPortrait
             WordApp.Selection.Document.PageSetup.TopMargin = 25
             WordApp.Selection.Document.PageSetup.BottomMargin = 25
-            WordApp.Selection.Document.PageSetup.LeftMargin = 40
+            WordApp.Selection.Document.PageSetup.LeftMargin = 75
             WordApp.Selection.NoProofing = 1
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineSingle
@@ -194,9 +217,9 @@ Public Class frmDAStatement
             WordApp.Selection.Tables.Item(1).AllowAutoFit = True
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(40, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(150, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(80, Word.WdRulerStyle.wdAdjustFirstColumn)
 
             WordApp.Selection.Tables.Item(1).Cell(1, 1).Select()
@@ -287,6 +310,16 @@ Public Class frmDAStatement
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
             End If
+
+
+            If bliAPSFormat Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
+            End If
+
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
             bgwWord.ReportProgress(100)
             System.Threading.Thread.Sleep(100)

@@ -10,19 +10,22 @@ Public Class FrmIndividualPerformance
     Dim SubHeader As String = "'"
     Dim OfficerList(4) As String
     Dim ArrayLength As Integer = 0
+    Dim bliAPSFormat As Boolean = True
 
 
     Private Sub LoadOfficerDetails() Handles MyBase.Load
         On Error Resume Next
         
         Me.Cursor = Cursors.WaitCursor
+        Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkIPStatement", 1)
+        If chkbox = "1" Then Me.chkiAPS.Checked = True
+        If chkbox = "2" Then Me.chkStatement.Checked = True
+
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
         Control.CheckForIllegalCrossThreadCalls = False
-
-        Me.chkIncludeTI.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "IncludeTI", 0)
 
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
         Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
@@ -71,22 +74,25 @@ Public Class FrmIndividualPerformance
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub IncludeTI() Handles chkIncludeTI.Click
-        On Error Resume Next
-        Dim s As Boolean = chkIncludeTI.Checked
-        Dim v As Integer
-        If s Then v = 0 Else v = 1
+    Private Sub SaveCheckBox(sender As Object, e As EventArgs) Handles chkiAPS.Click, chkStatement.Click
+        Try
+            Dim x As String = "1"
+            Select Case DirectCast(sender, Control).Name
 
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "IncludeTI", v, Microsoft.Win32.RegistryValueKind.String)
+                Case chkiAPS.Name
+                    x = "1"
+                Case chkStatement.Name
+                    x = "2"
+            End Select
 
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkIPStatement", x, Microsoft.Win32.RegistryValueKind.String)
+        Catch ex As Exception
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkIPStatement", "1", Microsoft.Win32.RegistryValueKind.String)
+        End Try
     End Sub
 
     Private Function GetArrayLength()
         ArrayLength = 0
-        If TI <> ", TI" And Me.chkIncludeTI.Checked Then
-            OfficerList(ArrayLength) = TI
-            ArrayLength = ArrayLength + 1
-        End If
 
         If FPE1 <> ", FPE" Then
             OfficerList(ArrayLength) = FPE1
@@ -126,7 +132,7 @@ Public Class FrmIndividualPerformance
                     Me.Cursor = Cursors.Default
                     Exit Sub
                 End If
-                Header = FullOfficeName & ", " & FullDistrictName & vbNewLine & "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
+                    Header = "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
                 SubHeader = "Details of additional duties attended by the staff of this unit during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
@@ -134,13 +140,15 @@ Public Class FrmIndividualPerformance
                     Dim d As Integer = Date.DaysInMonth(y, m)
                     d1 = New Date(y, m, 1)
                     d2 = New Date(y, m, d)
-                    Header = FullOfficeName & ", " & FullDistrictName & vbNewLine & "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-                    SubHeader = "Details of additional duties attended by the staff of this unit during the the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+                    Header = "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
+                    SubHeader = "Details of additional duties attended by the staff of this unit during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
             End Select
 
-        Me.CircularProgress1.Show()
-        Me.CircularProgress1.ProgressText = ""
-        Me.CircularProgress1.IsRunning = True
+            Me.CircularProgress1.Show()
+            Me.CircularProgress1.ProgressText = ""
+            Me.CircularProgress1.IsRunning = True
+            bliAPSFormat = Me.chkiAPS.Checked
+
             bgwLetter.RunWorkerAsync()
 
         Catch ex As Exception
@@ -188,36 +196,41 @@ Public Class FrmIndividualPerformance
             Next
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
-            ' WordApp.Selection.Document.PageSetup.LeftMargin = 25
-            ' WordApp.Selection.Document.PageSetup.RightMargin = 25
-            ' WordApp.Selection.Document.PageSetup.TopMargin = 30
-            '  WordApp.Selection.Document.PageSetup.BottomMargin = 10
+
+            WordApp.Selection.Document.PageSetup.TopMargin = 40
+            WordApp.Selection.Document.PageSetup.BottomMargin = 20
 
             WordApp.Selection.NoProofing = 1
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+            WordApp.Selection.Font.Underline = 1
 
+            WordApp.Selection.TypeText((FullOfficeName & ", " & FullDistrictName).ToUpper & vbCrLf)
+
+            WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeText(Header.ToUpper)
+
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.ParagraphFormat.Space1()
             WordApp.Selection.TypeParagraph()
             ' WordApp.Selection.Paragraphs.DecreaseSpacing()
             Dim RowCount = GetArrayLength()
 
-            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 1, 9)
+            WordApp.Selection.Tables.Add(WordApp.Selection.Range, RowCount + 1, 11)
 
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.Tables.Item(1).AllowAutoFit = False
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(28, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(120, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(85, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(130, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(6).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(7).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(8).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(9).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(10).SetWidth(65, Word.WdRulerStyle.wdAdjustFirstColumn)
 
             For delay = 21 To 30
                 bgwLetter.ReportProgress(delay)
@@ -239,25 +252,33 @@ Public Class FrmIndividualPerformance
 
             WordApp.Selection.Tables.Item(1).Cell(1, 4).Select()
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. of chance prints developed")
+            WordApp.Selection.TypeText("No. of CPs developed")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 5).Select()
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. of chance prints eliminated")
+            WordApp.Selection.TypeText("No. of CPs eliminated")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 6).Select()
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. of chance prints unfit")
+            WordApp.Selection.TypeText("No. of CPs unfit")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 7).Select()
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. of useful chance prints remaining")
+            WordApp.Selection.TypeText("No. of CPs remaining")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 8).Select()
             WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText("No. of chance prints/cases identified")
+            WordApp.Selection.TypeText("No. of CPs/cases searched in AFIS")
 
             WordApp.Selection.Tables.Item(1).Cell(1, 9).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("No. of CPs/cases identified in AFIS")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 10).Select()
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.TypeText("Total No. of CPs/cases identified")
+
+            WordApp.Selection.Tables.Item(1).Cell(1, 11).Select()
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.TypeText("Remarks")
 
@@ -309,7 +330,7 @@ Public Class FrmIndividualPerformance
                 If cpr = "" Or cpr = "0" Then cpr = "-"
                 WordApp.Selection.TypeText(cpr)
 
-                WordApp.Selection.Tables.Item(1).Cell(i, 8).Select()
+                WordApp.Selection.Tables.Item(1).Cell(i, 10).Select()
                 Dim cpi As String = Me.IdentificationRegisterTableAdapter1.ScalarQueryCPsIdentifiedBy(io, d1, d2).ToString
                 If cpi = "" Or cpi = "0" Then cpi = "-"
 
@@ -331,7 +352,7 @@ Public Class FrmIndividualPerformance
 
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 9).Select()
+            WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 11).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
@@ -363,6 +384,12 @@ Public Class FrmIndividualPerformance
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
+
+            If bliAPSFormat Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
             End If
 
             For delay = 91 To 100
