@@ -1291,11 +1291,7 @@ Public Class frmWeeklyDiaryDE
 
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
-            wdBooks("unit1").Range.Text = unit.ToUpper
             wdBooks("header").Range.Text = header
-            wdBooks("officername").Range.Text = wdOfficerName
-            wdBooks("designation").Range.Text = designation
-            wdBooks("unit2").Range.Text = unit
 
             Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
 
