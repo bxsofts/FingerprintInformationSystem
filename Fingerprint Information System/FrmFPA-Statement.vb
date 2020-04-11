@@ -19,6 +19,10 @@ Public Class frmFPAStatement
         Me.ChalanTableTableAdapter1.Connection.ConnectionString = sConString
         Me.ChalanTableTableAdapter1.Connection.Open()
 
+        If Me.RevenueCollectionTableAdapter1.Connection.State = ConnectionState.Open Then Me.RevenueCollectionTableAdapter1.Connection.Close()
+        Me.RevenueCollectionTableAdapter1.Connection.ConnectionString = sConString
+        Me.RevenueCollectionTableAdapter1.Connection.Open()
+
 
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
@@ -1174,7 +1178,7 @@ Public Class frmFPAStatement
 
 #End Region
 
-    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
             Me.Cursor = Cursors.WaitCursor
             Dim sMonth As String = Me.cmbMonth.Text & " " & Me.txtYear.Text
@@ -1194,4 +1198,46 @@ Public Class frmFPAStatement
 
 
    
+    Private Sub SaveValues() Handles btnSave.Click
+        Try
+            If Not IsMonthStmt Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No data to save.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            For i = 0 To 11
+                If Me.dgvSum.Rows(i).Cells(0).Value = "" Then Exit Sub
+                Dim dgvr As FingerPrintDataSet.RevenueCollectionRow = Me.FingerPrintDataSet.RevenueCollection.NewRevenueCollectionRow
+                dgvr.FPMonth = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(0).Value)
+                dgvr.Amount = Me.dgvSum.Rows(i).Cells(1).Value
+                Me.FingerPrintDataSet.RevenueCollection.Rows.Add(dgvr)
+            Next
+
+            For i = 0 To 11
+                If Me.dgvSum.Rows(i).Cells(2).Value = "" Then Exit Sub
+                Dim dgvr As FingerPrintDataSet.RevenueCollectionRow = Me.FingerPrintDataSet.RevenueCollection.NewRevenueCollectionRow
+                dgvr.FPMonth = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(2).Value)
+                dgvr.Amount = Me.dgvSum.Rows(i).Cells(3).Value
+                Me.FingerPrintDataSet.RevenueCollection.Rows.Add(dgvr)
+            Next
+
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Function ConvertFPMonth(FPMonth As String)
+        Try
+            FPMonth = "01 - " + FPMonth
+            Dim dt As DateTime = DateTime.ParseExact(FPMonth, "dd - MMM - yyyy", System.Globalization.CultureInfo.InvariantCulture)
+            Dim x As String = dt.ToString("yyyyMM")
+            Return Val(x)
+        Catch ex As Exception
+            Return FPMonth
+        End Try
+    End Function
 End Class

@@ -341,6 +341,7 @@ Public Class frmMainInterface
                 CreateCommonSettingsTable()
                 CreateSupportingStaffTable()
                 CreateChalanRegisterTable()
+                CreateRevenueCollectionTable()
                 ModifyTables()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
@@ -1088,6 +1089,7 @@ Public Class frmMainInterface
             CreateCommonSettingsTable()
             CreateSupportingStaffTable()
             CreateChalanRegisterTable()
+            CreateRevenueCollectionTable()
             ModifyTables()
 
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
@@ -16775,6 +16777,24 @@ errhandler:
         End Try
     End Sub
 
+    Public Sub CreateRevenueCollectionTable()
+        Try
+            If DoesTableExist("RevenueCollection", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE RevenueCollection (ID COUNTER PRIMARY KEY, FPMonth NUMBER, Amount Number)", con)
+
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
+
     Public Sub CopyValuesToCulpritsRegisterTable()
         Try
             If Not DoesTableExist("CulpritsRegister", sConString) Then
@@ -17860,6 +17880,7 @@ errhandler:
             CreateLastModificationTable()
             CreateCommonSettingsTable()
             CreateIdentificationRegisterTable()
+            CreateRevenueCollectionTable()
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
