@@ -660,6 +660,8 @@ Public Class frmQuarterlyPerformance
         Dim v2 = Me.DataGridViewX1.Rows(21).Cells(4).Value.ToString.Replace("Rs.", "").Replace("/-", "")
         Dim v3 = Me.DataGridViewX1.Rows(21).Cells(5).Value.ToString.Replace("Rs.", "").Replace("/-", "")
         Me.DataGridViewX1.Rows(21).Cells(6).Value = "Rs." & Val(v1) + Val(v2) + Val(v3) & "/-"
+
+
     End Sub
 
 
