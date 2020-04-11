@@ -266,9 +266,7 @@ Public Class frmAnnualStatistics
             WordApp.Selection.TypeText("Amount realized towards expert opinion fee and fee for taking Finger Prints for getting PCC and travel Abroad")
 
             WordApp.Selection.Tables.Item(1).Cell(11, 3).Select()
-            WordApp.Selection.Font.Name = "Rupee Foradian"
-            WordApp.Selection.Font.Size = 9
-            WordApp.Selection.TypeText("` " & Val(Me.FPARegisterTableAdapter1.AmountRemitted(d1, d2)) & "/-")
+            WordApp.Selection.TypeText("Rs." & Val(Me.FPARegisterTableAdapter1.AmountRemitted(d1, d2)) & "/-")
 
             WordApp.Selection.Tables.Item(1).Cell(11, 3).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
