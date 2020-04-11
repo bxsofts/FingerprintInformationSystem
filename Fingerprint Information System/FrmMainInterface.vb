@@ -14993,13 +14993,13 @@ errhandler:
             Dim SHO As String = Me.PSRegisterTableAdapter.FindSHO(PS)
 
             If SHO Is Nothing Then
-                SHO = "Sub Inspector of Police"
+                SHO = "The Station House Officer"
             End If
 
             If SHO.ToUpper = "IP" Then
                 SHO = "The Inspector of Police"
             Else
-                SHO = "The Sub Inspector of Police"
+                SHO = "The Station House Officer"
             End If
 
 
@@ -15458,11 +15458,31 @@ errhandler:
             WordApp.Selection.TypeText("‘S’")
             WordApp.Selection.Font.Bold = 0
 
-            WordApp.Selection.TypeText(" with eight points of identity marked therein are enclosed herewith. Please acknowledge the receipt.")
+            WordApp.Selection.TypeText(" with eight points of identity marked therein are enclosed herewith.")
 
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
+
+            If WordApp.ActiveDocument.Range.Information(Word.WdInformation.wdNumberOfPagesInDocument) > 1 Then
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekCurrentPageFooter
+
+                aDoc.ActiveWindow.ActivePane.Selection.Paragraphs.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphRight
+
+                aDoc.ActiveWindow.Selection.TypeText("Page ")
+
+                Dim CurrentPage = Word.WdFieldType.wdFieldPage
+
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, CurrentPage, , )
+
+                aDoc.ActiveWindow.Selection.TypeText(" of ")
+
+
+                Dim TotalPageCount = Word.WdFieldType.wdFieldNumPages
+                aDoc.ActiveWindow.Selection.Fields.Add(aDoc.ActiveWindow.Selection.Range, TotalPageCount, , )
+
+                aDoc.ActiveWindow.ActivePane.View.SeekView = Microsoft.Office.Interop.Word.WdSeekView.wdSeekMainDocument
+            End If
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
