@@ -115,7 +115,7 @@ Public Class frmFPAStatement
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
 
-        Dim f As Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Dim f As Font = New Font("Segoe UI", 9, FontStyle.Bold)
         sf.LineAlignment = StringAlignment.Center
         Using b As SolidBrush = New SolidBrush(Me.ForeColor)
             If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
