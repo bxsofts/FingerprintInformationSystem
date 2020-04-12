@@ -42,7 +42,7 @@
     <Shape ID="DesignTable:ChalanTable" ZOrder="12" X="583" Y="357" Height="324" Width="299" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="178" />
     <Shape ID="DesignTable:ChalanTableMonthViseSum" ZOrder="11" X="311" Y="696" Height="115" Width="283" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
     <Shape ID="DesignTable:SupportingStaff" ZOrder="10" X="520" Y="607" Height="229" Width="238" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
-    <Shape ID="DesignTable:RevenueCollection" ZOrder="1" X="864" Y="-200" Height="248" Width="267" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
+    <Shape ID="DesignTable:RevenueCollection" ZOrder="1" X="864" Y="-200" Height="210" Width="267" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

@@ -7,7 +7,7 @@ Public Class frmFPAStatement
     Dim RowCount As Integer = 0
     Dim IsMonthStmt As Boolean = True
     Dim blDGVChanged As Boolean
-
+    Dim blSaveData As Boolean
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next
@@ -109,6 +109,7 @@ Public Class frmFPAStatement
     Private Sub dgvsum_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSum.CellValueChanged
         On Error Resume Next
         blDGVChanged = True
+        blSaveData = True
         Me.dgvSum.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.BackColor = Color.Yellow
         Me.dgvSum.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.ForeColor = Color.Red
         Me.dgvSum.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.SelectionForeColor = Color.Red
@@ -135,7 +136,7 @@ Public Class frmFPAStatement
 
     End Sub
 
-    Private Sub ClearDatagridSumCells()
+    Private Sub ClearDatagridSumCellsAndLabels()
         For c = 0 To 12
             dgvSum.Rows(c).Cells(0).Value = ""
             dgvSum.Rows(c).Cells(1).Value = ""
@@ -194,10 +195,18 @@ Public Class frmFPAStatement
                 prevfinyear = d1.AddYears(-2).ToString("yy") & "-" & d1.AddYears(-1).ToString("yy")
             End If
 
-            ClearDatagridSumCells()
+            ClearDatagridSumCellsAndLabels()
 
             Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
-            Me.lblAmount1.Text = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+            Dim fpmonth As Integer = Val(d1.ToString("yyyyMM"))
+
+            Dim lbl1amount As Integer = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+            If lbl1amount = 0 Then
+                lbl1amount = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+            End If
+
+            Me.lblAmount1.Text = lbl1amount
 
 
             Dim dgvr As FingerPrintDataSet.ChalanTableRow = Me.FingerPrintDataSet.ChalanTable.NewChalanTableRow
@@ -206,6 +215,7 @@ Public Class frmFPAStatement
             Me.FingerPrintDataSet.ChalanTable.Rows.Add(dgvr)
             Me.ChalanTableBindingSource.MoveLast()
             Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+            Me.dgvChalan.Refresh()
 
             Dim TAmount1 As Integer = 0
             Dim TAmount2 As Integer = 0
@@ -219,7 +229,14 @@ Public Class frmFPAStatement
                     d = Date.DaysInMonth(y, i)
                     d1 = New Date(y, i, 1)
                     d2 = New Date(y, i, d)
-                    amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                    fpmonth = Val(d1.ToString("yyyyMM"))
+
+                    amount1 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+                    If amount1 = 0 Then
+                        amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    End If
+
                     TAmount1 = TAmount1 + amount1
 
                     dgvSum.Rows(i - 4).Cells(0).Value = MonthName(i, True) & " - " & y
@@ -229,7 +246,14 @@ Public Class frmFPAStatement
                     d = Date.DaysInMonth(y - 1, i)
                     d1 = New Date(y - 1, i, 1)
                     d2 = New Date(y - 1, i, d)
-                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                    fpmonth = Val(d1.ToString("yyyyMM"))
+
+                    amount2 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+                    If amount2 = 0 Then
+                        amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    End If
+
                     TAmount2 = TAmount2 + amount2
 
                     dgvSum.Rows(i - 4).Cells(2).Value = MonthName(i, True) & " - " & y - 1
@@ -249,7 +273,13 @@ Public Class frmFPAStatement
                     d1 = New Date(y - 1, i, 1)
                     d2 = New Date(y - 1, i, d)
 
-                    amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    fpmonth = Val(d1.ToString("yyyyMM"))
+
+                    amount1 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+                    If amount1 = 0 Then
+                        amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    End If
+
                     TAmount1 = TAmount1 + amount1
 
                     dgvSum.Rows(i - 4).Cells(0).Value = MonthName(i, True) & " - " & y - 1
@@ -258,7 +288,14 @@ Public Class frmFPAStatement
                     d = Date.DaysInMonth(y - 2, i)
                     d1 = New Date(y - 2, i, 1)
                     d2 = New Date(y - 2, i, d)
-                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                    fpmonth = Val(d1.ToString("yyyyMM"))
+
+                    amount2 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+                    If amount2 = 0 Then
+                        amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    End If
+
                     TAmount2 = TAmount2 + amount2
 
                     dgvSum.Rows(i - 4).Cells(2).Value = MonthName(i, True) & " - " & y - 2
@@ -270,7 +307,14 @@ Public Class frmFPAStatement
                     d = Date.DaysInMonth(y, j)
                     d1 = New Date(y, j, 1)
                     d2 = New Date(y, j, d)
-                    amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                    fpmonth = Val(d1.ToString("yyyyMM"))
+
+                    amount1 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+                    If amount1 = 0 Then
+                        amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    End If
+
                     TAmount1 = TAmount1 + amount1
 
                     dgvSum.Rows(i + j - 5).Cells(0).Value = MonthName(j, True) & " - " & y
@@ -279,7 +323,14 @@ Public Class frmFPAStatement
                     d = Date.DaysInMonth(y - 1, j)
                     d1 = New Date(y - 1, j, 1)
                     d2 = New Date(y - 1, j, d)
-                    amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+                    fpmonth = Val(d1.ToString("yyyyMM"))
+
+                    amount2 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+                    If amount2 = 0 Then
+                        amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+                    End If
+
                     TAmount2 = TAmount2 + amount2
 
                     dgvSum.Rows(i + j - 5).Cells(2).Value = MonthName(j, True) & " - " & y - 1
@@ -297,6 +348,7 @@ Public Class frmFPAStatement
             GenerateLabelValues()
             blDGVChanged = False
             ClearSelectionColors()
+            blSaveData = True
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -339,10 +391,11 @@ Public Class frmFPAStatement
             datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
             IsMonthStmt = False
 
-            ClearDatagridSumCells()
+            ClearDatagridSumCellsAndLabels()
             Me.ChalanTableTableAdapter1.FillByFPDateBetween(Me.FingerPrintDataSet.ChalanTable, d1, d2)
 
             Dim dgvr As FingerPrintDataSet.ChalanTableRow = Me.FingerPrintDataSet.ChalanTable.NewChalanTableRow
+            dgvr.ChalanNumber = "TOTAL REVENUE"
             dgvr.AmountRemitted = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
             Me.FingerPrintDataSet.ChalanTable.Rows.Add(dgvr)
             Me.ChalanTableBindingSource.MoveLast()
@@ -351,6 +404,7 @@ Public Class frmFPAStatement
             ShowDesktopAlert("Data generated")
             blDGVChanged = False
             ClearSelectionColors()
+            blSaveData = False
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -367,6 +421,8 @@ Public Class frmFPAStatement
         Try
 
             Me.Cursor = Cursors.WaitCursor
+
+            If blSaveData And IsMonthStmt Then SaveValues(False)
 
             RowCount = Me.FingerPrintDataSet.ChalanTable.Count
 
@@ -1197,34 +1253,57 @@ Public Class frmFPAStatement
     End Sub
 
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If Not IsMonthStmt Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("No data to save.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        SaveValues(True)
+    End Sub
+
    
-    Private Sub SaveValues() Handles btnSave.Click
+    Private Sub SaveValues(ShowMessage As Boolean)
         Try
-            If Not IsMonthStmt Then
-                DevComponents.DotNetBar.MessageBoxEx.Show("No data to save.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
 
             Me.Cursor = Cursors.WaitCursor
+
             For i = 0 To 11
                 If Me.dgvSum.Rows(i).Cells(0).Value = "" Then Exit Sub
-                Dim dgvr As FingerPrintDataSet.RevenueCollectionRow = Me.FingerPrintDataSet.RevenueCollection.NewRevenueCollectionRow
-                dgvr.FPMonth = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(0).Value)
-                dgvr.Amount = Me.dgvSum.Rows(i).Cells(1).Value
-                Me.FingerPrintDataSet.RevenueCollection.Rows.Add(dgvr)
+
+                Dim fpmonth As Integer = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(0).Value)
+                Dim amount As Integer = Val(Me.dgvSum.Rows(i).Cells(1).Value)
+
+                Me.RevenueCollectionTableAdapter1.FillByFPMonth(Me.FingerPrintDataSet.RevenueCollection, fpmonth)
+                If Me.FingerPrintDataSet.RevenueCollection.Count = 0 Then
+                    Me.RevenueCollectionTableAdapter1.InsertQuery(fpmonth, amount)
+                Else
+                    Me.RevenueCollectionTableAdapter1.UpdateAmount(amount, fpmonth)
+                End If
             Next
 
             For i = 0 To 11
                 If Me.dgvSum.Rows(i).Cells(2).Value = "" Then Exit Sub
-                Dim dgvr As FingerPrintDataSet.RevenueCollectionRow = Me.FingerPrintDataSet.RevenueCollection.NewRevenueCollectionRow
-                dgvr.FPMonth = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(2).Value)
-                dgvr.Amount = Me.dgvSum.Rows(i).Cells(3).Value
-                Me.FingerPrintDataSet.RevenueCollection.Rows.Add(dgvr)
+
+                Dim fpmonth As Integer = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(2).Value)
+                Dim amount As Integer = Val(Me.dgvSum.Rows(i).Cells(3).Value)
+
+                Me.RevenueCollectionTableAdapter1.FillByFPMonth(Me.FingerPrintDataSet.RevenueCollection, fpmonth)
+                If Me.FingerPrintDataSet.RevenueCollection.Count = 0 Then
+                    Me.RevenueCollectionTableAdapter1.InsertQuery(fpmonth, amount)
+                Else
+                    Me.RevenueCollectionTableAdapter1.UpdateAmount(amount, fpmonth)
+                End If
             Next
+
+            ClearSelectionColors()
+            blSaveData = False
+
+            If ShowMessage Then ShowDesktopAlert("Data saved successfully.")
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
-            ShowErrorMessage(ex)
+            If ShowMessage Then ShowErrorMessage(ex)
         End Try
 
         Me.Cursor = Cursors.Default
@@ -1240,4 +1319,6 @@ Public Class frmFPAStatement
             Return FPMonth
         End Try
     End Function
+
+    
 End Class
