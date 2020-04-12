@@ -1269,7 +1269,7 @@ Public Class frmFPAStatement
             Me.Cursor = Cursors.WaitCursor
 
             For i = 0 To 11
-                If Me.dgvSum.Rows(i).Cells(0).Value = "" Then Exit Sub
+                If Me.dgvSum.Rows(i).Cells(0).Value = "" Then Exit For
 
                 Dim fpmonth As Integer = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(0).Value)
                 Dim amount As Integer = Val(Me.dgvSum.Rows(i).Cells(1).Value)
@@ -1283,7 +1283,7 @@ Public Class frmFPAStatement
             Next
 
             For i = 0 To 11
-                If Me.dgvSum.Rows(i).Cells(2).Value = "" Then Exit Sub
+                If Me.dgvSum.Rows(i).Cells(2).Value = "" Then Exit For
 
                 Dim fpmonth As Integer = ConvertFPMonth(Me.dgvSum.Rows(i).Cells(2).Value)
                 Dim amount As Integer = Val(Me.dgvSum.Rows(i).Cells(3).Value)
