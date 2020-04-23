@@ -18716,4 +18716,39 @@ errhandler:
     End Sub
 
  
+    Private Sub btnCopyDBtoUSB_Click(sender As Object, e As EventArgs) Handles btnCopyDBtoUSB.Click
+        Try
+            Dim driveletter As String = ""
+            For Each d As System.IO.DriveInfo In My.Computer.FileSystem.Drives
+                If d.DriveType = IO.DriveType.Removable Then
+                    driveletter = d.Name
+                    Exit For
+                End If
+            Next
+
+            If driveletter <> "" Then
+                Dim destfile As String = driveletter & "\Fingerprint.mdb"
+                Dim blshowcopied As Boolean = False
+
+                If Not My.Computer.FileSystem.FileExists(destfile) Then
+                    blshowcopied = True
+                End If
+
+                If My.Computer.FileSystem.DirectoryExists(driveletter) Then
+                    My.Computer.FileSystem.CopyFile(strDatabaseFile, driveletter & "\Fingerprint.mdb", FileIO.UIOption.AllDialogs, FileIO.UICancelOption.DoNothing)
+
+                    If My.Computer.FileSystem.FileExists(destfile) And blshowcopied Then
+                        ShowDesktopAlert("Database copied to External drive.")
+                    End If
+                Else
+                    MessageBoxEx.Show("Error copying file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                MessageBoxEx.Show("No USB drive found.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
 End Class
