@@ -132,15 +132,16 @@
             Dim DI As Date = CDate(frmMainInterface.SOCDatagrid.SelectedCells(2).Value)
             Dim d = Today.Subtract(DI).Days
 
-            Me.cmbNatureOfReport.Items.Add("Interim")
             Me.cmbNatureOfReport.Items.Add("Preliminary")
+            Me.cmbNatureOfReport.Items.Add("Interim")
             Me.cmbNatureOfReport.Items.Add("Untraced")
 
             If photoreceived.ToLower <> "yes" Then
                 Me.cmbNatureOfReport.Items.Add("Awaiting Photographs")
             End If
-
             Me.cmbNatureOfReport.Items.Add("Forward Photographs")
+            Me.cmbNatureOfReport.Items.Add("Inmates Print - Request")
+            Me.cmbNatureOfReport.Items.Add("Inmates Print - Reminder")
             Me.cmbNatureOfReport.Items.Add("Suspect Comparison")
 
             If Me.RSOCDatagrid.RowCount = 0 Then

@@ -13386,6 +13386,16 @@ errhandler:
                 Exit Sub
             End If
 
+            If ReportNature = "Inmates Print - Request" Then
+                InmateRequest()
+                Exit Sub
+            End If
+
+            If ReportNature = "Inmates Print - Reminder" Then
+                InmateReminder()
+                Exit Sub
+            End If
+
             ShowPleaseWaitForm()
 
             Me.Cursor = Cursors.WaitCursor
@@ -13729,6 +13739,160 @@ errhandler:
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         End Try
+    End Sub
+
+    Private Sub InmateRequest()
+        Try
+            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\InmatesRequest.docx"
+
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            ShowPleaseWaitForm()
+
+            Dim ps As String = Me.SOCDatagrid.SelectedCells(5).Value.ToString
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
+
+            If sho Is Nothing Then
+                sho = "Station House Officer"
+            End If
+
+
+            If sho.ToUpper = "IP" Then
+                sho = "The Inspector of Police"
+            Else
+                sho = "The Sub Inspector of Police"
+            End If
+
+
+            Dim cr = Me.SOCDatagrid.SelectedCells(6).Value.ToString()
+
+            Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
+            FileNo = FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+            wdDoc.Range.NoProofing = 1
+
+            wdBooks("Station1").Range.Text = sho.ToUpper & ", " & ps.ToUpper
+            wdBooks("Unit1").Range.Text = FullDistrictName.ToUpper
+            wdBooks("SOCNo1").Range.Text = FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & "Date: " & GenerateDate(True)
+            wdBooks("CRNo1").Range.Text = cr
+
+            wdBooks("Station2").Range.Text = sho.ToUpper & ", " & ps.ToUpper
+            wdBooks("Unit2").Range.Text = ShortDistrictName.ToUpper
+            wdBooks("SOCNo2").Range.Text = FileNo & vbTab & vbTab & vbTab & vbTab & vbTab & "Date: " & GenerateDate(True)
+            wdBooks("CRNo2").Range.Text = cr
+
+            ClosePleaseWaitForm()
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            ReleaseObject(wdBooks)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp.Visible = True
+            wdApp = Nothing
+
+        Catch ex As Exception
+            ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub InmateReminder()
+
+        Try
+            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\InmatesReminder.docx"
+
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            ShowPleaseWaitForm()
+
+            Dim ps As String = Me.SOCDatagrid.SelectedCells(5).Value.ToString
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
+
+            If sho Is Nothing Then
+                sho = "Station House Officer"
+            End If
+
+
+            If sho.ToUpper = "IP" Then
+                sho = "The Inspector of Police"
+            Else
+                sho = "The Sub Inspector of Police"
+            End If
+
+
+            Dim cr = Me.SOCDatagrid.SelectedCells(6).Value.ToString()
+            Dim us = Me.SOCDatagrid.SelectedCells(7).Value.ToString()
+
+            Dim FileNo As String = Me.SOCDatagrid.SelectedCells(0).Value.ToString()
+
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
+            FileNo = "No: " & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+            wdDoc.Range.NoProofing = 1
+
+            wdBooks("SOCNo").Range.Text = FileNo
+            wdBooks("Unit1").Range.Text = FullDistrictName
+            wdBooks("Date").Range.Text = "Date: " & GenerateDate(True)
+            wdBooks("Unit2").Range.Text = FullDistrictName
+            wdBooks("SHO").Range.Text = sho
+            wdBooks("Station").Range.Text = ps
+            wdBooks("Ref").Range.Text = "Cr.No. " & cr & " u/s " & us & " of " & ps
+
+            ClosePleaseWaitForm()
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            ReleaseObject(wdBooks)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp.Visible = True
+            wdApp = Nothing
+
+        Catch ex As Exception
+            ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
+        End Try
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Function GetSalutation(OfficerName As String) As String
@@ -15733,7 +15897,14 @@ errhandler:
 
                 Exit Sub
             End If
-            If (Me.SOCDatagrid.SelectedCells(13).Value.ToString = "0") Then
+
+            Dim CPD As Integer = CInt(Me.SOCDatagrid.SelectedCells(10).Value.ToString)
+            Dim CPU As Integer = CInt(Me.SOCDatagrid.SelectedCells(11).Value.ToString)
+            Dim CPE As Integer = CInt(Me.SOCDatagrid.SelectedCells(12).Value.ToString)
+            Dim CPR As Integer = CPD - CPU - CPE
+
+
+            If CPR = 0 Then
                 If DevComponents.DotNetBar.MessageBoxEx.Show("No. of prints remaining for search is zero.Do you want to generate the report?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
             End If
 

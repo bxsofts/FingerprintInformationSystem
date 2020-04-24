@@ -204,13 +204,12 @@ Partial Class FrmSOCReportSentStatus
         Me.cmbNatureOfReport.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbNatureOfReport.ForeColor = System.Drawing.Color.Black
         Me.cmbNatureOfReport.FormattingEnabled = True
-        Me.cmbNatureOfReport.ItemHeight = 23
+        Me.cmbNatureOfReport.ItemHeight = 24
         Me.cmbNatureOfReport.Location = New System.Drawing.Point(116, 152)
         Me.cmbNatureOfReport.MaxDropDownItems = 35
         Me.cmbNatureOfReport.MaxLength = 255
         Me.cmbNatureOfReport.Name = "cmbNatureOfReport"
-        Me.cmbNatureOfReport.Size = New System.Drawing.Size(269, 29)
-        Me.cmbNatureOfReport.Sorted = True
+        Me.cmbNatureOfReport.Size = New System.Drawing.Size(269, 30)
         Me.cmbNatureOfReport.TabIndex = 2
         Me.cmbNatureOfReport.WatermarkText = "Nature of Report"
         '
@@ -300,7 +299,7 @@ Partial Class FrmSOCReportSentStatus
         Me.RSOCDatagrid.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.RSOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.RSOCDatagrid.EnableHeadersVisualStyles = False
-        Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.RSOCDatagrid.Location = New System.Drawing.Point(0, 229)
         Me.RSOCDatagrid.MultiSelect = False
         Me.RSOCDatagrid.Name = "RSOCDatagrid"
