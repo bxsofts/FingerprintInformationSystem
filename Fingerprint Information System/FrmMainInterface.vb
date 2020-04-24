@@ -17568,8 +17568,8 @@ errhandler:
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            Dim dtlastbackup As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
-            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & dtlastbackup & "; " & LatestSOCNumber & "; " & LatestSOCDI
+            Dim dtlastmodified As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
+            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & dtlastmodified & "; " & LatestSOCNumber & "; " & LatestSOCDI
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -17682,62 +17682,73 @@ errhandler:
 
             Dim remotesoccount As Integer = 0
             Dim description As String = ""
+            Dim dtlastremotemodified As Date
 
             If Results.Files.Count > 0 Then
                 description = Results.Files(0).Description
                 Dim SplitText() = Strings.Split(description, "; ")
                 Dim u = SplitText.GetUpperBound(0)
                 remotesoccount = Val(SplitText(u))
+                Dim strlastremotemodified As String = SplitText(1)
+                dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
             End If
 
             Dim localsoccount As Integer = e.Argument
+            Dim dtlastlocalmodified As Date = GetLastModificationDate()
+            Dim strlastlocalmodified As String = dtlastlocalmodified.ToString("dd-MM-yyyy HH:mm:ss")
 
-            If localsoccount <= remotesoccount Then
+            If localsoccount < remotesoccount Then
                 Exit Sub
             End If
 
-            ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
-
-            Dim BackupTime As Date = Now
-            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
-            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
-            Dim BackupFileName As String = "FingerPrintDB.mdb"
-
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            body.Name = BackupFileName
-            Dim dtlastbackup As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
-            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & dtlastbackup & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & localsoccount
-            body.MimeType = "database/mdb"
-
-            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
-
-            dFileSize = FileLen(tmpFileName)
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
-
-            If Results.Files.Count = 0 Then
-                Dim parentlist As New List(Of String)
-                parentlist.Add(BackupFolderID)
-                body.Parents = parentlist
-                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
-                UploadRequest.Fields = "id"
-                UploadRequest.Upload()
-            Else
-                Dim RemoteFileID As String = Results.Files(0).Id
-                Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
-                UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
-                UpdateRequest.Fields = "id"
-                UpdateRequest.Upload()
+            If localsoccount = remotesoccount Then
+                If dtlastlocalmodified.Date <= dtlastremotemodified.Date Then
+                    Exit Sub
+                End If
             End If
 
+                ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
 
-            Stream.Close()
+                Dim BackupTime As Date = Now
+                Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
+                Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+                Dim BackupFileName As String = "FingerPrintDB.mdb"
+
+                Dim body As New Google.Apis.Drive.v3.Data.File()
+                body.Name = BackupFileName
+
+                body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & strlastlocalmodified & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & localsoccount
+                body.MimeType = "database/mdb"
+
+                Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
+                My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
+
+                dFileSize = FileLen(tmpFileName)
+                dFormatedFileSize = CalculateFileSize(dFileSize)
+
+                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+                Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+                If Results.Files.Count = 0 Then
+                    Dim parentlist As New List(Of String)
+                    parentlist.Add(BackupFolderID)
+                    body.Parents = parentlist
+                    Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                    UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                    '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
+                    UploadRequest.Fields = "id"
+                    UploadRequest.Upload()
+                Else
+                    Dim RemoteFileID As String = Results.Files(0).Id
+                    Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
+                    UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                    '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
+                    UpdateRequest.Fields = "id"
+                    UpdateRequest.Upload()
+                End If
+
+
+                Stream.Close()
         Catch ex As Exception
 
         End Try
