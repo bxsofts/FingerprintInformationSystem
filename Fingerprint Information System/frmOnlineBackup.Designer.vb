@@ -37,13 +37,13 @@ Partial Class frmOnlineBackup
         Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
-        Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.BackupTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LastModificationDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Remarks = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.BackupTime = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.FileID = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.LastModDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LastSOCNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblSelectedFolder = New DevComponents.DotNetBar.LabelItem()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
@@ -55,6 +55,8 @@ Partial Class frmOnlineBackup
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.bgwListAllFiles = New System.ComponentModel.BackgroundWorker()
+        Me.DI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TotalRecords = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -167,7 +169,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1084, 539)
+        Me.PanelEx1.Size = New System.Drawing.Size(1131, 539)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -186,7 +188,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(921, 539)
+        Me.PanelEx3.Size = New System.Drawing.Size(968, 539)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -209,7 +211,7 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(921, 516)
+        Me.GroupPanel1.Size = New System.Drawing.Size(968, 516)
         '
         '
         '
@@ -248,7 +250,7 @@ Partial Class frmOnlineBackup
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(358, 311)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(382, 311)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(199, 18)
         Me.lblProgressStatus.TabIndex = 2
@@ -263,7 +265,7 @@ Partial Class frmOnlineBackup
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(397, 186)
+        Me.CircularProgress1.Location = New System.Drawing.Point(421, 186)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -282,7 +284,7 @@ Partial Class frmOnlineBackup
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupTime, Me.FileID, Me.FileSize, Me.UploadedBy, Me.LastModificationDate, Me.Remarks})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupTime, Me.FileID, Me.FileSize, Me.UploadedBy, Me.LastModDate, Me.LastSOCNo, Me.DI, Me.TotalRecords})
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -293,7 +295,7 @@ Partial Class frmOnlineBackup
         Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(915, 492)
+        Me.listViewEx1.Size = New System.Drawing.Size(962, 492)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -324,15 +326,15 @@ Partial Class frmOnlineBackup
         Me.UploadedBy.Text = "Uploaded By"
         Me.UploadedBy.Width = 175
         '
-        'LastModificationDate
+        'LastModDate
         '
-        Me.LastModificationDate.Text = "Last Modified Date"
-        Me.LastModificationDate.Width = 0
+        Me.LastModDate.Text = "Last Modification Date"
+        Me.LastModDate.Width = 0
         '
-        'Remarks
+        'LastSOCNo
         '
-        Me.Remarks.Text = "Remarks"
-        Me.Remarks.Width = 225
+        Me.LastSOCNo.Text = "Last SOC No."
+        Me.LastSOCNo.Width = 90
         '
         'Bar1
         '
@@ -344,7 +346,7 @@ Partial Class frmOnlineBackup
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblSelectedFolder, Me.lblItemCount, Me.lblTotalFileSize})
         Me.Bar1.Location = New System.Drawing.Point(0, 516)
         Me.Bar1.Name = "Bar1"
-        Me.Bar1.Size = New System.Drawing.Size(921, 23)
+        Me.Bar1.Size = New System.Drawing.Size(968, 23)
         Me.Bar1.Stretch = True
         Me.Bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Bar1.TabIndex = 24
@@ -384,7 +386,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx2.Controls.Add(Me.btnRestoreDatabase)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelEx2.Location = New System.Drawing.Point(921, 0)
+        Me.PanelEx2.Location = New System.Drawing.Point(968, 0)
         Me.PanelEx2.Name = "PanelEx2"
         Me.PanelEx2.Size = New System.Drawing.Size(163, 539)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -433,11 +435,21 @@ Partial Class frmOnlineBackup
         Me.bgwListAllFiles.WorkerReportsProgress = True
         Me.bgwListAllFiles.WorkerSupportsCancellation = True
         '
+        'DI
+        '
+        Me.DI.Text = "DI"
+        Me.DI.Width = 75
+        '
+        'TotalRecords
+        '
+        Me.TotalRecords.Text = "Total Records"
+        Me.TotalRecords.Width = 100
+        '
         'frmOnlineBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1084, 539)
+        Me.ClientSize = New System.Drawing.Size(1131, 539)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -489,6 +501,8 @@ Partial Class frmOnlineBackup
     Friend WithEvents bgwGetPassword As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwListAllFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblSelectedFolder As DevComponents.DotNetBar.LabelItem
-    Friend WithEvents LastModificationDate As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Remarks As System.Windows.Forms.ColumnHeader
+    Friend WithEvents LastModDate As System.Windows.Forms.ColumnHeader
+    Friend WithEvents LastSOCNo As System.Windows.Forms.ColumnHeader
+    Friend WithEvents DI As System.Windows.Forms.ColumnHeader
+    Friend WithEvents TotalRecords As System.Windows.Forms.ColumnHeader
 End Class

@@ -160,14 +160,28 @@ Public Class frmOnlineBackup
                     If u = 0 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
                         item.SubItems.Add("") 'last modified date
-                        item.SubItems.Add("") 'remarks
+                        item.SubItems.Add("") 'Last SOC No.
+                        item.SubItems.Add("") 'Last SOC DI
+                        item.SubItems.Add("") 'Total Records
                     End If
 
-                    If u >= 3 Then
+                    If u = 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
                         item.SubItems.Add(SplitText(1)) 'last modified date
-                        item.SubItems.Add("Last SOC No: " & SplitText(2) & ", DI: " & SplitText(3)) 'remarks
+                        item.SubItems.Add(SplitText(2)) ' Last SOC No.
+                        item.SubItems.Add(SplitText(3)) ' Last SOC DI
+                        item.SubItems.Add("") 'Total Records
                     End If
+
+                    If u = 4 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add(SplitText(1)) 'last modified date
+                        item.SubItems.Add(SplitText(2)) ' Last SOC No.
+                        item.SubItems.Add(SplitText(3)) ' Last SOC DI
+                        item.SubItems.Add(SplitText(4)) 'Total Records
+                    End If
+                  
+
                 End If
 
                 item.ImageIndex = 2
@@ -430,7 +444,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI
+            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & TotalSOCRecordCount
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -465,7 +479,9 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(FileOwner)
                 item.SubItems.Add(LastModifiedDate)
-                item.SubItems.Add("Last SOC No: " & LatestSOCNumber & ", DI: " & LatestSOCDI)
+                item.SubItems.Add(LatestSOCNumber)
+                item.SubItems.Add(LatestSOCDI)
+                item.SubItems.Add(TotalSOCRecordCount)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size
@@ -1158,25 +1174,42 @@ Public Class frmOnlineBackup
                         If sAdmin Then
                             item.SubItems.Add(Description)
                             item.SubItems.Add("") 'last modified date
-                            item.SubItems.Add("") 'remarks
+                            item.SubItems.Add("") 'Last SOC No.
+                            item.SubItems.Add("") 'Last SOC DI
+                            item.SubItems.Add("") 'Total Records
                         Else
                             If IsDate(Description) Or Description = "" Then
                                 item.SubItems.Add(CurrentFolderName)
                                 item.SubItems.Add("") 'last modified date
-                                item.SubItems.Add("") 'remarks
+                                item.SubItems.Add("") 'Last SOC No.
+                                item.SubItems.Add("") 'Last SOC DI
+                                item.SubItems.Add("") 'Total Records
                             Else
                                 item.SubItems.Add(SplitText(0)) 'uploaded by
                                 item.SubItems.Add("") 'last modified date
-                                item.SubItems.Add("") 'remarks
+                                item.SubItems.Add("") 'Last SOC No.
+                                item.SubItems.Add("") 'Last SOC DI
+                                item.SubItems.Add("") 'Total Records
                             End If
                         End If
 
                     End If
 
+
                     If u = 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
                         item.SubItems.Add(SplitText(1)) 'last modified date
-                        item.SubItems.Add("Last SOC No: " & SplitText(2) & ", DI: " & SplitText(3)) 'remarks
+                        item.SubItems.Add(SplitText(2)) ' Last SOC No.
+                        item.SubItems.Add(SplitText(3)) ' Last SOC DI
+                        item.SubItems.Add("") 'Total Records
+                    End If
+
+                    If u = 4 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add(SplitText(1)) 'last modified date
+                        item.SubItems.Add(SplitText(2)) ' Last SOC No.
+                        item.SubItems.Add(SplitText(3)) ' Last SOC DI
+                        item.SubItems.Add(SplitText(4)) 'Total Records
                     End If
 
                     bgwListAllFiles.ReportProgress(2, item)

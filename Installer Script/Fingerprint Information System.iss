@@ -1,17 +1,17 @@
 
 [Setup]
 AppName=Fingerprint Information System
-AppVerName=Fingerprint Information System V 15.0.0.0
-VersionInfoVersion=15.0.0.0
+AppVerName=Fingerprint Information System V 16.0.0.0
+VersionInfoVersion=16.0.0.0
 VersionInfoCompany=BXSofts
 VersionInfoProductName= Fingerprint Information System
-VersionInfoProductVersion=15.0.0.0
+VersionInfoProductVersion=16.0.0.0
 VersionInfoDescription=Manage SDFPB Registers. C@P Baiju Xavior, Fingerprint Expert.
-VersionInfoTextVersion=15.0.0.0
+VersionInfoTextVersion=16.0.0.0
 VersionInfoCopyright=C@P BXSofts
 MinVersion=0,6
 AppComments=Manage SDFPB Registers. C@P Baiju Xavior, Fingerprint Expert.
-AppCopyright=Copyright © 2007-2020 BXSofts, Inc
+AppCopyright=Copyright © 2007-2021 BXSofts, Inc
 AppPublisher=BXSofts, Inc.
 AppMutex=Fingerprint_Information_System_APPMUTEX
 AppID={{9af41670-6375-4975-91f8-05c8d73d3f48}
@@ -21,7 +21,7 @@ OutputDir=.
 UsePreviousAppDir=yes
 UsePreviousGroup=yes
 UsePreviousSetupType=yes
-OutputBaseFilename=Fingerprint Information System V15.0
+OutputBaseFilename=Fingerprint Information System V16.0
 SolidCompression=true
 PrivilegesRequired=admin
 ChangesAssociations=true
@@ -100,7 +100,6 @@ begin
   UnloadSkin();
 end;
 
-
 [Files]
 Source: .\Styles\ISSkin.dll; DestDir: {app}; Flags: dontcopy
 Source: .\Styles\Office2007.cjstyles; DestDir: {tmp}; Flags: dontcopy
@@ -122,7 +121,7 @@ Source: .\Database\HolidayList.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Info
 Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist uninsneveruninstall
 Source: .\Database\WeeklyDiary.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist
 Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
-Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
+;Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\Scripts\PinToTaskbar.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\Scripts\RestartFIS.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\VersionHistory\NewVersionFeatures.rtf; DestDir: {userdocs}\BXSofts\Fingerprint Information System; Flags: ignoreversion
@@ -194,7 +193,7 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 [Run]
 ; Filename: {app}\syspin.exe; Tasks: Pintotaskbar;  Parameters: """{app}\Fingerprint Information System.exe"" c:""Pin To Taskbar""" ; Flags: runhidden
 Filename: {app}\PinToTaskbar.exe; Tasks: Pintotaskbar  ; Flags: runhidden
-Filename: "{app}\ReportViewer2010.exe"; StatusMsg: "Installing Report Viewer. Please wait..."; Parameters: "/q"
+;Filename: "{app}\ReportViewer2010.exe"; StatusMsg: "Installing Report Viewer. Please wait..."; Parameters: "/q"
 Filename: {app}\Fingerprint Information System.exe; Description: {cm:LaunchProgram,Fingerprint Information System}; Flags: nowait postinstall skipifsilent runascurrentuser; WorkingDir: {app}
 [UninstallDelete]
 Name: {app}\DevComponents.DotNetBar2.dll; Type: files

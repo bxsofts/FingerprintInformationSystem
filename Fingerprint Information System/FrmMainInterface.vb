@@ -17522,7 +17522,7 @@ errhandler:
 #End Region
 
 
-#Region "AUTO ONLINE BACKUP"
+#Region "ONLINE AUTO BACKUP"
 
     Private Sub CopyCredentialFiles()
         Try
@@ -17656,7 +17656,7 @@ errhandler:
             Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
             If backupperiod = 0 Then Exit Sub
 
-            FindLatestSOCNumberAndDI()
+            FindLastSOCNumberDICount()
             If LatestSOCNumber = "" Then Exit Sub
 
             blCheckAutoBackup = True
@@ -17741,7 +17741,7 @@ errhandler:
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
             Dim LastModifiedDate As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
-            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI
+            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & TotalSOCRecordCount
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -17787,7 +17787,8 @@ errhandler:
             pgrDownloadInstaller.Text = "Uploading Backup 0%"
             Me.StatusBar.RecalcLayout()
         ElseIf TypeOf e.UserState Is Boolean And e.UserState = False Then
-            bgwUpdateOnlineDatabase.RunWorkerAsync(Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount)
+            TotalSOCRecordCount = Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount
+            bgwUpdateOnlineDatabase.RunWorkerAsync()
         Else
             Me.pgrDownloadInstaller.Value = e.ProgressPercentage
             Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
@@ -17859,21 +17860,19 @@ errhandler:
             If Results.Files.Count > 0 Then
                 description = Results.Files(0).Description
                 Dim SplitText() = Strings.Split(description, "; ")
-                Dim u = SplitText.GetUpperBound(0)
-                remotesoccount = Val(SplitText(u))
+                remotesoccount = Val(SplitText(4))
                 Dim strlastremotemodified As String = SplitText(1)
                 dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
             End If
 
-            Dim localsoccount As Integer = e.Argument
             Dim dtlastlocalmodified As Date = GetLastModificationDate()
             Dim LastModifiedDate As String = dtlastlocalmodified.ToString("dd-MM-yyyy HH:mm:ss")
 
-            If localsoccount < remotesoccount Then
+            If TotalSOCRecordCount < remotesoccount Then
                 Exit Sub
             End If
 
-            If localsoccount = remotesoccount Then
+            If TotalSOCRecordCount = remotesoccount Then
                 If dtlastlocalmodified.Date <= dtlastremotemodified.Date Then
                     Exit Sub
                 End If
@@ -17889,7 +17888,7 @@ errhandler:
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
 
-            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & localsoccount
+            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & TotalSOCRecordCount
             body.MimeType = "database/mdb"
 
             Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
@@ -17920,7 +17919,7 @@ errhandler:
             End If
 
 
-                Stream.Close()
+            Stream.Close()
         Catch ex As Exception
 
         End Try
@@ -17958,7 +17957,7 @@ errhandler:
 #End Region
 
 
-#Region "BACKUP AND RESTORE DATABASE"
+#Region "LOCAL AND ONLINE BACKUP AND RESTORE DATABASE"
 
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
@@ -18003,7 +18002,7 @@ errhandler:
         End If
 
         boolRestored = False
-        FindLatestSOCNumberAndDI()
+        FindLastSOCNumberDICount()
         frmOnlineBackup.ShowDialog()
         If boolRestored Then
             LoadRecordsAfterRestore()
@@ -18015,7 +18014,7 @@ errhandler:
         Cursor = Cursors.Default
     End Sub
 
-    Private Sub FindLatestSOCNumberAndDI()
+    Private Sub FindLastSOCNumberDICount()
         Try
             Dim FPDS As New FingerPrintDataSet
             Dim SOCTblAdptr As New FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
@@ -18027,6 +18026,7 @@ errhandler:
                 LatestSOCNumber = FPDS.SOCRegister(0).SOCNumber
                 LatestSOCDI = FPDS.SOCRegister(0).DateOfInspection.ToString("dd-MM-yyyy")
             End If
+            TotalSOCRecordCount = SOCTblAdptr.ScalarQueryTotalSOCCount
         Catch ex As Exception
             LatestSOCNumber = ""
             LatestSOCDI = ""
@@ -18072,7 +18072,7 @@ errhandler:
 
 
             CreateSettingsTable()
-           
+
 
             For i = 16 To 20
                 frmProgressBar.SetProgressText(i)
