@@ -459,6 +459,8 @@ Public Class frmMainInterface
             EndApplication()
         End If
 
+        FileOwner = ShortOfficeName & "_" & ShortDistrictName
+
         CopyCredentialFiles()
 
         If Me.chkTakeAutoBackup.Checked Then
@@ -17554,7 +17556,7 @@ errhandler:
         End Try
     End Sub
 
-    Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolder As String)
+    Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolderName As String)
         Try
             Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
 
@@ -17562,10 +17564,10 @@ errhandler:
             parentlist.Add(masterfolderid)
 
             Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
-            NewDirectory.Name = BackupFolder
+            NewDirectory.Name = BackupFolderName
             NewDirectory.Parents = parentlist
             NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            NewDirectory.Description = BackupFolder '
+            NewDirectory.Description = FileOwner '
             Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
             NewDirectory = request.Execute()
 
@@ -17638,7 +17640,7 @@ errhandler:
             NewDirectory.Name = FullDistrictName
             NewDirectory.Parents = parentlist
             NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            NewDirectory.Description = ShortOfficeName & "_" & ShortDistrictName
+            NewDirectory.Description = FileOwner
             Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
             NewDirectory = request.Execute()
 
@@ -17649,7 +17651,6 @@ errhandler:
     End Sub
 
     Private Sub TakeAutoOnlineBackup()
-
         Try
 
             Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
@@ -17679,34 +17680,34 @@ errhandler:
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
-            Dim BackupFolder As String = ShortOfficeName & "_" & ShortDistrictName
-            Dim BackupFolderID As String = ""
+            Dim UserBackupFolderName As String = FullDistrictName
+            Dim UserBackupFolderID As String = ""
 
 
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
             Dim List = FISService.Files.List()
-            Dim fisid As String = GetMasterBackupFolderID(FISService)
+            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "' and '" & fisid & "' in parents"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
 
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
-                BackupFolderID = ""
+                UserBackupFolderID = ""
             Else
-                BackupFolderID = Results.Files(0).Id
+                UserBackupFolderID = Results.Files(0).Id
             End If
 
-            If BackupFolderID = "" Then
-                BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
+            If UserBackupFolderID = "" Then
+                UserBackupFolderID = CreateUserBackupFolder(FISService, UserBackupFolderName)
             End If
 
 
-            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and name contains 'FingerprintBackup'"
+            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name contains 'FingerprintBackup'"
 
             List.Fields = "files(id, modifiedTime)"
             List.OrderBy = "createdTime desc"
@@ -17739,12 +17740,12 @@ errhandler:
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            Dim dtlastmodified As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
-            body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & dtlastmodified & "; " & LatestSOCNumber & "; " & LatestSOCDI
+            Dim LastModifiedDate As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
+            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
-            parentlist.Add(BackupFolderID)
+            parentlist.Add(UserBackupFolderID)
             body.Parents = parentlist
 
             Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
@@ -17819,33 +17820,33 @@ errhandler:
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
-            Dim BackupFolder As String = ShortOfficeName & "_" & ShortDistrictName
-            Dim BackupFolderID As String = ""
+            Dim UserBackupFolderName As String = FullDistrictName
+            Dim UserBackupFolderID As String = ""
 
 
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
             Dim List = FISService.Files.List()
-            Dim fisid As String = GetMasterBackupFolderID(FISService)
+            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "' and '" & fisid & "' in parents"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
 
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
-                BackupFolderID = ""
+                UserBackupFolderID = ""
             Else
-                BackupFolderID = Results.Files(0).Id
+                UserBackupFolderID = Results.Files(0).Id
             End If
 
-            If BackupFolderID = "" Then
-                BackupFolderID = CreateUserBackupFolder(FISService, BackupFolder)
+            If UserBackupFolderID = "" Then
+                UserBackupFolderID = CreateUserBackupFolder(FISService, UserBackupFolderName)
             End If
 
-            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents and name = 'FingerPrintDB.mdb'"
+            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name = 'FingerPrintDB.mdb'"
 
             List.Fields = "files(id, description)"
             Results = List.Execute
@@ -17866,7 +17867,7 @@ errhandler:
 
             Dim localsoccount As Integer = e.Argument
             Dim dtlastlocalmodified As Date = GetLastModificationDate()
-            Dim strlastlocalmodified As String = dtlastlocalmodified.ToString("dd-MM-yyyy HH:mm:ss")
+            Dim LastModifiedDate As String = dtlastlocalmodified.ToString("dd-MM-yyyy HH:mm:ss")
 
             If localsoccount < remotesoccount Then
                 Exit Sub
@@ -17878,45 +17879,45 @@ errhandler:
                 End If
             End If
 
-                ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
+            ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
 
-                Dim BackupTime As Date = Now
-                Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
-                Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
-                Dim BackupFileName As String = "FingerPrintDB.mdb"
+            Dim BackupTime As Date = Now
+            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
+            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+            Dim BackupFileName As String = "FingerPrintDB.mdb"
 
-                Dim body As New Google.Apis.Drive.v3.Data.File()
-                body.Name = BackupFileName
+            Dim body As New Google.Apis.Drive.v3.Data.File()
+            body.Name = BackupFileName
 
-                body.Description = ShortOfficeName & "_" & ShortDistrictName & "_AutoBackup" & "; " & strlastlocalmodified & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & localsoccount
-                body.MimeType = "database/mdb"
+            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & localsoccount
+            body.MimeType = "database/mdb"
 
-                Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-                My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
+            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
+            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
 
-                dFileSize = FileLen(tmpFileName)
-                dFormatedFileSize = CalculateFileSize(dFileSize)
+            dFileSize = FileLen(tmpFileName)
+            dFormatedFileSize = CalculateFileSize(dFileSize)
 
-                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
-                Dim Stream As New System.IO.MemoryStream(ByteArray)
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+            Dim Stream As New System.IO.MemoryStream(ByteArray)
 
-                If Results.Files.Count = 0 Then
-                    Dim parentlist As New List(Of String)
-                    parentlist.Add(BackupFolderID)
-                    body.Parents = parentlist
-                    Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-                    UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                    '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
-                    UploadRequest.Fields = "id"
-                    UploadRequest.Upload()
-                Else
-                    Dim RemoteFileID As String = Results.Files(0).Id
-                    Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
-                    UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                    '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
-                    UpdateRequest.Fields = "id"
-                    UpdateRequest.Upload()
-                End If
+            If Results.Files.Count = 0 Then
+                Dim parentlist As New List(Of String)
+                parentlist.Add(UserBackupFolderID)
+                body.Parents = parentlist
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
+                UploadRequest.Fields = "id"
+                UploadRequest.Upload()
+            Else
+                Dim RemoteFileID As String = Results.Files(0).Id
+                Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
+                UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
+                UpdateRequest.Fields = "id"
+                UpdateRequest.Upload()
+            End If
 
 
                 Stream.Close()

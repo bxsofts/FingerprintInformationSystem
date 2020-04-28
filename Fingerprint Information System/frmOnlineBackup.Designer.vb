@@ -167,7 +167,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1200, 539)
+        Me.PanelEx1.Size = New System.Drawing.Size(1084, 539)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -186,7 +186,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(1037, 539)
+        Me.PanelEx3.Size = New System.Drawing.Size(921, 539)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -209,7 +209,7 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(1037, 516)
+        Me.GroupPanel1.Size = New System.Drawing.Size(921, 516)
         '
         '
         '
@@ -248,7 +248,7 @@ Partial Class frmOnlineBackup
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(416, 300)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(358, 311)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(199, 18)
         Me.lblProgressStatus.TabIndex = 2
@@ -263,7 +263,7 @@ Partial Class frmOnlineBackup
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(455, 175)
+        Me.CircularProgress1.Location = New System.Drawing.Point(397, 186)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -293,7 +293,7 @@ Partial Class frmOnlineBackup
         Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(1031, 492)
+        Me.listViewEx1.Size = New System.Drawing.Size(915, 492)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -327,7 +327,7 @@ Partial Class frmOnlineBackup
         'LastModificationDate
         '
         Me.LastModificationDate.Text = "Last Modified Date"
-        Me.LastModificationDate.Width = 130
+        Me.LastModificationDate.Width = 0
         '
         'Remarks
         '
@@ -344,7 +344,7 @@ Partial Class frmOnlineBackup
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblSelectedFolder, Me.lblItemCount, Me.lblTotalFileSize})
         Me.Bar1.Location = New System.Drawing.Point(0, 516)
         Me.Bar1.Name = "Bar1"
-        Me.Bar1.Size = New System.Drawing.Size(1037, 23)
+        Me.Bar1.Size = New System.Drawing.Size(921, 23)
         Me.Bar1.Stretch = True
         Me.Bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Bar1.TabIndex = 24
@@ -354,7 +354,7 @@ Partial Class frmOnlineBackup
         '
         Me.lblSelectedFolder.BorderType = DevComponents.DotNetBar.eBorderType.DoubleLine
         Me.lblSelectedFolder.Name = "lblSelectedFolder"
-        Me.lblSelectedFolder.Width = 150
+        Me.lblSelectedFolder.Width = 350
         '
         'lblItemCount
         '
@@ -384,7 +384,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx2.Controls.Add(Me.btnRestoreDatabase)
         Me.PanelEx2.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.PanelEx2.Location = New System.Drawing.Point(1037, 0)
+        Me.PanelEx2.Location = New System.Drawing.Point(921, 0)
         Me.PanelEx2.Name = "PanelEx2"
         Me.PanelEx2.Size = New System.Drawing.Size(163, 539)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -437,7 +437,7 @@ Partial Class frmOnlineBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1200, 539)
+        Me.ClientSize = New System.Drawing.Size(1084, 539)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False

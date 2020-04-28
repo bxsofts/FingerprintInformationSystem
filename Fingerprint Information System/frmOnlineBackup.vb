@@ -19,8 +19,8 @@ Imports Google.Apis.Requests
 Public Class frmOnlineBackup
     Private FISService As DriveService = New DriveService
     Dim FISAccountServiceCredential As GoogleCredential
-    Dim BackupFolder As String
-    Dim BackupFolderID As String
+    Dim UserBackupFolderName As String
+    Dim UserBackupFolderID As String
     Dim BackupPath As String = ""
     Public CredentialFilePath As String
     Public NoFileFoundMessage As Boolean = False
@@ -57,17 +57,19 @@ Public Class frmOnlineBackup
         lAdmin = False
 
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
-        SetFormTitle(FileOwner)
+        SetFormTitle(ShortOfficeName & ", " & FullDistrictName)
+
         BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
 
         If My.Computer.FileSystem.DirectoryExists(BackupPath) = False Then
             My.Computer.FileSystem.CreateDirectory(BackupPath)
         End If
 
-        BackupFolder = FileOwner
-        CurrentFolderName = BackupFolder
-        BackupFolderID = ""
+        UserBackupFolderName = FullDistrictName
+        CurrentFolderName = UserBackupFolderName
+        UserBackupFolderID = ""
         Me.lblTotalFileSize.Text = ""
+
         Try
 
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
@@ -111,7 +113,7 @@ Public Class frmOnlineBackup
 
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         NoFileFoundMessage = ShowNoFileFoundMessage
-        CurrentFolderName = FileOwner
+        CurrentFolderName = UserBackupFolderName
         bgwListUserFiles.RunWorkerAsync()
     End Sub
 
@@ -125,14 +127,14 @@ Public Class frmOnlineBackup
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
             MasterBackupFolderID = GetMasterBackupFolderID()
-            BackupFolderID = GetUserBackupFolderID()
+            UserBackupFolderID = GetUserBackupFolderID()
             Dim List = FISService.Files.List()
 
-            If BackupFolderID = "" Then
-                BackupFolderID = CreateUserBackupFolder()
+            If UserBackupFolderID = "" Then
+                UserBackupFolderID = CreateUserBackupFolder()
             End If
 
-            List.Q = "mimeType = 'database/mdb' and '" & BackupFolderID & "' in parents"
+            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents"
             List.PageSize = 1000
             List.Fields = "nextPageToken, files(id, name, modifiedTime, size, description)"
 
@@ -150,7 +152,7 @@ Public Class frmOnlineBackup
                 Dim Description As String = Result.Description
 
                 If IsDate(Description) Or Description = "" Then
-                    item.SubItems.Add(CurrentFolderName)
+                    item.SubItems.Add(FileOwner)
                 Else
                     Dim SplitText() = Strings.Split(Description, "; ")
                     Dim u = SplitText.GetUpperBound(0)
@@ -245,14 +247,24 @@ Public Class frmOnlineBackup
             Dim id As String = ""
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & BackupFolder & "'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
 
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
-                id = ""
+                List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FileOwner & "' and '" & MasterBackupFolderID & "' in parents"
+                List.Fields = "files(id)"
+                Results = List.Execute
+                cnt = Results.Files.Count
+
+                If cnt = 0 Then
+                    id = ""
+                Else
+                    id = Results.Files(0).Id
+                    RenameUserBackupFolderName(id)
+                End If
             Else
                 id = Results.Files(0).Id
             End If
@@ -264,24 +276,37 @@ Public Class frmOnlineBackup
         End Try
     End Function
 
-    Private Function CreateUserBackupFolder()
+    Private Function CreateUserBackupFolder() As String
 
         Try
+            Dim id As String = ""
+            Dim List = FISService.Files.List()
 
-            Dim masterfolderid As String = GetMasterBackupFolderID()
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
+            List.Fields = "files(id)"
 
-            Dim parentlist As New List(Of String)
-            parentlist.Add(masterfolderid)
+            Dim Results = List.Execute
 
-            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
-            NewDirectory.Name = BackupFolder
-            NewDirectory.Parents = parentlist
-            NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            NewDirectory.Description = ShortOfficeName & "_" & ShortDistrictName
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
-            NewDirectory = request.Execute()
+            Dim cnt = Results.Files.Count
 
-            Return NewDirectory.Id
+            If cnt = 0 Then
+                Dim masterfolderid As String = GetMasterBackupFolderID()
+                Dim parentlist As New List(Of String)
+                parentlist.Add(masterfolderid)
+
+                Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                NewDirectory.Name = UserBackupFolderName
+                NewDirectory.Parents = parentlist
+                NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                NewDirectory.Description = FileOwner
+                Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
+                NewDirectory = request.Execute()
+                id = NewDirectory.Id
+            Else
+                id = Results.Files(0).Id
+            End If
+            
+            Return id
 
         Catch ex As Exception
             ' ShowErrorMessage(ex)
@@ -346,6 +371,17 @@ Public Class frmOnlineBackup
         request.Execute()
     End Sub
 
+    Private Sub RenameUserBackupFolderName(UserBackupFolderID As String)
+        Try
+            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            request.Name = FullDistrictName
+            request.Description = FileOwner
+            FISService.Files.Update(request, UserBackupFolderID).Execute()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 #End Region
 
 
@@ -353,7 +389,7 @@ Public Class frmOnlineBackup
 
     Private Sub UploadBackup() Handles btnBackupDatabase.Click
 
-        If CurrentFolderName <> FileOwner Then
+        If CurrentFolderName <> UserBackupFolderName Then
             MessageBoxEx.Show("Cannot upload backup to '" & CurrentFolderName & "' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
             Exit Sub
@@ -388,8 +424,8 @@ Public Class frmOnlineBackup
             Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
             Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
 
-            If BackupFolderID = "" Then
-                BackupFolderID = CreateUserBackupFolder()
+            If UserBackupFolderID = "" Then
+                UserBackupFolderID = CreateUserBackupFolder()
             End If
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
@@ -398,7 +434,7 @@ Public Class frmOnlineBackup
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
-            parentlist.Add(BackupFolderID)
+            parentlist.Add(UserBackupFolderID)
             body.Parents = parentlist
 
 
@@ -473,12 +509,17 @@ Public Class frmOnlineBackup
         If uUploadStatus = UploadStatus.Completed Then
             Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
             If listViewEx1.Items.Count > 0 Then
-                Me.listViewEx1.Items(0).Selected = True
+                If listViewEx1.SelectedItems.Count > 0 Then listViewEx1.SelectedItems.Clear()
+                If listViewEx1.Items(0).Text.ToLower = "fingerprintdb.mdb" Then
+                    Me.listViewEx1.Items(1).Selected = True
+                Else
+                    Me.listViewEx1.Items(0).Selected = True
+                End If
             End If
             MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         If dDownloadStatus = DownloadStatus.Failed Then
-            MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBoxEx.Show("File upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
         Me.Cursor = Cursors.Default
     End Sub
@@ -547,6 +588,7 @@ Public Class frmOnlineBackup
         End Try
 
     End Sub
+
     Private Sub DownloadSelectedFile() Handles btnDownloadDatabase.Click
         Try
 
@@ -605,7 +647,7 @@ Public Class frmOnlineBackup
 
             Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
 
-            If CurrentFolderName = FileOwner Then
+            If CurrentFolderName = UserBackupFolderName Then
                 strBackupFile = BackupPath & "\" & fname
             Else
                 Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
@@ -688,7 +730,6 @@ Public Class frmOnlineBackup
         End If
 
     End Sub
-
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownload.RunWorkerCompleted
 
         Me.Cursor = Cursors.Default
@@ -773,7 +814,7 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
-            If CurrentFolderName <> FileOwner Then
+            If CurrentFolderName <> UserBackupFolderName Then
                 Dim r As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("The backup file you selected is uploaded by '" & CurrentFolderName & "'." & vbNewLine & "Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
                 If r = Windows.Forms.DialogResult.No Then Exit Sub
             End If
@@ -829,7 +870,7 @@ Public Class frmOnlineBackup
                 Exit Sub
             End If
 
-            If Not sAdmin And CurrentFolderName <> FileOwner Then
+            If Not sAdmin And CurrentFolderName <> UserBackupFolderName Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("Deletion is not allowed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
@@ -1216,7 +1257,7 @@ Public Class frmOnlineBackup
     Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click
         On Error Resume Next
 
-        If CurrentFolderName = FileOwner Then
+        If CurrentFolderName = UserBackupFolderName Then
             If Me.listViewEx1.SelectedItems.Count > 0 Then
                 Dim file As String = BackupPath & "\" & Me.listViewEx1.SelectedItems(0).Text
                 If My.Computer.FileSystem.FileExists(file) Then
