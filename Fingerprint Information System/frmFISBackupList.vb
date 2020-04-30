@@ -741,6 +741,11 @@ Public Class frmFISBackupList
                 Exit Sub
             End If
 
+            If CurrentFolderPath = "\My Drive\Internal File Transfer" And Not SuperAdmin Then
+                MessageBoxEx.Show("Uploading of files is not allowed in 'Internal File Transfer' folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
             Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
 
             If filePaths.Count > 1 Then
