@@ -496,10 +496,17 @@ Public Class FrmTourNote
         End Try
 
         If Me.cmbSOCOfficer.SelectedIndex < 0 Then
-            MessageBoxEx.Show("Please select your Name", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please select your Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.cmbSOCOfficer.Focus()
             Exit Sub
         End If
+
+        If Me.txtDVNumber.Text.Trim = "" Then
+            MessageBoxEx.Show("Please enter Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.txtDVNumber.Focus()
+            Exit Sub
+        End If
+
         TourStartLocation = Me.txtStartingLocation.Text.Trim
         SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
         DVNumber = Me.txtDVNumber.Text.Trim
@@ -1077,6 +1084,13 @@ errhandler:
                 Me.cmbSOCOfficer.Focus()
                 Exit Sub
             End If
+
+            If Me.txtDVNumber.Text.Trim = "" Then
+                MessageBoxEx.Show("Please enter Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtDVNumber.Focus()
+                Exit Sub
+            End If
+
             TourStartLocation = Me.txtStartingLocation.Text
             SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
             DisplayFileStatus()
