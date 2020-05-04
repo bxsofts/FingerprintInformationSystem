@@ -121,22 +121,22 @@ Public Class FrmTourNote
         Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
         Me.CommonSettingsTableAdapter1.Connection.Open()
 
-        TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", "")
-        If TourStartLocation = "" And FullDistrictName = "Idukki" Then
-            TourStartLocation = "Painavu"
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "TourStartLocation")
+        If Me.FingerPrintDataSet.CommonSettings.Count = 1 Then
+            TourStartLocation = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue.ToString
         Else
             TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", FullDistrictName)
         End If
 
-        Dim DVNumber As String = ""
+        Me.txtStartingLocation.Text = TourStartLocation
+
+        DVNumber = ""
         Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "VehicleNumber")
         If Me.FingerPrintDataSet.CommonSettings.Count = 1 Then
             DVNumber = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue.ToString
         End If
 
         txtDVNumber.Text = DVNumber
-
-        Me.txtStartingLocation.Text = TourStartLocation
 
         Me.cmbMonth.Items.Clear()
 
@@ -249,7 +249,15 @@ Public Class FrmTourNote
 
     Private Sub SaveTourStartLocation() Handles txtStartingLocation.Validated, txtDVNumber.Validated
         On Error Resume Next
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "TourStartingLocation", Me.txtStartingLocation.Text.Trim, Microsoft.Win32.RegistryValueKind.String)
+
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "TourStartLocation")
+
+        If Me.FingerPrintDataSet.CommonSettings.Count = 0 Then
+            Me.CommonSettingsTableAdapter1.InsertQuery("TourStartLocation", Me.txtStartingLocation.Text.Trim, "")
+        Else
+            Me.CommonSettingsTableAdapter1.UpdateQuery(Me.txtStartingLocation.Text.Trim, "", "TourStartLocation")
+        End If
+
         Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "VehicleNumber")
 
         If Me.FingerPrintDataSet.CommonSettings.Count = 0 Then

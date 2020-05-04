@@ -144,13 +144,6 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\ACDatagrid; 
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\IDDatagrid; Flags: uninsdeletekey noerror
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\IODatagrid; Flags: uninsdeletekey noerror
 
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\RecentSOCRecords; Flags: uninsdeletekey noerror
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\RecentDARecords; Flags: uninsdeletekey noerror
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\RecentFPARecords; Flags: uninsdeletekey noerror
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\RecentCDRecords; Flags: uninsdeletekey noerror
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\RecentIDRecords; Flags: uninsdeletekey noerror
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\RecentACRecords; Flags: uninsdeletekey noerror
-
 Root: HKCU; Subkey: Control Panel\Desktop; ValueType: dword; ValueName: ForegroundLockTimeout; ValueData: 0; Flags: noerror
 
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: Style; ValueData: Office2016; Flags: noerror uninsdeletekey createvalueifdoesntexist
