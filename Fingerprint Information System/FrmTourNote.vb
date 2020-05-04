@@ -113,8 +113,13 @@ Public Class FrmTourNote
         Me.lblSavedTABill.Text = ""
         Me.lblTickedRecords.Text = "Selected Records : 0"
         Me.lblOfficerName.Text = "Officer Name not selected"
+
         Me.SOCDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.SOCDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+
+        If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
+        Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
+        Me.CommonSettingsTableAdapter1.Connection.Open()
 
         TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", "")
         If TourStartLocation = "" And FullDistrictName = "Idukki" Then
@@ -123,7 +128,11 @@ Public Class FrmTourNote
             TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", FullDistrictName)
         End If
 
-        DVNumber = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DVNumber", "")
+        Dim DVNumber As String = ""
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "VehicleNumber")
+        If Me.FingerPrintDataSet.CommonSettings.Count = 1 Then
+            DVNumber = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue.ToString
+        End If
 
         txtDVNumber.Text = DVNumber
 
@@ -241,7 +250,14 @@ Public Class FrmTourNote
     Private Sub SaveTourStartLocation() Handles txtStartingLocation.Validated, txtDVNumber.Validated
         On Error Resume Next
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "TourStartingLocation", Me.txtStartingLocation.Text.Trim, Microsoft.Win32.RegistryValueKind.String)
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "DVNumber", Me.txtDVNumber.Text.Trim, Microsoft.Win32.RegistryValueKind.String)
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "VehicleNumber")
+
+        If Me.FingerPrintDataSet.CommonSettings.Count = 0 Then
+            Me.CommonSettingsTableAdapter1.InsertQuery("VehicleNumber", Me.txtDVNumber.Text.Trim, "")
+        Else
+            Me.CommonSettingsTableAdapter1.UpdateQuery(Me.txtDVNumber.Text.Trim, "", "VehicleNumber")
+        End If
+
     End Sub
 
 #End Region
@@ -502,7 +518,7 @@ Public Class FrmTourNote
         End If
 
         If Me.txtDVNumber.Text.Trim = "" Then
-            MessageBoxEx.Show("Please enter Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Please enter Department Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.txtDVNumber.Focus()
             Exit Sub
         End If
@@ -1086,7 +1102,7 @@ errhandler:
             End If
 
             If Me.txtDVNumber.Text.Trim = "" Then
-                MessageBoxEx.Show("Please enter Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("Please enter Department Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.txtDVNumber.Focus()
                 Exit Sub
             End If
