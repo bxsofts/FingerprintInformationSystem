@@ -653,7 +653,7 @@ Partial Class FrmIdentificationRegisterDE
         'COID
         '
         Me.COID.DataPropertyName = "COID"
-        Me.COID.HeaderText = "COID"
+        Me.COID.HeaderText = "AFIS PIN"
         Me.COID.Name = "COID"
         Me.COID.ReadOnly = True
         Me.COID.Width = 150

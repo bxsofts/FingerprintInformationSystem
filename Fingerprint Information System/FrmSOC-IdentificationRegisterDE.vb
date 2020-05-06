@@ -1,5 +1,6 @@
 ﻿Imports DevComponents.DotNetBar
 
+
 Public Class FrmIdentificationRegisterDE
 
     Dim IDRSerialNumber As Integer
@@ -486,7 +487,7 @@ Public Class FrmIdentificationRegisterDE
             Dim PreviousCaseDetails As String = ""
             Dim IdentifiedFrom As String = ""
             Dim Remarks As String = ""
-            Dim Coid As String = ""
+            Dim Pin As String = ""
 
             Me.IdentificationRegisterTableAdapter1.FillBySOCNumber(Me.FingerPrintDataSet1.IdentificationRegister, SOCNumber)
             Dim soccount As Integer = Me.FingerPrintDataSet1.IdentificationRegister.Count
@@ -512,7 +513,7 @@ Public Class FrmIdentificationRegisterDE
                 PreviousCaseDetails = PreviousCaseDetails & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(8).Value, dgv.Rows(i).Cells(8).Value)
                 IdentifiedFrom = IdentifiedFrom & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(9).Value, dgv.Rows(i).Cells(9).Value)
                 Remarks = Remarks & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(10).Value, dgv.Rows(i).Cells(10).Value)
-                Coid = Coid & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(11).Value, dgv.Rows(i).Cells(11).Value)
+                Pin = Pin & vbCrLf & IIf(c > 1, "A" & (i + 1) & " - " & dgv.Rows(i).Cells(11).Value, dgv.Rows(i).Cells(11).Value)
             Next
 
             If blUpdate Then
@@ -533,7 +534,7 @@ Public Class FrmIdentificationRegisterDE
 
                 TotalCPsIdentified = PrevCPsIdentified + CPsIdentified
 
-                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim, Coid.Trim)
+                Me.IdentificationRegisterTableAdapter1.Insert(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim, Pin.Trim)
 
                 Me.SocRegisterTableAdapter1.FillBySOCNumber(FingerPrintDataSet1.SOCRegister, SOCNumber)
 
@@ -559,7 +560,7 @@ Public Class FrmIdentificationRegisterDE
                     .PreviousCaseDetails = PreviousCaseDetails.Trim
                     .IdentifiedFrom = IdentifiedFrom.Trim
                     .IdentificationDetails = Remarks.Trim
-                    .COID = Coid.Trim
+                    .COID = Pin.Trim
                 End With
 
                 frmMainInterface.FingerPrintDataSet.JoinedIDR.Rows.Add(dgvr)
@@ -567,7 +568,7 @@ Public Class FrmIdentificationRegisterDE
 
                 ShowDesktopAlert("New Identification Record entered successfully.")
             Else ' Edit mode
-                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim, Coid.Trim, IDRSerialNumber)
+                Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim, Pin.Trim, IDRSerialNumber)
 
                 With frmMainInterface.JoinedIDRDataGrid
                     .SelectedCells(0).Value = Me.txtIdentificationNumber.Text.Trim
@@ -584,7 +585,7 @@ Public Class FrmIdentificationRegisterDE
                     .SelectedCells(17).Value = PreviousCaseDetails.Trim
                     .SelectedCells(18).Value = IdentifiedFrom.Trim
                     .SelectedCells(19).Value = Remarks.Trim
-                    .SelectedCells(22).Value = Coid.Trim
+                    .SelectedCells(22).Value = Pin.Trim
                 End With
                 TotalCPsIdentified = PrevCPsIdentified - OriginalCPIdentified + CPsIdentified
 
@@ -599,7 +600,7 @@ Public Class FrmIdentificationRegisterDE
                         frmMainInterface.SOCDatagrid.SelectedRows(0).Cells(13).Value = "0"
                     End If
                 End If
-               
+
 
                 ShowDesktopAlert("Selected Identification Record updated successfully.")
             End If

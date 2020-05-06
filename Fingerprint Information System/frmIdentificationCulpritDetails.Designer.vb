@@ -24,6 +24,8 @@ Partial Class frmIdentificationCulpritDetails
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmIdentificationCulpritDetails))
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.txtPin = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.txtPreviousCaseDetails = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.btnClose = New DevComponents.DotNetBar.ButtonX()
@@ -52,8 +54,6 @@ Partial Class frmIdentificationCulpritDetails
         Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX19 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX18 = New DevComponents.DotNetBar.LabelX()
-        Me.txtCOID = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx1.SuspendLayout()
         CType(Me.txtCPsIdentified, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -62,7 +62,7 @@ Partial Class frmIdentificationCulpritDetails
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx1.Controls.Add(Me.txtCOID)
+        Me.PanelEx1.Controls.Add(Me.txtPin)
         Me.PanelEx1.Controls.Add(Me.LabelX3)
         Me.PanelEx1.Controls.Add(Me.txtPreviousCaseDetails)
         Me.PanelEx1.Controls.Add(Me.LabelX1)
@@ -104,6 +104,43 @@ Partial Class frmIdentificationCulpritDetails
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 202
+        '
+        'txtPin
+        '
+        Me.txtPin.AcceptsReturn = True
+        Me.txtPin.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtPin.Border.Class = "TextBoxBorder"
+        Me.txtPin.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtPin.ButtonCustom.Image = CType(resources.GetObject("txtCOID.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtPin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtPin.DisabledBackColor = System.Drawing.Color.White
+        Me.txtPin.FocusHighlightEnabled = True
+        Me.txtPin.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPin.ForeColor = System.Drawing.Color.Black
+        Me.txtPin.Location = New System.Drawing.Point(132, 380)
+        Me.txtPin.MaxLength = 255
+        Me.txtPin.Name = "txtPin"
+        Me.txtPin.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtPin.Size = New System.Drawing.Size(178, 25)
+        Me.txtPin.TabIndex = 8
+        Me.txtPin.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
+        Me.txtPin.WatermarkText = "AFIS PIN"
+        '
+        'LabelX3
+        '
+        Me.LabelX3.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX3.Location = New System.Drawing.Point(9, 383)
+        Me.LabelX3.Name = "LabelX3"
+        Me.LabelX3.Size = New System.Drawing.Size(52, 18)
+        Me.LabelX3.TabIndex = 235
+        Me.LabelX3.Text = "AFIS PIN"
         '
         'txtPreviousCaseDetails
         '
@@ -561,43 +598,6 @@ Partial Class frmIdentificationCulpritDetails
         Me.LabelX18.TabIndex = 226
         Me.LabelX18.Text = "<font color=""#ED1C24"">*</font><b></b>"
         '
-        'txtCOID
-        '
-        Me.txtCOID.AcceptsReturn = True
-        Me.txtCOID.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.txtCOID.Border.Class = "TextBoxBorder"
-        Me.txtCOID.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtCOID.ButtonCustom.Image = CType(resources.GetObject("TextBoxX1.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtCOID.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtCOID.DisabledBackColor = System.Drawing.Color.White
-        Me.txtCOID.FocusHighlightEnabled = True
-        Me.txtCOID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCOID.ForeColor = System.Drawing.Color.Black
-        Me.txtCOID.Location = New System.Drawing.Point(132, 380)
-        Me.txtCOID.MaxLength = 255
-        Me.txtCOID.Name = "txtCOID"
-        Me.txtCOID.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtCOID.Size = New System.Drawing.Size(178, 25)
-        Me.txtCOID.TabIndex = 8
-        Me.txtCOID.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtCOID.WatermarkText = "COID"
-        '
-        'LabelX3
-        '
-        Me.LabelX3.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(9, 383)
-        Me.LabelX3.Name = "LabelX3"
-        Me.LabelX3.Size = New System.Drawing.Size(32, 18)
-        Me.LabelX3.TabIndex = 235
-        Me.LabelX3.Text = "COID"
-        '
         'frmIdentificationCulpritDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -650,6 +650,6 @@ Partial Class frmIdentificationCulpritDetails
     Friend WithEvents btnClose As DevComponents.DotNetBar.ButtonX
     Friend WithEvents txtPreviousCaseDetails As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtCOID As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents txtPin As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
 End Class

@@ -2861,6 +2861,7 @@ Public Class frmMainInterface
         Me.JoinedIDRDataGrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.JoinedIDRDataGrid.Columns(0).CellTemplate.Style.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         Me.JoinedIDRDataGrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
+        Me.JoinedIDRDataGrid.Columns(22).DisplayIndex = 19
 
         Me.SSDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
         Me.SSDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Bold)
@@ -14640,7 +14641,7 @@ errhandler:
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
 
                         WordApp.Selection.TypeText(vbNewLine)
-                        WordApp.Selection.TypeText(vbTab & vbTab & "COID - " & fds.CulpritsRegister(i).COID)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "AFIS PIN - " & fds.CulpritsRegister(i).COID)
 
                     Else
                         WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
@@ -14699,7 +14700,7 @@ errhandler:
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
 
                         WordApp.Selection.TypeText(vbNewLine)
-                        WordApp.Selection.TypeText(vbTab & vbTab & "COID - " & fds.CulpritsRegister(i).COID)
+                        WordApp.Selection.TypeText(vbTab & vbTab & "AFIS PIN - " & fds.CulpritsRegister(i).COID)
 
                     Else
                         WordApp.Selection.TypeText(ConvertNumberToWord(Val(cpid)) & " chance prints have been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impressions of one ")
@@ -14893,7 +14894,7 @@ errhandler:
                     ElseIf identifiedfrom = "suspects" Then
                         WordApp.Selection.TypeText(("the suspect " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".").ToUpper)
                     ElseIf identifiedfrom = "afis" Then
-                        WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & " from AFIS. COID - " & fds.CulpritsRegister(i).COID & ".").ToUpper)
+                        WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & " from AFIS. PIN - " & fds.CulpritsRegister(i).COID & ".").ToUpper)
                     Else
                         WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ". He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails & " ", previousdetails & ". ") & "His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
                     End If
@@ -14907,7 +14908,7 @@ errhandler:
                     ElseIf identifiedfrom = "suspects" Then
                         WordApp.Selection.TypeText(("the suspect " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".").ToUpper)
                     ElseIf identifiedfrom = "afis" Then
-                        WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & " from AFIS. COID - " & fds.CulpritsRegister(i).COID & ".").ToUpper)
+                        WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & " from AFIS. PIN - " & fds.CulpritsRegister(i).COID & ".").ToUpper)
                     Else
                         WordApp.Selection.TypeText(("one " & fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ". He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails & " ", previousdetails & ". ") & "His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".").ToUpper)
                     End If
@@ -15824,9 +15825,9 @@ errhandler:
                 Dim da = Me.FingerPrintDataSet1.CulpritsRegister(i).DANumber.Trim
                 Dim hc = Me.FingerPrintDataSet1.CulpritsRegister(i).HenryClassification.Trim
                 Dim address = Me.FingerPrintDataSet1.CulpritsRegister(i).Address.Trim
-                Dim coid = Me.FingerPrintDataSet1.CulpritsRegister(i).COID.Trim
+                Dim pin = Me.FingerPrintDataSet1.CulpritsRegister(i).COID.Trim
 
-                Dim iddetails As String = address & vbCrLf & IIf(da = "", "", vbCrLf & "DA Number: " & da) & vbCrLf & IIf(hc = "", "", "Classification: " & hc) & vbCrLf & IIf(coid = "", "", "COID: " & coid) & vbCrLf
+                Dim iddetails As String = address & vbCrLf & IIf(da = "", "", vbCrLf & "DA Number: " & da) & vbCrLf & IIf(hc = "", "", "Classification: " & hc) & vbCrLf & IIf(pin = "", "", "AFIS PIN: " & pin) & vbCrLf
                 wdApp.Selection.TypeText(iddetails)
                 k = k + 1
             Next

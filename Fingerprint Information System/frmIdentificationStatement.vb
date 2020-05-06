@@ -432,6 +432,7 @@ Public Class frmIdentificationStatement
                     Dim culpritname As String = ""
                     Dim address As String = ""
                     Dim classification As String = ""
+                    Dim pin As String = ""
                     Dim identifiedfrom As String = ""
 
                     If c > 1 Then
@@ -451,6 +452,8 @@ Public Class frmIdentificationStatement
 
                         classification = Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification
 
+                        pin = Me.FingerPrintDataSet.CulpritsRegister(k).COID
+
                         identifiedfrom = Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom
 
                         joinedaddress = culpritname & vbCrLf & address
@@ -462,6 +465,7 @@ Public Class frmIdentificationStatement
                         WordApp.Selection.Tables.Item(1).Cell(x, 9).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                         WordApp.Selection.TypeText(classification.Trim)
+                        If pin.Trim <> "" Then WordApp.Selection.TypeText(vbNewLine & vbNewLine & "PIN - " & pin)
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 10).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
