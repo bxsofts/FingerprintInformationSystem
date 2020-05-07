@@ -64,8 +64,9 @@ Public Class frmFPAStatement
         datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
         Me.cmbMonth.Focus()
 
-        GenerateMonthViseAmount()
+        GenerateMonthWiseAmount()
         blDGVChanged = False
+        Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -75,6 +76,9 @@ Public Class frmFPAStatement
         Dim sum2 As Integer = 0
 
         For i = 0 To 11
+            If Me.dgvSum.Rows(i).Cells(0).Value = "" Then
+                Exit For
+            End If
             sum1 = sum1 + Val(Me.dgvSum.Rows(i).Cells(1).Value)
             sum2 = sum2 + Val(Me.dgvSum.Rows(i).Cells(3).Value)
         Next
@@ -169,10 +173,9 @@ Public Class frmFPAStatement
 
 #Region "GENERATE STATEMENT"
 
-    Private Sub GenerateMonthViseAmount()
+    Private Sub GenerateMonthWiseAmount()
         Try
             Me.Cursor = Cursors.WaitCursor
-            Me.dgvSum.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2
             Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
             Dim y = Me.txtYear.Value
 
@@ -349,6 +352,7 @@ Public Class frmFPAStatement
             blDGVChanged = False
             ClearSelectionColors()
             blSaveData = True
+            Me.dgvChalan.Refresh()
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -370,7 +374,8 @@ Public Class frmFPAStatement
     End Sub
 
     Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
-        GenerateMonthViseAmount()
+        Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
+        GenerateMonthWiseAmount()
         datevalue = "during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
         IsMonthStmt = True
         ShowDesktopAlert("Data generated")
@@ -378,7 +383,6 @@ Public Class frmFPAStatement
 
     Private Sub btnGenerateByDate_Click(sender As Object, e As EventArgs) Handles btnGenerateByDate.Click
         Try
-            Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
             d1 = Me.dtFrom.Value
             d2 = Me.dtTo.Value
             If d1 > d2 Then
@@ -387,7 +391,7 @@ Public Class frmFPAStatement
                 Exit Sub
             End If
             Me.Cursor = Cursors.WaitCursor
-
+            Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
             datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
             IsMonthStmt = False
 
@@ -422,7 +426,20 @@ Public Class frmFPAStatement
 
             Me.Cursor = Cursors.WaitCursor
 
-            If blSaveData And IsMonthStmt Then SaveValues(False)
+            Dim m = Me.cmbMonth.SelectedIndex + 1
+            Dim y = Me.txtYear.Value
+            Dim d As Integer = Date.DaysInMonth(y, m)
+            d2 = New Date(y, m, d)
+
+            If Today > d2 Then
+                blSaveData = True
+            Else
+                blSaveData = False
+            End If
+
+            If blSaveData And IsMonthStmt Then
+                SaveValues(False)
+            End If
 
             RowCount = Me.FingerPrintDataSet.ChalanTable.Count
 
@@ -1099,11 +1116,7 @@ Public Class frmFPAStatement
 
             xlSheet.Range("A9").Font.Bold = True
 
-            If IsMonthStmt Then
-                xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS FOR THE MONTH OF " & sMonth.ToUpper
-            Else
-                xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS FOR THE PERIOD FROM " & Me.dtFrom.Text & " TO " & Me.dtTo.Text
-            End If
+            xlSheet.Range("A9").Value = "REVENUE INCOME DETAILS " & datevalue.ToUpper
 
             xlSheet.Range("A9", "F9").Merge()
 
@@ -1201,7 +1214,10 @@ Public Class frmFPAStatement
 
                 xlSheet.Name = sMonth
 
-                If Not FileInUse(sFileName) And Today > d2 Then xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+                If FileInUse(sFileName) = False And (Today > d2) Then
+                    xlBook.SaveAs(sFileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook)
+                End If
+
             End If
             
 
@@ -1252,10 +1268,29 @@ Public Class frmFPAStatement
         End Try
     End Sub
 
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If IsMonthStmt Then
+            Me.dgvSum.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2
+            DevComponents.DotNetBar.MessageBoxEx.Show("To edit, type in the desired cell.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
+            DevComponents.DotNetBar.MessageBoxEx.Show("No data to edit.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Not IsMonthStmt Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No data to save.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim m = Me.cmbMonth.SelectedIndex + 1
+        Dim y = Me.txtYear.Value
+        Dim d As Integer = Date.DaysInMonth(y, m)
+        Dim dt As Date = New Date(y, m, d)
+
+        If Today < dt Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Seletced month has not completed yet. Cannot save data.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -1265,7 +1300,6 @@ Public Class frmFPAStatement
    
     Private Sub SaveValues(ShowMessage As Boolean)
         Try
-
             Me.Cursor = Cursors.WaitCursor
 
             For i = 0 To 11
@@ -1300,6 +1334,7 @@ Public Class frmFPAStatement
             blSaveData = False
 
             If ShowMessage Then ShowDesktopAlert("Data saved successfully.")
+            Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
@@ -1321,4 +1356,5 @@ Public Class frmFPAStatement
     End Function
 
     
+   
 End Class
