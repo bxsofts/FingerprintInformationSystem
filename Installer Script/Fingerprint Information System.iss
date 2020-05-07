@@ -72,7 +72,7 @@ function InitializeSetup(): Boolean;
 var
     NetFrameworkVersion: Cardinal;
     NetFrameWorkInstalled : Boolean;
-    Result1 : Boolean;
+    
 begin
    ExtractTemporaryFile('Office2007.cjstyles');
   LoadSkin(ExpandConstant('{tmp}\Office2007.cjstyles'), '');
