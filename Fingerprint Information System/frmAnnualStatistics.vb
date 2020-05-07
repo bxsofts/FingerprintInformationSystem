@@ -910,7 +910,7 @@ Public Class frmAnnualStatistics
                     Dim classification As String = ""
                     Dim identifiedfrom As String = ""
                     Dim danumber As String = ""
-                    Dim coid As String = ""
+                    Dim pin As String = ""
                     Dim finger As String = ""
 
                     If c > 1 Then
@@ -932,7 +932,7 @@ Public Class frmAnnualStatistics
                         danumber = Me.FingerPrintDataSet.CulpritsRegister(k).DANumber
                         classification = Me.FingerPrintDataSet.CulpritsRegister(k).HenryClassification
                         identifiedfrom = Me.FingerPrintDataSet.CulpritsRegister(k).IdentifiedFrom
-                        coid = Me.FingerPrintDataSet.CulpritsRegister(k).COID
+                        pin = Me.FingerPrintDataSet.CulpritsRegister(k).COID
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 8).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -944,7 +944,7 @@ Public Class frmAnnualStatistics
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 10).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
-                        WordApp.Selection.TypeText("DA No. - " & danumber.Trim & vbCrLf & vbCrLf & "H/C - " & classification.Trim & (IIf(coid = "", "", vbCrLf & "COID - " & coid)))
+                        WordApp.Selection.TypeText("DA No. - " & danumber.Trim & vbCrLf & vbCrLf & "H/C - " & classification.Trim & (IIf(pin = "", "", vbCrLf & "PIN - " & pin)))
 
                         WordApp.Selection.Tables.Item(1).Cell(x, 11).Select()
                         WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -1140,9 +1140,9 @@ Public Class frmAnnualStatistics
                     Dim culprit As String = FingerPrintDataSet.CulpritsRegister(j).CulpritName
                     Dim da As String = FingerPrintDataSet.CulpritsRegister(j).DANumber
                     Dim classification As String = FingerPrintDataSet.CulpritsRegister(j).HenryClassification
-                    Dim coid As String = FingerPrintDataSet.CulpritsRegister(j).COID
+                    Dim pin As String = FingerPrintDataSet.CulpritsRegister(j).COID
 
-                    iddetails = iddetails & vbCrLf & vbTab & vbTab & Strings.StrConv(ConvertNumberToWord(cpid), VbStrConv.ProperCase) & IIf(cpid = 1, " chance print is identified as the " & finger & " finger impression", " chance prints are identified as the " & finger & " finger impressions") & " of " & culprit & ". DA No. " & da & ", Classification - " & classification & (IIf(coid = "", "", ", COID - " & coid))
+                    iddetails = iddetails & vbCrLf & vbTab & vbTab & Strings.StrConv(ConvertNumberToWord(cpid), VbStrConv.ProperCase) & IIf(cpid = 1, " chance print is identified as the " & finger & " finger impression", " chance prints are identified as the " & finger & " finger impressions") & " of " & culprit & ". DA No. " & da & ", Classification - " & classification & (IIf(pin = "", "", ", AFIS PIN - " & pin))
                 Next
 
 
