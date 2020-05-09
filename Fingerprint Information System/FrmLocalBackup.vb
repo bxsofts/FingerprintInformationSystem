@@ -11,7 +11,6 @@ Public Class FrmLocalBackup
         On Error Resume Next
 
         BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
-        RenameOldFormatFiles()
 
         Me.listViewEx1.Items.Clear()
         TotalFileSize = 0
@@ -295,40 +294,6 @@ Public Class FrmLocalBackup
             ShowErrorMessage(ex)
         End Try
 
-    End Sub
-
-    Private Sub RenameOldFormatFiles()
-        On Error Resume Next
-        Dim RenameOldBackupFiles As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "RenameOldBackupFiles", "1")
-        If RenameOldBackupFiles = "0" Then Exit Sub
-        Dim OldFormatString As String = "dd-MM-yyyy-hh-mm-ss-tt"
-        '  Dim NewFormatString As String = BackupDateFormatString
-       
-
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchTopLevelOnly, "FingerPrintBackup*.fpbbk")
-            If foundFile Is Nothing Then
-                My.Computer.Registry.SetValue(strGeneralSettingsPath, "RenameOldBackupFiles", "0", Microsoft.Win32.RegistryValueKind.String)
-                Exit Sub
-            End If
-            Dim OldFileName As String
-            Dim NewFileName As String
-
-            OldFileName = My.Computer.FileSystem.GetName(foundFile)
-            If OldFileName.Contains("-AM") Or OldFileName.Contains("-PM") Then
-                Dim Filedate As DateTime = DateTime.ParseExact(OldFileName.Replace("FingerPrintBackup-", "").Replace(".fpbbk", ""), OldFormatString, culture)
-
-                NewFileName = "FingerPrintBackup-" & Filedate.ToString(BackupDateFormatString) & ".mdb"
-                OldFileName = (BackupPath & "\" & OldFileName).Replace("\\", "\")
-                My.Computer.FileSystem.RenameFile(OldFileName, NewFileName)
-            ElseIf OldFileName.Contains(".fpbbk") Then
-                NewFileName = OldFileName.Replace(".fpbbk", ".mdb")
-                OldFileName = (BackupPath & "\" & OldFileName).Replace("\\", "\")
-                My.Computer.FileSystem.RenameFile(OldFileName, NewFileName)
-
-            End If
-
-        Next
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "RenameOldBackupFiles", "0", Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 

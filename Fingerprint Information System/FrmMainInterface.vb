@@ -471,7 +471,7 @@ Public Class frmMainInterface
         ShowNewVersionInstalledInfo()
         CheckForUpdatesAtStartup()
         UploadVersionInfoToDrive()
-        AlertLocalBackupCount()
+        DeleteLocalBackupExcessFiles()
         If DBExists = False Then
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
@@ -17980,13 +17980,25 @@ errhandler:
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub AlertLocalBackupCount()
+    Private Sub DeleteLocalBackupExcessFiles()
+        On Error Resume Next
         Dim BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
         Dim x = My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
-        If x.Count > 10 Then
-            If MessageBoxEx.Show("There are more than 10 backup files in Local Backup Folder. Press 'OK' to open the Backup Folder and remove unwanted files.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.OK Then
-                Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
-            End If
+        Dim cnt As Integer = x.Count
+        If cnt > 10 Then
+            Dim ItemList As New ArrayList
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
+                Dim FileName = My.Computer.FileSystem.GetName(foundFile)
+                Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
+                ItemList.Add(FullFilePath)
+            Next
+
+            ItemList.Sort()
+            Dim u = cnt - 11
+
+            For i = 0 To u
+                My.Computer.FileSystem.DeleteFile(ItemList.Item(i))
+            Next
         End If
     End Sub
 
