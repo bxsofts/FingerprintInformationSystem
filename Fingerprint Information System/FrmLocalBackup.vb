@@ -78,6 +78,7 @@ Public Class FrmLocalBackup
             DisplayInformation()
             Me.lblTotalFileSize.Text = "Total File Size: " & CalculateFileSize(TotalFileSize)
             If listViewEx1.Items.Count > 0 Then
+                listViewEx1.SelectedItems.Clear()
                 Me.listViewEx1.Items(0).Selected = True
             End If
         Catch ex As Exception

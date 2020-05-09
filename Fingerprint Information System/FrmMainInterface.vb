@@ -471,7 +471,7 @@ Public Class frmMainInterface
         ShowNewVersionInstalledInfo()
         CheckForUpdatesAtStartup()
         UploadVersionInfoToDrive()
-        DeleteLocalBackupExcessFiles()
+        CleanupLocalBackupFiles()
         If DBExists = False Then
             Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
             DisableControls()
@@ -17808,6 +17808,7 @@ errhandler:
             ShowDesktopAlert("Database backed up to Google Drive.")
         End If
 
+        bgwCleanOnlineFiles.RunWorkerAsync()
     End Sub
 
     Private Sub bgwUpdateOnlineDatabase_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateOnlineDatabase.DoWork
@@ -17980,14 +17981,14 @@ errhandler:
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub DeleteLocalBackupExcessFiles()
+    Private Sub CleanupLocalBackupFiles()
         On Error Resume Next
         Dim BackupPath = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
-        Dim x = My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
+        Dim x = My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchTopLevelOnly, "FingerPrintBackup*.mdb")
         Dim cnt As Integer = x.Count
         If cnt > 10 Then
             Dim ItemList As New ArrayList
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchAllSubDirectories, "FingerPrintBackup*.mdb")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(BackupPath, FileIO.SearchOption.SearchTopLevelOnly, "FingerPrintBackup*.mdb")
                 Dim FileName = My.Computer.FileSystem.GetName(foundFile)
                 Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
                 ItemList.Add(FullFilePath)
@@ -18025,6 +18026,67 @@ errhandler:
             End If
         End If
         Cursor = Cursors.Default
+    End Sub
+
+    Private Sub bgwCleanOnlineFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCleanOnlineFiles.DoWork
+        Try
+            If InternetAvailable() = False Then
+                Exit Sub
+            End If
+
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+                Exit Sub
+            End If
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim UserBackupFolderName As String = FullDistrictName
+            Dim UserBackupFolderID As String = ""
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Exit Sub
+            Else
+                UserBackupFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name contains 'FingerprintBackup'"
+
+            List.Fields = "files(id)"
+            List.OrderBy = "createdTime asc"
+            Results = List.Execute
+
+            cnt = Results.Files.Count
+
+            If cnt < 11 Then Exit Sub
+
+            Dim ItemList As New ArrayList
+
+            For Each Result In Results.Files
+                ItemList.Add(Result.Id) 'id
+            Next
+
+            Dim u = cnt - 11
+            Dim id As String = ""
+            For i = 0 To u
+                id = ItemList.Item(i)
+                Dim DeleteRequest = FISService.Files.Delete(id)
+                DeleteRequest.Execute()
+            Next
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub FindLastSOCNumberDICount()
@@ -18947,4 +19009,6 @@ errhandler:
             ShowErrorMessage(ex)
         End Try
     End Sub
+
+    
 End Class
