@@ -46,6 +46,8 @@ Public Class frmOnlineBackup
     Dim MasterBackupFolderID As String = ""
     Dim CurrentFolderName As String = ""
     Dim LastModifiedDate As String = ""
+    Dim blShowFileCount As Boolean
+
 #Region "FORM LOAD EVENTS"
 
     Private Sub CreateService() Handles MyBase.Load
@@ -246,7 +248,7 @@ Public Class frmOnlineBackup
         If lUser Then
             LoadFilesInUserBackupFolder(True)
         Else
-            LoadFilesInMasterBackupFolder()
+            LoadFilesInMasterBackupFolder(False)
         End If
 
     End Sub
@@ -1018,7 +1020,7 @@ Public Class frmOnlineBackup
         End If
 
         If Not lUser Then
-            LoadFilesInMasterBackupFolder()
+            LoadFilesInMasterBackupFolder(True)
             Exit Sub
         End If
 
@@ -1027,7 +1029,7 @@ Public Class frmOnlineBackup
             SuperAdminPass = "^^^px7600d"
             Dim adminprivilege As Boolean = SetAdminPrivilege()
             If adminprivilege = True Then '
-                LoadFilesInMasterBackupFolder()
+                LoadFilesInMasterBackupFolder(True)
             End If
             Exit Sub
         End If
@@ -1048,7 +1050,7 @@ Public Class frmOnlineBackup
     Private Sub bgwGetPassword_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwGetPassword.ProgressChanged
         HideProgressControls()
         If e.UserState = True Then
-            If SetAdminPrivilege() Then LoadFilesInMasterBackupFolder()
+            If SetAdminPrivilege() Then LoadFilesInMasterBackupFolder(True)
         Else
             MessageBoxEx.Show("Unable to get user authentication.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
@@ -1056,7 +1058,7 @@ Public Class frmOnlineBackup
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub LoadFilesInMasterBackupFolder()
+    Private Sub LoadFilesInMasterBackupFolder(ShowFileCount As Boolean)
         Me.listViewEx1.Items.Clear()
         Me.lblTotalFileSize.Text = ""
         Me.lblItemCount.Text = ""
@@ -1065,6 +1067,7 @@ Public Class frmOnlineBackup
         ShowProgressControls("", "", eCircularProgressType.Donut)
         SetFormTitle("FIS Backup")
         CurrentFolderName = "FIS Backup"
+        blShowFileCount = ShowFileCount
         bgwListAllFiles.RunWorkerAsync(MasterBackupFolderID)
     End Sub
 
@@ -1141,7 +1144,7 @@ Public Class frmOnlineBackup
 
 
             List.PageSize = 1000 ' maximum file list
-            List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, description)"
+            List.Fields = "files(id, name, mimeType, size, modifiedTime, description)"
             List.OrderBy = "folder, name" 'sorting order
 
             Dim Results As FileList = List.Execute
@@ -1149,16 +1152,28 @@ Public Class frmOnlineBackup
             Dim item As ListViewItem
 
             TotalFileSize = 0
+            Dim id As String = ""
+            Dim fcount As Integer = 0
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
                 Dim modifiedtime As DateTime = Result.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
-                item.SubItems.Add(Result.Id)
+                id = Result.Id
+                item.SubItems.Add(id)
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = 3
                     item.SubItems.Add(Result.Description)
-                    item.SubItems.Add("") 'remarks
+                    If blShowFileCount Then
+                        item.SubItems.Add("")
+                        item.SubItems.Add("")
+                        item.SubItems.Add("")
+                        List.Q = "trashed = false and '" & id & "' in parents"
+                        Results = List.Execute
+                        fcount = Results.Files.Count
+                        item.SubItems.Add(fcount) 'remarks
+                    End If
+                    
                     bgwListAllFiles.ReportProgress(2, item)
                 ElseIf Result.MimeType = "database/mdb" Then
                     item.ImageIndex = 2
