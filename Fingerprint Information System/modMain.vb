@@ -173,6 +173,13 @@ Module modMain
         ClosePleaseWaitForm()
         frmSplashScreen.CloseForm()
 
+        Dim ermessage As String = ex.Message.Replace("""", "")
+
+        If ermessage.ToLower.StartsWith("error:invalid_grant") Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("System time is incorrect. Please set the time in control panel.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         Dim trace = New Diagnostics.StackTrace(ex, True)
         Dim line As String = Strings.Right(trace.ToString, 5)
         Dim strMethod As String = ""

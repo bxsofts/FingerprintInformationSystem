@@ -17664,7 +17664,7 @@ errhandler:
             bgwOnlineAutoBackup.RunWorkerAsync(backupperiod)
 
         Catch ex As Exception
-            ShowErrorMessage(ex)
+            ' ShowErrorMessage(ex)
         End Try
     End Sub
 
@@ -18108,6 +18108,7 @@ errhandler:
         End Try
 
     End Sub
+
     Private Sub LoadRecordsAfterRestore()
         Try
 
@@ -18500,7 +18501,7 @@ errhandler:
             End If
 
         Catch ex As Exception
-            ShowErrorMessage(ex)
+            ' ShowErrorMessage(ex)
         End Try
     End Sub
 #End Region
@@ -18659,13 +18660,12 @@ errhandler:
             End If
 
         Catch ex As Exception
-            ShowErrorMessage(ex)
+            '  ShowErrorMessage(ex)
             Return False
         End Try
     End Function
 
    
-
     Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
         If InternetAvailable() = False Then
             Exit Sub
@@ -18815,7 +18815,7 @@ errhandler:
 #End Region
 
 
-#Region "SYNC DATABASE"
+#Region "DATABASE LAST MODIFICATION DATE"
 
     Public Sub InsertOrUpdateLastModificationDate(NewDate As Date)
         Try
