@@ -1115,6 +1115,9 @@ Public Class frmOnlineBackup
         Try
             If TypeOf e.UserState Is ListViewItem Then
                 listViewEx1.Items.Add(e.UserState)
+                If blShowFileCount Then
+                    Me.CircularProgress1.ProgressText = e.ProgressPercentage & "%"
+                End If
             End If
 
         Catch ex As Exception
@@ -1130,6 +1133,7 @@ Public Class frmOnlineBackup
             Me.listViewEx1.Items(0).Selected = True
         End If
         blListIsLoading = False
+        blShowFileCount = False
     End Sub
 
     Private Sub ListAllFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
@@ -1153,7 +1157,10 @@ Public Class frmOnlineBackup
 
             TotalFileSize = 0
             Dim id As String = ""
-            Dim fcount As Integer = 0
+            Dim filecount As Integer = 0
+            Dim i As Integer = 0
+            Dim foldercount As Integer = Results.Files.Count
+
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
                 Dim modifiedtime As DateTime = Result.ModifiedTime
@@ -1170,11 +1177,12 @@ Public Class frmOnlineBackup
                         item.SubItems.Add("")
                         List.Q = "trashed = false and '" & id & "' in parents"
                         Results = List.Execute
-                        fcount = Results.Files.Count
-                        item.SubItems.Add(fcount) 'remarks
+                        filecount = Results.Files.Count
+                        item.SubItems.Add(filecount) 'remarks
+                        i = i + 1
                     End If
-                    
-                    bgwListAllFiles.ReportProgress(2, item)
+
+                    bgwListAllFiles.ReportProgress(i / foldercount * 100, item)
                 ElseIf Result.MimeType = "database/mdb" Then
                     item.ImageIndex = 2
                     item.SubItems.Add(CalculateFileSize(Result.Size))
