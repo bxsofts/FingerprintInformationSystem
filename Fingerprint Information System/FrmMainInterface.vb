@@ -16459,7 +16459,7 @@ errhandler:
         frmFPAStatement.ShowDialog()
     End Sub
 
-    Private Sub ShowMonthlyPerformance() Handles btnMonthlyPerformance.Click
+    Private Sub ShowMonthlyPerformance() Handles btnMonthlyPerformance.Click, btnMonthlyWorkdoneStmt.Click
         On Error Resume Next
         frmMonthlyPerformance.Show()
         frmMonthlyPerformance.WindowState = FormWindowState.Maximized
@@ -16551,7 +16551,7 @@ errhandler:
 
 
 #Region "COVERING LETTERS"
-    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilReport.Click, btnVigilanceCase.Click, btnGraveCrimeCL.Click, btnIdentificationStmtCL.Click, btnProjectsBuildingsReport.Click, btnMonthlyStatementCL.Click
+    Sub CoveringLetters(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAttendance.Click, btnSOCCL.Click, btnTABill.Click, btnRBWarrant.Click, btnIndividualPerformanceCL.Click, btnRBNilLetter.Click, btnVigilanceLetter.Click, btnGraveCrimeCL.Click, btnIdentificationStmtCL.Click, btnProjectLetter.Click, btnMonthlyStatementCL.Click
 
         Try
 
@@ -16609,13 +16609,13 @@ errhandler:
                     bodytext = "I am submitting herewith the Individual performance statement of the staff of this unit for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIndividualPerformance
                     sFileName = "CL - Individual Performance Statement.docx"
-                Case btnRBNilReport.Name
+                Case btnRBNilLetter.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Bus and Railway Warrants Statement - " & m2 & " - submitting of - reg:- "
                     bodytext = "No Bus and Railway Warrants were used in the month of " & m2 & ". This is for favour of information and necessary action."
                     PdlNumber = PdlRBWarrant
                     sFileName = "CL - Rail Bus Warrant Nil Statement.docx"
-                Case btnVigilanceCase.Name
+                Case btnVigilanceLetter.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Vigilance case against staff – " & m2 & " - report submitting of - reg:- "
                     bodytext = "No case has been Registered or Investigated or being investigated by Local Police / CBCID / Vigilance Department against any of the staff working in this unit during the month of " & m2 & ". This is for favour of information and necessary action."
@@ -16633,7 +16633,7 @@ errhandler:
                     bodytext = "I am submitting herewith the Identification statement for the month of " & m2 & " for favour of necessary action."
                     PdlNumber = PdlIdentificationStatement
                     sFileName = "CL - Identification Statement.docx"
-                Case btnProjectsBuildingsReport.Name
+                Case btnProjectLetter.Name
                     m2 = MonthName(m2) & " " & y2
                     subject = "Details of Projects/Buildings ready for inauguration – submitting of - reg:- "
                     bodytext = "Kind attention is invited to the subject. I am submitting a NIL report in this regard. This is for favour of information and necessary action."
@@ -16747,6 +16747,71 @@ errhandler:
         End Try
 
 
+    End Sub
+    Private Sub GenerateNilReports(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRBNiliAPS.Click, btnVigilanceIAPS.Click, btnProjectIAPS.Click
+        Try
+            Dim TemplateFile As String = ""
+            Dim blmonth2 As Boolean = True
+
+            Select Case DirectCast(sender, DevComponents.DotNetBar.ButtonItem).Name
+                Case btnRBNiliAPS.Name
+                    TemplateFile = strAppUserPath & "\WordTemplates\WarrantStatement.docx"
+                    blmonth2 = True
+                Case btnVigilanceIAPS.Name
+                    TemplateFile = strAppUserPath & "\WordTemplates\VigilanceCaseStatement.docx"
+                    blmonth2 = True
+                Case btnProjectIAPS.Name
+                    TemplateFile = strAppUserPath & "\WordTemplates\ProjectStatement.docx"
+                    blmonth2 = False
+            End Select
+
+            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
+                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            ShowPleaseWaitForm()
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim m1 As String = Month(Today)
+            Dim m2 As String = m1 - 1
+
+            Dim y1 As String = Year(Today)
+            Dim y2 As String = y1
+
+            If m2 = 0 Then
+                m2 = 12
+                y2 = y1 - 1
+            End If
+
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+            Dim wdDoc As Word.Document = wdDocs.Add(TemplateFile)
+            Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
+            wdDoc.Range.NoProofing = 1
+
+            wdBooks("unit").Range.Text = UCase(FullDistrictName)
+            wdBooks("month1").Range.Text = MonthName(m2).ToUpper & " " & y2
+            If blmonth2 Then wdBooks("month2").Range.Text = MonthName(m2) & " " & y2
+
+            ClosePleaseWaitForm()
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            ReleaseObject(wdBooks)
+            ReleaseObject(wdDoc)
+            ReleaseObject(wdDocs)
+            wdApp = Nothing
+        Catch ex As Exception
+            ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
+        End Try
+        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 #End Region
 
@@ -19010,5 +19075,5 @@ errhandler:
         End Try
     End Sub
 
-    
+   
 End Class
