@@ -176,7 +176,7 @@ Partial Class FrmSOCReportSentStatus
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(11, 125)
+        Me.LabelX3.Location = New System.Drawing.Point(11, 122)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(86, 18)
         Me.LabelX3.TabIndex = 35
@@ -189,7 +189,7 @@ Partial Class FrmSOCReportSentStatus
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(11, 156)
+        Me.LabelX2.Location = New System.Drawing.Point(11, 158)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(99, 18)
         Me.LabelX2.TabIndex = 37
@@ -299,7 +299,7 @@ Partial Class FrmSOCReportSentStatus
         Me.RSOCDatagrid.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.RSOCDatagrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.RSOCDatagrid.EnableHeadersVisualStyles = False
-        Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.RSOCDatagrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.RSOCDatagrid.Location = New System.Drawing.Point(0, 229)
         Me.RSOCDatagrid.MultiSelect = False
         Me.RSOCDatagrid.Name = "RSOCDatagrid"

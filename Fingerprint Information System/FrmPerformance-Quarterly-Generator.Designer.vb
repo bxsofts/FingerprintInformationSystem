@@ -100,7 +100,7 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(147, 19)
+        Me.LabelX5.Location = New System.Drawing.Point(147, 24)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.Size = New System.Drawing.Size(28, 18)
         Me.LabelX5.TabIndex = 38
@@ -113,7 +113,7 @@ Partial Class frmQuarterlyPerformance
         '
         '
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(6, 19)
+        Me.LabelX6.Location = New System.Drawing.Point(6, 24)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.Size = New System.Drawing.Size(46, 18)
         Me.LabelX6.TabIndex = 37
@@ -130,7 +130,7 @@ Partial Class frmQuarterlyPerformance
         Me.txtQuarterYear.FocusHighlightEnabled = True
         Me.txtQuarterYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuarterYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtQuarterYear.Location = New System.Drawing.Point(181, 14)
+        Me.txtQuarterYear.Location = New System.Drawing.Point(181, 19)
         Me.txtQuarterYear.MaxValue = 2099
         Me.txtQuarterYear.MinValue = 1900
         Me.txtQuarterYear.MouseWheelValueChangeEnabled = False
@@ -152,7 +152,7 @@ Partial Class frmQuarterlyPerformance
         Me.txtQuarter.FocusHighlightEnabled = True
         Me.txtQuarter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuarter.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtQuarter.Location = New System.Drawing.Point(59, 14)
+        Me.txtQuarter.Location = New System.Drawing.Point(59, 19)
         Me.txtQuarter.MaxValue = 4
         Me.txtQuarter.MinValue = 1
         Me.txtQuarter.MouseWheelValueChangeEnabled = False
@@ -521,7 +521,7 @@ Partial Class frmQuarterlyPerformance
         Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.DataGridViewX1.Location = New System.Drawing.Point(395, 45)
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"

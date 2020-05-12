@@ -156,7 +156,7 @@ Partial Class frmConciseSOCReport
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(241, 63)
+        Me.LabelX4.Location = New System.Drawing.Point(241, 62)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 30
@@ -169,7 +169,7 @@ Partial Class frmConciseSOCReport
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(14, 65)
+        Me.LabelX3.Location = New System.Drawing.Point(14, 62)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 29

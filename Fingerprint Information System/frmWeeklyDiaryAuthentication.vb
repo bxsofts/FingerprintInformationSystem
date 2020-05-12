@@ -438,4 +438,5 @@ Public Class frmWeeklyDiaryAuthentication
         End If
 
     End Sub
+
 End Class

@@ -314,7 +314,7 @@ Partial Class frmChalanDetails
         '
         Me.LabelX94.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX94.Font = New System.Drawing.Font("Rupee Foradian", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX94.Location = New System.Drawing.Point(51, 137)
+        Me.LabelX94.Location = New System.Drawing.Point(51, 138)
         Me.LabelX94.Name = "LabelX94"
         Me.LabelX94.Size = New System.Drawing.Size(9, 16)
         Me.LabelX94.TabIndex = 240

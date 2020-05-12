@@ -140,7 +140,7 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         '
         Me.lblPassword2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword2.Location = New System.Drawing.Point(2, 104)
+        Me.lblPassword2.Location = New System.Drawing.Point(2, 103)
         Me.lblPassword2.Name = "lblPassword2"
         Me.lblPassword2.Size = New System.Drawing.Size(48, 18)
         Me.lblPassword2.TabIndex = 13
@@ -153,7 +153,7 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         '
         Me.lblPassword1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblPassword1.Location = New System.Drawing.Point(2, 74)
+        Me.lblPassword1.Location = New System.Drawing.Point(2, 73)
         Me.lblPassword1.Name = "lblPassword1"
         Me.lblPassword1.Size = New System.Drawing.Size(56, 18)
         Me.lblPassword1.TabIndex = 11

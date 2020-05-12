@@ -59,6 +59,9 @@ Partial Class frmAnnualPerformance
         Me.lblQuarter2 = New DevComponents.DotNetBar.LabelX()
         Me.lblQuarter1 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
+        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnClearAllFields = New DevComponents.DotNetBar.ButtonX()
         Me.btnOpenInWord = New DevComponents.DotNetBar.ButtonX()
@@ -67,9 +70,6 @@ Partial Class frmAnnualPerformance
         Me.btnGeneratePerformanceStatement = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.txtYear = New DevComponents.Editors.IntegerInput()
-        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
-        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         CType(Me.PerformanceBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewX1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -137,7 +137,7 @@ Partial Class frmAnnualPerformance
         Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.DataGridViewX1.Location = New System.Drawing.Point(395, 45)
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
@@ -391,6 +391,54 @@ Partial Class frmAnnualPerformance
         Me.GroupPanel2.TabIndex = 34
         Me.GroupPanel2.Text = "Print Statement In MS Word"
         '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(131, 13)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 71
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
+        'LabelX1
+        '
+        Me.LabelX1.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(5, 13)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(43, 18)
+        Me.LabelX1.TabIndex = 70
+        Me.LabelX1.Text = "Format"
+        '
+        'chkStatement
+        '
+        Me.chkStatement.AutoSize = True
+        '
+        '
+        '
+        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkStatement.Location = New System.Drawing.Point(257, 13)
+        Me.chkStatement.Name = "chkStatement"
+        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
+        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkStatement.TabIndex = 69
+        Me.chkStatement.TabStop = False
+        Me.chkStatement.Text = "Statement Only"
+        '
         'CircularProgress1
         '
         '
@@ -528,54 +576,6 @@ Partial Class frmAnnualPerformance
         Me.txtYear.TabIndex = 2
         Me.txtYear.Value = 1900
         Me.txtYear.WatermarkText = "Year"
-        '
-        'chkiAPS
-        '
-        Me.chkiAPS.AutoSize = True
-        '
-        '
-        '
-        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkiAPS.Checked = True
-        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkiAPS.CheckValue = "Y"
-        Me.chkiAPS.Location = New System.Drawing.Point(131, 13)
-        Me.chkiAPS.Name = "chkiAPS"
-        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
-        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkiAPS.TabIndex = 71
-        Me.chkiAPS.TabStop = False
-        Me.chkiAPS.Text = "iAPS"
-        '
-        'LabelX1
-        '
-        Me.LabelX1.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(5, 13)
-        Me.LabelX1.Name = "LabelX1"
-        Me.LabelX1.Size = New System.Drawing.Size(43, 18)
-        Me.LabelX1.TabIndex = 70
-        Me.LabelX1.Text = "Format"
-        '
-        'chkStatement
-        '
-        Me.chkStatement.AutoSize = True
-        '
-        '
-        '
-        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkStatement.Location = New System.Drawing.Point(257, 13)
-        Me.chkStatement.Name = "chkStatement"
-        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
-        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkStatement.TabIndex = 69
-        Me.chkStatement.TabStop = False
-        Me.chkStatement.Text = "Statement Only"
         '
         'frmAnnualPerformance
         '

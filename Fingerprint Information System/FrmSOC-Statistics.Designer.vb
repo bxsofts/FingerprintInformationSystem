@@ -161,7 +161,7 @@ Partial Class frmSOCStatistics
         Me.btnPrint.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnPrint.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
-        Me.btnPrint.Location = New System.Drawing.Point(532, 19)
+        Me.btnPrint.Location = New System.Drawing.Point(532, 16)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlP)
         Me.btnPrint.Size = New System.Drawing.Size(98, 56)
@@ -211,7 +211,7 @@ Partial Class frmSOCStatistics
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(246, 60)
+        Me.LabelX4.Location = New System.Drawing.Point(246, 54)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 25
@@ -234,7 +234,7 @@ Partial Class frmSOCStatistics
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(9, 60)
+        Me.LabelX3.Location = New System.Drawing.Point(9, 54)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 24

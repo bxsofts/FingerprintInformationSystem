@@ -34,6 +34,7 @@ Partial Class frmAttendanceStmt
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkCoB = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
@@ -41,7 +42,6 @@ Partial Class frmAttendanceStmt
         Me.chkStaff = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkTI = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwAttendance = New System.ComponentModel.BackgroundWorker()
-        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.PanelEx2.SuspendLayout()
         Me.GroupPanel6.SuspendLayout()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -162,7 +162,7 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(24, 39)
+        Me.LabelX1.Location = New System.Drawing.Point(24, 38)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(32, 18)
         Me.LabelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -298,7 +298,7 @@ Partial Class frmAttendanceStmt
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(24, 82)
+        Me.LabelX2.Location = New System.Drawing.Point(24, 81)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(17, 18)
         Me.LabelX2.TabIndex = 13
@@ -346,6 +346,25 @@ Partial Class frmAttendanceStmt
         Me.GroupPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel5.TabIndex = 24
         Me.GroupPanel5.Text = "Statement Format"
+        '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(24, 22)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 63
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
         '
         'chkStatement
         '
@@ -477,25 +496,6 @@ Partial Class frmAttendanceStmt
         '
         Me.bgwAttendance.WorkerReportsProgress = True
         Me.bgwAttendance.WorkerSupportsCancellation = True
-        '
-        'chkiAPS
-        '
-        Me.chkiAPS.AutoSize = True
-        '
-        '
-        '
-        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkiAPS.Checked = True
-        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkiAPS.CheckValue = "Y"
-        Me.chkiAPS.Location = New System.Drawing.Point(24, 22)
-        Me.chkiAPS.Name = "chkiAPS"
-        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
-        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkiAPS.TabIndex = 63
-        Me.chkiAPS.TabStop = False
-        Me.chkiAPS.Text = "iAPS"
         '
         'frmAttendanceStmt
         '

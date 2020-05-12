@@ -33,6 +33,7 @@ Partial Class FrmSOCGraveCrimes
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
@@ -46,7 +47,6 @@ Partial Class FrmSOCGraveCrimes
         Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
-        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
         CType(Me.SOCRegisterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
@@ -107,7 +107,7 @@ Partial Class FrmSOCGraveCrimes
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(9, 78)
+        Me.LabelX1.Location = New System.Drawing.Point(9, 79)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(72, 18)
         Me.LabelX1.TabIndex = 7
@@ -120,7 +120,7 @@ Partial Class FrmSOCGraveCrimes
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(220, 44)
+        Me.LabelX4.Location = New System.Drawing.Point(220, 41)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 25
@@ -180,6 +180,25 @@ Partial Class FrmSOCGraveCrimes
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
         '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(87, 7)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 58
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
         'LabelX6
         '
         Me.LabelX6.AutoSize = True
@@ -201,11 +220,11 @@ Partial Class FrmSOCGraveCrimes
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(392, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(379, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(115, 148)
+        Me.CircularProgress1.Size = New System.Drawing.Size(128, 148)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 52
         Me.CircularProgress1.TabStop = False
@@ -262,7 +281,7 @@ Partial Class FrmSOCGraveCrimes
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(9, 40)
+        Me.LabelX3.Location = New System.Drawing.Point(9, 41)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 24
@@ -439,25 +458,6 @@ Partial Class FrmSOCGraveCrimes
         '
         Me.bgwLetter.WorkerReportsProgress = True
         Me.bgwLetter.WorkerSupportsCancellation = True
-        '
-        'chkiAPS
-        '
-        Me.chkiAPS.AutoSize = True
-        '
-        '
-        '
-        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkiAPS.Checked = True
-        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkiAPS.CheckValue = "Y"
-        Me.chkiAPS.Location = New System.Drawing.Point(87, 7)
-        Me.chkiAPS.Name = "chkiAPS"
-        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
-        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkiAPS.TabIndex = 58
-        Me.chkiAPS.TabStop = False
-        Me.chkiAPS.Text = "iAPS"
         '
         'FrmSOCGraveCrimes
         '

@@ -220,7 +220,11 @@ Partial Class frmMainInterface
         Me.btnRBNiliAPS = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRBNilLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnVigilanceCase = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnVigilanceIAPS = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnVigilanceLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnProjectsBuildingsReport = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnProjectIAPS = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnProjectLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnAttendanceStmt2 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnMonthlyStatementCL = New DevComponents.DotNetBar.ButtonItem()
@@ -1124,10 +1128,6 @@ Partial Class frmMainInterface
         Me.SSTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SupportingStaffTableAdapter()
         Me.bgwUpdateOnlineDatabase = New System.ComponentModel.BackgroundWorker()
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
-        Me.btnVigilanceIAPS = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnVigilanceLetter = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnProjectIAPS = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnProjectLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -2179,11 +2179,31 @@ Partial Class frmMainInterface
         Me.btnVigilanceCase.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnVigilanceIAPS, Me.btnVigilanceLetter})
         Me.btnVigilanceCase.Text = "Case Against Staff NIL Report"
         '
+        'btnVigilanceIAPS
+        '
+        Me.btnVigilanceIAPS.Name = "btnVigilanceIAPS"
+        Me.btnVigilanceIAPS.Text = "iAPS Statement Format"
+        '
+        'btnVigilanceLetter
+        '
+        Me.btnVigilanceLetter.Name = "btnVigilanceLetter"
+        Me.btnVigilanceLetter.Text = "Letter Format"
+        '
         'btnProjectsBuildingsReport
         '
         Me.btnProjectsBuildingsReport.Name = "btnProjectsBuildingsReport"
         Me.btnProjectsBuildingsReport.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnProjectIAPS, Me.btnProjectLetter})
         Me.btnProjectsBuildingsReport.Text = "Projects/Buildings NIL Report"
+        '
+        'btnProjectIAPS
+        '
+        Me.btnProjectIAPS.Name = "btnProjectIAPS"
+        Me.btnProjectIAPS.Text = "iAPS Statement Format"
+        '
+        'btnProjectLetter
+        '
+        Me.btnProjectLetter.Name = "btnProjectLetter"
+        Me.btnProjectLetter.Text = "Letter Format"
         '
         'btnAttendanceStmt2
         '
@@ -14183,26 +14203,6 @@ Partial Class frmMainInterface
         'bgwCleanOnlineFiles
         '
         Me.bgwCleanOnlineFiles.WorkerReportsProgress = true
-        '
-        'btnVigilanceIAPS
-        '
-        Me.btnVigilanceIAPS.Name = "btnVigilanceIAPS"
-        Me.btnVigilanceIAPS.Text = "iAPS Statement Format"
-        '
-        'btnVigilanceLetter
-        '
-        Me.btnVigilanceLetter.Name = "btnVigilanceLetter"
-        Me.btnVigilanceLetter.Text = "Letter Format"
-        '
-        'btnProjectIAPS
-        '
-        Me.btnProjectIAPS.Name = "btnProjectIAPS"
-        Me.btnProjectIAPS.Text = "iAPS Statement Format"
-        '
-        'btnProjectLetter
-        '
-        Me.btnProjectLetter.Name = "btnProjectLetter"
-        Me.btnProjectLetter.Text = "Letter Format"
         '
         'frmMainInterface
         '

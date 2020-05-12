@@ -27,6 +27,9 @@ Partial Class frmDAStatement
         Me.DAStatementBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
@@ -43,9 +46,6 @@ Partial Class frmDAStatement
         Me.DASTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DAStatementTableAdapter()
         Me.PsWiseDACountTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.PSWiseDACountTableAdapter()
         Me.bgwWord = New System.ComponentModel.BackgroundWorker()
-        Me.chkiAPS = New DevComponents.DotNetBar.Controls.CheckBoxX()
-        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
-        Me.chkStatement = New DevComponents.DotNetBar.Controls.CheckBoxX()
         CType(Me.DAStatementBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FingerPrintDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -95,6 +95,54 @@ Partial Class frmDAStatement
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
+        '
+        'chkiAPS
+        '
+        Me.chkiAPS.AutoSize = True
+        '
+        '
+        '
+        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkiAPS.Checked = True
+        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkiAPS.CheckValue = "Y"
+        Me.chkiAPS.Location = New System.Drawing.Point(86, 10)
+        Me.chkiAPS.Name = "chkiAPS"
+        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
+        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkiAPS.TabIndex = 65
+        Me.chkiAPS.TabStop = False
+        Me.chkiAPS.Text = "iAPS"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(8, 10)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(43, 18)
+        Me.LabelX5.TabIndex = 64
+        Me.LabelX5.Text = "Format"
+        '
+        'chkStatement
+        '
+        Me.chkStatement.AutoSize = True
+        '
+        '
+        '
+        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
+        Me.chkStatement.Location = New System.Drawing.Point(265, 10)
+        Me.chkStatement.Name = "chkStatement"
+        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
+        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkStatement.TabIndex = 63
+        Me.chkStatement.TabStop = False
+        Me.chkStatement.Text = "Statement Only"
         '
         'CircularProgress1
         '
@@ -156,7 +204,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Location = New System.Drawing.Point(231, 45)
+        Me.LabelX4.Location = New System.Drawing.Point(231, 44)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(28, 18)
         Me.LabelX4.TabIndex = 25
@@ -179,7 +227,7 @@ Partial Class frmDAStatement
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(8, 47)
+        Me.LabelX3.Location = New System.Drawing.Point(8, 44)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(40, 18)
         Me.LabelX3.TabIndex = 24
@@ -356,54 +404,6 @@ Partial Class frmDAStatement
         '
         Me.bgwWord.WorkerReportsProgress = True
         Me.bgwWord.WorkerSupportsCancellation = True
-        '
-        'chkiAPS
-        '
-        Me.chkiAPS.AutoSize = True
-        '
-        '
-        '
-        Me.chkiAPS.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkiAPS.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkiAPS.Checked = True
-        Me.chkiAPS.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkiAPS.CheckValue = "Y"
-        Me.chkiAPS.Location = New System.Drawing.Point(86, 10)
-        Me.chkiAPS.Name = "chkiAPS"
-        Me.chkiAPS.Size = New System.Drawing.Size(48, 18)
-        Me.chkiAPS.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkiAPS.TabIndex = 65
-        Me.chkiAPS.TabStop = False
-        Me.chkiAPS.Text = "iAPS"
-        '
-        'LabelX5
-        '
-        Me.LabelX5.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(8, 10)
-        Me.LabelX5.Name = "LabelX5"
-        Me.LabelX5.Size = New System.Drawing.Size(43, 18)
-        Me.LabelX5.TabIndex = 64
-        Me.LabelX5.Text = "Format"
-        '
-        'chkStatement
-        '
-        Me.chkStatement.AutoSize = True
-        '
-        '
-        '
-        Me.chkStatement.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkStatement.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkStatement.Location = New System.Drawing.Point(265, 10)
-        Me.chkStatement.Name = "chkStatement"
-        Me.chkStatement.Size = New System.Drawing.Size(110, 18)
-        Me.chkStatement.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkStatement.TabIndex = 63
-        Me.chkStatement.TabStop = False
-        Me.chkStatement.Text = "Statement Only"
         '
         'frmDAStatement
         '

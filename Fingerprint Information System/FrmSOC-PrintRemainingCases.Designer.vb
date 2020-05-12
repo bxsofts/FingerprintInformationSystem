@@ -24,6 +24,14 @@ Partial Class FrmSOCPrintRemainingCases
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSOCPrintRemainingCases))
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.cmbOperator = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.ComboItem1 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem2 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem3 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem4 = New DevComponents.Editors.ComboItem()
+        Me.ComboItem5 = New DevComponents.Editors.ComboItem()
+        Me.intCPCount = New DevComponents.Editors.IntegerInput()
         Me.btnGenerateByMonth = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
@@ -34,19 +42,11 @@ Partial Class FrmSOCPrintRemainingCases
         Me.btnGenerateByDate = New DevComponents.DotNetBar.ButtonX()
         Me.dtFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
-        Me.intCPCount = New DevComponents.Editors.IntegerInput()
-        Me.cmbOperator = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
-        Me.ComboItem1 = New DevComponents.Editors.ComboItem()
-        Me.ComboItem2 = New DevComponents.Editors.ComboItem()
-        Me.ComboItem3 = New DevComponents.Editors.ComboItem()
-        Me.ComboItem4 = New DevComponents.Editors.ComboItem()
-        Me.ComboItem5 = New DevComponents.Editors.ComboItem()
         Me.PanelEx2.SuspendLayout()
+        CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelEx2
@@ -78,6 +78,71 @@ Partial Class FrmSOCPrintRemainingCases
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 23
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(9, 13)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(83, 18)
+        Me.LabelX5.TabIndex = 34
+        Me.LabelX5.Text = "CPs remaining"
+        '
+        'cmbOperator
+        '
+        Me.cmbOperator.DisplayMember = "Text"
+        Me.cmbOperator.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbOperator.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbOperator.ForeColor = System.Drawing.Color.Black
+        Me.cmbOperator.FormattingEnabled = True
+        Me.cmbOperator.ItemHeight = 20
+        Me.cmbOperator.Items.AddRange(New Object() {Me.ComboItem1, Me.ComboItem2, Me.ComboItem3, Me.ComboItem4, Me.ComboItem5})
+        Me.cmbOperator.Location = New System.Drawing.Point(98, 9)
+        Me.cmbOperator.Name = "cmbOperator"
+        Me.cmbOperator.Size = New System.Drawing.Size(50, 26)
+        Me.cmbOperator.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.cmbOperator.TabIndex = 0
+        '
+        'ComboItem1
+        '
+        Me.ComboItem1.Text = "="
+        '
+        'ComboItem2
+        '
+        Me.ComboItem2.Text = ">"
+        '
+        'ComboItem3
+        '
+        Me.ComboItem3.Text = ">="
+        '
+        'ComboItem4
+        '
+        Me.ComboItem4.Text = "<="
+        '
+        'ComboItem5
+        '
+        Me.ComboItem5.Text = "<>"
+        '
+        'intCPCount
+        '
+        '
+        '
+        '
+        Me.intCPCount.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.intCPCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.intCPCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.intCPCount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.intCPCount.Location = New System.Drawing.Point(165, 10)
+        Me.intCPCount.MinValue = 0
+        Me.intCPCount.Name = "intCPCount"
+        Me.intCPCount.ShowUpDown = True
+        Me.intCPCount.Size = New System.Drawing.Size(50, 25)
+        Me.intCPCount.TabIndex = 1
         '
         'btnGenerateByMonth
         '
@@ -146,7 +211,7 @@ Partial Class FrmSOCPrintRemainingCases
         Me.cmbMonth.ForeColor = System.Drawing.Color.Black
         Me.cmbMonth.FormattingEnabled = True
         Me.cmbMonth.ItemHeight = 23
-        Me.cmbMonth.Location = New System.Drawing.Point(98, 48)
+        Me.cmbMonth.Location = New System.Drawing.Point(98, 50)
         Me.cmbMonth.MaxDropDownItems = 15
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
@@ -302,71 +367,6 @@ Partial Class FrmSOCPrintRemainingCases
         Me.dtTo.Value = New Date(1900, 1, 1, 0, 0, 0, 0)
         Me.dtTo.WatermarkText = "To"
         '
-        'intCPCount
-        '
-        '
-        '
-        '
-        Me.intCPCount.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.intCPCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.intCPCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
-        Me.intCPCount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.intCPCount.Location = New System.Drawing.Point(165, 10)
-        Me.intCPCount.MinValue = 0
-        Me.intCPCount.Name = "intCPCount"
-        Me.intCPCount.ShowUpDown = True
-        Me.intCPCount.Size = New System.Drawing.Size(50, 25)
-        Me.intCPCount.TabIndex = 1
-        '
-        'cmbOperator
-        '
-        Me.cmbOperator.DisplayMember = "Text"
-        Me.cmbOperator.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbOperator.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbOperator.ForeColor = System.Drawing.Color.Black
-        Me.cmbOperator.FormattingEnabled = True
-        Me.cmbOperator.ItemHeight = 20
-        Me.cmbOperator.Items.AddRange(New Object() {Me.ComboItem1, Me.ComboItem2, Me.ComboItem3, Me.ComboItem4, Me.ComboItem5})
-        Me.cmbOperator.Location = New System.Drawing.Point(98, 9)
-        Me.cmbOperator.Name = "cmbOperator"
-        Me.cmbOperator.Size = New System.Drawing.Size(50, 26)
-        Me.cmbOperator.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.cmbOperator.TabIndex = 0
-        '
-        'LabelX5
-        '
-        Me.LabelX5.AutoSize = True
-        '
-        '
-        '
-        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(9, 13)
-        Me.LabelX5.Name = "LabelX5"
-        Me.LabelX5.Size = New System.Drawing.Size(83, 18)
-        Me.LabelX5.TabIndex = 34
-        Me.LabelX5.Text = "CPs remaining"
-        '
-        'ComboItem1
-        '
-        Me.ComboItem1.Text = "="
-        '
-        'ComboItem2
-        '
-        Me.ComboItem2.Text = ">"
-        '
-        'ComboItem3
-        '
-        Me.ComboItem3.Text = ">="
-        '
-        'ComboItem4
-        '
-        Me.ComboItem4.Text = "<="
-        '
-        'ComboItem5
-        '
-        Me.ComboItem5.Text = "<>"
-        '
         'FrmSOCPrintRemainingCases
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -386,10 +386,10 @@ Partial Class FrmSOCPrintRemainingCases
         Me.TitleText = "<b>List of Print Remaining Cases</b>"
         Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx2.PerformLayout()
+        CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.intCPCount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

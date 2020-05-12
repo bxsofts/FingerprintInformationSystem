@@ -143,4 +143,5 @@ Public Class frmChalanDetails
         ClearFields()
         Me.Close()
     End Sub
+
 End Class

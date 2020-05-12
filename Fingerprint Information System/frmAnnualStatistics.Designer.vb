@@ -81,7 +81,7 @@ Partial Class frmAnnualStatistics
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(12, 16)
+        Me.LabelX2.Location = New System.Drawing.Point(12, 17)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(60, 18)
         Me.LabelX2.TabIndex = 14
@@ -132,11 +132,11 @@ Partial Class frmAnnualStatistics
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(225, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(211, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(123, 138)
+        Me.CircularProgress1.Size = New System.Drawing.Size(137, 138)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 54
         Me.CircularProgress1.TabStop = False
@@ -158,7 +158,7 @@ Partial Class frmAnnualStatistics
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Location = New System.Drawing.Point(12, 109)
+        Me.LabelX1.Location = New System.Drawing.Point(12, 107)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(17, 18)
         Me.LabelX1.TabIndex = 18
