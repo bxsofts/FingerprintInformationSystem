@@ -407,7 +407,7 @@ Partial Class FrmTourNote
         Me.pnlBackup.Controls.Add(Me.btnUploadAllFiles)
         Me.pnlBackup.Controls.Add(Me.lblBackup)
         Me.pnlBackup.DisabledBackColor = System.Drawing.Color.Empty
-        Me.pnlBackup.Location = New System.Drawing.Point(8, 558)
+        Me.pnlBackup.Location = New System.Drawing.Point(8, 536)
         Me.pnlBackup.Name = "pnlBackup"
         Me.pnlBackup.Size = New System.Drawing.Size(412, 66)
         Me.pnlBackup.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -478,7 +478,7 @@ Partial Class FrmTourNote
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTourNote)
         Me.GroupPanel3.Controls.Add(Me.btnGenerateBlankTR47)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GroupPanel3.Location = New System.Drawing.Point(8, 453)
+        Me.GroupPanel3.Location = New System.Drawing.Point(8, 431)
         Me.GroupPanel3.Name = "GroupPanel3"
         Me.GroupPanel3.Size = New System.Drawing.Size(412, 93)
         '
@@ -578,7 +578,7 @@ Partial Class FrmTourNote
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel2.Location = New System.Drawing.Point(8, 252)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(412, 190)
+        Me.GroupPanel2.Size = New System.Drawing.Size(412, 169)
         '
         '
         '
@@ -617,7 +617,7 @@ Partial Class FrmTourNote
         '
         Me.cprgGenerateFiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.cprgGenerateFiles.FocusCuesEnabled = False
-        Me.cprgGenerateFiles.Location = New System.Drawing.Point(3, 99)
+        Me.cprgGenerateFiles.Location = New System.Drawing.Point(3, 75)
         Me.cprgGenerateFiles.Name = "cprgGenerateFiles"
         Me.cprgGenerateFiles.ProgressColor = System.Drawing.Color.Red
         Me.cprgGenerateFiles.ProgressTextVisible = True
@@ -636,7 +636,7 @@ Partial Class FrmTourNote
         Me.PanelEx4.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx4.Location = New System.Drawing.Point(5, 3)
         Me.PanelEx4.Name = "PanelEx4"
-        Me.PanelEx4.Size = New System.Drawing.Size(398, 93)
+        Me.PanelEx4.Size = New System.Drawing.Size(398, 64)
         Me.PanelEx4.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx4.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -652,7 +652,7 @@ Partial Class FrmTourNote
         '
         '
         Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX7.Location = New System.Drawing.Point(11, 38)
+        Me.LabelX7.Location = New System.Drawing.Point(11, 21)
         Me.LabelX7.Name = "LabelX7"
         Me.LabelX7.Size = New System.Drawing.Size(104, 18)
         Me.LabelX7.TabIndex = 44
@@ -666,7 +666,7 @@ Partial Class FrmTourNote
         '
         Me.chkThreeRows.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkThreeRows.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkThreeRows.Location = New System.Drawing.Point(128, 51)
+        Me.chkThreeRows.Location = New System.Drawing.Point(128, 34)
         Me.chkThreeRows.Name = "chkThreeRows"
         Me.chkThreeRows.Size = New System.Drawing.Size(152, 18)
         Me.chkThreeRows.TabIndex = 9
@@ -684,7 +684,7 @@ Partial Class FrmTourNote
         Me.chkSingleRow.Checked = True
         Me.chkSingleRow.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkSingleRow.CheckValue = "Y"
-        Me.chkSingleRow.Location = New System.Drawing.Point(128, 23)
+        Me.chkSingleRow.Location = New System.Drawing.Point(128, 6)
         Me.chkSingleRow.Name = "chkSingleRow"
         Me.chkSingleRow.Size = New System.Drawing.Size(84, 18)
         Me.chkSingleRow.TabIndex = 8
@@ -695,7 +695,7 @@ Partial Class FrmTourNote
         '
         Me.btnOpenTABillFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOpenTABillFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenTABillFolder.Location = New System.Drawing.Point(281, 102)
+        Me.btnOpenTABillFolder.Location = New System.Drawing.Point(281, 78)
         Me.btnOpenTABillFolder.Name = "btnOpenTABillFolder"
         Me.btnOpenTABillFolder.Size = New System.Drawing.Size(122, 55)
         Me.btnOpenTABillFolder.TabIndex = 10
@@ -706,7 +706,7 @@ Partial Class FrmTourNote
         Me.btnGenerateTourNote.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateTourNote.BackColor = System.Drawing.Color.Transparent
         Me.btnGenerateTourNote.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateTourNote.Location = New System.Drawing.Point(5, 102)
+        Me.btnGenerateTourNote.Location = New System.Drawing.Point(5, 78)
         Me.btnGenerateTourNote.Name = "btnGenerateTourNote"
         Me.btnGenerateTourNote.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateTourNote.TabIndex = 8
@@ -717,7 +717,7 @@ Partial Class FrmTourNote
         '
         Me.btnGenerateTABill.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateTABill.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateTABill.Location = New System.Drawing.Point(143, 102)
+        Me.btnGenerateTABill.Location = New System.Drawing.Point(143, 78)
         Me.btnGenerateTABill.Name = "btnGenerateTABill"
         Me.btnGenerateTABill.Size = New System.Drawing.Size(122, 55)
         Me.btnGenerateTABill.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnGenerateTABillOuter})
@@ -1040,7 +1040,7 @@ Partial Class FrmTourNote
         Me.pnlStatus.Controls.Add(Me.lblSavedTABill)
         Me.pnlStatus.Controls.Add(Me.lblSavedTourNote)
         Me.pnlStatus.DisabledBackColor = System.Drawing.Color.Empty
-        Me.pnlStatus.Location = New System.Drawing.Point(8, 636)
+        Me.pnlStatus.Location = New System.Drawing.Point(8, 614)
         Me.pnlStatus.Name = "pnlStatus"
         Me.pnlStatus.Size = New System.Drawing.Size(412, 57)
         Me.pnlStatus.Style.Alignment = System.Drawing.StringAlignment.Center
