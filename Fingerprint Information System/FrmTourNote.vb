@@ -1126,51 +1126,27 @@ errhandler:
                 Exit Sub
             End If
 
-            '  If Not SelectedOfficerName.Contains(", FPS") Then
-            If SelectedOfficerName.Contains(", TI") Then
-                If chkSingleRow.Checked Then
-                    If Me.chkUseSavedTourNote.Checked Then
-                        If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
-                            GenerateSingleLineTR47fromTourNote()
-                        Else
-                            GenerateSingleLineTR47fromRecords()
-                        End If
-                    Else
-                        GenerateSingleLineTR47fromRecords()
-                    End If
-                Else
-                    If Me.chkUseSavedTourNote.Checked Then
-                        If My.Computer.FileSystem.FileExists(TAFileName("Tour Note - T")) Then
-                            GenerateThreeLineTR47fromTourNote()
-                        Else
-                            GenerateThreeLineTR47fromRecords()
-                        End If
-                    Else
-                        GenerateThreeLineTR47fromRecords()
-                    End If
-                End If
+            Dim blSingleLineTourNote As Boolean = My.Computer.FileSystem.FileExists(TAFileName("Tour Note"))
+            Dim blThreeLineTourNote As Boolean = My.Computer.FileSystem.FileExists(TAFileName("Tour Note - T"))
+            
 
-            Else
-                If chkSingleRow.Checked Then
-                    If Me.chkUseSavedTourNote.Checked Then
-                        If My.Computer.FileSystem.FileExists(TAFileName("Tour Note")) Then
-                            GenerateSingleLineTR56AfromTourNote()
-                        Else
-                            GenerateSingleLineTR56AfromRecords()
-                        End If
-                    Else
-                        GenerateSingleLineTR56AfromRecords()
-                    End If
-                Else
-                    If Me.chkUseSavedTourNote.Checked Then
-                        If My.Computer.FileSystem.FileExists(TAFileName("Tour Note - T")) Then
-                            GenerateThreeLineTR56AfromTourNote()
-                        Else
-                            GenerateThreeLineTR56AfromRecords()
-                        End If
-                    Else
-                        GenerateThreeLineTR56AfromRecords()
-                    End If
+
+            If Not (blSingleLineTourNote And blThreeLineTourNote) Then
+                MessageBoxEx.Show("First generate Tour Note and try again.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If SelectedOfficerName.Contains(", TI") Then
+                If blSingleLineTourNote Then 
+                    GenerateSingleLineTR47fromTourNote()
+                ElseIf blThreeLineTourNote Then
+                    GenerateThreeLineTR47fromTourNote()
+                End If
+            Else 'ngo
+                If blSingleLineTourNote Then
+                    GenerateSingleLineTR56AfromTourNote()
+                ElseIf blThreeLineTourNote Then
+                    GenerateThreeLineTR56AfromTourNote()
                 End If
             End If
 
@@ -1196,53 +1172,6 @@ errhandler:
 
     End Sub
 
-    Private Sub GenerateSingleLineTR56AfromRecords()
-        Try
-
-            Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
-            Dim SelectedRecordsCount As Integer = 0
-            Dim i = 0
-            For i = 0 To RowCount - 1
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                    SelectedRecordsCount = SelectedRecordsCount + 1
-                End If
-            Next
-
-            If SelectedRecordsCount = 0 Then
-                MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
-
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\TR56A.docx"
-            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-
-            Dim args As TourNoteArgs = New TourNoteArgs
-            args.TATemplateFile = TemplateFile
-            args.SelectedRecordsCount = SelectedRecordsCount
-            args.RowCount = RowCount
-            args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = True
-            args.UsePS = chkUsePS.Checked
-
-            Me.cprgGenerateFiles.Show()
-            Me.cprgGenerateFiles.ProgressText = ""
-            Me.cprgGenerateFiles.IsRunning = True
-            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
-
-            Me.Cursor = Cursors.WaitCursor
-
-            bgwTR56.RunWorkerAsync(args)
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-
-    End Sub
 
     Private Sub GenerateSingleLineTR56AfromTourNote()
         Try
@@ -1257,7 +1186,6 @@ errhandler:
             Dim args As TourNoteArgs = New TourNoteArgs
             args.TATemplateFile = TATemplateFile
             args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = False
             args.UsePS = chkUsePS.Checked
 
             Me.cprgGenerateFiles.Show()
@@ -1301,151 +1229,7 @@ errhandler:
                 OfficerNameOnly = SelectedOfficerName.Replace(", FPE", "")
             End If
 
-            If args.TAFromRecord Then
-
-                Dim sx As Integer = args.SelectedIndex
-
-                For delay = 11 To 20
-                    bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim wdApp As Word.Application
-                Dim wdDocs As Word.Documents
-                wdApp = New Word.Application
-
-                wdDocs = wdApp.Documents
-                Dim wdDoc As Word.Document = wdDocs.Add(args.TATemplateFile)
-
-                For delay = 21 To 30
-                    bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                wdDoc.Range.NoProofing = 1
-                Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
-                With wdTbl
-                    .Cell(4, 2).Range.Text = OfficerNameOnly.ToUpper
-                    .Cell(5, 2).Range.Text = Designation
-                    .Cell(6, 2).Range.Text = FullOfficeName & ", " & FullDistrictName
-                    .Cell(7, 2).Range.Text = "PEN : " & PENarray(sx)
-                    .Cell(8, 2).Range.Text = "Scale of Pay : " & ScaleArray(sx)
-                    .Cell(9, 2).Range.Text = "Basic Pay : " & BParray(sx) & "/-"
-                End With
-
-                Dim TblRowCount = wdTbl.Rows.Count - 7 'total 23 -3(heading) - 4 (calculation) = 16
-                Dim RowCountRequired = args.SelectedRecordsCount - TblRowCount
-                Dim rc = 1
-                If args.SelectedRecordsCount > TblRowCount Then
-                    For rc = 1 To RowCountRequired
-                        wdTbl.Rows.Add()
-                    Next
-                End If
-
-                Dim DA As Integer = Val(DAarray(sx))
-
-                For delay = 31 To 40
-                    bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim iteration As Integer = CInt(50 / args.RowCount)
-
-                Dim j = 4
-                Dim i = 0
-                For i = 0 To args.RowCount - 1
-
-                    If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                        Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
-                        Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
-                        Dim PS1 As String = PS
-
-                        wdTbl.Cell(j, 3).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 4).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 5).Range.Text = TourStartLocation
-
-                        If Not args.UsePS Then
-                            wdTbl.Cell(j, 6).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back"
-                        Else
-                            PS1 = PS.Replace("P.S", "")
-                            wdTbl.Cell(j, 6).Range.Text = PS1 & " and back"
-                        End If
-
-                        wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine
-
-                        If args.UsePS Then
-                            Dim distance As String = FindDistance(PS)
-                            If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance) * 2) & " km"
-                            End If
-                        End If
-
-                        '  wdTbl.Cell(j, 10).Range.Text = DA / 2
-                        wdTbl.Cell(j, 11).Range.Text = DA
-                        wdTbl.Cell(j, 12).Range.Text = DA / 2
-                        wdTbl.Cell(j, 14).Range.Text = DA / 2
-                        wdTbl.Cell(j, 16).Range.Text = DA / 2
-
-
-                        If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
-                        wdTbl.Cell(j, 17).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
-                        j = j + 1
-                    End If
-
-                    For delay = delay To delay + iteration
-                        If delay < 91 Then
-                            bgwTR56.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(5)
-                        End If
-                    Next
-                Next
-
-
-                wdTbl.Cell(j, 15).Range.Text = "Total Rs."
-                wdTbl.Cell(j, 15).Range.Font.Size = 10
-                wdTbl.Cell(j, 16).Formula(Formula:="=Sum(Above) - 12")
-                wdTbl.Cell(j, 16).Range.Bold = 1
-                wdTbl.Cell(j, 16).Range.Font.Size = 11
-                wdTbl.Cell(j + 1, 15).Range.Text = "Less B/W & R/W"
-                wdTbl.Cell(j + 1, 15).Range.Font.Size = 10
-                wdTbl.Cell(j + 1, 16).Range.Text = "Nil"
-                wdTbl.Cell(j + 1, 16).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 15).Range.Text = "Net Amount Rs."
-                wdTbl.Cell(j + 2, 15).Range.Font.Size = 10
-                wdTbl.Cell(j + 2, 16).Range.Bold = 1
-                wdTbl.Cell(j + 2, 16).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 16).Formula(Formula:="=(Sum(Above) - 12)/2")
-
-                Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
-                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
-                End If
-                For delay = 91 To 100
-                    bgwTR56.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(10)
-                Next
-
-                wdApp.Visible = True
-                wdApp.Activate()
-                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-                wdDoc.Activate()
-
-                ReleaseObject(wdTbl)
-                ReleaseObject(wdDoc)
-                ReleaseObject(wdDocs)
-                wdApp = Nothing
-            End If
-
-            If args.TAFromRecord = False Then
-                Dim TourNote As String = TAFileName("Tour Note")
+            Dim TourNote As String = TAFileName("Tour Note")
 
                 Dim wdApp As Word.Application
                 Dim wdDocs As Word.Documents
@@ -1616,7 +1400,6 @@ errhandler:
                 ReleaseObject(wdDocTA)
                 ReleaseObject(wdDocs)
                 wdApp = Nothing
-            End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -1624,51 +1407,7 @@ errhandler:
 
     End Sub
 
-    Private Sub GenerateThreeLineTR56AfromRecords()
-        Try
-
-            Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
-            Dim SelectedRecordsCount As Integer = 0
-            For i = 0 To RowCount - 1
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                    SelectedRecordsCount = SelectedRecordsCount + 1
-                End If
-            Next
-
-            If SelectedRecordsCount = 0 Then
-                MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
-
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\TR56A.docx"
-            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-
-            Dim args As TourNoteArgs = New TourNoteArgs
-            args.TATemplateFile = TemplateFile
-            args.SelectedRecordsCount = SelectedRecordsCount
-            args.RowCount = RowCount
-            args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = True
-            args.UsePS = chkUsePS.Checked
-
-            Me.cprgGenerateFiles.Show()
-            Me.cprgGenerateFiles.ProgressText = ""
-            Me.cprgGenerateFiles.IsRunning = True
-            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
-            Me.Cursor = Cursors.WaitCursor
-
-            bgwTR56ThreeLine.RunWorkerAsync(args)
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-
-    End Sub
+    
 
     Private Sub GenerateThreeLineTR56AfromTourNote()
 
@@ -1682,7 +1421,6 @@ errhandler:
             Dim args As TourNoteArgs = New TourNoteArgs
             args.TATemplateFile = TATemplateFile
             args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = False
             args.UsePS = chkUsePS.Checked
 
             Me.cprgGenerateFiles.Show()
@@ -1720,205 +1458,7 @@ errhandler:
                 OfficerNameOnly = SelectedOfficerName.Replace(", FPE", "")
             End If
 
-            If args.TAFromRecord Then
-               
-                Dim sx As Integer = args.SelectedIndex
-
-                For delay = 11 To 20
-                    bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim wdApp As Word.Application
-                Dim wdDocs As Word.Documents
-                wdApp = New Word.Application
-
-                wdDocs = wdApp.Documents
-                Dim wdDoc As Word.Document = wdDocs.Add(args.TATemplateFile)
-
-                For delay = 21 To 30
-                    bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                wdDoc.Range.NoProofing = 1
-
-                Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
-                With wdTbl
-                    .Cell(4, 2).Range.Text = OfficerNameOnly.ToUpper
-                    .Cell(5, 2).Range.Text = Designation
-                    .Cell(6, 2).Range.Text = FullOfficeName & ", " & FullDistrictName
-                    .Cell(7, 2).Range.Text = "PEN : " & PENarray(sx)
-                    .Cell(8, 2).Range.Text = "Scale of Pay : " & ScaleArray(sx)
-                    .Cell(9, 2).Range.Text = "Basic Pay : " & BParray(sx) & "/-"
-                End With
-
-                Dim TblRowCount = wdTbl.Rows.Count - 7 'total 23 -3n-4 = 16
-                Dim RowCountRequired = args.SelectedRecordsCount * 3 - TblRowCount
-                Dim rc = 1
-                If args.SelectedRecordsCount * 3 > TblRowCount Then
-                    For rc = 1 To RowCountRequired
-                        wdTbl.Rows.Add()
-                    Next
-                End If
-
-                For delay = 31 To 40
-                    bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim DA As Integer = Val(DAarray(sx))
-
-                Dim j = 4
-                Dim iteration As Integer = CInt(50 / args.RowCount)
-                For i = 0 To args.RowCount - 1
-
-                    If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                        Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
-                        Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
-                        Dim PS1 As String = PS
-
-
-                        wdTbl.Cell(j, 3).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 4).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 5).Range.Text = TourStartLocation
-
-                        If Not args.UsePS Then
-                            wdTbl.Cell(j, 6).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
-                        Else
-                            PS1 = PS.Replace("P.S", "")
-                            wdTbl.Cell(j, 6).Range.Text = PS1
-                        End If
-
-                        wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine
-
-                        If args.UsePS Then
-                            Dim distance As String = FindDistance(PS)
-                            If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
-                            End If
-                        End If
-
-                        '  wdTbl.Cell(j, 10).Range.Text = DA / 2 'mileage
-                        wdTbl.Cell(j, 14).Range.Text = 0 'total
-                        wdTbl.Cell(j, 16).Range.Text = 0 ' net
-
-
-                        If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
-                        wdTbl.Cell(j, 17).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
-
-                        j = j + 1
-
-                        wdTbl.Cell(j, 3).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 4).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 5).Range.Text = "Halt & Duty"
-                        wdTbl.Cell(j, 11).Range.Text = DA ' da rate
-                        wdTbl.Cell(j, 12).Range.Text = DA / 2 ' da amount
-                        wdTbl.Cell(j, 14).Range.Text = DA / 2 'total
-                        wdTbl.Cell(j, 16).Range.Text = DA / 2 ' net
-                        wdTbl.Cell(j, 17).Range.Text = "Halt & Duty"
-
-                        j = j + 1
-
-
-                        wdTbl.Cell(j, 3).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 4).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        If Not args.UsePS Then
-                            wdTbl.Cell(j, 5).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
-                        Else
-                            PS1 = PS.Replace("P.S", "")
-                            wdTbl.Cell(j, 5).Range.Text = PS1
-                        End If
-
-                        wdTbl.Cell(j, 6).Range.Text = TourStartLocation
-
-                        wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine
-
-                        If args.UsePS Then
-                            Dim distance As String = FindDistance(PS)
-                            If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 7).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
-                            End If
-                        End If
-                        wdTbl.Cell(j, 14).Range.Text = 0
-                        wdTbl.Cell(j, 16).Range.Text = 0
-                        wdTbl.Cell(j, 17).Range.Text = "Return Journey"
-                        j = j + 1
-                    End If
-
-                    For delay = delay To delay + iteration
-                        If delay < 91 Then
-                            bgwTR56ThreeLine.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(5)
-                        End If
-                    Next
-
-                Next
-                wdTbl.Cell(j, 15).Range.Text = "Total Rs."
-                wdTbl.Cell(j, 15).Range.Font.Size = 10
-                wdTbl.Cell(j, 16).Formula(Formula:="=Sum(Above) - 12")
-                wdTbl.Cell(j, 16).Range.Bold = 1
-                wdTbl.Cell(j, 16).Range.Font.Size = 11
-                wdTbl.Cell(j + 1, 15).Range.Text = "Less B/W & R/W"
-                wdTbl.Cell(j + 1, 15).Range.Font.Size = 10
-                wdTbl.Cell(j + 1, 16).Range.Text = "Nil"
-                wdTbl.Cell(j + 1, 16).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 15).Range.Text = "Net Amount Rs."
-                wdTbl.Cell(j + 2, 15).Range.Font.Size = 10
-                wdTbl.Cell(j + 2, 16).Range.Bold = 1
-                wdTbl.Cell(j + 2, 16).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 16).Formula(Formula:="=(Sum(Above) - 12)/2")
-
-                Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
-                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
-                End If
-
-                For delay = 91 To 100
-                    bgwTR56ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(10)
-                Next
-
-                wdApp.Visible = True
-                wdApp.Activate()
-                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-                wdDoc.Activate()
-
-                ReleaseObject(wdTbl)
-                ReleaseObject(wdDoc)
-                ReleaseObject(wdDocs)
-
-                wdApp = Nothing
-            End If
-
-
-            If args.TAFromRecord = False Then
-
-                Dim TourNote As String = TAFileName("Tour Note - T")
+            Dim TourNote As String = TAFileName("Tour Note - T")
 
                 Dim wdApp As Word.Application
                 Dim wdDocs As Word.Documents
@@ -2090,7 +1630,7 @@ errhandler:
                 ReleaseObject(wdDocTA)
                 ReleaseObject(wdDocs)
                 wdApp = Nothing
-            End If
+
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -2117,52 +1657,6 @@ errhandler:
 
     End Sub
 
-    Private Sub GenerateSingleLineTR47fromRecords()
-        Try
-            Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
-            Dim SelectedRecordsCount As Integer = 0
-            Dim i = 0
-            For i = 0 To RowCount - 1
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                    SelectedRecordsCount = SelectedRecordsCount + 1
-                End If
-            Next
-
-            If SelectedRecordsCount = 0 Then
-                MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
-
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\TR47.docx"
-            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-
-            Dim args As TourNoteArgs = New TourNoteArgs
-            args.TATemplateFile = TemplateFile
-            args.SelectedRecordsCount = SelectedRecordsCount
-            args.RowCount = RowCount
-            args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = True
-            args.UsePS = chkUsePS.Checked
-
-            Me.cprgGenerateFiles.Show()
-            Me.cprgGenerateFiles.ProgressText = ""
-            Me.cprgGenerateFiles.IsRunning = True
-            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
-
-            Me.Cursor = Cursors.WaitCursor
-
-            bgwTR47.RunWorkerAsync(args)
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-    End Sub
-
     Private Sub GenerateSingleLineTR47fromTourNote()
         Try
             Dim TATemplateFile As String = strAppUserPath & "\WordTemplates\TR47.docx"
@@ -2175,7 +1669,6 @@ errhandler:
             Dim args As TourNoteArgs = New TourNoteArgs
             args.TATemplateFile = TATemplateFile
             args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = False
 
             Me.cprgGenerateFiles.Show()
             Me.cprgGenerateFiles.ProgressText = ""
@@ -2218,314 +1711,168 @@ errhandler:
 
             Dim args As TourNoteArgs = e.Argument
 
-            If args.TAFromRecord Then
-             
-                Dim sx As Integer = args.SelectedIndex
+            Dim TourNote As String = TAFileName("Tour Note")
 
-                For delay = 11 To 20
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
+            Dim wdApp As Word.Application
+            Dim wdDocs As Word.Documents
+            wdApp = New Word.Application
+            wdDocs = wdApp.Documents
+
+            For delay = 11 To 20
+                bgwTR47.ReportProgress(delay)
+                System.Threading.Thread.Sleep(5)
+            Next
+
+            Dim wdDocTA As Word.Document = wdDocs.Add(args.TATemplateFile)
+            Dim wdDocTN As Word.Document = wdDocs.Add(TourNote)
+            Dim wdTblTN As Word.Table = wdDocTN.Range.Tables.Item(1)
+
+            Dim TNRowCount = wdTblTN.Rows.Count
+            Dim TNRecordCount As Integer = TNRowCount - 2
+
+            Dim sx As Integer = args.SelectedIndex
+
+            wdDocTA.Range.NoProofing = 1
+
+            For delay = 21 To 30
+                bgwTR47.ReportProgress(delay)
+                System.Threading.Thread.Sleep(5)
+            Next
+
+            Dim wdBooks As Word.Bookmarks = wdDocTA.Bookmarks
+            Dim wdTblTA As Word.Table = wdDocTA.Range.Tables.Item(1)
+            With wdTblTA
+                .Cell(1, 1).Range.Text = "District of: " & FullDistrictName.ToUpper
+                .Cell(1, 2).Range.Text = "Name: " & OfficerNameOnly.ToUpper & vbTab & "PEN No: " & PENarray(sx)
+                .Cell(2, 1).Range.Text = "Headquarters: " & FullOfficeName.ToUpper
+                .Cell(2, 2).Range.Text = "Designation: " & Designation.ToUpper
+                .Cell(3, 2).Range.Text = "Pay: " & BParray(sx) & "/-"
+            End With
+            wdBooks("Name").Range.Text = OfficerNameOnly.ToUpper
+            wdBooks("Designation").Range.Text = Designation
+
+            Dim TATblRowCount = wdTblTA.Rows.Count - 11 'total rows = 25 -4(calculation) -7(heading)  = 14
+            Dim RowCountRequired = TNRecordCount - TATblRowCount '18-15 = 3
+            Dim rc = 1
+            If TNRecordCount > TATblRowCount Then
+                For rc = 1 To RowCountRequired
+                    wdTblTA.Rows.Add()
                 Next
-
-                Dim wdApp As Word.Application
-                Dim wdDocs As Word.Documents
-                wdApp = New Word.Application
-                wdDocs = wdApp.Documents
-                Dim wdDoc As Word.Document = wdDocs.Add(args.TATemplateFile)
-
-                wdDoc.Range.NoProofing = 1
-
-                For delay = 21 To 30
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
-                Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
-                With wdTbl
-                    .Cell(1, 1).Range.Text = "District of: " & FullDistrictName.ToUpper
-                    .Cell(1, 2).Range.Text = "Name: " & OfficerNameOnly.ToUpper & vbTab & "PEN No: " & PENarray(sx)
-                    .Cell(2, 1).Range.Text = "Headquarters: " & FullOfficeName.ToUpper
-                    .Cell(2, 2).Range.Text = "Designation: " & Designation.ToUpper
-                    .Cell(3, 2).Range.Text = "Pay: " & BParray(sx) & "/-"
-                End With
-                wdBooks("Name").Range.Text = OfficerNameOnly.ToUpper
-                wdBooks("Designation").Range.Text = Designation
-
-                Dim TblRowCount = wdTbl.Rows.Count - 11 'total rows = 25 -4(calculation) -7(heading)  = 14
-                Dim RowCountRequired = args.SelectedRecordsCount - TblRowCount '18-15 = 3
-                Dim rc = 1
-                If args.SelectedRecordsCount > TblRowCount Then
-                    For rc = 1 To RowCountRequired
-                        wdTbl.Rows.Add()
-                    Next
-                End If
-
-                For delay = 31 To 40
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim DA As Integer = Val(DAarray(sx))
-
-                Dim j = 8
-                Dim i = 0
-                Dim iteration As Integer = CInt(50 / args.RowCount)
-                For i = 0 To args.RowCount - 1
-
-                    If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-
-                        Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
-                        Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
-                        Dim PS1 As String = PS
-
-                        wdTbl.Cell(j, 1).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 2).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 3).Range.Text = TourStartLocation
-
-                        If Not args.UsePS Then
-                            wdTbl.Cell(j, 4).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back"
-                        Else
-                            PS1 = PS.Replace("P.S", "")
-                            wdTbl.Cell(j, 4).Range.Text = PS1 & " and back"
-                        End If
-
-                        wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine
-
-                        If args.UsePS Then
-                            Dim distance As String = FindDistance(PS)
-                            If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance) * 2) & " km"
-                            End If
-                        End If
-
-                        '  wdTbl.Cell(j, 8).Range.Text = DA / 2
-                        wdTbl.Cell(j, 9).Range.Text = DA / 2
-                        wdTbl.Cell(j, 11).Range.Text = DA / 2
-
-                        If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
-                        wdTbl.Cell(j, 12).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
-                        j = j + 1
-                    End If
-                    For delay = delay To delay + iteration
-                        If delay < 91 Then
-                            bgwTR47.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(5)
-                        End If
-                    Next
-                Next
-
-                wdTbl.Cell(j, 10).Range.Text = "Total Rs."
-                wdTbl.Cell(j, 10).Range.Font.Size = 10
-                wdTbl.Cell(j, 11).Formula(Formula:="=Sum(Above)")
-                wdTbl.Cell(j, 11).Range.Bold = 1
-                wdTbl.Cell(j, 11).Range.Font.Size = 11
-                wdTbl.Cell(j + 1, 10).Range.Text = "Less B/W & R/W"
-                wdTbl.Cell(j + 1, 10).Range.Font.Size = 10
-                wdTbl.Cell(j + 1, 11).Range.Text = "Nil"
-                wdTbl.Cell(j + 1, 11).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 10).Range.Text = "Net Amount Rs."
-                wdTbl.Cell(j + 2, 10).Range.Font.Size = 10
-                wdTbl.Cell(j + 2, 11).Range.Bold = 1
-                wdTbl.Cell(j + 2, 11).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
-
-                Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
-                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
-                End If
-
-                For delay = 91 To 100
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                wdApp.Visible = True
-                wdApp.Activate()
-                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-                wdDoc.Activate()
-
-                ReleaseObject(wdTbl)
-                ReleaseObject(wdBooks)
-                ReleaseObject(wdDoc)
-                ReleaseObject(wdDocs)
-                wdApp = Nothing
             End If
 
-            If args.TAFromRecord = False Then
-                Dim TourNote As String = TAFileName("Tour Note")
+            For delay = 31 To 40
+                bgwTR47.ReportProgress(delay)
+                System.Threading.Thread.Sleep(5)
+            Next
 
-                Dim wdApp As Word.Application
-                Dim wdDocs As Word.Documents
-                wdApp = New Word.Application
-                wdDocs = wdApp.Documents
+            Dim DA As Integer = Val(DAarray(sx))
 
-                For delay = 11 To 20
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
+            Dim j = 8
+            Dim i = 0
+            Dim mode As String = ""
+            Dim distance As String = ""
+            Dim dt As String = ""
+            Dim iteration As Integer = CInt(50 / TNRowCount)
+            For i = 3 To TNRowCount
 
-                Dim wdDocTA As Word.Document = wdDocs.Add(args.TATemplateFile)
-                Dim wdDocTN As Word.Document = wdDocs.Add(TourNote)
-                Dim wdTblTN As Word.Table = wdDocTN.Range.Tables.Item(1)
+                dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
+                Dim s = Strings.Split(dt, Chr(13))
+                Dim len = s.Length
 
-                Dim TNRowCount = wdTblTN.Rows.Count
-                Dim TNRecordCount As Integer = TNRowCount - 2
-
-                Dim sx As Integer = args.SelectedIndex
-
-                wdDocTA.Range.NoProofing = 1
-
-                For delay = 21 To 30
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim wdBooks As Word.Bookmarks = wdDocTA.Bookmarks
-                Dim wdTblTA As Word.Table = wdDocTA.Range.Tables.Item(1)
-                With wdTblTA
-                    .Cell(1, 1).Range.Text = "District of: " & FullDistrictName.ToUpper
-                    .Cell(1, 2).Range.Text = "Name: " & OfficerNameOnly.ToUpper & vbTab & "PEN No: " & PENarray(sx)
-                    .Cell(2, 1).Range.Text = "Headquarters: " & FullOfficeName.ToUpper
-                    .Cell(2, 2).Range.Text = "Designation: " & Designation.ToUpper
-                    .Cell(3, 2).Range.Text = "Pay: " & BParray(sx) & "/-"
-                End With
-                wdBooks("Name").Range.Text = OfficerNameOnly.ToUpper
-                wdBooks("Designation").Range.Text = Designation
-
-                Dim TATblRowCount = wdTblTA.Rows.Count - 11 'total rows = 25 -4(calculation) -7(heading)  = 14
-                Dim RowCountRequired = TNRecordCount - TATblRowCount '18-15 = 3
-                Dim rc = 1
-                If TNRecordCount > TATblRowCount Then
-                    For rc = 1 To RowCountRequired
-                        wdTblTA.Rows.Add()
-                    Next
+                wdTblTA.Cell(j, 1).Range.Select()
+                If len > 0 Then
+                    wdApp.Selection.TypeText(s(0))
+                Else
+                    wdApp.Selection.TypeText("")
                 End If
 
-                For delay = 31 To 40
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
+                wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
 
-                Dim DA As Integer = Val(DAarray(sx))
-
-                Dim j = 8
-                Dim i = 0
-                Dim mode As String = ""
-                Dim distance As String = ""
-                Dim dt As String = ""
-                Dim iteration As Integer = CInt(50 / TNRowCount)
-                For i = 3 To TNRowCount
-
-                    dt = wdTblTN.Cell(i, 2).Range.Text.Trim(ChrW(7)).Trim()
-                    Dim s = Strings.Split(dt, Chr(13))
-                    Dim len = s.Length
-
-                    wdTblTA.Cell(j, 1).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-                    dt = wdTblTN.Cell(i, 3).Range.Text.Trim(ChrW(7)).Trim()
-                    s = Strings.Split(dt, Chr(13))
-                    len = s.Length
-
-                    wdTblTA.Cell(j, 2).Range.Select()
-                    If len > 0 Then
-                        wdApp.Selection.TypeText(s(0))
-                    Else
-                        wdApp.Selection.TypeText("")
-                    End If
-
-                    wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-
-                    If len > 1 Then
-                        wdApp.Selection.TypeText(vbNewLine & s(1))
-                    Else
-                        wdApp.Selection.TypeText(vbNewLine & "")
-                    End If
-
-
-                    wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
-                    wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim()
-                    mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                    If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
-                    distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
-                    distance = distance.Replace("km", "").Trim()
-                    wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
-
-                    wdTblTA.Cell(j, 9).Range.Text = DA / 2
-                    wdTblTA.Cell(j, 11).Range.Text = DA / 2
-                    wdTblTA.Cell(j, 12).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim()
-
-                    j = j + 1
-                    For delay = delay To delay + iteration
-                        If delay < 91 Then
-                            bgwTR47.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(5)
-                        End If
-                    Next
-                Next
-
-                wdTblTA.Cell(j, 10).Range.Text = "Total Rs."
-                wdTblTA.Cell(j, 10).Range.Font.Size = 10
-                wdTblTA.Cell(j, 11).Formula(Formula:="=Sum(Above)")
-                wdTblTA.Cell(j, 11).Range.Bold = 1
-                wdTblTA.Cell(j, 11).Range.Font.Size = 11
-                wdTblTA.Cell(j + 1, 10).Range.Text = "Less B/W & R/W"
-                wdTblTA.Cell(j + 1, 10).Range.Font.Size = 10
-                wdTblTA.Cell(j + 1, 11).Range.Text = "Nil"
-                wdTblTA.Cell(j + 1, 11).Range.Font.Size = 11
-                wdTblTA.Cell(j + 2, 10).Range.Text = "Net Amount Rs."
-                wdTblTA.Cell(j + 2, 10).Range.Font.Size = 10
-                wdTblTA.Cell(j + 2, 11).Range.Bold = 1
-                wdTblTA.Cell(j + 2, 11).Range.Font.Size = 11
-                wdTblTA.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
-
-                Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
-                    wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                If len > 1 Then
+                    wdApp.Selection.TypeText(vbNewLine & s(1))
+                Else
+                    wdApp.Selection.TypeText(vbNewLine & "")
                 End If
 
-                wdDocTN.Close()
+                dt = wdTblTN.Cell(i, 3).Range.Text.Trim(ChrW(7)).Trim()
+                s = Strings.Split(dt, Chr(13))
+                len = s.Length
 
-                For delay = 91 To 100
-                    bgwTR47.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
+                wdTblTA.Cell(j, 2).Range.Select()
+                If len > 0 Then
+                    wdApp.Selection.TypeText(s(0))
+                Else
+                    wdApp.Selection.TypeText("")
+                End If
+
+                wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+
+                If len > 1 Then
+                    wdApp.Selection.TypeText(vbNewLine & s(1))
+                Else
+                    wdApp.Selection.TypeText(vbNewLine & "")
+                End If
+
+
+                wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
+                wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim()
+                mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
+                If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
+                distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
+                distance = distance.Replace("km", "").Trim()
+                wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
+
+                wdTblTA.Cell(j, 9).Range.Text = DA / 2
+                wdTblTA.Cell(j, 11).Range.Text = DA / 2
+                wdTblTA.Cell(j, 12).Range.Text = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim()
+
+                j = j + 1
+                For delay = delay To delay + iteration
+                    If delay < 91 Then
+                        bgwTR47.ReportProgress(delay)
+                        System.Threading.Thread.Sleep(5)
+                    End If
                 Next
+            Next
 
-                Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
+            wdTblTA.Cell(j, 10).Range.Text = "Total Rs."
+            wdTblTA.Cell(j, 10).Range.Font.Size = 10
+            wdTblTA.Cell(j, 11).Formula(Formula:="=Sum(Above)")
+            wdTblTA.Cell(j, 11).Range.Bold = 1
+            wdTblTA.Cell(j, 11).Range.Font.Size = 11
+            wdTblTA.Cell(j + 1, 10).Range.Text = "Less B/W & R/W"
+            wdTblTA.Cell(j + 1, 10).Range.Font.Size = 10
+            wdTblTA.Cell(j + 1, 11).Range.Text = "Nil"
+            wdTblTA.Cell(j + 1, 11).Range.Font.Size = 11
+            wdTblTA.Cell(j + 2, 10).Range.Text = "Net Amount Rs."
+            wdTblTA.Cell(j + 2, 10).Range.Font.Size = 10
+            wdTblTA.Cell(j + 2, 11).Range.Bold = 1
+            wdTblTA.Cell(j + 2, 11).Range.Font.Size = 11
+            wdTblTA.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
 
-                wdApp.Visible = True
-                wdApp.Activate()
-                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-                wdDocTA.Activate()
-
-                ReleaseObject(wdTblTA)
-                ReleaseObject(wdDocTA)
-                ReleaseObject(wdDocs)
-                wdApp = Nothing
-
-
+            Dim sfilename As String = TAFileName("TA Bill")
+            If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
+                wdDocTA.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
+
+            wdDocTN.Close()
+
+            For delay = 91 To 100
+                bgwTR47.ReportProgress(delay)
+                System.Threading.Thread.Sleep(5)
+            Next
+
+            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generated"
+
+            wdApp.Visible = True
+            wdApp.Activate()
+            wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDocTA.Activate()
+
+            ReleaseObject(wdTblTA)
+            ReleaseObject(wdDocTA)
+            ReleaseObject(wdDocs)
+            wdApp = Nothing
 
             GenerateTR47Outer(OfficerNameOnly, Designation)
         Catch ex As Exception
@@ -2533,53 +1880,6 @@ errhandler:
         End Try
     End Sub
 
-
-    Private Sub GenerateThreeLineTR47fromRecords()
-        Try
-            Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
-            Dim SelectedRecordsCount As Integer = 0
-            Dim i = 0
-            For i = 0 To RowCount - 1
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                    SelectedRecordsCount = SelectedRecordsCount + 1
-                End If
-            Next
-
-            If SelectedRecordsCount = 0 Then
-                MessageBoxEx.Show("No records selected!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Cursor = Cursors.Default
-                Exit Sub
-            End If
-
-            Dim TemplateFile As String = strAppUserPath & "\WordTemplates\TR47.docx"
-            If My.Computer.FileSystem.FileExists(TemplateFile) = False Then
-                MessageBoxEx.Show("File missing. Please re-install the Application", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-
-            Dim args As TourNoteArgs = New TourNoteArgs
-            args.TATemplateFile = TemplateFile
-            args.SelectedRecordsCount = SelectedRecordsCount
-            args.RowCount = RowCount
-            args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = True
-            args.UsePS = chkUsePS.Checked
-
-            Me.cprgGenerateFiles.Show()
-            Me.cprgGenerateFiles.ProgressText = ""
-            Me.cprgGenerateFiles.IsRunning = True
-            Me.lblSavedTABill.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - TA Bill - Generating from selected records..."
-
-            Me.Cursor = Cursors.WaitCursor
-
-            bgwTR47ThreeLine.RunWorkerAsync(args)
-
-
-        Catch ex As Exception
-            ShowErrorMessage(ex)
-            Me.Cursor = Cursors.Default
-        End Try
-    End Sub
 
     Private Sub GenerateThreeLineTR47fromTourNote()
         Try
@@ -2592,7 +1892,6 @@ errhandler:
             Dim args As TourNoteArgs = New TourNoteArgs
             args.TATemplateFile = TATemplateFile
             args.SelectedIndex = Me.cmbSOCOfficer.SelectedIndex
-            args.TAFromRecord = False
 
             Me.cprgGenerateFiles.Show()
             Me.cprgGenerateFiles.ProgressText = ""
@@ -2632,203 +1931,7 @@ errhandler:
 
             Dim args As TourNoteArgs = e.Argument
 
-            If args.TAFromRecord Then
-
-                Dim sx As Integer = args.SelectedIndex
-
-                Dim wdApp As Word.Application
-                Dim wdDocs As Word.Documents
-                wdApp = New Word.Application
-                wdDocs = wdApp.Documents
-                Dim wdDoc As Word.Document = wdDocs.Add(args.TATemplateFile)
-                wdDoc.Range.NoProofing = 1
-
-                For delay = 11 To 20
-                    bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
-                Dim wdTbl As Word.Table = wdDoc.Range.Tables.Item(1)
-                With wdTbl
-                    .Cell(1, 1).Range.Text = "District of: " & FullDistrictName.ToUpper
-                    .Cell(1, 2).Range.Text = "Name: " & OfficerNameOnly.ToUpper & vbTab & "PEN No: " & PENarray(sx)
-                    .Cell(2, 1).Range.Text = "Headquarters: " & FullOfficeName.ToUpper
-                    .Cell(2, 2).Range.Text = "Designation: " & Designation.ToUpper
-                    .Cell(3, 2).Range.Text = "Pay: " & BParray(sx) & "/-"
-                End With
-                wdBooks("Name").Range.Text = OfficerNameOnly.ToUpper
-                wdBooks("Designation").Range.Text = Designation
-
-                For delay = 21 To 30
-                    bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim TblRowCount = wdTbl.Rows.Count - 11 'total 25-3-7 = 15
-                Dim RowCountRequired = args.SelectedRecordsCount * 3 - TblRowCount
-                Dim rc = 1
-                If args.SelectedRecordsCount * 3 > TblRowCount Then
-                    For rc = 1 To RowCountRequired
-                        wdTbl.Rows.Add()
-                    Next
-                End If
-
-                For delay = 31 To 40
-                    bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                Dim DA As Integer = Val(DAarray(sx))
-
-                Dim j = 8
-                Dim i = 0
-                Dim iteration As Integer = CInt(50 / args.RowCount)
-                For i = 0 To args.RowCount - 1
-
-                    If SOCDatagrid.Rows(i).Cells(1).Value = True Then
-                        Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
-                        Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
-                        Dim PS1 As String = PS
-
-                        wdTbl.Cell(j, 1).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 2).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 3).Range.Text = TourStartLocation
-
-                        If Not args.UsePS Then
-                            wdTbl.Cell(j, 4).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back"
-                        Else
-                            PS1 = PS.Replace("P.S", "")
-                            wdTbl.Cell(j, 4).Range.Text = PS1
-                        End If
-
-                        wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine
-
-                        If args.UsePS Then
-                            Dim distance As String = FindDistance(PS)
-                            If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
-                            End If
-                        End If
-
-                        '  wdTbl.Cell(j, 8).Range.Text = DA / 2
-                        wdTbl.Cell(j, 9).Range.Text = 0
-                        wdTbl.Cell(j, 11).Range.Text = 0
-
-                        If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
-                        wdTbl.Cell(j, 12).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
-
-                        j = j + 1
-
-                        wdTbl.Cell(j, 1).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 2).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 3).Range.Text = "Halt & Duty"
-                        wdTbl.Cell(j, 9).Range.Text = DA / 2
-                        wdTbl.Cell(j, 11).Range.Text = DA / 2
-                        wdTbl.Cell(j, 12).Range.Text = "Halt & Duty"
-
-                        j = j + 1
-
-
-                        wdTbl.Cell(j, 1).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-                        wdTbl.Cell(j, 2).Range.Select()
-                        wdApp.Selection.TypeText(dt)
-                        wdApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                        wdApp.Selection.TypeText(vbNewLine)
-
-
-                        If Not args.UsePS Then
-                            wdTbl.Cell(j, 3).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
-                        Else
-                            PS1 = PS.Replace("P.S", "")
-                            wdTbl.Cell(j, 3).Range.Text = PS1
-                        End If
-
-                        wdTbl.Cell(j, 4).Range.Text = TourStartLocation
-
-                        wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine
-
-                        If args.UsePS Then
-                            Dim distance As String = FindDistance(PS)
-                            If Val(distance) <> 0 Then
-                                wdTbl.Cell(j, 5).Range.Text = "Dept. Vehicle" & vbNewLine & (Val(distance)) & " km"
-                            End If
-                        End If
-
-                        wdTbl.Cell(j, 9).Range.Text = 0
-                        wdTbl.Cell(j, 11).Range.Text = 0
-                        wdTbl.Cell(j, 12).Range.Text = "Return Journey"
-                        j = j + 1
-                    End If
-                    For delay = delay To delay + iteration
-                        If delay < 91 Then
-                            bgwTR47ThreeLine.ReportProgress(delay)
-                            System.Threading.Thread.Sleep(5)
-                        End If
-                    Next
-                Next
-
-                wdTbl.Cell(j, 10).Range.Text = "Total Rs."
-                wdTbl.Cell(j, 10).Range.Font.Size = 10
-                wdTbl.Cell(j, 11).Formula(Formula:="=Sum(Above)")
-                wdTbl.Cell(j, 11).Range.Bold = 1
-                wdTbl.Cell(j, 11).Range.Font.Size = 11
-                wdTbl.Cell(j + 1, 10).Range.Text = "Less B/W & R/W"
-                wdTbl.Cell(j + 1, 10).Range.Font.Size = 10
-                wdTbl.Cell(j + 1, 11).Range.Text = "Nil"
-                wdTbl.Cell(j + 1, 11).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 10).Range.Text = "Net Amount Rs."
-                wdTbl.Cell(j + 2, 10).Range.Font.Size = 10
-                wdTbl.Cell(j + 2, 11).Range.Bold = 1
-                wdTbl.Cell(j + 2, 11).Range.Font.Size = 11
-                wdTbl.Cell(j + 2, 11).Formula(Formula:="=(Sum(Above))/2")
-
-                Dim sfilename As String = TAFileName("TA Bill")
-                If My.Computer.FileSystem.FileExists(sfilename) = False And blMonthCompleted Then
-                    wdDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
-                End If
-
-                For delay = 91 To 100
-                    bgwTR47ThreeLine.ReportProgress(delay)
-                    System.Threading.Thread.Sleep(5)
-                Next
-
-                wdApp.Visible = True
-                wdApp.Activate()
-                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-                wdDoc.Activate()
-
-                ReleaseObject(wdTbl)
-                ReleaseObject(wdBooks)
-                ReleaseObject(wdDoc)
-                ReleaseObject(wdDocs)
-
-                wdApp = Nothing
-            End If
-
-            If args.TAFromRecord = False Then
-
-                Dim TourNote As String = TAFileName("Tour Note - T")
+            Dim TourNote As String = TAFileName("Tour Note - T")
 
                 Dim wdApp As Word.Application
                 Dim wdDocs As Word.Documents
@@ -3002,7 +2105,7 @@ errhandler:
 
                 GenerateTR47Outer(OfficerNameOnly, Designation)
                 Me.Cursor = Cursors.Default
-            End If
+
             GenerateTR47Outer(OfficerNameOnly, Designation)
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -3739,6 +2842,5 @@ Public Class TourNoteArgs
     Public Month As String
     Public Year As String
     Public UsePS As Boolean = False
-    Public TAFromRecord As Boolean
     Public DVNumber As String
 End Class
