@@ -99,7 +99,7 @@ Module modMain
     Public frmNewPleaseWaitForm As New frmPleaseWait
     Public LatestSOCNumber As String = ""
     Public LatestSOCDI As String = ""
-    Public TotalSOCRecordCount As String = ""
+    Public LocalSOCRecordCount As String = ""
 
     Public blUserAuthenticated As Boolean = False
     Public blAuthenticatePasswordChange As Boolean = False

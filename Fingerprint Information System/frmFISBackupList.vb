@@ -704,9 +704,10 @@ Public Class frmFISBackupList
         lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
         If uUploadStatus = UploadStatus.Completed Then
             If listViewEx1.Items.Count > 0 Then
+                Me.listViewEx1.SelectedItems.Clear()
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
-            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ShowDesktopAlert("File uploaded successfully.")
         End If
 
         If uUploadStatus = UploadStatus.Failed Then

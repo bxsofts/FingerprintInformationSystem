@@ -446,7 +446,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & TotalSOCRecordCount
+            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -483,7 +483,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(LastModifiedDate)
                 item.SubItems.Add(LatestSOCNumber)
                 item.SubItems.Add(LatestSOCDI)
-                item.SubItems.Add(TotalSOCRecordCount)
+                item.SubItems.Add(LocalSOCRecordCount)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size
@@ -534,7 +534,7 @@ Public Class frmOnlineBackup
                     Me.listViewEx1.Items(0).Selected = True
                 End If
             End If
-            MessageBoxEx.Show("File uploaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ShowDesktopAlert("File uploaded successfully.")
         End If
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)

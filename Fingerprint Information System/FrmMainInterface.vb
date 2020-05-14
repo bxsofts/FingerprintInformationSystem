@@ -17807,7 +17807,7 @@ errhandler:
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
             Dim LastModifiedDate As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
-            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & TotalSOCRecordCount
+            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -17853,7 +17853,7 @@ errhandler:
             pgrDownloadInstaller.Text = "Uploading Backup 0%"
             Me.StatusBar.RecalcLayout()
         ElseIf TypeOf e.UserState Is Boolean And e.UserState = False Then
-            TotalSOCRecordCount = Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount
+            LocalSOCRecordCount = Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount
             bgwUpdateOnlineDatabase.RunWorkerAsync()
         Else
             Me.pgrDownloadInstaller.Value = e.ProgressPercentage
@@ -17920,14 +17920,14 @@ errhandler:
             Results = List.Execute
             Dim blTakeBackup As Boolean = False
 
-            Dim remotesoccount As Integer = 0
+            Dim RemoteSOCRecordCount As Integer = 0
             Dim description As String = ""
             Dim dtlastremotemodified As Date
 
             If Results.Files.Count > 0 Then
                 description = Results.Files(0).Description
                 Dim SplitText() = Strings.Split(description, "; ")
-                remotesoccount = Val(SplitText(4))
+                RemoteSOCRecordCount = Val(SplitText(4))
                 Dim strlastremotemodified As String = SplitText(1)
                 dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
             End If
@@ -17935,13 +17935,39 @@ errhandler:
             Dim dtlastlocalmodified As Date = GetLastModificationDate()
             Dim LastModifiedDate As String = dtlastlocalmodified.ToString("dd-MM-yyyy HH:mm:ss")
 
-            If TotalSOCRecordCount < remotesoccount Then
+            If LocalSOCRecordCount < RemoteSOCRecordCount Then
                 Exit Sub
             End If
 
-            If TotalSOCRecordCount = remotesoccount Then
-                If dtlastlocalmodified.Date <= dtlastremotemodified.Date Then
+            If LocalSOCRecordCount = RemoteSOCRecordCount Then
+
+                Dim ldt = dtlastlocalmodified.Date
+                Dim rdt = dtlastremotemodified.Date
+                Dim lhr = dtlastlocalmodified.Hour
+                Dim rhr = dtlastremotemodified.Hour
+                Dim lmt = dtlastlocalmodified.Minute
+                Dim rmt = dtlastremotemodified.Minute
+                Dim ls = dtlastlocalmodified.Second
+                Dim rs = dtlastremotemodified.Second
+
+                If ldt < rdt Then
                     Exit Sub
+                End If
+
+                If ldt = rdt Then
+                    If lhr < rhr Then
+                        Exit Sub
+                    End If
+                    If lhr = rhr Then
+                        If lmt < rmt Then
+                            Exit Sub
+                        End If
+                        If lmt = rmt Then
+                            If ls <= rs Then
+                                Exit Sub
+                            End If
+                        End If
+                    End If
                 End If
             End If
 
@@ -17955,7 +17981,7 @@ errhandler:
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
 
-            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & TotalSOCRecordCount
+            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
             body.MimeType = "database/mdb"
 
             Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
@@ -18166,7 +18192,7 @@ errhandler:
                 LatestSOCNumber = FPDS.SOCRegister(0).SOCNumber
                 LatestSOCDI = FPDS.SOCRegister(0).DateOfInspection.ToString("dd-MM-yyyy")
             End If
-            TotalSOCRecordCount = SOCTblAdptr.ScalarQueryTotalSOCCount
+            LocalSOCRecordCount = SOCTblAdptr.ScalarQueryTotalSOCCount
         Catch ex As Exception
             LatestSOCNumber = ""
             LatestSOCDI = ""
