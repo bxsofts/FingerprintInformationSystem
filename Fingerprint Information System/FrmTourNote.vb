@@ -86,6 +86,9 @@ Public Class FrmTourNote
     Private Sub LoadForm() Handles Me.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
+        Me.dgvWD.Visible = False
+        Me.dgvSOC.Visible = True
+
         boolGenerateRecords = False
 
         cprgGenerateFiles.ProgressText = ""
@@ -114,8 +117,11 @@ Public Class FrmTourNote
         Me.lblTickedRecords.Text = "Selected Records : 0"
         Me.lblOfficerName.Text = "Officer Name not selected"
 
-        Me.SOCDatagrid.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-        Me.SOCDatagrid.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        Me.dgvSOC.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        Me.dgvSOC.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+
+        Me.dgvWD.DefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+        Me.dgvWD.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10, FontStyle.Bold)
 
         If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
         Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
@@ -274,7 +280,7 @@ Public Class FrmTourNote
 #Region "DATAGRID"
 
 
-    Private Sub PaintSerialNumber(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles SOCDatagrid.CellPainting
+    Private Sub PaintSerialNumberDGVSOC(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvSOC.CellPainting
         On Error Resume Next
         Dim sf As New StringFormat
         sf.Alignment = StringAlignment.Center
@@ -298,22 +304,46 @@ Public Class FrmTourNote
 
     End Sub
 
-    Private Sub SOCDatagrid_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SOCDatagrid.CellValueChanged, SOCDatagrid.CellValidated
+    Private Sub PaintSerialNumberDGVWD(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvWD.CellPainting
+        On Error Resume Next
+        Dim sf As New StringFormat
+        sf.Alignment = StringAlignment.Center
+
+        Dim f As Font = New Font("Segoe UI", 10, FontStyle.Bold)
+        sf.LineAlignment = StringAlignment.Center
+        Using b As SolidBrush = New SolidBrush(Me.ForeColor)
+            If e.ColumnIndex < 0 AndAlso e.RowIndex < 0 Then
+                e.Graphics.DrawString("Sl.No", f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+
+            If e.ColumnIndex < 0 AndAlso e.RowIndex >= 0 Then
+                e.Graphics.DrawString((e.RowIndex + 1).ToString, f, b, e.CellBounds, sf)
+                e.Handled = True
+            End If
+        End Using
+        If e.ColumnIndex = 4 AndAlso e.RowIndex >= 0 Then
+            If e.Value = True Then e.CellStyle.BackColor = Color.MediumVioletRed
+        End If
+
+    End Sub
+
+    Private Sub SOCDatagrid_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvSOC.CellValueChanged, dgvSOC.CellValidated
         On Error Resume Next
         If e.ColumnIndex = 1 Then
-            DisplaySelectedRecordCount()
+            DisplaySelectedSOCRecordCount()
+        End If
+    End Sub
+
+    Private Sub WDDatagrid_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvWD.CellValueChanged, dgvWD.CellValidated
+        On Error Resume Next
+        If e.ColumnIndex = 4 Then
+            DisplaySelectedWDRecordCount()
         End If
     End Sub
 
 
-
-    Private Sub SOCDatagrid_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles SOCDatagrid.DataError
-        On Error Resume Next
-        MessageBoxEx.Show("The value you entered is invalid. Please Type date in the format MM/dd/YYYY if you changed date", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-    End Sub
-
-
-    Private Sub TickColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles SOCDatagrid.ColumnHeaderMouseClick
+    Private Sub TickAllSOCColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvSOC.ColumnHeaderMouseClick
         On Error Resume Next
 
         If e.Button <> Windows.Forms.MouseButtons.Left Then
@@ -321,13 +351,26 @@ Public Class FrmTourNote
         End If
 
         If e.ColumnIndex = 1 Then
-            Dim tickstatus As Boolean = SOCDatagrid.Rows(0).Cells(1).Value
-            For i = 0 To SOCDatagrid.Rows.Count - 1
-                SOCDatagrid.Rows(i).Cells(1).Value = Not tickstatus
+            Dim tickstatus As Boolean = dgvSOC.Rows(0).Cells(1).Value
+            For i = 0 To dgvSOC.Rows.Count - 1
+                dgvSOC.Rows(i).Cells(1).Value = Not tickstatus
             Next
         End If
+    End Sub
 
+    Private Sub TickAllWDColumns(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgvWD.ColumnHeaderMouseClick
+        On Error Resume Next
 
+        If e.Button <> Windows.Forms.MouseButtons.Left Then
+            Exit Sub
+        End If
+
+        If e.ColumnIndex = 4 Then
+            Dim tickstatus As Boolean = dgvWD.Rows(0).Cells(4).Value
+            For i = 0 To dgvWD.Rows.Count - 1
+                dgvWD.Rows(i).Cells(4).Value = Not tickstatus
+            Next
+        End If
     End Sub
 
 #End Region
@@ -335,29 +378,107 @@ Public Class FrmTourNote
 
 #Region "GENERATE RECORDS"
 
+    Private Sub cmbSOCOfficer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSOCOfficer.SelectedIndexChanged
+        Try
+            blUploadAuthenticated = False
+            SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+
+            If SelectedOfficerName.Contains(", TI") Then
+                Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & PENTI & ".mdb"
+                If My.Computer.FileSystem.FileExists(wdFile) Then
+                    GenerateWDRecords(wdFile)
+                    Exit Sub
+                End If
+            End If
+
+            GenerateSOCRecords()
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
     Private Sub GenerateRecords() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
         On Error Resume Next
         If boolGenerateRecords = False Then Exit Sub
-        Dim m = Me.cmbMonth.SelectedIndex + 1
-        Dim y = Me.txtYear.Value
-        Dim d As Integer = Date.DaysInMonth(y, m)
-        d1 = New DateTime(y, m, 1)
-        d2 = New DateTime(y, m, d)
 
-        If Today > d2 Then
-            blMonthCompleted = True
-        Else
-            blMonthCompleted = False
+        SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+
+        If SelectedOfficerName.Contains(", TI") Then
+            Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & PENTI & ".mdb"
+            If My.Computer.FileSystem.FileExists(wdFile) Then
+                GenerateWDRecords(wdFile)
+                Exit Sub
+            End If
         End If
 
-        Me.PanelSOC.Text = "SOCs inspected in " & MonthName(m) & " " & y
-        TourStartLocation = Me.txtStartingLocation.Text
-        Me.SocRegisterTableAdapter1.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
-
-        AutoTickRecords()
+        GenerateSOCRecords()
     End Sub
 
-    Private Sub AutoTickRecords() ' Handles cmbSOCOfficer.SelectedIndexChanged
+    Private Sub GenerateWDRecords(wdFile As String)
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Me.dgvSOC.Visible = False
+            Me.dgvWD.Visible = True
+
+            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
+            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+            Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
+            Me.WeeklyDiaryTableAdapter1.Connection.Open()
+
+            Dim m = Me.cmbMonth.SelectedIndex + 1
+            Dim y = Me.txtYear.Value
+            Dim d As Integer = Date.DaysInMonth(y, m)
+            d1 = New DateTime(y, m, 1)
+            d2 = New DateTime(y, m, d)
+
+            If Today > d2 Then
+                blMonthCompleted = True
+            Else
+                blMonthCompleted = False
+            End If
+
+            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, d1, d2)
+
+            TourStartLocation = Me.txtStartingLocation.Text
+            Me.PanelSOC.Text = "Weekly Diary of " & SelectedOfficerName & " for " & MonthName(m) & " " & y
+            AutoTickWDRecords()
+        Catch ex As Exception
+
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub GenerateSOCRecords()
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Me.dgvSOC.Visible = True
+            Me.dgvWD.Visible = False
+
+            Dim m = Me.cmbMonth.SelectedIndex + 1
+            Dim y = Me.txtYear.Value
+            Dim d As Integer = Date.DaysInMonth(y, m)
+            d1 = New DateTime(y, m, 1)
+            d2 = New DateTime(y, m, d)
+
+            If Today > d2 Then
+                blMonthCompleted = True
+            Else
+                blMonthCompleted = False
+            End If
+
+            TourStartLocation = Me.txtStartingLocation.Text
+            Me.PanelSOC.Text = "SOCs inspected in " & MonthName(m) & " " & y
+            Me.SocRegisterTableAdapter1.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
+            AutoTickSOCRecords()
+        Catch ex As Exception
+
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub AutoTickSOCRecords()
 
         On Error Resume Next
         Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
@@ -367,45 +488,81 @@ Public Class FrmTourNote
         Me.lblPEN.Text = "PEN No: " & PENarray(sx)
         Me.lblBasicPay.Text = "Basic Pay: ` " & BParray(sx)
         Me.lblDA.Text = "DA: ` " & DAarray(sx)
-        For i = 0 To SOCDatagrid.Rows.Count - 1
-            If Me.SOCDatagrid.Rows(i).Cells(6).Value.ToString.Contains(SelectedOfficerName) Then
-                SOCDatagrid.Rows(i).Cells(1).Value = True
-                Me.SOCDatagrid.Rows(i).Cells(6).Style.BackColor = Color.MediumAquamarine
+        For i = 0 To dgvSOC.Rows.Count - 1
+            If Me.dgvSOC.Rows(i).Cells(6).Value.ToString.Contains(SelectedOfficerName) Then
+                dgvSOC.Rows(i).Cells(1).Value = True
+                Me.dgvSOC.Rows(i).Cells(6).Style.BackColor = Color.MediumAquamarine
             Else
-                Me.SOCDatagrid.Rows(i).Cells(6).Style.BackColor = Me.SOCDatagrid.Rows(i).Cells(5).Style.BackColor
-                SOCDatagrid.Rows(i).Cells(1).Value = False
+                Me.dgvSOC.Rows(i).Cells(6).Style.BackColor = Me.dgvSOC.Rows(i).Cells(5).Style.BackColor
+                dgvSOC.Rows(i).Cells(1).Value = False
             End If
         Next
-        DisplaySelectedRecordCount()
+        DisplaySelectedSOCRecordCount()
         DisplayFileStatus()
 
     End Sub
 
-    Private Sub cmbSOCOfficer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSOCOfficer.SelectedIndexChanged
-        AutoTickRecords()
-        blUploadAuthenticated = False
+    Private Sub AutoTickWDRecords()
+
+        On Error Resume Next
+        Dim text As String = ""
+        For i = 0 To dgvWD.Rows.Count - 1
+            text = Me.dgvWD.Rows(i).Cells(2).Value.ToString.ToLower
+            If text.Contains(" soc ") Or text.Contains("range conference") Or text.Contains("quarterly conference") Or text.Contains("court duty") Then
+                dgvWD.Rows(i).Cells(4).Value = True
+                Me.dgvWD.Rows(i).Cells(4).Style.BackColor = Color.MediumVioletRed
+            End If
+        Next
+
+        DisplaySelectedWDRecordCount()
+        DisplayFileStatus()
+
     End Sub
+
     Private Sub SelectAllRecords() Handles btnSelectAll.Click
         On Error Resume Next
-
-        For i = 0 To SOCDatagrid.Rows.Count - 1
-            SOCDatagrid.Rows(i).Cells(1).Value = True
-        Next
+        If dgvSOC.Visible Then
+            For i = 0 To dgvSOC.Rows.Count - 1
+                dgvSOC.Rows(i).Cells(1).Value = True
+            Next
+        Else
+            For i = 0 To dgvSOC.Rows.Count - 1
+                dgvWD.Rows(i).Cells(4).Value = True
+            Next
+        End If
+       
     End Sub
 
     Private Sub DeSelectAllRecords() Handles btnDeselectAll.Click
         On Error Resume Next
 
-        For i = 0 To SOCDatagrid.Rows.Count - 1
-            SOCDatagrid.Rows(i).Cells(1).Value = False
-        Next
+        If dgvSOC.Visible Then
+            For i = 0 To dgvSOC.Rows.Count - 1
+                dgvSOC.Rows(i).Cells(1).Value = False
+            Next
+        Else
+            For i = 0 To dgvSOC.Rows.Count - 1
+                dgvWD.Rows(i).Cells(4).Value = False
+            Next
+        End If
     End Sub
 
-    Private Sub DisplaySelectedRecordCount()
+    Private Sub DisplaySelectedSOCRecordCount()
         On Error Resume Next
         Dim s = 0
-        For i = 0 To SOCDatagrid.Rows.Count - 1
-            If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+        For i = 0 To dgvSOC.Rows.Count - 1
+            If dgvSOC.Rows(i).Cells(1).Value = True Then
+                s = s + 1
+            End If
+        Next
+        Me.lblTickedRecords.Text = "Selected Records : " & s
+    End Sub
+
+    Private Sub DisplaySelectedWDRecordCount()
+        On Error Resume Next
+        Dim s = 0
+        For i = 0 To dgvWD.Rows.Count - 1
+            If dgvWD.Rows(i).Cells(4).Value = True Then
                 s = s + 1
             End If
         Next
@@ -560,7 +717,7 @@ errhandler:
             Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
             Dim SelectedRecordsCount As Integer = 0
             For i = 0 To RowCount - 1
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                If dgvSOC.Rows(i).Cells(1).Value = True Then
                     SelectedRecordsCount = SelectedRecordsCount + 1
                 End If
             Next
@@ -694,7 +851,7 @@ errhandler:
 
             For i = 0 To args.RowCount - 1
 
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                If dgvSOC.Rows(i).Cells(1).Value = True Then
                     Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
                     Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
                     Dim PS1 As String = PS
@@ -811,7 +968,7 @@ errhandler:
             Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
             Dim SelectedRecordsCount As Integer = 0
             For i = 0 To RowCount - 1
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                If dgvSOC.Rows(i).Cells(1).Value = True Then
                     SelectedRecordsCount = SelectedRecordsCount + 1
                 End If
             Next
@@ -945,7 +1102,7 @@ errhandler:
 
             For i = 0 To args.RowCount - 1
 
-                If SOCDatagrid.Rows(i).Cells(1).Value = True Then
+                If dgvSOC.Rows(i).Cells(1).Value = True Then
                     Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
                     Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
                     Dim PS1 As String = PS
