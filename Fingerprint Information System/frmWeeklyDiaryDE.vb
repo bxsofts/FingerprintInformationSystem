@@ -34,7 +34,7 @@ Public Class frmWeeklyDiaryDE
 
     Dim blDGVChanged As Boolean
     Dim blShowUploadStatus As Boolean = True
-
+    Dim TourStartLocation = ""
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
@@ -75,6 +75,9 @@ Public Class frmWeeklyDiaryDE
             Me.dgvOfficeDetails.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
 
             ConnectToDatabase()
+
+            CreateTourNoteColumns()
+            RemoveNullFromTourNoteColumns()
 
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
             Me.PersonalDetailsTableAdapter1.Fill(Me.WeeklyDiaryDataSet1.PersonalDetails)
@@ -128,11 +131,54 @@ Public Class frmWeeklyDiaryDE
             Me.SocRegisterTableAdapter1.Connection.ConnectionString = sConString
             Me.SocRegisterTableAdapter1.Connection.Open()
 
+            If Me.CommonSettingsTableAdapter1.Connection.State = ConnectionState.Open Then Me.CommonSettingsTableAdapter1.Connection.Close()
+            Me.CommonSettingsTableAdapter1.Connection.ConnectionString = sConString
+            Me.CommonSettingsTableAdapter1.Connection.Open()
+
+            Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet1.CommonSettings, "TourStartLocation")
+            If Me.FingerPrintDataSet1.CommonSettings.Count = 1 Then
+                TourStartLocation = Me.FingerPrintDataSet1.CommonSettings(0).SettingsValue.ToString
+            Else
+                TourStartLocation = My.Computer.Registry.GetValue(strGeneralSettingsPath, "TourStartingLocation", FullDistrictName)
+            End If
         Catch ex As Exception
 
         End Try
     End Sub
 
+    Private Sub CreateTourNoteColumns()
+        Try
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(wdConString)
+            con.Open()
+
+            If DoesFieldExist("WeeklyDiary", "TourFrom", wdConString) = False Then
+                Dim cmd = New OleDb.OleDbCommand("ALTER TABLE WeeklyDiary ADD COLUMN TourFrom VARCHAR(255) WITH COMPRESSION", con)
+                cmd.ExecuteNonQuery()
+            End If
+
+            If DoesFieldExist("WeeklyDiary", "TourTo", wdConString) = False Then
+                Dim cmd = New OleDb.OleDbCommand("ALTER TABLE WeeklyDiary ADD COLUMN TourTo VARCHAR(255) WITH COMPRESSION", con)
+                cmd.ExecuteNonQuery()
+            End If
+
+            If DoesFieldExist("WeeklyDiary", "TourPurpose", wdConString) = False Then
+                Dim cmd = New OleDb.OleDbCommand("ALTER TABLE WeeklyDiary ADD COLUMN TourPurpose VARCHAR(255) WITH COMPRESSION", con)
+                cmd.ExecuteNonQuery()
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub RemoveNullFromTourNoteColumns()
+        Try
+            Me.WeeklyDiaryTableAdapter1.RemoveNullFromTourFrom("")
+            Me.WeeklyDiaryTableAdapter1.RemoveNullFromTourTo("")
+            Me.WeeklyDiaryTableAdapter1.RemoveNullFromTourPurpose("")
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub MarkHolidays()
         Try
             Dim hdDatabase As String = strAppUserPath & "\WordTemplates\HolidayList.mdb"
@@ -1014,6 +1060,8 @@ Public Class frmWeeklyDiaryDE
 
         If dDownloadStatus = DownloadStatus.Completed Then
             ConnectToDatabase()
+            CreateTourNoteColumns()
+            RemoveNullFromTourNoteColumns()
 
             Me.WeeklyDiaryTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.WeeklyDiary)
             Me.WeeklyDiaryBindingSource.MoveLast()
@@ -1121,6 +1169,15 @@ Public Class frmWeeklyDiaryDE
 
                 Dim cnt As Integer = Me.FingerPrintDataSet1.SOCRegister.Count
                 Dim WorkDone As String = ""
+                Dim TourTo As String = ""
+                Dim TourPurpose As String = ""
+                Dim TourFrom As String = ""
+
+                Dim officer As String = ""
+                Dim inspected As String = ""
+                Dim ps As String = ""
+                Dim crno As String = ""
+                Dim po As String = ""
 
                 If cnt = 0 Then
                     If IsHoliday(dtWD) Then
@@ -1130,9 +1187,6 @@ Public Class frmWeeklyDiaryDE
                     End If
                 End If
 
-                Dim officer As String = ""
-                Dim inspected As String = ""
-
                 If cnt = 1 Then
                     officer = Me.FingerPrintDataSet1.SOCRegister(0).InvestigatingOfficer
                     If officer.Contains(vbCrLf) Then
@@ -1140,7 +1194,12 @@ Public Class frmWeeklyDiaryDE
                     Else
                         inspected = "Inspected SOC in Cr.No. "
                     End If
-                    WorkDone = inspected & Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber & " of " & Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation & " P.S"
+                    crno = Me.FingerPrintDataSet1.SOCRegister(0).CrimeNumber
+                    ps = Me.FingerPrintDataSet1.SOCRegister(0).PoliceStation
+                    WorkDone = inspected & crno & " of " & ps & " P.S"
+                    TourFrom = TourStartLocation
+                    TourTo = Me.FingerPrintDataSet1.SOCRegister(0).PlaceOfOccurrence
+                    TourPurpose = "SOC inspection in Cr.No. " & crno & " of " & ps & " P.S"
                 End If
 
                 If cnt > 1 Then
@@ -1164,6 +1223,9 @@ Public Class frmWeeklyDiaryDE
 
                     Next
                     WorkDone = inspected & details
+                    TourFrom = TourStartLocation
+                    TourTo = Me.FingerPrintDataSet1.SOCRegister(0).PlaceOfOccurrence
+                    TourPurpose = "SOC inspection in " & details
                 End If
 
                 Dim dgvr As WeeklyDiaryDataSet.WeeklyDiaryRow = Me.WeeklyDiaryDataSet1.WeeklyDiary.NewRow
@@ -1171,6 +1233,9 @@ Public Class frmWeeklyDiaryDE
                     .DiaryDate = dtWD
                     .WorkDone = WorkDone
                     .Remarks = ""
+                    .TourFrom = TourFrom
+                    .TourTo = TourTo
+                    .TourPurpose = TourPurpose
                 End With
                 Me.WeeklyDiaryDataSet1.WeeklyDiary.AddWeeklyDiaryRow(dgvr)
             Next

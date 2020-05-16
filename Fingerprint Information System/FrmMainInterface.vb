@@ -332,7 +332,7 @@ Public Class frmMainInterface
 
         If DBExists Then
             ConnectToDatabase()
-            Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "0")
+            Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "1")
 
             If CreateTable = "1" Then
                 CreateLastModificationTable()
@@ -17342,41 +17342,6 @@ errhandler:
 
     End Function
 
-
-    Public Function DoesFieldExist(ByVal tblName As String, _
-                                   ByVal fldName As String, _
-                                   ByVal cnnStr As String) As Boolean
-
-        Try
-            Dim dbConn As New OleDb.OleDbConnection(cnnStr)
-            dbConn.Open()
-            Dim dbTbl As New DataTable
-
-            ' Get the table definition loaded in a table adapter
-            Dim strSql As String = "Select TOP 1 * from " & tblName
-            Dim dbAdapater As New OleDb.OleDbDataAdapter(strSql, dbConn)
-            dbAdapater.Fill(dbTbl)
-
-            ' Get the index of the field name
-            Dim i As Integer = dbTbl.Columns.IndexOf(fldName)
-
-            If i = -1 Then
-                'Field is missing
-                DoesFieldExist = False
-            Else
-                'Field is there
-                DoesFieldExist = True
-            End If
-
-            dbTbl.Dispose()
-            dbConn.Close()
-            dbConn.Dispose()
-        Catch ex As Exception
-            DoesFieldExist = False
-        End Try
-
-
-    End Function
 
 #End Region
 
