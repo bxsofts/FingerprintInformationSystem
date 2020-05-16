@@ -264,6 +264,7 @@ Public Class FrmTourNote
         End If
         boolGenerateRecords = True
         GenerateRecords()
+        Me.dgvWD.Columns(4).DisplayIndex = 2
         '  Me.StatusBar.RecalcLayout()
         Me.Cursor = Cursors.Default
     End Sub
@@ -944,11 +945,12 @@ Public Class FrmTourNote
                         WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
                         WordApp.Selection.TypeText(vbNewLine)
 
-                        wdTbl.Cell(j, 4).Range.Text = TourStartLocation
+                        wdTbl.Cell(j, 4).Range.Text = WeeklyDiaryDataSet1.WeeklyDiary(i).TourFrom
+                        wdTbl.Cell(j, 5).Range.Text = WeeklyDiaryDataSet1.WeeklyDiary(i).TourTo
 
-                        Dim purpose As String = WeeklyDiaryDataSet1.WeeklyDiary(i).WorkDone
+                        Dim purpose As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourPurpose
 
-                        If purpose.ToLower.Contains(" soc ") Then
+                        If purpose.ToLower.Contains("inspection") Then
                             wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
                         End If
 
