@@ -244,7 +244,7 @@ Partial Class FrmTourNote
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvWD.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgvWD.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvWD.RowTemplate.Height = 40
+        Me.dgvWD.RowTemplate.Height = 30
         Me.dgvWD.SelectAllSignVisible = False
         Me.dgvWD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.dgvWD.Size = New System.Drawing.Size(862, 625)

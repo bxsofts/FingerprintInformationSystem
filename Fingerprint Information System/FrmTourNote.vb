@@ -73,6 +73,8 @@ Public Class FrmTourNote
 
     Dim blMonthCompleted As Boolean = False
     Dim DVNumber As String = ""
+    Dim wdFile As String = ""
+    Dim blWDFileExists As Boolean
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
@@ -247,6 +249,19 @@ Public Class FrmTourNote
         Me.PoliceStationListTableAdapter1.Connection.ConnectionString = sConString
         Me.PoliceStationListTableAdapter1.Connection.Open()
 
+        If PENTI.Trim = "" Then
+            blWDFileExists = False
+        Else
+            wdFile = SuggestedLocation & "\Weekly Diary\" & PENTI & ".mdb"
+            blWDFileExists = My.Computer.FileSystem.FileExists(wdFile)
+        End If
+
+        If blWDFileExists Then
+            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
+            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+            Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
+            Me.WeeklyDiaryTableAdapter1.Connection.Open()
+        End If
         boolGenerateRecords = True
         GenerateRecords()
         '  Me.StatusBar.RecalcLayout()
@@ -278,7 +293,6 @@ Public Class FrmTourNote
 
 
 #Region "DATAGRID"
-
 
     Private Sub PaintSerialNumberDGVSOC(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellPaintingEventArgs) Handles dgvSOC.CellPainting
         On Error Resume Next
@@ -380,15 +394,14 @@ Public Class FrmTourNote
 
     Private Sub cmbSOCOfficer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSOCOfficer.SelectedIndexChanged
         Try
+            If boolGenerateRecords = False Then Exit Sub
             blUploadAuthenticated = False
+
             SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
 
-            If SelectedOfficerName.Contains(", TI") Then
-                Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & PENTI & ".mdb"
-                If My.Computer.FileSystem.FileExists(wdFile) Then
-                    GenerateWDRecords(wdFile)
-                    Exit Sub
-                End If
+            If SelectedOfficerName.Contains(", TI") And blWDFileExists Then
+                GenerateWDRecords(wdFile)
+                Exit Sub
             End If
 
             GenerateSOCRecords()
@@ -405,12 +418,9 @@ Public Class FrmTourNote
 
         SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
 
-        If SelectedOfficerName.Contains(", TI") Then
-            Dim wdFile As String = SuggestedLocation & "\Weekly Diary\" & PENTI & ".mdb"
-            If My.Computer.FileSystem.FileExists(wdFile) Then
-                GenerateWDRecords(wdFile)
-                Exit Sub
-            End If
+        If SelectedOfficerName.Contains(", TI") And blWDFileExists Then
+            GenerateWDRecords(wdFile)
+            Exit Sub
         End If
 
         GenerateSOCRecords()
@@ -421,11 +431,6 @@ Public Class FrmTourNote
             Me.Cursor = Cursors.WaitCursor
             Me.dgvSOC.Visible = False
             Me.dgvWD.Visible = True
-
-            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
-            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
-            Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
-            Me.WeeklyDiaryTableAdapter1.Connection.Open()
 
             Dim m = Me.cmbMonth.SelectedIndex + 1
             Dim y = Me.txtYear.Value
@@ -439,10 +444,8 @@ Public Class FrmTourNote
                 blMonthCompleted = False
             End If
 
-            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, d1, d2)
-
-            TourStartLocation = Me.txtStartingLocation.Text
             Me.PanelSOC.Text = "Weekly Diary of " & SelectedOfficerName & " for " & MonthName(m) & " " & y
+            Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, d1, d2)
             AutoTickWDRecords()
         Catch ex As Exception
 
@@ -450,6 +453,22 @@ Public Class FrmTourNote
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub AutoTickWDRecords()
+
+        On Error Resume Next
+        Dim text As String = ""
+        For i = 0 To dgvWD.Rows.Count - 1
+            text = Me.dgvWD.Rows(i).Cells(2).Value.ToString.ToLower
+            If text.Contains(" soc ") Or text.Contains("range conference") Or text.Contains("quarterly conference") Or text.Contains("court duty") Or text.Contains("return journey") Then
+                dgvWD.Rows(i).Cells(4).Value = True
+                Me.dgvWD.Rows(i).Cells(4).Style.BackColor = Color.MediumVioletRed
+            End If
+        Next
+
+        DisplaySelectedWDRecordCount()
+        DisplayFileStatus()
+
+    End Sub
     Private Sub GenerateSOCRecords()
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -468,7 +487,6 @@ Public Class FrmTourNote
                 blMonthCompleted = False
             End If
 
-            TourStartLocation = Me.txtStartingLocation.Text
             Me.PanelSOC.Text = "SOCs inspected in " & MonthName(m) & " " & y
             Me.SocRegisterTableAdapter1.FillByDateBetween(Me.FingerPrintDataSet.SOCRegister, d1, d2)
             AutoTickSOCRecords()
@@ -502,22 +520,6 @@ Public Class FrmTourNote
 
     End Sub
 
-    Private Sub AutoTickWDRecords()
-
-        On Error Resume Next
-        Dim text As String = ""
-        For i = 0 To dgvWD.Rows.Count - 1
-            text = Me.dgvWD.Rows(i).Cells(2).Value.ToString.ToLower
-            If text.Contains(" soc ") Or text.Contains("range conference") Or text.Contains("quarterly conference") Or text.Contains("court duty") Then
-                dgvWD.Rows(i).Cells(4).Value = True
-                Me.dgvWD.Rows(i).Cells(4).Style.BackColor = Color.MediumVioletRed
-            End If
-        Next
-
-        DisplaySelectedWDRecordCount()
-        DisplayFileStatus()
-
-    End Sub
 
     Private Sub SelectAllRecords() Handles btnSelectAll.Click
         On Error Resume Next
@@ -526,7 +528,7 @@ Public Class FrmTourNote
                 dgvSOC.Rows(i).Cells(1).Value = True
             Next
         Else
-            For i = 0 To dgvSOC.Rows.Count - 1
+            For i = 0 To dgvWD.Rows.Count - 1
                 dgvWD.Rows(i).Cells(4).Value = True
             Next
         End If
@@ -541,7 +543,7 @@ Public Class FrmTourNote
                 dgvSOC.Rows(i).Cells(1).Value = False
             Next
         Else
-            For i = 0 To dgvSOC.Rows.Count - 1
+            For i = 0 To dgvWD.Rows.Count - 1
                 dgvWD.Rows(i).Cells(4).Value = False
             Next
         End If
@@ -692,11 +694,16 @@ Public Class FrmTourNote
         DVNumber = Me.txtDVNumber.Text.Trim
         DisplayFileStatus()
 
-        If chkSingleRow.Checked Then
+        If Me.dgvWD.Visible Then
             GenerateSingleLineTourNote()
         Else
-            GenerateThreeLineTourNote()
+            If chkSingleRow.Checked Then
+                GenerateSingleLineTourNote()
+            Else
+                GenerateThreeLineTourNote()
+            End If
         End If
+
         Exit Sub
 errhandler:
         DevComponents.DotNetBar.MessageBoxEx.Show(Err.Description, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -714,13 +721,25 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
+            Dim RowCount As Integer = 0
             Dim SelectedRecordsCount As Integer = 0
-            For i = 0 To RowCount - 1
-                If dgvSOC.Rows(i).Cells(1).Value = True Then
-                    SelectedRecordsCount = SelectedRecordsCount + 1
-                End If
-            Next
+
+            If Me.dgvSOC.Visible Then
+                RowCount = Me.FingerPrintDataSet.SOCRegister.Count
+                For i = 0 To RowCount - 1
+                    If dgvSOC.Rows(i).Cells(1).Value = True Then
+                        SelectedRecordsCount = SelectedRecordsCount + 1
+                    End If
+                Next
+            Else
+                RowCount = Me.WeeklyDiaryDataSet1.WeeklyDiary.Count
+                For i = 0 To RowCount - 1
+                    If dgvWD.Rows(i).Cells(4).Value = True Then
+                        SelectedRecordsCount = SelectedRecordsCount + 1
+                    End If
+                Next
+            End If
+            
 
             If SelectedRecordsCount = 0 Then
                 If MessageBoxEx.Show("No records selected. Would you like to generate a blank tour note?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
@@ -746,6 +765,7 @@ errhandler:
             args.Year = Me.txtYear.Text
             args.UsePS = chkUsePS.Checked
             args.DVNumber = DVNumber
+            args.blGenerateFromSOC = Me.dgvSOC.Visible
 
             Me.lblSavedTourNote.Text = Me.cmbMonth.SelectedItem.ToString & " " & Me.txtYear.Text & " - Tour Note - Generating from selected records..."
             Me.cprgGenerateFiles.Show()
@@ -819,7 +839,7 @@ errhandler:
             wdBooks("Month").Range.Text = (args.Month & " " & args.Year).ToUpper
             wdBooks("PEN").Range.Text = PENarray(sx)
             wdBooks("BasicPay").Range.Text = BParray(sx)
-            wdBooks("Place").Range.Text = TourStartLocation
+            wdBooks("Place").Range.Text = TourStartLocation & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,"
             wdBooks("Date").Range.Text = Today.ToString("dd/MM/yyyy", culture)
             wdBooks("Name2").Range.Text = OfficerNameOnly
             wdBooks("Designation").Range.Text = Designation
@@ -849,58 +869,100 @@ errhandler:
             Dim iteration As Integer = CInt(50 / args.RowCount)
             Dim dvn As String = args.DVNumber
 
-            For i = 0 To args.RowCount - 1
+            If args.blGenerateFromSOC Then
+                For i = 0 To args.RowCount - 1
 
-                If dgvSOC.Rows(i).Cells(1).Value = True Then
-                    Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
-                    Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
-                    Dim PS1 As String = PS
-                    n = n + 1
+                    If dgvSOC.Rows(i).Cells(1).Value = True Then
+                        Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", culture)
+                        Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
+                        Dim PS1 As String = PS
+                        n = n + 1
 
-                    wdTbl.Cell(j, 1).Range.Text = n
-                    wdTbl.Cell(j, 2).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
+                        wdTbl.Cell(j, 1).Range.Text = n
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
 
-                    wdTbl.Cell(j, 3).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
 
-                    wdTbl.Cell(j, 4).Range.Text = TourStartLocation
+                        wdTbl.Cell(j, 4).Range.Text = TourStartLocation
 
-                    If Not args.UsePS Then
-                        wdTbl.Cell(j, 5).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back"
-                    Else
-                        PS1 = PS.Replace("P.S", "")
-                        wdTbl.Cell(j, 5).Range.Text = (PS1 & " and back")
-                    End If
-
-                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
-
-                    If args.UsePS Then
-                        Dim distance As String = FindDistance(PS)
-                        If Val(distance) <> 0 Then
-                            wdTbl.Cell(j, 7).Range.Text = Val(distance) * 2
+                        If Not args.UsePS Then
+                            wdTbl.Cell(j, 5).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence & " and back"
+                        Else
+                            PS1 = PS.Replace("P.S", "")
+                            wdTbl.Cell(j, 5).Range.Text = (PS1 & " and back")
                         End If
+
+                        wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
+
+                        If args.UsePS Then
+                            Dim distance As String = FindDistance(PS)
+                            If Val(distance) <> 0 Then
+                                wdTbl.Cell(j, 7).Range.Text = Val(distance) * 2
+                            End If
+                        End If
+
+                        If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
+                        wdTbl.Cell(j, 8).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
+                        j = j + 1
                     End If
 
-                    If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
-                    wdTbl.Cell(j, 8).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
-                    j = j + 1
-                End If
 
+                    For delay = delay To delay + iteration
+                        If delay < 91 Then
+                            bgwSingleTN.ReportProgress(delay)
+                            System.Threading.Thread.Sleep(5)
+                        End If
+                    Next
 
-                For delay = delay To delay + iteration
-                    If delay < 91 Then
-                        bgwSingleTN.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(5)
-                    End If
                 Next
 
-            Next
+            Else 'if generate from weekly diary
+                For i = 0 To args.RowCount - 1
 
+                    If dgvWD.Rows(i).Cells(4).Value = True Then
+                        Dim dt As String = WeeklyDiaryDataSet1.WeeklyDiary(i).DiaryDate.ToString("dd/MM/yyyy", culture)
+                        n = n + 1
+
+                        wdTbl.Cell(j, 1).Range.Text = n
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 4).Range.Text = TourStartLocation
+
+                        Dim purpose As String = WeeklyDiaryDataSet1.WeeklyDiary(i).WorkDone
+
+                        If purpose.ToLower.Contains(" soc ") Then
+                            wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
+                        End If
+
+                        wdTbl.Cell(j, 8).Range.Text = purpose
+                        j = j + 1
+                    End If
+
+
+                    For delay = delay To delay + iteration
+                        If delay < 91 Then
+                            bgwSingleTN.ReportProgress(delay)
+                            System.Threading.Thread.Sleep(5)
+                        End If
+                    Next
+
+                Next
+            End If
+            
 
 
             If My.Computer.FileSystem.FileExists(args.sFileName) = False And blMonthCompleted Then
@@ -965,8 +1027,9 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim RowCount = Me.FingerPrintDataSet.SOCRegister.Count
+            Dim RowCount As Integer = Me.FingerPrintDataSet.SOCRegister.Count
             Dim SelectedRecordsCount As Integer = 0
+
             For i = 0 To RowCount - 1
                 If dgvSOC.Rows(i).Cells(1).Value = True Then
                     SelectedRecordsCount = SelectedRecordsCount + 1
@@ -997,6 +1060,7 @@ errhandler:
             args.Year = Me.txtYear.Text
             args.UsePS = chkUsePS.Checked
             args.DVNumber = DVNumber
+            args.blGenerateFromSOC = Me.dgvSOC.Visible
 
             Me.cprgGenerateFiles.Show()
             Me.cprgGenerateFiles.ProgressText = ""
@@ -1072,7 +1136,7 @@ errhandler:
             wdBooks("Month").Range.Text = (args.Month & " " & args.Year).ToUpper
             wdBooks("PEN").Range.Text = PENarray(sx)
             wdBooks("BasicPay").Range.Text = BParray(sx)
-            wdBooks("Place").Range.Text = TourStartLocation
+            wdBooks("Place").Range.Text = TourStartLocation & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,"
             wdBooks("Date").Range.Text = Today.ToString("dd/MM/yyyy", culture)
             wdBooks("Name2").Range.Text = OfficerNameOnly
             wdBooks("Designation").Range.Text = Designation
@@ -2954,4 +3018,5 @@ Public Class TourNoteArgs
     Public Year As String
     Public UsePS As Boolean = False
     Public DVNumber As String
+    Public blGenerateFromSOC As Boolean
 End Class
