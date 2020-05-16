@@ -338,6 +338,7 @@ Public Class FrmTourNote
         End Using
         If e.ColumnIndex = 4 AndAlso e.RowIndex >= 0 Then
             If e.Value = True Then e.CellStyle.BackColor = Color.MediumVioletRed
+            If e.Value = False Then e.CellStyle.BackColor = Color.White
         End If
 
     End Sub
@@ -456,6 +457,14 @@ Public Class FrmTourNote
     Private Sub AutoTickWDRecords()
 
         On Error Resume Next
+        Dim sx As Integer = Me.cmbSOCOfficer.SelectedIndex
+        If sx < 0 Then Exit Sub
+        SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+        Me.lblOfficerName.Text = SelectedOfficerName
+        Me.lblPEN.Text = "PEN No: " & PENarray(sx)
+        Me.lblBasicPay.Text = "Basic Pay: ` " & BParray(sx)
+        Me.lblDA.Text = "DA: ` " & DAarray(sx)
+
         Dim text As String = ""
         For i = 0 To dgvWD.Rows.Count - 1
             text = Me.dgvWD.Rows(i).Cells(2).Value.ToString.ToLower
@@ -671,42 +680,37 @@ Public Class FrmTourNote
 
     Private Sub ShowTourNote() Handles btnGenerateTourNote.Click
         Try
+            If Me.cmbSOCOfficer.SelectedIndex < 0 Then
+                MessageBoxEx.Show("Please select your Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.cmbSOCOfficer.Focus()
+                Exit Sub
+            End If
 
+            If Me.txtDVNumber.Text.Trim = "" Then
+                MessageBoxEx.Show("Please enter Department Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtDVNumber.Focus()
+                Exit Sub
+            End If
+
+            TourStartLocation = Me.txtStartingLocation.Text.Trim
+            SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
+            DVNumber = Me.txtDVNumber.Text.Trim
+            DisplayFileStatus()
+
+            If Me.dgvWD.Visible Then
+                GenerateSingleLineTourNote()
+            Else
+                If chkSingleRow.Checked Then
+                    GenerateSingleLineTourNote()
+                Else
+                    GenerateThreeLineTourNote()
+                End If
+            End If
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
         End Try
 
-        If Me.cmbSOCOfficer.SelectedIndex < 0 Then
-            MessageBoxEx.Show("Please select your Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.cmbSOCOfficer.Focus()
-            Exit Sub
-        End If
-
-        If Me.txtDVNumber.Text.Trim = "" Then
-            MessageBoxEx.Show("Please enter Department Vehicle Number.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Me.txtDVNumber.Focus()
-            Exit Sub
-        End If
-
-        TourStartLocation = Me.txtStartingLocation.Text.Trim
-        SelectedOfficerName = Me.cmbSOCOfficer.SelectedItem.ToString
-        DVNumber = Me.txtDVNumber.Text.Trim
-        DisplayFileStatus()
-
-        If Me.dgvWD.Visible Then
-            GenerateSingleLineTourNote()
-        Else
-            If chkSingleRow.Checked Then
-                GenerateSingleLineTourNote()
-            Else
-                GenerateThreeLineTourNote()
-            End If
-        End If
-
-        Exit Sub
-errhandler:
-        DevComponents.DotNetBar.MessageBoxEx.Show(Err.Description, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
     End Sub
 
 
