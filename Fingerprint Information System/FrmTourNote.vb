@@ -74,6 +74,7 @@ Public Class FrmTourNote
     Dim blMonthCompleted As Boolean = False
     Dim DVNumber As String = ""
     Dim wdFile As String = ""
+    Dim wdConString As String = ""
     Dim blWDFileExists As Boolean
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
@@ -257,10 +258,11 @@ Public Class FrmTourNote
         End If
 
         If blWDFileExists Then
-            Dim wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
+            wdConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & wdFile
             If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
             Me.WeeklyDiaryTableAdapter1.Connection.ConnectionString = wdConString
             Me.WeeklyDiaryTableAdapter1.Connection.Open()
+            CreateTourNoteColumns()
         End If
         boolGenerateRecords = True
         GenerateRecords()
@@ -290,6 +292,39 @@ Public Class FrmTourNote
 
     End Sub
 
+    Private Sub CreateTourNoteColumns()
+        Try
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(wdConString)
+            con.Open()
+
+            If DoesFieldExist("WeeklyDiary", "TourFrom", wdConString) Then
+                Exit Sub
+            End If
+
+            If DoesFieldExist("WeeklyDiary", "TourFrom", wdConString) = False Then
+                Dim cmd = New OleDb.OleDbCommand("ALTER TABLE WeeklyDiary ADD COLUMN TourFrom VARCHAR(255) WITH COMPRESSION", con)
+                cmd.ExecuteNonQuery()
+            End If
+
+            If DoesFieldExist("WeeklyDiary", "TourTo", wdConString) = False Then
+                Dim cmd = New OleDb.OleDbCommand("ALTER TABLE WeeklyDiary ADD COLUMN TourTo VARCHAR(255) WITH COMPRESSION", con)
+                cmd.ExecuteNonQuery()
+            End If
+
+            If DoesFieldExist("WeeklyDiary", "TourPurpose", wdConString) = False Then
+                Dim cmd = New OleDb.OleDbCommand("ALTER TABLE WeeklyDiary ADD COLUMN TourPurpose VARCHAR(255) WITH COMPRESSION", con)
+                cmd.ExecuteNonQuery()
+            End If
+
+            Me.WeeklyDiaryTableAdapter1.RemoveNullFromTourFrom("")
+            Me.WeeklyDiaryTableAdapter1.RemoveNullFromTourTo("")
+            Me.WeeklyDiaryTableAdapter1.RemoveNullFromTourPurpose("")
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+   
 #End Region
 
 
