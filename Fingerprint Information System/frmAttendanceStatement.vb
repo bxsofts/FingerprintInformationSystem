@@ -165,9 +165,9 @@ Public Class frmAttendanceStmt
         On Error Resume Next
         Dim dt = Now
         If ShowDate Then
-            Return dt.ToString("dd/MM/yyyy", culture)
+            Return dt.ToString("dd/MM/yyyy", TimeFormatCulture)
         Else
-            Return dt.ToString("dd/MM/yyyy", culture).Substring(3)
+            Return dt.ToString("dd/MM/yyyy", TimeFormatCulture).Substring(3)
         End If
 
     End Function

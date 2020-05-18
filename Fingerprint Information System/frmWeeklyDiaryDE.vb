@@ -35,6 +35,7 @@ Public Class frmWeeklyDiaryDE
     Dim blDGVChanged As Boolean
     Dim blShowUploadStatus As Boolean = True
     Dim TourStartLocation = ""
+
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
@@ -43,6 +44,7 @@ Public Class frmWeeklyDiaryDE
             Me.CenterToScreen()
             Me.CircularProgress1.Visible = False
             Me.lblLastWeek.Visible = False
+           
             Me.txtName.Text = ""
             Me.txtOldPassword.Text = ""
             Me.txtPassword1.Text = ""
@@ -67,7 +69,7 @@ Public Class frmWeeklyDiaryDE
             Me.MonthCalendarAdv1.SelectedDate = dtWeeklyDiaryFrom
             Me.MonthCalendarAdv1.DisplayMonth = dtWeeklyDiaryFrom
             MarkHolidays()
-            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", TimeFormatCulture)
 
             Me.dgvWeeklyDiary.DefaultCellStyle.Font = New Font("Segoe UI", 9, FontStyle.Regular)
 
@@ -102,7 +104,8 @@ Public Class frmWeeklyDiaryDE
 
             Control.CheckForIllegalCrossThreadCalls = False
 
-            FindLastDate()
+            FindLastLocalRecordCountAndDate()
+            FindRemoteRecordCountAndDate()
 
             blDGVChanged = False
             Me.Cursor = Cursors.Default
@@ -234,21 +237,117 @@ Public Class frmWeeklyDiaryDE
 
     End Sub
 
-    Private Sub FindLastDate()
+#Region "LAST RECORD COUNT"
+
+
+    Private Sub FindLastLocalRecordCountAndDate()
         Try
             Me.lblLastWeek.Visible = False
-            Dim cnt As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount
-            If cnt > 0 Then
+            Dim RecordCount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount
+            If RecordCount > 0 Then
                 Dim lastdate As Date = Me.WeeklyDiaryTableAdapter1.ScalarQueryLastDate
                 lastdate = lastdate.AddDays(-6)
-                Me.lblLastWeek.Text = "Last generated week: " & lastdate.ToString("dd/MM/yyyy")
+                Me.lblLastWeek.Text = "Last generated week: " & lastdate.ToString("dd/MM/yyyy", TimeFormatCulture)
                 Me.lblLastWeek.Visible = True
+                Me.lblLocalCount.Text = "No. of Local Records: " & RecordCount
+                Me.lblLocalLastDate.Text = "Last Local Diary Date: " & lastdate.ToString("dd/MM/yyyy", TimeFormatCulture)
+            Else
+                Me.lblLocalCount.Text = "No. of Local Records: 0"
+                Me.lblLocalLastDate.Text = "Last Local Diary Date: ##/##/####"
             End If
         Catch ex As Exception
             Me.lblLastWeek.Text = "Last generated week "
             Me.lblLastWeek.Visible = False
         End Try
     End Sub
+
+    Private Sub FindRemoteRecordCountAndDate()
+        Try
+            If InternetAvailable() Then bgwRemoteCount.RunWorkerAsync()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub bgwRemoteCount_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwRemoteCount.DoWork
+        Try
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim wdFolderID As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..WeeklyDiary'"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwRemoteCount.ReportProgress(2, "0")
+            Else
+                wdFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & wdFolderID & "' in parents and name = '" & wdPEN & ".mdb'"
+            List.Fields = "files(id, description)"
+            Results = List.Execute
+
+            Dim remotecount As Integer = 0
+            Dim description As String = ""
+            Dim lastdate As String = ""
+            cnt = Results.Files.Count
+
+            If Results.Files.Count = 0 Then
+                bgwRemoteCount.ReportProgress(2, remotecount)
+            Else
+                description = Results.Files(0).Description
+                Dim SplitText() = Strings.Split(description, " - ")
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u = 0 Then
+                    remotecount = Val(SplitText(0))
+                End If
+
+                If u > 0 Then
+                    remotecount = Val(SplitText(1))
+                    lastdate = SplitText(2)
+                End If
+                bgwRemoteCount.ReportProgress(3, remotecount)
+                bgwRemoteCount.ReportProgress(4, lastdate)
+            End If
+        Catch ex As Exception
+            bgwRemoteCount.ReportProgress(2, 0)
+        End Try
+
+    End Sub
+
+    Private Sub bgwRemoteCount_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwRemoteCount.ProgressChanged
+        If e.ProgressPercentage = 2 Then
+            Me.lblRemoteCount.Text = "No. of Remote Records: 0"
+            Me.lblRemoteLastDate.Text = "Last Remote Diary Date: ##/##/####"
+        End If
+
+        If e.ProgressPercentage > 2 Then
+            Me.lblRemoteCount.Visible = True
+            Me.lblRemoteLastDate.Visible = True
+        End If
+
+        If e.ProgressPercentage = 3 Then
+            Me.lblRemoteCount.Text = "No. of Remote Records: " & e.UserState.ToString
+        End If
+
+        If e.ProgressPercentage = 4 Then
+            Me.lblRemoteLastDate.Text = "Last Remote Diary Date: " & e.UserState.ToString
+        End If
+    End Sub
+
+#End Region
+
 
 #Region "CHANGE PASSWORD"
 
@@ -561,7 +660,7 @@ Public Class frmWeeklyDiaryDE
                     Next
                     Me.WeeklyDiaryTableAdapter1.Update(Me.WeeklyDiaryDataSet1)
                     LoadSelectedWeekDiary()
-                    FindLastDate()
+                    FindLastLocalRecordCountAndDate()
                     ShowDesktopAlert("Weekly Diary for the selected week deleted.")
                 End If
             End If
@@ -596,7 +695,7 @@ Public Class frmWeeklyDiaryDE
             Me.Cursor = Cursors.WaitCursor
 
 
-            Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+            Dim LocalRecordCount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
@@ -642,8 +741,8 @@ Public Class frmWeeklyDiaryDE
             End If
 
 
-            If remotecount > localcount Then
-                MessageBoxEx.Show("Remote database file has more records (" & remotecount & ") than local database (" & localcount & "). Cannot upload database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If remotecount > LocalRecordCount Then
+                MessageBoxEx.Show("Remote database file has more records (" & remotecount & ") than local database (" & LocalRecordCount & "). Cannot upload database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -655,12 +754,12 @@ Public Class frmWeeklyDiaryDE
             If WDDS.WeeklyDiary.Count > 0 Then
                 Dim dtlast As Date = WDDS.WeeklyDiary(0).DiaryDate
                 dtlast = dtlast.AddDays(-6)
-                lastdate = dtlast.ToString("dd/MM/yyyy")
+                lastdate = dtlast.ToString("dd/MM/yyyy", TimeFormatCulture)
             End If
 
-            Dim fDescription As String = wdOfficerName & " - " & localcount
+            Dim fDescription As String = wdOfficerName & " - " & LocalRecordCount
             If lastdate <> "" Then
-                fDescription = wdOfficerName & " - " & localcount & " - " & lastdate
+                fDescription = wdOfficerName & " - " & LocalRecordCount & " - " & lastdate
             End If
 
             CircularProgress1.IsRunning = True
@@ -741,7 +840,7 @@ Public Class frmWeeklyDiaryDE
             End If
 
             If uUploadStatus = UploadStatus.Completed Then
-                bgwUpload.ReportProgress(100)
+                bgwUpload.ReportProgress(100, e.Argument)
             End If
 
             Stream.Close()
@@ -769,6 +868,15 @@ Public Class frmWeeklyDiaryDE
     End Sub
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpload.ProgressChanged
         CircularProgress1.ProgressText = e.ProgressPercentage
+        If e.ProgressPercentage = 100 And TypeOf e.UserState Is String Then
+            Dim description = e.UserState.ToString
+            Dim SplitText() = Strings.Split(description, " - ")
+            Dim u = SplitText.GetUpperBound(0)
+            If u > 0 Then
+                Me.lblRemoteCount.Text = "No. of Remote Records: " & Val(SplitText(1))
+                Me.lblRemoteLastDate.Text = "Last Remote Diary Date: " & SplitText(2)
+            End If
+        End If
     End Sub
 
     Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpload.RunWorkerCompleted
@@ -858,7 +966,7 @@ Public Class frmWeeklyDiaryDE
             If WDDS.WeeklyDiary.Count > 0 Then
                 Dim dtlast As Date = WDDS.WeeklyDiary(0).DiaryDate
                 dtlast = dtlast.AddDays(-6)
-                lastdate = dtlast.ToString("dd/MM/yyyy")
+                lastdate = dtlast.ToString("dd/MM/yyyy", TimeFormatCulture)
             End If
 
             Dim fDescription As String = wdOfficerName & " - " & localcount
@@ -874,7 +982,7 @@ Public Class frmWeeklyDiaryDE
         End Try
     End Sub
 
-   
+
 #End Region
 
 
@@ -1081,7 +1189,7 @@ Public Class frmWeeklyDiaryDE
 
             Me.Text = "Weekly Diary - " & wdOfficerName & " - " & wdPEN
             Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & " - " & wdPEN & "</b>"
-            FindLastDate()
+            FindLastLocalRecordCountAndDate()
             MessageBoxEx.Show("Weekly Diary file restored successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
@@ -1114,7 +1222,7 @@ Public Class frmWeeklyDiaryDE
             dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)
             dtWeeklyDiaryTo = dtWeeklyDiaryFrom.AddDays(6)
 
-            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
+            Me.lblSelectedDate.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", TimeFormatCulture)
 
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
             Me.Cursor = Cursors.Default
@@ -1243,7 +1351,7 @@ Public Class frmWeeklyDiaryDE
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, dtWeeklyDiaryFrom, dtWeeklyDiaryTo)
             Me.WeeklyDiaryBindingSource.MoveFirst()
             blDGVChanged = False
-            FindLastDate()
+            FindLastLocalRecordCountAndDate()
             ShowDesktopAlert("Weekly Diary generated.")
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -1352,7 +1460,7 @@ Public Class frmWeeklyDiaryDE
             dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)
             dtWeeklyDiaryTo = Me.dgvWeeklyDiary.Rows(6).Cells(1).Value
 
-            Dim header As String = "Weekly Diary of " & wdOfficerName & ", " & designation & ", " & unit & " for the period from " & dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture) & " to " & dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
+            Dim header As String = "Weekly Diary of " & wdOfficerName & ", " & designation & ", " & unit & " for the period from " & dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", TimeFormatCulture) & " to " & dtWeeklyDiaryTo.ToString("dd/MM/yyyy", TimeFormatCulture)
 
             Dim wdBooks As Word.Bookmarks = wdDoc.Bookmarks
 
@@ -1362,7 +1470,7 @@ Public Class frmWeeklyDiaryDE
 
             For i = 2 To 8
                 Dim dt As Date = Me.dgvWeeklyDiary.Rows(i - 2).Cells(1).Value
-                wdTbl.Cell(i, 1).Range.Text = dt.ToString("dd/MM/yyyy", culture) & vbNewLine & Format(dt, "dddd")
+                wdTbl.Cell(i, 1).Range.Text = dt.ToString("dd/MM/yyyy", TimeFormatCulture) & vbNewLine & Format(dt, "dddd")
                 wdTbl.Cell(i, 2).Range.Text = Me.dgvWeeklyDiary.Rows(i - 2).Cells(2).Value
                 wdTbl.Cell(i, 3).Range.Text = Me.dgvWeeklyDiary.Rows(i - 2).Cells(3).Value
             Next
@@ -1416,7 +1524,7 @@ Public Class frmWeeklyDiaryDE
             wdBooks("FileNo").Range.Text = "No. " & PdlWeeklyDiary & "/PDL/" & Year(Today) & "/" & ShortOfficeName & "/" & ShortDistrictName
             wdBooks("OfficeName1").Range.Text = FullOfficeName
             wdBooks("District1").Range.Text = FullDistrictName
-            wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy", culture)
+            wdBooks("Date1").Range.Text = Today.ToString("dd/MM/yyyy", TimeFormatCulture)
 
             wdBooks("Name1").Range.Text = wdOfficerName
             wdBooks("OfficeName2").Range.Text = FullOfficeName
@@ -1428,8 +1536,8 @@ Public Class frmWeeklyDiaryDE
             End If
 
 
-            wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", culture)
-            wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", culture)
+            wdBooks("DateFrom").Range.Text = dtWeeklyDiaryFrom.ToString("dd/MM/yyyy", TimeFormatCulture)
+            wdBooks("DateTo").Range.Text = dtWeeklyDiaryTo.ToString("dd/MM/yyyy", TimeFormatCulture)
 
 
             If blUseTIinLetter Then
@@ -1491,7 +1599,6 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
     Private Sub btnReload_Click(sender As Object, e As EventArgs) Handles btnReload.Click
-
         Try
             If blDGVChanged Then
                 Dim reply As DialogResult = MessageBoxEx.Show("There are unsaved changes in Weekly Diary table data. Do you want to save the changes?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
@@ -1554,11 +1661,12 @@ Public Class frmWeeklyDiaryDE
         End If
         Me.Cursor = Cursors.Default
     End Sub
-    
+
     Private Sub btnPrintAll_Click(sender As Object, e As EventArgs) Handles btnPrintAll.Click
         Me.Cursor = Cursors.WaitCursor
         frmWeeklyDiaryView.Show()
         Me.Cursor = Cursors.Default
     End Sub
 
+  
 End Class

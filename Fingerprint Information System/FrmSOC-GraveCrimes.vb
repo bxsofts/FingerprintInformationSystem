@@ -458,7 +458,7 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
                 WordApp.Selection.Font.Size = 10
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yy", culture))
+                WordApp.Selection.TypeText(Me.FingerPrintDataSet.SOCRegister(j).DateOfInspection.ToString("dd/MM/yy", TimeFormatCulture))
 
                 WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                 WordApp.Selection.Font.Size = 10

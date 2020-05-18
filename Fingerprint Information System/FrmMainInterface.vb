@@ -411,7 +411,7 @@ Public Class frmMainInterface
         Next
 
 
-        Dim dm As String = Today.ToString("dd/MM/yyyy", culture)
+        Dim dm As String = Today.ToString("dd/MM/yyyy", TimeFormatCulture)
         dm = Strings.Left(dm, 5)
         Dim msg = ""
         Select Case dm

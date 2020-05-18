@@ -1241,7 +1241,7 @@ Public Class frmFPAStatement
     Private Function CheckChalanDate(index As Integer) As String
         Try
 
-            Dim dt As String = Me.FingerPrintDataSet.ChalanTable(index).ChalanDate.ToString("dd/MM/yyyy", culture)
+            Dim dt As String = Me.FingerPrintDataSet.ChalanTable(index).ChalanDate.ToString("dd/MM/yyyy", TimeFormatCulture)
             CheckChalanDate = dt
         Catch ex As Exception
             CheckChalanDate = ""

@@ -23,7 +23,7 @@ Public Class FrmLocalBackup
             Dim FileName = My.Computer.FileSystem.GetName(foundFile)
             Dim FullFilePath = My.Computer.FileSystem.GetParentPath(foundFile) & "\" & FileName
 
-            Dim Filedate As DateTime = DateTime.ParseExact(FileName.Replace("FingerPrintBackup-", "").Replace(".mdb", ""), BackupDateFormatString, culture)
+            Dim Filedate As DateTime = DateTime.ParseExact(FileName.Replace("FingerPrintBackup-", "").Replace(".mdb", ""), BackupDateFormatString, TimeFormatCulture)
 
             Dim item As ListViewItem = Me.listViewEx1.Items.Add(FileName)
             item.SubItems.Add(Filedate.ToString("dd-MM-yyyy HH:mm:ss"))

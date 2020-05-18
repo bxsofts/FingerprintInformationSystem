@@ -80,7 +80,7 @@ Module modMain
     Public boolShowWizard As Boolean = False
     Public blUseTIinLetter As Boolean = False
     Public BackupDateFormatString As String = "yyyy-MM-dd HH-mm-ss"
-    Public culture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+    Public TimeFormatCulture As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
 
     Public AdminPasswordFolderName As String = "..D4FvarcFNt/t7C/rcJltjylRSXzzthOS"
     Public UserPasswordFolderName As String = "..FAmDGDDYUnMfj45TryHY0B4ot4lMVHgcixHjrAdWfUA="

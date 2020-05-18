@@ -379,7 +379,7 @@ Public Class frmIdentificationStatement
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 3).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDate.ToString("dd/MM/yy", culture))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDate.ToString("dd/MM/yy", TimeFormatCulture))
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft

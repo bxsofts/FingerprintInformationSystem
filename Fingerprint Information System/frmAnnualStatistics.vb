@@ -598,9 +598,9 @@ Public Class frmAnnualStatistics
                 Dim cr = Me.FingerPrintDataSet.JoinedIDR(i).CrimeNumber
                 Dim us = Me.FingerPrintDataSet.JoinedIDR(i).SectionOfLaw
                 Dim dtin = Me.FingerPrintDataSet.JoinedIDR(i).DateOfInspection
-                Dim dtinstr = dtin.ToString("dd/MM/yyyy", culture)
+                Dim dtinstr = dtin.ToString("dd/MM/yyyy", TimeFormatCulture)
                 Dim dtid = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDate
-                Dim dtidstr = dtid.ToString("dd/MM/yyyy", culture)
+                Dim dtidstr = dtid.ToString("dd/MM/yyyy", TimeFormatCulture)
                 Dim ino = Me.FingerPrintDataSet.JoinedIDR(i).InvestigatingOfficer.Replace(vbNewLine, ", ")
                 Dim ido = Me.FingerPrintDataSet.JoinedIDR(i).IdentifiedBy
 
@@ -883,11 +883,11 @@ Public Class frmAnnualStatistics
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 4).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDate.ToString("dd/MM/yy", culture))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).IdentificationDate.ToString("dd/MM/yy", TimeFormatCulture))
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 5).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
-                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).DateOfInspection.ToString("dd/MM/yy", culture))
+                    WordApp.Selection.TypeText(Me.FingerPrintDataSet.JoinedIDR(j).DateOfInspection.ToString("dd/MM/yy", TimeFormatCulture))
 
                     WordApp.Selection.Tables.Item(1).Cell(i, 6).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
@@ -1118,9 +1118,9 @@ Public Class frmAnnualStatistics
                 Dim cr = Me.FingerPrintDataSet.JoinedIDR(i).CrimeNumber
                 Dim us = Me.FingerPrintDataSet.JoinedIDR(i).SectionOfLaw
                 Dim dtin = Me.FingerPrintDataSet.JoinedIDR(i).DateOfInspection
-                Dim dtinstr = dtin.ToString("dd/MM/yyyy", culture)
+                Dim dtinstr = dtin.ToString("dd/MM/yyyy", TimeFormatCulture)
                 Dim dtid = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDate
-                Dim dtidstr = dtid.ToString("dd/MM/yyyy", culture)
+                Dim dtidstr = dtid.ToString("dd/MM/yyyy", TimeFormatCulture)
                 Dim ino = Me.FingerPrintDataSet.JoinedIDR(i).InvestigatingOfficer.Replace(vbCrLf, ", ")
                 Dim ido = Me.FingerPrintDataSet.JoinedIDR(i).IdentifiedBy
                 ino = Replace(Replace(Replace(Replace(ino, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
