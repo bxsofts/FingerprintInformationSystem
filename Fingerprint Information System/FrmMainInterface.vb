@@ -18303,7 +18303,6 @@ errhandler:
             Call Shell("explorer.exe /select," & strDatabaseFile, AppWinStyle.NormalFocus)
         Else
             MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
         End If
 
     End Sub
@@ -18311,15 +18310,13 @@ errhandler:
 
     Private Sub OpenDBInAccess() Handles btnOpenDBInMSAccess.Click
         On Error Resume Next
-
+        Me.Cursor = Cursors.WaitCursor
         If FileIO.FileSystem.FileExists(strDatabaseFile) Then
             Shell("explorer.exe " & strDatabaseFile, AppWinStyle.MaximizedFocus)
-
         Else
             MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
         End If
-
+        Me.Cursor = Cursors.Default
     End Sub
 
 

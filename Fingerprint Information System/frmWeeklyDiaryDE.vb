@@ -91,8 +91,8 @@ Public Class frmWeeklyDiaryDE
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
 
-            Me.Text = "Weekly Diary - " & wdOfficerName
-            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
+            Me.Text = "Weekly Diary - " & wdOfficerName & " - " & wdPEN
+            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & " - " & wdPEN & "</b>"
 
             Me.OfficeDetailsTableAdapter1.FillByDate(Me.WeeklyDiaryDataSet1.OfficeDetails)
             Me.OfficeDetailsBindingSource.MoveLast()
@@ -356,8 +356,8 @@ Public Class frmWeeklyDiaryDE
             Me.btnCancelName.Visible = False
             Me.txtName.Enabled = False
 
-            Me.Text = "Weekly Diary - " & wdOfficerName
-            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
+            Me.Text = "Weekly Diary - " & wdOfficerName & " - " & wdPEN
+            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & " - " & wdPEN & "</b>"
 
             MessageBoxEx.Show("Name updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
@@ -1079,8 +1079,8 @@ Public Class frmWeeklyDiaryDE
             Me.txtName.Text = wdOfficerName
             Me.txtName.Enabled = False
 
-            Me.Text = "Weekly Diary - " & wdOfficerName
-            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & "</b>"
+            Me.Text = "Weekly Diary - " & wdOfficerName & " - " & wdPEN
+            Me.TitleText = "<b>Weekly Diary - " & wdOfficerName & " - " & wdPEN & "</b>"
             FindLastDate()
             MessageBoxEx.Show("Weekly Diary file restored successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
@@ -1544,12 +1544,21 @@ Public Class frmWeeklyDiaryDE
         End Try
     End Sub
 
-  
+    Private Sub btnOpenDatabase_Click(sender As Object, e As EventArgs) Handles btnOpenDatabase.Click
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+        If FileIO.FileSystem.FileExists(wdDatabase) Then
+            Shell("explorer.exe " & wdDatabase, AppWinStyle.MaximizedFocus)
+        Else
+            MessageBoxEx.Show("The database file does not exist!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
+    
     Private Sub btnPrintAll_Click(sender As Object, e As EventArgs) Handles btnPrintAll.Click
         Me.Cursor = Cursors.WaitCursor
         frmWeeklyDiaryView.Show()
         Me.Cursor = Cursors.Default
     End Sub
 
-   
 End Class
