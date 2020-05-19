@@ -17368,7 +17368,7 @@ errhandler:
         ChangeCursor(Cursors.Default)
     End Sub
 
-    Private Sub ChangeCursor(cr As Cursor)
+    Public Sub ChangeCursor(cr As Cursor)
         On Error Resume Next
 
         RibbonControl1.Cursor = cr
@@ -17410,6 +17410,11 @@ errhandler:
         Me.ACDatagrid.Cursor = cr
         Me.PSDataGrid.Cursor = cr
         Me.IODatagrid.Cursor = cr
+        Me.pnlRegisterName.Cursor = cr
+        Me.TabControl.Cursor = cr
+        Me.TableLayoutPanel1.Cursor = cr
+        Me.PanelEx1.Cursor = cr
+
     End Sub
 
 

@@ -8,6 +8,14 @@ Public Class frmFPAStatement
     Dim IsMonthStmt As Boolean = True
     Dim blDGVChanged As Boolean
     Dim blSaveData As Boolean
+
+    Private Sub frmFPAStatement_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Try
+            frmMainInterface.ChangeCursor(Cursors.Default)
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Sub SetDays() Handles MyBase.Load
 
         On Error Resume Next
