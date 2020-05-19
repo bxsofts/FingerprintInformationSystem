@@ -16456,6 +16456,7 @@ errhandler:
 
 
     Private Sub GenerateRevenueIncomeStatement() Handles btnRevenueCollectionStatement.Click
+        Me.Cursor = Cursors.WaitCursor
         frmFPAStatement.ShowDialog()
     End Sub
 
