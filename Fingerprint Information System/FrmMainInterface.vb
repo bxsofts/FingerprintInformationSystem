@@ -392,9 +392,10 @@ Public Class frmMainInterface
 
             LoadNatureOfReport()
             IncrementCircularProgress(1)
-            Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
-            Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 7)
-            Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "7", autobackuptime)
+
+            Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackup", 1)
+            Dim autobackuptime As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackupTime", 15)
+            Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "15", autobackuptime)
         End If
 
 
@@ -463,19 +464,19 @@ Public Class frmMainInterface
 
         CopyCredentialFiles()
 
-        If Me.chkTakeAutoBackup.Checked Then
-            TakeAutoLocalBackup()
-            TakeAutoOnlineBackup()
-        End If
+        If Me.chkTakeAutoBackup.Checked Then TakeAutoLocalBackup()
+       
+        bgwCleanOnlineFiles.RunWorkerAsync()
 
         ShowNewVersionInstalledInfo()
         CheckForUpdatesAtStartup()
         UploadVersionInfoToDrive()
         CleanupLocalBackupFiles()
         If DBExists = False Then
-            Me.pnlRegisterName.Text = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
+            Dim DBMissing As String = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
+            Me.pnlRegisterName.Text = DBMissing
             DisableControls()
-            MessageBoxEx.Show("FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBoxEx.Show(DBMissing, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
     End Sub
@@ -1934,14 +1935,6 @@ Public Class frmMainInterface
             SetWindowTitle()
             LoadRecordsToAllTablesDependingOnCurrentYearSettings()
 
-
-
-            Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackup", 1)
-            Dim autobackuptime As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "AutoBackupTime", 30)
-
-            Me.txtAutoBackupPeriod.TextBox.Text = autobackuptime
-            GetFPSlipImageImportLocation()
-            GetCPImageImportLocation()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -1990,7 +1983,7 @@ Public Class frmMainInterface
         Dim v As Integer
         If s Then v = 1 Else v = 0
 
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoBackup", v, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "AutoBackup", v, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 
@@ -17484,10 +17477,12 @@ errhandler:
 
         Dim lastbackupdate As Date = Now
 
-        If My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastLocalBackupDate", Nothing) Is Nothing Then
+        Dim strlastbackupdate As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", "")
+
+        If strlastbackupdate = "" Then
             blTakeBackup = True
         Else
-            lastbackupdate = CDate(My.Computer.Registry.GetValue(strGeneralSettingsPath, "LastLocalBackupDate", Now))
+            lastbackupdate = DateTime.ParseExact(strlastbackupdate, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
         End If
 
         Dim dt As Date = lastbackupdate.AddDays(backupperiod)
@@ -17510,7 +17505,7 @@ errhandler:
 
             Destination = Destination & BackupFileName
             My.Computer.FileSystem.CopyFile(Source, Destination, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "LastLocalBackupDate", Now, Microsoft.Win32.RegistryValueKind.String)
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", Now.ToString("dd-MM-yyyy HH:mm:ss"), Microsoft.Win32.RegistryValueKind.String)
 
         End If
 
@@ -17593,29 +17588,6 @@ errhandler:
         End Try
     End Sub
 
-    Private Function CreateUserBackupFolder(FISService As DriveService, BackupFolderName As String)
-        Try
-            Dim masterfolderid As String = GetMasterBackupFolderID(FISService)
-
-            Dim parentlist As New List(Of String)
-            parentlist.Add(masterfolderid)
-
-            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
-            NewDirectory.Name = BackupFolderName
-            NewDirectory.Parents = parentlist
-            NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            NewDirectory.Description = FileOwner '
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
-            NewDirectory = request.Execute()
-
-            Return NewDirectory.Id
-        Catch ex As Exception
-            ' ShowErrorMessage(ex)
-            Return ""
-        End Try
-
-    End Function
-
     Private Function GetMasterBackupFolderID(FISService As DriveService) As String
         Try
             Dim id As String = ""
@@ -17687,323 +17659,6 @@ errhandler:
         End Try
     End Sub
 
-    Private Sub TakeAutoOnlineBackup()
-        Try
-
-            Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
-            If backupperiod = 0 Then Exit Sub
-
-            FindLastSOCNumberDICount()
-            If LatestSOCNumber = "" Then Exit Sub
-
-            blCheckAutoBackup = True
-            bgwOnlineAutoBackup.RunWorkerAsync(backupperiod)
-
-        Catch ex As Exception
-            ' ShowErrorMessage(ex)
-        End Try
-    End Sub
-
-    Private Sub bgwOnlineAutoBackup_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwOnlineAutoBackup.DoWork
-
-        Try
-            If InternetAvailable() = False Then
-                Exit Sub
-            End If
-
-            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
-                Exit Sub
-            End If
-
-            Dim FISService As DriveService = New DriveService
-            Dim Scopes As String() = {DriveService.Scope.Drive}
-            Dim UserBackupFolderName As String = FullDistrictName
-            Dim UserBackupFolderID As String = ""
-
-
-            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
-
-            Dim List = FISService.Files.List()
-            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
-
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
-            List.Fields = "files(id)"
-
-            Dim Results = List.Execute
-
-            Dim cnt = Results.Files.Count
-            If cnt = 0 Then
-                UserBackupFolderID = ""
-            Else
-                UserBackupFolderID = Results.Files(0).Id
-            End If
-
-            If UserBackupFolderID = "" Then
-                UserBackupFolderID = CreateUserBackupFolder(FISService, UserBackupFolderName)
-            End If
-
-
-            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name contains 'FingerprintBackup'"
-
-            List.Fields = "files(id, modifiedTime)"
-            List.OrderBy = "createdTime desc"
-            Results = List.Execute
-            Dim blTakeBackup As Boolean = False
-
-            If Results.Files.Count = 0 Then blTakeBackup = True
-            Dim lastbackupdate As Date = Now
-            If Results.Files.Count > 0 Then
-                lastbackupdate = Results.Files(0).ModifiedTime
-            End If
-
-            Dim backupperiod As Integer = e.Argument
-
-            Dim dt As Date = lastbackupdate.AddDays(backupperiod)
-
-            If Now.Date >= dt.Date Or blTakeBackup Then
-                bgwOnlineAutoBackup.ReportProgress(0, True)
-                blAutoBackupInProgress = True
-            Else
-                bgwOnlineAutoBackup.ReportProgress(0, False)
-                blCheckAutoBackup = False
-                Exit Sub
-            End If
-
-            Dim BackupTime As Date = Now
-            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
-            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
-            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
-
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            body.Name = BackupFileName
-            Dim LastModifiedDate As String = GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
-            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
-            body.MimeType = "database/mdb"
-
-            Dim parentlist As New List(Of String)
-            parentlist.Add(UserBackupFolderID)
-            body.Parents = parentlist
-
-            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
-
-            dFileSize = FileLen(tmpFileName)
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
-            Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-            UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-            AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
-
-            UploadRequest.Fields = "id"
-            UploadRequest.Upload()
-            Stream.Close()
-        Catch ex As Exception
-            blAutoBackupInProgress = False
-            blCheckAutoBackup = False
-            ShowErrorMessage(ex)
-        End Try
-    End Sub
-
-    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
-        Control.CheckForIllegalCrossThreadCalls = False
-        uBytesUploaded = Progress.BytesSent
-        uUploadStatus = Progress.Status
-        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-        bgwOnlineAutoBackup.ReportProgress(percent, uBytesUploaded)
-    End Sub
-
-
-    Private Sub bgwOnlineAutoBackup_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwOnlineAutoBackup.ProgressChanged
-
-        If TypeOf e.UserState Is Boolean And e.UserState = True Then
-            pgrDownloadInstaller.Visible = True
-            pgrDownloadInstaller.Value = 0
-            pgrDownloadInstaller.Text = "Uploading Backup 0%"
-            Me.StatusBar.RecalcLayout()
-        ElseIf TypeOf e.UserState Is Boolean And e.UserState = False Then
-            LocalSOCRecordCount = Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount
-            bgwUpdateOnlineDatabase.RunWorkerAsync()
-        Else
-            Me.pgrDownloadInstaller.Value = e.ProgressPercentage
-            Me.pgrDownloadInstaller.Text = "Uploading Backup " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
-        End If
-    End Sub
-
-    Private Sub bgwOnlineAutoBackup_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwOnlineAutoBackup.RunWorkerCompleted ', bgwUpdateOnlineDatabase.RunWorkerCompleted
-        pgrDownloadInstaller.Visible = False
-        pgrDownloadInstaller.Value = 0
-        pgrDownloadInstaller.Text = ""
-
-        blAutoBackupInProgress = False
-
-        blCheckAutoBackup = False
-        If uUploadStatus = UploadStatus.Completed Then
-            ShowDesktopAlert("Database backed up to Google Drive.")
-        End If
-
-        bgwCleanOnlineFiles.RunWorkerAsync()
-    End Sub
-
-    Private Sub bgwUpdateOnlineDatabase_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateOnlineDatabase.DoWork
-        Try
-            If Not InternetAvailable() Then
-                Exit Sub
-            End If
-
-            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
-                Exit Sub
-            End If
-
-            Dim FISService As DriveService = New DriveService
-            Dim Scopes As String() = {DriveService.Scope.Drive}
-            Dim UserBackupFolderName As String = FullDistrictName
-            Dim UserBackupFolderID As String = ""
-
-
-            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
-
-            Dim List = FISService.Files.List()
-            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
-
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
-            List.Fields = "files(id)"
-
-            Dim Results = List.Execute
-
-            Dim cnt = Results.Files.Count
-            If cnt = 0 Then
-                UserBackupFolderID = ""
-            Else
-                UserBackupFolderID = Results.Files(0).Id
-            End If
-
-            If UserBackupFolderID = "" Then
-                UserBackupFolderID = CreateUserBackupFolder(FISService, UserBackupFolderName)
-            End If
-
-            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name = 'FingerPrintDB.mdb'"
-
-            List.Fields = "files(id, description)"
-            Results = List.Execute
-
-            Dim RemoteSOCRecordCount As Integer = 0
-            Dim description As String = ""
-            Dim dtlastremotemodified As Date
-
-            If Results.Files.Count > 0 Then
-                description = Results.Files(0).Description
-                Dim SplitText() = Strings.Split(description, "; ")
-                RemoteSOCRecordCount = Val(SplitText(4))
-                Dim strlastremotemodified As String = SplitText(1)
-                dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
-            End If
-
-            Dim dtlastlocalmodified As Date = GetLastModificationDate()
-            Dim LastModifiedDate As String = dtlastlocalmodified.ToString("dd-MM-yyyy HH:mm:ss")
-
-            If LocalSOCRecordCount < RemoteSOCRecordCount Then
-                Exit Sub
-            End If
-
-            If LocalSOCRecordCount = RemoteSOCRecordCount Then
-
-                Dim ldt = dtlastlocalmodified.Date
-                Dim rdt = dtlastremotemodified.Date
-                Dim lhr = dtlastlocalmodified.Hour
-                Dim rhr = dtlastremotemodified.Hour
-                Dim lmt = dtlastlocalmodified.Minute
-                Dim rmt = dtlastremotemodified.Minute
-                Dim ls = dtlastlocalmodified.Second
-                Dim rs = dtlastremotemodified.Second
-
-                If ldt < rdt Then
-                    Exit Sub
-                End If
-
-                If ldt = rdt Then
-                    If lhr < rhr Then
-                        Exit Sub
-                    End If
-                    If lhr = rhr Then
-                        If lmt < rmt Then
-                            Exit Sub
-                        End If
-                        If lmt = rmt Then
-                            If ls <= rs Then
-                                Exit Sub
-                            End If
-                        End If
-                    End If
-                End If
-            End If
-
-            ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
-
-            Dim BackupTime As Date = Now
-            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
-            Dim BackupFileName As String = "FingerPrintDB.mdb"
-
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            body.Name = BackupFileName
-
-            body.Description = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
-            body.MimeType = "database/mdb"
-
-            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
-
-            dFileSize = FileLen(tmpFileName)
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
-
-            If Results.Files.Count = 0 Then
-                Dim parentlist As New List(Of String)
-                parentlist.Add(UserBackupFolderID)
-                body.Parents = parentlist
-                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
-                UploadRequest.Fields = "id"
-                UploadRequest.Upload()
-            Else
-                Dim RemoteFileID As String = Results.Files(0).Id
-                Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
-                UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
-                UpdateRequest.Fields = "id"
-                UpdateRequest.Upload()
-            End If
-
-
-            Stream.Close()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub DBUpload_ProgressChanged(Progress As IUploadProgress)
-        Control.CheckForIllegalCrossThreadCalls = False
-        uBytesUploaded = Progress.BytesSent
-        uUploadStatus = Progress.Status
-        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-
-        bgwUpdateOnlineDatabase.ReportProgress(percent, uBytesUploaded)
-
-    End Sub
-
-    Private Sub DBUpdate_ProgressChanged(Progress As IUploadProgress)
-        Control.CheckForIllegalCrossThreadCalls = False
-        uBytesUploaded = Progress.BytesSent
-        uUploadStatus = Progress.Status
-        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
-        bgwUpdateOnlineDatabase.ReportProgress(percent)
-    End Sub
 #End Region
 
 
@@ -18823,7 +18478,7 @@ errhandler:
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
             Exit Sub
         End If
-        If Not blCheckAutoBackup Then TakeAutoOnlineBackup()
+
         FileOwner = ShortOfficeName & "_" & ShortDistrictName
         LocalAdmin = False
         SuperAdmin = False
@@ -18935,31 +18590,35 @@ errhandler:
         SavePSDatagridColumnOrder()
         SaveIDRDatagridColumnOrder()
 
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoBackupTime", Me.txtAutoBackupPeriod.TextBox.Text, Microsoft.Win32.RegistryValueKind.String)
 
-        Dim strOnlineBackupSettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\OnlineBackupSettings"
-        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "FullDistrictName", FullDistrictName, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "AutoBackupTime", Me.txtAutoBackupPeriod.TextBox.Text, Microsoft.Win32.RegistryValueKind.String)
+
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "FullDistrictName", FullDistrictName, Microsoft.Win32.RegistryValueKind.String)
 
         Dim LastModifiedDate As String = GetLastModificationDate().ToString("dd-MM-yyyy HH:mm:ss")
 
-        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "LastModifiedDate", LastModifiedDate, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModifiedDate", LastModifiedDate, Microsoft.Win32.RegistryValueKind.String)
 
         FindLastSOCNumberDICount()
 
-        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "LocalSOCRecordCount", LocalSOCRecordCount, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "LocalSOCRecordCount", LocalSOCRecordCount, Microsoft.Win32.RegistryValueKind.String)
 
         Dim FileOwner As String = ShortOfficeName & "_" & ShortDistrictName
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "FileOwner", FileOwner, Microsoft.Win32.RegistryValueKind.String)
 
         Dim BackupDescription As String = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
 
-        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "BackupDescription", BackupDescription, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "BackupDescription", BackupDescription, Microsoft.Win32.RegistryValueKind.String)
 
         SaveQuicktoolbarSettings()
         objMutex.Close()
         objMutex = Nothing
         If blRestartApplication Then
             Process.Start(strAppPath & "\RestartFIS.exe")
+        Else
+            Process.Start(strAppPath & "\BackupDatabase.exe")
         End If
+
         Me.Dispose()
         End
     End Sub

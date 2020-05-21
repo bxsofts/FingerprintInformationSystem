@@ -20,6 +20,7 @@ Module modMain
     Public strAppName As String = "Fingerprint Information System"
     Public strRegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System"
     Public strGeneralSettingsPath As String = strRegistrySettingsPath & "\General Settings"
+    Public strBackupSettingsPath As String = strRegistrySettingsPath & "\BackupSettings"
     Public strAppUserPath As String = FileIO.SpecialDirectories.MyDocuments & "\BXSofts\Fingerprint Information System"
     Public strAppPath As String = My.Application.Info.DirectoryPath
     Public strDatabaseFile As String = vbNullString

@@ -112,7 +112,7 @@ Source: .\Fonts\Rupee_Foradian.ttf; DestDir: {fonts}; Flags: onlyifdoesntexist u
 Source: .\Fonts\Keralite.ttf; DestDir: {fonts}; Flags: onlyifdoesntexist uninsneveruninstall; FontInstall: Keralite
 
 Source: ..\Fingerprint Information System\bin\Release\*; DestDir: {app}\; Flags: ignoreversion
-
+Source: ..\BackupDatabase\bin\Debug\BackupDatabase.exe; DestDir: {app}\; Flags: ignoreversion
 
 Source: .\WordTemplates\*.docx; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
 Source: .\WordTemplates\ModusOperandi-PreDefined.txt; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: ignoreversion
@@ -178,9 +178,8 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: UpdateNullFields; ValueData: 1; Flags: noerror uninsdeletekey
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: HideFields; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: HighLightColor; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoBackup; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: AutoBackupTime; ValueData: 15; Flags: noerror uninsdeletekey  createvalueifdoesntexist
-Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: RenameOldBackupFiles; ValueData: 1; Flags: noerror uninsdeletekey
+Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\BackupSettings; ValueType: string; ValueName: AutoBackup; ValueData: 1; Flags: noerror uninsdeletekey  createvalueifdoesntexist
+Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\BackupSettings; ValueType: string; ValueName: AutoBackupTime; ValueData: 15; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\TabColorSettings; ValueType: string; ValueName: TabStyle; ValueData: 9; Flags: noerror uninsdeletekey createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: ShowNewVersionInfo; ValueData: 1; Flags: noerror uninsdeletekey
 [Run]

@@ -389,7 +389,7 @@ Public Class frmOnlineBackup
 
     Private Sub RenameUserBackupFolderName(UserBackupFolderID As String)
         Try
-            Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
+            Dim request As New Google.Apis.Drive.v3.Data.File
             request.Name = FullDistrictName
             request.Description = FileOwner
             FISService.Files.Update(request, UserBackupFolderID).Execute()

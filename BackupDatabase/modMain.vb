@@ -1,26 +1,59 @@
-﻿Imports System.Threading
-Imports System.Threading.Tasks
-Imports System.IO
-
-Imports Google
+﻿Imports Google
 Imports Google.Apis.Auth.OAuth2
 Imports Google.Apis.Drive.v3
 Imports Google.Apis.Drive.v3.Data
 Imports Google.Apis.Services
-Imports Google.Apis.Download
 Imports Google.Apis.Upload
 Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
 Module Sub_Main
+    Dim strAppName As String = "Fingerprint Information System"
+    Dim strBackupSettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\BackupSettings"
+    Dim JsonPath As String = ""
+    Dim FISService As DriveService = New DriveService
 
-    Dim strOnlineBackupSettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\OnlineBackupSettings"
+    Dim UserBackupFolderName As String = ""
+    Dim MasterBackupFolderID As String = ""
+    Dim UserBackupFolderID As String = ""
+    Dim FileOwner As String = ""
+    Dim uUploadStatus As UploadStatus
+    Dim AutoBackupPeriod As Integer = 15
+    Dim BackupDescription As String = ""
     Sub Main()
         Try
-            Dim blUpdateOnlineDB As Boolean = CBool(My.Computer.Registry.GetValue(strOnlineBackupSettingsPath, "UpdateOnlineDB", 1))
-            If blUpdateOnlineDB Then
-                UpdateOnlineDatabase()
+            If Not InternetAvailable() Then
+                Exit Sub
             End If
+
+            JsonPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) & "\Fingerprint Information System\FISServiceAccount.json"
+
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then Exit Sub
+
+            UserBackupFolderName = My.Computer.Registry.GetValue(strBackupSettingsPath, "FullDistrictName", "")
+            FileOwner = My.Computer.Registry.GetValue(strBackupSettingsPath, "FileOwner", "")
+            If UserBackupFolderName = "" Then Exit Sub
+            If FileOwner = "" Then Exit Sub
+
+            BackupDescription = My.Computer.Registry.GetValue(strBackupSettingsPath, "BackupDescription", "")
+
+            If BackupDescription = "" Then Exit Sub
+
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            UpdateOnlineDatabase()
+
+            Dim blAutoBackup As Boolean = CBool(My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackup", 1))
+            If Not blAutoBackup Then Exit Sub
+
+            AutoBackupPeriod = CInt(My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackupTime", 15))
+            If AutoBackupPeriod = 0 Then Exit Sub
+
+            TakePeriodicBackup()
+
         Catch ex As Exception
 
         End Try
@@ -40,7 +73,7 @@ Module Sub_Main
         End If
     End Function
 
-    Private Function GetMasterBackupFolderID(FISService As DriveService) As String
+    Private Sub GetMasterBackupFolderID(FISService As DriveService)
         Try
             Dim id As String = ""
             Dim List = FISService.Files.List()
@@ -52,56 +85,84 @@ Module Sub_Main
 
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
-                id = ""
+                MasterBackupFolderID = ""
             Else
-                id = Results.Files(0).Id
+                MasterBackupFolderID = Results.Files(0).Id
             End If
 
-            Return id
+
         Catch ex As Exception
-            ' ShowErrorMessage(ex)
-            Return ""
+
+            MasterBackupFolderID = ""
         End Try
-    End Function
+    End Sub
+
+    Private Sub CreateUserBackupFolder(FISService As DriveService, BackupFolderName As String)
+        Try
+
+            Dim parentlist As New List(Of String)
+            parentlist.Add(MasterBackupFolderID)
+
+            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+            NewDirectory.Name = BackupFolderName
+            NewDirectory.Parents = parentlist
+            NewDirectory.MimeType = "application/vnd.google-apps.folder"
+            NewDirectory.Description = FileOwner '
+            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
+            NewDirectory = request.Execute()
+
+            UserBackupFolderID = NewDirectory.Id
+        Catch ex As Exception
+            UserBackupFolderID = ""
+        End Try
+
+    End Sub
+
+    Private Sub RenameUserBackupFolderName(UserBackupFolderID As String)
+        Try
+            Dim request As New Google.Apis.Drive.v3.Data.File
+            request.Name = UserBackupFolderName ' FullDistrictName
+            request.Description = FileOwner
+            FISService.Files.Update(request, UserBackupFolderID).Execute()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Private Sub UpdateOnlineDatabase()
 
         Try
-            If Not InternetAvailable() Then
-                Exit Sub
-            End If
-
-            Dim JsonPath As String = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) & "\Fingerprint Information System\FISServiceAccount.json"
-
-            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
-                Exit Sub
-            End If
-
-          
-            Dim UserBackupFolderName As String = My.Computer.Registry.GetValue(strOnlineBackupSettingsPath, "FullDistrictName", "")
-            If UserBackupFolderName = "" Then Exit Sub
-
-            Dim FISService As DriveService = New DriveService
-            Dim Scopes As String() = {DriveService.Scope.Drive}
-
-            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
-            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = "Fingerprint Information System"})
 
             Dim List = FISService.Files.List()
-            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
+
+            GetMasterBackupFolderID(FISService)
+
             If MasterBackupFolderID = "" Then Exit Sub
 
             List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
-            Dim UserBackupFolderID As String = ""
             Dim cnt = Results.Files.Count
+
             If cnt = 0 Then
-                Exit Sub
+                List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FileOwner & "' and '" & MasterBackupFolderID & "' in parents"
+                List.Fields = "files(id)"
+                Results = List.Execute
+                cnt = Results.Files.Count
+
+                If cnt = 0 Then
+                    CreateUserBackupFolder(FISService, UserBackupFolderName)
+                Else
+                    UserBackupFolderID = Results.Files(0).Id
+                    RenameUserBackupFolderName(UserBackupFolderID)
+                End If
+
             Else
                 UserBackupFolderID = Results.Files(0).Id
             End If
+
+            If UserBackupFolderID = "" Then Exit Sub
 
             List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name = 'FingerPrintDB.mdb'"
 
@@ -121,12 +182,12 @@ Module Sub_Main
             End If
 
 
-            Dim strlastlocalmodified As String = My.Computer.Registry.GetValue(strOnlineBackupSettingsPath, "LastModifiedDate", "")
+            Dim strlastlocalmodified As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "LastModifiedDate", "")
             If strlastlocalmodified = "" Then Exit Sub
 
             Dim dtlastlocalmodified As Date = DateTime.ParseExact(strlastlocalmodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
 
-            Dim LocalSOCRecordCount As Integer = CInt(My.Computer.Registry.GetValue(strOnlineBackupSettingsPath, "LocalSOCRecordCount", 0))
+            Dim LocalSOCRecordCount As Integer = CInt(My.Computer.Registry.GetValue(strBackupSettingsPath, "LocalSOCRecordCount", 0))
 
             If LocalSOCRecordCount = 0 Then Exit Sub
 
@@ -164,27 +225,23 @@ Module Sub_Main
                 End If
             End If
 
-            ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
+            Dim strDatabaseFile As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\General Settings", "DatabaseFile", "")
+            If strDatabaseFile = "" Then Exit Sub
 
-            Dim BackupTime As Date = Now
-            Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
+            System.Threading.Thread.Sleep(5000)
+
             Dim BackupFileName As String = "FingerPrintDB.mdb"
-            Dim BackupDescription As String = My.Computer.Registry.GetValue(strOnlineBackupSettingsPath, "BackupDescription", "")
-            If BackupDescription = "" Then Exit Sub
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
             body.Description = BackupDescription
 
             body.MimeType = "database/mdb"
-            Dim strDatabaseFile As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\General Settings", "DatabaseFile", "")
-            If strDatabaseFile = "" Then Exit Sub
 
-            Dim tmpFileName As String = My.Computer.FileSystem.GetTempFileName
-            My.Computer.FileSystem.CopyFile(strDatabaseFile, tmpFileName, True)
-
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(tmpFileName)
+            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(strDatabaseFile)
             Dim Stream As New System.IO.MemoryStream(ByteArray)
+            Dim BackupTime As Date
+            Dim file As Google.Apis.Drive.v3.Data.File
 
             If Results.Files.Count = 0 Then
                 Dim parentlist As New List(Of String)
@@ -192,20 +249,124 @@ Module Sub_Main
                 body.Parents = parentlist
                 Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
                 UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                '  AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
-                UploadRequest.Fields = "id"
+                AddHandler UploadRequest.ProgressChanged, AddressOf DBUpload_ProgressChanged
+                UploadRequest.Fields = "id, modifiedTime"
                 UploadRequest.Upload()
+                file = UploadRequest.ResponseBody
+                BackupTime = file.ModifiedTime
             Else
                 Dim RemoteFileID As String = Results.Files(0).Id
                 Dim UpdateRequest As FilesResource.UpdateMediaUpload = FISService.Files.Update(body, RemoteFileID, Stream, body.MimeType)
                 UpdateRequest.ChunkSize = ResumableUpload.MinimumChunkSize
-                '  AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
-                UpdateRequest.Fields = "id"
+                AddHandler UpdateRequest.ProgressChanged, AddressOf DBUpdate_ProgressChanged
+                UpdateRequest.Fields = "id, modifiedTime"
                 UpdateRequest.Upload()
+                file = UpdateRequest.ResponseBody
+                BackupTime = file.ModifiedTime
             End If
             Stream.Close()
+
+            Dim sBackupTime As String = BackupTime.ToString("dd-MM-yyyy HH:mm:ss")
+
+            If uUploadStatus = UploadStatus.Completed Then
+                My.Computer.Registry.SetValue(strBackupSettingsPath, "LastOnlineUpdate", sBackupTime & "; Success", Microsoft.Win32.RegistryValueKind.String)
+            End If
+
+            If uUploadStatus = UploadStatus.Failed Then
+                My.Computer.Registry.SetValue(strBackupSettingsPath, "LastOnlineUpdate", sBackupTime & "; Failed", Microsoft.Win32.RegistryValueKind.String)
+            End If
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
         End Try
     End Sub
+
+    Private Sub DBUpload_ProgressChanged(Progress As IUploadProgress)
+        On Error Resume Next
+        uUploadStatus = Progress.Status
+    End Sub
+
+    Private Sub DBUpdate_ProgressChanged(Progress As IUploadProgress)
+        On Error Resume Next
+        uUploadStatus = Progress.Status
+    End Sub
+
+    Private Sub TakePeriodicBackup()
+
+        Try
+            If MasterBackupFolderID = "" Then Exit Sub
+            If UserBackupFolderID = "" Then Exit Sub
+
+            Dim List = FISService.Files.List()
+            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name contains 'FingerprintBackup'"
+
+            List.Fields = "files(id, modifiedTime)"
+            List.OrderBy = "createdTime desc"
+            Dim Results = List.Execute
+
+            Dim blTakeBackup As Boolean = False
+
+            If Results.Files.Count = 0 Then blTakeBackup = True
+
+            Dim lastbackupdate As Date = Now
+            If Results.Files.Count > 0 Then
+                lastbackupdate = Results.Files(0).ModifiedTime
+            End If
+
+
+            Dim dt As Date = lastbackupdate.AddDays(AutoBackupPeriod)
+            Dim BackupTime As Date = Now
+
+            If Now.Date >= dt.Date Or blTakeBackup Then
+
+                Dim strDatabaseFile As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\General Settings", "DatabaseFile", "")
+                If strDatabaseFile = "" Then Exit Sub
+
+                System.Threading.Thread.Sleep(5000)
+
+                Dim d As String = Strings.Format(BackupTime, "yyyy-MM-dd HH-mm-ss")
+                Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+
+                Dim body As New Google.Apis.Drive.v3.Data.File()
+                body.Name = BackupFileName
+                body.Description = BackupDescription
+                body.MimeType = "database/mdb"
+
+                Dim parentlist As New List(Of String)
+                parentlist.Add(UserBackupFolderID)
+                body.Parents = parentlist
+
+                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(strDatabaseFile)
+                Dim Stream As New System.IO.MemoryStream(ByteArray)
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+                UploadRequest.Fields = "id, modifiedTime"
+                UploadRequest.Upload()
+                Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
+                BackupTime = file.ModifiedTime
+                Stream.Close()
+            Else
+                Exit Sub
+            End If
+
+            Dim sBackupTime As String = BackupTime.ToString("dd-MM-yyyy HH:mm:ss")
+
+            If uUploadStatus = UploadStatus.Completed Then
+                My.Computer.Registry.SetValue(strBackupSettingsPath, "LastPeriodicOnlineBackup", sBackupTime & "; Success", Microsoft.Win32.RegistryValueKind.String)
+            End If
+
+            If uUploadStatus = UploadStatus.Failed Then
+                My.Computer.Registry.SetValue(strBackupSettingsPath, "LastPeriodicOnlineBackup", sBackupTime & "; Failed", Microsoft.Win32.RegistryValueKind.String)
+            End If
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
+        On Error Resume Next
+        uUploadStatus = Progress.Status
+    End Sub
+
 End Module

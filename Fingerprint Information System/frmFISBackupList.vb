@@ -1514,7 +1514,7 @@ Public Class frmFISBackupList
         Dim Header As String = ""
         If SuperAdmin Then Header = "Super Admin"
         If LocalAdmin Then Header = "Local Admin"
-        If LocalUser Then Header = FileOwner
+        If LocalUser Then Header = ShortOfficeName & ", " & FullDistrictName
         Me.Text = "FIS Online File List - " & Header
         Me.TitleText = "<b>FIS Online File List - " & Header & "</b>"
 

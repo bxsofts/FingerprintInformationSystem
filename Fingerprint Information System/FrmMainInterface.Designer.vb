@@ -1052,7 +1052,6 @@ Partial Class frmMainInterface
         Me.ButtonItem29 = New DevComponents.DotNetBar.ButtonItem()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Highlighter1 = New DevComponents.DotNetBar.Validator.Highlighter()
-        Me.bgwOnlineAutoBackup = New System.ComponentModel.BackgroundWorker()
         Me.StyleManager1 = New DevComponents.DotNetBar.StyleManager(Me.components)
         Me.SOCNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SOCYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1126,7 +1125,6 @@ Partial Class frmMainInterface
         Me.CulpritsRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CulpritsRegisterTableAdapter()
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         Me.SSTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SupportingStaffTableAdapter()
-        Me.bgwUpdateOnlineDatabase = New System.ComponentModel.BackgroundWorker()
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
@@ -13703,11 +13701,6 @@ Partial Class frmMainInterface
         Me.Highlighter1.ContainerControl = Me.PanelSOC
         Me.Highlighter1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F"
         '
-        'bgwOnlineAutoBackup
-        '
-        Me.bgwOnlineAutoBackup.WorkerReportsProgress = true
-        Me.bgwOnlineAutoBackup.WorkerSupportsCancellation = true
-        '
         'StyleManager1
         '
         Me.StyleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2016
@@ -14194,11 +14187,6 @@ Partial Class frmMainInterface
         'SSTableAdapter1
         '
         Me.SSTableAdapter1.ClearBeforeFill = true
-        '
-        'bgwUpdateOnlineDatabase
-        '
-        Me.bgwUpdateOnlineDatabase.WorkerReportsProgress = true
-        Me.bgwUpdateOnlineDatabase.WorkerSupportsCancellation = true
         '
         'bgwCleanOnlineFiles
         '
@@ -15135,7 +15123,6 @@ End Sub
     Friend WithEvents btnSettingsWizard As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenRegedit As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenTemplatesFolder As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents bgwOnlineAutoBackup As System.ComponentModel.BackgroundWorker
     Friend WithEvents ItemContainer15 As DevComponents.DotNetBar.ItemContainer
     Friend WithEvents ColorPickerEvenRecords As DevComponents.DotNetBar.ColorPickerDropDown
     Friend WithEvents ColorPickerOddRecords As DevComponents.DotNetBar.ColorPickerDropDown
@@ -15319,7 +15306,6 @@ End Sub
     Friend WithEvents btnFixDBTables As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenErrorLog As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnAnnualPerformance As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents bgwUpdateOnlineDatabase As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnShowGraveCrimes As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnCopyDBtoUSB As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents IdentificationNumberDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
