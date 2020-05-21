@@ -17889,7 +17889,6 @@ errhandler:
 
             List.Fields = "files(id, description)"
             Results = List.Execute
-            Dim blTakeBackup As Boolean = False
 
             Dim RemoteSOCRecordCount As Integer = 0
             Dim description As String = ""
@@ -17945,7 +17944,6 @@ errhandler:
             ' bgwUpdateOnlineDatabase.ReportProgress(0, True)
 
             Dim BackupTime As Date = Now
-            Dim d As String = Strings.Format(BackupTime, BackupDateFormatString)
             Dim sBackupTime = Strings.Format(BackupTime, "dd-MM-yyyy HH:mm:ss")
             Dim BackupFileName As String = "FingerPrintDB.mdb"
 
@@ -17989,18 +17987,6 @@ errhandler:
         End Try
     End Sub
 
-    Private Sub bgwOnlineUpdateDatabase_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) ' Handles bgwUpdateOnlineDatabase.ProgressChanged
-
-        If TypeOf e.UserState Is Boolean Then
-            pgrDownloadInstaller.Visible = True
-            pgrDownloadInstaller.Value = 0
-            pgrDownloadInstaller.Text = "Uploading Database 0%"
-            Me.StatusBar.RecalcLayout()
-        Else
-            Me.pgrDownloadInstaller.Value = e.ProgressPercentage
-            Me.pgrDownloadInstaller.Text = "Uploading Database " & e.ProgressPercentage & "% " & CalculateFileSize(uBytesUploaded) & " / " & dFormatedFileSize
-        End If
-    End Sub
     Private Sub DBUpload_ProgressChanged(Progress As IUploadProgress)
         Control.CheckForIllegalCrossThreadCalls = False
         uBytesUploaded = Progress.BytesSent
@@ -18950,6 +18936,23 @@ errhandler:
         SaveIDRDatagridColumnOrder()
 
         My.Computer.Registry.SetValue(strGeneralSettingsPath, "AutoBackupTime", Me.txtAutoBackupPeriod.TextBox.Text, Microsoft.Win32.RegistryValueKind.String)
+
+        Dim strOnlineBackupSettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\OnlineBackupSettings"
+        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "FullDistrictName", FullDistrictName, Microsoft.Win32.RegistryValueKind.String)
+
+        Dim LastModifiedDate As String = GetLastModificationDate().ToString("dd-MM-yyyy HH:mm:ss")
+
+        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "LastModifiedDate", LastModifiedDate, Microsoft.Win32.RegistryValueKind.String)
+
+        FindLastSOCNumberDICount()
+
+        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "LocalSOCRecordCount", LocalSOCRecordCount, Microsoft.Win32.RegistryValueKind.String)
+
+        Dim FileOwner As String = ShortOfficeName & "_" & ShortDistrictName
+
+        Dim BackupDescription As String = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
+
+        My.Computer.Registry.SetValue(strOnlineBackupSettingsPath, "BackupDescription", BackupDescription, Microsoft.Win32.RegistryValueKind.String)
 
         SaveQuicktoolbarSettings()
         objMutex.Close()
