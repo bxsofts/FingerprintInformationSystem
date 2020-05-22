@@ -895,15 +895,33 @@ Public Class frmWeeklyDiaryDE
         Me.Cursor = Cursors.Default
     End Sub
     Private Sub TakeAutoBackup() Handles Me.FormClosed
-        ' bgwAutoUpload.RunWorkerAsync()
 
         Try
+            Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+
+            Dim WDDS = New WeeklyDiaryDataSet
+
+            Me.WeeklyDiaryTableAdapter1.FillByLastDate(WDDS.WeeklyDiary)
+            Dim lastdate As String = ""
+            If WDDS.WeeklyDiary.Count > 0 Then
+                Dim dtlast As Date = WDDS.WeeklyDiary(0).DiaryDate
+                dtlast = dtlast.AddDays(-6)
+                lastdate = dtlast.ToString("dd/MM/yyyy", TimeFormatCulture)
+            End If
+
+            Dim fDescription As String = wdOfficerName & " - " & localcount
+            If lastdate <> "" Then
+                fDescription = wdOfficerName & " - " & localcount & " - " & lastdate
+            End If
+
             If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
 
             If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
 
             If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
-            GC.Collect()
+            ' GC.Collect()
+            bgwAutoUpload.RunWorkerAsync(fDescription)
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -921,7 +939,9 @@ Public Class frmWeeklyDiaryDE
                 Exit Sub
             End If
 
-            Dim localcount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount()
+            Dim fDescription As String = e.Argument
+            Dim SplitfDescription() = Strings.Split(fDescription, " - ")
+            Dim localcount As Integer = SplitfDescription(1)
 
             Dim FISService As DriveService = New DriveService
             Dim Scopes As String() = {DriveService.Scope.Drive}
@@ -969,21 +989,6 @@ Public Class frmWeeklyDiaryDE
 
             If remotecount >= localcount Then
                 Exit Sub
-            End If
-
-            Dim WDDS = New WeeklyDiaryDataSet
-
-            Me.WeeklyDiaryTableAdapter1.FillByLastDate(WDDS.WeeklyDiary)
-            Dim lastdate As String = ""
-            If WDDS.WeeklyDiary.Count > 0 Then
-                Dim dtlast As Date = WDDS.WeeklyDiary(0).DiaryDate
-                dtlast = dtlast.AddDays(-6)
-                lastdate = dtlast.ToString("dd/MM/yyyy", TimeFormatCulture)
-            End If
-
-            Dim fDescription As String = wdOfficerName & " - " & localcount
-            If lastdate <> "" Then
-                fDescription = wdOfficerName & " - " & localcount & " - " & lastdate
             End If
 
             blShowUploadStatus = False
