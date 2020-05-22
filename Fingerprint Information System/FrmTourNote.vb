@@ -79,6 +79,15 @@ Public Class FrmTourNote
 
 #Region "FORM LOAD AND UNLOAD EVENTS"
 
+    Private Sub FrmTourNote_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        Try
+            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+            GC.Collect()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Sub FrmTourNote_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If cprgBackup.Visible Then
             MessageBoxEx.Show("File upload is in progress. Upload will continue in the background.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -324,7 +333,7 @@ Public Class FrmTourNote
         End Try
     End Sub
 
-   
+
 #End Region
 
 

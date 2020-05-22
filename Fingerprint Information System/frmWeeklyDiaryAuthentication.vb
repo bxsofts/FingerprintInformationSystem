@@ -18,6 +18,17 @@ Public Class frmWeeklyDiaryAuthentication
     Public dDownloadStatus As DownloadStatus
     Public dFileSize As Long
 
+    Private Sub frmWeeklyDiaryAuthentication_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Try
+            If Me.AuthenticationTableAdapter1.Connection.State = ConnectionState.Open Then Me.AuthenticationTableAdapter1.Connection.Close()
+
+            If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
+            GC.Collect()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 
 
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load

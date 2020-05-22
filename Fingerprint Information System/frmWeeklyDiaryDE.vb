@@ -895,7 +895,19 @@ Public Class frmWeeklyDiaryDE
         Me.Cursor = Cursors.Default
     End Sub
     Private Sub TakeAutoBackup() Handles Me.FormClosed
-        bgwAutoUpload.RunWorkerAsync()
+        ' bgwAutoUpload.RunWorkerAsync()
+
+        Try
+            If Me.WeeklyDiaryTableAdapter1.Connection.State = ConnectionState.Open Then Me.WeeklyDiaryTableAdapter1.Connection.Close()
+
+            If Me.PersonalDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.PersonalDetailsTableAdapter1.Connection.Close()
+
+            If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
+            GC.Collect()
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
     End Sub
 
     Private Sub bgwAutoUpload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAutoUpload.DoWork
