@@ -10,6 +10,7 @@ Imports Google.Apis.Requests
 Module Sub_Main
     Dim strAppName As String = "Fingerprint Information System"
     Dim strBackupSettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\BackupSettings"
+    Dim strGeneralSettingsPath As String = "HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\General Settings"
     Dim JsonPath As String = ""
     Dim FISService As DriveService = New DriveService
 
@@ -20,11 +21,15 @@ Module Sub_Main
     Dim uUploadStatus As UploadStatus
     Dim AutoBackupPeriod As Integer = 15
     Dim BackupDescription As String = ""
+    Dim strDatabaseFile As String = ""
+
+
     Sub Main()
         Try
-            If Not InternetAvailable() Then
-                Exit Sub
-            End If
+            If Not InternetAvailable() Then Exit Sub
+
+            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", "")
+            If strDatabaseFile = "" Then Exit Sub
 
             JsonPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) & "\Fingerprint Information System\FISServiceAccount.json"
 
@@ -52,7 +57,10 @@ Module Sub_Main
             AutoBackupPeriod = CInt(My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackupTime", 15))
             If AutoBackupPeriod = 0 Then Exit Sub
 
-            TakePeriodicBackup()
+            TakePeriodicOnlineBackup()
+
+            System.Threading.Thread.Sleep(5000)
+            TakePeriodicLocalBackup()
 
         Catch ex As Exception
 
@@ -128,6 +136,9 @@ Module Sub_Main
 
         End Try
     End Sub
+
+
+#Region "UPDATE ONLINE DATABASE"
 
     Private Sub UpdateOnlineDatabase()
 
@@ -225,9 +236,6 @@ Module Sub_Main
                 End If
             End If
 
-            Dim strDatabaseFile As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\General Settings", "DatabaseFile", "")
-            If strDatabaseFile = "" Then Exit Sub
-
             System.Threading.Thread.Sleep(5000)
 
             Dim BackupFileName As String = "FingerPrintDB.mdb"
@@ -290,7 +298,12 @@ Module Sub_Main
         uUploadStatus = Progress.Status
     End Sub
 
-    Private Sub TakePeriodicBackup()
+#End Region
+
+
+#Region "PERIODIC ONLINE DATABASE BACKUP"
+
+    Private Sub TakePeriodicOnlineBackup()
 
         Try
             If MasterBackupFolderID = "" Then Exit Sub
@@ -317,9 +330,6 @@ Module Sub_Main
             Dim BackupTime As Date = Now
 
             If Now.Date >= dt.Date Or blTakeBackup Then
-
-                Dim strDatabaseFile As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\BXSofts\Fingerprint Information System\General Settings", "DatabaseFile", "")
-                If strDatabaseFile = "" Then Exit Sub
 
                 System.Threading.Thread.Sleep(5000)
 
@@ -368,5 +378,53 @@ Module Sub_Main
         On Error Resume Next
         uUploadStatus = Progress.Status
     End Sub
+
+#End Region
+
+
+#Region "PERIODIC LOCAL DATABASE BACKUP"
+    Private Sub TakePeriodicLocalBackup()
+        Try
+            Dim blTakeBackup As Boolean = False
+
+            Dim lastbackupdate As Date = Now
+
+            Dim strlastbackupdate As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", "")
+
+            If strlastbackupdate = "" Then
+                blTakeBackup = True
+            Else
+                lastbackupdate = DateTime.ParseExact(strlastbackupdate, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+            End If
+
+            Dim dt As Date = lastbackupdate.AddDays(AutoBackupPeriod)
+
+            If Now >= dt Or blTakeBackup Then
+
+                Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", "")
+
+                If Destination = "" Then Exit Sub
+
+                If My.Computer.FileSystem.DirectoryExists(Destination) = False Then
+                    My.Computer.FileSystem.CreateDirectory(Destination)
+                End If
+
+                If Strings.Right(Destination, 1) <> "\" Then Destination = Destination & "\"
+                Dim backuptime As Date = Now
+                Dim d As String = Strings.Format(backuptime, "yyyy-MM-dd HH-mm-ss")
+                Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
+
+                Destination = Destination & BackupFileName
+                My.Computer.FileSystem.CopyFile(strDatabaseFile, Destination, True)
+                My.Computer.Registry.SetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", backuptime.ToString("dd-MM-yyyy HH:mm:ss"), Microsoft.Win32.RegistryValueKind.String)
+
+            End If
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+#End Region
+
 
 End Module

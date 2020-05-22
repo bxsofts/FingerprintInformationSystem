@@ -394,8 +394,15 @@ Public Class frmMainInterface
             IncrementCircularProgress(1)
 
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackup", 1)
-            Dim autobackuptime As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackupTime", 15)
-            Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "15", autobackuptime)
+            Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "AutoBackupTime")
+            Dim count As Integer = Me.FingerPrintDataSet.CommonSettings.Count
+            If count = 1 Then
+                Dim autobackuptime As String = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
+                Me.txtAutoBackupPeriod.TextBox.Text = IIf(autobackuptime = "", "15", autobackuptime)
+            Else
+                Me.txtAutoBackupPeriod.TextBox.Text = "15"
+            End If
+           
         End If
 
 
@@ -464,8 +471,6 @@ Public Class frmMainInterface
 
         CopyCredentialFiles()
 
-        If Me.chkTakeAutoBackup.Checked Then TakeAutoLocalBackup()
-       
         bgwCleanOnlineFiles.RunWorkerAsync()
 
         ShowNewVersionInstalledInfo()
@@ -17465,51 +17470,7 @@ errhandler:
 
     '---------------------------------------------BACKUP DATABASE MANIPULATION-----------------------------------
 
-#Region "LOCAL AUTO BACKUP"
-    Private Sub TakeAutoLocalBackup()
-        On Error Resume Next
-
-        Dim backupperiod As Integer = Val(Me.txtAutoBackupPeriod.TextBox.Text)
-        If backupperiod = 0 Then Exit Sub
-
-
-        Dim blTakeBackup As Boolean = False
-
-        Dim lastbackupdate As Date = Now
-
-        Dim strlastbackupdate As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", "")
-
-        If strlastbackupdate = "" Then
-            blTakeBackup = True
-        Else
-            lastbackupdate = DateTime.ParseExact(strlastbackupdate, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
-        End If
-
-        Dim dt As Date = lastbackupdate.AddDays(backupperiod)
-
-        If Now >= dt Or blTakeBackup Then
-
-            Dim Source As String = strDatabaseFile
-
-            Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups")
-
-            My.Computer.Registry.SetValue(strGeneralSettingsPath, "BackupPath", Destination, Microsoft.Win32.RegistryValueKind.String)
-
-            If My.Computer.FileSystem.DirectoryExists(Destination) = False Then
-                My.Computer.FileSystem.CreateDirectory(Destination)
-            End If
-
-            If Strings.Right(Destination, 1) <> "\" Then Destination = Destination & "\"
-            Dim d As String = Strings.Format(Now, BackupDateFormatString)
-            Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
-
-            Destination = Destination & BackupFileName
-            My.Computer.FileSystem.CopyFile(Source, Destination, True) ', FileIO.UIOption.AllDialogs, FileIO.UICancelOption.ThrowException)
-            My.Computer.Registry.SetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", Now.ToString("dd-MM-yyyy HH:mm:ss"), Microsoft.Win32.RegistryValueKind.String)
-
-        End If
-
-    End Sub
+#Region "LOCAL AUTO BACKUP LOCATION"
 
     Private Sub SetBackupPath(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeBackupFolder.Click
         Try
@@ -17554,7 +17515,7 @@ errhandler:
 #End Region
 
 
-#Region "ONLINE AUTO BACKUP"
+#Region "ONLINE CREDENTIALS AND FOLDER ID"
 
     Private Sub CopyCredentialFiles()
         Try
@@ -17662,8 +17623,7 @@ errhandler:
 #End Region
 
 
-#Region "LOCAL AND ONLINE BACKUP AND RESTORE DATABASE"
-
+#Region "MANUAL LOCAL AND ONLINE BACKUP AND RESTORE DATABASE"
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
 
@@ -18590,8 +18550,16 @@ errhandler:
         SavePSDatagridColumnOrder()
         SaveIDRDatagridColumnOrder()
 
+        Dim AutoBackupTime As String = Me.txtAutoBackupPeriod.TextBox.Text.Trim
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "AutoBackupTime", AutoBackupTime, Microsoft.Win32.RegistryValueKind.String)
 
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "AutoBackupTime", Me.txtAutoBackupPeriod.TextBox.Text, Microsoft.Win32.RegistryValueKind.String)
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "AutoBackupTime")
+        Dim count As Integer = Me.FingerPrintDataSet.CommonSettings.Count
+        If count = 1 Then
+            Me.CommonSettingsTableAdapter1.UpdateQuery(AutoBackupTime, "", "AutoBackupTime")
+        Else
+            Me.CommonSettingsTableAdapter1.Insert("AutoBackupTime", AutoBackupTime, "")
+        End If
 
         My.Computer.Registry.SetValue(strBackupSettingsPath, "FullDistrictName", FullDistrictName, Microsoft.Win32.RegistryValueKind.String)
 
