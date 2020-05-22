@@ -385,39 +385,41 @@ Module Sub_Main
 #Region "PERIODIC LOCAL DATABASE BACKUP"
     Private Sub TakePeriodicLocalBackup()
         Try
-            Dim blTakeBackup As Boolean = False
+            Dim DestinationFolder As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", "")
 
-            Dim lastbackupdate As Date = Now
+            If DestinationFolder = "" Then Exit Sub
 
-            Dim strlastbackupdate As String = My.Computer.Registry.GetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", "")
-
-            If strlastbackupdate = "" Then
-                blTakeBackup = True
-            Else
-                lastbackupdate = DateTime.ParseExact(strlastbackupdate, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+            If My.Computer.FileSystem.DirectoryExists(DestinationFolder) = False Then
+                My.Computer.FileSystem.CreateDirectory(DestinationFolder)
             End If
 
-            Dim dt As Date = lastbackupdate.AddDays(AutoBackupPeriod)
+            Dim blTakeBackup As Boolean = False
+
+            Dim dir = New System.IO.DirectoryInfo(DestinationFolder)
+            Dim file = dir.EnumerateFiles("*.mdb").OrderByDescending(Function(f) f.Name).FirstOrDefault()
+            Dim filename As String = ""
+            Dim dt As Date = Now
+            If file Is Nothing Then
+                blTakeBackup = True
+            Else
+                filename = file.Name
+                filename = filename.Replace("FingerPrintBackup-", "")
+                filename = filename.Replace(".mdb", "")
+                Dim lastbackupdate As Date = DateTime.ParseExact(filename, "yyyy-MM-dd HH-mm-ss", System.Globalization.CultureInfo.InvariantCulture)
+
+                dt = lastbackupdate.AddDays(AutoBackupPeriod)
+            End If
 
             If Now >= dt Or blTakeBackup Then
 
-                Dim Destination As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", "")
-
-                If Destination = "" Then Exit Sub
-
-                If My.Computer.FileSystem.DirectoryExists(Destination) = False Then
-                    My.Computer.FileSystem.CreateDirectory(Destination)
-                End If
-
-                If Strings.Right(Destination, 1) <> "\" Then Destination = Destination & "\"
                 Dim backuptime As Date = Now
                 Dim d As String = Strings.Format(backuptime, "yyyy-MM-dd HH-mm-ss")
                 Dim BackupFileName As String = "FingerPrintBackup-" & d & ".mdb"
 
-                Destination = Destination & BackupFileName
-                My.Computer.FileSystem.CopyFile(strDatabaseFile, Destination, True)
-                My.Computer.Registry.SetValue(strBackupSettingsPath, "LastPeriodicLocalBackup", backuptime.ToString("dd-MM-yyyy HH:mm:ss"), Microsoft.Win32.RegistryValueKind.String)
+                If Strings.Right(DestinationFolder, 1) <> "\" Then DestinationFolder = DestinationFolder & "\"
 
+                DestinationFolder = DestinationFolder & BackupFileName
+                My.Computer.FileSystem.CopyFile(strDatabaseFile, DestinationFolder, True)
             End If
         Catch ex As Exception
 
