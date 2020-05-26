@@ -120,10 +120,8 @@ Source: .\WordTemplates\ModusOperandi-UserDefined.txt; DestDir: {userdocs}\BXSof
 Source: .\Database\HolidayList.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\WordTemplates; Flags: onlyifdoesntexist
 Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist uninsneveruninstall
 Source: .\Database\WeeklyDiary.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist
-Source: .\Report Viewer\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
-;Source: .\Report Viewer\ReportViewer2010.exe; DestDir: {app}\; Flags: ignoreversion
+Source: .\WIA\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
 Source: .\Scripts\PinToTaskbar.exe; DestDir: {app}\; Flags: ignoreversion
-Source: .\Scripts\RestartFIS.exe; DestDir: {app}\; Flags: ignoreversion
 Source: .\VersionHistory\NewVersionFeatures.rtf; DestDir: {userdocs}\BXSofts\Fingerprint Information System; Flags: ignoreversion
 
 

@@ -18530,6 +18530,12 @@ errhandler:
 
         On Error Resume Next
 
+        If blRestartApplication Then
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "RestartApp", "1", Microsoft.Win32.RegistryValueKind.String)
+        Else
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "RestartApp", "0", Microsoft.Win32.RegistryValueKind.String)
+        End If
+
         SaveSOCDatagridColumnWidth()
         SaveRSOCDatagridColumnWidth()
         SaveDADatagridColumnWidth()
@@ -18581,11 +18587,8 @@ errhandler:
         SaveQuicktoolbarSettings()
         objMutex.Close()
         objMutex = Nothing
-        If blRestartApplication Then
-            Process.Start(strAppPath & "\RestartFIS.exe")
-        Else
-            Process.Start(strAppPath & "\BackupDatabase.exe")
-        End If
+
+        Process.Start(strAppPath & "\BackupDatabase.exe")
 
         Me.Dispose()
         End

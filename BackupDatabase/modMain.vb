@@ -26,6 +26,15 @@ Module Sub_Main
 
     Sub Main()
         Try
+            Dim RestartApp As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "RestartApp", "0")
+
+            If RestartApp = "1" Then
+                My.Computer.Registry.SetValue(strGeneralSettingsPath, "RestartApp", "0", Microsoft.Win32.RegistryValueKind.String)
+                System.Threading.Thread.Sleep(5000)
+                Process.Start(My.Application.Info.DirectoryPath & "\Fingerprint Information System.exe")
+                Exit Sub
+            End If
+
             If Not InternetAvailable() Then Exit Sub
 
             strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", "")

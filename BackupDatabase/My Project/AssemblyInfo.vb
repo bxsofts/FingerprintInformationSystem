@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("BackupDatabase")> 
-<Assembly: AssemblyCopyright("Copyright © BXSofts  2020")> 
+<Assembly: AssemblyCopyright("Copyright © BXSofts  2020-2021")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
