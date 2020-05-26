@@ -112,7 +112,6 @@ Public Class frmMainInterface
     Dim dFormatedFileSize As String = ""
     Public uBytesUploaded As Long
 
-    Dim blAutoBackupInProgress As Boolean = False
     Dim blCheckAutoBackup As Boolean = False
 
     Dim blIdentificationRegisterUpdateFailed As Boolean = False
@@ -18521,12 +18520,6 @@ errhandler:
 
 
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
-
-        If blAutoBackupInProgress Then
-            If MessageBoxEx.Show("Auto Backup of Database is in progress. Do you want to close the application?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                Exit Sub
-            End If
-        End If
 
         On Error Resume Next
 
