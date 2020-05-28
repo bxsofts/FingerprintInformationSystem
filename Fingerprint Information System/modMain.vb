@@ -111,7 +111,7 @@ Module modMain
 
     Public JsonPath As String = ""
 
-    Public InstallerFileVersion As String = ""
+    Public RemoteInstallerVersion As String = ""
     Public blDownloadUpdate As Boolean = False
 
     Public blIDREditMode As Boolean = False

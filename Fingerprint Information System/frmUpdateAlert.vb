@@ -21,7 +21,7 @@
 
             Me.BringToFront()
         Catch ex As Exception
-            Me.RichTextBoxEx1.Text = "New Version " & InstallerFileVersion & " Available"
+            Me.RichTextBoxEx1.Text = "New Version " & RemoteInstallerVersion & " Available"
         End Try
 
     End Sub

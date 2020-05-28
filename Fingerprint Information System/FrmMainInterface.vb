@@ -18208,7 +18208,7 @@ errhandler:
                 blNewVersionFound = True
                 frmUpdateAlert.ShowDialog()
             Else
-                Dim d = MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                Dim d = MessageBoxEx.Show("A new version 'V" & RemoteInstallerVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                 If d = Windows.Forms.DialogResult.Yes Then blDownloadUpdate = True
             End If
 
@@ -18266,13 +18266,13 @@ errhandler:
             Results = List.Execute
 
             If Results.Files.Count > 0 Then
-                InstallerFileVersion = Results.Files(0).Name
+                RemoteInstallerVersion = Results.Files(0).Name
                 InstallerFileID = Results.Files(0).Id
                 InstallerFileURL = Results.Files(0).WebViewLink
-                InstallerFileVersion = InstallerFileVersion.Substring(InstallerFileVersion.Length - 8).Remove(4)
+                RemoteInstallerVersion = RemoteInstallerVersion.Substring(RemoteInstallerVersion.Length - 8).Remove(4)
                 Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
 
-                If InstallerFileVersion > LocalVersion Then
+                If RemoteInstallerVersion > LocalVersion Then
 
                     List.Q = "name = 'NewVersionAvailable.rtf' and trashed = false"
                     List.Fields = "files(name, id)"
@@ -18324,7 +18324,7 @@ errhandler:
         End Try
     End Function
 
-   
+
     Private Sub bgwUpdateChecker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUpdateChecker.DoWork
         If InternetAvailable() = False Then
             Exit Sub
@@ -18342,7 +18342,7 @@ errhandler:
                 blNewVersionFound = True
                 frmUpdateAlert.ShowDialog()
             Else
-                Dim d = MessageBoxEx.Show("A new version 'V" & InstallerFileVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                Dim d = MessageBoxEx.Show("A new version 'V" & RemoteInstallerVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                 If d = Windows.Forms.DialogResult.Yes Then blDownloadUpdate = True
             End If
 
