@@ -923,8 +923,7 @@ Public Class frmWeeklyDiaryDE
             bgwAutoUpload.RunWorkerAsync(fDescription)
 
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
-            ShowErrorMessage(ex)
+            ' ShowErrorMessage(ex)
         End Try
     End Sub
 
