@@ -16384,15 +16384,14 @@ errhandler:
 
             wdBooks("Office").Range.Text = UCase(FullOfficeName & ", " & FullDistrictName)
             If BlankForm Then
-                Dim dots As String = "..............................................."
-                wdBooks("Name").Range.Text = "............................................."
-                wdBooks("Address").Range.Text = dots & vbNewLine & dots & vbNewLine & dots
-                wdBooks("Passport").Range.Text = "........................"
-                wdBooks("FileNo").Range.Text = "................"
-                wdBooks("Date").Range.Text = "................"
-                wdBooks("NameAddress").Range.Text = dots
-                wdBooks("PassportNo").Range.Text = "................"
-                wdBooks("Reason").Range.Text = dots
+                wdBooks("Name").Range.Text = ""
+                wdBooks("Address").Range.Text = ""
+                wdBooks("Passport").Range.Text = ""
+                wdBooks("FileNo").Range.Text = "                            "
+                wdBooks("Date").Range.Text = "                "
+                wdBooks("NameAddress").Range.Text = "                                        "
+                wdBooks("PassportNo").Range.Text = "              "
+                wdBooks("Reason").Range.Text = ""
             Else
                 wdBooks("Name").Range.Text = Me.FPADataGrid.SelectedCells(3).Value.ToString.ToUpper
                 wdBooks("Address").Range.Text = Me.FPADataGrid.SelectedCells(4).Value
@@ -18453,6 +18452,7 @@ errhandler:
     End Function
 
 #End Region
+
     '---------------------------------------------END APPLICATION-----------------------------------
 
 #Region "END APPLICATION"
