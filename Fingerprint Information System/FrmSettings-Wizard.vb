@@ -6,6 +6,40 @@ Public Class FrmSettingsWizard
 
     Private Sub FormLoad() Handles MyBase.Load
         Try
+
+            Dim ItemList As New ArrayList
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(My.Computer.FileSystem.SpecialDirectories.MyDocuments, FileIO.SearchOption.SearchTopLevelOnly, "Fingerprint Information System V*.exe")
+                Dim FileName = My.Computer.FileSystem.GetName(foundFile)
+                ItemList.Add(FileName)
+            Next
+
+            ItemList.Sort()
+            Dim cnt As Integer = ItemList.Count
+
+            If cnt > 0 Then
+                Dim NewInstallerName As String = ItemList.Item(cnt - 1)
+
+                If NewInstallerName <> "" Then
+                    Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
+                    Dim NewInstallerVersion As String = NewInstallerName.Substring(NewInstallerName.Length - 8).Remove(4)
+
+                    If NewInstallerVersion > LocalVersion Then
+                        Dim InstallerFile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & NewInstallerName
+                        If My.Computer.FileSystem.FileExists(InstallerFile) Then
+                            System.Threading.Thread.Sleep(2000)
+                            frmSplashScreen.CloseForm()
+                            Application.DoEvents()
+                            System.Threading.Thread.Sleep(1000)
+                            frmNewVersion.lblMessage.Text = "A new version " & NewInstallerVersion & " is available. Press OK to install."
+                            frmNewVersion.ShowDialog()
+                            Process.Start(InstallerFile)
+                            End
+                        End If
+                    End If
+                End If
+            End If
+
+
             firstrun = CBool(My.Computer.Registry.GetValue(strGeneralSettingsPath, "FirstRun", 1))
             If frmMainInterface.Visible = False Then
                 SetColorTheme()
@@ -47,7 +81,7 @@ Public Class FrmSettingsWizard
             Me.SettingsTableAdapter1.Connection.ConnectionString = sConString
             Me.SettingsTableAdapter1.Connection.Open()
 
-           
+
 
             If frmMainInterface.DoesTableExist("Settings", sConString) Then
 

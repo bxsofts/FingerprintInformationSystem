@@ -105,6 +105,7 @@ Public Class frmMainInterface
     Dim InstallerFileID As String = ""
     Dim InstallerFileURL As String = "" '"https://drive.google.com/file/d/1vyGdhxjXUWjkcgTE_rTT7juiMSBA-UKc/view"
 
+    Public blShowUpdateDownloaded As Boolean
     Public dBytesDownloaded As Long
     Public dDownloadStatus As DownloadStatus
     Public dFileSize As Long
@@ -477,7 +478,7 @@ Public Class frmMainInterface
         UploadVersionInfoToDrive()
         CleanupLocalBackupFiles()
         If DBExists = False Then
-            Dim DBMissing As String = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database."
+            Dim DBMissing As String = "FATAL ERROR: The database file 'Fingerprint.mdvb' is missing. Please restore the database."
             Me.pnlRegisterName.Text = DBMissing
             DisableControls()
             MessageBoxEx.Show(DBMissing, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -17622,7 +17623,7 @@ errhandler:
 #End Region
 
 
-#Region "MANUAL LOCAL AND ONLINE BACKUP AND RESTORE DATABASE"
+#Region "LOCAL AND ONLINE MANUAL BACKUP AND RESTORE DATABASE"
 
     Private Sub LocalDatabaseBackup() Handles btnLocalBackup.Click
 
@@ -17964,6 +17965,7 @@ errhandler:
             Exit Sub
         End If
 
+        blShowUpdateDownloaded = True
         DownloadInstaller()
     End Sub
 
@@ -18074,10 +18076,12 @@ errhandler:
         pgrDownloadInstaller.Text = "Downloading Installer " & e.ProgressPercentage & "% " & CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
 
         If e.UserState = "File not found" Then
+            blShowUpdateDownloaded = False
             MessageBoxEx.Show("Installer File not found. Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
         If e.UserState = "Installer File folder not found" Then
+            blShowUpdateDownloaded = False
             MessageBoxEx.Show("Installer File folder not found. Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
@@ -18086,12 +18090,12 @@ errhandler:
         rbrDownloadInstaller.Visible = False
         pgrDownloadInstaller.Visible = False
 
-        If dDownloadStatus = DownloadStatus.Completed Then
+        If dDownloadStatus = DownloadStatus.Completed And blShowUpdateDownloaded Then
             MessageBoxEx.Show(InstallerFileName.Replace(".exe", "") & " Installer File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Call Shell("explorer.exe /select," & My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, AppWinStyle.NormalFocus)
         End If
 
-        If dDownloadStatus = DownloadStatus.Failed Then
+        If dDownloadStatus = DownloadStatus.Failed And blShowUpdateDownloaded Then
             MessageBoxEx.Show("Installer File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
@@ -18172,6 +18176,7 @@ errhandler:
         Try
 
             Dim ShowNewVersionInfo As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0")
+
             If ShowNewVersionInfo = "1" And My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionFeatures.rtf") Then
                 Thread.Sleep(2000)
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0", Microsoft.Win32.RegistryValueKind.String)
@@ -18183,8 +18188,11 @@ errhandler:
         End Try
     End Sub
     Private Sub CheckForUpdatesAtStartup()
+        Try
+            bgwUpdateChecker.RunWorkerAsync()
+        Catch ex As Exception
 
-        bgwUpdateChecker.RunWorkerAsync()
+        End Try
 
     End Sub
 
@@ -18202,23 +18210,16 @@ errhandler:
         If CheckForUpdates() Then
             ClosePleaseWaitForm()
             Application.DoEvents()
-            blDownloadUpdate = False
 
-            If My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionAvailable.rtf") Then
-                blNewVersionFound = True
-                frmUpdateAlert.ShowDialog()
-            Else
-                Dim d = MessageBoxEx.Show("A new version 'V" & RemoteInstallerVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                If d = Windows.Forms.DialogResult.Yes Then blDownloadUpdate = True
-            End If
-
-
-            If blDownloadUpdate Then
+            Dim d = MessageBoxEx.Show("A new version 'V" & RemoteInstallerVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            If d = Windows.Forms.DialogResult.Yes Then
                 ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
+                blShowUpdateDownloaded = True
                 DownloadInstaller()
             End If
         Else
             ClosePleaseWaitForm()
+            blShowUpdateDownloaded = False
             MessageBoxEx.Show("You are using the latest version.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
@@ -18273,48 +18274,9 @@ errhandler:
                 Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
 
                 If RemoteInstallerVersion > LocalVersion Then
-
-                    List.Q = "name = 'NewVersionAvailable.rtf' and trashed = false"
-                    List.Fields = "files(name, id)"
-
-                    Results = List.Execute
-
-                    If Results.Files.Count > 0 Then
-                        Dim fileid = Results.Files(0).Id
-                        Dim request = FISService.Files.Get(fileid)
-
-                        Dim fStream = New System.IO.FileStream(strAppUserPath & "\NewVersionAvailable.rtf", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
-                        Dim mStream = New System.IO.MemoryStream
-
-                        request.DownloadWithStatus(mStream)
-
-                        mStream.WriteTo(fStream)
-
-                        fStream.Close()
-                        mStream.Close()
-                    End If
-
-                    List.Q = "name = 'NewVersionFeatures.rtf' and trashed = false"
-                    List.Fields = "files(name, id)"
-
-                    Results = List.Execute
-
-                    If Results.Files.Count > 0 Then
-                        Dim fileid = Results.Files(0).Id
-                        Dim request = FISService.Files.Get(fileid)
-
-                        Dim fStream = New System.IO.FileStream(strAppUserPath & "\NewVersionFeatures.rtf", System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
-                        Dim mStream = New System.IO.MemoryStream
-
-                        request.DownloadWithStatus(mStream)
-
-                        mStream.WriteTo(fStream)
-
-                        fStream.Close()
-                        mStream.Close()
-                    End If
-
                     Return True
+                Else
+                    Return False
                 End If
             End If
 
@@ -18334,23 +18296,8 @@ errhandler:
     End Sub
 
     Private Sub bgwUpdateChecker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateChecker.ProgressChanged
-        If e.ProgressPercentage = 100 And e.UserState = True Then
-
-            blDownloadUpdate = False
-
-            If My.Computer.FileSystem.FileExists(strAppUserPath & "\NewVersionAvailable.rtf") Then
-                blNewVersionFound = True
-                frmUpdateAlert.ShowDialog()
-            Else
-                Dim d = MessageBoxEx.Show("A new version 'V" & RemoteInstallerVersion & "' is available. Do you want to download?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-                If d = Windows.Forms.DialogResult.Yes Then blDownloadUpdate = True
-            End If
-
-            If blDownloadUpdate Then
-                ShowDesktopAlert("Download will continue in the background. You will be notified when finished.")
-                DownloadInstaller()
-            End If
-
+        If e.ProgressPercentage = 100 And e.UserState = True Then 'auto update avaialable
+            DownloadInstaller()
         End If
     End Sub
 

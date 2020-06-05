@@ -195,6 +195,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmNewVersion.Designer.vb">
+      <DependentUpon>frmNewVersion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewVersion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmPerformance-Annual-Generator.Designer.vb">
       <DependentUpon>FrmPerformance-Annual-Generator.vb</DependentUpon>
     </Compile>
@@ -568,6 +574,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
+    <EmbeddedResource Include="frmNewVersion.resx">
+      <DependentUpon>frmNewVersion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPerformance-Annual-Generator.resx">
       <DependentUpon>FrmPerformance-Annual-Generator.vb</DependentUpon>
     </EmbeddedResource>

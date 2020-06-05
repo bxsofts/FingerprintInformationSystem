@@ -23,44 +23,30 @@ Partial Class frmUpdateAlert
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdateAlert))
-        Me.btnRemindLater = New DevComponents.DotNetBar.ButtonX()
-        Me.btnDownloadUpdate = New DevComponents.DotNetBar.ButtonX()
+        Me.btnClose = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.RichTextBoxEx1 = New DevComponents.DotNetBar.Controls.RichTextBoxEx()
         Me.PanelEx1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnRemindLater
+        'btnClose
         '
-        Me.btnRemindLater.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnRemindLater.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnRemindLater.Location = New System.Drawing.Point(497, 307)
-        Me.btnRemindLater.Name = "btnRemindLater"
-        Me.btnRemindLater.Size = New System.Drawing.Size(111, 36)
-        Me.btnRemindLater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnRemindLater.TabIndex = 3
-        Me.btnRemindLater.TabStop = False
-        Me.btnRemindLater.Text = "Remind Me Later"
-        '
-        'btnDownloadUpdate
-        '
-        Me.btnDownloadUpdate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnDownloadUpdate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnDownloadUpdate.Location = New System.Drawing.Point(360, 307)
-        Me.btnDownloadUpdate.Name = "btnDownloadUpdate"
-        Me.btnDownloadUpdate.Size = New System.Drawing.Size(111, 36)
-        Me.btnDownloadUpdate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnDownloadUpdate.TabIndex = 2
-        Me.btnDownloadUpdate.TabStop = False
-        Me.btnDownloadUpdate.Text = "Download Now"
+        Me.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnClose.Location = New System.Drawing.Point(514, 307)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(93, 36)
+        Me.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnClose.TabIndex = 2
+        Me.btnClose.TabStop = False
+        Me.btnClose.Text = "Close"
         '
         'PanelEx1
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.PanelEx1.Controls.Add(Me.RichTextBoxEx1)
-        Me.PanelEx1.Controls.Add(Me.btnRemindLater)
-        Me.PanelEx1.Controls.Add(Me.btnDownloadUpdate)
+        Me.PanelEx1.Controls.Add(Me.btnClose)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
@@ -108,15 +94,14 @@ Partial Class frmUpdateAlert
         Me.MinimizeBox = False
         Me.Name = "frmUpdateAlert"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "New Update Available"
-        Me.TitleText = "<b>New Update Available</b>"
+        Me.Text = "New Version Features"
+        Me.TitleText = "<b>New Version Features</b>"
         Me.TopMost = True
         Me.PanelEx1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents btnRemindLater As DevComponents.DotNetBar.ButtonX
-    Friend WithEvents btnDownloadUpdate As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnClose As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents RichTextBoxEx1 As DevComponents.DotNetBar.Controls.RichTextBoxEx
 End Class
