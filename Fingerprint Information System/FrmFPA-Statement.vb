@@ -431,6 +431,10 @@ Public Class frmFPAStatement
 
     Private Sub PrintReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateReport.Click
         Try
+            If Not IsMonthStmt Then
+                Dim r = DevComponents.DotNetBar.MessageBoxEx.Show("ALERT: The data generated is for a period. For monthly statement, first generate data for selected Month. Do you still want to print the statement?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                If r = Windows.Forms.DialogResult.No Then Exit Sub
+            End If
 
             Me.Cursor = Cursors.WaitCursor
 

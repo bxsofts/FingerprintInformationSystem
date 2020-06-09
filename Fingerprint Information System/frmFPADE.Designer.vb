@@ -355,7 +355,7 @@ Partial Class frmFPADE
         Me.txtRemarks.Size = New System.Drawing.Size(227, 85)
         Me.txtRemarks.TabIndex = 7
         Me.txtRemarks.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty
-        Me.txtRemarks.WatermarkText = "Remarks"
+        Me.txtRemarks.WatermarkText = "Purpose"
         '
         'LabelX61
         '
@@ -366,9 +366,9 @@ Partial Class frmFPADE
         Me.LabelX61.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX61.Location = New System.Drawing.Point(345, 47)
         Me.LabelX61.Name = "LabelX61"
-        Me.LabelX61.Size = New System.Drawing.Size(51, 18)
+        Me.LabelX61.Size = New System.Drawing.Size(48, 18)
         Me.LabelX61.TabIndex = 220
-        Me.LabelX61.Text = "Remarks"
+        Me.LabelX61.Text = "Purpose"
         '
         'txtAddress
         '

@@ -49,11 +49,6 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -115,6 +110,11 @@ Partial Class frmMainInterface
         Dim DataGridViewCellStyle89 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle90 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle91 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.RibbonTabItem6 = New DevComponents.DotNetBar.RibbonTabItem()
         Me.RibbonPanel2 = New DevComponents.DotNetBar.RibbonPanel()
         Me.RibbonBar12 = New DevComponents.DotNetBar.RibbonBar()
@@ -408,19 +408,6 @@ Partial Class frmMainInterface
         Me.RemarksDataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CDRegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FPADataGrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
-        Me.FPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FPYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FPDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PassportNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChalanDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HeadOfAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AttestedFPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FPARegisterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ACDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.ACNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1126,6 +1113,19 @@ Partial Class frmMainInterface
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         Me.SSTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SupportingStaffTableAdapter()
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
+        Me.FPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPYearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AddressDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PassportNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HeadOfAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AttestedFPNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -4269,121 +4269,6 @@ Partial Class frmMainInterface
         Me.FPADataGrid.TabIndex = 5
         Me.FPADataGrid.TabStop = false
         '
-        'FPNumberDataGridViewTextBoxColumn
-        '
-        Me.FPNumberDataGridViewTextBoxColumn.DataPropertyName = "FPNumber"
-        Me.FPNumberDataGridViewTextBoxColumn.HeaderText = "FP Number"
-        Me.FPNumberDataGridViewTextBoxColumn.Name = "FPNumberDataGridViewTextBoxColumn"
-        Me.FPNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FPNumberDataGridViewTextBoxColumn.Width = 80
-        '
-        'FPYearDataGridViewTextBoxColumn
-        '
-        Me.FPYearDataGridViewTextBoxColumn.DataPropertyName = "FPYear"
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.FPYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle23
-        Me.FPYearDataGridViewTextBoxColumn.HeaderText = "Year"
-        Me.FPYearDataGridViewTextBoxColumn.Name = "FPYearDataGridViewTextBoxColumn"
-        Me.FPYearDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FPYearDataGridViewTextBoxColumn.Visible = false
-        Me.FPYearDataGridViewTextBoxColumn.Width = 80
-        '
-        'FPDateDataGridViewTextBoxColumn
-        '
-        Me.FPDateDataGridViewTextBoxColumn.DataPropertyName = "FPDate"
-        DataGridViewCellStyle24.Format = "dd/MM/yyyy"
-        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle24
-        Me.FPDateDataGridViewTextBoxColumn.HeaderText = "Date of Attestation"
-        Me.FPDateDataGridViewTextBoxColumn.Name = "FPDateDataGridViewTextBoxColumn"
-        Me.FPDateDataGridViewTextBoxColumn.ReadOnly = true
-        Me.FPDateDataGridViewTextBoxColumn.Width = 80
-        '
-        'NameDataGridViewTextBoxColumn1
-        '
-        Me.NameDataGridViewTextBoxColumn1.DataPropertyName = "Name"
-        Me.NameDataGridViewTextBoxColumn1.HeaderText = "Name"
-        Me.NameDataGridViewTextBoxColumn1.Name = "NameDataGridViewTextBoxColumn1"
-        Me.NameDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.NameDataGridViewTextBoxColumn1.Width = 150
-        '
-        'AddressDataGridViewTextBoxColumn1
-        '
-        Me.AddressDataGridViewTextBoxColumn1.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn1.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn1.Name = "AddressDataGridViewTextBoxColumn1"
-        Me.AddressDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.AddressDataGridViewTextBoxColumn1.Width = 170
-        '
-        'PassportNumberDataGridViewTextBoxColumn
-        '
-        Me.PassportNumberDataGridViewTextBoxColumn.DataPropertyName = "PassportNumber"
-        Me.PassportNumberDataGridViewTextBoxColumn.HeaderText = "Passport Number"
-        Me.PassportNumberDataGridViewTextBoxColumn.Name = "PassportNumberDataGridViewTextBoxColumn"
-        Me.PassportNumberDataGridViewTextBoxColumn.ReadOnly = true
-        '
-        'ChalanNumberDataGridViewTextBoxColumn
-        '
-        Me.ChalanNumberDataGridViewTextBoxColumn.DataPropertyName = "ChalanNumber"
-        Me.ChalanNumberDataGridViewTextBoxColumn.HeaderText = "Chalan Number"
-        Me.ChalanNumberDataGridViewTextBoxColumn.Name = "ChalanNumberDataGridViewTextBoxColumn"
-        Me.ChalanNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.ChalanNumberDataGridViewTextBoxColumn.Width = 160
-        '
-        'ChalanDate
-        '
-        Me.ChalanDate.DataPropertyName = "ChalanDate"
-        DataGridViewCellStyle25.Format = "dd/MM/yyyy"
-        Me.ChalanDate.DefaultCellStyle = DataGridViewCellStyle25
-        Me.ChalanDate.HeaderText = "Chalan Date"
-        Me.ChalanDate.Name = "ChalanDate"
-        Me.ChalanDate.ReadOnly = true
-        Me.ChalanDate.Width = 80
-        '
-        'HeadOfAccount
-        '
-        Me.HeadOfAccount.DataPropertyName = "HeadOfAccount"
-        Me.HeadOfAccount.HeaderText = "Head of Account"
-        Me.HeadOfAccount.Name = "HeadOfAccount"
-        Me.HeadOfAccount.ReadOnly = true
-        '
-        'TreasuryDataGridViewTextBoxColumn
-        '
-        Me.TreasuryDataGridViewTextBoxColumn.DataPropertyName = "Treasury"
-        Me.TreasuryDataGridViewTextBoxColumn.HeaderText = "Treasury"
-        Me.TreasuryDataGridViewTextBoxColumn.Name = "TreasuryDataGridViewTextBoxColumn"
-        Me.TreasuryDataGridViewTextBoxColumn.ReadOnly = true
-        Me.TreasuryDataGridViewTextBoxColumn.Width = 150
-        '
-        'AmountRemittedDataGridViewTextBoxColumn
-        '
-        Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle26.Format = "` #/-"
-        DataGridViewCellStyle26.NullValue = Nothing
-        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle26
-        Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount Remitted"
-        Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
-        Me.AmountRemittedDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AmountRemittedDataGridViewTextBoxColumn.Width = 80
-        '
-        'AttestedFPNumberDataGridViewTextBoxColumn
-        '
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.DataPropertyName = "AttestedFPNumber"
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle27
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.HeaderText = "No. of Slips Attested"
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.Name = "AttestedFPNumberDataGridViewTextBoxColumn"
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AttestedFPNumberDataGridViewTextBoxColumn.Visible = false
-        '
-        'RemarksDataGridViewTextBoxColumn2
-        '
-        Me.RemarksDataGridViewTextBoxColumn2.DataPropertyName = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn2.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn2.Name = "RemarksDataGridViewTextBoxColumn2"
-        Me.RemarksDataGridViewTextBoxColumn2.ReadOnly = true
-        Me.RemarksDataGridViewTextBoxColumn2.Width = 200
-        '
         'FPARegisterBindingSource
         '
         Me.FPARegisterBindingSource.DataMember = "FPAttestationRegister"
@@ -5621,6 +5506,7 @@ Partial Class frmMainInterface
         '
         Me.TabControl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
         Me.TabControl.CanReorderTabs = true
+        Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel1)
         Me.TabControl.Controls.Add(Me.TabControlPanel11)
         Me.TabControl.Controls.Add(Me.TabControlPanel10)
@@ -5628,7 +5514,6 @@ Partial Class frmMainInterface
         Me.TabControl.Controls.Add(Me.TabControlPanel5)
         Me.TabControl.Controls.Add(Me.TabControlPanel3)
         Me.TabControl.Controls.Add(Me.TabControlPanel9)
-        Me.TabControl.Controls.Add(Me.TabControlPanel4)
         Me.TabControl.Controls.Add(Me.TabControlPanel2)
         Me.TabControl.Controls.Add(Me.TabControlPanel6)
         Me.TabControl.Controls.Add(Me.TabControlPanel8)
@@ -14192,6 +14077,121 @@ Partial Class frmMainInterface
         '
         Me.bgwCleanOnlineFiles.WorkerReportsProgress = true
         '
+        'FPNumberDataGridViewTextBoxColumn
+        '
+        Me.FPNumberDataGridViewTextBoxColumn.DataPropertyName = "FPNumber"
+        Me.FPNumberDataGridViewTextBoxColumn.HeaderText = "FP Number"
+        Me.FPNumberDataGridViewTextBoxColumn.Name = "FPNumberDataGridViewTextBoxColumn"
+        Me.FPNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FPNumberDataGridViewTextBoxColumn.Width = 80
+        '
+        'FPYearDataGridViewTextBoxColumn
+        '
+        Me.FPYearDataGridViewTextBoxColumn.DataPropertyName = "FPYear"
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.FPYearDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle23
+        Me.FPYearDataGridViewTextBoxColumn.HeaderText = "Year"
+        Me.FPYearDataGridViewTextBoxColumn.Name = "FPYearDataGridViewTextBoxColumn"
+        Me.FPYearDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FPYearDataGridViewTextBoxColumn.Visible = false
+        Me.FPYearDataGridViewTextBoxColumn.Width = 80
+        '
+        'FPDateDataGridViewTextBoxColumn
+        '
+        Me.FPDateDataGridViewTextBoxColumn.DataPropertyName = "FPDate"
+        DataGridViewCellStyle24.Format = "dd/MM/yyyy"
+        Me.FPDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle24
+        Me.FPDateDataGridViewTextBoxColumn.HeaderText = "Date of Attestation"
+        Me.FPDateDataGridViewTextBoxColumn.Name = "FPDateDataGridViewTextBoxColumn"
+        Me.FPDateDataGridViewTextBoxColumn.ReadOnly = true
+        Me.FPDateDataGridViewTextBoxColumn.Width = 80
+        '
+        'NameDataGridViewTextBoxColumn1
+        '
+        Me.NameDataGridViewTextBoxColumn1.DataPropertyName = "Name"
+        Me.NameDataGridViewTextBoxColumn1.HeaderText = "Name"
+        Me.NameDataGridViewTextBoxColumn1.Name = "NameDataGridViewTextBoxColumn1"
+        Me.NameDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.NameDataGridViewTextBoxColumn1.Width = 150
+        '
+        'AddressDataGridViewTextBoxColumn1
+        '
+        Me.AddressDataGridViewTextBoxColumn1.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn1.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn1.Name = "AddressDataGridViewTextBoxColumn1"
+        Me.AddressDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.AddressDataGridViewTextBoxColumn1.Width = 170
+        '
+        'PassportNumberDataGridViewTextBoxColumn
+        '
+        Me.PassportNumberDataGridViewTextBoxColumn.DataPropertyName = "PassportNumber"
+        Me.PassportNumberDataGridViewTextBoxColumn.HeaderText = "Passport Number"
+        Me.PassportNumberDataGridViewTextBoxColumn.Name = "PassportNumberDataGridViewTextBoxColumn"
+        Me.PassportNumberDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'ChalanNumberDataGridViewTextBoxColumn
+        '
+        Me.ChalanNumberDataGridViewTextBoxColumn.DataPropertyName = "ChalanNumber"
+        Me.ChalanNumberDataGridViewTextBoxColumn.HeaderText = "Chalan Number"
+        Me.ChalanNumberDataGridViewTextBoxColumn.Name = "ChalanNumberDataGridViewTextBoxColumn"
+        Me.ChalanNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.ChalanNumberDataGridViewTextBoxColumn.Width = 160
+        '
+        'ChalanDate
+        '
+        Me.ChalanDate.DataPropertyName = "ChalanDate"
+        DataGridViewCellStyle25.Format = "dd/MM/yyyy"
+        Me.ChalanDate.DefaultCellStyle = DataGridViewCellStyle25
+        Me.ChalanDate.HeaderText = "Chalan Date"
+        Me.ChalanDate.Name = "ChalanDate"
+        Me.ChalanDate.ReadOnly = true
+        Me.ChalanDate.Width = 80
+        '
+        'HeadOfAccount
+        '
+        Me.HeadOfAccount.DataPropertyName = "HeadOfAccount"
+        Me.HeadOfAccount.HeaderText = "Head of Account"
+        Me.HeadOfAccount.Name = "HeadOfAccount"
+        Me.HeadOfAccount.ReadOnly = true
+        '
+        'TreasuryDataGridViewTextBoxColumn
+        '
+        Me.TreasuryDataGridViewTextBoxColumn.DataPropertyName = "Treasury"
+        Me.TreasuryDataGridViewTextBoxColumn.HeaderText = "Treasury"
+        Me.TreasuryDataGridViewTextBoxColumn.Name = "TreasuryDataGridViewTextBoxColumn"
+        Me.TreasuryDataGridViewTextBoxColumn.ReadOnly = true
+        Me.TreasuryDataGridViewTextBoxColumn.Width = 150
+        '
+        'AmountRemittedDataGridViewTextBoxColumn
+        '
+        Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle26.Format = "` #/-"
+        DataGridViewCellStyle26.NullValue = Nothing
+        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle26
+        Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount Remitted"
+        Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
+        Me.AmountRemittedDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AmountRemittedDataGridViewTextBoxColumn.Width = 80
+        '
+        'AttestedFPNumberDataGridViewTextBoxColumn
+        '
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.DataPropertyName = "AttestedFPNumber"
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle27
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.HeaderText = "No. of Slips Attested"
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.Name = "AttestedFPNumberDataGridViewTextBoxColumn"
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AttestedFPNumberDataGridViewTextBoxColumn.Visible = false
+        '
+        'RemarksDataGridViewTextBoxColumn2
+        '
+        Me.RemarksDataGridViewTextBoxColumn2.DataPropertyName = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn2.HeaderText = "Purpose"
+        Me.RemarksDataGridViewTextBoxColumn2.Name = "RemarksDataGridViewTextBoxColumn2"
+        Me.RemarksDataGridViewTextBoxColumn2.ReadOnly = true
+        Me.RemarksDataGridViewTextBoxColumn2.Width = 200
+        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -14968,19 +14968,6 @@ End Sub
     Friend WithEvents PanelEx6 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents btnSaveIO As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnIdentifiedTemplateContextMenu As DevComponents.DotNetBar.ButtonItem
-    Friend WithEvents FPNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FPYearDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FPDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents NameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AddressDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PassportNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChalanNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ChalanDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents HeadOfAccount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TreasuryDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AmountRemittedDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AttestedFPNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents RemarksDataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnFPAApplicationForm As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnFPABlankSlipForm As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnFPAGenerateSlipFormContext As DevComponents.DotNetBar.ButtonItem
@@ -15339,5 +15326,18 @@ End Sub
     Friend WithEvents btnVigilanceLetter As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnProjectIAPS As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnProjectLetter As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents FPNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FPYearDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents FPDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NameDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AddressDataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents PassportNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChalanNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ChalanDate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents HeadOfAccount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TreasuryDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AmountRemittedDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AttestedFPNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RemarksDataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

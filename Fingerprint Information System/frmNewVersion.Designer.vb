@@ -46,7 +46,7 @@ Partial Class frmNewVersion
         '
         Me.btnOK.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOK.Location = New System.Drawing.Point(284, 64)
+        Me.btnOK.Location = New System.Drawing.Point(320, 64)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(92, 36)
         Me.btnOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -58,7 +58,7 @@ Partial Class frmNewVersion
         Me.AcceptButton = Me.btnOK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(379, 101)
+        Me.ClientSize = New System.Drawing.Size(413, 101)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblMessage)
         Me.DoubleBuffered = True
@@ -71,7 +71,7 @@ Partial Class frmNewVersion
         Me.Name = "frmNewVersion"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "New Version Available"
-        Me.TitleText = "<b>New Version Available</b>"
+        Me.TitleText = "<b>Fingerprint Information System - New Version Available</b>"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
