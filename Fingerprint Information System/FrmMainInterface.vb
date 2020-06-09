@@ -130,7 +130,7 @@ Public Class frmMainInterface
         If Not frmSplashScreen.Visible Then
             ShowPleaseWaitForm()
         End If
-
+        Me.cprDBAvailable.Visible = False
         ChangeCursor(Cursors.WaitCursor)
 
         frmSplashScreen.ShowProgressBar()
@@ -484,6 +484,7 @@ Public Class frmMainInterface
             MessageBoxEx.Show(DBMissing, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
+        CheckForUpdatedRemoteDatabase()
     End Sub
 
 #End Region
@@ -17900,6 +17901,136 @@ errhandler:
 #End Region
 
 
+#Region "CHECK FOR UPDATED DATABASE IN ONLINE"
+    Private Sub CheckForUpdatedRemoteDatabase()
+        Try
+            If Not InternetAvailable() Then
+                Me.cprDBAvailable.Visible = False
+                Exit Sub
+            End If
+
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then
+                Exit Sub
+            End If
+            Dim LocalSOCCount As Integer = Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount
+            bgwCheckRemoteDB.RunWorkerAsync(LocalSOCCount)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub bgwCheckRemoteDB_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCheckRemoteDB.DoWork
+        Try
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim UserBackupFolderName As String = FullDistrictName
+            Dim UserBackupFolderID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim List = FISService.Files.List()
+            Dim MasterBackupFolderID As String = GetMasterBackupFolderID(FISService)
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & UserBackupFolderName & "' and '" & MasterBackupFolderID & "' in parents"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwCheckRemoteDB.ReportProgress(0, False)
+            Else
+                UserBackupFolderID = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents and name = 'FingerPrintDB.mdb'"
+
+            List.Fields = "files(id, description)"
+            Results = List.Execute
+
+            Dim RemoteSOCRecordCount As Integer = 0
+            Dim description As String = ""
+            Dim dtlastremotemodified As Date
+
+            If Results.Files.Count > 0 Then
+                description = Results.Files(0).Description
+                Dim SplitText() = Strings.Split(description, "; ")
+                RemoteSOCRecordCount = Val(SplitText(4))
+                Dim strlastremotemodified As String = SplitText(1)
+                dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+            End If
+
+
+            Dim dtlastlocalmodified As Date = GetLastModificationDate()
+
+            Dim LocalSOCRecordCount As Integer = e.Argument
+
+            If RemoteSOCRecordCount > LocalSOCRecordCount Then
+                bgwCheckRemoteDB.ReportProgress(0, True)
+            End If
+
+            If LocalSOCRecordCount = RemoteSOCRecordCount Then
+
+                Dim ldt = dtlastlocalmodified.Date
+                Dim rdt = dtlastremotemodified.Date
+                Dim lhr = dtlastlocalmodified.Hour
+                Dim rhr = dtlastremotemodified.Hour
+                Dim lmt = dtlastlocalmodified.Minute
+                Dim rmt = dtlastremotemodified.Minute
+                Dim ls = dtlastlocalmodified.Second
+                Dim rs = dtlastremotemodified.Second
+
+                If ldt < rdt Then
+                    bgwCheckRemoteDB.ReportProgress(0, True)
+                End If
+
+                If ldt = rdt Then
+                    If lhr < rhr Then
+                        bgwCheckRemoteDB.ReportProgress(0, True)
+                    End If
+                    If lhr = rhr Then
+                        If lmt < rmt Then
+                            bgwCheckRemoteDB.ReportProgress(0, True)
+                        End If
+                        If lmt = rmt Then
+                            If ls <= rs Then
+                                bgwCheckRemoteDB.ReportProgress(0, True)
+                            End If
+                        End If
+                    End If
+                End If
+
+                If ldt > rdt Then
+                    bgwCheckRemoteDB.ReportProgress(0, False)
+                End If
+
+            End If
+
+        Catch ex As Exception
+            bgwCheckRemoteDB.ReportProgress(0, False)
+        End Try
+    End Sub
+
+    Private Sub bgwCheckRemoteDB_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwCheckRemoteDB.ProgressChanged
+        If TypeOf e.UserState Is Boolean Then
+            Me.cprDBAvailable.Visible = e.UserState
+            If e.UserState = True Then
+                Thread.Sleep(5000)
+                Dim r = MessageBoxEx.Show("A more recent database is available in online backup list. Press OK to view and restore database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+                If r = Windows.Forms.DialogResult.OK Then
+                    OnlineDatabaseBackup()
+                End If
+            End If
+        Else
+            Me.cprDBAvailable.Visible = False
+        End If
+    End Sub
+
+#End Region
+
+
 #Region "OPEN DATABASE"
 
     Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
@@ -18431,6 +18562,7 @@ errhandler:
             Else
                 Me.LastModificationTableAdapter.UpdateQuery(ID, NewDate, ID)
             End If
+            Me.cprDBAvailable.Visible = False
         Catch ex As Exception
 
         End Try
@@ -18595,10 +18727,10 @@ errhandler:
         Catch ex As Exception
             Me.Cursor = Cursors.Default
         End Try
-       
+
     End Sub
 
-    
+
     Private Sub btnOpenErrorLog_Click(sender As Object, e As EventArgs) Handles btnOpenErrorLog.Click
         Try
             Dim errfile As String = strAppUserPath & "\ErrorLog.txt"
@@ -18614,7 +18746,7 @@ errhandler:
         Me.Cursor = Cursors.Default
     End Sub
 
- 
+
     Private Sub btnCopyDBtoUSB_Click(sender As Object, e As EventArgs) Handles btnCopyDBtoUSB.Click
         Try
             Dim driveletter As String = ""
@@ -18651,5 +18783,7 @@ errhandler:
         End Try
     End Sub
 
+
+   
    
 End Class
