@@ -38,6 +38,7 @@ Public Class frmWeeklyDiaryDE
 
     Dim RemoteRecordCount As Integer = 0
     Dim LocalRecordCount As Integer = 0
+    Dim LastRemoteRecordDate As String = "##/##/####"""
 
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -315,6 +316,7 @@ Public Class frmWeeklyDiaryDE
 
                 If u = 0 Then
                     remotecount = Val(SplitText(0))
+                    lastdate = "##/##/####"
                 End If
 
                 If u > 0 Then
@@ -342,14 +344,15 @@ Public Class frmWeeklyDiaryDE
         End If
 
         If e.ProgressPercentage = 4 Then
-            Me.lblRemoteLastDate.Text = "Last Remote Diary Date: " & e.UserState.ToString
+            LastRemoteRecordDate = e.UserState
+            Me.lblRemoteLastDate.Text = "Last Remote Diary Date: " & LastRemoteRecordDate
         End If
     End Sub
 
     Private Sub bgwRemoteCount_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwRemoteCount.RunWorkerCompleted
         If RemoteRecordCount > LocalRecordCount Then
             Me.cprDBAvailable.Visible = True
-            Dim r = MessageBoxEx.Show("A more recent Weekly Diary database is available in online backup. Press OK to import this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+            Dim r = MessageBoxEx.Show("Weekly Diary upto " & LastRemoteRecordDate & " is available in online backup. Press OK to import this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
             If r = Windows.Forms.DialogResult.OK Then
                 cprDataTransfer.IsRunning = True
                 cprDataTransfer.ProgressColor = GetProgressColor()
