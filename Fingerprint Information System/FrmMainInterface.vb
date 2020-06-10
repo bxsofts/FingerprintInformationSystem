@@ -117,6 +117,9 @@ Public Class frmMainInterface
 
     Dim blIdentificationRegisterUpdateFailed As Boolean = False
     Dim blRestartApplication As Boolean = False
+    Dim blUpdateLastModificationDate As Boolean = True
+
+    Dim RemoteModifiedDate As String = ""
 
 #End Region
 
@@ -17776,6 +17779,8 @@ errhandler:
         Try
 
             Me.Cursor = Cursors.WaitCursor
+            blUpdateLastModificationDate = False
+            Me.cprDBAvailable.Visible = False
             ' Me.TabControl.SelectedTab = SOCTabItem
             frmProgressBar.Show()
             frmProgressBar.SetStatusText("Restoring Database...")
@@ -17868,7 +17873,6 @@ errhandler:
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
             OfficeSettingsEditMode(False)
-            InsertOrUpdateLastModificationDate(Now)
 
             If blIdentificationRegisterUpdateFailed Then
                 System.Threading.Thread.Sleep(3000)
@@ -17877,7 +17881,7 @@ errhandler:
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "1", Microsoft.Win32.RegistryValueKind.String)
                 EndApplication()
             End If
-
+            blUpdateLastModificationDate = True
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -17959,8 +17963,8 @@ errhandler:
                 description = Results.Files(0).Description
                 Dim SplitText() = Strings.Split(description, "; ")
                 RemoteSOCRecordCount = Val(SplitText(4))
-                Dim strlastremotemodified As String = SplitText(1)
-                dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+                RemoteModifiedDate = SplitText(1)
+                dtlastremotemodified = DateTime.ParseExact(RemoteModifiedDate, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
             Else
                 bgwCheckRemoteDB.ReportProgress(0, False)
                 Exit Sub
@@ -17999,8 +18003,11 @@ errhandler:
                             bgwCheckRemoteDB.ReportProgress(0, True)
                         End If
                         If lmt = rmt Then
-                            If ls <= rs Then
+                            If ls < rs Then
                                 bgwCheckRemoteDB.ReportProgress(0, True)
+                            End If
+                            If ls = rs Then
+                                bgwCheckRemoteDB.ReportProgress(0, False)
                             End If
                         End If
                     End If
@@ -18022,7 +18029,7 @@ errhandler:
             Me.cprDBAvailable.Visible = e.UserState
             If e.UserState = True Then
                 Thread.Sleep(5000)
-                Dim r = MessageBoxEx.Show("A more recent database is available in online backup list. Press OK to view and restore database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+                Dim r = MessageBoxEx.Show("A more recent database (Last Modified on " & RemoteModifiedDate & ") is available in online backup. Press OK to view and restore this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
                 If r = Windows.Forms.DialogResult.OK Then
                     OnlineDatabaseBackup()
                 End If
@@ -18559,6 +18566,7 @@ errhandler:
 
     Public Sub InsertOrUpdateLastModificationDate(NewDate As Date)
         Try
+            If blUpdateLastModificationDate = False Then Exit Sub
             Dim ID As Integer = 1
             Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
             If FingerPrintDataSet.LastModification.Count = 0 Then
