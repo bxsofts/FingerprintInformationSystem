@@ -49,9 +49,9 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         Me.btnLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnLogin.Location = New System.Drawing.Point(288, 12)
+        Me.btnLogin.Location = New System.Drawing.Point(288, 10)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(119, 53)
+        Me.btnLogin.Size = New System.Drawing.Size(119, 55)
         Me.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnLogin.TabIndex = 5
         Me.btnLogin.Text = "Login"
@@ -278,7 +278,7 @@ Partial Class frmWeeklyDiaryAuthentication
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(288, 67)
+        Me.CircularProgress1.Location = New System.Drawing.Point(288, 69)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True

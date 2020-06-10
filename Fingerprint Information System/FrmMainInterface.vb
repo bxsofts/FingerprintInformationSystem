@@ -484,7 +484,7 @@ Public Class frmMainInterface
             MessageBoxEx.Show(DBMissing, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
 
-        CheckForUpdatedRemoteDatabase()
+        CheckForRecentRemoteDatabase()
     End Sub
 
 #End Region
@@ -17901,11 +17901,10 @@ errhandler:
 #End Region
 
 
-#Region "CHECK FOR UPDATED DATABASE IN ONLINE"
-    Private Sub CheckForUpdatedRemoteDatabase()
+#Region "CHECK FOR RECENT DATABASE IN ONLINE"
+    Private Sub CheckForRecentRemoteDatabase()
         Try
             If Not InternetAvailable() Then
-                Me.cprDBAvailable.Visible = False
                 Exit Sub
             End If
 
@@ -17941,6 +17940,7 @@ errhandler:
             Dim cnt = Results.Files.Count
             If cnt = 0 Then
                 bgwCheckRemoteDB.ReportProgress(0, False)
+                Exit Sub
             Else
                 UserBackupFolderID = Results.Files(0).Id
             End If
@@ -17954,12 +17954,16 @@ errhandler:
             Dim description As String = ""
             Dim dtlastremotemodified As Date
 
-            If Results.Files.Count > 0 Then
+            cnt = Results.Files.Count
+            If cnt > 0 Then
                 description = Results.Files(0).Description
                 Dim SplitText() = Strings.Split(description, "; ")
                 RemoteSOCRecordCount = Val(SplitText(4))
                 Dim strlastremotemodified As String = SplitText(1)
                 dtlastremotemodified = DateTime.ParseExact(strlastremotemodified, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+            Else
+                bgwCheckRemoteDB.ReportProgress(0, False)
+                Exit Sub
             End If
 
 

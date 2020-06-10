@@ -36,15 +36,19 @@ Public Class frmWeeklyDiaryDE
     Dim blShowUploadStatus As Boolean = True
     Dim TourStartLocation = ""
 
+    Dim RemoteRecordCount As Integer = 0
+    Dim LocalRecordCount As Integer = 0
+
     Private Sub frmWeeklyDiaryDE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
             Me.Cursor = Cursors.WaitCursor
             Me.BringToFront()
             Me.CenterToScreen()
-            Me.CircularProgress1.Visible = False
+            Me.cprDataTransfer.Visible = False
+            Me.cprDBAvailable.Visible = False
             Me.lblLastWeek.Visible = False
-           
+
             Me.txtName.Text = ""
             Me.txtOldPassword.Text = ""
             Me.txtPassword1.Text = ""
@@ -243,13 +247,13 @@ Public Class frmWeeklyDiaryDE
     Private Sub FindLastLocalRecordCountAndDate()
         Try
             Me.lblLastWeek.Visible = False
-            Dim RecordCount As Integer = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount
-            If RecordCount > 0 Then
+            LocalRecordCount = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount
+            If LocalRecordCount > 0 Then
                 Dim lastdate As Date = Me.WeeklyDiaryTableAdapter1.ScalarQueryLastDate
                 lastdate = lastdate.AddDays(-6)
                 Me.lblLastWeek.Text = "Last generated week: " & lastdate.ToString("dd/MM/yyyy", TimeFormatCulture)
                 Me.lblLastWeek.Visible = True
-                Me.lblLocalCount.Text = "No. of Local Records: " & RecordCount
+                Me.lblLocalCount.Text = "No. of Local Records: " & LocalRecordCount
                 Me.lblLocalLastDate.Text = "Last Local Diary Date: " & lastdate.ToString("dd/MM/yyyy", TimeFormatCulture)
             Else
                 Me.lblLocalCount.Text = "No. of Local Records: 0"
@@ -332,17 +336,30 @@ Public Class frmWeeklyDiaryDE
             Me.lblRemoteLastDate.Text = "Last Remote Diary Date: ##/##/####"
         End If
 
-        If e.ProgressPercentage > 2 Then
-            Me.lblRemoteCount.Visible = True
-            Me.lblRemoteLastDate.Visible = True
-        End If
-
         If e.ProgressPercentage = 3 Then
-            Me.lblRemoteCount.Text = "No. of Remote Records: " & e.UserState.ToString
+            RemoteRecordCount = e.UserState
+            Me.lblRemoteCount.Text = "No. of Remote Records: " & RemoteRecordCount
         End If
 
         If e.ProgressPercentage = 4 Then
             Me.lblRemoteLastDate.Text = "Last Remote Diary Date: " & e.UserState.ToString
+        End If
+    End Sub
+
+    Private Sub bgwRemoteCount_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwRemoteCount.RunWorkerCompleted
+        If RemoteRecordCount > LocalRecordCount Then
+            Me.cprDBAvailable.Visible = True
+            Dim r = MessageBoxEx.Show("A more recent Weekly Diary database is available in online backup. Press OK to import this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+            If r = Windows.Forms.DialogResult.OK Then
+                cprDataTransfer.IsRunning = True
+                cprDataTransfer.ProgressColor = GetProgressColor()
+                cprDataTransfer.ProgressText = "0"
+                cprDataTransfer.Visible = True
+                Me.RibbonBar1.RecalcLayout()
+                Me.bgwDownload.RunWorkerAsync()
+            End If
+        Else
+            Me.cprDBAvailable.Visible = False
         End If
     End Sub
 
@@ -762,10 +779,10 @@ Public Class frmWeeklyDiaryDE
                 fDescription = wdOfficerName & " - " & LocalRecordCount & " - " & lastdate
             End If
 
-            CircularProgress1.IsRunning = True
-            CircularProgress1.ProgressColor = GetProgressColor()
-            CircularProgress1.Visible = True
-            CircularProgress1.ProgressText = "0"
+            cprDataTransfer.IsRunning = True
+            cprDataTransfer.ProgressColor = GetProgressColor()
+            cprDataTransfer.Visible = True
+            cprDataTransfer.ProgressText = "0"
             Me.RibbonBar1.RecalcLayout()
             blShowUploadStatus = True
             Me.bgwUpload.RunWorkerAsync(fDescription)
@@ -867,7 +884,7 @@ Public Class frmWeeklyDiaryDE
         bgwUpload.ReportProgress(percent)
     End Sub
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpload.ProgressChanged
-        CircularProgress1.ProgressText = e.ProgressPercentage
+        cprDataTransfer.ProgressText = e.ProgressPercentage
         If e.ProgressPercentage = 100 And TypeOf e.UserState Is String Then
             Dim description = e.UserState.ToString
             Dim SplitText() = Strings.Split(description, " - ")
@@ -881,7 +898,7 @@ Public Class frmWeeklyDiaryDE
 
     Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUpload.RunWorkerCompleted
 
-        CircularProgress1.Visible = False
+        cprDataTransfer.Visible = False
         blUploadIsProgressing = False
 
         If uUploadStatus = UploadStatus.Completed And blShowUploadStatus Then
@@ -1069,10 +1086,10 @@ Public Class frmWeeklyDiaryDE
                 Exit Sub
             End If
 
-            CircularProgress1.IsRunning = True
-            CircularProgress1.ProgressColor = GetProgressColor()
-            CircularProgress1.ProgressText = "0"
-            CircularProgress1.Visible = True
+            cprDataTransfer.IsRunning = True
+            cprDataTransfer.ProgressColor = GetProgressColor()
+            cprDataTransfer.ProgressText = "0"
+            cprDataTransfer.Visible = True
             Me.RibbonBar1.RecalcLayout()
             Me.bgwDownload.RunWorkerAsync()
         Catch ex As Exception
@@ -1162,7 +1179,7 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
     Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownload.ProgressChanged
-        CircularProgress1.ProgressText = e.ProgressPercentage
+        cprDataTransfer.ProgressText = e.ProgressPercentage
 
 
         If e.UserState = "Weekly Diary folder not found" Then
@@ -1180,9 +1197,10 @@ Public Class frmWeeklyDiaryDE
         On Error Resume Next
         Me.Cursor = Cursors.Default
 
-        CircularProgress1.Visible = False
+        cprDataTransfer.Visible = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
+            Me.cprDBAvailable.Visible = False
             ConnectToDatabase()
             CreateTourNoteColumns()
             RemoveNullFromTourNoteColumns()
@@ -1684,5 +1702,5 @@ Public Class frmWeeklyDiaryDE
         Me.Cursor = Cursors.Default
     End Sub
 
-  
+
 End Class

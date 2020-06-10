@@ -307,10 +307,19 @@ Public Class frmWeeklyDiaryAuthentication
             List.Fields = "files(id, description)"
             Results = List.Execute
 
+            cnt = Results.Files.Count
+
+            If cnt = 0 Then
+                Me.Cursor = Cursors.Default
+                MessageBoxEx.Show("Weekly Diary file for the selected PEN not found in remote server.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
             Dim remotecount As Integer = 0
 
             Dim description As String = ""
-            If Results.Files.Count > 0 Then
+
+            If cnt > 0 Then
                 description = Results.Files(0).Description
                 Dim SplitText() = Strings.Split(description, " - ")
                 Dim u = SplitText.GetUpperBound(0)
