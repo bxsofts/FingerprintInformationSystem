@@ -1310,9 +1310,14 @@ Public Class frmFISBackupList
             blUploadIsProgressing = True
 
             Dim request As New Google.Apis.Drive.v3.Data.File   'FISService.Files.Get(InstallerFileID).Execute
-            request.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
+            Dim fname As String = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
+            request.Name = fname
             request.MimeType = "files/" & My.Computer.FileSystem.GetFileInfo(e.Argument).Extension.Replace(".", "")
             request.Description = FileOwner
+            If fname.ToLower.StartsWith(strAppName.ToLower) And fname.ToLower.EndsWith(".exe") Then
+                Dim md5 As String = GetMD5(e.Argument)
+                request.Description = FileOwner & ", " & md5
+            End If
 
             Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(e.Argument)
             Dim Stream As New System.IO.MemoryStream(ByteArray)

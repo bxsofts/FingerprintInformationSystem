@@ -120,7 +120,7 @@ Public Class frmMainInterface
     Dim blUpdateLastModificationDate As Boolean = True
 
     Dim RemoteModifiedDate As String = ""
-
+    Dim InstallerMD5 As String = ""
 #End Region
 
 
@@ -18162,13 +18162,27 @@ errhandler:
             End If
 
             List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false and '" & parentid & "' in parents"
-            List.Fields = "files(name, id, webViewLink)"
+            List.Fields = "files(name, id, webViewLink, description)"
 
             Results = List.Execute
 
             If Results.Files.Count > 0 Then
                 InstallerFileName = Results.Files(0).Name
+                Dim InstallerFilePath As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName
                 InstallerFileID = Results.Files(0).Id
+
+                Dim description As String = Results.Files(0).Description
+                Dim SplitText() = Strings.Split(description, ", ")
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u > 0 Then
+                    Dim md5 As String = SplitText(1)
+                    Dim md5filename As String = System.IO.Path.GetFileNameWithoutExtension(InstallerFilePath) & ".md5"
+                    Dim md5file As System.IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & md5filename, False)
+                    md5file.WriteLine(md5)
+                    md5file.Close()
+                End If
+
                 Dim request = FISService.Files.Get(InstallerFileID)
                 request.Fields = "size"
                 Dim file = request.Execute
@@ -18176,7 +18190,7 @@ errhandler:
                 dFileSize = file.Size
                 dFormatedFileSize = CalculateFileSize(dFileSize)
 
-                Dim fStream = New System.IO.FileStream(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim fStream = New System.IO.FileStream(InstallerFilePath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
                 Dim mStream = New System.IO.MemoryStream
 
                 Dim m = request.MediaDownloader
@@ -18228,18 +18242,26 @@ errhandler:
     End Sub
     Private Sub bgwDownloadInstaller_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadInstaller.RunWorkerCompleted
 
-        rbrDownloadInstaller.Visible = False
-        pgrDownloadInstaller.Visible = False
+        Try
+            rbrDownloadInstaller.Visible = False
+            pgrDownloadInstaller.Visible = False
 
-        If dDownloadStatus = DownloadStatus.Completed And blShowUpdateDownloaded Then
-            MessageBoxEx.Show(InstallerFileName.Replace(".exe", "") & " Installer File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Call Shell("explorer.exe /select," & My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, AppWinStyle.NormalFocus)
-        End If
+            If dDownloadStatus = DownloadStatus.Completed And blShowUpdateDownloaded Then
+                MessageBoxEx.Show(InstallerFileName.Replace(".exe", "") & " Installer File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Call Shell("explorer.exe /select," & My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName, AppWinStyle.NormalFocus)
+            End If
 
-        If dDownloadStatus = DownloadStatus.Failed And blShowUpdateDownloaded Then
-            MessageBoxEx.Show("Installer File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+            If dDownloadStatus = DownloadStatus.Failed And blShowUpdateDownloaded Then
+                MessageBoxEx.Show("Installer File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
 
+            If dDownloadStatus = DownloadStatus.Failed Then
+                My.Computer.FileSystem.DeleteFile(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & InstallerFileName)
+            End If
+        Catch ex As Exception
+
+        End Try
+       
     End Sub
 
     Private Sub DownloadHolidayList()

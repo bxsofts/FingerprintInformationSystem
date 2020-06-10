@@ -30,10 +30,19 @@ Public Class FrmSettingsWizard
                             frmSplashScreen.CloseForm()
                             Application.DoEvents()
                             System.Threading.Thread.Sleep(1000)
-                            frmNewVersion.lblMessage.Text = "A new version " & NewInstallerVersion & " is available. Press OK to install."
-                            frmNewVersion.ShowDialog()
-                            Process.Start(InstallerFile)
-                            End
+
+                            Dim exemd5 As String = GetMD5(InstallerFile)
+                            Dim md5file As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & System.IO.Path.GetFileNameWithoutExtension(InstallerFile) & ".md5"
+                            If My.Computer.FileSystem.FileExists(md5file) Then
+                                Dim fileReader As System.IO.StreamReader = My.Computer.FileSystem.OpenTextFileReader(md5file)
+                                Dim originalmd5 As String = fileReader.ReadLine()
+                                If originalmd5 = exemd5 Then
+                                    frmNewVersion.lblMessage.Text = "A new version " & NewInstallerVersion & " is available. Press OK to install."
+                                    frmNewVersion.ShowDialog()
+                                    Process.Start(InstallerFile)
+                                    End
+                                End If
+                            End If
                         End If
                     End If
                 End If
