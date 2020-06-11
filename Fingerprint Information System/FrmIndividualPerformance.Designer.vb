@@ -41,9 +41,6 @@ Partial Class FrmIndividualPerformance
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.SOCRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter()
-        Me.DARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter()
-        Me.FPARegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
-        Me.CDRegisterTableAdapter = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter()
         Me.bgwLetter = New System.ComponentModel.BackgroundWorker()
         Me.IdentificationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter()
         Me.PanelEx2.SuspendLayout()
@@ -381,18 +378,6 @@ Partial Class FrmIndividualPerformance
         '
         Me.SOCRegisterTableAdapter.ClearBeforeFill = True
         '
-        'DARegisterTableAdapter
-        '
-        Me.DARegisterTableAdapter.ClearBeforeFill = True
-        '
-        'FPARegisterTableAdapter
-        '
-        Me.FPARegisterTableAdapter.ClearBeforeFill = True
-        '
-        'CDRegisterTableAdapter
-        '
-        Me.CDRegisterTableAdapter.ClearBeforeFill = True
-        '
         'bgwLetter
         '
         Me.bgwLetter.WorkerReportsProgress = True
@@ -442,9 +427,6 @@ Partial Class FrmIndividualPerformance
     Friend WithEvents dtTo As DevComponents.Editors.DateTimeAdv.DateTimeInput
     Friend WithEvents FingerPrintDataSet As FingerprintInformationSystem.FingerPrintDataSet
     Friend WithEvents SOCRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SOCRegisterTableAdapter
-    Friend WithEvents DARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.DARegisterTableAdapter
-    Friend WithEvents FPARegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
-    Friend WithEvents CDRegisterTableAdapter As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CDRegisterTableAdapter
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwLetter As System.ComponentModel.BackgroundWorker
     Friend WithEvents IdentificationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.IdentificationRegisterTableAdapter

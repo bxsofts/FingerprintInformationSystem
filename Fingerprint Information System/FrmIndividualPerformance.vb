@@ -7,7 +7,6 @@ Public Class FrmIndividualPerformance
     Dim d1 As Date
     Dim d2 As Date
     Dim Header As String = vbNullString
-    Dim SubHeader As String = "'"
     Dim OfficerList(4) As String
     Dim ArrayLength As Integer = 0
     Dim bliAPSFormat As Boolean = True
@@ -30,18 +29,6 @@ Public Class FrmIndividualPerformance
         If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
         Me.SOCRegisterTableAdapter.Connection.ConnectionString = sConString
         Me.SOCRegisterTableAdapter.Connection.Open()
-
-        If Me.DARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.DARegisterTableAdapter.Connection.Close()
-        Me.DARegisterTableAdapter.Connection.ConnectionString = sConString
-        Me.DARegisterTableAdapter.Connection.Open()
-
-        If Me.CDRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.CDRegisterTableAdapter.Connection.Close()
-        Me.CDRegisterTableAdapter.Connection.ConnectionString = sConString
-        Me.CDRegisterTableAdapter.Connection.Open()
-
-        If Me.FPARegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.FPARegisterTableAdapter.Connection.Close()
-        Me.FPARegisterTableAdapter.Connection.ConnectionString = sConString
-        Me.FPARegisterTableAdapter.Connection.Open()
 
         If Me.IdentificationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.IdentificationRegisterTableAdapter1.Connection.Close()
         Me.IdentificationRegisterTableAdapter1.Connection.ConnectionString = sConString
@@ -133,7 +120,6 @@ Public Class FrmIndividualPerformance
                     Exit Sub
                 End If
                     Header = "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
-                SubHeader = "Details of additional duties attended by the staff of this unit during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
                 Case btnGenerateByMonth.Name
                     Dim m = Me.cmbMonth.SelectedIndex + 1
                     Dim y = Me.txtYear.Value
@@ -141,7 +127,6 @@ Public Class FrmIndividualPerformance
                     d1 = New Date(y, m, 1)
                     d2 = New Date(y, m, d)
                     Header = "STATEMENT OF INDIVIDUAL PERFORMANCE OF THE STAFF for the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
-                    SubHeader = "Details of additional duties attended by the staff of this unit during the month of " & Me.cmbMonth.Text & " " & Me.txtYear.Text
             End Select
 
             Me.CircularProgress1.Show()
@@ -167,16 +152,6 @@ Public Class FrmIndividualPerformance
             bgwLetter.ReportProgress(0)
             System.Threading.Thread.Sleep(10)
 
-            Dim dacount As Integer = Val(Me.DARegisterTableAdapter.CountDASlip(d1, d2))
-            Dim fpacount As Integer = Val(Me.FPARegisterTableAdapter.AttestedPersonCount(d1, d2))
-            Dim cdcount As Integer = Val(Me.CDRegisterTableAdapter.CountCD(d1, d2))
-           
-            Dim sdacount As String = ""
-            Dim sfpacount As String = ""
-            Dim scdcount As String = ""
-            If dacount = 0 Then sdacount = "Nil" Else sdacount = dacount.ToString
-            If fpacount = 0 Then sfpacount = "Nil" Else sfpacount = fpacount.ToString
-            If cdcount = 0 Then scdcount = "Nil" Else scdcount = cdcount.ToString
             For delay = 1 To 10
                 bgwLetter.ReportProgress(delay)
                 System.Threading.Thread.Sleep(10)
@@ -196,9 +171,6 @@ Public Class FrmIndividualPerformance
             Next
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
-
-            WordApp.Selection.Document.PageSetup.TopMargin = 40
-            WordApp.Selection.Document.PageSetup.BottomMargin = 20
 
             WordApp.Selection.NoProofing = 1
             WordApp.Selection.Font.Bold = 1
@@ -357,20 +329,6 @@ Public Class FrmIndividualPerformance
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
 
             WordApp.Selection.TypeParagraph()
-            WordApp.Selection.Font.Bold = 1
-            WordApp.Selection.TypeText(SubHeader)
-            WordApp.Selection.Font.Bold = 0
-            WordApp.Selection.TypeParagraph()
-            WordApp.Selection.ParagraphFormat.LeftIndent = 20
-            WordApp.Selection.TypeText("1. No. of currents received and disposed" & vbTab & vbTab & vbTab & vbTab & ": " & vbNewLine)
-            WordApp.Selection.TypeText("2. No. of suspects prints received and compared" & vbTab & vbTab & vbTab & ": " & vbNewLine)
-            WordApp.Selection.TypeText("3. No. of DA slips received and classified" & vbTab & vbTab & vbTab & vbTab & ": " & sdacount & vbNewLine)
-            WordApp.Selection.TypeText("4. No. of range conference conducted" & vbTab & vbTab & vbTab & vbTab & ": " & vbNewLine)
-            WordApp.Selection.TypeText("5. No. of FP slips prepared and certified for persons abroad" & vbTab & vbTab & ": " & sfpacount & vbNewLine)
-            WordApp.Selection.TypeText("6. No. of correspondence reports prepared and dispatched" & vbTab & vbTab & ": " & vbNewLine)
-            WordApp.Selection.TypeText("7. No. of court duties attended" & vbTab & vbTab & vbTab & vbTab & vbTab & ": " & scdcount & vbNewLine)
-            WordApp.Selection.TypeText("8. Others, if any" & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & ": " & vbNewLine)
-            WordApp.Selection.TypeParagraph()
 
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Submitted,")
 
@@ -391,6 +349,8 @@ Public Class FrmIndividualPerformance
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeText("To: The Director, Fingerprint Bureau, Thiruvananthapuram")
             End If
+
+            WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
             For delay = 91 To 100
                 bgwLetter.ReportProgress(delay)
