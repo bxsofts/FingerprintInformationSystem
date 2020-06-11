@@ -55,6 +55,8 @@ Public Class frmWeeklyDiaryDE
             Me.txtPassword1.Text = ""
             Me.txtPassword2.Text = ""
 
+            FindRemoteRecordCountAndDate()
+
             ShowPasswordFields(False)
             Me.btnSaveName.Visible = False
             Me.btnCancelName.Visible = False
@@ -110,7 +112,6 @@ Public Class frmWeeklyDiaryDE
             Control.CheckForIllegalCrossThreadCalls = False
 
             FindLastLocalRecordCountAndDate()
-            FindRemoteRecordCountAndDate()
 
             blDGVChanged = False
             Me.Cursor = Cursors.Default
@@ -350,20 +351,26 @@ Public Class frmWeeklyDiaryDE
     End Sub
 
     Private Sub bgwRemoteCount_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwRemoteCount.RunWorkerCompleted
-        If RemoteRecordCount > LocalRecordCount Then
-            Me.cprDBAvailable.Visible = True
-            Dim r = MessageBoxEx.Show("Weekly Diary upto " & LastRemoteRecordDate & " is available in online backup. Press OK to import this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
-            If r = Windows.Forms.DialogResult.OK Then
-                cprDataTransfer.IsRunning = True
-                cprDataTransfer.ProgressColor = GetProgressColor()
-                cprDataTransfer.ProgressText = "0"
-                cprDataTransfer.Visible = True
-                Me.RibbonBar1.RecalcLayout()
-                Me.bgwDownload.RunWorkerAsync()
+        Try
+            LocalRecordCount = Me.WeeklyDiaryTableAdapter1.ScalarQueryCount
+            If RemoteRecordCount > LocalRecordCount Then
+                Me.cprDBAvailable.Visible = True
+                Dim r = MessageBoxEx.Show("Weekly Diary upto " & LastRemoteRecordDate & " is available in online backup. Press OK to import this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+                If r = Windows.Forms.DialogResult.OK Then
+                    cprDataTransfer.IsRunning = True
+                    cprDataTransfer.ProgressColor = GetProgressColor()
+                    cprDataTransfer.ProgressText = "0"
+                    cprDataTransfer.Visible = True
+                    Me.RibbonBar1.RecalcLayout()
+                    Me.bgwDownload.RunWorkerAsync()
+                End If
+            Else
+                Me.cprDBAvailable.Visible = False
             End If
-        Else
-            Me.cprDBAvailable.Visible = False
-        End If
+        Catch ex As Exception
+
+        End Try
+        
     End Sub
 
 #End Region

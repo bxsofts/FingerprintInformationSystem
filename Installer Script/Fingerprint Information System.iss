@@ -180,6 +180,8 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\BackupSettin
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\BackupSettings; ValueType: string; ValueName: AutoBackupTime; ValueData: 15; Flags: noerror uninsdeletekey  createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\TabColorSettings; ValueType: string; ValueName: TabStyle; ValueData: 9; Flags: noerror uninsdeletekey createvalueifdoesntexist
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: ShowNewVersionInfo; ValueData: 1; Flags: noerror uninsdeletekey
+Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: HeadOfAccount; ValueData: 0055-00-501-99; Flags: noerror uninsdeletekey
+
 [Run]
 ; Filename: {app}\syspin.exe; Tasks: Pintotaskbar;  Parameters: """{app}\Fingerprint Information System.exe"" c:""Pin To Taskbar""" ; Flags: runhidden
 Filename: {app}\PinToTaskbar.exe; Tasks: Pintotaskbar  ; Flags: runhidden

@@ -713,7 +713,7 @@ Public Class frmFPAStatement
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText("Collection from April upto the month during the last financial year")
 
-                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-00-501-99")
 
                 WordApp.Selection.Tables.Item(1).Cell(2, 1).Select()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -988,7 +988,7 @@ Public Class frmFPAStatement
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
                 WordApp.Selection.TypeText("Collection from April upto the month during the last financial year")
 
-                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-00-501-99")
 
 
 
@@ -1211,7 +1211,7 @@ Public Class frmFPAStatement
                 xlSheet.Range("A" & i, "B" & i).Merge()
 
                 i = i + 1
-                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-501-99")
+                Dim headofac As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "HeadOfAccount", "0055-00-501-99")
 
                 xlSheet.Range("A" & i).Value = headofac
                 xlSheet.Range("C" & i).Value = Me.lblAmount1.Text

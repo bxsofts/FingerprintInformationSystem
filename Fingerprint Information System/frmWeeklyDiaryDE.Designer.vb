@@ -23,21 +23,21 @@ Partial Class frmWeeklyDiaryDE
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWeeklyDiaryDE))
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.SuperTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
         Me.SuperTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
@@ -111,6 +111,7 @@ Partial Class frmWeeklyDiaryDE
         Me.OfficeDetailsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.tabOD = New DevComponents.DotNetBar.SuperTabItem()
         Me.RibbonBar1 = New DevComponents.DotNetBar.RibbonBar()
+        Me.cprDBAvailable = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnNewEntry = New DevComponents.DotNetBar.ButtonItem()
         Me.btnEdit = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDelete = New DevComponents.DotNetBar.ButtonItem()
@@ -133,7 +134,6 @@ Partial Class frmWeeklyDiaryDE
         Me.OfficeDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.OfficeDetailsTableAdapter()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.bgwRemoteCount = New System.ComponentModel.BackgroundWorker()
-        Me.cprDBAvailable = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.PanelEx1.SuspendLayout()
         CType(Me.SuperTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl1.SuspendLayout()
@@ -268,39 +268,39 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvWeeklyDiary.AutoGenerateColumns = False
         Me.dgvWeeklyDiary.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvWeeklyDiary.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvWeeklyDiary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle43.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvWeeklyDiary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle43
         Me.dgvWeeklyDiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvWeeklyDiary.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn1, Me.DiaryDateDataGridViewTextBoxColumn, Me.WorkDoneDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn1, Me.TourFrom, Me.TourTo, Me.TourPurpose})
         Me.dgvWeeklyDiary.DataSource = Me.WeeklyDiaryBindingSource
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvWeeklyDiary.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle50.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle50.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvWeeklyDiary.DefaultCellStyle = DataGridViewCellStyle50
         Me.dgvWeeklyDiary.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvWeeklyDiary.EnableHeadersVisualStyles = False
         Me.dgvWeeklyDiary.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.dgvWeeklyDiary.Location = New System.Drawing.Point(0, 0)
         Me.dgvWeeklyDiary.MultiSelect = False
         Me.dgvWeeklyDiary.Name = "dgvWeeklyDiary"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvWeeklyDiary.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle51.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle51.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle51.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle51.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle51.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvWeeklyDiary.RowHeadersDefaultCellStyle = DataGridViewCellStyle51
         Me.dgvWeeklyDiary.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvWeeklyDiary.RowTemplate.Height = 40
         Me.dgvWeeklyDiary.SelectAllSignVisible = False
@@ -320,8 +320,8 @@ Partial Class frmWeeklyDiaryDE
         'DiaryDateDataGridViewTextBoxColumn
         '
         Me.DiaryDateDataGridViewTextBoxColumn.DataPropertyName = "DiaryDate"
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy dddd"
-        Me.DiaryDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle44.Format = "dd/MM/yyyy dddd"
+        Me.DiaryDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle44
         Me.DiaryDateDataGridViewTextBoxColumn.HeaderText = "Date"
         Me.DiaryDateDataGridViewTextBoxColumn.Name = "DiaryDateDataGridViewTextBoxColumn"
         Me.DiaryDateDataGridViewTextBoxColumn.ReadOnly = True
@@ -330,9 +330,9 @@ Partial Class frmWeeklyDiaryDE
         'WorkDoneDataGridViewTextBoxColumn
         '
         Me.WorkDoneDataGridViewTextBoxColumn.DataPropertyName = "WorkDone"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.WorkDoneDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.WorkDoneDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle45
         Me.WorkDoneDataGridViewTextBoxColumn.HeaderText = "Work Done"
         Me.WorkDoneDataGridViewTextBoxColumn.Name = "WorkDoneDataGridViewTextBoxColumn"
         Me.WorkDoneDataGridViewTextBoxColumn.Width = 400
@@ -340,9 +340,9 @@ Partial Class frmWeeklyDiaryDE
         'RemarksDataGridViewTextBoxColumn1
         '
         Me.RemarksDataGridViewTextBoxColumn1.DataPropertyName = "Remarks"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RemarksDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RemarksDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle46
         Me.RemarksDataGridViewTextBoxColumn1.HeaderText = "Remarks"
         Me.RemarksDataGridViewTextBoxColumn1.Name = "RemarksDataGridViewTextBoxColumn1"
         Me.RemarksDataGridViewTextBoxColumn1.Width = 150
@@ -350,16 +350,16 @@ Partial Class frmWeeklyDiaryDE
         'TourFrom
         '
         Me.TourFrom.DataPropertyName = "TourFrom"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.TourFrom.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.TourFrom.DefaultCellStyle = DataGridViewCellStyle47
         Me.TourFrom.HeaderText = "Tour From"
         Me.TourFrom.Name = "TourFrom"
         '
         'TourTo
         '
         Me.TourTo.DataPropertyName = "TourTo"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.TourTo.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.TourTo.DefaultCellStyle = DataGridViewCellStyle48
         Me.TourTo.HeaderText = "Tour To"
         Me.TourTo.Name = "TourTo"
         Me.TourTo.Width = 150
@@ -367,8 +367,8 @@ Partial Class frmWeeklyDiaryDE
         'TourPurpose
         '
         Me.TourPurpose.DataPropertyName = "TourPurpose"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.TourPurpose.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.TourPurpose.DefaultCellStyle = DataGridViewCellStyle49
         Me.TourPurpose.HeaderText = "Tour Purpose"
         Me.TourPurpose.Name = "TourPurpose"
         Me.TourPurpose.Width = 200
@@ -1169,25 +1169,25 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.AllowUserToOrderColumns = True
         Me.dgvOfficeDetails.AutoGenerateColumns = False
         Me.dgvOfficeDetails.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvOfficeDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle52.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle52.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle52.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvOfficeDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle52
         Me.dgvOfficeDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvOfficeDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UnitDataGridViewTextBoxColumn, Me.FromDateDataGridViewTextBoxColumn, Me.ToDateDataGridViewTextBoxColumn, Me.DesignationDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn, Me.IDDataGridViewTextBoxColumn})
         Me.dgvOfficeDetails.DataSource = Me.OfficeDetailsBindingSource
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvOfficeDetails.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle55.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle55.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle55.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle55.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvOfficeDetails.DefaultCellStyle = DataGridViewCellStyle55
         Me.dgvOfficeDetails.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvOfficeDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvOfficeDetails.EnableHeadersVisualStyles = False
@@ -1195,14 +1195,14 @@ Partial Class frmWeeklyDiaryDE
         Me.dgvOfficeDetails.Location = New System.Drawing.Point(0, 128)
         Me.dgvOfficeDetails.MultiSelect = False
         Me.dgvOfficeDetails.Name = "dgvOfficeDetails"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvOfficeDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle56.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle56.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle56.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvOfficeDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle56
         Me.dgvOfficeDetails.RowTemplate.Height = 30
         Me.dgvOfficeDetails.SelectAllSignVisible = False
         Me.dgvOfficeDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -1220,18 +1220,18 @@ Partial Class frmWeeklyDiaryDE
         'FromDateDataGridViewTextBoxColumn
         '
         Me.FromDateDataGridViewTextBoxColumn.DataPropertyName = "FromDate"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle11.Format = "dd/MM/yyyy"
-        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle53.Format = "dd/MM/yyyy"
+        Me.FromDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle53
         Me.FromDateDataGridViewTextBoxColumn.HeaderText = "From Date"
         Me.FromDateDataGridViewTextBoxColumn.Name = "FromDateDataGridViewTextBoxColumn"
         '
         'ToDateDataGridViewTextBoxColumn
         '
         Me.ToDateDataGridViewTextBoxColumn.DataPropertyName = "ToDate"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle12.Format = "dd/MM/yyyy"
-        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle54.Format = "dd/MM/yyyy"
+        Me.ToDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle54
         Me.ToDateDataGridViewTextBoxColumn.HeaderText = "To Date"
         Me.ToDateDataGridViewTextBoxColumn.Name = "ToDateDataGridViewTextBoxColumn"
         '
@@ -1298,6 +1298,24 @@ Partial Class frmWeeklyDiaryDE
         '
         '
         Me.RibbonBar1.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'cprDBAvailable
+        '
+        Me.cprDBAvailable.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.cprDBAvailable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.cprDBAvailable.FocusCuesEnabled = False
+        Me.cprDBAvailable.Location = New System.Drawing.Point(916, 10)
+        Me.cprDBAvailable.Name = "cprDBAvailable"
+        Me.cprDBAvailable.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Pie
+        Me.cprDBAvailable.ProgressColor = System.Drawing.Color.SpringGreen
+        Me.cprDBAvailable.Size = New System.Drawing.Size(20, 15)
+        Me.cprDBAvailable.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.cprDBAvailable.TabIndex = 1
+        Me.cprDBAvailable.TabStop = False
+        Me.cprDBAvailable.Value = 100
         '
         'btnNewEntry
         '
@@ -1444,24 +1462,6 @@ Partial Class frmWeeklyDiaryDE
         '
         Me.bgwRemoteCount.WorkerReportsProgress = True
         Me.bgwRemoteCount.WorkerSupportsCancellation = True
-        '
-        'cprDBAvailable
-        '
-        Me.cprDBAvailable.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.cprDBAvailable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.cprDBAvailable.FocusCuesEnabled = False
-        Me.cprDBAvailable.Location = New System.Drawing.Point(917, 10)
-        Me.cprDBAvailable.Name = "cprDBAvailable"
-        Me.cprDBAvailable.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Pie
-        Me.cprDBAvailable.ProgressColor = System.Drawing.Color.SpringGreen
-        Me.cprDBAvailable.Size = New System.Drawing.Size(20, 15)
-        Me.cprDBAvailable.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.cprDBAvailable.TabIndex = 1
-        Me.cprDBAvailable.TabStop = False
-        Me.cprDBAvailable.Value = 100
         '
         'frmWeeklyDiaryDE
         '

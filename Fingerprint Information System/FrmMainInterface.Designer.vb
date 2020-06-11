@@ -152,6 +152,7 @@ Partial Class frmMainInterface
         Me.btnBasicOnlineFileTransfer = New DevComponents.DotNetBar.ButtonItem()
         Me.btnPersonalOnlineFiles = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar4 = New DevComponents.DotNetBar.RibbonBar()
+        Me.cprDBAvailable = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnLocalBackup = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOnlineBackup = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonBar2 = New DevComponents.DotNetBar.RibbonBar()
@@ -544,9 +545,6 @@ Partial Class frmMainInterface
         Me.lblAutoCapsStatus = New DevComponents.DotNetBar.LabelItem()
         Me.lblTime = New DevComponents.DotNetBar.LabelItem()
         Me.TabControl = New DevComponents.DotNetBar.TabControl()
-        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
-        Me.lblFPAGridInfo = New DevComponents.DotNetBar.LabelX()
-        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel1 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
@@ -675,6 +673,9 @@ Partial Class frmMainInterface
         Me.txtSOCNumberOnly = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.TabStyleContextMenuBar = New DevComponents.DotNetBar.ContextMenuBar()
         Me.SOCTabItem = New DevComponents.DotNetBar.TabItem(Me.components)
+        Me.TabControlPanel4 = New DevComponents.DotNetBar.TabControlPanel()
+        Me.lblFPAGridInfo = New DevComponents.DotNetBar.LabelX()
+        Me.FPATabItem = New DevComponents.DotNetBar.TabItem(Me.components)
         Me.TabControlPanel11 = New DevComponents.DotNetBar.TabControlPanel()
         Me.PanelIDR = New DevComponents.DotNetBar.PanelEx()
         Me.lblIDRGridInfo = New DevComponents.DotNetBar.LabelX()
@@ -1126,7 +1127,6 @@ Partial Class frmMainInterface
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         Me.SSTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SupportingStaffTableAdapter()
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
-        Me.cprDBAvailable = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.bgwCheckRemoteDB = New System.ComponentModel.BackgroundWorker()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
@@ -1163,7 +1163,6 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabControl.SuspendLayout
-        Me.TabControlPanel4.SuspendLayout
         Me.TabControlPanel1.SuspendLayout
         Me.PanelEx1.SuspendLayout
         Me.PanelEx4.SuspendLayout
@@ -1180,6 +1179,7 @@ Partial Class frmMainInterface
         CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControlPanel4.SuspendLayout
         Me.TabControlPanel11.SuspendLayout
         Me.PanelIDR.SuspendLayout
         Me.TabControlPanel10.SuspendLayout
@@ -1747,6 +1747,24 @@ Partial Class frmMainInterface
         '
         '
         Me.RibbonBar4.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        'cprDBAvailable
+        '
+        Me.cprDBAvailable.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.cprDBAvailable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.cprDBAvailable.FocusCuesEnabled = false
+        Me.cprDBAvailable.Location = New System.Drawing.Point(146, 13)
+        Me.cprDBAvailable.Name = "cprDBAvailable"
+        Me.cprDBAvailable.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Pie
+        Me.cprDBAvailable.ProgressColor = System.Drawing.Color.SpringGreen
+        Me.cprDBAvailable.Size = New System.Drawing.Size(20, 15)
+        Me.cprDBAvailable.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.cprDBAvailable.TabIndex = 0
+        Me.cprDBAvailable.TabStop = false
+        Me.cprDBAvailable.Value = 100
         '
         'btnLocalBackup
         '
@@ -5662,48 +5680,6 @@ Partial Class frmMainInterface
         Me.TabControl.Tabs.Add(Me.OSTabItem)
         Me.TabControl.TabStop = false
         '
-        'TabControlPanel4
-        '
-        Me.TabControlPanel4.Controls.Add(Me.lblFPAGridInfo)
-        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
-        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
-        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
-        Me.TabControlPanel4.Name = "TabControlPanel4"
-        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 528)
-        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
-        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
-        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
-        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
-            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
-        Me.TabControlPanel4.Style.GradientAngle = 90
-        Me.TabControlPanel4.TabIndex = 4
-        Me.TabControlPanel4.TabItem = Me.FPATabItem
-        '
-        'lblFPAGridInfo
-        '
-        Me.lblFPAGridInfo.AutoSize = true
-        Me.lblFPAGridInfo.BackColor = System.Drawing.Color.Gold
-        '
-        '
-        '
-        Me.lblFPAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblFPAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblFPAGridInfo.ForeColor = System.Drawing.Color.Red
-        Me.lblFPAGridInfo.Location = New System.Drawing.Point(22, 261)
-        Me.lblFPAGridInfo.Name = "lblFPAGridInfo"
-        Me.lblFPAGridInfo.Size = New System.Drawing.Size(35, 24)
-        Me.lblFPAGridInfo.TabIndex = 165
-        Me.lblFPAGridInfo.Text = "Grid"
-        Me.lblFPAGridInfo.Visible = false
-        '
-        'FPATabItem
-        '
-        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
-        Me.FPATabItem.Name = "FPATabItem"
-        Me.FPATabItem.Text = "FP Attestation Register"
-        '
         'TabControlPanel1
         '
         Me.TabControlPanel1.Controls.Add(Me.PanelEx1)
@@ -7536,6 +7512,48 @@ Partial Class frmMainInterface
         Me.SOCTabItem.AttachedControl = Me.TabControlPanel1
         Me.SOCTabItem.Name = "SOCTabItem"
         Me.SOCTabItem.Text = "SOC Register"
+        '
+        'TabControlPanel4
+        '
+        Me.TabControlPanel4.Controls.Add(Me.lblFPAGridInfo)
+        Me.TabControlPanel4.Controls.Add(Me.FPADataGrid)
+        Me.TabControlPanel4.DisabledBackColor = System.Drawing.Color.Empty
+        Me.TabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControlPanel4.Location = New System.Drawing.Point(0, 25)
+        Me.TabControlPanel4.Name = "TabControlPanel4"
+        Me.TabControlPanel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.TabControlPanel4.Size = New System.Drawing.Size(1360, 528)
+        Me.TabControlPanel4.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer))
+        Me.TabControlPanel4.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
+        Me.TabControlPanel4.Style.BorderColor.Color = System.Drawing.Color.FromArgb(CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer), CType(CType(204,Byte),Integer))
+        Me.TabControlPanel4.Style.BorderSide = CType(((DevComponents.DotNetBar.eBorderSide.Left Or DevComponents.DotNetBar.eBorderSide.Right)  _
+            Or DevComponents.DotNetBar.eBorderSide.Bottom),DevComponents.DotNetBar.eBorderSide)
+        Me.TabControlPanel4.Style.GradientAngle = 90
+        Me.TabControlPanel4.TabIndex = 4
+        Me.TabControlPanel4.TabItem = Me.FPATabItem
+        '
+        'lblFPAGridInfo
+        '
+        Me.lblFPAGridInfo.AutoSize = true
+        Me.lblFPAGridInfo.BackColor = System.Drawing.Color.Gold
+        '
+        '
+        '
+        Me.lblFPAGridInfo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblFPAGridInfo.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblFPAGridInfo.ForeColor = System.Drawing.Color.Red
+        Me.lblFPAGridInfo.Location = New System.Drawing.Point(22, 261)
+        Me.lblFPAGridInfo.Name = "lblFPAGridInfo"
+        Me.lblFPAGridInfo.Size = New System.Drawing.Size(35, 24)
+        Me.lblFPAGridInfo.TabIndex = 165
+        Me.lblFPAGridInfo.Text = "Grid"
+        Me.lblFPAGridInfo.Visible = false
+        '
+        'FPATabItem
+        '
+        Me.FPATabItem.AttachedControl = Me.TabControlPanel4
+        Me.FPATabItem.Name = "FPATabItem"
+        Me.FPATabItem.Text = "FP Attestation Register"
         '
         'TabControlPanel11
         '
@@ -14196,24 +14214,6 @@ Partial Class frmMainInterface
         '
         Me.bgwCleanOnlineFiles.WorkerReportsProgress = true
         '
-        'cprDBAvailable
-        '
-        Me.cprDBAvailable.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.cprDBAvailable.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.cprDBAvailable.FocusCuesEnabled = false
-        Me.cprDBAvailable.Location = New System.Drawing.Point(148, 13)
-        Me.cprDBAvailable.Name = "cprDBAvailable"
-        Me.cprDBAvailable.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Pie
-        Me.cprDBAvailable.ProgressColor = System.Drawing.Color.SpringGreen
-        Me.cprDBAvailable.Size = New System.Drawing.Size(20, 15)
-        Me.cprDBAvailable.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.cprDBAvailable.TabIndex = 0
-        Me.cprDBAvailable.TabStop = false
-        Me.cprDBAvailable.Value = 100
-        '
         'bgwCheckRemoteDB
         '
         Me.bgwCheckRemoteDB.WorkerReportsProgress = true
@@ -14269,8 +14269,6 @@ Partial Class frmMainInterface
         CType(Me.StatusBar,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabControl,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabControl.ResumeLayout(false)
-        Me.TabControlPanel4.ResumeLayout(false)
-        Me.TabControlPanel4.PerformLayout
         Me.TabControlPanel1.ResumeLayout(false)
         Me.PanelEx1.ResumeLayout(false)
         Me.PanelEx4.ResumeLayout(false)
@@ -14289,6 +14287,8 @@ Partial Class frmMainInterface
         CType(Me.dtSOCReport,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.dtSOCInspection,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.TabStyleContextMenuBar,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControlPanel4.ResumeLayout(false)
+        Me.TabControlPanel4.PerformLayout
         Me.TabControlPanel11.ResumeLayout(false)
         Me.PanelIDR.ResumeLayout(false)
         Me.PanelIDR.PerformLayout
