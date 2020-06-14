@@ -440,7 +440,7 @@ Public Class frmPersonalFileStorage
     End Sub
 
 
-    Private Sub RefreshFileList() Handles btnRefresh.Click
+    Private Sub RefreshFileList() Handles btnRefresh.Click, btnRefreshCM.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -537,7 +537,7 @@ Public Class frmPersonalFileStorage
 
 #Region "NEW FOLDER"
 
-    Private Sub btnNewFolder_Click(sender As Object, e As EventArgs) Handles btnNewFolder.Click
+    Private Sub btnNewFolder_Click(sender As Object, e As EventArgs) Handles btnNewFolder.Click, btnNewFolderCM.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -635,7 +635,7 @@ Public Class frmPersonalFileStorage
 
 #Region "UPLOAD FILE"
 
-    Private Sub btnUploadFile_Click(sender As Object, e As EventArgs) Handles btnUploadFile.Click
+    Private Sub btnUploadFile_Click(sender As Object, e As EventArgs) Handles btnUploadFile.Click, btnUploadCM.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -861,7 +861,7 @@ Public Class frmPersonalFileStorage
 
 #Region "DOWNLOAD FILE"
 
-    Private Sub DownloadSelectedFile() Handles btnDownloadFile.Click
+    Private Sub DownloadSelectedFile() Handles btnDownloadFile.Click, btnDownloadCM.Click
 
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
@@ -1121,7 +1121,7 @@ Public Class frmPersonalFileStorage
 
 #Region "DELETE FILE"
 
-    Private Sub DeleteSelectedFile(sender As Object, e As EventArgs) Handles btnRemoveFile.Click
+    Private Sub DeleteSelectedFile(sender As Object, e As EventArgs) Handles btnRemoveFile.Click, btnRemoveCM.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -1289,7 +1289,7 @@ Public Class frmPersonalFileStorage
 
 
 #Region "RENAME FILES"
-    Private Sub btnRename_Click(sender As Object, e As EventArgs) Handles btnRename.Click
+    Private Sub btnRename_Click(sender As Object, e As EventArgs) Handles btnRename.Click, btnRenameCM.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -1400,7 +1400,7 @@ Public Class frmPersonalFileStorage
 
 
 #Region "SHARE FILES"
-    Private Sub btnShareFile_Click(sender As Object, e As EventArgs) Handles btnShareFile.Click
+    Private Sub btnShareFile_Click(sender As Object, e As EventArgs) Handles btnShareFile.Click, btnShareCM.Click
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
@@ -1548,7 +1548,47 @@ Public Class frmPersonalFileStorage
         Me.listViewEx1.SelectedItems(0).EnsureVisible()
     End Sub
 
+
+    Private Sub ContextMenuBar1_PopupOpen(sender As Object, e As PopupOpenEventArgs) Handles ContextMenuBar1.PopupOpen
+        On Error Resume Next
+
+        Me.btnRefreshCM.Visible = False
+        Me.btnNewFolderCM.Visible = False
+        Me.btnUploadCM.Visible = False
+        Me.btnDownloadCM.Visible = False
+        Me.btnRemoveCM.Visible = False
+        Me.btnRenameCM.Visible = False
+        Me.btnShareCM.Visible = False
+
+        If Me.listViewEx1.Items.Count = 0 Or Me.listViewEx1.SelectedItems.Count = 0 Then
+            Me.btnRefreshCM.Visible = True
+            Me.btnNewFolderCM.Visible = True
+            Me.btnUploadCM.Visible = True
+            Me.btnRemoveCM.Visible = False
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 1 Then
+
+            If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+                e.Cancel = True
+            End If
+
+            Me.btnRenameCM.Visible = True
+            Me.btnShareCM.Visible = True
+            Me.btnRemoveCM.Visible = True
+            If Not Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
+                Me.btnDownloadCM.Visible = True
+            End If
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+                e.Cancel = True
+            End If
+            Me.btnRemoveCM.Visible = True
+        End If
+
+
+    End Sub
     
-  
-  
 End Class
