@@ -116,7 +116,7 @@ Public Class FrmLocalBackup
 
     End Sub
 
-    Private Sub RestoreDatabase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestoreDatabase.Click
+    Private Sub RestoreDatabase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestoreDatabase.Click, btnRestoreCM.Click
         Try
             If Me.listViewEx1.Items.Count = 0 Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("No backup files in the list", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -198,7 +198,7 @@ Public Class FrmLocalBackup
         End If
     End Sub
 
-    Private Sub RemoveBackupFile() Handles btnRemoveBackupFile.Click
+    Private Sub RemoveBackupFile() Handles btnRemoveBackupFile.Click, btnRemoveCM.Click
         On Error Resume Next
         If Me.listViewEx1.Items.Count = 0 Then
             DevComponents.DotNetBar.MessageBoxEx.Show("No backup files in the list", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -226,7 +226,7 @@ Public Class FrmLocalBackup
                 Me.listViewEx1.SelectedItems(0).Remove()
                 Application.DoEvents()
             Next
-            
+
             ShowDesktopAlert("Selected backup files deleted to the Recycle Bin.")
             SelectNextItem(selectedfileindex)
             DisplayInformation()
@@ -260,7 +260,7 @@ Public Class FrmLocalBackup
     End Sub
 
 
-    Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click
+    Private Sub btnOpenBackupLocation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpenBackupFolder.Click, btnOpenFolderCM.Click
         On Error Resume Next
         If Me.listViewEx1.SelectedItems.Count <> 0 Then
             Call Shell("explorer.exe /select," & Me.listViewEx1.SelectedItems(0).SubItems(2).Text, AppWinStyle.NormalFocus)
@@ -274,7 +274,7 @@ Public Class FrmLocalBackup
         Call Shell("explorer.exe " & BackupPath, AppWinStyle.NormalFocus)
     End Sub
 
-    Private Sub OpenFileInMSAccess(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnOpenFileMSAccess.Click
+    Private Sub OpenFileInMSAccess(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnOpenFileMSAccess.Click, btnOpenFileCM.Click
         Try
             If Me.listViewEx1.Items.Count = 0 Then
                 DevComponents.DotNetBar.MessageBoxEx.Show("No backup files in the list", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -332,7 +332,28 @@ Public Class FrmLocalBackup
         Me.lblCount.Text = "No. of Backup Files: " & Me.listViewEx1.Items.Count
     End Sub
 
-    
+    Private Sub ContextMenuBar1_PopupOpen(sender As Object, e As PopupOpenEventArgs) Handles ContextMenuBar1.PopupOpen
+        On Error Resume Next
+        Me.btnRestoreCM.Visible = False
+        Me.btnRemoveCM.Visible = False
+        Me.btnOpenFileCM.Visible = False
+        Me.btnOpenFolderCM.Visible = False
+
+        If Me.listViewEx1.Items.Count = 0 Or Me.listViewEx1.SelectedItems.Count = 0 Then
+            e.Cancel = True
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 1 Then
+            Me.btnRestoreCM.Visible = True
+            Me.btnRemoveCM.Visible = True
+            Me.btnOpenFileCM.Visible = True
+            Me.btnOpenFolderCM.Visible = True
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            Me.btnRemoveCM.Visible = True
+        End If
+    End Sub
 End Class
 
 

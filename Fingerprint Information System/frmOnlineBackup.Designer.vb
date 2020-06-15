@@ -34,16 +34,26 @@ Partial Class frmOnlineBackup
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
-        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
+        Me.ContextMenuBar1 = New DevComponents.DotNetBar.ContextMenuBar()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
-        Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.BackupTime = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.FileID = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.BackupFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BackupTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LastModDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LastSOCNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.DI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TotalRecords = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRefreshCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnUploadCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRestoreCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
+        Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
         Me.lblSelectedFolder = New DevComponents.DotNetBar.LabelItem()
         Me.lblItemCount = New DevComponents.DotNetBar.LabelItem()
@@ -55,11 +65,10 @@ Partial Class frmOnlineBackup
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.bgwListAllFiles = New System.ComponentModel.BackgroundWorker()
-        Me.DI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.TotalRecords = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
+        CType(Me.ContextMenuBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx2.SuspendLayout()
         Me.SuspendLayout()
@@ -203,6 +212,7 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel1.Controls.Add(Me.ContextMenuBar1)
         Me.GroupPanel1.Controls.Add(Me.lblProgressStatus)
         Me.GroupPanel1.Controls.Add(Me.CircularProgress1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
@@ -243,36 +253,21 @@ Partial Class frmOnlineBackup
         Me.GroupPanel1.TabIndex = 25
         Me.GroupPanel1.Text = "Available Backups"
         '
-        'lblProgressStatus
+        'ContextMenuBar1
         '
-        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(382, 311)
-        Me.lblProgressStatus.Name = "lblProgressStatus"
-        Me.lblProgressStatus.Size = New System.Drawing.Size(199, 18)
-        Me.lblProgressStatus.TabIndex = 2
-        Me.lblProgressStatus.Text = "Fetching Files from Google Drive..."
-        Me.lblProgressStatus.TextAlignment = System.Drawing.StringAlignment.Center
-        '
-        'CircularProgress1
-        '
-        Me.CircularProgress1.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(421, 186)
-        Me.CircularProgress1.Name = "CircularProgress1"
-        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
-        Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(120, 120)
-        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.CircularProgress1.TabIndex = 1
-        Me.CircularProgress1.TabStop = False
+        Me.ContextMenuBar1.AntiAlias = True
+        Me.ContextMenuBar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
+        Me.ContextMenuBar1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ContextMenuBar1.IsMaximized = False
+        Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
+        Me.ContextMenuBar1.Location = New System.Drawing.Point(613, 71)
+        Me.ContextMenuBar1.Name = "ContextMenuBar1"
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
+        Me.ContextMenuBar1.Stretch = True
+        Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.ContextMenuBar1.TabIndex = 6
+        Me.ContextMenuBar1.TabStop = False
+        Me.ContextMenuBar1.Text = "ContextMenuBar1"
         '
         'listViewEx1
         '
@@ -285,6 +280,7 @@ Partial Class frmOnlineBackup
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupTime, Me.FileID, Me.FileSize, Me.UploadedBy, Me.LastModDate, Me.LastSOCNo, Me.DI, Me.TotalRecords})
+        Me.ContextMenuBar1.SetContextMenuEx(Me.listViewEx1, Me.ButtonItem1)
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -335,6 +331,93 @@ Partial Class frmOnlineBackup
         '
         Me.LastSOCNo.Text = "Last SOC No."
         Me.LastSOCNo.Width = 90
+        '
+        'DI
+        '
+        Me.DI.Text = "DI"
+        Me.DI.Width = 75
+        '
+        'TotalRecords
+        '
+        Me.TotalRecords.Text = "Total Records"
+        Me.TotalRecords.Width = 100
+        '
+        'ButtonItem1
+        '
+        Me.ButtonItem1.AutoExpandOnClick = True
+        Me.ButtonItem1.Name = "ButtonItem1"
+        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRefreshCM, Me.btnUploadCM, Me.btnDownloadCM, Me.btnRestoreCM, Me.btnRemoveCM, Me.btnOpenCM})
+        Me.ButtonItem1.Text = "ButtonItem1"
+        '
+        'btnRefreshCM
+        '
+        Me.btnRefreshCM.Image = CType(resources.GetObject("btnRefreshCM.Image"), System.Drawing.Image)
+        Me.btnRefreshCM.Name = "btnRefreshCM"
+        Me.btnRefreshCM.Text = "Refresh"
+        '
+        'btnUploadCM
+        '
+        Me.btnUploadCM.BeginGroup = True
+        Me.btnUploadCM.Image = CType(resources.GetObject("btnUploadCM.Image"), System.Drawing.Image)
+        Me.btnUploadCM.Name = "btnUploadCM"
+        Me.btnUploadCM.Text = "Upload"
+        '
+        'btnDownloadCM
+        '
+        Me.btnDownloadCM.Image = CType(resources.GetObject("btnDownloadCM.Image"), System.Drawing.Image)
+        Me.btnDownloadCM.Name = "btnDownloadCM"
+        Me.btnDownloadCM.Text = "Download"
+        '
+        'btnRestoreCM
+        '
+        Me.btnRestoreCM.BeginGroup = True
+        Me.btnRestoreCM.Image = CType(resources.GetObject("btnRestoreCM.Image"), System.Drawing.Image)
+        Me.btnRestoreCM.Name = "btnRestoreCM"
+        Me.btnRestoreCM.Text = "Restore"
+        '
+        'btnRemoveCM
+        '
+        Me.btnRemoveCM.Image = CType(resources.GetObject("btnRemoveCM.Image"), System.Drawing.Image)
+        Me.btnRemoveCM.Name = "btnRemoveCM"
+        Me.btnRemoveCM.Text = "Remove"
+        '
+        'btnOpenCM
+        '
+        Me.btnOpenCM.BeginGroup = True
+        Me.btnOpenCM.Image = CType(resources.GetObject("btnOpenCM.Image"), System.Drawing.Image)
+        Me.btnOpenCM.Name = "btnOpenCM"
+        Me.btnOpenCM.Text = "Open File"
+        '
+        'lblProgressStatus
+        '
+        Me.lblProgressStatus.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblProgressStatus.Location = New System.Drawing.Point(382, 311)
+        Me.lblProgressStatus.Name = "lblProgressStatus"
+        Me.lblProgressStatus.Size = New System.Drawing.Size(199, 18)
+        Me.lblProgressStatus.TabIndex = 2
+        Me.lblProgressStatus.Text = "Fetching Files from Google Drive..."
+        Me.lblProgressStatus.TextAlignment = System.Drawing.StringAlignment.Center
+        '
+        'CircularProgress1
+        '
+        Me.CircularProgress1.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.CircularProgress1.FocusCuesEnabled = False
+        Me.CircularProgress1.Location = New System.Drawing.Point(421, 186)
+        Me.CircularProgress1.Name = "CircularProgress1"
+        Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
+        Me.CircularProgress1.ProgressTextVisible = True
+        Me.CircularProgress1.Size = New System.Drawing.Size(120, 120)
+        Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
+        Me.CircularProgress1.TabIndex = 1
+        Me.CircularProgress1.TabStop = False
         '
         'Bar1
         '
@@ -435,16 +518,6 @@ Partial Class frmOnlineBackup
         Me.bgwListAllFiles.WorkerReportsProgress = True
         Me.bgwListAllFiles.WorkerSupportsCancellation = True
         '
-        'DI
-        '
-        Me.DI.Text = "DI"
-        Me.DI.Width = 75
-        '
-        'TotalRecords
-        '
-        Me.TotalRecords.Text = "Total Records"
-        Me.TotalRecords.Width = 100
-        '
         'frmOnlineBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -466,6 +539,7 @@ Partial Class frmOnlineBackup
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.GroupPanel1.ResumeLayout(False)
+        CType(Me.ContextMenuBar1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx2.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -505,4 +579,12 @@ Partial Class frmOnlineBackup
     Friend WithEvents LastSOCNo As System.Windows.Forms.ColumnHeader
     Friend WithEvents DI As System.Windows.Forms.ColumnHeader
     Friend WithEvents TotalRecords As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ContextMenuBar1 As DevComponents.DotNetBar.ContextMenuBar
+    Friend WithEvents ButtonItem1 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnRefreshCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnUploadCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnDownloadCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnRestoreCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnRemoveCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenCM As DevComponents.DotNetBar.ButtonItem
 End Class

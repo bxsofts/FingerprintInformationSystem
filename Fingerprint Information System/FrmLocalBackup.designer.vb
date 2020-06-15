@@ -28,11 +28,17 @@ Partial Class FrmLocalBackup
         Me.btnRemoveBackupFile = New DevComponents.DotNetBar.ButtonX()
         Me.btnOpenBackupFolder = New DevComponents.DotNetBar.ButtonX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.ContextMenuBar1 = New DevComponents.DotNetBar.ContextMenuBar()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.BackupFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.BackupFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRestoreCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenFileCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnOpenFolderCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnBackupDatabase = New DevComponents.DotNetBar.ButtonX()
         Me.btnCopyDatabase = New DevComponents.DotNetBar.ButtonX()
         Me.btnImportDatabase = New DevComponents.DotNetBar.ButtonX()
@@ -46,6 +52,7 @@ Partial Class FrmLocalBackup
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupPanel1.SuspendLayout()
+        CType(Me.ContextMenuBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,6 +107,7 @@ Partial Class FrmLocalBackup
         Me.GroupPanel1.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel1.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel1.Controls.Add(Me.ContextMenuBar1)
         Me.GroupPanel1.Controls.Add(Me.listViewEx1)
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -138,6 +146,22 @@ Partial Class FrmLocalBackup
         Me.GroupPanel1.TabIndex = 9
         Me.GroupPanel1.Text = "Available Backups"
         '
+        'ContextMenuBar1
+        '
+        Me.ContextMenuBar1.AntiAlias = True
+        Me.ContextMenuBar1.DockSide = DevComponents.DotNetBar.eDockSide.Document
+        Me.ContextMenuBar1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ContextMenuBar1.IsMaximized = False
+        Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
+        Me.ContextMenuBar1.Location = New System.Drawing.Point(338, 220)
+        Me.ContextMenuBar1.Name = "ContextMenuBar1"
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
+        Me.ContextMenuBar1.Stretch = True
+        Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.ContextMenuBar1.TabIndex = 7
+        Me.ContextMenuBar1.TabStop = False
+        Me.ContextMenuBar1.Text = "ContextMenuBar1"
+        '
         'listViewEx1
         '
         Me.listViewEx1.Alignment = System.Windows.Forms.ListViewAlignment.Left
@@ -148,6 +172,7 @@ Partial Class FrmLocalBackup
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFile, Me.BackupDate, Me.BackupFolder, Me.FileSize})
+        Me.ContextMenuBar1.SetContextMenuEx(Me.listViewEx1, Me.ButtonItem1)
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -184,6 +209,39 @@ Partial Class FrmLocalBackup
         '
         Me.FileSize.Text = "File Size"
         Me.FileSize.Width = 100
+        '
+        'ButtonItem1
+        '
+        Me.ButtonItem1.AutoExpandOnClick = True
+        Me.ButtonItem1.Name = "ButtonItem1"
+        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRestoreCM, Me.btnRemoveCM, Me.btnOpenFileCM, Me.btnOpenFolderCM})
+        Me.ButtonItem1.Text = "ButtonItem1"
+        '
+        'btnRestoreCM
+        '
+        Me.btnRestoreCM.Image = CType(resources.GetObject("btnRestoreCM.Image"), System.Drawing.Image)
+        Me.btnRestoreCM.Name = "btnRestoreCM"
+        Me.btnRestoreCM.Text = "Restore"
+        '
+        'btnRemoveCM
+        '
+        Me.btnRemoveCM.BeginGroup = True
+        Me.btnRemoveCM.Image = CType(resources.GetObject("btnRemoveCM.Image"), System.Drawing.Image)
+        Me.btnRemoveCM.Name = "btnRemoveCM"
+        Me.btnRemoveCM.Text = "Remove"
+        '
+        'btnOpenFileCM
+        '
+        Me.btnOpenFileCM.BeginGroup = True
+        Me.btnOpenFileCM.Image = CType(resources.GetObject("btnOpenFileCM.Image"), System.Drawing.Image)
+        Me.btnOpenFileCM.Name = "btnOpenFileCM"
+        Me.btnOpenFileCM.Text = "Open File"
+        '
+        'btnOpenFolderCM
+        '
+        Me.btnOpenFolderCM.Image = CType(resources.GetObject("btnOpenFolderCM.Image"), System.Drawing.Image)
+        Me.btnOpenFolderCM.Name = "btnOpenFolderCM"
+        Me.btnOpenFolderCM.Text = "Open Folder"
         '
         'btnBackupDatabase
         '
@@ -350,6 +408,7 @@ Partial Class FrmLocalBackup
         Me.Text = "Local Database Backup"
         Me.TitleText = "<b>Local Database Backup</b>"
         Me.GroupPanel1.ResumeLayout(False)
+        CType(Me.ContextMenuBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -379,4 +438,10 @@ Partial Class FrmLocalBackup
     Friend WithEvents PanelEx2 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents FileSize As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblTotalFileSize As DevComponents.DotNetBar.LabelItem
+    Friend WithEvents ContextMenuBar1 As DevComponents.DotNetBar.ContextMenuBar
+    Friend WithEvents ButtonItem1 As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnRestoreCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnRemoveCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenFileCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnOpenFolderCM As DevComponents.DotNetBar.ButtonItem
 End Class

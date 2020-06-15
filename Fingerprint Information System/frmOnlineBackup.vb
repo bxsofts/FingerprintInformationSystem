@@ -231,7 +231,7 @@ Public Class frmOnlineBackup
         Me.lblTotalFileSize.Text = "Total Online File Size: " & CalculateFileSize(TotalFileSize)
     End Sub
 
-    Private Sub RefreshBackupList() Handles btnRefresh.Click
+    Private Sub RefreshBackupList() Handles btnRefresh.Click, btnRefreshCM.Click
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -403,7 +403,7 @@ Public Class frmOnlineBackup
 
 #Region "BACKUP DATABASE"
 
-    Private Sub UploadBackup() Handles btnBackupDatabase.Click
+    Private Sub UploadBackup() Handles btnBackupDatabase.Click, btnUploadCM.Click
 
         If CurrentFolderName <> UserBackupFolderName Then
             MessageBoxEx.Show("Cannot upload backup to '" & CurrentFolderName & "' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -547,7 +547,7 @@ Public Class frmOnlineBackup
 
 #Region "DOWNLOAD FILE"
 
-    Private Sub listViewEx1_DoubleClick(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnOpenFileMSAccess.Click
+    Private Sub listViewEx1_DoubleClick(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnOpenFileMSAccess.Click, btnOpenCM.Click
         Try
 
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
@@ -607,7 +607,7 @@ Public Class frmOnlineBackup
 
     End Sub
 
-    Private Sub DownloadSelectedFile() Handles btnDownloadDatabase.Click
+    Private Sub DownloadSelectedFile() Handles btnDownloadDatabase.Click, btnDownloadCM.Click
         Try
 
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
@@ -805,7 +805,7 @@ Public Class frmOnlineBackup
 
 #Region "RESTORE DATABASE"
 
-    Private Sub RestoreSelectedFile() Handles btnRestoreDatabase.Click
+    Private Sub RestoreSelectedFile() Handles btnRestoreDatabase.Click, btnRestoreCM.Click
         Try
             If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
                 ShowFileTransferInProgressMessage()
@@ -868,7 +868,7 @@ Public Class frmOnlineBackup
 
 
 #Region "REMOVE FILE"
-    Private Sub RemoveBackupFileFromDrive() Handles btnRemoveBackupFile.Click
+    Private Sub RemoveBackupFileFromDrive() Handles btnRemoveBackupFile.Click, btnRemoveCM.Click
         Try
 
             Dim selectedcount As Integer = Me.listViewEx1.SelectedItems.Count
@@ -1395,5 +1395,40 @@ Public Class frmOnlineBackup
     End Class
 
 
+    Private Sub ContextMenuBar1_PopupOpen(sender As Object, e As PopupOpenEventArgs) Handles ContextMenuBar1.PopupOpen
+        On Error Resume Next
+        Me.btnRefreshCM.Visible = False
+        Me.btnUploadCM.Visible = False
+        Me.btnDownloadCM.Visible = False
+        Me.btnRemoveCM.Visible = False
+        Me.btnRestoreCM.Visible = False
+        Me.btnOpenCM.Visible = False
 
+        If Me.listViewEx1.Items.Count = 0 Or Me.listViewEx1.SelectedItems.Count = 0 Then
+            Me.btnRefreshCM.Visible = True
+            Me.btnUploadCM.Visible = True
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 1 Then
+            If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+                e.Cancel = True
+            End If
+
+            If Me.listViewEx1.SelectedItems(0).ImageIndex = 3 Then
+                Me.btnRemoveCM.Visible = sAdmin
+            Else
+                Me.btnDownloadCM.Visible = True
+                Me.btnRemoveCM.Visible = True
+                Me.btnRestoreCM.Visible = True
+                Me.btnOpenCM.Visible = True
+            End If
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
+                e.Cancel = True
+            End If
+            Me.btnRemoveCM.Visible = True
+        End If
+    End Sub
 End Class
