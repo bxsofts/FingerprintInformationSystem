@@ -1386,6 +1386,83 @@ Public Class frmFISBackupList
 
 #End Region
 
+#Region "SHARE FILES"
+    Private Sub btnShareFile_Click(sender As Object, e As EventArgs) Handles btnShareCM.Click
+        If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+            ShowFileTransferInProgressMessage()
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.Items.Count = 0 Then
+            MessageBoxEx.Show("No files in the list.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 0 Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count > 1 Then
+            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim SelectedItemText As String = Me.listViewEx1.SelectedItems(0).Text
+
+        Dim blSelectedItemIsFolder As Boolean = False
+        If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then blSelectedItemIsFolder = True
+
+        If SelectedItemText.StartsWith("\") Then
+            MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim ftype As String = "file"
+        If blSelectedItemIsFolder Then ftype = "folder"
+
+        frmInputBox.SetTitleandMessage("Share File", "Enter email id of recepient", False, "fingerprintinformationsystem@gmail.com")
+        frmInputBox.ShowDialog()
+        Dim email As String = frmInputBox.txtInputBox.Text
+        If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
+        If Not ValidEmail(email) Then
+            MessageBoxEx.Show("Invalid email id.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        Me.Cursor = Cursors.WaitCursor
+
+        If (ShareFile(listViewEx1.SelectedItems(0).SubItems(3).Text, email)) Then
+            ShowDesktopAlert("Selected " & ftype & " shared successfully.")
+        Else
+            MessageBoxEx.Show("Sharing failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Function ValidEmail(email As String) As Boolean
+        Try
+            Dim a As New System.Net.Mail.MailAddress(email)
+        Catch
+            Return False
+        End Try
+        Return True
+    End Function
+
+    Private Function ShareFile(fileid As String, email As String)
+        Try
+            Dim userPermission As Permission = New Permission
+            userPermission.Type = "user"
+            userPermission.Role = "reader"
+            userPermission.EmailAddress = email
+            Dim request = FISService.Permissions.Create(userPermission, fileid)
+            request.Fields = "id"
+            request.Execute()
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
+    End Function
+#End Region
 
 #Region "ADMIN PRIVILEGE & PASSWORD"
     Private Sub SetAdminPassword(SelectedPassword As String)
