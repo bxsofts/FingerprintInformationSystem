@@ -9388,10 +9388,9 @@ errhandler:
             Me.RSOCRegisterTableAdapter.Insert(OriginalRSOCSerialNumber, socno, socnumwithoutyear, Me.SOCDatagrid.SelectedCells(2).Value, ps, cr, officer, reportto, ReportSentDate, nature, despatch, remarks)
             InitializeRSOCFields()
             IncrementRSOCNumber(OriginalRSOCSerialNumber)
-
-
             Me.lblReportSent.Visible = True
             Me.StatusBar.RecalcLayout()
+            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
