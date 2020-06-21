@@ -27,7 +27,8 @@ Module modMain
     Public strDatabaseFile As String = vbNullString
     Public sConString As String = vbNullString
     Public strBackupFile As String = ""
-    Public boolRestored As Boolean = False
+    Public blRestore As Boolean = False
+    Public blPreviewMode As Boolean = False
     Public m_BaseColorSelected As Boolean = False 'style color
     Public m_BaseColor As System.Drawing.Color
     Public m_ColorTint As System.Drawing.Color

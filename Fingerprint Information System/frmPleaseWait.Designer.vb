@@ -30,17 +30,17 @@ Partial Class frmPleaseWait
         '
         'LabelX1
         '
-        Me.LabelX1.AutoSize = True
         '
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX1.Location = New System.Drawing.Point(102, 59)
+        Me.LabelX1.Location = New System.Drawing.Point(2, 59)
         Me.LabelX1.Name = "LabelX1"
-        Me.LabelX1.Size = New System.Drawing.Size(122, 30)
+        Me.LabelX1.Size = New System.Drawing.Size(322, 30)
         Me.LabelX1.TabIndex = 0
         Me.LabelX1.Text = "Please Wait..."
+        Me.LabelX1.TextAlignment = System.Drawing.StringAlignment.Center
         Me.LabelX1.UseWaitCursor = True
         '
         'CircularProgress1
@@ -77,7 +77,6 @@ Partial Class frmPleaseWait
         Me.TopMost = True
         Me.UseWaitCursor = True
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX

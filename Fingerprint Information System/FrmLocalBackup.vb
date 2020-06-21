@@ -48,6 +48,11 @@ Public Class FrmLocalBackup
 
     Private Sub TakeBackup() Handles btnBackupDatabase.Click
         Try
+            If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot take Backup.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
 
             If My.Computer.FileSystem.DirectoryExists(BackupPath) = False Then
                 My.Computer.FileSystem.CreateDirectory(BackupPath)
@@ -88,6 +93,12 @@ Public Class FrmLocalBackup
 
     Private Sub CopyDatabase() Handles btnCopyDatabase.Click
         Try
+            If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot copy Database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             If My.Computer.FileSystem.FileExists(strDatabaseFile) = False Then
                 MessageBoxEx.Show("The source database file does not exist. Cannot copy database", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
@@ -136,21 +147,25 @@ Public Class FrmLocalBackup
 
             If result = Windows.Forms.DialogResult.Yes Then
                 strBackupFile = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
+                strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
                 My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                 Application.DoEvents()
-                boolRestored = True
+                blRestore = True
                 Me.Close()
             End If
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
-            boolRestored = False
+            blRestore = False
         End Try
-
-
     End Sub
     Private Sub ImportDatabase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportDatabase.Click
         Try
+            If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot Import Database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
 
             Dim reply As DialogResult
 
@@ -177,16 +192,18 @@ Public Class FrmLocalBackup
                     MessageBoxEx.Show("The file you selected is not a valid Database. Cannot restore database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Exit Sub
                 End If
+                strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+
                 My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                 Application.DoEvents()
-                boolRestored = True
+                blRestore = True
                 Me.Close()
             End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
-            boolRestored = False
+            blRestore = False
         End Try
     End Sub
 
@@ -353,6 +370,34 @@ Public Class FrmLocalBackup
         If Me.listViewEx1.SelectedItems.Count > 1 Then
             Me.btnRemoveCM.Visible = True
         End If
+    End Sub
+
+    Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click, btnPreviewCM.Click
+        Try
+            If Me.listViewEx1.Items.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No backup files in the list", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+            If Me.listViewEx1.SelectedItems.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Please select a file", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            strDatabaseFile = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
+            blRestore = False
+            blPreviewMode = True
+
+                Me.Close()
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+            blRestore = False
+        End Try
     End Sub
 End Class
 

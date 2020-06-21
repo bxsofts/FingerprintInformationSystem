@@ -29,16 +29,16 @@ Partial Class FrmLocalBackup
         Me.btnOpenBackupFolder = New DevComponents.DotNetBar.ButtonX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.ContextMenuBar1 = New DevComponents.DotNetBar.ContextMenuBar()
-        Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
-        Me.BackupFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.BackupFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRestoreCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenFileCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenFolderCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
+        Me.BackupFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BackupDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.BackupFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnBackupDatabase = New DevComponents.DotNetBar.ButtonX()
         Me.btnCopyDatabase = New DevComponents.DotNetBar.ButtonX()
         Me.btnImportDatabase = New DevComponents.DotNetBar.ButtonX()
@@ -51,6 +51,8 @@ Partial Class FrmLocalBackup
         Me.lblCount = New DevComponents.DotNetBar.LabelItem()
         Me.lblTotalFileSize = New DevComponents.DotNetBar.LabelItem()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnPreview = New DevComponents.DotNetBar.ButtonX()
+        Me.btnPreviewCM = New DevComponents.DotNetBar.ButtonItem()
         Me.GroupPanel1.SuspendLayout()
         CType(Me.ContextMenuBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
@@ -72,7 +74,7 @@ Partial Class FrmLocalBackup
         Me.btnRestoreDatabase.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRestoreDatabase.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRestoreDatabase.Image = CType(resources.GetObject("btnRestoreDatabase.Image"), System.Drawing.Image)
-        Me.btnRestoreDatabase.Location = New System.Drawing.Point(15, 94)
+        Me.btnRestoreDatabase.Location = New System.Drawing.Point(15, 83)
         Me.btnRestoreDatabase.Name = "btnRestoreDatabase"
         Me.btnRestoreDatabase.Size = New System.Drawing.Size(117, 59)
         Me.btnRestoreDatabase.TabIndex = 2
@@ -84,10 +86,10 @@ Partial Class FrmLocalBackup
         Me.btnRemoveBackupFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRemoveBackupFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveBackupFile.Image = CType(resources.GetObject("btnRemoveBackupFile.Image"), System.Drawing.Image)
-        Me.btnRemoveBackupFile.Location = New System.Drawing.Point(15, 161)
+        Me.btnRemoveBackupFile.Location = New System.Drawing.Point(15, 217)
         Me.btnRemoveBackupFile.Name = "btnRemoveBackupFile"
         Me.btnRemoveBackupFile.Size = New System.Drawing.Size(117, 59)
-        Me.btnRemoveBackupFile.TabIndex = 3
+        Me.btnRemoveBackupFile.TabIndex = 4
         Me.btnRemoveBackupFile.Text = "Remove"
         '
         'btnOpenBackupFolder
@@ -96,10 +98,10 @@ Partial Class FrmLocalBackup
         Me.btnOpenBackupFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnOpenBackupFolder.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOpenBackupFolder.Image = CType(resources.GetObject("btnOpenBackupFolder.Image"), System.Drawing.Image)
-        Me.btnOpenBackupFolder.Location = New System.Drawing.Point(15, 295)
+        Me.btnOpenBackupFolder.Location = New System.Drawing.Point(15, 351)
         Me.btnOpenBackupFolder.Name = "btnOpenBackupFolder"
         Me.btnOpenBackupFolder.Size = New System.Drawing.Size(117, 59)
-        Me.btnOpenBackupFolder.TabIndex = 5
+        Me.btnOpenBackupFolder.TabIndex = 6
         Me.btnOpenBackupFolder.Text = "Open Folder"
         '
         'GroupPanel1
@@ -114,7 +116,7 @@ Partial Class FrmLocalBackup
         Me.GroupPanel1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(757, 491)
+        Me.GroupPanel1.Size = New System.Drawing.Size(757, 538)
         '
         '
         '
@@ -155,66 +157,18 @@ Partial Class FrmLocalBackup
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(338, 220)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 25)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ContextMenuBar1.TabIndex = 7
         Me.ContextMenuBar1.TabStop = False
         Me.ContextMenuBar1.Text = "ContextMenuBar1"
         '
-        'listViewEx1
-        '
-        Me.listViewEx1.Alignment = System.Windows.Forms.ListViewAlignment.Left
-        Me.listViewEx1.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.listViewEx1.Border.Class = "ListViewBorder"
-        Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFile, Me.BackupDate, Me.BackupFolder, Me.FileSize})
-        Me.ContextMenuBar1.SetContextMenuEx(Me.listViewEx1, Me.ButtonItem1)
-        Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
-        Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.listViewEx1.ForeColor = System.Drawing.Color.Black
-        Me.listViewEx1.FullRowSelect = True
-        Me.listViewEx1.GridLines = True
-        Me.listViewEx1.HideSelection = False
-        Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
-        Me.listViewEx1.Name = "listViewEx1"
-        Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(751, 467)
-        Me.listViewEx1.SmallImageList = Me.ImageList1
-        Me.listViewEx1.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.listViewEx1.TabIndex = 0
-        Me.listViewEx1.UseCompatibleStateImageBehavior = False
-        Me.listViewEx1.View = System.Windows.Forms.View.Details
-        '
-        'BackupFile
-        '
-        Me.BackupFile.Text = "Backup File"
-        Me.BackupFile.Width = 315
-        '
-        'BackupDate
-        '
-        Me.BackupDate.Text = "Backup Date"
-        Me.BackupDate.Width = 223
-        '
-        'BackupFolder
-        '
-        Me.BackupFolder.Text = "Backup Folder"
-        Me.BackupFolder.Width = 0
-        '
-        'FileSize
-        '
-        Me.FileSize.Text = "File Size"
-        Me.FileSize.Width = 100
-        '
         'ButtonItem1
         '
         Me.ButtonItem1.AutoExpandOnClick = True
         Me.ButtonItem1.Name = "ButtonItem1"
-        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRestoreCM, Me.btnRemoveCM, Me.btnOpenFileCM, Me.btnOpenFolderCM})
+        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRestoreCM, Me.btnPreviewCM, Me.btnRemoveCM, Me.btnOpenFileCM, Me.btnOpenFolderCM})
         Me.ButtonItem1.Text = "ButtonItem1"
         '
         'btnRestoreCM
@@ -243,13 +197,61 @@ Partial Class FrmLocalBackup
         Me.btnOpenFolderCM.Name = "btnOpenFolderCM"
         Me.btnOpenFolderCM.Text = "Open Folder"
         '
+        'listViewEx1
+        '
+        Me.listViewEx1.Alignment = System.Windows.Forms.ListViewAlignment.Left
+        Me.listViewEx1.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.listViewEx1.Border.Class = "ListViewBorder"
+        Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFile, Me.BackupDate, Me.BackupFolder, Me.FileSize})
+        Me.ContextMenuBar1.SetContextMenuEx(Me.listViewEx1, Me.ButtonItem1)
+        Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
+        Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.listViewEx1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.listViewEx1.ForeColor = System.Drawing.Color.Black
+        Me.listViewEx1.FullRowSelect = True
+        Me.listViewEx1.GridLines = True
+        Me.listViewEx1.HideSelection = False
+        Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
+        Me.listViewEx1.Name = "listViewEx1"
+        Me.listViewEx1.ShowItemToolTips = True
+        Me.listViewEx1.Size = New System.Drawing.Size(751, 514)
+        Me.listViewEx1.SmallImageList = Me.ImageList1
+        Me.listViewEx1.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.listViewEx1.TabIndex = 0
+        Me.listViewEx1.UseCompatibleStateImageBehavior = False
+        Me.listViewEx1.View = System.Windows.Forms.View.Details
+        '
+        'BackupFile
+        '
+        Me.BackupFile.Text = "Backup File"
+        Me.BackupFile.Width = 315
+        '
+        'BackupDate
+        '
+        Me.BackupDate.Text = "Backup Date"
+        Me.BackupDate.Width = 223
+        '
+        'BackupFolder
+        '
+        Me.BackupFolder.Text = "Backup Folder"
+        Me.BackupFolder.Width = 0
+        '
+        'FileSize
+        '
+        Me.FileSize.Text = "File Size"
+        Me.FileSize.Width = 100
+        '
         'btnBackupDatabase
         '
         Me.btnBackupDatabase.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnBackupDatabase.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnBackupDatabase.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBackupDatabase.Image = CType(resources.GetObject("btnBackupDatabase.Image"), System.Drawing.Image)
-        Me.btnBackupDatabase.Location = New System.Drawing.Point(15, 27)
+        Me.btnBackupDatabase.Location = New System.Drawing.Point(15, 16)
         Me.btnBackupDatabase.Name = "btnBackupDatabase"
         Me.btnBackupDatabase.Size = New System.Drawing.Size(117, 59)
         Me.btnBackupDatabase.TabIndex = 1
@@ -261,10 +263,10 @@ Partial Class FrmLocalBackup
         Me.btnCopyDatabase.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnCopyDatabase.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCopyDatabase.Image = CType(resources.GetObject("btnCopyDatabase.Image"), System.Drawing.Image)
-        Me.btnCopyDatabase.Location = New System.Drawing.Point(15, 362)
+        Me.btnCopyDatabase.Location = New System.Drawing.Point(15, 418)
         Me.btnCopyDatabase.Name = "btnCopyDatabase"
         Me.btnCopyDatabase.Size = New System.Drawing.Size(117, 59)
-        Me.btnCopyDatabase.TabIndex = 6
+        Me.btnCopyDatabase.TabIndex = 7
         Me.btnCopyDatabase.Text = "Copy Database"
         '
         'btnImportDatabase
@@ -273,10 +275,10 @@ Partial Class FrmLocalBackup
         Me.btnImportDatabase.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnImportDatabase.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportDatabase.Image = CType(resources.GetObject("btnImportDatabase.Image"), System.Drawing.Image)
-        Me.btnImportDatabase.Location = New System.Drawing.Point(15, 429)
+        Me.btnImportDatabase.Location = New System.Drawing.Point(15, 485)
         Me.btnImportDatabase.Name = "btnImportDatabase"
         Me.btnImportDatabase.Size = New System.Drawing.Size(117, 59)
-        Me.btnImportDatabase.TabIndex = 7
+        Me.btnImportDatabase.TabIndex = 8
         Me.btnImportDatabase.Text = "Import Database"
         '
         'OpenFileDialog1
@@ -289,10 +291,10 @@ Partial Class FrmLocalBackup
         Me.btnOpenFileMSAccess.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnOpenFileMSAccess.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOpenFileMSAccess.Image = CType(resources.GetObject("btnOpenFileMSAccess.Image"), System.Drawing.Image)
-        Me.btnOpenFileMSAccess.Location = New System.Drawing.Point(15, 228)
+        Me.btnOpenFileMSAccess.Location = New System.Drawing.Point(15, 284)
         Me.btnOpenFileMSAccess.Name = "btnOpenFileMSAccess"
         Me.btnOpenFileMSAccess.Size = New System.Drawing.Size(117, 59)
-        Me.btnOpenFileMSAccess.TabIndex = 4
+        Me.btnOpenFileMSAccess.TabIndex = 5
         Me.btnOpenFileMSAccess.Text = "Open File"
         '
         'PanelEx1
@@ -306,7 +308,7 @@ Partial Class FrmLocalBackup
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(904, 514)
+        Me.PanelEx1.Size = New System.Drawing.Size(904, 561)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -324,7 +326,7 @@ Partial Class FrmLocalBackup
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx3.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx3.Name = "PanelEx3"
-        Me.PanelEx3.Size = New System.Drawing.Size(757, 491)
+        Me.PanelEx3.Size = New System.Drawing.Size(757, 538)
         Me.PanelEx3.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -342,7 +344,7 @@ Partial Class FrmLocalBackup
         Me.Bar1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Bar1.IsMaximized = False
         Me.Bar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.lblCount, Me.lblTotalFileSize})
-        Me.Bar1.Location = New System.Drawing.Point(0, 491)
+        Me.Bar1.Location = New System.Drawing.Point(0, 538)
         Me.Bar1.Name = "Bar1"
         Me.Bar1.Size = New System.Drawing.Size(757, 23)
         Me.Bar1.Stretch = True
@@ -367,6 +369,7 @@ Partial Class FrmLocalBackup
         '
         Me.PanelEx2.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx2.Controls.Add(Me.btnPreview)
         Me.PanelEx2.Controls.Add(Me.btnBackupDatabase)
         Me.PanelEx2.Controls.Add(Me.btnRestoreDatabase)
         Me.PanelEx2.Controls.Add(Me.btnOpenFileMSAccess)
@@ -378,7 +381,7 @@ Partial Class FrmLocalBackup
         Me.PanelEx2.Dock = System.Windows.Forms.DockStyle.Right
         Me.PanelEx2.Location = New System.Drawing.Point(757, 0)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(147, 514)
+        Me.PanelEx2.Size = New System.Drawing.Size(147, 561)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -387,12 +390,29 @@ Partial Class FrmLocalBackup
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 29
         '
+        'btnPreview
+        '
+        Me.btnPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnPreview.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPreview.Image = CType(resources.GetObject("btnPreview.Image"), System.Drawing.Image)
+        Me.btnPreview.Location = New System.Drawing.Point(15, 150)
+        Me.btnPreview.Name = "btnPreview"
+        Me.btnPreview.Size = New System.Drawing.Size(117, 59)
+        Me.btnPreview.TabIndex = 3
+        Me.btnPreview.Text = "Preview"
+        '
+        'btnPreviewCM
+        '
+        Me.btnPreviewCM.Name = "btnPreviewCM"
+        Me.btnPreviewCM.Text = "Preview"
+        '
         'FrmLocalBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CaptionFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ClientSize = New System.Drawing.Size(904, 514)
+        Me.ClientSize = New System.Drawing.Size(904, 561)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -444,4 +464,6 @@ Partial Class FrmLocalBackup
     Friend WithEvents btnRemoveCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenFileCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnOpenFolderCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnPreview As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnPreviewCM As DevComponents.DotNetBar.ButtonItem
 End Class

@@ -1092,6 +1092,12 @@ Public Class frmMainInterface
 
     Private Sub btnFixDBTables_Click(sender As Object, e As EventArgs) Handles btnFixDBTables.Click
         Try
+            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot fix.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             Me.Cursor = Cursors.WaitCursor
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "1", Microsoft.Win32.RegistryValueKind.String)
 
@@ -1395,7 +1401,7 @@ Public Class frmMainInterface
 
             blApplicationIsRestoring = False
             frmProgressBar.Close()
-            boolRestored = False
+            blRestore = False
             ShowDesktopAlert("Database restored successfully!")
         End If
 
@@ -2607,6 +2613,9 @@ Public Class frmMainInterface
 
         End Select
 
+        If blPreviewMode Then
+            Me.pnlRegisterName.Text += " - Preview Mode"
+        End If
 
         DisplayDatabaseInformation()
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -4790,6 +4799,20 @@ Public Class frmMainInterface
 
     End Sub
 
+    Private Sub DisableControlsInPreviewMode()
+        On Error Resume Next
+        Me.RibbonControl1.Enabled = True
+        Me.btnNewEntry.Enabled = False
+        Me.btnOpen.Enabled = False
+        Me.btnEdit.Enabled = False
+        Me.btnDelete.Enabled = False
+        Me.btnShowHideFields.Enabled = False
+        Me.btnSavePS.Enabled = False
+        Me.btnSaveIO.Enabled = False
+        Me.btnSaveSS.Enabled = False
+        Me.btnSaveOfficeSettings.Enabled = False
+
+    End Sub
     Private Sub EnableControls()
         On Error Resume Next
         Dim ctrl As Control
@@ -13132,6 +13155,12 @@ errhandler:
 #Region "DATABASE LOCATION"
     Private Sub ChangeDatabaseLocation(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeDBFolder.Click
         Try
+            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot change Database Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             Dim StartFolder As String
             strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
 
@@ -17578,6 +17607,7 @@ errhandler:
 
 
     Private Sub CreateInternalFileTransferFolder(FISService As DriveService)
+
         Try
 
             Dim masterid As String = ""
@@ -17635,15 +17665,28 @@ errhandler:
 
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        boolRestored = False
+        blRestore = False
+        Dim isPreviewMode As Boolean = blPreviewMode
+        blPreviewMode = False
+
         FrmLocalBackup.ShowDialog()
-        If boolRestored Then
+
+        If blRestore Then
             LoadRecordsAfterRestore()
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
+            blPreviewMode = False
+            Exit Sub
         End If
+
+        If blPreviewMode Then
+            LoadRecordsAfterPreview()
+        Else
+            blPreviewMode = isPreviewMode
+        End If
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -17671,6 +17714,11 @@ errhandler:
 
     Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
+        If FullDistrictName = "" Then
+            MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
 
         On Error Resume Next
@@ -17681,17 +17729,29 @@ errhandler:
             Exit Sub
         End If
 
-        boolRestored = False
+        blRestore = False
+        Dim isPreviewMode As Boolean = blPreviewMode
+        blPreviewMode = False
+
         FindLastSOCNumberDICount()
         frmOnlineBackup.ShowDialog()
-        If boolRestored Then
+
+        If blRestore Then
             LoadRecordsAfterRestore()
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
+            blPreviewMode = False
+            Exit Sub
         End If
-        Cursor = Cursors.Default
+
+        If blPreviewMode Then
+            LoadRecordsAfterPreview()
+        Else
+            blPreviewMode = isPreviewMode
+        End If
+
     End Sub
 
     Private Sub bgwCleanOnlineFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCleanOnlineFiles.DoWork
@@ -17701,6 +17761,10 @@ errhandler:
             End If
 
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+                Exit Sub
+            End If
+
+            If FullDistrictName = "" Then
                 Exit Sub
             End If
 
@@ -17781,7 +17845,11 @@ errhandler:
             Me.Cursor = Cursors.WaitCursor
             blUpdateLastModificationDate = False
             Me.cprDBAvailable.Visible = False
-            ' Me.TabControl.SelectedTab = SOCTabItem
+
+            strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
+
+            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
+
             frmProgressBar.Show()
             frmProgressBar.SetStatusText("Restoring Database...")
             blApplicationIsRestoring = True
@@ -17872,7 +17940,13 @@ errhandler:
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
+
             OfficeSettingsEditMode(False)
+
+            Me.btnSavePS.Enabled = True
+            Me.btnSaveIO.Enabled = True
+            Me.btnSaveSS.Enabled = True
+            Me.btnSaveOfficeSettings.Enabled = True
 
             If blIdentificationRegisterUpdateFailed Then
                 System.Threading.Thread.Sleep(3000)
@@ -17888,6 +17962,42 @@ errhandler:
         End Try
     End Sub
 
+    Private Sub LoadRecordsAfterPreview()
+        Try
+
+            Me.Cursor = Cursors.WaitCursor
+            blUpdateLastModificationDate = False
+            Me.cprDBAvailable.Visible = False
+            ShowPleaseWaitForm()
+            blApplicationIsRestoring = False
+
+            sConString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDatabaseFile
+            ConnectToDatabase()
+
+            LoadPSList()
+            InitializeOfficerTable()
+            LoadOfficerToMemory()
+            LoadOfficerListToTable()
+
+            OfficeSettingsEditMode(True)
+            LoadOfficeSettingsToMemory()
+            SetWindowTitle()
+            LoadOfficeSettingsToTextBoxes()
+
+            LoadRecordsToAllTablesDependingOnCurrentYearSettings()
+
+            OfficeSettingsEditMode(False)
+            If Not Me.pnlRegisterName.Text.EndsWith("Mode") Then Me.pnlRegisterName.Text += " - Preview Mode"
+            DisableControlsInPreviewMode()
+
+            ClosePleaseWaitForm()
+            MessageBoxEx.Show("Database preview generated. Restart the application to close Preview.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
     Public Function IsValidBackupFile(ByVal DBPath As String) As Boolean
         IsValidBackupFile = False
 
@@ -17915,6 +18025,11 @@ errhandler:
             If Not FileIO.FileSystem.FileExists(JsonPath) Then
                 Exit Sub
             End If
+
+            If FullDistrictName = "" Then
+                Exit Sub
+            End If
+
             Dim LocalSOCCount As Integer = Me.SOCRegisterTableAdapter.ScalarQueryTotalSOCCount
             bgwCheckRemoteDB.RunWorkerAsync(LocalSOCCount)
         Catch ex As Exception
@@ -18029,6 +18144,10 @@ errhandler:
             Me.cprDBAvailable.Visible = e.UserState
             If e.UserState = True Then
                 Thread.Sleep(5000)
+                If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+                    Exit Sub
+                End If
+
                 Dim r = MessageBoxEx.Show("A more recent database (Last Modified on " & RemoteModifiedDate & ") is available in online backup. Press OK to view and restore this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
                 If r = Windows.Forms.DialogResult.OK Then
                     OnlineDatabaseBackup()
@@ -18046,6 +18165,11 @@ errhandler:
 
     Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
         On Error Resume Next
+        If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+            MessageBoxEx.Show("Database is in Preview Mode. Cannot open Database Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
         If FileIO.FileSystem.FileExists(strDatabaseFile) Then
             Call Shell("explorer.exe /select," & strDatabaseFile, AppWinStyle.NormalFocus)
@@ -18360,7 +18484,7 @@ errhandler:
     End Sub
 
     Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
-
+       
         Me.Cursor = Cursors.WaitCursor
         ShowPleaseWaitForm()
         If InternetAvailable() = False Then
@@ -18405,7 +18529,8 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-            CreateInternalFileTransferFolder(FISService)
+            If FullDistrictName <> "" Then CreateInternalFileTransferFolder(FISService)
+
             DownloadHolidayList()
 
             Dim parentid As String = ""
@@ -18471,6 +18596,10 @@ errhandler:
 #Region "VERSION FILE"
 
     Private Sub UploadVersionInfoToDrive()
+        If FullDistrictName = "" Then
+            Exit Sub
+        End If
+
         bgwVersionUploader.RunWorkerAsync()
     End Sub
 
@@ -18541,6 +18670,12 @@ errhandler:
 #Region "FIS ONLINE FILE LIST"
     Private Sub btnBasicOnlineFileTransfer_Click(sender As Object, e As EventArgs) Handles btnBasicOnlineFileTransfer.Click
         On Error Resume Next
+
+        If FullDistrictName = "" Then
+            MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -18706,6 +18841,12 @@ errhandler:
 
     Private Sub btnCompactDatabase_Click(sender As Object, e As EventArgs) Handles btnCompactDatabase.Click
         Try
+            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot compact.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             Dim olddbsize As String = CalculateFileSize(My.Computer.FileSystem.GetFileInfo(strDatabaseFile).Length)
             Dim r = MessageBoxEx.Show("Current Database file size is " & olddbsize & ". Do you want to compact the Database?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
 
@@ -18783,6 +18924,12 @@ errhandler:
 
     Private Sub btnCopyDBtoUSB_Click(sender As Object, e As EventArgs) Handles btnCopyDBtoUSB.Click
         Try
+            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot copy.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             Dim driveletter As String = ""
             For Each d As System.IO.DriveInfo In My.Computer.FileSystem.Drives
                 If d.DriveType = IO.DriveType.Removable Then

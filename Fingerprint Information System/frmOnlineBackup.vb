@@ -30,9 +30,11 @@ Public Class frmOnlineBackup
     Dim dFormatedFileSize As String = ""
     Public uBytesUploaded As Long
     Public uUploadStatus As UploadStatus
+
     Public DownloadRestore As Boolean = False
     Public DownloadOpen As Boolean = False
     Public DownloadOnly As Boolean = False
+    Public DownloadPreview As Boolean = False
 
     Dim FileOwner As String = ""
     Dim TotalFileSize As Long = 0
@@ -90,6 +92,7 @@ Public Class frmOnlineBackup
             blUploadIsProgressing = False
             blDownloadIsProgressing = False
             blListIsLoading = False
+            
             LastModifiedDate = frmMainInterface.GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
             LoadFilesInUserBackupFolder(False)
 
@@ -112,6 +115,12 @@ Public Class frmOnlineBackup
         Me.lblItemCount.Text = ""
         listViewEx1.ListViewItemSorter = New ListViewItemComparer(0, SortOrder.Descending)
         listViewEx1.Sort()
+
+        If UserBackupFolderName = "" Then
+            MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
 
         ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
         NoFileFoundMessage = ShowNoFileFoundMessage
@@ -182,7 +191,7 @@ Public Class frmOnlineBackup
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
                         item.SubItems.Add(SplitText(4)) 'Total Records
                     End If
-                  
+
 
                 End If
 
@@ -321,7 +330,7 @@ Public Class frmOnlineBackup
             Else
                 id = Results.Files(0).Id
             End If
-            
+
             Return id
 
         Catch ex As Exception
@@ -405,6 +414,12 @@ Public Class frmOnlineBackup
 
     Private Sub UploadBackup() Handles btnBackupDatabase.Click, btnUploadCM.Click
 
+        If UserBackupFolderName = "" Then
+            MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         If CurrentFolderName <> UserBackupFolderName Then
             MessageBoxEx.Show("Cannot upload backup to '" & CurrentFolderName & "' folder", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
@@ -419,6 +434,12 @@ Public Class frmOnlineBackup
         Me.Cursor = Cursors.WaitCursor
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
+            MessageBoxEx.Show("Database is in Preview Mode. Cannot Upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
@@ -778,8 +799,10 @@ Public Class frmOnlineBackup
                 DownloadRestore = False
 
                 If My.Computer.FileSystem.FileExists(strBackupFile) Then
+                    strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
                     My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
-                    boolRestored = True
+                    blRestore = True
+                    blPreviewMode = False
                     Me.Close()
                     Exit Sub
                 Else
@@ -787,6 +810,22 @@ Public Class frmOnlineBackup
                 End If
                 Me.Cursor = Cursors.Default
             End If
+
+            If DownloadPreview Then
+                Me.Cursor = Cursors.WaitCursor
+                DownloadPreview = False
+
+                If My.Computer.FileSystem.FileExists(strBackupFile) Then
+                    strDatabaseFile = strBackupFile
+                    blPreviewMode = True
+                    Me.Close()
+                    Exit Sub
+                Else
+                    MessageBoxEx.Show("Cannot preview. Backup file is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+                Me.Cursor = Cursors.Default
+            End If
+
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -796,8 +835,10 @@ Public Class frmOnlineBackup
         DownloadOnly = False
         DownloadRestore = False
         DownloadOpen = False
-        DisplayInformation()
+        DownloadPreview = False
 
+        DisplayInformation()
+        Me.Cursor = Cursors.Default
     End Sub
 
 #End Region
@@ -857,13 +898,62 @@ Public Class frmOnlineBackup
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            boolRestored = False
+            blRestore = False
             Me.Cursor = Cursors.Default
         End Try
 
 
     End Sub
 
+#End Region
+
+
+#Region "PREVIEW DATABASE"
+
+    Private Sub PreviewDatabase() Handles btnPreview.Click, btnPreviewCM.Click
+        Try
+            If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
+                ShowFileTransferInProgressMessage()
+                Exit Sub
+            End If
+
+            If Me.listViewEx1.Items.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No backup files in the list", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.listViewEx1.SelectedItems.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No file selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.listViewEx1.SelectedItems.Count > 1 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.listViewEx1.SelectedItems(0).ImageIndex = 3 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("Selected item is a folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            DownloadPreview = True
+
+            DownloadFileFromDrive()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            ' blPreviewMode = False
+            Me.Cursor = Cursors.Default
+        End Try
+
+    End Sub
 #End Region
 
 
@@ -1431,4 +1521,5 @@ Public Class frmOnlineBackup
             Me.btnRemoveCM.Visible = True
         End If
     End Sub
+
 End Class

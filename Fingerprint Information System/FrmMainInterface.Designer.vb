@@ -6212,73 +6212,73 @@ Partial Class frmMainInterface
         Me.btnPhotoReceivedContext.AutoCheckOnClick = true
         Me.btnPhotoReceivedContext.BeginGroup = true
         Me.btnPhotoReceivedContext.Name = "btnPhotoReceivedContext"
-        Me.btnPhotoReceivedContext.Text = "Photo Received"
+        Me.btnPhotoReceivedContext.Text = "Set Photo Received"
         '
         'btnImportFPSlipContext
         '
-        Me.btnImportFPSlipContext.BeginGroup = true
-        Me.btnImportFPSlipContext.Icon = CType(resources.GetObject("btnImportFPSlipContext.Icon"),System.Drawing.Icon)
+        Me.btnImportFPSlipContext.BeginGroup = True
+        Me.btnImportFPSlipContext.Icon = CType(resources.GetObject("btnImportFPSlipContext.Icon"), System.Drawing.Icon)
         Me.btnImportFPSlipContext.Name = "btnImportFPSlipContext"
         Me.btnImportFPSlipContext.Text = "Import FP Slip"
         '
         'btnSelectFPSlipContext
         '
-        Me.btnSelectFPSlipContext.Icon = CType(resources.GetObject("btnSelectFPSlipContext.Icon"),System.Drawing.Icon)
+        Me.btnSelectFPSlipContext.Icon = CType(resources.GetObject("btnSelectFPSlipContext.Icon"), System.Drawing.Icon)
         Me.btnSelectFPSlipContext.Name = "btnSelectFPSlipContext"
         Me.btnSelectFPSlipContext.Text = "Select FP Slip"
         '
         'btnViewDASlipContext
         '
-        Me.btnViewDASlipContext.BeginGroup = true
-        Me.btnViewDASlipContext.Icon = CType(resources.GetObject("btnViewDASlipContext.Icon"),System.Drawing.Icon)
+        Me.btnViewDASlipContext.BeginGroup = True
+        Me.btnViewDASlipContext.Icon = CType(resources.GetObject("btnViewDASlipContext.Icon"), System.Drawing.Icon)
         Me.btnViewDASlipContext.Name = "btnViewDASlipContext"
         Me.btnViewDASlipContext.Text = "View FP Slip"
         '
         'btnViewIDSlipContext
         '
-        Me.btnViewIDSlipContext.BeginGroup = true
-        Me.btnViewIDSlipContext.Icon = CType(resources.GetObject("btnViewIDSlipContext.Icon"),System.Drawing.Icon)
+        Me.btnViewIDSlipContext.BeginGroup = True
+        Me.btnViewIDSlipContext.Icon = CType(resources.GetObject("btnViewIDSlipContext.Icon"), System.Drawing.Icon)
         Me.btnViewIDSlipContext.Name = "btnViewIDSlipContext"
         Me.btnViewIDSlipContext.Text = "View FP Slip"
         '
         'btnViewACSlipContext
         '
-        Me.btnViewACSlipContext.BeginGroup = true
-        Me.btnViewACSlipContext.Icon = CType(resources.GetObject("btnViewACSlipContext.Icon"),System.Drawing.Icon)
+        Me.btnViewACSlipContext.BeginGroup = True
+        Me.btnViewACSlipContext.Icon = CType(resources.GetObject("btnViewACSlipContext.Icon"), System.Drawing.Icon)
         Me.btnViewACSlipContext.Name = "btnViewACSlipContext"
         Me.btnViewACSlipContext.Text = "View FP Slip"
         '
         'btnLocateFPSlip
         '
-        Me.btnLocateFPSlip.Image = CType(resources.GetObject("btnLocateFPSlip.Image"),System.Drawing.Image)
+        Me.btnLocateFPSlip.Image = CType(resources.GetObject("btnLocateFPSlip.Image"), System.Drawing.Image)
         Me.btnLocateFPSlip.Name = "btnLocateFPSlip"
-        Me.btnLocateFPSlip.Text = "Locate FP Slip"
+        Me.btnLocateFPSlip.Text = "Open FP Slip Folder"
         '
         'btnImportCP
         '
-        Me.btnImportCP.BeginGroup = true
-        Me.btnImportCP.Icon = CType(resources.GetObject("btnImportCP.Icon"),System.Drawing.Icon)
+        Me.btnImportCP.BeginGroup = True
+        Me.btnImportCP.Icon = CType(resources.GetObject("btnImportCP.Icon"), System.Drawing.Icon)
         Me.btnImportCP.Name = "btnImportCP"
         Me.btnImportCP.Text = "Import Chance Prints"
         '
         'btnSelcetCPs
         '
-        Me.btnSelcetCPs.Icon = CType(resources.GetObject("btnSelcetCPs.Icon"),System.Drawing.Icon)
+        Me.btnSelcetCPs.Icon = CType(resources.GetObject("btnSelcetCPs.Icon"), System.Drawing.Icon)
         Me.btnSelcetCPs.Name = "btnSelcetCPs"
         Me.btnSelcetCPs.Text = "Select Chance Prints"
         '
         'btnViewCP
         '
-        Me.btnViewCP.BeginGroup = true
-        Me.btnViewCP.Icon = CType(resources.GetObject("btnViewCP.Icon"),System.Drawing.Icon)
+        Me.btnViewCP.BeginGroup = True
+        Me.btnViewCP.Icon = CType(resources.GetObject("btnViewCP.Icon"), System.Drawing.Icon)
         Me.btnViewCP.Name = "btnViewCP"
         Me.btnViewCP.Text = "View Chance Prints"
         '
         'btnLocateCP
         '
-        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"),System.Drawing.Image)
+        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"), System.Drawing.Image)
         Me.btnLocateCP.Name = "btnLocateCP"
-        Me.btnLocateCP.Text = "Locate Chance Prints"
+        Me.btnLocateCP.Text = "Open Chance Print Folder"
         '
         'btnEnterIDRDetailsContextMenu
         '
