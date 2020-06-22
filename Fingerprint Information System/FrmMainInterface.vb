@@ -1401,7 +1401,7 @@ Public Class frmMainInterface
 
             blApplicationIsRestoring = False
             frmProgressBar.Close()
-            blRestore = False
+            blRestoreDB = False
             ShowDesktopAlert("Database restored successfully!")
         End If
 
@@ -2613,7 +2613,7 @@ Public Class frmMainInterface
 
         End Select
 
-        If blPreviewMode Then
+        If blPreviewDB Then
             Me.pnlRegisterName.Text += " - Preview Mode"
         End If
 
@@ -17664,26 +17664,28 @@ errhandler:
 
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        blRestore = False
-        Dim isPreviewMode As Boolean = blPreviewMode
-        blPreviewMode = False
+        blRestoreDB = False
+        blDBIsInPreviewMode = blPreviewDB
+        blPreviewDB = False
 
         FrmLocalBackup.ShowDialog()
 
-        If blRestore Then
+        If blRestoreDB Then
             LoadRecordsAfterRestore()
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
-            blPreviewMode = False
+            blPreviewDB = False
+            blDBIsInPreviewMode = False
             Exit Sub
         End If
 
-        If blPreviewMode Then
+        If blPreviewDB Then
+            blDBIsInPreviewMode = True
             LoadRecordsAfterPreview()
         Else
-            blPreviewMode = isPreviewMode
+            blPreviewDB = blDBIsInPreviewMode
         End If
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -17728,27 +17730,29 @@ errhandler:
             Exit Sub
         End If
 
-        blRestore = False
-        Dim isPreviewMode As Boolean = blPreviewMode
-        blPreviewMode = False
+        blRestoreDB = False
+        blDBIsInPreviewMode = blPreviewDB
+        blPreviewDB = False
 
         FindLastSOCNumberDICount()
         frmOnlineBackup.ShowDialog()
 
-        If blRestore Then
+        If blRestoreDB Then
             LoadRecordsAfterRestore()
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
-            blPreviewMode = False
+            blPreviewDB = False
+            blDBIsInPreviewMode = False
             Exit Sub
         End If
 
-        If blPreviewMode Then
+        If blPreviewDB Then
+            blDBIsInPreviewMode = True
             LoadRecordsAfterPreview()
         Else
-            blPreviewMode = isPreviewMode
+            blPreviewDB = blDBIsInPreviewMode
         End If
 
     End Sub
@@ -18672,6 +18676,11 @@ errhandler:
 
         If FullDistrictName = "" Then
             MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If blDBIsInPreviewMode Then
+            MessageBoxEx.Show("Database is in Preview Mode. Cannot Upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 

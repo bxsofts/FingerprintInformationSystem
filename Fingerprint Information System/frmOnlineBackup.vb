@@ -50,6 +50,8 @@ Public Class frmOnlineBackup
     Dim LastModifiedDate As String = ""
     Dim blShowFileCount As Boolean
 
+
+
 #Region "FORM LOAD EVENTS"
 
     Private Sub CreateService() Handles MyBase.Load
@@ -92,7 +94,7 @@ Public Class frmOnlineBackup
             blUploadIsProgressing = False
             blDownloadIsProgressing = False
             blListIsLoading = False
-            
+
             LastModifiedDate = frmMainInterface.GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
             LoadFilesInUserBackupFolder(False)
 
@@ -398,6 +400,10 @@ Public Class frmOnlineBackup
 
     Private Sub RenameUserBackupFolderName(UserBackupFolderID As String)
         Try
+            If blDBIsInPreviewMode Then
+                Exit Sub
+            End If
+
             Dim request As New Google.Apis.Drive.v3.Data.File
             request.Name = FullDistrictName
             request.Description = FileOwner
@@ -438,8 +444,8 @@ Public Class frmOnlineBackup
             Exit Sub
         End If
 
-        If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
-            MessageBoxEx.Show("Database is in Preview Mode. Cannot Upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If blDBIsInPreviewMode Then
+            MessageBoxEx.Show("Database is in Preview Mode. Cannot Upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
@@ -801,8 +807,8 @@ Public Class frmOnlineBackup
                 If My.Computer.FileSystem.FileExists(strBackupFile) Then
                     strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
                     My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
-                    blRestore = True
-                    blPreviewMode = False
+                    blRestoreDB = True
+                    blPreviewDB = False
                     Me.Close()
                     Exit Sub
                 Else
@@ -817,7 +823,7 @@ Public Class frmOnlineBackup
 
                 If My.Computer.FileSystem.FileExists(strBackupFile) Then
                     strDatabaseFile = strBackupFile
-                    blPreviewMode = True
+                    blPreviewDB = True
                     Me.Close()
                     Exit Sub
                 Else
@@ -898,7 +904,7 @@ Public Class frmOnlineBackup
 
         Catch ex As Exception
             ShowErrorMessage(ex)
-            blRestore = False
+            blRestoreDB = False
             Me.Cursor = Cursors.Default
         End Try
 

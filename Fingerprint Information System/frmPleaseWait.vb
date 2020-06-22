@@ -10,7 +10,7 @@
         Control.CheckForIllegalCrossThreadCalls = False
         Me.CircularProgress1.ProgressColor = GetProgressColor()
         Me.CircularProgress1.IsRunning = True
-        If blPreviewMode Then
+        If blPreviewDB Then
             Me.LabelX1.Text = "Generating Preview..."
         Else
             Me.LabelX1.Text = "Please Wait..."

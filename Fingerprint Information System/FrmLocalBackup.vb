@@ -48,8 +48,8 @@ Public Class FrmLocalBackup
 
     Private Sub TakeBackup() Handles btnBackupDatabase.Click
         Try
-            If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
-                MessageBoxEx.Show("Database is in Preview Mode. Cannot take Backup.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If blDBIsInPreviewMode Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot take Backup.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -93,8 +93,8 @@ Public Class FrmLocalBackup
 
     Private Sub CopyDatabase() Handles btnCopyDatabase.Click
         Try
-            If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
-                MessageBoxEx.Show("Database is in Preview Mode. Cannot copy Database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If blDBIsInPreviewMode Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot copy Database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -150,19 +150,19 @@ Public Class FrmLocalBackup
                 strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
                 My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                 Application.DoEvents()
-                blRestore = True
+                blRestoreDB = True
                 Me.Close()
             End If
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
-            blRestore = False
+            blRestoreDB = False
         End Try
     End Sub
     Private Sub ImportDatabase(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportDatabase.Click
         Try
-            If frmMainInterface.pnlRegisterName.Text.EndsWith(" Mode") Then
-                MessageBoxEx.Show("Database is in Preview Mode. Cannot Import Database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If blDBIsInPreviewMode Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot Import Database.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -196,14 +196,14 @@ Public Class FrmLocalBackup
 
                 My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                 Application.DoEvents()
-                blRestore = True
+                blRestoreDB = True
                 Me.Close()
             End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
-            blRestore = False
+            blRestoreDB = False
         End Try
     End Sub
 
@@ -255,7 +255,7 @@ Public Class FrmLocalBackup
 
     Private Sub SelectNextItem(SelectedFileIndex)
         On Error Resume Next
-       
+
         If SelectedFileIndex < listViewEx1.Items.Count And listViewEx1.Items.Count > 0 Then 'selected 5 < count 10 
             Me.listViewEx1.Items(SelectedFileIndex).Selected = True 'select 5
         End If
@@ -389,14 +389,14 @@ Public Class FrmLocalBackup
             End If
 
             strDatabaseFile = Me.listViewEx1.SelectedItems(0).SubItems(2).Text
-            blRestore = False
-            blPreviewMode = True
+            blRestoreDB = False
+            blPreviewDB = True
 
-                Me.Close()
+            Me.Close()
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
-            blRestore = False
+            blRestoreDB = False
         End Try
     End Sub
 End Class

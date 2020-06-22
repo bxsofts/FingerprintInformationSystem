@@ -35,7 +35,12 @@ Module Sub_Main
                 Exit Sub
             End If
 
-            If Not InternetAvailable() Then Exit Sub
+            TakePeriodicLocalBackup()
+
+            If Not InternetAvailable() Then
+                Exit Sub
+            End If
+
 
             strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", "")
             If strDatabaseFile = "" Then Exit Sub
@@ -58,6 +63,8 @@ Module Sub_Main
 
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
+            System.Threading.Thread.Sleep(10000)
+
             UpdateOnlineDatabase()
 
             Dim blAutoBackup As Boolean = CBool(My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackup", 1))
@@ -66,10 +73,8 @@ Module Sub_Main
             AutoBackupPeriod = CInt(My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackupTime", 15))
             If AutoBackupPeriod = 0 Then Exit Sub
 
-            TakePeriodicOnlineBackup()
-
             System.Threading.Thread.Sleep(5000)
-            TakePeriodicLocalBackup()
+            TakePeriodicOnlineBackup()
 
         Catch ex As Exception
 
