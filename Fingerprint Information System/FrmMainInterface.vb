@@ -1092,8 +1092,8 @@ Public Class frmMainInterface
 
     Private Sub btnFixDBTables_Click(sender As Object, e As EventArgs) Handles btnFixDBTables.Click
         Try
-            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
-                MessageBoxEx.Show("Database is in Preview Mode. Cannot fix.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If blDBIsInPreviewMode Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot fix tables.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -1372,7 +1372,14 @@ Public Class frmMainInterface
     Sub LoadRecordsToAllTablesDependingOnCurrentYearSettings() 'loads data to the datagrid
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
-        If chkLoadCurrentYearRecordsOnly.Checked Then
+
+        Dim blloadcurrentyearonly As Boolean = chkLoadCurrentYearRecordsOnly.Checked
+
+        If blRestoreDB Or blPreviewDB Then
+            blloadcurrentyearonly = False
+        End If
+
+        If blloadcurrentyearonly Then
             LoadCurrentYearRecords()
         Else
             LoadSOCRecords()
@@ -1381,6 +1388,7 @@ Public Class frmMainInterface
             LoadFPARecords()
             LoadCDRecords()
         End If
+
         LoadIDRecords()
         LoadSSRecords()
         If blApplicationIsRestoring Then
@@ -13154,7 +13162,7 @@ errhandler:
 #Region "DATABASE LOCATION"
     Private Sub ChangeDatabaseLocation(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeDBFolder.Click
         Try
-            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+            If blDBIsInPreviewMode Then
                 MessageBoxEx.Show("Database is in Preview Mode. Cannot change Database Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub
@@ -17671,14 +17679,13 @@ errhandler:
         FrmLocalBackup.ShowDialog()
 
         If blRestoreDB Then
+            blPreviewDB = False
+            blDBIsInPreviewMode = False
             LoadRecordsAfterRestore()
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
-            blPreviewDB = False
-            blDBIsInPreviewMode = False
-            Exit Sub
         End If
 
         If blPreviewDB Then
@@ -17738,14 +17745,13 @@ errhandler:
         frmOnlineBackup.ShowDialog()
 
         If blRestoreDB Then
+            blPreviewDB = False
+            blDBIsInPreviewMode = False
             LoadRecordsAfterRestore()
             If Me.btnOpen.Enabled = False Then
                 EnableControls()
                 Me.pnlRegisterName.Text = "Scene of Crime Register"
             End If
-            blPreviewDB = False
-            blDBIsInPreviewMode = False
-            Exit Sub
         End If
 
         If blPreviewDB Then
@@ -18147,7 +18153,7 @@ errhandler:
             Me.cprDBAvailable.Visible = e.UserState
             If e.UserState = True Then
                 Thread.Sleep(5000)
-                If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+                If blDBIsInPreviewMode Then
                     Exit Sub
                 End If
 
@@ -18168,7 +18174,7 @@ errhandler:
 
     Private Sub OpenDBLocation() Handles btnOpenDBFolder.Click
         On Error Resume Next
-        If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+        If blDBIsInPreviewMode Then
             MessageBoxEx.Show("Database is in Preview Mode. Cannot open Database Folder.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
             Exit Sub
@@ -18680,7 +18686,7 @@ errhandler:
         End If
 
         If blDBIsInPreviewMode Then
-            MessageBoxEx.Show("Database is in Preview Mode. Cannot Upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBoxEx.Show("Database is in Preview Mode. Cannot open.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -18732,6 +18738,8 @@ errhandler:
     Public Sub InsertOrUpdateLastModificationDate(NewDate As Date)
         Try
             If blUpdateLastModificationDate = False Then Exit Sub
+            If blDBIsInPreviewMode Then Exit Sub
+
             Dim ID As Integer = 1
             Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
             If FingerPrintDataSet.LastModification.Count = 0 Then
@@ -18849,7 +18857,7 @@ errhandler:
 
     Private Sub btnCompactDatabase_Click(sender As Object, e As EventArgs) Handles btnCompactDatabase.Click
         Try
-            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+            If blDBIsInPreviewMode Then
                 MessageBoxEx.Show("Database is in Preview Mode. Cannot compact.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub
@@ -18932,7 +18940,7 @@ errhandler:
 
     Private Sub btnCopyDBtoUSB_Click(sender As Object, e As EventArgs) Handles btnCopyDBtoUSB.Click
         Try
-            If Me.pnlRegisterName.Text.EndsWith(" Mode") Then
+            If blDBIsInPreviewMode Then
                 MessageBoxEx.Show("Database is in Preview Mode. Cannot copy.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Cursor = Cursors.Default
                 Exit Sub

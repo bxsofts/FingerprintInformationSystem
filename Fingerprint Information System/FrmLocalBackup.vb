@@ -151,6 +151,7 @@ Public Class FrmLocalBackup
                 My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                 Application.DoEvents()
                 blRestoreDB = True
+                blPreviewDB = False
                 Me.Close()
             End If
         Catch ex As Exception
@@ -372,6 +373,8 @@ Public Class FrmLocalBackup
         End If
     End Sub
 
+#Region "PREVIEW DATABASE"
+
     Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click, btnPreviewCM.Click
         Try
             If Me.listViewEx1.Items.Count = 0 Then
@@ -399,6 +402,9 @@ Public Class FrmLocalBackup
             blRestoreDB = False
         End Try
     End Sub
+
+#End Region
+
 End Class
 
 

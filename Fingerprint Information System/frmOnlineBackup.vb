@@ -798,19 +798,15 @@ Public Class frmOnlineBackup
                 Me.Cursor = Cursors.Default
             End If
 
-
-
             If DownloadRestore Then
                 Me.Cursor = Cursors.WaitCursor
                 DownloadRestore = False
-
+                blPreviewDB = False
                 If My.Computer.FileSystem.FileExists(strBackupFile) Then
                     strDatabaseFile = My.Computer.Registry.GetValue(strGeneralSettingsPath, "DatabaseFile", SuggestedLocation & "\Database\Fingerprint.mdb")
                     My.Computer.FileSystem.CopyFile(strBackupFile, strDatabaseFile, True)
                     blRestoreDB = True
-                    blPreviewDB = False
                     Me.Close()
-                    Exit Sub
                 Else
                     MessageBoxEx.Show("Cannot restore. Backup file is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -820,12 +816,11 @@ Public Class frmOnlineBackup
             If DownloadPreview Then
                 Me.Cursor = Cursors.WaitCursor
                 DownloadPreview = False
-
+                blRestoreDB = False
                 If My.Computer.FileSystem.FileExists(strBackupFile) Then
                     strDatabaseFile = strBackupFile
                     blPreviewDB = True
                     Me.Close()
-                    Exit Sub
                 Else
                     MessageBoxEx.Show("Cannot preview. Backup file is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
