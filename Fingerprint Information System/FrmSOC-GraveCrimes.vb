@@ -86,7 +86,7 @@ Public Class FrmSOCGraveCrimes
     Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
         Try
             If Not blModifyButtonName Then Exit Sub
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement\" & Me.txtYear.Text
+            Dim SaveFolder As String = SuggestedLocation & "\Grave Crime Statement\" & Me.txtYear.Text
             Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
             SaveFileName = SaveFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
@@ -132,7 +132,7 @@ Public Class FrmSOCGraveCrimes
                         blMonthCompleted = False
                     End If
 
-                    Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement\" & y
+                    Dim SaveFolder As String = SuggestedLocation & "\Grave Crime Statement\" & y
                     System.IO.Directory.CreateDirectory(SaveFolder)
                     SaveFileName = SaveFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
@@ -605,7 +605,10 @@ Public Class FrmSOCGraveCrimes
 
             WordApp.Selection.GoTo(Word.WdGoToItem.wdGoToPage, , 1)
 
-            If Not FileInUse(SaveFileName) And IsMonthStmt And RowCount > 3 And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And IsMonthStmt And blMonthCompleted Then
+                aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
+
 
             For delay = 96 To 100
                 bgwLetter.ReportProgress(delay)
@@ -646,7 +649,7 @@ Public Class FrmSOCGraveCrimes
             Dim m = Me.cmbMonth.SelectedIndex + 1
             Dim y = Me.txtYear.Value
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement"
+            Dim SaveFolder As String = SuggestedLocation & "\Grave Crime Statement"
             System.IO.Directory.CreateDirectory(SaveFolder)
             Dim sFileName = SaveFolder & "\" & y & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
