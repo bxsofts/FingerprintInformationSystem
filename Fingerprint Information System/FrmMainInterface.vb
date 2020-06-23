@@ -1337,7 +1337,7 @@ Public Class frmMainInterface
     End Sub
 
 
-    Private Sub LoadJoinedIDRRecords()
+    Private Sub LoadIDRRecords()
         Try
             Me.Cursor = Cursors.WaitCursor
 
@@ -1387,6 +1387,7 @@ Public Class frmMainInterface
             LoadDARecords()
             LoadFPARecords()
             LoadCDRecords()
+            LoadIDRRecords()
         End If
 
         LoadIDRecords()
@@ -1423,7 +1424,7 @@ Public Class frmMainInterface
         LoadSOCRecords()
         LoadRSOCRecords()
         LoadDARecords()
-        LoadJoinedIDRRecords()
+        LoadIDRRecords()
         LoadFPARecords()
         LoadCDRecords()
         LoadIDRecords()
@@ -1486,7 +1487,7 @@ Public Class frmMainInterface
 
             Case "IDR"
                 Me.Cursor = Cursors.WaitCursor
-                LoadJoinedIDRRecords()
+                LoadIDRRecords()
                 ShowDesktopAlert("Records reloaded in Identification Register!")
                 Me.Cursor = Cursors.Default
         End Select
@@ -17142,7 +17143,7 @@ errhandler:
             Me.IdentificationRegisterTableAdapter1.RemoveNullFromCOID("")
             blIdentificationRegisterUpdateFailed = False
 
-            LoadJoinedIDRRecords()
+            LoadIDRRecords()
         Catch ex As Exception
             blIdentificationRegisterUpdateFailed = True
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
