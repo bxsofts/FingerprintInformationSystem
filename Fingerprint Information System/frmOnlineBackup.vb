@@ -1448,10 +1448,6 @@ Public Class frmOnlineBackup
 
         End If
 
-
-
-
-
     End Sub
 
     Private Sub ShowProgressControls(ProgressText As String, StatusText As String, ProgressType As eCircularProgressType)

@@ -753,6 +753,7 @@ Module modMain
         Next i
         Return hex_value.ToLower
     End Function
+
 End Module
 
 

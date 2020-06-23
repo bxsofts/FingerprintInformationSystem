@@ -480,6 +480,7 @@ Public Class frmMainInterface
         CheckForUpdatesAtStartup()
         UploadVersionInfoToDrive()
         CleanupLocalBackupFiles()
+        bgwCopyFolder.RunWorkerAsync()
         If DBExists = False Then
             Dim DBMissing As String = "FATAL ERROR: The database file 'Fingerprint.mdvb' is missing. Please restore the database."
             Me.pnlRegisterName.Text = DBMissing
@@ -18904,6 +18905,53 @@ errhandler:
 #End Region
 
 
+#Region "MOVE FOLDER TO NEW LOCATION"
+
+    Private Sub bgwCopyFolder_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCopyFolder.DoWork
+        Try
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics", SuggestedLocation & "\Annual Statistics")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement", SuggestedLocation & "\Attendance Statement")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion", SuggestedLocation & "\Expert Opinion")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Grave Crime Statement", SuggestedLocation & "\Grave Crime Statement")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Identification Reports", SuggestedLocation & "\Identification Reports")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Identification Statement", SuggestedLocation & "\Identification Statement")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\Performance Statement", SuggestedLocation & "\Performance Statement")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\SOC Statement", SuggestedLocation & "\SOC Statement")
+            Thread.Sleep(2000)
+
+            CopyFolder(FileIO.SpecialDirectories.MyDocuments & "\TA Bills", SuggestedLocation & "\TA Bills")
+            Thread.Sleep(2000)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub CopyFolder(SourceFolder As String, DestinationFolder As String)
+        Try
+            If My.Computer.FileSystem.DirectoryExists(SourceFolder) Then
+                My.Computer.FileSystem.CreateDirectory(DestinationFolder)
+                My.Computer.FileSystem.CopyDirectory(SourceFolder, DestinationFolder, True)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+#End Region
+
     Private Sub btnWeeklyDiaryDB_Click(sender As Object, e As EventArgs) Handles btnWeeklyDiaryDB.Click
         Try
             blPENVerified = False
@@ -18982,6 +19030,4 @@ errhandler:
     End Sub
 
 
-   
-   
 End Class

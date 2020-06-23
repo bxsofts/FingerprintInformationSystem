@@ -1128,6 +1128,7 @@ Partial Class frmMainInterface
         Me.SSTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.SupportingStaffTableAdapter()
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwCheckRemoteDB = New System.ComponentModel.BackgroundWorker()
+        Me.bgwCopyFolder = New System.ComponentModel.BackgroundWorker()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -6216,67 +6217,67 @@ Partial Class frmMainInterface
         '
         'btnImportFPSlipContext
         '
-        Me.btnImportFPSlipContext.BeginGroup = True
-        Me.btnImportFPSlipContext.Icon = CType(resources.GetObject("btnImportFPSlipContext.Icon"), System.Drawing.Icon)
+        Me.btnImportFPSlipContext.BeginGroup = true
+        Me.btnImportFPSlipContext.Icon = CType(resources.GetObject("btnImportFPSlipContext.Icon"),System.Drawing.Icon)
         Me.btnImportFPSlipContext.Name = "btnImportFPSlipContext"
         Me.btnImportFPSlipContext.Text = "Import FP Slip"
         '
         'btnSelectFPSlipContext
         '
-        Me.btnSelectFPSlipContext.Icon = CType(resources.GetObject("btnSelectFPSlipContext.Icon"), System.Drawing.Icon)
+        Me.btnSelectFPSlipContext.Icon = CType(resources.GetObject("btnSelectFPSlipContext.Icon"),System.Drawing.Icon)
         Me.btnSelectFPSlipContext.Name = "btnSelectFPSlipContext"
         Me.btnSelectFPSlipContext.Text = "Select FP Slip"
         '
         'btnViewDASlipContext
         '
-        Me.btnViewDASlipContext.BeginGroup = True
-        Me.btnViewDASlipContext.Icon = CType(resources.GetObject("btnViewDASlipContext.Icon"), System.Drawing.Icon)
+        Me.btnViewDASlipContext.BeginGroup = true
+        Me.btnViewDASlipContext.Icon = CType(resources.GetObject("btnViewDASlipContext.Icon"),System.Drawing.Icon)
         Me.btnViewDASlipContext.Name = "btnViewDASlipContext"
         Me.btnViewDASlipContext.Text = "View FP Slip"
         '
         'btnViewIDSlipContext
         '
-        Me.btnViewIDSlipContext.BeginGroup = True
-        Me.btnViewIDSlipContext.Icon = CType(resources.GetObject("btnViewIDSlipContext.Icon"), System.Drawing.Icon)
+        Me.btnViewIDSlipContext.BeginGroup = true
+        Me.btnViewIDSlipContext.Icon = CType(resources.GetObject("btnViewIDSlipContext.Icon"),System.Drawing.Icon)
         Me.btnViewIDSlipContext.Name = "btnViewIDSlipContext"
         Me.btnViewIDSlipContext.Text = "View FP Slip"
         '
         'btnViewACSlipContext
         '
-        Me.btnViewACSlipContext.BeginGroup = True
-        Me.btnViewACSlipContext.Icon = CType(resources.GetObject("btnViewACSlipContext.Icon"), System.Drawing.Icon)
+        Me.btnViewACSlipContext.BeginGroup = true
+        Me.btnViewACSlipContext.Icon = CType(resources.GetObject("btnViewACSlipContext.Icon"),System.Drawing.Icon)
         Me.btnViewACSlipContext.Name = "btnViewACSlipContext"
         Me.btnViewACSlipContext.Text = "View FP Slip"
         '
         'btnLocateFPSlip
         '
-        Me.btnLocateFPSlip.Image = CType(resources.GetObject("btnLocateFPSlip.Image"), System.Drawing.Image)
+        Me.btnLocateFPSlip.Image = CType(resources.GetObject("btnLocateFPSlip.Image"),System.Drawing.Image)
         Me.btnLocateFPSlip.Name = "btnLocateFPSlip"
         Me.btnLocateFPSlip.Text = "Open FP Slip Folder"
         '
         'btnImportCP
         '
-        Me.btnImportCP.BeginGroup = True
-        Me.btnImportCP.Icon = CType(resources.GetObject("btnImportCP.Icon"), System.Drawing.Icon)
+        Me.btnImportCP.BeginGroup = true
+        Me.btnImportCP.Icon = CType(resources.GetObject("btnImportCP.Icon"),System.Drawing.Icon)
         Me.btnImportCP.Name = "btnImportCP"
         Me.btnImportCP.Text = "Import Chance Prints"
         '
         'btnSelcetCPs
         '
-        Me.btnSelcetCPs.Icon = CType(resources.GetObject("btnSelcetCPs.Icon"), System.Drawing.Icon)
+        Me.btnSelcetCPs.Icon = CType(resources.GetObject("btnSelcetCPs.Icon"),System.Drawing.Icon)
         Me.btnSelcetCPs.Name = "btnSelcetCPs"
         Me.btnSelcetCPs.Text = "Select Chance Prints"
         '
         'btnViewCP
         '
-        Me.btnViewCP.BeginGroup = True
-        Me.btnViewCP.Icon = CType(resources.GetObject("btnViewCP.Icon"), System.Drawing.Icon)
+        Me.btnViewCP.BeginGroup = true
+        Me.btnViewCP.Icon = CType(resources.GetObject("btnViewCP.Icon"),System.Drawing.Icon)
         Me.btnViewCP.Name = "btnViewCP"
         Me.btnViewCP.Text = "View Chance Prints"
         '
         'btnLocateCP
         '
-        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"), System.Drawing.Image)
+        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"),System.Drawing.Image)
         Me.btnLocateCP.Name = "btnLocateCP"
         Me.btnLocateCP.Text = "Open Chance Print Folder"
         '
@@ -14218,6 +14219,10 @@ Partial Class frmMainInterface
         '
         Me.bgwCheckRemoteDB.WorkerReportsProgress = true
         '
+        'bgwCopyFolder
+        '
+        Me.bgwCopyFolder.WorkerReportsProgress = true
+        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -15368,5 +15373,6 @@ End Sub
     Friend WithEvents RemarksDataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cprDBAvailable As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwCheckRemoteDB As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwCopyFolder As System.ComponentModel.BackgroundWorker
 
 End Class

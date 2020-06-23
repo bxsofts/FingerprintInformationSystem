@@ -115,7 +115,7 @@ Public Class frmAnnualStatistics
             End Select
 
             If Me.Text = "Annual Statistics" Then
-                Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics"
+                Dim SaveFolder As String = SuggestedLocation & "\Annual Statistics"
                 System.IO.Directory.CreateDirectory(SaveFolder)
                 SaveFileName = SaveFolder & "\Annual Statistics - " & SaveFileName & ".docx"
 
@@ -1213,7 +1213,7 @@ Public Class frmAnnualStatistics
 
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
-            Dim sFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Annual Statistics\"
+            Dim sFolder As String = SuggestedLocation & "\Annual Statistics\"
             Dim sfilename = sFolder & "Annual Statistics - " & Me.txtYear.Text & ".docx"
 
             If FileIO.FileSystem.FileExists(sfilename) Then
