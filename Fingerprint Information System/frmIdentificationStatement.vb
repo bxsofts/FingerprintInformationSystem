@@ -108,7 +108,7 @@ Public Class frmIdentificationStatement
     Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
         Try
             If Not blModifyButtonName Then Exit Sub
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement\" & Me.txtYear.Text
+            Dim SaveFolder As String = SuggestedLocation & "\Identification Statement\" & Me.txtYear.Text
             Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
             SaveFileName = SaveFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
             If My.Computer.FileSystem.FileExists(SaveFileName) Then
@@ -141,7 +141,7 @@ Public Class frmIdentificationStatement
                             blMonthCompleted = False
                         End If
 
-                        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement\" & y
+                        Dim SaveFolder As String = SuggestedLocation & "\Identification Statement\" & y
                         System.IO.Directory.CreateDirectory(SaveFolder)
                         SaveFileName = SaveFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
@@ -553,7 +553,10 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            If Not FileInUse(SaveFileName) And IsMonthStmt And idcount > 0 And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And IsMonthStmt And blMonthCompleted Then
+                aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
+
 
             WordApp.Visible = True
             WordApp.Activate()
@@ -587,7 +590,7 @@ Public Class frmIdentificationStatement
             Dim m = Me.cmbMonth.SelectedIndex + 1
             Dim y = Me.txtYear.Value
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Statement"
+            Dim SaveFolder As String = SuggestedLocation & "\Identification Statement"
             System.IO.Directory.CreateDirectory(SaveFolder)
             Dim sFileName = SaveFolder & "\" & y & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
