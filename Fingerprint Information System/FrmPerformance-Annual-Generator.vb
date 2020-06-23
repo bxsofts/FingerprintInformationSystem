@@ -32,7 +32,7 @@ Public Class frmAnnualPerformance
         CreateDatagridRows()
         ConnectToDatabase()
 
-        SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
+        SaveFolder = SuggestedLocation & "\Performance Statement"
         System.IO.Directory.CreateDirectory(SaveFolder)
         Me.txtYear.Focus()
 
