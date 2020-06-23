@@ -742,15 +742,15 @@ Public Class FrmTourNote
             DVNumber = Me.txtDVNumber.Text.Trim
             DisplayFileStatus()
 
-            If Me.dgvWD.Visible Then
+            '  If Me.dgvWD.Visible Then
+            'GenerateSingleLineTourNote()
+            '  Else
+            If chkSingleRow.Checked Then
                 GenerateSingleLineTourNote()
             Else
-                If chkSingleRow.Checked Then
-                    GenerateSingleLineTourNote()
-                Else
-                    GenerateThreeLineTourNote()
-                End If
+                GenerateThreeLineTourNote()
             End If
+            ' End If
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -994,6 +994,10 @@ Public Class FrmTourNote
 
                         Dim purpose As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourPurpose
 
+                        If purpose.Trim = "" Then
+                            purpose = WeeklyDiaryDataSet1.WeeklyDiary(i).WorkDone
+                        End If
+
                         If purpose.ToLower.Contains("inspection") Then
                             wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
                         End If
@@ -1077,14 +1081,26 @@ Public Class FrmTourNote
                 Exit Sub
             End If
 
-            Dim RowCount As Integer = Me.FingerPrintDataSet.SOCRegister.Count
+            Dim RowCount As Integer = 0
             Dim SelectedRecordsCount As Integer = 0
 
-            For i = 0 To RowCount - 1
-                If dgvSOC.Rows(i).Cells(1).Value = True Then
-                    SelectedRecordsCount = SelectedRecordsCount + 1
-                End If
-            Next
+
+            If Me.dgvSOC.Visible Then
+                RowCount = Me.FingerPrintDataSet.SOCRegister.Count
+                For i = 0 To RowCount - 1
+                    If dgvSOC.Rows(i).Cells(1).Value = True Then
+                        SelectedRecordsCount = SelectedRecordsCount + 1
+                    End If
+                Next
+            Else
+                RowCount = Me.WeeklyDiaryDataSet1.WeeklyDiary.Count
+                For i = 0 To RowCount - 1
+                    If dgvWD.Rows(i).Cells(4).Value = True Then
+                        SelectedRecordsCount = SelectedRecordsCount + 1
+                    End If
+                Next
+            End If
+
 
             If SelectedRecordsCount = 0 Then
                 If MessageBoxEx.Show("No records selected. Would you like to generate a blank tour note?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
@@ -1214,106 +1230,195 @@ Public Class FrmTourNote
             Dim iteration As Integer = CInt(50 / args.RowCount)
             Dim dvn As String = args.DVNumber
 
-            For i = 0 To args.RowCount - 1
+            If args.blGenerateFromSOC Then
+                For i = 0 To args.RowCount - 1
+                    If dgvSOC.Rows(i).Cells(1).Value = True Then
+                        Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", TimeFormatCulture)
+                        Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
+                        Dim PS1 As String = PS
+                        n = n + 1
 
-                If dgvSOC.Rows(i).Cells(1).Value = True Then
-                    Dim dt As String = FingerPrintDataSet.SOCRegister(i).DateOfInspection.ToString("dd/MM/yyyy", TimeFormatCulture)
-                    Dim PS As String = FingerPrintDataSet.SOCRegister(i).PoliceStation
-                    Dim PS1 As String = PS
-                    n = n + 1
+                        wdTbl.Cell(j, 1).Range.Text = n
 
-                    wdTbl.Cell(j, 1).Range.Text = n
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
 
-                    wdTbl.Cell(j, 2).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
 
-                    wdTbl.Cell(j, 3).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
+                        wdTbl.Cell(j, 4).Range.Text = TourStartLocation
 
-                    wdTbl.Cell(j, 4).Range.Text = TourStartLocation
-
-                    If Me.chkUsePO.Checked Then
-                        wdTbl.Cell(j, 5).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
-                    Else
-                        PS1 = PS.Replace("P.S", "")
-                        wdTbl.Cell(j, 5).Range.Text = PS1
-                    End If
-
-                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
-
-                    If args.UsePS Then
-                        Dim distance As String = FindDistance(PS)
-                        If Val(distance) <> 0 Then
-                            wdTbl.Cell(j, 7).Range.Text = Val(distance)
+                        If Me.chkUsePO.Checked Then
+                            wdTbl.Cell(j, 5).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
+                        Else
+                            PS1 = PS.Replace("P.S", "")
+                            wdTbl.Cell(j, 5).Range.Text = PS1
                         End If
-                    End If
 
-                    If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
-                    wdTbl.Cell(j, 8).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
+                        wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
 
-                    j = j + 1
-
-                    wdTbl.Cell(j, 2).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
-
-                    wdTbl.Cell(j, 3).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
-
-                    wdTbl.Cell(j, 4).Range.Text = "Halt & Duty"
-                    wdTbl.Cell(j, 8).Range.Text = "Halt & Duty"
-
-                    j = j + 1
-
-                    wdTbl.Cell(j, 2).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
-
-                    wdTbl.Cell(j, 3).Range.Select()
-                    WordApp.Selection.TypeText(dt)
-                    WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
-                    WordApp.Selection.TypeText(vbNewLine)
-
-                    If Not args.UsePS Then
-                        wdTbl.Cell(j, 4).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
-                    Else
-                        PS1 = PS.Replace("P.S", "")
-                        wdTbl.Cell(j, 4).Range.Text = PS1
-                    End If
-
-                    wdTbl.Cell(j, 5).Range.Text = TourStartLocation
-                    wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
-
-                    If args.UsePS Then
-                        Dim distance As String = FindDistance(PS)
-                        If Val(distance) <> 0 Then
-                            wdTbl.Cell(j, 7).Range.Text = Val(distance)
+                        If args.UsePS Then
+                            Dim distance As String = FindDistance(PS)
+                            If Val(distance) <> 0 Then
+                                wdTbl.Cell(j, 7).Range.Text = Val(distance)
+                            End If
                         End If
+
+                        If PS.EndsWith("P.S") = False Then PS1 = PS & " P.S"
+                        wdTbl.Cell(j, 8).Range.Text = "SOC Inspection in Cr.No. " & FingerPrintDataSet.SOCRegister(i).CrimeNumber & " of " & PS1
+
+                        j = j + 1
+
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 4).Range.Text = "Halt & Duty"
+                        wdTbl.Cell(j, 8).Range.Text = "Halt & Duty"
+
+                        j = j + 1
+
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        If Not args.UsePS Then
+                            wdTbl.Cell(j, 4).Range.Text = FingerPrintDataSet.SOCRegister(i).PlaceOfOccurrence
+                        Else
+                            PS1 = PS.Replace("P.S", "")
+                            wdTbl.Cell(j, 4).Range.Text = PS1
+                        End If
+
+                        wdTbl.Cell(j, 5).Range.Text = TourStartLocation
+                        wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
+
+                        If args.UsePS Then
+                            Dim distance As String = FindDistance(PS)
+                            If Val(distance) <> 0 Then
+                                wdTbl.Cell(j, 7).Range.Text = Val(distance)
+                            End If
+                        End If
+
+                        wdTbl.Cell(j, 8).Range.Text = "Return Journey"
+
+                        wdTbl.Cell(j, 1).Merge(wdTbl.Cell(j - 2, 1))
+
+                        j = j + 1
                     End If
 
-                    wdTbl.Cell(j, 8).Range.Text = "Return Journey"
-
-                    wdTbl.Cell(j, 1).Merge(wdTbl.Cell(j - 2, 1))
-
-                    j = j + 1
-                End If
-
-                For delay = delay To delay + iteration
-                    If delay < 91 Then
-                        bgwThreeTN.ReportProgress(delay)
-                        System.Threading.Thread.Sleep(5)
-                    End If
+                    For delay = delay To delay + iteration
+                        If delay < 91 Then
+                            bgwThreeTN.ReportProgress(delay)
+                            System.Threading.Thread.Sleep(5)
+                        End If
+                    Next
                 Next
+            Else
+                For i = 0 To args.RowCount - 1
 
-            Next
+                    If dgvWD.Rows(i).Cells(4).Value = True Then
+                        Dim dt As String = WeeklyDiaryDataSet1.WeeklyDiary(i).DiaryDate.ToString("dd/MM/yyyy", TimeFormatCulture)
+                        n = n + 1
+
+                        wdTbl.Cell(j, 1).Range.Text = n
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        Dim TourFrom As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourFrom
+                        Dim TourTo As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourTo
+
+                        wdTbl.Cell(j, 4).Range.Text = TourFrom
+                        wdTbl.Cell(j, 5).Range.Text = TourTo
+
+                        Dim purpose As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourPurpose
+
+                        If purpose.Trim = "" Then
+                            purpose = WeeklyDiaryDataSet1.WeeklyDiary(i).WorkDone
+                        End If
+
+                        Dim blsocinspection As Boolean = purpose.ToLower.Contains("inspection")
+
+                        If blsocinspection Then
+                            wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
+                        End If
+
+                        wdTbl.Cell(j, 8).Range.Text = purpose
+
+                        j = j + 1
+
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 4).Range.Text = "Halt & Duty"
+                        wdTbl.Cell(j, 8).Range.Text = "Halt & Duty"
+
+                        j = j + 1
+
+                        wdTbl.Cell(j, 2).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 3).Range.Select()
+                        WordApp.Selection.TypeText(dt)
+                        WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
+                        WordApp.Selection.TypeText(vbNewLine)
+
+                        wdTbl.Cell(j, 4).Range.Text = TourTo
+                        wdTbl.Cell(j, 5).Range.Text = TourFrom
+
+                        If blsocinspection Then
+                            wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
+                        End If
+
+                        wdTbl.Cell(j, 8).Range.Text = "Return Journey"
+
+                        wdTbl.Cell(j, 1).Merge(wdTbl.Cell(j - 2, 1))
+
+                        j = j + 1
+                    End If
+
+
+                    For delay = delay To delay + iteration
+                        If delay < 91 Then
+                            bgwThreeTN.ReportProgress(delay)
+                            System.Threading.Thread.Sleep(5)
+                        End If
+                    Next
+
+                Next
+            End If
+            
 
             If My.Computer.FileSystem.FileExists(args.sFileName) = False And blMonthCompleted Then
                 aDoc.SaveAs(args.sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
