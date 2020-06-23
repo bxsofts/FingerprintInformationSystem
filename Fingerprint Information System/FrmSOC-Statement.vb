@@ -84,7 +84,7 @@ Public Class frmSOCStatement
     Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
         Try
             If Not blModifyButtonName Then Exit Sub
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement\" & Me.txtYear.Text
+            Dim SaveFolder As String = SuggestedLocation & "\SOC Statement\" & Me.txtYear.Text
             Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
             SaveFileName = SaveFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
             If My.Computer.FileSystem.FileExists(SaveFileName) Then
@@ -128,7 +128,7 @@ Public Class frmSOCStatement
                         blMonthCompleted = False
                     End If
 
-                    Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement\" & y
+                    Dim SaveFolder As String = SuggestedLocation & "\SOC Statement\" & y
                     System.IO.Directory.CreateDirectory(SaveFolder)
                     SaveFileName = SaveFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
@@ -469,7 +469,9 @@ Public Class frmSOCStatement
             bgwWord.ReportProgress(100)
             System.Threading.Thread.Sleep(10)
 
-            If Not FileInUse(SaveFileName) And IsMonthStatement And blMonthCompleted Then aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            If Not FileInUse(SaveFileName) And IsMonthStatement And blMonthCompleted Then
+                aDoc.SaveAs(SaveFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+            End If
 
             WordApp.Visible = True
 
@@ -504,7 +506,7 @@ Public Class frmSOCStatement
             Dim m = Me.cmbMonth.SelectedIndex + 1
             Dim y = Me.txtYear.Value
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\SOC Statement"
+            Dim SaveFolder As String = SuggestedLocation & "\SOC Statement"
             System.IO.Directory.CreateDirectory(SaveFolder)
             Dim sFileName = SaveFolder & "\" & y & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
