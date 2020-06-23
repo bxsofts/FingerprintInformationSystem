@@ -7,6 +7,7 @@ Public Class frmMonthlyPerformance
     Dim IsMonthStatement As Boolean = False
     Dim blAllowSave As Boolean = False
     Dim bliAPSFormat As Boolean = True
+    Dim blModifyButtonName As Boolean = False
 
 #Region "FORM LOAD EVENTS"
 
@@ -14,6 +15,7 @@ Public Class frmMonthlyPerformance
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
+        blModifyButtonName = False
         Dim chkbox As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "chkMPStatement", 1)
         If chkbox = "1" Then Me.chkiAPS.Checked = True
         If chkbox = "2" Then Me.chkStatement.Checked = True
@@ -32,11 +34,13 @@ Public Class frmMonthlyPerformance
         CreateDatagridRows()
         ConnectToDatabase()
 
-        SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
+        SaveFolder = SuggestedLocation & "\Performance Statement"
         System.IO.Directory.CreateDirectory(SaveFolder)
         Me.cmbMonth.Focus()
-
         Application.DoEvents()
+
+        blModifyButtonName = True
+        ModifyButtonName()
 
         GeneratePerformanceStatement()
         Control.CheckForIllegalCrossThreadCalls = False
@@ -63,6 +67,21 @@ Public Class frmMonthlyPerformance
         End Try
     End Sub
 
+    Private Sub ModifyButtonName() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
+        Try
+            If Not blModifyButtonName Then Exit Sub
+            Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
+            PerfFileName = SaveFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+
+            If My.Computer.FileSystem.FileExists(PerfFileName) Then
+                Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
+            Else
+                Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"
+            End If
+        Catch ex As Exception
+        End Try
+
+    End Sub
     Private Sub ConnectToDatabase()
         Try
             If Me.SOCRegisterTableAdapter.Connection.State = ConnectionState.Open Then Me.SOCRegisterTableAdapter.Connection.Close()
@@ -774,7 +793,13 @@ Public Class frmMonthlyPerformance
     Private Sub bgwStatement_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwStatement.RunWorkerCompleted
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
+
         Me.CircularProgress1.IsRunning = False
+        If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
+        Else
+            Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"
+        End If
         Me.Cursor = Cursors.Default
     End Sub
 

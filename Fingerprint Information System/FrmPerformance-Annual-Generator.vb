@@ -5,12 +5,16 @@ Public Class frmAnnualPerformance
     Dim PerfFileName As String
     Dim blAllowSave As Boolean = False
     Dim bliAPSFormat As Boolean = True
+    Dim blModifyButtonName As Boolean = False
 
 #Region "LOAD FORM"
 
     Private Sub LoadForm() Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
+
+        blModifyButtonName = False
+
         Me.lblQuarter1.Text = ""
         Me.lblQuarter2.Text = ""
         Me.lblQuarter3.Text = ""
@@ -38,6 +42,9 @@ Public Class frmAnnualPerformance
 
         Application.DoEvents()
 
+        blModifyButtonName = True
+        ModifyButtonName()
+
         GeneratePerformanceStatement()
         Control.CheckForIllegalCrossThreadCalls = False
         Me.Cursor = Cursors.Default
@@ -61,6 +68,20 @@ Public Class frmAnnualPerformance
         Catch ex As Exception
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "chkAPStatement", "1", Microsoft.Win32.RegistryValueKind.String)
         End Try
+    End Sub
+
+    Private Sub ModifyButtonName() Handles txtYear.ValueChanged
+        Try
+            If Not blModifyButtonName Then Exit Sub
+            PerfFileName = SaveFolder & "\Annual Performance Statement - " & Me.txtYear.Text & ".docx"
+            If My.Computer.FileSystem.FileExists(PerfFileName) Then
+                Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
+            Else
+                Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"
+            End If
+        Catch ex As Exception
+        End Try
+
     End Sub
 
     Private Sub ConnectToDatabase()
@@ -722,6 +743,11 @@ Public Class frmAnnualPerformance
         Me.CircularProgress1.Hide()
         Me.CircularProgress1.ProgressText = ""
         Me.CircularProgress1.IsRunning = False
+        If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
+        Else
+            Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"
+        End If
         Me.Cursor = Cursors.Default
     End Sub
 

@@ -23,15 +23,15 @@ Partial Class frmMonthlyPerformance
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMonthlyPerformance))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.lblHeader = New DevComponents.DotNetBar.LabelX()
         Me.btnClearAllFields = New DevComponents.DotNetBar.ButtonX()
@@ -368,7 +368,7 @@ Partial Class frmMonthlyPerformance
         Me.btnOpenInWord.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlW)
         Me.btnOpenInWord.Size = New System.Drawing.Size(112, 56)
         Me.btnOpenInWord.TabIndex = 8
-        Me.btnOpenInWord.Text = "OPEN IN WORD"
+        Me.btnOpenInWord.Text = "PRINT IN WORD"
         '
         'btnOpenFolder
         '
@@ -569,11 +569,11 @@ Partial Class frmMonthlyPerformance
         '
         Me.btnGenerateSelectedPeriodValues.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGenerateSelectedPeriodValues.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGenerateSelectedPeriodValues.Location = New System.Drawing.Point(267, 6)
+        Me.btnGenerateSelectedPeriodValues.Location = New System.Drawing.Point(195, 8)
         Me.btnGenerateSelectedPeriodValues.Name = "btnGenerateSelectedPeriodValues"
-        Me.btnGenerateSelectedPeriodValues.Size = New System.Drawing.Size(102, 58)
+        Me.btnGenerateSelectedPeriodValues.Size = New System.Drawing.Size(120, 52)
         Me.btnGenerateSelectedPeriodValues.TabIndex = 6
-        Me.btnGenerateSelectedPeriodValues.Text = "GENERATE"
+        Me.btnGenerateSelectedPeriodValues.Text = "GENERATE VALUES"
         '
         'GroupPanel1
         '
@@ -624,11 +624,11 @@ Partial Class frmMonthlyPerformance
         '
         Me.btnGeneratePerformanceStatement.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGeneratePerformanceStatement.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnGeneratePerformanceStatement.Location = New System.Drawing.Point(267, 12)
+        Me.btnGeneratePerformanceStatement.Location = New System.Drawing.Point(195, 18)
         Me.btnGeneratePerformanceStatement.Name = "btnGeneratePerformanceStatement"
-        Me.btnGeneratePerformanceStatement.Size = New System.Drawing.Size(102, 58)
+        Me.btnGeneratePerformanceStatement.Size = New System.Drawing.Size(120, 52)
         Me.btnGeneratePerformanceStatement.TabIndex = 3
-        Me.btnGeneratePerformanceStatement.Text = "GENERATE"
+        Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"
         '
         'PerformanceBindingSource
         '
@@ -671,25 +671,25 @@ Partial Class frmMonthlyPerformance
         Me.DataGridViewX1.AllowUserToDeleteRows = False
         Me.DataGridViewX1.AutoGenerateColumns = False
         Me.DataGridViewX1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle46.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewX1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle46
         Me.DataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewX1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlNoDataGridViewTextBoxColumn, Me.DetailsOfWorkDataGridViewTextBoxColumn, Me.PreviousDataGridViewTextBoxColumn, Me.Month1DataGridViewTextBoxColumn, Me.Month2DataGridViewTextBoxColumn, Me.Month3DataGridViewTextBoxColumn, Me.PresentDataGridViewTextBoxColumn, Me.RemarksDataGridViewTextBoxColumn})
         Me.DataGridViewX1.DataSource = Me.PerformanceBindingSource
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle53.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewX1.DefaultCellStyle = DataGridViewCellStyle53
         Me.DataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridViewX1.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
@@ -697,8 +697,8 @@ Partial Class frmMonthlyPerformance
         Me.DataGridViewX1.MultiSelect = False
         Me.DataGridViewX1.Name = "DataGridViewX1"
         Me.DataGridViewX1.RowHeadersVisible = False
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle54.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridViewX1.RowsDefaultCellStyle = DataGridViewCellStyle54
         Me.DataGridViewX1.RowTemplate.Height = 25
         Me.DataGridViewX1.SelectAllSignVisible = False
         Me.DataGridViewX1.Size = New System.Drawing.Size(959, 688)
@@ -707,8 +707,8 @@ Partial Class frmMonthlyPerformance
         'SlNoDataGridViewTextBoxColumn
         '
         Me.SlNoDataGridViewTextBoxColumn.DataPropertyName = "SlNo"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.SlNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.SlNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle47
         Me.SlNoDataGridViewTextBoxColumn.HeaderText = "Sl.No."
         Me.SlNoDataGridViewTextBoxColumn.Name = "SlNoDataGridViewTextBoxColumn"
         Me.SlNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -725,8 +725,8 @@ Partial Class frmMonthlyPerformance
         'PreviousDataGridViewTextBoxColumn
         '
         Me.PreviousDataGridViewTextBoxColumn.DataPropertyName = "Previous"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PreviousDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PreviousDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle48
         Me.PreviousDataGridViewTextBoxColumn.HeaderText = "Previous Quarter/Month"
         Me.PreviousDataGridViewTextBoxColumn.Name = "PreviousDataGridViewTextBoxColumn"
         Me.PreviousDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -735,8 +735,8 @@ Partial Class frmMonthlyPerformance
         'Month1DataGridViewTextBoxColumn
         '
         Me.Month1DataGridViewTextBoxColumn.DataPropertyName = "Month1"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month1DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month1DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle49
         Me.Month1DataGridViewTextBoxColumn.HeaderText = "Month1"
         Me.Month1DataGridViewTextBoxColumn.Name = "Month1DataGridViewTextBoxColumn"
         Me.Month1DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -745,8 +745,8 @@ Partial Class frmMonthlyPerformance
         'Month2DataGridViewTextBoxColumn
         '
         Me.Month2DataGridViewTextBoxColumn.DataPropertyName = "Month2"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month2DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month2DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle50
         Me.Month2DataGridViewTextBoxColumn.HeaderText = "Month2"
         Me.Month2DataGridViewTextBoxColumn.Name = "Month2DataGridViewTextBoxColumn"
         Me.Month2DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -755,8 +755,8 @@ Partial Class frmMonthlyPerformance
         'Month3DataGridViewTextBoxColumn
         '
         Me.Month3DataGridViewTextBoxColumn.DataPropertyName = "Month3"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.Month3DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.Month3DataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle51
         Me.Month3DataGridViewTextBoxColumn.HeaderText = "Month3"
         Me.Month3DataGridViewTextBoxColumn.Name = "Month3DataGridViewTextBoxColumn"
         Me.Month3DataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -765,8 +765,8 @@ Partial Class frmMonthlyPerformance
         'PresentDataGridViewTextBoxColumn
         '
         Me.PresentDataGridViewTextBoxColumn.DataPropertyName = "Present"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        Me.PresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        Me.PresentDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle52
         Me.PresentDataGridViewTextBoxColumn.HeaderText = "Present Quarter"
         Me.PresentDataGridViewTextBoxColumn.Name = "PresentDataGridViewTextBoxColumn"
         Me.PresentDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
