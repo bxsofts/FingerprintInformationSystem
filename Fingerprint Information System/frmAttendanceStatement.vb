@@ -86,7 +86,7 @@ Public Class frmAttendanceStmt
             Dim m As String = d2.Month.ToString("D2")
             Dim y As String = d2.Year.ToString
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
+            Dim SaveFolder As String = SuggestedLocation & "\Attendance Statement\" & y
 
             If Me.chkTI.Checked Then
                 SaveFileName = m & " - Attendance - TI - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
@@ -285,7 +285,7 @@ Public Class frmAttendanceStmt
             args.FDS = frmMainInterface.FingerPrintDataSet
         End If
 
-        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
+        Dim SaveFolder As String = SuggestedLocation & "\Attendance Statement\" & y
         System.IO.Directory.CreateDirectory(SaveFolder)
         SaveFileName = SaveFolder & "\" & SaveFileName & ".docx"
 
@@ -819,7 +819,7 @@ Public Class frmAttendanceStmt
                 SaveFileName = m & " - Attendance - Police Personnel - " & d1.ToString("dd-MM-yyyy") & " to " & d2.ToString("dd-MM-yyyy")
             End If
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement\" & y
+            Dim SaveFolder As String = SuggestedLocation & "\Attendance Statement\" & y
             System.IO.Directory.CreateDirectory(SaveFolder)
             SaveFileName = SaveFolder & "\" & SaveFileName & ".docx"
 
@@ -840,7 +840,7 @@ Public Class frmAttendanceStmt
     Private Sub RenameAndMoveOldFiles()
         Try
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement", FileIO.SearchOption.SearchTopLevelOnly, "*.docx")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\Attendance Statement", FileIO.SearchOption.SearchTopLevelOnly, "*.docx")
 
                 If foundFile Is Nothing Then
                     Exit Sub
@@ -855,7 +855,7 @@ Public Class frmAttendanceStmt
 
                 Dim m As String = OldFileName.Substring(OldFileName.Length - 12, 2)
 
-                Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Attendance Statement" & "\" & y
+                Dim SaveFolder As String = SuggestedLocation & "\Attendance Statement" & "\" & y
 
                 My.Computer.FileSystem.CreateDirectory(SaveFolder)
 
