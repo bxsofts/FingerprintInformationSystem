@@ -4030,6 +4030,7 @@ Public Class frmMainInterface
         Me.btnEnterIDRDetailsContextMenu.Visible = False
         Me.btnOpenExpertOpinionFolderContext.Visible = False
         Me.btnOpenIdentificationReportFolderContext.Visible = False
+        Me.btnSelectIDRPrintImages.Visible = False
 
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
@@ -4252,6 +4253,7 @@ Public Class frmMainInterface
             Me.btnGenerateExpertOpinionContext.Visible = True
             Me.btnOpenExpertOpinionFolderContext.Visible = True
             Me.btnOpenIdentificationReportFolderContext.Visible = True
+            Me.btnSelectIDRPrintImages.Visible = True
         End If
 
         ' DisplayDatabaseInformation()
