@@ -15071,14 +15071,45 @@ errhandler:
             If My.Computer.FileSystem.FileExists(oldfilename) Then
                 System.IO.Directory.CreateDirectory(IDRFolder & "\" & IDYear)
                 My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
-                Thread.Sleep(2000)
             End If
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
-            Else
-                Call Shell("explorer.exe " & IDRFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
             End If
+
+            oldfilename = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - CoB.docx"
+
+            sfilename = IDRFolder & "\" & IDYear & "\IDR No. " & IDNumber & " - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - CoB.docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                System.IO.Directory.CreateDirectory(IDRFolder & "\" & IDYear)
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+            End If
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            oldfilename = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
+
+            sfilename = IDRFolder & "\" & IDYear & "\IDR No. " & IDNumber & " - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                System.IO.Directory.CreateDirectory(IDRFolder & "\" & IDYear)
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+            End If
+
+            If My.Computer.FileSystem.FileExists(sfilename) Then
+                Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            Call Shell("explorer.exe " & IDRFolder, AppWinStyle.NormalFocus)
 
             Me.Cursor = Cursors.Default
 
