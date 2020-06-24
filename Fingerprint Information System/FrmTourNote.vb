@@ -475,8 +475,6 @@ Public Class FrmTourNote
     Private Sub GenerateWDRecords(wdFile As String)
         Try
             Me.Cursor = Cursors.WaitCursor
-            Me.dgvSOC.Visible = False
-            Me.dgvWD.Visible = True
 
             Dim m = Me.cmbMonth.SelectedIndex + 1
             Dim y = Me.txtYear.Value
@@ -492,7 +490,15 @@ Public Class FrmTourNote
 
             Me.PanelSOC.Text = "Weekly Diary of " & SelectedOfficerName & " for " & MonthName(m) & " " & y
             Me.WeeklyDiaryTableAdapter1.FillByDateBetween(Me.WeeklyDiaryDataSet1.WeeklyDiary, d1, d2)
-            AutoTickWDRecords()
+
+            If Me.WeeklyDiaryDataSet1.WeeklyDiary.Count > 0 Then
+                AutoTickWDRecords()
+                Me.dgvSOC.Visible = False
+                Me.dgvWD.Visible = True
+            Else
+                GenerateSOCRecords()
+            End If
+
         Catch ex As Exception
 
         End Try
@@ -989,7 +995,10 @@ Public Class FrmTourNote
                         WordApp.Selection.Font.Underline = Word.WdUnderline.wdUnderlineNone
                         WordApp.Selection.TypeText(vbNewLine)
 
-                        wdTbl.Cell(j, 4).Range.Text = WeeklyDiaryDataSet1.WeeklyDiary(i).TourFrom
+                        Dim TourFrom As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourFrom
+                        If TourFrom.Trim = "" Then TourFrom = TourStartLocation
+
+                        wdTbl.Cell(j, 4).Range.Text = TourFrom
                         wdTbl.Cell(j, 5).Range.Text = WeeklyDiaryDataSet1.WeeklyDiary(i).TourTo
 
                         Dim purpose As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourPurpose
@@ -1348,6 +1357,8 @@ Public Class FrmTourNote
                         WordApp.Selection.TypeText(vbNewLine)
 
                         Dim TourFrom As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourFrom
+                        If TourFrom.Trim = "" Then TourFrom = TourStartLocation
+
                         Dim TourTo As String = WeeklyDiaryDataSet1.WeeklyDiary(i).TourTo
 
                         wdTbl.Cell(j, 4).Range.Text = TourFrom
@@ -2856,11 +2867,11 @@ Public Class FrmTourNote
     Private Sub btnUploadToGoogleDrive_Click_1(sender As Object, e As EventArgs) Handles btnUploadAllFiles.Click
 
         Try
-            Dim TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\"
+            Dim TABillFolder = SuggestedLocation & "\TA Bills\"
 
             If Me.cmbSOCOfficer.SelectedIndex >= 0 Then
                 Dim officer = Me.cmbSOCOfficer.SelectedItem.ToString
-                TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & officer.Replace(",", "")
+                TABillFolder = SuggestedLocation & "\TA Bills\" & officer.Replace(",", "")
                 FileIO.FileSystem.CreateDirectory(TABillFolder)
             Else
                 MessageBoxEx.Show("Select Officer Name.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -3071,7 +3082,7 @@ Public Class FrmTourNote
 
     Private Sub btnOpenTABillFolder_Click(sender As Object, e As EventArgs) Handles btnOpenTABillFolder.Click
         Try
-            Dim TABillFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills"
+            Dim TABillFolder As String = SuggestedLocation & "\TA Bills"
 
             If Me.cmbSOCOfficer.SelectedIndex < 0 Then
                 FileIO.FileSystem.CreateDirectory(TABillFolder)
@@ -3096,7 +3107,7 @@ Public Class FrmTourNote
 
             If Me.cmbSOCOfficer.SelectedIndex >= 0 Then
                 Dim officer = Me.cmbSOCOfficer.SelectedItem.ToString
-                TABillFolder = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & officer.Replace(",", "")
+                TABillFolder = SuggestedLocation & "\TA Bills\" & officer.Replace(",", "")
             End If
 
             FileIO.FileSystem.CreateDirectory(TABillFolder)
@@ -3111,7 +3122,7 @@ Public Class FrmTourNote
     End Sub
 
     Private Function TAFileName(FileName As String) As String
-        Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\TA Bills\" & (SelectedOfficerName.Replace(",", "")) & "\" & Me.txtYear.Text
+        Dim SaveFolder As String = SuggestedLocation & "\TA Bills\" & (SelectedOfficerName.Replace(",", "")) & "\" & Me.txtYear.Text
         System.IO.Directory.CreateDirectory(SaveFolder)
         Dim m = Me.cmbMonth.SelectedIndex + 1
         TAFileName = SaveFolder & "\" & m.ToString("D2") & " - " & Me.txtYear.Text & " - " & FileName & ".docx"
