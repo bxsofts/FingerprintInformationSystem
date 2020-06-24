@@ -13976,7 +13976,15 @@ errhandler:
 
             Me.Cursor = Cursors.WaitCursor
 
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
+
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
 
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
             Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
@@ -13996,9 +14004,19 @@ errhandler:
             Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
             Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
+            Dim oldfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
+
+            IDRFolder = IDRFolder & "\" & IDYear
+
             System.IO.Directory.CreateDirectory(IDRFolder)
 
-            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
+            Dim sfilename As String = IDRFolder & "\IDR No. " & IDNumber & " - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+                Thread.Sleep(2000)
+            End If
+
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
@@ -14377,7 +14395,15 @@ errhandler:
 
             Me.Cursor = Cursors.WaitCursor
 
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
+
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
 
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
             Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
@@ -14390,18 +14416,25 @@ errhandler:
             End If
 
             Dim ps As String = fds.SOCRegister(0).PoliceStation
-
             If Strings.Right(ps, 3) <> "P.S" Then
                 ps = ps & " P.S"
             End If
 
-
             Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
             Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
+            Dim oldfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
+
+            IDRFolder = IDRFolder & "\" & IDYear
+
             System.IO.Directory.CreateDirectory(IDRFolder)
 
-            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
+            Dim sfilename As String = IDRFolder & "\IDR No. " & IDNumber & " - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+                Thread.Sleep(2000)
+            End If
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
@@ -14825,7 +14858,15 @@ errhandler:
 
             Me.Cursor = Cursors.WaitCursor
 
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
+
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
 
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
             Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
@@ -14838,23 +14879,25 @@ errhandler:
             End If
 
             Dim ps As String = fds.SOCRegister(0).PoliceStation
-
-            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
-
-            If sho Is Nothing Then
-                sho = "Sub Inspector of Police"
-            End If
-
             If Strings.Right(ps, 3) <> "P.S" Then
                 ps = ps & " P.S"
             End If
 
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
             Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
+            Dim oldfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - CoB.docx"
+
+            IDRFolder = IDRFolder & "\" & IDYear
+
             System.IO.Directory.CreateDirectory(IDRFolder)
 
-            Dim CrNo As String = fds.SOCRegister(0).CrimeNumber
+            Dim sfilename As String = IDRFolder & "\IDR No. " & IDNumber & " - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - CoB.docx"
 
-            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - CoB.docx"
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+                Thread.Sleep(2000)
+            End If
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
@@ -14863,6 +14906,12 @@ errhandler:
             End If
 
             ShowPleaseWaitForm()
+
+            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
+
+            If sho Is Nothing Then
+                sho = "Sub Inspector of Police"
+            End If
 
             If sho.ToUpper = "IP" Then
                 sho = "The Inspector of Police, " & ps
@@ -14911,7 +14960,7 @@ errhandler:
             Dim line() = Strings.Split(FileNo, "/")
             FileNo = line(0) & "/SOC/" & line(1)
 
-            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
+            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName & vbTab & vbTab & vbTab & vbTab & vbTab & "DATE: " & Format(Now, "dd/MM/yyyy") & vbNewLine)
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.TypeText("--------------------------------------------------------------------------------------------------------------------------" & vbCrLf)
             WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
@@ -14995,16 +15044,35 @@ errhandler:
                 Exit Sub
             End If
 
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
-            Dim PS As String = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
 
-            If Strings.Right(PS, 3) <> "P.S" Then
-                PS = PS & " P.S"
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
+
+            Dim fds As FingerPrintDataSet = New FingerPrintDataSet
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
+
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
             End If
 
-            Dim CrNo As String = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
-            Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & " - SHO.docx"
+            Dim oldfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
+
+            Dim sfilename As String = IDRFolder & "\" & IDYear & "\IDR No. " & IDNumber & " - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                System.IO.Directory.CreateDirectory(IDRFolder & "\" & IDYear)
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+                Thread.Sleep(2000)
+            End If
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
