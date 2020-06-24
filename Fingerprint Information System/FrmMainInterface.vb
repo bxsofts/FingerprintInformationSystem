@@ -15059,6 +15059,12 @@ errhandler:
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
             Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
 
+            If fds.SOCRegister.Count = 0 Then
+                Call Shell("explorer.exe " & IDRFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             Dim ps As String = fds.SOCRegister(0).PoliceStation
             If Strings.Right(ps, 3) <> "P.S" Then
                 ps = ps & " P.S"
@@ -15135,7 +15141,15 @@ errhandler:
 
             Me.Cursor = Cursors.WaitCursor
 
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
+
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
 
             Dim fds As FingerPrintDataSet = New FingerPrintDataSet
             Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
@@ -15147,23 +15161,34 @@ errhandler:
                 Exit Sub
             End If
 
-            Dim PS As String = fds.SOCRegister(0).PoliceStation
-
-            If Strings.Right(PS, 3) <> "P.S" Then
-                PS = PS & " P.S"
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
             End If
 
             Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
-            Dim SaveFolder As String = SuggestedLocation & "\Expert Opinion"
-            System.IO.Directory.CreateDirectory(SaveFolder)
-            Dim sfilename As String = SaveFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
+            Dim OpinionFolder As String = SuggestedLocation & "\Expert Opinion"
+            Dim oldfilename As String = OpinionFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & ".docx"
+
+            OpinionFolder = OpinionFolder & "\" & IDYear & "\ID No. " & IDNumber
+
+            System.IO.Directory.CreateDirectory(OpinionFolder)
+
+            Dim sfilename As String = OpinionFolder & "\Opinion - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & ".docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+                Thread.Sleep(2000)
+            End If
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Shell("explorer.exe " & sfilename, AppWinStyle.MaximizedFocus)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
+
+
 
             Dim FileNo As String = SOCNumber
             Dim line() = Strings.Split(FileNo, "/")
@@ -15358,7 +15383,6 @@ errhandler:
             WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeParagraph()
 
-            If WordApp.Version < 12 Then WordApp.Selection.ParagraphFormat.Space15()
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.Font.Bold = 0
             WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName)
@@ -15831,16 +15855,44 @@ errhandler:
                 Exit Sub
             End If
 
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
             Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
-            Dim PS As String = Me.JoinedIDRDataGrid.SelectedCells(4).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
 
-            If Strings.Right(PS, 3) <> "P.S" Then
-                PS = PS & " P.S"
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
+
+            Dim fds As FingerPrintDataSet = New FingerPrintDataSet
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
+
+            If fds.SOCRegister.Count = 0 Then
+                Call Shell("explorer.exe " & OpinionFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
             End If
 
-            Dim CrNo As String = Me.JoinedIDRDataGrid.SelectedCells(5).Value.ToString
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
 
-            Dim sfilename As String = OpinionFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
+
+            Dim oldfilename As String = OpinionFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & ".docx"
+
+            OpinionFolder = OpinionFolder & "\" & IDYear & "\ID No. " & IDNumber
+            System.IO.Directory.CreateDirectory(OpinionFolder)
+
+            Dim sfilename As String = OpinionFolder & "\Opinion - SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & ".docx"
+
+            If My.Computer.FileSystem.FileExists(oldfilename) Then
+                My.Computer.FileSystem.MoveFile(oldfilename, sfilename)
+            End If
+
 
             If My.Computer.FileSystem.FileExists(sfilename) Then
                 Call Shell("explorer.exe /select," & sfilename, AppWinStyle.NormalFocus)
