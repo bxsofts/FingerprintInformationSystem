@@ -582,25 +582,26 @@ Partial Class frmMainInterface
         Me.btnImportFPSlipContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSelectFPSlipContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnViewDASlipContext = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnViewIDSlipContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnViewACSlipContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnViewIDSlipContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnLocateFPSlip = New DevComponents.DotNetBar.ButtonItem()
         Me.btnImportCP = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSelcetCPs = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnViewCP = New DevComponents.DotNetBar.ButtonItem()
         Me.btnLocateCP = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnViewCP = New DevComponents.DotNetBar.ButtonItem()
         Me.btnEnterIDRDetailsContextMenu = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSOCReportContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnFacingSheetContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnFPAGenerateSlipFormContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIDRShowInSoCRegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnSOCShowInIDRRegister = New DevComponents.DotNetBar.ButtonItem()
         Me.btnIdentifiedTemplateContextMenu = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnFPAGenerateSlipFormContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationCoB = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateIdentificationReportDirector = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenIdentificationReportFolderContext = New DevComponents.DotNetBar.ButtonItem()
         Me.btnGenerateExpertOpinionContext = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSelectOpinionImages = New DevComponents.DotNetBar.ButtonItem()
         Me.btnOpenExpertOpinionFolderContext = New DevComponents.DotNetBar.ButtonItem()
         Me.SSDatagrid = New DevComponents.DotNetBar.Controls.DataGridViewX()
         Me.StaffNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1129,7 +1130,6 @@ Partial Class frmMainInterface
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwCheckRemoteDB = New System.ComponentModel.BackgroundWorker()
         Me.bgwCopyFolder = New System.ComponentModel.BackgroundWorker()
-        Me.btnSelectIDRPrintImages = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -6180,12 +6180,12 @@ Partial Class frmMainInterface
         '
         Me.btnDatagridContextMenu.AutoExpandOnClick = true
         Me.btnDatagridContextMenu.Name = "btnDatagridContextMenu"
-        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewACSlipContext, Me.btnViewIDSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnLocateCP, Me.btnViewCP, Me.btnEnterIDRDetailsContextMenu, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnFPAGenerateSlipFormContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnGenerateIdentificationCoB, Me.btnGenerateIdentificationLetter, Me.btnGenerateIdentificationReportDirector, Me.btnOpenIdentificationReportFolderContext, Me.btnGenerateExpertOpinionContext, Me.btnSelectIDRPrintImages, Me.btnOpenExpertOpinionFolderContext})
+        Me.btnDatagridContextMenu.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnOpenContext, Me.btnEditContext, Me.btnDeleteContext, Me.btnPhotoReceivedContext, Me.btnImportFPSlipContext, Me.btnSelectFPSlipContext, Me.btnViewDASlipContext, Me.btnViewACSlipContext, Me.btnViewIDSlipContext, Me.btnLocateFPSlip, Me.btnImportCP, Me.btnSelcetCPs, Me.btnLocateCP, Me.btnViewCP, Me.btnEnterIDRDetailsContextMenu, Me.btnSOCReportContext, Me.btnFacingSheetContext, Me.btnFPAGenerateSlipFormContext, Me.btnIDRShowInSoCRegister, Me.btnSOCShowInIDRRegister, Me.btnIdentifiedTemplateContextMenu, Me.btnGenerateIdentificationCoB, Me.btnGenerateIdentificationLetter, Me.btnGenerateIdentificationReportDirector, Me.btnOpenIdentificationReportFolderContext, Me.btnGenerateExpertOpinionContext, Me.btnSelectOpinionImages, Me.btnOpenExpertOpinionFolderContext})
         Me.btnDatagridContextMenu.Text = "Datagrid Context Menu"
         '
         'btnOpenContext
         '
-        Me.btnOpenContext.Icon = CType(resources.GetObject("btnOpenContext.Icon"), System.Drawing.Icon)
+        Me.btnOpenContext.Icon = CType(resources.GetObject("btnOpenContext.Icon"),System.Drawing.Icon)
         Me.btnOpenContext.ImagePaddingVertical = 10
         Me.btnOpenContext.Name = "btnOpenContext"
         Me.btnOpenContext.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlO)
@@ -6194,7 +6194,7 @@ Partial Class frmMainInterface
         'btnEditContext
         '
         Me.btnEditContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnEditContext.Icon = CType(resources.GetObject("btnEditContext.Icon"), System.Drawing.Icon)
+        Me.btnEditContext.Icon = CType(resources.GetObject("btnEditContext.Icon"),System.Drawing.Icon)
         Me.btnEditContext.ImagePaddingVertical = 10
         Me.btnEditContext.Name = "btnEditContext"
         Me.btnEditContext.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE)
@@ -6203,7 +6203,7 @@ Partial Class frmMainInterface
         'btnDeleteContext
         '
         Me.btnDeleteContext.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText
-        Me.btnDeleteContext.Icon = CType(resources.GetObject("btnDeleteContext.Icon"), System.Drawing.Icon)
+        Me.btnDeleteContext.Icon = CType(resources.GetObject("btnDeleteContext.Icon"),System.Drawing.Icon)
         Me.btnDeleteContext.ImagePaddingVertical = 10
         Me.btnDeleteContext.Name = "btnDeleteContext"
         Me.btnDeleteContext.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD)
@@ -6211,15 +6211,15 @@ Partial Class frmMainInterface
         '
         'btnPhotoReceivedContext
         '
-        Me.btnPhotoReceivedContext.AutoCheckOnClick = True
-        Me.btnPhotoReceivedContext.BeginGroup = True
+        Me.btnPhotoReceivedContext.AutoCheckOnClick = true
+        Me.btnPhotoReceivedContext.BeginGroup = true
         Me.btnPhotoReceivedContext.Name = "btnPhotoReceivedContext"
         Me.btnPhotoReceivedContext.Text = "Set Photo Received"
         '
         'btnImportFPSlipContext
         '
-        Me.btnImportFPSlipContext.BeginGroup = True
-        Me.btnImportFPSlipContext.Icon = CType(resources.GetObject("btnImportFPSlipContext.Icon"), System.Drawing.Icon)
+        Me.btnImportFPSlipContext.BeginGroup = true
+        Me.btnImportFPSlipContext.Icon = CType(resources.GetObject("btnImportFPSlipContext.Icon"),System.Drawing.Icon)
         Me.btnImportFPSlipContext.Name = "btnImportFPSlipContext"
         Me.btnImportFPSlipContext.Text = "Import FP Slip"
         '
@@ -6236,19 +6236,19 @@ Partial Class frmMainInterface
         Me.btnViewDASlipContext.Name = "btnViewDASlipContext"
         Me.btnViewDASlipContext.Text = "View FP Slip"
         '
-        'btnViewIDSlipContext
-        '
-        Me.btnViewIDSlipContext.BeginGroup = true
-        Me.btnViewIDSlipContext.Icon = CType(resources.GetObject("btnViewIDSlipContext.Icon"),System.Drawing.Icon)
-        Me.btnViewIDSlipContext.Name = "btnViewIDSlipContext"
-        Me.btnViewIDSlipContext.Text = "View FP Slip"
-        '
         'btnViewACSlipContext
         '
         Me.btnViewACSlipContext.BeginGroup = true
         Me.btnViewACSlipContext.Icon = CType(resources.GetObject("btnViewACSlipContext.Icon"),System.Drawing.Icon)
         Me.btnViewACSlipContext.Name = "btnViewACSlipContext"
         Me.btnViewACSlipContext.Text = "View FP Slip"
+        '
+        'btnViewIDSlipContext
+        '
+        Me.btnViewIDSlipContext.BeginGroup = true
+        Me.btnViewIDSlipContext.Icon = CType(resources.GetObject("btnViewIDSlipContext.Icon"),System.Drawing.Icon)
+        Me.btnViewIDSlipContext.Name = "btnViewIDSlipContext"
+        Me.btnViewIDSlipContext.Text = "View FP Slip"
         '
         'btnLocateFPSlip
         '
@@ -6269,18 +6269,18 @@ Partial Class frmMainInterface
         Me.btnSelcetCPs.Name = "btnSelcetCPs"
         Me.btnSelcetCPs.Text = "Select Chance Prints"
         '
+        'btnLocateCP
+        '
+        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"),System.Drawing.Image)
+        Me.btnLocateCP.Name = "btnLocateCP"
+        Me.btnLocateCP.Text = "Open Chance Print Folder"
+        '
         'btnViewCP
         '
         Me.btnViewCP.BeginGroup = true
         Me.btnViewCP.Icon = CType(resources.GetObject("btnViewCP.Icon"),System.Drawing.Icon)
         Me.btnViewCP.Name = "btnViewCP"
         Me.btnViewCP.Text = "View Chance Prints"
-        '
-        'btnLocateCP
-        '
-        Me.btnLocateCP.Image = CType(resources.GetObject("btnLocateCP.Image"),System.Drawing.Image)
-        Me.btnLocateCP.Name = "btnLocateCP"
-        Me.btnLocateCP.Text = "Open Chance Print Folder"
         '
         'btnEnterIDRDetailsContextMenu
         '
@@ -6307,6 +6307,13 @@ Partial Class frmMainInterface
         Me.btnFacingSheetContext.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlT)
         Me.btnFacingSheetContext.Text = "Facing Sheet"
         '
+        'btnFPAGenerateSlipFormContext
+        '
+        Me.btnFPAGenerateSlipFormContext.BeginGroup = true
+        Me.btnFPAGenerateSlipFormContext.ForeColor = System.Drawing.Color.Red
+        Me.btnFPAGenerateSlipFormContext.Name = "btnFPAGenerateSlipFormContext"
+        Me.btnFPAGenerateSlipFormContext.Text = "Generate Fingerprint Slip Form"
+        '
         'btnIDRShowInSoCRegister
         '
         Me.btnIDRShowInSoCRegister.BeginGroup = true
@@ -6325,13 +6332,6 @@ Partial Class frmMainInterface
         Me.btnIdentifiedTemplateContextMenu.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(0,Byte),Integer), CType(CType(192,Byte),Integer))
         Me.btnIdentifiedTemplateContextMenu.Name = "btnIdentifiedTemplateContextMenu"
         Me.btnIdentifiedTemplateContextMenu.Text = "Show 'Identified File' Docket"
-        '
-        'btnFPAGenerateSlipFormContext
-        '
-        Me.btnFPAGenerateSlipFormContext.BeginGroup = true
-        Me.btnFPAGenerateSlipFormContext.ForeColor = System.Drawing.Color.Red
-        Me.btnFPAGenerateSlipFormContext.Name = "btnFPAGenerateSlipFormContext"
-        Me.btnFPAGenerateSlipFormContext.Text = "Generate Fingerprint Slip Form"
         '
         'btnGenerateIdentificationCoB
         '
@@ -6362,6 +6362,11 @@ Partial Class frmMainInterface
         Me.btnGenerateExpertOpinionContext.Icon = CType(resources.GetObject("btnGenerateExpertOpinionContext.Icon"),System.Drawing.Icon)
         Me.btnGenerateExpertOpinionContext.Name = "btnGenerateExpertOpinionContext"
         Me.btnGenerateExpertOpinionContext.Text = "Generate Expert Opinion"
+        '
+        'btnSelectOpinionImages
+        '
+        Me.btnSelectOpinionImages.Name = "btnSelectOpinionImages"
+        Me.btnSelectOpinionImages.Text = "Select Opinion CP and Specimen Images"
         '
         'btnOpenExpertOpinionFolderContext
         '
@@ -14224,11 +14229,6 @@ Partial Class frmMainInterface
         '
         Me.bgwCopyFolder.WorkerReportsProgress = true
         '
-        'btnSelectIDRPrintImages
-        '
-        Me.btnSelectIDRPrintImages.Name = "btnSelectIDRPrintImages"
-        Me.btnSelectIDRPrintImages.Text = "Select CP and Specimen Images"
-        '
         'frmMainInterface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -15380,6 +15380,6 @@ End Sub
     Friend WithEvents cprDBAvailable As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwCheckRemoteDB As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwCopyFolder As System.ComponentModel.BackgroundWorker
-    Friend WithEvents btnSelectIDRPrintImages As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnSelectOpinionImages As DevComponents.DotNetBar.ButtonItem
 
 End Class

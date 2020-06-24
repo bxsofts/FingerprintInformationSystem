@@ -4030,7 +4030,7 @@ Public Class frmMainInterface
         Me.btnEnterIDRDetailsContextMenu.Visible = False
         Me.btnOpenExpertOpinionFolderContext.Visible = False
         Me.btnOpenIdentificationReportFolderContext.Visible = False
-        Me.btnSelectIDRPrintImages.Visible = False
+        Me.btnSelectOpinionImages.Visible = False
 
         If CurrentTab = "SOC" Then
             If SelectedRowIndex < 0 Or SelectedRowIndex > Me.SOCDatagrid.Rows.Count - 1 Then
@@ -4253,7 +4253,7 @@ Public Class frmMainInterface
             Me.btnGenerateExpertOpinionContext.Visible = True
             Me.btnOpenExpertOpinionFolderContext.Visible = True
             Me.btnOpenIdentificationReportFolderContext.Visible = True
-            Me.btnSelectIDRPrintImages.Visible = True
+            Me.btnSelectOpinionImages.Visible = True
         End If
 
         ' DisplayDatabaseInformation()
@@ -9001,6 +9001,74 @@ errhandler:
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub SelectExpertOpinionImages() Handles btnSelectOpinionImages.Click
+        Try
+            Dim OpinionFolder As String = SuggestedLocation & "\Expert Opinion"
+            System.IO.Directory.CreateDirectory(OpinionFolder)
+
+            If Me.JoinedIDRDataGrid.RowCount = 0 Or Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                Call Shell("explorer.exe " & OpinionFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            Dim IDNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value.ToString
+            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+            Dim IDDate As Date = Me.JoinedIDRDataGrid.SelectedCells(2).Value
+            Dim IDYear As String = IDDate.Year.ToString
+
+            Dim SplitText() = Strings.Split(IDNumber, "/")
+            Dim IDN As Integer = CInt(SplitText(0))
+
+            IDNumber = IDN.ToString("D3")
+
+            OpinionFolder = OpinionFolder & "\" & IDYear & "\ID No. " & IDNumber
+
+            System.IO.Directory.CreateDirectory(OpinionFolder)
+
+            OpenFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.tiff;*.tif;*.gif"
+            OpenFileDialog1.FileName = ""
+            OpenFileDialog1.Title = "Select Chance Print and Specimen Image Files"
+            OpenFileDialog1.Multiselect = True
+
+            If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+
+                If UCase(OpenFileDialog1.FileNames(0)).StartsWith(UCase(OpinionFolder)) Then
+                    MessageBoxEx.Show("The source and destination folders are same. Cannot copy images.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+
+                Dim count = OpenFileDialog1.FileNames.Length
+
+                If count = 1 Then
+                    My.Computer.FileSystem.CopyFile(OpenFileDialog1.FileNames(0), OpinionFolder & "/" & OpenFileDialog1.SafeFileNames(0), True)
+                    ShowDesktopAlert("1 image imported sucessfully!")
+                End If
+
+                If count > 1 Then
+                    FrmImportTransferRate.StartPosition = FormStartPosition.CenterScreen
+                    FrmImportTransferRate.Show()
+                    FrmImportTransferRate.ProgressBarX1.Maximum = count
+                    boolCancelImport = False
+                    Dim i As Integer
+                    For i = 0 To count - 1
+                        If boolCancelImport Then Exit For
+                        My.Computer.FileSystem.CopyFile(OpenFileDialog1.FileNames(i), OpinionFolder & "/" & OpenFileDialog1.SafeFileNames(i), True)
+                        FrmImportTransferRate.ProgressBarX1.Text = "Imported image " & (i + 1) & " of " & count
+                        FrmImportTransferRate.ProgressBarX1.Increment(1)
+                        Application.DoEvents()
+                    Next
+                    FrmImportTransferRate.Close()
+                    ShowDesktopAlert(i & " images imported sucessfully!")
+                End If
+            End If
+
+        Catch ex As Exception
+            FrmImportTransferRate.Close()
             ShowErrorMessage(ex)
         End Try
     End Sub
