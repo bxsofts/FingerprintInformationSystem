@@ -13995,7 +13995,7 @@ errhandler:
 
             Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
-            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
             System.IO.Directory.CreateDirectory(IDRFolder)
 
             Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - SHO.docx"
@@ -14398,7 +14398,7 @@ errhandler:
 
             Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
-            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
             System.IO.Directory.CreateDirectory(IDRFolder)
 
             Dim sfilename As String = IDRFolder & "\Identification Report - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & ps & " - Director.docx"
@@ -14849,7 +14849,7 @@ errhandler:
                 ps = ps & " P.S"
             End If
 
-            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
             System.IO.Directory.CreateDirectory(IDRFolder)
 
             Dim CrNo As String = fds.SOCRegister(0).CrimeNumber
@@ -14986,7 +14986,7 @@ errhandler:
 
         Try
             Me.Cursor = Cursors.WaitCursor
-            Dim IDRFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Identification Reports"
+            Dim IDRFolder As String = SuggestedLocation & "\Identification Reports"
             System.IO.Directory.CreateDirectory(IDRFolder)
 
             If Me.JoinedIDRDataGrid.RowCount = 0 Or Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
@@ -15054,7 +15054,7 @@ errhandler:
 
             Dim CrNo = fds.SOCRegister(0).CrimeNumber
 
-            Dim SaveFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion"
+            Dim SaveFolder As String = SuggestedLocation & "\Expert Opinion"
             System.IO.Directory.CreateDirectory(SaveFolder)
             Dim sfilename As String = SaveFolder & "\Expert Opinion - " & "SOC No. " & SOCNumber.Replace("/", "-") & " - Cr.No. " & CrNo.Replace("/", "-") & " - " & PS & ".docx"
 
@@ -15721,7 +15721,7 @@ errhandler:
     Private Sub btnOpenExpertOpinionFolder_Click(sender As Object, e As EventArgs) Handles btnOpenExpertOpinionFolder.Click, btnOpenExpertOpinionFolderContext.Click
         Try
             Me.Cursor = Cursors.WaitCursor
-            Dim OpinionFolder As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion"
+            Dim OpinionFolder As String = SuggestedLocation & "\Expert Opinion"
             System.IO.Directory.CreateDirectory(OpinionFolder)
 
             If Me.JoinedIDRDataGrid.RowCount = 0 Or Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
