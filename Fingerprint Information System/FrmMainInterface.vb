@@ -18944,7 +18944,7 @@ errhandler:
         Try
             If My.Computer.FileSystem.DirectoryExists(SourceFolder) Then
                 My.Computer.FileSystem.CreateDirectory(DestinationFolder)
-                My.Computer.FileSystem.CopyDirectory(SourceFolder, DestinationFolder, True)
+                My.Computer.FileSystem.CopyDirectory(SourceFolder, DestinationFolder, False)
             End If
         Catch ex As Exception
 
