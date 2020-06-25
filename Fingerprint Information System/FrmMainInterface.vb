@@ -6843,6 +6843,8 @@ Public Class frmMainInterface
 
                     Me.FPARegisterTableAdapter.DeleteAllRecords()
                     Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
+                    Me.ChalanTableTableAdapter1.DeleteAllRecords()
+
                     ModificationDetail = "Deleted all records from FP Attestation Register"
                     ShowDesktopAlert("All records deleted from FP Attestation Register!")
                 End If
@@ -6955,7 +6957,9 @@ Public Class frmMainInterface
 
                 If reply = Windows.Forms.DialogResult.Yes Then
                     Me.IdentificationRegisterTableAdapter1.DeleteAllRecords()
+                    Me.CulpritsRegisterTableAdapter1.DeleteAllRecords()
                     Me.IdentificationRegisterTableAdapter1.Fill(Me.FingerPrintDataSet.IdentificationRegister)
+                    Me.JoinedIDRTableAdapter.Fill(Me.FingerPrintDataSet.JoinedIDR)
                     ModificationDetail = "Deleted all records from Identification Register"
                     ShowDesktopAlert("All records deleted from Identification Register!")
                 End If
