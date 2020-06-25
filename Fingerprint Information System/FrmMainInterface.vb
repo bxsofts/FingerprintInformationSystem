@@ -4882,7 +4882,9 @@ Public Class frmMainInterface
 
 
     Private Function ImportImageFromScannerOrCamera(ByVal SaveLocation As String, Optional ByVal FileName As String = vbNullString) As String
-        On Error GoTo errhandler
+
+        Try
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
         If Me.devmanager.DeviceInfos.Count = 0 Then
             MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -4929,13 +4931,10 @@ Public Class frmMainInterface
             Return SaveLocation & FileName & ".jpeg" 'return the Photo
         End If
 
-        Exit Function
-errhandler:
-        If Err.Number = -2145320939 Then
-            MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-        ElseIf Err.Number = -2145320860 Then
-            ' ShowAlertMessage(Err.Description)
-        End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+            Return vbNullString
+        End Try
 
     End Function
 
@@ -8788,7 +8787,9 @@ errhandler:
     End Sub
 
     Private Sub ImportChancePrints() Handles btnImportCP.Click
-        On Error GoTo errhandler
+        Try
+
+        
         If Me.devmanager.DeviceInfos.Count = 0 Then
             MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
@@ -8855,17 +8856,10 @@ errhandler:
             ShowDesktopAlert(i - 1 & " images imported sucessfully!")
         End If
         DisplayDatabaseInformation()
-        If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
-        Exit Sub
-errhandler:
-        On Error Resume Next
-        FrmImportTransferRate.Close()
-        If Err.Number = -2145320939 Then
-            MessageBoxEx.Show("No compatible Scanner or Camera Device detected. Please connect one!", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-        ElseIf Err.Number = -2145320860 Then
-            ' ShowAlertMessage(Err.Description)
-        End If
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
