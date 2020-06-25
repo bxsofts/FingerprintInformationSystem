@@ -1007,7 +1007,7 @@ Public Class FrmTourNote
                             purpose = WeeklyDiaryDataSet1.WeeklyDiary(i).WorkDone
                         End If
 
-                        If purpose.ToLower.Contains("inspection") Then
+                        If purpose.ToLower.Contains("inspection") Or purpose.ToLower.Contains("inspected") Then
                             wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
                         End If
 
@@ -1370,7 +1370,10 @@ Public Class FrmTourNote
                             purpose = WeeklyDiaryDataSet1.WeeklyDiary(i).WorkDone
                         End If
 
-                        Dim blsocinspection As Boolean = purpose.ToLower.Contains("inspection")
+                        Dim blsocinspection As Boolean
+                        If purpose.ToLower.Contains("inspection") Or purpose.ToLower.Contains("inspected") Then
+                            blsocinspection = True
+                        End If
 
                         If blsocinspection Then
                             wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
