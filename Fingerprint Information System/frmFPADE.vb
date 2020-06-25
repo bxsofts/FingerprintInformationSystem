@@ -368,7 +368,7 @@ Public Class frmFPADE
             InitializeFPAFields()
             IncrementFPANumber(OriginalFPANumber)
 
-            frmMainInterface.InsertOrUpdateLastModificationDate(Now)
+            frmMainInterface.InsertOrUpdateLastModificationDate(Now, "Added new FPA No. " & OriginalFPANumber)
             frmMainInterface.DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -561,7 +561,7 @@ Public Class frmFPADE
             Me.btnSaveFPA.Text = "Save"
             blFPAEditMode = False
             frmMainInterface.DisplayDatabaseInformation()
-            frmMainInterface.InsertOrUpdateLastModificationDate(Now)
+            frmMainInterface.InsertOrUpdateLastModificationDate(Now, "Edited FPA No. " & OriginalFPANumber)
             Me.Close()
         Catch ex As Exception
             ShowErrorMessage(ex)

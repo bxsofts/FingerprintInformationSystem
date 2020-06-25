@@ -120,6 +120,7 @@ Public Class frmMainInterface
     Dim blUpdateLastModificationDate As Boolean = True
 
     Dim RemoteModifiedDate As String = ""
+    Dim RemoteModificationDetails As String = ""
     Dim InstallerMD5 As String = ""
 #End Region
 
@@ -6328,10 +6329,13 @@ Public Class frmMainInterface
                 Exit Sub
             End If
 
+            Dim ModicationDetail As String = ""
+
             If CurrentTab = "IO" Then
                 Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " : " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
+                    ModicationDetail = "Deleted the officer " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString()
                     IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
                     ClearIOFields()
                     UpdateOfficerList()
@@ -6369,6 +6373,8 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.SOCRegisterTableAdapter.DeleteSelectedRecord(OriginalSOCNumber)
+                    ModicationDetail = "Deleted SOC No. " & OriginalSOCNumber
+
                     ShowDesktopAlert("Selected SOC record deleted!")
                     If Me.SOCDatagrid.SelectedRows.Count = 0 And Me.SOCDatagrid.RowCount <> 0 Then
                         Me.SOCDatagrid.Rows(Me.SOCDatagrid.RowCount - 1).Selected = True
@@ -6406,6 +6412,8 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.RSOCRegisterTableAdapter.DeleteSelectedRecord(OriginalRSOCSerialNumber)
+                    ModicationDetail = "Deleted RSOC No. " & OriginalRSOCSerialNumber
+
                     ShowDesktopAlert("Selected SOC Report record deleted!")
                     If Me.RSOCDatagrid.SelectedRows.Count = 0 And Me.RSOCDatagrid.RowCount <> 0 Then
                         Me.RSOCDatagrid.Rows(Me.RSOCDatagrid.RowCount - 1).Selected = True
@@ -6444,6 +6452,8 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.DARegisterTableAdapter.DeleteSelectedRecord(OriginalDANumber)
+                    ModicationDetail = "Deleted DA No. " & OriginalDANumber
+
                     ShowDesktopAlert("Selected DA record deleted!")
                     If Me.DADatagrid.SelectedRows.Count = 0 And Me.DADatagrid.RowCount <> 0 Then
                         Me.DADatagrid.Rows(Me.DADatagrid.RowCount - 1).Selected = True
@@ -6483,6 +6493,8 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.IDRegisterTableAdapter.DeleteSelectedRecord(OriginalIDNumber)
+                    ModicationDetail = "Deleted Identified Slip No. " & OriginalIDNumber
+
                     ShowDesktopAlert("Selected Identified Slip record deleted!")
                     If Me.IDDatagrid.SelectedRows.Count = 0 And Me.IDDatagrid.RowCount <> 0 Then
                         Me.IDDatagrid.Rows(Me.IDDatagrid.RowCount - 1).Selected = True
@@ -6522,7 +6534,9 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.ACRegisterTableAdapter.DeleteSelectedRecord(OriginalACNumber)
-                    ShowDesktopAlert("Selected Identified Slip record deleted!")
+                    ModicationDetail = "Deleted Active Criminal Slip No. " & OriginalACNumber
+
+                    ShowDesktopAlert("Selected Active Criminal Slip record deleted!")
                     If Me.ACDatagrid.SelectedRows.Count = 0 And Me.ACDatagrid.RowCount <> 0 Then
                         Me.ACDatagrid.Rows(Me.ACDatagrid.RowCount - 1).Selected = True
                     End If
@@ -6560,6 +6574,8 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.CDRegisterTableAdapter.DeleteSelectedRecord(OriginalCDNumber)
+                    ModicationDetail = "Deleted Court Duty No. " & OriginalCDNumber
+
                     ShowDesktopAlert("Selected CD record deleted!")
                     If Me.CDDataGrid.SelectedRows.Count = 0 And Me.CDDataGrid.RowCount <> 0 Then
                         Me.CDDataGrid.Rows(Me.CDDataGrid.RowCount - 1).Selected = True
@@ -6597,7 +6613,9 @@ Public Class frmMainInterface
 
                     Me.FPARegisterTableAdapter.DeleteSelectedRecord(OriginalFPANumber)
                     Me.ChalanTableTableAdapter1.DeleteQueryFPNumber(OriginalFPANumber)
-                    ShowDesktopAlert("Selected record deleted!")
+                    ModicationDetail = "Deleted FP Attestation No. " & OriginalFPANumber
+
+                    ShowDesktopAlert("Selected FPA record deleted!")
                     If Me.FPADataGrid.SelectedRows.Count = 0 And Me.FPADataGrid.RowCount <> 0 Then
                         Me.FPADataGrid.Rows(Me.FPADataGrid.RowCount - 1).Selected = True
                     End If
@@ -6633,7 +6651,9 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.PSRegisterTableAdapter.DeleteSelectedRecord(OriginalPSName)
-                    ShowDesktopAlert("Selected Police Station Name deleted!")
+                    ModicationDetail = "Deleted Police Station " & OriginalPSName
+
+                    ShowDesktopAlert("Selected Police Station deleted!")
                     If Me.PSDataGrid.SelectedRows.Count = 0 And Me.PSDataGrid.RowCount <> 0 Then
                         Me.PSDataGrid.Rows(Me.PSDataGrid.RowCount - 1).Selected = True
                     End If
@@ -6700,8 +6720,9 @@ Public Class frmMainInterface
 
                     End If
 
+                    ModicationDetail = "Deleted Identification No. " & IdentificationNumber
 
-                    ShowDesktopAlert("Selected record deleted!")
+                    ShowDesktopAlert("Selected Identification record deleted!")
                     If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 And Me.JoinedIDRDataGrid.RowCount <> 0 Then
                         Me.JoinedIDRDataGrid.Rows(Me.JoinedIDRDataGrid.RowCount - 1).Selected = True
                     End If
@@ -6722,7 +6743,7 @@ Public Class frmMainInterface
                 Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Staff  '" & Me.SSDatagrid.SelectedCells(0).Value.ToString() & "' ?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
-
+                    ModicationDetail = "Deleted the staff " & Me.SSDatagrid.SelectedCells(0).Value.ToString()
                     SSEditMode = False
                     Me.btnSavePS.Text = "Save"
 
@@ -6737,7 +6758,7 @@ Public Class frmMainInterface
                 End If
             End If
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, ModicationDetail)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -6772,7 +6793,7 @@ Public Class frmMainInterface
 
             End If
 
-
+            Dim ModificationDetail As String = ""
 
             '###################   SOC  ##############
             If CurrentTab = "SOC" Then
@@ -6787,6 +6808,7 @@ Public Class frmMainInterface
 
                     Me.SOCRegisterTableAdapter.DeleteAllRecords()
                     Me.SOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCRegister)
+                    ModificationDetail = "Deleted all records from SOC Register"
                     ShowDesktopAlert("All records deleted from SOC Register!")
                 End If
             End If
@@ -6804,6 +6826,7 @@ Public Class frmMainInterface
                     Me.RSOCRegisterTableAdapter.DeleteAllRecords()
                     Me.RSOCRegisterTableAdapter.Fill(Me.FingerPrintDataSet.SOCReportRegister)
                     GenerateNewRSOCSerialNumber()
+                    ModificationDetail = "Deleted all records from SOC Reports Register"
                     ShowDesktopAlert("All records deleted from SOC Reports Register!")
                 End If
             End If
@@ -6820,6 +6843,7 @@ Public Class frmMainInterface
 
                     Me.FPARegisterTableAdapter.DeleteAllRecords()
                     Me.FPARegisterTableAdapter.Fill(Me.FingerPrintDataSet.FPAttestationRegister)
+                    ModificationDetail = "Deleted all records from FP Attestation Register"
                     ShowDesktopAlert("All records deleted from FP Attestation Register!")
                 End If
             End If
@@ -6836,6 +6860,7 @@ Public Class frmMainInterface
 
                     Me.DARegisterTableAdapter.DeleteAllRecords()
                     Me.DARegisterTableAdapter.Fill(Me.FingerPrintDataSet.DARegister)
+                    ModificationDetail = "Deleted all records from DA Register"
                     ShowDesktopAlert("All records deleted from DA Register!")
                 End If
             End If
@@ -6853,6 +6878,7 @@ Public Class frmMainInterface
 
                     Me.IDRegisterTableAdapter.DeleteAllRecords()
                     Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
+                    ModificationDetail = "Deleted all records from Identified Slips Register"
                     ShowDesktopAlert("All records deleted from Identified Slips Register!")
                 End If
             End If
@@ -6870,6 +6896,7 @@ Public Class frmMainInterface
 
                     Me.ACRegisterTableAdapter.DeleteAllRecords()
                     Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
+                    ModificationDetail = "Deleted all records from Active Criminal Slips Register"
                     ShowDesktopAlert("All records deleted from Active Criminal Slips Register!")
                 End If
             End If
@@ -6889,6 +6916,7 @@ Public Class frmMainInterface
 
                     Me.CDRegisterTableAdapter.DeleteAllRecords()
                     Me.CDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.CDRegister)
+                    ModificationDetail = "Deleted all records from Court Duty Slips Register"
                     ShowDesktopAlert("All records deleted from Court Duty Register!")
                 End If
             End If
@@ -6908,6 +6936,7 @@ Public Class frmMainInterface
 
                     Me.PSRegisterTableAdapter.DeleteAllRecords()
                     Me.PSRegisterTableAdapter.Fill(Me.FingerPrintDataSet.PoliceStationList)
+                    ModificationDetail = "Deleted all Police Stations"
                     ShowDesktopAlert("All records deleted from Police Station List!")
                     Me.cmbSOCPoliceStation.Items.Clear()
                 End If
@@ -6927,6 +6956,7 @@ Public Class frmMainInterface
                 If reply = Windows.Forms.DialogResult.Yes Then
                     Me.IdentificationRegisterTableAdapter1.DeleteAllRecords()
                     Me.IdentificationRegisterTableAdapter1.Fill(Me.FingerPrintDataSet.IdentificationRegister)
+                    ModificationDetail = "Deleted all records from Identification Register"
                     ShowDesktopAlert("All records deleted from Identification Register!")
                 End If
             End If
@@ -6939,11 +6969,12 @@ Public Class frmMainInterface
                     Me.btnSavePS.Text = "Save"
                     Me.SSTableAdapter1.DeleteAllQuery()
                     Me.SSTableAdapter1.Fill(Me.FingerPrintDataSet.SupportingStaff)
+                    ModificationDetail = "Deleted all records from Supporting Staff List"
                     ShowDesktopAlert("All records deleted from Supporting Staff List!")
                 End If
             End If
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, ModificationDetail)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -7615,7 +7646,7 @@ Public Class frmMainInterface
             ConnectToDatabase()
             LoadOfficerToMemory()
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Modified Officers List")
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -7656,7 +7687,7 @@ Public Class frmMainInterface
             Me.txtSSPen.Focus()
             Exit Sub
         End If
-
+        Dim modificationdetail As String = ""
         Try
             If Not SSEditMode Then
                 Dim dgvr As FingerPrintDataSet.SupportingStaffRow = Me.FingerPrintDataSet.SupportingStaff.NewRow
@@ -7670,6 +7701,7 @@ Public Class frmMainInterface
                 Me.SSTableAdapter1.Fill(Me.FingerPrintDataSet.SupportingStaff)
                 Me.SSBindingSource.MoveLast()
                 ShowDesktopAlert("New Supporting Staff added sucessfully!")
+                modificationdetail = "New Supporting Staff added"
             Else
                 Dim dgvr As FingerPrintDataSet.SupportingStaffRow = Me.FingerPrintDataSet.SupportingStaff.Rows(Me.SSDatagrid.SelectedRows(0).Index)
                 With dgvr
@@ -7679,13 +7711,14 @@ Public Class frmMainInterface
                 End With
                 Me.SSTableAdapter1.Update(Me.FingerPrintDataSet.SupportingStaff)
                 ShowDesktopAlert("Selected record updated.")
+                modificationdetail = "Edited Supporting Staff details"
                 SSEditMode = False
                 Me.btnSaveSS.Text = "Save"
             End If
 
             ClearSSFields()
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, modificationdetail)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -8108,7 +8141,7 @@ Public Class frmMainInterface
             IncrementSOCNumber(OriginalSOCNumber)
             DisplayDatabaseInformation()
             ShowDesktopAlert("New SOC Record entered successfully!")
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Added new SOC No. " & OriginalSOCNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -8249,7 +8282,7 @@ Public Class frmMainInterface
             Me.btnSaveSOC.Text = "Save"
             SOCEditMode = False
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited SOC No. " & OriginalSOCNumber)
             DisplayDatabaseInformation()
 
         Catch ex As Exception
@@ -8355,7 +8388,7 @@ Public Class frmMainInterface
 
             Me.btnSaveSOC.Text = "Save"
             SOCEditMode = False
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited SOC No. " & OriginalSOCNumber)
             DisplayDatabaseInformation()
 
         Catch ex As Exception
@@ -8390,7 +8423,7 @@ Public Class frmMainInterface
         End If
 
         Me.SOCRegisterTableAdapter.UpdatePhotoReceived(y, soc)
-        InsertOrUpdateLastModificationDate(Now)
+        InsertOrUpdateLastModificationDate(Now, "Photo received status set to '" & y & "' for SOC No. " & soc)
         ShowDesktopAlert("Photo received status set to '" & y & "'")
     End Sub
 #End Region
@@ -9412,7 +9445,7 @@ errhandler:
             InitializeRSOCFields()
             IncrementRSOCNumber(OriginalRSOCSerialNumber)
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, nature & " report sent for SOC No. " & socno)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -9464,7 +9497,7 @@ errhandler:
             IncrementRSOCNumber(OriginalRSOCSerialNumber)
             Me.lblReportSent.Visible = True
             Me.StatusBar.RecalcLayout()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, nature & " report sent for SOC No. " & socno)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -9556,7 +9589,7 @@ errhandler:
 
             Me.btnSaveRSOC.Text = "Save"
             RSOCEditMode = False
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited RSOC No. " & OriginalRSOCSerialNumber)
             DisplayDatabaseInformation()
 
 
@@ -9633,7 +9666,7 @@ errhandler:
 
             Me.btnSaveRSOC.Text = "Save"
             RSOCEditMode = False
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited RSOC No. " & OriginalRSOCSerialNumber)
             DisplayDatabaseInformation()
 
 
@@ -10051,7 +10084,7 @@ errhandler:
 
             InitializeDAFields()
             IncrementDANumber(OriginalDANumber)
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Added new DA No. " & OriginalDANumber)
 
             DisplayDatabaseInformation()
         Catch ex As Exception
@@ -10129,7 +10162,7 @@ errhandler:
             Me.btnSaveDA.Text = "Save"
             DAEditMode = False
             ClearDAImage()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited DA No. " & OriginalDANumber)
             DisplayDatabaseInformation()
 
         Catch ex As Exception
@@ -10218,7 +10251,7 @@ errhandler:
             DAEditMode = False
             ClearDAImage()
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited DA No. " & OriginalDANumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -11001,7 +11034,7 @@ errhandler:
 
             InitializeIDFields()
             IncrementIDNumber(OriginalIDNumber)
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Added new Identified Slips Record No. " & OriginalIDNumber)
 
             DisplayDatabaseInformation()
 
@@ -11081,7 +11114,7 @@ errhandler:
             Me.btnSaveID.Text = "Save"
             IDEditMode = False
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Identified Slips Record No. " & OriginalIDNumber)
             Exit Sub
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -11164,7 +11197,7 @@ errhandler:
             Me.btnSaveID.Text = "Save"
             IDEditMode = False
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Identified Slips Record No. " & OriginalIDNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -11820,7 +11853,7 @@ errhandler:
             InitializeACFields()
             IncrementACNumber(OriginalACNumber)
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Added new Active Criminal Slip Record No. " & OriginalACNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -11896,7 +11929,7 @@ errhandler:
             ACEditMode = False
 
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Active Criminal Slip Record No. " & OriginalACNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -11976,7 +12009,7 @@ errhandler:
             Me.btnSaveAC.Text = "Save"
             ACEditMode = False
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Active Criminal Slip Record No. " & OriginalACNumber)
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -12564,7 +12597,7 @@ errhandler:
             IncrementCDNumber(OriginalCDNumber)
 
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Added new Court Duty Record No. " & OriginalCDNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -12644,7 +12677,7 @@ errhandler:
             CDEditMode = False
 
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Court Duty Record No. " & OriginalCDNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -12861,7 +12894,7 @@ errhandler:
             Me.btnSaveCD.Text = "Save"
             CDEditMode = False
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Court Duty Record No. " & OriginalCDNumber)
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -12962,9 +12995,9 @@ errhandler:
         ClearPSFields()
 
 
-        PSListChanged = True
+            PSListChanged = True
             DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Added new Police Station " & OriginalPSName)
        Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13063,11 +13096,11 @@ errhandler:
             ShowDesktopAlert("Police Station details updated successfully!")
         End If
 
+            NewDataMode()
+            PSListChanged = True
+            DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now, "Edited Police Station " & OriginalPSName)
 
-        NewDataMode()
-        PSListChanged = True
-        DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
         Catch ex As Exception
             ShowErrorMessage(ex)
              If Not blApplicationIsLoading  And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -13110,8 +13143,8 @@ errhandler:
         ShowDesktopAlert("Police Station Name overwrited successfully!")
         NewDataMode()
         PSListChanged = True
-        DisplayDatabaseInformation()
-            InsertOrUpdateLastModificationDate(Now)
+            DisplayDatabaseInformation()
+            InsertOrUpdateLastModificationDate(Now, "Edited Police Station " & OriginalPSName)
        
          Catch ex As Exception
             ShowErrorMessage(ex)
@@ -13216,7 +13249,7 @@ errhandler:
 
             ShowDesktopAlert("Office Settings updated!")
             OfficeSettingsEditMode(False)
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Edited Office Settings")
         Catch ex As Exception
             ShowErrorMessage(ex)
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -17126,7 +17159,7 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Created SOC Report Register")
         Catch ex As Exception
             'ShowErrorMessage(ex)
         End Try
@@ -17144,7 +17177,7 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Created Officer Table")
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -17162,7 +17195,7 @@ errhandler:
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Created Settings Table")
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -17176,13 +17209,13 @@ errhandler:
 
             Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
             con.Open()
-            Dim cmd = New OleDb.OleDbCommand("Create TABLE LastModification (ID integer primary key, LastModifiedDate Date)", con)
+            Dim cmd = New OleDb.OleDbCommand("Create TABLE LastModification (ID integer primary key, LastModifiedDate Date, LastModificationDetails VARCHAR(255)WITH COMPRESSION)", con)
 
             cmd.ExecuteNonQuery()
             Application.DoEvents()
 
             If DoesTableExist("LastModification", sConString) Then
-                InsertOrUpdateLastModificationDate(Now)
+                InsertOrUpdateLastModificationDate(Now, "Created Last Modification Details Table")
             End If
 
         Catch ex As Exception
@@ -17203,7 +17236,7 @@ errhandler:
             cmd.ExecuteNonQuery()
             Application.DoEvents()
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Created Common Settings Table")
 
 
         Catch ex As Exception
@@ -17229,6 +17262,7 @@ errhandler:
             RemoveNullFromIdentificationRegister()
             Thread.Sleep(1000)
             CopyValuesToCulpritsRegisterTable()
+            InsertOrUpdateLastModificationDate(Now, "Created Identification Register")
         Catch ex As Exception
             ShowErrorMessage(ex)
 
@@ -17282,7 +17316,7 @@ errhandler:
             Dim cmd = New OleDb.OleDbCommand("Create TABLE RevenueCollection (ID COUNTER PRIMARY KEY, FPMonth NUMBER, Amount Number)", con)
 
             cmd.ExecuteNonQuery()
-
+            InsertOrUpdateLastModificationDate(Now, "Created Revenue Collection Register")
         Catch ex As Exception
             ShowErrorMessage(ex)
 
@@ -17303,9 +17337,6 @@ errhandler:
 
             Thread.Sleep(1000)
             RemoveNullFromCulpritRegister()
-
-            InsertOrUpdateLastModificationDate(Now)
-
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -17379,7 +17410,7 @@ errhandler:
             cmd.ExecuteNonQuery()
             Application.DoEvents()
 
-            InsertOrUpdateLastModificationDate(Now)
+            InsertOrUpdateLastModificationDate(Now, "Modified Identification Register")
 
 
         Catch ex As Exception
@@ -17532,6 +17563,11 @@ errhandler:
             cmd.ExecuteNonQuery()
         End If
 
+        If DoesFieldExist("LastModification", "LastModificationDetails", sConString) = False Then
+            Dim cmd = New OleDb.OleDbCommand("ALTER TABLE LastModification ADD COLUMN LastModificationDetails VARCHAR(255) WITH COMPRESSION", con)
+            cmd.ExecuteNonQuery()
+        End If
+
         If UpdateSettingsTable Then
             Dim id = 1
             Me.SettingsTableAdapter1.UpdateNullFields(PdlGraveCrime, PdlVigilanceCase, PdlWeeklyDiary, id)
@@ -17541,7 +17577,7 @@ errhandler:
         ' AlterSOCComparisoanDetailsColumn()
         con.Close()
 
-        InsertOrUpdateLastModificationDate(Now)
+        InsertOrUpdateLastModificationDate(Now, "Modified Various Registers")
         ' MsgBox(Err.Description)
     End Sub
 
@@ -18298,6 +18334,7 @@ errhandler:
             Dim RemoteSOCRecordCount As Integer = 0
             Dim description As String = ""
             Dim dtlastremotemodified As Date
+            RemoteModificationDetails = ""
 
             cnt = Results.Files.Count
             If cnt > 0 Then
@@ -18306,6 +18343,16 @@ errhandler:
                 RemoteSOCRecordCount = Val(SplitText(4))
                 RemoteModifiedDate = SplitText(1)
                 dtlastremotemodified = DateTime.ParseExact(RemoteModifiedDate, "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+
+                Dim u = SplitText.GetUpperBound(0)
+
+                If u = 5 Then
+                    RemoteModificationDetails = SplitText(5)
+                End If
+
+                If RemoteModificationDetails = "NIL" Then
+                    RemoteModificationDetails = ""
+                End If
             Else
                 bgwCheckRemoteDB.ReportProgress(0, False)
                 Exit Sub
@@ -18374,7 +18421,15 @@ errhandler:
                     Exit Sub
                 End If
 
-                Dim r = MessageBoxEx.Show("A more recent database (Last Modified on " & RemoteModifiedDate & ") is available in online backup. Press OK to view and restore this database.", strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+                Dim message As String = ""
+
+                If RemoteModificationDetails = "" Then
+                    message = "A more recent database is available in online backup." & vbNewLine & vbNewLine & vbTab & "Last Modification Date: " & RemoteModifiedDate & vbNewLine & vbNewLine & "Press OK to view and restore this database."
+                Else
+                    message = "A recently modified database is available in online backup." & vbNewLine & vbNewLine & vbTab & "Last Modification Details: " & RemoteModificationDetails & vbNewLine & vbTab & "Last Modification Date: " & RemoteModifiedDate & vbNewLine & vbNewLine & "Press OK to view and restore this database."
+                End If
+                Dim r = MessageBoxEx.Show(message, strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+
                 If r = Windows.Forms.DialogResult.OK Then
                     OnlineDatabaseBackup()
                 End If
@@ -18952,7 +19007,7 @@ errhandler:
 
 #Region "DATABASE LAST MODIFICATION DATE"
 
-    Public Sub InsertOrUpdateLastModificationDate(NewDate As Date)
+    Public Sub InsertOrUpdateLastModificationDate(ModificationDate As Date, ModificationDetails As String)
         Try
             If blUpdateLastModificationDate = False Then Exit Sub
             If blDBIsInPreviewMode Then Exit Sub
@@ -18960,9 +19015,9 @@ errhandler:
             Dim ID As Integer = 1
             Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
             If FingerPrintDataSet.LastModification.Count = 0 Then
-                Me.LastModificationTableAdapter.Insert(ID, NewDate)
+                Me.LastModificationTableAdapter.Insert(ID, ModificationDate, ModificationDetails.Trim)
             Else
-                Me.LastModificationTableAdapter.UpdateQuery(ID, NewDate, ID)
+                Me.LastModificationTableAdapter.UpdateQuery(ID, ModificationDate, ModificationDetails.Trim, ID)
             End If
             Me.cprDBAvailable.Visible = False
         Catch ex As Exception
@@ -18985,6 +19040,21 @@ errhandler:
 
     End Function
 
+    Public Function GetLastModificationDetails() As String
+        Try
+            Dim ID As Integer = 1
+            Me.LastModificationTableAdapter.FillByID(FingerPrintDataSet.LastModification, ID)
+            Dim modification As String = "NIL"
+            If FingerPrintDataSet.LastModification.Count = 1 Then
+                modification = FingerPrintDataSet.LastModification(0).LastModificationDetails
+                If modification Is Nothing Then modification = "NIL"
+            End If
+            Return modification
+        Catch ex As Exception
+            Return "NIL"
+        End Try
+
+    End Function
 #End Region
 
     '---------------------------------------------END APPLICATION-----------------------------------
@@ -19047,6 +19117,10 @@ errhandler:
 
         My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModifiedDate", LastModifiedDate, Microsoft.Win32.RegistryValueKind.String)
 
+        Dim LastModificationDetail As String = GetLastModificationDetails()
+
+        My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModificationDetail", LastModificationDetail, Microsoft.Win32.RegistryValueKind.String)
+
         FindLastSOCNumberDICount()
 
         My.Computer.Registry.SetValue(strBackupSettingsPath, "LocalSOCRecordCount", LocalSOCRecordCount, Microsoft.Win32.RegistryValueKind.String)
@@ -19054,7 +19128,7 @@ errhandler:
         Dim FileOwner As String = ShortOfficeName & "_" & ShortDistrictName
         My.Computer.Registry.SetValue(strBackupSettingsPath, "FileOwner", FileOwner, Microsoft.Win32.RegistryValueKind.String)
 
-        Dim BackupDescription As String = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
+        Dim BackupDescription As String = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount & "; " & LastModificationDetail
 
         My.Computer.Registry.SetValue(strBackupSettingsPath, "BackupDescription", BackupDescription, Microsoft.Win32.RegistryValueKind.String)
 

@@ -48,6 +48,7 @@ Public Class frmOnlineBackup
     Dim MasterBackupFolderID As String = ""
     Dim CurrentFolderName As String = ""
     Dim LastModifiedDate As String = ""
+    Dim LastModificationDetail As String = ""
     Dim blShowFileCount As Boolean
 
 
@@ -96,6 +97,8 @@ Public Class frmOnlineBackup
             blListIsLoading = False
 
             LastModifiedDate = frmMainInterface.GetLastModificationDate.ToString("dd-MM-yyyy HH:mm:ss")
+            LastModificationDetail = frmMainInterface.GetLastModificationDetails()
+
             LoadFilesInUserBackupFolder(False)
 
         Catch ex As Exception
@@ -194,6 +197,19 @@ Public Class frmOnlineBackup
                         item.SubItems.Add(SplitText(4)) 'Total Records
                     End If
 
+                    If u = 5 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add(SplitText(1)) 'last modified date
+                        item.SubItems.Add(SplitText(2)) ' Last SOC No.
+                        item.SubItems.Add(SplitText(3)) ' Last SOC DI
+                        item.SubItems.Add(SplitText(4)) 'Total Records
+                        Dim RemoteModificationDetails = SplitText(5) ' Last Modiifcation Details
+
+                        If RemoteModificationDetails = "NIL" Then
+                            RemoteModificationDetails = ""
+                        End If
+                        item.SubItems.Add(RemoteModificationDetails)
+                    End If
 
                 End If
 
@@ -473,7 +489,7 @@ Public Class frmOnlineBackup
 
             Dim body As New Google.Apis.Drive.v3.Data.File()
             body.Name = BackupFileName
-            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount
+            body.Description = FileOwner & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount & "; " & LastModificationDetail
             body.MimeType = "database/mdb"
 
             Dim parentlist As New List(Of String)
@@ -511,6 +527,7 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(LatestSOCNumber)
                 item.SubItems.Add(LatestSOCDI)
                 item.SubItems.Add(LocalSOCRecordCount)
+                item.SubItems.Add(LastModificationDetail)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size
