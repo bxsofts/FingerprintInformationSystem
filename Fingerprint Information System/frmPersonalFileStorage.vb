@@ -555,7 +555,7 @@ Public Class frmPersonalFileStorage
         End If
 
 
-        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False, "New Folder")
+        frmInputBox.SetTitleandMessage("New Folder Name", "Enter Name of New Folder", False, "")
         frmInputBox.ShowDialog()
         Dim FolderName As String = frmInputBox.txtInputBox.Text
         If frmInputBox.ButtonClicked <> "OK" Then Exit Sub
