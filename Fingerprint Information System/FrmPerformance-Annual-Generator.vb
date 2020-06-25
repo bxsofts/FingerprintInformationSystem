@@ -73,8 +73,8 @@ Public Class frmAnnualPerformance
     Private Sub ModifyButtonName() Handles txtYear.ValueChanged
         Try
             If Not blModifyButtonName Then Exit Sub
-            PerfFileName = SaveFolder & "\Annual Performance Statement - " & Me.txtYear.Text & ".docx"
-            If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            Dim sFileName = SaveFolder & "\Annual Performance Statement - " & Me.txtYear.Text & ".docx"
+            If My.Computer.FileSystem.FileExists(sFileName) Then
                 Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
             Else
                 Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"

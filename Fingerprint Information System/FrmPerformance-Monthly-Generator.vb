@@ -71,9 +71,9 @@ Public Class frmMonthlyPerformance
         Try
             If Not blModifyButtonName Then Exit Sub
             Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
-            PerfFileName = SaveFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+            Dim sFileName = SaveFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
 
-            If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            If My.Computer.FileSystem.FileExists(sFileName) Then
                 Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
             Else
                 Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"

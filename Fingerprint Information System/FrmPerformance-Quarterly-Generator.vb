@@ -50,7 +50,7 @@ Public Class frmQuarterlyPerformance
         CreateDatagridRows()
         ConnectToDatabse()
 
-        SaveFolder = FileIO.SpecialDirectories.MyDocuments & "\Performance Statement"
+        SaveFolder = SuggestedLocation & "\Performance Statement"
         System.IO.Directory.CreateDirectory(SaveFolder)
         Me.txtQuarter.Focus()
         Application.DoEvents()
@@ -89,9 +89,9 @@ Public Class frmQuarterlyPerformance
     Private Sub ModifyButtonName() Handles txtQuarter.ValueChanged, txtQuarterYear.ValueChanged
         Try
             If Not blModifyButtonName Then Exit Sub
-            PerfFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
+            Dim sFileName = SaveFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
 
-            If My.Computer.FileSystem.FileExists(PerfFileName) Then
+            If My.Computer.FileSystem.FileExists(sFileName) Then
                 Me.btnGeneratePerformanceStatement.Text = "LOAD VALUES"
             Else
                 Me.btnGeneratePerformanceStatement.Text = "GENERATE VALUES"
@@ -240,6 +240,7 @@ Public Class frmQuarterlyPerformance
 #Region "GENERATE REPORTS"
 
     Private Sub btnGeneratePerformanceStatement_Click(sender As Object, e As EventArgs) Handles btnGeneratePerformanceStatement.Click
+
         lblMonth1.Visible = False
         lblMonth2.Visible = False
         lblMonth3.Visible = False
