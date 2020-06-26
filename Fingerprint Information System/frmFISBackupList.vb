@@ -39,6 +39,7 @@ Public Class frmFISBackupList
     Dim blPasswordFetched As Boolean = False
 
     Dim RecoverPassword As String = ""
+    Dim sFileCount As String = ""
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -591,31 +592,17 @@ Public Class frmFISBackupList
 
         OpenFileDialog1.Filter = "All Files|*.*"
         OpenFileDialog1.FileName = ""
-        OpenFileDialog1.Title = "Select File to Upload"
+        OpenFileDialog1.Title = "Select Files to Upload"
         OpenFileDialog1.AutoUpgradeEnabled = True
         OpenFileDialog1.RestoreDirectory = True 'remember last directory
 
+        Dim FileList() As String
+
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
             Application.DoEvents() 'first close the selection window
-            uSelectedFile = OpenFileDialog1.FileName
+            FileList = OpenFileDialog1.FileNames
         Else
             Exit Sub
-        End If
-
-        For i = 0 To Me.listViewEx1.Items.Count - 1
-            If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
-                MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-        Next
-
-        dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
-        dFormatedFileSize = CalculateFileSize(dFileSize)
-
-        If dFileSize >= 25 * 1048576 Then '25MB
-            If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                Exit Sub
-            End If
         End If
 
         Me.Cursor = Cursors.WaitCursor
@@ -626,50 +613,63 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
+        Me.lblProgressStatus.TextAlignment = StringAlignment.Near
+        ShowProgressControls("0", "Uploading Files...", eCircularProgressType.Line)
         System.Threading.Thread.Sleep(200)
-        bgwUploadFile.RunWorkerAsync(uSelectedFile)
+        bgwUploadFile.RunWorkerAsync(FileList)
 
     End Sub
 
     Private Sub bgwUploadFile_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadFile.DoWork
         Try
             blUploadIsProgressing = True
+            Dim FileList() As String = e.Argument
+            Dim count As Integer = FileList.Count
 
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            body.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
-            Dim extension As String = My.Computer.FileSystem.GetFileInfo(e.Argument).Extension
-            body.MimeType = "files/" & extension.Replace(".", "")
-            body.Description = FileOwner
+            For i = 0 To count - 1
+                sFileCount = "File " & i + 1 & " of " & count
 
-            Dim parentlist As New List(Of String)
-            parentlist.Add(CurrentFolderID)
-            body.Parents = parentlist
+                bgwUploadFile.ReportProgress(0)
+                Dim SelectedFile = FileList(i)
+                dFileSize = My.Computer.FileSystem.GetFileInfo(SelectedFile).Length
+                dFormatedFileSize = CalculateFileSize(dFileSize)
 
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(e.Argument)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
+                Dim body As New Google.Apis.Drive.v3.Data.File()
+                body.Name = My.Computer.FileSystem.GetFileInfo(SelectedFile).Name
+                Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
+                body.MimeType = "files/" & extension.Replace(".", "")
+                body.Description = FileOwner
 
-            Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-            UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                Dim parentlist As New List(Of String)
+                parentlist.Add(CurrentFolderID)
+                body.Parents = parentlist
 
-            AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
+                Dim Stream As New System.IO.MemoryStream(ByteArray)
 
-            UploadRequest.Fields = "id, name, mimeType, size, modifiedTime, description"
-            UploadRequest.Upload()
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
 
-            If uUploadStatus = UploadStatus.Completed Then
-                Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
-                Dim item As ListViewItem = New ListViewItem(file.Name)
-                Dim modifiedtime As DateTime = file.ModifiedTime
-                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
-                item.SubItems.Add(CalculateFileSize(file.Size))
-                item.SubItems.Add(file.Id)
-                item.SubItems.Add(file.Description)
-                item.ImageIndex = GetImageIndex(extension)
-                bgwUploadFile.ReportProgress(100, item)
-            End If
+                AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
 
-            Stream.Close()
+                UploadRequest.Fields = "id, name, mimeType, size, modifiedTime, description"
+                UploadRequest.Upload()
+
+                If uUploadStatus = UploadStatus.Completed Then
+                    Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
+                    Dim item As ListViewItem = New ListViewItem(file.Name)
+                    Dim modifiedtime As DateTime = file.ModifiedTime
+                    item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+                    item.SubItems.Add(CalculateFileSize(file.Size))
+                    item.SubItems.Add(file.Id)
+                    item.SubItems.Add(file.Description)
+                    item.ImageIndex = GetImageIndex(extension)
+                    bgwUploadFile.ReportProgress(100, item)
+                End If
+
+                Stream.Close()
+            Next
+            
 
             If uUploadStatus = UploadStatus.Completed Then
                 GetDriveUsageDetails()
@@ -692,7 +692,7 @@ Public Class frmFISBackupList
 
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
         CircularProgress1.ProgressText = e.ProgressPercentage
-        lblProgressStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+        lblProgressStatus.Text = sFileCount & ": " & CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
         If TypeOf e.UserState Is ListViewItem Then
             listViewEx1.Items.Add(e.UserState)
         End If
@@ -707,13 +707,13 @@ Public Class frmFISBackupList
                 Me.listViewEx1.SelectedItems.Clear()
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
-            ShowDesktopAlert("File uploaded successfully.")
+            ShowDesktopAlert("Files uploaded successfully.")
         End If
 
         If uUploadStatus = UploadStatus.Failed Then
             MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-
+        Me.lblProgressStatus.TextAlignment = StringAlignment.Center
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -749,40 +749,12 @@ Public Class frmFISBackupList
 
             Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
 
-            If filePaths.Count > 1 Then
-                MessageBoxEx.Show("Drop only one file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            Dim filepath As String = filePaths(0)
-
-            If My.Computer.FileSystem.DirectoryExists(filepath) Then
-                MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            If Not My.Computer.FileSystem.FileExists(filepath) Then
-                MessageBoxEx.Show("Dropped file does not exist.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            uSelectedFile = filepath
-
-            For i = 0 To Me.listViewEx1.Items.Count - 1
-                If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
-                    MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            For i = 0 To filePaths.Length - 1
+                If My.Computer.FileSystem.DirectoryExists(filePaths(i)) Then
+                    MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Exit Sub
                 End If
             Next
-
-            dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            If dFileSize >= 25 * 1048576 Then '25MB
-                If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                    Exit Sub
-                End If
-            End If
 
             Me.Cursor = Cursors.WaitCursor
 
@@ -792,9 +764,10 @@ Public Class frmFISBackupList
                 Exit Sub
             End If
 
+            Me.lblProgressStatus.TextAlignment = StringAlignment.Near
             ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
             System.Threading.Thread.Sleep(200)
-            bgwUploadFile.RunWorkerAsync(uSelectedFile)
+            bgwUploadFile.RunWorkerAsync(filePaths)
 
         End If
     End Sub
@@ -846,11 +819,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems.Count > 1 Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
-
         Me.Cursor = Cursors.WaitCursor
 
         If InternetAvailable() = False Then
@@ -859,26 +827,10 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
+        Me.lblProgressStatus.TextAlignment = StringAlignment.Near
         ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
-        Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
-        If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> (ShortOfficeName & "_" & ShortDistrictName) Then
-            Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
-            If My.Computer.FileSystem.DirectoryExists(f) = False Then
-                My.Computer.FileSystem.CreateDirectory(f)
-            End If
-            SaveFileName = f & "\" & fname
-        ElseIf fname.StartsWith("FingerPrintBackup-") And CurrentFolderName = (ShortOfficeName & "_" & ShortDistrictName) Then
-            Dim f As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
-
-            If My.Computer.FileSystem.DirectoryExists(f) = False Then
-                My.Computer.FileSystem.CreateDirectory(f)
-            End If
-            SaveFileName = f & "\" & fname
-        Else
-            SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
-        End If
-        bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems(0).SubItems(3).Text) ' fileid
+        bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems)
     End Sub
 
     Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadFile.DoWork
@@ -886,29 +838,57 @@ Public Class frmFISBackupList
 
         Try
             blDownloadIsProgressing = True
+            Dim SelectedItems As ListView.SelectedListViewItemCollection
+            SelectedItems = e.Argument
+            Dim count As Integer = SelectedItems.Count
 
-            Dim request = FISService.Files.Get(e.Argument)
-            request.Fields = "size"
-            Dim file = request.Execute
+            For i = 0 To count - 1
 
-            dFileSize = file.Size
-            dFormatedFileSize = CalculateFileSize(dFileSize)
+                sFileCount = "File " & i + 1 & " of " & count
+                Dim fname As String = SelectedItems(i).SubItems(0).Text
+                Dim fid As String = SelectedItems(i).SubItems(3).Text
 
-            Dim fStream = New System.IO.FileStream(SaveFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
-            Dim mStream = New System.IO.MemoryStream
+                If fname.StartsWith("FingerPrintBackup-") And CurrentFolderName <> (ShortOfficeName & "_" & ShortDistrictName) Then
+                    Dim f As String = strAppUserPath & "\FIS Backup\" & CurrentFolderName
+                    If My.Computer.FileSystem.DirectoryExists(f) = False Then
+                        My.Computer.FileSystem.CreateDirectory(f)
+                    End If
+                    SaveFileName = f & "\" & fname
+                ElseIf fname.StartsWith("FingerPrintBackup-") And CurrentFolderName = (ShortOfficeName & "_" & ShortDistrictName) Then
+                    Dim f As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "BackupPath", SuggestedLocation & "\Backups") & "\Online Downloads"
 
-            Dim m = request.MediaDownloader
-            m.ChunkSize = 256 * 1024
+                    If My.Computer.FileSystem.DirectoryExists(f) = False Then
+                        My.Computer.FileSystem.CreateDirectory(f)
+                    End If
+                    SaveFileName = f & "\" & fname
+                Else
+                    SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
+                End If
 
-            AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
-            request.DownloadWithStatus(mStream)
+                Dim request = FISService.Files.Get(fid)
+                request.Fields = "size"
+                Dim file = request.Execute
 
-            If dDownloadStatus = DownloadStatus.Completed Then
-                mStream.WriteTo(fStream)
-            End If
+                dFileSize = file.Size
+                dFormatedFileSize = CalculateFileSize(dFileSize)
 
-            fStream.Close()
-            mStream.Close()
+                Dim fStream = New System.IO.FileStream(SaveFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+                m.ChunkSize = 256 * 1024
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+            Next
+           
 
         Catch ex As Exception
             blDownloadIsProgressing = False
@@ -931,7 +911,7 @@ Public Class frmFISBackupList
     Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadFile.ProgressChanged
 
         CircularProgress1.ProgressText = e.ProgressPercentage
-        lblProgressStatus.Text = CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
+        lblProgressStatus.Text = sFileCount & ": " & CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
     End Sub
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadFile.RunWorkerCompleted
 
@@ -939,8 +919,7 @@ Public Class frmFISBackupList
         blDownloadIsProgressing = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
-            MessageBoxEx.Show("File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
+            ShowDesktopAlert("Files downloaded successfully.")
         End If
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
