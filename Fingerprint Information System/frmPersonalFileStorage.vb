@@ -45,6 +45,12 @@ Public Class frmPersonalFileStorage
 
     Dim blShowSharedWithMe As Boolean = False
     Dim blViewFile As Boolean = False
+    Dim blReDownload As Boolean = False
+
+    Dim UploadedFileCount As Integer = 0
+    Dim SkippedFileCount As Integer = 0
+    Dim DownloadedFileCount As Integer = 0
+    Dim FailedFileCount As Integer = 0
 
     Public Enum ImageIndex
         Folder = 0
@@ -359,6 +365,8 @@ Public Class frmPersonalFileStorage
 
     Private Sub ListViewEx1_DoubleClick(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnView.Click
 
+        blViewFile = False
+        blReDownload = False
 
         If Me.listViewEx1.SelectedItems.Count = 0 Then
             Exit Sub
@@ -373,16 +381,33 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 And Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "" And Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "0B" Then
-            If MessageBoxEx.Show("Do you want to download and view the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                blViewFile = True
-                DownloadSelectedFile()
-                Exit Sub
+
+            SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & Me.listViewEx1.SelectedItems(0).SubItems(0).Text
+
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Dim r = MessageBoxEx.Show("Selected file already exists in 'My Documents' folder. Do you want to download it again?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
+                If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                If r = Windows.Forms.DialogResult.No Then
+                    Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+                    Exit Sub
+                End If
+                If r = Windows.Forms.DialogResult.Yes Then
+                    blReDownload = True
+                    blViewFile = True
+                    DownloadSelectedFile()
+                    Exit Sub
+                End If
             Else
-                blViewFile = False
-                Me.Cursor = Cursors.Default
-                Exit Sub
+                If MessageBoxEx.Show("Do you want to download and view the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                    blViewFile = True
+                    DownloadSelectedFile()
+                    Exit Sub
+                Else
+                    blViewFile = False
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
             End If
         End If
 
@@ -709,6 +734,9 @@ Public Class frmPersonalFileStorage
 
             Dim FileList() As String = e.Argument
             TotalFileCount = FileList.Count
+            UploadedFileCount = 0
+            SkippedFileCount = 0
+            FailedFileCount = 0
 
             For i = 0 To TotalFileCount - 1
 
@@ -717,6 +745,7 @@ Public Class frmPersonalFileStorage
 
                 If FileAlreadyExists(SelectedFileName) Then
                     bgwUploadFile.ReportProgress(i + 1, "Skipping existing file.")
+                    SkippedFileCount += 1
                     Continue For
                 End If
 
@@ -757,15 +786,18 @@ Public Class frmPersonalFileStorage
                     item.SubItems.Add(file.Id)
                     item.ImageIndex = GetImageIndex(extension)
                     bgwUploadFile.ReportProgress(100, item)
+                    UploadedFileCount += 1
+                End If
+
+                If uUploadStatus = UploadStatus.Failed Then
+                    FailedFileCount += 1
                 End If
 
                 Stream.Close()
             Next
             
+            GetDriveUsageDetails()
 
-            If uUploadStatus = UploadStatus.Completed Then
-                GetDriveUsageDetails()
-            End If
         Catch ex As Exception
             blUploadIsProgressing = False
             ShowErrorMessage(ex)
@@ -800,21 +832,31 @@ Public Class frmPersonalFileStorage
 
         HideProgressControls()
         blUploadIsProgressing = False
-
-        If uUploadStatus = UploadStatus.Completed Then
-            If listViewEx1.Items.Count > 0 Then
-                Me.listViewEx1.SelectedItems.Clear()
-                Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
-            End If
-            If TotalFileCount = 1 Then ShowDesktopAlert("File uploaded successfully.")
-            If TotalFileCount > 1 Then ShowDesktopAlert("Files uploaded successfully.")
-        End If
-
-        If dDownloadStatus = DownloadStatus.Failed Then
-            MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
-        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
         Me.Cursor = Cursors.Default
+
+        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
+
+         If listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.SelectedItems.Clear()
+            Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
+        End If
+
+        If TotalFileCount = 1 And UploadedFileCount = 1 Then
+            ShowDesktopAlert("File uploaded successfully.")
+        End If
+
+        If TotalFileCount = 1 And SkippedFileCount = 1 Then
+            ShowDesktopAlert("File skipped as it already exists.")
+        End If
+
+        If TotalFileCount = 1 And FailedFileCount = 1 Then
+            ShowDesktopAlert("File upload failed.")
+        End If
+
+        If TotalFileCount > 1 Then
+            ShowDesktopAlert(UploadedFileCount & IIf(UploadedFileCount = 1, " file ", " files ") & "uploaded." & vbNewLine & SkippedFileCount & IIf(SkippedFileCount = 1, " file ", " files ") & "skipped." & vbNewLine & FailedFileCount & IIf(FailedFileCount = 1, " file ", " files ") & "failed.")
+        End If
+
     End Sub
 
     Private Sub listViewEx1_DragDrop(sender As Object, e As DragEventArgs) Handles listViewEx1.DragDrop
@@ -881,9 +923,9 @@ Public Class frmPersonalFileStorage
 
 #Region "DOWNLOAD FILE"
 
-    Private Sub DownloadSelectedFile() Handles btnDownloadFile.Click, btnDownloadCM.Click
-
+    Private Sub btnDownloadFile_Click(sender As Object, e As EventArgs) Handles btnDownloadFile.Click, btnDownloadCM.Click
         blViewFile = False
+        blReDownload = False
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -932,6 +974,9 @@ Public Class frmPersonalFileStorage
                     Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
                     Exit Sub
                 End If
+                If r = Windows.Forms.DialogResult.Yes Then
+                    blReDownload = True
+                End If
             End If
         End If
 
@@ -942,6 +987,11 @@ Public Class frmPersonalFileStorage
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
+
+        DownloadSelectedFile()
+    End Sub
+
+    Private Sub DownloadSelectedFile()
 
         ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
@@ -965,7 +1015,12 @@ Public Class frmPersonalFileStorage
                 SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
 
                 If My.Computer.FileSystem.FileExists(SaveFileName) Then
-                    bgwDownloadFile.ReportProgress(i + 1, "Skipping existing file.")
+                    If blReDownload = False Then
+                        bgwDownloadFile.ReportProgress(i + 1, "Skipping existing file.")
+                        Continue For
+                    Else
+                        bgwDownloadFile.ReportProgress(i + 1, "Re-downloading file.")
+                    End If
                 End If
 
                 Dim request = GDService.Files.Get(fid)
@@ -1661,4 +1716,5 @@ Public Class frmPersonalFileStorage
 
     End Sub
     
+   
 End Class

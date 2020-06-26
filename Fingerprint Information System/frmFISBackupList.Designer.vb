@@ -66,6 +66,7 @@ Partial Class frmFISBackupList
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
+        Me.btnViewFile = New DevComponents.DotNetBar.ButtonItem()
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -324,7 +325,7 @@ Partial Class frmFISBackupList
         '
         Me.ButtonItem1.AutoExpandOnClick = True
         Me.ButtonItem1.Name = "ButtonItem1"
-        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRefreshCM, Me.btnNewFolderCM, Me.btnUploadCM, Me.btnDownloadCM, Me.btnRenameCM, Me.btnRemoveCM, Me.btnUpdateCM, Me.btnShareCM})
+        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRefreshCM, Me.btnNewFolderCM, Me.btnUploadCM, Me.btnDownloadCM, Me.btnViewFile, Me.btnRenameCM, Me.btnRemoveCM, Me.btnUpdateCM, Me.btnShareCM})
         Me.ButtonItem1.Text = "ButtonItem1"
         '
         'btnRefreshCM
@@ -529,6 +530,13 @@ Partial Class frmFISBackupList
         Me.bgwGetPassword.WorkerReportsProgress = True
         Me.bgwGetPassword.WorkerSupportsCancellation = True
         '
+        'btnViewFile
+        '
+        Me.btnViewFile.BeginGroup = True
+        Me.btnViewFile.Image = CType(resources.GetObject("btnViewFile.Image"), System.Drawing.Image)
+        Me.btnViewFile.Name = "btnViewFile"
+        Me.btnViewFile.Text = "View"
+        '
         'frmFISBackupList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -594,4 +602,5 @@ Partial Class frmFISBackupList
     Friend WithEvents btnUpdateCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnShareCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnRefreshCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnViewFile As DevComponents.DotNetBar.ButtonItem
 End Class

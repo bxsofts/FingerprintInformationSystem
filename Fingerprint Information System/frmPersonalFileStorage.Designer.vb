@@ -39,6 +39,7 @@ Partial Class frmPersonalFileStorage
         Me.btnNewFolderCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnUploadCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDownloadCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnView = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRenameCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnShareCM = New DevComponents.DotNetBar.ButtonItem()
@@ -76,7 +77,6 @@ Partial Class frmPersonalFileStorage
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFolder = New System.ComponentModel.BackgroundWorker()
-        Me.btnView = New DevComponents.DotNetBar.ButtonItem()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -268,6 +268,13 @@ Partial Class frmPersonalFileStorage
         Me.btnDownloadCM.Image = CType(resources.GetObject("btnDownloadCM.Image"), System.Drawing.Image)
         Me.btnDownloadCM.Name = "btnDownloadCM"
         Me.btnDownloadCM.Text = "Download"
+        '
+        'btnView
+        '
+        Me.btnView.BeginGroup = True
+        Me.btnView.Image = CType(resources.GetObject("btnView.Image"), System.Drawing.Image)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Text = "View"
         '
         'btnRenameCM
         '
@@ -635,12 +642,6 @@ Partial Class frmPersonalFileStorage
         '
         Me.bgwDownloadFolder.WorkerReportsProgress = True
         Me.bgwDownloadFolder.WorkerSupportsCancellation = True
-        '
-        'btnView
-        '
-        Me.btnView.Image = CType(resources.GetObject("btnView.Image"), System.Drawing.Image)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Text = "View"
         '
         'frmPersonalFileStorage
         '
