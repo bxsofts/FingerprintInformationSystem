@@ -68,53 +68,53 @@ Public Class frmFISBackupList
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
 
-       
-        Me.Cursor = Cursors.WaitCursor
 
-        If SuperAdmin Then
-            Me.btnUpdateFileContent.Visible = True
-        Else
-            Me.btnUpdateFileContent.Visible = False
-        End If
+            Me.Cursor = Cursors.WaitCursor
 
-        SetTitleAndSize()
-        Me.CenterToScreen()
+            If SuperAdmin Then
+                Me.btnUpdateFileContent.Visible = True
+            Else
+                Me.btnUpdateFileContent.Visible = False
+            End If
 
-        Me.lblDriveSpaceUsed.Text = "Drive Space used: "
-        Me.lblItemCount.Text = "Item Count: "
+            SetTitleAndSize()
+            Me.CenterToScreen()
 
-        CurrentFolderPath = "\My Drive"
-        ParentFolderPath = "\My Drive"
-        CurrentFolderName = "My Drive"
+            Me.lblDriveSpaceUsed.Text = "Drive Space used: "
+            Me.lblItemCount.Text = "Item Count: "
 
-
-        JsonPath = CredentialFilePath & "\FISServiceAccount.json"
-
-        If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
-            My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
-            FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
-        End If
-
-        If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
-            Me.Cursor = Cursors.Default
-            MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Me.Close()
-            Exit Sub
-        End If
-
-        Me.listViewEx1.Items.Clear()
-        Me.lblItemCount.Text = "Item Count: "
-        ServiceCreated = False
+            CurrentFolderPath = "\My Drive"
+            ParentFolderPath = "\My Drive"
+            CurrentFolderName = "My Drive"
 
 
-        ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
+            JsonPath = CredentialFilePath & "\FISServiceAccount.json"
 
-        blUploadIsProgressing = False
-        blDownloadIsProgressing = False
-        blListIsLoading = False
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
+                My.Computer.FileSystem.CreateDirectory(CredentialFilePath)
+                FileSystem.FileCopy(strAppPath & "\FISServiceAccount.json", CredentialFilePath & "\FISServiceAccount.json")
+            End If
 
-        '  ImageList1.Images.Add(GetFileIcon(".exe"))
-        bgwListFiles.RunWorkerAsync("root")
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'if copy failed
+                Me.Cursor = Cursors.Default
+                MessageBoxEx.Show("Authentication File is missing. Please re-install the application.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Close()
+                Exit Sub
+            End If
+
+            Me.listViewEx1.Items.Clear()
+            Me.lblItemCount.Text = "Item Count: "
+            ServiceCreated = False
+
+
+            ShowProgressControls("", "Fetching Files from Google Drive...", eCircularProgressType.Donut)
+
+            blUploadIsProgressing = False
+            blDownloadIsProgressing = False
+            blListIsLoading = False
+
+            '  ImageList1.Images.Add(GetFileIcon(".exe"))
+            bgwListFiles.RunWorkerAsync("root")
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -690,6 +690,11 @@ Public Class frmFISBackupList
 
             For i = 0 To TotalFileCount - 1
 
+                If bgwUploadFile.CancellationPending Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
+
                 Dim SelectedFile = FileList(i)
                 Dim SelectedFileName As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Name
 
@@ -978,6 +983,11 @@ Public Class frmFISBackupList
             SkippedFileCount = 0
 
             For i = 0 To TotalFileCount - 1
+
+                If bgwDownloadFile.CancellationPending Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
 
                 Dim fname As String = SelectedItems(i).SubItems(0).Text
                 Dim fid As String = SelectedItems(i).SubItems(3).Text
@@ -1844,6 +1854,30 @@ Public Class frmFISBackupList
                 e.Cancel = True
             End If
             Me.btnRemoveCM.Visible = True
+        End If
+    End Sub
+
+
+    Private Sub frmFISBackupList_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If blDownloadIsProgressing Then
+            On Error Resume Next
+            If MessageBoxEx.Show("File download is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                If bgwDownloadFile.IsBusy Then
+                    bgwDownloadFile.CancelAsync()
+                End If
+            End If
+        End If
+
+        If blUploadIsProgressing Then
+            If MessageBoxEx.Show("File upload is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                If bgwUploadFile.IsBusy Then
+                    bgwUploadFile.CancelAsync()
+                End If
+            End If
         End If
     End Sub
 End Class

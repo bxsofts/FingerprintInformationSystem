@@ -70,33 +70,6 @@ Public Class frmPersonalFileStorage
 
 #Region "LOAD DATA"
 
-    Private Sub frmPersonalFileStorage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If blDownloadIsProgressing Then
-            On Error Resume Next
-            If MessageBoxEx.Show("File download is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                e.Cancel = True
-            Else
-                If bgwDownloadFile.IsBusy Then
-                    bgwDownloadFile.CancelAsync()
-                End If
-                If bgwDownloadFolder.IsBusy Then
-                    bgwDownloadFolder.CancelAsync()
-                End If
-            End If
-        End If
-
-        If blUploadIsProgressing Then
-            If MessageBoxEx.Show("File upload is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                e.Cancel = True
-            Else
-                If bgwUploadFile.IsBusy Then
-                    bgwUploadFile.CancelAsync()
-                End If
-            End If
-        End If
-
-    End Sub
-
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Cursor = Cursors.WaitCursor
         Me.Text = "Personal File Storage - " & oAuthUserID
@@ -740,6 +713,11 @@ Public Class frmPersonalFileStorage
 
             For i = 0 To TotalFileCount - 1
 
+                If bgwUploadFile.CancellationPending Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
+
                 Dim SelectedFile As String = FileList(i)
                 Dim SelectedFileName As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Name
 
@@ -1012,6 +990,12 @@ Public Class frmPersonalFileStorage
             SkippedFileCount = 0
 
             For i = 0 To TotalFileCount - 1
+
+                If bgwDownloadFile.CancellationPending Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
+
                 Dim fname As String = SelectedItems(i).SubItems(0).Text
                 Dim fid As String = SelectedItems(i).SubItems(3).Text
 
@@ -1160,6 +1144,10 @@ Public Class frmPersonalFileStorage
                 Exit Sub
             End If
 
+            DownloadedFileCount = 0
+            FailedFileCount = 0
+            SkippedFileCount = 0
+
             Dim SaveFolder As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & SelectedFolderName
             My.Computer.FileSystem.CreateDirectory(SaveFolder)
 
@@ -1181,6 +1169,7 @@ Public Class frmPersonalFileStorage
                 If My.Computer.FileSystem.FileExists(SaveFileName) Then
                     Dim fsize As Long = My.Computer.FileSystem.GetFileInfo(SaveFileName).Length
                     If fsize = dFileSize Then
+                        SkippedFileCount += 1
                         bgwDownloadFolder.ReportProgress(i + 1, "Skipping existing file.")
                         Continue For
                     Else
@@ -1208,7 +1197,12 @@ Public Class frmPersonalFileStorage
                     request.DownloadWithStatus(mStream)
 
                     If dDownloadStatus = DownloadStatus.Completed Then
+                        DownloadedFileCount += 1
                         mStream.WriteTo(fStream)
+                    End If
+
+                    If dDownloadStatus = DownloadStatus.Failed Then
+                        FailedFileCount += 1
                     End If
 
                     fStream.Close()
@@ -1221,7 +1215,6 @@ Public Class frmPersonalFileStorage
             ShowErrorMessage(ex)
         End Try
     End Sub
-
 
     Private Sub FolderDownload_ProgressChanged(Progress As IDownloadProgress)
 
@@ -1255,6 +1248,22 @@ Public Class frmPersonalFileStorage
         If TotalFileCount = 0 Then
             MessageBoxEx.Show("No files in the folder")
             Exit Sub
+        End If
+
+        If TotalFileCount = 1 And DownloadedFileCount = 1 Then
+            ShowDesktopAlert("1 File downloaded successfully.")
+        End If
+
+        If TotalFileCount = 1 And SkippedFileCount = 1 Then
+            ShowDesktopAlert("1 File skipped as it already exists.")
+        End If
+
+        If TotalFileCount = 1 And FailedFileCount = 1 Then
+            ShowDesktopAlert("File download failed.")
+        End If
+
+        If TotalFileCount > 1 Then
+            ShowDesktopAlert(DownloadedFileCount & IIf(DownloadedFileCount = 1, " file ", " files ") & "downloaded." & vbNewLine & SkippedFileCount & IIf(SkippedFileCount = 1, " file ", " files ") & "skipped." & vbNewLine & FailedFileCount & IIf(FailedFileCount = 1, " file ", " files ") & "failed.")
         End If
 
         Dim folder = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & SelectedFolderName
@@ -1725,8 +1734,8 @@ Public Class frmPersonalFileStorage
             Me.btnRenameCM.Visible = True
             Me.btnShareCM.Visible = True
             Me.btnRemoveCM.Visible = True
+            Me.btnDownloadCM.Visible = True
             If Not Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
-                Me.btnDownloadCM.Visible = True
                 Me.btnView.Visible = True
             End If
         End If
@@ -1741,5 +1750,31 @@ Public Class frmPersonalFileStorage
 
     End Sub
     
-   
+
+    Private Sub frmPersonalFileStorage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If blDownloadIsProgressing Then
+            On Error Resume Next
+            If MessageBoxEx.Show("File download is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                If bgwDownloadFile.IsBusy Then
+                    bgwDownloadFile.CancelAsync()
+                End If
+                If bgwDownloadFolder.IsBusy Then
+                    bgwDownloadFolder.CancelAsync()
+                End If
+            End If
+        End If
+
+        If blUploadIsProgressing Then
+            If MessageBoxEx.Show("File upload is in progress. Do you want to close the window?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
+                e.Cancel = True
+            Else
+                If bgwUploadFile.IsBusy Then
+                    bgwUploadFile.CancelAsync()
+                End If
+            End If
+        End If
+
+    End Sub
 End Class
