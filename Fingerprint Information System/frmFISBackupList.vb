@@ -973,6 +973,9 @@ Public Class frmFISBackupList
             Dim SelectedItems As ListView.SelectedListViewItemCollection
             SelectedItems = e.Argument
             TotalFileCount = SelectedItems.Count
+            DownloadedFileCount = 0
+            FailedFileCount = 0
+            SkippedFileCount = 0
 
             For i = 0 To TotalFileCount - 1
 
@@ -998,6 +1001,7 @@ Public Class frmFISBackupList
 
                 If My.Computer.FileSystem.FileExists(SaveFileName) Then
                     If blRedownload = False Then
+                        SkippedFileCount += 1
                         bgwDownloadFile.ReportProgress(i + 1, "Skipping existing file.")
                         Continue For
                     Else
@@ -1025,7 +1029,12 @@ Public Class frmFISBackupList
                 request.DownloadWithStatus(mStream)
 
                 If dDownloadStatus = DownloadStatus.Completed Then
+                    DownloadedFileCount += 1
                     mStream.WriteTo(fStream)
+                End If
+
+                If dDownloadStatus = DownloadStatus.Failed Then
+                    FailedFileCount += 1
                 End If
 
                 fStream.Close()
@@ -1066,11 +1075,10 @@ Public Class frmFISBackupList
 
         HideProgressControls()
         blDownloadIsProgressing = False
+        Me.Cursor = Cursors.Default
 
-        If dDownloadStatus = DownloadStatus.Completed Then
-            If TotalFileCount = 1 Then ShowDesktopAlert("File downloaded successfully.")
-            If TotalFileCount > 1 Then ShowDesktopAlert("Files downloaded successfully.")
-
+        If TotalFileCount = 1 And DownloadedFileCount = 1 Then
+            ShowDesktopAlert("File downloaded successfully.")
             If blViewFile Then
                 If My.Computer.FileSystem.FileExists(SaveFileName) Then
                     Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
@@ -1082,10 +1090,26 @@ Public Class frmFISBackupList
             End If
         End If
 
-        If dDownloadStatus = DownloadStatus.Failed Then
-            MessageBoxEx.Show("File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If TotalFileCount = 1 And SkippedFileCount = 1 Then
+            ShowDesktopAlert("File skipped as it already exists.")
+            If blViewFile Then
+                If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                    Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+                Else
+                    MessageBoxEx.Show("Cannot open file. File is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
+            End If
         End If
-        Me.Cursor = Cursors.Default
+
+        If TotalFileCount = 1 And FailedFileCount = 1 Then
+            ShowDesktopAlert("File download failed.")
+        End If
+
+        If TotalFileCount > 1 Then
+            ShowDesktopAlert(DownloadedFileCount & IIf(DownloadedFileCount = 1, " file ", " files ") & "downloaded." & vbNewLine & SkippedFileCount & IIf(SkippedFileCount = 1, " file ", " files ") & "skipped." & vbNewLine & FailedFileCount & IIf(FailedFileCount = 1, " file ", " files ") & "failed.")
+        End If
     End Sub
 
 #End Region
