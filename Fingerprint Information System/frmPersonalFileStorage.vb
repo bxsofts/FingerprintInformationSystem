@@ -44,6 +44,8 @@ Public Class frmPersonalFileStorage
     Dim ShowStatusText As Boolean
 
     Dim blShowSharedWithMe As Boolean = False
+    Dim blViewFile As Boolean = False
+
     Public Enum ImageIndex
         Folder = 0
         GoogleDrive = 1
@@ -355,7 +357,7 @@ Public Class frmPersonalFileStorage
     End Sub
 
 
-    Private Sub ListViewEx1_DoubleClick(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick
+    Private Sub ListViewEx1_DoubleClick(sender As Object, e As EventArgs) Handles listViewEx1.DoubleClick, btnView.Click
 
 
         If Me.listViewEx1.SelectedItems.Count = 0 Then
@@ -373,10 +375,12 @@ Public Class frmPersonalFileStorage
 
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex > 2 And Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "" And Me.listViewEx1.SelectedItems(0).SubItems(2).Text <> "0B" Then
-            If MessageBoxEx.Show("Do you want to download the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            If MessageBoxEx.Show("Do you want to download and view the selected file?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+                blViewFile = True
                 DownloadSelectedFile()
                 Exit Sub
             Else
+                blViewFile = False
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -658,28 +662,24 @@ Public Class frmPersonalFileStorage
         OpenFileDialog1.AutoUpgradeEnabled = True
         OpenFileDialog1.RestoreDirectory = True 'remember last directory
 
+       Dim FileList() As String
+
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
             Application.DoEvents() 'first close the selection window
-            uSelectedFile = OpenFileDialog1.FileName
+            FileList = OpenFileDialog1.FileNames
         Else
             Exit Sub
         End If
 
-        For i = 0 To Me.listViewEx1.Items.Count - 1
-            If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
-                MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-        Next
-
-        dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
-        dFormatedFileSize = CalculateFileSize(dFileSize)
-
-        If dFileSize >= 25 * 1048576 Then '25MB
-            If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                Exit Sub
-            End If
+        If FileList.Length = 1 Then
+            For i = 0 To Me.listViewEx1.Items.Count - 1
+                If FileAlreadyExists(FileList(0)) Then
+                    MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(FileList(0)).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Exit Sub
+                End If
+            Next
         End If
+       
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -689,49 +689,79 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-        ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
-        System.Threading.Thread.Sleep(500)
-        bgwUploadFile.RunWorkerAsync(uSelectedFile)
+        ShowProgressControls("0", "Uploading Files...", eCircularProgressType.Line)
+        System.Threading.Thread.Sleep(200)
+        bgwUploadFile.RunWorkerAsync(FileList)
 
     End Sub
 
+    Private Function FileAlreadyExists(sFileName As String) As Boolean
+        For i = 0 To Me.listViewEx1.Items.Count - 1
+            If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(sFileName).Name.ToLower Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
     Private Sub bgwUploadFile_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadFile.DoWork
         Try
             blUploadIsProgressing = True
 
-            Dim body As New Google.Apis.Drive.v3.Data.File()
-            body.Name = My.Computer.FileSystem.GetFileInfo(e.Argument).Name
-            Dim extension As String = My.Computer.FileSystem.GetFileInfo(e.Argument).Extension
-            body.MimeType = "files/" & extension.Replace(".", "")
+            Dim FileList() As String = e.Argument
+            TotalFileCount = FileList.Count
+
+            For i = 0 To TotalFileCount - 1
+
+                Dim SelectedFile As String = FileList(i)
+                Dim SelectedFileName As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Name
+
+                If FileAlreadyExists(SelectedFileName) Then
+                    bgwUploadFile.ReportProgress(i + 1, "Skipping existing file.")
+                    Continue For
+                End If
+
+                dFileSize = My.Computer.FileSystem.GetFileInfo(SelectedFile).Length
+                dFormatedFileSize = CalculateFileSize(dFileSize)
+
+                Dim body As New Google.Apis.Drive.v3.Data.File()
+                body.Name = SelectedFileName
+                Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
+                body.MimeType = "files/" & extension.Replace(".", "")
 
 
-            Dim parentlist As New List(Of String)
-            parentlist.Add(CurrentFolderID)
-            body.Parents = parentlist
+                Dim parentlist As New List(Of String)
+                parentlist.Add(CurrentFolderID)
+                body.Parents = parentlist
 
-            Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(e.Argument)
-            Dim Stream As New System.IO.MemoryStream(ByteArray)
+                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
+                Dim Stream As New System.IO.MemoryStream(ByteArray)
 
-            Dim UploadRequest As FilesResource.CreateMediaUpload = GDService.Files.Create(body, Stream, body.MimeType)
-            UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                uBytesUploaded = 0
+                bgwUploadFile.ReportProgress(i + 1, SelectedFileName)
+                bgwUploadFile.ReportProgress(i + 1, uBytesUploaded)
 
-            AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+                Dim UploadRequest As FilesResource.CreateMediaUpload = GDService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
 
-            UploadRequest.Fields = "id, name, mimeType, size, modifiedTime"
-            UploadRequest.Upload()
+                AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
 
-            If uUploadStatus = UploadStatus.Completed Then
-                Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
-                Dim item As ListViewItem = New ListViewItem(file.Name)
-                Dim modifiedtime As DateTime = file.ModifiedTime
-                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
-                item.SubItems.Add(CalculateFileSize(file.Size))
-                item.SubItems.Add(file.Id)
-                item.ImageIndex = GetImageIndex(extension)
-                bgwUploadFile.ReportProgress(100, item)
-            End If
+                UploadRequest.Fields = "id, name, mimeType, size, modifiedTime"
+                UploadRequest.Upload()
 
-            Stream.Close()
+                If uUploadStatus = UploadStatus.Completed Then
+                    Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
+                    Dim item As ListViewItem = New ListViewItem(file.Name)
+                    Dim modifiedtime As DateTime = file.ModifiedTime
+                    item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+                    item.SubItems.Add(CalculateFileSize(file.Size))
+                    item.SubItems.Add(file.Id)
+                    item.ImageIndex = GetImageIndex(extension)
+                    bgwUploadFile.ReportProgress(100, item)
+                End If
+
+                Stream.Close()
+            Next
+            
 
             If uUploadStatus = UploadStatus.Completed Then
                 GetDriveUsageDetails()
@@ -752,8 +782,16 @@ Public Class frmPersonalFileStorage
     End Sub
 
     Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
-        CircularProgress1.ProgressText = e.ProgressPercentage
-        lblProgressStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+
+        If TypeOf e.UserState Is String Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalFileCount
+            lblProgressStatus.Text = e.UserState
+        End If
+
+        If TypeOf e.UserState Is Long Then
+            lblProgressStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+        End If
+
         If TypeOf e.UserState Is ListViewItem Then
             listViewEx1.Items.Add(e.UserState)
         End If
@@ -768,7 +806,8 @@ Public Class frmPersonalFileStorage
                 Me.listViewEx1.SelectedItems.Clear()
                 Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
             End If
-            ShowDesktopAlert("File uploaded successfully.")
+            If TotalFileCount = 1 Then ShowDesktopAlert("File uploaded successfully.")
+            If TotalFileCount > 1 Then ShowDesktopAlert("Files uploaded successfully.")
         End If
 
         If dDownloadStatus = DownloadStatus.Failed Then
@@ -799,39 +838,20 @@ Public Class frmPersonalFileStorage
 
             Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
 
-            If filePaths.Count > 1 Then
-                MessageBoxEx.Show("Drop only one file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            Dim filepath As String = filePaths(0)
-
-            If My.Computer.FileSystem.DirectoryExists(filepath) Then
-                MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            If Not My.Computer.FileSystem.FileExists(filepath) Then
-                MessageBoxEx.Show("Dropped file does not exist.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
-            uSelectedFile = filepath
-
-            For i = 0 To Me.listViewEx1.Items.Count - 1
-                If Me.listViewEx1.Items(i).Text.ToLower = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name.ToLower Then
-                    MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(uSelectedFile).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+             For i = 0 To filePaths.Length - 1
+                If My.Computer.FileSystem.DirectoryExists(filePaths(i)) Then
+                    MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Exit Sub
                 End If
             Next
 
-            dFileSize = My.Computer.FileSystem.GetFileInfo(uSelectedFile).Length
-            dFormatedFileSize = CalculateFileSize(dFileSize)
-
-            If dFileSize >= 25 * 1048576 Then '25MB
-                If MessageBoxEx.Show("File size is larger than 25MB. The upload may take time. Do you want to continue?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then
-                    Exit Sub
-                End If
+            If filePaths.Length = 1 Then
+                For i = 0 To Me.listViewEx1.Items.Count - 1
+                    If FileAlreadyExists(filePaths(0)) Then
+                        MessageBoxEx.Show("File '" & My.Computer.FileSystem.GetFileInfo(filePaths(0)).Name & "' already exists.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Exit Sub
+                    End If
+                Next
             End If
 
             Me.Cursor = Cursors.WaitCursor
@@ -844,7 +864,7 @@ Public Class frmPersonalFileStorage
 
             ShowProgressControls("0", "Uploading File...", eCircularProgressType.Line)
             System.Threading.Thread.Sleep(200)
-            bgwUploadFile.RunWorkerAsync(uSelectedFile)
+            bgwUploadFile.RunWorkerAsync(filePaths)
 
         End If
     End Sub
@@ -863,6 +883,7 @@ Public Class frmPersonalFileStorage
 
     Private Sub DownloadSelectedFile() Handles btnDownloadFile.Click, btnDownloadCM.Click
 
+        blViewFile = False
 
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
@@ -879,10 +900,6 @@ Public Class frmPersonalFileStorage
             Exit Sub
         End If
 
-        If Me.listViewEx1.SelectedItems.Count > 1 Then
-            DevComponents.DotNetBar.MessageBoxEx.Show("Select single file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
 
         If Me.listViewEx1.SelectedItems(0).Text.StartsWith("\") Then
             MessageBoxEx.Show("No files selected.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -890,7 +907,11 @@ Public Class frmPersonalFileStorage
         End If
 
         If Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
-            ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
+            Dim r = MessageBoxEx.Show("Do you want to download files in the selected folder?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If r <> Windows.Forms.DialogResult.Yes Then
+                Exit Sub
+            End If
+            ShowProgressControls("0", "Downloading Folder...", eCircularProgressType.Line)
             SelectedFolderName = Me.listViewEx1.SelectedItems(0).Text
             bgwDownloadFolder.RunWorkerAsync(Me.listViewEx1.SelectedItems(0).SubItems(3).Text) ' folderid
             Exit Sub
@@ -899,6 +920,19 @@ Public Class frmPersonalFileStorage
         If Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "" Or Me.listViewEx1.SelectedItems(0).SubItems(2).Text = "0B" Then
             MessageBoxEx.Show("Cannot download zero size file.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
+        End If
+
+        If Me.listViewEx1.SelectedItems.Count = 1 Then
+            SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & Me.listViewEx1.SelectedItems(0).SubItems(0).Text
+
+            If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                Dim r = MessageBoxEx.Show("Selected file already exists in 'My Documents' folder. Do you want to download it again?", strAppName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
+                If r = Windows.Forms.DialogResult.Cancel Then Exit Sub
+                If r = Windows.Forms.DialogResult.No Then
+                    Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
+                    Exit Sub
+                End If
+            End If
         End If
 
         Me.Cursor = Cursors.WaitCursor
@@ -911,10 +945,7 @@ Public Class frmPersonalFileStorage
 
         ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
-        Dim fname As String = Me.listViewEx1.SelectedItems(0).Text
-        SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
-
-        bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems(0).SubItems(3).Text) ' fileid
+        bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems)
     End Sub
 
     Private Sub bgwDownload_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadFile.DoWork
@@ -923,28 +954,46 @@ Public Class frmPersonalFileStorage
         Try
             blDownloadIsProgressing = True
 
-            Dim request = GDService.Files.Get(e.Argument)
-            request.Fields = "size"
-            Dim file = request.Execute
+            Dim SelectedItems As ListView.SelectedListViewItemCollection
+            SelectedItems = e.Argument
+            TotalFileCount = SelectedItems.Count
 
-            dFileSize = file.Size
-            dFormatedFileSize = CalculateFileSize(dFileSize)
+            For i = 0 To TotalFileCount - 1
+                Dim fname As String = SelectedItems(i).SubItems(0).Text
+                Dim fid As String = SelectedItems(i).SubItems(3).Text
 
-            Dim fStream = New System.IO.FileStream(SaveFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
-            Dim mStream = New System.IO.MemoryStream
+                SaveFileName = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & fname
 
-            Dim m = request.MediaDownloader
-            m.ChunkSize = 256 * 1024
+                If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                    bgwDownloadFile.ReportProgress(i + 1, "Skipping existing file.")
+                End If
 
-            AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
-            request.DownloadWithStatus(mStream)
+                Dim request = GDService.Files.Get(fid)
+                request.Fields = "size"
+                Dim file = request.Execute
 
-            If dDownloadStatus = DownloadStatus.Completed Then
-                mStream.WriteTo(fStream)
-            End If
+                dFileSize = file.Size
+                dFormatedFileSize = CalculateFileSize(dFileSize)
+                dBytesDownloaded = 0
+                bgwDownloadFile.ReportProgress(i + 1, fname)
+                bgwDownloadFile.ReportProgress(i + 1, dBytesDownloaded)
 
-            fStream.Close()
-            mStream.Close()
+                Dim fStream = New System.IO.FileStream(SaveFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+                m.ChunkSize = 256 * 1024
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+            Next
 
         Catch ex As Exception
             blDownloadIsProgressing = False
@@ -965,8 +1014,15 @@ Public Class frmPersonalFileStorage
 
     Private Sub bgwDownload_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadFile.ProgressChanged
 
-        CircularProgress1.ProgressText = e.ProgressPercentage
-        lblProgressStatus.Text = CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
+        If TypeOf e.UserState Is String Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalFileCount
+            lblProgressStatus.Text = e.UserState
+        End If
+
+        If TypeOf e.UserState Is Long Then
+            lblProgressStatus.Text = CalculateFileSize(dBytesDownloaded) & "/" & dFormatedFileSize
+        End If
+
     End Sub
     Private Sub bgwDownload_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadFile.RunWorkerCompleted
 
@@ -974,8 +1030,19 @@ Public Class frmPersonalFileStorage
         blDownloadIsProgressing = False
 
         If dDownloadStatus = DownloadStatus.Completed Then
-            MessageBoxEx.Show("File downloaded successfully.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
+            If TotalFileCount = 1 Then ShowDesktopAlert("File downloaded successfully.")
+            If TotalFileCount > 1 Then ShowDesktopAlert("Files downloaded successfully.")
+
+            If blViewFile Then
+                If My.Computer.FileSystem.FileExists(SaveFileName) Then
+                    Shell("explorer.exe " & SaveFileName, AppWinStyle.MaximizedFocus)
+                Else
+                    MessageBoxEx.Show("Cannot open file. File is missing", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Else
+                Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
+            End If
+
         End If
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1556,9 +1623,11 @@ Public Class frmPersonalFileStorage
         Me.btnNewFolderCM.Visible = False
         Me.btnUploadCM.Visible = False
         Me.btnDownloadCM.Visible = False
+        Me.btnView.Visible = False
         Me.btnRemoveCM.Visible = False
         Me.btnRenameCM.Visible = False
         Me.btnShareCM.Visible = False
+
 
         If Me.listViewEx1.Items.Count = 0 Or Me.listViewEx1.SelectedItems.Count = 0 Then
             Me.btnRefreshCM.Visible = True
@@ -1578,6 +1647,7 @@ Public Class frmPersonalFileStorage
             Me.btnRemoveCM.Visible = True
             If Not Me.listViewEx1.SelectedItems(0).ImageIndex = ImageIndex.Folder Then
                 Me.btnDownloadCM.Visible = True
+                Me.btnView.Visible = True
             End If
         End If
 

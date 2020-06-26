@@ -34,6 +34,14 @@ Partial Class frmPersonalFileStorage
         Me.SideNav1 = New DevComponents.DotNetBar.Controls.SideNav()
         Me.SideNavPanel1 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.ContextMenuBar1 = New DevComponents.DotNetBar.ContextMenuBar()
+        Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRefreshCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnNewFolderCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnUploadCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnDownloadCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRenameCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnShareCM = New DevComponents.DotNetBar.ButtonItem()
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.FileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UploadedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -41,14 +49,6 @@ Partial Class frmPersonalFileStorage
         Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FileOwner = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.ButtonItem1 = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRefreshCM = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnNewFolderCM = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnUploadCM = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnDownloadCM = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnShareCM = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRenameCM = New DevComponents.DotNetBar.ButtonItem()
-        Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.SideNavPanel2 = New DevComponents.DotNetBar.Controls.SideNavPanel()
@@ -76,6 +76,7 @@ Partial Class frmPersonalFileStorage
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFile = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadFolder = New System.ComponentModel.BackgroundWorker()
+        Me.btnView = New DevComponents.DotNetBar.ButtonItem()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -95,6 +96,7 @@ Partial Class frmPersonalFileStorage
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        Me.OpenFileDialog1.Multiselect = True
         '
         'bgwUploadFile
         '
@@ -213,9 +215,9 @@ Partial Class frmPersonalFileStorage
         Me.SideNavPanel1.Controls.Add(Me.lblProgressStatus)
         Me.SideNavPanel1.Controls.Add(Me.listViewEx1)
         Me.SideNavPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanel1.Location = New System.Drawing.Point(151, 31)
+        Me.SideNavPanel1.Location = New System.Drawing.Point(147, 31)
         Me.SideNavPanel1.Name = "SideNavPanel1"
-        Me.SideNavPanel1.Size = New System.Drawing.Size(798, 459)
+        Me.SideNavPanel1.Size = New System.Drawing.Size(802, 459)
         Me.SideNavPanel1.TabIndex = 2
         '
         'ContextMenuBar1
@@ -227,12 +229,65 @@ Partial Class frmPersonalFileStorage
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(362, 216)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 25)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ContextMenuBar1.TabIndex = 6
         Me.ContextMenuBar1.TabStop = False
         Me.ContextMenuBar1.Text = "ContextMenuBar1"
+        '
+        'ButtonItem1
+        '
+        Me.ButtonItem1.AutoExpandOnClick = True
+        Me.ButtonItem1.Name = "ButtonItem1"
+        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRefreshCM, Me.btnNewFolderCM, Me.btnUploadCM, Me.btnDownloadCM, Me.btnView, Me.btnRenameCM, Me.btnRemoveCM, Me.btnShareCM})
+        Me.ButtonItem1.Text = "ButtonItem1"
+        '
+        'btnRefreshCM
+        '
+        Me.btnRefreshCM.Image = CType(resources.GetObject("btnRefreshCM.Image"), System.Drawing.Image)
+        Me.btnRefreshCM.Name = "btnRefreshCM"
+        Me.btnRefreshCM.Text = "Refresh"
+        '
+        'btnNewFolderCM
+        '
+        Me.btnNewFolderCM.BeginGroup = True
+        Me.btnNewFolderCM.Image = CType(resources.GetObject("btnNewFolderCM.Image"), System.Drawing.Image)
+        Me.btnNewFolderCM.Name = "btnNewFolderCM"
+        Me.btnNewFolderCM.Text = "New Folder"
+        '
+        'btnUploadCM
+        '
+        Me.btnUploadCM.BeginGroup = True
+        Me.btnUploadCM.Image = CType(resources.GetObject("btnUploadCM.Image"), System.Drawing.Image)
+        Me.btnUploadCM.Name = "btnUploadCM"
+        Me.btnUploadCM.Text = "Upload"
+        '
+        'btnDownloadCM
+        '
+        Me.btnDownloadCM.Image = CType(resources.GetObject("btnDownloadCM.Image"), System.Drawing.Image)
+        Me.btnDownloadCM.Name = "btnDownloadCM"
+        Me.btnDownloadCM.Text = "Download"
+        '
+        'btnRenameCM
+        '
+        Me.btnRenameCM.BeginGroup = True
+        Me.btnRenameCM.Image = CType(resources.GetObject("btnRenameCM.Image"), System.Drawing.Image)
+        Me.btnRenameCM.Name = "btnRenameCM"
+        Me.btnRenameCM.Text = "Rename"
+        '
+        'btnRemoveCM
+        '
+        Me.btnRemoveCM.Image = CType(resources.GetObject("btnRemoveCM.Image"), System.Drawing.Image)
+        Me.btnRemoveCM.Name = "btnRemoveCM"
+        Me.btnRemoveCM.Text = "Remove"
+        '
+        'btnShareCM
+        '
+        Me.btnShareCM.BeginGroup = True
+        Me.btnShareCM.Image = CType(resources.GetObject("btnShareCM.Image"), System.Drawing.Image)
+        Me.btnShareCM.Name = "btnShareCM"
+        Me.btnShareCM.Text = "Share"
         '
         'listViewEx1
         '
@@ -257,7 +312,7 @@ Partial Class frmPersonalFileStorage
         Me.listViewEx1.Location = New System.Drawing.Point(0, 0)
         Me.listViewEx1.Name = "listViewEx1"
         Me.listViewEx1.ShowItemToolTips = True
-        Me.listViewEx1.Size = New System.Drawing.Size(798, 459)
+        Me.listViewEx1.Size = New System.Drawing.Size(802, 459)
         Me.listViewEx1.SmallImageList = Me.ImageList1
         Me.listViewEx1.TabIndex = 0
         Me.listViewEx1.UseCompatibleStateImageBehavior = False
@@ -305,59 +360,6 @@ Partial Class frmPersonalFileStorage
         Me.ImageList1.Images.SetKeyName(10, "jpeg.png")
         Me.ImageList1.Images.SetKeyName(11, "rar.png")
         Me.ImageList1.Images.SetKeyName(12, "BlankFile.png")
-        '
-        'ButtonItem1
-        '
-        Me.ButtonItem1.AutoExpandOnClick = True
-        Me.ButtonItem1.Name = "ButtonItem1"
-        Me.ButtonItem1.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnRefreshCM, Me.btnNewFolderCM, Me.btnUploadCM, Me.btnDownloadCM, Me.btnRenameCM, Me.btnRemoveCM, Me.btnShareCM})
-        Me.ButtonItem1.Text = "ButtonItem1"
-        '
-        'btnRefreshCM
-        '
-        Me.btnRefreshCM.Image = CType(resources.GetObject("btnRefreshCM.Image"), System.Drawing.Image)
-        Me.btnRefreshCM.Name = "btnRefreshCM"
-        Me.btnRefreshCM.Text = "Refresh"
-        '
-        'btnNewFolderCM
-        '
-        Me.btnNewFolderCM.BeginGroup = True
-        Me.btnNewFolderCM.Image = CType(resources.GetObject("btnNewFolderCM.Image"), System.Drawing.Image)
-        Me.btnNewFolderCM.Name = "btnNewFolderCM"
-        Me.btnNewFolderCM.Text = "New Folder"
-        '
-        'btnUploadCM
-        '
-        Me.btnUploadCM.BeginGroup = True
-        Me.btnUploadCM.Image = CType(resources.GetObject("btnUploadCM.Image"), System.Drawing.Image)
-        Me.btnUploadCM.Name = "btnUploadCM"
-        Me.btnUploadCM.Text = "Upload"
-        '
-        'btnDownloadCM
-        '
-        Me.btnDownloadCM.Image = CType(resources.GetObject("btnDownloadCM.Image"), System.Drawing.Image)
-        Me.btnDownloadCM.Name = "btnDownloadCM"
-        Me.btnDownloadCM.Text = "Download"
-        '
-        'btnShareCM
-        '
-        Me.btnShareCM.BeginGroup = True
-        Me.btnShareCM.Image = CType(resources.GetObject("btnShareCM.Image"), System.Drawing.Image)
-        Me.btnShareCM.Name = "btnShareCM"
-        Me.btnShareCM.Text = "Share"
-        '
-        'btnRenameCM
-        '
-        Me.btnRenameCM.BeginGroup = True
-        Me.btnRenameCM.Image = CType(resources.GetObject("btnRenameCM.Image"), System.Drawing.Image)
-        Me.btnRenameCM.Name = "btnRenameCM"
-        Me.btnRenameCM.Text = "Rename"
-        '
-        'btnRemoveCM
-        '
-        Me.btnRemoveCM.Image = CType(resources.GetObject("btnRemoveCM.Image"), System.Drawing.Image)
-        Me.btnRemoveCM.Name = "btnRemoveCM"
-        Me.btnRemoveCM.Text = "Remove"
         '
         'CircularProgress1
         '
@@ -634,6 +636,12 @@ Partial Class frmPersonalFileStorage
         Me.bgwDownloadFolder.WorkerReportsProgress = True
         Me.bgwDownloadFolder.WorkerSupportsCancellation = True
         '
+        'btnView
+        '
+        Me.btnView.Image = CType(resources.GetObject("btnView.Image"), System.Drawing.Image)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Text = "View"
+        '
         'frmPersonalFileStorage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -715,4 +723,5 @@ Partial Class frmPersonalFileStorage
     Friend WithEvents btnRenameCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnRemoveCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnShareCM As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnView As DevComponents.DotNetBar.ButtonItem
 End Class

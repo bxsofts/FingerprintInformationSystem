@@ -613,7 +613,7 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        Me.lblProgressStatus.TextAlignment = StringAlignment.Near
+
         ShowProgressControls("0", "Uploading Files...", eCircularProgressType.Line)
         System.Threading.Thread.Sleep(200)
         bgwUploadFile.RunWorkerAsync(FileList)
@@ -670,10 +670,8 @@ Public Class frmFISBackupList
                 Stream.Close()
             Next
             
+            GetDriveUsageDetails()
 
-            If uUploadStatus = UploadStatus.Completed Then
-                GetDriveUsageDetails()
-            End If
         Catch ex As Exception
             blUploadIsProgressing = False
             Me.Cursor = Cursors.Default
@@ -713,7 +711,6 @@ Public Class frmFISBackupList
         If uUploadStatus = UploadStatus.Failed Then
             MessageBoxEx.Show("File Upload failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
-        Me.lblProgressStatus.TextAlignment = StringAlignment.Center
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -827,7 +824,6 @@ Public Class frmFISBackupList
             Exit Sub
         End If
 
-        Me.lblProgressStatus.TextAlignment = StringAlignment.Near
         ShowProgressControls("0", "Downloading File...", eCircularProgressType.Line)
 
         bgwDownloadFile.RunWorkerAsync(Me.listViewEx1.SelectedItems)
@@ -920,6 +916,7 @@ Public Class frmFISBackupList
 
         If dDownloadStatus = DownloadStatus.Completed Then
             ShowDesktopAlert("Files downloaded successfully.")
+            Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
         End If
         If dDownloadStatus = DownloadStatus.Failed Then
             MessageBoxEx.Show("File Download failed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
