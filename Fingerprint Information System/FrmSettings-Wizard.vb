@@ -27,11 +27,8 @@ Public Class FrmSettingsWizard
                         Dim InstallerFile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & NewInstallerName
                         If My.Computer.FileSystem.FileExists(InstallerFile) Then
                             Dim exemd5 As String = GetMD5(InstallerFile)
-                            Dim md5file As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & System.IO.Path.GetFileNameWithoutExtension(InstallerFile) & ".md5"
-                            If My.Computer.FileSystem.FileExists(md5file) Then
-                                Dim fileReader As System.IO.StreamReader = My.Computer.FileSystem.OpenTextFileReader(md5file)
-                                Dim remotemd5 As String = fileReader.ReadLine()
-                                If remotemd5 = exemd5 Then
+                            Dim remotemd5 As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "MD5", "")
+                            If remotemd5 = exemd5 Then
                                     System.Threading.Thread.Sleep(2000)
                                     frmSplashScreen.CloseForm()
                                     Application.DoEvents()
@@ -45,7 +42,7 @@ Public Class FrmSettingsWizard
                         End If
                     End If
                 End If
-            End If
+
 
 
             firstrun = CBool(My.Computer.Registry.GetValue(strGeneralSettingsPath, "FirstRun", 1))

@@ -13665,7 +13665,7 @@ errhandler:
             End If
 
             If CPD > 1 And CPU <> CPD And CPE <> CPD And CPR = 0 Then 'all eliminated or unfit
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. Hence no further action is pending with this office in this regard. This is for information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison and the remaining " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". Hence no further action is pending with this office in this regard. This is for information."
             End If
 
 
@@ -13691,7 +13691,7 @@ errhandler:
 
             If CPD > 0 And CPR <> CPD And CPR <> 0 And CPU <> 0 And CPE <> 0 And CPU <> 0 Then 'some remains
 
-                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & " and " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison. The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
+                BodyText = BodyText & " and developed " & ConvertNumberToWord(CPD) & " chance prints. " & Photographer & vbNewLine & vbTab & "Out of the " & ConvertNumberToWord(CPD) & " chance prints developed from the scene of crime, " & ConvertNumberToWord(CPU) & IIf(CPU = 1, " chance print is unfit", " chance prints are unfit") & " for comparison and " & ConvertNumberToWord(CPE) & IIf(CPE = 1, " chance print is eliminated as the finger impression of inmate", " chance prints are eliminated as the finger impressions of inmates") & ". The remaining " & ConvertNumberToWord(CPR) & IIf(CPR = 1, " chance print is ", " chance prints are ") & "under comparison and the result of comparison will be intimated at the earliest. This is for information."
             End If
 
             If CPD = 1 Then
@@ -18580,7 +18580,7 @@ errhandler:
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Installer File'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Installer File' and 'root' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -18609,10 +18609,11 @@ errhandler:
 
                 If u > 0 Then
                     Dim md5 As String = SplitText(1)
-                    Dim md5filename As String = System.IO.Path.GetFileNameWithoutExtension(InstallerFilePath) & ".md5"
-                    Dim md5file As System.IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & md5filename, False)
-                    md5file.WriteLine(md5)
-                    md5file.Close()
+                    '  Dim md5filename As String = System.IO.Path.GetFileNameWithoutExtension(InstallerFilePath) & ".md5"
+                    ' Dim md5file As System.IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & md5filename, False)
+                    ' md5file.WriteLine(md5)
+                    ' md5file.Close()
+                    My.Computer.Registry.SetValue(strGeneralSettingsPath, "MD5", md5, Microsoft.Win32.RegistryValueKind.String)
                 End If
 
                 Dim request = FISService.Files.Get(InstallerFileID)
