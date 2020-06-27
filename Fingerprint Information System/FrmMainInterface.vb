@@ -17854,7 +17854,7 @@ errhandler:
             Dim id As String = ""
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup' and 'root' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -17882,7 +17882,7 @@ errhandler:
             Dim internalfolderid As String = ""
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Internal File Transfer'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Internal File Transfer' and 'root' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -18711,7 +18711,7 @@ errhandler:
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..HolidayList'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..HolidayList' and 'root' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -18845,7 +18845,7 @@ errhandler:
             Dim parentid As String = ""
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Installer File'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Installer File' and 'root' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
@@ -18947,7 +18947,7 @@ errhandler:
 
             Dim List = FISService.Files.List()
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..VersionFolder'"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '..VersionFolder' and 'root' in parents"
             List.Fields = "files(id)"
 
             Dim Results = List.Execute
