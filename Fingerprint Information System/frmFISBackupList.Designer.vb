@@ -116,7 +116,7 @@ Partial Class frmFISBackupList
         Me.btnGetAdminPrivilege.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGetAdminPrivilege.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnGetAdminPrivilege.Image = CType(resources.GetObject("btnGetAdminPrivilege.Image"), System.Drawing.Image)
-        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(16, 423)
+        Me.btnGetAdminPrivilege.Location = New System.Drawing.Point(16, 421)
         Me.btnGetAdminPrivilege.Name = "btnGetAdminPrivilege"
         Me.btnGetAdminPrivilege.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlShiftS)
         Me.btnGetAdminPrivilege.Size = New System.Drawing.Size(131, 59)
@@ -141,7 +141,7 @@ Partial Class frmFISBackupList
         Me.btnRename.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRename.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRename.Image = CType(resources.GetObject("btnRename.Image"), System.Drawing.Image)
-        Me.btnRename.Location = New System.Drawing.Point(16, 293)
+        Me.btnRename.Location = New System.Drawing.Point(16, 291)
         Me.btnRename.Name = "btnRename"
         Me.btnRename.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F2)
         Me.btnRename.Size = New System.Drawing.Size(131, 59)
@@ -190,7 +190,7 @@ Partial Class frmFISBackupList
         Me.btnRemoveFile.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnRemoveFile.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveFile.Image = CType(resources.GetObject("btnRemoveFile.Image"), System.Drawing.Image)
-        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 358)
+        Me.btnRemoveFile.Location = New System.Drawing.Point(16, 356)
         Me.btnRemoveFile.Name = "btnRemoveFile"
         Me.btnRemoveFile.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Del)
         Me.btnRemoveFile.Size = New System.Drawing.Size(131, 59)
