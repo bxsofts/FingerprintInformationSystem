@@ -58,6 +58,7 @@ Partial Class frmFISBackupList
         Me.listViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.FileID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.UploadedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ViewedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
@@ -67,7 +68,6 @@ Partial Class frmFISBackupList
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
-        Me.ViewedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -428,6 +428,11 @@ Partial Class frmFISBackupList
         Me.UploadedBy.Text = "Uploaded By"
         Me.UploadedBy.Width = 280
         '
+        'ViewedDate
+        '
+        Me.ViewedDate.Text = "Last Viewed Date"
+        Me.ViewedDate.Width = 140
+        '
         'ImageList1
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -453,7 +458,7 @@ Partial Class frmFISBackupList
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(295, 295)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(574, 295)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(207, 18)
         Me.lblProgressStatus.TabIndex = 4
@@ -469,7 +474,7 @@ Partial Class frmFISBackupList
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(338, 170)
+        Me.CircularProgress1.Location = New System.Drawing.Point(617, 170)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -537,11 +542,6 @@ Partial Class frmFISBackupList
         '
         Me.bgwGetPassword.WorkerReportsProgress = True
         Me.bgwGetPassword.WorkerSupportsCancellation = True
-        '
-        'ViewedDate
-        '
-        Me.ViewedDate.Text = "Last Viewed Date"
-        Me.ViewedDate.Width = 140
         '
         'frmFISBackupList
         '

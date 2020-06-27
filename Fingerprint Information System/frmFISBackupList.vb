@@ -265,6 +265,10 @@ Public Class frmFISBackupList
                 item.SubItems.Add(Result.Id)
 
                 Dim Description As String = Result.Description
+                If Not SuperAdmin And Result.Name.Contains(strAppName) And Result.Name.ToLower.Contains(".exe") Then
+                    Description = "Admin"
+                End If
+
                 If SuperAdmin Then
                     item.SubItems.Add(Description)
                     If Not Result.ViewedByMeTime Is Nothing Then

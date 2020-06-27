@@ -19242,7 +19242,7 @@ errhandler:
 #End Region
 
 
-#Region "MOVE FOLDER TO NEW LOCATION"
+#Region "MOVE STATEMENT FOLDERS TO NEW LOCATION"
 
     Private Sub bgwCopyFolder_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCopyFolder.DoWork
         Try

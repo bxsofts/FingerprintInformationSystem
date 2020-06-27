@@ -53,6 +53,7 @@ Partial Class frmOnlineBackup
         Me.LastSOCNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DI = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TotalRecords = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.LastModification = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblProgressStatus = New DevComponents.DotNetBar.LabelX()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.Bar1 = New DevComponents.DotNetBar.Bar()
@@ -67,7 +68,6 @@ Partial Class frmOnlineBackup
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
         Me.bgwListAllFiles = New System.ComponentModel.BackgroundWorker()
-        Me.LastModification = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -265,7 +265,7 @@ Partial Class frmOnlineBackup
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(613, 71)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 25)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ContextMenuBar1.TabIndex = 6
@@ -398,6 +398,11 @@ Partial Class frmOnlineBackup
         Me.TotalRecords.Text = "Total Records"
         Me.TotalRecords.Width = 100
         '
+        'LastModification
+        '
+        Me.LastModification.Text = "Last Modification"
+        Me.LastModification.Width = 150
+        '
         'lblProgressStatus
         '
         Me.lblProgressStatus.BackColor = System.Drawing.Color.White
@@ -405,7 +410,7 @@ Partial Class frmOnlineBackup
         '
         '
         Me.lblProgressStatus.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblProgressStatus.Location = New System.Drawing.Point(382, 311)
+        Me.lblProgressStatus.Location = New System.Drawing.Point(453, 329)
         Me.lblProgressStatus.Name = "lblProgressStatus"
         Me.lblProgressStatus.Size = New System.Drawing.Size(199, 18)
         Me.lblProgressStatus.TabIndex = 2
@@ -420,7 +425,7 @@ Partial Class frmOnlineBackup
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(421, 186)
+        Me.CircularProgress1.Location = New System.Drawing.Point(492, 204)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
@@ -540,11 +545,6 @@ Partial Class frmOnlineBackup
         '
         Me.bgwListAllFiles.WorkerReportsProgress = True
         Me.bgwListAllFiles.WorkerSupportsCancellation = True
-        '
-        'LastModification
-        '
-        Me.LastModification.Text = "Last Modification"
-        Me.LastModification.Width = 150
         '
         'frmOnlineBackup
         '
