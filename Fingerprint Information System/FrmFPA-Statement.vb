@@ -1359,7 +1359,7 @@ Public Class frmFPAStatement
     Private Function ConvertFPMonth(FPMonth As String)
         Try
             FPMonth = "01 - " + FPMonth
-            Dim dt As DateTime = DateTime.ParseExact(FPMonth, "dd - MMM - yyyy", System.Globalization.CultureInfo.InvariantCulture)
+            Dim dt As Date = DateTime.ParseExact(FPMonth, "dd - MMM - yyyy", System.Globalization.CultureInfo.InvariantCulture)
             Dim x As String = dt.ToString("yyyyMM")
             Return Val(x)
         Catch ex As Exception

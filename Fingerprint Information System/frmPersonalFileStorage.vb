@@ -298,7 +298,7 @@ Public Class frmPersonalFileStorage
 
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
-                Dim modifiedtime As DateTime = Result.ModifiedTime
+                Dim modifiedtime As Date = Result.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
 
                 If Not Result.Size Is Nothing Then
@@ -610,7 +610,7 @@ Public Class frmPersonalFileStorage
             Dim item As ListViewItem
 
             item = New ListViewItem(NewDirectory.Name)
-            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Dim modifiedtime As Date = Result.ModifiedTime
             item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
             item.SubItems.Add("")
             item.SubItems.Add(Result.Id)
@@ -758,7 +758,7 @@ Public Class frmPersonalFileStorage
                 If uUploadStatus = UploadStatus.Completed Then
                     Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
                     Dim item As ListViewItem = New ListViewItem(file.Name)
-                    Dim modifiedtime As DateTime = file.ModifiedTime
+                    Dim modifiedtime As Date = file.ModifiedTime
                     item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                     item.SubItems.Add(CalculateFileSize(file.Size))
                     item.SubItems.Add(file.Id)
@@ -1543,7 +1543,7 @@ Public Class frmPersonalFileStorage
             Dim Result = List.Execute
 
             Me.listViewEx1.Items(SelectedFileIndex).Text = Result.Name
-            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Dim modifiedtime As Date = Result.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
             ShowDesktopAlert("Selected " & ftype & " renamed successfully.")
             Me.Cursor = Cursors.Default

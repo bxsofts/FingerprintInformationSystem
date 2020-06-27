@@ -159,7 +159,7 @@ Public Class frmOnlineBackup
 
             For Each Result In Results.Files
                 Dim item As ListViewItem = New ListViewItem(Result.Name) 'name
-                Dim modifiedtime As DateTime = Result.ModifiedTime
+                Dim modifiedtime As Date = Result.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")) 'backup time
                 item.SubItems.Add(Result.Id) 'id
                 TotalFileSize = TotalFileSize + Result.Size
@@ -518,7 +518,7 @@ Public Class frmOnlineBackup
             If uUploadStatus = UploadStatus.Completed Then
                 Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
                 Dim item As ListViewItem = New ListViewItem(BackupFileName)
-                Dim modifiedtime As DateTime = file.ModifiedTime
+                Dim modifiedtime As Date = file.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(CalculateFileSize(file.Size))
@@ -1271,7 +1271,7 @@ Public Class frmOnlineBackup
 
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
-                Dim modifiedtime As DateTime = Result.ModifiedTime
+                Dim modifiedtime As Date = Result.ModifiedTime
                 item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                 id = Result.Id
                 item.SubItems.Add(id)

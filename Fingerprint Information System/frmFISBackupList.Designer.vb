@@ -50,6 +50,7 @@ Partial Class frmFISBackupList
         Me.btnNewFolderCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnUploadCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnDownloadCM = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnViewFile = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRenameCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnRemoveCM = New DevComponents.DotNetBar.ButtonItem()
         Me.btnUpdateCM = New DevComponents.DotNetBar.ButtonItem()
@@ -66,7 +67,7 @@ Partial Class frmFISBackupList
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.bgwGetPassword = New System.ComponentModel.BackgroundWorker()
-        Me.btnViewFile = New DevComponents.DotNetBar.ButtonItem()
+        Me.ViewedDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelEx2.SuspendLayout()
         CType(Me.Bar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
@@ -314,7 +315,7 @@ Partial Class frmFISBackupList
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(592, 93)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 25)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ContextMenuBar1.TabIndex = 5
@@ -354,6 +355,13 @@ Partial Class frmFISBackupList
         Me.btnDownloadCM.Name = "btnDownloadCM"
         Me.btnDownloadCM.Text = "Download"
         '
+        'btnViewFile
+        '
+        Me.btnViewFile.BeginGroup = True
+        Me.btnViewFile.Image = CType(resources.GetObject("btnViewFile.Image"), System.Drawing.Image)
+        Me.btnViewFile.Name = "btnViewFile"
+        Me.btnViewFile.Text = "View"
+        '
         'btnRenameCM
         '
         Me.btnRenameCM.BeginGroup = True
@@ -392,7 +400,7 @@ Partial Class frmFISBackupList
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID, Me.UploadedBy})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.FileName, Me.UploadedDate, Me.FileSize, Me.FileID, Me.UploadedBy, Me.ViewedDate})
         Me.ContextMenuBar1.SetContextMenuEx(Me.listViewEx1, Me.ButtonItem1)
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -530,12 +538,10 @@ Partial Class frmFISBackupList
         Me.bgwGetPassword.WorkerReportsProgress = True
         Me.bgwGetPassword.WorkerSupportsCancellation = True
         '
-        'btnViewFile
+        'ViewedDate
         '
-        Me.btnViewFile.BeginGroup = True
-        Me.btnViewFile.Image = CType(resources.GetObject("btnViewFile.Image"), System.Drawing.Image)
-        Me.btnViewFile.Name = "btnViewFile"
-        Me.btnViewFile.Text = "View"
+        Me.ViewedDate.Text = "Last Viewed Date"
+        Me.ViewedDate.Width = 140
         '
         'frmFISBackupList
         '
@@ -603,4 +609,5 @@ Partial Class frmFISBackupList
     Friend WithEvents btnShareCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnRefreshCM As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents btnViewFile As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents ViewedDate As System.Windows.Forms.ColumnHeader
 End Class

@@ -198,7 +198,7 @@ Public Class frmFISBackupList
 
 
             List.PageSize = 1000 ' maximum file list
-            List.Fields = "files(id, name, mimeType, size, modifiedTime, description, createdTime)"
+            List.Fields = "files(id, name, mimeType, size, modifiedTime, description, createdTime, viewedByMeTime)"
             List.OrderBy = "folder, name" 'sorting order
 
             Dim Results As FileList = List.Execute
@@ -212,6 +212,7 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add("root")
                 item.SubItems.Add("")
+                item.SubItems.Add("")
                 item.ImageIndex = ImageIndex.GoogleDrive 'google drive icon
                 bgwListFiles.ReportProgress(1, item)
             Else
@@ -219,6 +220,7 @@ Public Class frmFISBackupList
                 item.SubItems.Add("")
                 item.SubItems.Add("")
                 item.SubItems.Add(FolderID)
+                item.SubItems.Add("")
                 item.SubItems.Add("")
 
                 If CurrentFolderName = "My Drive" Then
@@ -231,18 +233,19 @@ Public Class frmFISBackupList
             End If
 
             Dim ResultIsFolder As Boolean = False
+
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
 
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
-                    Dim createdtime As DateTime = Result.CreatedTime
+                    Dim createdtime As Date = Result.CreatedTime
                     item.SubItems.Add(createdtime.ToString("dd-MM-yyyy HH:mm:ss"))
 
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = ImageIndex.Folder
                     ResultIsFolder = True
                 Else
-                    Dim modifiedtime As DateTime = Result.ModifiedTime
+                    Dim modifiedtime As Date = Result.ModifiedTime
                     item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                     item.ImageIndex = GetImageIndex(My.Computer.FileSystem.GetFileInfo(Result.Name).Extension)
                     ResultIsFolder = False
@@ -264,6 +267,10 @@ Public Class frmFISBackupList
                 Dim Description As String = Result.Description
                 If SuperAdmin Then
                     item.SubItems.Add(Description)
+                    If Not Result.ViewedByMeTime Is Nothing Then
+                        Dim viewedtime As Date = Result.ViewedByMeTime
+                        item.SubItems.Add(viewedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+                    End If
                 Else
                     If Description = "FIS Backup Folder" Then
                         item.SubItems.Add(Result.Name)
@@ -602,7 +609,7 @@ Public Class frmFISBackupList
             Dim item As ListViewItem
 
             item = New ListViewItem(NewDirectory.Name)
-            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Dim modifiedtime As Date = Result.ModifiedTime
             item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
             item.SubItems.Add("")
             item.SubItems.Add(Result.Id)
@@ -762,7 +769,7 @@ Public Class frmFISBackupList
                 If uUploadStatus = UploadStatus.Completed Then
                     Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
                     Dim item As ListViewItem = New ListViewItem(file.Name)
-                    Dim modifiedtime As DateTime = file.ModifiedTime
+                    Dim modifiedtime As Date = file.ModifiedTime
                     item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                     item.SubItems.Add(CalculateFileSize(file.Size))
                     item.SubItems.Add(file.Id)
@@ -1077,7 +1084,7 @@ Public Class frmFISBackupList
                 fStream.Close()
                 mStream.Close()
             Next
-           
+
 
         Catch ex As Exception
             blDownloadIsProgressing = False
@@ -1406,7 +1413,7 @@ Public Class frmFISBackupList
             Dim Result = List.Execute
 
             Me.listViewEx1.Items(SelectedFileIndex).Text = Result.Name
-            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Dim modifiedtime As Date = Result.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
             ShowDesktopAlert("Selected " & ftype & " renamed successfully.")
@@ -1560,7 +1567,7 @@ Public Class frmFISBackupList
         If TypeOf e.UserState Is Google.Apis.Drive.v3.Data.File Then
             Dim file As Google.Apis.Drive.v3.Data.File = e.UserState
             Me.listViewEx1.Items(SelectedFileIndex).Text = file.Name
-            Dim modifiedtime As DateTime = file.ModifiedTime
+            Dim modifiedtime As Date = file.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(2).Text = CalculateFileSize(file.Size)
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = file.Description
@@ -1695,7 +1702,7 @@ Public Class frmFISBackupList
             Dim Result = List.Execute
 
             Me.listViewEx1.Items(SelectedFileIndex).Text = Result.Name
-            Dim modifiedtime As DateTime = Result.ModifiedTime
+            Dim modifiedtime As Date = Result.ModifiedTime
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(1).Text = modifiedtime.ToString("dd-MM-yyyy HH:mm:ss")
             Me.listViewEx1.Items(SelectedFileIndex).SubItems(4).Text = Result.Description
             MessageBoxEx.Show(Result.Name & " updated.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -1728,7 +1735,7 @@ Public Class frmFISBackupList
                 ShowProgressControls("", "", eCircularProgressType.Donut)
                 bgwListFiles.RunWorkerAsync(CurrentFolderID)
             End If
-        Exit Sub
+            Exit Sub
         End If
 
         If Not blPasswordFetched Then
@@ -1802,9 +1809,13 @@ Public Class frmFISBackupList
         Me.TitleText = "<b>FIS Online File List - " & Header & "</b>"
 
         If SuperAdmin Then
-            Me.listViewEx1.Columns(3).Width = 100
+            Me.listViewEx1.Columns(3).Width = 80
+            Me.listViewEx1.Columns(4).Width = 80
+            Me.listViewEx1.Columns(5).Width = 140
         Else
             Me.listViewEx1.Columns(3).Width = 0
+            Me.listViewEx1.Columns(4).Width = 280
+            Me.listViewEx1.Columns(5).Width = 0
         End If
 
         '   Me.CircularProgress1.Location = New Point((Me.listViewEx1.Width - Me.CircularProgress1.Width) / 2, Me.CircularProgress1.Location.Y)
