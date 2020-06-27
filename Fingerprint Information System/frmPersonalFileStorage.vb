@@ -265,7 +265,7 @@ Public Class frmPersonalFileStorage
 
 
             List.PageSize = 1000 ' maximum file list
-            List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, owners)"
+            List.Fields = "files(id, name, mimeType, size, modifiedTime, owners)"
             List.OrderBy = "folder, name" 'sorting order
 
             Dim Results As FileList = List.Execute
@@ -677,7 +677,7 @@ Public Class frmPersonalFileStorage
                 End If
             Next
         End If
-       
+
 
         Me.Cursor = Cursors.WaitCursor
 
@@ -773,7 +773,7 @@ Public Class frmPersonalFileStorage
 
                 Stream.Close()
             Next
-            
+
             GetDriveUsageDetails()
 
         Catch ex As Exception
@@ -814,7 +814,7 @@ Public Class frmPersonalFileStorage
 
         lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
 
-         If listViewEx1.Items.Count > 0 Then
+        If listViewEx1.Items.Count > 0 Then
             Me.listViewEx1.SelectedItems.Clear()
             Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
         End If
@@ -858,7 +858,7 @@ Public Class frmPersonalFileStorage
 
             Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
 
-             For i = 0 To filePaths.Length - 1
+            For i = 0 To filePaths.Length - 1
                 If My.Computer.FileSystem.DirectoryExists(filePaths(i)) Then
                     MessageBoxEx.Show("Folder drop is not allowed. Drop file only.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                     Exit Sub

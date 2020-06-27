@@ -129,6 +129,9 @@ Module modMain
     Public blFPAEditMode As Boolean = False
     Public strHoliday As String = ""
 
+    Public blUnreadIFTFileAvailable As Boolean = False
+    Public UserIFTFolderID As String = ""
+    Public dtIFTFolderViewTime As Date
     Public Sub CreateFolder(ByVal FolderName As String)
         If My.Computer.FileSystem.DirectoryExists(FolderName) = False Then 'if destination directory not exists
             My.Computer.FileSystem.CreateDirectory(FolderName) 'then create one!
@@ -629,7 +632,7 @@ Module modMain
 
             List.Q = "trashed = false and '" & parentid & "' in parents" ' list all files in parent folder. 
 
-            List.Fields = "nextPageToken, files(id, name, description)"
+            List.Fields = "files(id, name, description)"
             List.OrderBy = "folder, name" 'sorting order
 
             Results = List.Execute

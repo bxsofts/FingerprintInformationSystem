@@ -122,6 +122,8 @@ Public Class frmMainInterface
     Dim RemoteModifiedDate As String = ""
     Dim RemoteModificationDetails As String = ""
     Dim InstallerMD5 As String = ""
+
+    Dim UnreadIFTFileCount As Integer = 0
 #End Region
 
 
@@ -135,6 +137,8 @@ Public Class frmMainInterface
             ShowPleaseWaitForm()
         End If
         Me.cprDBAvailable.Visible = False
+        Me.cprUnreadFile.Visible = False
+
         ChangeCursor(Cursors.WaitCursor)
 
         frmSplashScreen.ShowProgressBar()
@@ -17870,11 +17874,12 @@ errhandler:
     End Function
 
 
-    Private Sub CreateInternalFileTransferFolder(FISService As DriveService)
+    Private Sub CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService As DriveService)
 
         Try
+            blUnreadIFTFileAvailable = False
 
-            Dim masterid As String = ""
+            Dim internalfolderid As String = ""
             Dim List = FISService.Files.List()
 
             List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Internal File Transfer'"
@@ -17886,33 +17891,51 @@ errhandler:
             If cnt = 0 Then
                 Exit Sub
             Else
-                masterid = Results.Files(0).Id
+                internalfolderid = Results.Files(0).Id
             End If
 
-            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FullDistrictName & "' and '" & masterid & "' in parents"
-            List.Fields = "files(id)"
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FullDistrictName & "' and '" & internalfolderid & "' in parents"
+
+            List.Fields = "files(id, viewedByMeTime)"
 
             Results = List.Execute
 
             cnt = Results.Files.Count
-            If cnt > 0 Then
-                Exit Sub ' do not create folder.
+
+            If cnt = 0 Then
+                Dim parentlist As New List(Of String)
+                parentlist.Add(internalfolderid)
+
+                Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                NewDirectory.Name = FullDistrictName
+                NewDirectory.Parents = parentlist
+                NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                NewDirectory.Description = FileOwner
+                Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
+                NewDirectory = request.Execute()
+            Else
+
+                If Results.Files(0).ViewedByMeTime Is Nothing Then
+                    dtIFTFolderViewTime = Now
+                    Exit Sub
+                Else
+                    UserIFTFolderID = Results.Files(0).Id
+                    dtIFTFolderViewTime = Results.Files(0).ViewedByMeTime
+                    Dim viewedtime As String = Results.Files(0).ViewedByMeTimeRaw
+
+                    List.Q = "trashed = false and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "'"
+                    List.Fields = "files(id, modifiedTime)"
+                    Results = List.Execute
+                    UnreadIFTFileCount = Results.Files.Count
+
+                    If UnreadIFTFileCount > 0 Then
+                        blUnreadIFTFileAvailable = True
+                    End If
+                End If
             End If
 
-
-            Dim parentlist As New List(Of String)
-            parentlist.Add(masterid)
-
-            Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
-            NewDirectory.Name = FullDistrictName
-            NewDirectory.Parents = parentlist
-            NewDirectory.MimeType = "application/vnd.google-apps.folder"
-            NewDirectory.Description = FileOwner
-            Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
-            NewDirectory = request.Execute()
-
         Catch ex As Exception
-            ' ShowErrorMessage(ex)
+            ShowErrorMessage(ex)
 
         End Try
     End Sub
@@ -17977,7 +18000,7 @@ errhandler:
         End If
     End Sub
 
-    Private Sub OnlineDatabaseBackup() Handles btnOnlineBackup.Click
+    Private Sub ShowOnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
         If FullDistrictName = "" Then
             MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -18435,7 +18458,7 @@ errhandler:
                 Dim r = MessageBoxEx.Show(message, strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
 
                 If r = Windows.Forms.DialogResult.OK Then
-                    OnlineDatabaseBackup()
+                    ShowOnlineDatabaseBackup()
                 End If
             End If
         Else
@@ -18670,7 +18693,7 @@ errhandler:
         Catch ex As Exception
 
         End Try
-       
+
     End Sub
 
     Private Sub DownloadHolidayList()
@@ -18769,7 +18792,7 @@ errhandler:
     End Sub
 
     Private Sub CheckForUpdatesManually() Handles btnCheckUpdate.Click
-       
+
         Me.Cursor = Cursors.WaitCursor
         ShowPleaseWaitForm()
         If InternetAvailable() = False Then
@@ -18814,7 +18837,7 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-            If FullDistrictName <> "" Then CreateInternalFileTransferFolder(FISService)
+            If FullDistrictName <> "" Then CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService)
 
             DownloadHolidayList()
 
@@ -18871,6 +18894,26 @@ errhandler:
     Private Sub bgwUpdateChecker_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUpdateChecker.ProgressChanged
         If e.ProgressPercentage = 100 And e.UserState = True Then 'auto update avaialable
             DownloadInstaller()
+        End If
+
+        If blUnreadIFTFileAvailable Then
+            Me.cprUnreadFile.Visible = True
+            Dim message As String = ""
+
+            If UnreadIFTFileCount = 1 Then
+                message = "You have 1 unread file in online 'Internal File Transfer' Folder. Press 'OK' to view the file."
+            End If
+
+            If UnreadIFTFileCount > 1 Then
+                message = "You have " & UnreadIFTFileCount & " unread files in online 'Internal File Transfer' Folder. Press 'OK' to view the files."
+            End If
+
+            Dim r = MessageBoxEx.Show(message, strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            If r = Windows.Forms.DialogResult.OK Then
+                ShowFISFileList()
+            Else
+                blUnreadIFTFileAvailable = False
+            End If
         End If
     End Sub
 
@@ -18953,7 +18996,7 @@ errhandler:
 
 
 #Region "FIS ONLINE FILE LIST"
-    Private Sub btnBasicOnlineFileTransfer_Click(sender As Object, e As EventArgs) Handles btnBasicOnlineFileTransfer.Click
+    Private Sub ShowFISFileList() Handles btnBasicOnlineFileTransfer.Click
         On Error Resume Next
 
         If FullDistrictName = "" Then

@@ -113,8 +113,15 @@ Public Class frmFISBackupList
             blDownloadIsProgressing = False
             blListIsLoading = False
 
-            '  ImageList1.Images.Add(GetFileIcon(".exe"))
-            bgwListFiles.RunWorkerAsync("root")
+            If blUnreadIFTFileAvailable Then
+                CurrentFolderPath = "\My Drive\Internal File Transfer\" & FullDistrictName
+                ParentFolderPath = "\My Drive\Internal File Transfer\"
+                CurrentFolderName = "Internal File Transfer"
+                bgwListFiles.RunWorkerAsync(UserIFTFolderID)
+            Else
+                bgwListFiles.RunWorkerAsync("root")
+            End If
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)
@@ -152,6 +159,11 @@ Public Class frmFISBackupList
                 If Me.listViewEx1.Items.Count = 1 Then Me.listViewEx1.Items(0).Font = New Font(Me.listViewEx1.Font, FontStyle.Bold)
             End If
 
+            If TypeOf e.UserState Is Boolean Then
+                frmMainInterface.cprUnreadFile.Visible = e.UserState
+            End If
+
+
         Catch ex As Exception
             ShowErrorMessage(ex)
             Me.Cursor = Cursors.Default
@@ -163,10 +175,19 @@ Public Class frmFISBackupList
         blListIsLoading = False
         lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
         ShortenCurrentFolderPath()
+        blUnreadIFTFileAvailable = False
     End Sub
 
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
         Try
+
+            If CurrentFolderPath = "\My Drive\Internal File Transfer\" & FullDistrictName Then
+                Dim tFile = New Google.Apis.Drive.v3.Data.File
+                tFile.ViewedByMeTime = Now
+                FISService.Files.Update(tFile, FolderID).Execute()
+                bgwListFiles.ReportProgress(1, False) 'hide unread file icon in main form
+            End If
+
             Dim List As FilesResource.ListRequest = FISService.Files.List()
 
             If ShowTrashedFiles Then
@@ -177,7 +198,7 @@ Public Class frmFISBackupList
 
 
             List.PageSize = 1000 ' maximum file list
-            List.Fields = "nextPageToken, files(id, name, mimeType, size, modifiedTime, description)"
+            List.Fields = "files(id, name, mimeType, size, modifiedTime, description, createdTime)"
             List.OrderBy = "folder, name" 'sorting order
 
             Dim Results As FileList = List.Execute
@@ -212,16 +233,22 @@ Public Class frmFISBackupList
             Dim ResultIsFolder As Boolean = False
             For Each Result In Results.Files
                 item = New ListViewItem(Result.Name)
-                Dim modifiedtime As DateTime = Result.ModifiedTime
-                item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
 
                 If Result.MimeType = "application/vnd.google-apps.folder" Then ' it is a folder
+                    Dim createdtime As DateTime = Result.CreatedTime
+                    item.SubItems.Add(createdtime.ToString("dd-MM-yyyy HH:mm:ss"))
+
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = ImageIndex.Folder
                     ResultIsFolder = True
                 Else
+                    Dim modifiedtime As DateTime = Result.ModifiedTime
+                    item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                     item.ImageIndex = GetImageIndex(My.Computer.FileSystem.GetFileInfo(Result.Name).Extension)
                     ResultIsFolder = False
+                    If blUnreadIFTFileAvailable Then
+                        If modifiedtime > dtIFTFolderViewTime Then item.ForeColor = Color.Red
+                    End If
                 End If
 
                 If item.ImageIndex > 2 Then

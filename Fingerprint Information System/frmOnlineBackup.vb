@@ -152,7 +152,7 @@ Public Class frmOnlineBackup
 
             List.Q = "mimeType = 'database/mdb' and '" & UserBackupFolderID & "' in parents"
             List.PageSize = 1000
-            List.Fields = "nextPageToken, files(id, name, modifiedTime, size, description)"
+            List.Fields = "files(id, name, modifiedTime, size, description)"
 
             Dim Results = List.Execute
             TotalFileSize = 0
