@@ -116,7 +116,7 @@ Public Class frmFISBackupList
             If blUnreadIFTFileAvailable Then
                 CurrentFolderPath = "\My Drive\Internal File Transfer\" & FullDistrictName
                 ParentFolderPath = "\My Drive\Internal File Transfer\"
-                CurrentFolderName = "Internal File Transfer"
+                CurrentFolderName = FullDistrictName
                 bgwListFiles.RunWorkerAsync(UserIFTFolderID)
             Else
                 bgwListFiles.RunWorkerAsync("root")
