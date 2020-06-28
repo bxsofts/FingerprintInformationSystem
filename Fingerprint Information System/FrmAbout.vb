@@ -20,7 +20,7 @@
 
        
 
-        Me.LabelVersion.Text = "<b>V " & My.Application.Info.Version.ToString.Substring(0, 4) & "</b><br/>Licenced To: " & ShortOfficeName & ", " & FullDistrictName
+        Me.LabelVersion.Text = "<b>V" & My.Application.Info.Version.ToString.Substring(0, 4) & "</b><br/>Licenced To: " & ShortOfficeName & ", " & FullDistrictName
 
     End Sub
 

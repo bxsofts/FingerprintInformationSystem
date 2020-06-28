@@ -11,7 +11,7 @@ Public NotInheritable Class frmSplashScreen
         Me.Height = 228
         Control.CheckForIllegalCrossThreadCalls = False
 
-        Me.lblVersion.Text = "<b>V " & My.Application.Info.Version.ToString.Substring(0, 4) & "</b><br/>Copyright © Baiju Xavior"
+        Me.lblVersion.Text = "<b>V" & My.Application.Info.Version.ToString.Substring(0, 4) & "</b><br/>Copyright © Baiju Xavior"
         Me.ProgressBarX1.Hide()
     End Sub
 

@@ -17815,7 +17815,7 @@ errhandler:
 #End Region
 
 
-#Region "ONLINE CREDENTIALS AND FOLDER ID"
+#Region "ONLINE CREDENTIALS AND FOLDER ID INTERNAL FILE TRANSFER FOLDER"
 
     Private Sub CopyCredentialFiles()
         Try
@@ -17914,12 +17914,14 @@ errhandler:
                 Dim request As FilesResource.CreateRequest = FISService.Files.Create(NewDirectory)
                 NewDirectory = request.Execute()
             Else
-
+                UserIFTFolderID = Results.Files(0).Id
                 If Results.Files(0).ViewedByMeTime Is Nothing Then
                     dtIFTFolderViewTime = Now
+                    Dim tFile = New Google.Apis.Drive.v3.Data.File
+                    tFile.ViewedByMeTime = dtIFTFolderViewTime
+                    FISService.Files.Update(tFile, UserIFTFolderID).Execute()
                     Exit Sub
                 Else
-                    UserIFTFolderID = Results.Files(0).Id
                     dtIFTFolderViewTime = Results.Files(0).ViewedByMeTime
                     Dim viewedtime As String = Results.Files(0).ViewedByMeTimeRaw
 

@@ -128,7 +128,6 @@ Public Class frmFISBackupList
         End Try
     End Sub
 
-
     Private Sub CreateServiceAndLoadData(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwListFiles.DoWork
         blListIsLoading = True
         Me.Cursor = Cursors.WaitCursor
