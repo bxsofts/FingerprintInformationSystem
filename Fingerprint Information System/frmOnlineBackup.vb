@@ -175,31 +175,33 @@ Public Class frmOnlineBackup
 
                     If u = 0 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add("") 'last modified date
                         item.SubItems.Add("") 'Last SOC No.
                         item.SubItems.Add("") 'Last SOC DI
                         item.SubItems.Add("") 'Total Records
+                        item.SubItems.Add("") ' Last Modiifcation Details
+                        item.SubItems.Add("") 'last modified date
                     End If
 
                     If u = 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add(SplitText(1)) 'last modified date
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
                         item.SubItems.Add("") 'Total Records
+                        item.SubItems.Add("") ' Last Modiifcation Details
+                        item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
                     If u = 4 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add(SplitText(1)) 'last modified date
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
                         item.SubItems.Add(SplitText(4)) 'Total Records
+                        item.SubItems.Add("") ' Last Modiifcation Details
+                        item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
                     If u = 5 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add(SplitText(1)) 'last modified date
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
                         item.SubItems.Add(SplitText(4)) 'Total Records
@@ -208,7 +210,8 @@ Public Class frmOnlineBackup
                         If RemoteModificationDetails = "NIL" Then
                             RemoteModificationDetails = ""
                         End If
-                        item.SubItems.Add(RemoteModificationDetails)
+                        item.SubItems.Add(RemoteModificationDetails) ' Last Modiifcation Details
+                        item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
                 End If
@@ -1282,7 +1285,6 @@ Public Class frmOnlineBackup
                     If blShowFileCount Then
                         item.SubItems.Add("")
                         item.SubItems.Add("")
-                        item.SubItems.Add("")
                         List.Q = "trashed = false and '" & id & "' in parents"
                         Results = List.Execute
                         filecount = Results.Files.Count
@@ -1303,24 +1305,27 @@ Public Class frmOnlineBackup
 
                     If u = 0 Then
                         If sAdmin Then
-                            item.SubItems.Add(Description)
-                            item.SubItems.Add("") 'last modified date
-                            item.SubItems.Add("") 'Last SOC No.
-                            item.SubItems.Add("") 'Last SOC DI
+                            item.SubItems.Add(Description) 'uploaded by
+                            item.SubItems.Add("") ' Last SOC No.
+                            item.SubItems.Add("") ' Last SOC DI
                             item.SubItems.Add("") 'Total Records
+                            item.SubItems.Add("") ' Last Modiifcation Details
+                            item.SubItems.Add("") 'last modified date
                         Else
                             If IsDate(Description) Or Description = "" Then
                                 item.SubItems.Add(CurrentFolderName)
-                                item.SubItems.Add("") 'last modified date
-                                item.SubItems.Add("") 'Last SOC No.
-                                item.SubItems.Add("") 'Last SOC DI
+                                item.SubItems.Add("") ' Last SOC No.
+                                item.SubItems.Add("") ' Last SOC DI
                                 item.SubItems.Add("") 'Total Records
+                                item.SubItems.Add("") ' Last Modiifcation Details
+                                item.SubItems.Add("") 'last modified date
                             Else
                                 item.SubItems.Add(SplitText(0)) 'uploaded by
-                                item.SubItems.Add("") 'last modified date
-                                item.SubItems.Add("") 'Last SOC No.
-                                item.SubItems.Add("") 'Last SOC DI
+                                item.SubItems.Add("") ' Last SOC No.
+                                item.SubItems.Add("") ' Last SOC DI
                                 item.SubItems.Add("") 'Total Records
+                                item.SubItems.Add("") ' Last Modiifcation Details
+                                item.SubItems.Add("") 'last modified date
                             End If
                         End If
 
@@ -1329,18 +1334,29 @@ Public Class frmOnlineBackup
 
                     If u = 3 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add(SplitText(1)) 'last modified date
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
                         item.SubItems.Add("") 'Total Records
+                        item.SubItems.Add("") ' Last Modiifcation Details
+                        item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
                     If u = 4 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
-                        item.SubItems.Add(SplitText(1)) 'last modified date
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
                         item.SubItems.Add(SplitText(4)) 'Total Records
+                        item.SubItems.Add("") ' Last Modiifcation Details
+                        item.SubItems.Add(SplitText(1)) 'last modified date
+                    End If
+
+                    If u = 5 Then
+                        item.SubItems.Add(SplitText(0)) 'uploaded by
+                        item.SubItems.Add(SplitText(2)) ' Last SOC No.
+                        item.SubItems.Add(SplitText(3)) ' Last SOC DI
+                        item.SubItems.Add(SplitText(4)) 'Total Records
+                        item.SubItems.Add(SplitText(5)) ' Last Modiifcation Details
+                        item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
                     bgwListAllFiles.ReportProgress(2, item)

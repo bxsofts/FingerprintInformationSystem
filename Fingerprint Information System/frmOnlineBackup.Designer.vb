@@ -265,7 +265,7 @@ Partial Class frmOnlineBackup
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(613, 71)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 27)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(75, 25)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.ContextMenuBar1.TabIndex = 6
@@ -335,7 +335,7 @@ Partial Class frmOnlineBackup
         Me.listViewEx1.Border.Class = "ListViewBorder"
         Me.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.listViewEx1.ColumnHeaderFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupTime, Me.FileID, Me.FileSize, Me.UploadedBy, Me.LastModDate, Me.LastSOCNo, Me.DI, Me.TotalRecords, Me.LastModification})
+        Me.listViewEx1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.BackupFileName, Me.BackupTime, Me.FileID, Me.FileSize, Me.UploadedBy, Me.LastSOCNo, Me.DI, Me.TotalRecords, Me.LastModification, Me.LastModDate})
         Me.ContextMenuBar1.SetContextMenuEx(Me.listViewEx1, Me.ButtonItem1)
         Me.listViewEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.listViewEx1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -371,22 +371,22 @@ Partial Class frmOnlineBackup
         'FileSize
         '
         Me.FileSize.Text = "File Size"
-        Me.FileSize.Width = 70
+        Me.FileSize.Width = 65
         '
         'UploadedBy
         '
         Me.UploadedBy.Text = "Uploaded By"
-        Me.UploadedBy.Width = 175
+        Me.UploadedBy.Width = 100
         '
         'LastModDate
         '
-        Me.LastModDate.Text = "Last Modification Date"
-        Me.LastModDate.Width = 0
+        Me.LastModDate.Text = "Modification Date"
+        Me.LastModDate.Width = 130
         '
         'LastSOCNo
         '
-        Me.LastSOCNo.Text = "Last SOC No."
-        Me.LastSOCNo.Width = 90
+        Me.LastSOCNo.Text = "Last SOC"
+        Me.LastSOCNo.Width = 70
         '
         'DI
         '
@@ -395,8 +395,8 @@ Partial Class frmOnlineBackup
         '
         'TotalRecords
         '
-        Me.TotalRecords.Text = "Total Records"
-        Me.TotalRecords.Width = 100
+        Me.TotalRecords.Text = "Records"
+        Me.TotalRecords.Width = 80
         '
         'LastModification
         '
