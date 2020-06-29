@@ -200,7 +200,7 @@ Public Class frmOnlineBackup
                         item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
-                    If u = 5 Then
+                    If u >= 5 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
@@ -1350,7 +1350,7 @@ Public Class frmOnlineBackup
                         item.SubItems.Add(SplitText(1)) 'last modified date
                     End If
 
-                    If u = 5 Then
+                    If u >= 5 Then
                         item.SubItems.Add(SplitText(0)) 'uploaded by
                         item.SubItems.Add(SplitText(2)) ' Last SOC No.
                         item.SubItems.Add(SplitText(3)) ' Last SOC DI
