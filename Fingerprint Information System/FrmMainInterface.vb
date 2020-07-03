@@ -124,6 +124,7 @@ Public Class frmMainInterface
     Dim InstallerMD5 As String = ""
 
     Dim UnreadIFTFileCount As Integer = 0
+    Dim InstallerFileSize As String = ""
 #End Region
 
 
@@ -18259,6 +18260,7 @@ errhandler:
             Me.Cursor = Cursors.WaitCursor
             blUpdateLastModificationDate = False
             Me.cprDBAvailable.Visible = False
+            blChangePleaseWaitFormText = True
             ShowPleaseWaitForm()
             blApplicationIsRestoring = False
 
@@ -18282,6 +18284,7 @@ errhandler:
             DisableControlsInPreviewMode()
 
             ClosePleaseWaitForm()
+            blChangePleaseWaitFormText = False
             MessageBoxEx.Show("Database preview generated. Restart the application to close Preview.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         Catch ex As Exception
@@ -18526,11 +18529,13 @@ errhandler:
 
         If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Uploading Backup") Then
             MessageBoxEx.Show("Another File Upload is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
         If Me.pgrDownloadInstaller.Visible And Me.pgrDownloadInstaller.Text.StartsWith("Downloading Installer") Then
             MessageBoxEx.Show("Another File Download is in progress. Please try later.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
@@ -18539,6 +18544,16 @@ errhandler:
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
+
+        Dim message As String = ""
+        If InstallerFileSize = "" Then
+            message = "Download Installer?"
+        Else
+            message = "Installer File size is " & InstallerFileSize & ". Download Installer?"
+        End If
+        Dim r = MessageBoxEx.Show(message, strAppName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+
+        If r <> Windows.Forms.DialogResult.OK Then Exit Sub
 
         blShowUpdateDownloaded = True
         DownloadInstaller()
@@ -18861,7 +18876,7 @@ errhandler:
 
             List.Q = "name contains 'Fingerprint Information System' and name contains '.exe' and trashed = false and '" & parentid & "' in parents"
 
-            List.Fields = "files(name, id, webViewLink)"
+            List.Fields = "files(name, id, webViewLink, size)"
 
             Results = List.Execute
 
@@ -18869,6 +18884,7 @@ errhandler:
                 RemoteInstallerVersion = Results.Files(0).Name
                 InstallerFileID = Results.Files(0).Id
                 InstallerFileURL = Results.Files(0).WebViewLink
+                InstallerFileSize = CalculateFileSize(Results.Files(0).Size)
                 RemoteInstallerVersion = RemoteInstallerVersion.Substring(RemoteInstallerVersion.Length - 8).Remove(4)
                 Dim LocalVersion As String = My.Application.Info.Version.ToString.Substring(0, 4)
 
