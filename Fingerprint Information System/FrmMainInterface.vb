@@ -344,6 +344,7 @@ Public Class frmMainInterface
             Dim CreateTable As String = My.Computer.Registry.GetValue(strGeneralSettingsPath, "CreateTable", "1")
 
             If CreateTable = "1" Then
+                blUpdateLastModificationDate = False
                 CreateLastModificationTable()
                 CreateIdentificationRegisterTable()
                 CreateSOCReportRegisterTable()
