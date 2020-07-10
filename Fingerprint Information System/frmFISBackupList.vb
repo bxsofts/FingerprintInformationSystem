@@ -791,6 +791,12 @@ Public Class frmFISBackupList
 
             GetDriveUsageDetails()
 
+            If CurrentFolderPath = "\My Drive\Internal File Transfer\" & FullDistrictName Then
+                Dim tFile = New Google.Apis.Drive.v3.Data.File
+                tFile.ViewedByMeTime = Now
+                FISService.Files.Update(tFile, CurrentFolderID).Execute()
+            End If
+
         Catch ex As Exception
             blUploadIsProgressing = False
             Me.Cursor = Cursors.Default
