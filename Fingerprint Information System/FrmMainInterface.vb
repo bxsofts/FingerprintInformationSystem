@@ -477,19 +477,22 @@ Public Class frmMainInterface
             EndApplication()
         End If
 
-        FileOwner = ShortOfficeName & "_" & ShortDistrictName
-
         CopyCredentialFiles()
 
-        bgwCleanOnlineFiles.RunWorkerAsync()
+        If DBExists Then
+            FileOwner = ShortOfficeName & "_" & ShortDistrictName
 
-        ShowNewVersionInstalledInfo()
-        CheckForUpdatesAtStartup()
-        UploadVersionInfoToDrive()
-        CleanupLocalBackupFiles()
-        bgwCopyFolder.RunWorkerAsync()
+            bgwCleanOnlineFiles.RunWorkerAsync()
+
+            ShowNewVersionInstalledInfo()
+            CheckForUpdatesAtStartup()
+            UploadVersionInfoToDrive()
+            CleanupLocalBackupFiles()
+            bgwCopyFolder.RunWorkerAsync()
+        End If
+
         If DBExists = False Then
-            Dim DBMissing As String = "FATAL ERROR: The database file 'Fingerprint.mdvb' is missing. Please restore the database."
+            Dim DBMissing As String = "FATAL ERROR: The database file 'Fingerprint.mdb' is missing. Please restore the database from Local or Online Backups."
             Me.pnlRegisterName.Text = DBMissing
             DisableControls()
             MessageBoxEx.Show(DBMissing, strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -18007,8 +18010,13 @@ errhandler:
     Private Sub ShowOnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
         If FullDistrictName = "" Then
-            MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
+            MessageBoxEx.Show("Enter'Full and Short District Names' to view online files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            boolShowWizard = True
+            FrmSettingsWizard.ShowDialog()
+            If FullDistrictName = "" Then
+                MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
         End If
 
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
