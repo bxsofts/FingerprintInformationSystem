@@ -489,11 +489,15 @@ Public Class frmPersonalFileStorage
                 index = ImageIndex.Exe 'exe
             Case ".exe"
                 index = ImageIndex.Exe 'exe
+            Case ".msi"
+                index = ImageIndex.Exe 'exe
             Case "database/mdb"
                 index = ImageIndex.MSAccess 'mdb
             Case ".mdb"
                 index = ImageIndex.MSAccess 'mdb
             Case ".accdb"
+                index = ImageIndex.MSAccess 'mdb
+            Case ".accde"
                 index = ImageIndex.MSAccess 'mdb
             Case ".pdf"
                 index = ImageIndex.PDF

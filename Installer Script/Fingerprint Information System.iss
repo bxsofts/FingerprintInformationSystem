@@ -122,6 +122,8 @@ Source: .\Database\FingerPrint.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Info
 Source: .\Database\WeeklyDiary.mdb; DestDir: {userdocs}\BXSofts\Fingerprint Information System\Database\; Flags: onlyifdoesntexist
 Source: .\WIA\wiaaut.dll; DestDir: {sys}; Flags: onlyifdoesntexist uninsneveruninstall sharedfile regserver noregerror
 Source: .\Scripts\PinToTaskbar.exe; DestDir: {app}\; Flags: ignoreversion
+Source: .\Dependency Files\SQLSysClrTypes.msi; DestDir: {app}\; Flags: ignoreversion
+;Source: .\Dependency Files\ReportViewer2012.msi; DestDir: {app}\; Flags: ignoreversion
 Source: .\VersionHistory\NewVersionFeatures.rtf; DestDir: {userdocs}\BXSofts\Fingerprint Information System; Flags: ignoreversion
 
 
@@ -183,10 +185,12 @@ Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Sett
 Root: HKCU; Subkey: Software\BXSofts\Fingerprint Information System\General Settings; ValueType: string; ValueName: HeadOfAccount; ValueData: 0055-00-501-99; Flags: noerror uninsdeletekey
 
 [Run]
-; Filename: {app}\syspin.exe; Tasks: Pintotaskbar;  Parameters: """{app}\Fingerprint Information System.exe"" c:""Pin To Taskbar""" ; Flags: runhidden
 Filename: {app}\PinToTaskbar.exe; Tasks: Pintotaskbar  ; Flags: runhidden
+Filename: "msiexec.exe"; Parameters: "/i ""{app}\SQLSysClrTypes.msi"" /quiet"; StatusMsg: "Installing Microsoft SQL System CLR Types..."; 
+;Filename: "msiexec.exe"; Parameters: "/i ""{app}\ReportViewer2012.msi"" /quiet"; StatusMsg: "Installing Report Viewer..."; 
 ;Filename: "{app}\ReportViewer2010.exe"; StatusMsg: "Installing Report Viewer. Please wait..."; Parameters: "/q"
 Filename: {app}\Fingerprint Information System.exe; Description: {cm:LaunchProgram,Fingerprint Information System}; Flags: nowait postinstall skipifsilent runascurrentuser; WorkingDir: {app}
+
 [UninstallDelete]
 Name: {app}\DevComponents.DotNetBar2.dll; Type: files
 Name: {app}\Fingerprint Information System.pdb; Type: files
