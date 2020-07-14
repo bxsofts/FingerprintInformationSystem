@@ -52,6 +52,7 @@ Module Sub_Main
             UserBackupFolderName = My.Computer.Registry.GetValue(strBackupSettingsPath, "FullDistrictName", "")
             FileOwner = My.Computer.Registry.GetValue(strBackupSettingsPath, "FileOwner", "")
             If UserBackupFolderName = "" Then Exit Sub
+            If UserBackupFolderName = "FullDistrict" Then Exit Sub
             If FileOwner = "" Then Exit Sub
 
             BackupDescription = My.Computer.Registry.GetValue(strBackupSettingsPath, "BackupDescription", "")

@@ -18009,14 +18009,29 @@ errhandler:
 
     Private Sub ShowOnlineDatabaseBackup() Handles btnOnlineBackup.Click
 
-        If FullDistrictName = "" Then
+        If FullDistrictName = "" Or FullDistrictName = "FullDistrict" Then
             MessageBoxEx.Show("Enter'Full and Short District Names' to view online files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             boolShowWizard = True
             FrmSettingsWizard.ShowDialog()
-            If FullDistrictName = "" Then
+
+            If FullDistrictName = "" Or FullDistrictName = "FullDistrict" Then
                 MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
+
+            Me.Cursor = Cursors.WaitCursor
+            If Not CheckUserBackupFolderExists(FullDistrictName) Then
+                Me.Cursor = Cursors.Default
+                Dim r = MessageBoxEx.Show("District Name '" & FullDistrictName & "' not found in Online Backup. Do you want to change District Name and try again?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+                If r = Windows.Forms.DialogResult.No Then
+                    Exit Sub
+                Else
+                    boolShowWizard = True
+                    FrmSettingsWizard.ShowDialog()
+                End If
+
+            End If
+            Me.Cursor = Cursors.Default
         End If
 
         If blApplicationIsLoading Or blApplicationIsRestoring Then Exit Sub
@@ -18052,9 +18067,61 @@ errhandler:
         Else
             blPreviewDB = blDBIsInPreviewMode
         End If
+        Me.Cursor = Cursors.Default
 
     End Sub
 
+    Private Function CheckUserBackupFolderExists(UserFolder As String) As Boolean
+        Try
+            If Not FileIO.FileSystem.FileExists(JsonPath) Then 'exit 
+                Return False
+            End If
+
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Dim FISService As DriveService = New DriveService
+            Dim Scopes As String() = {DriveService.Scope.Drive}
+            Dim UserFolderID As String = ""
+
+
+            Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+            FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+
+            Dim parentid As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'FIS Backup' and 'root' in parents"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Return False
+            Else
+                parentid = Results.Files(0).Id
+            End If
+
+            List.Q = "name contains '" & UserFolder & "' and trashed = false and '" & parentid & "' in parents"
+
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+
+            If Results.Files.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
     Private Sub bgwCleanOnlineFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCleanOnlineFiles.DoWork
         Try
             If InternetAvailable() = False Then
@@ -18066,6 +18133,10 @@ errhandler:
             End If
 
             If FullDistrictName = "" Then
+                Exit Sub
+            End If
+
+            If FullDistrictName = "FullDistrict" Then
                 Exit Sub
             End If
 
@@ -18301,6 +18372,7 @@ errhandler:
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
     Public Function IsValidBackupFile(ByVal DBPath As String) As Boolean
         IsValidBackupFile = False
 
@@ -18315,6 +18387,7 @@ errhandler:
             IsValidBackupFile = False
         End Try
     End Function
+
 #End Region
 
 
@@ -18330,6 +18403,10 @@ errhandler:
             End If
 
             If FullDistrictName = "" Then
+                Exit Sub
+            End If
+
+            If FullDistrictName = "FullDistrict" Then
                 Exit Sub
             End If
 
@@ -18864,7 +18941,7 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-            If FullDistrictName <> "" Then CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService)
+            If FullDistrictName <> "" And FullDistrictName <> "FullDistrict" Then CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService)
 
             DownloadHolidayList()
 
@@ -18956,6 +19033,10 @@ errhandler:
             Exit Sub
         End If
 
+        If FullDistrictName = "FullDistrict" Then
+            Exit Sub
+        End If
+
         bgwVersionUploader.RunWorkerAsync()
     End Sub
 
@@ -19027,7 +19108,7 @@ errhandler:
     Private Sub ShowFISFileList() Handles btnBasicOnlineFileTransfer.Click
         On Error Resume Next
 
-        If FullDistrictName = "" Then
+        If FullDistrictName = "" Or FullDistrictName = "FullDistrict" Then
             MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
