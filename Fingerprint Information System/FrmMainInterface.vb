@@ -129,7 +129,6 @@ Public Class frmMainInterface
 
 
 #Region "FORM LOAD EVENTS"
-
     Private Sub LoadForm() Handles MyBase.Load
 
         On Error Resume Next
@@ -412,7 +411,7 @@ Public Class frmMainInterface
             Else
                 Me.txtAutoBackupPeriod.TextBox.Text = "15"
             End If
-           
+
         End If
 
 
@@ -18005,6 +18004,10 @@ errhandler:
                 My.Computer.FileSystem.DeleteFile(ItemList.Item(i))
             Next
         End If
+
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(My.Computer.FileSystem.SpecialDirectories.MyDocuments, FileIO.SearchOption.SearchTopLevelOnly, "Fingerprint Information System*.md5")
+            My.Computer.FileSystem.DeleteFile(foundFile)
+        Next
     End Sub
 
     Private Sub ShowOnlineDatabaseBackup() Handles btnOnlineBackup.Click

@@ -5,7 +5,13 @@ Imports DevComponents.DotNetBar.Rendering
 
 Public NotInheritable Class frmSplashScreen
 
-    
+    Private Sub frmSplashScreen_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+        If e.KeyCode = Keys.Escape Then
+            CloseForm()
+        End If
+    End Sub
+
+
     Private Sub frmSplashScreen_Load(sender As Object, e As EventArgs) Handles Me.Load
         Me.Width = 475
         Me.Height = 228
