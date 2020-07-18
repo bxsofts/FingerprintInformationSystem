@@ -136,6 +136,32 @@ Public Class FrmSettingsWizard
 
             Me.ActiveControl = Me.txtFullDistrict
             Me.txtFullDistrict.Focus()
+
+            Dim DistrictCollection As New AutoCompleteStringCollection
+            DistrictCollection.Add("Thiruvananthapuram City")
+            DistrictCollection.Add("Thiruvananthapuram Rural")
+            DistrictCollection.Add("Kollam City")
+            DistrictCollection.Add("Kollam Rural")
+            DistrictCollection.Add("Pathanamthitta")
+            DistrictCollection.Add("Alappuzha")
+            DistrictCollection.Add("Kottayam")
+            DistrictCollection.Add("Idukki")
+            DistrictCollection.Add("Kochi City")
+            DistrictCollection.Add("Ernakulam Rural")
+            DistrictCollection.Add("Thrissur City")
+            DistrictCollection.Add("Thrissur Rural")
+            DistrictCollection.Add("Malappuram")
+            DistrictCollection.Add("Palakkad")
+            DistrictCollection.Add("Kozhikode City")
+            DistrictCollection.Add("Kozhikode Rural")
+            DistrictCollection.Add("Wayanad")
+            DistrictCollection.Add("Kannur")
+            DistrictCollection.Add("Kasaragod")
+
+            
+            Me.txtFullDistrict.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            Me.txtFullDistrict.AutoCompleteSource = AutoCompleteSource.CustomSource
+            Me.txtFullDistrict.AutoCompleteCustomSource = DistrictCollection
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
@@ -289,4 +315,56 @@ Public Class FrmSettingsWizard
 
     End Function
 
+    Private Sub txtShortDistrict_GotFocus(sender As Object, e As EventArgs) Handles txtShortDistrict.GotFocus
+        Try
+            If Me.txtShortDistrict.Text <> "" Then Exit Sub
+            Select Case Me.txtFullDistrict.Text.ToLower
+                Case ""
+                    Me.txtShortDistrict.Text = ""
+                Case "thiruvananthapuram city"
+                    Me.txtShortDistrict.Text = "TVPM CITY"
+                Case "thiruvananthapuram rural"
+                    Me.txtShortDistrict.Text = "TR"
+                Case "kollam rural"
+                    Me.txtShortDistrict.Text = "QR"
+                Case "kollam city"
+                    Me.txtShortDistrict.Text = "KLM C"
+                Case "pathanamthitta"
+                    Me.txtShortDistrict.Text = "PTA"
+                Case "alappuzha"
+                    Me.txtShortDistrict.Text = "ALP"
+                Case "kottayam"
+                    Me.txtShortDistrict.Text = "KTM"
+                Case "idukki"
+                    Me.txtShortDistrict.Text = "IDK"
+                Case "kochi city"
+                    Me.txtShortDistrict.Text = "EKM"
+                Case "ernakulam rural"
+                    Me.txtShortDistrict.Text = "ERRL"
+                Case "thrissur city"
+                    Me.txtShortDistrict.Text = "R(C)"
+                Case "thrissur rural"
+                    Me.txtShortDistrict.Text = "RR"
+                Case "palakkad"
+                    Me.txtShortDistrict.Text = "P"
+                Case "malappuram"
+                    Me.txtShortDistrict.Text = "MM"
+                Case "kozhikode city"
+                    Me.txtShortDistrict.Text = "KKD-C"
+                Case "kozhikode rural"
+                    Me.txtShortDistrict.Text = "KKD(R)"
+                Case "wayanad"
+                    Me.txtShortDistrict.Text = "WND"
+                Case "kannur"
+                    Me.txtShortDistrict.Text = "KNR"
+                Case "kasaragod"
+                    Me.txtShortDistrict.Text = "KSD"
+                Case Else
+                    Me.txtShortDistrict.Text = ""
+
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
