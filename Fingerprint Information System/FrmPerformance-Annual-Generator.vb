@@ -388,7 +388,13 @@ Public Class frmAnnualPerformance
             End If
 
             Me.DataGridViewX1.Rows(8).Cells(Column).Value = culpritcount
-            Me.DataGridViewX1.Rows(9).Cells(Column).Value = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+
+            Dim photocount As Integer = 0
+            If strPhotographer <> "" Then
+                photocount = Val(Me.SOCRegisterTableAdapter.ScalarQueryPhotoNotReceived(d1, d2))
+            End If
+            Me.DataGridViewX1.Rows(9).Cells(Column).Value = photocount
+
             Me.DataGridViewX1.Rows(10).Cells(Column).Value = Val(Me.DaRegisterTableAdapter.CountDASlip(d1, d2))
             Me.DataGridViewX1.Rows(15).Cells(Column).Value = Val(Me.CdRegisterTableAdapter.CountCD(d1, d2))
             Me.DataGridViewX1.Rows(17).Cells(Column).Value = "" ' CalculateCasesPendingInPreviousMonth(d1)
