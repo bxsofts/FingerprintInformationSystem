@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmUpdateAlert
+Partial Class frmNewVersionFeatures
     Inherits DevComponents.DotNetBar.Office2007Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class frmUpdateAlert
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdateAlert))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewVersionFeatures))
         Me.btnClose = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.RichTextBoxEx1 = New DevComponents.DotNetBar.Controls.RichTextBoxEx()

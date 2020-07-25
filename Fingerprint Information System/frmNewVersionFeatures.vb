@@ -1,4 +1,4 @@
-﻿Public Class frmUpdateAlert
+﻿Public Class frmNewVersionFeatures
 
     Private Sub frmUpdateAlert_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try

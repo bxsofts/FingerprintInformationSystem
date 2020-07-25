@@ -204,16 +204,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="frmNewVersion.Designer.vb">
-      <DependentUpon>frmNewVersion.vb</DependentUpon>
+    <Compile Include="frmNewVersionAvailable.Designer.vb">
+      <DependentUpon>frmNewVersionAvailable.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNewVersion.vb">
+    <Compile Include="frmNewVersionAvailable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPerformance-Annual-Generator.Designer.vb">
-      <DependentUpon>FrmPerformance-Annual-Generator.vb</DependentUpon>
+    <Compile Include="frmPerformance-Annual.Designer.vb">
+      <DependentUpon>frmPerformance-Annual.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPerformance-Annual-Generator.vb">
+    <Compile Include="frmPerformance-Annual.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmWeeklyDiaryView.Designer.vb">
@@ -222,34 +222,34 @@
     <Compile Include="frmWeeklyDiaryView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmChalanDetails.Designer.vb">
-      <DependentUpon>frmChalanDetails.vb</DependentUpon>
+    <Compile Include="frmFPA-ChalanDetails.Designer.vb">
+      <DependentUpon>frmFPA-ChalanDetails.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmChalanDetails.vb">
+    <Compile Include="frmFPA-ChalanDetails.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmExpertOpinion.Designer.vb">
-      <DependentUpon>frmExpertOpinion.vb</DependentUpon>
+    <Compile Include="frmIDR-ExpertOpinion.Designer.vb">
+      <DependentUpon>frmIDR-ExpertOpinion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmExpertOpinion.vb">
+    <Compile Include="frmIDR-ExpertOpinion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmFISBackupList.Designer.vb">
-      <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    <Compile Include="frmOnlineStorage-FIS.Designer.vb">
+      <DependentUpon>frmOnlineStorage-FIS.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmFISBackupList.vb">
+    <Compile Include="frmOnlineStorage-FIS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmFPADE.Designer.vb">
-      <DependentUpon>frmFPADE.vb</DependentUpon>
+    <Compile Include="frmFPA-DE.Designer.vb">
+      <DependentUpon>frmFPA-DE.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmFPADE.vb">
+    <Compile Include="frmFPA-DE.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmIdentificationCulpritDetails.Designer.vb">
-      <DependentUpon>frmIdentificationCulpritDetails.vb</DependentUpon>
+    <Compile Include="frmIDR-CulpritDetails.Designer.vb">
+      <DependentUpon>frmIDR-CulpritDetails.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmIdentificationCulpritDetails.vb">
+    <Compile Include="frmIDR-CulpritDetails.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPassword.Designer.vb">
@@ -258,10 +258,10 @@
     <Compile Include="frmPassword.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPersonalFileStorage.Designer.vb">
-      <DependentUpon>frmPersonalFileStorage.vb</DependentUpon>
+    <Compile Include="frmOnlineStorage-Personal.Designer.vb">
+      <DependentUpon>frmOnlineStorage-Personal.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPersonalFileStorage.vb">
+    <Compile Include="frmOnlineStorage-Personal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmProgressBar.Designer.vb">
@@ -276,22 +276,22 @@
     <Compile Include="frmOnlineBackup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-IdentificationRegisterDE.Designer.vb">
-      <DependentUpon>FrmSOC-IdentificationRegisterDE.vb</DependentUpon>
+    <Compile Include="frmIDR-DE.Designer.vb">
+      <DependentUpon>frmIDR-DE.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-IdentificationRegisterDE.vb">
+    <Compile Include="frmIDR-DE.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmIdentificationStatement.Designer.vb">
-      <DependentUpon>frmIdentificationStatement.vb</DependentUpon>
+    <Compile Include="frmIDR-IdentificationStatement.Designer.vb">
+      <DependentUpon>frmIDR-IdentificationStatement.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmIdentificationStatement.vb">
+    <Compile Include="frmIDR-IdentificationStatement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUpdateAlert.Designer.vb">
-      <DependentUpon>frmUpdateAlert.vb</DependentUpon>
+    <Compile Include="frmNewVersionFeatures.Designer.vb">
+      <DependentUpon>frmNewVersionFeatures.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmUpdateAlert.vb">
+    <Compile Include="frmNewVersionFeatures.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAttendanceStatement.Designer.vb">
@@ -300,22 +300,22 @@
     <Compile Include="frmAttendanceStatement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAC-Register.Designer.vb">
-      <DependentUpon>FrmAC-Register.vb</DependentUpon>
+    <Compile Include="frmAC-Register.Designer.vb">
+      <DependentUpon>frmAC-Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmAC-Register.vb">
+    <Compile Include="frmAC-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAC-SlipImageDisplayer.designer.vb">
-      <DependentUpon>FrmAC-SlipImageDisplayer.vb</DependentUpon>
+    <Compile Include="frmAC-SlipImageDisplayer.designer.vb">
+      <DependentUpon>frmAC-SlipImageDisplayer.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmAC-SlipImageDisplayer.vb">
+    <Compile Include="frmAC-SlipImageDisplayer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAdvancedSearch.Designer.vb">
-      <DependentUpon>FrmAdvancedSearch.vb</DependentUpon>
+    <Compile Include="frmAdvancedSearch.Designer.vb">
+      <DependentUpon>frmAdvancedSearch.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmAdvancedSearch.vb">
+    <Compile Include="frmAdvancedSearch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAnnualStatistics.Designer.vb">
@@ -324,34 +324,34 @@
     <Compile Include="frmAnnualStatistics.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-SlipImage.designer.vb">
-      <DependentUpon>FrmDA-SlipImage.vb</DependentUpon>
+    <Compile Include="frmDA-SlipImage.designer.vb">
+      <DependentUpon>frmDA-SlipImage.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDA-SlipImage.vb">
+    <Compile Include="frmDA-SlipImage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmIDRegister.Designer.vb">
-      <DependentUpon>FrmIDRegister.vb</DependentUpon>
+    <Compile Include="frmIDR-Register.Designer.vb">
+      <DependentUpon>frmIDR-Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmIDRegister.vb">
+    <Compile Include="frmIDR-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmIDSlipImageDisplayer.Designer.vb">
-      <DependentUpon>FrmIDSlipImageDisplayer.vb</DependentUpon>
+    <Compile Include="frmIDSlipImageDisplayer.Designer.vb">
+      <DependentUpon>frmIDSlipImageDisplayer.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmIDSlipImageDisplayer.vb">
+    <Compile Include="frmIDSlipImageDisplayer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmImportTransferRate.Designer.vb">
-      <DependentUpon>FrmImportTransferRate.vb</DependentUpon>
+    <Compile Include="frmImportTransferRate.Designer.vb">
+      <DependentUpon>frmImportTransferRate.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmImportTransferRate.vb">
+    <Compile Include="frmImportTransferRate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmIndividualPerformance.Designer.vb">
-      <DependentUpon>FrmIndividualPerformance.vb</DependentUpon>
+    <Compile Include="frmPerformance-Individual.Designer.vb">
+      <DependentUpon>frmPerformance-Individual.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmIndividualPerformance.vb">
+    <Compile Include="frmPerformance-Individual.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmInputBox.designer.vb">
@@ -360,176 +360,176 @@
     <Compile Include="frmInputBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-ReportSentStatus.Designer.vb">
-      <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>
+    <Compile Include="frmSOC-ReportSentStatus.Designer.vb">
+      <DependentUpon>frmSOC-ReportSentStatus.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-ReportSentStatus.vb">
+    <Compile Include="frmSOC-ReportSentStatus.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="FingerPrintDataSet.vb">
       <DependentUpon>FingerPrintDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="FrmAbout.designer.vb">
-      <DependentUpon>FrmAbout.vb</DependentUpon>
+    <Compile Include="frmAbout.designer.vb">
+      <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmAbout.vb">
+    <Compile Include="frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCDRegister.Designer.vb">
-      <DependentUpon>FrmCDRegister.vb</DependentUpon>
+    <Compile Include="frmCDRegister.Designer.vb">
+      <DependentUpon>frmCDRegister.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmCDRegister.vb">
+    <Compile Include="frmCDRegister.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-PSWiseStatistics.Designer.vb">
-      <DependentUpon>FrmDA-PSWiseStatistics.vb</DependentUpon>
+    <Compile Include="frmDA-PSWiseStatistics.Designer.vb">
+      <DependentUpon>frmDA-PSWiseStatistics.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDA-PSWiseStatistics.vb">
+    <Compile Include="frmDA-PSWiseStatistics.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-PrintRemainingCases.Designer.vb">
-      <DependentUpon>FrmSOC-PrintRemainingCases.vb</DependentUpon>
+    <Compile Include="frmSOC-PrintRemainingCases.Designer.vb">
+      <DependentUpon>frmSOC-PrintRemainingCases.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-PrintRemainingCases.vb">
+    <Compile Include="frmSOC-PrintRemainingCases.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-Statement-Concise.Designer.vb">
-      <DependentUpon>FrmSOC-Statement-Concise.vb</DependentUpon>
+    <Compile Include="frmSOC-Statement-Concise.Designer.vb">
+      <DependentUpon>frmSOC-Statement-Concise.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-Statement-Concise.vb">
+    <Compile Include="frmSOC-Statement-Concise.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-Register.Designer.vb">
-      <DependentUpon>FrmDA-Register.vb</DependentUpon>
+    <Compile Include="frmDA-Register.Designer.vb">
+      <DependentUpon>frmDA-Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDA-Register.vb">
+    <Compile Include="frmDA-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-Statement.Designer.vb">
-      <DependentUpon>FrmDA-Statement.vb</DependentUpon>
+    <Compile Include="frmDA-Statement.Designer.vb">
+      <DependentUpon>frmDA-Statement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDA-Statement.vb">
+    <Compile Include="frmDA-Statement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDA-Statistics-MonthWise.Designer.vb">
-      <DependentUpon>FrmDA-Statistics-MonthWise.vb</DependentUpon>
+    <Compile Include="frmDA-Statistics-MonthWise.Designer.vb">
+      <DependentUpon>frmDA-Statistics-MonthWise.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmDA-Statistics-MonthWise.vb">
+    <Compile Include="frmDA-Statistics-MonthWise.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFPA-Statistics-MonthWise.Designer.vb">
-      <DependentUpon>FrmFPA-Statistics-MonthWise.vb</DependentUpon>
+    <Compile Include="frmFPA-Statistics-MonthWise.Designer.vb">
+      <DependentUpon>frmFPA-Statistics-MonthWise.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmFPA-Statistics-MonthWise.vb">
+    <Compile Include="frmFPA-Statistics-MonthWise.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPSList.Designer.vb">
-      <DependentUpon>FrmPSList.vb</DependentUpon>
+    <Compile Include="frmPSList.Designer.vb">
+      <DependentUpon>frmPSList.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPSList.vb">
+    <Compile Include="frmPSList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFPA-Register.Designer.vb">
-      <DependentUpon>FrmFPA-Register.vb</DependentUpon>
+    <Compile Include="frmFPA-Register.Designer.vb">
+      <DependentUpon>frmFPA-Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmFPA-Register.vb">
+    <Compile Include="frmFPA-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFPA-Statement.Designer.vb">
-      <DependentUpon>FrmFPA-Statement.vb</DependentUpon>
+    <Compile Include="frmFPA-Statement.Designer.vb">
+      <DependentUpon>frmFPA-Statement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmFPA-Statement.vb">
+    <Compile Include="frmFPA-Statement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPerformance-Monthly-Generator.Designer.vb">
-      <DependentUpon>FrmPerformance-Monthly-Generator.vb</DependentUpon>
+    <Compile Include="frmPerformance-Monthly.Designer.vb">
+      <DependentUpon>frmPerformance-Monthly.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPerformance-Monthly-Generator.vb">
+    <Compile Include="frmPerformance-Monthly.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-PhotoNotReceivedCases.Designer.vb">
-      <DependentUpon>FrmSOC-PhotoNotReceivedCases.vb</DependentUpon>
+    <Compile Include="frmSOC-PhotoNotReceivedCases.Designer.vb">
+      <DependentUpon>frmSOC-PhotoNotReceivedCases.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-PhotoNotReceivedCases.vb">
+    <Compile Include="frmSOC-PhotoNotReceivedCases.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPerformance-Quarterly-Generator.Designer.vb">
-      <DependentUpon>FrmPerformance-Quarterly-Generator.vb</DependentUpon>
+    <Compile Include="frmPerformance-Quarterly.Designer.vb">
+      <DependentUpon>frmPerformance-Quarterly.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPerformance-Quarterly-Generator.vb">
+    <Compile Include="frmPerformance-Quarterly.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-Register.Designer.vb">
-      <DependentUpon>FrmSOC-Register.vb</DependentUpon>
+    <Compile Include="frmSOC-Register.Designer.vb">
+      <DependentUpon>frmSOC-Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-Register.vb">
+    <Compile Include="frmSOC-Register.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-Statement.Designer.vb">
-      <DependentUpon>FrmSOC-Statement.vb</DependentUpon>
+    <Compile Include="frmSOC-Statement.Designer.vb">
+      <DependentUpon>frmSOC-Statement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-Statement.vb">
+    <Compile Include="frmSOC-Statement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmLocalBackup.designer.vb">
-      <DependentUpon>FrmLocalBackup.vb</DependentUpon>
+    <Compile Include="frmLocalBackup.designer.vb">
+      <DependentUpon>frmLocalBackup.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmLocalBackup.vb">
+    <Compile Include="frmLocalBackup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMainInterface.Designer.vb">
-      <DependentUpon>FrmMainInterface.vb</DependentUpon>
+    <Compile Include="frmMainInterface.Designer.vb">
+      <DependentUpon>frmMainInterface.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmMainInterface.vb">
+    <Compile Include="frmMainInterface.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-Statistics.Designer.vb">
-      <DependentUpon>FrmSOC-Statistics.vb</DependentUpon>
+    <Compile Include="frmSOC-Statistics.Designer.vb">
+      <DependentUpon>frmSOC-Statistics.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-Statistics.vb">
+    <Compile Include="frmSOC-Statistics.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-Statistics-MonthWise.Designer.vb">
-      <DependentUpon>FrmSOC-Statistics-MonthWise.vb</DependentUpon>
+    <Compile Include="frmSOC-Statistics-MonthWise.Designer.vb">
+      <DependentUpon>frmSOC-Statistics-MonthWise.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-Statistics-MonthWise.vb">
+    <Compile Include="frmSOC-Statistics-MonthWise.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-GraveCrimes.Designer.vb">
-      <DependentUpon>FrmSOC-GraveCrimes.vb</DependentUpon>
+    <Compile Include="frmSOC-GraveCrimes.Designer.vb">
+      <DependentUpon>frmSOC-GraveCrimes.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-GraveCrimes.vb">
+    <Compile Include="frmSOC-GraveCrimes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSOC-ReportStatement.Designer.vb">
-      <DependentUpon>FrmSOC-ReportStatement.vb</DependentUpon>
+    <Compile Include="frmSOC-ReportStatement.Designer.vb">
+      <DependentUpon>frmSOC-ReportStatement.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSOC-ReportStatement.vb">
+    <Compile Include="frmSOC-ReportStatement.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSplashScreen.designer.vb">
-      <DependentUpon>FrmSplashScreen.vb</DependentUpon>
+    <Compile Include="frmSplashScreen.designer.vb">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSplashScreen.vb">
+    <Compile Include="frmSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSettings-Wizard.designer.vb">
-      <DependentUpon>FrmSettings-Wizard.vb</DependentUpon>
+    <Compile Include="frmSettings-Wizard.designer.vb">
+      <DependentUpon>frmSettings-Wizard.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmSettings-Wizard.vb">
+    <Compile Include="frmSettings-Wizard.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTourNote.Designer.vb">
-      <DependentUpon>FrmTourNote.vb</DependentUpon>
+    <Compile Include="frmTABill-TourNote.Designer.vb">
+      <DependentUpon>frmTABill-TourNote.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmTourNote.vb">
+    <Compile Include="frmTABill-TourNote.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmViewChancePrints.Designer.vb">
-      <DependentUpon>FrmViewChancePrints.vb</DependentUpon>
+    <Compile Include="frmViewChancePrints.Designer.vb">
+      <DependentUpon>frmViewChancePrints.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmViewChancePrints.vb">
+    <Compile Include="frmViewChancePrints.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmWeeklyDiaryAuthentication.Designer.vb">
@@ -583,35 +583,35 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Active Criminals Register.rdlc" />
-    <EmbeddedResource Include="frmNewVersion.resx">
-      <DependentUpon>frmNewVersion.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewVersionAvailable.resx">
+      <DependentUpon>frmNewVersionAvailable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPerformance-Annual-Generator.resx">
-      <DependentUpon>FrmPerformance-Annual-Generator.vb</DependentUpon>
+    <EmbeddedResource Include="frmPerformance-Annual.resx">
+      <DependentUpon>frmPerformance-Annual.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWeeklyDiaryView.resx">
       <DependentUpon>frmWeeklyDiaryView.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmChalanDetails.resx">
-      <DependentUpon>frmChalanDetails.vb</DependentUpon>
+    <EmbeddedResource Include="frmFPA-ChalanDetails.resx">
+      <DependentUpon>frmFPA-ChalanDetails.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmExpertOpinion.resx">
-      <DependentUpon>frmExpertOpinion.vb</DependentUpon>
+    <EmbeddedResource Include="frmIDR-ExpertOpinion.resx">
+      <DependentUpon>frmIDR-ExpertOpinion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmFISBackupList.resx">
-      <DependentUpon>frmFISBackupList.vb</DependentUpon>
+    <EmbeddedResource Include="frmOnlineStorage-FIS.resx">
+      <DependentUpon>frmOnlineStorage-FIS.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmFPADE.resx">
-      <DependentUpon>frmFPADE.vb</DependentUpon>
+    <EmbeddedResource Include="frmFPA-DE.resx">
+      <DependentUpon>frmFPA-DE.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmIdentificationCulpritDetails.resx">
-      <DependentUpon>frmIdentificationCulpritDetails.vb</DependentUpon>
+    <EmbeddedResource Include="frmIDR-CulpritDetails.resx">
+      <DependentUpon>frmIDR-CulpritDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPassword.resx">
       <DependentUpon>frmPassword.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPersonalFileStorage.resx">
-      <DependentUpon>frmPersonalFileStorage.vb</DependentUpon>
+    <EmbeddedResource Include="frmOnlineStorage-Personal.resx">
+      <DependentUpon>frmOnlineStorage-Personal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProgressBar.resx">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
@@ -619,40 +619,40 @@
     <EmbeddedResource Include="frmAttendanceStatement.resx">
       <DependentUpon>frmAttendanceStatement.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAC-Register.resx">
-      <DependentUpon>FrmAC-Register.vb</DependentUpon>
+    <EmbeddedResource Include="frmAC-Register.resx">
+      <DependentUpon>frmAC-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAC-SlipImageDisplayer.resx">
-      <DependentUpon>FrmAC-SlipImageDisplayer.vb</DependentUpon>
+    <EmbeddedResource Include="frmAC-SlipImageDisplayer.resx">
+      <DependentUpon>frmAC-SlipImageDisplayer.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAdvancedSearch.resx">
-      <DependentUpon>FrmAdvancedSearch.vb</DependentUpon>
+    <EmbeddedResource Include="frmAdvancedSearch.resx">
+      <DependentUpon>frmAdvancedSearch.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAnnualStatistics.resx">
       <DependentUpon>frmAnnualStatistics.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-SlipImage.resx">
-      <DependentUpon>FrmDA-SlipImage.vb</DependentUpon>
+    <EmbeddedResource Include="frmDA-SlipImage.resx">
+      <DependentUpon>frmDA-SlipImage.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmIDRegister.resx">
-      <DependentUpon>FrmIDRegister.vb</DependentUpon>
+    <EmbeddedResource Include="frmIDR-Register.resx">
+      <DependentUpon>frmIDR-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmIDSlipImageDisplayer.resx">
-      <DependentUpon>FrmIDSlipImageDisplayer.vb</DependentUpon>
+    <EmbeddedResource Include="frmIDSlipImageDisplayer.resx">
+      <DependentUpon>frmIDSlipImageDisplayer.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmImportTransferRate.resx">
-      <DependentUpon>FrmImportTransferRate.vb</DependentUpon>
+    <EmbeddedResource Include="frmImportTransferRate.resx">
+      <DependentUpon>frmImportTransferRate.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmIndividualPerformance.resx">
-      <DependentUpon>FrmIndividualPerformance.vb</DependentUpon>
+    <EmbeddedResource Include="frmPerformance-Individual.resx">
+      <DependentUpon>frmPerformance-Individual.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInputBox.resx">
@@ -662,129 +662,129 @@
     <EmbeddedResource Include="frmOnlineBackup.resx">
       <DependentUpon>frmOnlineBackup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-IdentificationRegisterDE.resx">
-      <DependentUpon>FrmSOC-IdentificationRegisterDE.vb</DependentUpon>
+    <EmbeddedResource Include="frmIDR-DE.resx">
+      <DependentUpon>frmIDR-DE.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmIdentificationStatement.resx">
-      <DependentUpon>frmIdentificationStatement.vb</DependentUpon>
+    <EmbeddedResource Include="frmIDR-IdentificationStatement.resx">
+      <DependentUpon>frmIDR-IdentificationStatement.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-ReportSentStatus.resx">
-      <DependentUpon>FrmSOC-ReportSentStatus.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-ReportSentStatus.resx">
+      <DependentUpon>frmSOC-ReportSentStatus.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CD Register.rdlc" />
     <EmbeddedResource Include="Concise SOC Report.rdlc" />
     <EmbeddedResource Include="DA Register.rdlc" />
     <EmbeddedResource Include="FPA Register.rdlc" />
-    <EmbeddedResource Include="FrmAbout.resx">
-      <DependentUpon>FrmAbout.vb</DependentUpon>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmCDRegister.resx">
-      <DependentUpon>FrmCDRegister.vb</DependentUpon>
+    <EmbeddedResource Include="frmCDRegister.resx">
+      <DependentUpon>frmCDRegister.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-PSWiseStatistics.resx">
-      <DependentUpon>FrmDA-PSWiseStatistics.vb</DependentUpon>
+    <EmbeddedResource Include="frmDA-PSWiseStatistics.resx">
+      <DependentUpon>frmDA-PSWiseStatistics.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-PrintRemainingCases.resx">
-      <DependentUpon>FrmSOC-PrintRemainingCases.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-PrintRemainingCases.resx">
+      <DependentUpon>frmSOC-PrintRemainingCases.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-Statement-Concise.resx">
-      <DependentUpon>FrmSOC-Statement-Concise.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-Statement-Concise.resx">
+      <DependentUpon>frmSOC-Statement-Concise.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-Register.resx">
-      <DependentUpon>FrmDA-Register.vb</DependentUpon>
+    <EmbeddedResource Include="frmDA-Register.resx">
+      <DependentUpon>frmDA-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-Statement.resx">
-      <DependentUpon>FrmDA-Statement.vb</DependentUpon>
+    <EmbeddedResource Include="frmDA-Statement.resx">
+      <DependentUpon>frmDA-Statement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDA-Statistics-MonthWise.resx">
-      <DependentUpon>FrmDA-Statistics-MonthWise.vb</DependentUpon>
+    <EmbeddedResource Include="frmDA-Statistics-MonthWise.resx">
+      <DependentUpon>frmDA-Statistics-MonthWise.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFPA-Statistics-MonthWise.resx">
-      <DependentUpon>FrmFPA-Statistics-MonthWise.vb</DependentUpon>
+    <EmbeddedResource Include="frmFPA-Statistics-MonthWise.resx">
+      <DependentUpon>frmFPA-Statistics-MonthWise.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPSList.resx">
-      <DependentUpon>FrmPSList.vb</DependentUpon>
+    <EmbeddedResource Include="frmPSList.resx">
+      <DependentUpon>frmPSList.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFPA-Register.resx">
-      <DependentUpon>FrmFPA-Register.vb</DependentUpon>
+    <EmbeddedResource Include="frmFPA-Register.resx">
+      <DependentUpon>frmFPA-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFPA-Statement.resx">
-      <DependentUpon>FrmFPA-Statement.vb</DependentUpon>
+    <EmbeddedResource Include="frmFPA-Statement.resx">
+      <DependentUpon>frmFPA-Statement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPerformance-Monthly-Generator.resx">
-      <DependentUpon>FrmPerformance-Monthly-Generator.vb</DependentUpon>
+    <EmbeddedResource Include="frmPerformance-Monthly.resx">
+      <DependentUpon>frmPerformance-Monthly.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-PhotoNotReceivedCases.resx">
-      <DependentUpon>FrmSOC-PhotoNotReceivedCases.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-PhotoNotReceivedCases.resx">
+      <DependentUpon>frmSOC-PhotoNotReceivedCases.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPerformance-Quarterly-Generator.resx">
-      <DependentUpon>FrmPerformance-Quarterly-Generator.vb</DependentUpon>
+    <EmbeddedResource Include="frmPerformance-Quarterly.resx">
+      <DependentUpon>frmPerformance-Quarterly.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-Register.resx">
-      <DependentUpon>FrmSOC-Register.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-Register.resx">
+      <DependentUpon>frmSOC-Register.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-Statement.resx">
-      <DependentUpon>FrmSOC-Statement.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-Statement.resx">
+      <DependentUpon>frmSOC-Statement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmLocalBackup.resx">
-      <DependentUpon>FrmLocalBackup.vb</DependentUpon>
+    <EmbeddedResource Include="frmLocalBackup.resx">
+      <DependentUpon>frmLocalBackup.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMainInterface.resx">
-      <DependentUpon>FrmMainInterface.vb</DependentUpon>
+    <EmbeddedResource Include="frmMainInterface.resx">
+      <DependentUpon>frmMainInterface.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-Statistics.resx">
-      <DependentUpon>FrmSOC-Statistics.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-Statistics.resx">
+      <DependentUpon>frmSOC-Statistics.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-Statistics-MonthWise.resx">
-      <DependentUpon>FrmSOC-Statistics-MonthWise.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-Statistics-MonthWise.resx">
+      <DependentUpon>frmSOC-Statistics-MonthWise.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-GraveCrimes.resx">
-      <DependentUpon>FrmSOC-GraveCrimes.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-GraveCrimes.resx">
+      <DependentUpon>frmSOC-GraveCrimes.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSOC-ReportStatement.resx">
-      <DependentUpon>FrmSOC-ReportStatement.vb</DependentUpon>
+    <EmbeddedResource Include="frmSOC-ReportStatement.resx">
+      <DependentUpon>frmSOC-ReportStatement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSplashScreen.resx">
-      <DependentUpon>FrmSplashScreen.vb</DependentUpon>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSettings-Wizard.resx">
-      <DependentUpon>FrmSettings-Wizard.vb</DependentUpon>
+    <EmbeddedResource Include="frmSettings-Wizard.resx">
+      <DependentUpon>frmSettings-Wizard.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTourNote.resx">
-      <DependentUpon>FrmTourNote.vb</DependentUpon>
+    <EmbeddedResource Include="frmTABill-TourNote.resx">
+      <DependentUpon>frmTABill-TourNote.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdateAlert.resx">
-      <DependentUpon>frmUpdateAlert.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewVersionFeatures.resx">
+      <DependentUpon>frmNewVersionFeatures.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmViewChancePrints.resx">
-      <DependentUpon>FrmViewChancePrints.vb</DependentUpon>
+    <EmbeddedResource Include="frmViewChancePrints.resx">
+      <DependentUpon>frmViewChancePrints.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWeeklyDiaryAuthentication.resx">

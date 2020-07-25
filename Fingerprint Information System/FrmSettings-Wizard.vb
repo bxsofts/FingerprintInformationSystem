@@ -33,8 +33,8 @@ Public Class FrmSettingsWizard
                                     frmSplashScreen.CloseForm()
                                     Application.DoEvents()
                                     System.Threading.Thread.Sleep(1000)
-                                    frmNewVersion.lblMessage.Text = "A new version " & NewInstallerVersion & " is available. Press OK to install."
-                                    frmNewVersion.ShowDialog()
+                                frmNewVersionAvailable.lblMessage.Text = "A new version " & NewInstallerVersion & " is available. Press OK to install."
+                                frmNewVersionAvailable.ShowDialog()
                                     Process.Start(InstallerFile)
                                     End
                                 End If

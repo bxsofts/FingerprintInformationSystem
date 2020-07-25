@@ -18883,7 +18883,7 @@ errhandler:
                 Thread.Sleep(2000)
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "ShowNewVersionInfo", "0", Microsoft.Win32.RegistryValueKind.String)
                 blNewVersionFound = False
-                frmUpdateAlert.ShowDialog()
+                frmNewVersionFeatures.ShowDialog()
             End If
         Catch ex As Exception
 
