@@ -7,6 +7,11 @@ Public Class frmFPADE
 
 #Region "FORM LOAD EVENTS"
 
+    Private Sub frmFPADE_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        On Error Resume Next
+        frmChalanDetails.Close()
+    End Sub
+
 
     Private Sub frmFPADE_Load(sender As Object, e As EventArgs) Handles Me.Load
 
@@ -647,4 +652,6 @@ Public Class frmFPADE
     End Sub
 
 #End Region
+
+
 End Class

@@ -14,6 +14,8 @@ Public Class FrmIdentificationRegisterDE
     Dim SelectedRowIndex As Integer
 
 #Region "FORM LOAD EVENTS"
+
+  
     Private Sub FrmSOC_IdentificationDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
@@ -667,5 +669,9 @@ Public Class FrmIdentificationRegisterDE
 
 
 
+    Private Sub FrmIdentificationRegisterDE_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        On Error Resume Next
+        frmIdentificationCulpritDetails.Close()
+    End Sub
 
 End Class
