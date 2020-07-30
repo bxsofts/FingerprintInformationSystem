@@ -569,6 +569,7 @@ Public Class FrmIdentificationRegisterDE
                 frmMainInterface.JoinedIDRBindingSource.Position = frmMainInterface.JoinedIDRBindingSource.Find("IdentificationNumber", Me.txtIdentificationNumber.Text.Trim)
 
                 ShowDesktopAlert("New Identification Record entered successfully.")
+                frmMainInterface.InsertOrUpdateLastModificationDate(Now, "Added Identification No. " & Me.txtIdentificationNumber.Text.Trim)
             Else ' Edit mode
                 Me.IdentificationRegisterTableAdapter1.UpdateQuery(Me.txtIdentificationNumber.Text.Trim, SOCNumber, Me.dtIdentificationDate.Value, Me.cmbIdentifyingOfficer.Text.Trim, CPsIdentified.ToString, CulpritCount.Trim, CulpritName.Trim, Address.Trim, FingersIdentified.Trim, Classification.Trim, DANumber.Trim, IdentifiedFrom.Trim, Remarks.Trim, IDRN, PreviousCaseDetails.Trim, Pin.Trim, IDRSerialNumber)
 
@@ -603,8 +604,8 @@ Public Class FrmIdentificationRegisterDE
                     End If
                 End If
 
-
                 ShowDesktopAlert("Selected Identification Record updated successfully.")
+                frmMainInterface.InsertOrUpdateLastModificationDate(Now, "Edited Identification No. " & Me.txtIdentificationNumber.Text.Trim)
             End If
 
 
@@ -626,6 +627,7 @@ Public Class FrmIdentificationRegisterDE
 
             ClearIDFields()
 
+            frmMainInterface.DisplayDatabaseInformation()
 
 
         Catch ex As Exception
