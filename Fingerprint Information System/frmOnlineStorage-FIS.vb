@@ -68,7 +68,6 @@ Public Class frmFISBackupList
     Private Sub frmFISBakupList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
 
-
             Me.Cursor = Cursors.WaitCursor
 
             If SuperAdmin Then
@@ -130,7 +129,6 @@ Public Class frmFISBackupList
 
     Private Sub CreateServiceAndLoadData(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwListFiles.DoWork
         blListIsLoading = True
-        Me.Cursor = Cursors.WaitCursor
         Try
             If ServiceCreated = False Then
                 Dim Scopes As String() = {DriveService.Scope.Drive}
@@ -143,7 +141,6 @@ Public Class frmFISBackupList
             GetDriveUsageDetails()
             If Not blPasswordFetched Then blPasswordFetched = GetAdminPasswords()
 
-            Me.Cursor = Cursors.Default
         Catch ex As Exception
             blListIsLoading = False
             ServiceCreated = False

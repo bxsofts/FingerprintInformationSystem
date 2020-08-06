@@ -19216,6 +19216,37 @@ errhandler:
     End Function
 #End Region
 
+
+#Region "SEND STATEMENTS"
+
+    Private Sub SendStatements() Handles btnSendStmtToRangeTI.Click
+        Try
+            If FullDistrictName = "" Or FullDistrictName = "FullDistrict" Then
+                MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+
+            If blDBIsInPreviewMode Then
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot open.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Me.Cursor = Cursors.WaitCursor
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+            Me.Cursor = Cursors.Default
+            frmOnlineSendStatements.ShowDialog()
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+#End Region
+
     '---------------------------------------------END APPLICATION-----------------------------------
 
 #Region "END APPLICATION"
@@ -19477,5 +19508,5 @@ errhandler:
         End Try
     End Sub
 
-
+   
 End Class
