@@ -24,6 +24,16 @@ Partial Class frmOnlineSendStatements
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOnlineSendStatements))
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.lblSOC = New DevComponents.DotNetBar.LabelX()
+        Me.lblQuarterlyPerf = New DevComponents.DotNetBar.LabelX()
+        Me.lblGrave = New DevComponents.DotNetBar.LabelX()
+        Me.lblID = New DevComponents.DotNetBar.LabelX()
+        Me.lblMonthPerf = New DevComponents.DotNetBar.LabelX()
+        Me.chkQuarterlyPerf = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
+        Me.txtQuarter = New DevComponents.Editors.IntegerInput()
+        Me.txtQuarterYear = New DevComponents.Editors.IntegerInput()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.ListViewEx1 = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.District = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FolderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -33,14 +43,15 @@ Partial Class frmOnlineSendStatements
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.txtYear = New DevComponents.Editors.IntegerInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
-        Me.chkPerf = New DevComponents.DotNetBar.Controls.CheckBoxX()
+        Me.chkMonthlyPerf = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkID = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkGrave = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.chkSOC = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
-        Me.bgwUpdateFileContent = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
+        CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -48,6 +59,16 @@ Partial Class frmOnlineSendStatements
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx1.Controls.Add(Me.lblSOC)
+        Me.PanelEx1.Controls.Add(Me.lblQuarterlyPerf)
+        Me.PanelEx1.Controls.Add(Me.lblGrave)
+        Me.PanelEx1.Controls.Add(Me.lblID)
+        Me.PanelEx1.Controls.Add(Me.lblMonthPerf)
+        Me.PanelEx1.Controls.Add(Me.chkQuarterlyPerf)
+        Me.PanelEx1.Controls.Add(Me.LabelX6)
+        Me.PanelEx1.Controls.Add(Me.txtQuarter)
+        Me.PanelEx1.Controls.Add(Me.txtQuarterYear)
+        Me.PanelEx1.Controls.Add(Me.LabelX5)
         Me.PanelEx1.Controls.Add(Me.ListViewEx1)
         Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.btnSend)
@@ -55,7 +76,7 @@ Partial Class frmOnlineSendStatements
         Me.PanelEx1.Controls.Add(Me.LabelX3)
         Me.PanelEx1.Controls.Add(Me.txtYear)
         Me.PanelEx1.Controls.Add(Me.cmbMonth)
-        Me.PanelEx1.Controls.Add(Me.chkPerf)
+        Me.PanelEx1.Controls.Add(Me.chkMonthlyPerf)
         Me.PanelEx1.Controls.Add(Me.chkID)
         Me.PanelEx1.Controls.Add(Me.chkGrave)
         Me.PanelEx1.Controls.Add(Me.chkSOC)
@@ -71,6 +92,156 @@ Partial Class frmOnlineSendStatements
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
+        '
+        'lblSOC
+        '
+        Me.lblSOC.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC.Location = New System.Drawing.Point(188, 54)
+        Me.lblSOC.Name = "lblSOC"
+        Me.lblSOC.Size = New System.Drawing.Size(47, 18)
+        Me.lblSOC.TabIndex = 61
+        Me.lblSOC.Text = "LabelX1"
+        '
+        'lblQuarterlyPerf
+        '
+        Me.lblQuarterlyPerf.AutoSize = True
+        '
+        '
+        '
+        Me.lblQuarterlyPerf.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblQuarterlyPerf.Location = New System.Drawing.Point(188, 287)
+        Me.lblQuarterlyPerf.Name = "lblQuarterlyPerf"
+        Me.lblQuarterlyPerf.Size = New System.Drawing.Size(47, 18)
+        Me.lblQuarterlyPerf.TabIndex = 60
+        Me.lblQuarterlyPerf.Text = "LabelX9"
+        '
+        'lblGrave
+        '
+        Me.lblGrave.AutoSize = True
+        '
+        '
+        '
+        Me.lblGrave.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblGrave.Location = New System.Drawing.Point(188, 93)
+        Me.lblGrave.Name = "lblGrave"
+        Me.lblGrave.Size = New System.Drawing.Size(47, 18)
+        Me.lblGrave.TabIndex = 59
+        Me.lblGrave.Text = "LabelX8"
+        '
+        'lblID
+        '
+        Me.lblID.AutoSize = True
+        '
+        '
+        '
+        Me.lblID.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID.Location = New System.Drawing.Point(188, 132)
+        Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(47, 18)
+        Me.lblID.TabIndex = 58
+        Me.lblID.Text = "LabelX7"
+        '
+        'lblMonthPerf
+        '
+        Me.lblMonthPerf.AutoSize = True
+        '
+        '
+        '
+        Me.lblMonthPerf.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblMonthPerf.Location = New System.Drawing.Point(188, 171)
+        Me.lblMonthPerf.Name = "lblMonthPerf"
+        Me.lblMonthPerf.Size = New System.Drawing.Size(47, 18)
+        Me.lblMonthPerf.TabIndex = 57
+        Me.lblMonthPerf.Text = "LabelX2"
+        '
+        'chkQuarterlyPerf
+        '
+        Me.chkQuarterlyPerf.AutoSize = True
+        '
+        '
+        '
+        Me.chkQuarterlyPerf.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkQuarterlyPerf.Location = New System.Drawing.Point(65, 287)
+        Me.chkQuarterlyPerf.Name = "chkQuarterlyPerf"
+        Me.chkQuarterlyPerf.Size = New System.Drawing.Size(110, 18)
+        Me.chkQuarterlyPerf.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkQuarterlyPerf.TabIndex = 55
+        Me.chkQuarterlyPerf.TabStop = False
+        Me.chkQuarterlyPerf.Text = "Quarterly Work"
+        '
+        'LabelX6
+        '
+        Me.LabelX6.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX6.Location = New System.Drawing.Point(10, 241)
+        Me.LabelX6.Name = "LabelX6"
+        Me.LabelX6.Size = New System.Drawing.Size(46, 18)
+        Me.LabelX6.TabIndex = 53
+        Me.LabelX6.Text = "Quarter"
+        '
+        'txtQuarter
+        '
+        '
+        '
+        '
+        Me.txtQuarter.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtQuarter.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtQuarter.ButtonCustom.Image = CType(resources.GetObject("txtQuarter.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtQuarter.FocusHighlightEnabled = True
+        Me.txtQuarter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQuarter.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtQuarter.Location = New System.Drawing.Point(65, 236)
+        Me.txtQuarter.MaxValue = 4
+        Me.txtQuarter.MinValue = 1
+        Me.txtQuarter.MouseWheelValueChangeEnabled = False
+        Me.txtQuarter.Name = "txtQuarter"
+        Me.txtQuarter.ShowUpDown = True
+        Me.txtQuarter.Size = New System.Drawing.Size(110, 29)
+        Me.txtQuarter.TabIndex = 3
+        Me.txtQuarter.Value = 4
+        Me.txtQuarter.WatermarkText = "Quarter"
+        '
+        'txtQuarterYear
+        '
+        '
+        '
+        '
+        Me.txtQuarterYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtQuarterYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtQuarterYear.ButtonCustom.Image = CType(resources.GetObject("txtQuarterYear.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtQuarterYear.FocusHighlightEnabled = True
+        Me.txtQuarterYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQuarterYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtQuarterYear.Location = New System.Drawing.Point(222, 236)
+        Me.txtQuarterYear.MaxValue = 2099
+        Me.txtQuarterYear.MinValue = 1900
+        Me.txtQuarterYear.MouseWheelValueChangeEnabled = False
+        Me.txtQuarterYear.Name = "txtQuarterYear"
+        Me.txtQuarterYear.ShowUpDown = True
+        Me.txtQuarterYear.Size = New System.Drawing.Size(64, 29)
+        Me.txtQuarterYear.TabIndex = 4
+        Me.txtQuarterYear.Value = 1900
+        Me.txtQuarterYear.WatermarkText = "Year"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Location = New System.Drawing.Point(188, 241)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(28, 18)
+        Me.LabelX5.TabIndex = 54
+        Me.LabelX5.Text = "Year"
         '
         'ListViewEx1
         '
@@ -97,6 +268,7 @@ Partial Class frmOnlineSendStatements
         Me.ListViewEx1.ShowItemToolTips = True
         Me.ListViewEx1.Size = New System.Drawing.Size(262, 392)
         Me.ListViewEx1.TabIndex = 50
+        Me.ListViewEx1.TabStop = False
         Me.ListViewEx1.UseCompatibleStateImageBehavior = False
         Me.ListViewEx1.View = System.Windows.Forms.View.Details
         '
@@ -135,7 +307,7 @@ Partial Class frmOnlineSendStatements
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(101, 56)
         Me.btnSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnSend.TabIndex = 35
+        Me.btnSend.TabIndex = 5
         Me.btnSend.Text = "Send"
         '
         'LabelX4
@@ -181,7 +353,7 @@ Partial Class frmOnlineSendStatements
         Me.txtYear.Name = "txtYear"
         Me.txtYear.ShowUpDown = True
         Me.txtYear.Size = New System.Drawing.Size(64, 29)
-        Me.txtYear.TabIndex = 32
+        Me.txtYear.TabIndex = 2
         Me.txtYear.Value = 1900
         Me.txtYear.WatermarkText = "Year"
         '
@@ -200,22 +372,23 @@ Partial Class frmOnlineSendStatements
         Me.cmbMonth.MaxLength = 255
         Me.cmbMonth.Name = "cmbMonth"
         Me.cmbMonth.Size = New System.Drawing.Size(110, 29)
-        Me.cmbMonth.TabIndex = 31
+        Me.cmbMonth.TabIndex = 1
         Me.cmbMonth.WatermarkText = "Month"
         '
-        'chkPerf
+        'chkMonthlyPerf
         '
-        Me.chkPerf.AutoSize = True
+        Me.chkMonthlyPerf.AutoSize = True
         '
         '
         '
-        Me.chkPerf.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkPerf.Location = New System.Drawing.Point(65, 189)
-        Me.chkPerf.Name = "chkPerf"
-        Me.chkPerf.Size = New System.Drawing.Size(87, 18)
-        Me.chkPerf.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.chkPerf.TabIndex = 4
-        Me.chkPerf.Text = "Work Done"
+        Me.chkMonthlyPerf.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.chkMonthlyPerf.Location = New System.Drawing.Point(65, 171)
+        Me.chkMonthlyPerf.Name = "chkMonthlyPerf"
+        Me.chkMonthlyPerf.Size = New System.Drawing.Size(87, 18)
+        Me.chkMonthlyPerf.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.chkMonthlyPerf.TabIndex = 4
+        Me.chkMonthlyPerf.TabStop = False
+        Me.chkMonthlyPerf.Text = "Work Done"
         '
         'chkID
         '
@@ -224,11 +397,12 @@ Partial Class frmOnlineSendStatements
         '
         '
         Me.chkID.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkID.Location = New System.Drawing.Point(65, 150)
+        Me.chkID.Location = New System.Drawing.Point(65, 132)
         Me.chkID.Name = "chkID"
         Me.chkID.Size = New System.Drawing.Size(98, 18)
         Me.chkID.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.chkID.TabIndex = 3
+        Me.chkID.TabStop = False
         Me.chkID.Text = "Identification"
         '
         'chkGrave
@@ -238,11 +412,12 @@ Partial Class frmOnlineSendStatements
         '
         '
         Me.chkGrave.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkGrave.Location = New System.Drawing.Point(65, 111)
+        Me.chkGrave.Location = New System.Drawing.Point(65, 93)
         Me.chkGrave.Name = "chkGrave"
         Me.chkGrave.Size = New System.Drawing.Size(92, 18)
         Me.chkGrave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.chkGrave.TabIndex = 2
+        Me.chkGrave.TabStop = False
         Me.chkGrave.Text = "Grave Crime"
         '
         'chkSOC
@@ -252,11 +427,12 @@ Partial Class frmOnlineSendStatements
         '
         '
         Me.chkSOC.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.chkSOC.Location = New System.Drawing.Point(65, 72)
+        Me.chkSOC.Location = New System.Drawing.Point(65, 54)
         Me.chkSOC.Name = "chkSOC"
         Me.chkSOC.Size = New System.Drawing.Size(108, 18)
         Me.chkSOC.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.chkSOC.TabIndex = 1
+        Me.chkSOC.TabStop = False
         Me.chkSOC.Text = "SOC Statement"
         '
         'bgwListFiles
@@ -269,11 +445,6 @@ Partial Class frmOnlineSendStatements
         Me.bgwUploadFile.WorkerReportsProgress = True
         Me.bgwUploadFile.WorkerSupportsCancellation = True
         '
-        'bgwUpdateFileContent
-        '
-        Me.bgwUpdateFileContent.WorkerReportsProgress = True
-        Me.bgwUpdateFileContent.WorkerSupportsCancellation = True
-        '
         'frmOnlineSendStatements
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -283,7 +454,7 @@ Partial Class frmOnlineSendStatements
         Me.DoubleBuffered = True
         Me.EnableGlass = False
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -294,12 +465,14 @@ Partial Class frmOnlineSendStatements
         Me.TitleText = "<b>Send Statements to Range TI</b>"
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
+        CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
-    Friend WithEvents chkPerf As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents chkMonthlyPerf As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkID As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkGrave As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents chkSOC As DevComponents.DotNetBar.Controls.CheckBoxX
@@ -311,8 +484,17 @@ Partial Class frmOnlineSendStatements
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents bgwListFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwUploadFile As System.ComponentModel.BackgroundWorker
-    Friend WithEvents bgwUpdateFileContent As System.ComponentModel.BackgroundWorker
     Private WithEvents ListViewEx1 As DevComponents.DotNetBar.Controls.ListViewEx
     Private WithEvents District As System.Windows.Forms.ColumnHeader
     Friend WithEvents FolderID As System.Windows.Forms.ColumnHeader
+    Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents txtQuarter As DevComponents.Editors.IntegerInput
+    Friend WithEvents txtQuarterYear As DevComponents.Editors.IntegerInput
+    Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents chkQuarterlyPerf As DevComponents.DotNetBar.Controls.CheckBoxX
+    Friend WithEvents lblSOC As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblQuarterlyPerf As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblGrave As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblMonthPerf As DevComponents.DotNetBar.LabelX
 End Class

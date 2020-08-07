@@ -17929,6 +17929,7 @@ errhandler:
                     dtIFTFolderViewTime = Results.Files(0).ViewedByMeTime
                     Dim viewedtime As String = Results.Files(0).ViewedByMeTimeRaw
 
+                    '  List.Q = "trashed = false and mimeType != 'application/vnd.google-apps.folder' and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "'"
                     List.Q = "trashed = false and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "'"
                     List.Fields = "files(id, modifiedTime)"
                     Results = List.Execute
@@ -18944,7 +18945,10 @@ errhandler:
             Dim FISAccountServiceCredential As GoogleCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
-            If FullDistrictName <> "" And FullDistrictName <> "FullDistrict" Then CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService)
+            If FullDistrictName <> "" And FullDistrictName <> "FullDistrict" Then
+                CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService)
+            End If
+
 
             DownloadHolidayList()
 

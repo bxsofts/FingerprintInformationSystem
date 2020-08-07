@@ -240,12 +240,17 @@ Public Class frmFISBackupList
                     item.SubItems.Add("") 'size for folder
                     item.ImageIndex = ImageIndex.Folder
                     ResultIsFolder = True
+                    Dim modifiedtime As Date = Result.ModifiedTime
+                   
+                    If blUnreadIFTFileAvailable Or CurrentFolderPath.Contains("\My Drive\Internal File Transfer\" & FullDistrictName) Then
+                        If modifiedtime > dtIFTFolderViewTime Then item.ForeColor = Color.Red
+                    End If
                 Else
                     Dim modifiedtime As Date = Result.ModifiedTime
                     item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                     item.ImageIndex = GetImageIndex(My.Computer.FileSystem.GetFileInfo(Result.Name).Extension)
                     ResultIsFolder = False
-                    If blUnreadIFTFileAvailable Then
+                    If blUnreadIFTFileAvailable Or CurrentFolderPath.Contains("\My Drive\Internal File Transfer\" & FullDistrictName) Then
                         If modifiedtime > dtIFTFolderViewTime Then item.ForeColor = Color.Red
                     End If
                 End If
@@ -437,7 +442,7 @@ Public Class frmFISBackupList
 
 
     Private Sub RefreshFileList() Handles btnRefresh.Click, btnRefreshCM.Click
-
+        '  blUnreadIFTFileAvailable = False
         If blDownloadIsProgressing Or blUploadIsProgressing Or blListIsLoading Then
             ShowFileTransferInProgressMessage()
             Exit Sub
