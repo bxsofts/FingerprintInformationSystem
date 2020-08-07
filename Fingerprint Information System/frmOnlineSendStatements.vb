@@ -18,10 +18,16 @@ Public Class frmOnlineSendStatements
 
     Public uBytesUploaded As Long
     Public uUploadStatus As UploadStatus
-    Dim uSelectedFile As String = ""
+    Public dFileSize As Long
+    Public dFormatedFileSize As String = ""
+
     Dim blServiceCreated As Boolean = False
     Dim blCheckBoxes As Boolean = False
 
+    Dim SelectedDistrict As String = ""
+    Dim SelectedDistrictID As String = ""
+    Dim SelectedMonth As Integer
+    Dim SelectedYear As String = ""
     Private Sub frmOnlineSendStatements_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
 
@@ -90,14 +96,17 @@ Public Class frmOnlineSendStatements
         chkSOC.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkSOC.Enabled = chkSOC.Checked
 
+        StmtFolder = SuggestedLocation & "\Grave Crime Statement\" & Me.txtYear.Text
         StmtFileName = StmtFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
         chkGrave.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkGrave.Enabled = chkGrave.Checked
 
+        StmtFolder = SuggestedLocation & "\Identification Statement\" & Me.txtYear.Text
         StmtFileName = StmtFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
         chkID.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkID.Enabled = chkID.Checked
 
+        StmtFolder = SuggestedLocation & "\Performance Statement"
         StmtFileName = StmtFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
         chkPerf.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkPerf.Enabled = chkPerf.Checked
@@ -196,9 +205,253 @@ Public Class frmOnlineSendStatements
             Exit Sub
         End If
 
-        Dim SelectedItemText As String = Me.ListViewEx1.SelectedItems(0).Text
-        Dim SelectedItemID As String = Me.ListViewEx1.SelectedItems(0).SubItems(1).Text
-        My.Computer.Registry.SetValue(strGeneralSettingsPath, "RangeDistrict", SelectedItemText, Microsoft.Win32.RegistryValueKind.String)
+        Dim FileList(3) As String
+        Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
+        Dim n As Integer = 0
+
+        Dim StmtFolder As String = SuggestedLocation & "\SOC Statement\" & Me.txtYear.Text
+        Dim StmtFileName As String = StmtFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        If chkSOC.Checked Then
+            FileList(0) = StmtFileName
+            n = n + 1
+        Else
+            FileList(0) = ""
+        End If
+
+        If FileInUse(StmtFileName) Then
+            MessageBoxEx.Show("SOC Statement File is open in MS Word. Please close it.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        StmtFolder = SuggestedLocation & "\Grave Crime Statement\" & Me.txtYear.Text
+        StmtFileName = StmtFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        If chkGrave.Checked Then
+            FileList(1) = StmtFileName
+            n = n + 1
+        Else
+            FileList(1) = ""
+        End If
+
+        If FileInUse(StmtFileName) Then
+            MessageBoxEx.Show("Grave Crime Statement File is open in MS Word. Please close it.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        StmtFolder = SuggestedLocation & "\Identification Statement\" & Me.txtYear.Text
+        StmtFileName = StmtFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        If chkID.Checked Then
+            FileList(2) = StmtFileName
+            n = n + 1
+        Else
+            FileList(2) = ""
+        End If
+
+        If FileInUse(StmtFileName) Then
+            MessageBoxEx.Show("Identification Statement File is open in MS Word. Please close it.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        StmtFolder = SuggestedLocation & "\Performance Statement"
+        StmtFileName = StmtFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        If chkPerf.Checked Then
+            FileList(3) = StmtFileName
+            n = n + 1
+        Else
+            FileList(3) = ""
+        End If
+
+        If FileInUse(StmtFileName) Then
+            MessageBoxEx.Show("Monthly Performance Statement File is open in MS Word. Please close it.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        SelectedDistrict = Me.ListViewEx1.SelectedItems(0).Text
+        SelectedDistrictID = Me.ListViewEx1.SelectedItems(0).SubItems(1).Text
+        SelectedMonth = Me.cmbMonth.SelectedIndex + 1
+        SelectedYear = Me.txtYear.Text
+
+        My.Computer.Registry.SetValue(strGeneralSettingsPath, "RangeDistrict", SelectedDistrict, Microsoft.Win32.RegistryValueKind.String)
+
+        Me.CircularProgress1.ProgressText = "1 & n"
+        Me.CircularProgress1.IsRunning = True
+        Me.CircularProgress1.Show()
+        FileOwner = ShortOfficeName & "_" & ShortDistrictName
+
+        bgwUploadFile.RunWorkerAsync(FileList)
     End Sub
 
+    Private Function CreateFolderAndGetID(FolderName As String, ParentFolderID As String)
+        Try
+            Dim id As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FolderName & "' and '" & ParentFolderID & "' in parents"
+
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                Dim NewDirectory = New Google.Apis.Drive.v3.Data.File
+                Dim parentlist As New List(Of String)
+                parentlist.Add(ParentFolderID) 'parent forlder
+
+                NewDirectory.Parents = parentlist
+                NewDirectory.Name = FolderName
+                NewDirectory.MimeType = "application/vnd.google-apps.folder"
+                NewDirectory.Description = FileOwner
+                NewDirectory = FISService.Files.Create(NewDirectory).Execute
+                id = NewDirectory.Id
+            Else
+                id = Results.Files(0).Id
+            End If
+
+            Return id
+
+
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+    Private Sub bgwUploadFile_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadFile.DoWork
+        Try
+            Dim monthlyfolderid As String = CreateFolderAndGetID("Monthly Statements - " & FullDistrictName, SelectedDistrictID)
+
+            Dim FileList() As String = e.Argument
+
+            For i = 0 To 3
+
+                Dim SelectedFile = FileList(i)
+                If SelectedFile = "" Then
+                    Continue For
+                End If
+
+                Dim SelectedFileName As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Name
+
+                dFileSize = My.Computer.FileSystem.GetFileInfo(SelectedFile).Length
+                dFormatedFileSize = CalculateFileSize(dFileSize)
+
+                Dim body As New Google.Apis.Drive.v3.Data.File()
+                body.Name = SelectedFileName
+                Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
+                body.MimeType = "files/" & extension.Replace(".", "")
+                body.Description = FileOwner
+
+                Dim parentlist As New List(Of String)
+                parentlist.Add(monthlyfolderid)
+                body.Parents = parentlist
+
+                Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
+                Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+                uBytesUploaded = 0
+                bgwUploadFile.ReportProgress(i + 1, SelectedFileName)
+                bgwUploadFile.ReportProgress(i + 1, uBytesUploaded)
+
+                Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+
+                AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+
+                UploadRequest.Fields = "id"
+                UploadRequest.Upload()
+
+                If uUploadStatus = UploadStatus.Completed Then
+                    Dim file As Google.Apis.Drive.v3.Data.File = UploadRequest.ResponseBody
+                    Dim item As ListViewItem = New ListViewItem(file.Name)
+                    Dim modifiedtime As Date = file.ModifiedTime
+                    item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
+                    item.SubItems.Add(CalculateFileSize(file.Size))
+                    item.SubItems.Add(file.Id)
+                    item.SubItems.Add(file.Description)
+                    item.ImageIndex = GetImageIndex(extension)
+                    UploadedFileCount += 1
+                    bgwUploadFile.ReportProgress(100, item)
+                End If
+
+                If uUploadStatus = UploadStatus.Failed Then
+                    FailedFileCount += 1
+                End If
+
+                Stream.Close()
+            Next
+
+            GetDriveUsageDetails()
+
+            If CurrentFolderPath = "\My Drive\Internal File Transfer\" & FullDistrictName Then
+                Dim tFile = New Google.Apis.Drive.v3.Data.File
+                tFile.ViewedByMeTime = Now
+                FISService.Files.Update(tFile, CurrentFolderID).Execute()
+            End If
+
+        Catch ex As Exception
+            blUploadIsProgressing = False
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
+
+        Control.CheckForIllegalCrossThreadCalls = False
+        uBytesUploaded = Progress.BytesSent
+        uUploadStatus = Progress.Status
+        Dim percent = CInt((uBytesUploaded / dFileSize) * 100)
+        bgwUploadFile.ReportProgress(percent, uBytesUploaded)
+    End Sub
+
+    Private Sub bgwUploadFile_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwUploadFile.ProgressChanged
+
+        If TypeOf e.UserState Is String Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalFileCount
+            lblProgressStatus.Text = e.UserState
+        End If
+
+        If TypeOf e.UserState Is Long Then
+            lblProgressStatus.Text = CalculateFileSize(uBytesUploaded) & "/" & dFormatedFileSize
+        End If
+
+        If TypeOf e.UserState Is ListViewItem Then
+            listViewEx1.Items.Add(e.UserState)
+        End If
+    End Sub
+    Private Sub bgwUploadFile_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwUploadFile.RunWorkerCompleted
+
+        Me.Cursor = Cursors.Default
+        HideProgressControls()
+        blUploadIsProgressing = False
+        lblItemCount.Text = "Item Count: " & Me.listViewEx1.Items.Count - 1
+
+        If listViewEx1.Items.Count > 0 Then
+            Me.listViewEx1.SelectedItems.Clear()
+            Me.listViewEx1.Items(listViewEx1.Items.Count - 1).Selected = True
+        End If
+
+        If TotalFileCount = 1 And UploadedFileCount = 1 Then
+            ShowDesktopAlert("File uploaded successfully.")
+        End If
+
+        If TotalFileCount = 1 And SkippedFileCount = 1 Then
+            ShowDesktopAlert("File skipped as it already exists.")
+        End If
+
+        If TotalFileCount = 1 And FailedFileCount = 1 Then
+            ShowDesktopAlert("File upload failed.")
+        End If
+
+        If TotalFileCount > 1 Then
+            ShowDesktopAlert(UploadedFileCount & IIf(UploadedFileCount = 1, " file ", " files ") & "uploaded." & vbNewLine & SkippedFileCount & IIf(SkippedFileCount = 1, " file ", " files ") & "skipped." & vbNewLine & FailedFileCount & IIf(FailedFileCount = 1, " file ", " files ") & "failed.")
+        End If
+
+    End Sub
 End Class
