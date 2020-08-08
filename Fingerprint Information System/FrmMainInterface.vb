@@ -14069,7 +14069,7 @@ errhandler:
         End Try
     End Function
 
-    Private Sub GenerateIdentificationLetter() Handles btnGenerateIdentificationLetter.Click, btnGenerateIdentificationLetter2.Click
+    Private Sub GenerateIdentificationLetterSHO() Handles btnGenerateIdentificationLetter.Click, btnGenerateIdentificationLetter2.Click
 
         Try
             If Me.JoinedIDRDataGrid.RowCount = 0 Then
@@ -14368,25 +14368,25 @@ errhandler:
 
             WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
 
-                WordApp.Selection.TypeParagraph()
-                WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
+            WordApp.Selection.TypeParagraph()
 
-                WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
-                WordApp.Selection.ParagraphFormat.LineSpacing = 14
+            WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
+            WordApp.Selection.ParagraphFormat.LineSpacing = 14
 
-                WordApp.Selection.TypeText(IdentificationText.Replace("..", "."))
+            WordApp.Selection.TypeText(IdentificationText.Replace("..", "."))
 
-                Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
-                Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
+            Dim IDRNumber As String = Me.JoinedIDRDataGrid.SelectedCells(0).Value
+            Me.CulpritsRegisterTableAdapter1.FillByIdentificationNumber(fds.CulpritsRegister, IDRNumber)
 
-                For i = 0 To fds.CulpritsRegister.Count - 1
-                    Dim cpid = fds.CulpritsRegister(i).CPsIdentified
-                    Dim previousdetails As String = fds.CulpritsRegister(i).PreviousCaseDetails
+            For i = 0 To fds.CulpritsRegister.Count - 1
+                Dim cpid = fds.CulpritsRegister(i).CPsIdentified
+                Dim previousdetails As String = fds.CulpritsRegister(i).PreviousCaseDetails
 
                 If cpid = "1" Then
 
                     If identifiedfrom = "accused" Then
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the accused ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the accused ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14396,14 +14396,14 @@ errhandler:
                         WordApp.Selection.TypeText(" His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
 
                     ElseIf identifiedfrom = "suspects" Then
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the suspect ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the suspect ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
 
                         WordApp.Selection.Font.Bold = 0
                     Else
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14442,44 +14442,44 @@ errhandler:
                         WordApp.Selection.TypeText(" He is accused in " & IIf(previousdetails.EndsWith("."), previousdetails & " ", previousdetails & ". ") & "His fingerprint slip is registered in the Bureau records as Daily Arrest Slip Number " & fds.CulpritsRegister(i).DANumber & ".")
                     End If
                 End If
-                Next
+            Next
 
 
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & "This is for information.")
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & "This is for information.")
 
 
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
 
-                If blUseTIinLetter Then
-                    WordApp.Selection.TypeParagraph()
-                    WordApp.Selection.TypeParagraph()
-                    WordApp.Selection.TypeParagraph()
-                    WordApp.Selection.ParagraphFormat.Space1()
+            If blUseTIinLetter Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.ParagraphFormat.Space1()
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
-                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
-                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
-                    WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
-                End If
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
 
             If My.Computer.FileSystem.FileExists(sfilename) = False Then
                 aDoc.SaveAs(sfilename, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
             End If
 
-                ClosePleaseWaitForm()
+            ClosePleaseWaitForm()
 
-                WordApp.Visible = True
-                WordApp.Activate()
-                WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
-                aDoc.Activate()
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            aDoc.Activate()
 
-                aDoc = Nothing
-                WordApp = Nothing
+            aDoc = Nothing
+            WordApp = Nothing
 
-                If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
         Catch ex As Exception
             ClosePleaseWaitForm()
@@ -14783,7 +14783,7 @@ errhandler:
                 If cpid = "1" Then
 
                     If identifiedfrom = "accused" Then
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the accused ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the accused ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14797,7 +14797,7 @@ errhandler:
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
 
                     ElseIf identifiedfrom = "suspects" Then
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the suspect ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of the suspect ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14808,7 +14808,7 @@ errhandler:
                         WordApp.Selection.TypeText(vbTab & vbTab & "Henry Classification - " & fds.CulpritsRegister(i).HenryClassification)
 
                     ElseIf identifiedfrom = "afis" Then
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")
@@ -14826,7 +14826,7 @@ errhandler:
                         WordApp.Selection.TypeText(vbTab & vbTab & "AFIS PIN - " & fds.CulpritsRegister(i).COID)
 
                     Else
-                        WordApp.Selection.TypeText("one chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
+                        WordApp.Selection.TypeText(IIf(CPD = 1, "the", "one") & " chance print has been identified as the " & fds.CulpritsRegister(i).FingersIdentified & " finger impression of one ")
                         WordApp.Selection.Font.Bold = 1
 
                         WordApp.Selection.TypeText(fds.CulpritsRegister(i).CulpritName & ", " & fds.CulpritsRegister(i).Address.Replace(vbCrLf, ", ") & ".")

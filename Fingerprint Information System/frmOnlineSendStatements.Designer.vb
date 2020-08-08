@@ -49,6 +49,7 @@ Partial Class frmOnlineSendStatements
         Me.chkSOC = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.bgwListFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
+        Me.bgwCheckSentStatus = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -445,6 +446,11 @@ Partial Class frmOnlineSendStatements
         Me.bgwUploadFile.WorkerReportsProgress = True
         Me.bgwUploadFile.WorkerSupportsCancellation = True
         '
+        'bgwCheckSentStatus
+        '
+        Me.bgwCheckSentStatus.WorkerReportsProgress = True
+        Me.bgwCheckSentStatus.WorkerSupportsCancellation = True
+        '
         'frmOnlineSendStatements
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -497,4 +503,5 @@ Partial Class frmOnlineSendStatements
     Friend WithEvents lblGrave As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblID As DevComponents.DotNetBar.LabelX
     Friend WithEvents lblMonthPerf As DevComponents.DotNetBar.LabelX
+    Friend WithEvents bgwCheckSentStatus As System.ComponentModel.BackgroundWorker
 End Class

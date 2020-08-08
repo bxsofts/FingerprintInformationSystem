@@ -50,8 +50,6 @@ Public Class frmOnlineSendStatements
             End If
             blServiceCreated = False
             Me.ListViewEx1.Items.Clear()
-            bgwListFiles.RunWorkerAsync("root")
-
             blCheckBoxes = False
             Me.CircularProgress1.Visible = False
             Me.CircularProgress1.ProgressColor = GetProgressColor()
@@ -100,7 +98,7 @@ Public Class frmOnlineSendStatements
             blCheckBoxes = True
             CheckForMonthlyStatementFiles()
             CheckForQuarterlyStatementFiles()
-
+            bgwListFiles.RunWorkerAsync("root")
             
 
         Catch ex As Exception
@@ -166,6 +164,9 @@ Public Class frmOnlineSendStatements
             chkQuarterlyPerf.Checked = False
         End If
     End Sub
+
+
+#Region "LOAD DISTRICT LIST"
 
     Private Sub LoadDistrictList(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwListFiles.DoWork
         Try
@@ -241,8 +242,124 @@ Public Class frmOnlineSendStatements
             End If
         Next
 
+        If Me.ListViewEx1.SelectedItems.Count = 1 Then
+            SelectedDistrict = Me.ListViewEx1.SelectedItems(0).Text
+            SelectedDistrictID = Me.ListViewEx1.SelectedItems(0).SubItems(1).Text
+            SelectedMonth = Me.cmbMonth.SelectedIndex + 1
+            SelectedYear = Me.txtYear.Text
+            SelectedQuarter = Me.txtQuarter.Text
+            SelectedQuarterYear = Me.txtQuarterYear.Text
+            ShowLabels(True)
+            bgwCheckSentStatus.RunWorkerAsync()
+        End If
+
     End Sub
 
+#End Region
+
+
+#Region "CHECK FILE SENT STATUS"
+
+    Private Sub bgwCheckSentStatus_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwCheckSentStatus.DoWork
+        Try
+            Dim monthlyfolderid As String = CreateFolderAndGetID("Statements - " & FullDistrictName, SelectedDistrictID)
+            If monthlyfolderid = "" Then Exit Sub
+
+            Dim List As FilesResource.ListRequest = FISService.Files.List()
+            Dim NewFileName As String = ""
+
+            NewFileName = ShortDistrictName.ToUpper & "-" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & "SOC.docx"
+            List.Q = "name = '" & NewFileName & "' and '" & monthlyfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+            Dim cnt = Results.Files.Count
+
+            If cnt > 0 Then
+                bgwCheckSentStatus.ReportProgress(100, "soc Already Sent")
+            End If
+
+            NewFileName = ShortDistrictName.ToUpper & "-" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & "Grave.docx"
+            List.Q = "name = '" & NewFileName & "' and '" & monthlyfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+            cnt = Results.Files.Count
+
+            If cnt > 0 Then
+                bgwCheckSentStatus.ReportProgress(100, "gra Already Sent")
+            End If
+
+            NewFileName = ShortDistrictName.ToUpper & "-" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & "Identification.docx"
+            List.Q = "name = '" & NewFileName & "' and '" & monthlyfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+            cnt = Results.Files.Count
+
+            If cnt > 0 Then
+                bgwCheckSentStatus.ReportProgress(100, "ide Already Sent")
+            End If
+
+            NewFileName = ShortDistrictName.ToUpper & "-" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & "WorkDone.docx"
+            List.Q = "name = '" & NewFileName & "' and '" & monthlyfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+            cnt = Results.Files.Count
+
+            If cnt > 0 Then
+                bgwCheckSentStatus.ReportProgress(100, "mon Already Sent")
+            End If
+
+            NewFileName = ShortDistrictName.ToUpper & "-" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & "WorkDone.docx"
+            List.Q = "name = '" & NewFileName & "' and '" & monthlyfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+            cnt = Results.Files.Count
+
+            If cnt > 0 Then
+                bgwCheckSentStatus.ReportProgress(100, "qua Already Sent")
+            End If
+        Catch ex As Exception
+            Me.Cursor = Cursors.Default
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+
+    Private Sub bgwCheckSentStatus_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwCheckSentStatus.ProgressChanged
+        If TypeOf e.UserState Is String Then
+            Dim stmt As String = e.UserState.ToString.Substring(0, 3)
+            Dim lblText As String = "Already Sent"
+            Dim clr As Color = Color.Brown
+            Select Case stmt
+                Case "soc"
+                    lblSOC.Text = lblText
+                    lblSOC.ForeColor = clr
+                Case "ide"
+                    lblID.Text = lblText
+                    lblID.ForeColor = clr
+                Case "gra"
+                    lblGrave.Text = lblText
+                    lblGrave.ForeColor = clr
+                Case "mon"
+                    lblMonthPerf.Text = lblText
+                    lblMonthPerf.ForeColor = clr
+                Case "qua"
+                    lblQuarterlyPerf.Text = lblText
+                    lblQuarterlyPerf.ForeColor = clr
+            End Select
+        End If
+    End Sub
+
+
+
+#End Region
+
+
+#Region "SEND FILES"
     Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
 
         If Me.ListViewEx1.Items.Count = 0 Then
@@ -549,4 +666,7 @@ Public Class frmOnlineSendStatements
         Me.CircularProgress1.Hide()
 
     End Sub
+
+#End Region
+
 End Class
