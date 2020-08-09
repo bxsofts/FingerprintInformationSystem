@@ -404,6 +404,7 @@ Public Class frmMainInterface
 
             Me.chkTakeAutoBackup.Checked = My.Computer.Registry.GetValue(strBackupSettingsPath, "AutoBackup", 1)
             Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "AutoBackupTime")
+
             Dim count As Integer = Me.FingerPrintDataSet.CommonSettings.Count
             If count = 1 Then
                 Dim autobackuptime As String = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
@@ -474,6 +475,18 @@ Public Class frmMainInterface
             blRestartApplication = True
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "1", Microsoft.Win32.RegistryValueKind.String)
             EndApplication()
+        End If
+
+        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "MinimumVersion")
+        Dim cnt As Integer = Me.FingerPrintDataSet.CommonSettings.Count
+        Dim minimumversion As String = "16.1"
+        If cnt = 0 Then
+            Me.CommonSettingsTableAdapter1.Insert("MinimumVersion", minimumversion, "")
+        Else
+            Dim version As String = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
+            If version <> minimumversion Then
+                Me.CommonSettingsTableAdapter1.UpdateQuery(minimumversion, "", "MinimumVersion")
+            End If
         End If
 
         CopyCredentialFiles()

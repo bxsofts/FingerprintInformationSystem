@@ -184,6 +184,12 @@ Public Class frmFISBackupList
                 bgwListFiles.ReportProgress(1, False) 'hide unread file icon in main form
             End If
 
+            If CurrentFolderPath.Contains("\My Drive\Internal File Transfer\" & FullDistrictName & "\Statements - ") Then
+                Dim tFile = New Google.Apis.Drive.v3.Data.File
+                tFile.ViewedByMeTime = Now
+                FISService.Files.Update(tFile, FolderID).Execute()
+            End If
+
             Dim List As FilesResource.ListRequest = FISService.Files.List()
 
             If ShowTrashedFiles Then
