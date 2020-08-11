@@ -19307,43 +19307,46 @@ errhandler:
         SavePSDatagridColumnOrder()
         SaveIDRDatagridColumnOrder()
 
-        Dim AutoBackupTime As String = Me.txtAutoBackupPeriod.TextBox.Text.Trim
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "AutoBackupTime", AutoBackupTime, Microsoft.Win32.RegistryValueKind.String)
+        If Not blDBIsInPreviewMode Then
+            Dim AutoBackupTime As String = Me.txtAutoBackupPeriod.TextBox.Text.Trim
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "AutoBackupTime", AutoBackupTime, Microsoft.Win32.RegistryValueKind.String)
 
-        Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "AutoBackupTime")
-        Dim count As Integer = Me.FingerPrintDataSet.CommonSettings.Count
-        If count = 1 Then
-            Me.CommonSettingsTableAdapter1.UpdateQuery(AutoBackupTime, "", "AutoBackupTime")
-        Else
-            Me.CommonSettingsTableAdapter1.Insert("AutoBackupTime", AutoBackupTime, "")
+            Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "AutoBackupTime")
+            Dim count As Integer = Me.FingerPrintDataSet.CommonSettings.Count
+            If count = 1 Then
+                Me.CommonSettingsTableAdapter1.UpdateQuery(AutoBackupTime, "", "AutoBackupTime")
+            Else
+                Me.CommonSettingsTableAdapter1.Insert("AutoBackupTime", AutoBackupTime, "")
+            End If
+
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "FullDistrictName", FullDistrictName, Microsoft.Win32.RegistryValueKind.String)
+
+            Dim LastModifiedDate As String = GetLastModificationDate().ToString("dd-MM-yyyy HH:mm:ss")
+
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModifiedDate", LastModifiedDate, Microsoft.Win32.RegistryValueKind.String)
+
+            Dim LastModificationDetail As String = GetLastModificationDetails()
+
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModificationDetail", LastModificationDetail, Microsoft.Win32.RegistryValueKind.String)
+
+            FindLastSOCNumberDICount()
+
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "LocalSOCRecordCount", LocalSOCRecordCount, Microsoft.Win32.RegistryValueKind.String)
+
+            Dim FileOwner As String = ShortOfficeName & "_" & ShortDistrictName
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "FileOwner", FileOwner, Microsoft.Win32.RegistryValueKind.String)
+
+            Dim BackupDescription As String = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount & "; " & LastModificationDetail
+
+            My.Computer.Registry.SetValue(strBackupSettingsPath, "BackupDescription", BackupDescription, Microsoft.Win32.RegistryValueKind.String)
         End If
 
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "FullDistrictName", FullDistrictName, Microsoft.Win32.RegistryValueKind.String)
-
-        Dim LastModifiedDate As String = GetLastModificationDate().ToString("dd-MM-yyyy HH:mm:ss")
-
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModifiedDate", LastModifiedDate, Microsoft.Win32.RegistryValueKind.String)
-
-        Dim LastModificationDetail As String = GetLastModificationDetails()
-
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "LastModificationDetail", LastModificationDetail, Microsoft.Win32.RegistryValueKind.String)
-
-        FindLastSOCNumberDICount()
-
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "LocalSOCRecordCount", LocalSOCRecordCount, Microsoft.Win32.RegistryValueKind.String)
-
-        Dim FileOwner As String = ShortOfficeName & "_" & ShortDistrictName
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "FileOwner", FileOwner, Microsoft.Win32.RegistryValueKind.String)
-
-        Dim BackupDescription As String = FileOwner & "_AutoBackup" & "; " & LastModifiedDate & "; " & LatestSOCNumber & "; " & LatestSOCDI & "; " & LocalSOCRecordCount & "; " & LastModificationDetail
-
-        My.Computer.Registry.SetValue(strBackupSettingsPath, "BackupDescription", BackupDescription, Microsoft.Win32.RegistryValueKind.String)
 
         SaveQuicktoolbarSettings()
         objMutex.Close()
         objMutex = Nothing
 
-        Process.Start(strAppPath & "\BackupDatabase.exe")
+        If Not blDBIsInPreviewMode Then Process.Start(strAppPath & "\BackupDatabase.exe")
 
         Me.Dispose()
         End
