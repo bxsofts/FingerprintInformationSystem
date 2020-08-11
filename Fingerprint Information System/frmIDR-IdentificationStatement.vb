@@ -501,7 +501,7 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(rcount, 12).Select()
+            WordApp.Selection.Tables.Item(1).Cell(rowcount, 12).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
             If idcount = 0 Then
