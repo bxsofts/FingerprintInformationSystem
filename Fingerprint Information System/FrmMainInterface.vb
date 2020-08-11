@@ -1175,7 +1175,7 @@ Public Class frmMainInterface
             IncrementCircularProgress(5)
             Application.DoEvents()
         Else
-            If blApplicationIsRestoring Then
+            If blApplicationIsRestoring Or blDBIsInPreviewMode Then
                 Me.SOCRegisterBindingSource.MoveLast()
             Else
                 Dim p = Me.SOCRegisterBindingSource.Find("SOCNumber", oldrow)
@@ -1207,7 +1207,7 @@ Public Class frmMainInterface
             Next
         End If
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blDBIsInPreviewMode Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
@@ -1238,7 +1238,7 @@ Public Class frmMainInterface
             Next
         End If
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blDBIsInPreviewMode Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
@@ -1259,7 +1259,7 @@ Public Class frmMainInterface
         End If
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
         Me.IDRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blDBIsInPreviewMode Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
@@ -1281,7 +1281,7 @@ Public Class frmMainInterface
         End If
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
         Me.ACRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blDBIsInPreviewMode Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
@@ -1311,7 +1311,7 @@ Public Class frmMainInterface
             Next
         End If
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blDBIsInPreviewMode Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
@@ -1340,7 +1340,7 @@ Public Class frmMainInterface
             Next
         End If
 
-        If blApplicationIsLoading Then
+        If blApplicationIsLoading Or blDBIsInPreviewMode Then
             IncrementCircularProgress(5)
         Else
             Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
@@ -1372,9 +1372,12 @@ Public Class frmMainInterface
             End If
 
             Me.JoinedIDRTableAdapter.Fill(Me.FingerPrintDataSet.JoinedIDR)
-
-            Dim p = Me.JoinedIDRBindingSource.Find("IdentificationNumber", oldrow)
-            If p >= 0 Then Me.JoinedIDRBindingSource.Position = p
+            If blDBIsInPreviewMode Or blApplicationIsLoading Then
+                Me.JoinedIDRBindingSource.MoveLast()
+            Else
+                Dim p = Me.JoinedIDRBindingSource.Find("IdentificationNumber", oldrow)
+                If p >= 0 Then Me.JoinedIDRBindingSource.Position = p
+            End If
 
             If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
 
