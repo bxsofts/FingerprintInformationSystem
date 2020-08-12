@@ -29,6 +29,7 @@ Public Class frmOnlineSendStatements
     Dim SelectedQuarter As String = ""
     Dim SelectedQuarterYear As String = ""
     Dim TotalFileCount As Integer = 0
+    Dim UserFolderID As String = ""
     Private Sub frmOnlineSendStatements_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
 
@@ -208,6 +209,9 @@ Public Class frmOnlineSendStatements
 
             For Each Result In Results.Files
                 If Not Result.Name.StartsWith("*") Then
+                    If Result.Name.ToLower = FullDistrictName.ToLower Then
+                        UserFolderID = Result.Id
+                    End If
                     item = New ListViewItem(Result.Name)
                     item.SubItems.Add(Result.Id)
                     bgwListFiles.ReportProgress(0, item)
@@ -516,6 +520,8 @@ Public Class frmOnlineSendStatements
         Try
 
             Dim monthlyfolderid As String = CreateFolderAndGetID("Statements - " & FullDistrictName, SelectedDistrictID)
+            Dim monthlyworkdonefolderid As String = CreateFolderAndGetID("Work Done Statement - Monthly" & FullDistrictName, UserFolderID)
+            Dim quarterlyworkdonefolderid As String = CreateFolderAndGetID("Work Done Statement - Quarterly" & FullDistrictName, UserFolderID)
 
             If monthlyfolderid = "" Then Exit Sub
 

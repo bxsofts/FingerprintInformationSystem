@@ -276,7 +276,7 @@ Partial Class frmOnlineSendStatements
         'District
         '
         Me.District.Text = "District"
-        Me.District.Width = 250
+        Me.District.Width = 230
         '
         'FolderID
         '
