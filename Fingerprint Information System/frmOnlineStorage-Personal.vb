@@ -1114,6 +1114,7 @@ Public Class frmPersonalFileStorage
 
         If TotalFileCount > 1 Then
             ShowDesktopAlert(DownloadedFileCount & IIf(DownloadedFileCount = 1, " file ", " files ") & "downloaded." & vbNewLine & SkippedFileCount & IIf(SkippedFileCount = 1, " file ", " files ") & "skipped." & vbNewLine & FailedFileCount & IIf(FailedFileCount = 1, " file ", " files ") & "failed.")
+            Call Shell("explorer.exe /select," & SaveFileName, AppWinStyle.NormalFocus)
         End If
 
     End Sub
