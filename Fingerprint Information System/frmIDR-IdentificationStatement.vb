@@ -407,7 +407,7 @@ Public Class frmIdentificationStatement
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
 
                     Dim pl = Me.FingerPrintDataSet.JoinedIDR(j).PropertyLost
-                    If pl.Contains("`") And bliAPSFormat Then
+                    If bliAPSFormat Then
                         pl = pl.Replace("`", "Rs.")
                     Else
                         WordApp.Selection.Font.Name = "Rupee Foradian"
@@ -494,7 +494,12 @@ Public Class frmIdentificationStatement
                 Next i ' i= 4
             End If
 
-
+            If idcount > 0 Then
+                For l = 3 To rowcount
+                    WordApp.Selection.Tables.Item(1).Columns(10).Cells(l).Select()
+                    WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
+                Next
+            End If
 
             For delay = 71 To 80
                 bgwIDList.ReportProgress(delay)

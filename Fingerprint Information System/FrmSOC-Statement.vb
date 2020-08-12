@@ -339,7 +339,7 @@ Public Class frmSOCStatement
                 WordApp.Selection.Tables.Item(1).Cell(i, 7).Select()
                 Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
 
-                If pl.Contains("`") And bliAPSFormat Then
+                If bliAPSFormat Then
                     pl = pl.Replace("`", "Rs.")
                 Else
                     WordApp.Selection.Font.Name = "Rupee Foradian"

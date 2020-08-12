@@ -495,7 +495,7 @@ Public Class FrmSOCGraveCrimes
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft
                 Dim pl = Me.FingerPrintDataSet.SOCRegister(j).PropertyLost
 
-                If pl.Contains("`") And bliAPSFormat Then
+                If bliAPSFormat Then
                     pl = pl.Replace("`", "Rs.")
                 Else
                     WordApp.Selection.Font.Name = "Rupee Foradian"
