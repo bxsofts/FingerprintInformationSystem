@@ -17946,7 +17946,8 @@ errhandler:
                     Dim viewedtime As String = Results.Files(0).ViewedByMeTimeRaw
 
                     '  List.Q = "trashed = false and mimeType != 'application/vnd.google-apps.folder' and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "'"
-                    List.Q = "trashed = false and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "'"
+                    List.Q = "trashed = false and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "' and name != 'Work Done Statement'"
+
                     List.Fields = "files(id, modifiedTime)"
                     Results = List.Execute
                     UnreadIFTFileCount = Results.Files.Count
@@ -17958,7 +17959,7 @@ errhandler:
             End If
 
         Catch ex As Exception
-            ShowErrorMessage(ex)
+            ' ShowErrorMessage(ex)
 
         End Try
     End Sub
@@ -18889,7 +18890,7 @@ errhandler:
 #End Region
 
 
-#Region "CHECK FOR UPDATE"
+#Region "CHECK FOR APP UPDATE AND NEW FILES"
 
     Private Sub ShowNewVersionInstalledInfo()
         Try
@@ -18962,7 +18963,7 @@ errhandler:
             FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
 
             If FullDistrictName <> "" And FullDistrictName <> "FullDistrict" Then
-                CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService)
+                CreateInternalFileTransferFolderAndCheckUnreadFiles(FISService) 'CHECK FOR NEW FILES
             End If
 
 

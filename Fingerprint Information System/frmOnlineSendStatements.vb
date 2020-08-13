@@ -519,11 +519,10 @@ Public Class frmOnlineSendStatements
     Private Sub bgwUploadFile_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwUploadFile.DoWork
         Try
 
+            Dim workdonefolderid As String = CreateFolderAndGetID("Work Done Statement", UserFolderID)
             Dim monthlyfolderid As String = CreateFolderAndGetID("Statements - " & FullDistrictName, SelectedDistrictID)
-            Dim monthlyworkdonefolderid As String = CreateFolderAndGetID("Work Done Statement - Monthly" & FullDistrictName, UserFolderID)
-            Dim quarterlyworkdonefolderid As String = CreateFolderAndGetID("Work Done Statement - Quarterly" & FullDistrictName, UserFolderID)
+            If workdonefolderid = "" Or monthlyfolderid = "" Then Exit Sub
 
-            If monthlyfolderid = "" Then Exit Sub
 
             Dim FileList() As String = e.Argument
             Dim currentfilenumber As Integer = 0
@@ -556,15 +555,46 @@ Public Class frmOnlineSendStatements
                 End Select
 
                 Dim List = FISService.Files.List()
+                Dim Results As Google.Apis.Drive.v3.Data.FileList
+                Dim cnt As Integer = 0
+
+                If stmt = "mon" Or stmt = "qua" Then
+                    List.Q = "name = '" & SelectedFileName & "' and '" & workdonefolderid & "' in parents"
+                    List.Fields = "files(id)"
+
+                    Results = List.Execute
+                    cnt = Results.Files.Count
+
+                    If cnt = 0 Then
+                        Dim body As New Google.Apis.Drive.v3.Data.File()
+                        body.Name = SelectedFileName
+                        Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
+                        body.MimeType = "files/" & extension.Replace(".", "")
+                        body.Description = FileOwner
+
+                        Dim parentlist As New List(Of String)
+                        parentlist.Add(workdonefolderid)
+                        body.Parents = parentlist
+
+                        Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
+                        Dim Stream As New System.IO.MemoryStream(ByteArray)
+
+                        Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                        UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
+                        UploadRequest.Upload()
+                        Stream.Close()
+                    End If
+                End If
+
+
 
                 List.Q = "name = '" & NewFileName & "' and '" & monthlyfolderid & "' in parents"
                 List.Fields = "files(id)"
 
-                Dim Results = List.Execute
-                Dim cnt = Results.Files.Count
+                Results = List.Execute
+                cnt = Results.Files.Count
 
                 If cnt > 0 Then
-                    '  VersionFolderID = Results.Files(0).Id
                     bgwUploadFile.ReportProgress(100, stmt & " Already Sent")
                 Else
                     Dim body As New Google.Apis.Drive.v3.Data.File()

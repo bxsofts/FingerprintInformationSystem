@@ -177,17 +177,11 @@ Public Class frmFISBackupList
     Private Sub ListFiles(ByVal FolderID As String, ShowTrashedFiles As Boolean)
         Try
 
-            If CurrentFolderPath = "\My Drive\Internal File Transfer\" & FullDistrictName Then
+            If CurrentFolderPath.ToLower.Contains("\my drive\internal file transfer\" & FullDistrictName.ToLower) Then
                 Dim tFile = New Google.Apis.Drive.v3.Data.File
                 tFile.ViewedByMeTime = Now
                 FISService.Files.Update(tFile, FolderID).Execute()
                 bgwListFiles.ReportProgress(1, False) 'hide unread file icon in main form
-            End If
-
-            If CurrentFolderPath.Contains("\My Drive\Internal File Transfer\" & FullDistrictName & "\Statements - ") Then
-                Dim tFile = New Google.Apis.Drive.v3.Data.File
-                tFile.ViewedByMeTime = Now
-                FISService.Files.Update(tFile, FolderID).Execute()
             End If
 
             Dim List As FilesResource.ListRequest = FISService.Files.List()
@@ -247,17 +241,21 @@ Public Class frmFISBackupList
                     item.ImageIndex = ImageIndex.Folder
                     ResultIsFolder = True
                     Dim modifiedtime As Date = Result.ModifiedTime
-                   
-                    If blUnreadIFTFileAvailable Or CurrentFolderPath.Contains("\My Drive\Internal File Transfer\" & FullDistrictName) Then
-                        If modifiedtime > dtIFTFolderViewTime Then item.ForeColor = Color.Red
+
+                    If blUnreadIFTFileAvailable Or CurrentFolderPath.ToLower.Contains("\my drive\internal file transfer\" & FullDistrictName.ToLower) Then
+                        If modifiedtime > dtIFTFolderViewTime And Result.Name <> "Work Done Statement" Then
+                            item.ForeColor = Color.Red
+                        End If
                     End If
                 Else
                     Dim modifiedtime As Date = Result.ModifiedTime
                     item.SubItems.Add(modifiedtime.ToString("dd-MM-yyyy HH:mm:ss"))
                     item.ImageIndex = GetImageIndex(My.Computer.FileSystem.GetFileInfo(Result.Name).Extension)
                     ResultIsFolder = False
-                    If blUnreadIFTFileAvailable Or CurrentFolderPath.Contains("\My Drive\Internal File Transfer\" & FullDistrictName) Then
-                        If modifiedtime > dtIFTFolderViewTime Then item.ForeColor = Color.Red
+                    If blUnreadIFTFileAvailable Or CurrentFolderPath.ToLower.Contains("\my drive\internal file transfer\" & FullDistrictName.ToLower) Then
+                        If modifiedtime > dtIFTFolderViewTime And CurrentFolderPath.ToLower <> "\my drive\internal file transfer\" & FullDistrictName.ToLower & "\work done statement" Then
+                            item.ForeColor = Color.Red
+                        End If
                     End If
                 End If
 
@@ -305,16 +303,22 @@ Public Class frmFISBackupList
                         If Not Result.Name.StartsWith("..") Then bgwListFiles.ReportProgress(2, item)
                     Case ShortOfficeName & "_" & ShortDistrictName
                         If Not Result.Name.StartsWith(".") And Result.Name <> "FIS Backup" Then 'if not hidden item
-                            If CurrentFolderPath.Contains(FileOwner) Or CurrentFolderPath.Contains(FullDistrictName) Or CurrentFolderPath.ToLower.Contains(FullDistrictName.ToLower) Or CurrentFolderPath = "\My Drive\Internal File Transfer\*All Bureaux" Then
+                            If CurrentFolderPath.Contains(FileOwner) Or CurrentFolderPath.ToLower.Contains(FullDistrictName.ToLower) Or CurrentFolderPath = "\My Drive\Internal File Transfer\*All Bureaux" Then
                                 bgwListFiles.ReportProgress(2, item)
                             ElseIf item.SubItems(4).Text = FileOwner Then 'if file owner
                                 bgwListFiles.ReportProgress(2, item)
                             ElseIf ResultIsFolder Then 'if folder
-                                bgwListFiles.ReportProgress(2, item)
+                                If CurrentFolderPath.ToLower.Contains("\my drive\internal file transfer\") And Not CurrentFolderPath.ToLower.Contains(FullDistrictName.ToLower) Then
+
+                                Else
+                                    bgwListFiles.ReportProgress(2, item)
+                                End If
+
                             ElseIf Not CurrentFolderPath.StartsWith("\My Drive\FIS Backup\") And Not CurrentFolderPath.StartsWith("\My Drive\Internal File Transfer\") Then 'if not folder
                                 bgwListFiles.ReportProgress(2, item)
                             End If
                         End If
+
                 End Select
 
             Next
