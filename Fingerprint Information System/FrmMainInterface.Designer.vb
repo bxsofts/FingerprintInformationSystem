@@ -228,6 +228,7 @@ Partial Class frmMainInterface
         Me.btnProjectIAPS = New DevComponents.DotNetBar.ButtonItem()
         Me.btnProjectLetter = New DevComponents.DotNetBar.ButtonItem()
         Me.btnAttendanceStmt2 = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnSendStmtToRangeTI = New DevComponents.DotNetBar.ButtonItem()
         Me.btnCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnMonthlyStatementCL = New DevComponents.DotNetBar.ButtonItem()
         Me.btnAttendance = New DevComponents.DotNetBar.ButtonItem()
@@ -1131,7 +1132,7 @@ Partial Class frmMainInterface
         Me.bgwCleanOnlineFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwCheckRemoteDB = New System.ComponentModel.BackgroundWorker()
         Me.bgwCopyFolder = New System.ComponentModel.BackgroundWorker()
-        Me.btnSendStmtToRangeTI = New DevComponents.DotNetBar.ButtonItem()
+        Me.btnConsolidateWorkDone = New DevComponents.DotNetBar.ButtonItem()
         Me.RibbonPanel2.SuspendLayout
         Me.RibbonControl1.SuspendLayout
         Me.RibbonPanel1.SuspendLayout
@@ -2255,6 +2256,12 @@ Partial Class frmMainInterface
         Me.btnAttendanceStmt2.Name = "btnAttendanceStmt2"
         Me.btnAttendanceStmt2.Text = "Attendance Statement"
         '
+        'btnSendStmtToRangeTI
+        '
+        Me.btnSendStmtToRangeTI.BeginGroup = true
+        Me.btnSendStmtToRangeTI.Name = "btnSendStmtToRangeTI"
+        Me.btnSendStmtToRangeTI.Text = "Send Statements to Range TI"
+        '
         'btnCL
         '
         Me.btnCL.ForeColor = System.Drawing.Color.Red
@@ -2322,7 +2329,7 @@ Partial Class frmMainInterface
         Me.btnPerformance.BeginGroup = true
         Me.btnPerformance.ForeColor = System.Drawing.Color.Red
         Me.btnPerformance.Name = "btnPerformance"
-        Me.btnPerformance.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlyPerformance, Me.btnQuarterlyPerformance, Me.btnAnnualPerformance, Me.btnIndividualPerformance, Me.btnAnnualStatics})
+        Me.btnPerformance.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btnMonthlyPerformance, Me.btnQuarterlyPerformance, Me.btnAnnualPerformance, Me.btnIndividualPerformance, Me.btnAnnualStatics, Me.btnConsolidateWorkDone})
         Me.btnPerformance.Text = "Performance Statements"
         '
         'btnMonthlyPerformance
@@ -14250,11 +14257,11 @@ Partial Class frmMainInterface
         '
         Me.bgwCopyFolder.WorkerReportsProgress = true
         '
-        'btnSendStmtToRangeTI
+        'btnConsolidateWorkDone
         '
-        Me.btnSendStmtToRangeTI.BeginGroup = true
-        Me.btnSendStmtToRangeTI.Name = "btnSendStmtToRangeTI"
-        Me.btnSendStmtToRangeTI.Text = "Send Statements to Range TI"
+        Me.btnConsolidateWorkDone.BeginGroup = true
+        Me.btnConsolidateWorkDone.Name = "btnConsolidateWorkDone"
+        Me.btnConsolidateWorkDone.Text = "Consolidate Range wise Work Done"
         '
         'frmMainInterface
         '
@@ -15411,5 +15418,6 @@ End Sub
     Friend WithEvents btnSelectOpinionImages As DevComponents.DotNetBar.ButtonItem
     Friend WithEvents cprUnreadFile As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents btnSendStmtToRangeTI As DevComponents.DotNetBar.ButtonItem
+    Friend WithEvents btnConsolidateWorkDone As DevComponents.DotNetBar.ButtonItem
 
 End Class

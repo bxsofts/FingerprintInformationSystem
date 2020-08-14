@@ -85,7 +85,7 @@ Partial Class frmOnlineSendStatements
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(691, 410)
+        Me.PanelEx1.Size = New System.Drawing.Size(729, 444)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -267,7 +267,7 @@ Partial Class frmOnlineSendStatements
         Me.ListViewEx1.MultiSelect = False
         Me.ListViewEx1.Name = "ListViewEx1"
         Me.ListViewEx1.ShowItemToolTips = True
-        Me.ListViewEx1.Size = New System.Drawing.Size(262, 392)
+        Me.ListViewEx1.Size = New System.Drawing.Size(282, 425)
         Me.ListViewEx1.TabIndex = 50
         Me.ListViewEx1.TabStop = False
         Me.ListViewEx1.UseCompatibleStateImageBehavior = False
@@ -276,7 +276,7 @@ Partial Class frmOnlineSendStatements
         'District
         '
         Me.District.Text = "District"
-        Me.District.Width = 230
+        Me.District.Width = 240
         '
         'FolderID
         '
@@ -291,11 +291,11 @@ Partial Class frmOnlineSendStatements
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.Dock = System.Windows.Forms.DockStyle.Right
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(560, 0)
+        Me.CircularProgress1.Location = New System.Drawing.Point(595, 0)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(131, 410)
+        Me.CircularProgress1.Size = New System.Drawing.Size(134, 444)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 49
         Me.CircularProgress1.TabStop = False
@@ -304,7 +304,7 @@ Partial Class frmOnlineSendStatements
         '
         Me.btnSend.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnSend.Location = New System.Drawing.Point(572, 177)
+        Me.btnSend.Location = New System.Drawing.Point(602, 194)
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(101, 56)
         Me.btnSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -455,7 +455,7 @@ Partial Class frmOnlineSendStatements
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(691, 410)
+        Me.ClientSize = New System.Drawing.Size(729, 444)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False

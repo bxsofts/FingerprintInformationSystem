@@ -16802,6 +16802,10 @@ errhandler:
         FrmIndividualPerformance.ShowDialog()
     End Sub
 
+    Private Sub ConsolidateWorkDone() Handles btnConsolidateWorkDone.Click
+        On Error Resume Next
+        frmPerformance_RangeConsolidate.ShowDialog()
+    End Sub
     Private Sub ShowPSList() Handles btnPSList.Click
         On Error Resume Next
         frmPSList.Show()
@@ -19532,5 +19536,5 @@ errhandler:
         End Try
     End Sub
 
-   
+
 End Class
