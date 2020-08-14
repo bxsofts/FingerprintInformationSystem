@@ -16804,6 +16804,18 @@ errhandler:
 
     Private Sub ConsolidateWorkDone() Handles btnConsolidateWorkDone.Click
         On Error Resume Next
+        If FullDistrictName = "" Or FullDistrictName = "FullDistrict" Then
+            MessageBoxEx.Show("'Full District Name' is empty. Cannot proceed.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Me.Cursor = Cursors.WaitCursor
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+        Me.Cursor = Cursors.Default
         frmPerformance_RangeConsolidate.ShowDialog()
     End Sub
     Private Sub ShowPSList() Handles btnPSList.Click
@@ -17759,7 +17771,16 @@ errhandler:
         End Try
     End Sub
 
-    Private Sub OpenTemplatesFolder() Handles btnOpenTemplatesFolder.Click
+
+    Private Sub btnOpenStatementsFolder_Click(sender As Object, e As EventArgs) Handles btnOpenStatementsFolder.Click
+        Try
+            Call Shell("explorer.exe " & SuggestedLocation, AppWinStyle.NormalFocus)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+    Private Sub OpenTemplatesFolder(sender As Object, e As EventArgs) Handles btnOpenTemplatesFolder.Click
         Try
             Dim TemplatesFolder As String = strAppUserPath & "\WordTemplates"
 
@@ -19537,4 +19558,5 @@ errhandler:
     End Sub
 
 
+    
 End Class

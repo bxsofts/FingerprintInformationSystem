@@ -16,7 +16,6 @@ Public Class frmOnlineSendStatements
     Dim FISService As DriveService = New DriveService
     Dim FISAccountServiceCredential As GoogleCredential
 
-    Public uBytesUploaded As Long
     Public uUploadStatus As UploadStatus
 
     Dim blServiceCreated As Boolean = False
@@ -566,6 +565,7 @@ Public Class frmOnlineSendStatements
                     cnt = Results.Files.Count
 
                     If cnt = 0 Then
+                        bgwUploadFile.ReportProgress(100, stmt & " Uploading")
                         Dim body As New Google.Apis.Drive.v3.Data.File()
                         body.Name = SelectedFileName
                         Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
@@ -597,6 +597,7 @@ Public Class frmOnlineSendStatements
                 If cnt > 0 Then
                     bgwUploadFile.ReportProgress(100, stmt & " Already Sent")
                 Else
+                    bgwUploadFile.ReportProgress(100, stmt & " Uploading")
                     Dim body As New Google.Apis.Drive.v3.Data.File()
                     body.Name = NewFileName
                     Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
@@ -610,9 +611,7 @@ Public Class frmOnlineSendStatements
                     Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
                     Dim Stream As New System.IO.MemoryStream(ByteArray)
 
-                    uBytesUploaded = 0
                     bgwUploadFile.ReportProgress(i + 1, SelectedFileName)
-                    bgwUploadFile.ReportProgress(i + 1, uBytesUploaded)
 
                     Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
                     UploadRequest.ChunkSize = ResumableUpload.MinimumChunkSize
@@ -645,9 +644,8 @@ Public Class frmOnlineSendStatements
     End Sub
 
     Private Sub Upload_ProgressChanged(Progress As IUploadProgress)
-
+        On Error Resume Next
         Control.CheckForIllegalCrossThreadCalls = False
-        uBytesUploaded = Progress.BytesSent
         uUploadStatus = Progress.Status
     End Sub
 
@@ -659,7 +657,11 @@ Public Class frmOnlineSendStatements
         If TypeOf e.UserState Is String Then
             Dim stmt As String = e.UserState.ToString.Substring(0, 3)
             Dim lblText As String = e.UserState.ToString.Substring(4)
-            Dim clr As Color
+            Dim clr As Color = Color.Black
+
+            If lblText = "Uploading" Then
+                clr = Color.Blue
+            End If
 
             If lblText = "Uploaded" Then
                 clr = Color.Green

@@ -10,6 +10,8 @@ Imports Google.Apis.Download
 Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
+Imports Microsoft.Office.Interop
+
 
 Public Class frmPerformance_RangeConsolidate
 
@@ -29,18 +31,25 @@ Public Class frmPerformance_RangeConsolidate
     Dim SelectedYear As String = ""
     Dim SelectedQuarter As String = ""
     Dim SelectedQuarterYear As String = ""
-    Dim TotalFileCount As Integer = 0
+    Dim TotalDistrictCount As Integer = 5
     Dim UserFolderID As String = ""
+
+    Dim DistrictList(4) As String
+    Dim InternalFolderID As String = ""
+
+    Dim blAllFilesDownloaded As Boolean = False
+
+#Region "FORM LOAD EVENTS"
 
     Private Sub frmPerformance_RangeConsolidate_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             Me.Cursor = Cursors.WaitCursor
 
+            ClearLabels()
             Me.CircularProgress1.Visible = False
             Me.CircularProgress1.ProgressColor = GetProgressColor()
             Me.CircularProgress1.ProgressText = ""
             Me.CircularProgress1.IsRunning = False
-
 
             If FullDistrictName.ToLower.Contains("thiruvananthapuram") Then
                 Range = "Thiruvananthapuram"
@@ -112,24 +121,48 @@ Public Class frmPerformance_RangeConsolidate
                     Me.lblDistrict3.Text = "Kollam City"
                     Me.lblDistrict4.Text = "Kollam Rural"
                     Me.lblDistrict5.Text = "Pathanamthitta"
+                    TotalDistrictCount = 5
+                    DistrictList(0) = "Thiruvananthapuram City"
+                    DistrictList(1) = "Thiruvananthapuram Rural"
+                    DistrictList(2) = "Kollam City"
+                    DistrictList(3) = "Kollam Rural"
+                    DistrictList(4) = "Pathanamthitta"
                 Case "Ernakulam"
                     Me.lblDistrict1.Text = "Alappuzha"
                     Me.lblDistrict2.Text = "Kottayam"
                     Me.lblDistrict3.Text = "Idukki"
                     Me.lblDistrict4.Text = "Kochi City"
                     Me.lblDistrict5.Text = "Ernakulam Rural"
+                    TotalDistrictCount = 5
+                    DistrictList(0) = "Alappuzha"
+                    DistrictList(1) = "Kottayam"
+                    DistrictList(2) = "Idukki"
+                    DistrictList(3) = "Kochi City"
+                    DistrictList(4) = "Ernakulam Rural"
                 Case "Thrissur"
                     Me.lblDistrict1.Text = "Thrissur City"
                     Me.lblDistrict2.Text = "Thrissur Rural"
                     Me.lblDistrict3.Text = "Palakkad"
                     Me.lblDistrict4.Text = "Malappuram"
                     Me.lblDistrict5.Text = ""
+                    TotalDistrictCount = 4
+                    DistrictList(0) = "Thrissur City"
+                    DistrictList(1) = "Thrissur Rural"
+                    DistrictList(2) = "Palakkad"
+                    DistrictList(3) = "Malappuram"
+                    DistrictList(4) = ""
                 Case "Kannur"
                     Me.lblDistrict1.Text = "Kozhikode City"
                     Me.lblDistrict2.Text = "Kozhikode Rural"
                     Me.lblDistrict3.Text = "Wayanad"
                     Me.lblDistrict4.Text = "Kannur"
                     Me.lblDistrict5.Text = "Kasaragod"
+                    TotalDistrictCount = 5
+                    DistrictList(0) = "Kozhikode City"
+                    DistrictList(1) = "Kozhikode Rural"
+                    DistrictList(2) = "Wayanad"
+                    DistrictList(3) = "Kannur"
+                    DistrictList(4) = "Kasaragod"
                 Case Else
                     Me.lblDistrict1.Text = ""
                     Me.lblDistrict2.Text = ""
@@ -199,6 +232,491 @@ Public Class frmPerformance_RangeConsolidate
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub ClearLabels()
+        Me.lbl1.Text = ""
+        Me.lbl2.Text = ""
+        Me.lbl3.Text = ""
+        Me.lbl4.Text = ""
+        Me.lbl5.Text = ""
+        lblStmt.Text = ""
+    End Sub
 
 
+#End Region
+
+
+#Region "MONTHLY PERF CONSOLIDATED"
+
+    Private Sub btnConsolidateMonth_Click(sender As Object, e As EventArgs) Handles btnConsolidateMonth.Click
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        SelectedMonth = Me.cmbMonth.SelectedIndex + 1
+        SelectedYear = Me.txtYear.Text
+
+        Me.CircularProgress1.ProgressText = "1/" & TotalDistrictCount
+        Me.CircularProgress1.IsRunning = True
+        Me.CircularProgress1.Show()
+
+        ClearLabels()
+        Me.lblStmt.Text = "Consolidated Statement - " & Me.cmbMonth.Text & " - " & SelectedYear
+
+        blAllFilesDownloaded = False
+        bgwDownloadMonthFiles.RunWorkerAsync(DistrictList)
+
+    End Sub
+
+    Private Function GetFolderID(FolderName As String, ParentFolderID As String)
+        Try
+            Dim id As String = ""
+            Dim List = FISService.Files.List()
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name contains '" & FolderName & "' and '" & ParentFolderID & "' in parents"
+
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 1 Then
+                id = Results.Files(0).Id
+            End If
+
+            Return id
+
+
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+    Private Sub bgwDownloadFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadMonthFiles.DoWork
+        Try
+            If blServiceCreated = False Then
+                Dim Scopes As String() = {DriveService.Scope.Drive}
+                FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+                FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+                blServiceCreated = True
+            End If
+
+            If InternalFolderID = "" Then
+                InternalFolderID = GetFolderID("Internal File Transfer", "root")
+            End If
+
+            Dim currentfilenumber As Integer = 0
+
+            Dim List = FISService.Files.List()
+            Dim Results As Google.Apis.Drive.v3.Data.FileList
+            Dim cnt As Integer = 0
+
+            Dim DownloadedFileCount As Integer = 0
+
+            For i = 0 To 4
+
+                Dim SelectedDistrict = DistrictList(i)
+                If SelectedDistrict = "" Then
+                    Continue For
+                End If
+                currentfilenumber = currentfilenumber + 1
+                bgwDownloadMonthFiles.ReportProgress(currentfilenumber, currentfilenumber)
+
+                Dim DownloadFileName As String = SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & SelectedDistrict & ".docx"
+                Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
+                My.Computer.FileSystem.CreateDirectory(DownloadFolder)
+
+                If My.Computer.FileSystem.FileExists(DownloadFolder & "\" & DownloadFileName) Then
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                    DownloadedFileCount += 1
+                    Continue For
+                End If
+
+                Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
+                If districtfolderid = "" Then
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "No stmt found")
+                    Continue For
+                End If
+
+                Dim workfolderid As String = GetFolderID("Work Done Statement", districtfolderid)
+                If workfolderid = "" Then
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "No stmt found")
+                    Continue For
+                End If
+
+                Dim fileid As String = ""
+
+                List.Q = "name = 'Monthly Performance Statement - " & SelectedYear & " - " & SelectedMonth.ToString("D2") & ".docx' and '" & workfolderid & "' in parents"
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+                cnt = Results.Files.Count
+
+                If cnt = 0 Then
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "No stmt found")
+                Else
+
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Downloading")
+                    fileid = Results.Files(0).Id
+
+                    Dim request = FISService.Files.Get(fileid)
+                    request.Fields = "size"
+                    Dim file = request.Execute
+
+                    Dim fStream = New System.IO.FileStream(DownloadFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                    Dim mStream = New System.IO.MemoryStream
+
+                    Dim m = request.MediaDownloader
+
+                    AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                    request.DownloadWithStatus(mStream)
+
+                    If dDownloadStatus = DownloadStatus.Completed Then
+                        mStream.WriteTo(fStream)
+                        bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Downloaded")
+                        DownloadedFileCount += 1
+                    End If
+
+                    If dDownloadStatus = DownloadStatus.Failed Then
+                        bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Failed")
+                        mStream.WriteTo(fStream)
+                    End If
+
+                    fStream.Close()
+                    mStream.Close()
+
+                End If
+            Next
+
+            If DownloadedFileCount = TotalDistrictCount Then
+                blAllFilesDownloaded = True
+            Else
+                blAllFilesDownloaded = False
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub Download_ProgressChanged(Progress As IDownloadProgress)
+        On Error Resume Next
+        Control.CheckForIllegalCrossThreadCalls = False
+        dDownloadStatus = Progress.Status
+    End Sub
+
+    Private Sub bgwDownloadMonthFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadMonthFiles.ProgressChanged
+
+        If TypeOf e.UserState Is Integer Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalDistrictCount
+        End If
+
+        If TypeOf e.UserState Is String Then
+            Dim districtnumber As Integer = e.ProgressPercentage
+            Dim status As String = e.UserState.ToString
+            Dim clr As Color = Color.Black
+
+            If status = "No stmt found" Then
+                clr = Color.Red
+            End If
+
+            If status = "Already downloaded" Then
+                clr = Color.Brown
+            End If
+
+            If status = "Downloading" Then
+                clr = Color.Blue
+            End If
+
+            If status = "Downloaded" Then
+                clr = Color.Green
+            End If
+
+            If status = "Failed" Then
+                clr = Color.Red
+            End If
+
+            Select Case districtnumber
+                Case 1
+                    Me.lbl1.Text = status
+                    Me.lbl1.ForeColor = clr
+                Case 2
+                    Me.lbl2.Text = status
+                    Me.lbl2.ForeColor = clr
+                Case 3
+                    Me.lbl3.Text = status
+                    Me.lbl3.ForeColor = clr
+                Case 4
+                    Me.lbl4.Text = status
+                    Me.lbl4.ForeColor = clr
+                Case 5
+                    Me.lbl5.Text = status
+                    Me.lbl5.ForeColor = clr
+            End Select
+        End If
+    End Sub
+
+    Private Sub bgwDownloadMonthFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadMonthFiles.RunWorkerCompleted
+
+        Me.Cursor = Cursors.Default
+        Me.CircularProgress1.IsRunning = False
+        Me.CircularProgress1.Text = ""
+        Me.CircularProgress1.Hide()
+
+        If Not blAllFilesDownloaded Then
+            MessageBoxEx.Show("Cannot generate consolidated statement as all files are not downloaded.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+#End Region
+
+
+#Region "QUARTERLY PERF CONSOLIDATED"
+
+    Private Sub btnConsolidateQuarter_Click(sender As Object, e As EventArgs) Handles btnConsolidateQuarter.Click
+        On Error Resume Next
+        Me.Cursor = Cursors.WaitCursor
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        SelectedQuarter = Me.txtQuarter.Text
+        SelectedQuarterYear = Me.txtQuarterYear.Text
+
+        Me.CircularProgress1.ProgressText = "1/" & TotalDistrictCount
+        Me.CircularProgress1.IsRunning = True
+        Me.CircularProgress1.Show()
+
+        ClearLabels()
+        Me.lblStmt.Text = "Consolidated Statement - Quarter " & SelectedQuarter & " - " & SelectedQuarterYear
+        blAllFilesDownloaded = False
+        bgwDownloadQuarterFiles.RunWorkerAsync()
+
+    End Sub
+
+    Private Sub bgwDownloadQuarterFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadQuarterFiles.DoWork
+        Try
+            If blServiceCreated = False Then
+                Dim Scopes As String() = {DriveService.Scope.Drive}
+                FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+                FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+                blServiceCreated = True
+            End If
+
+            If InternalFolderID = "" Then
+                InternalFolderID = GetFolderID("Internal File Transfer", "root")
+            End If
+
+            Dim currentfilenumber As Integer = 0
+
+            Dim List = FISService.Files.List()
+            Dim Results As Google.Apis.Drive.v3.Data.FileList
+            Dim cnt As Integer = 0
+
+            Dim DownloadedFileCount As Integer = 0
+
+            Dim DownloadFileName As String = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
+            Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
+            My.Computer.FileSystem.CreateDirectory(DownloadFolder)
+
+            For i = 0 To 4
+
+                Dim SelectedDistrict = DistrictList(i)
+                If SelectedDistrict = "" Then
+                    Continue For
+                End If
+                currentfilenumber = currentfilenumber + 1
+                bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, currentfilenumber)
+
+
+                If My.Computer.FileSystem.FileExists(DownloadFolder & "\" & DownloadFileName) Then
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                    DownloadedFileCount += 1
+                    Continue For
+                End If
+
+                Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
+                If districtfolderid = "" Then
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "No stmt found")
+                    Continue For
+                End If
+
+                Dim workfolderid As String = GetFolderID("Work Done Statement", districtfolderid)
+                If workfolderid = "" Then
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "No stmt found")
+                    Continue For
+                End If
+
+                Dim fileid As String = ""
+
+                List.Q = "name = 'Quarterly Performance Statement - " & SelectedQuarterYear & " - Q" & SelectedQuarter & ".docx' and '" & workfolderid & "' in parents"
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+                cnt = Results.Files.Count
+
+                If cnt = 0 Then
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "No stmt found")
+                Else
+
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Downloading")
+                    fileid = Results.Files(0).Id
+
+                    Dim request = FISService.Files.Get(fileid)
+                    request.Fields = "size"
+                    Dim file = request.Execute
+
+                    Dim fStream = New System.IO.FileStream(DownloadFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                    Dim mStream = New System.IO.MemoryStream
+
+                    Dim m = request.MediaDownloader
+
+                    AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                    request.DownloadWithStatus(mStream)
+
+                    If dDownloadStatus = DownloadStatus.Completed Then
+                        mStream.WriteTo(fStream)
+                        bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Downloaded")
+                        DownloadedFileCount += 1
+                    End If
+
+                    If dDownloadStatus = DownloadStatus.Failed Then
+                        bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Failed")
+                        mStream.WriteTo(fStream)
+                    End If
+
+                    fStream.Close()
+                    mStream.Close()
+
+                End If
+            Next
+
+            If Not DownloadedFileCount = TotalDistrictCount Then
+                blAllFilesDownloaded = False
+            Else
+                blAllFilesDownloaded = True
+                Dim ConsolidatedFileName As String = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-Consolidated Work Done.docx"
+
+                Dim TemplateFile As String = strAppUserPath & "\WordTemplates\ConsolidatedPerformance.docx"
+
+                Dim wdApp As Word.Application = New Word.Application
+                Dim wdDocs As Word.Documents = wdApp.Documents
+                Dim wdDocConsol As Word.Document = wdDocs.Add(TemplateFile)
+                Dim wdDocConsolTbl As Word.Table = wdDocConsol.Range.Tables.Item(1)
+                Dim wdBooks As Word.Bookmarks = wdDocConsol.Bookmarks
+
+                wdDocConsol.Range.NoProofing = 1
+
+                wdBooks("Range").Range.Text = Range.ToUpper & " RANGE"
+                wdBooks("Period").Range.Text = "QUARTER " & SelectedQuarter & " OF " & SelectedQuarterYear
+
+                For i = 0 To 4
+                    wdDocConsolTbl.Cell(1, i + 3).Range.Text = DistrictList(i)
+                Next
+
+                Dim rc As Integer = wdDocConsolTbl.Rows.Count
+
+                wdApp.Visible = True
+                wdApp.Activate()
+                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+                wdDocConsol.Activate()
+
+                ReleaseObject(wdDocConsolTbl)
+                ReleaseObject(wdDocConsol)
+                ReleaseObject(wdDocs)
+                wdApp = Nothing
+            End If
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+    Private Sub bgwDownloadQuarterFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadQuarterFiles.ProgressChanged
+
+        If TypeOf e.UserState Is Integer Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalDistrictCount
+        End If
+
+        If TypeOf e.UserState Is String Then
+            Dim districtnumber As Integer = e.ProgressPercentage
+            Dim status As String = e.UserState.ToString
+            Dim clr As Color = Color.Black
+
+            If status = "No stmt found" Then
+                clr = Color.Red
+            End If
+
+            If status = "Already downloaded" Then
+                clr = Color.Brown
+            End If
+
+            If status = "Downloading" Then
+                clr = Color.Blue
+            End If
+
+            If status = "Downloaded" Then
+                clr = Color.Green
+            End If
+
+            If status = "Failed" Then
+                clr = Color.Red
+            End If
+
+            Select Case districtnumber
+                Case 1
+                    Me.lbl1.Text = status
+                    Me.lbl1.ForeColor = clr
+                Case 2
+                    Me.lbl2.Text = status
+                    Me.lbl2.ForeColor = clr
+                Case 3
+                    Me.lbl3.Text = status
+                    Me.lbl3.ForeColor = clr
+                Case 4
+                    Me.lbl4.Text = status
+                    Me.lbl4.ForeColor = clr
+                Case 5
+                    Me.lbl5.Text = status
+                    Me.lbl5.ForeColor = clr
+            End Select
+        End If
+    End Sub
+
+    Private Sub bgwDownloadQuarterFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadQuarterFiles.RunWorkerCompleted
+
+        Me.Cursor = Cursors.Default
+        Me.CircularProgress1.IsRunning = False
+        Me.CircularProgress1.Text = ""
+        Me.CircularProgress1.Hide()
+
+        If Not blAllFilesDownloaded Then
+            MessageBoxEx.Show("Cannot generate consolidated statement as all files are not downloaded.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+#End Region
+
+
+    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
+            My.Computer.FileSystem.CreateDirectory(DownloadFolder)
+            Call Shell("explorer.exe " & DownloadFolder, AppWinStyle.NormalFocus)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class

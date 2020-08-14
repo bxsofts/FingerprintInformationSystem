@@ -86,7 +86,6 @@ Public Class frmFISBackupList
             ParentFolderPath = "\My Drive"
             CurrentFolderName = "My Drive"
 
-
             JsonPath = CredentialFilePath & "\FISServiceAccount.json"
 
             If Not FileIO.FileSystem.FileExists(JsonPath) Then 'copy from application folder
