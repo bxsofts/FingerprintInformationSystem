@@ -28,6 +28,7 @@ Public Class frmPerformance_RangeConsolidate
     Dim SelectedDistrict As String = ""
     Dim SelectedDistrictID As String = ""
     Dim SelectedMonth As Integer
+    Dim SelectedMonthText As String = ""
     Dim SelectedYear As String = ""
     Dim SelectedQuarter As String = ""
     Dim SelectedQuarterYear As String = ""
@@ -251,21 +252,31 @@ Public Class frmPerformance_RangeConsolidate
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
+        SelectedMonth = Me.cmbMonth.SelectedIndex + 1
+        SelectedMonthText = Me.cmbMonth.Text
+        SelectedYear = Me.txtYear.Text
+
+        ClearLabels()
+
+        Me.lblStmt.Text = "Consolidated Statement - " & SelectedMonthText & " - " & SelectedYear
+
+        Dim ConsolidatedFileName As String = SuggestedLocation & "\Consolidated Performance Statement\" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-Consolidated Work Done.docx"
+
+        If My.Computer.FileSystem.FileExists(ConsolidatedFileName) Then
+            Shell("explorer.exe " & ConsolidatedFileName, AppWinStyle.MaximizedFocus)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
-        SelectedMonth = Me.cmbMonth.SelectedIndex + 1
-        SelectedYear = Me.txtYear.Text
-
         Me.CircularProgress1.ProgressText = "1/" & TotalDistrictCount
         Me.CircularProgress1.IsRunning = True
         Me.CircularProgress1.Show()
-
-        ClearLabels()
-        Me.lblStmt.Text = "Consolidated Statement - " & Me.cmbMonth.Text & " - " & SelectedYear
 
         blAllFilesDownloaded = False
         bgwDownloadMonthFiles.RunWorkerAsync(DistrictList)
@@ -296,7 +307,7 @@ Public Class frmPerformance_RangeConsolidate
         End Try
     End Function
 
-    Private Sub bgwDownloadFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadMonthFiles.DoWork
+    Private Sub bgwDownloadMonthFiles_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadMonthFiles.DoWork
         Try
             If blServiceCreated = False Then
                 Dim Scopes As String() = {DriveService.Scope.Drive}
@@ -316,6 +327,8 @@ Public Class frmPerformance_RangeConsolidate
             Dim cnt As Integer = 0
 
             Dim DownloadedFileCount As Integer = 0
+            Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
+            My.Computer.FileSystem.CreateDirectory(DownloadFolder)
 
             For i = 0 To 4
 
@@ -323,12 +336,12 @@ Public Class frmPerformance_RangeConsolidate
                 If SelectedDistrict = "" Then
                     Continue For
                 End If
+
                 currentfilenumber = currentfilenumber + 1
                 bgwDownloadMonthFiles.ReportProgress(currentfilenumber, currentfilenumber)
 
                 Dim DownloadFileName As String = SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & SelectedDistrict & ".docx"
-                Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
-                My.Computer.FileSystem.CreateDirectory(DownloadFolder)
+               
 
                 If My.Computer.FileSystem.FileExists(DownloadFolder & "\" & DownloadFileName) Then
                     bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Already downloaded")
@@ -393,10 +406,96 @@ Public Class frmPerformance_RangeConsolidate
                 End If
             Next
 
-            If DownloadedFileCount = TotalDistrictCount Then
-                blAllFilesDownloaded = True
-            Else
+            If Not DownloadedFileCount = TotalDistrictCount Then
                 blAllFilesDownloaded = False
+            Else
+                blAllFilesDownloaded = True
+
+                Dim TemplateFile As String = strAppUserPath & "\WordTemplates\ConsolidatedPerformance.docx"
+
+                Dim wdApp As Word.Application = New Word.Application
+                Dim wdDocs As Word.Documents = wdApp.Documents
+                Dim wdDocConsol As Word.Document = wdDocs.Add(TemplateFile)
+                Dim wdDocConsolTbl As Word.Table = wdDocConsol.Range.Tables.Item(1)
+                Dim wdBooks As Word.Bookmarks = wdDocConsol.Bookmarks
+
+                wdDocConsol.Range.NoProofing = 1
+
+                wdBooks("Range").Range.Text = Range.ToUpper & " RANGE"
+                wdBooks("Period").Range.Text = SelectedMonthText.ToUpper & " " & SelectedYear
+
+                currentfilenumber = 0
+
+                For i = 0 To 4
+
+                    Dim SelectedDistrict = DistrictList(i)
+                    wdDocConsolTbl.Cell(1, i + 3).Range.Text = SelectedDistrict
+
+                    If SelectedDistrict = "" Then
+                        Continue For
+                    End If
+
+                    currentfilenumber = currentfilenumber + 1
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, currentfilenumber)
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Attaching")
+
+                    Dim DistFileName As String = DownloadFolder & "\" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-" & SelectedDistrict & ".docx"
+                    Dim wdDocDist As Word.Document = wdDocs.Add(DistFileName)
+                    Dim wdDocDistTbl As Word.Table = wdDocDist.Range.Tables.Item(1)
+                    Dim rc As Integer = wdDocDistTbl.Rows.Count
+
+                    For j = 4 To rc
+                        wdDocConsolTbl.Cell(j - 2, i + 3).Range.Text = wdDocDistTbl.Cell(j, 4).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+
+                    wdDocDist.Close()
+                    ReleaseObject(wdDocDistTbl)
+                    ReleaseObject(wdDocDist)
+                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Attached")
+                    Threading.Thread.Sleep(250)
+                Next
+
+                Dim rcnt As Integer = wdDocConsolTbl.Rows.Count
+
+                For i = 2 To rcnt
+                    Dim total As Integer = 0
+
+                    For j = 3 To TotalDistrictCount + 2
+                        If i = rcnt Then
+                            Dim t = wdDocConsolTbl.Cell(i, j).Range.Text.ToLower
+                            t = t.Replace("rs.", "")
+                            t = t.Replace("`", "")
+                            t = t.Replace("/-", "")
+                            total = total + Val(t)
+                        Else
+                            total = total + Val(wdDocConsolTbl.Cell(i, j).Range.Text)
+                        End If
+                    Next
+
+                    If i = rcnt Then
+                        wdDocConsolTbl.Cell(i, 8).Range.Text = "Rs." & total & "/-"
+                    Else
+                        wdDocConsolTbl.Cell(i, 8).Range.Text = total
+                    End If
+
+                Next
+
+
+                Dim ConsolidatedFileName As String = SuggestedLocation & "\Consolidated Performance Statement\" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-Consolidated Work Done.docx"
+
+                If My.Computer.FileSystem.FileExists(ConsolidatedFileName) = False Then
+                    wdDocConsol.SaveAs(ConsolidatedFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                End If
+
+                wdApp.Visible = True
+                wdApp.Activate()
+                wdApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+                wdDocConsol.Activate()
+
+                ReleaseObject(wdDocConsolTbl)
+                ReleaseObject(wdDocConsol)
+                ReleaseObject(wdDocs)
+                wdApp = Nothing
             End If
 
         Catch ex As Exception
@@ -408,69 +507,6 @@ Public Class frmPerformance_RangeConsolidate
         On Error Resume Next
         Control.CheckForIllegalCrossThreadCalls = False
         dDownloadStatus = Progress.Status
-    End Sub
-
-    Private Sub bgwDownloadMonthFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadMonthFiles.ProgressChanged
-
-        If TypeOf e.UserState Is Integer Then
-            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalDistrictCount
-        End If
-
-        If TypeOf e.UserState Is String Then
-            Dim districtnumber As Integer = e.ProgressPercentage
-            Dim status As String = e.UserState.ToString
-            Dim clr As Color = Color.Black
-
-            If status = "No stmt found" Then
-                clr = Color.Red
-            End If
-
-            If status = "Already downloaded" Then
-                clr = Color.Brown
-            End If
-
-            If status = "Downloading" Then
-                clr = Color.Blue
-            End If
-
-            If status = "Downloaded" Then
-                clr = Color.Green
-            End If
-
-            If status = "Failed" Then
-                clr = Color.Red
-            End If
-
-            Select Case districtnumber
-                Case 1
-                    Me.lbl1.Text = status
-                    Me.lbl1.ForeColor = clr
-                Case 2
-                    Me.lbl2.Text = status
-                    Me.lbl2.ForeColor = clr
-                Case 3
-                    Me.lbl3.Text = status
-                    Me.lbl3.ForeColor = clr
-                Case 4
-                    Me.lbl4.Text = status
-                    Me.lbl4.ForeColor = clr
-                Case 5
-                    Me.lbl5.Text = status
-                    Me.lbl5.ForeColor = clr
-            End Select
-        End If
-    End Sub
-
-    Private Sub bgwDownloadMonthFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadMonthFiles.RunWorkerCompleted
-
-        Me.Cursor = Cursors.Default
-        Me.CircularProgress1.IsRunning = False
-        Me.CircularProgress1.Text = ""
-        Me.CircularProgress1.Hide()
-
-        If Not blAllFilesDownloaded Then
-            MessageBoxEx.Show("Cannot generate consolidated statement as all files are not downloaded.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
     End Sub
 
 #End Region
@@ -647,7 +683,7 @@ Public Class frmPerformance_RangeConsolidate
                     bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, currentfilenumber)
                     bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Attaching")
 
-                    Dim DistFileName As String = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & DistrictList(i) & ".docx"
+                    Dim DistFileName As String = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
                     Dim wdDocDist As Word.Document = wdDocs.Add(DistFileName)
                     Dim wdDocDistTbl As Word.Table = wdDocDist.Range.Tables.Item(1)
                     Dim rc As Integer = wdDocDistTbl.Rows.Count
@@ -711,7 +747,7 @@ Public Class frmPerformance_RangeConsolidate
         End Try
     End Sub
 
-    Private Sub bgwDownloadQuarterFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadQuarterFiles.ProgressChanged
+    Private Sub bgwDownloadQuarterFiles_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadQuarterFiles.ProgressChanged, bgwDownloadMonthFiles.ProgressChanged
 
         If TypeOf e.UserState Is Integer Then
             CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalDistrictCount
@@ -770,7 +806,7 @@ Public Class frmPerformance_RangeConsolidate
         End If
     End Sub
 
-    Private Sub bgwDownloadQuarterFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadQuarterFiles.RunWorkerCompleted
+    Private Sub bgwDownloadQuarterFiles_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadQuarterFiles.RunWorkerCompleted, bgwDownloadMonthFiles.RunWorkerCompleted
 
         Me.Cursor = Cursors.Default
         Me.CircularProgress1.IsRunning = False
@@ -797,6 +833,11 @@ Public Class frmPerformance_RangeConsolidate
                 SelectedQuarterYear = Me.txtQuarterYear.Text
 
                 ConsolidatedFileName = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-Consolidated Work Done.docx"
+            ElseIf Me.lblStmt.Text.StartsWith("Consolidated Statement - ") Or Me.lblStmt.Text = "" Then
+                SelectedMonth = Me.cmbMonth.SelectedIndex + 1
+                SelectedYear = Me.txtYear.Text
+
+                ConsolidatedFileName = DownloadFolder & "\" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-Consolidated Work Done.docx"
             End If
            
             If My.Computer.FileSystem.FileExists(ConsolidatedFileName) Then
