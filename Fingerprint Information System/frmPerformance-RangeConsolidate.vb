@@ -482,21 +482,31 @@ Public Class frmPerformance_RangeConsolidate
         On Error Resume Next
         Me.Cursor = Cursors.WaitCursor
 
+        SelectedQuarter = Me.txtQuarter.Text
+        SelectedQuarterYear = Me.txtQuarterYear.Text
+
+        ClearLabels()
+        Me.lblStmt.Text = "Consolidated Statement - Quarter " & SelectedQuarter & " - " & SelectedQuarterYear
+
+        Dim ConsolidatedFileName As String = SuggestedLocation & "\Consolidated Performance Statement\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-Consolidated Work Done.docx"
+
+        If My.Computer.FileSystem.FileExists(ConsolidatedFileName) Then
+            Shell("explorer.exe " & ConsolidatedFileName, AppWinStyle.MaximizedFocus)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
         If InternetAvailable() = False Then
             MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Cursor = Cursors.Default
             Exit Sub
         End If
 
-        SelectedQuarter = Me.txtQuarter.Text
-        SelectedQuarterYear = Me.txtQuarterYear.Text
-
         Me.CircularProgress1.ProgressText = "1/" & TotalDistrictCount
         Me.CircularProgress1.IsRunning = True
         Me.CircularProgress1.Show()
 
-        ClearLabels()
-        Me.lblStmt.Text = "Consolidated Statement - Quarter " & SelectedQuarter & " - " & SelectedQuarterYear
+       
         blAllFilesDownloaded = False
         bgwDownloadQuarterFiles.RunWorkerAsync()
 
@@ -523,7 +533,7 @@ Public Class frmPerformance_RangeConsolidate
 
             Dim DownloadedFileCount As Integer = 0
 
-            Dim DownloadFileName As String = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
+
             Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
             My.Computer.FileSystem.CreateDirectory(DownloadFolder)
 
@@ -533,7 +543,11 @@ Public Class frmPerformance_RangeConsolidate
                 If SelectedDistrict = "" Then
                     Continue For
                 End If
+
                 currentfilenumber = currentfilenumber + 1
+
+                Dim DownloadFileName As String = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
+
                 bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, currentfilenumber)
 
 
@@ -604,7 +618,6 @@ Public Class frmPerformance_RangeConsolidate
                 blAllFilesDownloaded = False
             Else
                 blAllFilesDownloaded = True
-                Dim ConsolidatedFileName As String = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-Consolidated Work Done.docx"
 
                 Dim TemplateFile As String = strAppUserPath & "\WordTemplates\ConsolidatedPerformance.docx"
 
@@ -619,11 +632,68 @@ Public Class frmPerformance_RangeConsolidate
                 wdBooks("Range").Range.Text = Range.ToUpper & " RANGE"
                 wdBooks("Period").Range.Text = "QUARTER " & SelectedQuarter & " OF " & SelectedQuarterYear
 
+                currentfilenumber = 0
+
                 For i = 0 To 4
-                    wdDocConsolTbl.Cell(1, i + 3).Range.Text = DistrictList(i)
+
+                    Dim SelectedDistrict = DistrictList(i)
+                    wdDocConsolTbl.Cell(1, i + 3).Range.Text = SelectedDistrict
+
+                    If SelectedDistrict = "" Then
+                        Continue For
+                    End If
+
+                    currentfilenumber = currentfilenumber + 1
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, currentfilenumber)
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Attaching")
+
+                    Dim DistFileName As String = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & DistrictList(i) & ".docx"
+                    Dim wdDocDist As Word.Document = wdDocs.Add(DistFileName)
+                    Dim wdDocDistTbl As Word.Table = wdDocDist.Range.Tables.Item(1)
+                    Dim rc As Integer = wdDocDistTbl.Rows.Count
+
+                    For j = 4 To rc
+                        wdDocConsolTbl.Cell(j - 2, i + 3).Range.Text = wdDocDistTbl.Cell(j, 7).Range.Text.Trim(ChrW(7)).Trim()
+                    Next
+
+                    wdDocDist.Close()
+                    ReleaseObject(wdDocDistTbl)
+                    ReleaseObject(wdDocDist)
+                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Attached")
+                    Threading.Thread.Sleep(250)
                 Next
 
-                Dim rc As Integer = wdDocConsolTbl.Rows.Count
+                Dim rcnt As Integer = wdDocConsolTbl.Rows.Count
+
+                For i = 2 To rcnt
+                    Dim total As Integer = 0
+
+                    For j = 3 To TotalDistrictCount + 2
+                        If i = rcnt Then
+                            Dim t = wdDocConsolTbl.Cell(i, j).Range.Text.ToLower
+                            t = t.Replace("rs.", "")
+                            t = t.Replace("`", "")
+                            t = t.Replace("/-", "")
+                            total = total + Val(t)
+                        Else
+                            total = total + Val(wdDocConsolTbl.Cell(i, j).Range.Text)
+                        End If
+                    Next
+
+                    If i = rcnt Then
+                        wdDocConsolTbl.Cell(i, 8).Range.Text = "Rs." & total & "/-"
+                    Else
+                        wdDocConsolTbl.Cell(i, 8).Range.Text = total
+                    End If
+
+                Next
+
+
+                Dim ConsolidatedFileName As String = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-Consolidated Work Done.docx"
+
+                If My.Computer.FileSystem.FileExists(ConsolidatedFileName) = False Then
+                    wdDocConsol.SaveAs(ConsolidatedFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+                End If
 
                 wdApp.Visible = True
                 wdApp.Activate()
@@ -672,6 +742,14 @@ Public Class frmPerformance_RangeConsolidate
                 clr = Color.Red
             End If
 
+            If status = "Attaching" Then
+                clr = Color.Blue
+            End If
+
+            If status = "Attached" Then
+                clr = Color.Green
+            End If
+
             Select Case districtnumber
                 Case 1
                     Me.lbl1.Text = status
@@ -712,7 +790,20 @@ Public Class frmPerformance_RangeConsolidate
             Me.Cursor = Cursors.WaitCursor
             Dim DownloadFolder As String = SuggestedLocation & "\Consolidated Performance Statement"
             My.Computer.FileSystem.CreateDirectory(DownloadFolder)
-            Call Shell("explorer.exe " & DownloadFolder, AppWinStyle.NormalFocus)
+            Dim ConsolidatedFileName As String = ""
+
+            If Me.lblStmt.Text.StartsWith("Consolidated Statement - Quarter") Then
+                SelectedQuarter = Me.txtQuarter.Text
+                SelectedQuarterYear = Me.txtQuarterYear.Text
+
+                ConsolidatedFileName = DownloadFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-Consolidated Work Done.docx"
+            End If
+           
+            If My.Computer.FileSystem.FileExists(ConsolidatedFileName) Then
+                Shell("explorer.exe /select," & ConsolidatedFileName, AppWinStyle.NormalFocus)
+            Else
+                Call Shell("explorer.exe " & DownloadFolder, AppWinStyle.NormalFocus)
+            End If
 
         Catch ex As Exception
             ShowErrorMessage(ex)
