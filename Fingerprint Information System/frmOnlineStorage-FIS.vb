@@ -1839,7 +1839,7 @@ Public Class frmFISBackupList
             Me.listViewEx1.Columns(5).Width = 140
         Else
             Me.listViewEx1.Columns(3).Width = 0
-            Me.listViewEx1.Columns(4).Width = 280
+            Me.listViewEx1.Columns(4).Width = 150
             Me.listViewEx1.Columns(5).Width = 0
         End If
 

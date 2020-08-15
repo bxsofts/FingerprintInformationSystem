@@ -19263,17 +19263,17 @@ errhandler:
 #End Region
 
 
-#Region "SEND STATEMENTS"
+#Region "BACKUP STATEMENTS"
 
-    Private Sub SendStatements() Handles btnSendStmtToRangeTI.Click
+    Private Sub BackupStatements() Handles btnBackupStatements.Click
         Try
             If FullDistrictName = "" Or FullDistrictName = "FullDistrict" Then
-                MessageBoxEx.Show("'Full District Name' is empty. Cannot load files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBoxEx.Show("'Full District Name' is empty. Cannot backup files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
 
             If blDBIsInPreviewMode Then
-                MessageBoxEx.Show("Database is in Preview Mode. Cannot open.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBoxEx.Show("Database is in Preview Mode. Cannot backup files.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Exit Sub
             End If
 
@@ -19284,7 +19284,7 @@ errhandler:
                 Exit Sub
             End If
             Me.Cursor = Cursors.Default
-            frmOnlineSendStatements.ShowDialog()
+            frmBackupStatements.ShowDialog()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             ShowErrorMessage(ex)

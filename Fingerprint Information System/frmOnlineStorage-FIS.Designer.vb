@@ -259,7 +259,7 @@ Partial Class frmFISBackupList
         'FileName
         '
         Me.FileName.Text = "File Name"
-        Me.FileName.Width = 300
+        Me.FileName.Width = 350
         '
         'GroupPanel1
         '
@@ -421,12 +421,12 @@ Partial Class frmFISBackupList
         'FileID
         '
         Me.FileID.Text = "File ID"
-        Me.FileID.Width = 290
+        Me.FileID.Width = 0
         '
         'UploadedBy
         '
         Me.UploadedBy.Text = "Uploaded By"
-        Me.UploadedBy.Width = 280
+        Me.UploadedBy.Width = 150
         '
         'ViewedDate
         '

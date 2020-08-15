@@ -210,10 +210,10 @@
     <Compile Include="frmNewVersionAvailable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOnlineSendStatements.Designer.vb">
-      <DependentUpon>frmOnlineSendStatements.vb</DependentUpon>
+    <Compile Include="frmOnlineStorage-BackupStatements.Designer.vb">
+      <DependentUpon>frmOnlineStorage-BackupStatements.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmOnlineSendStatements.vb">
+    <Compile Include="frmOnlineStorage-BackupStatements.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPerformance-Annual.Designer.vb">
@@ -598,8 +598,8 @@
     <EmbeddedResource Include="frmNewVersionAvailable.resx">
       <DependentUpon>frmNewVersionAvailable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOnlineSendStatements.resx">
-      <DependentUpon>frmOnlineSendStatements.vb</DependentUpon>
+    <EmbeddedResource Include="frmOnlineStorage-BackupStatements.resx">
+      <DependentUpon>frmOnlineStorage-BackupStatements.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPerformance-Annual.resx">
       <DependentUpon>frmPerformance-Annual.vb</DependentUpon>
