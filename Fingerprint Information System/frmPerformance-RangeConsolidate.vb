@@ -820,7 +820,6 @@ Public Class frmPerformance_RangeConsolidate
 
 #End Region
 
-
     Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
         Try
             Me.Cursor = Cursors.WaitCursor
@@ -839,7 +838,7 @@ Public Class frmPerformance_RangeConsolidate
 
                 ConsolidatedFileName = DownloadFolder & "\" & SelectedYear & "-" & SelectedMonth.ToString("D2") & "-Consolidated Work Done.docx"
             End If
-           
+
             If My.Computer.FileSystem.FileExists(ConsolidatedFileName) Then
                 Shell("explorer.exe /select," & ConsolidatedFileName, AppWinStyle.NormalFocus)
             Else
