@@ -242,7 +242,7 @@ Public Class frmFISBackupList
                     Dim modifiedtime As Date = Result.ModifiedTime
 
                     If blUnreadIFTFileAvailable Or CurrentFolderPath.ToLower.Contains("\my drive\internal file transfer\" & FullDistrictName.ToLower) Then
-                        If modifiedtime > dtIFTFolderViewTime And Result.Name <> "Work Done Statement" Then
+                        If modifiedtime > dtIFTFolderViewTime And Result.Name <> "Work Done Statement" And Result.Name <> "Monthly Statements Backup" Then
                             item.ForeColor = Color.Red
                         End If
                     End If
@@ -252,7 +252,7 @@ Public Class frmFISBackupList
                     item.ImageIndex = GetImageIndex(My.Computer.FileSystem.GetFileInfo(Result.Name).Extension)
                     ResultIsFolder = False
                     If blUnreadIFTFileAvailable Or CurrentFolderPath.ToLower.Contains("\my drive\internal file transfer\" & FullDistrictName.ToLower) Then
-                        If modifiedtime > dtIFTFolderViewTime And CurrentFolderPath.ToLower <> "\my drive\internal file transfer\" & FullDistrictName.ToLower & "\work done statement" Then
+                        If modifiedtime > dtIFTFolderViewTime And CurrentFolderPath.ToLower <> "\my drive\internal file transfer\" & FullDistrictName.ToLower & "\work done statement" And CurrentFolderPath.ToLower <> "\my drive\internal file transfer\" & FullDistrictName.ToLower & "\monthly statements backup" Then
                             item.ForeColor = Color.Red
                         End If
                     End If

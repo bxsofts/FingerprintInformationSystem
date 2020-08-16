@@ -59,6 +59,7 @@ Public Class frmBackupStatements
             Dim m As Integer = DateAndTime.Month(Today)
             Dim y As Integer = DateAndTime.Year(Today)
 
+            Me.txtAnnualYear.Value = y - 1
 
             If m = 1 Then
                 m = 12
@@ -108,6 +109,8 @@ Public Class frmBackupStatements
         Me.lblMonthPerf.Visible = Show
         Me.lblQuarterlyPerf.Text = ""
         Me.lblQuarterlyPerf.Visible = Show
+        Me.lblAnnualPerf.Text = ""
+        Me.lblAnnualPerf.Visible = Show
     End Sub
 
     Private Sub CheckForMonthlyStatementFiles() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
@@ -155,16 +158,27 @@ Public Class frmBackupStatements
         End If
     End Sub
 
+    Private Sub CheckForAnnualStatementFiles() Handles txtAnnualYear.ValueChanged
+        On Error Resume Next
+        If Not blCheckBoxes Then Exit Sub
+        ShowLabels(False)
+        Dim StmtFolder As String = SuggestedLocation & "\Performance Statement"
+        Dim StmtFileName = StmtFolder & "\Annual Performance Statement - " & Me.txtAnnualYear.Text & ".docx"
+
+        chkAnnualPerf.Enabled = My.Computer.FileSystem.FileExists(StmtFileName)
+
+    End Sub
+
 
 #Region "BACKUP FILES"
-    Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnBackup.Click
+    Private Sub btnBackup_Click(sender As Object, e As EventArgs) Handles btnBackup.Click
 
-        If Not Me.chkSOC.Checked And Not Me.chkGrave.Checked And Not Me.chkID.Checked And Not Me.chkMonthlyPerf.Checked And Not Me.chkQuarterlyPerf.Checked Then
+        If Not Me.chkSOC.Checked And Not Me.chkGrave.Checked And Not Me.chkID.Checked And Not Me.chkMonthlyPerf.Checked And Not Me.chkQuarterlyPerf.Checked And Me.chkAnnualPerf.Checked Then
             MessageBoxEx.Show("No statements selected to upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
-        Dim FileList(4) As String
+        Dim FileList(5) As String
         Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
 
         TotalFileCount = 0
@@ -237,6 +251,18 @@ Public Class frmBackupStatements
             Exit Sub
         End If
 
+        StmtFileName = StmtFolder & "\Annual Performance Statement - " & Me.txtAnnualYear.Text & ".docx"
+        If chkAnnualPerf.Checked Then
+            FileList(5) = StmtFileName
+            TotalFileCount = TotalFileCount + 1
+        Else
+            FileList(5) = ""
+        End If
+
+        If FileInUse(StmtFileName) And chkAnnualPerf.Checked Then
+            MessageBoxEx.Show("Annual Performance Statement File is open in MS Word. Please close it.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
         Me.Cursor = Cursors.WaitCursor
 
         If InternetAvailable() = False Then
@@ -338,7 +364,7 @@ Public Class frmBackupStatements
 
             Dim FileList() As String = e.Argument
             Dim currentfilenumber As Integer = 0
-            For i = 0 To 4
+            For i = 0 To 5
 
                 Dim SelectedFile = FileList(i)
                 If SelectedFile = "" Then
@@ -352,7 +378,7 @@ Public Class frmBackupStatements
                 Dim stmt As String = SelectedFileName.ToLower.Substring(0, 3)
                 Dim FolderID As String = ""
 
-                If stmt = "mon" Or stmt = "qua" Then
+                If stmt = "mon" Or stmt = "qua" Or stmt = "ann" Then
                     FolderID = workdonefolderid
                 Else
                     FolderID = monthlyfolderid
@@ -455,6 +481,9 @@ Public Class frmBackupStatements
                 Case "qua"
                     lblQuarterlyPerf.Text = lblText
                     lblQuarterlyPerf.ForeColor = clr
+                Case "ann"
+                    lblAnnualPerf.Text = lblText
+                    lblAnnualPerf.ForeColor = clr
             End Select
         End If
 

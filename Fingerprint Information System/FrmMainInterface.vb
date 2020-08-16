@@ -17971,7 +17971,7 @@ errhandler:
                     Dim viewedtime As String = Results.Files(0).ViewedByMeTimeRaw
 
                     '  List.Q = "trashed = false and mimeType != 'application/vnd.google-apps.folder' and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "'"
-                    List.Q = "trashed = false and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "' and name != 'Work Done Statement'"
+                    List.Q = "trashed = false and '" & UserIFTFolderID & "' in parents and modifiedTime > '" & viewedtime & "' and name != 'Work Done Statement' and name != 'Monthly Statements Backup'"
 
                     List.Fields = "files(id, modifiedTime)"
                     Results = List.Execute
@@ -19263,7 +19263,7 @@ errhandler:
 #End Region
 
 
-#Region "BACKUP STATEMENTS"
+#Region "BACKUP RANGE STATEMENTS"
 
     Private Sub BackupStatements() Handles btnBackupStatements.Click
         Try

@@ -24,6 +24,8 @@ Partial Class frmPerformance_RangeConsolidate
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPerformance_RangeConsolidate))
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.txtAnnualYear = New DevComponents.Editors.IntegerInput()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.lblStmt = New DevComponents.DotNetBar.LabelX()
         Me.lbl1 = New DevComponents.DotNetBar.LabelX()
         Me.lbl5 = New DevComponents.DotNetBar.LabelX()
@@ -44,22 +46,28 @@ Partial Class frmPerformance_RangeConsolidate
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
-        Me.txtYear = New DevComponents.Editors.IntegerInput()
+        Me.txtMonthlyYear = New DevComponents.Editors.IntegerInput()
         Me.cmbMonth = New DevComponents.DotNetBar.Controls.ComboBoxEx()
+        Me.btnDownloadStatements = New DevComponents.DotNetBar.ButtonX()
+        Me.btnConsolidateAnnual = New DevComponents.DotNetBar.ButtonX()
+        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
         Me.bgwDownloadMonthFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadQuarterFiles = New System.ComponentModel.BackgroundWorker()
-        Me.btnOpenFolder = New DevComponents.DotNetBar.ButtonX()
+        Me.bgwDownloadAnnualFiles = New System.ComponentModel.BackgroundWorker()
+        Me.bgwDownloadStatements = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
+        CType(Me.txtAnnualYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtMonthlyYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelEx1
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.PanelEx1.Controls.Add(Me.btnOpenFolder)
+        Me.PanelEx1.Controls.Add(Me.txtAnnualYear)
+        Me.PanelEx1.Controls.Add(Me.LabelX1)
         Me.PanelEx1.Controls.Add(Me.lblStmt)
         Me.PanelEx1.Controls.Add(Me.lbl1)
         Me.PanelEx1.Controls.Add(Me.lbl5)
@@ -80,13 +88,16 @@ Partial Class frmPerformance_RangeConsolidate
         Me.PanelEx1.Controls.Add(Me.LabelX5)
         Me.PanelEx1.Controls.Add(Me.LabelX4)
         Me.PanelEx1.Controls.Add(Me.LabelX3)
-        Me.PanelEx1.Controls.Add(Me.txtYear)
+        Me.PanelEx1.Controls.Add(Me.txtMonthlyYear)
         Me.PanelEx1.Controls.Add(Me.cmbMonth)
+        Me.PanelEx1.Controls.Add(Me.btnDownloadStatements)
+        Me.PanelEx1.Controls.Add(Me.btnConsolidateAnnual)
+        Me.PanelEx1.Controls.Add(Me.btnOpenFolder)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(449, 250)
+        Me.PanelEx1.Size = New System.Drawing.Size(674, 303)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -94,6 +105,41 @@ Partial Class frmPerformance_RangeConsolidate
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
+        '
+        'txtAnnualYear
+        '
+        '
+        '
+        '
+        Me.txtAnnualYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtAnnualYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtAnnualYear.ButtonCustom.Image = CType(resources.GetObject("txtAnnualYear.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtAnnualYear.FocusHighlightEnabled = True
+        Me.txtAnnualYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAnnualYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtAnnualYear.Location = New System.Drawing.Point(230, 96)
+        Me.txtAnnualYear.MaxValue = 2099
+        Me.txtAnnualYear.MinValue = 1900
+        Me.txtAnnualYear.MouseWheelValueChangeEnabled = False
+        Me.txtAnnualYear.Name = "txtAnnualYear"
+        Me.txtAnnualYear.ShowUpDown = True
+        Me.txtAnnualYear.Size = New System.Drawing.Size(64, 29)
+        Me.txtAnnualYear.TabIndex = 74
+        Me.txtAnnualYear.Value = 1900
+        Me.txtAnnualYear.WatermarkText = "Year"
+        '
+        'LabelX1
+        '
+        Me.LabelX1.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(45, 101)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(180, 18)
+        Me.LabelX1.TabIndex = 76
+        Me.LabelX1.Text = "Annual Work Done for the Year"
         '
         'lblStmt
         '
@@ -104,7 +150,7 @@ Partial Class frmPerformance_RangeConsolidate
         Me.lblStmt.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lblStmt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStmt.ForeColor = System.Drawing.Color.Red
-        Me.lblStmt.Location = New System.Drawing.Point(15, 102)
+        Me.lblStmt.Location = New System.Drawing.Point(15, 139)
         Me.lblStmt.Name = "lblStmt"
         Me.lblStmt.Size = New System.Drawing.Size(51, 20)
         Me.lblStmt.TabIndex = 73
@@ -117,7 +163,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl1.Location = New System.Drawing.Point(179, 126)
+        Me.lbl1.Location = New System.Drawing.Point(179, 172)
         Me.lbl1.Name = "lbl1"
         Me.lbl1.Size = New System.Drawing.Size(47, 18)
         Me.lbl1.TabIndex = 72
@@ -130,7 +176,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl5.Location = New System.Drawing.Point(179, 222)
+        Me.lbl5.Location = New System.Drawing.Point(179, 268)
         Me.lbl5.Name = "lbl5"
         Me.lbl5.Size = New System.Drawing.Size(47, 18)
         Me.lbl5.TabIndex = 71
@@ -143,7 +189,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl2.Location = New System.Drawing.Point(179, 150)
+        Me.lbl2.Location = New System.Drawing.Point(179, 196)
         Me.lbl2.Name = "lbl2"
         Me.lbl2.Size = New System.Drawing.Size(47, 18)
         Me.lbl2.TabIndex = 70
@@ -156,7 +202,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl3.Location = New System.Drawing.Point(179, 174)
+        Me.lbl3.Location = New System.Drawing.Point(179, 220)
         Me.lbl3.Name = "lbl3"
         Me.lbl3.Size = New System.Drawing.Size(47, 18)
         Me.lbl3.TabIndex = 69
@@ -169,7 +215,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl4.Location = New System.Drawing.Point(179, 198)
+        Me.lbl4.Location = New System.Drawing.Point(179, 244)
         Me.lbl4.Name = "lbl4"
         Me.lbl4.Size = New System.Drawing.Size(47, 18)
         Me.lbl4.TabIndex = 68
@@ -182,11 +228,11 @@ Partial Class frmPerformance_RangeConsolidate
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(326, 18)
+        Me.CircularProgress1.Location = New System.Drawing.Point(573, 76)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(75, 78)
+        Me.CircularProgress1.Size = New System.Drawing.Size(82, 162)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 67
         Me.CircularProgress1.TabStop = False
@@ -198,7 +244,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict1.Location = New System.Drawing.Point(15, 126)
+        Me.lblDistrict1.Location = New System.Drawing.Point(15, 172)
         Me.lblDistrict1.Name = "lblDistrict1"
         Me.lblDistrict1.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict1.TabIndex = 66
@@ -211,7 +257,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict5.Location = New System.Drawing.Point(15, 222)
+        Me.lblDistrict5.Location = New System.Drawing.Point(15, 268)
         Me.lblDistrict5.Name = "lblDistrict5"
         Me.lblDistrict5.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict5.TabIndex = 65
@@ -224,7 +270,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict2.Location = New System.Drawing.Point(15, 150)
+        Me.lblDistrict2.Location = New System.Drawing.Point(15, 196)
         Me.lblDistrict2.Name = "lblDistrict2"
         Me.lblDistrict2.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict2.TabIndex = 64
@@ -237,7 +283,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict3.Location = New System.Drawing.Point(15, 174)
+        Me.lblDistrict3.Location = New System.Drawing.Point(15, 220)
         Me.lblDistrict3.Name = "lblDistrict3"
         Me.lblDistrict3.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict3.TabIndex = 63
@@ -250,7 +296,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict4.Location = New System.Drawing.Point(15, 198)
+        Me.lblDistrict4.Location = New System.Drawing.Point(15, 244)
         Me.lblDistrict4.Name = "lblDistrict4"
         Me.lblDistrict4.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict4.TabIndex = 62
@@ -260,7 +306,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         Me.btnConsolidateQuarter.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnConsolidateQuarter.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnConsolidateQuarter.Location = New System.Drawing.Point(326, 58)
+        Me.btnConsolidateQuarter.Location = New System.Drawing.Point(326, 57)
         Me.btnConsolidateQuarter.Name = "btnConsolidateQuarter"
         Me.btnConsolidateQuarter.Size = New System.Drawing.Size(75, 29)
         Me.btnConsolidateQuarter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -285,7 +331,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX6.Location = New System.Drawing.Point(15, 63)
+        Me.LabelX6.Location = New System.Drawing.Point(15, 62)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.Size = New System.Drawing.Size(46, 18)
         Me.LabelX6.TabIndex = 57
@@ -302,7 +348,7 @@ Partial Class frmPerformance_RangeConsolidate
         Me.txtQuarter.FocusHighlightEnabled = True
         Me.txtQuarter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuarter.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtQuarter.Location = New System.Drawing.Point(73, 58)
+        Me.txtQuarter.Location = New System.Drawing.Point(73, 57)
         Me.txtQuarter.MaxValue = 4
         Me.txtQuarter.MinValue = 1
         Me.txtQuarter.MouseWheelValueChangeEnabled = False
@@ -324,7 +370,7 @@ Partial Class frmPerformance_RangeConsolidate
         Me.txtQuarterYear.FocusHighlightEnabled = True
         Me.txtQuarterYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuarterYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtQuarterYear.Location = New System.Drawing.Point(230, 58)
+        Me.txtQuarterYear.Location = New System.Drawing.Point(230, 57)
         Me.txtQuarterYear.MaxValue = 2099
         Me.txtQuarterYear.MinValue = 1900
         Me.txtQuarterYear.MouseWheelValueChangeEnabled = False
@@ -342,7 +388,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Location = New System.Drawing.Point(196, 63)
+        Me.LabelX5.Location = New System.Drawing.Point(196, 62)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.Size = New System.Drawing.Size(28, 18)
         Me.LabelX5.TabIndex = 58
@@ -374,26 +420,26 @@ Partial Class frmPerformance_RangeConsolidate
         Me.LabelX3.TabIndex = 37
         Me.LabelX3.Text = "Month"
         '
-        'txtYear
+        'txtMonthlyYear
         '
         '
         '
         '
-        Me.txtYear.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtYear.ButtonCustom.Image = CType(resources.GetObject("txtYear.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtYear.FocusHighlightEnabled = True
-        Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(230, 18)
-        Me.txtYear.MaxValue = 2099
-        Me.txtYear.MinValue = 0
-        Me.txtYear.Name = "txtYear"
-        Me.txtYear.ShowUpDown = True
-        Me.txtYear.Size = New System.Drawing.Size(64, 29)
-        Me.txtYear.TabIndex = 2
-        Me.txtYear.Value = 1900
-        Me.txtYear.WatermarkText = "Year"
+        Me.txtMonthlyYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtMonthlyYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtMonthlyYear.ButtonCustom.Image = CType(resources.GetObject("txtMonthlyYear.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtMonthlyYear.FocusHighlightEnabled = True
+        Me.txtMonthlyYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMonthlyYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtMonthlyYear.Location = New System.Drawing.Point(230, 18)
+        Me.txtMonthlyYear.MaxValue = 2099
+        Me.txtMonthlyYear.MinValue = 0
+        Me.txtMonthlyYear.Name = "txtMonthlyYear"
+        Me.txtMonthlyYear.ShowUpDown = True
+        Me.txtMonthlyYear.Size = New System.Drawing.Size(64, 29)
+        Me.txtMonthlyYear.TabIndex = 2
+        Me.txtMonthlyYear.Value = 1900
+        Me.txtMonthlyYear.WatermarkText = "Year"
         '
         'cmbMonth
         '
@@ -413,6 +459,39 @@ Partial Class frmPerformance_RangeConsolidate
         Me.cmbMonth.TabIndex = 1
         Me.cmbMonth.WatermarkText = "Month"
         '
+        'btnDownloadStatements
+        '
+        Me.btnDownloadStatements.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDownloadStatements.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDownloadStatements.Location = New System.Drawing.Point(424, 18)
+        Me.btnDownloadStatements.Name = "btnDownloadStatements"
+        Me.btnDownloadStatements.Size = New System.Drawing.Size(103, 68)
+        Me.btnDownloadStatements.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnDownloadStatements.TabIndex = 8
+        Me.btnDownloadStatements.Text = "Download Monthly Statements"
+        '
+        'btnConsolidateAnnual
+        '
+        Me.btnConsolidateAnnual.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnConsolidateAnnual.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnConsolidateAnnual.Location = New System.Drawing.Point(326, 96)
+        Me.btnConsolidateAnnual.Name = "btnConsolidateAnnual"
+        Me.btnConsolidateAnnual.Size = New System.Drawing.Size(75, 29)
+        Me.btnConsolidateAnnual.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnConsolidateAnnual.TabIndex = 75
+        Me.btnConsolidateAnnual.Text = "Consolidate"
+        '
+        'btnOpenFolder
+        '
+        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnOpenFolder.Location = New System.Drawing.Point(424, 96)
+        Me.btnOpenFolder.Name = "btnOpenFolder"
+        Me.btnOpenFolder.Size = New System.Drawing.Size(103, 29)
+        Me.btnOpenFolder.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnOpenFolder.TabIndex = 7
+        Me.btnOpenFolder.Text = "Open Folder"
+        '
         'bgwDownloadMonthFiles
         '
         Me.bgwDownloadMonthFiles.WorkerReportsProgress = True
@@ -423,22 +502,21 @@ Partial Class frmPerformance_RangeConsolidate
         Me.bgwDownloadQuarterFiles.WorkerReportsProgress = True
         Me.bgwDownloadQuarterFiles.WorkerSupportsCancellation = True
         '
-        'btnOpenFolder
+        'bgwDownloadAnnualFiles
         '
-        Me.btnOpenFolder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnOpenFolder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnOpenFolder.Location = New System.Drawing.Point(326, 98)
-        Me.btnOpenFolder.Name = "btnOpenFolder"
-        Me.btnOpenFolder.Size = New System.Drawing.Size(75, 29)
-        Me.btnOpenFolder.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btnOpenFolder.TabIndex = 7
-        Me.btnOpenFolder.Text = "Open Folder"
+        Me.bgwDownloadAnnualFiles.WorkerReportsProgress = True
+        Me.bgwDownloadAnnualFiles.WorkerSupportsCancellation = True
+        '
+        'bgwDownloadStatements
+        '
+        Me.bgwDownloadStatements.WorkerReportsProgress = True
+        Me.bgwDownloadStatements.WorkerSupportsCancellation = True
         '
         'frmPerformance_RangeConsolidate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(449, 250)
+        Me.ClientSize = New System.Drawing.Size(674, 303)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -453,16 +531,17 @@ Partial Class frmPerformance_RangeConsolidate
         Me.TitleText = "<b>Consolidate Work Done</b>"
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
+        CType(Me.txtAnnualYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtMonthlyYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtYear As DevComponents.Editors.IntegerInput
+    Friend WithEvents txtMonthlyYear As DevComponents.Editors.IntegerInput
     Friend WithEvents cmbMonth As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnConsolidateMonth As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
@@ -485,4 +564,10 @@ Partial Class frmPerformance_RangeConsolidate
     Friend WithEvents bgwDownloadMonthFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownloadQuarterFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnOpenFolder As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnConsolidateAnnual As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents txtAnnualYear As DevComponents.Editors.IntegerInput
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnDownloadStatements As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents bgwDownloadAnnualFiles As System.ComponentModel.BackgroundWorker
+    Friend WithEvents bgwDownloadStatements As System.ComponentModel.BackgroundWorker
 End Class
