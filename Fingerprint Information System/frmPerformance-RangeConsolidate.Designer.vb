@@ -55,6 +55,20 @@ Partial Class frmPerformance_RangeConsolidate
         Me.bgwDownloadQuarterFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadAnnualFiles = New System.ComponentModel.BackgroundWorker()
         Me.bgwDownloadStatements = New System.ComponentModel.BackgroundWorker()
+        Me.lblID1 = New DevComponents.DotNetBar.LabelX()
+        Me.lblID5 = New DevComponents.DotNetBar.LabelX()
+        Me.lblID2 = New DevComponents.DotNetBar.LabelX()
+        Me.lblID3 = New DevComponents.DotNetBar.LabelX()
+        Me.lblID4 = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOC1 = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOC5 = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOC2 = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOC3 = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOC4 = New DevComponents.DotNetBar.LabelX()
+        Me.lblGrave = New DevComponents.DotNetBar.LabelX()
+        Me.lblID = New DevComponents.DotNetBar.LabelX()
+        Me.lblSOC = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.PanelEx1.SuspendLayout()
         CType(Me.txtAnnualYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,6 +80,20 @@ Partial Class frmPerformance_RangeConsolidate
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx1.Controls.Add(Me.LabelX2)
+        Me.PanelEx1.Controls.Add(Me.lblSOC)
+        Me.PanelEx1.Controls.Add(Me.lblID)
+        Me.PanelEx1.Controls.Add(Me.lblGrave)
+        Me.PanelEx1.Controls.Add(Me.lblSOC1)
+        Me.PanelEx1.Controls.Add(Me.lblSOC5)
+        Me.PanelEx1.Controls.Add(Me.lblSOC2)
+        Me.PanelEx1.Controls.Add(Me.lblSOC3)
+        Me.PanelEx1.Controls.Add(Me.lblSOC4)
+        Me.PanelEx1.Controls.Add(Me.lblID1)
+        Me.PanelEx1.Controls.Add(Me.lblID5)
+        Me.PanelEx1.Controls.Add(Me.lblID2)
+        Me.PanelEx1.Controls.Add(Me.lblID3)
+        Me.PanelEx1.Controls.Add(Me.lblID4)
         Me.PanelEx1.Controls.Add(Me.txtAnnualYear)
         Me.PanelEx1.Controls.Add(Me.LabelX1)
         Me.PanelEx1.Controls.Add(Me.lblStmt)
@@ -97,7 +125,7 @@ Partial Class frmPerformance_RangeConsolidate
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(674, 303)
+        Me.PanelEx1.Size = New System.Drawing.Size(674, 316)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -150,7 +178,7 @@ Partial Class frmPerformance_RangeConsolidate
         Me.lblStmt.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lblStmt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStmt.ForeColor = System.Drawing.Color.Red
-        Me.lblStmt.Location = New System.Drawing.Point(15, 139)
+        Me.lblStmt.Location = New System.Drawing.Point(15, 137)
         Me.lblStmt.Name = "lblStmt"
         Me.lblStmt.Size = New System.Drawing.Size(51, 20)
         Me.lblStmt.TabIndex = 73
@@ -163,7 +191,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl1.Location = New System.Drawing.Point(179, 172)
+        Me.lbl1.Location = New System.Drawing.Point(179, 189)
         Me.lbl1.Name = "lbl1"
         Me.lbl1.Size = New System.Drawing.Size(47, 18)
         Me.lbl1.TabIndex = 72
@@ -176,7 +204,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl5.Location = New System.Drawing.Point(179, 268)
+        Me.lbl5.Location = New System.Drawing.Point(179, 285)
         Me.lbl5.Name = "lbl5"
         Me.lbl5.Size = New System.Drawing.Size(47, 18)
         Me.lbl5.TabIndex = 71
@@ -189,7 +217,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl2.Location = New System.Drawing.Point(179, 196)
+        Me.lbl2.Location = New System.Drawing.Point(179, 213)
         Me.lbl2.Name = "lbl2"
         Me.lbl2.Size = New System.Drawing.Size(47, 18)
         Me.lbl2.TabIndex = 70
@@ -202,7 +230,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl3.Location = New System.Drawing.Point(179, 220)
+        Me.lbl3.Location = New System.Drawing.Point(179, 237)
         Me.lbl3.Name = "lbl3"
         Me.lbl3.Size = New System.Drawing.Size(47, 18)
         Me.lbl3.TabIndex = 69
@@ -215,7 +243,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lbl4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbl4.Location = New System.Drawing.Point(179, 244)
+        Me.lbl4.Location = New System.Drawing.Point(179, 261)
         Me.lbl4.Name = "lbl4"
         Me.lbl4.Size = New System.Drawing.Size(47, 18)
         Me.lbl4.TabIndex = 68
@@ -228,11 +256,11 @@ Partial Class frmPerformance_RangeConsolidate
         '
         Me.CircularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.CircularProgress1.FocusCuesEnabled = False
-        Me.CircularProgress1.Location = New System.Drawing.Point(573, 76)
+        Me.CircularProgress1.Location = New System.Drawing.Point(310, 18)
         Me.CircularProgress1.Name = "CircularProgress1"
         Me.CircularProgress1.ProgressColor = System.Drawing.Color.Red
         Me.CircularProgress1.ProgressTextVisible = True
-        Me.CircularProgress1.Size = New System.Drawing.Size(82, 162)
+        Me.CircularProgress1.Size = New System.Drawing.Size(229, 107)
         Me.CircularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
         Me.CircularProgress1.TabIndex = 67
         Me.CircularProgress1.TabStop = False
@@ -244,7 +272,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict1.Location = New System.Drawing.Point(15, 172)
+        Me.lblDistrict1.Location = New System.Drawing.Point(15, 189)
         Me.lblDistrict1.Name = "lblDistrict1"
         Me.lblDistrict1.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict1.TabIndex = 66
@@ -257,7 +285,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict5.Location = New System.Drawing.Point(15, 268)
+        Me.lblDistrict5.Location = New System.Drawing.Point(15, 285)
         Me.lblDistrict5.Name = "lblDistrict5"
         Me.lblDistrict5.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict5.TabIndex = 65
@@ -270,7 +298,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict2.Location = New System.Drawing.Point(15, 196)
+        Me.lblDistrict2.Location = New System.Drawing.Point(15, 213)
         Me.lblDistrict2.Name = "lblDistrict2"
         Me.lblDistrict2.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict2.TabIndex = 64
@@ -283,7 +311,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict3.Location = New System.Drawing.Point(15, 220)
+        Me.lblDistrict3.Location = New System.Drawing.Point(15, 237)
         Me.lblDistrict3.Name = "lblDistrict3"
         Me.lblDistrict3.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict3.TabIndex = 63
@@ -296,7 +324,7 @@ Partial Class frmPerformance_RangeConsolidate
         '
         '
         Me.lblDistrict4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblDistrict4.Location = New System.Drawing.Point(15, 244)
+        Me.lblDistrict4.Location = New System.Drawing.Point(15, 261)
         Me.lblDistrict4.Name = "lblDistrict4"
         Me.lblDistrict4.Size = New System.Drawing.Size(47, 18)
         Me.lblDistrict4.TabIndex = 62
@@ -512,11 +540,201 @@ Partial Class frmPerformance_RangeConsolidate
         Me.bgwDownloadStatements.WorkerReportsProgress = True
         Me.bgwDownloadStatements.WorkerSupportsCancellation = True
         '
+        'lblID1
+        '
+        Me.lblID1.AutoSize = True
+        '
+        '
+        '
+        Me.lblID1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID1.Location = New System.Drawing.Point(354, 189)
+        Me.lblID1.Name = "lblID1"
+        Me.lblID1.Size = New System.Drawing.Size(47, 18)
+        Me.lblID1.TabIndex = 81
+        Me.lblID1.Text = "LabelX1"
+        '
+        'lblID5
+        '
+        Me.lblID5.AutoSize = True
+        '
+        '
+        '
+        Me.lblID5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID5.Location = New System.Drawing.Point(354, 285)
+        Me.lblID5.Name = "lblID5"
+        Me.lblID5.Size = New System.Drawing.Size(47, 18)
+        Me.lblID5.TabIndex = 80
+        Me.lblID5.Text = "LabelX9"
+        '
+        'lblID2
+        '
+        Me.lblID2.AutoSize = True
+        '
+        '
+        '
+        Me.lblID2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID2.Location = New System.Drawing.Point(354, 213)
+        Me.lblID2.Name = "lblID2"
+        Me.lblID2.Size = New System.Drawing.Size(47, 18)
+        Me.lblID2.TabIndex = 79
+        Me.lblID2.Text = "LabelX8"
+        '
+        'lblID3
+        '
+        Me.lblID3.AutoSize = True
+        '
+        '
+        '
+        Me.lblID3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID3.Location = New System.Drawing.Point(354, 237)
+        Me.lblID3.Name = "lblID3"
+        Me.lblID3.Size = New System.Drawing.Size(47, 18)
+        Me.lblID3.TabIndex = 78
+        Me.lblID3.Text = "LabelX7"
+        '
+        'lblID4
+        '
+        Me.lblID4.AutoSize = True
+        '
+        '
+        '
+        Me.lblID4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID4.Location = New System.Drawing.Point(354, 261)
+        Me.lblID4.Name = "lblID4"
+        Me.lblID4.Size = New System.Drawing.Size(47, 18)
+        Me.lblID4.TabIndex = 77
+        Me.lblID4.Text = "LabelX2"
+        '
+        'lblSOC1
+        '
+        Me.lblSOC1.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC1.Location = New System.Drawing.Point(542, 189)
+        Me.lblSOC1.Name = "lblSOC1"
+        Me.lblSOC1.Size = New System.Drawing.Size(47, 18)
+        Me.lblSOC1.TabIndex = 86
+        Me.lblSOC1.Text = "LabelX1"
+        '
+        'lblSOC5
+        '
+        Me.lblSOC5.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC5.Location = New System.Drawing.Point(542, 285)
+        Me.lblSOC5.Name = "lblSOC5"
+        Me.lblSOC5.Size = New System.Drawing.Size(47, 18)
+        Me.lblSOC5.TabIndex = 85
+        Me.lblSOC5.Text = "LabelX9"
+        '
+        'lblSOC2
+        '
+        Me.lblSOC2.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC2.Location = New System.Drawing.Point(542, 213)
+        Me.lblSOC2.Name = "lblSOC2"
+        Me.lblSOC2.Size = New System.Drawing.Size(47, 18)
+        Me.lblSOC2.TabIndex = 84
+        Me.lblSOC2.Text = "LabelX8"
+        '
+        'lblSOC3
+        '
+        Me.lblSOC3.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC3.Location = New System.Drawing.Point(542, 237)
+        Me.lblSOC3.Name = "lblSOC3"
+        Me.lblSOC3.Size = New System.Drawing.Size(47, 18)
+        Me.lblSOC3.TabIndex = 83
+        Me.lblSOC3.Text = "LabelX7"
+        '
+        'lblSOC4
+        '
+        Me.lblSOC4.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC4.Location = New System.Drawing.Point(542, 261)
+        Me.lblSOC4.Name = "lblSOC4"
+        Me.lblSOC4.Size = New System.Drawing.Size(47, 18)
+        Me.lblSOC4.TabIndex = 82
+        Me.lblSOC4.Text = "LabelX2"
+        '
+        'lblGrave
+        '
+        Me.lblGrave.AutoSize = True
+        '
+        '
+        '
+        Me.lblGrave.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblGrave.Font = New System.Drawing.Font("Segoe UI", 9.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblGrave.ForeColor = System.Drawing.Color.Red
+        Me.lblGrave.Location = New System.Drawing.Point(179, 165)
+        Me.lblGrave.Name = "lblGrave"
+        Me.lblGrave.Size = New System.Drawing.Size(35, 18)
+        Me.lblGrave.TabIndex = 87
+        Me.lblGrave.Text = "Grave"
+        '
+        'lblID
+        '
+        Me.lblID.AutoSize = True
+        '
+        '
+        '
+        Me.lblID.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblID.Font = New System.Drawing.Font("Segoe UI", 9.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblID.ForeColor = System.Drawing.Color.Red
+        Me.lblID.Location = New System.Drawing.Point(354, 165)
+        Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(78, 18)
+        Me.lblID.TabIndex = 88
+        Me.lblID.Text = "Identification"
+        '
+        'lblSOC
+        '
+        Me.lblSOC.AutoSize = True
+        '
+        '
+        '
+        Me.lblSOC.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblSOC.Font = New System.Drawing.Font("Segoe UI", 9.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSOC.ForeColor = System.Drawing.Color.Red
+        Me.lblSOC.Location = New System.Drawing.Point(542, 165)
+        Me.lblSOC.Name = "lblSOC"
+        Me.lblSOC.Size = New System.Drawing.Size(26, 18)
+        Me.lblSOC.TabIndex = 89
+        Me.lblSOC.Text = "SOC"
+        '
+        'LabelX2
+        '
+        Me.LabelX2.AutoSize = True
+        '
+        '
+        '
+        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX2.Font = New System.Drawing.Font("Segoe UI", 9.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX2.ForeColor = System.Drawing.Color.Red
+        Me.LabelX2.Location = New System.Drawing.Point(15, 165)
+        Me.LabelX2.Name = "LabelX2"
+        Me.LabelX2.Size = New System.Drawing.Size(43, 18)
+        Me.LabelX2.TabIndex = 90
+        Me.LabelX2.Text = "District"
+        '
         'frmPerformance_RangeConsolidate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(674, 303)
+        Me.ClientSize = New System.Drawing.Size(674, 316)
         Me.Controls.Add(Me.PanelEx1)
         Me.DoubleBuffered = True
         Me.EnableGlass = False
@@ -570,4 +788,18 @@ Partial Class frmPerformance_RangeConsolidate
     Friend WithEvents btnDownloadStatements As DevComponents.DotNetBar.ButtonX
     Friend WithEvents bgwDownloadAnnualFiles As System.ComponentModel.BackgroundWorker
     Friend WithEvents bgwDownloadStatements As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblSOC1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblSOC5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblSOC2 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblSOC3 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblSOC4 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID2 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID3 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID4 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblSOC As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblID As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblGrave As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
 End Class

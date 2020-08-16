@@ -46,6 +46,7 @@ Public Class frmPerformance_RangeConsolidate
     Dim blAllFilesDownloaded As Boolean = False
 
     Dim ConsolidatedPerformanceFolder As String = ""
+    Dim ConsolidatedStatementsFolder As String = ""
 
 #Region "FORM LOAD EVENTS"
 
@@ -55,6 +56,9 @@ Public Class frmPerformance_RangeConsolidate
 
             ConsolidatedPerformanceFolder = SuggestedLocation & "\Consolidated Performance Statement"
             My.Computer.FileSystem.CreateDirectory(ConsolidatedPerformanceFolder)
+
+            ConsolidatedStatementsFolder = SuggestedLocation & "\Consolidated Monthly Statements"
+            My.Computer.FileSystem.CreateDirectory(ConsolidatedStatementsFolder)
 
             ClearLabels()
             Me.CircularProgress1.Visible = False
@@ -250,9 +254,367 @@ Public Class frmPerformance_RangeConsolidate
         Me.lbl3.Text = ""
         Me.lbl4.Text = ""
         Me.lbl5.Text = ""
+
+        Me.lblID1.Text = ""
+        Me.lblID2.Text = ""
+        Me.lblID3.Text = ""
+        Me.lblID4.Text = ""
+        Me.lblID5.Text = ""
+
+        Me.lblSOC1.Text = ""
+        Me.lblSOC2.Text = ""
+        Me.lblSOC3.Text = ""
+        Me.lblSOC4.Text = ""
+        Me.lblSOC5.Text = ""
+
         lblStmt.Text = ""
+
+        Me.lblGrave.Text = ""
+        Me.lblSOC.Text = ""
+        Me.lblID.Text = ""
     End Sub
 
+
+#End Region
+
+
+#Region "DOWNLOAD STATEMENTS"
+    Private Sub btnDownloadStatements_Click(sender As Object, e As EventArgs) Handles btnDownloadStatements.Click
+        Me.Cursor = Cursors.WaitCursor
+
+        SelectedMonthIndex = Me.cmbMonth.SelectedIndex + 1
+        SelectedMonthText = Me.cmbMonth.Text
+        SelectedMonthYear = Me.txtMonthlyYear.Text
+
+        ClearLabels()
+
+        Me.lblGrave.Text = "Grave"
+        Me.lblSOC.Text = "SOC"
+        Me.lblID.Text = "Identification"
+
+        Me.lblStmt.Text = "Download Statements for " & SelectedMonthText & " - " & SelectedMonthYear
+
+        If InternetAvailable() = False Then
+            MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
+
+        Me.CircularProgress1.ProgressText = "1/" & TotalDistrictCount
+        Me.CircularProgress1.IsRunning = True
+        Me.CircularProgress1.Show()
+
+        bgwDownloadStatements.RunWorkerAsync(DistrictList)
+    End Sub
+
+
+    Private Sub bgwDownloadStatements_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadStatements.DoWork
+        Try
+            If blServiceCreated = False Then
+                Dim Scopes As String() = {DriveService.Scope.Drive}
+                FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+                FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+                blServiceCreated = True
+            End If
+
+            If InternalFolderID = "" Then
+                InternalFolderID = GetFolderID("Internal File Transfer", "root")
+            End If
+
+            Dim currentdistrictnumber As Integer = 0
+
+            Dim List = FISService.Files.List()
+            Dim Results As Google.Apis.Drive.v3.Data.FileList
+            Dim cnt As Integer = 0
+
+            For i = 0 To 4
+
+                SelectedDistrict = DistrictList(i)
+                Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+                If SelectedDistrict = "" Then
+                    Continue For
+                End If
+
+                currentdistrictnumber = currentdistrictnumber + 1
+                bgwDownloadStatements.ReportProgress(currentdistrictnumber, currentdistrictnumber)
+
+                Dim DownloadFileName As String = ""
+                Dim DownloadFolder As String = ""
+
+                If blUserDistrict Then
+                    DownloadFileName = "Grave Crime Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+                    DownloadFolder = SuggestedLocation & "\Grave Crime Statement\" & SelectedMonthYear
+                Else
+                    DownloadFileName = SelectedDistrict & "-" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & "Grave.docx"
+                    DownloadFolder = ConsolidatedStatementsFolder
+                End If
+
+
+
+
+
+
+
+
+
+
+
+                If blUserDistrict Then
+                    DownloadFileName = "SOC Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+                    DownloadFolder = SuggestedLocation & "\SOC Statement\" & SelectedMonthYear
+                Else
+                    DownloadFileName = SelectedDistrict & "-" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & "SOC.docx"
+                    DownloadFolder = ConsolidatedStatementsFolder
+                End If
+
+                
+                If blUserDistrict Then
+                    DownloadFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+                    DownloadFolder = SuggestedLocation & "\Identification Statement\" & SelectedMonthYear
+                Else
+                    DownloadFileName = SelectedDistrict & "-" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & "Identification.docx"
+                    DownloadFolder = ConsolidatedStatementsFolder
+                End If
+
+
+
+
+                Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
+                If districtfolderid = "" Then
+                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, "all No stmt found")
+                    Continue For
+                End If
+
+                Dim statementfolderid As String = GetFolderID("Monthly Statements Backup", districtfolderid)
+                If statementfolderid = "" Then
+                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, "all No stmt found")
+                    Continue For
+                End If
+
+                List.Q = "name = 'Grave Crime Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx' and '" & statementfolderid & "' in parents"
+                List.Fields = "files(id)"
+
+                Results = List.Execute
+                cnt = Results.Files.Count
+
+                If cnt = 0 Then
+                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, "gra No stmt found")
+                Else
+
+                    
+
+
+
+                    DownloadFile(Results.Files(j).Id, DownloadFolder & "\" & DownloadFileName)
+
+                End If
+            Next
+
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+    End Sub
+
+
+    Private Sub DownloadFile(FileID As String, FullDownloadPath As String, currentdistrictnumber As Integer, stmt As String)
+        Try
+
+            If My.Computer.FileSystem.FileExists(FullDownloadPath) Then
+                If FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower) Then
+                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Already Exists")
+                Else
+                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Already Downloaded")
+                End If
+            End If
+
+            bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Downloading")
+
+            Dim request = FISService.Files.Get(FileID)
+            Dim file = request.Execute
+
+            Dim fStream = New System.IO.FileStream(FullDownloadPath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+            Dim mStream = New System.IO.MemoryStream
+
+            Dim m = request.MediaDownloader
+
+            AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+            request.DownloadWithStatus(mStream)
+
+            If dDownloadStatus = DownloadStatus.Completed Then
+                bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Downloaded")
+                mStream.WriteTo(fStream)
+            End If
+
+            If dDownloadStatus = DownloadStatus.Failed Then
+                bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Failed")
+                mStream.WriteTo(fStream)
+            End If
+
+            fStream.Close()
+            mStream.Close()
+        Catch ex As Exception
+            bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Failed")
+        End Try
+    End Sub
+
+    Private Sub bgwDownloadStatements_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadStatements.ProgressChanged
+
+        If TypeOf e.UserState Is Integer Then
+            CircularProgress1.ProgressText = e.ProgressPercentage & "/" & TotalDistrictCount
+        End If
+
+        If TypeOf e.UserState Is String Then
+            Dim districtnumber As Integer = e.ProgressPercentage
+            Dim Status As String = e.UserState.ToString
+            Dim stmt As String = Status.Substring(0, 3)
+            Dim lblText As String = Status.Substring(4)
+
+            Dim clr As Color = Color.Black
+
+            If lblText.StartsWith("No stmt") Then
+                clr = Color.Red
+            End If
+
+            If lblText.StartsWith("Already") Then
+                clr = Color.Brown
+            End If
+
+            If lblText.StartsWith("Downloading") Then
+                clr = Color.Blue
+            End If
+
+            If lblText.StartsWith("Downloaded") Then
+                clr = Color.Green
+            End If
+
+            If lblText = "Failed" Then
+                clr = Color.Red
+            End If
+
+            Select Case districtnumber
+                Case 1
+                    Select Case stmt
+                        Case "all"
+                            Me.lbl1.Text = lblText
+                            Me.lbl1.ForeColor = clr
+
+                            Me.lblID1.Text = lblText
+                            Me.lblID1.ForeColor = clr
+
+                            Me.lblSOC1.Text = lblText
+                            Me.lblSOC1.ForeColor = clr
+
+                        Case "soc"
+                            lblSOC1.Text = lblText
+                            lblSOC1.ForeColor = clr
+                        Case "ide"
+                            lblID1.Text = lblText
+                            lblID1.ForeColor = clr
+                        Case "gra"
+                            Me.lbl1.Text = lblText
+                            Me.lbl1.ForeColor = clr
+                    End Select
+                Case 2
+                    Select Case stmt
+                        Case "all"
+                            Me.lbl2.Text = lblText
+                            Me.lbl2.ForeColor = clr
+
+                            Me.lblID2.Text = lblText
+                            Me.lblID2.ForeColor = clr
+
+                            Me.lblSOC2.Text = lblText
+                            Me.lblSOC2.ForeColor = clr
+
+                        Case "soc"
+                            lblSOC2.Text = lblText
+                            lblSOC2.ForeColor = clr
+                        Case "ide"
+                            lblID2.Text = lblText
+                            lblID2.ForeColor = clr
+                        Case "gra"
+                            Me.lbl2.Text = lblText
+                            Me.lbl2.ForeColor = clr
+                    End Select
+                Case 3
+                    Select Case stmt
+                        Case "all"
+                            Me.lbl3.Text = lblText
+                            Me.lbl3.ForeColor = clr
+
+                            Me.lblID3.Text = lblText
+                            Me.lblID3.ForeColor = clr
+
+                            Me.lblSOC3.Text = lblText
+                            Me.lblSOC3.ForeColor = clr
+
+                        Case "soc"
+                            lblSOC3.Text = lblText
+                            lblSOC3.ForeColor = clr
+                        Case "ide"
+                            lblID3.Text = lblText
+                            lblID3.ForeColor = clr
+                        Case "gra"
+                            Me.lbl3.Text = lblText
+                            Me.lbl3.ForeColor = clr
+                    End Select
+                Case 4
+                    Select Case stmt
+                        Case "all"
+                            Me.lbl4.Text = lblText
+                            Me.lbl4.ForeColor = clr
+
+                            Me.lblID4.Text = lblText
+                            Me.lblID4.ForeColor = clr
+
+                            Me.lblSOC4.Text = lblText
+                            Me.lblSOC4.ForeColor = clr
+
+                        Case "soc"
+                            lblSOC4.Text = lblText
+                            lblSOC4.ForeColor = clr
+                        Case "ide"
+                            lblID4.Text = lblText
+                            lblID4.ForeColor = clr
+                        Case "gra"
+                            Me.lbl4.Text = lblText
+                            Me.lbl4.ForeColor = clr
+                    End Select
+                Case 5
+                    Select Case stmt
+                        Case "all"
+                            Me.lbl5.Text = lblText
+                            Me.lbl5.ForeColor = clr
+
+                            Me.lblID5.Text = lblText
+                            Me.lblID5.ForeColor = clr
+
+                            Me.lblSOC5.Text = lblText
+                            Me.lblSOC5.ForeColor = clr
+
+                        Case "soc"
+                            lblSOC5.Text = lblText
+                            lblSOC5.ForeColor = clr
+                        Case "ide"
+                            lblID5.Text = lblText
+                            lblID5.ForeColor = clr
+                        Case "gra"
+                            Me.lbl5.Text = lblText
+                            Me.lbl5.ForeColor = clr
+                    End Select
+            End Select
+        End If
+    End Sub
+
+    Private Sub bgwDownloadStatements_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadStatements.RunWorkerCompleted
+        Me.CircularProgress1.IsRunning = False
+        Me.CircularProgress1.Text = ""
+        Me.CircularProgress1.Hide()
+        Call Shell("explorer.exe " & ConsolidatedStatementsFolder, AppWinStyle.NormalFocus)
+        Me.Cursor = Cursors.Default
+    End Sub
 
 #End Region
 
@@ -1076,6 +1438,10 @@ Public Class frmPerformance_RangeConsolidate
                 SelectedMonthIndex = Me.cmbMonth.SelectedIndex + 1
                 SelectedMonthYear = Me.txtMonthlyYear.Text
                 ConsolidatedFileName = ConsolidatedPerformanceFolder & "\" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-Consolidated Work Done.docx"
+            ElseIf Me.lblStmt.Text.StartsWith("Download") Then
+                Call Shell("explorer.exe " & ConsolidatedStatementsFolder, AppWinStyle.NormalFocus)
+                Me.Cursor = Cursors.Default
+                Exit Sub
             End If
 
             If My.Computer.FileSystem.FileExists(ConsolidatedFileName) Then
@@ -1090,9 +1456,5 @@ Public Class frmPerformance_RangeConsolidate
         Me.Cursor = Cursors.Default
     End Sub
 
-    
-    Private Sub btnDownloadStatements_Click(sender As Object, e As EventArgs) Handles btnDownloadStatements.Click
-
-    End Sub
 
 End Class
