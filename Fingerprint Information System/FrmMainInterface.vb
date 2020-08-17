@@ -352,6 +352,7 @@ Public Class frmMainInterface
                 CreateChalanRegisterTable()
                 CreateRevenueCollectionTable()
                 ModifyTables()
+                ReCopyValuesToChalanTable()
                 My.Computer.Registry.SetValue(strGeneralSettingsPath, "CreateTable", "0", Microsoft.Win32.RegistryValueKind.String)
             End If
 
@@ -1136,6 +1137,7 @@ Public Class frmMainInterface
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
 
             UpdateNullFields()
+            ReCopyValuesToChalanTable()
             MessageBoxEx.Show("Fixed Database Tables.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.Cursor = Cursors.Default
         Catch ex As Exception
@@ -17528,6 +17530,24 @@ errhandler:
         End Try
     End Sub
 
+    Private Sub ReCopyValuesToChalanTable()
+        Try
+            If Not DoesTableExist("ChalanTable", sConString) Then
+                Exit Sub
+            End If
+
+            Dim con As OleDb.OleDbConnection = New OleDb.OleDbConnection(sConString)
+            con.Open()
+            Dim cmd = New OleDb.OleDbCommand("INSERT INTO ChalanTable (FPNumber, FPDate, ChalanNumber, ChalanDate, HeadOfAccount, Treasury, AmountRemitted) SELECT FPNumber, FPDate, ChalanNumber, ChalanDate, HeadOfAccount, Treasury, AmountRemitted FROM FPAttestationRegister WHERE NOT EXISTS (SELECT * FROM ChalanTable WHERE (FPAttestationRegister.FPNumber=ChalanTable.FPNumber))", con)
+
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+
+        End Try
+    End Sub
+
     Private Sub CreateSupportingStaffTable()
         Try
             If DoesTableExist("SupportingStaff", sConString) Then
@@ -18322,6 +18342,8 @@ errhandler:
             CreateCommonSettingsTable()
             CreateIdentificationRegisterTable()
             CreateRevenueCollectionTable()
+
+            ReCopyValuesToChalanTable()
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
