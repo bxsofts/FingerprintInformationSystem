@@ -1167,7 +1167,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 51 To 60
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -1203,15 +1203,8 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 61 To 70
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
-        End If
-
-        If blApplicationIsLoading Or blDBIsInPreviewMode Then
-            IncrementCircularProgress(5)
-        Else
-            Dim p = Me.RSOCRegisterBindingSource.Find("SerialNo", oldrow)
-            If p >= 0 Then Me.RSOCRegisterBindingSource.Position = p
         End If
 
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
@@ -1234,16 +1227,23 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 71 To 80
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
-        If blApplicationIsLoading Or blDBIsInPreviewMode Then
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
+            Application.DoEvents()
         Else
-            Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
-            If p >= 0 Then Me.DARegisterBindingSource.Position = p
+            If blApplicationIsRestoring Or blDBIsInPreviewMode Then
+                Me.DARegisterBindingSource.MoveLast()
+            Else
+                Dim p = Me.DARegisterBindingSource.Find("DANumber", oldrow)
+                If p >= 0 Then Me.DARegisterBindingSource.Position = p
+            End If
         End If
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -1259,12 +1259,20 @@ Public Class frmMainInterface
         End If
         Me.IDRegisterTableAdapter.Fill(Me.FingerPrintDataSet.IdentifiedSlipsRegister)
         Me.IDRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Or blDBIsInPreviewMode Then
+
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
+            Application.DoEvents()
         Else
-            Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
-            If p >= 0 Then Me.IDRegisterBindingSource.Position = p
+            If blApplicationIsRestoring Or blDBIsInPreviewMode Then
+                Me.IDRegisterBindingSource.MoveLast()
+            Else
+                Dim p = Me.IDRegisterBindingSource.Find("IDNumber", oldrow)
+                If p >= 0 Then Me.IDRegisterBindingSource.Position = p
+            End If
         End If
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -1281,12 +1289,19 @@ Public Class frmMainInterface
         End If
         Me.ACRegisterTableAdapter.Fill(Me.FingerPrintDataSet.ActiveCriminalsRegister)
         Me.ACRegisterBindingSource.MoveLast()
-        If blApplicationIsLoading Or blDBIsInPreviewMode Then
+
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
+            Application.DoEvents()
         Else
-            Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
-            If p >= 0 Then Me.ACRegisterBindingSource.Position = p
+            If blApplicationIsRestoring Or blDBIsInPreviewMode Then
+                Me.ACRegisterBindingSource.MoveLast()
+            Else
+                Dim p = Me.ACRegisterBindingSource.Find("ACNumber", oldrow)
+                If p >= 0 Then Me.ACRegisterBindingSource.Position = p
+            End If
         End If
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -1307,16 +1322,22 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 81 To 85
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
-        If blApplicationIsLoading Or blDBIsInPreviewMode Then
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
+            Application.DoEvents()
         Else
-            Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
-            If p >= 0 Then Me.FPARegisterBindingSource.Position = p
+            If blApplicationIsRestoring Or blDBIsInPreviewMode Then
+                Me.FPARegisterBindingSource.MoveLast()
+            Else
+                Dim p = Me.FPARegisterBindingSource.Find("FPNumber", oldrow)
+                If p >= 0 Then Me.FPARegisterBindingSource.Position = p
+            End If
         End If
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -1336,16 +1357,22 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 86 To 90
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
-        If blApplicationIsLoading Or blDBIsInPreviewMode Then
+        If blApplicationIsLoading Then
             IncrementCircularProgress(5)
+            Application.DoEvents()
         Else
-            Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
-            If p >= 0 Then Me.CDRegisterBindingSource.Position = p
+            If blApplicationIsRestoring Or blDBIsInPreviewMode Then
+                Me.CDRegisterBindingSource.MoveLast()
+            Else
+                Dim p = Me.CDRegisterBindingSource.Find("CDNumberWithYear", oldrow)
+                If p >= 0 Then Me.CDRegisterBindingSource.Position = p
+            End If
         End If
+
         If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
     End Sub
 
@@ -1372,7 +1399,8 @@ Public Class frmMainInterface
             End If
 
             Me.JoinedIDRTableAdapter.Fill(Me.FingerPrintDataSet.JoinedIDR)
-            If blDBIsInPreviewMode Or blApplicationIsLoading Then
+
+            If blDBIsInPreviewMode Or blApplicationIsLoading Or blApplicationIsRestoring Then
                 Me.JoinedIDRBindingSource.MoveLast()
             Else
                 Dim p = Me.JoinedIDRBindingSource.Find("IdentificationNumber", oldrow)
@@ -1421,7 +1449,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 91 To 95
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -1544,7 +1572,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 51 To 60
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -1561,7 +1589,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 61 To 70
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -1578,7 +1606,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 71 To 80
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -1595,7 +1623,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 81 To 85
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -1618,7 +1646,7 @@ Public Class frmMainInterface
         If blApplicationIsRestoring Then
             For i = 86 To 90
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
         End If
 
@@ -18276,7 +18304,7 @@ errhandler:
 
             For i = 1 To 5
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             CreateSupportingStaffTable()
@@ -18286,7 +18314,7 @@ errhandler:
             CreateSupportingStaffTable()
             For i = 6 To 10
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             CreateSOCReportRegisterTable()
@@ -18297,7 +18325,7 @@ errhandler:
 
             For i = 11 To 15
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
 
@@ -18306,26 +18334,26 @@ errhandler:
 
             For i = 16 To 20
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
             ModifyTables()
             My.Computer.Registry.SetValue(strGeneralSettingsPath, "UpdateNullFields", "1", Microsoft.Win32.RegistryValueKind.String)
             For i = 21 To 25
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             UpdateNullFields()
 
             For i = 26 To 30
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             RemoveNullFromOfficerTable()
             For i = 31 To 35
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             LoadPSList()
@@ -18338,7 +18366,7 @@ errhandler:
 
             For i = 36 To 40
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
 
@@ -18349,7 +18377,7 @@ errhandler:
 
             For i = 41 To 50
                 frmProgressBar.SetProgressText(i)
-                System.Threading.Thread.Sleep(50)
+                System.Threading.Thread.Sleep(10)
             Next
 
             LoadRecordsToAllTablesDependingOnCurrentYearSettings()
