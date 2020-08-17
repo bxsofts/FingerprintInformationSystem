@@ -323,10 +323,6 @@ Public Class frmPerformance_RangeConsolidate
 
             Dim currentdistrictnumber As Integer = 0
 
-            Dim List = FISService.Files.List()
-            Dim Results As Google.Apis.Drive.v3.Data.FileList
-            Dim cnt As Integer = 0
-
             For i = 0 To 4
 
                 SelectedDistrict = DistrictList(i)
@@ -349,14 +345,17 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
+                DownloadFile(DownloadFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "gra")
 
+                If blUserDistrict Then
+                    DownloadFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+                    DownloadFolder = SuggestedLocation & "\Identification Statement\" & SelectedMonthYear
+                Else
+                    DownloadFileName = SelectedDistrict & "-" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & "Identification.docx"
+                    DownloadFolder = ConsolidatedStatementsFolder
+                End If
 
-
-
-
-
-
-
+                DownloadFile(DownloadFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "ide")
 
 
                 If blUserDistrict Then
@@ -367,47 +366,8 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
-                
-                If blUserDistrict Then
-                    DownloadFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
-                    DownloadFolder = SuggestedLocation & "\Identification Statement\" & SelectedMonthYear
-                Else
-                    DownloadFileName = SelectedDistrict & "-" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & "Identification.docx"
-                    DownloadFolder = ConsolidatedStatementsFolder
-                End If
+                DownloadFile(DownloadFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "soc")
 
-
-
-
-                Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
-                If districtfolderid = "" Then
-                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, "all No stmt found")
-                    Continue For
-                End If
-
-                Dim statementfolderid As String = GetFolderID("Monthly Statements Backup", districtfolderid)
-                If statementfolderid = "" Then
-                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, "all No stmt found")
-                    Continue For
-                End If
-
-                List.Q = "name = 'Grave Crime Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx' and '" & statementfolderid & "' in parents"
-                List.Fields = "files(id)"
-
-                Results = List.Execute
-                cnt = Results.Files.Count
-
-                If cnt = 0 Then
-                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, "gra No stmt found")
-                Else
-
-                    
-
-
-
-                    DownloadFile(Results.Files(j).Id, DownloadFolder & "\" & DownloadFileName)
-
-                End If
             Next
 
 
@@ -417,45 +377,73 @@ Public Class frmPerformance_RangeConsolidate
     End Sub
 
 
-    Private Sub DownloadFile(FileID As String, FullDownloadPath As String, currentdistrictnumber As Integer, stmt As String)
+    Private Sub DownloadFile(RemoteFileName As String, FullDownloadPath As String, DistrictNumber As Integer, stmt As String)
         Try
 
             If My.Computer.FileSystem.FileExists(FullDownloadPath) Then
                 If FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower) Then
-                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Already Exists")
+                    bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " Already Exists")
                 Else
-                    bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Already Downloaded")
+                    bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " Already Downloaded")
                 End If
+                Exit Sub
             End If
 
-            bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Downloading")
-
-            Dim request = FISService.Files.Get(FileID)
-            Dim file = request.Execute
-
-            Dim fStream = New System.IO.FileStream(FullDownloadPath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
-            Dim mStream = New System.IO.MemoryStream
-
-            Dim m = request.MediaDownloader
-
-            AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
-
-            request.DownloadWithStatus(mStream)
-
-            If dDownloadStatus = DownloadStatus.Completed Then
-                bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Downloaded")
-                mStream.WriteTo(fStream)
+            Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
+            If districtfolderid = "" Then
+                bgwDownloadStatements.ReportProgress(DistrictNumber, "all No stmt found")
+                Exit Sub
             End If
 
-            If dDownloadStatus = DownloadStatus.Failed Then
-                bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Failed")
-                mStream.WriteTo(fStream)
+            Dim statementfolderid As String = GetFolderID("Monthly Statements Backup", districtfolderid)
+            If statementfolderid = "" Then
+                bgwDownloadStatements.ReportProgress(DistrictNumber, "all No stmt found")
+                Exit Sub
             End If
 
-            fStream.Close()
-            mStream.Close()
+            Dim List = FISService.Files.List()
+            Dim Results As Google.Apis.Drive.v3.Data.FileList
+            Dim cnt As Integer = 0
+
+            List.Q = "name = '" & RemoteFileName & "' and '" & statementfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+            cnt = Results.Files.Count
+
+            If cnt = 0 Then
+                bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " No stmt found")
+            Else
+                bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " Downloading")
+                Dim fileid As String = Results.Files(0).Id
+                Dim request = FISService.Files.Get(fileid)
+                Dim file = request.Execute
+
+                Dim fStream = New System.IO.FileStream(FullDownloadPath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " Downloaded")
+                    mStream.WriteTo(fStream)
+                End If
+
+                If dDownloadStatus = DownloadStatus.Failed Then
+                    bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " Failed")
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+            End If
+
         Catch ex As Exception
-            bgwDownloadStatements.ReportProgress(currentdistrictnumber, stmt & " Failed")
+            bgwDownloadStatements.ReportProgress(DistrictNumber, stmt & " Failed")
         End Try
     End Sub
 
@@ -612,7 +600,7 @@ Public Class frmPerformance_RangeConsolidate
         Me.CircularProgress1.IsRunning = False
         Me.CircularProgress1.Text = ""
         Me.CircularProgress1.Hide()
-        Call Shell("explorer.exe " & ConsolidatedStatementsFolder, AppWinStyle.NormalFocus)
+        '   Call Shell("explorer.exe " & ConsolidatedStatementsFolder, AppWinStyle.NormalFocus)
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -1419,7 +1407,19 @@ Public Class frmPerformance_RangeConsolidate
     End Sub
 #End Region
 
-    Private Sub btnOpenFolder_Click(sender As Object, e As EventArgs) Handles btnOpenFolder.Click
+    Private Sub btnOpenStatementFolder_Click(sender As Object, e As EventArgs) Handles btnOpenStatementFolder.Click
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            Call Shell("explorer.exe " & ConsolidatedStatementsFolder, AppWinStyle.NormalFocus)
+
+        Catch ex As Exception
+            ShowErrorMessage(ex)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
+    Private Sub btnOpenWorkDoneFolder_Click(sender As Object, e As EventArgs) Handles btnOpenWorkDoneFolder.Click
         Try
             Me.Cursor = Cursors.WaitCursor
 
@@ -1434,12 +1434,12 @@ Public Class frmPerformance_RangeConsolidate
                 SelectedAnnualYear = Me.txtAnnualYear.Text
                 ConsolidatedFileName = ConsolidatedPerformanceFolder & "\" & SelectedAnnualYear & "-Consolidated Work Done.docx"
 
-            ElseIf Me.lblStmt.Text.StartsWith("Consolidated Statement - ") Or Me.lblStmt.Text = "" Then
+            ElseIf Me.lblStmt.Text.StartsWith("Consolidated Statement - ") Then
                 SelectedMonthIndex = Me.cmbMonth.SelectedIndex + 1
                 SelectedMonthYear = Me.txtMonthlyYear.Text
                 ConsolidatedFileName = ConsolidatedPerformanceFolder & "\" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-Consolidated Work Done.docx"
-            ElseIf Me.lblStmt.Text.StartsWith("Download") Then
-                Call Shell("explorer.exe " & ConsolidatedStatementsFolder, AppWinStyle.NormalFocus)
+            Else
+                Call Shell("explorer.exe " & ConsolidatedPerformanceFolder, AppWinStyle.NormalFocus)
                 Me.Cursor = Cursors.Default
                 Exit Sub
             End If
@@ -1455,6 +1455,4 @@ Public Class frmPerformance_RangeConsolidate
         End Try
         Me.Cursor = Cursors.Default
     End Sub
-
-
 End Class
