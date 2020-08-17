@@ -570,7 +570,7 @@ Public Class frmFPAStatement
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Tables.Item(1).AllowAutoFit = True
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(40, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(110, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(155, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
@@ -651,7 +651,7 @@ Public Class frmFPAStatement
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Size = 10
 
-            Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
+            Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(Me.dgvChalan.ColumnCount - 1).Value
             Dim p2 = "` " & totalamount & "/-"
 
             WordApp.Selection.TypeText(p2)
@@ -823,6 +823,8 @@ Public Class frmFPAStatement
        
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Paragraphs.Space1()
+
             WordApp.Selection.Font.Size = 11
             WordApp.Selection.Font.Bold = 1
             WordApp.Selection.Font.Underline = 1
@@ -852,7 +854,7 @@ Public Class frmFPAStatement
             WordApp.Selection.Tables.Item(1).Borders.Enable = True
             WordApp.Selection.Tables.Item(1).AllowAutoFit = True
             WordApp.Selection.Tables.Item(1).Columns(1).SetWidth(40, Word.WdRulerStyle.wdAdjustFirstColumn)
-            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(90, Word.WdRulerStyle.wdAdjustFirstColumn)
+            WordApp.Selection.Tables.Item(1).Columns(2).SetWidth(110, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(3).SetWidth(155, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(4).SetWidth(70, Word.WdRulerStyle.wdAdjustFirstColumn)
             WordApp.Selection.Tables.Item(1).Columns(5).SetWidth(60, Word.WdRulerStyle.wdAdjustFirstColumn)
@@ -925,9 +927,9 @@ Public Class frmFPAStatement
             WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight
             WordApp.Selection.TypeText("Total")
             WordApp.Selection.Tables.Item(1).Cell(RowCount + 1, 2).Select()
-           
+            WordApp.Selection.Font.Bold = 1
 
-            Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
+            Dim totalamount As Integer = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(Me.dgvChalan.ColumnCount - 1).Value
 
             Dim p2 = "Rs." & totalamount & "/-"
             WordApp.Selection.TypeText(p2)
@@ -1178,7 +1180,7 @@ Public Class frmFPAStatement
                 xlSheet.Cells(i, 5).font.bold = True
                 xlSheet.Cells(i, 5).value = "Total Rs."
                 xlSheet.Cells(i, 6).font.bold = True
-                xlSheet.Cells(i, 6).value = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(4).Value
+                xlSheet.Cells(i, 6).value = Me.dgvChalan.Rows(Me.dgvChalan.RowCount - 1).Cells(Me.dgvChalan.ColumnCount - 1).Value
 
                 xlSheet.Range("A12:F" & i).Borders.LineStyle = 1
             End If
