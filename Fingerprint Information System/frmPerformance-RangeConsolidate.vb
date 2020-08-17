@@ -326,10 +326,11 @@ Public Class frmPerformance_RangeConsolidate
             For i = 0 To 4
 
                 SelectedDistrict = DistrictList(i)
-                Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
                 If SelectedDistrict = "" Then
                     Continue For
                 End If
+
+                Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
 
                 currentdistrictnumber = currentdistrictnumber + 1
                 bgwDownloadStatements.ReportProgress(currentdistrictnumber, currentdistrictnumber)
@@ -595,7 +596,6 @@ Public Class frmPerformance_RangeConsolidate
             End Select
         End If
     End Sub
-
     Private Sub bgwDownloadStatements_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadStatements.RunWorkerCompleted
         Me.CircularProgress1.IsRunning = False
         Me.CircularProgress1.Text = ""
@@ -700,11 +700,24 @@ Public Class frmPerformance_RangeConsolidate
                 currentfilenumber = currentfilenumber + 1
                 bgwDownloadMonthFiles.ReportProgress(currentfilenumber, currentfilenumber)
 
-                Dim DownloadFileName As String = SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & SelectedDistrict & ".docx"
+                Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+                Dim DownloadFileName As String = ""
+                Dim DownloadFolder As String = ""
 
+                If blUserDistrict Then
+                    DownloadFileName = "Monthly Performance Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+                    DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                Else
+                    DownloadFileName = SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & SelectedDistrict & ".docx"
+                    DownloadFolder = ConsolidatedPerformanceFolder
+                End If
 
-                If My.Computer.FileSystem.FileExists(ConsolidatedPerformanceFolder & "\" & DownloadFileName) Then
-                    bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                If My.Computer.FileSystem.FileExists(DownloadFolder & "\" & DownloadFileName) Then
+                    If blUserDistrict Then
+                        bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Already exists")
+                    Else
+                        bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                    End If
                     DownloadedFileCount += 1
                     Continue For
                 End If
@@ -740,7 +753,7 @@ Public Class frmPerformance_RangeConsolidate
                     request.Fields = "size"
                     Dim file = request.Execute
 
-                    Dim fStream = New System.IO.FileStream(ConsolidatedPerformanceFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                    Dim fStream = New System.IO.FileStream(DownloadFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
                     Dim mStream = New System.IO.MemoryStream
 
                     Dim m = request.MediaDownloader
@@ -795,11 +808,25 @@ Public Class frmPerformance_RangeConsolidate
                         Continue For
                     End If
 
+                    Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+
                     currentfilenumber = currentfilenumber + 1
                     bgwDownloadMonthFiles.ReportProgress(currentfilenumber, currentfilenumber)
                     bgwDownloadMonthFiles.ReportProgress(currentfilenumber, "Attaching")
 
-                    Dim DistFileName As String = ConsolidatedPerformanceFolder & "\" & SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & SelectedDistrict & ".docx"
+                    Dim DistFileName As String = ""
+                    Dim DownloadFolder As String = ""
+
+                    If blUserDistrict Then
+                        DistFileName = "Monthly Performance Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+                        DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                    Else
+                        DistFileName = SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & SelectedDistrict & ".docx"
+                        DownloadFolder = ConsolidatedPerformanceFolder
+                    End If
+
+                    DistFileName = DownloadFolder & "\" & DistFileName
+
                     Dim wdDocDist As Word.Document = wdDocs.Add(DistFileName)
                     Dim wdDocDistTbl As Word.Table = wdDocDist.Range.Tables.Item(1)
                     Dim rc As Integer = wdDocDistTbl.Rows.Count
@@ -937,17 +964,30 @@ Public Class frmPerformance_RangeConsolidate
                 End If
 
                 currentfilenumber = currentfilenumber + 1
-
-                Dim DownloadFileName As String = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
-
                 bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, currentfilenumber)
 
+                Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+                Dim DownloadFileName As String = ""
+                Dim DownloadFolder As String = ""
 
-                If My.Computer.FileSystem.FileExists(ConsolidatedPerformanceFolder & "\" & DownloadFileName) Then
-                    bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                If blUserDistrict Then
+                    DownloadFileName = "Quarterly Performance Statement - " & SelectedQuarterYear & " - Q" & SelectedQuarter & ".docx"
+                    DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                Else
+                    DownloadFileName = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
+                    DownloadFolder = ConsolidatedPerformanceFolder
+                End If
+
+                If My.Computer.FileSystem.FileExists(DownloadFolder & "\" & DownloadFileName) Then
+                    If blUserDistrict Then
+                        bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Already exists")
+                    Else
+                        bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                    End If
                     DownloadedFileCount += 1
                     Continue For
                 End If
+
 
                 Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
                 If districtfolderid = "" Then
@@ -980,7 +1020,7 @@ Public Class frmPerformance_RangeConsolidate
                     request.Fields = "size"
                     Dim file = request.Execute
 
-                    Dim fStream = New System.IO.FileStream(ConsolidatedPerformanceFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                    Dim fStream = New System.IO.FileStream(DownloadFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
                     Dim mStream = New System.IO.MemoryStream
 
                     Dim m = request.MediaDownloader
@@ -1039,7 +1079,21 @@ Public Class frmPerformance_RangeConsolidate
                     bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, currentfilenumber)
                     bgwDownloadQuarterFiles.ReportProgress(currentfilenumber, "Attaching")
 
-                    Dim DistFileName As String = ConsolidatedPerformanceFolder & "\" & SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
+                    Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+
+                    Dim DistFileName As String = ""
+                    Dim DownloadFolder As String = ""
+
+                    If blUserDistrict Then
+                        DistFileName = "Quarterly Performance Statement - " & SelectedQuarterYear & " - Q" & SelectedQuarter & ".docx"
+                        DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                    Else
+                        DistFileName = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
+                        DownloadFolder = ConsolidatedPerformanceFolder
+                    End If
+
+                    DistFileName = DownloadFolder & "\" & DistFileName
+
                     Dim wdDocDist As Word.Document = wdDocs.Add(DistFileName)
                     Dim wdDocDistTbl As Word.Table = wdDocDist.Range.Tables.Item(1)
                     Dim rc As Integer = wdDocDistTbl.Rows.Count
@@ -1119,6 +1173,10 @@ Public Class frmPerformance_RangeConsolidate
             End If
 
             If status = "Already downloaded" Then
+                clr = Color.Brown
+            End If
+
+            If status = "Already exists" Then
                 clr = Color.Brown
             End If
 
@@ -1244,13 +1302,28 @@ Public Class frmPerformance_RangeConsolidate
                 currentfilenumber = currentfilenumber + 1
                 bgwDownloadAnnualFiles.ReportProgress(currentfilenumber, currentfilenumber)
 
-                Dim DownloadFileName As String = SelectedAnnualYear & "-" & SelectedDistrict & ".docx" '2020-Kozhikode Rural.docx
+                Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+                Dim DownloadFileName As String = ""
+                Dim DownloadFolder As String = ""
 
-                If My.Computer.FileSystem.FileExists(ConsolidatedPerformanceFolder & "\" & DownloadFileName) Then
-                    bgwDownloadAnnualFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                If blUserDistrict Then
+                    DownloadFileName = "Annual Performance Statement - " & SelectedAnnualYear & ".docx"
+                    DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                Else
+                    DownloadFileName = SelectedAnnualYear & "-" & SelectedDistrict & ".docx"
+                    DownloadFolder = ConsolidatedPerformanceFolder
+                End If
+
+                If My.Computer.FileSystem.FileExists(DownloadFolder & "\" & DownloadFileName) Then
+                    If blUserDistrict Then
+                        bgwDownloadAnnualFiles.ReportProgress(currentfilenumber, "Already exists")
+                    Else
+                        bgwDownloadAnnualFiles.ReportProgress(currentfilenumber, "Already downloaded")
+                    End If
                     DownloadedFileCount += 1
                     Continue For
                 End If
+
 
                 Dim districtfolderid As String = GetFolderID(SelectedDistrict, InternalFolderID)
                 If districtfolderid = "" Then
@@ -1283,7 +1356,7 @@ Public Class frmPerformance_RangeConsolidate
                     request.Fields = "size"
                     Dim file = request.Execute
 
-                    Dim fStream = New System.IO.FileStream(ConsolidatedPerformanceFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                    Dim fStream = New System.IO.FileStream(DownloadFolder & "\" & DownloadFileName, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
                     Dim mStream = New System.IO.MemoryStream
 
                     Dim m = request.MediaDownloader
@@ -1342,8 +1415,23 @@ Public Class frmPerformance_RangeConsolidate
                     bgwDownloadAnnualFiles.ReportProgress(currentfilenumber, currentfilenumber)
                     bgwDownloadAnnualFiles.ReportProgress(currentfilenumber, "Attaching")
 
-                    Dim DistFileName As String = ConsolidatedPerformanceFolder & "\" & SelectedAnnualYear & "-" & SelectedDistrict & ".docx"
+                    Dim blUserDistrict As Boolean = FullDistrictName.ToLower.StartsWith(SelectedDistrict.ToLower)
+
+                    Dim DistFileName As String = ""
+                    Dim DownloadFolder As String = ""
+
+                    If blUserDistrict Then
+                        DistFileName = "Annual Performance Statement - " & SelectedAnnualYear & ".docx"
+                        DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                    Else
+                        DistFileName = SelectedAnnualYear & "-" & SelectedDistrict & ".docx"
+                        DownloadFolder = ConsolidatedPerformanceFolder
+                    End If
+
+                    DistFileName = DownloadFolder & "\" & DistFileName
+
                     Dim wdDocDist As Word.Document = wdDocs.Add(DistFileName)
+
                     Dim wdDocDistTbl As Word.Table = wdDocDist.Range.Tables.Item(1)
                     Dim rc As Integer = wdDocDistTbl.Rows.Count
 
