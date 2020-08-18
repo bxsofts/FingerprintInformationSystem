@@ -8,7 +8,6 @@ Public Class frmFPAStatement
     Dim IsMonthStmt As Boolean = True
     Dim blDGVChanged As Boolean
     Dim blSaveData As Boolean
-
     Private Sub frmFPAStatement_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         Try
             frmMainInterface.ChangeCursor(Cursors.Default)
@@ -240,13 +239,7 @@ Public Class frmFPAStatement
 
             Dim fpmonth As Integer = Val(d1.ToString("yyyyMM"))
 
-            Dim lbl1amount As Integer = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-            If lbl1amount = 0 Then
-                lbl1amount = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-            End If
-
-            Me.lblAmount1.Text = lbl1amount
-
+            Me.lblAmount1.Text = FindAmount(fpmonth, d1, d2)
 
             Dim dgvr As FingerPrintDataSet.ChalanTableRow = Me.FingerPrintDataSet.ChalanTable.NewChalanTableRow
             dgvr.ChalanNumber = "TOTAL REVENUE"
@@ -271,10 +264,7 @@ Public Class frmFPAStatement
 
                     fpmonth = Val(d1.ToString("yyyyMM"))
 
-                    amount1 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-                    If amount1 = 0 Then
-                        amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                    End If
+                    amount1 = FindAmount(fpmonth, d1, d2)
 
                     TAmount1 = TAmount1 + amount1
 
@@ -288,10 +278,7 @@ Public Class frmFPAStatement
 
                     fpmonth = Val(d1.ToString("yyyyMM"))
 
-                    amount2 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-                    If amount2 = 0 Then
-                        amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                    End If
+                    amount2 = FindAmount(fpmonth, d1, d2)
 
                     TAmount2 = TAmount2 + amount2
 
@@ -314,10 +301,7 @@ Public Class frmFPAStatement
 
                     fpmonth = Val(d1.ToString("yyyyMM"))
 
-                    amount1 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-                    If amount1 = 0 Then
-                        amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                    End If
+                    amount1 = FindAmount(fpmonth, d1, d2)
 
                     TAmount1 = TAmount1 + amount1
 
@@ -330,10 +314,7 @@ Public Class frmFPAStatement
 
                     fpmonth = Val(d1.ToString("yyyyMM"))
 
-                    amount2 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-                    If amount2 = 0 Then
-                        amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                    End If
+                    amount2 = FindAmount(fpmonth, d1, d2)
 
                     TAmount2 = TAmount2 + amount2
 
@@ -349,10 +330,7 @@ Public Class frmFPAStatement
 
                     fpmonth = Val(d1.ToString("yyyyMM"))
 
-                    amount1 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-                    If amount1 = 0 Then
-                        amount1 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                    End If
+                   amount1 = FindAmount(fpmonth, d1, d2)
 
                     TAmount1 = TAmount1 + amount1
 
@@ -365,10 +343,7 @@ Public Class frmFPAStatement
 
                     fpmonth = Val(d1.ToString("yyyyMM"))
 
-                    amount2 = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
-                    If amount2 = 0 Then
-                        amount2 = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
-                    End If
+                    amount2 = FindAmount(fpmonth, d1, d2)
 
                     TAmount2 = TAmount2 + amount2
 
@@ -397,6 +372,24 @@ Public Class frmFPAStatement
         End Try
     End Sub
 
+    Private Function FindAmount(fpmonth As Integer, d1 As Date, d2 As Date) As String
+        Dim amount As Integer = 0
+        Try
+            Dim RCTAmount As Integer = Val(Me.RevenueCollectionTableAdapter1.ScalarQueryAmount(fpmonth))
+            Dim CTTAmount As Integer = Val(Me.ChalanTableTableAdapter1.ScalarQueryAmountRemitted(d1, d2))
+
+            If RCTAmount > CTTAmount Then
+                amount = RCTAmount
+            ElseIf RCTAmount = CTTAmount Then
+                amount = RCTAmount
+            ElseIf RCTAmount < CTTAmount Then
+                amount = CTTAmount
+            End If
+        Catch ex As Exception
+            amount = 0
+        End Try
+        Return amount
+    End Function
     Private Sub GenerateLabelValues()
         Dim amount1 As Integer = Val(Me.lblAmount1.Text)
         Dim amount2 As Integer = 0
