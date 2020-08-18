@@ -4330,7 +4330,7 @@ Public Class frmMainInterface
         Me.FPARegisterBindingSource.Sort = FPADataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & FPADataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.CDRegisterBindingSource.Sort = CDDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & CDDataGrid.Columns(1).DataPropertyName.ToString() & " ASC"
         Me.PSRegisterBindingSource.Sort = PSDataGrid.Columns(0).DataPropertyName.ToString() & " ASC"
-        Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
+        '  Me.JoinedIDRBindingSource.Sort = JoinedIDRDataGrid.Columns(2).DataPropertyName.ToString() & " ASC, " & JoinedIDRDataGrid.Columns(19).DataPropertyName.ToString() & " ASC"
 
     End Sub
 
