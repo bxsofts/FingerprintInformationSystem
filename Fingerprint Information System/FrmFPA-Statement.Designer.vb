@@ -24,19 +24,19 @@ Partial Class frmFPAStatement
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFPAStatement))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateReport = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -49,6 +49,8 @@ Partial Class frmFPAStatement
         Me.dtTo = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx5 = New DevComponents.DotNetBar.PanelEx()
+        Me.lblAlert2 = New DevComponents.DotNetBar.LabelX()
+        Me.lblAlert1 = New DevComponents.DotNetBar.LabelX()
         Me.btnGenerateMonthlyData = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx4 = New DevComponents.DotNetBar.PanelEx()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
@@ -69,6 +71,13 @@ Partial Class frmFPAStatement
         Me.btnEdit = New DevComponents.DotNetBar.ButtonX()
         Me.btnSave = New DevComponents.DotNetBar.ButtonX()
         Me.dgvChalan = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.FPNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FPDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HeadOfAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ChalanDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChalanTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.FingerPrintDataSet = New FingerprintInformationSystem.FingerPrintDataSet()
         Me.dgvSum = New DevComponents.DotNetBar.Controls.DataGridViewX()
@@ -78,13 +87,7 @@ Partial Class frmFPAStatement
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ChalanTableTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.ChalanTableTableAdapter()
         Me.RevenueCollectionTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.RevenueCollectionTableAdapter()
-        Me.FPNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FPDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HeadOfAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TreasuryDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChalanNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChalanDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AmountRemittedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FpAttestationRegisterTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtTo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -351,6 +354,8 @@ Partial Class frmFPAStatement
         '
         Me.PanelEx5.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.PanelEx5.Controls.Add(Me.lblAlert2)
+        Me.PanelEx5.Controls.Add(Me.lblAlert1)
         Me.PanelEx5.Controls.Add(Me.LabelX3)
         Me.PanelEx5.Controls.Add(Me.btnGenerateMonthlyData)
         Me.PanelEx5.Controls.Add(Me.cmbMonth)
@@ -372,6 +377,34 @@ Partial Class frmFPAStatement
         Me.PanelEx5.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx5.Style.GradientAngle = 90
         Me.PanelEx5.TabIndex = 58
+        '
+        'lblAlert2
+        '
+        Me.lblAlert2.AutoSize = True
+        '
+        '
+        '
+        Me.lblAlert2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblAlert2.ForeColor = System.Drawing.Color.Red
+        Me.lblAlert2.Location = New System.Drawing.Point(535, 50)
+        Me.lblAlert2.Name = "lblAlert2"
+        Me.lblAlert2.Size = New System.Drawing.Size(47, 18)
+        Me.lblAlert2.TabIndex = 27
+        Me.lblAlert2.Text = "LabelX6"
+        '
+        'lblAlert1
+        '
+        Me.lblAlert1.AutoSize = True
+        '
+        '
+        '
+        Me.lblAlert1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblAlert1.ForeColor = System.Drawing.Color.Red
+        Me.lblAlert1.Location = New System.Drawing.Point(535, 13)
+        Me.lblAlert1.Name = "lblAlert1"
+        Me.lblAlert1.Size = New System.Drawing.Size(47, 18)
+        Me.lblAlert1.TabIndex = 26
+        Me.lblAlert1.Text = "LabelX6"
         '
         'btnGenerateMonthlyData
         '
@@ -669,25 +702,25 @@ Partial Class frmFPAStatement
         Me.dgvChalan.AllowUserToDeleteRows = False
         Me.dgvChalan.AutoGenerateColumns = False
         Me.dgvChalan.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvChalan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvChalan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.dgvChalan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvChalan.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FPNumber, Me.FPDate, Me.HeadOfAccountDataGridViewTextBoxColumn, Me.TreasuryDataGridViewTextBoxColumn, Me.ChalanNumberDataGridViewTextBoxColumn, Me.ChalanDateDataGridViewTextBoxColumn, Me.AmountRemittedDataGridViewTextBoxColumn})
         Me.dgvChalan.DataSource = Me.ChalanTableBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvChalan.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvChalan.DefaultCellStyle = DataGridViewCellStyle18
         Me.dgvChalan.Dock = System.Windows.Forms.DockStyle.Left
         Me.dgvChalan.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvChalan.EnableHeadersVisualStyles = False
@@ -695,115 +728,18 @@ Partial Class frmFPAStatement
         Me.dgvChalan.Location = New System.Drawing.Point(0, 0)
         Me.dgvChalan.MultiSelect = False
         Me.dgvChalan.Name = "dgvChalan"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvChalan.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvChalan.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.dgvChalan.RowHeadersWidth = 40
         Me.dgvChalan.SelectAllSignVisible = False
         Me.dgvChalan.Size = New System.Drawing.Size(809, 354)
         Me.dgvChalan.TabIndex = 51
-        '
-        'ChalanTableBindingSource
-        '
-        Me.ChalanTableBindingSource.DataMember = "ChalanTable"
-        Me.ChalanTableBindingSource.DataSource = Me.FingerPrintDataSet
-        '
-        'FingerPrintDataSet
-        '
-        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
-        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'dgvSum
-        '
-        Me.dgvSum.AllowUserToAddRows = False
-        Me.dgvSum.AllowUserToDeleteRows = False
-        Me.dgvSum.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSum.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvSum.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSum.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvSum.DefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvSum.Dock = System.Windows.Forms.DockStyle.Right
-        Me.dgvSum.EnableHeadersVisualStyles = False
-        Me.dgvSum.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
-        Me.dgvSum.Location = New System.Drawing.Point(815, 0)
-        Me.dgvSum.MultiSelect = False
-        Me.dgvSum.Name = "dgvSum"
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSum.RowHeadersDefaultCellStyle = DataGridViewCellStyle13
-        Me.dgvSum.RowHeadersVisible = False
-        Me.dgvSum.SelectAllSignVisible = False
-        Me.dgvSum.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSum.Size = New System.Drawing.Size(350, 354)
-        Me.dgvSum.TabIndex = 53
-        '
-        'Column1
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Column1.HeaderText = "Month"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column2
-        '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle9
-        Me.Column2.HeaderText = "Amount"
-        Me.Column2.Name = "Column2"
-        Me.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Column2.Width = 70
-        '
-        'Column3
-        '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle10
-        Me.Column3.HeaderText = "Month"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column4
-        '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle11
-        Me.Column4.HeaderText = "Amount"
-        Me.Column4.Name = "Column4"
-        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Column4.Width = 70
-        '
-        'ChalanTableTableAdapter1
-        '
-        Me.ChalanTableTableAdapter1.ClearBeforeFill = True
-        '
-        'RevenueCollectionTableAdapter1
-        '
-        Me.RevenueCollectionTableAdapter1.ClearBeforeFill = True
         '
         'FPNumber
         '
@@ -816,8 +752,8 @@ Partial Class frmFPAStatement
         'FPDate
         '
         Me.FPDate.DataPropertyName = "FPDate"
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.FPDate.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle15.Format = "dd/MM/yyyy"
+        Me.FPDate.DefaultCellStyle = DataGridViewCellStyle15
         Me.FPDate.HeaderText = "FPA Date"
         Me.FPDate.Name = "FPDate"
         Me.FPDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -849,8 +785,8 @@ Partial Class frmFPAStatement
         'ChalanDateDataGridViewTextBoxColumn
         '
         Me.ChalanDateDataGridViewTextBoxColumn.DataPropertyName = "ChalanDate"
-        DataGridViewCellStyle3.Format = "dd/MM/yyyy"
-        Me.ChalanDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle16.Format = "dd/MM/yyyy"
+        Me.ChalanDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle16
         Me.ChalanDateDataGridViewTextBoxColumn.HeaderText = "Chalan Date"
         Me.ChalanDateDataGridViewTextBoxColumn.Name = "ChalanDateDataGridViewTextBoxColumn"
         Me.ChalanDateDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -859,12 +795,113 @@ Partial Class frmFPAStatement
         'AmountRemittedDataGridViewTextBoxColumn
         '
         Me.AmountRemittedDataGridViewTextBoxColumn.DataPropertyName = "AmountRemitted"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.AmountRemittedDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle17
         Me.AmountRemittedDataGridViewTextBoxColumn.HeaderText = "Amount"
         Me.AmountRemittedDataGridViewTextBoxColumn.Name = "AmountRemittedDataGridViewTextBoxColumn"
         Me.AmountRemittedDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.AmountRemittedDataGridViewTextBoxColumn.Width = 70
+        '
+        'ChalanTableBindingSource
+        '
+        Me.ChalanTableBindingSource.DataMember = "ChalanTable"
+        Me.ChalanTableBindingSource.DataSource = Me.FingerPrintDataSet
+        '
+        'FingerPrintDataSet
+        '
+        Me.FingerPrintDataSet.DataSetName = "FingerPrintDataSet"
+        Me.FingerPrintDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'dgvSum
+        '
+        Me.dgvSum.AllowUserToAddRows = False
+        Me.dgvSum.AllowUserToDeleteRows = False
+        Me.dgvSum.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSum.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
+        Me.dgvSum.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvSum.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle25.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvSum.DefaultCellStyle = DataGridViewCellStyle25
+        Me.dgvSum.Dock = System.Windows.Forms.DockStyle.Right
+        Me.dgvSum.EnableHeadersVisualStyles = False
+        Me.dgvSum.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.dgvSum.Location = New System.Drawing.Point(815, 0)
+        Me.dgvSum.MultiSelect = False
+        Me.dgvSum.Name = "dgvSum"
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle26.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSum.RowHeadersDefaultCellStyle = DataGridViewCellStyle26
+        Me.dgvSum.RowHeadersVisible = False
+        Me.dgvSum.SelectAllSignVisible = False
+        Me.dgvSum.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvSum.Size = New System.Drawing.Size(350, 354)
+        Me.dgvSum.TabIndex = 53
+        '
+        'Column1
+        '
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle21
+        Me.Column1.HeaderText = "Month"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column2
+        '
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle22
+        Me.Column2.HeaderText = "Amount"
+        Me.Column2.Name = "Column2"
+        Me.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Column2.Width = 70
+        '
+        'Column3
+        '
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle23
+        Me.Column3.HeaderText = "Month"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column4
+        '
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle24
+        Me.Column4.HeaderText = "Amount"
+        Me.Column4.Name = "Column4"
+        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Column4.Width = 70
+        '
+        'ChalanTableTableAdapter1
+        '
+        Me.ChalanTableTableAdapter1.ClearBeforeFill = True
+        '
+        'RevenueCollectionTableAdapter1
+        '
+        Me.RevenueCollectionTableAdapter1.ClearBeforeFill = True
+        '
+        'FpAttestationRegisterTableAdapter1
+        '
+        Me.FpAttestationRegisterTableAdapter1.ClearBeforeFill = True
         '
         'frmFPAStatement
         '
@@ -953,4 +990,7 @@ Partial Class frmFPAStatement
     Friend WithEvents ChalanNumberDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ChalanDateDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AmountRemittedDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblAlert1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents FpAttestationRegisterTableAdapter1 As FingerprintInformationSystem.FingerPrintDataSetTableAdapters.FPAttestationRegisterTableAdapter
+    Friend WithEvents lblAlert2 As DevComponents.DotNetBar.LabelX
 End Class

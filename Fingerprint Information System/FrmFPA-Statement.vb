@@ -21,6 +21,9 @@ Public Class frmFPAStatement
         On Error Resume Next
 
         Me.Cursor = Cursors.WaitCursor
+        Me.lblAlert1.Text = ""
+        Me.lblAlert2.Text = ""
+
         Me.chkiAPS.Checked = True
 
         If Me.ChalanTableTableAdapter1.Connection.State = ConnectionState.Open Then Me.ChalanTableTableAdapter1.Connection.Close()
@@ -31,6 +34,9 @@ Public Class frmFPAStatement
         Me.RevenueCollectionTableAdapter1.Connection.ConnectionString = sConString
         Me.RevenueCollectionTableAdapter1.Connection.Open()
 
+        If Me.FpAttestationRegisterTableAdapter1.Connection.State = ConnectionState.Open Then Me.FpAttestationRegisterTableAdapter1.Connection.Close()
+        Me.FpAttestationRegisterTableAdapter1.Connection.ConnectionString = sConString
+        Me.FpAttestationRegisterTableAdapter1.Connection.Open()
 
         Dim m As Integer = DateAndTime.Month(Today)
         Dim y As Integer = DateAndTime.Year(Today)
@@ -184,12 +190,34 @@ Public Class frmFPAStatement
     Private Sub GenerateMonthWiseAmount()
         Try
             Me.Cursor = Cursors.WaitCursor
+
             Dim m = Me.cmbMonth.SelectedIndex + 1 ' selected month
             Dim y = Me.txtYear.Value
 
             d1 = New Date(y, m, 1)
             Dim d = Date.DaysInMonth(y, m)
             d2 = New Date(y, m, d)
+
+            Me.lblAlert1.Text = ""
+            Me.lblAlert2.Text = ""
+
+            Application.DoEvents()
+
+            Dim attestationcount As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationCount(d1, d2)
+            If attestationcount > 0 Then
+                Dim attestationmaxmindifference As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationDifference(d1, d2) + 1
+
+                If attestationcount < attestationmaxmindifference Then
+                    Dim difference = attestationmaxmindifference - attestationcount
+                    If difference = 1 Then
+                        Me.lblAlert1.Text = "Warning: 1 Attestation Number is missing."
+                    Else
+                        Me.lblAlert1.Text = "Warning: " & difference & " Attestation Numbers are missing."
+                    End If
+                Else
+                    Me.lblAlert1.Text = ""
+                End If
+            End If
 
             Dim curfinyear As String = ""
             Dim prevfinyear As String = ""
@@ -361,6 +389,7 @@ Public Class frmFPAStatement
             ClearSelectionColors()
             blSaveData = True
             Me.dgvChalan.Refresh()
+
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -399,6 +428,29 @@ Public Class frmFPAStatement
                 Exit Sub
             End If
             Me.Cursor = Cursors.WaitCursor
+
+            Me.lblAlert1.Text = ""
+            Me.lblAlert2.Text = ""
+            Application.DoEvents()
+
+            If d1.Year = d2.Year Then
+                Dim attestationcount As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationCount(d1, d2)
+                If attestationcount > 0 Then
+                    Dim attestationmaxmindifference As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationDifference(d1, d2) + 1
+
+                    If attestationcount < attestationmaxmindifference Then
+                        Dim difference = attestationmaxmindifference - attestationcount
+                        If difference = 1 Then
+                            Me.lblAlert2.Text = "Warning: 1 Attestation Number is missing."
+                        Else
+                            Me.lblAlert2.Text = "Warning: " & difference & " Attestation Numbers are missing."
+                        End If
+                    Else
+                        Me.lblAlert2.Text = ""
+                    End If
+                End If
+            End If
+
             Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
             datevalue = "during the period from " & Me.dtFrom.Text & " to " & Me.dtTo.Text
             IsMonthStmt = False
@@ -431,9 +483,23 @@ Public Class frmFPAStatement
 
     Private Sub PrintReport(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerateReport.Click
         Try
+            If IsMonthStmt Then
+                If Me.lblAlert1.Text.StartsWith("Warning:") Then
+                    Dim r = DevComponents.DotNetBar.MessageBoxEx.Show(Me.lblAlert1.Text & " Do you still want to print the statement?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+                    If r = Windows.Forms.DialogResult.No Then Exit Sub
+
+                End If
+            End If
+
             If Not IsMonthStmt Then
-                Dim r = DevComponents.DotNetBar.MessageBoxEx.Show("ALERT: The data generated is for a period. For monthly statement, first generate data for selected Month. Do you still want to print the statement?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                If r = Windows.Forms.DialogResult.No Then Exit Sub
+
+                If Me.lblAlert2.Text.StartsWith("Warning:") Then
+                    Dim r = DevComponents.DotNetBar.MessageBoxEx.Show(Me.lblAlert2.Text & " Do you still want to print the statement?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+                    If r = Windows.Forms.DialogResult.No Then Exit Sub
+                End If
+
+                Dim r1 = DevComponents.DotNetBar.MessageBoxEx.Show("ALERT: The data generated is for a period. For monthly statement, first generate data for selected Month. Do you still want to print the statement?.", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2)
+                If r1 = Windows.Forms.DialogResult.No Then Exit Sub
             End If
 
             Me.Cursor = Cursors.WaitCursor
@@ -816,11 +882,11 @@ Public Class frmFPAStatement
 
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
-           
+
             WordApp.Selection.Document.PageSetup.TopMargin = 45
             WordApp.Selection.Document.PageSetup.BottomMargin = 40
             WordApp.Selection.Document.PageSetup.LeftMargin = 60
-       
+
 
             WordApp.Selection.Paragraphs.DecreaseSpacing()
             WordApp.Selection.Paragraphs.Space1()
@@ -1233,7 +1299,7 @@ Public Class frmFPAStatement
                 End If
 
             End If
-            
+
 
             ClosePleaseWaitForm()
 
@@ -1369,6 +1435,4 @@ Public Class frmFPAStatement
         End Try
     End Function
 
-    
-   
 End Class
