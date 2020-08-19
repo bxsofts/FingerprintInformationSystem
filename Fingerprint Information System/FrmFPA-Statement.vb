@@ -202,21 +202,7 @@ Public Class frmFPAStatement
 
             Application.DoEvents()
 
-            Dim attestationcount As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationCount(d1, d2)
-            If attestationcount > 0 Then
-                Dim attestationmaxmindifference As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationDifference(d1, d2) + 1
-
-                If attestationcount < attestationmaxmindifference Then
-                    Dim difference = attestationmaxmindifference - attestationcount
-                    If difference = 1 Then
-                        Me.lblAlert1.Text = "Warning: 1 Attestation Number is missing."
-                    Else
-                        Me.lblAlert1.Text = "Warning: " & difference & " Attestation Numbers are missing."
-                    End If
-                Else
-                    Me.lblAlert1.Text = ""
-                End If
-            End If
+            Me.lblAlert1.Text = FPACountWarning(d1, d2)
 
             Dim curfinyear As String = ""
             Dim prevfinyear As String = ""
@@ -403,6 +389,31 @@ Public Class frmFPAStatement
         Me.lblAmount4.Text = amount4
     End Sub
 
+    Private Function FPACountWarning(d1 As Date, d2 As Date) As String
+        Dim msg As String = ""
+        Try
+            Dim attestationcount As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationCount(d1, d2)
+            If attestationcount > 0 Then
+                Dim attestationmaxmindifference As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationDifference(d1, d2) + 1
+
+                If attestationcount < attestationmaxmindifference Then
+                    Dim difference = attestationmaxmindifference - attestationcount
+                    If difference = 1 Then
+                        msg = "Warning: 1 Attestation Number is missing."
+                    Else
+                        msg = "Warning: " & difference & " Attestation Numbers are missing."
+                    End If
+                Else
+                    msg = ""
+                End If
+            Else
+                msg = ""
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+        Return msg
+    End Function
     Private Sub btnGenerateMonthlyData_Click(sender As Object, e As EventArgs) Handles btnGenerateMonthlyData.Click
         Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically
         GenerateMonthWiseAmount()
@@ -427,21 +438,7 @@ Public Class frmFPAStatement
             Application.DoEvents()
 
             If d1.Year = d2.Year Then
-                Dim attestationcount As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationCount(d1, d2)
-                If attestationcount > 0 Then
-                    Dim attestationmaxmindifference As Integer = Me.FpAttestationRegisterTableAdapter1.ScalarQueryAttestationDifference(d1, d2) + 1
-
-                    If attestationcount < attestationmaxmindifference Then
-                        Dim difference = attestationmaxmindifference - attestationcount
-                        If difference = 1 Then
-                            Me.lblAlert2.Text = "Warning: 1 Attestation Number is missing."
-                        Else
-                            Me.lblAlert2.Text = "Warning: " & difference & " Attestation Numbers are missing."
-                        End If
-                    Else
-                        Me.lblAlert2.Text = ""
-                    End If
-                End If
+                Me.lblAlert2.Text = FPACountWarning(d1, d2)
             End If
 
             Me.dgvSum.EditMode = DataGridViewEditMode.EditProgrammatically

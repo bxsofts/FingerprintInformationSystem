@@ -6383,13 +6383,13 @@ Public Class frmMainInterface
                 Exit Sub
             End If
 
-            Dim ModicationDetail As String = ""
+            Dim ModificationDetail As String = ""
 
             If CurrentTab = "IO" Then
                 Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the officer " & Me.IODatagrid.SelectedRows(0).Cells(0).Value.ToString().ToUpper & " : " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString().ToUpper & "?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
-                    ModicationDetail = "Deleted the officer " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString()
+                    ModificationDetail = "Deleted the officer " & Me.IODatagrid.SelectedRows(0).Cells(1).Value.ToString()
                     IOSelectedRow = Me.IODatagrid.SelectedRows(0).Index
                     ClearIOFields()
                     UpdateOfficerList()
@@ -6427,7 +6427,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.SOCRegisterTableAdapter.DeleteSelectedRecord(OriginalSOCNumber)
-                    ModicationDetail = "Deleted SOC No. " & OriginalSOCNumber
+                    ModificationDetail = "Deleted SOC No. " & OriginalSOCNumber
 
                     ShowDesktopAlert("Selected SOC record deleted!")
                     If Me.SOCDatagrid.SelectedRows.Count = 0 And Me.SOCDatagrid.RowCount <> 0 Then
@@ -6466,7 +6466,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.RSOCRegisterTableAdapter.DeleteSelectedRecord(OriginalRSOCSerialNumber)
-                    ModicationDetail = "Deleted RSOC No. " & OriginalRSOCSerialNumber
+                    ModificationDetail = "Deleted RSOC No. " & OriginalRSOCSerialNumber
 
                     ShowDesktopAlert("Selected SOC Report record deleted!")
                     If Me.RSOCDatagrid.SelectedRows.Count = 0 And Me.RSOCDatagrid.RowCount <> 0 Then
@@ -6506,7 +6506,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.DARegisterTableAdapter.DeleteSelectedRecord(OriginalDANumber)
-                    ModicationDetail = "Deleted DA No. " & OriginalDANumber
+                    ModificationDetail = "Deleted DA No. " & OriginalDANumber
 
                     ShowDesktopAlert("Selected DA record deleted!")
                     If Me.DADatagrid.SelectedRows.Count = 0 And Me.DADatagrid.RowCount <> 0 Then
@@ -6547,7 +6547,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.IDRegisterTableAdapter.DeleteSelectedRecord(OriginalIDNumber)
-                    ModicationDetail = "Deleted Identified Slip No. " & OriginalIDNumber
+                    ModificationDetail = "Deleted Identified Slip No. " & OriginalIDNumber
 
                     ShowDesktopAlert("Selected Identified Slip record deleted!")
                     If Me.IDDatagrid.SelectedRows.Count = 0 And Me.IDDatagrid.RowCount <> 0 Then
@@ -6588,7 +6588,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.ACRegisterTableAdapter.DeleteSelectedRecord(OriginalACNumber)
-                    ModicationDetail = "Deleted Active Criminal Slip No. " & OriginalACNumber
+                    ModificationDetail = "Deleted Active Criminal Slip No. " & OriginalACNumber
 
                     ShowDesktopAlert("Selected Active Criminal Slip record deleted!")
                     If Me.ACDatagrid.SelectedRows.Count = 0 And Me.ACDatagrid.RowCount <> 0 Then
@@ -6628,7 +6628,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.CDRegisterTableAdapter.DeleteSelectedRecord(OriginalCDNumber)
-                    ModicationDetail = "Deleted Court Duty No. " & OriginalCDNumber
+                    ModificationDetail = "Deleted Court Duty No. " & OriginalCDNumber
 
                     ShowDesktopAlert("Selected CD record deleted!")
                     If Me.CDDataGrid.SelectedRows.Count = 0 And Me.CDDataGrid.RowCount <> 0 Then
@@ -6667,7 +6667,7 @@ Public Class frmMainInterface
 
                     Me.FPARegisterTableAdapter.DeleteSelectedRecord(OriginalFPANumber)
                     Me.ChalanTableTableAdapter1.DeleteQueryFPNumber(OriginalFPANumber)
-                    ModicationDetail = "Deleted FP Attestation No. " & OriginalFPANumber
+                    ModificationDetail = "Deleted FP Attestation No. " & OriginalFPANumber
 
                     ShowDesktopAlert("Selected FPA record deleted!")
                     If Me.FPADataGrid.SelectedRows.Count = 0 And Me.FPADataGrid.RowCount <> 0 Then
@@ -6705,7 +6705,7 @@ Public Class frmMainInterface
                     oldRow.Delete()
 
                     Me.PSRegisterTableAdapter.DeleteSelectedRecord(OriginalPSName)
-                    ModicationDetail = "Deleted Police Station " & OriginalPSName
+                    ModificationDetail = "Deleted Police Station " & OriginalPSName
 
                     ShowDesktopAlert("Selected Police Station deleted!")
                     If Me.PSDataGrid.SelectedRows.Count = 0 And Me.PSDataGrid.RowCount <> 0 Then
@@ -6774,7 +6774,7 @@ Public Class frmMainInterface
 
                     End If
 
-                    ModicationDetail = "Deleted Identification No. " & IdentificationNumber
+                    ModificationDetail = "Deleted Identification No. " & IdentificationNumber
 
                     ShowDesktopAlert("Selected Identification record deleted!")
                     If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 And Me.JoinedIDRDataGrid.RowCount <> 0 Then
@@ -6797,7 +6797,7 @@ Public Class frmMainInterface
                 Dim reply As DialogResult = DevComponents.DotNetBar.MessageBoxEx.Show("Do you really want to delete the selected Staff  '" & Me.SSDatagrid.SelectedCells(0).Value.ToString() & "' ?", strAppName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
                 If reply = Windows.Forms.DialogResult.Yes Then
-                    ModicationDetail = "Deleted the staff " & Me.SSDatagrid.SelectedCells(0).Value.ToString()
+                    ModificationDetail = "Deleted the staff " & Me.SSDatagrid.SelectedCells(0).Value.ToString()
                     SSEditMode = False
                     Me.btnSavePS.Text = "Save"
 
@@ -6812,7 +6812,7 @@ Public Class frmMainInterface
                 End If
             End If
 
-            InsertOrUpdateLastModificationDate(Now, ModicationDetail)
+            InsertOrUpdateLastModificationDate(Now, ModificationDetail)
             DisplayDatabaseInformation()
         Catch ex As Exception
             ShowErrorMessage(ex)
