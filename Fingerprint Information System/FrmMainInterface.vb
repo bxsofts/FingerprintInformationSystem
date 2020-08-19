@@ -480,12 +480,12 @@ Public Class frmMainInterface
 
         Me.CommonSettingsTableAdapter1.FillBySettingsName(Me.FingerPrintDataSet.CommonSettings, "MinimumVersion")
         Dim cnt As Integer = Me.FingerPrintDataSet.CommonSettings.Count
-        Dim minimumversion As String = "16.1"
+        Dim minimumversion As String = "162"
         If cnt = 0 Then
             Me.CommonSettingsTableAdapter1.Insert("MinimumVersion", minimumversion, "")
         Else
-            Dim version As String = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
-            If version <> minimumversion Then
+            Dim storedversion As String = Me.FingerPrintDataSet.CommonSettings(0).SettingsValue
+            If Val(storedversion) < Val(minimumversion) Then
                 Me.CommonSettingsTableAdapter1.UpdateQuery(minimumversion, "", "MinimumVersion")
             End If
         End If
@@ -19425,7 +19425,10 @@ errhandler:
         objMutex.Close()
         objMutex = Nothing
 
-        If Not blDBIsInPreviewMode Then Process.Start(strAppPath & "\BackupDatabase.exe")
+        If Not blDBIsInPreviewMode And Not blRestartApplication Then
+            Process.Start(strAppPath & "\BackupDatabase.exe")
+        End If
+
 
         Me.Dispose()
         End
