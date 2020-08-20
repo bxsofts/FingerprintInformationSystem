@@ -1993,7 +1993,7 @@ Partial Class frmMainInterface
         '
         Me.btnFPAStatement.ForeColor = System.Drawing.Color.Red
         Me.btnFPAStatement.Name = "btnFPAStatement"
-        Me.btnFPAStatement.Text = "FP Attestation Statement"
+        Me.btnFPAStatement.Text = "FP Attestation (Revenue Collection) Statement"
         '
         'btnFPARegister
         '
