@@ -384,36 +384,66 @@ Module modMain
                 Return True
             End If
 
-            Dim hdDatabase As String = strAppUserPath & "\WordTemplates\HolidayList.mdb"
-            If My.Computer.FileSystem.FileExists(hdDatabase) = False Then
+            If Not blHolidayDBConnected Then
+                blHolidayDBConnected = ConnectToHolidayDB()
+            End If
+
+            If blHolidayDBConnected Then
+                strHoliday = GetHolidayName(dt)
+                If strHoliday = "" Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Else
                 Return False
             End If
 
-            Dim hdConnectionString As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & hdDatabase
-            Dim hdTblAdptr As HolidayListDataSetTableAdapters.HolidayListTableAdapter = New HolidayListDataSetTableAdapters.HolidayListTableAdapter
 
-            If hdTblAdptr.Connection.State = ConnectionState.Open Then hdTblAdptr.Connection.Close()
-            hdTblAdptr.Connection.ConnectionString = hdConnectionString
-            hdTblAdptr.Connection.Open()
-
-            Dim hddataset As HolidayListDataSet = New HolidayListDataSet
-            hdTblAdptr.FillByHoliday(hddataset.HolidayList, dt)
-
-            If hddataset.HolidayList.Count = 1 Then
-                strHoliday = hddataset.HolidayList(0).Holiday
-                Return True
-            End If
-
-
-            Return False
         Catch ex As Exception
             Return False
         End Try
-        
-
 
     End Function
 
+    Dim hdDatabase As String
+    Dim hdConnectionString As String
+    Dim hdTblAdptr As HolidayListDataSetTableAdapters.HolidayListTableAdapter
+    Dim blHolidayDBConnected As Boolean = False
+    Public Function ConnectToHolidayDB() As Boolean
+        Try
+            hdDatabase = strAppUserPath & "\WordTemplates\HolidayList.mdb"
+            If My.Computer.FileSystem.FileExists(hdDatabase) Then
+                hdConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & hdDatabase
+                hdTblAdptr = New HolidayListDataSetTableAdapters.HolidayListTableAdapter
+
+                If hdTblAdptr.Connection.State = ConnectionState.Open Then hdTblAdptr.Connection.Close()
+                hdTblAdptr.Connection.ConnectionString = hdConnectionString
+                hdTblAdptr.Connection.Open()
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
+    Public Function GetHolidayName(dt As Date)
+        Try
+            strHoliday = ""
+            Dim result = hdTblAdptr.ScalarQuery(dt)
+            If result IsNot Nothing Then
+                strHoliday = result
+            Else
+                strHoliday = ""
+            End If
+
+        Catch ex As Exception
+            strHoliday = ""
+        End Try
+        Return strHoliday
+    End Function
     Public Function TIName() As String
         Return TI.Replace(", TI", "")
     End Function
