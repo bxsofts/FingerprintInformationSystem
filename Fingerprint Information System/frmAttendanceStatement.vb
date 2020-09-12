@@ -533,8 +533,12 @@ Public Class frmAttendanceStmt
                         If dti <= d Then
                             dt = New DateTime(d1.Year, d1.Month, dti)
                             If IsHoliday(dt) Then
+                                If args.StaffType <> "SS" Then
+                                    txt = "HD"
+                                Else
+                                    txt = "X"
+                                End If
                                 WordApp.Selection.Tables.Item(1).Cell(j, i).Shading.BackgroundPatternColor = Word.WdColor.wdColorGray10
-                                txt = "HD"
                             Else
                                 txt = "X"
                             End If
@@ -543,8 +547,12 @@ Public Class frmAttendanceStmt
                         If dti > d Then
                             dt = New DateTime(d2.Year, d2.Month, dti - d)
                             If IsHoliday(dt) Then
+                                If args.StaffType <> "SS" Then
+                                    txt = "HD"
+                                Else
+                                    txt = "X"
+                                End If
                                 WordApp.Selection.Tables.Item(1).Cell(j, i).Shading.BackgroundPatternColor = Word.WdColor.wdColorGray10
-                                txt = "HD"
                             Else
                                 txt = "X"
                             End If
@@ -564,7 +572,7 @@ Public Class frmAttendanceStmt
 
                 WordApp.Selection.TypeText(vbNewLine)
 
-                WordApp.Selection.TypeText("* HD - Holiday, CL - Casual Leave")
+                If args.StaffType <> "SS" Then WordApp.Selection.TypeText("* HD - Holiday, CL - Casual Leave")
 
                 WordApp.Selection.TypeText(vbNewLine)
 
