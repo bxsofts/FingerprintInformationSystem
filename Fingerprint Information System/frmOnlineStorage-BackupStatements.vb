@@ -173,7 +173,7 @@ Public Class frmBackupStatements
 #Region "BACKUP FILES"
     Private Sub btnBackup_Click(sender As Object, e As EventArgs) Handles btnBackup.Click
 
-        If Not Me.chkSOC.Checked And Not Me.chkGrave.Checked And Not Me.chkID.Checked And Not Me.chkMonthlyPerf.Checked And Not Me.chkQuarterlyPerf.Checked And Me.chkAnnualPerf.Checked Then
+        If Not Me.chkSOC.Checked And Not Me.chkGrave.Checked And Not Me.chkID.Checked And Not Me.chkMonthlyPerf.Checked And Not Me.chkQuarterlyPerf.Checked And Not Me.chkAnnualPerf.Checked Then
             MessageBoxEx.Show("No statements selected to upload.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
