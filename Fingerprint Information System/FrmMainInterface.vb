@@ -14654,7 +14654,7 @@ errhandler:
             Dim identifiedfrom As String = Me.JoinedIDRDataGrid.SelectedCells(18).Value.ToString.ToLower
             Dim IdentificationText As String = ""
 
-            IdentificationText = vbTab & vbTab & "Kind attention is invited to the subject and reference cited above." & vbNewLine & vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dtins
+            IdentificationText = vbTab & vbTab & "Kind attention is invited to the subject and reference cited above." & vbNewLine & vbNewLine & vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dtins
 
 
             If CPD = 1 And CPR = 1 Then 'one print
@@ -15108,7 +15108,7 @@ errhandler:
             Dim identifiedfrom As String = Me.JoinedIDRDataGrid.SelectedCells(18).Value.ToString.ToLower
             Dim IdentificationText As String = ""
 
-            IdentificationText = vbTab & vbTab & "Kind attention is invited to the subject and reference cited above." & vbNewLine & vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dtins
+            IdentificationText = vbTab & vbTab & "Kind attention is invited to the subject and reference cited above." & vbNewLine & vbNewLine & vbTab & "The Scene of Crime " & PO & "in the case cited above was inspected by " & InspectingOfficer & " of this unit on " & dtins
 
 
             If CPD = 1 Then 'one print
