@@ -15535,6 +15535,189 @@ errhandler:
     End Sub
 
 
+    Private Sub GenerateIdentificationCL() Handles btnGenerateExpertOpinionCL.Click, btnGenerateExpertOpinionCLContext.Click
+
+        Try
+            If Me.JoinedIDRDataGrid.RowCount = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            If Me.JoinedIDRDataGrid.SelectedRows.Count = 0 Then
+                DevComponents.DotNetBar.MessageBoxEx.Show("No records selected in Identification Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+
+            Me.Cursor = Cursors.WaitCursor
+
+            Dim SOCNumber As String = Me.JoinedIDRDataGrid.SelectedCells(1).Value.ToString
+
+            Dim fds As FingerPrintDataSet = New FingerPrintDataSet
+            Me.SOCRegisterTableAdapter.FillBySOCNumber(fds.SOCRegister, SOCNumber)
+
+            If fds.SOCRegister.Count = 0 Then
+                ClosePleaseWaitForm()
+                Me.Cursor = Cursors.Default
+                MessageBoxEx.Show("The selected SOC Number " & SOCNumber & " does not exist. Please add details in SOC Register.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim ps As String = fds.SOCRegister(0).PoliceStation
+            If Strings.Right(ps, 3) <> "P.S" Then
+                ps = ps & " P.S"
+            End If
+
+            Dim CrNo = fds.SOCRegister(0).CrimeNumber
+
+            ShowPleaseWaitForm()
+
+
+            Dim IdentifyingOfficer As String = Me.JoinedIDRDataGrid.SelectedCells(8).Value.ToString().Replace(vbNewLine, "; ")
+
+            IdentifyingOfficer = GetSalutation(IdentifyingOfficer)
+
+            IdentifyingOfficer = Replace(Replace(Replace(Replace(IdentifyingOfficer, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
+
+
+            Dim sho As String = Me.PSRegisterTableAdapter.FindSHO(ps)
+
+            If sho Is Nothing Then
+                sho = "The Station House Officer"
+            End If
+
+
+            If sho.ToUpper = "IP" Then
+                sho = "The Inspector of Police" & vbNewLine & vbTab & ps
+            Else
+                sho = "The Station House Officer" & vbNewLine & vbTab & ps
+            End If
+
+            Dim us = fds.SOCRegister(0).SectionOfLaw
+
+            
+
+
+            Dim missing As Object = System.Reflection.Missing.Value
+            Dim fileName As Object = "normal.dotm"
+            Dim newTemplate As Object = False
+            Dim docType As Object = 0
+            Dim isVisible As Object = True
+            Dim WordApp As New Word.Application()
+
+            Dim wdDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
+
+
+            WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
+            If WordApp.Version < 12 Then
+                WordApp.Selection.Document.PageSetup.LeftMargin = 72
+                WordApp.Selection.Document.PageSetup.RightMargin = 72
+                WordApp.Selection.Document.PageSetup.TopMargin = 72
+                WordApp.Selection.Document.PageSetup.BottomMargin = 72
+                WordApp.Selection.ParagraphFormat.Space15()
+            End If
+
+            WordApp.Selection.NoProofing = 1
+
+            WordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphJustify
+            WordApp.Selection.Paragraphs.DecreaseSpacing()
+            WordApp.Selection.Font.Size = 12
+            WordApp.Selection.Font.Bold = 1
+            WordApp.Selection.ParagraphFormat.Space1()
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab)
+            WordApp.Selection.Font.Underline = 1
+
+            Dim FileNo As String = SOCNumber
+
+            Dim line() = Strings.Split(FileNo, "/")
+            FileNo = line(0) & "/SOC/" & line(1)
+
+            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
+
+            WordApp.Selection.Font.Underline = 0
+            WordApp.Selection.TypeParagraph()
+
+            If WordApp.Version < 12 Then WordApp.Selection.ParagraphFormat.Space15()
+            WordApp.Selection.Font.Bold = 0
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName)
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Date: " & GenerateDate(True))
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText("From")
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & "Tester Inspector" & vbNewLine & vbTab & FullOfficeName & vbNewLine & vbTab & FullDistrictName)
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText("To")
+            WordApp.Selection.TypeText(vbNewLine)
+
+
+            WordApp.Selection.TypeText(vbTab & sho)
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText("Sir,")
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText(vbTab & "Sub: Identification of criminal through chance prints – Expert opinion forwarding of - reg.")
+
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+
+            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+
+            WordApp.Selection.TypeParagraph()
+
+            WordApp.Selection.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceMultiple
+            WordApp.Selection.ParagraphFormat.LineSpacing = 14
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & "I am forwarding herewith the Expert Opinion in the above referred case, furnished by " & IdentifyingOfficer & " of this office, for onward transmission to the concerned court.")
+
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Yours faithfully,")
+
+            If blUseTIinLetter Then
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.TypeParagraph()
+                WordApp.Selection.ParagraphFormat.Space1()
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & Me.IODatagrid.Rows(0).Cells(1).Value & vbNewLine)
+                ' WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "PEN: " & TIPen & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & "Tester Inspector" & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullOfficeName & vbNewLine)
+                WordApp.Selection.TypeText(vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & FullDistrictName)
+            End If
+
+
+            ClosePleaseWaitForm()
+
+            Dim sFileName As String = FileIO.SpecialDirectories.MyDocuments & "\Expert Opinion CL.docx"
+            If Not FileInUse(sFileName) Then wdDoc.SaveAs(sFileName, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatDocumentDefault)
+
+            WordApp.Visible = True
+            WordApp.Activate()
+            WordApp.WindowState = Word.WdWindowState.wdWindowStateMaximize
+            wdDoc.Activate()
+
+            wdDoc = Nothing
+            WordApp = Nothing
+
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            ClosePleaseWaitForm()
+            ShowErrorMessage(ex)
+            If Not blApplicationIsLoading And Not blApplicationIsRestoring Then Me.Cursor = Cursors.Default
+        End Try
+    End Sub
     Private Sub btnOpenIdentificationReportFolder_Click(sender As Object, e As EventArgs) Handles btnOpenIdentificationReportFolder.Click, btnOpenIdentificationReportFolderContext.Click
 
         Try
