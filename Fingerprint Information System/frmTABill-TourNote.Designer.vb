@@ -26,6 +26,12 @@ Partial Class FrmTourNote
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -34,16 +40,18 @@ Partial Class FrmTourNote
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTourNote))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
         Me.PanelEx6 = New DevComponents.DotNetBar.PanelEx()
         Me.dgvWD = New DevComponents.DotNetBar.Controls.DataGridViewX()
+        Me.IDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DiaryDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WorkDoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemarksDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SelectRecord = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.TourFrom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TourTo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TourPurpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WeeklyDiaryBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
         Me.dgvSOC = New DevComponents.DotNetBar.Controls.DataGridViewX()
@@ -119,14 +127,6 @@ Partial Class FrmTourNote
         Me.bgwUploadAllFiles = New System.ComponentModel.BackgroundWorker()
         Me.CommonSettingsTableAdapter1 = New FingerprintInformationSystem.FingerPrintDataSetTableAdapters.CommonSettingsTableAdapter()
         Me.WeeklyDiaryTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.WeeklyDiaryTableAdapter()
-        Me.IDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DiaryDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WorkDoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemarksDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelectRecord = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.TourFrom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TourTo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TourPurpose = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.PanelEx6.SuspendLayout()
@@ -200,7 +200,6 @@ Partial Class FrmTourNote
         Me.PanelEx6.Size = New System.Drawing.Size(862, 625)
         Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.PanelEx6.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
         Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx6.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx6.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
@@ -237,7 +236,7 @@ Partial Class FrmTourNote
         Me.dgvWD.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvWD.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvWD.EnableHeadersVisualStyles = False
-        Me.dgvWD.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.dgvWD.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.dgvWD.Location = New System.Drawing.Point(0, 0)
         Me.dgvWD.MultiSelect = False
         Me.dgvWD.Name = "dgvWD"
@@ -256,6 +255,80 @@ Partial Class FrmTourNote
         Me.dgvWD.Size = New System.Drawing.Size(862, 625)
         Me.dgvWD.TabIndex = 44
         Me.dgvWD.TabStop = False
+        '
+        'IDDataGridViewTextBoxColumn1
+        '
+        Me.IDDataGridViewTextBoxColumn1.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn1.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn1.Name = "IDDataGridViewTextBoxColumn1"
+        Me.IDDataGridViewTextBoxColumn1.Visible = False
+        Me.IDDataGridViewTextBoxColumn1.Width = 50
+        '
+        'DiaryDateDataGridViewTextBoxColumn
+        '
+        Me.DiaryDateDataGridViewTextBoxColumn.DataPropertyName = "DiaryDate"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
+        Me.DiaryDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DiaryDateDataGridViewTextBoxColumn.HeaderText = "Date"
+        Me.DiaryDateDataGridViewTextBoxColumn.Name = "DiaryDateDataGridViewTextBoxColumn"
+        Me.DiaryDateDataGridViewTextBoxColumn.ReadOnly = True
+        Me.DiaryDateDataGridViewTextBoxColumn.Width = 80
+        '
+        'WorkDoneDataGridViewTextBoxColumn
+        '
+        Me.WorkDoneDataGridViewTextBoxColumn.DataPropertyName = "WorkDone"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.WorkDoneDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
+        Me.WorkDoneDataGridViewTextBoxColumn.HeaderText = "Work Done"
+        Me.WorkDoneDataGridViewTextBoxColumn.Name = "WorkDoneDataGridViewTextBoxColumn"
+        Me.WorkDoneDataGridViewTextBoxColumn.Width = 200
+        '
+        'RemarksDataGridViewTextBoxColumn1
+        '
+        Me.RemarksDataGridViewTextBoxColumn1.DataPropertyName = "Remarks"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RemarksDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        Me.RemarksDataGridViewTextBoxColumn1.HeaderText = "Remarks"
+        Me.RemarksDataGridViewTextBoxColumn1.Name = "RemarksDataGridViewTextBoxColumn1"
+        Me.RemarksDataGridViewTextBoxColumn1.Visible = False
+        Me.RemarksDataGridViewTextBoxColumn1.Width = 200
+        '
+        'SelectRecord
+        '
+        Me.SelectRecord.HeaderText = "Select"
+        Me.SelectRecord.Name = "SelectRecord"
+        Me.SelectRecord.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.SelectRecord.Width = 65
+        '
+        'TourFrom
+        '
+        Me.TourFrom.DataPropertyName = "TourFrom"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.TourFrom.DefaultCellStyle = DataGridViewCellStyle5
+        Me.TourFrom.HeaderText = "Tour From"
+        Me.TourFrom.Name = "TourFrom"
+        Me.TourFrom.Width = 110
+        '
+        'TourTo
+        '
+        Me.TourTo.DataPropertyName = "TourTo"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.TourTo.DefaultCellStyle = DataGridViewCellStyle6
+        Me.TourTo.HeaderText = "Tour To"
+        Me.TourTo.Name = "TourTo"
+        Me.TourTo.Width = 140
+        '
+        'TourPurpose
+        '
+        Me.TourPurpose.DataPropertyName = "TourPurpose"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.TourPurpose.DefaultCellStyle = DataGridViewCellStyle7
+        Me.TourPurpose.HeaderText = "Tour Purpose"
+        Me.TourPurpose.Name = "TourPurpose"
+        Me.TourPurpose.Width = 270
         '
         'WeeklyDiaryBindingSource
         '
@@ -296,7 +369,7 @@ Partial Class FrmTourNote
         Me.dgvSOC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvSOC.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.dgvSOC.EnableHeadersVisualStyles = False
-        Me.dgvSOC.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
+        Me.dgvSOC.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
         Me.dgvSOC.Location = New System.Drawing.Point(0, 0)
         Me.dgvSOC.MultiSelect = False
         Me.dgvSOC.Name = "dgvSOC"
@@ -772,7 +845,10 @@ Partial Class FrmTourNote
         '
         Me.chkThreeRows.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkThreeRows.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkThreeRows.Location = New System.Drawing.Point(128, 34)
+        Me.chkThreeRows.Checked = True
+        Me.chkThreeRows.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkThreeRows.CheckValue = "Y"
+        Me.chkThreeRows.Location = New System.Drawing.Point(128, 8)
         Me.chkThreeRows.Name = "chkThreeRows"
         Me.chkThreeRows.Size = New System.Drawing.Size(152, 18)
         Me.chkThreeRows.TabIndex = 9
@@ -787,10 +863,7 @@ Partial Class FrmTourNote
         '
         Me.chkSingleRow.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.chkSingleRow.CheckBoxStyle = DevComponents.DotNetBar.eCheckBoxStyle.RadioButton
-        Me.chkSingleRow.Checked = True
-        Me.chkSingleRow.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkSingleRow.CheckValue = "Y"
-        Me.chkSingleRow.Location = New System.Drawing.Point(128, 6)
+        Me.chkSingleRow.Location = New System.Drawing.Point(128, 35)
         Me.chkSingleRow.Name = "chkSingleRow"
         Me.chkSingleRow.Size = New System.Drawing.Size(84, 18)
         Me.chkSingleRow.TabIndex = 8
@@ -1247,80 +1320,6 @@ Partial Class FrmTourNote
         'WeeklyDiaryTableAdapter1
         '
         Me.WeeklyDiaryTableAdapter1.ClearBeforeFill = True
-        '
-        'IDDataGridViewTextBoxColumn1
-        '
-        Me.IDDataGridViewTextBoxColumn1.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn1.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn1.Name = "IDDataGridViewTextBoxColumn1"
-        Me.IDDataGridViewTextBoxColumn1.Visible = False
-        Me.IDDataGridViewTextBoxColumn1.Width = 50
-        '
-        'DiaryDateDataGridViewTextBoxColumn
-        '
-        Me.DiaryDateDataGridViewTextBoxColumn.DataPropertyName = "DiaryDate"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle2.Format = "dd/MM/yyyy"
-        Me.DiaryDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DiaryDateDataGridViewTextBoxColumn.HeaderText = "Date"
-        Me.DiaryDateDataGridViewTextBoxColumn.Name = "DiaryDateDataGridViewTextBoxColumn"
-        Me.DiaryDateDataGridViewTextBoxColumn.ReadOnly = True
-        Me.DiaryDateDataGridViewTextBoxColumn.Width = 80
-        '
-        'WorkDoneDataGridViewTextBoxColumn
-        '
-        Me.WorkDoneDataGridViewTextBoxColumn.DataPropertyName = "WorkDone"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.WorkDoneDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle3
-        Me.WorkDoneDataGridViewTextBoxColumn.HeaderText = "Work Done"
-        Me.WorkDoneDataGridViewTextBoxColumn.Name = "WorkDoneDataGridViewTextBoxColumn"
-        Me.WorkDoneDataGridViewTextBoxColumn.Width = 200
-        '
-        'RemarksDataGridViewTextBoxColumn1
-        '
-        Me.RemarksDataGridViewTextBoxColumn1.DataPropertyName = "Remarks"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.RemarksDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
-        Me.RemarksDataGridViewTextBoxColumn1.HeaderText = "Remarks"
-        Me.RemarksDataGridViewTextBoxColumn1.Name = "RemarksDataGridViewTextBoxColumn1"
-        Me.RemarksDataGridViewTextBoxColumn1.Visible = False
-        Me.RemarksDataGridViewTextBoxColumn1.Width = 200
-        '
-        'SelectRecord
-        '
-        Me.SelectRecord.HeaderText = "Select"
-        Me.SelectRecord.Name = "SelectRecord"
-        Me.SelectRecord.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.SelectRecord.Width = 65
-        '
-        'TourFrom
-        '
-        Me.TourFrom.DataPropertyName = "TourFrom"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.TourFrom.DefaultCellStyle = DataGridViewCellStyle5
-        Me.TourFrom.HeaderText = "Tour From"
-        Me.TourFrom.Name = "TourFrom"
-        Me.TourFrom.Width = 110
-        '
-        'TourTo
-        '
-        Me.TourTo.DataPropertyName = "TourTo"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.TourTo.DefaultCellStyle = DataGridViewCellStyle6
-        Me.TourTo.HeaderText = "Tour To"
-        Me.TourTo.Name = "TourTo"
-        Me.TourTo.Width = 140
-        '
-        'TourPurpose
-        '
-        Me.TourPurpose.DataPropertyName = "TourPurpose"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.TourPurpose.DefaultCellStyle = DataGridViewCellStyle7
-        Me.TourPurpose.HeaderText = "Tour Purpose"
-        Me.TourPurpose.Name = "TourPurpose"
-        Me.TourPurpose.Width = 270
         '
         'FrmTourNote
         '
