@@ -335,8 +335,11 @@ Public Class frmPerformance_RangeConsolidate
                 currentdistrictnumber = currentdistrictnumber + 1
                 bgwDownloadStatements.ReportProgress(currentdistrictnumber, currentdistrictnumber)
 
+
                 Dim DownloadFileName As String = ""
                 Dim DownloadFolder As String = ""
+
+                Dim RemoteFileName As String = "Grave Crime Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
 
                 If blUserDistrict Then
                     DownloadFileName = "Grave Crime Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
@@ -346,8 +349,9 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
-                DownloadFile(DownloadFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "gra")
+                DownloadFile(RemoteFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "gra")
 
+                RemoteFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
                 If blUserDistrict Then
                     DownloadFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
                     DownloadFolder = SuggestedLocation & "\Identification Statement\" & SelectedMonthYear
@@ -356,9 +360,9 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
-                DownloadFile(DownloadFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "ide")
+                DownloadFile(RemoteFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "ide")
 
-
+                RemoteFileName = "SOC Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
                 If blUserDistrict Then
                     DownloadFileName = "SOC Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
                     DownloadFolder = SuggestedLocation & "\SOC Statement\" & SelectedMonthYear
@@ -367,7 +371,7 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
-                DownloadFile(DownloadFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "soc")
+                DownloadFile(RemoteFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "soc")
 
             Next
 
