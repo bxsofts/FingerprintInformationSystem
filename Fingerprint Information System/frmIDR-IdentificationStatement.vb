@@ -216,7 +216,7 @@ Public Class frmIdentificationStatement
             Next
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
-            WordApp.Visible = False
+            WordApp.Visible = True
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
@@ -506,7 +506,8 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            WordApp.Selection.Tables.Item(1).Cell(rowcount, 12).Select()
+            Dim cellcount As Integer = WordApp.Selection.Tables.Item(1).Rows(rowcount).Cells.Count
+            WordApp.Selection.Tables.Item(1).Cell(rowcount, cellcount).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
             If idcount = 0 Then
