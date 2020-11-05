@@ -216,7 +216,8 @@ Public Class frmIdentificationStatement
             Next
 
             Dim aDoc As Word.Document = WordApp.Documents.Add(fileName, newTemplate, docType, isVisible)
-            WordApp.Visible = True
+
+            WordApp.Visible = False
 
             WordApp.Selection.Document.PageSetup.PaperSize = Word.WdPaperSize.wdPaperA4
             WordApp.Selection.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape
@@ -247,10 +248,10 @@ Public Class frmIdentificationStatement
             Dim rcount = FingerPrintDataSet.JoinedIDR.Rows.Count + 2
             If rcount = 2 Then rcount = 3
 
-            Dim idcount As Integer = Me.JoinedCulpritsRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2)
+            Dim culpritcount As Integer = Me.JoinedCulpritsRegisterTableAdapter1.ScalarQueryCulpritCount(d1, d2)
 
 
-            Dim rowcount = idcount + 2
+            Dim rowcount = culpritcount + 2
             If rowcount = 2 Then rowcount = 3
 
             WordApp.Selection.Font.Bold = 0
@@ -365,7 +366,7 @@ Public Class frmIdentificationStatement
 
 
 
-            If idcount > 0 Then
+            If culpritcount > 0 Then
                 Dim j = 0
                 For i = 3 To rowcount
                     WordApp.Selection.Tables.Item(1).Cell(i, 1).Select()
@@ -494,7 +495,7 @@ Public Class frmIdentificationStatement
                 Next i ' i= 4
             End If
 
-            If idcount > 0 Then
+            If culpritcount > 0 Then
                 For l = 3 To rowcount
                     WordApp.Selection.Tables.Item(1).Columns(10).Cells(l).Select()
                     WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
@@ -506,11 +507,10 @@ Public Class frmIdentificationStatement
                 System.Threading.Thread.Sleep(10)
             Next
 
-            Dim cellcount As Integer = WordApp.Selection.Tables.Item(1).Rows(rowcount).Cells.Count
-            WordApp.Selection.Tables.Item(1).Cell(rowcount, cellcount).Select()
+            WordApp.Selection.Tables.Item(1).Cell(rowcount, 10).Select()
             WordApp.Selection.GoToNext(Word.WdGoToItem.wdGoToLine)
 
-            If idcount = 0 Then
+            If culpritcount = 0 Then
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.TypeParagraph()
                 WordApp.Selection.Paragraphs.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter
