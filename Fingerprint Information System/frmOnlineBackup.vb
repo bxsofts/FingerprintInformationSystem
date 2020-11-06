@@ -526,11 +526,11 @@ Public Class frmOnlineBackup
                 item.SubItems.Add(file.Id)
                 item.SubItems.Add(CalculateFileSize(file.Size))
                 item.SubItems.Add(FileOwner)
-                item.SubItems.Add(LastModifiedDate)
                 item.SubItems.Add(LatestSOCNumber)
                 item.SubItems.Add(LatestSOCDI)
                 item.SubItems.Add(LocalSOCRecordCount)
                 item.SubItems.Add(LastModificationDetail)
+                item.SubItems.Add(LastModifiedDate)
                 item.ImageIndex = 2
                 bgwUpload.ReportProgress(100, item)
                 TotalFileSize += file.Size
