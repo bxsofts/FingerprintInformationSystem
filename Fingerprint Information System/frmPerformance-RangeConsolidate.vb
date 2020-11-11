@@ -349,6 +349,7 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
+                My.Computer.FileSystem.CreateDirectory(DownloadFolder)
                 DownloadFile(RemoteFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "gra")
 
                 RemoteFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
@@ -360,6 +361,7 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
+                My.Computer.FileSystem.CreateDirectory(DownloadFolder)
                 DownloadFile(RemoteFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "ide")
 
                 RemoteFileName = "SOC Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
@@ -371,6 +373,7 @@ Public Class frmPerformance_RangeConsolidate
                     DownloadFolder = ConsolidatedStatementsFolder
                 End If
 
+                My.Computer.FileSystem.CreateDirectory(DownloadFolder)
                 DownloadFile(RemoteFileName, DownloadFolder & "\" & DownloadFileName, currentdistrictnumber, "soc")
 
             Next
