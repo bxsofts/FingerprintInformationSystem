@@ -1497,8 +1497,17 @@ Public Class frmWeeklyDiaryDE
             Dim rowcount As Integer = Me.dgvOfficeDetails.Rows.Count
 
             If rowcount > 0 Then
-                designation = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(3).Value
-                unit = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(0).Value
+                If Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(3).Value Is DBNull.Value Then
+                    designation = "Tester Inspector"
+                Else
+                    designation = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(3).Value
+                End If
+
+                If Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(0).Value Is DBNull.Value Then
+                    unit = "SDFPB, " & FullDistrictName
+                Else
+                    unit = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(0).Value
+                End If
             End If
 
             dtWeeklyDiaryFrom = Me.MonthCalendarAdv1.SelectedDate.AddDays(-Me.MonthCalendarAdv1.SelectedDate.DayOfWeek)

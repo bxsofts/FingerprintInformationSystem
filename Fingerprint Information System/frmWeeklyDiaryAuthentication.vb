@@ -152,6 +152,10 @@ Public Class frmWeeklyDiaryAuthentication
             Me.PersonalDetailsTableAdapter1.Connection.ConnectionString = wdConString
             Me.PersonalDetailsTableAdapter1.Connection.Open()
 
+            If Me.OfficeDetailsTableAdapter1.Connection.State = ConnectionState.Open Then Me.OfficeDetailsTableAdapter1.Connection.Close()
+            Me.OfficeDetailsTableAdapter1.Connection.ConnectionString = wdConString
+            Me.OfficeDetailsTableAdapter1.Connection.Open()
+
             Me.AuthenticationTableAdapter1.Insert(Me.txtPassword1.Text.Trim)
             Dim dgvr As WeeklyDiaryDataSet.PersonalDetailsRow = Me.WeeklyDiaryDataSet1.PersonalDetails.NewPersonalDetailsRow
 
@@ -163,7 +167,17 @@ Public Class frmWeeklyDiaryAuthentication
 
             WeeklyDiaryDataSet1.PersonalDetails.Rows.Add(dgvr)
             PersonalDetailsTableAdapter1.Update(WeeklyDiaryDataSet1.PersonalDetails)
-            ' Me.PersonalDetailsTableAdapter1.InsertQuery(pen, Me.txtName.Text.Trim, "")
+
+            Dim dgor As WeeklyDiaryDataSet.OfficeDetailsRow = Me.WeeklyDiaryDataSet1.OfficeDetails.NewOfficeDetailsRow
+
+            With dgor
+                .Unit = "SDFPB, " & FullDistrictName
+                .Designation = "Tester Inspector"
+                .Remarks = ""
+            End With
+
+            WeeklyDiaryDataSet1.OfficeDetails.Rows.Add(dgor)
+            OfficeDetailsTableAdapter1.Update(WeeklyDiaryDataSet1.OfficeDetails)
 
             Me.Cursor = Cursors.Default
             InitializeComponents()

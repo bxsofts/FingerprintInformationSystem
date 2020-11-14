@@ -42,6 +42,7 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.bgwDownload = New System.ComponentModel.BackgroundWorker()
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.WeeklyDiaryDataSet1 = New FingerprintInformationSystem.WeeklyDiaryDataSet()
+        Me.OfficeDetailsTableAdapter1 = New FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.OfficeDetailsTableAdapter()
         CType(Me.WeeklyDiaryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -292,6 +293,10 @@ Partial Class frmWeeklyDiaryAuthentication
         Me.WeeklyDiaryDataSet1.DataSetName = "WeeklyDiaryDataSet"
         Me.WeeklyDiaryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'OfficeDetailsTableAdapter1
+        '
+        Me.OfficeDetailsTableAdapter1.ClearBeforeFill = True
+        '
         'frmWeeklyDiaryAuthentication
         '
         Me.AcceptButton = Me.btnLogin
@@ -348,4 +353,5 @@ Partial Class frmWeeklyDiaryAuthentication
     Friend WithEvents bgwDownload As System.ComponentModel.BackgroundWorker
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
     Friend WithEvents WeeklyDiaryDataSet1 As FingerprintInformationSystem.WeeklyDiaryDataSet
+    Friend WithEvents OfficeDetailsTableAdapter1 As FingerprintInformationSystem.WeeklyDiaryDataSetTableAdapters.OfficeDetailsTableAdapter
 End Class
