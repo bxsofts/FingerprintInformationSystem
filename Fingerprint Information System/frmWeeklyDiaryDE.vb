@@ -1504,7 +1504,7 @@ Public Class frmWeeklyDiaryDE
                 End If
 
                 If Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(0).Value Is DBNull.Value Then
-                    unit = "SDFPB, " & FullDistrictName
+                    unit = ShortOfficeName & ", " & FullDistrictName
                 Else
                     unit = Me.dgvOfficeDetails.Rows(rowcount - 1).Cells(0).Value
                 End If
