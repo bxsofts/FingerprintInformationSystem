@@ -4872,6 +4872,7 @@ Public Class frmMainInterface
 
     Private Sub DisableControlsInPreviewMode()
         On Error Resume Next
+        ShowAllDataEntryFields(False)
         Me.RibbonControl1.Enabled = True
         Me.btnNewEntry.Enabled = False
         Me.btnOpen.Enabled = False
@@ -18797,7 +18798,7 @@ errhandler:
 
             cnt = Results.Files.Count
 
-            If cnt < 11 Then Exit Sub
+            If cnt < 25 Then Exit Sub
 
             Dim ItemList As New ArrayList
 
@@ -18805,7 +18806,7 @@ errhandler:
                 ItemList.Add(Result.Id) 'id
             Next
 
-            Dim u = cnt - 11
+            Dim u = cnt - 25
             Dim id As String = ""
             For i = 0 To u
                 id = ItemList.Item(i)
