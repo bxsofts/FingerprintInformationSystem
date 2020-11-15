@@ -14380,8 +14380,9 @@ errhandler:
 
             Dim line() = Strings.Split(FileNo, "/")
             FileNo = line(0) & "/SOC/" & line(1)
+            FileNo = "No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
 
-            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
+            WordApp.Selection.TypeText(FileNo)
 
             WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeParagraph()
@@ -14417,7 +14418,8 @@ errhandler:
 
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbTab & "Ref: 1. Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "        2. " & FileNo)
 
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
@@ -14497,7 +14499,7 @@ errhandler:
 
 
             WordApp.Selection.TypeText(vbNewLine)
-            WordApp.Selection.TypeText(vbTab & "This is for information.")
+            WordApp.Selection.TypeText(vbTab & "This is for information and necessary action.")
 
 
             WordApp.Selection.TypeText(vbNewLine)
@@ -14776,8 +14778,9 @@ errhandler:
 
             Dim line() = Strings.Split(FileNo, "/")
             FileNo = line(0) & "/SOC/" & line(1)
+            FileNo = "No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
 
-            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
+            WordApp.Selection.TypeText(FileNo)
 
             WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeParagraph()
@@ -14812,7 +14815,8 @@ errhandler:
 
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbTab & "Ref: 1. Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "        2. " & FileNo)
 
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
@@ -14954,6 +14958,17 @@ errhandler:
 
             Next
 
+            Dim pl As String = fds.SOCRegister(0).PropertyLost.Replace(vbCrLf, ", ")
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & "P/L - " & pl)
+
+            WordApp.Selection.TypeText(vbNewLine)
+            WordApp.Selection.TypeText(vbTab & vbTab & "Gist - ")
+
+
+            WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbNewLine)
             WordApp.Selection.TypeText(vbTab & "The identification was made by " & IdentifyingOfficer & " on " & dtid & ".")
 
@@ -15179,8 +15194,8 @@ errhandler:
 
             Dim line() = Strings.Split(FileNo, "/")
             FileNo = line(0) & "/SOC/" & line(1)
-
-            WordApp.Selection.TypeText("No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName)
+            FileNo = "No." & FileNo & "/" & ShortOfficeName & "/" & ShortDistrictName
+            WordApp.Selection.TypeText(FileNo)
 
             WordApp.Selection.Font.Underline = 0
             WordApp.Selection.TypeParagraph()
@@ -15219,7 +15234,8 @@ errhandler:
 
             WordApp.Selection.TypeText(vbNewLine)
 
-            WordApp.Selection.TypeText(vbTab & "Ref: Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbTab & "Ref: 1. Cr.No. " & CrNo & " u/s " & us & " of " & ps)
+            WordApp.Selection.TypeText(vbNewLine & vbTab & "        2. " & FileNo)
 
             WordApp.Selection.TypeParagraph()
             WordApp.Selection.TypeParagraph()
