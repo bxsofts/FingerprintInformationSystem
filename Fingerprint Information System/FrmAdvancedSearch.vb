@@ -547,7 +547,46 @@ Public Class FrmAdvancedSearch
             sql = sql.Replace("STARTS WITH", "")
 
           
+            If DirectCast(sender, Control).Name = btnGenerateSQL.Name Then
+                If CurrentTab = "IDR" Then
+                    sql = Strings.Replace(sql, "InspectingOfficer", "InvestigatingOfficer", , , CompareMethod.Text)
+                    sql = Strings.Replace(sql, "CDNumber", "CDNumberWithYear", , , CompareMethod.Text)
+                    sql = Strings.Replace(sql, "CPsDeveloped", "ChancePrintsDeveloped", , , CompareMethod.Text)
+
+                    sql = sql.Replace("from IdentificationRegister", " from (IdentificationRegister INNER JOIN SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)")
+                    If Not sql.Contains("ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber") Then
+                        sql = sql & " ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
+                    End If
+                    sql = sql.Replace("IdentificationNumber", "IdentificationRegister.IdentificationNumber")
+                    sql = sql.Replace("SOCNumber", "SOCRegister.SOCNumber")
+                    sql = sql.Replace("IdentificationDate", "IdentificationRegister.IdentificationDate")
+                    sql = sql.Replace("DateOfInspection", "SOCRegister.DateOfInspection")
+                    sql = sql.Replace("PoliceStation", "SOCRegister.PoliceStation")
+                    sql = sql.Replace("CrimeNumber", "SOCRegister.CrimeNumber")
+                    sql = sql.Replace("SectionOfLaw", "SOCRegister.SectionOfLaw")
+                    sql = sql.Replace("InvestigatingOfficer", "SOCRegister.InvestigatingOfficer")
+                    sql = sql.Replace("IdentifiedBy", "IdentificationRegister.IdentifiedBy")
+                    sql = sql.Replace("ChancePrintsDeveloped", "SOCRegister.ChancePrintsDeveloped")
+                    sql = sql.Replace("CPsIdentified", "IdentificationRegister.CPsIdentified")
+                    sql = sql.Replace("NoOfCulpritsIdentified", "IdentificationRegister.NoOfCulpritsIdentified")
+                    sql = sql.Replace("CulpritName", "IdentificationRegister.CulpritName")
+                    sql = sql.Replace("Address", "IdentificationRegister.Address")
+                    sql = sql.Replace("FingersIdentified", "IdentificationRegister.FingersIdentified")
+                    sql = sql.Replace("HenryClassification", "IdentificationRegister.HenryClassification")
+                    sql = sql.Replace("DANumber", "IdentificationRegister.DANumber")
+                    sql = sql.Replace("IdentifiedFrom", "IdentificationRegister.IdentifiedFrom")
+                    sql = sql.Replace("IdentificationDetails", "IdentificationRegister.IdentificationDetails")
+                    sql = sql.Replace("SOCRegister.SOCRegister", "SOCRegister")
+                    sql = sql.Replace("IdentificationRegister.IdentificationRegister", "IdentificationRegister")
+                    sql = sql.Replace("IdentificationRegister.SOCRegister", "IdentificationRegister")
+                    sql = sql.Replace("*", "IdentificationRegister.IdentificationNumber, IdentificationRegister.SOCNumber, IdentificationRegister.IdentificationDate, SOCRegister.DateOfInspection, SOCRegister.PoliceStation, SOCRegister.CrimeNumber, SOCRegister.SectionOfLaw, SOCRegister.InvestigatingOfficer, IdentificationRegister.IdentifiedBy, SOCRegister.ChancePrintsDeveloped, IdentificationRegister.CPsIdentified, IdentificationRegister.NoOfCulpritsIdentified, IdentificationRegister.CulpritName, IdentificationRegister.Address, IdentificationRegister.FingersIdentified, IdentificationRegister.HenryClassification, IdentificationRegister.DANumber, IdentificationRegister.IdentifiedFrom, IdentificationRegister.IdentificationDetails, IdentificationRegister.IDRNumber, IdentificationRegister.SlNumber")
+                    ' sql = sql.Replace("*", "IdentificationRegister.*, SOCRegister.*")
+                    Me.txtSQL.Text = sql
+                End If
+            End If
+
             Me.txtSQL.Text = sql
+
 
             If DirectCast(sender, Control).Name = btnSearch.Name Then
                 PerformSearch()
@@ -615,8 +654,9 @@ Public Class FrmAdvancedSearch
 
             If CurrentTab = "IDR" Then
                 SQLText = SQLText.Replace("from IdentificationRegister", " from (IdentificationRegister INNER JOIN SOCRegister ON IdentificationRegister.SOCNumber = SOCRegister.SOCNumber)")
-                SQLText = SQLText & " ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
-
+                If Not SQLText.Contains("ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber") Then
+                    SQLText = SQLText & " ORDER BY IdentificationRegister.IdentificationDate, IdentificationRegister.IDRNumber"
+                End If
                 SQLText = SQLText.Replace("IdentificationNumber", "IdentificationRegister.IdentificationNumber")
                 SQLText = SQLText.Replace("SOCNumber", "SOCRegister.SOCNumber")
                 SQLText = SQLText.Replace("IdentificationDate", "IdentificationRegister.IdentificationDate")
@@ -625,7 +665,7 @@ Public Class FrmAdvancedSearch
                 SQLText = SQLText.Replace("CrimeNumber", "SOCRegister.CrimeNumber")
                 SQLText = SQLText.Replace("SectionOfLaw", "SOCRegister.SectionOfLaw")
                 SQLText = SQLText.Replace("InvestigatingOfficer", "SOCRegister.InvestigatingOfficer")
-                SQLText = SQLText.Replace("IdentifiedBy", "SOCRegister.IdentifiedBy")
+                SQLText = SQLText.Replace("IdentifiedBy", "IdentificationRegister.IdentifiedBy")
                 SQLText = SQLText.Replace("ChancePrintsDeveloped", "SOCRegister.ChancePrintsDeveloped")
                 SQLText = SQLText.Replace("CPsIdentified", "IdentificationRegister.CPsIdentified")
                 SQLText = SQLText.Replace("NoOfCulpritsIdentified", "IdentificationRegister.NoOfCulpritsIdentified")

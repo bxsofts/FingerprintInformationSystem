@@ -168,7 +168,7 @@ Partial Class FrmAdvancedSearch
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGrid.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.DataGrid.GridColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(229, Byte), Integer))
         Me.DataGrid.Location = New System.Drawing.Point(0, 5)
         Me.DataGrid.Name = "DataGrid"
         Me.DataGrid.RowTemplate.Height = 30
@@ -193,7 +193,7 @@ Partial Class FrmAdvancedSearch
         Me.ContextMenuBar1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.ButtonItem1})
         Me.ContextMenuBar1.Location = New System.Drawing.Point(872, 170)
         Me.ContextMenuBar1.Name = "ContextMenuBar1"
-        Me.ContextMenuBar1.Size = New System.Drawing.Size(126, 27)
+        Me.ContextMenuBar1.Size = New System.Drawing.Size(126, 25)
         Me.ContextMenuBar1.Stretch = True
         Me.ContextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
         Me.ContextMenuBar1.TabIndex = 6
@@ -404,6 +404,7 @@ Partial Class FrmAdvancedSearch
         Me.txtSQL.Location = New System.Drawing.Point(3, 465)
         Me.txtSQL.Multiline = True
         Me.txtSQL.Name = "txtSQL"
+        Me.txtSQL.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtSQL.Size = New System.Drawing.Size(842, 142)
         Me.txtSQL.TabIndex = 2
         '
