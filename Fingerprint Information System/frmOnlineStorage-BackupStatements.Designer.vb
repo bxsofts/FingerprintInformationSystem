@@ -24,7 +24,10 @@ Partial Class frmBackupStatements
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBackupStatements))
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.btnDownload = New DevComponents.DotNetBar.ButtonX()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
+        Me.Line2 = New DevComponents.DotNetBar.Controls.Line()
+        Me.Line1 = New DevComponents.DotNetBar.Controls.Line()
         Me.lblAnnualPerf = New DevComponents.DotNetBar.LabelX()
         Me.chkAnnualPerf = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
@@ -39,7 +42,7 @@ Partial Class frmBackupStatements
         Me.lblID = New DevComponents.DotNetBar.LabelX()
         Me.chkMonthlyPerf = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.lblMonthPerf = New DevComponents.DotNetBar.LabelX()
-        Me.txtYear = New DevComponents.Editors.IntegerInput()
+        Me.txtMonthlyYear = New DevComponents.Editors.IntegerInput()
         Me.chkQuarterlyPerf = New DevComponents.DotNetBar.Controls.CheckBoxX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
@@ -50,12 +53,11 @@ Partial Class frmBackupStatements
         Me.CircularProgress1 = New DevComponents.DotNetBar.Controls.CircularProgress()
         Me.btnBackup = New DevComponents.DotNetBar.ButtonX()
         Me.bgwUploadFile = New System.ComponentModel.BackgroundWorker()
-        Me.Line1 = New DevComponents.DotNetBar.Controls.Line()
-        Me.Line2 = New DevComponents.DotNetBar.Controls.Line()
+        Me.bgwDownloadStatements = New System.ComponentModel.BackgroundWorker()
         Me.PanelEx1.SuspendLayout()
         Me.PanelEx2.SuspendLayout()
         CType(Me.txtAnnualYear, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtMonthlyYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -67,6 +69,7 @@ Partial Class frmBackupStatements
         Me.PanelEx1.Controls.Add(Me.PanelEx2)
         Me.PanelEx1.Controls.Add(Me.CircularProgress1)
         Me.PanelEx1.Controls.Add(Me.btnBackup)
+        Me.PanelEx1.Controls.Add(Me.btnDownload)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx1.Location = New System.Drawing.Point(0, 0)
@@ -79,6 +82,17 @@ Partial Class frmBackupStatements
         Me.PanelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 0
+        '
+        'btnDownload
+        '
+        Me.btnDownload.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnDownload.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
+        Me.btnDownload.Location = New System.Drawing.Point(363, 114)
+        Me.btnDownload.Name = "btnDownload"
+        Me.btnDownload.Size = New System.Drawing.Size(101, 56)
+        Me.btnDownload.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnDownload.TabIndex = 7
+        Me.btnDownload.Text = "Download"
         '
         'PanelEx2
         '
@@ -100,7 +114,7 @@ Partial Class frmBackupStatements
         Me.PanelEx2.Controls.Add(Me.lblID)
         Me.PanelEx2.Controls.Add(Me.chkMonthlyPerf)
         Me.PanelEx2.Controls.Add(Me.lblMonthPerf)
-        Me.PanelEx2.Controls.Add(Me.txtYear)
+        Me.PanelEx2.Controls.Add(Me.txtMonthlyYear)
         Me.PanelEx2.Controls.Add(Me.chkQuarterlyPerf)
         Me.PanelEx2.Controls.Add(Me.LabelX3)
         Me.PanelEx2.Controls.Add(Me.LabelX6)
@@ -120,6 +134,22 @@ Partial Class frmBackupStatements
         Me.PanelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelEx2.Style.GradientAngle = 90
         Me.PanelEx2.TabIndex = 62
+        '
+        'Line2
+        '
+        Me.Line2.Location = New System.Drawing.Point(12, 252)
+        Me.Line2.Name = "Line2"
+        Me.Line2.Size = New System.Drawing.Size(313, 18)
+        Me.Line2.TabIndex = 67
+        Me.Line2.Text = "Line2"
+        '
+        'Line1
+        '
+        Me.Line1.Location = New System.Drawing.Point(12, 168)
+        Me.Line1.Name = "Line1"
+        Me.Line1.Size = New System.Drawing.Size(313, 18)
+        Me.Line1.TabIndex = 66
+        Me.Line1.Text = "Line1"
         '
         'lblAnnualPerf
         '
@@ -169,7 +199,7 @@ Partial Class frmBackupStatements
         '
         Me.txtAnnualYear.BackgroundStyle.Class = "DateTimeInputBackground"
         Me.txtAnnualYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtAnnualYear.ButtonCustom.Image = CType(resources.GetObject("IntegerInput1.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtAnnualYear.ButtonCustom.Image = CType(resources.GetObject("txtAnnualYear.ButtonCustom.Image"), System.Drawing.Image)
         Me.txtAnnualYear.FocusHighlightEnabled = True
         Me.txtAnnualYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAnnualYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
@@ -327,26 +357,26 @@ Partial Class frmBackupStatements
         Me.lblMonthPerf.TabIndex = 57
         Me.lblMonthPerf.Text = "LabelX2"
         '
-        'txtYear
+        'txtMonthlyYear
         '
         '
         '
         '
-        Me.txtYear.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.txtYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.txtYear.ButtonCustom.Image = CType(resources.GetObject("txtYear.ButtonCustom.Image"), System.Drawing.Image)
-        Me.txtYear.FocusHighlightEnabled = True
-        Me.txtYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
-        Me.txtYear.Location = New System.Drawing.Point(224, 9)
-        Me.txtYear.MaxValue = 2099
-        Me.txtYear.MinValue = 0
-        Me.txtYear.Name = "txtYear"
-        Me.txtYear.ShowUpDown = True
-        Me.txtYear.Size = New System.Drawing.Size(64, 29)
-        Me.txtYear.TabIndex = 2
-        Me.txtYear.Value = 1900
-        Me.txtYear.WatermarkText = "Year"
+        Me.txtMonthlyYear.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.txtMonthlyYear.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.txtMonthlyYear.ButtonCustom.Image = CType(resources.GetObject("txtMonthlyYear.ButtonCustom.Image"), System.Drawing.Image)
+        Me.txtMonthlyYear.FocusHighlightEnabled = True
+        Me.txtMonthlyYear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMonthlyYear.InputHorizontalAlignment = DevComponents.Editors.eHorizontalAlignment.Left
+        Me.txtMonthlyYear.Location = New System.Drawing.Point(224, 9)
+        Me.txtMonthlyYear.MaxValue = 2099
+        Me.txtMonthlyYear.MinValue = 0
+        Me.txtMonthlyYear.Name = "txtMonthlyYear"
+        Me.txtMonthlyYear.ShowUpDown = True
+        Me.txtMonthlyYear.Size = New System.Drawing.Size(64, 29)
+        Me.txtMonthlyYear.TabIndex = 2
+        Me.txtMonthlyYear.Value = 1900
+        Me.txtMonthlyYear.WatermarkText = "Year"
         '
         'chkQuarterlyPerf
         '
@@ -480,7 +510,7 @@ Partial Class frmBackupStatements
         '
         Me.btnBackup.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnBackup.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
-        Me.btnBackup.Location = New System.Drawing.Point(368, 143)
+        Me.btnBackup.Location = New System.Drawing.Point(363, 29)
         Me.btnBackup.Name = "btnBackup"
         Me.btnBackup.Size = New System.Drawing.Size(101, 56)
         Me.btnBackup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -492,21 +522,10 @@ Partial Class frmBackupStatements
         Me.bgwUploadFile.WorkerReportsProgress = True
         Me.bgwUploadFile.WorkerSupportsCancellation = True
         '
-        'Line1
+        'bgwDownloadStatements
         '
-        Me.Line1.Location = New System.Drawing.Point(12, 168)
-        Me.Line1.Name = "Line1"
-        Me.Line1.Size = New System.Drawing.Size(313, 18)
-        Me.Line1.TabIndex = 66
-        Me.Line1.Text = "Line1"
-        '
-        'Line2
-        '
-        Me.Line2.Location = New System.Drawing.Point(12, 252)
-        Me.Line2.Name = "Line2"
-        Me.Line2.Size = New System.Drawing.Size(313, 18)
-        Me.Line2.TabIndex = 67
-        Me.Line2.Text = "Line2"
+        Me.bgwDownloadStatements.WorkerReportsProgress = True
+        Me.bgwDownloadStatements.WorkerSupportsCancellation = True
         '
         'frmBackupStatements
         '
@@ -530,7 +549,7 @@ Partial Class frmBackupStatements
         Me.PanelEx2.ResumeLayout(False)
         Me.PanelEx2.PerformLayout()
         CType(Me.txtAnnualYear, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtMonthlyYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQuarter, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQuarterYear, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -543,7 +562,7 @@ Partial Class frmBackupStatements
     Friend WithEvents chkSOC As DevComponents.DotNetBar.Controls.CheckBoxX
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents txtYear As DevComponents.Editors.IntegerInput
+    Friend WithEvents txtMonthlyYear As DevComponents.Editors.IntegerInput
     Friend WithEvents cmbMonth As DevComponents.DotNetBar.Controls.ComboBoxEx
     Friend WithEvents btnBackup As DevComponents.DotNetBar.ButtonX
     Friend WithEvents CircularProgress1 As DevComponents.DotNetBar.Controls.CircularProgress
@@ -565,4 +584,6 @@ Partial Class frmBackupStatements
     Friend WithEvents txtAnnualYear As DevComponents.Editors.IntegerInput
     Friend WithEvents Line2 As DevComponents.DotNetBar.Controls.Line
     Friend WithEvents Line1 As DevComponents.DotNetBar.Controls.Line
+    Friend WithEvents btnDownload As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents bgwDownloadStatements As System.ComponentModel.BackgroundWorker
 End Class

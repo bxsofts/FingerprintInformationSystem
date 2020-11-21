@@ -713,7 +713,7 @@ Public Class frmPerformance_RangeConsolidate
 
                 If blUserDistrict Then
                     DownloadFileName = "Monthly Performance Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
-                    DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                    DownloadFolder = SuggestedLocation & "\Performance Statement"
                 Else
                     DownloadFileName = SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & SelectedDistrict & ".docx"
                     DownloadFolder = ConsolidatedPerformanceFolder
@@ -826,7 +826,7 @@ Public Class frmPerformance_RangeConsolidate
 
                     If blUserDistrict Then
                         DistFileName = "Monthly Performance Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
-                        DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                        DownloadFolder = SuggestedLocation & "\Performance Statement"
                     Else
                         DistFileName = SelectedMonthYear & "-" & SelectedMonthIndex.ToString("D2") & "-" & SelectedDistrict & ".docx"
                         DownloadFolder = ConsolidatedPerformanceFolder
@@ -979,7 +979,7 @@ Public Class frmPerformance_RangeConsolidate
 
                 If blUserDistrict Then
                     DownloadFileName = "Quarterly Performance Statement - " & SelectedQuarterYear & " - Q" & SelectedQuarter & ".docx"
-                    DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                    DownloadFolder = SuggestedLocation & "\Performance Statement"
                 Else
                     DownloadFileName = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
                     DownloadFolder = ConsolidatedPerformanceFolder
@@ -1093,7 +1093,7 @@ Public Class frmPerformance_RangeConsolidate
 
                     If blUserDistrict Then
                         DistFileName = "Quarterly Performance Statement - " & SelectedQuarterYear & " - Q" & SelectedQuarter & ".docx"
-                        DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                        DownloadFolder = SuggestedLocation & "\Performance Statement"
                     Else
                         DistFileName = SelectedQuarterYear & "-Q" & SelectedQuarter & "-" & SelectedDistrict & ".docx"
                         DownloadFolder = ConsolidatedPerformanceFolder
@@ -1315,7 +1315,7 @@ Public Class frmPerformance_RangeConsolidate
 
                 If blUserDistrict Then
                     DownloadFileName = "Annual Performance Statement - " & SelectedAnnualYear & ".docx"
-                    DownloadFolder = SuggestedLocation & "\Performance Statement\"
+                    DownloadFolder = SuggestedLocation & "\Performance Statement"
                 Else
                     DownloadFileName = SelectedAnnualYear & "-" & SelectedDistrict & ".docx"
                     DownloadFolder = ConsolidatedPerformanceFolder

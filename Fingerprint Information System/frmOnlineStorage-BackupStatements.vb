@@ -8,6 +8,7 @@ Imports Google.Apis.Drive.v3
 Imports Google.Apis.Drive.v3.Data
 Imports Google.Apis.Services
 Imports Google.Apis.Upload
+Imports Google.Apis.Download
 Imports Google.Apis.Util.Store
 Imports Google.Apis.Requests
 
@@ -16,7 +17,21 @@ Public Class frmBackupStatements
     Dim FISService As DriveService = New DriveService
     Dim FISAccountServiceCredential As GoogleCredential
 
+    Dim InternalFolderID As String = ""
+
     Public uUploadStatus As UploadStatus
+    Public dBytesDownloaded As Long
+    Public dDownloadStatus As DownloadStatus
+
+    Dim SelectedMonthIndex As Integer
+    Dim SelectedMonthText As String = ""
+    Dim SelectedMonthYear As String = ""
+
+    Dim SelectedQuarter As String = ""
+    Dim SelectedQuarterYear As String = ""
+
+    Dim SelectedAnnualYear As String = ""
+
 
     Dim blServiceCreated As Boolean = False
     Dim blCheckBoxes As Boolean = False
@@ -69,7 +84,7 @@ Public Class frmBackupStatements
             End If
 
             Me.cmbMonth.SelectedIndex = m - 1
-            Me.txtYear.Value = y
+            Me.txtMonthlyYear.Value = y
 
             m = DateAndTime.Month(Today)
             y = DateAndTime.Year(Today)
@@ -91,6 +106,7 @@ Public Class frmBackupStatements
             blCheckBoxes = True
             CheckForMonthlyStatementFiles()
             CheckForQuarterlyStatementFiles()
+            CheckForAnnualStatementFiles()
 
         Catch ex As Exception
             ShowErrorMessage(ex)
@@ -113,29 +129,29 @@ Public Class frmBackupStatements
         Me.lblAnnualPerf.Visible = Show
     End Sub
 
-    Private Sub CheckForMonthlyStatementFiles() Handles cmbMonth.SelectedValueChanged, txtYear.ValueChanged
+    Private Sub CheckForMonthlyStatementFiles() Handles cmbMonth.SelectedValueChanged, txtMonthlyYear.ValueChanged
         On Error Resume Next
         If Not blCheckBoxes Then Exit Sub
         ShowLabels(False)
-        Dim StmtFolder As String = SuggestedLocation & "\SOC Statement\" & Me.txtYear.Text
+        Dim StmtFolder As String = SuggestedLocation & "\SOC Statement\" & Me.txtMonthlyYear.Text
         Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
 
-        Dim StmtFileName As String = StmtFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        Dim StmtFileName As String = StmtFolder & "\SOC Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         chkSOC.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkSOC.Enabled = chkSOC.Checked
 
-        StmtFolder = SuggestedLocation & "\Grave Crime Statement\" & Me.txtYear.Text
-        StmtFileName = StmtFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        StmtFolder = SuggestedLocation & "\Grave Crime Statement\" & Me.txtMonthlyYear.Text
+        StmtFileName = StmtFolder & "\Grave Crime Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         chkGrave.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkGrave.Enabled = chkGrave.Checked
 
-        StmtFolder = SuggestedLocation & "\Identification Statement\" & Me.txtYear.Text
-        StmtFileName = StmtFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        StmtFolder = SuggestedLocation & "\Identification Statement\" & Me.txtMonthlyYear.Text
+        StmtFileName = StmtFolder & "\Identification Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         chkID.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkID.Enabled = chkID.Checked
 
         StmtFolder = SuggestedLocation & "\Performance Statement"
-        StmtFileName = StmtFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        StmtFileName = StmtFolder & "\Monthly Performance Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         chkMonthlyPerf.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
         chkMonthlyPerf.Enabled = chkMonthlyPerf.Checked
 
@@ -149,13 +165,8 @@ Public Class frmBackupStatements
         Dim StmtFileName = StmtFolder & "\Quarterly Performance Statement - " & Me.txtQuarterYear.Text & " - Q" & Me.txtQuarter.Text & ".docx"
 
         chkQuarterlyPerf.Enabled = My.Computer.FileSystem.FileExists(StmtFileName)
-
-        Dim m = DateAndTime.Month(Today)
-        If (m = 1 Or m = 4 Or m = 7 Or m = 10) And chkQuarterlyPerf.Enabled Then
-            chkQuarterlyPerf.Checked = True
-        Else
-            chkQuarterlyPerf.Checked = False
-        End If
+        chkQuarterlyPerf.Checked = chkQuarterlyPerf.Enabled
+      
     End Sub
 
     Private Sub CheckForAnnualStatementFiles() Handles txtAnnualYear.ValueChanged
@@ -164,8 +175,8 @@ Public Class frmBackupStatements
         ShowLabels(False)
         Dim StmtFolder As String = SuggestedLocation & "\Performance Statement"
         Dim StmtFileName = StmtFolder & "\Annual Performance Statement - " & Me.txtAnnualYear.Text & ".docx"
-
-        chkAnnualPerf.Enabled = My.Computer.FileSystem.FileExists(StmtFileName)
+        chkAnnualPerf.Checked = My.Computer.FileSystem.FileExists(StmtFileName)
+        chkAnnualPerf.Enabled = chkAnnualPerf.Checked
 
     End Sub
 
@@ -182,8 +193,8 @@ Public Class frmBackupStatements
         Dim m As Integer = Me.cmbMonth.SelectedIndex + 1
 
         TotalFileCount = 0
-        Dim StmtFolder As String = SuggestedLocation & "\SOC Statement\" & Me.txtYear.Text
-        Dim StmtFileName As String = StmtFolder & "\SOC Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        Dim StmtFolder As String = SuggestedLocation & "\SOC Statement\" & Me.txtMonthlyYear.Text
+        Dim StmtFileName As String = StmtFolder & "\SOC Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         If chkSOC.Checked Then
             FileList(0) = StmtFileName
             TotalFileCount = TotalFileCount + 1
@@ -196,8 +207,8 @@ Public Class frmBackupStatements
             Exit Sub
         End If
 
-        StmtFolder = SuggestedLocation & "\Grave Crime Statement\" & Me.txtYear.Text
-        StmtFileName = StmtFolder & "\Grave Crime Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        StmtFolder = SuggestedLocation & "\Grave Crime Statement\" & Me.txtMonthlyYear.Text
+        StmtFileName = StmtFolder & "\Grave Crime Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         If chkGrave.Checked Then
             FileList(1) = StmtFileName
             TotalFileCount = TotalFileCount + 1
@@ -210,8 +221,8 @@ Public Class frmBackupStatements
             Exit Sub
         End If
 
-        StmtFolder = SuggestedLocation & "\Identification Statement\" & Me.txtYear.Text
-        StmtFileName = StmtFolder & "\Identification Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        StmtFolder = SuggestedLocation & "\Identification Statement\" & Me.txtMonthlyYear.Text
+        StmtFileName = StmtFolder & "\Identification Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         If chkID.Checked Then
             FileList(2) = StmtFileName
             TotalFileCount = TotalFileCount + 1
@@ -225,7 +236,7 @@ Public Class frmBackupStatements
         End If
 
         StmtFolder = SuggestedLocation & "\Performance Statement"
-        StmtFileName = StmtFolder & "\Monthly Performance Statement - " & Me.txtYear.Text & " - " & m.ToString("D2") & ".docx"
+        StmtFileName = StmtFolder & "\Monthly Performance Statement - " & Me.txtMonthlyYear.Text & " - " & m.ToString("D2") & ".docx"
         If chkMonthlyPerf.Checked Then
             FileList(3) = StmtFileName
             TotalFileCount = TotalFileCount + 1
@@ -396,32 +407,38 @@ Public Class frmBackupStatements
                 If cnt > 0 Then
                     bgwUploadFile.ReportProgress(100, stmt & " Already Uploaded")
                 Else
-                    bgwUploadFile.ReportProgress(100, stmt & " Uploading")
-                    Dim body As New Google.Apis.Drive.v3.Data.File()
-                    body.Name = SelectedFileName
-                    Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
-                    body.MimeType = "files/" & extension.Replace(".", "")
-                    body.Description = FileOwner
+                    If My.Computer.FileSystem.FileExists(SelectedFile) Then
+                        bgwUploadFile.ReportProgress(100, stmt & " Uploading")
+                        Dim body As New Google.Apis.Drive.v3.Data.File()
+                        body.Name = SelectedFileName
+                        Dim extension As String = My.Computer.FileSystem.GetFileInfo(SelectedFile).Extension
+                        body.MimeType = "files/" & extension.Replace(".", "")
+                        body.Description = FileOwner
 
-                    Dim parentlist As New List(Of String)
-                    parentlist.Add(FolderID)
-                    body.Parents = parentlist
+                        Dim parentlist As New List(Of String)
+                        parentlist.Add(FolderID)
+                        body.Parents = parentlist
 
-                    Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
-                    Dim Stream As New System.IO.MemoryStream(ByteArray)
+                        Dim ByteArray As Byte() = System.IO.File.ReadAllBytes(SelectedFile)
+                        Dim Stream As New System.IO.MemoryStream(ByteArray)
 
-                    Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
-                    AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
+                        Dim UploadRequest As FilesResource.CreateMediaUpload = FISService.Files.Create(body, Stream, body.MimeType)
+                        AddHandler UploadRequest.ProgressChanged, AddressOf Upload_ProgressChanged
 
-                    UploadRequest.Upload()
-                    Stream.Close()
+                        UploadRequest.Upload()
+                        Stream.Close()
 
-                    If uUploadStatus = UploadStatus.Completed Then
-                        bgwUploadFile.ReportProgress(100, stmt & " Uploaded")
+                        If uUploadStatus = UploadStatus.Completed Then
+                            bgwUploadFile.ReportProgress(100, stmt & " Uploaded")
+                        End If
+                        If uUploadStatus = UploadStatus.Failed Then
+                            bgwUploadFile.ReportProgress(100, stmt & " Failed")
+                        End If
+                    Else
+                        bgwUploadFile.ReportProgress(100, stmt & " File not found")
                     End If
-                    If uUploadStatus = UploadStatus.Failed Then
-                        bgwUploadFile.ReportProgress(100, stmt & " Failed")
-                    End If
+
+                   
                 End If
             Next
 
@@ -457,6 +474,10 @@ Public Class frmBackupStatements
             End If
 
             If lblText = "Failed" Then
+                clr = Color.Red
+            End If
+
+            If lblText = "File not found" Then
                 clr = Color.Red
             End If
 
@@ -498,5 +519,235 @@ Public Class frmBackupStatements
     End Sub
 
 #End Region
+
+
+#Region "DOWNLOAD FILES"
+    Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+        Try
+            If InternetAvailable() = False Then
+                MessageBoxEx.Show("NO INTERNET CONNECTION DETECTED.", strAppName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            SelectedMonthIndex = Me.cmbMonth.SelectedIndex + 1
+            SelectedMonthText = Me.cmbMonth.Text
+            SelectedMonthYear = Me.txtMonthlyYear.Text
+
+            SelectedQuarter = Me.txtQuarter.Text
+            SelectedQuarterYear = Me.txtQuarterYear.Text
+
+            SelectedAnnualYear = Me.txtAnnualYear.Text
+
+            Me.CircularProgress1.ProgressText = "1/6"
+            Me.CircularProgress1.IsRunning = True
+            Me.CircularProgress1.Show()
+            ShowLabels(True)
+            bgwDownloadStatements.RunWorkerAsync()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub bgwDownloadStatements_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwDownloadStatements.DoWork
+        Try
+            If blServiceCreated = False Then
+                Dim Scopes As String() = {DriveService.Scope.Drive}
+                FISAccountServiceCredential = GoogleCredential.FromFile(JsonPath).CreateScoped(Scopes)
+                FISService = New DriveService(New BaseClientService.Initializer() With {.HttpClientInitializer = FISAccountServiceCredential, .ApplicationName = strAppName})
+                blServiceCreated = True
+            End If
+
+            Dim internalfolderid As String = ""
+
+            Dim List = FISService.Files.List()
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = 'Internal File Transfer' and 'root' in parents"
+            List.Fields = "files(id)"
+
+            Dim Results = List.Execute
+
+            Dim cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwDownloadStatements.ReportProgress(0, "all No stmt found")
+                Exit Sub
+            Else
+                internalfolderid = Results.Files(0).Id
+            End If
+
+            List.Q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false and name = '" & FullDistrictName & "' and '" & internalfolderid & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+
+            Dim DistrictFolderID As String = ""
+
+            cnt = Results.Files.Count
+            If cnt = 0 Then
+                bgwDownloadStatements.ReportProgress(0, "all No stmt found")
+                Exit Sub
+            Else
+                DistrictFolderID = Results.Files(0).Id
+            End If
+
+
+            Dim workdonefolderid As String = CreateFolderAndGetID("Work Done Statement", DistrictFolderID)
+            Dim monthlyfolderid As String = CreateFolderAndGetID("Monthly Statements Backup", DistrictFolderID)
+
+            If workdonefolderid = "" Or monthlyfolderid = "" Then
+                bgwDownloadStatements.ReportProgress(0, "all No stmt found")
+                Exit Sub
+            End If
+
+            Dim RemoteFileName As String = "SOC Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+            Dim DownloadFolder As String = SuggestedLocation & "\SOC Statement\" & SelectedMonthYear
+            DownloadFile(RemoteFileName, DownloadFolder, "soc", monthlyfolderid, 1)
+
+            RemoteFileName = "Grave Crime Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+            DownloadFolder = SuggestedLocation & "\Grave Crime Statement\" & SelectedMonthYear
+            DownloadFile(RemoteFileName, DownloadFolder, "gra", monthlyfolderid, 2)
+
+            RemoteFileName = "Identification Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+            DownloadFolder = SuggestedLocation & "\Identification Statement\" & SelectedMonthYear
+            DownloadFile(RemoteFileName, DownloadFolder, "ide", monthlyfolderid, 3)
+
+            RemoteFileName = "Monthly Performance Statement - " & SelectedMonthYear & " - " & SelectedMonthIndex.ToString("D2") & ".docx"
+            DownloadFolder = SuggestedLocation & "\Performance Statement"
+            DownloadFile(RemoteFileName, DownloadFolder, "mon", workdonefolderid, 4)
+
+            RemoteFileName = "Quarterly Performance Statement - " & SelectedQuarterYear & " - Q" & SelectedQuarter & ".docx"
+            DownloadFolder = SuggestedLocation & "\Performance Statement"
+            DownloadFile(RemoteFileName, DownloadFolder, "qua", workdonefolderid, 5)
+
+            RemoteFileName = "Annual Performance Statement - " & SelectedAnnualYear & ".docx"
+            DownloadFolder = SuggestedLocation & "\Performance Statement"
+            DownloadFile(RemoteFileName, DownloadFolder, "ann", workdonefolderid, 6)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub DownloadFile(RemoteFileName As String, DownloadFolder As String, stmt As String, DistrictFolderID As String, filenumber As Integer)
+        Try
+            Dim FullDownloadPath As String = DownloadFolder & "\" & RemoteFileName
+            My.Computer.FileSystem.CreateDirectory(DownloadFolder)
+            If My.Computer.FileSystem.FileExists(FullDownloadPath) Then
+                bgwDownloadStatements.ReportProgress(filenumber, stmt & " Already Exists")
+                Exit Sub
+            End If
+
+            Dim List = FISService.Files.List()
+            Dim Results As Google.Apis.Drive.v3.Data.FileList
+            Dim cnt As Integer = 0
+
+            List.Q = "name = '" & RemoteFileName & "' and '" & DistrictFolderID & "' in parents"
+            List.Fields = "files(id)"
+
+            Results = List.Execute
+            cnt = Results.Files.Count
+
+            If cnt = 0 Then
+                bgwDownloadStatements.ReportProgress(filenumber, stmt & " No stmt found")
+            Else
+                bgwDownloadStatements.ReportProgress(filenumber, stmt & " Downloading")
+                Dim fileid As String = Results.Files(0).Id
+                Dim request = FISService.Files.Get(fileid)
+                Dim file = request.Execute
+
+                Dim fStream = New System.IO.FileStream(FullDownloadPath, System.IO.FileMode.Create, System.IO.FileAccess.ReadWrite)
+                Dim mStream = New System.IO.MemoryStream
+
+                Dim m = request.MediaDownloader
+
+                AddHandler m.ProgressChanged, AddressOf Download_ProgressChanged
+
+                request.DownloadWithStatus(mStream)
+
+                If dDownloadStatus = DownloadStatus.Completed Then
+                    bgwDownloadStatements.ReportProgress(filenumber, stmt & " Downloaded")
+                    mStream.WriteTo(fStream)
+                End If
+
+                If dDownloadStatus = DownloadStatus.Failed Then
+                    bgwDownloadStatements.ReportProgress(filenumber, stmt & " Failed")
+                    mStream.WriteTo(fStream)
+                End If
+
+                fStream.Close()
+                mStream.Close()
+            End If
+
+        Catch ex As Exception
+            bgwDownloadStatements.ReportProgress(filenumber, stmt & " Failed")
+        End Try
+    End Sub
+
+    Private Sub bgwDownloadStatements_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwDownloadStatements.ProgressChanged
+
+        CircularProgress1.ProgressText = e.ProgressPercentage & "/6"
+
+        If TypeOf e.UserState Is String Then
+            Dim stmt As String = e.UserState.ToString.Substring(0, 3)
+            Dim lblText As String = e.UserState.ToString.Substring(4)
+            Dim clr As Color = Color.Black
+
+            If lblText = "Already Exists" Then
+                clr = Color.Blue
+            End If
+
+            If lblText = "Downloading" Then
+                clr = Color.Blue
+            End If
+
+            If lblText = "Downloaded" Then
+                clr = Color.Green
+            End If
+
+            If lblText = "Failed" Then
+                clr = Color.Red
+            End If
+
+            If lblText = "No stmt found" Then
+                clr = Color.Brown
+            End If
+
+
+            Select Case stmt
+                Case "soc"
+                    lblSOC.Text = lblText
+                    lblSOC.ForeColor = clr
+                Case "ide"
+                    lblID.Text = lblText
+                    lblID.ForeColor = clr
+                Case "gra"
+                    lblGrave.Text = lblText
+                    lblGrave.ForeColor = clr
+                Case "mon"
+                    lblMonthPerf.Text = lblText
+                    lblMonthPerf.ForeColor = clr
+                Case "qua"
+                    lblQuarterlyPerf.Text = lblText
+                    lblQuarterlyPerf.ForeColor = clr
+                Case "ann"
+                    lblAnnualPerf.Text = lblText
+                    lblAnnualPerf.ForeColor = clr
+            End Select
+        End If
+    End Sub
+
+    Private Sub bgwDownloadStatements_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwDownloadStatements.RunWorkerCompleted
+        Me.CircularProgress1.IsRunning = False
+        Me.CircularProgress1.Text = ""
+        Me.CircularProgress1.Hide()
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub Download_ProgressChanged(Progress As IDownloadProgress)
+        On Error Resume Next
+        Control.CheckForIllegalCrossThreadCalls = False
+        dDownloadStatus = Progress.Status
+    End Sub
+#End Region
+
 
 End Class
