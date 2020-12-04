@@ -1315,7 +1315,7 @@ Public Class FrmTourNote
                         End If
 
                         wdTbl.Cell(j, 5).Range.Text = TourStartLocation
-                        wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle"
+                        wdTbl.Cell(j, 6).Range.Text = "Dept. Vehicle" & IIf(dvn = "", "", vbCrLf & dvn)
 
                         If args.UsePS Then
                             Dim distance As String = FindDistance(PS)
@@ -1724,7 +1724,7 @@ Public Class FrmTourNote
 
                 wdTblTA.Cell(j, 6).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' TourTo
                 mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
+                '  If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                 distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                 distance = distance.Replace("km", "").Trim()
 
@@ -1950,7 +1950,7 @@ Public Class FrmTourNote
                 wdTblTA.Cell(j, 5).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                 wdTblTA.Cell(j, 6).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' TourTo
                 mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
+                ' If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                 distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                 distance = distance.Replace("km", "").Trim()
                 Dim details As String = wdTblTN.Cell(i, 8).Range.Text.Trim(ChrW(7)).Trim() 'details
@@ -2204,7 +2204,7 @@ Public Class FrmTourNote
                 wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                 wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim()
                 mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
+                ' If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                 distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                 distance = distance.Replace("km", "").Trim()
                 wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
@@ -2427,7 +2427,7 @@ Public Class FrmTourNote
                 wdTblTA.Cell(j, 3).Range.Text = wdTblTN.Cell(i, 4).Range.Text.Trim(ChrW(7)).Trim() ' TourFrom
                 wdTblTA.Cell(j, 4).Range.Text = wdTblTN.Cell(i, 5).Range.Text.Trim(ChrW(7)).Trim() ' tour to
                 mode = wdTblTN.Cell(i, 6).Range.Text.Trim(ChrW(7)).Trim()
-                If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
+                '  If mode.StartsWith("Dept. Vehicle") Then mode = "Dept. Vehicle"
                 distance = wdTblTN.Cell(i, 7).Range.Text.Trim(ChrW(7)).Trim()
                 distance = distance.Replace("km", "").Trim()
                 wdTblTA.Cell(j, 5).Range.Text = mode & vbNewLine & IIf(distance <> "", distance & " km", "")
@@ -2493,7 +2493,6 @@ Public Class FrmTourNote
             GenerateTR47Outer(OfficerNameOnly, Designation)
             Me.Cursor = Cursors.Default
 
-            GenerateTR47Outer(OfficerNameOnly, Designation)
         Catch ex As Exception
             ShowErrorMessage(ex)
         End Try
