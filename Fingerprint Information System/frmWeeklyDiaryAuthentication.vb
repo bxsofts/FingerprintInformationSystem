@@ -34,6 +34,10 @@ Public Class frmWeeklyDiaryAuthentication
     Private Sub frmWeeklyDiaryAuthentication_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CircularProgress1.Visible = False
         InitializeComponents()
+        Me.txtPEN.Text = My.Computer.Registry.GetValue(strGeneralSettingsPath, "WeeklyDiaryUserID", "")
+        If Me.txtPEN.Text.Trim <> "" Then
+            Me.ActiveControl = Me.txtPassword
+        End If
         Me.txtPassword.UseSystemPasswordChar = True
         Me.txtPassword1.UseSystemPasswordChar = True
         Me.txtPassword2.UseSystemPasswordChar = True
@@ -226,6 +230,7 @@ Public Class frmWeeklyDiaryAuthentication
             blPENVerified = True
             wdDatabase = wdFile
             '  wdPEN = pen
+            My.Computer.Registry.SetValue(strGeneralSettingsPath, "WeeklyDiaryUserID", pen, Microsoft.Win32.RegistryValueKind.String)
             Me.Close()
         Catch ex As Exception
             Me.Cursor = Cursors.Default
