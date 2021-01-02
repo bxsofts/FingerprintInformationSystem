@@ -606,7 +606,7 @@ Public Class frmAnnualStatistics
 
                 ino = Replace(Replace(Replace(Replace(ino, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
                 ido = Replace(Replace(Replace(Replace(ido, "FPE", "Fingerprint Expert"), "FPS", "Fingerprint Searcher"), " TI", " Tester Inspector"), " AD", " Assistant Director")
-                Dim gist = Me.FingerPrintDataSet.JoinedIDR(i).Gist.Trim
+
                 Dim iddetails = Me.FingerPrintDataSet.JoinedIDR(i).IdentificationDetails.Trim
                 Dim identifiedas = Me.FingerPrintDataSet.JoinedIDR(i).CulpritName.Trim
                 WordApp.Selection.TypeText(vbTab & ps & ", Cr.No. " & cr & " u/s " & us)
@@ -621,8 +621,6 @@ Public Class frmAnnualStatistics
                 WordApp.Selection.TypeText(vbNewLine)
                 WordApp.Selection.TypeText(vbTab & "Name of accused - " & identifiedas)
                 WordApp.Selection.TypeText(vbNewLine)
-                If gist <> "" Then WordApp.Selection.TypeText(vbNewLine)
-                WordApp.Selection.TypeText(vbTab & vbTab & gist)
                 WordApp.Selection.TypeText(vbNewLine)
                 WordApp.Selection.TypeText(vbTab & vbTab & iddetails)
                 WordApp.Selection.TypeText(vbNewLine)
