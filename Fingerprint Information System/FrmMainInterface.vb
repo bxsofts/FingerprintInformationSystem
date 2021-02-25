@@ -16197,7 +16197,7 @@ errhandler:
                     WordApp.Selection.TypeText(FingersIdentified)
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" finger impression, since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(" finger impression, since the impressions possess identical ridge characterics in their nature and relative positions. He is accused in " & previouscasedetails & " and his fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -16248,7 +16248,7 @@ errhandler:
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(AccusedDetails)
                     WordApp.Selection.Font.Bold = 0
-                    WordApp.Selection.TypeText(", , since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(", since the impressions possess identical ridge characterics in their nature and relative positions. He is accused in " & previouscasedetails & " and his fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -16282,7 +16282,7 @@ errhandler:
                     WordApp.Selection.TypeText(FingerOrder)
                     WordApp.Selection.Font.Bold = 0
 
-                    WordApp.Selection.TypeText(" finger impressions respectively, since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(" finger impressions respectively, since the impressions possess identical ridge characterics in their nature and relative positions. He is accused in " & previouscasedetails & " and his fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
@@ -16333,7 +16333,7 @@ errhandler:
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(AccusedDetails)
                     WordApp.Selection.Font.Bold = 0
-                    WordApp.Selection.TypeText(", since the impressions possess identical ridge characterics in their nature and relative positions. His fingerprint slip is recorded in this Bureau as daily arrest slip number ")
+                    WordApp.Selection.TypeText(", since the impressions possess identical ridge characterics in their nature and relative positions. He is accused in " & previouscasedetails & " and his fingerprint slip is recorded in this Bureau as daily arrest slip number ")
 
                     WordApp.Selection.Font.Bold = 1
                     WordApp.Selection.TypeText(daslipnumber)
